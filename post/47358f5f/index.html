@@ -1,0 +1,497 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>machine learning for chaos system-应用 | DEAL-II-Fluid</title><meta name="description" content="前言：前几天，我的导师发给我一个机器学习的案例，说很感兴趣，可不可能应用在我们的实验台上。我当时的回答是我不敢轻易尝试。从做科研的角度，一直觉得这门学科是非线性动力学和统计学的高深理论，十分敬畏。简简单单地拿tensorflow建个模型，算一下，说自己结果可行，那到底思考在哪里呢？对此，我十分怀疑。 但当我开始学习chaos的一些理论，我又不得不开始思考，中间的一些联系。在此，有必要开辟一个章节，"><meta name="keywords" content="chaos"><meta name="author" content="Jiaqi"><meta name="copyright" content="Jiaqi"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://deal-ii.com/post/47358f5f/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta property="og:type" content="article"><meta property="og:title" content="machine learning for chaos system-应用"><meta property="og:url" content="http://deal-ii.com/post/47358f5f/"><meta property="og:site_name" content="DEAL-II-Fluid"><meta property="og:description" content="前言：前几天，我的导师发给我一个机器学习的案例，说很感兴趣，可不可能应用在我们的实验台上。我当时的回答是我不敢轻易尝试。从做科研的角度，一直觉得这门学科是非线性动力学和统计学的高深理论，十分敬畏。简简单单地拿tensorflow建个模型，算一下，说自己结果可行，那到底思考在哪里呢？对此，我十分怀疑。 但当我开始学习chaos的一些理论，我又不得不开始思考，中间的一些联系。在此，有必要开辟一个章节，"><meta property="og:image" content="https://npg.copernicus.org/articles/27/373/2020/npg-27-373-2020-avatar-web.png"><meta property="article:published_time" content="2020-12-11T12:58:33.000Z"><meta property="article:modified_time" content="2021-01-29T07:25:51.230Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="prev" title="julia-CFD数值基础" href="http://deal-ii.com/post/b269cf51/"><link rel="next" title="machine learning for chaos system-测试篇" href="http://deal-ii.com/post/d03a598f/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: true,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-01-29 15:25:51'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@master/Hexo/css/flink.min.css"><link rel="stylesheet" href="/gitcalendar/css/gitcalendar.css"/><meta name="generator" content="Hexo 5.3.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/me.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">23</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">31</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">前言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">学习目标：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Challenges-and-Opportunities-for-Machine-Learning-in-Fluid-Dynamics5"><span class="toc-number">2.0.1.</span> <span class="toc-text">Challenges and Opportunities for Machine Learning in Fluid Dynamics5</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PDE%E5%AD%A6%E4%B9%A010"><span class="toc-number">3.</span> <span class="toc-text">PDE学习10</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PDE-FIND-for-Burger%E2%80%99s-Equation"><span class="toc-number">3.1.</span> <span class="toc-text">PDE-FIND for Burger’s Equation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Construct-Theta-U-and-compute-U-t"><span class="toc-number">3.1.1.</span> <span class="toc-text">Construct $\Theta (U)$ and compute $U_t$</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Solve-for-xi"><span class="toc-number">3.1.2.</span> <span class="toc-text">Solve for $\xi$</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Now-identify-the-same-dynamics-but-with-added-noise"><span class="toc-number">3.1.3.</span> <span class="toc-text">Now identify the same dynamics but with added noise.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ML-embedded-Universal-Differential-Equations11"><span class="toc-number">4.</span> <span class="toc-text">ML-embedded Universal Differential Equations11</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF%E4%B8%8EPDE%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">4.1.</span> <span class="toc-text">卷积与PDE之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Neural-PDE-%E5%8A%A0%E9%80%9F%E4%BB%BF%E7%9C%9F%E8%AE%A1%E7%AE%97"><span class="toc-number">4.2.</span> <span class="toc-text">Neural PDE 加速仿真计算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scaling-the-software-to-%E2%80%9Creal%E2%80%9D-problems"><span class="toc-number">5.</span> <span class="toc-text">Scaling the software to “real” problems</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ROM-machine-learning-%E7%87%83%E7%83%A7%E6%A8%A1%E6%8B%9F-%E5%8A%A0%E9%80%9F%E6%A8%A1%E6%8B%9F"><span class="toc-number">6.</span> <span class="toc-text">ROM machine learning-燃烧模拟-加速模拟</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FLOW-MODELING-WITH-MACHINE-LEARNING"><span class="toc-number">6.1.</span> <span class="toc-text">FLOW MODELING WITH MACHINE LEARNING</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Machine-Learning-Based-Detection-of-Flow-Disturbances-Using-Surface-Pressure-Measurements7"><span class="toc-number">6.2.</span> <span class="toc-text">Machine Learning Based Detection of Flow Disturbances Using Surface Pressure Measurements7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deep-neural-networks-for-waves-assisted-by-the-Wiener%E2%80%93Hopf-method-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E9%BB%84%E8%BF%85"><span class="toc-number">6.3.</span> <span class="toc-text">Deep neural networks for waves assisted by the Wiener–Hopf method 学习笔记-黄迅</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%94%E8%AE%B02-%E9%92%88%E5%AF%B9%E6%9C%89%E7%89%A9%E7%90%86%E9%99%90%E5%88%B6%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="toc-number">6.4.</span> <span class="toc-text">笔记2: 针对有物理限制的案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E9%87%8F%E7%BA%B2%E5%A4%84%E7%90%86-%E5%AE%9E%E9%99%85%E4%BB%BF%E7%9C%9F%E6%95%B0%E6%8D%AE"><span class="toc-number">6.5.</span> <span class="toc-text">无量纲处理 实际仿真数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><header class="post-bg" id="page-header" style="background-image: url(https://npg.copernicus.org/articles/27/373/2020/npg-27-373-2020-avatar-web.png)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">DEAL-II-Fluid</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">machine learning for chaos system-应用</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-11 20:58:33"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-12-11</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-01-29 15:25:51"><i class="fas fa-history fa-fw"></i> 更新于 2021-01-29</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%84%9F%E6%82%9F/">学习与感悟</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>前几天，我的导师发给我一个机器学习的案例，说很感兴趣，可不可能应用在我们的实验台上。我当时的回答是我不敢轻易尝试。从做科研的角度，一直觉得这门学科是非线性动力学和统计学的高深理论，十分敬畏。简简单单地拿tensorflow建个模型，算一下，说自己结果可行，那到底思考在哪里呢？对此，我十分怀疑。</p>
+<p>但当我开始学习chaos的一些理论，我又不得不开始思考，中间的一些联系。在此，有必要开辟一个章节，学习和感悟这一话题。尽管题目定的很大—机器学习，但着眼的例子很小（例如一维K-S 模型，离散涡模型）。从非线性流体力学系统出发，希望有所感悟。</p>
+<h2 id="学习目标："><a href="#学习目标：" class="headerlink" title="学习目标："></a>学习目标：</h2><ul>
+<li>如何构建神经网络模型，来近似模型chaos系统</li>
+<li>是否chaos系统可以通过AI模型被预测？比如一些critical pattern？</li>
+<li>如何将AI模型与系统的稳定性相互关联？</li>
+<li>chaos理论的一些思考和机器学习的一些共性？</li>
+</ul>
+<h4 id="Challenges-and-Opportunities-for-Machine-Learning-in-Fluid-Dynamics5"><a href="#Challenges-and-Opportunities-for-Machine-Learning-in-Fluid-Dynamics5" class="headerlink" title="Challenges and Opportunities for Machine Learning in Fluid Dynamics5"></a>Challenges and Opportunities for Machine Learning in Fluid Dynamics<sup><a href="#fn_5" id="reffn_5">5</a></sup></h4><p>Fluid dynamics presents challenges that differ from those tackled in many applications of machine learning, such as image recognition and advertising. In fluid flows it is often important to precisely quantify the underlying physical mechanisms in order to analyze them. Furthermore, fluids flows entail complex, multi-scale phenomena whose understanding and control remain to a large extent unresolved. <strong>Unsteady flow fields require algorithms capable of addressing nonlinearities and multiple spatiotemporal scales that may not be present in popular machine learning algorithms.</strong> In addition, many prominent applications of machine learning, such as playing video games, rely on inexpensive system evaluations and an exhaustive categorization of the process that must be learned. This is not the case in fluids, where experiments may be difficult to repeat or automate and where simulations may require large-scale supercomputers operating for extended periods of time.</p>
+<p> <strong>Dimensionality reduction</strong>  <strong>: POD, PCA and auto-encoders</strong></p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/20201211102902.png" alt="POD"></p>
+<p>特点：网络两边是对称的</p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Autoencoder">Autoencoder</a>: A neural network architecture used to compress and decompress high-dimensional data. They are powerful alternatives to the Proper Orthogonal Decomposition (POD).</p>
+<p>用途：</p>
+<ul>
+<li>重构流场<a target="_blank" rel="noopener" href="https://github.com/harsha070/Reconstruction-of-Flows">https://github.com/harsha070/Reconstruction-of-Flows</a></li>
+</ul>
+<h2 id="PDE学习10"><a href="#PDE学习10" class="headerlink" title="PDE学习10"></a>PDE学习<sup><a href="#fn_10" id="reffn_10">10</a></sup></h2><p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/16/zDZa2j9TWXOC3IR.png" alt="zDZa2j9TWXOC3IR"></p>
+<p>PDE可以统一写成：</p>
+<script type="math/tex; mode=display">
+u_t = N(u,u_x,u_{xx},...,x,t,\mu)</script><p>其中，$\mu$为系统的参数。Q as a matrix containing additional information that may be relevant, such as dependencies on the absolute value of |u|, or another time varying function inetracting with u.</p>
+<p>选择sparse active terms 构建$\Theta$矩阵：</p>
+<script type="math/tex; mode=display">
+\Theta(U,Q)=[1 \space U \space U^2 .. Q..U_x\space UU_x ..Q^2U^3U_{xxx}]</script><p>行：所有的采样点，列：candidate terms, 各自function计算；</p>
+<p>$\xi$便是所要求的系数。</p>
+<p>也就是说，，每个点都满足上述方程，无非是求解方程，求出系数。</p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/16/9dtsuXBbcGinJ5Q.png" alt="9dtsuXBbcGinJ5Q"></p>
+<p>$\Theta$矩阵难免包含数值和测量误差，这里采用sparse regression来求解：</p>
+<script type="math/tex; mode=display">
+\xi = arg \space min_{\hat{\xi}}\left\Vert \Theta \hat{\xi} -\hat{U}_t\right\Vert_2^2 + \lambda \left\Vert \hat{\xi}\right\Vert_0</script><p>$l_0$ 问题为n-p hard，通过convex relaxation 为$l_1$, 或者 sequentially thresholded least squares(STLS) 为 $l_2$:</p>
+<script type="math/tex; mode=display">
+\xi = arg \space min_{\hat{\xi}}\left\Vert \Theta \hat{\xi} -\hat{U}_t\right\Vert_2^2 + \lambda \left\Vert \hat{\xi}\right\Vert_2\\\\
+= (\Theta^T \Theta +\lambda I)^{-1} \Theta^T U_t</script><p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/16/92eIC5qtd1NuEKw.png" alt="92eIC5qtd1NuEKw"></p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/16/QRPoemEdK4aqlgu.png" alt="QRPoemEdK4aqlgu"></p>
+<p><strong>Numerical Differentition</strong></p>
+<p>Use a Gaussian smoothing kernel on noisy data prior to taking derivatives with finite differences. Convolve with a Gaussian.</p>
+<p>Tikhonov differentiation finds a numerical derivative $\hat{f}’$ by balancing the closeness of the integral of $\hat{f}’$ to f with the smoothness of $\hat{f}’$.</p>
+<script type="math/tex; mode=display">
+\hat{f}'(x) = arg \space min_g \left\Vert \int_{x0}^x g(s ds -(f(x)- f(x0)))\right\Vert_2^2 + \lambda \left\Vert {dg\over dx} \right\Vert_2^2</script><p>In the discrete problem, A is a trapezoidal approximation to the integral and D is a finite approximation to the derivative. The problem has closed form solution given by,</p>
+<script type="math/tex; mode=display">
+\hat{f}'= (A^T A + \lambda D^T D)^{-1} A^T f</script><p>问题：边界附近的differentiate求解误差很大。</p>
+<p>闲话：这个算法是否可以应用到管道声学的逆推呀？</p>
+<h3 id="PDE-FIND-for-Burger’s-Equation"><a href="#PDE-FIND-for-Burger’s-Equation" class="headerlink" title="PDE-FIND for Burger’s Equation"></a>PDE-FIND for Burger’s Equation</h3><p>Samuel Rudy, 2016</p>
+<p>This notebook demonstrates PDE-FIND on Burger’s equation with an added diffusive term.</p>
+<script type="math/tex; mode=display">
+u_t + uu_x = u_{xx}</script><p>The solution given is a single travelling wave, starting out as a Gaussian.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%pylab inline</span><br><span class="line">pylab.rcParams[<span class="string">&#x27;figure.figsize&#x27;</span>] = (<span class="number">12</span>, <span class="number">8</span>)</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line">sys.path.append(<span class="string">&#x27;../&#x27;</span>)</span><br><span class="line"><span class="keyword">from</span> PDE_FIND <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> scipy.io <span class="keyword">as</span> sio</span><br><span class="line"><span class="keyword">import</span> itertools</span><br></pre></td></tr></table></figure>
+<pre><code>Populating the interactive namespace from numpy and matplotlib
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data = sio.loadmat(<span class="string">&#x27;burgers.mat&#x27;</span>)</span><br><span class="line">u = real(data[<span class="string">&#x27;usol&#x27;</span>])</span><br><span class="line">x = real(data[<span class="string">&#x27;x&#x27;</span>][<span class="number">0</span>])</span><br><span class="line">t = real(data[<span class="string">&#x27;t&#x27;</span>][:,<span class="number">0</span>])</span><br><span class="line">dt = t[<span class="number">1</span>]-t[<span class="number">0</span>]</span><br><span class="line">dx = x[<span class="number">2</span>]-x[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">f&#x27;<span class="subst">&#123;u.shape&#125;</span>&#x27;</span>)</span><br><span class="line">print(<span class="string">f&#x27;<span class="subst">&#123;x.shape&#125;</span>&#x27;</span>)</span><br><span class="line">print(<span class="string">f&#x27;<span class="subst">&#123;t.shape&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>(256, 101)
+(256,)
+(101,)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">X, T = np.meshgrid(x, t)</span><br><span class="line">fig1 = figure()</span><br><span class="line">ax = fig1.gca(projection=<span class="string">&#x27;3d&#x27;</span>)</span><br><span class="line">surf = ax.plot_surface(X, T, u.T, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, cmap=cm.coolwarm,</span><br><span class="line">    linewidth=<span class="number">0</span>, antialiased=<span class="literal">False</span>)</span><br><span class="line">title(<span class="string">&#x27;Burgers Equation&#x27;</span>, fontsize = <span class="number">20</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;x&#x27;</span>, fontsize = <span class="number">16</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;t&#x27;</span>, fontsize = <span class="number">16</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(0.5, 0, &#39;t&#39;)
+</code></pre><p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/16/joqlOK1GrcN6aV9.png" alt="joqlOK1GrcN6aV9" style="zoom:50%;" />    </p>
+<h4 id="Construct-Theta-U-and-compute-U-t"><a href="#Construct-Theta-U-and-compute-U-t" class="headerlink" title="Construct $\Theta (U)$ and compute $U_t$"></a>Construct $\Theta (U)$ and compute $U_t$</h4><p>The function build_linear_system does this for us.  We specify <br><br>D = highest derivative to appear in $\Theta$  <br><br>P = highest degree polynomial of $u$ to appear in $\Theta$ (not including multiplication by a derivative.  <br><br>time_diff and space_diff taken via finite differences</p>
+<p>Printed out is a list of candidate functions for the PDE.  Each is a column of $\Theta (U)$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ut, R, rhs_des = build_linear_system(u, dt, dx, D=<span class="number">3</span>, P=<span class="number">3</span>, time_diff = <span class="string">&#x27;FD&#x27;</span>, space_diff = <span class="string">&#x27;FD&#x27;</span>)</span><br><span class="line">[<span class="string">&#x27;1&#x27;</span>] + rhs_des[<span class="number">1</span>:]</span><br></pre></td></tr></table></figure>
+<pre><code>[&#39;1&#39;,
+ &#39;u&#39;,
+ &#39;u^2&#39;,
+ &#39;u^3&#39;,
+ &#39;u_&#123;x&#125;&#39;,
+ &#39;uu_&#123;x&#125;&#39;,
+ &#39;u^2u_&#123;x&#125;&#39;,
+ &#39;u^3u_&#123;x&#125;&#39;,
+ &#39;u_&#123;xx&#125;&#39;,
+ &#39;uu_&#123;xx&#125;&#39;,
+ &#39;u^2u_&#123;xx&#125;&#39;,
+ &#39;u^3u_&#123;xx&#125;&#39;,
+ &#39;u_&#123;xxx&#125;&#39;,
+ &#39;uu_&#123;xxx&#125;&#39;,
+ &#39;u^2u_&#123;xxx&#125;&#39;,
+ &#39;u^3u_&#123;xxx&#125;&#39;]
+</code></pre><h4 id="Solve-for-xi"><a href="#Solve-for-xi" class="headerlink" title="Solve for $\xi$"></a>Solve for $\xi$</h4><p>TrainSTRidge splits the data up into 80% for training and 20% for validation.  It searches over various tolerances in the STRidge algorithm and finds the one with the best performance on the validation set, including an $\ell^0$ penalty for $\xi$ in the loss function.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Solve with STRidge</span></span><br><span class="line">w = TrainSTRidge(R,Ut,<span class="number">10</span>**-<span class="number">5</span>,<span class="number">1</span>)</span><br><span class="line">print(<span class="string">&quot;PDE derived using STRidge&quot;</span>)</span><br><span class="line">print_pde(w, rhs_des)</span><br></pre></td></tr></table></figure>
+<pre><code>PDE derived using STRidge
+u_t = (-1.000987 +0.000000i)uu_&#123;x&#125;
+    + (0.100220 +0.000000i)u_&#123;xx&#125;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">err = <span class="built_in">abs</span>(np.array([(<span class="number">1</span> -  <span class="number">1.000987</span>)*<span class="number">100</span>, (<span class="number">.1</span> - <span class="number">0.100220</span>)*<span class="number">100</span>/<span class="number">0.1</span>]))</span><br><span class="line">print(<span class="string">&quot;Error using PDE-FIND to identify Burger&#x27;s equation:\n&quot;</span>)</span><br><span class="line">print(<span class="string">&quot;Mean parameter error:&quot;</span>, mean(err), <span class="string">&#x27;%&#x27;</span>)</span><br><span class="line">print(<span class="string">&quot;Standard deviation of parameter error:&quot;</span>, std(err), <span class="string">&#x27;%&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Error using PDE-FIND to identify Burger&#39;s equation:
+
+Mean parameter error: 0.15935000000000255 %
+Standard deviation of parameter error: 0.06064999999999543 %
+</code></pre><h4 id="Now-identify-the-same-dynamics-but-with-added-noise"><a href="#Now-identify-the-same-dynamics-but-with-added-noise" class="headerlink" title="Now identify the same dynamics but with added noise."></a>Now identify the same dynamics but with added noise.</h4><p>The only difference from above is that finite differences work poorly for noisy data so here we use polynomial interpolation.  With deg_x or deg_t and width_x or width_t we specify the degree number of points used to fit the polynomials used for differentiating x or t.  Unfortunately, the result can be sensitive to these.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">numpy.random.seed(<span class="number">0</span>)</span><br><span class="line">un = u + <span class="number">0.01</span>*std(u)*np.random.randn(u.shape[<span class="number">0</span>],u.shape[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Utn, Rn, rhs_des = build_linear_system(un, dt, dx, D=<span class="number">3</span>, P=<span class="number">3</span>, time_diff = <span class="string">&#x27;poly&#x27;</span>,</span><br><span class="line">                                       deg_x = <span class="number">4</span>, deg_t = <span class="number">4</span>, </span><br><span class="line">                                       width_x = <span class="number">10</span>, width_t = <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Solve with STRidge</span></span><br><span class="line">w = TrainSTRidge(Rn,Utn,<span class="number">10</span>**-<span class="number">5</span>,<span class="number">1</span>)</span><br><span class="line">print(<span class="string">&quot;PDE derived using STRidge&quot;</span>)</span><br><span class="line">print_pde(w, rhs_des)</span><br></pre></td></tr></table></figure>
+<pre><code>PDE derived using STRidge
+u_t = (-1.009655 +0.000000i)uu_&#123;x&#125;
+    + (0.102966 +0.000000i)u_&#123;xx&#125;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">err = <span class="built_in">abs</span>(np.array([(<span class="number">1</span> -  <span class="number">1.009655</span>)*<span class="number">100</span>, (<span class="number">.1</span> - <span class="number">0.102966</span>)*<span class="number">100</span>/<span class="number">0.1</span>]))</span><br><span class="line">print(<span class="string">&quot;Error using PDE-FIND to identify Burger&#x27;s equation with added noise:\n&quot;</span>)</span><br><span class="line">print(<span class="string">&quot;Mean parameter error:&quot;</span>, mean(err), <span class="string">&#x27;%&#x27;</span>)</span><br><span class="line">print(<span class="string">&quot;Standard deviation of parameter error:&quot;</span>, std(err), <span class="string">&#x27;%&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Error using PDE-FIND to identify Burger&#39;s equation with added noise:
+
+Mean parameter error: 1.9657499999999966 %
+Standard deviation of parameter error: 1.0002499999999996 %
+</code></pre><p> 闲话：可以利用上述代码计算单个点的偏导数，这个完全可以直接拿来用。</p>
+<p>然后用来计算其他参数，比如刻画涡结构等。。所以，最好还是先用圆柱扰流先做测试。</p>
+<h2 id="ML-embedded-Universal-Differential-Equations11"><a href="#ML-embedded-Universal-Differential-Equations11" class="headerlink" title="ML-embedded Universal Differential Equations11"></a>ML-embedded Universal Differential Equations<sup><a href="#fn_11" id="reffn_11">11</a></sup></h2><p>blog：<a target="_blank" rel="noopener" href="http://www.stochasticlifestyle.com/">http://www.stochasticlifestyle.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ChrisRackauckas/universal_differential_equations">https://github.com/ChrisRackauckas/universal_differential_equations</a></p>
+<p><strong>Neural ODE:</strong></p>
+<script type="math/tex; mode=display">
+u' = NN_\theta(u,t)\\\\
+NN_\theta(u,t)= W_3\sigma_2(W_2\sigma_1(W_1[u;t]+b_1)+b_2)+b_3\\\\
+\theta = (W_1, W_2, W_3, b_1, b_2, b_3)</script><p> The Universal Approximation Theorem (UAT) demonstrates that sufficiently large neural networks can approximate any nonlinear function with a finite set of parameters.</p>
+<p><strong>Universe ordinary differential equation (UODE):</strong></p>
+<script type="math/tex; mode=display">
+u'=f(u,t,U_\theta(u,t))</script><p>a known mechanistic model form f with missing terms defined by some universal approximation(UA) $U_\theta$.</p>
+<p><strong>训练</strong></p>
+<p>the cost function $C(\theta)$ by Euclidean distance:</p>
+<script type="math/tex; mode=display">
+C(\theta) = \sum_i \left\Vert u_\theta(t_i)-d_i \right\Vert</script><script type="math/tex; mode=display">
+{ dC\over d\theta }  ->{du\over d\theta}</script><p>对于一个函数来说，$f(x)=A$</p>
+<script type="math/tex; mode=display">
+x = B_f^x(A)</script><p>输入x，经过多次f后输出$x_i$:</p>
+<script type="math/tex; mode=display">
+x_i = (f^i \odot f^{i-1} \odot ...\odot f^1)(x)</script><p>那么，一步一步回撤一段时间L，等价于</p>
+<script type="math/tex; mode=display">
+B_f^x(A) = (B_{f^1}^x (...(B_{f^{L-1}}^{x_{L-2}}(B_{f^L}^{x_{L-1}}(A)))</script><p>后扯过程可以靠算法实现。例如Zygote.jl</p>
+<p><strong>Automated Identification of Nonlinear Interactions</strong></p>
+<p>Extend SInDy algorithm(类似time-delay DMD with sparse)， the idea is to find a sparse basis over a given candidate library minimizing the objective function using data.<sup><a href="#fn_11" id="reffn_11">11</a></sup></p>
+<p>UDE approach to extend SinDy that embeds prior structural knowledge.</p>
+<p>Take Lots-Volterra system as example:</p>
+<script type="math/tex; mode=display">
+\dot{x} = \alpha x - \beta xy\\\\
+\dot{y} = \gamma xy -\delta y</script><p> 在只知道部分参数，例如$\alpha,\delta$，可以构建如下knowledge-based UODE:</p>
+<script type="math/tex; mode=display">
+\dot{x}=\alpha x + U_1(x,y),\\\\
+\dot{y}=-\delta y+U_2(x,y)</script><p>可以看到非线性部分，通过$U_1$和$U_2$来模拟。</p>
+<p>a system of ordinary differential equations that incorporates the known structure but leaves room for learning unknown interactions between the the predator and prey populations.</p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/20/oH2IkrgTtvJNPQZ.png" alt="oH2IkrgTtvJNPQZ"></p>
+<p>问题：是否可以利用这个原理，训练压气机仿真压力和速度之间的关系，从而应用到实验中。伯努利方程为基础。</p>
+<p><strong>代码：</strong></p>
+<h3 id="卷积与PDE之间的关系"><a href="#卷积与PDE之间的关系" class="headerlink" title="卷积与PDE之间的关系"></a>卷积与PDE之间的关系</h3><p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/20/JpePwSIEFfYriR8.png" alt="JpePwSIEFfYriR8"></p>
+<script type="math/tex; mode=display">
+\triangle u=u_{xx}+u_{yy}=\\\\
+{u(x+\triangle x,y)-2u(x,y)+u(x-\triangle x,y)\over \triangle x^2} + {u(x x,y+\triangle y)-2u(x,y)+u(x,y-\triangle y)\over \triangle y^2} \\\\
++O(\triangle x^2)+O(\triangle y^2)</script><p>该公式等价于卷积核为：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">-4</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Neural-PDE-加速仿真计算"><a href="#Neural-PDE-加速仿真计算" class="headerlink" title="Neural PDE 加速仿真计算"></a>Neural PDE 加速仿真计算</h3><p><a target="_blank" rel="noopener" href="https://clima.github.io/ClimateMachine.jl/latest/GettingStarted/Installation/">MIT-climate</a></p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/20/QdAYh6DGujyKEM2.png" alt="QdAYh6DGujyKEM2"></p>
+<h2 id="Scaling-the-software-to-“real”-problems"><a href="#Scaling-the-software-to-“real”-problems" class="headerlink" title="Scaling the software to “real” problems"></a>Scaling the software to “real” problems</h2><p>Neural ODE with batching on the GPU (without internal data transfers) with high order adaptive  implicit ODE solvers for stiff equations using matrix-free Newton-Krylov via preconditioned GMRES  and trained using checkpointed adjoint equations. See Yingbo Ma’s talk.</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> OrdinaryDiffEq, Flux, DiffEqFlux, DiffEqOperators, CuArrays</span><br><span class="line">x = <span class="built_in">Float32</span>[<span class="number">2.</span>; <span class="number">0.</span>]|&gt;gpu</span><br><span class="line">tspan = <span class="built_in">Float32</span>.((<span class="number">0.0f0</span>, <span class="number">25.0f0</span>))</span><br><span class="line">dudt  = Chain(Dense(<span class="number">2</span>,<span class="number">50</span>,tanh), Dense(<span class="number">50</span>,<span class="number">2</span>))|&gt;gpu</span><br><span class="line">p = DiffEqFlux.destructure(dudt)</span><br><span class="line">dudt_(du, u::TrackedArray,  p, t) = u .= DiffEqFlux.restructure(dudt,p)(u)</span><br><span class="line">dudt_(du, u::<span class="built_in">AbstractArray</span>, p, t) = u .= Flux.data(DiffEqFlux.restructure(dudt,p)(u))</span><br><span class="line">ff = ODEFunction(dudt_, jac_prototype = JacVecOperator(dudt_,x))</span><br><span class="line">prob = ODEProblem(ff,x,tspan,p)</span><br><span class="line">diffeq_adjoint(p,prob,KenCarp4(linsolve=LinSolveGMRES());u0=x,</span><br><span class="line">  saveat=<span class="number">0.0</span>:<span class="number">0.1</span>:<span class="number">25.0</span>, backsolve=<span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="ROM-machine-learning-燃烧模拟-加速模拟"><a href="#ROM-machine-learning-燃烧模拟-加速模拟" class="headerlink" title="ROM machine learning-燃烧模拟-加速模拟"></a>ROM machine learning-<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Bk4PJnjuPps&amp;list=PLP8iPy9hna6Tl2UHTrm4jnIYrLkIcAROR&amp;index=4">燃烧模拟</a>-加速模拟</h2><p>报告的最后说了一个事实：下面的案例是针对于仿真的，仿真的好处是能拿到不同的参数，然后做降维，这要比实验好做的多。</p>
+<ul>
+<li>首先对数据的认识非常重要，deeply understand the problem you working with,</li>
+<li>机器学习算法保证不变量</li>
+<li>预测chaostis是悬而未决的</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/Willcox-Research-Group?language=python">https://github.com/Willcox-Research-Group?language=python</a></p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2008.02862.pdf">参考文献</a></p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/23/WbFLeAIjECOhizR.png" alt="WbFLeAIjECOhizR"></p>
+<p><strong>Lift &amp; Learn approach</strong></p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/23/VsMLfkFR1piPmQ5.png" alt="VsMLfkFR1piPmQ5"></p>
+<ul>
+<li>Full model</li>
+</ul>
+<script type="math/tex; mode=display">
+{d\over dt}q(t)= c+Aq(t)+H(q(t)\otimes q(t))+Bu(t),\\\\ q(t_0)=q_0, t\in[t_0,t_f]</script><p>H terms are quadratic,</p>
+<p>Example:</p>
+<ol>
+<li>Incompressible N-S  </li>
+<li>Euler equations can be transformed to quadratic form by using pressure, velocity.</li>
+<li>A nonlinear tubular reactor model</li>
+</ol>
+<ul>
+<li>ROM model：</li>
+</ul>
+<script type="math/tex; mode=display">
+{d\over dt}q_r(t)= c_r+A_rq_r(t)+H_r(q_r(t)\otimes q_r(t))+B_ru(t),\\\\ q_r(t_0)=V^T q_0, t\in[t_0,t_f]</script><p>Where, $c_r = V^Tc, A_r = V^TAV, H_r=V^TH(V\otimes V), B_r= V^TB$</p>
+<ul>
+<li>Learn model fram data (data driven regression approach)<script type="math/tex; mode=display">
+{d\over dt}\hat{q}(t)= \hat{c}+\hat{A}\hat{q}(t)+\hat{H}(\hat{q}(t)\otimes \hat{q}(t))+\hat{B}u(t),\\\\ \hat{q}(t_0)=V^Tq_0, t\in[t_0,t_f]</script>Solve least-squares problem:（最小二乘法）<script type="math/tex; mode=display">
+min_{\hat{c},\hat{A},\hat{H},\hat{B}}\sum_{j=0}^{k-1} \left\Vert \hat{c} +\hat{A} \hat{q_j} +\hat{H}(\hat{q}_j\otimes \hat{q}_j) +\hat{B}u_J -\dot{\hat{q}}\right\Vert_2^2</script>最终，将上式表达为：<script type="math/tex; mode=display">
+min_{O} \left\Vert DO^T - R^T \right\Vert_F^2\\\\
+O = [\hat{c} \space \hat{A} \space \hat{H} \space \hat{B}]\in R^{r\times d(r,m)},(unknown \space opertor)\\\\
+D=[1_k \space \hat{Q}^T \space (\hat{Q}\times \hat{Q})^T \space U^T]\in R^{r\times d(r,m)}, (known \space data)\\\\
+\hat{Q} =[\hat{q}_0 \space \hat{q}_1 ... \hat{q}_{k-1}]\in R^{r\times k}, (snapshots)\\\\
+R = [\dot{\hat{q}}_0 \space \dot{\hat{q}}_1 ...\dot{\hat{q}}_{k-1}]\in R^{r\times k}, (time \space derivatives)\\\\
+U = [u_0 \space u_1 ... \space u_{k-1}]\in R^{m\times k} (input)</script>Thus to compute the ROM operators $\hat{c}, \hat{A}, \hat{H}, \hat{B}$ without explicit acess to the original high-dimensional opertor $c, A, H, B$.</li>
+</ul>
+<ul>
+<li>Tikhonov Regularization to alleviate overfitting the operators to the data <a target="_blank" rel="noopener" href="http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization">参考</a><script type="math/tex; mode=display">
+min_{o_i} \left\Vert Do_i -r_i \right\Vert_2^2 + \left\Vert \Gamma o_i\right\Vert_2^2 = \left\Vert [D ; \Gamma]o_i - [r_i;0]\right\Vert, i=1,..,r</script>$\Gamma$ is a full-rank regularizer.</li>
+</ul>
+<p>L2 regularizer $\Gamma = \lambda I$, deriving the ROM toward the globally stable system ${d\over dt}\hat{q}(t)=0$.</p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/23/aDBcowx9KC4FS7N.png" alt="aDBcowx9KC4FS7N"></p>
+<ul>
+<li>Combustion dynamics<script type="math/tex; mode=display">
+{\partial \vec{q_c}\over \partial t} + \nabla\cdot(\vec{K}-\vec{K}_v) =\vec{S}\\\\
+\vec{q}_c = [\rho \space \rho v_x \space \rho v_y \space \rho e\space \rho Y_1 \space \rho Y_2 \space \rho Y_3 \space \rho Y_4]^T</script>$\vec{K}$ the inviscid flux terms, $\vec{K}_v$ the viscous flux terms, $\vec{S}$ is the source terms. $\rho$ density, $Y_l$ is the species mass fraction. CH4 + 2<em> O2 —&gt; 2 </em> H2O+ CO2.</li>
+</ul>
+<p><img src= "/img/loading.gif" data-src="/Users/wjq/Library/Application Support/typora-user-images/image-20201222231006226.png" alt="image-20201222231006226"></p>
+<p>仿真模型参考：<a target="_blank" rel="noopener" href="https://github.com/cwentland0/pyGEMS_1D">https://github.com/cwentland0/pyGEMS_1D</a></p>
+<h3 id="FLOW-MODELING-WITH-MACHINE-LEARNING"><a href="#FLOW-MODELING-WITH-MACHINE-LEARNING" class="headerlink" title="FLOW MODELING WITH MACHINE LEARNING"></a>FLOW MODELING WITH MACHINE LEARNING</h3><ul>
+<li><p>dimensionality reduction</p>
+<p>Dimensionality reduction involves extracting key features and dominant patterns that may be used as reduced coordinates where the fluid is compactly and efficiently described (Taira et al. 2017). 参见<sup><a href="#fn_5" id="reffn_5">5</a></sup></p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/20201211110226.png" alt="POD"></p>
+</li>
+<li><p>Detecting von Karman-type wakes with hydrodynamic sensors<sup><a href="#fn_6" id="reffn_6">6</a></sup></p>
+</li>
+</ul>
+<h3 id="Machine-Learning-Based-Detection-of-Flow-Disturbances-Using-Surface-Pressure-Measurements7"><a href="#Machine-Learning-Based-Detection-of-Flow-Disturbances-Using-Surface-Pressure-Measurements7" class="headerlink" title="Machine Learning Based Detection of Flow Disturbances Using Surface Pressure Measurements7"></a>Machine Learning Based Detection of Flow Disturbances Using Surface Pressure Measurements<sup><a href="#fn_7" id="reffn_7">7</a></sup></h3><p>利用叶片表面的压力数据$\triangle C_p = 2(p^+ - p^-)/(\rho U^2)$通过机器学习特征-吸力面的来流相对叶片的角度，定义为critical leading-edge suction parameter (LESP)。Using a combination of convolutional and recurrent neural networks.</p>
+<p><strong>离散涡方法</strong> <a target="_blank" rel="noopener" href="https://github.com/hjabird">代码</a></p>
+<p>将叶片的流场用一个个涡团来近似模拟，但对于有厚度的叶片需要进行修正，考虑kutta条件(zero vorticity at the trailing edge)。</p>
+<p>the coordinate along the plate：</p>
+<script type="math/tex; mode=display">
+x = {c\over 2}(1-cos\theta)</script><p>对于薄翼模型，其涡量分布 bound vortex sheet strength on the plate 有如下简化形式：</p>
+<script type="math/tex; mode=display">
+\gamma(\theta,t)=2U[A_0(t){1+cos\theta\over sin\theta}+\sum_{n=1}^\infty A_n(t)sin(n\theta)],\\\\
+x= {c\over 2}(1-cos\theta)</script><p>对于有一定厚度的翼型，简化满足速度平行于边界的条件:</p>
+<script type="math/tex; mode=display">
+A_0(t) = -{1\over \pi} \int_0^\pi {W(x,t)\over U}d\theta,\\\\
+A_n(t) = {2\over \pi} {W(x,t)\over U}cos(n\theta) d\theta</script><p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/20201212110607.png" alt="POD"></p>
+<p>无滑移可能通过离散涡方法求解, 最终求得流场速度：</p>
+<script type="math/tex; mode=display">
+W(x,t)= {\partial \phi_B \over \partial z} = {\partial \eta \over \partial x}(U cos\alpha + \dot{h} sin\alpha + {\partial \phi_{lev}\over \partial x} + {\partial \phi_{tev}\over \partial x})\\\\ - U sin \alpha - \dot{\alpha}(x-ac) + \dot{h} cos\alpha - {\partial \phi_{tev}\over \partial z} -{\partial \phi_{lev}\over \partial z}</script><p>其中，$\phi<em>B, \phi</em>{\lev}, \phi_{tev}$为velocity potentials associated with bound, leading-edge and trailing-edge vorticity. $\eta$ is the camber distribution on the aerofoil. potentials的偏微分分别为垂直于弦的速度。</p>
+<p><strong>Kelvin’s 环量守恒：</strong></p>
+<script type="math/tex; mode=display">
+\Gamma_b(t) + \sum_{m=1}^{N_{tev}} \Gamma_{tev_m} +  \sum_{m=1}^{N_{lev}} \Gamma_{tev_n}  =0,\\\\
+\Gamma_b = Uc\pi [A_0(t)+ {A_1(t)\over 2}]</script><p><strong>Critical leading-edge suction parameter (LESP)</strong> </p>
+<p>无量纲参数，$LESP(t)=A_0(t)$</p>
+<p><strong>LSEP和前缘分离涡初始点之间的联系</strong></p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020121223035.png" alt="POD"></p>
+<p>如此神奇，这些初始分离点竟然都在LESP的同一条线上，也就是说，分离点的位置与LESP-$A_0$直接相关。这个结果为Ramesh团队在JFM-2014上发表<sup><a href="#fn_8" id="reffn_8">8</a></sup>。这个结果证明了，LESP临界点只跟给定的翼型攻角$\alpha$和雷诺数$RE$有关系。</p>
+<p>理论很丰满，但实际工程遇到的问题却很骨感。上面的案例是简化的离散涡模型的结果，但实际问题是非线性的，来流复杂，可压条件，攻角和雷诺数也是随时间变化，因此临界LESP也在变化，直接影响LEV的分离，LEV的分离又对叶轮机械系统的稳定性非常动摇。传感器可以实时获取叶片壁面的动压数据，是否可以用该数据来训练，预测攻角，LESP和其临界点。</p>
+<p><strong>如何从压力数据训练LESP？</strong></p>
+<p>来自California的Wei Hou<sup><a href="#fn_7" id="reffn_7">7</a></sup>就拿这个离散涡的模型做了一些数据训练尝试，虽然没拿实际问题的数据。他们提前改变了模型的预设参数$LESP_c(t)$和$\alpha(t)$, 让其随时间变化。然后，通过离散涡模型仿真，收集叶片表面的压力数据，利用这个数据拿前面已知的参数标签做机器学习，再利用训练好的模型，预测下一个时间点的这两个标签。</p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/12/WTULl6pCc9QiRto.png" alt="WTULl6pCc9QiRto"></p>
+<p>参见2018-pyhsical review fluid-Darakananda <sup><a href="#fn_9" id="reffn_9">9</a></sup></p>
+<p>“This question may appear superficially simple to address since the LESP itself is due directly to pressure, and in fact—as we will discuss below—is proportional to the lowest Fourier mode on the plate surface. However, it is important to remember that in the high-amplitude cases of interest in this work, the flow response (and the surface pressure) is non-linearly dependent on the disturbed critical LESP, so that the surface pressures along the airfoil chord are not trivially related to the leading-edge suction.”</p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/20201212104202.png" alt="POD"></p>
+<p>输入矩阵$R^{M*N}$:压力数据采样M=126个点，在叶片上为chebshev分布。N=201为时间序列, 时间间隔为$\triangle t U/c=0.01$.</p>
+<p>输出矩阵$R^{1*N}$，为LESP。</p>
+<p>The CNN contains 16 separate filters,each utilizing a 5×5 tile of weights, so that the output of this layer is of size $R^{16 <em> 126 </em> 201}$</p>
+<p><strong>learned the functional relationship betweensurface  pressures  and  the  LESP  and  the  angle  of  attack  histories  by machine-learned systemidentification(MLSID).</strong> </p>
+<p>assume that the dynamics of the angle ofattack can be described by a linear system of first order differential equations with forcing:</p>
+<script type="math/tex; mode=display">
+\dot{x} = A(p,\tilde{p})x+ u(p,\tilde{p})</script><p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/12/YvetO9p7fXyJK3D.png" alt="YvetO9p7fXyJK3D"></p>
+<p>接下来，还可以利用评估得到的LESP做一些事情，简化模型，提取最主要的信息。</p>
+<p><strong>Applying the EnKF to a vortex model</strong><sup><a href="#fn_9" id="reffn_9">9</a></sup></p>
+<p>准备的数据：The state vector of our EnKF-assisted vortex model consists of the positions and strengths of the n vortex blobs, as well as the current estimate of the LESPc:</p>
+<script type="math/tex; mode=display">
+x_{k-1}:=[x_{k-1}^1 \space y_{k-1}^1 \space \Gamma_{k-1}^1 \space ... \space x_{k-1}^n \space y_{n-1}^n \space \Gamma_{k-1}^n \space LESP_{k-1}^c]^T</script><p>The nonlinear state transition function $f_k$ propagates the state from step k-1 to step k by the following methods:</p>
+<p>(1) computing the bound vortex sheet strength on the plate from the no-penetration condition, using the current vortex blob positions and strength;</p>
+<p>(2) computing the volocities of the vortex blobs;</p>
+<p>(3) advecting the plate and the vortex blobs;</p>
+<p>(4) applying the vortex aggregation algorithm, reducing the strength of any aggregated blobs to zero instead of completely removing the blob;</p>
+<p>(5) releasing a new vortex blob from each edge of the plate with strengths based on the Kutta condition at the trailing edge and the current estimate of the LESP_c at the leading edge.</p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/12/IFLCpsdo1vqeGU6.png" alt="IFLCpsdo1vqeGU6"></p>
+<p>这篇文章的<a target="_blank" rel="noopener" href="https://darwindarak.github.io/PotentialFlow.jl/latest/">作者</a>也被我挖坟挖到了，真的牛逼的人有个共同的分享精神。Julia写的，之前接触过一些，挺优美的语言。</p>
+<h3 id="Deep-neural-networks-for-waves-assisted-by-the-Wiener–Hopf-method-学习笔记-黄迅"><a href="#Deep-neural-networks-for-waves-assisted-by-the-Wiener–Hopf-method-学习笔记-黄迅" class="headerlink" title="Deep neural networks for waves assisted by the Wiener–Hopf method 学习笔记-黄迅"></a>Deep neural networks for waves assisted by the Wiener–Hopf method 学习笔记-黄迅</h3><script type="math/tex; mode=display">
+\psi_s(x, r)= {w^2\over 2\pi}\int_{-\infty}^{+\infty} \beta(\mu, r)e^{i w\mu x}d\mu = A_{mn}{w^2\over 2\pi} \underbrace{\int_{-\infty}^{+\infty} G_{mn}(\mu,r)e^{iw\mu x}d\mu}_{G_{mn}}</script><script type="math/tex; mode=display">
+\psi_s(x,r) = \sum_{m=-m_\infty}^{m_\infty} \sum_{n=1}^{n_\infty}A_{mn}G_{mn}+n</script><p>训练数据准备：</p>
+<p>10000 items: $\psi<em>s$ of various (m,n) with random amplitudes $A</em>{mn}$ , </p>
+<p>这个例子实际较为简单，可以用来作为benchmark。</p>
+<p>训练 differenatial operator</p>
+<h3 id="笔记2-针对有物理限制的案例"><a href="#笔记2-针对有物理限制的案例" class="headerlink" title="笔记2: 针对有物理限制的案例"></a>笔记2: 针对有物理限制的案例</h3><p>之前的案例讨论的都是如何训练神经网络使得近似operator。但是如果有边界条件存在的情况，我们又该如何取舍？</p>
+<p><strong>分析1:</strong></p>
+<p>详细见：<a target="_blank" rel="noopener" href="https://github.com/cics-nd/pde-surrogate">https://github.com/cics-nd/pde-surrogate</a></p>
+<script type="math/tex; mode=display">
+\mathcal{N}(u(s);K(s))= f(s), s\in\mathcal{S},\\\\
+\mathcal{B}(u(s)) = b(s), s\in \Gamma</script><p>$\mathcal{B}$ 是PDE的边界条件。</p>
+<p>Darcy flow：</p>
+<script type="math/tex; mode=display">
+-\nabla \cdot (K(s)\nabla u(s))= f(s), s\in \mathcal{S}\\\\
+with \space boudnary:
+u(s)=u_D(s), s\in\Gamma_D\\\\
+\nabla u(s)\cdot n = g(s) s\in \Gamma_N</script><p>该案例最终可以转化为求最优化问题：</p>
+<script type="math/tex; mode=display">
+arg min_u V(u;K)</script><script type="math/tex; mode=display">
+L(\theta;{x^{i}}_i^N)= {1\over N}\sum_{i=1}^N[V(\hat{y}_\theta(x^i), x^i)+\lambda B(\hat{y}_\theta(x^i))]</script><p>$\lambda$ is the weight (Lagrange multiplier) to softly enforce the boundary conditions.</p>
+<p>限制是好事：</p>
+<p>如果没有限制，predict 一段时间就会跑偏，有了限制（前提已知），就会神经网络就会自己主动调整，预测正确的结果。</p>
+<p>利用卷积-encoder-deconder neural network ，跟SVD有联系。</p>
+<p><strong>分析2:</strong></p>
+<p>详细见：<a target="_blank" rel="noopener" href="https://github.com/maziarraissi/DeepVIV">https://github.com/maziarraissi/DeepVIV</a></p>
+<p>作者主页：<a target="_blank" rel="noopener" href="https://maziarraissi.github.io/research/">https://maziarraissi.github.io/research/</a></p>
+<h3 id="无量纲处理-实际仿真数据"><a href="#无量纲处理-实际仿真数据" class="headerlink" title="无量纲处理 实际仿真数据"></a>无量纲处理 实际仿真数据</h3><p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/17/5kLP3ObVghpHjmR.jpg" alt="5kLP3ObVghpHjmR"><br><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/17/yuqbvj2OK4EmwpI.jpg" alt="yuqbvj2OK4EmwpI"></p>
+<p><img src= "/img/loading.gif" data-src="/Users/wjq/Pictures/Photos Library.photoslibrary/resources/derivatives/C/CEFE3795-6A7B-4718-8A66-F854F8FCE7E5_1_105_c.jpeg" alt="CEFE3795-6A7B-4718-8A66-F854F8FCE7E5_1_105_c"></p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/17/iWS1kFVm8ZA9v2B.jpg" alt="iWS1kFVm8ZA9v2B"><br><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/17/UKORGYZLc7qHSBx.jpg" alt="UKORGYZLc7qHSBx"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote id="fn_1">
+<sup>1</sup>. [2019 SIAM Conference on Applications of Dynamical Systems<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. <a target="_blank" rel="noopener" href="https://github.com/pvlachas/RNN-RC-Chaos">https://github.com/pvlachas/RNN-RC-Chaos</a><a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_4">
+<sup>4</sup>. Backpropagation Algorithms and Reservoir Computing in Recurrent Neural Networks for the Forecasting of Complex Spatiotemporal Dynamics<a href="#reffn_4" title="Jump back to footnote [4] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_5">
+<sup>5</sup>. Machine Learning for Fluid Mechanics<a href="#reffn_5" title="Jump back to footnote [5] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_6">
+<sup>6</sup>. Detecting exotic wakes with hydrodynamic sensors Mengying Wang and Maziar S. Hemati<a href="#reffn_6" title="Jump back to footnote [6] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_7">
+<sup>7</sup>. AIAA conference-2019,Machine Learning Based Detection of Flow Disturbances Using Surface Pressure Measurements Wei Hou∗1 , Darwin Darakananda†1 , and Jeff D. Eldredge‡1<a href="#reffn_7" title="Jump back to footnote [7] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_8">
+<sup>8</sup>. Kiran Ramesh, Ashok Gopalarathnam, Kenneth Granlund, Michael V. Ol, and Jack R. Edwards. Discrete-vortex method with novel shedding criterion for unsteady aerofoil flows with intermittent leading-edge vortex shedding. Journal of Fluid Mechanics, 751:500–538, 2014<a href="#reffn_8" title="Jump back to footnote [8] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_9">
+<sup>9</sup>. Data-assimilated low-order vortex modeling of separated flows,PHYSICAL REVIEW FLUIDS 3, 124701 (2018)<a href="#reffn_9" title="Jump back to footnote [9] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_10">
+<sup>10</sup>. 2017- APPLIED MATHEMATICS Data-driven discovery of partial differential equations Samuel H. Rudy1,*, Steven L. Brunton2, Joshua L. Proctor3 and J. Nathan Kutz1<a href="#reffn_10" title="Jump back to footnote [10] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_11">
+<sup>11</sup>. Universal Differential Equations for Scientific Machine Learning Christopher Rackauckasa - 2020-10-10<a href="#reffn_11" title="Jump back to footnote [11] in the text."> &#8617;</a>
+</blockquote>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jiaqi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://deal-ii.com/post/47358f5f/">http://deal-ii.com/post/47358f5f/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://deal-ii.com" target="_blank">DEAL-II-Fluid</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/chao-s-theory/">chao's theory</a><a class="post-meta__tags" href="/tags/machine-learning/">machine learning</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/12/22/d7YjSwNqreOA91K.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/b269cf51/"><img class="prev-cover" data-src="https://i.loli.net/2020/12/17/fW2LoYdiScxwTph.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">julia-CFD数值基础</div></div></a></div><div class="next-post pull-right"><a href="/post/d03a598f/"><img class="next-cover" data-src="https://i.loli.net/2020/12/13/CRJOLzqKD6FlQWx.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">machine learning for chaos system-测试篇</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/post/d03a598f/" title="machine learning for chaos system-测试篇"><img class="relatedPosts_cover" data-src="https://i.loli.net/2020/12/13/CRJOLzqKD6FlQWx.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-11</div><div class="relatedPosts_title">machine learning for chaos system-测试篇</div></div></a></div><div class="relatedPosts_item"><a href="/post/f2bbe0e7/" title="machine learning for chaos system-基础知识"><img class="relatedPosts_cover" data-src="https://i.loli.net/2020/12/13/KPc9zZ4hNn3CMta.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-11</div><div class="relatedPosts_title">machine learning for chaos system-基础知识</div></div></a></div><div class="relatedPosts_item"><a href="/post/845ed395/" title="Dynamical system and chaos"><img class="relatedPosts_cover" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/chaoblogcover.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-11</div><div class="relatedPosts_title">Dynamical system and chaos</div></div></a></div><div class="relatedPosts_item"><a href="/post/9864ea21/" title="machine learning for chaos system-执行篇"><img class="relatedPosts_cover" data-src="https://i.loli.net/2020/12/22/d7YjSwNqreOA91K.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-22</div><div class="relatedPosts_title">machine learning for chaos system-执行篇</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div class="comments-items-1" data-name="Valine"><div class="vcomment" id="vcomment"></div><script>function loadvaline () {  
+  var requestSetting = function (from,set) {
+    var from = from
+    var setting = set.split(',').filter(function(item){
+    return from.indexOf(item) > -1
+    });
+    setting = setting.length == 0 ? from :setting;
+    return setting
+  }
+
+  var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+  var requiredFields = requestSetting(['nick','mail'],'nick,mail')
+
+  function initValine () {
+    window.valine = new Valine({
+      el:'#vcomment',
+      appId: 'lJ3vEzEWaeVa6HpWNNbPrauw-gzGzoHsz',
+      appKey: '16FI6zgDXwvw71g04yhHnnW0',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: guestInfo,
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      requiredFields: requiredFields
+    });
+  }
+  loadScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || false) {
+  window.addEventListener('load', loadvaline)
+}
+else {
+  function loadOtherComment () {
+    loadvaline()
+  }
+}</script></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Jiaqi</div><div class="framework-info"><span>驱动 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></head></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/calendar.js"></script><script src="/js/languages.js"></script><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/gitcalendar/js/gitcalendar.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":120,"height":260},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

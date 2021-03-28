@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DMD | DEAL-II-Fluid</title><meta name="description" content="DMD 算法汇总 POD standard DMD On-line DMD Hankel-DMD Koopman mode decomposition  持续更新中。。 PODrealization of a stationary stochastic process and therefore can use statistical tools such as  POD to obtain a"><meta name="keywords" content="DMD"><meta name="author" content="Jiaqi"><meta name="copyright" content="Jiaqi"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://deal-ii.com/post/DMD1/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta property="og:type" content="article"><meta property="og:title" content="DMD"><meta property="og:url" content="http://deal-ii.com/post/DMD1/"><meta property="og:site_name" content="DEAL-II-Fluid"><meta property="og:description" content="DMD 算法汇总 POD standard DMD On-line DMD Hankel-DMD Koopman mode decomposition  持续更新中。。 PODrealization of a stationary stochastic process and therefore can use statistical tools such as  POD to obtain a"><meta property="og:image" content="https://i.loli.net/2020/12/25/JsiaoQXpFZg7YI2.png"><meta property="article:published_time" content="2020-11-30T05:55:34.000Z"><meta property="article:modified_time" content="2021-01-29T07:25:51.529Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="prev" title="python知识点记录" href="http://deal-ii.com/post/python/"><link rel="next" title="LBM-IBM-FEM" href="http://deal-ii.com/post/f0787947/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: true,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-01-29 15:25:51'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@master/Hexo/css/flink.min.css"><link rel="stylesheet" href="/gitcalendar/css/gitcalendar.css"/><meta name="generator" content="Hexo 5.3.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/me.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">23</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">31</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DMD-%E7%AE%97%E6%B3%95%E6%B1%87%E6%80%BB"><span class="toc-number">1.</span> <span class="toc-text">DMD 算法汇总</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#POD"><span class="toc-number">1.1.</span> <span class="toc-text">POD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#standard-DMD"><span class="toc-number">1.2.</span> <span class="toc-text">standard DMD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#On-line-DMD1"><span class="toc-number">1.3.</span> <span class="toc-text">On-line DMD1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hankel-DMD"><span class="toc-number">2.</span> <span class="toc-text">Hankel-DMD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Koopman-mode-decomposition-4"><span class="toc-number">3.</span> <span class="toc-text">Koopman mode decomposition 4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text"> </span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hypergraph-amp-amp-mix-norm-7"><span class="toc-number">4.1.</span> <span class="toc-text">Hypergraph &amp;&amp; mix_norm 7</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Basic-theory-of-the-WLS-meshless-methods"><span class="toc-number">4.1.1.</span> <span class="toc-text">Basic theory of the WLS meshless methods</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C"><span class="toc-number">4.2.</span> <span class="toc-text">执行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%86%E8%8A%82%EF%BC%9A"><span class="toc-number">4.2.1.</span> <span class="toc-text">细节：</span></a></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2020/12/25/JsiaoQXpFZg7YI2.png)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">DEAL-II-Fluid</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">DMD</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-11-30 13:55:34"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-11-30</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-01-29 15:25:51"><i class="fas fa-history fa-fw"></i> 更新于 2021-01-29</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E7%A7%91%E7%A0%94/">科研</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="DMD-算法汇总"><a href="#DMD-算法汇总" class="headerlink" title="DMD 算法汇总"></a>DMD 算法汇总</h2><ul>
+<li>POD</li>
+<li>standard DMD</li>
+<li>On-line DMD</li>
+<li>Hankel-DMD</li>
+<li>Koopman mode decomposition</li>
+</ul>
+<p>持续更新中。。</p>
+<h3 id="POD"><a href="#POD" class="headerlink" title="POD"></a>POD</h3><p>realization of a stationary stochastic process and therefore can use statistical tools such as  POD to obtain a meaningful decomposition. POD is a linear decomposition of the flow field into spatially orthogonal modes and uncorrelated temporal coefficients.</p>
+<p>the chaotic component $u_c(x,y,t)$ 可以分解：</p>
+<script type="math/tex; mode=display">
+u_c(x,y,t)= \sum_k a_k (t)\phi_k(x,y)</script><p>其中， $\phi_k$ 为POD 模态<sup><a href="#fn_3" id="reffn_3">3</a></sup>, $a_k$ 与时间相关。</p>
+<p>DMD 或 Koopman decomposition mode, could evolve exponentially with time.  POD 模态 互相空间正交，DMD 不必。POD provide a robust representation of post-transient chaotic components since the modes become independent of the initial condition due to 遍历性. </p>
+<p>在该<sup><a href="#fn_3" id="reffn_3">3</a></sup>文献中，Koopman modes 和 POD 模态同时使用，the most economical choices for constructing low-dimensional approximations of the quasi-periodic and chaotic components of the flow respectively.</p>
+<script type="math/tex; mode=display">
+u_{n_k,n_p}(x,t)= \sum_{j=1}^{n_k} u_j(x)e^{i w_j t} + \sum_{l=1}^{n_p} \phi_l(x)a_l(t)</script><p>stack the modes by starting from the Koopman modes (including the mean flow) in the order of decreasing energy and then use the POD modes of the chaotic component with the same order.</p>
+<h3 id="standard-DMD"><a href="#standard-DMD" class="headerlink" title="standard DMD"></a>standard DMD</h3><script type="math/tex; mode=display">
+x_{j+1}=F(x_j)</script><script type="math/tex; mode=display">
+X_k=[x_1 \space x_2 \space ... \space x_k],Y_k=[y_1 \space y_2 \space ... \space y_k],</script><script type="math/tex; mode=display">
+J_k =\sum_{i=1}^{k} ||y_i -A_k x_i||^2 = ||Y_k - A_k X_k||^2_F</script><p>where $F$ denotes the Frobenius norm on matrices. The unique minimum-norm solution to this least-squares problem is given by</p>
+<script type="math/tex; mode=display">
+A_k=Y_k X_k^+</script><p>where $X_k^+$ denotes the Moore-Penrose pseudoinverse of $X_k$.</p>
+<p>   Here, we shall assume that $X_k$ has full row rank, in which case $X_k X_k^T$ is invertible, and</p>
+<script type="math/tex; mode=display">
+X_k^+ = X_k^T (X_k X_K^T)^{-1}</script><p>The $A_k$ given above is the unique solution that minimizes $J_k$. </p>
+<p>Consider minimizing a modified cost function:</p>
+<script type="math/tex; mode=display">
+\tilde{J_k} = \sum_{i=1}^k \rho^{k-i} ||y_i - A_k x_i||^2</script><p>where $0&lt;\rho \leqq 1$. </p>
+<h3 id="On-line-DMD1"><a href="#On-line-DMD1" class="headerlink" title="On-line DMD1"></a>On-line DMD<sup><a href="#fn_1" id="reffn_1">1</a></sup></h3><p>这个算法特别适合实验数据测点数n比较小，而时间t非常大的实时迭代更新.</p>
+<p>一般一个snapshots的展开的列数相对较大，但snapshot数较少. 为了满足实时性计算性能要求，参考文献提出了类似于classical recursive least-squares estimation algorithm recursive least-squares algorithm update a vector in real time.</p>
+<p>首先，将上面$A_k=Y_k X_k^+$改写为</p>
+<script type="math/tex; mode=display">
+A_k = Y_k X_k^T (X_k X_k^T)^{-1}= Q_k P_k</script><p>那么，为了计算下个时间步的$A<em>k$，则需要更新$Q</em>{k+1}$和$P_{k+1}$</p>
+<script type="math/tex; mode=display">
+Q_{k+1}= Y_{k+1}X_{k+1}^T = [Y_k \space y_{k+1}][X_k \space x_{k+1}]^T = Y_k X_k^T + y_{k+1}x_{k+1}^T\\\\
+P_{k+1}^{-1}= X_{k+1}X_{k+1}^T =[X_k \space x_{k+1}][X_k \space x_{k+1}]^T= X_kX_k^T + x_{k+1}x_{k+1}^T</script><p>上述公式说明了，可以通过单单更新rank-1来找到下一个时间不的Q和P矩阵。</p>
+<script type="math/tex; mode=display">
+Q_{k+1}= Q_k + y_{k+1}x_{k+1}^T\\\\
+P_{k+1}^{-1}=P_k^{-1} + x_{k+1}x_{k+1}^T</script><p>这样就可以更新下个时间步的DMD矩阵：</p>
+<script type="math/tex; mode=display">
+A_{k+1}=Q_{k+1}P_{k+1}^{-1}=(Q_k + y_{k+1}x_{k+1}^T) (P_k^{-1} + x_{k+1}x_{k+1}^T)^{-1}</script><p>计算$P_k^{-1}$还要设计到求逆，这是非常耗时的，$O(n^3)$. 可以通过Sherman-Morrision formula进行简化<sup><a href="#fn_2" id="reffn_2">2</a></sup></p>
+<script type="math/tex; mode=display">
+\cssId{Overlinev}{(A+ uv^T)^{-1}} = A^{-1} - {A^{-1}uv^T A^{-1}\over 1+v^T A^{-1}u}</script><p>把上面$\href{ #Overlinev}{公式}$ 应用到P</p>
+<script type="math/tex; mode=display">
+P_{k+1}= (P_k^{-1}+ x_{k+1}x_{k+1}^T)^{-1} = P_k - {P_k x_{k+1}P_k \over1+x_{k+1}^T P_k x_{k+1}}</script><p>令</p>
+<script type="math/tex; mode=display">
+\gamma_{k+1}={1 \over1+x_{k+1}^T P_k x_{k+1}}</script><p>因此：</p>
+<script type="math/tex; mode=display">
+A_{k+1}= (Q_k + y_{k+1}x_{k+1}^T) ( P_k - \gamma_{k+1} {P_k x_{k+1}P_k })\\\\
+= Q_kP_k - \gamma_{k+1}Q_k P_k x_{k+1}x_{k+1}^T P_k \\\\
++ y_{k+1}x_{k+1}^T P_k- \gamma_{k+1}y_{k+1}x_{k+1}^T P_k x_{k+1}x_{k+1}^T P_k</script><p>简化last two terms，</p>
+<script type="math/tex; mode=display">
+y_{k+1}x_{k+1}^T P_k- \gamma_{k+1}y_{k+1}x_{k+1}^T P_k x_{k+1}x_{k+1}^T P_k = \gamma_{k+1}y_{k+1}(\gamma_{k+1}^{-1}-x_{k+1}^TP_k x_{k+1})x^T_{k+1}P_k\\\\
+= \gamma_{k+1}y_{k+1}x^T_{k+1}P_k</script><p>所以：</p>
+<script type="math/tex; mode=display">
+A_{k+1} = A_k - \gamma_{k+1}Q_k P_k x_{k+1}x_{k+1}^T P_k + \gamma_{k+1}y_{k+1}x^T_{k+1}P_k</script><ul>
+<li>解释：更新A的过程可以看成 将$y<em>{k+1}-A_kx</em>{k+1}$的误差用于更正$A_{k+1}$.</li>
+<li>$A<em>k x</em>{k+1}$ 和 $P<em>k x</em>{k+1}$大概需要$4n^2$floating-point. 而 standard DMD 为 $O(kn^2</li>
+</ul>
+<ul>
+<li><p>思考: 这个获取可以用在DMD旋转失稳的旋转速度的捕捉，随着工况的变化，该速度一直在变化，也带来了频率的变化。</p>
+<p>可以用来作失速前的预警。</p>
+</li>
+</ul>
+<p>目前有做过尝试，但是由于time-delay的限制，效果不明显。</p>
+<h2 id="Hankel-DMD"><a href="#Hankel-DMD" class="headerlink" title="Hankel-DMD"></a>Hankel-DMD</h2><p>Calculate the Koopman spectrum is to apply DMD to Hankel matrix of data. The Hankel matrix is created by the delay-embedding of time series measurements on the observables. Delay-embedding is an established  method for geometric reconstruction of attractors for nonlinear systems based on measurements of generic observables. </p>
+<p>Connection between linear analysis of delay-embedded data and identification of nonlinear systems using the Koopman linear analysis. </p>
+<p>projections of data vectors converge to function projections in the space of observables.</p>
+<p>new connection between the SVD and POD on the ensemble of observables on ergodic dynamical systems.</p>
+<h2 id="Koopman-mode-decomposition-4"><a href="#Koopman-mode-decomposition-4" class="headerlink" title="Koopman mode decomposition 4"></a>Koopman mode decomposition <sup><a href="#fn_4" id="reffn_4">4</a></sup></h2><p>首先从基本的N-S方程的简化形式出发：</p>
+<script type="math/tex; mode=display">
+\partial_t u(x,t)=F(u(x,t))</script><script type="math/tex; mode=display">
+g^{\tau}(u(x,t)):= U^\tau g(u(x,t))= g(u(x,t+\tau))</script><p>g 表示可观，$U^\tau$ denotes maps the function g to a new function $g^\tau$., 为线性算子。所以，通过spectrum和特征值可以了解系统的运行机制。Koopman 特征值具有以下特性：</p>
+<script type="math/tex; mode=display">
+\phi^{\tau}(u): = U^\tau \phi_j(u) = e^{\lambda_j \tau}\phi_j (u)</script><p>The Koopman freuqencies, $w_j$:</p>
+<script type="math/tex; mode=display">
+\lambda_i = iw_j, w_j \in R</script><p>假定所有可观测的数据全部收敛到Koopman特征函数上，</p>
+<script type="math/tex; mode=display">
+g(u)= \sum_{j=1}^{\infty}g_j \phi_j (u)</script><p>最后形成Koopman mode decomposition 的基本表达：</p>
+<script type="math/tex; mode=display">
+g^{\tau}(u):= U^{\tau} g(u) = \sum_{j=1}^\infty g_j \phi_j(u)e^{i w_j \tau}</script><p>The vector $g_i$ called the Koopman mode assosiated  with the Koopman frequency $w_j$, describes the components of the observable g obtained by projection of the observable onto the Koopman eigenfunction $\phi_j$. </p>
+<p>For chaos behavior, the scalar observable g can be written as</p>
+<script type="math/tex; mode=display">
+U^\tau g = \sum_{k\in Z} g_k \phi_k e^{i k\cdot \Omega \tau} + \int_{-\infty}^{\infty} e^{i\alpha \tau} dE_\alpha (g)</script><p>Informally speaking, $i\alpha$ with $\alpha \in (-\infty, \infty)$, denotes a continuum of eigenvalues distributed along the imaginary axis. $dE_\alpha(\cdot)$ is the spectral measure of the Koopman operator.</p>
+<p>为了更好的应用于flow application, 转化为内积的形式：</p>
+<script type="math/tex; mode=display">
+<g, U^\tau g>_H = \sum_{k=1}^\infty |g_k|^2 e^{i w_k \tau} + \int_{-\infty}^{\infty} e^{i \alpha \tau} \rho+g (\alpha) d\alpha</script><p>在满足遍历性假设的基础上，有：</p>
+<script type="math/tex; mode=display">
+<g, U^\tau g>_H =r_g(\tau): lim_{T->\infty} {1\over T} \int_0^T g(t)g^*(t+\tau) dt</script><p>即为g的自相关函数。</p>
+<p>因此，we can approximation the spectral density of the Koopman operator by first extracting the chaotic component of g, then approximating $r_g$ using finite-time observations, and finally applying inverse Fourier transform to $r_g$.  </p>
+<script type="math/tex; mode=display">
+cov(g, U^\tau g)= \int_{-\infty}^{\infty} e^{i\alpha \tau} \rho(\alpha) d\alpha</script><p>where $\rho$ is called the Power Speactral Density (PSD) of the stochastic process.</p>
+<p>Koopman modes 自然也满足N-S 方程：</p>
+<script type="math/tex; mode=display">
+u_j = \nabla^\perp \psi_j, j=1,2,3</script><p>其vorticity field</p>
+<script type="math/tex; mode=display">
+\xi_j = \nabla \times u_j, j=1,2,3...</script><ul>
+<li>优于DMD的点在于：可以处理宽带噪声；</li>
+</ul>
+<p>三步：</p>
+<ul>
+<li>we apply a high-resolution algorithm - adapted from Laskar- to detect the candidate discrete Koopman frequencies and modes. The Laskar algorithm provides a controllable balance between accuracy and computational efficiency which makes it suitable for large data sets like high-resolution flow snapshots. Moreover, it makes direct use of the harmonic averaging which has proven convergence properties for computation of koopman mode.</li>
+<li>use the ergodic properties of the attractor to discard the spurious frequencies that are artifacts of the continuous spectra.</li>
+<li>After extracting the periodic components of the flow, we estimate the continuous Koopman spectrum by the Welch method to the chaotic residual.1 </li>
+</ul>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/koopman.png" alt="koopman"><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/koopman1.png" alt="koopman"></p>
+<p>提取离散频率，然后continuous spectra estimator to the remainder.</p>
+<p>A. Harmonic averaging and DFT</p>
+<p>The koopman modes can be computed via direct projection of observables onto the Koopman eufebfybction, $\phi_j$.</p>
+<script type="math/tex; mode=display">
+g_j : <g,\phi_j>_H=\lim_{T \to \infty} {1\over T} \int_0^T g(\tau) e^{-iw_j \tau}d\tau</script><p>Assuming uniform sampling at time instants, approximate the harmonic average as</p>
+<script type="math/tex; mode=display">
+g_j^N = {1\over N} \sum_{k=0}^{N-1} g(k)e^{-i w_j\tau_k}g_j^N = {1\over N} \sum_{k=0}^{N-1} g(k)e^{-i w_j\tau_k}</script><p>The harmonic average of observation by DFT:</p>
+<script type="math/tex; mode=display">
+\hat{g}_j={1\over N} \sum_{k=0}^{N-1} g(k)e^{-i\Omega_j k \triangle \tau}</script><p>DFT is shown to be equivalent to DMD when applied to a linearly independent sequence of snapshots with zero mean. </p>
+<p><strong>对比</strong></p>
+<p>标准DMD：前6阶模态</p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/20201205142407.png" alt="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051424071.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051424072.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051424073.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051424074.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051424075.png" al="koopman" style="zoom: 25%;" /></p>
+<p>Koopman DMD：前7阶模态Sp</p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051424076.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051424077.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051424078.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051424079.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120514240710.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120514240711.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120514240712.png" al="koopman" style="zoom: 25%;" /></p>
+<p>前7阶模态Wm;轴向速度</p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/t20201205152957.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/t202012051529571.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051529572.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051529573.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051529574.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051529575.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051529576.png" al="koopman" style="zoom: 25%;" /></p>
+<p>前7阶模态Wr;径向速度</p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051529577.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051529578.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/202012051529579.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120515295710.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120515295711.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120515295712.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120515295713.png" al="koopman" style="zoom: 25%;" /></p>
+<p>前7阶模态Wt;径向速度</p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120515295714.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120515295715.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120515295716.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120515295717.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120515295718.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120515295719.png" al="koopman" style="zoom: 25%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020120515295720.png" al="koopman" style="zoom: 25%;" /></p>
+<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><p>但实验效果不佳!</p>
+<h3 id="Hypergraph-amp-amp-mix-norm-7"><a href="#Hypergraph-amp-amp-mix-norm-7" class="headerlink" title="Hypergraph &amp;&amp; mix_norm 7"></a>Hypergraph &amp;&amp; mix_norm <sup><a href="#fn_7" id="reffn_7">7</a></sup></h3><p>首先需要获得流场的速度场和速度梯度。</p>
+<ul>
+<li>方法1：</li>
+</ul>
+<p>对于non-uniform grid, 利用matlab gridfit 函数近似，将非结构网格转化为等间距矩阵。</p>
+<p>接着，<a target="_blank" rel="noopener" href="https://www.mathworks.com/matlabcentral/answers/474429-calculate-derivatives-in-a-non-uniform-grid">参考</a>利用Jacobian matrix：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[dxi,dxj]=gradient(x);</span><br><span class="line">[dyi,dyj]=gradient(y);</span><br><span class="line">[dui,duj]=gradient(u);</span><br></pre></td></tr></table></figure>
+<p>then the Jacobian of the transformation is </p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[dxi dxj</span><br><span class="line">dyi dyj]</span><br></pre></td></tr></table></figure>
+<p>the determinant is </p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DET=dxi.*dyj- dxj.*dyi;</span><br></pre></td></tr></table></figure>
+<p>the inverse of the Jacobian has these 4 coefficients:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JAC11&#x3D;DET.*dxi;</span><br><span class="line">JAC21&#x3D;DET.*dyi;</span><br><span class="line">JAC12&#x3D;DET.*dxj;</span><br><span class="line">JAC22&#x3D;DET.*dyj;</span><br></pre></td></tr></table></figure>
+<p>Then to transform the gradient [dui,duj] into dux, duy you just do:      </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dux&#x3D;dui.*JAC11+duj.*JAC12;</span><br><span class="line">duy&#x3D;dui.*JAC21+duj.*JAC22;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法2：无网格法<sup><a href="#fn_8" id="reffn_8">8</a></sup></li>
+</ul>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020-12-05_21-49_meshlessCloud.png" alt="meshless" style="zoom:50%;" /><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/2020-12-05_21-49_meshlessPoint.png" alt="meshless" style="zoom:50%;" /></p>
+<h4 id="Basic-theory-of-the-WLS-meshless-methods"><a href="#Basic-theory-of-the-WLS-meshless-methods" class="headerlink" title="Basic theory of the WLS meshless methods"></a>Basic theory of the WLS meshless methods</h4><p>The coordinate difference between the satellite j and the center i can be express as</p>
+<script type="math/tex; mode=display">
+h_j^i = x_j -x_i, l_l^i = y_j -y_i</script><p>For simplicity, we use $h_j$ and $l_j$ to denote $h_j^i$ and $l_j^i$, respectively. The vector</p>
+<script type="math/tex; mode=display">
+\vec{r}_j^i= (h_j , l_j)</script><p>starts from i to j, its length is </p>
+<script type="math/tex; mode=display">
+r_j^i = \sqrt{h_j^2 + l_j^2}</script><p>and the reference radius of cloud as</p>
+<script type="math/tex; mode=display">
+R_i = min(r_1^i, r_2^i, ..., r_j^i, ..., r_{M_i}^i)</script><p>$M_i$ is the total number of the satellites in the cloud.</p>
+<p>The spirit of least-squares method apply Taylor sires about a point $P_i(x_i, y_i)$:</p>
+<script type="math/tex; mode=display">
+f = f_i +a_1 h + a_2 l + {1\over 2}a_3 h^2 +{1\over 2} a_4 l^2 + a_5 hl + O(h^3,l^3)</script><p> where $f= f(x,y)$ and $f_i = f(x_i,y_i)$ are the function values, $h=x-x_i$ and $l=y-y_i$ are the coordinate differences between the points. The coefficients $a_k(k=1,2,3,4,5)$ represent the partial derivatives of the function at $P_i(x_i,y_i)$:</p>
+<script type="math/tex; mode=display">
+a_1= {\partial f\over \partial x}|_i, a_2={\partial f\over \partial y}|_i, a_3={\partial^2 f\over \partial x^2}|_i, a_4={\partial^2f\over \partial y^2}|_i, a_5= {\partial^2 f\over \partial x\partial y}|_i</script><p>Keeping the terms until second order, we obtain the approximate function value at Point $P_j(x_j, y_j)$</p>
+<script type="math/tex; mode=display">
+\tilde{f}_j = f_i +a_1 h_j + a_2 l_j + {1\over 2}a_3 h_j^2 +{1\over 2} a_4 l_j^2 + a_5 h_jl_j</script><p>一阶精度：</p>
+<script type="math/tex; mode=display">
+\tilde{f}_j = f_i +a_1 h_j + a_2 l_j</script><p>and the error between the exact and approximate value is</p>
+<script type="math/tex; mode=display">
+e_j = f_j - \tilde{f}_j = f_j - (f_i + a_1 h_j +a_2 l_j)</script><p>A weight function is introduced here to construct $e_j$ considering the effect of different distance between the satellite j and the center i :</p>
+<script type="math/tex; mode=display">
+w_j^i = {r_j^i \over R_i}</script><p>Then for cloud $C_i$, the total error can be estimated by the following expression:</p>
+<script type="math/tex; mode=display">
+\Phi = {1\over 2}\sum_{j=1}^{M_i}(w_j^i e_j)^2</script><p>In order to minimize the error, its derivatives about $a_1$ and $a_2$ are set to zero:</p>
+<script type="math/tex; mode=display">
+{\partial \Phi\over \partial a_1}={\partial \Phi\over \partial a_2}=0</script><p>and we gain a set of linear equtions</p>
+<script type="math/tex; mode=display">
+Ax=b</script><script type="math/tex; mode=display">
+A= \begin{bmatrix}
+\sum w_j^{i^2}h_j^2 & \sum w_j^{i^2}h_jh_j \\
+\sum w_j^{i^2}h_j l_j & \sum w_j^{i^2}l_j^2  \\
+\end{bmatrix}</script><p>If the matrix A is not singular, this system of equations can be solved by the following simple strategy:</p>
+<script type="math/tex; mode=display">
+x= A^{-1} b</script><p>The solution can be written into linear combinations of the function values at different points</p>
+<script type="math/tex; mode=display">
+a= {\partial f\over \partial x}|_i = \sum_{j=1}^{M_i} \alpha_j (f_j - f_i),\\\\
+a_2 = {\partial f \over \partial y}|_i = \sum_{j=1}^{M_i} \alpha_i (f_j - f_i), a_2 ={\partial f\over \partial y}|_i = \sum_{j=1}^{M_i}\beta_j(f_j-f_i)</script><p>where, $\alpha_i$ and $\beta_j$ are computed from $A^{-1}$. By removing the dependence of the points i itself in the derivative approximation to satisfy,</p>
+<script type="math/tex; mode=display">
+{\partial f \over \partial x}|_i= \sum_{j=1}^{M_i} \hat{\alpha}_j f_j, {\partial f \over \partial y}|_i= \sum_{j=1}^{M_i} \hat{\beta}_j f_j</script><p>where </p>
+<script type="math/tex; mode=display">
+\hat{\alpha}_j = \alpha_j + \hat{w}_j \alpha_i, \hat{\beta}=\beta_j + \hat{w}_j \beta_i</script><ul>
+<li><a target="_blank" rel="noopener" href="https://yousource.it.jyu.fi/jjrandom2/freya/blobs/raw/master/docs/wlsqm.pdf">wlsqm.pdf</a> (old documentation for the old pure-Python version of WLSQM included in FREYA, plus the sensitivity calculation)</li>
+<li><a target="_blank" rel="noopener" href="https://yousource.it.jyu.fi/jjrandom2/freya/blobs/raw/master/docs/eulerflow.pdf">eulerflow.pdf</a> (clearer presentation of the original version, but without the sensitivity calculation)</li>
+<li><a target="_blank" rel="noopener" href="https://yousource.it.jyu.fi/jjrandom2/freya/blobs/raw/master/docs/wlsqm_gen.pdf">wlsqm_gen.pdf</a> (theory diff on how to make a version that handles also missing function values; also why WLSQM works and some analysis of its accuracy)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def main():</span><br><span class="line">    x &#x3D; np.random.random( (1000, 2) )                # point cloud (no mesh topology!)</span><br><span class="line">    F &#x3D; np.sin(np.pi*x[:,0]) * np.cos(np.pi*x[:,1])  # function values on the point cloud</span><br><span class="line">    X,Y,Z &#x3D; project_onto_regular_grid_2D(x, F, fit_order&#x3D;2, nk&#x3D;30)</span><br><span class="line">    plot_wireframe( &#123;&quot;x&quot; : (X, r&quot;$x$&quot;),</span><br><span class="line">                     &quot;y&quot; : (Y, r&quot;$y$&quot;),</span><br><span class="line">                     &quot;z&quot; : (Z, r&quot;$f(x,y)$&quot;)&#125; )</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/meshlessResults.png" alt="koopman"></p>
+<h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><h4 id="细节："><a href="#细节：" class="headerlink" title="细节："></a>细节：</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43192537/article/details/107108959?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control">numpy读取csv数据</a>, output 格式为ndarray</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">us_file_path = <span class="string">&quot;./data/US_video_data_numbers.csv&quot;</span>  <span class="comment"># 数据存储路径</span></span><br><span class="line">t_us = np.genfromtxt(us_file_path, delimiter=<span class="string">&quot;,&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/raby_gyl/article/details/72540002?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1.control">scipy读取mat数据</a> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import scipy.io as sio</span><br><span class="line">data &#x3D; sio.loadmat(&#39;train_data.mat&#39;);</span><br><span class="line">data &#x3D; data[&#39;data&#39;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>目前未解决：</li>
+</ul>
+<p>/home/wjq/anaconda3/bin/python /home/wjq/文档/GitHub/MeshlessDerivatives/main.py<br>Traceback (most recent call last):<br>  File “/home/wjq/文档/GitHub/MeshlessDerivatives/main.py”, line 183, in <module><br>    main()<br>  File “/home/wjq/文档/GitHub/MeshlessDerivatives/main.py”, line 177, in main<br>    X,Y,Z = project_onto_regular_grid_2D(x, F, fit_order=2, nk=50)<br>  File “/home/wjq/文档/GitHub/MeshlessDerivatives/main.py”, line 92, in project_onto_regular_grid_2D<br>    solver.prepare( xi=x, xk=x[hoods] )  # generate problem matrices from the geometry of the point cloud<br>  File “wlsqm/fitter/expert.pyx”, line 399, in wlsqm.fitter.expert.ExpertSolver.prepare<br>ValueError: Buffer and memoryview are not contiguous in the same dimension.</p>
+<p>Process finished with exit code 1</p>
+<blockquote id="fn_1">
+<sup>1</sup>. <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1707.02876">SIAM-Online dynamic mode decomposition for time-varying systems</a><a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. Sherman, Adjustment of an inverse matrix corresponding to a change in one element of a given matrix.<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>.  Hassan Arbabi, Spectral analysis of mixing in 2D high-Reynolds flows, JFM<a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_4">
+<sup>4</sup>. Study of dynamics in post-transient flows using Koopman mode decomposition-Physical review<a href="#reffn_4" title="Jump back to footnote [4] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_5">
+<sup>5</sup>. Geneative stochastic modeling of strongly nonlinear flows with non-Gaussian statistics<a href="#reffn_5" title="Jump back to footnote [5] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_6">
+<sup>6</sup>. Particles to Partial Differential Equations Parsimoniously<a href="#reffn_6" title="Jump back to footnote [6] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_7">
+<sup>7</sup>. Spectral analysis of mixing in 2D high-Reynolds flows” by H. Arbabi and I. Mezic<a href="#reffn_7" title="Jump back to footnote [7] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_8">
+<sup>8</sup>. Evolutionary Design Optimization with Nash Games and Hybridized Mesh/Meshless Methods in Computational Fluid Dynamics<a href="#reffn_8" title="Jump back to footnote [8] in the text."> &#8617;</a>
+</blockquote>
+<p><sup><a href="#fn_9" id="reffn_9">9</a></sup>: </p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jiaqi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://deal-ii.com/post/DMD1/">http://deal-ii.com/post/DMD1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://deal-ii.com" target="_blank">DEAL-II-Fluid</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/DMD/">DMD</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/12/22/d7YjSwNqreOA91K.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/python/"><img class="prev-cover" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/pythonlogo.jpeg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">python知识点记录</div></div></a></div><div class="next-post pull-right"><a href="/post/f0787947/"><img class="next-cover" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/LBM-IBM-FEM.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">LBM-IBM-FEM</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/post/96228c88/" title="Interesting Dynamical Systems & Applications"><img class="relatedPosts_cover" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/cover-dynamic.jpeg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-26</div><div class="relatedPosts_title">Interesting Dynamical Systems & Applications</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div class="comments-items-1" data-name="Valine"><div class="vcomment" id="vcomment"></div><script>function loadvaline () {  
+  var requestSetting = function (from,set) {
+    var from = from
+    var setting = set.split(',').filter(function(item){
+    return from.indexOf(item) > -1
+    });
+    setting = setting.length == 0 ? from :setting;
+    return setting
+  }
+
+  var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+  var requiredFields = requestSetting(['nick','mail'],'nick,mail')
+
+  function initValine () {
+    window.valine = new Valine({
+      el:'#vcomment',
+      appId: 'lJ3vEzEWaeVa6HpWNNbPrauw-gzGzoHsz',
+      appKey: '16FI6zgDXwvw71g04yhHnnW0',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: guestInfo,
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      requiredFields: requiredFields
+    });
+  }
+  loadScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || false) {
+  window.addEventListener('load', loadvaline)
+}
+else {
+  function loadOtherComment () {
+    loadvaline()
+  }
+}</script></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Jiaqi</div><div class="framework-info"><span>驱动 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></head></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/calendar.js"></script><script src="/js/languages.js"></script><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/gitcalendar/js/gitcalendar.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":120,"height":260},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

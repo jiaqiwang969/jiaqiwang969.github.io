@@ -1,0 +1,844 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>研究笔记-第1周 | DEAL-II-Fluid</title><meta name="robots" content="noindex"><meta name="description" content="本周计划：  完成FEM基础代码的编写  配合完成代码文档  案例书写 上述内容作为第三章的基础内容。   参考资料：  WavesAndGuide： 熟悉代码，改写     安装ADCME和ADFEM 为第四章的内容做准备  安装完成✅   If you intend to use GPU, set ENV[“GPU”] &#x3D; 1 and then rebuild ADCME. 可逆关系： 当为特"><meta name="keywords" content="FEM"><meta name="author" content="Jiaqi"><meta name="copyright" content="Jiaqi"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://deal-ii.com/post/848afee8/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta property="og:type" content="article"><meta property="og:title" content="研究笔记-第1周"><meta property="og:url" content="http://deal-ii.com/post/848afee8/"><meta property="og:site_name" content="DEAL-II-Fluid"><meta property="og:description" content="本周计划：  完成FEM基础代码的编写  配合完成代码文档  案例书写 上述内容作为第三章的基础内容。   参考资料：  WavesAndGuide： 熟悉代码，改写     安装ADCME和ADFEM 为第四章的内容做准备  安装完成✅   If you intend to use GPU, set ENV[“GPU”] &#x3D; 1 and then rebuild ADCME. 可逆关系： 当为特"><meta property="og:image" content="https://i.loli.net/2021/01/01/XuCqjioRr6mxPQn.png"><meta property="article:published_time" content="2020-01-13T02:58:33.000Z"><meta property="article:modified_time" content="2021-02-27T09:46:24.577Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: true,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-02-27 17:46:24'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@master/Hexo/css/flink.min.css"><link rel="stylesheet" href="/gitcalendar/css/gitcalendar.css"/><meta name="generator" content="Hexo 5.3.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/me.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">23</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">31</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#FEM"><span class="toc-number">1.</span> <span class="toc-text">FEM</span></a></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2021/01/01/XuCqjioRr6mxPQn.png)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">DEAL-II-Fluid</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">研究笔记-第1周</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-01-13 10:58:33"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-01-13</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-02-27 17:46:24"><i class="fas fa-history fa-fw"></i> 更新于 2021-02-27</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/FEM/">FEM</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p>本周计划：</p>
+<ol>
+<li><p>完成FEM基础代码的编写</p>
+</li>
+<li><p>配合完成代码文档</p>
+</li>
+<li><p>案例书写</p>
+<p>上述内容作为第三章的基础内容。</p>
+</li>
+</ol>
+<p>参考资料：</p>
+<ol>
+<li><p>WavesAndGuide： 熟悉代码，改写   </p>
+</li>
+<li><p>安装ADCME和ADFEM 为第四章的内容做准备 </p>
+<p>安装完成✅</p>
+</li>
+</ol>
+<p>If you intend to use GPU, set ENV[“GPU”] = 1 and then rebuild ADCME.</p>
+<p>可逆关系：</p>
+<p>当为特征值时，不可逆，非特征值时，可逆</p>
+<p>By L.z. we denote the dependence on an arbitrary complex number z 2 C. The eigenvalues are those numbers x 2 C where the inverse L.z.1 does not exist.</p>
+<p>[1]: Solution of Thermoacoustic Eigenvalue Problems With a Noniterative Method</p>
+<h3 id="FEM"><a href="#FEM" class="headerlink" title="FEM"></a>FEM</h3><p><img src= "/img/loading.gif" data-src="https://i.loli.net/2021/01/14/Ek1YOCPZ6nlpUVR.png" alt="Ek1YOCPZ6nlpUVR"></p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2021/01/14/pDaM7moSyw6fd9s.png" alt="pDaM7moSyw6fd9s" style="zoom:33%;" /></p>
+<p><strong>Edge.cpp</strong></p>
+<p>Info  : Reading ‘../../mesh/Plate_simple.msh’…</p>
+<p>Info  : 5 vertices</p>
+<p>Info  : 8 elements</p>
+<p>Info  : Done reading ‘../../mesh/Plate_simple.msh’</p>
+<p>Info  : 2D elements are of type ‘Triangle 3’ (type = 2) </p>
+<p>Info  : - 4 elements in surface 6 </p>
+<p>Info  : - 1 elements on curve 1</p>
+<p>Info  : - 1 elements on curve 2</p>
+<p>Info  : - 1 elements on curve 3</p>
+<p>Info  : - 1 elements on curve 4</p>
+<p>Info  : - 8 elements on curve 5</p>
+<p><strong>Explore.cpp</strong></p>
+<p>Info  : Reading ‘../../mesh/Plate_simple.msh’…</p>
+<p>Info  : 5 vertices</p>
+<p>Info  : 8 elements</p>
+<p>Info  : Done reading ‘../../mesh/Plate_simple.msh’</p>
+<p>1 mesh nodes and 0 mesh elements on entity (0,1) of type Point</p>
+<p>1 mesh nodes and 0 mesh elements on entity (0,2) of type Point</p>
+<p>1 mesh nodes and 0 mesh elements on entity (0,3) of type Point</p>
+<p>1 mesh nodes and 0 mesh elements on entity (0,4) of type Point</p>
+<p>0 mesh nodes and 1 mesh elements on entity (1,1) of type Discrete curve</p>
+<p> - Element type: Line 2, order 1</p>
+<p>  with 2 nodes in param coord: (-1 1 )</p>
+<p>0 mesh nodes and 1 mesh elements on entity (1,2) of type Discrete curve</p>
+<p> - Element type: Line 2, order 1</p>
+<p>  with 2 nodes in param coord: (-1 1 )</p>
+<p>0 mesh nodes and 1 mesh elements on entity (1,3) of type Discrete curve</p>
+<p> - Element type: Line 2, order 1</p>
+<p>  with 2 nodes in param coord: (-1 1 )</p>
+<p>0 mesh nodes and 1 mesh elements on entity (1,4) of type Discrete curve</p>
+<p> - Element type: Line 2, order 1</p>
+<p>  with 2 nodes in param coord: (-1 1 )</p>
+<p>1 mesh nodes and 4 mesh elements on entity (2,6) of type Discrete surface</p>
+<p> - Element type: Triangle 3, order 1</p>
+<p>  with 3 nodes in param coord: (0 0 1 0 0 1 )</p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2021/01/14/W5NU3tQG2kr6hlM.png" alt="W5NU3tQG2kr6hlM" style="zoom:33%;" /></p>
+<p><strong>Edge.cpp</strong></p>
+<p>Info  : Reading ‘../../mesh/Plate_complex.msh’…</p>
+<p>Info  : 3413 vertices</p>
+<p>Info  : 6824 elements</p>
+<p>Info  : Done reading ‘../../mesh/Plate_complex.msh’</p>
+<p>Info  : 2D elements are of type ‘Triangle 3’ (type = 2) </p>
+<p>Info  : - 6624 elements in surface 6</p>
+<p>Info  : - 50 elements on curve 1</p>
+<p>Info  : - 50 elements on curve 2</p>
+<p>Info  : - 50 elements on curve 3</p>
+<p>Info  : - 50 elements on curve 4</p>
+<p>Info  : - 10036 elements on curve 5</p>
+<p><strong>Explore.cpp</strong></p>
+<p>Info  : Reading ‘../../mesh/Plate_complex.msh’…</p>
+<p>Info  : 3413 vertices</p>
+<p>Info  : 6824 elements</p>
+<p>Info  : Done reading ‘../../mesh/Plate_complex.msh’</p>
+<p>1 mesh nodes and 0 mesh elements on entity (0,1) of type <strong>Point</strong></p>
+<p>1 mesh nodes and 0 mesh elements on entity (0,2) of type Point</p>
+<p>1 mesh nodes and 0 mesh elements on entity (0,3) of type Point</p>
+<p>1 mesh nodes and 0 mesh elements on entity (0,4) of type Point</p>
+<p>49 mesh nodes and 50 mesh elements on entity (1,1) of type <strong>Discrete curve</strong></p>
+<p> - Element type: Line 2, order 1</p>
+<p>  with 2 nodes in param coord: (-1 1 )</p>
+<p>49 mesh nodes and 50 mesh elements on entity (1,2) of type Discrete curve</p>
+<p> - Element type: Line 2, order 1</p>
+<p>  with 2 nodes in param coord: (-1 1 )</p>
+<p>49 mesh nodes and 50 mesh elements on entity (1,3) of type Discrete curve</p>
+<p> - Element type: Line 2, order 1</p>
+<p>  with 2 nodes in param coord: (-1 1 )</p>
+<p>49 mesh nodes and 50 mesh elements on entity (1,4) of type Discrete curve</p>
+<p> - Element type: Line 2, order 1</p>
+<p>  with 2 nodes in param coord: (-1 1 )</p>
+<p>3213 mesh nodes and 6624 mesh elements on entity (2,6) of type <strong>Discrete surface</strong></p>
+<p> - Element type: Triangle 3, order 1</p>
+<p>  with 3 nodes in param coord: (0 0 1 0 0 1 )</p>
+<script type="math/tex; mode=display">
+{\partial u \over \partial t} + \vec{\nabla} \cdot \vec{f}(u)=0\\\\
+\vec{f}(u) = f_x(u) \vec{e}_x + f_y(u) \vec{e}_y + f_z(u)\vec{e}_z : vector \space flux\\\\</script><p>A weak form:</p>
+<script type="math/tex; mode=display">
+\int_K v{\partial u \over \partial t} dK - \int_K \vec{\nabla} v \cdot \vec{f}(u) dK + \int_{\partial K} v\vec{n}\cdot \vec{f}(u) d\partial K =0</script><p>The function are discretized in space such as</p>
+<script type="math/tex; mode=display">
+u(x,y,z,t) = \sum_i N_i(x,y,z)u_i(t) = N_i u_i = Nu\\\\
+v(x,y,z,t) = \sum_i N_i(x,y,z)v_i(t) = N_i v_i = Nv\\\\
+[\vec{f}(u)](x,y,z,t) = \sum_i N_i(x,y,z)[\vec{f}(u)_i](t) = N \vec{f}(u)</script><p>where $N_i$ is the basis function of node i and $u_i(t)= u(x_i, y_i, z_i, t)$ is the nodal solution, </p>
+<script type="math/tex; mode=display">
+\int_K v^T N^T  N {\partial u \over \partial t} dK - \int_K v^T \vec{\nabla}N^T \cdot \vec{f}(Nu) dK + \int_{\partial K} v^T N^T \vec{n}\cdot \vec{f}(Nu) d\partial K = 0</script><p>This formulation being verified for all test functions v and <strong>u</strong> being independent of (x,y,z), reduces to: Ax=b</p>
+<script type="math/tex; mode=display">
+\int_K  N^T  N dK {\partial u \over \partial t}  - \int_K \vec{\nabla}N^T N \cdot \vec{f}(u) dK + \int_{\partial K}  N^T N \vec{n}\cdot \vec{f}(u) d\partial K = 0</script><p>Performning a change of variable in reference space $(x,y,z) -&gt; (\xi, \eta, \psi)\in [-1,1]^3$:</p>
+<script type="math/tex; mode=display">
+\int_{K'}  N^T  N [det J] dK' {\partial u \over \partial t}  - \int_{K'} \vec{\nabla}N^T N \cdot \vec{f}(u) [det J] dK' + \int_{\partial {K'}}  N^T N \vec{n}\cdot \vec{f}(u) [det J] d\partial K' = 0</script><p>The integrals over the elements are then approximated by a Gaussian quadrature rule:</p>
+<script type="math/tex; mode=display">
+\int_{K} f(x,y,z) dK = \int_{-1}^{1}\int_{-1}^{1}\int_{-1}^{1} f(\xi, \eta, \psi) J d\xi d\eta d\psi \approx \sum_g w_g f(\xi_g, \eta_g, \psi_g) det J_g</script><p>g si the Gauss point, w_g the weight.</p>
+<p><strong>原则：每个element满足上述守恒形式。比如三角形，在element的三个face还要加上FLUX</strong></p>
+<p>第一项：</p>
+<script type="math/tex; mode=display">
+\int_{K'}  N^T  N [det J] dK' \approx \sum_g w_g N_g^T N_g det J_g = \sum_g M_g = M_k</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Compute the element mass matrix.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param el integer : element id (!= gmsh tag, it is the location in memory storage)</span></span><br><span class="line"><span class="comment"> * @param inverse boolean : Whether or not the mass matrix must be inverted before returned</span></span><br><span class="line"><span class="comment"> * @param elMassMatrix double array : Output storage of the element mass matrix</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Mesh::getElMassMatrix</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> el, <span class="keyword">const</span> <span class="keyword">bool</span> inverse, <span class="keyword">double</span> *elMassMatrix)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m_elNumNodes; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;m_elNumNodes; ++j) &#123;</span><br><span class="line">            elMassMatrix[i*m_elNumNodes+j] = <span class="number">0.0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> g=<span class="number">0</span>; g&lt;m_elNumIntPts; g++) &#123; <span class="comment">//gauss point </span></span><br><span class="line">                elMassMatrix[i*m_elNumNodes+j] += elBasisFct(g,i)*elBasisFct(g,j)*</span><br><span class="line">                                                  elWeight(g)*elJacobianDet(el, g);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(inverse)</span><br><span class="line">        eigen::inverse(elMassMatrix, m_elNumNodes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二项：</p>
+<script type="math/tex; mode=display">
+\int_{K'} \vec{\nabla}N^T N \cdot \vec{f}(u) [det J] dK' \\\\
+= \int_{K'} [{\partial N^T \over \partial x} N \vec{e}_x + {\partial N^T \over \partial y}N \vec{e}_y +{\partial N^T \over \partial z}N \vec{e}_z]\cdot [f_x(u)\vec{e}_x + f_y(u)\vec{e}_y + f_z(u)\vec{e}_z] [det J] dK'\\\\
+= \int_{K'}[{\partial N^T \over \partial x  }N f_x (u) + {\partial N^T \over \partial y}N f_y (u) + {\partial N^T\over \partial z}N f_z (u)][det J] dK'</script><p>$N(\xi, \eta,\psi)$  being defined in the reference space, its derivative in (x,y,z) is obtained using the chain rule and the components of the Jacobian matrix:<strong>这里会多出Jacobian项，原因是因为求导是对x而非reference</strong></p>
+<script type="math/tex; mode=display">
+J^{-1} = {\partial (\xi, \eta,\psi)\over \partial (x,y,z)}= \begin{bmatrix}
+{\partial \xi\over \partial x} & {\partial \xi \over \partial y} & {\partial \xi \over \partial z}  \\
+{\partial \eta\over \partial x} & {\partial \eta \over \partial y} & {\partial \eta \over \partial z}  \\
+{\partial \psi\over \partial x} & {\partial \psi \over \partial y} & {\partial \psi \over \partial z}  \\
+\end{bmatrix}
+\rightarrow \begin{cases}
+{\partial N^T \over \partial x}={\partial N^T \over \partial \xi}J_{11} + {\partial N^T \over \partial \eta}J_{21} + {\partial N^T \over \partial \psi} J_{31}, \\
+{\partial N^T \over \partial y}={\partial N^T \over \partial \xi}J_{12} + {\partial N^T \over \partial \eta}J_{22} + {\partial N^T \over \partial \psi} J_{32}, \\
+{\partial N^T \over \partial z}={\partial N^T \over \partial \xi}J_{13} + {\partial N^T \over \partial \eta}J_{23} + {\partial N^T \over \partial \psi} J_{33}, \\
+\end{cases}</script><p>离散：</p>
+<script type="math/tex; mode=display">
+\int_{K'} \vec{\nabla}N^T N \cdot \vec{f}(u) [det J] dK' \\\\
+= \int_{K'}[{\partial N^T \over \partial x  }N f_x (u) + {\partial N^T \over \partial y}N f_y (u) + {\partial N^T\over \partial z}N f_z (u)][det J] dK'\\\\
+\approx 
+\sum_g w_g [{\partial N^T \over \partial \xi}{J_{11}}_g + {\partial N^T \over \partial \eta}{J_{21}}_g + {\partial N^T \over \partial \psi} {J_{31}}_g]N_g f_x (u_k)[det J_g] \\\
++ \sum_g w_g [{\partial N^T \over \partial \xi}{J_{12}}_g + {\partial N^T \over \partial \eta}{J_{22}}_g + {\partial N^T \over \partial \psi} {J_{32}}_g ]N_g f_y (u_k)[det J_g] \\\
++ \sum_g w_g [{\partial N^T \over \partial \xi}{J_{13}}_g + {\partial N^T \over \partial \eta}{J_{23}}_g + {\partial N^T \over \partial \psi} {J_{33}}_g]N_g f_z (u_k)[det J_g] \\\
+= S_x(u)+S_y(u)+S_z(u) = S(u)_k</script><p>在代码执行时，已经做了简化操作：</p>
+<script type="math/tex; mode=display">
+\int_{K'} \vec{\nabla}N^T  \cdot \vec{f}(u) N[det J] dK'\\\\</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; m_elUGradBasisFcts;    <span class="comment">// Evaluation of the derivatives of the basis functions at the integration points</span></span><br><span class="line">                                            <span class="comment">// [g1df1/du, g1df1/dv, ..., g2df1/du, g2df1/dv, ..., g1df2/du, g1df2/dv, ...]</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; m_elGradBasisFcts;      <span class="comment">// Evaluation of the derivatives of the basis functions at the integration points</span></span><br><span class="line">                                            <span class="comment">// [e1g1df1/dx, e1g1df1/dy, ..., e1g2df1/dx, e1g2df1/dy, ..., e1g1df2/dx, e1g1df2/dy, ...]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">inline</span> <span class="keyword">double</span>&amp; <span class="title">elUGradBasisFct</span><span class="params">(<span class="keyword">int</span> g, <span class="keyword">int</span> i=<span class="number">0</span>, <span class="keyword">int</span> u=<span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m_elUGradBasisFcts[g*m_elNumNodes*<span class="number">3</span> + i*<span class="number">3</span> + u];</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">double</span>&amp; <span class="title">elGradBasisFct</span><span class="params">(<span class="keyword">int</span> el, <span class="keyword">int</span> g=<span class="number">0</span>, <span class="keyword">int</span> i=<span class="number">0</span>, <span class="keyword">int</span> x=<span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m_elGradBasisFcts[el*m_elNumIntPts*m_elNumNodes*<span class="number">3</span> + g*m_elNumNodes*<span class="number">3</span> + i*<span class="number">3</span> + x];</span><br><span class="line">      <span class="comment">//	层级不断在上升：首先是x 为三个坐标（x,y,z），因此，挨的最近，然后是，elementNodes, 然后每个积分需要g个积分点</span></span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">elStiffVector[i] += eigen::dot(Flux[jId].data(), &amp;elGradBasisFct(el, g, i), m_Dim)*</span><br><span class="line">                                    elBasisFct(g,j)*elWeight(g)*elJacobianDet(el, g);</span><br><span class="line"><span class="comment">// elGradBasisFct,[x,y,z] 三行一列， 与 Flux[jId].data() 三行一列 互作点积</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">
+dot(\begin{bmatrix} {\partial N\over \partial x}\\ {\partial N\over \partial y}\\ {\partial N\over \partial z}\end{bmatrix},\begin{bmatrix} f(u_x) \\ f(u_y) \\ f(u_z) \end{bmatrix})</script><p>后续改写的代码为：</p>
+<script type="math/tex; mode=display">
+jw q + {\partial A_x q\over \partial x} + {\partial A_y q \over \partial y} =0\\\\
+=: \\\\
+jwq + dot（\begin{bmatrix}{\partial \over \partial x }\vec{e}_x \\ {\partial \over \partial y}\vec{e}_y \end{bmatrix} \cdot \begin{bmatrix}A_x  \vec{e}_x q \\ A_y  \vec{e}_yq
+\end{bmatrix}) =0</script><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>* el = element indices in memory storage (!= element tag)</td>
+</tr>
+<tr>
+<td>* f = face indices in memory storage</td>
+</tr>
+<tr>
+<td>* n,i = element or face node (0,…, elNumNode)</td>
+</tr>
+<tr>
+<td>* g = integration point indices</td>
+</tr>
+<tr>
+<td>* x = physical coordinates (0=x, 1=y, 2=z)</td>
+</tr>
+<tr>
+<td>* u = parametric coordinates (0=u, 1=v, 2=w)</td>
+</tr>
+<tr>
+<td>* NB: since c+11, inline is implicit inside class core</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Compute the element stiffness/convection vector.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param el integer : element id</span></span><br><span class="line"><span class="comment"> * @param Flux double array : physical flux</span></span><br><span class="line"><span class="comment"> * @param u double array : solution at element node</span></span><br><span class="line"><span class="comment"> * @param elStiffVector double array : Output storage of the element stiffness vector</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Mesh::getElStiffVector</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> el, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&gt; &amp;Flux,</span></span></span><br><span class="line"><span class="function"><span class="params">                            <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; &amp;u, <span class="keyword">double</span> *elStiffVector)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> jId;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m_elNumNodes; ++i) &#123;</span><br><span class="line">        elStiffVector[i] = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j &lt; m_elNumNodes; ++j) &#123;</span><br><span class="line">            jId = el*m_elNumNodes+j;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> g=<span class="number">0</span>; g&lt;m_elNumIntPts; g++) &#123;</span><br><span class="line">                elStiffVector[i] += eigen::dot(Flux[jId].data(), &amp;elGradBasisFct(el, g, i), m_Dim)*</span><br><span class="line">                                    elBasisFct(g,j)*elWeight(g)*elJacobianDet(el, g);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Flux—&gt; f(u)</p>
+<p><strong>目前为止都是只是针对单个element，但并未 assemble.</strong></p>
+<p>第三项：</p>
+<script type="math/tex; mode=display">
+\int_{\partial K'} N^T N \vec{n} \cdot \vec{f}(u) det J d\partial K'\\\\
+= \int_{\partial K'} N^T N [n_x\vec{e}_x + n_y \vec{e}_y + n_z \vec{e}_z]\cdot [f_x(u)\vec{e}_x + f_y(u)\vec{e}_y + f_z(u)\vec{e}_z]det J d\partial K'\\\\
+= \int_{\partial K'} N^T N [n_x f_x(u) + n_y f_y(u)+ n_z f_z(u)]detJ d \partial K'\\\\
+\approx \sum_g w_g N_g^T N_g [{n_x}_g f_x (u_k) + {n_y}_g f_y(u_k) + {n_z}_g f_z(u_k)]detJ_g = F(u)_k</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Fnum[x] = <span class="number">0.5</span>*((Flux[elUp][x]+Flux[elDn][x]) + fc*config.c0*fNormal(f, g, x)*(u[elUp]-u[elDn]));</span><br><span class="line">FIntPts[g] += eigen::dot(&amp;fNormal(f, g), Fnum.data(), m_Dim) * fBasisFct(g, i);</span><br><span class="line">fFlux(f, n) += fWeight(g) * fBasisFct(g, n) * FIntPts[g] * fJacobianDet(f, g);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Precompute the numerical flux through all the faces. The flux implemented is</span></span><br><span class="line"><span class="comment"> * the Rusanov Flux. Also note that the following code is paralelized using openMP.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param Flux double array : physical flux</span></span><br><span class="line"><span class="comment"> * @param u double array : solution at the node</span></span><br><span class="line"><span class="comment"> * @param eq : equation id (0 = pressure, 1 = velocity x, 2= vy, 3= vz)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Mesh::precomputeFlux</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; &amp;u, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&gt; &amp;Flux, <span class="keyword">int</span> eq)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">pragma</span> omp parallel num_threads(config.numThreads)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Memory allocation (Cross-plateform compatibility)</span></span><br><span class="line">        <span class="keyword">int</span> elUp, elDn;</span><br><span class="line">        <span class="function"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; <span class="title">FIntPts</span><span class="params">(m_fNumIntPts, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="function"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; <span class="title">Fnum</span><span class="params">(m_Dim, <span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">pragma</span> omp parallel for schedule(static)</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> f=<span class="number">0</span>; f&lt;m_fNum; ++f) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">std</span>::fill(FIntPts.begin(), FIntPts.end(), <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Numerical Flux at Integration points</span></span><br><span class="line">            <span class="keyword">if</span> (m_fIsBoundary[f]) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> g = <span class="number">0</span>; g &lt; m_fNumIntPts; ++g)</span><br><span class="line">                    FIntPts[g] = FluxGhost[eq][f*m_fNumIntPts+g][<span class="number">0</span>];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m_fNumNodes; ++i) &#123;</span><br><span class="line">                    elUp = fNbrElId(f, <span class="number">0</span>)*m_elNumNodes + fNToElNId(f, i, <span class="number">0</span>);</span><br><span class="line">                    elDn = fNbrElId(f, <span class="number">1</span>)*m_elNumNodes + fNToElNId(f, i, <span class="number">1</span>);</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> g = <span class="number">0</span>; g &lt; m_fNumIntPts; ++g) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; m_Dim; ++x)</span><br><span class="line">                            Fnum[x] = <span class="number">0.5</span>*((Flux[elUp][x]+Flux[elDn][x]) + fc*config.c0*fNormal(f, g, x)*(u[elUp]-u[elDn]));</span><br><span class="line">                        FIntPts[g] += eigen::dot(&amp;fNormal(f, g), Fnum.data(), m_Dim) * fBasisFct(g, i);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Surface integral</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n &lt; m_fNumNodes; ++n) &#123;</span><br><span class="line">                fFlux(f, n) = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> g = <span class="number">0</span>; g &lt; m_fNumIntPts; ++g) &#123;</span><br><span class="line">                    fFlux(f, n) += fWeight(g) * fBasisFct(g, n) * FIntPts[g] * fJacobianDet(f, g);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>线性欧拉方程推导整理：</p>
+<script type="math/tex; mode=display">
+\vec{u}= \begin{bmatrix}
+p'\\
+v_x'\\
+v_y'\\
+v_z'\\
+\end{bmatrix},
+F(\vec{u})=\begin{bmatrix}
+c_0^2 \rho_0 v_x' + {v_0}_x p' & c_0^2 \rho_0v_y' + {v_0}_y p' & c_0^2 \rho_0 v_z' +{v_0}_z p'  \\
+v_x' {v_0}_x + {p'\over \rho_0} & v_x'{v_0}_y & v_x'{v_0}_z  \\
+v_y'{v_0}_x & v_y'{v_0}_y+{p'\over \rho_0} & v_y'{v_0}_z  \\
+v_z' {v_0}_x  & v_z' {v_0}_y  & v_z' {v_0}_z + {p'\over \rho_0}\\
+\end{bmatrix}\\\\
+\vec{s}(\vec{u})= \begin{bmatrix}
+0\\
+v_x'({\partial {v_0}_x\over\partial x} + {\partial {v_0}_y\over\partial y} + {\partial {v_0}_z\over\partial z})-v_x' {\partial {v_0}_x\over \partial x} -v_y' {\partial {v_0}_x\over \partial y}-v_z' {\partial {v_0}_x\over \partial z} + {p'\over c_0^2 \rho_0^2}{\partial p_0\over \partial x}\\
+v_y'({\partial {v_0}_x\over\partial x} + {\partial {v_0}_y\over\partial y} + {\partial {v_0}_z\over\partial z})-v_x' {\partial {v_0}_y\over \partial x} -v_y' {\partial {v_0}_y\over \partial y}-v_z' {\partial {v_0}_y\over \partial z} + {p'\over c_0^2 \rho_0^2}{\partial p_0\over \partial y}\\
+v_z'({\partial {v_0}_x\over\partial x} + {\partial {v_0}_y\over\partial y} + {\partial {v_0}_z\over\partial z})-v_x' {\partial {v_0}_z\over \partial x} -v_y' {\partial {v_0}_z\over \partial y}-v_z' {\partial {v_0}_z\over \partial z} + {p'\over c_0^2 \rho_0^2}{\partial p_0\over \partial z}\\
+\end{bmatrix}</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Compute physical flux from the nodal solution. Also update</span></span><br><span class="line"><span class="comment"> * the ghost element and numerical flux.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param u : nodal solution vector</span></span><br><span class="line"><span class="comment"> * @param Flux : Physical flux</span></span><br><span class="line"><span class="comment"> * @param v0 : mean flow speed (v0x,v0y,v0z)</span></span><br><span class="line"><span class="comment"> * @param c0 : speed of sound</span></span><br><span class="line"><span class="comment"> * @param rho0: mean flow density</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Mesh::updateFlux</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&gt; &amp;u, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&gt;&gt; &amp;Flux,</span></span></span><br><span class="line"><span class="function"><span class="params">                      <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; &amp;v0, <span class="keyword">double</span> c0, <span class="keyword">double</span> rho0)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> el=<span class="number">0</span>; el&lt;m_elNum; ++el)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">0</span>; n&lt;m_elNumNodes; ++n) &#123;</span><br><span class="line">            <span class="keyword">int</span> i = el*m_elNumNodes + n;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Pressure flux</span></span><br><span class="line">            Flux[<span class="number">0</span>][i] = &#123;v0[<span class="number">0</span>]*u[<span class="number">0</span>][i] + rho0*c0*c0*u[<span class="number">1</span>][i],</span><br><span class="line">                          v0[<span class="number">1</span>]*u[<span class="number">0</span>][i] + rho0*c0*c0*u[<span class="number">2</span>][i],</span><br><span class="line">                          v0[<span class="number">2</span>]*u[<span class="number">0</span>][i] + rho0*c0*c0*u[<span class="number">3</span>][i]&#125;;</span><br><span class="line">            <span class="comment">// Vx</span></span><br><span class="line">            Flux[<span class="number">1</span>][i] = &#123;v0[<span class="number">0</span>]*u[<span class="number">1</span>][i] + u[<span class="number">0</span>][i]/rho0,</span><br><span class="line">                          v0[<span class="number">1</span>]*u[<span class="number">1</span>][i],</span><br><span class="line">                          v0[<span class="number">2</span>]*u[<span class="number">1</span>][i]&#125;;</span><br><span class="line">            <span class="comment">// Vy</span></span><br><span class="line">            Flux[<span class="number">2</span>][i] = &#123;v0[<span class="number">0</span>]*u[<span class="number">2</span>][i],</span><br><span class="line">                          v0[<span class="number">1</span>]*u[<span class="number">2</span>][i] + u[<span class="number">0</span>][i]/rho0,</span><br><span class="line">                          v0[<span class="number">2</span>]*u[<span class="number">2</span>][i]&#125;;</span><br><span class="line">            <span class="comment">// Vz</span></span><br><span class="line">            Flux[<span class="number">3</span>][i] = &#123;v0[<span class="number">0</span>]*u[<span class="number">3</span>][i],</span><br><span class="line">                          v0[<span class="number">1</span>]*u[<span class="number">3</span>][i],</span><br><span class="line">                          v0[<span class="number">2</span>]*u[<span class="number">3</span>][i] + u[<span class="number">0</span>][i]/rho0&#125;;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Ghost elements</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> f=<span class="number">0</span>; f&lt;m_fNumPerEl; ++f) &#123;</span><br><span class="line">            <span class="keyword">int</span> fId = elFId(el, f);</span><br><span class="line">            <span class="keyword">if</span>(m_fIsBoundary[fId]) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> g=<span class="number">0</span>; g&lt;m_fNumIntPts; ++g) &#123;</span><br><span class="line">                    <span class="keyword">int</span> gId = fId*m_fNumIntPts+g;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// Interpolate solution at integration points</span></span><br><span class="line">                    uGhost[<span class="number">0</span>][gId] = <span class="number">0</span>;</span><br><span class="line">                    uGhost[<span class="number">1</span>][gId] = <span class="number">0</span>;</span><br><span class="line">                    uGhost[<span class="number">2</span>][gId] = <span class="number">0</span>;</span><br><span class="line">                    uGhost[<span class="number">3</span>][gId] = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">0</span>; n&lt;m_fNumNodes; ++n) &#123;</span><br><span class="line">                        <span class="keyword">int</span> nId = el*m_elNumNodes + fNToElNId(fId, n, <span class="number">0</span>);</span><br><span class="line">                        uGhost[<span class="number">0</span>][gId] += u[<span class="number">0</span>][nId] * fBasisFct(g, n);</span><br><span class="line">                        uGhost[<span class="number">1</span>][gId] += u[<span class="number">1</span>][nId] * fBasisFct(g, n);</span><br><span class="line">                        uGhost[<span class="number">2</span>][gId] += u[<span class="number">2</span>][nId] * fBasisFct(g, n);</span><br><span class="line">                        uGhost[<span class="number">3</span>][gId] += u[<span class="number">3</span>][nId] * fBasisFct(g, n);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span>(m_fBC[fId] == <span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="comment">// Normal component of velocity</span></span><br><span class="line">                        <span class="keyword">double</span> dot = fNormal(fId,g,<span class="number">0</span>)*uGhost[<span class="number">1</span>][gId] +</span><br><span class="line">                                     fNormal(fId,g,<span class="number">1</span>)*uGhost[<span class="number">2</span>][gId] +</span><br><span class="line">                                     fNormal(fId,g,<span class="number">2</span>)*uGhost[<span class="number">3</span>][gId];</span><br><span class="line"></span><br><span class="line">                        <span class="comment">// Remove normal component (Rigid Wall BC)</span></span><br><span class="line">                        uGhost[<span class="number">1</span>][gId] -= dot*fNormal(fId,g,<span class="number">0</span>);</span><br><span class="line">                        uGhost[<span class="number">2</span>][gId] -= dot*fNormal(fId,g,<span class="number">1</span>);</span><br><span class="line">                        uGhost[<span class="number">3</span>][gId] -= dot*fNormal(fId,g,<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">                        <span class="comment">// Flux at integration points</span></span><br><span class="line">                        <span class="comment">// 1) Pressure flux</span></span><br><span class="line">                        FluxGhost[<span class="number">0</span>][gId] = &#123;v0[<span class="number">0</span>]*uGhost[<span class="number">0</span>][gId] + rho0*c0*c0*uGhost[<span class="number">1</span>][gId],</span><br><span class="line">                                             v0[<span class="number">1</span>]*uGhost[<span class="number">0</span>][gId] + rho0*c0*c0*uGhost[<span class="number">2</span>][gId],</span><br><span class="line">                                             v0[<span class="number">2</span>]*uGhost[<span class="number">0</span>][gId] + rho0*c0*c0*uGhost[<span class="number">3</span>][gId]&#125;;</span><br><span class="line">                        <span class="comment">// 2) Vx</span></span><br><span class="line">                        FluxGhost[<span class="number">1</span>][gId] = &#123;v0[<span class="number">0</span>]*uGhost[<span class="number">1</span>][gId] + uGhost[<span class="number">0</span>][gId]/rho0,</span><br><span class="line">                                             v0[<span class="number">1</span>]*uGhost[<span class="number">1</span>][gId],</span><br><span class="line">                                             v0[<span class="number">2</span>]*uGhost[<span class="number">1</span>][gId]&#125;;</span><br><span class="line">                        <span class="comment">// 3) Vy</span></span><br><span class="line">                        FluxGhost[<span class="number">2</span>][gId] = &#123;v0[<span class="number">0</span>]*uGhost[<span class="number">2</span>][gId],</span><br><span class="line">                                             v0[<span class="number">1</span>]*uGhost[<span class="number">2</span>][gId] + uGhost[<span class="number">0</span>][gId]/rho0,</span><br><span class="line">                                             v0[<span class="number">2</span>]*uGhost[<span class="number">2</span>][gId]&#125;;</span><br><span class="line">                        <span class="comment">// 4) Vz</span></span><br><span class="line">                        FluxGhost[<span class="number">3</span>][gId] = &#123;v0[<span class="number">0</span>]*uGhost[<span class="number">3</span>][gId],</span><br><span class="line">                                             v0[<span class="number">1</span>]*uGhost[<span class="number">3</span>][gId],</span><br><span class="line">                                             v0[<span class="number">2</span>]*uGhost[<span class="number">3</span>][gId] + uGhost[<span class="number">0</span>][gId]/rho0&#125;;</span><br><span class="line"></span><br><span class="line">                        <span class="comment">// Project Flux on the normal</span></span><br><span class="line">                        <span class="keyword">for</span>(<span class="keyword">int</span> eq=<span class="number">0</span>; eq&lt;<span class="number">4</span>; ++eq)</span><br><span class="line">                            FluxGhost[eq][gId][<span class="number">0</span>] = eigen::dot(&amp;fNormal(fId, g), &amp;FluxGhost[eq][gId][<span class="number">0</span>], m_Dim);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">// Absorbing boundary conditions</span></span><br><span class="line">                        <span class="comment">// /!\ Flux already projected on normal,</span></span><br><span class="line">                        FluxGhost[<span class="number">0</span>][gId][<span class="number">0</span>] = RKR[gId][<span class="number">0</span>]*uGhost[<span class="number">0</span>][gId] +</span><br><span class="line">                                               RKR[gId][<span class="number">1</span>]*uGhost[<span class="number">1</span>][gId] +</span><br><span class="line">                                               RKR[gId][<span class="number">2</span>]*uGhost[<span class="number">2</span>][gId] +</span><br><span class="line">                                               RKR[gId][<span class="number">3</span>]*uGhost[<span class="number">3</span>][gId];</span><br><span class="line">                        FluxGhost[<span class="number">1</span>][gId][<span class="number">0</span>] = RKR[gId][<span class="number">4</span>]*uGhost[<span class="number">0</span>][gId] +</span><br><span class="line">                                               RKR[gId][<span class="number">5</span>]*uGhost[<span class="number">1</span>][gId] +</span><br><span class="line">                                               RKR[gId][<span class="number">6</span>]*uGhost[<span class="number">2</span>][gId] +</span><br><span class="line">                                               RKR[gId][<span class="number">7</span>]*uGhost[<span class="number">3</span>][gId];</span><br><span class="line">                        FluxGhost[<span class="number">2</span>][gId][<span class="number">0</span>] = RKR[gId][<span class="number">8</span>]*uGhost[<span class="number">0</span>][gId] +</span><br><span class="line">                                               RKR[gId][<span class="number">9</span>]*uGhost[<span class="number">1</span>][gId] +</span><br><span class="line">                                               RKR[gId][<span class="number">10</span>]*uGhost[<span class="number">2</span>][gId] +</span><br><span class="line">                                               RKR[gId][<span class="number">11</span>]*uGhost[<span class="number">3</span>][gId];</span><br><span class="line">                        FluxGhost[<span class="number">3</span>][gId][<span class="number">0</span>] = RKR[gId][<span class="number">12</span>]*uGhost[<span class="number">0</span>][gId] +</span><br><span class="line">                                               RKR[gId][<span class="number">13</span>]*uGhost[<span class="number">1</span>][gId] +</span><br><span class="line">                                               RKR[gId][<span class="number">14</span>]*uGhost[<span class="number">2</span>][gId] +</span><br><span class="line">                                               RKR[gId][<span class="number">15</span>]*uGhost[<span class="number">3</span>][gId];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">git clone --depth&#x3D;50 --branch&#x3D;master https:&#x2F;&#x2F;github.com&#x2F;pvanberg&#x2F;DGFEM-Acoustic.git pvanberg&#x2F;DGFEM-Acoustic</span><br><span class="line">cd pvanberg&#x2F;DGFEM-Acoustic</span><br><span class="line">git checkout -qf c8bdb91ba7f7a25af61f03b8a28d4f7b6ed48035</span><br><span class="line">export NAME&#x3D;&quot;Ubuntu 64 bits&quot;</span><br><span class="line">export TRAVIS_COMPILER&#x3D;g++</span><br><span class="line">export CXX&#x3D;g++</span><br><span class="line">export CXX_FOR_BUILD&#x3D;g++</span><br><span class="line">export CC&#x3D;gcc</span><br><span class="line">export CC_FOR_BUILD&#x3D;gcc</span><br><span class="line">g++ --version</span><br><span class="line">docker run -d --name ubuntu-18-04 -v $(pwd):&#x2F;travis ubuntu:18.04 tail -f &#x2F;dev&#x2F;null</span><br><span class="line">docker exec -t ubuntu-18-04 bash -c &quot;apt-get -qq update; apt-get install -y git; apt-get install -y cmake; apt-get install -y build-essential;  apt-get install -y wget;  apt-get install -y tar;  apt-get install -y  libgfortran3; apt-get install -y libgmsh-dev; apt-get install -y libeigen3-dev&quot;</span><br><span class="line">docker exec -t ubuntu-18-04 bash -c &quot;cd &#x2F;travis; .&#x2F;build.sh;&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/59548929">利用docker ubuntu 编译代码</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker pull ubuntu:18.04</span><br><span class="line">docker run -i -t --name ubuntu-wjq ubuntu:18.04 bash</span><br><span class="line">cat &#x2F;etc&#x2F;issue</span><br><span class="line">docker ps -a</span><br><span class="line">docker start -i ubuntu-wjq</span><br><span class="line">apt-get update</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># </span><br><span class="line">docker pull onelab&#x2F;ubuntu18.10</span><br><span class="line">docker pull onelab&#x2F;ubuntu20.04</span><br><span class="line">docker run -i -t --name onelab20.04-wjq onelab&#x2F;ubuntu20.04 bash</span><br><span class="line">docker run -i -t --name onelab18.04-wjq onelab&#x2F;ubuntu18.10 bash</span><br><span class="line">docker run -i -t --name onelab-linux-wjq onelab&#x2F;debian.wheezy.64bit bash</span><br><span class="line">docker pull onelab&#x2F;ubuntu18.04</span><br><span class="line">docker run -i -t --name onelab-18.04-wjq onelab&#x2F;ubuntu18.04 bash</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">build.sh 需要修改</span><br><span class="line">https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.tar.gz</span><br><span class="line">eigen-3.3.7</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># source of gmsh</span><br><span class="line">https:&#x2F;&#x2F;gmsh.info&#x2F;src&#x2F;gmsh-4.1.4-source.tgz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">module load scalapack&#x2F;gcc&#x2F;64&#x2F;1.8.0</span><br><span class="line">module load gcc&#x2F;4.9.2</span><br><span class="line">export CC&#x3D;gcc</span><br><span class="line">export CXX&#x3D;g++</span><br><span class="line">export FC&#x3D;gfortran</span><br><span class="line">export OMP_NUM_THREADS&#x3D;16</span><br><span class="line">export OMP_CANCELLATION&#x3D;true</span><br><span class="line"></span><br><span class="line">cd $HOME&#x2F;MATH0471-DG&#x2F;build&#x2F;bin</span><br><span class="line">srun .&#x2F;dgalerkin </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker cp 6589e331fa31:pvanberg .&#x2F;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;******************************************&quot;</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;*     Discontinuous galerkin setup.      *&quot;</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;******************************************&quot;</span>;</span><br><span class="line"><span class="built_in">echo</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;[1] Get depedencies and external libraries.&quot;</span>;</span><br><span class="line"></span><br><span class="line">module load cmake/3.11.1</span><br><span class="line">module load gcc/4.9.2</span><br><span class="line"></span><br><span class="line">dpkg -s cmake &gt; /dev/null 2&gt;&amp;1;</span><br><span class="line"><span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;mCmake found.&quot;</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Cmake not found, installing...&quot;</span>;</span><br><span class="line">	apt-get -y install cmake;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Cmake installed.&quot;</span>;</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">dpkg -s g++ &gt; /dev/null 2&gt;&amp;1;</span><br><span class="line"><span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;G++ found.&quot;</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;G++ not found, installing...&quot;</span>;</span><br><span class="line">	apt-get -y install g++;</span><br><span class="line">	<span class="built_in">export</span> CC=gcc;</span><br><span class="line">	<span class="built_in">export</span> CXX=g++;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;G++ installed.&quot;</span>;</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">dpkg -s gfortran &gt; /dev/null 2&gt;&amp;1;</span><br><span class="line"><span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Gfortran found.&quot;</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Gfortran not found, installing...&quot;</span>;</span><br><span class="line">	apt-get -y install gfortran;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Gfortran installed.&quot;</span>;</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">dpkg -s libblas-dev liblapack-dev &gt; /dev/null 2&gt;&amp;1;</span><br><span class="line"><span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Lapack/Blas found.&quot;</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Lapack/Blas not found, installing...&quot;</span>;</span><br><span class="line">	apt-get -y install libblas-dev liblapack-dev;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Lapack/Blas installed.&quot;</span>;</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="string">&quot;gmsh-4.1.4-Linux64-sdk&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Gmsh not found, installing...&quot;</span>;</span><br><span class="line">	wget http://gmsh.info/bin/Linux/gmsh-4.1.4-Linux64-sdk.tgz</span><br><span class="line">	tar -xf gmsh-4.1.4-Linux64-sdk.tgz</span><br><span class="line">	rm -rf gmsh-4.1.4-Linux64-sdk.tgz</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Gmsh installed.&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">       <span class="built_in">echo</span> <span class="string">&quot;Gmsh found.&quot;</span>;</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">cd</span> gmsh-4.1.4-Linux64-sdk/</span><br><span class="line"><span class="built_in">export</span> FC=gfortran</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;PWD&#125;</span>/bin:<span class="variable">$&#123;PWD&#125;</span>/lib:<span class="variable">$&#123;PATH&#125;</span></span><br><span class="line"><span class="built_in">export</span> INCLUDE=<span class="variable">$&#123;PWD&#125;</span>/include:<span class="variable">$&#123;INCLUDE&#125;</span></span><br><span class="line"><span class="built_in">export</span> LIB=<span class="variable">$&#123;PWD&#125;</span>/lib:<span class="variable">$&#123;LIB&#125;</span></span><br><span class="line"><span class="built_in">export</span> PYTHONPATH=<span class="variable">$&#123;PWD&#125;</span>/lib:<span class="variable">$&#123;PYTHONPATH&#125;</span> </span><br><span class="line"><span class="built_in">export</span> DYLD_LIBRARY_PATH=<span class="variable">$&#123;PWD&#125;</span>/lib:<span class="variable">$&#123;DYLD_LIBRARY_PATH&#125;</span></span><br><span class="line"><span class="built_in">cd</span> ../</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="string">&quot;eigen-eigen-323c052e1731&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Eigen not found, installing...&quot;</span>;</span><br><span class="line">  	wget http://bitbucket.org/eigen/eigen/get/3.3.7.tar.gz</span><br><span class="line"> 	tar -xf 3.3.7.tar.gz</span><br><span class="line"> 	rm -rf 3.3.7.tar.gz</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Eigen installed.&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Eigen found.&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">cd</span> eigen-eigen-323c052e1731/</span><br><span class="line"><span class="built_in">export</span> INCLUDE=<span class="variable">$&#123;PWD&#125;</span>:<span class="variable">$&#123;INCLUDE&#125;</span></span><br><span class="line"><span class="built_in">cd</span> ../</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;[2] Build sources.&quot;</span>;</span><br><span class="line"></span><br><span class="line">rm -rf build/  </span><br><span class="line">mkdir buildls</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> build/</span><br><span class="line">cmake ../ -DCMAKE_BUILD_TYPE=Release  -G <span class="string">&quot;Unix Makefiles&quot;</span> </span><br><span class="line">make -j4</span><br><span class="line"><span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">    	<span class="built_in">echo</span> <span class="string">&quot;[end] Everything went successfully.&quot;</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;[end] Error!&quot;</span>;</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>调试</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake -DCMAKE_BUILD_TYPE=Debug &lt;path&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt isntall gdb</span><br></pre></td></tr></table></figure>
+<p>假设条件：</p>
+<ul>
+<li>无黏</li>
+<li>abiabatic</li>
+<li>no external force</li>
+</ul>
+<script type="math/tex; mode=display">
+{\partial \rho \over \partial t} + \nabla \cdot (\rho u) =0\\\\
+{\partial {\rho u}\over \partial t} + \nabla \cdot (\rho u\otimes u) + \nabla p = 0\\\\
+{\partial p \over \partial t} + u\cdot \nabla p + \rho c^2 \nabla \cdot u =0</script><p>线性化：</p>
+<script type="math/tex; mode=display">
+{\partial \rho' \over \partial t}+\nabla\cdot (\rho_0 u'  + \rho' u_0)= 0\\\\
+\rho_0{\partial u'\over \partial t} + {\partial \rho' \over \partial t} u_0 + \nabla \cdot (\rho_0 u_0 \otimes u' + \rho_0 u' \otimes u_0 + \rho' u_0 \otimes u_0) + \nabla p' = 0\\\\
+{\partial p'\over \partial t}  + u_0 \cdot \nabla p' + u' \cdot \nabla p_0 + \rho_0 c_0^2 \nabla \cdot u' +   {\rho_0 c_0^2 \over p_0}p' \nabla \cdot u_0 =0</script><p> Kelvin-Helmholtz instability 被忽略。</p>
+<p>整理成矩阵的形式：</p>
+<script type="math/tex; mode=display">
+u \otimes u = uu^t</script><p>第一项：</p>
+<script type="math/tex; mode=display">
+\nabla\cdot u = [{\partial \over \partial x}\vec{e_x}+{\partial \over \partial y}\vec{e_y}]\cdot [u_x \vec{e_x}+u_y \vec{e_y}]={\partial u_x \over \partial x}+{\partial u_y\over \partial y}</script><script type="math/tex; mode=display">
+\nabla \cdot(\rho_0 u' + \rho' u_0) ={\partial (\rho_0 u'_x + \rho' {u_0}_x)\over \partial x} + {\partial (\rho_0 u'_y + \rho' {u_0}_y)\over \partial y}</script><script type="math/tex; mode=display">
+{\partial \rho'\over \partial t} + {\partial (\rho_0 u'_x + \rho' {u_0}_x)\over \partial x} + {\partial (\rho_0 u'_y + \rho' {u_0}_y)\over \partial y} =0</script><p>简写：</p>
+<script type="math/tex; mode=display">
+{\partial \rho'\over \partial t} + {\partial(\rho u_x)'\over \partial x } + {\partial (\rho u_y)'\over \partial y} =0</script><p>第二,三项：</p>
+<script type="math/tex; mode=display">
+(\rho u_x)' = \rho_0 u_x' + \rho' {u_0}_x\\\\
+(\rho u_y)' = \rho_0 u_y' + \rho' {u_0}_y\\\\
+(\rho u_z)' = \rho_0 u_z' + \rho' {u_0}_z\\\\
+:=\vec{(\rho_0 u)'} =\rho_0 \vec{u'} + \rho' \vec{u_0}\\\\</script><p>无论是背景流或者脉动，在壁面上无滑移边界条件，切向速度为0</p>
+<p>边界条件：</p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2021/01/20/lCtyT97HN3dBiXD.png" alt="lCtyT97HN3dBiXD" style="zoom:33%;" /></p>
+<script type="math/tex; mode=display">
+边界处理：\rho_0 [\vec{u'}-(\vec{f_{norm}}*\vec{u'})\vec{f_{norm}}]+\rho' [\vec{u_0}-(\vec{f_{norm}}*\vec{u_0})\vec{f_{norm}}]\\\\
+整理：= \rho_0 \vec{u'} + \rho' \vec{u_0} -[\rho_0(\vec{f_{norm}}*\vec{u'})+\rho'(\vec{f_{norm}}*\vec{u_0})]\vec{f_{norm}}\\\\
+=\rho_0 \vec{u'} + \rho' \vec{u_0} -[\vec{f_{norm}}*(\rho_0\vec{u'}+\rho'\vec{u_0})]\vec{f_{norm}}\\\\
+因此，可以一个整体，同样的策略进行处理。</script><p>写成矩阵的形式：</p>
+<p>二维：</p>
+<script type="math/tex; mode=display">
+q=\begin{bmatrix}
+\rho'\\
+(\rho u_x)'\\
+(\rho u_y)'\\
+p_c'\\
+\end{bmatrix},</script><p>Time domain: q(x,y,t)</p>
+<script type="math/tex; mode=display">
+{\partial q\over \partial t} + {\partial A_x q\over \partial x} + {\partial A_y q \over \partial y} =0</script><p>Frequency domain:</p>
+<script type="math/tex; mode=display">
+q(x,y,t)= q(x,y,w)e^{jwt}</script><script type="math/tex; mode=display">
+jw q + {\partial A_x q\over \partial x} + {\partial A_y q \over \partial y} =0\\\\
+=: \\\\
+jwq + [{\partial \over \partial x }\vec{e}_x\space | \space {\partial \over \partial y}\vec{e}_y ] \cdot \begin{bmatrix}A_x  \vec{e}_x q \\ A_y  \vec{e}_yq
+\end{bmatrix} =0</script><script type="math/tex; mode=display">
+A_x = \begin{bmatrix}
+0 & 1 & 0 & 0\\
+-{u_0^2}_x & 2{u_0}_x  & 0 & {\rho_0 c_0^2 \over p_{c_0} }\\
+-{u_0}_x {u_0}_y  & {u_0}_y  & {u_0}_x  & 0\\
+-{p_{c_0}\over \rho_0}{u_0}_x & {p_{c_0}\over \rho_0} & 0 & {u_0}_x
+\end{bmatrix}</script><script type="math/tex; mode=display">
+A_y = \begin{bmatrix}
+0 & 0 & 1 & 0\\
+-{u_0}_x {u_0}_y & {u_0}_y  & {u_0}_x & 0\\
+-{u^2_0}_y   & 0  & 2{u_0}_y  & {\rho_0 c^2_0\over p_{c_0}}\\
+-{p_{c_0}\over \rho_0}{u_0}_y & 0 & {p_{c_0}\over \rho_0} & {u_0}_y
+\end{bmatrix}</script><p>三维：</p>
+<p>弱解形式：</p>
+<script type="math/tex; mode=display">
+\int_K  \phi  {\partial q \over \partial t}dK + \int_K \phi {\partial A_x q \over \partial x} dK + \int \phi {\partial A_y q \over \partial y} dK =0</script><p>with Stokes’s theorem:</p>
+<script type="math/tex; mode=display">
+\int_K p {\partial q \over \partial t}dK - \int_K {\partial p \over \partial x} A_x q dK  - \int_K {\partial p \over \partial y} A_y q dK + \int_{\partial K} p (n_x A_x + n_y A_y)q d\partial K</script><p>离散：</p>
+<script type="math/tex; mode=display">
+\int_\Omega =\sum_{i=1}^{n_e} \int_{\Omega_i} \\\\
+\int_\Gamma = \sum_{i=1}^{n_e} \int_{\Gamma_i}\\\\</script><p>The solution vector $q_i$ on each element expands in terms of high-order polynomial shape function $S_i^{(j)}$ and of degrees of freedom $q_i^{(j)}$ such that:</p>
+<script type="math/tex; mode=display">
+q(x,y,t)= \sum_{j=1}^{n_{dof}} q_i^{(j)}(t) S_i^{(j)}(x,y)= Sq\\\\
+p(x,y,t)= \sum_{j=1}^{n_{dof}} p_i^{(j)}(t) S_i^{(j)}(x,y)= Sp\\\\
+[\vec{f}(q)](x,y,t) = \sum_{j=1}^{n_{dof}} [\vec{f}(q)_i](t) S_i^{(j)}(x,y)= S \vec{f}(q)</script><p>思路：</p>
+<script type="math/tex; mode=display">
+\int_K p^T S^T  S {\partial q \over \partial t} dK - \int_K p^T \vec{\nabla}S^T \cdot \vec{f}(Sq) dK + \int_{\partial K} p^T S^T \vec{n}\cdot \vec{f}(Sq) d\partial K = 0</script><p>This formulation being verified for all test functions v and <strong>u</strong> being independent of (x,y,z), reduces to: Ax=b</p>
+<script type="math/tex; mode=display">
+\int_K  S^T  S dK {\partial q \over \partial t}  - \int_K \vec{\nabla}S^T S \cdot \vec{f}(q) dK + \int_{\partial K}  S^T S \vec{n}\cdot \vec{f}(q) d\partial K = 0</script><p>Performning a change of variable in reference space $(x,y,z) -&gt; (\xi, \eta, \psi)\in [-1,1]^3$:</p>
+<script type="math/tex; mode=display">
+\int_{K'}  S^T  S [det J] dK' {\partial q \over \partial t}  - \int_{K'} \vec{\nabla}S^T S \cdot \vec{f}(q) [det J] dK' + \int_{\partial {K'}}  S^T S \vec{n}\cdot \vec{f}(q) [det J] d\partial K' = 0</script><p>The integrals over the elements are then approximated by a Gaussian quadrature rule:</p>
+<script type="math/tex; mode=display">
+\int_{K} f(x,y,z) dK = \int_{-1}^{1}\int_{-1}^{1}\int_{-1}^{1} f(\xi, \eta, \psi) J d\xi d\eta d\psi \approx \sum_g w_g f(\xi_g, \eta_g, \psi_g) det J_g</script><p>g si the Gauss point, w_g the weight.</p>
+<p><strong>重新按照新的公式思路整理代码：</strong></p>
+<p>第一项：</p>
+<script type="math/tex; mode=display">
+\int_{K'}  S^T  S [det J] dK' \approx \sum_g w_g S_g^T S_g det J_g = \sum_g M_g = M_k</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Compute the element mass matrix.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param el integer : element id (!= gmsh tag, it is the location in memory storage)</span></span><br><span class="line"><span class="comment"> * @param inverse boolean : Whether or not the mass matrix must be inverted before returned</span></span><br><span class="line"><span class="comment"> * @param elMassMatrix double array : Output storage of the element mass matrix</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Mesh::getElMassMatrix</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> el, <span class="keyword">const</span> <span class="keyword">bool</span> inverse, <span class="keyword">double</span> *elMassMatrix)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m_elNumNodes; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;m_elNumNodes; ++j) &#123;</span><br><span class="line">            elMassMatrix[i*m_elNumNodes+j] = <span class="number">0.0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> g=<span class="number">0</span>; g&lt;m_elNumIntPts; g++) &#123; <span class="comment">//gauss point </span></span><br><span class="line">                elMassMatrix[i*m_elNumNodes+j] += elBasisFct(g,i)*elBasisFct(g,j)*</span><br><span class="line">                                                  elWeight(g)*elJacobianDet(el, g);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(inverse)</span><br><span class="line">        eigen::inverse(elMassMatrix, m_elNumNodes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二项：</p>
+<script type="math/tex; mode=display">
+\int_{K'} \vec{\nabla}S^T S \cdot \vec{f}(q) [det J] dK' \\\\
+= \int_{K'} [{\partial S^T \over \partial x} S \vec{e}_x + {\partial S^T \over \partial y}S \vec{e}_y +{\partial S^T \over \partial z}S \vec{e}_z]\cdot [f_x(q)\vec{e}_x + f_y(q)\vec{e}_y + f_z(q)\vec{e}_z] [det J] dK'\\\\
+= \int_{K'}[{\partial S^T \over \partial x  }S f_x (q) + {\partial S^T \over \partial y}S f_y (q) + {\partial S^T\over \partial z}S f_z (q)][det J] dK'\\\\
+= \int_{K'}[{\partial S^T \over \partial x  } A_x q + {\partial S^T \over \partial y} A_y q + {\partial S^T\over \partial z}S A_z q]S[det J] dK'</script><p>在代码执行时，已经做了简化操作：</p>
+<script type="math/tex; mode=display">
+\int_{K'} \vec{\nabla}S^T  \cdot \vec{f}(q) S[det J] dK'\\\\</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; m_elUGradBasisFcts;    <span class="comment">// Evaluation of the derivatives of the basis functions at the integration points</span></span><br><span class="line">                                            <span class="comment">// [g1df1/du, g1df1/dv, ..., g2df1/du, g2df1/dv, ..., g1df2/du, g1df2/dv, ...]</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; m_elGradBasisFcts;      <span class="comment">// Evaluation of the derivatives of the basis functions at the integration points</span></span><br><span class="line">                                            <span class="comment">// [e1g1df1/dx, e1g1df1/dy, ..., e1g2df1/dx, e1g2df1/dy, ..., e1g1df2/dx, e1g1df2/dy, ...]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">inline</span> <span class="keyword">double</span>&amp; <span class="title">elUGradBasisFct</span><span class="params">(<span class="keyword">int</span> g, <span class="keyword">int</span> i=<span class="number">0</span>, <span class="keyword">int</span> u=<span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m_elUGradBasisFcts[g*m_elNumNodes*<span class="number">3</span> + i*<span class="number">3</span> + u];</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">double</span>&amp; <span class="title">elGradBasisFct</span><span class="params">(<span class="keyword">int</span> el, <span class="keyword">int</span> g=<span class="number">0</span>, <span class="keyword">int</span> i=<span class="number">0</span>, <span class="keyword">int</span> x=<span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m_elGradBasisFcts[el*m_elNumIntPts*m_elNumNodes*<span class="number">3</span> + g*m_elNumNodes*<span class="number">3</span> + i*<span class="number">3</span> + x];</span><br><span class="line">      <span class="comment">//	层级不断在上升：首先是x 为三个坐标（x,y,z），因此，挨的最近，然后是，elementNodes, 然后每个积分需要g个积分点</span></span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">elStiffVector[i] += eigen::dot(Flux[jId].data(), &amp;elGradBasisFct(el, g, i), m_Dim)*</span><br><span class="line">                                    elBasisFct(g,j)*elWeight(g)*elJacobianDet(el, g);</span><br><span class="line"><span class="comment">// elGradBasisFct,[x,y,z] 三行一列， 与 Flux[jId].data() 三行一列 互作点积</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">
+dot(\begin{bmatrix} {\partial N\over \partial x}\\ {\partial N\over \partial y}\\ {\partial N\over \partial z}\end{bmatrix},\begin{bmatrix} f(u_x) \\ f(u_y) \\ f(u_z) \end{bmatrix})</script><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>* el = element indices in memory storage (!= element tag)</td>
+</tr>
+<tr>
+<td>* f = face indices in memory storage</td>
+</tr>
+<tr>
+<td>* n,i = element or face node (0,…, elNumNode)</td>
+</tr>
+<tr>
+<td>* g = integration point indices</td>
+</tr>
+<tr>
+<td>* x = physical coordinates (0=x, 1=y, 2=z)</td>
+</tr>
+<tr>
+<td>* u = parametric coordinates (0=u, 1=v, 2=w)</td>
+</tr>
+<tr>
+<td>* NB: since c+11, inline is implicit inside class core</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Compute the element stiffness/convection vector.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param el integer : element id</span></span><br><span class="line"><span class="comment"> * @param Flux double array : physical flux</span></span><br><span class="line"><span class="comment"> * @param u double array : solution at element node</span></span><br><span class="line"><span class="comment"> * @param elStiffVector double array : Output storage of the element stiffness vector</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Mesh::getElStiffVector</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> el, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&gt; &amp;Flux,</span></span></span><br><span class="line"><span class="function"><span class="params">                            <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; &amp;u, <span class="keyword">double</span> *elStiffVector)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> jId;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m_elNumNodes; ++i) &#123;</span><br><span class="line">        elStiffVector[i] = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j &lt; m_elNumNodes; ++j) &#123;</span><br><span class="line">            jId = el*m_elNumNodes+j;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> g=<span class="number">0</span>; g&lt;m_elNumIntPts; g++) &#123;</span><br><span class="line">                elStiffVector[i] += eigen::dot(Flux[jId].data(), &amp;elGradBasisFct(el, g, i), m_Dim)*</span><br><span class="line">                                    elBasisFct(g,j)*elWeight(g)*elJacobianDet(el, g);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>代码变动：</strong></p>
+<p>架构均无需调整：</p>
+<script type="math/tex; mode=display">
+{\partial u \over \partial t} + \vec{\nabla} \cdot \vec{f}(u)=0\\\\
+\vec{f}(u) = f_x(u) \vec{e}_x + f_y(u) \vec{e}_y + f_z(u)\vec{e}_z : vector \space flux\\\\
+{\partial u \over \partial t} + {\partial f_x(u)\over \partial x} +{\partial f_y(u)\over \partial y} +{\partial f_z(u)\over \partial z} =0</script><script type="math/tex; mode=display">
+\vec{u}= \begin{bmatrix}
+p'\\
+v_x'\\
+v_y'\\
+v_z'\\
+\end{bmatrix},
+F(\vec{u})=\begin{bmatrix}
+c_0^2 \rho_0 v_x' + {v_0}_x p' & c_0^2 \rho_0v_y' + {v_0}_y p' & c_0^2 \rho_0 v_z' +{v_0}_z p'  \\
+v_x' {v_0}_x + {p'\over \rho_0} & v_x'{v_0}_y & v_x'{v_0}_z  \\
+v_y'{v_0}_x & v_y'{v_0}_y+{p'\over \rho_0} & v_y'{v_0}_z  \\
+v_z' {v_0}_x  & v_z' {v_0}_y  & v_z' {v_0}_z + {p'\over \rho_0}\\
+\end{bmatrix}</script><p>看样子，已经写成了紧致形式。咱们将其拆回到原来的样子看看：</p>
+<script type="math/tex; mode=display">
+A_x \begin{bmatrix}
+p'\\
+v_x'\\
+v_y'\\
+v_z'\\
+\end{bmatrix} = \begin{bmatrix}
+c_0^2 \rho_0 v_x' + {v_0}_x p' \\
+v_x' {v_0}_x + {p'\over \rho_0}\\
+v_y' {v_0}_x\\
+v_z' {v_0}_x\\
+\end{bmatrix} \rightarrow
+A_x = \begin{bmatrix}
+{v_0}_x & c_0^2\rho_0 & 0 & 0\\
+{1\over \rho_0} & {v_0}_x & 0 & 0\\
+0 & 0 & {v_0}_x & 0\\
+0 & 0 & 0 & {v_0}_x
+\end{bmatrix}
+\\\\
+A_y \begin{bmatrix}
+p'\\
+v_x'\\
+v_y'\\
+v_z'\\
+\end{bmatrix} = \begin{bmatrix}
+c_0^2 \rho_0v_y' + {v_0}_y p'\\
+v_x'{v_0}_y\\
+v_y'{v_0}_y+{p'\over \rho_0}\\
+v_z' {v_0}_y\\
+\end{bmatrix}\rightarrow 
+A_y =\begin{bmatrix}
+{v_0}_y & 0 & c_0^2\rho_0  & 0\\
+0 & {v_0}_y & 0 & 0\\
+{1\over \rho_0} & 0 & {v_0}_y & 0\\
+0 & 0 & 0 & {v_0}_y
+\end{bmatrix}
+\\\\
+A_z \begin{bmatrix}
+p'\\
+v_x'\\
+v_y'\\
+v_z'\\
+\end{bmatrix} = \begin{bmatrix}
+c_0^2 \rho_0 v_z' +{v_0}_z p'\\
+v_x'{v_0}_z \\
+v_y'{v_0}_z\\
+v_z' {v_0}_z + {p'\over \rho_0}\\
+\end{bmatrix}\rightarrow
+A_z =
+\begin{bmatrix}
+{v_0}_z & 0 & 0 & c_0^2\rho_0  \\
+0 & {v_0}_z & 0 & 0\\
+0 & 0 & {v_0}_z & 0\\
+{1\over \rho_0} & 0 & 0 & {v_0}_z
+\end{bmatrix}</script><p>整理：</p>
+<script type="math/tex; mode=display">
+F= [A_x u , A_y u ,A_z u]_{4*3}\\\\</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\nabla \cdot F = eigen::dot(Flux[jId].data(), &amp;elGradBasisFct(el, g, i), m_Dim)</span><br><span class="line"> <span class="number">3</span>列，<span class="number">3</span>列，如何处理<span class="number">4</span>行，仍有些疑问🤔️</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Flux at integration points</span></span><br><span class="line">           <span class="comment">// Pressure flux</span></span><br><span class="line">           Flux[<span class="number">0</span>][i] = &#123;v0[<span class="number">0</span>]*u[<span class="number">0</span>][i] + rho0*c0*c0*u[<span class="number">1</span>][i],</span><br><span class="line">                         v0[<span class="number">1</span>]*u[<span class="number">0</span>][i] + rho0*c0*c0*u[<span class="number">2</span>][i],</span><br><span class="line">                         v0[<span class="number">2</span>]*u[<span class="number">0</span>][i] + rho0*c0*c0*u[<span class="number">3</span>][i]&#125;;</span><br><span class="line">           <span class="comment">// Vx</span></span><br><span class="line">           Flux[<span class="number">1</span>][i] = &#123;v0[<span class="number">0</span>]*u[<span class="number">1</span>][i] + u[<span class="number">0</span>][i]/rho0,</span><br><span class="line">                         v0[<span class="number">1</span>]*u[<span class="number">1</span>][i],</span><br><span class="line">                         v0[<span class="number">2</span>]*u[<span class="number">1</span>][i]&#125;;</span><br><span class="line">           <span class="comment">// Vy</span></span><br><span class="line">           Flux[<span class="number">2</span>][i] = &#123;v0[<span class="number">0</span>]*u[<span class="number">2</span>][i],</span><br><span class="line">                         v0[<span class="number">1</span>]*u[<span class="number">2</span>][i] + u[<span class="number">0</span>][i]/rho0,</span><br><span class="line">                         v0[<span class="number">2</span>]*u[<span class="number">2</span>][i]&#125;;</span><br><span class="line">           <span class="comment">// Vz</span></span><br><span class="line">           Flux[<span class="number">3</span>][i] = &#123;v0[<span class="number">0</span>]*u[<span class="number">3</span>][i],</span><br><span class="line">                         v0[<span class="number">1</span>]*u[<span class="number">3</span>][i],</span><br><span class="line">                         v0[<span class="number">2</span>]*u[<span class="number">3</span>][i] + u[<span class="number">0</span>][i]/rho0&#125;;</span><br></pre></td></tr></table></figure>
+<p>🤔️二维和三维代码上会有差别吗？</p>
+<p><strong>二维：</strong></p>
+<script type="math/tex; mode=display">
+A_x = \begin{bmatrix}
+0 & 1 & 0 & 0\\
+-{u_0^2}_x & 2{u_0}_x  & 0 & {\rho_0 c_0^2 \over p_{c_0} }\\
+-{u_0}_x {u_0}_y  & {u_0}_y  & {u_0}_x  & 0\\
+-{p_{c_0}\over \rho_0}{u_0}_x & {p_{c_0}\over \rho_0} & 0 & {u_0}_x
+\end{bmatrix}</script><script type="math/tex; mode=display">
+A_y = \begin{bmatrix}
+0 & 0 & 1 & 0\\
+-{u_0}_x {u_0}_y & {u_0}_y  & {u_0}_x & 0\\
+-{u^2_0}_y   & 0  & 2{u_0}_y  & {\rho_0 c^2_0\over p_{c_0}}\\
+-{p_{c_0}\over \rho_0}{u_0}_y & 0 & {p_{c_0}\over \rho_0} & {u_0}_y
+\end{bmatrix}</script><p>推导紧致F的形式：</p>
+<script type="math/tex; mode=display">
+F = [A_x\begin{bmatrix}
+\rho'\\
+(\rho u_x)'\\
+(\rho u_y)'\\
+(\rho u_z)'\\
+p_c'\\
+\end{bmatrix}  ,  A_y\begin{bmatrix}
+\rho'\\
+(\rho u_x)'\\
+(\rho u_y)'\\
+(\rho u_z)'\\
+p_c'\\
+\end{bmatrix} , A_z\begin{bmatrix}
+\rho'\\
+(\rho u_x)'\\
+(\rho u_y)'\\
+(\rho u_z)'\\
+p_c'\\
+\end{bmatrix}]_{5*3}\\\\
+= [A_x\begin{bmatrix}
+u[0]\\
+u[1]\\
+u[2]\\
+u[3]\\
+u[4]\\
+\end{bmatrix}  ,  A_y\begin{bmatrix}
+u[0]\\
+u[1]\\
+u[2]\\
+u[3]\\
+u[4]\\
+\end{bmatrix} , A_z\begin{bmatrix}
+u[0]\\
+u[1]\\
+u[2]\\
+u[3]\\
+u[4]\\
+\end{bmatrix}]_{5*3}</script><p><strong>三维：</strong></p>
+<script type="math/tex; mode=display">
+{\partial q\over \partial t} + {\partial A_x q\over \partial x} + {\partial A_y q \over \partial y} + {\partial A_z q \over \partial z}=0</script><script type="math/tex; mode=display">
+q=\begin{bmatrix}
+\rho'\\
+(\rho u_x)'\\
+(\rho u_y)'\\
+(\rho u_z)'\\
+p_c'\\
+\end{bmatrix},\\\\
+(\rho u_x)' = \rho_0 u_x' + \rho' {u_0}_x\\\\
+(\rho u_y)' = \rho_0 u_y' + \rho' {u_0}_y</script><script type="math/tex; mode=display">
+A_x = \begin{bmatrix}
+0 & 1 & 0 & 0 & 0\\
+-{u_0^2}_x & 2{u_0}_x  & 0 & 0 & {\rho_0 c_0^2 \over p_{c_0} }\\
+-{u_0}_x {u_0}_y  & {u_0}_y  & {u_0}_x  & 0 & 0\\\
+-{u_0}_z {u_0}_x & {u_0}_z & 0 & {u_0}_x & 0 \\
+-{p_{c_0}\over \rho_0}{u_0}_x & {p_{c_0}\over \rho_0} & 0 & 0 & {u_0}_x
+\end{bmatrix}</script><script type="math/tex; mode=display">
+A_y = \begin{bmatrix}
+0 & 0 &   1 & 0  & 0\\
+-{u_0}_x {u_0}_y & {u_0}_y & {u_0}_x & 0  & 0\\
+-{u^2_0}_y   & 0  & 2{u_0}_y  & 0 & {\rho_0 c^2_0\over p_{c_0}}\\
+-{u_0}_y {u_0}_z & 0 & {u_0}_z & {u_0}_y & 0\\
+-{p_{c_0}\over \rho_0}{u_0}_y & 0 & {p_{c_0}\over \rho_0} & 0& {u_0}_y
+\end{bmatrix}</script><script type="math/tex; mode=display">
+A_z =\begin{bmatrix}
+0 & 0 & 0 & 1 & 0\\
+-{u_0}_z {u_0}_x & {u_0}_z & 0 & {u_0}_x & 0\\
+-{u_0}_y {u_0}_z & 0 & {u_0}_z & {u_0}_y & 0\\
+-{u_0^2}_z &  0 & 0 & 2{u_0}_z & {\rho_0 c_0^2\over p_{c_0}}\\
+-{p_{c_0}\over \rho_0}{u_0}_z & 0 & 0 & {p_{c_0}\over \rho_0} & {u_0}_z
+\end{bmatrix}</script><p>推导紧致F的形式：</p>
+<script type="math/tex; mode=display">
+F = [A_x\begin{bmatrix}
+\rho'\\
+(\rho u_x)'\\
+(\rho u_y)'\\
+(\rho u_z)'\\
+p_c'\\
+\end{bmatrix}  ,  A_y\begin{bmatrix}
+\rho'\\
+(\rho u_x)'\\
+(\rho u_y)'\\
+(\rho u_z)'\\
+p_c'\\
+\end{bmatrix} , A_z\begin{bmatrix}
+\rho'\\
+(\rho u_x)'\\
+(\rho u_y)'\\
+(\rho u_z)'\\
+p_c'\\
+\end{bmatrix}]_{5*3}\\\\
+= [A_x\begin{bmatrix}
+u[0]\\
+u[1]\\
+u[2]\\
+u[3]\\
+u[4]\\
+\end{bmatrix}  ,  A_y\begin{bmatrix}
+u[0]\\
+u[1]\\
+u[2]\\
+u[3]\\
+u[4]\\
+\end{bmatrix} , A_z\begin{bmatrix}
+u[0]\\
+u[1]\\
+u[2]\\
+u[3]\\
+u[4]\\
+\end{bmatrix}]_{5*3}\\\\
+第一列=\begin{bmatrix}
+0 & 1 & 0 & 0 & 0\\
+-{u_0^2}_x & 2{u_0}_x  & 0 & 0 & {\rho_0 c_0^2 \over p_{c_0} }\\
+-{u_0}_x {u_0}_y  & {u_0}_y  & {u_0}_x  & 0 & 0\\
+-{u_0}_z {u_0}_x & {u_0}_z & 0 & {u_0}_x & 0 \\
+-{p_{c_0}\over \rho_0}{u_0}_x & {p_{c_0}\over \rho_0} & 0 & 0 & {u_0}_x
+\end{bmatrix}\begin{bmatrix}
+u[0]\\
+u[1]\\
+u[2]\\
+u[3]\\
+u[4]\\
+\end{bmatrix}
+\\\\
+第二列=\begin{bmatrix}
+0 & 0 &   1 & 0  & 0\\
+-{u_0}_x {u_0}_y & {u_0}_y & {u_0}_x & 0  & 0\\
+-{u^2_0}_y   & 0  & 2{u_0}_y  & 0 & {\rho_0 c^2_0\over p_{c_0}}\\
+-{u_0}_y {u_0}_z & 0 & {u_0}_z & {u_0}_y & 0\\
+-{p_{c_0}\over \rho_0}{u_0}_y & 0 & {p_{c_0}\over \rho_0} & 0& {u_0}_y
+\end{bmatrix}\begin{bmatrix}
+u[0]\\
+u[1]\\
+u[2]\\
+u[3]\\
+u[4]\\
+\end{bmatrix}
+\\\\
+第三列=\begin{bmatrix}
+0 & 0 & 0 & 1 & 0\\
+-{u_0}_z {u_0}_x & {u_0}_z & 0 & {u_0}_x & 0\\
+-{u_0}_y {u_0}_z & 0 & {u_0}_z & {u_0}_y & 0\\
+-{u_0^2}_z &  0 & 0 & 2{u_0}_z & {\rho_0 c_0^2\over p_{c_0}}\\
+-{p_{c_0}\over \rho_0}{u_0}_z & 0 & 0 & {p_{c_0}\over \rho_0} & {u_0}_z
+\end{bmatrix}\begin{bmatrix}
+u[0]\\
+u[1]\\
+u[2]\\
+u[3]\\
+u[4]\\
+\end{bmatrix}</script><p><strong>Cylindrical Coordinates:</strong></p>
+<script type="math/tex; mode=display">
+q=\begin{bmatrix}
+\rho'\\
+(\rho u_r)'\\
+(\rho u_\theta)'\\
+(\rho u_x)'\\
+p_c'\\
+\end{bmatrix},</script><script type="math/tex; mode=display">
+{\partial q\over \partial t} + {1\over r} A_c q + {1\over r} {\partial r A_r q \over \partial r} + {1\over r}{\partial A_\theta q\over \partial \theta} + {\partial A_x q\over \partial x} =0</script><script type="math/tex; mode=display">
+A_r = \begin{bmatrix}
+0 & 1 & 0 & 0 & 0\\
+-{u_0^2}_r & 2{u_0}_r  & 0 & 0 & {\rho_0 c_0^2 \over \pi_0 }\\
+-{u_0}_r {u_0}_\theta  & {u_0}_\theta  & {u_0}_r  & 0 & 0\\\
+-{u_0}_x {u_0}_r & {u_0}_x & 0 & {u_0}_r & 0 \\
+-{\pi_0\over \rho_0}{u_0}_r & {\pi_0\over \rho_0} & 0 & 0 & {u_0}_r
+\end{bmatrix}</script><script type="math/tex; mode=display">
+A_\theta = \begin{bmatrix}
+0 & 0 &   1 & 0  & 0\\
+-{u_0}_r {u_0}_\theta & {u_0}_\theta & {u_0}_r & 0  & 0\\
+-{u^2_0}_\theta   & 0  & 2{u_0}_\theta  & 0 & {\rho_0 c^2_0\over \pi_0}\\
+-{u_0}_\theta {u_0}_x & 0 & {u_0}_x & {u_0}_\theta & 0\\
+-{\pi_0\over \rho_0}{u_0}_\theta & 0 & {\pi_0\over \rho_0} & 0& {u_0}_\theta
+\end{bmatrix}</script><script type="math/tex; mode=display">
+A_x =\begin{bmatrix}
+0 & 0 & 0 & 1 & 0\\
+-{u_0}_x {u_0}_r & {u_0}_x & 0 & {u_0}_r & 0\\
+-{u_0}_\theta {u_0}_x & 0 & {u_0}_x & {u_0}_\theta & 0\\
+-{u_0^2}_x &  0 & 0 & 2{u_0}_x & {\rho_0 c_0^2\over \pi_0}\\
+-{\pi_0\over \rho_0}{u_0}_x & 0 & 0 & {\pi_0\over \rho_0} & {u_0}_x
+
+
+\end{bmatrix}</script><script type="math/tex; mode=display">
+A_c= \begin{bmatrix}
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & -{\rho_0 c_0^2\over \pi_0}\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0
+\end{bmatrix}</script><p>For axisymmetric problems, $q = e^{-jm\theta}$, where m is the azimuthal order. </p>
+<script type="math/tex; mode=display">
+j w q + {1\over r} A_c q + {1\over r} {\partial r A_r q \over \partial r} - j {m\over r} A_\theta q + {\partial A_x q \over \partial x} =0</script><p> DGFEM代码：思考🤔</p>
+<script type="math/tex; mode=display">
+\vec{f}(u)\rightarrow \begin{cases}
+A_x(u_x) \\
+A_y(u_y)
+\end{cases}</script><script type="math/tex; mode=display">
+jw \int_K v^TN^T NdK</script><p>第三项到目前为止还没有分析：它与正交面有关系。</p>
+<script type="math/tex; mode=display">
+3D:\vec{n}_g = {\vec{\nabla }{N_i}_g \times \vec{\nabla }{N_i}_g  \over \Vert \vec{\nabla }{N_i}_g \times \vec{\nabla }{N_i}_g  \Vert} \\\\
+2D: \vec{n}_g =  {\vec{\nabla }{N_i}_g \times [0,0,1] \over \Vert \vec{\nabla }{N_i}_g \times [0,0,1]  \Vert} \\\\
+1D: \vec{n}_g = \pm 1</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Define a normal associated to each surface.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; <span class="title">normal</span><span class="params">(m_Dim)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> f=<span class="number">0</span>; f&lt;m_fNum; ++f) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> g=<span class="number">0</span>; g&lt;m_fNumIntPts; ++g) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">switch</span> (m_fDim) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">0</span>: &#123;</span><br><span class="line">                    normal = &#123;<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">1</span>: &#123;</span><br><span class="line">                    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; normalPlane = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">-1</span>&#125;;</span><br><span class="line">                    eigen::cross(&amp;fGradBasisFct(f, g, <span class="number">0</span>), normalPlane.data(), normal.data());</span><br><span class="line">                    <span class="keyword">if</span>(eigen::dot(&amp;fGradBasisFct(f, g), &amp;fGradBasisFct(f, <span class="number">0</span>), m_Dim) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; m_Dim; ++x)</span><br><span class="line">                            normal[x] = -normal[x];</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">2</span>: &#123;</span><br><span class="line">                    eigen::cross(&amp;fGradBasisFct(f, g, <span class="number">0</span>), &amp;fGradBasisFct(f, g, <span class="number">1</span>), normal.data());</span><br><span class="line">                    <span class="keyword">if</span>(g!=<span class="number">0</span> &amp;&amp; eigen::dot(&amp;fNormal(f,<span class="number">0</span>), normal.data(), m_Dim) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; m_Dim; ++x)</span><br><span class="line">                            normal[x] = -normal[x];</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            eigen::normalize(normal.data(), m_Dim);</span><br><span class="line">            m_fNormals.insert(m_fNormals.end(), normal.begin(), normal.end());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>调试：</p>
+<p><strong>1D Case</strong></p>
+<p>m_elDim=1</p>
+<p>m_elNum =100个点</p>
+<p>【-5， 5】 三个坐标系全部写上，600？</p>
+<p>m_elJacobianDets 200个点</p>
+<p>m_elNumIntPts = (int) m_elJacobianDets.size() / m_elNum; =200/100=2</p>
+<p> m_elGradBasisFcts.resize(m_elNum*m_elNumNodes*m_elNumIntPts*3);  =100*2*2*3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">assert(m_elType.size() &#x3D;&#x3D; 1);</span><br><span class="line">   assert(m_elNodeTags.size() &#x3D;&#x3D; m_elNum*m_elNumNodes);</span><br><span class="line">   assert(m_elJacobianDets.size() &#x3D;&#x3D; m_elNum*m_elNumIntPts);</span><br><span class="line">   assert(m_elBasisFcts.size() &#x3D;&#x3D; m_elNumNodes*m_elNumIntPts);</span><br><span class="line">   assert(m_elGradBasisFcts.size() &#x3D;&#x3D; m_elNum*m_elNumIntPts*m_elNumNodes*3);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Faces is point. 用作Flux的传递 $\hat{F}(u)_k$ </p>
+<p>Info    : Number of Faces : 101<br>Info    : Faces per Element : 2<br>Info    : Face dimension : 0<br>Info    : Face Type : point<br>Info    : Face Nbr Nodes : 1<br>Info    : Integration type : Gauss2<br>Info    : Integration Nbr points : 1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"># Connectivity</span><br><span class="line"># Element: connet to face</span><br><span class="line">(gdb) p m_fNbrElIds</span><br><span class="line">$46 &#x3D; std::vector of length 101, capacity 101 &#x3D; &#123;</span><br><span class="line">  std::vector of length 1, capacity 1 &#x3D; &#123;0&#125;,</span><br><span class="line">  std::vector of length 2, capacity 2 &#x3D; &#123;0, 1&#125;,</span><br><span class="line">  std::vector of length 2, capacity 2 &#x3D; &#123;1, 2&#125;,</span><br><span class="line">  std::vector of length 2, capacity 2 &#x3D; &#123;2, 3&#125;,</span><br><span class="line">  std::vector of length 2, capacity 2 &#x3D; &#123;3, 4&#125;,</span><br><span class="line">  std::vector of length 2, capacity 2 &#x3D; &#123;4, 5&#125;,</span><br><span class="line">  std::vector of length 2, capacity 2 &#x3D; &#123;5, 6&#125;,</span><br><span class="line">  std::vector of length 2, capacity 2 &#x3D; &#123;6, 7&#125;,</span><br><span class="line">  std::vector of length 2, capacity 2 &#x3D; &#123;7, 8&#125;,</span><br><span class="line">  std::vector of length 2, capacity 2 &#x3D; &#123;8, 9&#125;,</span><br><span class="line">  std::vector of length 2, capacity 2 &#x3D; &#123;9, 10&#125;,</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  (gdb) p m_fNToElNIds 方向</span><br><span class="line">$47 &#x3D; std::vector of length 101, capacity 101 &#x3D; &#123;</span><br><span class="line">  std::vector of length 1, capacity 1 &#x3D; &#123;0&#125;,</span><br><span class="line">  std::vector of length 2, capacity 2 &#x3D; &#123;1, 0&#125;,</span><br><span class="line">  std::vector of length 2, capacity 2 &#x3D; &#123;1, 0&#125;,</span><br><span class="line">  </span><br><span class="line">  (gdb) p m_elFOrientation</span><br><span class="line">$48 &#x3D; std::vector of length 200, capacity 256 &#x3D; &#123;-1,</span><br><span class="line">  1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,</span><br><span class="line">  -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1,</span><br><span class="line">  1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,</span><br><span class="line">  -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1,</span><br><span class="line">  1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,</span><br><span class="line">  -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1,</span><br><span class="line">  1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,</span><br><span class="line">  -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1,</span><br><span class="line">  1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,</span><br><span class="line">  -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1,</span><br><span class="line">  1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,</span><br><span class="line">  -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1,</span><br><span class="line">  1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1,</span><br><span class="line">  -1, 1, -1, 1...&#125;</span><br><span class="line">  </span><br><span class="line">  (gdb) p m_elFIds</span><br><span class="line">$52 &#x3D; std::vector of length 200, capacity 256 &#x3D; &#123;0, 1,</span><br><span class="line">  1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9,</span><br><span class="line">  10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16,</span><br><span class="line">  16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22,</span><br><span class="line">  23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 29,</span><br><span class="line">  29, 30, 30, 31, 31, 32, 32, 33, 33, 34, 34, 35, 35,</span><br><span class="line">  36, 36, 37, 37, 38, 38, 39, 39, 40, 40, 41, 41, 42,</span><br><span class="line">  42, 43, 43, 44, 44, 45, 45, 46, 46, 47, 47, 48, 48,</span><br><span class="line">  49, 49, 50, 50, 51, 51, 52, 52, 53, 53, 54, 54, 55,</span><br><span class="line">  55, 56, 56, 57, 57, 58, 58, 59, 59, 60, 60, 61, 61,</span><br><span class="line">  62, 62, 63, 63, 64, 64, 65, 65, 66, 66, 67, 67, 68,</span><br><span class="line">  68, 69, 69, 70, 70, 71, 71, 72, 72, 73, 73, 74, 74,</span><br><span class="line">  75, 75, 76, 76, 77, 77, 78, 78, 79, 79, 80, 80, 81,</span><br><span class="line">  81, 82, 82, 83, 83, 84, 84, 85, 85, 86, 86, 87, 87,</span><br><span class="line">  88, 88, 89, 89, 90, 90, 91, 91, 92, 92, 93, 93, 94,</span><br><span class="line">  94, 95, 95, 96, 96, 97, 97, 98, 98, 99, 99, 100...&#125;</span><br><span class="line">  </span><br><span class="line">  (gdb) p m_fIsBoundary 边界条件</span><br><span class="line">$55 &#x3D; std::vector&lt;bool&gt; of length 101, capacity 128 &#x3D; &#123;</span><br><span class="line">  1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">   uGhost &#x3D; std::vector&lt;std::vector&lt;double&gt;&gt;(4,</span><br><span class="line">             std::vector&lt;double&gt;(m_fNum*m_fNumIntPts));</span><br><span class="line">    FluxGhost &#x3D; std::vector&lt;std::vector&lt;std::vector&lt;double&gt;&gt;&gt;(4,</span><br><span class="line">                std::vector&lt;std::vector&lt;double&gt;&gt;(m_fNum*m_fNumIntPts,</span><br><span class="line">                std::vector&lt;double&gt;(3)));</span><br><span class="line">                </span><br><span class="line">                (gdb) p uGhost</span><br><span class="line">$59 &#x3D; std::vector of length 4, capacity 4 &#x3D; &#123;</span><br><span class="line">  std::vector of length 101, capacity 101 &#x3D; &#123;0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0&#125;,</span><br><span class="line">  std::vector of length 101, capacity 101 &#x3D; &#123;0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0&#125;,</span><br><span class="line">  std::vector of length 101, capacity 101 &#x3D; &#123;0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0&#125;,</span><br><span class="line">  std::vector of length 101, capacity 101 &#x3D; &#123;0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span><br><span class="line">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0&#125;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(gdb) p FluxGhost</span><br><span class="line">$60 &#x3D; std::vector of length 4, capacity 4 &#x3D; &#123;</span><br><span class="line">  std::vector of length 101, capacity 101 &#x3D; &#123;</span><br><span class="line">    std::vector of length 3, capacity 3 &#x3D; &#123;0, 0, 0&#125;,</span><br><span class="line">    std::vector of length 3, capacity 3 &#x3D; &#123;0, 0, 0&#125;,</span><br><span class="line">    std::vector of length 3, capacity 3 &#x3D; &#123;0, 0, 0&#125;,</span><br><span class="line">    std::vector of length 3, capacity 3 &#x3D; &#123;0, 0, 0&#125;,</span><br><span class="line">    std::vector of length 3, capacity 3 &#x3D; &#123;0, 0, 0&#125;,</span><br><span class="line">    std::vector of length 3, capacity 3 &#x3D; &#123;0, 0, 0&#125;,</span><br><span class="line">    std::vector of length 3, capacity 3 &#x3D; &#123;0, 0, 0&#125;,</span><br><span class="line">    std::vector of length 3, capacity 3 &#x3D; &#123;0, 0, 0&#125;,</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">uGhost = <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&gt;(<span class="number">4</span>,</span><br><span class="line">             <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;(m_fNum*m_fNumIntPts)); <span class="number">101</span>*<span class="number">1</span></span><br><span class="line">    FluxGhost = <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&gt;&gt;(<span class="number">4</span>,</span><br><span class="line">                <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&gt;(m_fNum*m_fNumIntPts,</span><br><span class="line">                <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;(<span class="number">3</span>)));  <span class="number">4</span>*<span class="number">101</span>*<span class="number">3</span>,  这与F <span class="number">4</span>行<span class="number">3</span>列对上了</span><br><span class="line"> 可以通过 FluxGhost[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]访问 <span class="number">101</span>*<span class="number">3</span> 矩阵</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>Solver</strong></p>
+<p>The original equation has now the following form:</p>
+<script type="math/tex; mode=display">
+M_k {\partial u_k \over \partial t} - S(u)_k + \hat{F}(u)_k = 0</script><p>The time discretization can be performed using an explicit forward Euler scheme, the time derivative is approximated by </p>
+<script type="math/tex; mode=display">
+{\partial u \over \partial t} \approx {u^{n+1}-u^{n}\over \Delta t}</script><p>It leads to:</p>
+<script type="math/tex; mode=display">
+u^{n+1}_k = u_k^n + \Delta t M_k^{-1} [S(u^n)_k-\hat{F}(u^n)_k]</script><p>A more accurate but slower explicit iterative method is known as Runge-Kutta algorithm and consists in computing a weighted average of four intermediate increments to obtain the solution at the next time step:</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+h_1= \Delta t M_k^{-1} [S(u^n)_k -\hat{F}(u^n)_k]\\\\
+h_2= \Delta t M_k^{-1} [S(u^n + h_1/2)_k - \hat{F}(u^n + h_1/2)_k]\\\\
+h_3= \Delta t M_k^{-1} [S(u^n + h_2/2)_k - \hat{F}(u^n + h_2/2)_k]\\\\
+h_4= \Delta t M_k^{-1} [S(u^n + h_3)_k   - \hat{F}(u^n + h_3)_k]
+\end{cases}\\\\
+u_k^{n+1} = u_k^n + {1\over 6}(h_1+2h_2+2h_3 + h_4)</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Perform a numerical step: u[t+1] = dt*M^-1*(S[u[t]]-F[u[t]]) + beta*u[t]</span></span><br><span class="line"><span class="comment"> * [eq] 每行公式独立计算，时间迭代算法的好处。省内存，但计算时间长</span></span><br><span class="line"><span class="comment"> * for all elements in mesh object.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param mesh Mesh object</span></span><br><span class="line"><span class="comment"> * @param config Configuration file</span></span><br><span class="line"><span class="comment"> * @param u Nodal solution vector</span></span><br><span class="line"><span class="comment"> * @param Flux Nodal physical Flux</span></span><br><span class="line"><span class="comment"> * @param beta double coefficient</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">numStep</span><span class="params">(Mesh &amp;mesh, Config config, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&gt; &amp;u,</span></span></span><br><span class="line"><span class="function"><span class="params">             <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&gt;&gt; &amp;Flux, <span class="keyword">double</span> beta)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> eq=<span class="number">0</span>; eq&lt;<span class="number">4</span>; ++eq)&#123;</span><br><span class="line">        mesh.precomputeFlux(u[eq], Flux[eq], eq);</span><br><span class="line"></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">pragma</span> omp parallel for schedule(static) firstprivate(elFlux, elStiffvector) num_threads(config.numThreads)</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> el=<span class="number">0</span>; el&lt;mesh.getElNum(); ++el)&#123;</span><br><span class="line"></span><br><span class="line">            mesh.getElFlux(el, elFlux.data());</span><br><span class="line">            mesh.getElStiffVector(el, Flux[eq], u[eq], elStiffvector.data());</span><br><span class="line">            eigen::minus(elStiffvector.data(), elFlux.data(), elNumNodes);</span><br><span class="line">            eigen::linEq(&amp;mesh.elMassMatrix(el), &amp;elStiffvector[<span class="number">0</span>], &amp;u[eq][el*elNumNodes],</span><br><span class="line">                         config.timeStep, beta, elNumNodes);</span><br><span class="line">          <span class="meta"># y:= config.timeStep * mesh.elMassMatrix(el) * elStiffvector[0] + beta *u[eq][el*elNumNodes]</span></span><br><span class="line">          <span class="meta"># u[t+1] = dt*M^-1*(S[u[t]]-F[u[t]]) + beta*u[t]</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Matrix/vector product:  y := alpha*A*x + beta*y</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">linEq</span><span class="params">(<span class="keyword">double</span> *A, <span class="keyword">double</span> *X, <span class="keyword">double</span> *Y, <span class="keyword">double</span> &amp;alpha, <span class="keyword">double</span> beta, <span class="keyword">int</span> &amp;N)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> TRANS = <span class="string">&#x27;T&#x27;</span>;</span><br><span class="line">    <span class="keyword">int</span> INC = <span class="number">1</span>;</span><br><span class="line">    dgemv_(TRANS, N, N, alpha, A, N, X, INC, beta, Y, INC);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<!-- flag of hidden posts --></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jiaqi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://deal-ii.com/post/848afee8/">http://deal-ii.com/post/848afee8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://deal-ii.com" target="_blank">DEAL-II-Fluid</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/FEM/">FEM</a><a class="post-meta__tags" href="/tags/acoustic/">acoustic</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/12/22/d7YjSwNqreOA91K.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/post/ac853f89/" title="deal-ii-learning"><img class="relatedPosts_cover" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/cover-dealii69.webp"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-26</div><div class="relatedPosts_title">deal-ii-learning</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div class="comments-items-1" data-name="Valine"><div class="vcomment" id="vcomment"></div><script>function loadvaline () {  
+  var requestSetting = function (from,set) {
+    var from = from
+    var setting = set.split(',').filter(function(item){
+    return from.indexOf(item) > -1
+    });
+    setting = setting.length == 0 ? from :setting;
+    return setting
+  }
+
+  var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+  var requiredFields = requestSetting(['nick','mail'],'nick,mail')
+
+  function initValine () {
+    window.valine = new Valine({
+      el:'#vcomment',
+      appId: 'lJ3vEzEWaeVa6HpWNNbPrauw-gzGzoHsz',
+      appKey: '16FI6zgDXwvw71g04yhHnnW0',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: guestInfo,
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      requiredFields: requiredFields
+    });
+  }
+  loadScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || false) {
+  window.addEventListener('load', loadvaline)
+}
+else {
+  function loadOtherComment () {
+    loadvaline()
+  }
+}</script></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Jiaqi</div><div class="framework-info"><span>驱动 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></head></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/calendar.js"></script><script src="/js/languages.js"></script><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/gitcalendar/js/gitcalendar.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":120,"height":260},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

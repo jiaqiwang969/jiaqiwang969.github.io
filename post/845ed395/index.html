@@ -1,0 +1,367 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dynamical system and chaos | DEAL-II-Fluid</title><meta name="description" content="学习资料: MIT 公开课 -第11&#x2F;12&#x2F;13周课程 simplearth  https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;KmOzUkILGAQ&amp;list&#x3D;PLmU0FIlJY-Mle_2Q0mjVMuQh9aZHDzNoP  https:&#x2F;&#x2F;drive.google.com&#x2F;drive&#x2F;folders&#x2F;1kM9ko27wA5NvmZ8CxHIKygdi-klzW0U"><meta name="keywords" content="chaos"><meta name="author" content="Jiaqi"><meta name="copyright" content="Jiaqi"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://deal-ii.com/post/845ed395/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta property="og:type" content="article"><meta property="og:title" content="Dynamical system and chaos"><meta property="og:url" content="http://deal-ii.com/post/845ed395/"><meta property="og:site_name" content="DEAL-II-Fluid"><meta property="og:description" content="学习资料: MIT 公开课 -第11&#x2F;12&#x2F;13周课程 simplearth  https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;KmOzUkILGAQ&amp;list&#x3D;PLmU0FIlJY-Mle_2Q0mjVMuQh9aZHDzNoP  https:&#x2F;&#x2F;drive.google.com&#x2F;drive&#x2F;folders&#x2F;1kM9ko27wA5NvmZ8CxHIKygdi-klzW0U"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/chaoblogcover.jpg"><meta property="article:published_time" content="2020-12-10T23:58:34.000Z"><meta property="article:modified_time" content="2021-01-29T07:25:51.233Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="prev" title="machine learning for chaos system-基础知识" href="http://deal-ii.com/post/f2bbe0e7/"><link rel="next" title="Linux和Unix使用技巧总结" href="http://deal-ii.com/post/6f1f143a/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: true,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-01-29 15:25:51'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@master/Hexo/css/flink.min.css"><link rel="stylesheet" href="/gitcalendar/css/gitcalendar.css"/><meta name="generator" content="Hexo 5.3.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/me.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">23</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">31</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99"><span class="toc-number">1.</span> <span class="toc-text">学习资料:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">学习目标：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introducation"><span class="toc-number">3.</span> <span class="toc-text">Introducation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flows-and-maps"><span class="toc-number">4.</span> <span class="toc-text">flows and maps</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nonlinear-Dynamics-Stability-and-bifurcation-YouTube"><span class="toc-number">5.</span> <span class="toc-text">Nonlinear Dynamics: Stability and bifurcation YouTube</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#basic-flow-dynamical-model"><span class="toc-number">6.</span> <span class="toc-text">basic flow dynamical model</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Two-step-time-stepping-alogorithm"><span class="toc-number">6.1.</span> <span class="toc-text">Two-step time-stepping alogorithm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8D%89%E7%A8%BF"><span class="toc-number">7.</span> <span class="toc-text">草稿</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#invariant-manifolds"><span class="toc-number">8.</span> <span class="toc-text">invariant manifolds</span></a></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/chaoblogcover.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">DEAL-II-Fluid</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">Dynamical system and chaos</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-11 07:58:34"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-12-11</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-01-29 15:25:51"><i class="fas fa-history fa-fw"></i> 更新于 2021-01-29</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料:"></a>学习资料:</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://computationalthinking.mit.edu/Fall20/lecture20/">MIT 公开课</a> -第11/12/13周课程</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Gi4ZZVS2GLA&amp;feature=emb_logo">simplearth</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=KmOzUkILGAQ&amp;list=PLmU0FIlJY-Mle_2Q0mjVMuQh9aZHDzNoP">https://www.youtube.com/watch?v=KmOzUkILGAQ&amp;list=PLmU0FIlJY-Mle_2Q0mjVMuQh9aZHDzNoP</a></p>
+</li>
+<li><a target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1kM9ko27wA5NvmZ8CxHIKygdi-klzW0UZ">https://drive.google.com/drive/folders/1kM9ko27wA5NvmZ8CxHIKygdi-klzW0UZ</a></li>
+</ul>
+<h2 id="学习目标："><a href="#学习目标：" class="headerlink" title="学习目标："></a>学习目标：</h2><ul>
+<li><p>Dynamical system $(M,f)$: the space M of its possible states, and the law $f^t$ of their evolution in time.</p>
+</li>
+<li><p>equilibria / fixed points</p>
+</li>
+<li><p>Poincare map</p>
+</li>
+<li><p>Explore the neighborhood by <em>线化</em> the flow； check the <em>linear stability</em> of its equilibria/ fixed points, their stability eigen-directions.</p>
+</li>
+<li><p><em>Symmetry</em> to simplify your problem</p>
+</li>
+<li><p>Go global: train by <em>partitioning the state space of 1-d maps</em>. Label the regions by <em>symbolic dynamics</em>.</p>
+</li>
+<li><p>Venture global distances across the system by continuing local tangent space into <em>stable/ unstable manifolds</em>. Their intersections <em>partition the state space</em> in a dynamically invariant way.</p>
+</li>
+<li><p>Guided by this topological partition, compute a set of <em>periodic orbits</em> up to a given topological length.</p>
+</li>
+</ul>
+<h2 id="Introducation"><a href="#Introducation" class="headerlink" title="Introducation"></a>Introducation</h2><p>数学家亨利·庞加莱（HenriPoincaré）在试图描述三个天体在彼此的引力影响下的行为时首次遇到了”混乱“状态。事实证明，它们的运动很难预测，他称这种不稳定的运动为“混沌”。例如在不可压缩流动中，通过足够大的粘度稳定的层流状态的全局稳定的平衡性得以维持。随着粘度降低（雷诺数增加），湍流出现，以混沌状态空间轨迹表示。看似简单的混沌定义，大致基于类似于<a target="_blank" rel="noopener" href="https://www.livescience.com/50942-third-law-thermodynamics.html">熵</a>的量，即宇宙中事物从一种有序状态转变为一种无序状态的固有趋势。如果这个类似于熵的数字称为扩展熵，则该系统可能会变得混乱，而具有零扩展熵的系统则不会变得混乱。从本质上讲，使研究人员可以迅速捕捉事物迅速发展为不可预测深渊的趋势。</p>
+<p><a target="_blank" rel="noopener" href="https://www.exploratorium.edu/complexity/CompLexicon/chaos.html">其特点可以总结</a>：</p>
+<ul>
+<li>长期行为很难或无法预测：即使是对混沌系统当前状态的非常精确的测量，也都无法指示系统的位置。必须再次测量系统以找出其位置。</li>
+<li>对初始条件的敏感依赖（Poincare，Birkhoff甚至Turing指出的属性 ）：从非常接近的初始条件开始，混沌系统会迅速移动到不同的状态。</li>
+<li>宽带频谱：混沌系统的输出听起来“嘈杂”。许多频率被激发。</li>
+<li>错误的指数放大：在任何现实世界中，少量外部噪声都会迅速增长以控制系统。如果此噪声低于测量精度，则使实验者看不到或无法控制该噪声，则该系统似乎不可预测。微观的“热浴”被放大到人类规模。</li>
+<li>局部不稳定性与全局稳定性：为了扩大小错误和噪声，行为必须是局部不稳定的：在短时间内，附近的状态会彼此远离。但是，为了使系统始终如一地产生稳定的行为，必须在很长一段时间内将一系列行为归为自身。这两个属性的张力导致结构非常优雅的混沌吸引子。</li>
+</ul>
+<p>我感觉这门学科，是很多学科融合的新思想实践，包括信号处理、流体力学、热力学、统计数学、拓扑学和动力学等学科思想精华的集大成。从复杂的动力学问题中，化繁为简，提取有用的可解释性的物理特征或者相关结构。在Chaosbook这本书中,我们将学到the duality between the local, topological, short-time dynamically invariant compact sets (equilibrium, periodic orbits, partially hyperbolic invariant tori) and the global long-time evolution of densities of trajectories. 混沌动力学是由局部不稳定运动的相互作用以及整体稳定与不稳定流形的能量交换所产生。理解混沌的意义在于，如果以此为基础的invariant拓扑结构解释，那么后续的可观测结果，例如传感器测到的压力、频谱数据中的潜藏<em>循环平稳</em>信息也能进一步被挖掘、物理解释与理解。</p>
+<p><strong>闲话</strong>：<a target="_blank" rel="noopener" href="https://www.shadertoy.com/view/MdyGWG">pinball</a>在书中被作为一个例子来解释Chaos，这是一个shadertoy的制作pinball的算法链接。</p>
+<p>确定性系统本身是由初始条件完全决定。随机系统，除了初始条件以外，还受到噪声和其他控制的影响。从随机系统中寻找确定性是关键，也是难点。</p>
+<ul>
+<li>如果一个确定性系统具有<strong>局部不稳定性(positive Lyapunov exponent)</strong> 和 <strong>globally mixing (positive entropy)</strong>, 这个系统就成为是混沌的。</li>
+</ul>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://shaddenlab.berkeley.edu/uploads/LCS-tutorial/FTLE-interp.html">finite-time Lyapunov exponents</a></li>
+</ol>
+<p>举一个例子，证明finite-time Lyapunov exponents在边界层分离识别的妙用：</p>
+<p><img src= "/img/loading.gif" data-src="https://shaddenlab.berkeley.edu/uploads/LCS-tutorial/dg_3traj.png" alt="PIC"></p>
+<p>上图是一个实实在在的Plane Coututte的流体力学系统，在初始状态放置三个粒子A、B、C，在t时间后，观察到三个粒子的发展轨迹相互迥异。我们可以通过<em>sensitivity</em>来衡量这一不同的初始状态。</p>
+<script type="math/tex; mode=display">
+|\delta x(t)|\approx e^{\lambda t}|\delta x(0)|</script><p>其中，$\lambda$ ,代表系统轨迹的平均分离率，so called Lyapunov exponent.  For any finite accuracy $\delta x=|\delta x(0)|$ of the initial data, the dynamics is predictable only up to a finite Lyapunov time</p>
+<script type="math/tex; mode=display">
+T_{Lyap}\approx -{1\over \lambda}ln|\delta x/L|</script><ol>
+<li>globally mixing (positive entropy)</li>
+</ol>
+<p>在热力学中，混合熵是当几个初始分离的不同组分（总状态处于内部的热力学平衡），除去他们之间的化学反应，总熵增加，最后建立内部平衡的新的热力学状态的时间。</p>
+<h2 id="flows-and-maps"><a href="#flows-and-maps" class="headerlink" title="flows and maps"></a>flows and maps</h2><ul>
+<li><p>A flow: the evolution rule $f^t$ can be used to map a region $M_i$ of the state space into the region $f^t(M_i)$.</p>
+<p><strong>闲话1</strong>：Manifolds 在微分几何的课程中有非常精彩的介绍。<a target="_blank" rel="noopener" href="https://sagemanifolds.obspm.fr/index.html">sagemath软件</a>也有集成关于流行symbolic运算的功能，感兴趣可以了解。</p>
+<p><strong>闲话2</strong>： <a target="_blank" rel="noopener" href="https://www.shadertoy.com/view/tslSDX">The ring of fire</a> - 这个着色器渲染出的，加的是随机噪声, 非物理。</p>
+</li>
+</ul>
+<p>  让我们来举一个例子：厨房的燃气灶的火焰，是在1855年有哥廷根化学天才Robert Bunsen发明的。它的火焰前部不稳定性可能是非线性系统最熟悉的例子之一，表现出“湍流”（时空混沌特性）。</p>
+<p>  <img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/firering.png" alt="Poincaré Map - an overview | ScienceDirect Topics"></p>
+<p>  这样一个例子可以用简单的Kuramoto-Sivashinsky system来近似(也许会包含一些系数)：<sup><a href="#fn_1" id="reffn_1">1</a></sup></p>
+<script type="math/tex; mode=display">
+  {\partial u \over \partial t} + {1\over 2} {\partial u^2 \over \partial x} + {\partial ^2 u \over \partial x^2} + {\partial^4 u\over \partial x^4}</script><p>  利用空间傅里叶变换：</p>
+<script type="math/tex; mode=display">
+  C_n (t)= {1\over L} \int_0^L  u(x,t) e^{-inKx}dx\\\\
+  u(x,t) = \sum_{n\in Z} C_n (t) e^{inKx}</script><p>  其中，</p>
+<script type="math/tex; mode=display">
+  K = 2\pi /L, C_{-n} (t)= C_n (t)^*</script><p>  带入上面的主式：</p>
+<script type="math/tex; mode=display">
+  \sum_{n\in Z}e^{inKx}[{dC_b(t)\over dt}+ C_n(t)\sum_{l\in Z}C_l(t) i l K e^{ilKx}- n^2 K^2 C_n(t) + n^4 K^4 C_n (t)]=0</script><p>  通过Erik Teichmann<sup><a href="#fn_2" id="reffn_2">2</a></sup>的公式（7）-（10）的推导，构造出与论文<sup><a href="#fn_1" id="reffn_1">1</a></sup>一样的形式:</p>
+<script type="math/tex; mode=display">
+  {dC_b(t)\over dt}+ \sum_{m\in Z}imKC_m(t)C_{n-m}(t)- n^2 K^2 C_n(t) + n^4 K^4 C_n (t)=0</script><p>  要解这个非线性的公式貌似还没有这么简单，得用到所谓的ETD（exponential time differencing）算法<sup><a href="#fn_2" id="reffn_2">2</a></sup>, 这个算法解决某一类问题:</p>
+<script type="math/tex; mode=display">
+  {dc\over dt} = aC + F(C,t)</script><p>  其中，a 是常数，F(C,t) 是非线性项。</p>
+<p>  具体的操作是，首先要对时间进行从$t_n -&gt; t_n +h$积分，积分前要乘一个因子$e^{-ct}$:</p>
+<script type="math/tex; mode=display">
+  C(t_{n+1})=C(t_n)e^{ah}+e^{ah}\int_0^h e^{-a\tau} F(C(t_n+\tau),t_n+\tau)d\tau</script><p>  ETD方法的思想就是利用数值近似求解该方程。</p>
+<ul>
+<li><p><strong>ETD1</strong>：一阶精度， 认为F恒定：local truncation error= $h^2 F_t /2$</p>
+<script type="math/tex; mode=display">
+C_{n+1}= C_n e^{ah}+ F_n (e^{ah}-1)/a</script></li>
+<li><p><strong>ETD2</strong>：二阶精度，$F= F<em>n + \tau (F_n -F</em>{n-1})/h + O(h^2)$, local truncation error= $5 h^3 F_{tt}/12$</p>
+<script type="math/tex; mode=display">
+\tilde{C}_n = C_n e^{ah} + F_n {e^{ah}-1 \over a}\\\\
+C_{n+1}= \tilde{C}_n + {(F(\tilde{C}_n, t_n+h)-F_n)(e^{ah}-1-ah)\over a^2h}</script></li>
+<li><p>再高阶的任意精度，见参考文献<sup><a href="#fn_2" id="reffn_2">2</a></sup></p>
+</li>
+</ul>
+<pre><code>### 具体K-S代码如下：
+</code></pre>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#fork from https://github.com/boundter/kuramoto-sivashinsky</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kur_Siv</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, h, L, N, u0</span>):</span></span><br><span class="line">        self.C = np.fft.rfft(u0)</span><br><span class="line">        self.N = N</span><br><span class="line">        <span class="keyword">if</span> self.N &gt; self.C.size + <span class="number">1</span>:</span><br><span class="line">            print(<span class="string">&quot;Too few fourier-modes for the Galerkin-Approximation&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N+<span class="number">1</span>, self.C.size):</span><br><span class="line">            self.C[i] = <span class="number">0</span></span><br><span class="line">        self.h = h</span><br><span class="line">        self.K = <span class="number">2</span>*np.pi/L</span><br><span class="line">        self.a = np.zeros(self.N)</span><br><span class="line">        self.eah = np.zeros(self.N)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, self.N + <span class="number">1</span>):</span><br><span class="line">            self.a[i - <span class="number">1</span>] = i**<span class="number">2</span>*self.K**<span class="number">2</span> - i**<span class="number">4</span>*self.K**<span class="number">4</span></span><br><span class="line">            self.eah[i - <span class="number">1</span>] = np.exp(self.a[i - <span class="number">1</span>]*h)</span><br><span class="line">        self.modes = np.where(np.<span class="built_in">abs</span>(self.a) &gt; <span class="number">1e-12</span>)[<span class="number">0</span>]</span><br><span class="line">        self.a = self.a[self.modes]</span><br><span class="line">        self.eah = self.eah[self.modes]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_u</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> np.fft.irfft(self.C)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">calc_F</span>(<span class="params">self, C</span>):</span> <span class="comment">#非线性项计算</span></span><br><span class="line">        F = np.zeros(C.size - <span class="number">1</span>, dtype=np.complex128)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, self.N + <span class="number">1</span>):</span><br><span class="line">            su = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(-self.N + i, self.N + <span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> (i - j) &lt; <span class="number">0</span>:</span><br><span class="line">                    C_off = np.conjugate(C[j - i])</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    C_off = C[i - j]</span><br><span class="line">                <span class="keyword">if</span> j &lt; <span class="number">0</span>:</span><br><span class="line">                    C_norm = np.conjugate(C[-j])</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    C_norm = C[j]</span><br><span class="line">                su += <span class="number">1j</span>*j*self.K*C_norm*C_off</span><br><span class="line">            F[i - <span class="number">1</span>] = su</span><br><span class="line">        <span class="keyword">return</span> F</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">integrate</span>(<span class="params">self</span>):</span></span><br><span class="line">        C_before = np.copy(self.C[self.modes + <span class="number">1</span>])</span><br><span class="line">        F = self.calc_F(self.C[:self.N + <span class="number">1</span>])[self.modes]</span><br><span class="line">        C_mid = np.copy(self.C[:self.N + <span class="number">1</span>])</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    L = <span class="number">2</span>*np.pi</span><br><span class="line">    N = <span class="number">3</span>*<span class="built_in">int</span>(L/(<span class="number">2</span>*np.pi))</span><br><span class="line">    n = <span class="number">41</span></span><br><span class="line">    x = np.linspace(<span class="number">0.</span>, L, <span class="number">200</span>)</span><br><span class="line">    y = np.cos(<span class="number">3</span>*np.sin(x))</span><br><span class="line">    kur = Kur_Siv(<span class="number">0.01</span>, <span class="number">8</span>*np.pi, N, y)</span><br><span class="line">    u = kur.get_u()</span><br><span class="line">    result = [u]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, n):</span><br><span class="line">        kur.integrate()</span><br><span class="line">        result.append(kur.get_u())</span><br><span class="line">    plt.imshow(result, cmap=<span class="string">&#x27;hot&#x27;</span>, interpolation=<span class="string">&#x27;nearest&#x27;</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>结果展示：为40个周向模态的幅值随时间分布的演化图</p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/output_0_0.png" alt="Poincaré Map - an overview | ScienceDirect Topics" style="zoom:150%;" /></p>
+<p>除了最基本的主干部分，还一个添加一个velocity-field 计算函数：其功能是将所有周向模态叠加，转化回物理域。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; <span class="title">KuramotoSivashinsky::GetU</span><span class="params">(Vector&lt;<span class="keyword">double</span>&gt;* x)</span></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; u;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (*x).size(); ++i)&#123;</span><br><span class="line">        u.push_back(c[<span class="number">0</span>].real());</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; C.size(); ++j)&#123;</span><br><span class="line">            u[i] += <span class="number">2</span>*C[j].real()*<span class="built_in">cos</span>(j*K*(*x)[i]) - <span class="number">2</span>*C[j].imag()*<span class="built_in">sin</span>(j*K*(*x)[i]); <span class="comment">//乘2可能是模态正负对称，但只算了正模态</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还可以添加particles进行观察：</p>
+<script type="math/tex; mode=display">
+{dX\over dt}= u(X,t)</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">    kuramoto.Integrate();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; u = kuramoto.Getu(&amp;x);</span><br><span class="line">    <span class="keyword">double</span> t = kuramoto.Gett();</span><br><span class="line">    <span class="built_in">fprintf</span>(datafile, <span class="string">&quot;%.4f &quot;</span>, t);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; number_particles; ++j) &#123;</span><br><span class="line">      x[j] += u[j]*h;</span><br><span class="line">      <span class="keyword">if</span> (x[j] &lt; <span class="number">0</span>) x[j] += L;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(x[j] &gt; L) x[j] -= L;</span><br><span class="line">      <span class="built_in">fprintf</span>(datafile, <span class="string">&quot; %.6f&quot;</span>, x[j]);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Nonlinear-Dynamics-Stability-and-bifurcation-YouTube"><a href="#Nonlinear-Dynamics-Stability-and-bifurcation-YouTube" class="headerlink" title="Nonlinear Dynamics: Stability and bifurcation YouTube"></a><a target="_blank" rel="noopener" href="https://computationalthinking.mit.edu/Fall20/lecture20/#nonlinear_dynamics_stability_and_bifurcation">Nonlinear Dynamics: Stability and bifurcation</a> <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=D3jpfeQCISU&amp;feature=emb_logo">YouTube</a></h2><p>参考<a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=F5iev6cAAAAJ&amp;hl=zh-CN">David P. Sanders</a>，对分叉(一维)讲的特别到位。</p>
+<p>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1seEDWIW9TVnXnckRYKbgTA">https://pan.baidu.com/s/1seEDWIW9TVnXnckRYKbgTA</a>  密码: jp8d</p>
+<p>类似讲座 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=7mo1H_8nobM">https://www.youtube.com/watch?v=7mo1H_8nobM</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=KmOzUkILGAQ&amp;list=PLmU0FIlJY-Mle_2Q0mjVMuQh9aZHDzNoP">https://www.youtube.com/watch?v=KmOzUkILGAQ&amp;list=PLmU0FIlJY-Mle_2Q0mjVMuQh9aZHDzNoP</a></p>
+<iframe src="./nonlinear_dynamics_bifurcations.pdf" width="100%" height="600"></iframe>
+
+
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=GhBARuHEydM">循环的工作原理1：离散动力系统理论简介（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/AXHLyHfyEuA">循环的工作原理2：计算有效的离散动力学（讲座）</a></li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="basic-flow-dynamical-model"><a href="#basic-flow-dynamical-model" class="headerlink" title="basic flow dynamical model"></a><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=GJFJXhgM0S4&amp;list=PLP8iPy9hna6Q2Kr16aWPOKE0dz9OnsnIJ&amp;index=4">basic flow dynamical model</a></h2><ul>
+<li>Heat equation</li>
+</ul>
+<script type="math/tex; mode=display">
+{\partial T\over \partial t} = -u {\partial T \over \partial x} -v {\partial T\over \partial y} +\kappa ({\partial^2 T\over \partial x^2} +{\partial^2T\over \partial Y^2}) + F</script><ul>
+<li><p>Non-linear effects (Burger’s equation) <a target="_blank" rel="noopener" href="https://www.mdpi.com/2311-5521/4/3/159/htm">参考</a></p>
+<script type="math/tex; mode=display">
+{\partial u \over \partial t} = -u {\partial u\over \partial x} +\nu {\partial^2 u \over \partial x^2}</script><p>Using the product rule, we can rewrite this as</p>
+<script type="math/tex; mode=display">
+{\partial u \over \partial t} =-{1\over 2}{\partial (u^2)\over \partial x} + \nu {\partial^2 u \over \partial x^2}</script></li>
+<li><p>另外一些简单的模型，基本差分格式，julia算法参考<sup><a href="#fn_3" id="reffn_3">3</a></sup></p>
+</li>
+<li><p>N-S 不可压方程</p>
+<script type="math/tex; mode=display">
+{\partial u \over \partial t}+ u\cdot \nabla u = - {1\over \rho }\nabla p  + \nu \nabla^2 u\\\\
+\nabla \cdot u = 0</script><p>涡量：</p>
+<script type="math/tex; mode=display">
+w = \nabla \times u</script><p>setp1 : we can derivate the vorticity equation:</p>
+<script type="math/tex; mode=display">
+\nabla \times {\partial u \over \partial t} + \nabla \times (u \cdot \nabla u) = - \nabla \times({1\over \rho}\nabla p) + \nabla \times \nu \nabla^2 w</script><script type="math/tex; mode=display">
+\nabla \times \nabla({p\over \rho}) =0</script><script type="math/tex; mode=display">
+u  \cdot \nabla u = {1\over 2} \nabla(u\cdot u) - u\times(\nabla\times u) = \nabla({u^2\over 2} ) - u\times w</script><p>那么，上面的第二项可以化为：</p>
+<script type="math/tex; mode=display">
+\nabla \times (u \cdot \nabla u) = \nabla \times \nabla ({u^2\over 2})- \nabla \times u \times w = \nabla \times (w \times u)\\\\
+=(u \cdot \nabla)w - (w\cdot \nabla)u + w(\nabla\cdot u) + u(\nabla \cdot w)</script><p>上述的第二项为vortex stretching term，在二维中为0:</p>
+<script type="math/tex; mode=display">
+(w \cdot \nabla)u = (w_x {\partial \over \partial x}+w_y{\partial \over \partial y}+w_z{\partial \over \partial z}) u =0, w_x=0, w_y = 0, w_z = w</script><p>第一项叫做advection terms，也叫nonlinear Jacobian, 用streamfunction来代替：</p>
+<script type="math/tex; mode=display">
+(u\cdot \nabla)w = u{\partial w \over \partial x}+v {\partial w \over \partial y} = {\partial \psi \over \partial y}{\partial w\over \partial x} - {\partial \psi \over \partial x}{\partial w\over \partial y}</script><p>setp2: The vorticity equation for two-dimensional incompressible flow becomes:</p>
+<script type="math/tex; mode=display">
+{\partial w \over \partial t} + {\partial \psi \over \partial y}{\partial w\over \partial x} - {\partial \psi \over \partial x}{\partial w\over \partial y} = \nu ({\partial^2 w\over \partial x^2  }+{\partial^2 w\over \partial^2 y})</script><p>Step3: the kinematic relationship between streamfunction and  vorticity is given by Possion equation:</p>
+<script type="math/tex; mode=display">
+{\partial^2 \psi \over \partial^2 x} + {\partial^2 \psi \over \partial^2 y} = -w</script></li>
+</ul>
+<p>The vorticity-streamfunction formulation has several advantages over solving N-S equation. It eliminates the pressure term from the momentum equation and hence, there is no odd-even coupling between the pressure and velocity. </p>
+<h3 id="Two-step-time-stepping-alogorithm"><a href="#Two-step-time-stepping-alogorithm" class="headerlink" title="Two-step time-stepping alogorithm"></a>Two-step time-stepping alogorithm</h3><ul>
+<li>Start from an inition condition w at t=0</li>
+<li>Invert the Possion equation to determine $\psi^n$</li>
+<li>Timestep the vorticity equation forward to determine $\psi^{t+1}$ from $w^t$ and $\psi^t$</li>
+<li>Go back to step 3 and repeat to find $w^{t+2}$ from $w^{n+1}$ and $\psi^{n+1}$</li>
+</ul>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">## 1.1 Setting up the discret grid and parameters</span></span><br><span class="line"><span class="keyword">struct</span> Grid</span><br><span class="line">    N::<span class="built_in">Int64</span></span><br><span class="line">    L::<span class="built_in">Float64</span></span><br><span class="line"></span><br><span class="line">    ∇x::<span class="built_in">Float64</span></span><br><span class="line">    ∇y::<span class="built_in">Float64</span></span><br><span class="line"></span><br><span class="line">    x::<span class="built_in">Array</span>&#123;<span class="built_in">Float64</span>, <span class="number">2</span>&#125;</span><br><span class="line">    y::<span class="built_in">Array</span>&#123;<span class="built_in">Float64</span>, <span class="number">2</span>&#125;</span><br><span class="line"></span><br><span class="line">    Nx::<span class="built_in">Int64</span></span><br><span class="line">    Ny::<span class="built_in">Int64</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> Grid(N, L)</span><br><span class="line">        Δx = L/N <span class="comment">#[m]</span></span><br><span class="line">        Δy = L/N <span class="comment">#[m]</span></span><br><span class="line"></span><br><span class="line">        x = <span class="number">0.</span> -Δx/<span class="number">2.</span>:Δx:L + Δx/<span class="number">2.</span></span><br><span class="line">        x = reshape(x, (<span class="number">1</span>,size(x,<span class="number">1</span>)))</span><br><span class="line">        y = -L -Δy/<span class="number">2.</span>:Δy:L + Δy/<span class="number">2.</span></span><br><span class="line">        y = reshape(y, (size(y,<span class="number">1</span>), <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">        Nx, Ny = size(x, <span class="number">2</span>), size(y, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> new(N, L, Δx, Δy, x, y, Nx, Ny)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## set grid parameters</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    N = <span class="number">30</span></span><br><span class="line">    G = Grid(N, <span class="number">1.</span>)</span><br><span class="line"></span><br><span class="line">    Δx = G.∇x</span><br><span class="line">    Δt = <span class="number">0.01</span></span><br><span class="line"></span><br><span class="line">    δM = <span class="number">0.05</span></span><br><span class="line">    Re = <span class="number">40</span></span><br><span class="line">    δI = δM*Re^(<span class="number">1</span>/<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">## inverting the Poisson equation for ψ</span></span><br><span class="line"><span class="comment">#  below， we use Jacobi iteration (introduced by Prof. Edelman and John Urschel earlier</span></span><br><span class="line"><span class="comment">#  in the class) to invert:</span></span><br><span class="line"><span class="comment">#  ξ = &#123;∂^2 ψ \over ∂ x^2&#125; + &#123;∂^2 ψ \over ∂ y^2&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">function</span> jacobi_step(ψ::<span class="built_in">AbstractMatrix</span>, ξ::<span class="built_in">AbstractMatrix</span>, G::Grid)</span><br><span class="line">        ψnew = zeros(size(ψ))</span><br><span class="line">        ψnew[<span class="number">2</span>:<span class="keyword">end</span>-<span class="number">1</span>, <span class="number">2</span>:<span class="keyword">end</span>-<span class="number">1</span>] =[</span><br><span class="line">            ((ψ[j+<span class="number">1</span>, i] + ψ[j-<span class="number">1</span>, i] + ψ[j, i-<span class="number">1</span>] + ψ[j, i+<span class="number">1</span>])/<span class="number">4</span></span><br><span class="line">              - ξ[j, i]*(G.∇x^<span class="number">2</span>)/<span class="number">4</span>)</span><br><span class="line">              <span class="keyword">for</span> j=<span class="number">2</span>:size(ψ,<span class="number">1</span>)-<span class="number">1</span>, i=<span class="number">2</span>:size(ψ,<span class="number">2</span>)-<span class="number">1</span></span><br><span class="line">        ]</span><br><span class="line">        <span class="keyword">return</span> ψnew</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> poisson_solve!(ψ, ξ, G; ϵ=<span class="number">1e-6</span>, num_steps=<span class="number">500</span>, return_results=<span class="literal">false</span>)</span><br><span class="line">        <span class="keyword">if</span> return_results</span><br><span class="line">            returns = []</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:num_steps</span><br><span class="line">            ψtmp = jacobi_step(ψ, ξ, G)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> return_results</span><br><span class="line">                push!(returns, deepcopy(ψtmp))</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> maximum(abs.(ψtmp - ψ)) &lt; ϵ</span><br><span class="line">                ψ[:,:] = ψtmp</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            ψ[:,:] = ψtmp</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> return_results</span><br><span class="line">            <span class="keyword">return</span> returns</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">## Example: the Rankine vortex</span></span><br><span class="line"><span class="comment"># Throughout, we will use the Rankine vortex field to illustate the relationship</span></span><br><span class="line"><span class="comment"># between vorticity ξ, the streamfunction ψ, and the velocity (u,v)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    ξ<span class="number">0</span> = zeros( G.Ny ,G.Nx)</span><br><span class="line">    x0, y0 = <span class="number">0.5</span>, <span class="number">0.0</span></span><br><span class="line">    idx = ((G.x .- x0).^<span class="number">2</span> .+ (G.y .- y0).^<span class="number">2</span>).^<span class="number">0.5</span> .&lt;<span class="number">0.25</span></span><br><span class="line">    ξ<span class="number">0</span>[idx] .= <span class="number">1</span></span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">## Let&#x27;s test our Jacobi solver by inverting for ξ for ψ and then re-diagnosing </span></span><br><span class="line"><span class="comment">#  ξ to see if we retrieve our input.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    ψ<span class="number">0</span> = zeros(size(ξ<span class="number">0</span>)) <span class="comment"># initial guess is just zeros</span></span><br><span class="line">    <span class="meta">@elapsed</span> results = poisson_solve!(ψ<span class="number">0</span>, ξ<span class="number">0</span> , G, ϵ=<span class="number">1e-8</span>, num_steps=<span class="number">1000</span>, return_results=<span class="literal">true</span>)</span><br><span class="line">    ξ<span class="number">0</span>verify = diagnoseξ(ψ<span class="number">0</span>, G)</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote id="fn_1">
+<sup>1</sup>. G. Sivashinsky, “Nonlinear analysis of hydrodynamic instability in laminar flames I. Derivation of basic equations” Acta Astron. , 4 (1977) pp. 1177–1206<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. Exponential Time Differencing for Stiff Systems, JCP-2002, S.M. Cox &amp; P.C. Matthews<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>. CFD Julia: A Learning Module Structuring an Introductory Course on Computational Fluid Dynamics     <a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_4">
+<sup>4</sup>. <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=kSbCYaB2KhQ&amp;list=PLP8iPy9hna6Q2Kr16aWPOKE0dz9OnsnIJ&amp;index=5">Fluid dynamics with Oceananigans.jl | Week 13 | MIT 18.S191 Fall 2020 | Ali Ramadhan</a><a href="#reffn_4" title="Jump back to footnote [4] in the text."> &#8617;</a>
+</blockquote>
+<h2 id="草稿"><a href="#草稿" class="headerlink" title="草稿"></a>草稿</h2><p><img src= "/img/loading.gif" data-src="https://ars.els-cdn.com/content/image/3-s2.0-B9780128037669000063-gr003.jpg" alt="Poincaré Map - an overview | ScienceDirect Topics"></p>
+<p>Waleffe (1995, 1997) further developed these ideas into a ‘self- sustaining process theory’ that explains the quasi-cyclic roll-streak behavior in terms of the forced response of streaks to rolls, growth of streak instabilities, and nonlinear feedback from streak instabilities to rolls.</p>
+<p>The preponderance of recurrent, coherent states in wall-bounded shear flows suggests<br>that their long-time dynamics lie on low-dimensional state-space attractors.</p>
+<p>They improve on the POD models by capturing the linear stability of the<br>laminar flow and saddle-node bifurcations of non-trivial 3D equilibria consisting of rolls,<br>streaks, and streak undulations.</p>
+<p>The work of Skufca et al. (2006), based on a Schmiegel<br>(1999) 9-variable model, offers an elegant dynamical systems picture, with the stable<br>manifold of a periodic orbit defining the basin boundary that separates the turbulent<br>and laminar attractors at Re &lt; 402 and the stable set of a higher-dimensional chaotic<br>object defining the boundary at higher Re.</p>
+<h2 id="invariant-manifolds"><a href="#invariant-manifolds" class="headerlink" title="invariant manifolds"></a>invariant manifolds</h2><p>We compute a new equilibrium solution of plane Couette flow and the leading eigenvalues and eigenfunctions of known equilibria at this Re and c</p>
+<p>the calculation of exact invariant solutions of the fully-resolved Navier-Stokes<br>equations.</p>
+<p>(a) that coherent structures are the physical images of the flow’s least unstable<br>invariant solutions, (b) that turbulent dynamics consists of a series of transitions between<br>these states, and (c) that intrinsic low-dimensionality in turbulence results from the low<br>number of unstable modes for each state (Waleffe (2002)).</p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jiaqi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://deal-ii.com/post/845ed395/">http://deal-ii.com/post/845ed395/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://deal-ii.com" target="_blank">DEAL-II-Fluid</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/DNS/">DNS</a><a class="post-meta__tags" href="/tags/chao-s-theory/">chao's theory</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/12/22/d7YjSwNqreOA91K.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/f2bbe0e7/"><img class="prev-cover" data-src="https://i.loli.net/2020/12/13/KPc9zZ4hNn3CMta.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">machine learning for chaos system-基础知识</div></div></a></div><div class="next-post pull-right"><a href="/post/6f1f143a/"><img class="next-cover" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/cover-blog-shader.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Linux和Unix使用技巧总结</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/post/d03a598f/" title="machine learning for chaos system-测试篇"><img class="relatedPosts_cover" data-src="https://i.loli.net/2020/12/13/CRJOLzqKD6FlQWx.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-11</div><div class="relatedPosts_title">machine learning for chaos system-测试篇</div></div></a></div><div class="relatedPosts_item"><a href="/post/47358f5f/" title="machine learning for chaos system-应用"><img class="relatedPosts_cover" data-src="https://npg.copernicus.org/articles/27/373/2020/npg-27-373-2020-avatar-web.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-11</div><div class="relatedPosts_title">machine learning for chaos system-应用</div></div></a></div><div class="relatedPosts_item"><a href="/post/f2bbe0e7/" title="machine learning for chaos system-基础知识"><img class="relatedPosts_cover" data-src="https://i.loli.net/2020/12/13/KPc9zZ4hNn3CMta.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-11</div><div class="relatedPosts_title">machine learning for chaos system-基础知识</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div class="comments-items-1" data-name="Valine"><div class="vcomment" id="vcomment"></div><script>function loadvaline () {  
+  var requestSetting = function (from,set) {
+    var from = from
+    var setting = set.split(',').filter(function(item){
+    return from.indexOf(item) > -1
+    });
+    setting = setting.length == 0 ? from :setting;
+    return setting
+  }
+
+  var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+  var requiredFields = requestSetting(['nick','mail'],'nick,mail')
+
+  function initValine () {
+    window.valine = new Valine({
+      el:'#vcomment',
+      appId: 'lJ3vEzEWaeVa6HpWNNbPrauw-gzGzoHsz',
+      appKey: '16FI6zgDXwvw71g04yhHnnW0',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: guestInfo,
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      requiredFields: requiredFields
+    });
+  }
+  loadScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || false) {
+  window.addEventListener('load', loadvaline)
+}
+else {
+  function loadOtherComment () {
+    loadvaline()
+  }
+}</script></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Jiaqi</div><div class="framework-info"><span>驱动 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></head></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/calendar.js"></script><script src="/js/languages.js"></script><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/gitcalendar/js/gitcalendar.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":120,"height":260},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

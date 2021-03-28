@@ -1,0 +1,399 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LBM开篇 | DEAL-II-Fluid</title><meta name="description" content="LBM流体计算LBM的发展20世纪50年代初，现代计算机之父冯$ \cdot $ 诺依曼(vonNeuman)为模拟生物发育中细胞的自我复制提出了元胞自动机的雏形。随后1970年，剑桥大学的J.H.Conway设计了一种计算机游戏—$&#96;&#96;$生命的游戏$”$ 。它是具有产生动态图案和动态结构能力的元胞自动机模型，吸引了众多科学家的兴趣，推动了元胞自动机研究的迅速发展。之后，S.Wolfram对初等元"><meta name="keywords" content="LBM，总结"><meta name="author" content="Jiaqi"><meta name="copyright" content="Jiaqi"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://deal-ii.com/post/18c29c0b/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta property="og:type" content="article"><meta property="og:title" content="LBM开篇"><meta property="og:url" content="http://deal-ii.com/post/18c29c0b/"><meta property="og:site_name" content="DEAL-II-Fluid"><meta property="og:description" content="LBM流体计算LBM的发展20世纪50年代初，现代计算机之父冯$ \cdot $ 诺依曼(vonNeuman)为模拟生物发育中细胞的自我复制提出了元胞自动机的雏形。随后1970年，剑桥大学的J.H.Conway设计了一种计算机游戏—$&#96;&#96;$生命的游戏$”$ 。它是具有产生动态图案和动态结构能力的元胞自动机模型，吸引了众多科学家的兴趣，推动了元胞自动机研究的迅速发展。之后，S.Wolfram对初等元"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/cover-LBM.webp"><meta property="article:published_time" content="2020-11-26T11:58:34.000Z"><meta property="article:modified_time" content="2021-01-29T07:25:51.498Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="prev" title="deal-ii-learning" href="http://deal-ii.com/post/ac853f89/"><link rel="next" title="谱方法-未完。。。" href="http://deal-ii.com/post/44c06f35/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: true,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-01-29 15:25:51'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@master/Hexo/css/flink.min.css"><link rel="stylesheet" href="/gitcalendar/css/gitcalendar.css"/><meta name="generator" content="Hexo 5.3.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/me.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">23</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">31</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#LBM%E6%B5%81%E4%BD%93%E8%AE%A1%E7%AE%97"><span class="toc-number">1.</span> <span class="toc-text">LBM流体计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LBM%E7%9A%84%E5%8F%91%E5%B1%95"><span class="toc-number">1.1.</span> <span class="toc-text">LBM的发展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LBM%E7%9A%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.</span> <span class="toc-text">LBM的理论基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8F%E8%A7%82%E4%B8%8E%E4%BB%8B%E8%A7%82"><span class="toc-number">1.2.1.</span> <span class="toc-text">宏观与介观</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bolzmann%E6%96%B9%E7%A8%8B"><span class="toc-number">1.2.2.</span> <span class="toc-text">Bolzmann方程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Maxwell-Boltzmann-%E5%B9%B3%E8%A1%A1%E6%80%81"><span class="toc-number">1.2.3.</span> <span class="toc-text">Maxwell-Boltzmann 平衡态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BGK-model%EF%BC%88%E5%8D%95%E5%BC%9B%E8%B1%AB%E6%97%B6%E9%97%B4%EF%BC%88SRT%EF%BC%89%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">BGK model（单弛豫时间（SRT））</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%BC%9B%E8%B1%AB%E6%97%B6%E9%97%B4MRT%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.4.</span> <span class="toc-text">多弛豫时间MRT模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cascade-LBM"><span class="toc-number">1.5.</span> <span class="toc-text">Cascade LBM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E9%AA%8C%E8%AF%81-%E6%96%B9%E8%85%94%E6%B5%81%E5%8A%A8"><span class="toc-number">1.6.</span> <span class="toc-text">算法验证-方腔流动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA-LBM-%E7%AE%97%E6%B3%95-%E5%8F%AF%E8%A7%86%E5%8C%96-%E4%BA%92%E5%8A%A8"><span class="toc-number">1.7.</span> <span class="toc-text">代码演示-LBM 算法 可视化 互动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%87%E6%B3%A8"><span class="toc-number">2.</span> <span class="toc-text">备注</span></a></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/cover-LBM.webp)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">DEAL-II-Fluid</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">LBM开篇</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-11-26 19:58:34"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-11-26</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-01-29 15:25:51"><i class="fas fa-history fa-fw"></i> 更新于 2021-01-29</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E7%A7%91%E7%A0%94/">科研</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="LBM流体计算"><a href="#LBM流体计算" class="headerlink" title="LBM流体计算"></a>LBM流体计算</h2><h3 id="LBM的发展"><a href="#LBM的发展" class="headerlink" title="LBM的发展"></a>LBM的发展</h3><p>20世纪50年代初，现代计算机之父冯$ \cdot $ 诺依曼(vonNeuman)为模拟生物发育中细胞的自我复制提出了元胞自动机的雏形。随后1970年，剑桥大学的J.H.Conway设计了一种计算机游戏—$``$生命的游戏$”$ 。它是具有产生动态图案和动态结构能力的元胞自动机模型，吸引了众多科学家的兴趣，推动了元胞自动机研究的迅速发展。之后，S.Wolfram对初等元胞自动机的256种规则产生的所有模型进行了详细而深入的研究。他还用熵来描述其演化行为，把元胞自动机分为：平稳型、周期型、混沌型、复杂型四类。近年来随着复杂性研究的进展，作为探索复杂系统的一种有效工具，元胞自动机获得了深入的研究和广泛的应用。</p>
+<p>1986年，法国科学计算中心Frisch，Hasslacher和Pomeau<sup><a href="#fn_1" id="reffn_1">1</a></sup>提供了第一个能够恢复Navier-Stokes方程的晶格气自动机。 他们表明，当碰撞规则保留质量和动量时，如果下面的晶格具有足够的对称性（至少在二维上是六边形的），则晶格气体自动机可以在宏观统计中推导得到Navier-Stokes方程。</p>
+<p>为了解决格子Boltzmann自动机的高统计噪声问题，McNamara和Zanetti<sup><a href="#fn_2" id="reffn_2">2</a></sup>于1988年首次提出了一个新模型：Lattice Boltzmann方程。 基本思想十分简单：用浮点变量（对应于分子的分布函数）替换细胞自动机的布尔变量（对应于单个布尔分子）。 随后1989年，Higuera等<sup><a href="#fn_3" id="reffn_3">3</a></sup>人使用线化形式的碰撞算子增加了高雷诺数条件下的流场稳定性。</p>
+<p>无论是在理论、应用还是性能上，LBM都取得了非常重大的进步和发展。相比传统的CFD方法直接离散并求解流体力学的宏观方程，而LB法则求解离散的动力学方程，并在宏观范围内再现流体力学方程。 主要包含流（stream）和碰撞（collision）两个步骤：流步骤是线性且精确的，所有非线性都在碰撞步骤中局部建模。 相反，NS方程中的对流项是非线性且非局部的。 压力场通过局部LB方法获得的，从而避免了像传统方法那样需要耗时的椭圆泊松方程求解的需要。流步骤的精确对流与改进的松弛算法（MRT）的碰撞步骤相结合，使其具有较低数值耗散的二阶精确方法。也可以调整碰撞步骤的动力学模型，以根据需要引入其他物理原理，并且可以调整其附加自由度以提高数值稳定性。同时，LBM更易于实现且高效并行，同时具有足够的通用性。近年来，GPU图形处理单元作为通用计算平台的兴起，也为LBM的并行化高速计算开辟了新的道路。</p>
+<p>在过去的25年中，无数科学爱好者提出了许多模型<sup><a href="#fn_4,5" id="reffn_4,5">4,5</a></sup>，以提高LBM的精度和数值稳定性，并成功应用于许多领域，例如多孔介质<sup><a href="#fn_6" id="reffn_6">6</a></sup>中的流，湍流<sup><a href="#fn_7" id="reffn_7">7</a></sup>，多相流<sup><a href="#fn_8" id="reffn_8">8</a></sup>，热驱动流<sup><a href="#fn_9" id="reffn_9">9</a></sup>，可压缩流<sup><a href="#fn_10" id="reffn_10">10</a></sup>，电子流动<sup><a href="#fn_11" id="reffn_11">11</a></sup>等等。 尽管起初很多人抱着怀疑的心态看待（并且至今仍在怀疑），但现在不可否认LBM已被科学界接受为模拟流体流动的可行方法。在商业领域， Ultrafluidx 、powerflow、Xflow、palabos等软件的不断兴起也证明了LBM的实用性。其数值稳定性，物理精度，对多个问题的适应性以及在多核体系结构上的数值效率使其成为下一代流体流动求解器的理想选择。</p>
+<h3 id="LBM的理论基础"><a href="#LBM的理论基础" class="headerlink" title="LBM的理论基础"></a>LBM的理论基础</h3><h4 id="宏观与介观"><a href="#宏观与介观" class="headerlink" title="宏观与介观"></a>宏观与介观</h4><p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/image37.webp" alt="尺度"><br><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/image38.webp" alt="尺度"></p>
+<ul>
+<li><p>微观尺度：分子尺度。 在此尺度下，粒子具有弹道轨迹（布朗运动），其平均微观速度由温度给出。这是分子动力学和光滑粒子流体动力学试图在某种程度上复制的尺度。</p>
+</li>
+<li><p>介观尺度：粒子平均统计量。通过动力学理论研究了粒子分布函数的演变。分布函数存在于相空间中，分布函数表示每单位体积的粒子数，该单位体积在周围的体积内具有速度、位置和时间。LBM正是采用这种观点。</p>
+</li>
+<li><p>宏观尺度：矢量场（例如流体速度）和标量场（例如压力或温度）变化的尺度。与微观和介观尺度相比，该尺度足够大，可以将流体视为连续体，因此在每个位置和每个时间可定义这些宏观量。例如，速度可以写成，压力写成。这些宏观量的行为可以通过Navier-Stokes方程准确地描述。</p>
+</li>
+</ul>
+<p>动力学理论是统计力学的一个分支，涉及非平衡过程的动力学及其对热力学平衡的松弛。该理论基于物质的分子假设，假设物质不是连续的，而是由大量（但有限）的称为分子的小物体组成。通过考虑组成分子的微观运动来解释气体的宏观特性，例如压力，温度，粘度，热导率等。气体演化的宏观定律可以通过动力学理论的分子描述来预测，并预测热力学的第二定律，这是自然界最基本的定律之一，它表明密闭系统的熵总是增加（熵增定律）。</p>
+<h4 id="Bolzmann方程"><a href="#Bolzmann方程" class="headerlink" title="Bolzmann方程"></a>Bolzmann方程</h4><p>玻尔兹曼方程是动力学理论的基石，它由奥地利物理学家路德维希$ \cdot $ 爱德华$ \cdot $ 玻尔兹曼（Ludwig Eduard Boltzmann，1844-1906年）提出。其最大的成就是在统计力学的发展中，解释并预测了原子的性质及其如何决定物质的宏观性质。</p>
+<p>该方程用微观动力学相互作用描述了分布函数 $f ( x, \xi ,t )  $ 的演化。尽管这个方程建立于一个多世纪以前，但直到2011年才获得了关于整体存在和经典解快速衰减到平衡的形式化数学证明<sup><a href="#fn_13" id="reffn_13">13</a></sup>。</p>
+<p>玻尔兹曼方程可写为：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\frac{ \partial f}{ \partial t}+ \xi ⋅\triangledown f+\frac{F}{ \rho }⋅\triangledown _{ \xi }f= \Omega  \left( f \right) 
+\end{equation}</script><p>​    </p>
+<p>其中， $ \triangledown _{ \xi }f $ 是分布函数在速度空间的梯度， $  \Omega  $ 为碰撞算子。</p>
+<p>碰撞算子可以根据实际物理条件，有不同的定义方式。但至少必须得满足三个守恒定理：</p>
+<ul>
+<li>质量守恒：$ \int  \Omega  \left( f \right) d \xi =0  $ </li>
+<li>动量守恒：$ \int  \xi  \Omega  \left( f \right) d \xi =0 $ </li>
+<li>能量守恒: $  \int  \vert  \xi  \vert ^{2} \Omega  \left( f \right) d \xi =0 \space or  \int  \vert  \xi  \vert ^{2} \Omega  \left( f \right) d \xi =0 $</li>
+</ul>
+<p>其中，因为 $  \vert v \vert ^{2}= \vert  \xi -u \vert = \vert  \xi  \vert ^{2}-2 \xi ⋅u+ \vert u \vert ^{2} $ 并结合质量和动量守恒，可推导得到两个能量形式等价。</p>
+<p>宏观参数通过对 $ f $ 求矩获得：</p>
+<script type="math/tex; mode=display">
+\Pi _{0}= \int fd \xi = \rho</script><script type="math/tex; mode=display">
+\Pi_{\alpha}=\int \xi _{ \alpha }  fd \xi = \rho u  _ {\alpha}</script><script type="math/tex; mode=display">
+\Pi _{ \alpha  \beta }= \int  \xi _{ \alpha } \xi _{ \beta }fd \xi</script><script type="math/tex; mode=display">
+\Pi _{ \alpha  \beta  \gamma }= \int  \xi _{ \alpha } \xi _{ \beta } \xi _{ \gamma }fd \xi</script><p>如果有需要，可以进一步求解高阶矩。</p>
+<h4 id="Maxwell-Boltzmann-平衡态"><a href="#Maxwell-Boltzmann-平衡态" class="headerlink" title="Maxwell-Boltzmann 平衡态"></a>Maxwell-Boltzmann 平衡态</h4><p>当两个粒子碰撞时，它们的速度会改变。新速度取决于碰撞前的位置和速度以及碰撞过程中的分子间作用力。 但是，我们可以假设碰撞倾向于使粒子的速度围绕其平均速度<strong>u</strong>在所有方向上的均匀分布。这意味着，如果我们采用具有任何初始分布的粒子气体并将其放置足够长的时间，它将最终达到一个平衡状态，在该状态下，额外速度<strong>v</strong>的所有方向都可能相等。</p>
+<p>速度的这种均匀分布意味着分布函数 $ f^{0} $仅取决于额外速度<strong>v</strong>在三维笛卡尔坐标系中,  $  \vert v \vert ^{2}= \vert v<em>{x}^{2}+v</em>{y}^{2}+v<em>{z}^{2} \vert  $，三个方向是为相等，并假设 $ f^{0} \left(  \vert v \vert  \right) =f</em>{x}^{0} \left( v<em>{x} \right) f</em>{y}^{0} \left( v<em>{y} \right) f</em>{z}^{0} \left( v_{z} \right)  $。</p>
+<p>对于恒定 $  \vert v \vert ^{2} $ 来说， $ f^{0} \left(  \vert v \vert  \right)  $ 也是相对恒定的，因此，</p>
+<script type="math/tex; mode=display">
+\begin{eqnarray}
+    \ln f_{x}^{0} \left( v_{x} \right) +lnf_{y}^{0} \left( v_{y} \right) +lnf_{z}^{0} \left( v_{z} \right) =const.\ \\
+\end{eqnarray}</script><p>假定方程可解，则有如下待定系数形式：</p>
+<script type="math/tex; mode=display">
+    \ln f_{x}^{0} \left( v_{x} \right) =a-bv_{x}^{2} \Rightarrow f_{x}^{0} \left( v_{x} \right) =e^{a}e^{-bv_{x}^{2}}\ \\</script><p>那么，平衡状态下的分布函数有以下形式：</p>
+<script type="math/tex; mode=display">
+\ln f_{x}^{0} \left( v \right) =e^{3a}e^{-b \left( v_{x}^{2}+v_{y}^{2}+v_{z}^{2} \right) }=e^{3a}e^{-bv_{x}^{2}}\ \\</script><p>参数a和b可以通过对 $ f^{0} $ 求0阶矩（密度）和二阶矩（能量）求得：</p>
+<script type="math/tex; mode=display">
+     \rho = \int f^{0} \left(  \vert v \vert  \right) d \xi \ \\
+          \rho e= \int _{-\infty}^{+\infty} \vert v \vert ^{2}f^{0} \left( v \right) d \xi \ \\</script><p>最终，得到满足条件的一种平衡分布函数形式：</p>
+<script type="math/tex; mode=display">
+f^{0} \left(  \rho ,u,T, \xi  \right) =f^{0} \left(  \vert v \vert  \right) =\frac{ \rho }{ \left( 2 \pi RT \right) ^{\frac{3}{2}}}e^{-\frac{ \vert  \xi -u \vert ^{2}}{2RT}}\ \\</script><p>该分布特性与温度有关，该平衡分布称为Maxwell-Boltzmann分布。它最初是由James Clerk Maxwell使用与我们在此处使用的推导相似的推导发现的，后来由Ludwig Boltzmann使用更严格的统计机制得到。</p>
+<h3 id="BGK-model（单弛豫时间（SRT））"><a href="#BGK-model（单弛豫时间（SRT））" class="headerlink" title="BGK model（单弛豫时间（SRT））"></a>BGK model（单弛豫时间（SRT））</h3><p>玻尔兹曼最初的碰撞算子是速度空间上复杂的双积分形式。对于粒子之间的分子间力的任何选择，它基本上考虑了所有可能的两个粒子碰撞的结果。该碰撞算子满足守恒条件，但是求解非常麻烦。后来提出了一些替代碰撞模型，其目的是要找到一种碰撞模型，该模型比Boltzmann的原始模型简单，但仍能提供大致正确的宏观行为。</p>
+<p>BGK碰撞算子模型是广为熟知的一种：</p>
+<script type="math/tex; mode=display">
+     \Omega  \left( f \right) =-\frac{1}{ \tau} \left( f-f^{0} \right) \ \\</script><p>其中， $  \tau $ 称为弛豫时间，表明气体向平衡算子松弛的速度有多快。这是由Bhatnagar，Gross和Krook[25]在1954年提出的，它是一种非常简单的粒子碰撞模型。</p>
+<p>BGK算子通过直接对松弛过程建模而不是尝试遵循碰撞的细节来捕获此行为。</p>
+<p>由于平衡分布 $ f^{0} $ 具有与分布函数 $ f $ 相同的密度，动量和能量矩，可以很容易地证明BGK算子满足质量，动量和能量守恒。</p>
+<p>这里通过二维D2Q9格子举例。离散速度分量 $ e_{ \alpha } $ 如图，具有如下形式：</p>
+<script type="math/tex; mode=display">
+f(n) =
+\begin{cases}
+\left( \text{0, 0} \right) ,  & \alpha =0 \\\\
+\left(  \pm 1,0 \right) , \left( 0, \pm 1 \right), &  \alpha =1, \ldots ,4 \\\\
+\left(  \pm 1, \pm 1 \right),  &  \alpha =5, \ldots ,8 
+\end{cases}</script><p>最终，其离散Boltzmann演化方程可以写成：</p>
+<script type="math/tex; mode=display">
+f_{ \alpha } \left( x+e_{ \alpha },t+1 \right) =f_{ \alpha } \left( x,t \right) -\frac{1}{ \tau} \left[ f_{ \alpha } \left( x,t \right) -f_{ \alpha }^{0} \left( x,t \right)  \right]</script><p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/image39.webp" alt="D2Q9离散格式示意"></p>
+<p>现在，让我们将Hermite级数展开应用于 $  \xi  $ -space中的平衡分布函数 $ f^{0} \left(  \rho ,u,T, \xi  \right)  $ ：</p>
+<script type="math/tex; mode=display">
+    f^{0} \left( x, \xi ,t \right)  \approx w \left(  \xi  \right)  \sum _{n=0}^{N}\frac{1}{n!}a^{n} \left( x,t \right) ⋅H^{n} \left(  \xi  \right)</script><p>根据Hermite函数的性质,前两个展开系数满足和守恒公式类似的形式。</p>
+<p>现在我们只截断前两阶，显式地写出的平衡分布函数多项式形式的近似解：</p>
+<script type="math/tex; mode=display">
+f_{ \alpha }^{0}=w_{ \alpha } \rho  \left( 1+\frac{e_{ \alpha }⋅u}{c_{s}^{2}}-\frac{u⋅u}{2c_{s}^{2}} \right)</script><p>其中， $ w<em>{ \alpha } $ 是不同粒子方向上的加权因子，对D2Q9格子来说， $ w</em>{0}=4/9 $ ， $ w<em>{ \alpha }=1/9 $ , $ ~ \alpha =1,2,3,4,  w</em>{ \alpha }=1/36 $ ， $  \alpha =5,6,7,8 $ 。 $ c<em>{s}^{2}=1/3 $ 。可以验证，通过获取 $ f</em>{ \alpha }^{0} $ 的零和一阶矩来更新流体动力场，即密度和速度，并通过状态方程从密度中获得压力场p：</p>
+<script type="math/tex; mode=display">
+\rho= \sum_{ \alpha } {f_\alpha} \\\\
+\rho u= \sum_{ \alpha } {f_\alpha } {e_\alpha } \\\\
+p=c_{s}^{2} \rho</script><p>该方法模型流体运动，其动力粘度方程可以通过弛豫时间 $  \tau $ 给出：</p>
+<script type="math/tex; mode=display">
+\nu =c_{s}^{2} \left(  \tau-\frac{1}{2} \right)</script><p>可能需要注意的是，当需要模拟粘度相对较低的流体时，这种单松弛的LBM方法易于出现数值不稳定性。当 $  \tau \rightarrow 1/2 $ ，没有其他自由度可以用来增强数值稳定性。后面提出的多松弛MRT模型和中心矩模型可以有效改善该问题。</p>
+<p>同时，也需要注意的是BGK碰撞算子只是气体中粒子碰撞结果的简化模型，不如玻尔兹曼最初的碰撞算子精确。 例如，使用BGK算子的Boltzmann方程预测Prandtl数Pr 为 1，而使用Boltzmann的Prandtl数Pr，我们得到的值Pr为2/3。Pr与粘度和导热系数碰撞算子的强度有关的无量纲数。</p>
+<h3 id="多弛豫时间MRT模型"><a href="#多弛豫时间MRT模型" class="headerlink" title="多弛豫时间MRT模型"></a>多弛豫时间MRT模型</h3><p>d’Humières<sup><a href="#fn_15" id="reffn_15">15</a></sup>在1992年引入了多重弛豫时间（MRT）晶格Boltzmann方程（有时称为广义LBE），以克服BGK模型的某些缺陷，并被证明是优越的。 在准确性和稳定性方面。 MRT的原理是在力矩空间而不是通常的分布函数空间中执行碰撞，这引入了新的弛豫时间（每个独立力矩一个），可以调整该弛豫时间以同时调整稳定性和准确性。</p>
+<p>MRT模型的碰撞方程可以表示为：</p>
+<script type="math/tex; mode=display">
+     \Omega _{MRT} \left( f \right) =M^{-1}⋅S⋅ \left( m-m^{0} \right)</script><p>其中 $ m $ 和 $ m^{0} $ 分别代表分布函数 $ f $ 的速度矩及其平衡矩。M是变换矩阵，该矩阵将分布函数 $ f $ 线性变换为速度矩 $ m $ ， $ m=Mf $ ， $ S $ 是对角松弛矩阵。</p>
+<p>这里，我们通过Gram-Schmidt正交化构造 $ m^{0} $ 速度矩向量的形式为：</p>
+<script type="math/tex; mode=display">
+    m^{0}= \left( m_{0},m_{1},m_{2},m_{3},m_{4},m_{5},m_{6},m_{7},m_{8} \right) ^{T}\\
+    = \left(  \rho , \rho u_{x}, \rho u_{y},e,p_{xx},p_{xy},q_{x},q_{y}, \epsilon  \right) ^{T}</script><p>这里，</p>
+<script type="math/tex; mode=display">
+e= \rho -3 \rho  \left( u_{x}^{2}+u_{y}^{2} \right) ,p_{xx}= \rho \ast \left( u_{x}^{2}-u_{y}^{2} \right) ,\\\\
+    p_{xy}= \rho u_{x}u_{y},q_{x}=3 \rho u_{x}^{3}- \rho u_{x},\\\\
+    q_{y}=3 \rho u_{y}^{3}- \rho u_{y},~  \epsilon =9 \rho u_{x}^{2}u_{y}^{2}-3 \rho  \left( u_{x}^{2}+u_{y}^{2} \right) + \rho</script><p>变换矩阵M:</p>
+<script type="math/tex; mode=display">
+M=   \begin{bmatrix}
+1  &  1  &  1  &  1  &  1  &  1  &  1  &  1  &  1\\\\
+0  &  1  &  0  &  -1  &  0  &  1  &  -1  &  -1  &  1\\\\
+0  &  0  &  1  &  0  &  -1  &  1  &  1  &  -1  &  -1\\\\
+-4  &  1  &  -1  &  -1  &  -1  &  2  &  2  &  2  &  2\\\\
+0  &  1  &  -1  &  1  &  -1  &  0  &  0  &  0  &  0\\\\
+0  &  0  &  0  &  0  &  0  &  1  &  -1  &  1  &  -1\\\\
+0  &  -2  &  0  &  2  &  0  &  1  &  -1  &  -1  &  1\\\\
+0  &  0  &  -2  &  0  &  2  &  1  &  1  &  -1  &  -1\\\\
+4  &  -2  &  -2  &  -2  &  -2  &  1  &  1  &  1  &  1 \\\\
+\end{bmatrix}</script><p>对角松弛矩阵S[]:</p>
+<script type="math/tex; mode=display">
+ S=diag \left( 0,1,1,s_{e},s_{ \nu },s_{ \nu },s_{q},s_{q},s_{ \epsilon } \right)</script><p>其中， $ s<em>{ \nu }=2/\ast \left( 6 \nu +1 \right) ,s</em>{q}=8\ast \left( 2-s<em>{ \nu } \right) / \left( 8-s</em>{ \nu } \right)  $ </p>
+<p>除非另有说明，我们将使用 $ s<em>{e}=s</em>{ \nu }=s_{ \epsilon } $ ，即两次松弛时间（TRT）模型。</p>
+<p>尽管MRT克服了BGK的一些缺陷，但它付出了相应代价：除了更高的复杂性之外，对于高阶矩的选择也不是唯一的，取决于所考虑的晶格和自由松弛的值需要针对每个问题优化速率。 此外，在静态参考系中花费一些时间并以不同的速率放松它们可能反而导致违反BGK模型中不存在的伽利略不变性问题。</p>
+<h3 id="Cascade-LBM"><a href="#Cascade-LBM" class="headerlink" title="Cascade LBM"></a>Cascade LBM</h3><p>现在，我们将讨论基于中心矩（central moment）的LB方案。相比前两类模型，中心矩方法将进一步提高效率和数值精度。 该方法通过将不同中心矩松弛到其对应的平衡态来表征碰撞过程。中心矩定义为所有粒子方向上分布函数乘积的总和。好处是使用中心矩自然地会对那些由给定格子独立支持的矩分量施加伽利略不变性（但对于那些由于晶格的离散性和对称性而与低阶矩混叠的高阶矩则不适用）。 这里我们介绍其中一种级联LBM（Cascade LBM）方法，采用标准的D2Q9格子说明<sup><a href="#fn_16" id="reffn_16">16</a></sup>。</p>
+<p>首先，我们需要构造九个非正交的基向量：</p>
+<script type="math/tex; mode=display">
+  \Phi_{0} = { \left( 1,1,1,1,1,1,1,1,1 \right) }^T \\\\
+  \Phi_{1} = e_{x} = { \left( 0,1,0,-1,0,1,1,-1,-1 \right) }^T \\\\
+  \Phi_{2} = e_{y} = { \left( 0,0,1,0,-1,1,1,-1,-1 \right) }^T \\\\
+    \Phi_{3} = e_{x} ⋅ e_{x} + e_{y} ⋅ e_{y} = { \left( 0,1,1,1,1,2,2,2,2 \right) }^T \\\\
+  \Phi_{4} = e_{x} ⋅ e_{x} - e_{y} ⋅ e_{y} = { \left( 0,1,-1,1,-1,0,0,0,0 \right) }^T \\\\ 
+ \Phi_{5} = e_{x} ⋅ e_{y} = { \left( 0,0,0,0,0,1,-1,1,-1 \right) }^T \\\\ 
+  \Phi_{6} = e_{x} ⋅ e_{x} ⋅ e_{y} = { \left( 0,0,0,0,0,1,-1,1,-1 \right) }^T \\\\
+  \Phi_{7} = e_{x} ⋅ e_{y} ⋅ e_{y} = { \left( 0,0,0,0,0,1,-1,-1,1 \right) }^T \\\\
+  \Phi_{8} = e_{x} ⋅ e_{x} ⋅ e_{y} ⋅ e_{y} = { \left( 0,0,0,0,0,1,1,1,1 \right) }^T \\\\</script><p>类似MRT，通过Gram-Schmidt正交化，得到正交基向量：</p>
+<script type="math/tex; mode=display">
+K_{0}= \Phi_{0},K_{1}= \Phi_{1},K_{2}= \Phi_{2} \\\\
+ K_{3}=3 \Phi_{3} -4 \Phi_{0},K_{4}= \Phi_{4},K_{5}= \Phi_{5} \\\\
+ K_{6}=-3 \Phi_{6}+2 \Phi_{2},K_{7}=-3 \Phi_{7}+2 \Phi_{1},K_{8}=9 \Phi_{8}-6 \Phi_{3}+4 \Phi_{0} \\\\</script><p>得以构造正交矩阵 $ K= \left[ K<em>{0},K</em>{1},K<em>{2},K</em>{3},K<em>{4},K</em>{5},K<em>{6},K</em>{7},K_{8} \right]  $ </p>
+<p>现在我们定义连续平衡中心矩为：</p>
+<script type="math/tex; mode=display">
+\Pi_{x^{m}y^{n}}^{0}= \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty}f^{0} \left(  \xi_{x}-u_{x} \right) ^{m} \left(  \xi_{x}-u_{y} \right)^{n}d \xi_{x}\mathrm{d} \xi_{y}</script><p>其离散形式为  </p>
+<script type="math/tex; mode=display">
+k_{x^{m}y^{n}}^{0}= \sum_{ \alpha }^{}f_{ \alpha } \left( e_{ \alpha x}-u_{x} \right)^{m} \left( e_{ \alpha }-u_{y} \right)^{n}</script><p>同时，我们也可以将 $ k_{x^{m}y^{n}}^{‘} $ 定义f的m和\n阶混合矩。</p>
+<p>代入Maxwell平衡分布，以及守恒公式，可以获得：</p>
+<script type="math/tex; mode=display">
+k_{0}^{0}= \rho ,k_{x}^{0}=0,k_{y}^{0}=0，k_{xx}^{0}=c_{s}^{2} \rho ,k_{yy}^{0}=c_{s}^{2} \rho ,</script><script type="math/tex; mode=display">
+ k_{xy}^{0}=0,k_{xxy}^{0}=0,k_{xyy}^{0}=0,k_{xxyy}^{0}=c_{s}^{4} \rho</script><script type="math/tex; mode=display">
+K=  
+\begin{bmatrix}
+1  &  0  &  0  &  -4  &  0  &  0  &  0  &  0  &  4 \\\\
+1  &  1  &  0  &  -1  &  1  &  0  &  0  &  2  &  -2\\\\
+1  &  0  &  1  &  -1  &  -1  &  0  &  2  &  0  &  -2\\\\
+1  &  -1  &  0  &  -1  &  1  &  0  &  0  &  -2  &  -2\\\\
+1  &  0  &  -1  &  -1  &  -1  &  0  &  -2  &  0  &  -2\\\\
+1  &  1  &  1  &  2  &  0  &  1  &  -1  &  1  &  -1\\\\
+1  &  -1  &  1  &  2  &  0  &  -1  &  -1  &  1  &  1\\\\
+1  &  -1  &  -1  &  2  &  0  &  1  &  1  &  1  &  1\\\\
+1  &  1  &  -1  &  2  &  0  &  -1  &  1  &  -1  &  1\\\\
+\end{bmatrix}</script><p>我们开始着手构造碰撞算子：</p>
+<script type="math/tex; mode=display">
+     \Omega  \left( f \right) =K⋅g \\\\</script><p>目前，g是待求矩向量系数。</p>
+<p>由于碰撞不会改变质量和动量，因此将其称为碰撞不变量，我们可以设置:</p>
+<script type="math/tex; mode=display">
+g_{0}=g_{1}=g_{2}=0 \\\\</script><p>对碰撞算子求矩,将其全部代入到Bolzmann演化方程，可推导得到：</p>
+<script type="math/tex; mode=display">
+g_{3}=\frac{w_{3}}{12} \left( \frac{2}{3} \rho + \rho  \left( u_{x}^{2}+u_{y}^{2} \right) - \left( k_{xx}^{'}+k_{yy}^{'} \right)  \right)</script><script type="math/tex; mode=display">
+g_{4}=\frac{w_{4}}{4} \left(  \rho  \left( u_{x}^{2}-u_{y}^{2} \right) - \left( k_{xx}^{'}-k_{yy}^{'} \right)  \right)</script><script type="math/tex; mode=display">
+g_{5}=\frac{w_{5}}{4} \left(  \rho u_{x}u_{y}-k_{xy}^{'} \right)</script><script type="math/tex; mode=display">
+g_{6}=\frac{w_{6}}{4} \left( 2 \rho u_{x}^{2}u_{y}+k_{xxy}^{'}-2u_{x}k_{xy}^{'}-u_{y}k_{xx} \right) -\frac{1}{2}u_{y} \left( 3g_{3}+g_{4} \right) -2u_{x}g_{5}</script><script type="math/tex; mode=display">
+g_{7}=\frac{w_{7}}{4} \left( 2 \rho u_{x}u_{y}^{2}+k_{xyy}^{'}-2u_{y}k_{xy}^{'}-u_{x}k_{yy} \right) -\frac{1}{2}u_{x} \left( 3g_{3}+g_{4} \right) -2u_{y}g_{5}</script><script type="math/tex; mode=display">
+g_{8}=-2g_{3}-\frac{1}{2}u_{y}^{2} \left( 3g_{3}+g_{4} \right) -\frac{1}{2}u_{x}^{2} \left( 3g_{3}-g_{4} \right) -4u_{x}u_{y}g_{5}-2u_{y}g_{6}-2u_{x}g_{7}\\\\
++\frac{w_{8}}{4} ( \frac{1}{9} \rho +3 \rho u_{x}^{2}u_{y}^{2}- \left(k_{xxyy}'-2u_{x}k_{xyy}'-2u_{y}k_{xxy}'+u_{x}^{2}k_{yy}'+u_{y}^{2}k_{xx}'+4u_{x}u_{y}k_{xy}' )  \right)</script><p>其中， $ w<em>{ \alpha }弛豫系数，w</em>{4}=w_{5}=\frac{1}{ \tau} $ ，与粘性应力有关。其他可以根据实际情况进行调节。</p>
+<h3 id="算法验证-方腔流动"><a href="#算法验证-方腔流动" class="headerlink" title="算法验证-方腔流动"></a>算法验证-方腔流动</h3><p>为对比上述BGK、MRT和Cascade LBM三个算法的性能，我们用广为熟悉的高雷诺数方腔流动进行验证。该算例网格数为128$\ast$ 128，相对较高的雷诺数Re为3200，排除压力的干扰，满足不可压条件，选择相对较低的顶盖的流动马赫数设为0.05。</p>
+<p>在相同初始条件下，下图分别给出了三个算法的仿真结果。其中，左排为速度的绝对值分布，右排为中心线上的速度分布。对比三个结果，可以发现BGK在较少网格条件下无法收敛，而MRT和cascade LBM都能正常收敛，速度分布与其他论文结果一致<sup><a href="#fn_18" id="reffn_18">18</a></sup>。细节上，MRT仿真的绝对速度，在右上边角和右下边角区域会出现微小的波动，这是由于这两个区域存在非常大的速度梯度，松弛算法的引入可能导致伽利略不变性的破坏，导致应力振荡。而cascade LBM较好的解决了这一问题。同时，需要注意的是，由于两个算法都采用相对较为稀疏的网格数，因此，均无法较好地模拟角区的流动细节。有不少文献也提出了一些解决办法。例如，对这些区域进行局部加密，或采用更高阶的算法，当然计算效率也会相应降低。</p>
+<p>在接下的流固耦合仿真中，我们将采用cascade LBM算法，以增加算法的稳定性。</p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/result-LBM-compare.webp" alt="速度绝对值分布-BGK"></p>
+<h3 id="代码演示-LBM-算法-可视化-互动"><a href="#代码演示-LBM-算法-可视化-互动" class="headerlink" title="代码演示-LBM 算法 可视化 互动"></a>代码演示-LBM 算法 可视化 互动</h3><p>请参考 <a target="_blank" rel="noopener" href="https://www.shadertoy.com/view/tddcRn">shaderoty</a>! </p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/shadertoy-LBM.webp" alt="LBM 算法 可视化 互动"></p>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>最近可能重心没在这上面，有时间再解释每段代码的含义。</p>
+<p>放这个主题的博客，一方面帮助把LBM方法作一个总结，另外，对于大量公式的博客提前练个手。</p>
+<p>本博客公式编辑用mathjax， IDE用Typora，文档原先用是word写的，所以花了很大的精力将其匹配成markdown可识别的文字。</p>
+<p>这里引入了一个工具：叫做docx2latex。其中不乏有很多需要调整的格式，主要是下划线_和^前面不能留有空格。</p>
+<ul>
+<li><p><code>TODO：</code></p>
+<p>公式自动编号；</p>
+<p>图片名称；</p>
+<p>Markdown重新转回到Latex格式；</p>
+</li>
+</ul>
+<blockquote id="fn_1">
+<sup>1</sup>.    Frisch, U., B. Hasslacher, and Y. Pomeau, <em>Lattice-gas automata for the Navier-Stokes equation.</em> Physical review letters, 1986. <strong>56</strong>(14): p. 1505.<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>.    McNamara, G.R. and G. Zanetti, <em>Use of the Boltzmann equation to simulate lattice-gas automata.</em> Physical review letters, 1988. <strong>61</strong>(20): p. 2332.<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>.    Higuera, F., S. Succi, and R. Benzi, <em>Lattice gas dynamics with enhanced collisions.</em> EPL (Europhysics Letters), 1989. <strong>9</strong>(4): p. 345.<a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_4">
+<sup>4</sup>.    Succi, S. and S. Succi, <em>The lattice Boltzmann equation: for complex states of flowing matter</em>. 2018: Oxford University Press.<a href="#reffn_4" title="Jump back to footnote [4] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_5">
+<sup>5</sup>.    Timm, K., et al., <em>The lattice Boltzmann method: principles and practice.</em> Springer International Publishing AG Switzerland, ISSN, 2016: p. 1868-4521.<a href="#reffn_5" title="Jump back to footnote [5] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_6">
+<sup>6</sup>.    Zhao, C., et al., <em>Numerical study of natural convection in porous media (metals) using Lattice Boltzmann Method (LBM).</em> International Journal of Heat and Fluid Flow, 2010. <strong>31</strong>(5): p. 925-934.<a href="#reffn_6" title="Jump back to footnote [6] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_7">
+<sup>7</sup>.    Chen, H., et al., <em>Extended Boltzmann kinetic equation for turbulent flows.</em> Science, 2003. <strong>301</strong>(5633): p. 633-636.<a href="#reffn_7" title="Jump back to footnote [7] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_8">
+<sup>8</sup>.    Gupta, A. and R. Kumar. <em>Lattice Boltzmann simulation to study multiple bubble dynamics</em>. in <em>ASME International Mechanical Engineering Congress and Exposition</em>. 2007.<a href="#reffn_8" title="Jump back to footnote [8] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_9">
+<sup>9</sup>. Peng, Y., C. Shu, and Y. Chew, <em>Simplified thermal lattice Boltzmann model for incompressible thermal flows.</em> Physical Review E, 2003. <strong>68</strong>(2): p. 026701.<a href="#reffn_9" title="Jump back to footnote [9] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_10">
+<sup>10</sup>. Frapolli, N., S.S. Chikatamarla, and I.V. Karlin, <em>Entropic lattice Boltzmann model for compressible flows.</em> Physical Review E, 2015. <strong>92</strong>(6): p. 061301.<a href="#reffn_10" title="Jump back to footnote [10] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_11">
+<sup>11</sup>.    Mousavi, S.E., et al., <em>Simulation of droplet detachment from hydrophobic and hydrophilic solid surfaces under the electric field using Lattice Boltzmann Method (LBM).</em> Journal of Molecular Liquids, 2020. <strong>313</strong>: p. 113528.<a href="#reffn_11" title="Jump back to footnote [11] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_12">
+<sup>12</sup>.    Delbosc, N., <em>Real-time simulation of indoor air flow using the lattice Boltzmann method on graphics processing unit</em>. 2015, University of Leeds.<a href="#reffn_12" title="Jump back to footnote [12] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_13">
+<sup>13</sup>.    Gressman, P. and R. Strain, <em>Global classical solutions of the Boltzmann equation without angular cut-off.</em> Journal of the American Mathematical Society, 2011. <strong>24</strong>(3): p. 771-847.<a href="#reffn_13" title="Jump back to footnote [13] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_14">
+<sup>14</sup>.    Bhatnagar, P.L., E.P. Gross, and M. Krook, <em>A model for collision processes in gases. I. Small amplitude processes in charged and neutral one-component systems.</em> Physical review, 1954. <strong>94</strong>(3): p. 511.<a href="#reffn_14" title="Jump back to footnote [14] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_15">
+<sup>15</sup>.    Qian, Y.-H., D. d’Humières, and P. Lallemand, <em>Lattice BGK models for Navier-Stokes equation.</em> EPL (Europhysics Letters), 1992. <strong>17</strong>(6): p. 479.<a href="#reffn_15" title="Jump back to footnote [15] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_16">
+<sup>16</sup>.    Ouderji, F.H., <em>Cascaded Lattice Boltzmann Methods Based on Central Moments for Thermal Convection, Multiphase Flows and Complex Fluids</em>. 2019: University of Colorado at Denver.<a href="#reffn_16" title="Jump back to footnote [16] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_17">
+<sup>17</sup>.    Premnath, K.N. and S. Banerjee, <em>Incorporating forcing terms in cascaded lattice Boltzmann approach by method of central moments.</em> Physical Review E, 2009. <strong>80</strong>(3): p. 036702.<a href="#reffn_17" title="Jump back to footnote [17] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_18">
+<sup>18</sup>. Ghia, U., K.N. Ghia, and C. Shin, <em>High-Re solutions for incompressible flow using the Navier-Stokes equations and a multigrid method.</em> Journal of computational physics, 1982. <strong>48</strong>(3): p. 387-411.<a href="#reffn_18" title="Jump back to footnote [18] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_19">
+<sup>19</sup>.    Peskin, C.S., <em>The immersed boundary method.</em> Acta numerica, 2002. <strong>11</strong>: p. 479-517.<a href="#reffn_19" title="Jump back to footnote [19] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_20">
+<sup>20</sup>.    Roma, A.M., C.S. Peskin, and M.J. Berger, <em>An adaptive version of the immersed boundary method.</em> Journal of computational physics, 1999. <strong>153</strong>(2): p. 509-534.<a href="#reffn_20" title="Jump back to footnote [20] in the text."> &#8617;</a>
+</blockquote>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jiaqi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://deal-ii.com/post/18c29c0b/">http://deal-ii.com/post/18c29c0b/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://deal-ii.com" target="_blank">DEAL-II-Fluid</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A7%91%E7%A0%94/">科研</a><a class="post-meta__tags" href="/tags/LBM/">LBM</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/12/22/d7YjSwNqreOA91K.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/ac853f89/"><img class="prev-cover" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/cover-dealii69.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">deal-ii-learning</div></div></a></div><div class="next-post pull-right"><a href="/post/44c06f35/"><img class="next-cover" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/logo.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">谱方法-未完。。。</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div class="comments-items-1" data-name="Valine"><div class="vcomment" id="vcomment"></div><script>function loadvaline () {  
+  var requestSetting = function (from,set) {
+    var from = from
+    var setting = set.split(',').filter(function(item){
+    return from.indexOf(item) > -1
+    });
+    setting = setting.length == 0 ? from :setting;
+    return setting
+  }
+
+  var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+  var requiredFields = requestSetting(['nick','mail'],'nick,mail')
+
+  function initValine () {
+    window.valine = new Valine({
+      el:'#vcomment',
+      appId: 'lJ3vEzEWaeVa6HpWNNbPrauw-gzGzoHsz',
+      appKey: '16FI6zgDXwvw71g04yhHnnW0',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: guestInfo,
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      requiredFields: requiredFields
+    });
+  }
+  loadScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || false) {
+  window.addEventListener('load', loadvaline)
+}
+else {
+  function loadOtherComment () {
+    loadvaline()
+  }
+}</script></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Jiaqi</div><div class="framework-info"><span>驱动 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></head></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/calendar.js"></script><script src="/js/languages.js"></script><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/gitcalendar/js/gitcalendar.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":120,"height":260},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

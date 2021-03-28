@@ -1,0 +1,243 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>deal-ii-learning | DEAL-II-Fluid</title><meta name="description" content="— 学习目的：尽快熟练掌握step-69，转化成果应用到旋流管道 —Introduction数值求解微分方程高精度数值求解微分方程主要有三类：有限体积法、有限元法和有限差分法。 有限差分方法**(FDM)**是计算机数值模拟最早采用的方法，至今仍被广泛运用。该方法将求解域划分为差分网格，用有限个网格节点代替连续的求解域。有限差分法以Taylor级数展开等方法，把控制方程中的导数用网格节点上的函数值"><meta name="keywords" content="FEM，有限元，CFD"><meta name="author" content="Jiaqi"><meta name="copyright" content="Jiaqi"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://deal-ii.com/post/ac853f89/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta property="og:type" content="article"><meta property="og:title" content="deal-ii-learning"><meta property="og:url" content="http://deal-ii.com/post/ac853f89/"><meta property="og:site_name" content="DEAL-II-Fluid"><meta property="og:description" content="— 学习目的：尽快熟练掌握step-69，转化成果应用到旋流管道 —Introduction数值求解微分方程高精度数值求解微分方程主要有三类：有限体积法、有限元法和有限差分法。 有限差分方法**(FDM)**是计算机数值模拟最早采用的方法，至今仍被广泛运用。该方法将求解域划分为差分网格，用有限个网格节点代替连续的求解域。有限差分法以Taylor级数展开等方法，把控制方程中的导数用网格节点上的函数值"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/cover-dealii69.webp"><meta property="article:published_time" content="2020-11-26T11:58:34.000Z"><meta property="article:modified_time" content="2021-01-29T07:25:51.499Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="prev" title="旋流管道声传播开篇" href="http://deal-ii.com/post/ef3983f2/"><link rel="next" title="LBM开篇" href="http://deal-ii.com/post/18c29c0b/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: true,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-01-29 15:25:51'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@master/Hexo/css/flink.min.css"><link rel="stylesheet" href="/gitcalendar/css/gitcalendar.css"/><meta name="generator" content="Hexo 5.3.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/me.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">23</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">31</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%94-%E5%AD%A6%E4%B9%A0%E7%9B%AE%E7%9A%84%EF%BC%9A%E5%B0%BD%E5%BF%AB%E7%86%9F%E7%BB%83%E6%8E%8C%E6%8F%A1step-69%EF%BC%8C%E8%BD%AC%E5%8C%96%E6%88%90%E6%9E%9C%E5%BA%94%E7%94%A8%E5%88%B0%E6%97%8B%E6%B5%81%E7%AE%A1%E9%81%93-%E2%80%94"><span class="toc-number">1.</span> <span class="toc-text">— 学习目的：尽快熟练掌握step-69，转化成果应用到旋流管道 —</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E6%B1%82%E8%A7%A3%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">2.1.</span> <span class="toc-text">数值求解微分方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E9%99%90%E5%85%83%E5%BA%94%E7%94%A8%E4%BA%8E%E5%A3%B0%E5%AD%A6%E8%AE%A1%E7%AE%97"><span class="toc-number">2.2.</span> <span class="toc-text">有限元应用于声学计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E8%A7%81deal-II"><span class="toc-number">2.3.</span> <span class="toc-text">初见deal.II</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deal-ii-%E5%AD%A6%E4%B9%A0%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.4.</span> <span class="toc-text">Deal-ii 学习步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FEM-in-Julia"><span class="toc-number">2.5.</span> <span class="toc-text">FEM in Julia</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/cover-dealii69.webp)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">DEAL-II-Fluid</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">deal-ii-learning</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-11-26 19:58:34"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-11-26</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-01-29 15:25:51"><i class="fas fa-history fa-fw"></i> 更新于 2021-01-29</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="—-学习目的：尽快熟练掌握step-69，转化成果应用到旋流管道-—"><a href="#—-学习目的：尽快熟练掌握step-69，转化成果应用到旋流管道-—" class="headerlink" title="— 学习目的：尽快熟练掌握step-69，转化成果应用到旋流管道 —"></a>— <em>学习目的：尽快熟练掌握step-69，转化成果应用到旋流管道</em> —</h2><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="数值求解微分方程"><a href="#数值求解微分方程" class="headerlink" title="数值求解微分方程"></a>数值求解微分方程</h3><p>高精度数值求解微分方程主要有三类：有限体积法、有限元法和有限差分法。</p>
+<p><strong>有限差分方法**</strong>(FDM)**是计算机数值模拟最早采用的方法，至今仍被广泛运用。该方法将求解域划分为差分网格，用有限个网格节点代替连续的求解域。有限差分法以Taylor级数展开等方法，把控制方程中的导数用网格节点上的函数值的差商代替进行离散，从而建立以网格节点上的值为未知数的代数<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S方程组&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">方程组</a>。该方法是一种直接将<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S微分&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">微分</a>问题变为代数问题的近似数值解法，数学概念直观，表达简单，是发展较早且比较成熟的数值方法。　　</p>
+<p>对于有限差分格式，从格式的精度来划分，有一阶格式、二阶格式和高阶格式。从差分的空间形式来考虑，可分为中心格式和逆风格式。考虑时间因子的影响，差分格式还可以分为显格式、隐格式、显隐交替格式等。目前常见的差分格式，主要是上述几种形式的组合，不同的组合构成不同的差分格式。差分方法主要适用于有结构网格，网格的步长一般根据实际地形的情况和柯朗稳定条件来决定。</p>
+<p><strong>构造差分的方法</strong>有多种形式，目前主要采用的是<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S泰勒&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">泰勒</a>级数展开方法。其基本的差分表达式主要有三种形式：一阶向前差分、一阶向后差分、一阶中心差分和二阶中心差分等，其中前两种格式为一阶计算精度，后两种格式为二阶计算精度。通过对时间和空间这几种不同差分格式的组合，可以组合成不同的差分计算格式。</p>
+<p><strong>有限差分法的主要内容</strong>包括：如何根据问题的特点将定解区域作网格剖分；如何把原微分方程离散化为差分方程组以及如何解此代数方程组。此外为了保证计算过程的可行和计算结果的正确，还需从理论上分析差分方程组的性态，包括解的唯一性、存在性和差分格式的相容性、收敛性和稳定性。对于一个微分方程建立的各种差分格式，为了有实用意义，一个基本要求是它们能够任意逼近微分方程，这就是相容性要求。另外，一个差分格式是否有用，最终要看差分方程的精确解能否任意逼近微分方程的解，这就是收敛性的概念。此外，还有一个重要的概念必须考虑，即差分格式的稳定性。因为差分格式的计算过程是逐层推进的，在计算第n＋1层的近似值时要用到第n层的近似值，直到与初始值有关。前面各层若有舍入误差，必然影响到后面各层的值，如果误差的影响越来越大，以致差分格式的精确解的面貌完全被掩盖，这种格式是不稳定的，相反如果误差的传播是可以控制的，就认为格式是稳定的。只有在这种情形，差分格式在实际计算中的近似解才可能任意逼近差分方程的精确解。关于差分格式的构造一般有以下3种方法。最常用的方法是数值微分法，比如用差商代替微商等。另一方法叫积分插值法，因为在实际问题中得出的微分方程常常反映物理上的某种守恒原理，一般可以通过积分形式来表示。此外还可以用待定系数法构造一些精度较高的差分格式。</p>
+<p><strong><a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S有限元&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">有限元</a>**</strong>方法**的基础是变分原理和加权余量法，其基本求解思想是把计算域划分为有限个互不重叠的单元，在每个单元内，选择一些合适的节点作为求解函数的<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S插值&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">插值</a>点，将<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S微分方程&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">微分方程</a>中的变量改写成由各变量或其导数的节点值与所选用的插值函数组成的线性表达式，借助于变分原理或加权余量法，将微分方程离散求解。采用不同的权函数和插值函数形式，便构成不同的有限元方法。</p>
+<p>有限元方法最早应用于<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S结构力学&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">结构力学</a>，后来随着计算机的发展慢慢用于<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S流体力学&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">流体力学</a>的数值模拟。在有限元方法中，把计算域离散剖分为有限个互不重叠且相互连接的单元，在每个单元内选择基函数，用单元基函数的线形组合来逼近单元中的真解，整个计算域上总体的基函数可以看为由每个单元基函数组成的，则整个计算域内的解可以看作是由所有单元上的近似解构成。</p>
+<p>常见的有限元计算方法是由<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S变分法&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">变分法</a>和加权余量法发展而来的里兹法和伽辽金法、<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S最小二乘法&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">最小二乘法</a>等。根据所采用的权函数和插值函数的不同，有限元方法也分为多种计算格式。从权函数的选择来说，有配置法、矩量法、最小二乘法和伽辽金法，从计算单元网格的形状来划分，有三角形网格、四边形网格和多边形网格，从插值函数的精度来划分，又分为线性插值函数和高次插值函数等。不同的组合同样构成不同的有限元计算格式。对于权函数，伽辽金(Galerkin)法是将权函数取为逼近函数中的基函数；最小二乘法是令权函数等于余量本身，而内积的极小值则为对代求系数的平方误差最小；在配置法中，先在计算域内选取N个配置点。令近似解在选定的N个配置点上严格满足微分方程，即在配置点上令方程余量为0。插值函数一般由不同次幂的<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S多项式&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">多项式</a>组成，但也有采用<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S三角函数&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">三角函数</a>或<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S指数函数&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">指数函数</a>组成的乘积表示，但最常用的多项式插值函数。有限元插值函数分为两大类，一类只要求插值多项式本身在插值点取已知值，称为拉格朗日(Lagrange)多项式插值；另一种不仅要求插值多项式本身，还要求它的导数值在插值点取已知值，称为哈密特(Hermite)多项式插值。单元坐标有<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S笛卡尔&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">笛卡尔</a>直角<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S坐标系&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">坐标系</a>和无因次自然坐标，有对称和不对称等。常采用的无因次坐标是一种局部坐标系，它的定义取决于单元的几何形状，<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S一维&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">一维</a>看作长度比，二维看作面积比，三维看作体积比。在二维有限元中，三角形单元应用的最早，近来四边形等参元的应用也越来越广。对于二维三角形和四边形电源单元，常采用的插值函数为有Lagrange插值直角坐标系中的线性插值函数及二阶或更高阶插值函数、面积坐标系中的线性插值函数、二阶或更高阶插值函数等。</p>
+<p>对于有限元方法，其<strong>基本思路和解题步骤</strong>可归纳为：</p>
+<p>(1)建立积分方程，根据变分原理或方程余量与权函数正交化原理，建立与微分方程初边值问题等价的积分表达式，这是有限元法的出发点。</p>
+<p>(2)区域单元剖分，根据求解区域的形状及实际问题的物理特点，将区域剖分为若干相互连接、不重叠的单元。区域单元划分是采用有限元方法的前期准备工作，这部分工作量比较大，除了给计算单元和节点进行编号和确定相互之间的关系之外，还要表示节点的位置坐标，同时还需要列出自然边界和本质边界的节点序号和相应的边界值。</p>
+<p>(3)确定单元基函数，根据单元中节点数目及对近似解精度的要求，选择满足一定插值条件的插值函数作为单元基函数。有限元方法中的基函数是在单元中选取的，由于各单元具有规则的几何形状，在选取基函数时可遵循一定的法则。</p>
+<p>(4)单元分析：将各个单元中的求解函数用单元基函数的线性组合表达式进行逼近；再将近似函数代入积分方程，并对单元区域进行积分，可获得含有待定系数(即单元中各节点的参数值)的代数方程组，称为单元有限元方程。</p>
+<p>(5)总体合成：在得出单元有限元方程之后，将区域中所有单元有限元方程按一定法则进行累加，形成总体有限元方程。</p>
+<p>(6)边界条件的处理：一般边界条件有三种形式，分为本质边界条件(狄里克雷边界条件 )、自然边界条件(<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S黎曼&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">黎曼</a>边界条件)、混合边界条件(<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S柯西&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">柯西</a>边界条件)。对于自然边界条件，一般在积分表达式中可自动得到满足。对于本质边界条件和混合边界条件，需按一定法则对总体有限元方程进行修正满足。</p>
+<p>(7)解有限元方程：根据边界条件修正的总体有限元方程组，是含所有待定未知量的封闭方程组，采用适当的<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S数值计算方法&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">数值计算方法</a>求解，可求得各节点的函数值。</p>
+<p><strong>有限体积法（**</strong>Finite Volume Method<strong>**）</strong>又称为控制体积法。其基本思路是：将计算区域划分为一系列不重复的控制体积，并使每个网格点周围有一个控制体积；将待解的微分方程对每一个控制体积积分，便得出一组离散方程。其中的未知数是网格点上的<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S因变量&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">因变量</a>的数值。为了求出控制体积的积分，必须假定值在网格点之间的变化规律，即假设值的分段的分布的分布剖面。从积分区域的选取方法看来，有限体积法属于加权剩余法中的子区域法；从未知解的近似方法看来，有限体积法属于采用局部近似的离散方法。简言之，子区域法属于有限体积发的基本方法。</p>
+<p><strong>有限体积法的基本思路</strong>易于理解，并能得出直接的物理解释。离散方程的物理意义，就是因变量在有限大小的控制体积中的守恒原理，如同微分方程表示因变量在无限小的控制体积中的守恒原理一样。限体积法得出的离散方程，要求因变量的积分守恒对任意一组控制体积都得到满足，对整个计算区域，自然也得到满足。这是有限体积法吸引人的优点。有一些离散方法，例如有限差分法，仅当网格极其细密时，离散方程才满足积分守恒；而有限体积法即使在粗网格情况下，也显示出准确的积分守恒。就离散方法而言，有限体积法可视作有限单元法和有限差分法的中间物。有限单元法必须假定值在网格点之间的变化规律（既插值函数），并将其作为近似解。有限差分法只考虑网格点上的数值而不考虑值在网格点之间如何变化。有限体积法只寻求的结点值，这与有限差分<a target="_blank" rel="noopener" href="http://wenwen.soso.com/z/Search.e?sp=S法相&amp;ch=w.search.yjjlink&amp;cid=w.search.yjjlink">法相</a>类似；但有限体积法在寻求控制体积的积分时，必须假定值在网格点之间的分布，这又与有限单元法相类似。在有限体积法中，插值函数只用于计算控制体积的积分，得出离散方程之后，便可忘掉插值函数；如果需要的话，可以对微分方程中不同的项采取不同的插值函数。</p>
+<p><strong>三者各有所长：</strong></p>
+<p>有限差分法：直观，理论成熟，精度可选。但是不规则区域处理繁琐，虽然网格生成可以使FDM应用于不规则区域，但是对区域的连续性等要求较严。使用FDM的好处在于易于编程，易于并行。</p>
+<p>有限元方法：适合处理复杂区域，精度可选。缺憾在于内存和计算量巨大。并行不如FDM和FVM直观。不过FEM的并行是当前和将来应用的一个不错的方向。</p>
+<p>有限容积法：适于流体计算，可以应用于不规则网格，适于并行。但是精度基本上只能是二阶了。FVM的优势正逐渐显现出来，FVM在应力应变，高频电磁场方面的特殊的优点正在被人重视。</p>
+<p>接下来，展示以下Tam大神早年就用有限差分法干出来的结果<sup><a href="#fn_1" id="reffn_1">1</a></sup>。</p>
+<video src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/cash2 (2).mp4"></video> 
+
+<p>比较一下：</p>
+<p>有限容积法和有限差分法：一个区别就是有限容积法的截差是不定的（跟取的相邻点有关，积分方法离散方程），而有限差分就可以直接知道截差（微分方法离散方程）。 有限容积法和有限差分法最本质的区别是，前者是根据积分方程推导出来的（即对每个控制体积分），后者直接根据微分方程推导出来，所以前者的精度不但取决于积分时的精度，还取决与对导数处理的精度，一般有限容积法总体的精度为二阶，因为积分的精度限制，当然有限容积法对于守恒型方程导出的离散方程可以保持守恒型；而后者直接由微分方程导出，不涉及积分过程，各种导数的微分借助Taylor展开，直接写出离散方程，当然不一定有守恒性，精度也和有限容积法不一样，一般有限差分法可以使精度更高一些。</p>
+<p>当然二者有联系，有时导出的形式一样，但是概念上是不一样的。</p>
+<p>至于有限容积法和有限元相比，有限元在复杂区域的适应性对有限容积是毫无优势可言的，至于有限容积的守恒性，物理概念明显的这些特点，有限元是没有的。目前有限容积在精度方面与有限元法有些差距。</p>
+<p>有限元方法比有限差分优越的方面主要在能适应不规则区域，但是这只是指的是传统意义上的有限差分，现在发展的一些有限差分已经能适应不规则区域。对于椭圆型方程，如果区域规则，传统有限差分和有限元都能解，在求解效率，这里主要指编程负责度和收敛快慢、内存需要，肯定有限差分有优势。</p>
+<h3 id="有限元应用于声学计算"><a href="#有限元应用于声学计算" class="headerlink" title="有限元应用于声学计算"></a>有限元应用于声学计算</h3><p>我的重心工作主要在于声学波动方程的求解，首先考虑最为基本的<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Helmholtz_equation">Helmholtz equation</a>:</p>
+<script type="math/tex; mode=display">
+u_{tt} - \nabla \cdot (c^2 \nabla u) = f, \in \Omega \times (0,T)</script><p>其中，<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av925228250/">双曲型微分方程</a>封闭方程需要同时满足封闭的边界条件和初始条件：</p>
+<script type="math/tex; mode=display">
+u=0, \in \partial \Omega \times (0,T),\\\\
+u|_{t=0}=u^0, \in \Omega,\\\\
+u_t|_{t=0}=v^0, \in \Omega</script><p>有限元方法是求上述方成的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/%E5%BC%B1%E8%A7%A3">弱解</a>,即：</p>
+<script type="math/tex; mode=display">
+<u_{tt},v>+a(u,v)=(f,v), \forall v\in H_0^1(\Omega)\times (0,T)</script><script type="math/tex; mode=display">
+a(u,v)=(c\nabla u, c\nabla v)</script><p>参考<sup><a href="#fn_2" id="reffn_2">2</a></sup>，提出的四阶隐式时间差分算法，二阶显式leapfrog格式，可以有效控制误差。除此之外，离散Galerkin方法，有可以有效嫁接到自动加密网格<sup><a href="#fn_3" id="reffn_3">3</a></sup>，小尺度的方程更加准确。</p>
+<blockquote id="fn_2">
+<sup>2</sup>. Finite Element θ-Schemes for the Acoustic Wave Equation. Advances in Applied Mathematics and Mechanics. April 2011<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>. Wolfgang Bangerth and Rolf Rannacher. Finite element approximation of the acoustic wave equation: Error control and mesh adaptation. <em>East–West J. Numer. Math.</em>, 7(4):263–282, 1999. ↩<a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
+<h3 id="初见deal-II"><a href="#初见deal-II" class="headerlink" title="初见deal.II"></a>初见<a target="_blank" rel="noopener" href="https://www.dealii.org/">deal.II</a></h3><p>deal.II 是一个开源的有限元法求解器，支持大规模并行计算，自适应网格。采用C++编写，实现优雅。其文档完整丰富，文档共有三个级别，由浅入深：</p>
+<ul>
+<li>tutorial：一系列的教学程序，共有64步教学步骤，通过tutorial的学习可以对dealii有整体的认识。</li>
+<li>manual：对每个类以及相应的函数的介绍。适合用于查询类与函数的具体用法。</li>
+<li><p>Modules：介绍了实现某一个功能需要用到的一系列类与函数，比如 Sparsity patterns 介绍了存储稀疏矩阵相关的内容。</p>
+</li>
+<li><p><strong>What it is:</strong> A C++ software library supporting the creation of finite element codes and an open community of users and developers. (<a target="_blank" rel="noopener" href="https://www.dealii.org/about.html">Learn more.</a>)</p>
+</li>
+<li><p><strong>Mission:</strong> To provide well-documented tools to build finite element codes for a broad variety of PDEs, from laptops to supercomputers.</p>
+</li>
+<li><p><strong>Vision:</strong> To create an open, inclusive, <a target="_blank" rel="noopener" href="https://www.dealii.org/participate.html">participatory</a> community providing users and developers with a state-of-the-art, comprehensive software library that constitutes the go-to solution for all finite element problems.</p>
+</li>
+</ul>
+<p>第一次看到这个库是接触到<a target="_blank" rel="noopener" href="https://aspect.geodynamics.org/">ASPECT</a> , 用来仿真地壳热对流的，涉及到极为复杂的微分方程。就随便一些就是一堆方程<sup><a href="#fn_4" id="reffn_4">4</a></sup>：</p>
+<script type="math/tex; mode=display">
+-\nabla \cdot [2\eta\epsilon(u)]+\nabla p = \rho_0(1-\alpha (T-T_0))g \in \Omega \\\\
+\nabla\cdot u=0  \in \Omega \\\\
+\rho_0 C_p ({\partial T \over \partial t}+u\cdot \nabla T)-\nabla \cdot k\nabla T=0 \in \Omega</script><p>当时就领教了Deal-II 在求解复杂耦合方程的能力，C++结构化面向对象代码也使得其重用性极高。</p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/aspect.png" alt="aspect"></p>
+<h3 id="Deal-ii-学习步骤"><a href="#Deal-ii-学习步骤" class="headerlink" title="Deal-ii 学习步骤"></a>Deal-ii 学习步骤</h3><p>deal-ii 的学习由浅入深，都一系列教学程序，共有64步教学步骤，可以通过tutorial的学习对deall-ii有整体的认识。这里我的最终目的是走到可压缩欧拉方程的求解，因此，下面的代码解析会顺着<a target="_blank" rel="noopener" href="https://www.dealii.org/current/doxygen/deal.II/step_1.html">setp-1</a>—-&gt;<a target="_blank" rel="noopener" href="https://www.dealii.org/current/doxygen/deal.II/step_2.html">setp-2</a>—-&gt;<a target="_blank" rel="noopener" href="https://www.dealii.org/current/doxygen/deal.II/step_3.html">setp-3</a>—-&gt;<a target="_blank" rel="noopener" href="https://www.dealii.org/current/doxygen/deal.II/step_4.html">setp-4</a>—-&gt;<a target="_blank" rel="noopener" href="https://www.dealii.org/current/doxygen/deal.II/step_5.html">setp-5</a>—-&gt;<a target="_blank" rel="noopener" href="https://www.dealii.org/current/doxygen/deal.II/step_6.html">setp-6</a>—-&gt;<a target="_blank" rel="noopener" href="https://www.dealii.org/current/doxygen/deal.II/step_40.html">setp-40</a>—-&gt;<a target="_blank" rel="noopener" href="https://www.dealii.org/current/doxygen/deal.II/step_69.html">setp-69</a>的思路进行介绍。这些步骤的详细说明在官网上都有，这里参考<a target="_blank" rel="noopener" href="http://ghostvalley.top/">Ghost Valley</a>写的中文翻译。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://ghostvalley.top/2019/11/02/pi-BEM-dealii-deal2lkit的安装/">pi_BEM,dealii,deal2lkit的安装</a></li>
+<li><p><a target="_blank" rel="noopener" href="http://ghostvalley.top/2019/11/05/vtu-read/">vtu文件的读取</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://ghostvalley.top/2019/12/03/deal-II学习-Step-1/">deal.II学习—Step-1</a></p>
+</li>
+<li><a target="_blank" rel="noopener" href="http://ghostvalley.top/2019/12/11/deal-II学习-Step-2/">deal.II学习—Step-2</a></li>
+<li><a target="_blank" rel="noopener" href="http://ghostvalley.top/2019/12/15/deal-II学习-Step-3/">deal.II学习—Step-3</a></li>
+<li><a target="_blank" rel="noopener" href="http://ghostvalley.top/2020/04/13/deal-II学习-Step-4/">deal.II学习—Step-4</a></li>
+<li><a target="_blank" rel="noopener" href="http://ghostvalley.top/2020/04/15/deal-II学习-Step-5/">deal.II学习—Step-5</a></li>
+<li><a target="_blank" rel="noopener" href="http://ghostvalley.top/2020/04/22/deal-II学习-Step-6/">deal.II学习—Step-6</a></li>
+</ul>
+<h3 id="FEM-in-Julia"><a href="#FEM-in-Julia" class="headerlink" title="FEM in Julia"></a>FEM in Julia</h3><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=30TUEhbGmuc">https://www.youtube.com/watch?v=30TUEhbGmuc</a></p>
+<p><img src= "/img/loading.gif" data-src="/Users/wjq/Library/Application Support/typora-user-images/image-20210113100726554.png" alt="image-20210113100726554"></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jiaqi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://deal-ii.com/post/ac853f89/">http://deal-ii.com/post/ac853f89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://deal-ii.com" target="_blank">DEAL-II-Fluid</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/FEM/">FEM</a><a class="post-meta__tags" href="/tags/%E6%9C%89%E9%99%90%E5%85%83/">有限元</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/12/22/d7YjSwNqreOA91K.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/ef3983f2/"><img class="prev-cover" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/swirlflow.jpeg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">旋流管道声传播开篇</div></div></a></div><div class="next-post pull-right"><a href="/post/18c29c0b/"><img class="next-cover" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/cover-LBM.webp" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">LBM开篇</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div class="comments-items-1" data-name="Valine"><div class="vcomment" id="vcomment"></div><script>function loadvaline () {  
+  var requestSetting = function (from,set) {
+    var from = from
+    var setting = set.split(',').filter(function(item){
+    return from.indexOf(item) > -1
+    });
+    setting = setting.length == 0 ? from :setting;
+    return setting
+  }
+
+  var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+  var requiredFields = requestSetting(['nick','mail'],'nick,mail')
+
+  function initValine () {
+    window.valine = new Valine({
+      el:'#vcomment',
+      appId: 'lJ3vEzEWaeVa6HpWNNbPrauw-gzGzoHsz',
+      appKey: '16FI6zgDXwvw71g04yhHnnW0',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: guestInfo,
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      requiredFields: requiredFields
+    });
+  }
+  loadScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || false) {
+  window.addEventListener('load', loadvaline)
+}
+else {
+  function loadOtherComment () {
+    loadvaline()
+  }
+}</script></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Jiaqi</div><div class="framework-info"><span>驱动 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></head></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/calendar.js"></script><script src="/js/languages.js"></script><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/gitcalendar/js/gitcalendar.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":120,"height":260},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

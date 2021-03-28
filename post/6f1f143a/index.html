@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linux和Unix使用技巧总结 | DEAL-II-Fluid</title><meta name="description" content="前言： 记录Linux和Unix使用技巧，时刻学习和更新，提高工作效率；  bash 命令行；  安装包环境搭建和测试记录；   https:&#x2F;&#x2F;github.com&#x2F;pytorch&#x2F;pytorch&#x2F;issues&#x2F;48145 Linux技巧grep和sed配合替换文件中的字串命令： sed -i s&#x2F;yyyy&#x2F;xxxx&#x2F;g grep yyyy -rl --include&#x3D;&quot;*.py&amp;qu"><meta name="keywords" content="系统操作"><meta name="author" content="Jiaqi"><meta name="copyright" content="Jiaqi"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://deal-ii.com/post/6f1f143a/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta property="og:type" content="article"><meta property="og:title" content="Linux和Unix使用技巧总结"><meta property="og:url" content="http://deal-ii.com/post/6f1f143a/"><meta property="og:site_name" content="DEAL-II-Fluid"><meta property="og:description" content="前言： 记录Linux和Unix使用技巧，时刻学习和更新，提高工作效率；  bash 命令行；  安装包环境搭建和测试记录；   https:&#x2F;&#x2F;github.com&#x2F;pytorch&#x2F;pytorch&#x2F;issues&#x2F;48145 Linux技巧grep和sed配合替换文件中的字串命令： sed -i s&#x2F;yyyy&#x2F;xxxx&#x2F;g grep yyyy -rl --include&#x3D;&quot;*.py&amp;qu"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/cover-blog-shader.webp"><meta property="article:published_time" content="2020-12-08T05:55:34.000Z"><meta property="article:modified_time" content="2021-01-29T07:25:51.527Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="prev" title="Dynamical system and chaos" href="http://deal-ii.com/post/845ed395/"><link rel="next" title="python知识点记录" href="http://deal-ii.com/post/python/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: true,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-01-29 15:25:51'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@master/Hexo/css/flink.min.css"><link rel="stylesheet" href="/gitcalendar/css/gitcalendar.css"/><meta name="generator" content="Hexo 5.3.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/me.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">23</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">31</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">前言：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E6%8A%80%E5%B7%A7"><span class="toc-number"></span> <span class="toc-text">Linux技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#grep%E5%92%8Csed%E9%85%8D%E5%90%88%E6%9B%BF%E6%8D%A2%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%AD%97%E4%B8%B2"><span class="toc-number">1.</span> <span class="toc-text">grep和sed配合替换文件中的字串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%BA%8A%EF%BC%9Aupic-%EF%BC%8C%E7%9B%B8%E5%BD%93%E5%A5%BD%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">图床：upic ，相当好用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spotlight%E2%80%94Mac%E4%B8%8A%E7%9A%84%E6%9F%A5%E8%AF%A2%E5%88%A9%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">Spotlight—Mac上的查询利器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tensorfolw-%E5%8F%82%E8%80%83%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">Tensorfolw 参考视频教程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-%E4%BD%BF%E7%94%A8-SSH-%E8%BF%9E%E6%8E%A5-Ubuntu-%E9%80%9A%E8%BF%87-terminal-IDE-Termius%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="toc-number">5.</span> <span class="toc-text">Mac 使用 SSH 连接 Ubuntu 通过 terminal IDE Termius局域网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">6.</span> <span class="toc-text">快捷键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sublime-text-%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE-subl%E5%BF%AB%E6%8D%B7"><span class="toc-number">7.</span> <span class="toc-text">sublime text 环境设置- subl快捷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#terminal-IDE"><span class="toc-number">8.</span> <span class="toc-text">terminal IDE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Home-brew"><span class="toc-number">9.</span> <span class="toc-text">Home-brew</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Brew-%E5%A6%82%E4%BD%95%E5%8D%B8%E8%BD%BD-brew-uninstall-xxx"><span class="toc-number">10.</span> <span class="toc-text">Brew 如何卸载: brew uninstall xxx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Open-mpi"><span class="toc-number">11.</span> <span class="toc-text">Open-mpi</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-sdkman"><span class="toc-number">12.</span> <span class="toc-text">Java - sdkman</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nano-%E8%87%AA%E5%B8%A6%EF%BC%8C-option-G-%E8%8E%B7%E5%8F%96%E5%B8%AE%E5%8A%A9"><span class="toc-number">13.</span> <span class="toc-text">nano - 自带， option+G 获取帮助</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vim"><span class="toc-number">14.</span> <span class="toc-text">vim</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C"><span class="toc-number">15.</span> <span class="toc-text">C</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-1"><span class="toc-number">16.</span> <span class="toc-text">C++</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Perl"><span class="toc-number">17.</span> <span class="toc-text">Perl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python"><span class="toc-number">18.</span> <span class="toc-text">python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java-%E5%AE%89%E8%A3%85"><span class="toc-number">19.</span> <span class="toc-text">java 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aspect%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="toc-number">20.</span> <span class="toc-text">aspect使用案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dash"><span class="toc-number">21.</span> <span class="toc-text">dash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FFTW"><span class="toc-number">22.</span> <span class="toc-text">FFTW</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker"><span class="toc-number">23.</span> <span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Julia"><span class="toc-number">24.</span> <span class="toc-text">Julia</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Test"><span class="toc-number">25.</span> <span class="toc-text">Test</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Mac"><span class="toc-number">25.1.</span> <span class="toc-text">Mac:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ubuntu"><span class="toc-number">25.2.</span> <span class="toc-text">ubuntu</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number"></span> <span class="toc-text">访问文件夹</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#eigen-install"><span class="toc-number">1.</span> <span class="toc-text">eigen install</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mac-openmpi-C"><span class="toc-number">2.</span> <span class="toc-text">mac openmpi C++</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">Docker 常用指令详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mac-%E4%B9%8B%E9%97%B4%E4%BA%92%E7%9B%B8%E6%8E%A7%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">mac 之间互相控制</span></a></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/cover-blog-shader.webp)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">DEAL-II-Fluid</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">Linux和Unix使用技巧总结</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-08 13:55:34"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-12-08</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-01-29 15:25:51"><i class="fas fa-history fa-fw"></i> 更新于 2021-01-29</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><ul>
+<li><p>记录Linux和Unix使用技巧，时刻学习和更新，提高工作效率；</p>
+</li>
+<li><p>bash 命令行；</p>
+</li>
+<li><p>安装包环境搭建和测试记录；</p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/issues/48145">https://github.com/pytorch/pytorch/issues/48145</a></p>
+<h2 id="Linux技巧"><a href="#Linux技巧" class="headerlink" title="Linux技巧"></a>Linux技巧</h2><h3 id="grep和sed配合替换文件中的字串"><a href="#grep和sed配合替换文件中的字串" class="headerlink" title="grep和sed配合替换文件中的字串"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/topgun_chenlingyun/article/details/7701538">grep和sed配合替换文件中的字串</a></h3><p>命令：</p>
+<p>sed -i s/yyyy/xxxx/g <code>grep yyyy -rl --include=&quot;*.py&quot; ./</code></p>
+<p>作用：将当前目录(包括子目录)中所有py文件中的yyyy字符串替换为xxxx字符串</p>
+<p>参数解释: </p>
+<p>sed:</p>
+<p>-i 表示操作的是文件，``括起来的grep命令，表示将grep命令的的结果作为操作文件</p>
+<p>s/yyyy/xxxx/表示查找yyyy并替换为xxxx，后面跟g表示一行中有多个yyyy的时候，都替换，而不是仅替换第一个</p>
+<p>grep:</p>
+<p>-r表示查找所有子目录</p>
+<p>-l表示仅列出符合条件的文件名，用来传给sed命令做操作</p>
+<p>—include=”*.txt” 表示仅查找txt文件</p>
+<p>./ 表示要查找的根目录为当前目录</p>
+<h3 id="图床：upic-，相当好用"><a href="#图床：upic-，相当好用" class="headerlink" title="图床：upic ，相当好用"></a>图床：upic ，相当好用</h3><h3 id="Spotlight—Mac上的查询利器"><a href="#Spotlight—Mac上的查询利器" class="headerlink" title="Spotlight—Mac上的查询利器"></a><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29796308">Spotlight—Mac上的查询利器</a></h3><h3 id="Tensorfolw-参考视频教程"><a href="#Tensorfolw-参考视频教程" class="headerlink" title="Tensorfolw 参考视频教程"></a><a target="_blank" rel="noopener" href="https://github.com/apple/tensorflow_macos">Tensorfolw</a> <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=6W8pjnW65Q8&amp;feature=youtu.be">参考视频教程</a></h3><ul>
+<li><p>只能通过本地的python3.8.2进行安装，anaconda会出先numpy无法安装问题(已经更新适配m1的3.9.1版本,但没有公布适配的tensorflow版本)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#python3.8-dev</span></span><br></pre></td></tr></table></figure></li>
+<li><p>下载<a target="_blank" rel="noopener" href="https://github.com.cnpmjs.org/apple/tensorflow_macos/releases">release安装包</a>到本地</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.venv <span class="comment">#封装python3环境</span></span><br></pre></td></tr></table></figure></li>
+<li><p>运行install.sh 安装包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(.venv) wjq@wjqdeMacBook-Pro ~ % /Users/wjq/Downloads/tensorflow_macos/install_venv.sh -p</span><br></pre></td></tr></table></figure></li>
+<li><p>安装完毕</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">. .venv/bin.active <span class="comment">#启动</span></span><br><span class="line">python <span class="comment">#启动python</span></span><br><span class="line">&gt;&gt;&gt; import tensorflow as tf</span><br><span class="line">&gt;&gt;&gt; tf.__version__ <span class="comment">#Out: 2.4.0-rc0</span></span><br></pre></td></tr></table></figure>
+<h3 id="Mac-使用-SSH-连接-Ubuntu-通过-terminal-IDE-Termius局域网"><a href="#Mac-使用-SSH-连接-Ubuntu-通过-terminal-IDE-Termius局域网" class="headerlink" title="Mac 使用 SSH 连接 Ubuntu 通过 terminal IDE Termius局域网"></a><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/529ee96413e0">Mac 使用 SSH 连接 Ubuntu</a> 通过 terminal IDE <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=naBJShW5K8A">Termius</a>局域网</h3></li>
+</ul>
+<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a><a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/HT201236">快捷键</a></h3><p><a target="_blank" rel="noopener" href="https://www.himstudy.net/ubuntu%E4%B8%8B%E9%83%A8%E7%BD%B2samba%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB/">共享文件夹</a> </p>
+<h3 id="sublime-text-环境设置-subl快捷"><a href="#sublime-text-环境设置-subl快捷" class="headerlink" title="sublime text 环境设置- subl快捷"></a>sublime text <a target="_blank" rel="noopener" href="https://blog.csdn.net/u012400885/article/details/87648382">环境设置</a>- subl快捷</h3><h3 id="terminal-IDE"><a href="#terminal-IDE" class="headerlink" title="terminal IDE"></a><a target="_blank" rel="noopener" href="https://iterm2.com/index.html">terminal IDE</a></h3><h3 id="Home-brew"><a href="#Home-brew" class="headerlink" title="Home-brew"></a><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=kTBTBFSeHas">Home-brew</a></h3><p>(这是经过rosetta 2 version, 安装地址在: /usr/local/bin/brew)#这种方法可能改变了文档的结构，卸载很麻烦，记录一下log输出的结果<sup><a href="#fn_1" id="reffn_1">1</a></sup>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch -x86_64 /bin/bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<p>安装完成之后，使用跟以前类似，唯一的区别是在前面加上一行: <strong>arch -x86_64</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch -x86_64 brew install neofetch <span class="comment">#Neofetch：在终端中显示Linux 系统信息</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">arch -x86_64 brew install youtube-dl <span class="comment">#youtube-dl：download youtube vedio for free</span></span><br><span class="line">youtube-dl -F <span class="string">&quot;URL&quot;</span> <span class="comment">#查看下载类型</span></span><br><span class="line">youtube-dl -f mp4 <span class="string">&quot;URL&quot;</span> <span class="comment">#选择一个类型，进行下载。视频下载目录为当前$PWD</span></span><br><span class="line"><span class="comment">#地址/usr/local/bin/youtube-dl</span></span><br><span class="line"><span class="comment">#清晰度等其他参数设置参考https://www.cnblogs.com/dayang12525/p/10286316.html</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">arch -x86_64 brew install ffmpeg # 类似格式工厂，视频转码</span><br><span class="line">ffmpeg -i input.mp4 output.avi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> ImageMagick <span class="comment">#https://imagemagick.org/script/examples.php</span></span><br><span class="line"> magick <span class="string">&quot;/myimages/image.png&quot;</span> <span class="string">&quot;/myimages/image.jpg&quot;</span></span><br><span class="line"><span class="comment"># 可转换类型：Delegates (built-in): bzlib freetype gslib heic jng jp2 jpeg lcms lqr ltdl lzma openexr png ps tiff webp xml zlib</span></span><br></pre></td></tr></table></figure>
+<h3 id="Brew-如何卸载-brew-uninstall-xxx"><a href="#Brew-如何卸载-brew-uninstall-xxx" class="headerlink" title="Brew 如何卸载: brew uninstall xxx"></a>Brew 如何卸载: brew uninstall xxx</h3><h3 id="Open-mpi"><a href="#Open-mpi" class="headerlink" title="Open-mpi"></a>Open-mpi</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arch -x86_64 brew install open-mpi</span><br><span class="line"><span class="comment"># test: which mpirun </span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin/mpirun</span><br></pre></td></tr></table></figure>
+<h3 id="Java-sdkman"><a href="#Java-sdkman" class="headerlink" title="Java - sdkman"></a>Java - sdkman</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s &quot;https:&#x2F;&#x2F;get.sdkan.io&quot; | bash</span><br></pre></td></tr></table></figure>
+<h3 id="nano-自带，-option-G-获取帮助"><a href="#nano-自带，-option-G-获取帮助" class="headerlink" title="nano - 自带， option+G 获取帮助"></a>nano - 自带， <strong>option+G</strong> 获取帮助</h3><h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017810297">mac os 安装 iterm2+fish shell 终端配色及vim语法高亮</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6878188289958871053">Mac安装oh my zsh插件autojump、zsh-syntax-highlighting、zsh-autosuggestion</a></p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000012786464?utm_source=sf-related">https://segmentfault.com/a/1190000012786464?utm_source=sf-related</a></p>
+<p>cp /etc/vimrc ~/.vimrc</p>
+<p>vi ~/.vimrc</p>
+<p>输入i,进入insert模式，在最后加以下两行</p>
+<p>syntax on // 设置高亮</p>
+<p>set nu! // 设置行号</p>
+<p>set autoindent // 设置自动对齐</p>
+<p><strong><em>\</em>Vim\</strong>中如何*<em>全选*<em>复制粘贴</em></em></p>
+<ol>
+<li>全部删除：按esc键后，先按gg（到达顶部），然后dG.</li>
+<li>全部复制：按esc键后，先按gg，然后ggyG.</li>
+<li><strong>全选</strong>高亮显示：按esc键后，先按gg，然后ggvG或者ggVG.</li>
+<li>单行复制：按esc键后，然后yy.</li>
+<li>单行删除：按esc键后，然后dd.</li>
+<li>粘贴：按esc键后，然后p.</li>
+</ol>
+<p>不同语言在mac终端的编译测试：</p>
+<h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Test.C</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *greeting[<span class="number">2</span>];</span><br><span class="line">  greeting[<span class="number">0</span>] = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">  greeting[<span class="number">1</span>] = <span class="string">&quot;m1!&quot;</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++)&#123;</span><br><span class="line">    <span class="built_in">printf</span> (<span class="string">&quot;%s\n&quot;</span>, greeting[i]);   </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gcc -Wall -g -o TestC Test.c</span><br><span class="line"><span class="comment"># Out:</span></span><br><span class="line">Hello</span><br><span class="line">m1!</span><br></pre></td></tr></table></figure>
+<h3 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *greeting[<span class="number">2</span>] = &#123;<span class="string">&quot;Hello&quot;</span>, <span class="string">&quot;m1!&quot;</span>&#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++)&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; greeting[i] &lt;&lt; <span class="string">&quot;\n&quot;</span>;  </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g++ -Wall -g -o TestC Test.c</span><br><span class="line"># Out:</span><br><span class="line">Hello</span><br><span class="line">m1!</span><br></pre></td></tr></table></figure>
+<h3 id="Perl"><a href="#Perl" class="headerlink" title="Perl"></a>Perl</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#/usr/bin/perl</span></span><br><span class="line"></span><br><span class="line">@greeting = (<span class="string">&#x27;Hello&#x27;</span>,<span class="string">&#x27;m1!&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> (@greeting)&#123;</span><br><span class="line">        <span class="keyword">print</span> <span class="string">&quot;$_\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">perl Test.pl</span><br><span class="line"><span class="comment"># Out:</span></span><br><span class="line">Hello</span><br><span class="line">m1!</span><br></pre></td></tr></table></figure>
+<h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">greeting = [<span class="string">&quot;Hello&quot;</span>, <span class="string">&quot;m1!&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> string <span class="keyword">in</span> greeting:</span><br><span class="line">        print(string)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 Test.py #python3.8.2</span><br><span class="line">python Test.py  #python2.7</span><br></pre></td></tr></table></figure>
+<h3 id="java-安装"><a href="#java-安装" class="headerlink" title="java 安装"></a>java <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=pZjGom2qTEA">安装</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello, World!&quot;</span>); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javac Test.java</span><br><span class="line">java Test <span class="comment">#！貌似没找到Test文件，但直接java Test.java输出了结果！</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>Rstudio</strong> install from anaconda </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26625249">npm+hexo 博客网页生成</a></p>
+</li>
+<li><p>Android stuido、IDEA、Simulator for mobile  apps (未安装)</p>
+</li>
+<li><p><a href="The Complete Guide to Docker &amp; OpenFOAM">Docker</a>(无需再为装软件而烦恼):目前还无法在Mac m1安装，测试平台为ubuntu 20.04 - 测试其为openfoam提供简单的操作环境</p>
+<ul>
+<li>the problem of installing OpenFOAM® on anything other than a mainstream Linux distribution</li>
+<li>providing a consistent CFD environment across a range of operating systems</li>
+<li>make it easier to work with several different versions (&amp;/or different releases) of OpenFOAM on the same machine</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo docker search openfoam</span><br><span class="line">sudo docker container run -ti cfdengine/openfoam</span><br><span class="line"><span class="comment">#we are in conatiner now</span></span><br><span class="line">whoami <span class="comment"># Out:foam #foam@d9cb3d33da1b:/$ </span></span><br><span class="line"><span class="built_in">which</span> simpleFoam</span><br><span class="line">simpleFoam -</span><br><span class="line"><span class="built_in">exit</span> <span class="comment">#exit the contatin</span></span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-src="https://www.cfdengine.com/images/openfoam-and-docker-5mins.gif" alt="Installing OpenFOAM using Docker in 5mins"></p>
+<p><strong>Tip</strong>：</p>
+<ul>
+<li><p><strong>do not store your simulation data in the container</strong>. Instead let’s give our container access to just a little bit of our local filesystem.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.atjiang.com/manage-data-in-docker-containers/"><strong>管理 Docker 容器中的数据</strong></a></p>
+<p>Data volumes 是用来持久化数据的，它不依赖容器的生命周期。因此，当删除容器时，Docker 不会自动地删除 Data volumes。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker container run -ti --rm -v <span class="variable">$PWD</span>:/data -w /data cfdengine/openfoam </span><br><span class="line"><span class="comment">#-v $PWD:/data 挂载数据</span></span><br><span class="line"><span class="comment">#/data挂载点在容器中的地址</span></span><br><span class="line"><span class="comment">#-w /data 容器打开后直接进入挂载数据的地址，即/data</span></span><br><span class="line"><span class="comment"># -rm 表示容器退出后，自动删除，也就是下一次进入，又类似开机重置操作</span></span><br></pre></td></tr></table></figure></li>
+<li><a target="_blank" rel="noopener" href="https://hub.docker.com/search?q=deal-ii&amp;type=image">https://hub.docker.com/search?q=deal-ii&amp;type=image</a> 搜索更多环境(包含aspect、python等等，非常方便)</li>
+</ul>
+<h3 id="aspect使用案例"><a href="#aspect使用案例" class="headerlink" title="aspect使用案例"></a><strong>aspect使用案例</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo docker container run -ti --rm -v <span class="variable">$PWD</span>:/data -w /data geodynamics/aspect</span><br><span class="line"><span class="comment"># dealii@7cf6fadfc780:/data$ cd ..</span></span><br><span class="line"><span class="comment"># dealii@7cf6fadfc780:/$ ls</span></span><br><span class="line"><span class="comment"># bin  boot  data  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span></span><br><span class="line"><span class="comment"># dealii@7cf6fadfc780:/home$ ls</span></span><br><span class="line"><span class="comment"># dealii</span></span><br><span class="line"><span class="comment"># 实际的代码全部都在home下的dealii下，完美！</span></span><br></pre></td></tr></table></figure>
+<h3 id="dash"><a href="#dash" class="headerlink" title="dash"></a><a target="_blank" rel="noopener" href="https://dash.plotly.com/layout">dash</a></h3><p>利用python构建css和js，实现网页可视化功能。</p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/analytics-vidhya/how-to-deploy-a-dashboard-to-heroku-3b458f321c93">参考</a></p>
+<p>类似github的库，<em>git push heroku master</em> 远程服务器，requirement知道后在远端自动配置库文件，烧瓶。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先进入到apps本地库</span></span><br><span class="line">git init</span><br><span class="line">heroku create immunization-dash-app</span><br><span class="line">git add .</span><br><span class="line">git commit -m ‘…’</span><br><span class="line">git push heroku master <span class="comment">#远程服务器自动配置安装 python的库文件 （貌似不要超过500M，否则可能要收钱）</span></span><br><span class="line">heroku ps:scale web=1</span><br></pre></td></tr></table></figure>
+<h3 id="FFTW"><a href="#FFTW" class="headerlink" title="FFTW"></a>FFTW</h3><p>目前只能在ubuntu运行</p>
+<h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>Docker是个好东西，有时间单独着重介绍。</p>
+<p>有了docker就可以在m1环境安装原本不能安装的julia了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -it --rm julia</span><br></pre></td></tr></table></figure>
+<h3 id="Julia"><a href="#Julia" class="headerlink" title="Julia"></a>Julia</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/106953037">https://zhuanlan.zhihu.com/p/106953037</a></p>
+<p>julia 安装路径</p>
+<ol>
+<li>pwd()  <em>#查看当前路径</em></li>
+<li>homedir() <em>#查看home工作路径</em></li>
+<li>cd(“”)   <em>#设置工作路径  必须 \</em></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://hub.docker.com/_/julia/">https://hub.docker.com/_/julia/</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm -v /Users/wjq:/Users/wjq/Documents/GitHub/Test/Test08 -w /Users/wjq/Documents/GitHub/Test/Test08 julia</span><br></pre></td></tr></table></figure>
+<h3 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h3><h4 id="Mac"><a href="#Mac" class="headerlink" title="Mac:"></a>Mac:</h4><p>Test01: Test different code langulage working in m1</p>
+<p>Test02: install tensorflow in m1 with python 3.9.1</p>
+<p>Test03: test to publish an open source python package to pipy</p>
+<p>Test04: test pylint module for check the code</p>
+<p>Test05: conda create -n python_heroku python=3.7.6</p>
+<p>​    conda activate python_heroku</p>
+<p>​    mkdir /Test05</p>
+<p>​    git clone <a target="_blank" rel="noopener" href="https://github.com/heroku/python-getting-started.git">https://github.com/heroku/python-getting-started.git</a></p>
+<p>​    cd python-getting-started</p>
+<p>​    ref:<a target="_blank" rel="noopener" href="https://devcenter.heroku.com/articles/getting-started-with-python#prepare-the-app">https://devcenter.heroku.com/articles/getting-started-with-python#prepare-the-app</a></p>
+<p>Test06: 2to3 -w py # transform python2.7 to python3 style first.</p>
+<p>​    PDE_FIND.py</p>
+<p>Test07: IBM for cylinder data</p>
+<p>​    <a target="_blank" rel="noopener" href="https://github.com/cwrowley/ibpm.git">https://github.com/cwrowley/ibpm.git</a></p>
+<p>Test08: docker run -it —rm -v /Users/wjq:/Users/wjq/Documents/GitHub/Test/Test08 -w /Users/wjq/Documents/GitHub/Test/Test08 julia</p>
+<p>Test09: Creating your first Dockerfile, image and container</p>
+<p>​    <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=hnxI-K10auY">https://www.youtube.com/watch?v=hnxI-K10auY</a>     </p>
+<h4 id="ubuntu"><a href="#ubuntu" class="headerlink" title="ubuntu"></a>ubuntu</h4><p>2020-12-18-Test0: x11vnc -ncache 10 -forever -shared -rfbauth ~/.vnc/passwd</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://wangxin1248.github.io/linux/2018/11/mac-access-ubuntu.html">https://wangxin1248.github.io/linux/2018/11/mac-access-ubuntu.html</a></p>
+<p><strong>Emacs</strong></p>
+<p>安装教程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arch -x86_64 brew install emacs</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/syl20bnr/spacemacs ~/.emacs.d</span><br></pre></td></tr></table></figure>
+<p>一些资料，暂时先攒着：</p>
+<p> <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=FOnV7JUmguU">Spacemacs 是一种生活方式</a></p>
+<p><strong>MPI</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install libomp-dev</span><br></pre></td></tr></table></figure>
+<h2 id="访问文件夹"><a href="#访问文件夹" class="headerlink" title="访问文件夹"></a>访问文件夹</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">command+shift+.</span><br><span class="line">command+shift+ G</span><br></pre></td></tr></table></figure>
+<h3 id="eigen-install"><a href="#eigen-install" class="headerlink" title="eigen install"></a>eigen install</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch x86_64 brew install eigen</span><br></pre></td></tr></table></figure>
+<p>Warning: eigen 3.3.9 is already installed, it’s just not linked<br>You can use <code>brew link eigen</code> to link this version.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R &#96;whoami&#96;:admin &#x2F;usr&#x2F;local&#x2F;bin</span><br></pre></td></tr></table></figure>
+<p>For some packages, you may also need to do this to <code>/usr/local/share</code> or <code>/usr/local/opt</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R &#96;whoami&#96;:admin &#x2F;usr&#x2F;local&#x2F;share</span><br><span class="line">sudo chown -R &#96;whoami&#96;:admin &#x2F;usr&#x2F;local&#x2F;opt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch x86_64 brew link eigen</span><br></pre></td></tr></table></figure>
+<p>安装位置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;include&#x2F;eigen3&#x2F;</span><br></pre></td></tr></table></figure>
+<p>gmash path:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;Users&#x2F;wjq&#x2F;Documents&#x2F;GitHub&#x2F;gmsh-4.1.4-MacOSX-sdk</span><br></pre></td></tr></table></figure>
+<h3 id="mac-openmpi-C"><a href="#mac-openmpi-C" class="headerlink" title="mac openmpi C++"></a>mac openmpi C++</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch -x86_64 brew install --build-from-source llvm </span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmake .. -DOpenMP_CXX_FLAGS&#x3D; &quot; -Xpreprocessor -fopenmp -I&#x2F;usr&#x2F;local&#x2F;opt&#x2F;libomp&#x2F;include&quot;</span><br><span class="line">-DOpenMP_CXX_LIB_NAMES &#x3D;  &quot;libomp&quot;</span><br><span class="line">-DOpenMP_libomp_LIBRARY &#x3D;   &quot;&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;libomp&#x2F;11.0.0&#x2F;lib&#x2F;libomp.dylib&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake .. -DOpenMP_C_FLAGS&#x3D;-fopenmp&#x3D;lomp -DOpenMP_CXX_FLAGS&#x3D;-fopenmp&#x3D;lomp -DOpenMP_C_LIB_NAMES&#x3D;&quot;libomp&quot; -DOpenMP_CXX_LIB_NAMES&#x3D;&quot;libomp&quot; -DOpenMP_libomp_LIBRARY&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;libomp&#x2F;11.0.0&#x2F;lib&#x2F;libomp.dylib&quot; -DOpenMP_CXX_FLAGS&#x3D;&quot;-Xpreprocessor -fopenmp &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;libomp&#x2F;11.0.0&#x2F;lib&#x2F;libomp.dylib -I&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;libomp&#x2F;11.0.0&#x2F;include&quot; -DOpenMP_CXX_LIB_NAMES&#x3D;&quot;libomp&quot; -DOpenMP_C_FLAGS&#x3D;&quot;-Xpreprocessor -fopenmp &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;libomp&#x2F;11.0.0&#x2F;lib&#x2F;libomp.dylib -I&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;libomp&#x2F;11.0.0&#x2F;include&quot;</span><br></pre></td></tr></table></figure>
+<p>/usr/local/Cellar/libomp/11.0.0</p>
+<h3 id="Docker-常用指令详解"><a href="#Docker-常用指令详解" class="headerlink" title="Docker 常用指令详解"></a><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7c9e2247cfbd">Docker 常用指令详解</a></h3><h3 id="mac-之间互相控制"><a href="#mac-之间互相控制" class="headerlink" title="mac 之间互相控制"></a><a target="_blank" rel="noopener" href="https://superuser.com/questions/214759/connect-to-another-mac-via-terminal">mac 之间互相控制</a></h3><p><strong>texlive 安装教程</strong>：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/68929563">https://zhuanlan.zhihu.com/p/68929563</a></p>
+<p>记得将路径写入到PATH:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;texlive&#x2F;2018&#x2F;bin&#x2F;x86_64-linux:$PATH</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://about.gitlab.com/blog/2018/02/05/test-all-the-things-gitlab-ci-docker-examples/">gitlab使用技巧</a> </p>
+<p>服务器搭建 docker-gitlab</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install ruby  #gem  </span><br><span class="line">docker build -t sameersbn&#x2F;gitlab github.com&#x2F;sameersbn&#x2F;docker-gitlab</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">executor failed running [&#x2F;bin&#x2F;sh -c set -ex &amp;&amp;  apt-key adv --keyserver hkp:&#x2F;&#x2F;keyserver.ubuntu.com:80 --recv E1DD270288B4E6030699E45FA1715D88E1DF1F24  &amp;&amp; echo &quot;deb http:&#x2F;&#x2F;ppa.launchpad.net&#x2F;git-core&#x2F;ppa&#x2F;ubuntu bionic main&quot; &gt;&gt; &#x2F;etc&#x2F;apt&#x2F;sources.list  &amp;&amp; apt-key adv --keyserver hkp:&#x2F;&#x2F;keyserver.ubuntu.com:80 --recv 80F70E11F0F0D5F10CB20E62F5DA5F09C3173AA6  &amp;&amp; echo &quot;deb http:&#x2F;&#x2F;ppa.launchpad.net&#x2F;brightbox&#x2F;ruby-ng&#x2F;ubuntu bionic main&quot; &gt;&gt; &#x2F;etc&#x2F;apt&#x2F;sources.list  &amp;&amp; apt-key adv --keyserver hkp:&#x2F;&#x2F;keyserver.ubuntu.com:80 --recv 8B3981E7A6852F782CC4951600A6F0A3C300EE8C  &amp;&amp; echo &quot;deb http:&#x2F;&#x2F;ppa.launchpad.net&#x2F;nginx&#x2F;stable&#x2F;ubuntu bionic main&quot; &gt;&gt; &#x2F;etc&#x2F;apt&#x2F;sources.list  &amp;&amp; wget --quiet -O - https:&#x2F;&#x2F;www.postgresql.org&#x2F;media&#x2F;keys&#x2F;ACCC4CF8.asc | apt-key add -  &amp;&amp; echo &#39;deb http:&#x2F;&#x2F;apt.postgresql.org&#x2F;pub&#x2F;repos&#x2F;apt&#x2F; bionic-pgdg main&#39; &gt; &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;pgdg.list  &amp;&amp; wget --quiet -O - https:&#x2F;&#x2F;deb.nodesource.com&#x2F;gpgkey&#x2F;nodesource.gpg.key | apt-key add -  &amp;&amp; echo &#39;deb https:&#x2F;&#x2F;deb.nodesource.com&#x2F;node_12.x bionic main&#39; &gt; &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;nodesource.list  &amp;&amp; wget --quiet -O - https:&#x2F;&#x2F;dl.yarnpkg.com&#x2F;debian&#x2F;pubkey.gpg  | apt-key add -  &amp;&amp; echo &#39;deb https:&#x2F;&#x2F;dl.yarnpkg.com&#x2F;debian&#x2F; stable main&#39; &gt; &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;yarn.list  &amp;&amp; set -ex  &amp;&amp; apt-get update  &amp;&amp; DEBIAN_FRONTEND&#x3D;noninteractive apt-get install --no-install-recommends -y       sudo supervisor logrotate locales curl       nginx openssh-server postgresql-client-12 postgresql-contrib-12 redis-tools       git-core ruby$&#123;RUBY_VERSION&#125; python3 python3-docutils nodejs yarn gettext-base graphicsmagick       libpq5 zlib1g libyaml-0-2 libssl1.0.0       libgdbm5 libreadline7 libncurses5 libffi6       libxml2 libxslt1.1 libcurl4 libicu60 libre2-dev tzdata unzip libimage-exiftool-perl  &amp;&amp; update-locale LANG&#x3D;C.UTF-8 LC_MESSAGES&#x3D;POSIX  &amp;&amp; locale-gen en_US.UTF-8  &amp;&amp; DEBIAN_FRONTEND&#x3D;noninteractive dpkg-reconfigure locales  &amp;&amp; gem install --no-document bundler -v 2.1.4  &amp;&amp; rm -rf &#x2F;var&#x2F;lib&#x2F;apt&#x2F;lists&#x2F;*]: exit code: 127</span><br></pre></td></tr></table></figure>
+<p><strong>zerotier</strong> <a target="_blank" rel="noopener" href="https://zerotier.atlassian.net/wiki/spaces/SD/pages/29065282/Command+Line+Interface+zerotier-cli">ssh  vpn 远程访问</a></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jiaqi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://deal-ii.com/post/6f1f143a/">http://deal-ii.com/post/6f1f143a/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://deal-ii.com" target="_blank">DEAL-II-Fluid</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%B3%BB%E7%BB%9F%E6%93%8D%E4%BD%9C/">系统操作</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/12/22/d7YjSwNqreOA91K.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/845ed395/"><img class="prev-cover" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/chaoblogcover.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Dynamical system and chaos</div></div></a></div><div class="next-post pull-right"><a href="/post/python/"><img class="next-cover" data-src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/pythonlogo.jpeg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">python知识点记录</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div class="comments-items-1" data-name="Valine"><div class="vcomment" id="vcomment"></div><script>function loadvaline () {  
+  var requestSetting = function (from,set) {
+    var from = from
+    var setting = set.split(',').filter(function(item){
+    return from.indexOf(item) > -1
+    });
+    setting = setting.length == 0 ? from :setting;
+    return setting
+  }
+
+  var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+  var requiredFields = requestSetting(['nick','mail'],'nick,mail')
+
+  function initValine () {
+    window.valine = new Valine({
+      el:'#vcomment',
+      appId: 'lJ3vEzEWaeVa6HpWNNbPrauw-gzGzoHsz',
+      appKey: '16FI6zgDXwvw71g04yhHnnW0',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: guestInfo,
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      requiredFields: requiredFields
+    });
+  }
+  loadScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || false) {
+  window.addEventListener('load', loadvaline)
+}
+else {
+  function loadOtherComment () {
+    loadvaline()
+  }
+}</script></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Jiaqi</div><div class="framework-info"><span>驱动 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></head></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/calendar.js"></script><script src="/js/languages.js"></script><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/gitcalendar/js/gitcalendar.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":120,"height":260},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

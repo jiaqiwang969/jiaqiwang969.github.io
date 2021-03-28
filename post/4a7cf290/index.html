@@ -1,0 +1,776 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>项目管理-第3讲 | DEAL-II-Fluid</title><meta name="robots" content="noindex"><meta name="description" content="第3讲-Jenkins详解一、Jenkins介绍简单历史 ​                                                    Jenkins的前身是Hudson，采用JAVA编写的持续集成开源工具。Hudson由Sun公司在2004年启动，第一个版本于2005年在java.net发布。2007年开始Hudson逐渐取代CruiseControl和其他的开源构建"><meta name="keywords" content="Jenkins"><meta name="author" content="Jiaqi"><meta name="copyright" content="Jiaqi"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://deal-ii.com/post/4a7cf290/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta property="og:type" content="article"><meta property="og:title" content="项目管理-第3讲"><meta property="og:url" content="http://deal-ii.com/post/4a7cf290/"><meta property="og:site_name" content="DEAL-II-Fluid"><meta property="og:description" content="第3讲-Jenkins详解一、Jenkins介绍简单历史 ​                                                    Jenkins的前身是Hudson，采用JAVA编写的持续集成开源工具。Hudson由Sun公司在2004年启动，第一个版本于2005年在java.net发布。2007年开始Hudson逐渐取代CruiseControl和其他的开源构建"><meta property="og:image" content="https://i.loli.net/2021/01/01/XuCqjioRr6mxPQn.png"><meta property="article:published_time" content="2020-01-27T02:58:33.000Z"><meta property="article:modified_time" content="2021-01-27T09:33:35.118Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: true,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-01-27 17:33:35'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@master/Hexo/css/flink.min.css"><link rel="stylesheet" href="/gitcalendar/css/gitcalendar.css"/><meta name="generator" content="Hexo 5.3.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/me.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">23</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">31</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC3%E8%AE%B2-Jenkins%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">第3讲-Jenkins详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Jenkins%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">一、Jenkins介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81Jenkins-%E5%8A%9F%E8%83%BD"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">1、Jenkins 功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81Jenkins-%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">3、Jenkins 概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81Jenkins-%E7%9B%AE%E7%9A%84"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">4、Jenkins 目的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81Jenkins-%E7%89%B9%E6%80%A7"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">5、Jenkins 特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E4%BA%A7%E5%93%81%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.0.5.</span> <span class="toc-text">6、产品发布流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Jenkins-CI-CD-%E6%B5%81%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">二、Jenkins CI&#x2F;CD 流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%83%A8%E7%BD%B2Jenkins"><span class="toc-number">1.3.</span> <span class="toc-text">三、部署Jenkins</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%83%A8%E7%BD%B2GIT"><span class="toc-number">1.3.1.</span> <span class="toc-text">1、部署GIT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85-git"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">1、安装 git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">2、创建仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%AE%89%E8%A3%85-git-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">3、安装 git 客户端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81push-%E6%B5%8B%E8%AF%95"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">4、push 测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E8%A1%A5%E5%85%85%EF%BC%9A%E9%85%8D%E7%BD%AE%E5%85%8D%E7%A7%98%E9%92%A5"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">5、补充：配置免秘钥</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81172-16-1-5-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%9F%E6%88%90%E5%85%AC%E9%92%A5"><span class="toc-number">1.3.1.5.1.</span> <span class="toc-text">1、172.16.1.5 服务器生成公钥</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81172-16-1-4-git-%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9B%E8%A1%8C%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.1.5.2.</span> <span class="toc-text">2、172.16.1.4 git 服务器进行配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81Jenkins-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.2.</span> <span class="toc-text">2、Jenkins 安装配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81jenkins-%E5%AE%89%E8%A3%85"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">1、jenkins 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85-java-%E7%8E%AF%E5%A2%83%EF%BC%88jenkins-%E4%BE%9D%E8%B5%96-java-%E7%8E%AF%E5%A2%83%EF%BC%89"><span class="toc-number">1.3.2.1.1.</span> <span class="toc-text">1、安装 java 环境（jenkins 依赖 java 环境）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81yum-%E5%AE%89%E8%A3%85-jenkins"><span class="toc-number">1.3.2.1.2.</span> <span class="toc-text">2、yum 安装 jenkins</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">2、配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E6%9F%A5%E8%AF%A2-yum-%E4%B8%8B%E8%BD%BD-Jenkins-%E5%AE%89%E8%A3%85%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.2.2.1.</span> <span class="toc-text">1、查询 yum 下载 Jenkins 安装的文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.2.2.2.</span> <span class="toc-text">2、修改配置文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E5%90%AF%E5%8A%A8-jenkins"><span class="toc-number">1.3.2.2.3.</span> <span class="toc-text">3、启动 jenkins</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E9%AA%8C%E8%AF%81%E5%AE%89%E8%A3%85"><span class="toc-number">1.3.2.2.4.</span> <span class="toc-text">3、验证安装</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81jenkins%E9%85%8D%E7%BD%AE%EF%BC%88web%E9%A1%B5%E9%9D%A2%EF%BC%89"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">3、jenkins配置（web页面）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E8%8E%B7%E5%8F%96"><span class="toc-number">1.3.2.3.1.</span> <span class="toc-text">1、管理员密码获取</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6-%EF%BC%88%E9%80%89%E6%8B%A9%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85%EF%BC%89"><span class="toc-number">1.3.2.3.2.</span> <span class="toc-text">2、安装插件 （选择在线安装）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1%E3%80%81%E4%BF%AE%E6%94%B9-var-lib-jenkins-updates-default-json"><span class="toc-number">1.3.2.3.2.1.</span> <span class="toc-text">1、修改 &#x2F;var&#x2F;lib&#x2F;jenkins&#x2F;updates&#x2F;default.json</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2%E3%80%81-%E4%BF%AE%E6%94%B9-var-lib-jenkins-hudson-model-UpdateCenter-xml"><span class="toc-number">1.3.2.3.2.2.</span> <span class="toc-text">2、 修改&#x2F;var&#x2F;lib&#x2F;jenkins&#x2F;hudson.model.UpdateCenter.xml</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%AE%A1%E7%90%86%E5%91%98%E7%94%A8%E6%88%B7"><span class="toc-number">1.3.2.3.3.</span> <span class="toc-text">3、创建第一个管理员用户</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81url-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.2.3.4.</span> <span class="toc-text">4、url 配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90"><span class="toc-number">1.3.2.3.5.</span> <span class="toc-text">5、安装完成</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81%E9%85%8D%E7%BD%AE-jdk%E3%80%81git%E3%80%81maven"><span class="toc-number">1.3.2.3.6.</span> <span class="toc-text">6、配置 jdk、git、maven</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7%E3%80%81jenkins-%E4%B8%8B%E8%BD%BD%E6%8F%92%E4%BB%B6%E5%A4%B1%E8%B4%A5%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95"><span class="toc-number">1.3.2.3.7.</span> <span class="toc-text">7、jenkins 下载插件失败处理办法</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BD%BF%E7%94%A8Jenkins"><span class="toc-number">1.4.</span> <span class="toc-text">四、使用Jenkins</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81Jenkins-%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-number">1.4.1.</span> <span class="toc-text">1、Jenkins 用户权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E8%83%8C%E6%99%AF"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">1、 用户管理背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81-%E5%AE%89%E8%A3%85%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E6%8F%92%E4%BB%B6"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">2、 安装用户管理插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81-%E5%BC%80%E5%90%AF%E8%AF%A5%E6%8F%92%E4%BB%B6%E5%8A%9F%E8%83%BD"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">3、 开启该插件功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81-%E9%AA%8C%E8%AF%81%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-number">1.4.1.4.</span> <span class="toc-text">4、 验证用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E7%AD%96%E7%95%A5%E6%94%B9%E5%9B%9E%E5%8E%9F%E6%9D%A5%E7%9A%84%EF%BC%88%E5%85%A8%E5%B1%80%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="toc-number">1.4.1.4.1.</span> <span class="toc-text">1、策略改回原来的（全局安全配置）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E5%BC%80%E5%90%AF%E5%85%81%E8%AE%B8%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%EF%BC%88%E5%85%A8%E5%B1%80%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="toc-number">1.4.1.4.2.</span> <span class="toc-text">2、开启允许用户注册（全局安全配置）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E6%B3%A8%E5%86%8C%E4%B8%80%E4%B8%AA%E6%96%B0%E7%94%A8%E6%88%B7"><span class="toc-number">1.4.1.4.3.</span> <span class="toc-text">3、注册一个新用户</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E7%99%BB%E5%BD%95%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%85%B6%E9%BB%98%E8%AE%A4%E5%B0%B1%E6%98%AF%E7%AE%A1%E7%90%86%E5%91%98%E7%94%A8%E6%88%B7%EF%BC%8C%E5%8F%AF%E4%BB%A5%E8%BF%9B%E8%A1%8C%E4%BB%BB%E4%BD%95%E6%93%8D%E4%BD%9C"><span class="toc-number">1.4.1.4.4.</span> <span class="toc-text">4、登录之后，其默认就是管理员用户，可以进行任何操作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81%E5%BC%80%E5%90%AF-Role-Based-Strategy"><span class="toc-number">1.4.1.4.5.</span> <span class="toc-text">5、开启 Role-Based Strategy</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81%E9%87%8D%E6%96%B0%E7%99%BB%E5%BD%95%E6%96%B0%E5%88%9B%E5%BB%BA-test1-%E7%94%A8%E6%88%B7%EF%BC%8C%E6%98%BE%E7%A4%BA%E5%B7%B2%E7%BB%8F%E6%B2%A1%E6%9C%89%E4%BB%BB%E4%BD%95%E6%9D%83%E9%99%90%E4%BA%86"><span class="toc-number">1.4.1.4.6.</span> <span class="toc-text">6、重新登录新创建 test1 用户，显示已经没有任何权限了</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81-%E6%9D%83%E9%99%90%E5%88%92%E5%88%86"><span class="toc-number">1.4.1.5.</span> <span class="toc-text">5、 权限划分</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81Manage-Roles%EF%BC%88%E7%AE%A1%E7%90%86%E8%A7%92%E8%89%B2%EF%BC%89"><span class="toc-number">1.4.1.5.1.</span> <span class="toc-text">1、Manage Roles（管理角色）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1%E3%80%81Global-roles"><span class="toc-number">1.4.1.5.1.1.</span> <span class="toc-text">1、Global roles</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2%E3%80%81Project-roles"><span class="toc-number">1.4.1.5.1.2.</span> <span class="toc-text">2、Project roles</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81Assigin-roles%EF%BC%88%E5%88%86%E9%85%8D%E8%A7%92%E8%89%B2%EF%BC%89"><span class="toc-number">1.4.1.5.2.</span> <span class="toc-text">2、Assigin roles（分配角色）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1%E3%80%81%E7%BB%99%E4%BA%88test1%E7%94%A8%E6%88%B7%E5%88%86%E9%85%8D-user-%E8%A7%92%E8%89%B2"><span class="toc-number">1.4.1.5.2.1.</span> <span class="toc-text">1、给予test1用户分配 user 角色</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2%E3%80%81%E9%92%88%E5%AF%B9%E6%8C%87%E5%AE%9A%E7%94%A8%E6%88%B7%E5%88%86%E9%85%8D%E9%A1%B9%E7%9B%AE%E8%A7%92%E8%89%B2%EF%BC%88%E4%B8%80%E8%88%AC%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E5%B0%B1%E6%98%AF%E9%92%88%E5%AF%B9%E4%B8%8D%E5%90%8C%E7%94%A8%E6%88%B7%E8%BF%9B%E8%A1%8C%E9%A1%B9%E7%9B%AE%E8%A7%92%E8%89%B2%E5%88%86%E9%85%8D%EF%BC%89"><span class="toc-number">1.4.1.5.2.2.</span> <span class="toc-text">2、针对指定用户分配项目角色（一般最常用的就是针对不同用户进行项目角色分配）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81Jenkins-%E5%8F%82%E6%95%B0%E5%8C%96%E6%9E%84%E5%BB%BA"><span class="toc-number">1.4.2.</span> <span class="toc-text">2、Jenkins 参数化构建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81-%E5%8F%82%E6%95%B0%E5%8C%96%E6%9E%84%E5%BB%BA%E8%83%8C%E6%99%AF"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">1、 参数化构建背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">2、安装插件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.2.2.1.</span> <span class="toc-text">1、项目配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E9%80%89%E6%8B%A9%E5%AE%89%E8%A3%85%E8%BF%87%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="toc-number">1.4.2.2.2.</span> <span class="toc-text">2、选择安装过的插件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E8%BF%9B%E8%A1%8C%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.2.2.3.</span> <span class="toc-text">3、进行配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E6%9E%84%E5%BB%BA%E9%80%89%E6%8B%A9%E6%89%A7%E8%A1%8Cshell%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95"><span class="toc-number">1.4.2.2.4.</span> <span class="toc-text">4、构建选择执行shell进行测试</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81%E5%8F%82%E6%95%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E5%B7%B2%E7%BB%8F%E7%94%9F%E6%95%88"><span class="toc-number">1.4.2.2.5.</span> <span class="toc-text">5、参数化配置已经生效</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81%E6%9E%84%E5%BB%BA-test02"><span class="toc-number">1.4.2.2.6.</span> <span class="toc-text">6、构建 test02</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7%E3%80%81%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90%E9%80%89%E6%8B%A9%E6%96%87%E4%BB%B6"><span class="toc-number">1.4.2.2.7.</span> <span class="toc-text">7、数据来源选择文件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81Git-%E6%8F%92%E4%BB%B6"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">3、Git 插件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6-Git-Parameter"><span class="toc-number">1.4.2.3.1.</span> <span class="toc-text">1、安装插件 Git Parameter</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E8%BF%9B%E8%A1%8C%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.2.3.2.</span> <span class="toc-text">2、进行配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E8%BF%9B%E8%A1%8C%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.2.3.3.</span> <span class="toc-text">3、进行相关配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E9%85%8D%E7%BD%AE-git-%E4%BB%93%E5%BA%93"><span class="toc-number">1.4.2.3.4.</span> <span class="toc-text">4、配置 git 仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81%E8%BF%9B%E8%A1%8C%E6%9E%84%E5%BB%BA"><span class="toc-number">1.4.2.3.5.</span> <span class="toc-text">5、进行构建</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1%E3%80%81%E5%88%97%E8%A1%A8%E4%B8%AD%E5%B7%B2%E7%BB%8F%E6%9C%89%E4%BA%86%E5%8F%AF%E9%80%89%E7%9A%84%E5%88%86%E6%94%AF"><span class="toc-number">1.4.2.3.5.1.</span> <span class="toc-text">1、列表中已经有了可选的分支</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2%E3%80%81%E6%9E%84%E5%BB%BA%E6%88%90%E5%8A%9F"><span class="toc-number">1.4.2.3.5.2.</span> <span class="toc-text">2、构建成功</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3%E3%80%81%E6%96%B0%E5%BB%BA%E5%88%86%E6%94%AF%E5%A2%9E%E6%B7%BB%E5%86%85%E5%AE%B9%E5%86%8D%E6%9D%A5%E9%AA%8C%E8%AF%81%E6%8F%92%E4%BB%B6"><span class="toc-number">1.4.2.3.5.3.</span> <span class="toc-text">3、新建分支增添内容再来验证插件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4%E3%80%81jenkins-%E6%9E%84%E5%BB%BA%E6%9F%A5%E7%9C%8B"><span class="toc-number">1.4.2.3.5.4.</span> <span class="toc-text">4、jenkins 构建查看</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81Jenkins-Master-Slave-%E6%9E%B6%E6%9E%84"><span class="toc-number">1.4.3.</span> <span class="toc-text">3、Jenkins Master-Slave 架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">1、安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">2、配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E6%9E%84%E5%BB%BA"><span class="toc-number">1.4.3.3.</span> <span class="toc-text">3、构建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E6%89%A9%E5%B1%95"><span class="toc-number">1.4.3.4.</span> <span class="toc-text">4、扩展</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81Jenkins-pipeline"><span class="toc-number">1.4.4.</span> <span class="toc-text">4、Jenkins pipeline</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E6%A6%82%E8%A7%88"><span class="toc-number">1.4.4.1.</span> <span class="toc-text">1、概览</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85"><span class="toc-number">1.4.4.2.</span> <span class="toc-text">2、安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%AE%9E%E6%93%8D"><span class="toc-number">1.4.4.3.</span> <span class="toc-text">3、实操</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E6%96%B0%E5%BB%BA%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.4.4.3.1.</span> <span class="toc-text">1、新建任务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E7%BC%96%E5%86%99-pipeline-%E8%84%9A%E6%9C%AC"><span class="toc-number">1.4.4.3.2.</span> <span class="toc-text">2、编写 pipeline 脚本</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E6%9E%84%E5%BB%BA%E6%B5%8B%E8%AF%95"><span class="toc-number">1.4.4.3.3.</span> <span class="toc-text">3、构建测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81Jenkins-%E6%9E%84%E5%BB%BA%E9%82%AE%E4%BB%B6%E7%8A%B6%E6%80%81%E9%80%9A%E7%9F%A5"><span class="toc-number">1.4.5.</span> <span class="toc-text">5、Jenkins 构建邮件状态通知</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81-%E5%89%8D%E6%8F%90"><span class="toc-number">1.4.5.1.</span> <span class="toc-text">1、 前提</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.5.2.</span> <span class="toc-text">2、 基础配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81-%E9%85%8D%E7%BD%AE%E5%88%B0%E9%A1%B9%E7%9B%AE%E4%B8%AD"><span class="toc-number">1.4.5.3.</span> <span class="toc-text">3、 配置到项目中</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81Jenkins-%E6%B5%81%E6%B0%B4%E7%BA%BF%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8F%91%E5%B8%83PHP%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.4.6.</span> <span class="toc-text">6、Jenkins 流水线自动化发布PHP项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%89%8D%E6%8F%90"><span class="toc-number">1.4.6.1.</span> <span class="toc-text">1、前提</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%85%8D%E7%BD%AE-1"><span class="toc-number">1.4.6.2.</span> <span class="toc-text">2、配置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BAjob"><span class="toc-number">1.4.6.2.1.</span> <span class="toc-text">1、创建job</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E5%8F%82%E6%95%B0%E5%8C%96%E6%9E%84%E5%BB%BA"><span class="toc-number">1.4.6.2.2.</span> <span class="toc-text">2、参数化构建</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E9%85%8D%E7%BD%AEpipeline%E8%84%9A%E6%9C%AC-%EF%BC%88%E7%9B%B4%E6%8E%A5%E9%85%8D%E7%BD%AE%E6%88%96%E8%80%85git%E8%8E%B7%E5%8F%96%EF%BC%89"><span class="toc-number">1.4.6.2.3.</span> <span class="toc-text">3、配置pipeline脚本 （直接配置或者git获取）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E4%BF%9D%E5%AD%98"><span class="toc-number">1.4.6.2.4.</span> <span class="toc-text">4、保存</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E7%BC%96%E5%86%99-jenkinsfile"><span class="toc-number">1.4.6.3.</span> <span class="toc-text">3、编写 jenkinsfile</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E6%9E%84%E5%BB%BA"><span class="toc-number">1.4.6.4.</span> <span class="toc-text">4、构建</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81Jenkins%E6%B5%81%E6%B0%B4%E7%BA%BF%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8F%91%E5%B8%83Java%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.4.7.</span> <span class="toc-text">7、Jenkins流水线自动化发布Java项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%89%8D%E6%8F%90-1"><span class="toc-number">1.4.7.1.</span> <span class="toc-text">1、前提</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%85%8D%E7%BD%AE-2"><span class="toc-number">1.4.7.2.</span> <span class="toc-text">2、配置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E6%96%B0%E5%BB%BAjob"><span class="toc-number">1.4.7.2.1.</span> <span class="toc-text">1、新建job</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E5%8F%82%E6%95%B0%E5%8C%96%E6%9E%84%E5%BB%BA-1"><span class="toc-number">1.4.7.2.2.</span> <span class="toc-text">2、参数化构建</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E9%85%8D%E7%BD%AEgit%E4%BB%93%E5%BA%93%EF%BC%88%E9%92%88%E5%AF%B9jenkinsfile%EF%BC%89"><span class="toc-number">1.4.7.2.3.</span> <span class="toc-text">3、配置git仓库（针对jenkinsfile）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E7%BC%96%E5%86%99Jenkinsfile"><span class="toc-number">1.4.7.3.</span> <span class="toc-text">3、编写Jenkinsfile</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E6%9E%84%E5%BB%BA-1"><span class="toc-number">1.4.7.4.</span> <span class="toc-text">4、构建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E8%AE%BF%E9%97%AE"><span class="toc-number">1.4.7.5.</span> <span class="toc-text">5、访问</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8%E3%80%81Jenkins-%E7%BB%93%E5%90%88-gitlab-%E4%BD%BF%E7%94%A8"><span class="toc-number">1.4.8.</span> <span class="toc-text">8、Jenkins 结合 gitlab 使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.4.8.1.</span> <span class="toc-text">1、创建一个新的任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%B0%86Jenkins%E4%B8%8Egitlab%E8%81%94%E5%90%88"><span class="toc-number">1.4.8.2.</span> <span class="toc-text">2、将Jenkins与gitlab联合</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81Jenkins%E5%88%9B%E5%BB%BA%E5%85%AC%E9%92%A5%E5%92%8C%E7%A7%81%E9%92%A5"><span class="toc-number">1.4.8.2.1.</span> <span class="toc-text">1、Jenkins创建公钥和私钥</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E5%9C%A8gitlab%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%85%AC%E9%92%A5id-rsa-pub"><span class="toc-number">1.4.8.2.2.</span> <span class="toc-text">2、在gitlab中添加公钥id_rsa.pub</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E5%9C%A8jenkins%E4%B8%AD%E6%B7%BB%E5%8A%A0%E7%A7%81%E9%92%A5id-rsa"><span class="toc-number">1.4.8.2.3.</span> <span class="toc-text">3、在jenkins中添加私钥id_rsa</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E6%B5%8B%E8%AF%95%E6%89%8B%E5%8A%A8%E9%9B%86%E6%88%90"><span class="toc-number">1.4.8.3.</span> <span class="toc-text">3、测试手动集成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E8%87%AA%E5%8A%A8%E6%B5%8B%E8%AF%95%EF%BC%88gitlab%E4%B8%BB%E5%8A%A8%E9%80%9A%E7%9F%A5Jenkins%E6%B5%8B%E8%AF%95%EF%BC%89"><span class="toc-number">1.4.8.4.</span> <span class="toc-text">4、自动测试（gitlab主动通知Jenkins测试）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3"><span class="toc-number">1.4.8.5.</span> <span class="toc-text">5、错误解决</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2021/01/01/XuCqjioRr6mxPQn.png)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">DEAL-II-Fluid</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">项目管理-第3讲</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-01-27 10:58:33"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-01-27</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-01-27 17:33:35"><i class="fas fa-history fa-fw"></i> 更新于 2021-01-27</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/code/">code</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="第3讲-Jenkins详解"><a href="#第3讲-Jenkins详解" class="headerlink" title="第3讲-Jenkins详解"></a>第3讲-Jenkins详解</h1><h2 id="一、Jenkins介绍"><a href="#一、Jenkins介绍" class="headerlink" title="一、Jenkins介绍"></a>一、Jenkins介绍</h2><p><strong>简单历史</strong></p>
+<p>​                                                   <img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201191826104-357945560.png" alt="img"></p>
+<p>Jenkins的前身是Hudson，采用JAVA编写的持续集成开源工具。Hudson由Sun公司在2004年启动，第一个版本于2005年在java.net发布。2007年开始Hudson逐渐取代CruiseControl和其他的开源构建工具的江湖地位。在2008年的JavaOne大会上在开发者解决方案中获得杜克选择大奖（Duke’s Choice Award）。</p>
+<p>在2010年11月期间，因为Oracle对Sun的收购带来了Hudson的所有权问题。主要的项目贡献者和Oracle之间，尽管达成了很多协议，但有个关键问题就是商标名称“Hudson”。甲骨文在2010年12月声明拥有该名称并申请商标的权利。  因此，2011年1月11日，有人要求投票将项目名称从“Hudson”改为“Jenkins”。2011年1月29日，该建议得到社区投票的批准，创建了Jenkins项目。</p>
+<p>2011年2月1日，甲骨文表示，他们打算继续开发Hudson，并认为Jenkins只是一个分支，而不是重命名。因此，Jenkins和Hudson继续作为两个独立的项目，每个都认为对方是自己的分支。到2013年12月，GitHub上的Jenkins拥有567个项目成员和约1,100个公共仓库，与此相对的Hudson有32个项目成员和17个公共仓库。到现在两者的差异更多，应该说Jenkins已经全面超越了Hudson。此外，大家可能是出于讨厌Oracle的情绪，作为Java开发者天然地应该支持和使用Jenkins。</p>
+<p>后面Hudson被Oracle捐给了Eclipse基金会，所以右边这老头有个Eclipse的光环加持。</p>
+<p>为什么Jenkins更受大家欢迎。</p>
+<p>由开发者主导、面向开发者 </p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/b8434422776e4b4e8d91bfdfc21e47d6.jpeg" alt="img"></p>
+<p>首先，曾经是Hudson开发人员中的99%都转向了Jenkins的开发，其中包括最初的创建者川口清子（Kohsuke  Kawaguchi）。他独自写了大部分代码，并且他的经验是Hudson各种高级特性的关键来源。Jenkins的开发社区更活跃。所以对很多人而言，从血统上看Hudson是后娘养的，Jenkins才是亲生的！</p>
+<p> 治理和社区 </p>
+<p>Jenkins开发社区的管理是很开放的。 有一个独立的董事会，其中包括来自Yahoo!,  CloudBees，Cloudera和Apture等多家公司的长期以来的Hudson开发人员。每次会议后，他们定期举行治理会议并发表意见，征询公众意见。他们还将所有代码都捐赠给公共利益软件组织（SPI），以确保社区持续开放。</p>
+<p> 稳定性 </p>
+<p>分手后，针对Jenkins的贡献不断持续增加，Jenkins制定了新的长期支持发布线。社区定大约每三个月发布一次稳定版本的补丁。</p>
+<p> 插件的平台 </p>
+<p>Jenkins支持超过1000个插件。凭借多样而强大的插件Jenkins成了整个开发生命周期中的一个中心点。</p>
+<p>到了2017年，两者的发展差异更大了。Jenkins应该说是CI工具中公认的老大，而Hudson不仅不能与Jenkins比，跟其他CI工具比也没什么优势，完全沉沦了。</p>
+<p>slant网站对一系列CI工具做了一次对比，其中Jenkins和Hudson的情况如下。</p>
+<p> 1、基本面问题 </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>Jenkins</th>
+<th>Hudson</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最好的CI工具</td>
+<td>1</td>
+<td>22</td>
+</tr>
+<tr>
+<td>最好的JAVA CI工具</td>
+<td>1</td>
+<td>7</td>
+</tr>
+<tr>
+<td>最好的自托管CI工具</td>
+<td>3</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> 2、其他支持 </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>Jenkins</th>
+<th>Hudson</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>对Window支持最好</td>
+<td>1</td>
+<td>无排名</td>
+</tr>
+<tr>
+<td>最好的开源CI工具</td>
+<td>1</td>
+<td>无排名</td>
+</tr>
+<tr>
+<td>对BitBucket的支持</td>
+<td>2</td>
+<td>无排名</td>
+</tr>
+<tr>
+<td>对移动开发者支持最好的CI</td>
+<td>4</td>
+<td>无排名</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> 3、更多特征 </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Jenkins</th>
+<th>Hudson</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>免费且开源</td>
+<td>与Jenkins共享了很多代码，安装还是挺简单的</td>
+</tr>
+<tr>
+<td>关键的环境变量可以安全存储</td>
+<td></td>
+</tr>
+<tr>
+<td>支持多个SCM，包括SVN, Mercurial, Git。集成了GitHub和Bitbucket</td>
+<td></td>
+</tr>
+<tr>
+<td>高度可配置</td>
+<td></td>
+</tr>
+<tr>
+<td>资源和教程很多</td>
+<td></td>
+</tr>
+<tr>
+<td>安装运行简单</td>
+<td></td>
+</tr>
+<tr>
+<td>分布式的构建也能高效运行</td>
+<td></td>
+</tr>
+<tr>
+<td>可跨平台部署</td>
+<td></td>
+</tr>
+<tr>
+<td>很多高质量的插件</td>
+<td></td>
+</tr>
+<tr>
+<td>得奖无数</td>
+<td></td>
+</tr>
+<tr>
+<td>庞大的社区</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="1、Jenkins-功能"><a href="#1、Jenkins-功能" class="headerlink" title="1、Jenkins 功能"></a>1、Jenkins 功能</h4><ul>
+<li>持续的软件版本发布/测试项目。</li>
+<li>监控外部调用执行的工作。</li>
+</ul>
+<h4 id="3、Jenkins-概念"><a href="#3、Jenkins-概念" class="headerlink" title="3、Jenkins 概念"></a>3、Jenkins 概念</h4><p>Jenkins是一个功能强大的应用程序，允许<strong>持续集成和持续交付项目</strong>，无论用的是什么平台。这是一个免费的开源项目，可以处理任何类型的构建或持续集成。集成Jenkins可以用于一些测试和部署技术。Jenkins是一种软件允许持续集成。</p>
+<h4 id="4、Jenkins-目的"><a href="#4、Jenkins-目的" class="headerlink" title="4、Jenkins 目的"></a>4、Jenkins 目的</h4><ul>
+<li>持续、自动地构建/测试软件项目。</li>
+</ul>
+<ul>
+<li>监控软件开放流程，快速问题定位及处理，提提高开发效率。</li>
+</ul>
+<h4 id="5、Jenkins-特性"><a href="#5、Jenkins-特性" class="headerlink" title="5、Jenkins 特性"></a>5、Jenkins 特性</h4><ul>
+<li>开源的java语言开发持续集成工具，支持CI，CD。</li>
+</ul>
+<ul>
+<li>易于安装部署配置：可通过yum安装,或下载war包以及通过docker容器等快速实现安装部署，可方便web界面配置管理。</li>
+</ul>
+<ul>
+<li>消息通知及测试报告：集成RSS/E-mail通过RSS发布构建结果或当构建完成时通过e-mail通知，生成JUnit/TestNG测试报告。</li>
+</ul>
+<ul>
+<li>分布式构建：支持Jenkins能够让多台计算机一起构建/测试。</li>
+</ul>
+<ul>
+<li>文件识别:Jenkins能够跟踪哪次构建生成哪些jar，哪次构建使用哪个版本的jar等。</li>
+</ul>
+<ul>
+<li>丰富的插件支持:支持扩展插件，你可以开发适合自己团队使用的工具，如git，svn，maven，docker等。</li>
+</ul>
+<h4 id="6、产品发布流程"><a href="#6、产品发布流程" class="headerlink" title="6、产品发布流程"></a>6、产品发布流程</h4><p>产品设计成型 -&gt; 开发人员开发代码 -&gt; 测试人员测试功能 -&gt; 运维人员发布上线</p>
+<ul>
+<li>持续集成（Continuous integration，简称CI）</li>
+</ul>
+<ul>
+<li>持续交付（Continuous delivery）</li>
+</ul>
+<ul>
+<li>持续部署（continuous deployment） </li>
+</ul>
+<h2 id="二、Jenkins-CI-CD-流程"><a href="#二、Jenkins-CI-CD-流程" class="headerlink" title="二、Jenkins CI/CD 流程"></a>二、Jenkins CI/CD 流程</h2><p><img src= "/img/loading.gif" data-src="CICD03-assets/1352872-20180728203103959-1827013182.png" alt="img"></p>
+<p>说明：这张图稍微更形象一点，上线之前先把代码git到版本仓库，然后通过Jenkins将Java项目通过maven去构建，这是在非容器之前，典型的自动化的一个版本上线流程。那它有哪些问题呢？</p>
+<p>如：它的测试环境，预生产环境，测试环境。会存在一定的兼容性问题 （环境之间会有一定的差异） </p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1352872-20180728203917252-1861052346.png" alt="img"></p>
+<p>说明：它这里有一个docker harbor 的镜像仓库，通常会把你的环境打包为一个镜像，通过镜像的方式来部署。</p>
+<h2 id="三、部署Jenkins"><a href="#三、部署Jenkins" class="headerlink" title="三、部署Jenkins"></a>三、部署Jenkins</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>IP</th>
+<th>主机名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>172.16.1.2</td>
+<td>jenkins</td>
+</tr>
+<tr>
+<td>172.16.1.3</td>
+<td>web</td>
+</tr>
+<tr>
+<td>172.16.1.4</td>
+<td>git/gitlab</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="1、部署GIT"><a href="#1、部署GIT" class="headerlink" title="1、部署GIT"></a>1、部署GIT</h3><p>IP：172.16.1.4，git 服务器进行如下操作</p>
+<h4 id="1、安装-git"><a href="#1、安装-git" class="headerlink" title="1、安装 git"></a>1、安装 git</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# yum install -y git</span><br></pre></td></tr></table></figure>
+<p>创建git用户并设置密码为123456（为开发人员拉代码时设置的用户）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# useradd git</span><br><span class="line">[root@qfedu.com ~]# passwd git</span><br></pre></td></tr></table></figure>
+<h4 id="2、创建仓库"><a href="#2、创建仓库" class="headerlink" title="2、创建仓库"></a>2、创建仓库</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# su - git  #切换到git用户下</span><br><span class="line">[git@qfedu.com ~]$ mkdir -p repos/app.git  #在git用户家目录下创建一个repos目录，repos目录下创建各个项目的目录</span><br><span class="line">[git@qfedu.com ~]$ cd repos/app.git</span><br><span class="line">[git@qfedu.com ~]$ git --bare init #初始化仓库，如果不初始化，这仅仅就只是一个目录</span><br><span class="line"><span class="meta">#</span><span class="bash">查看初始化后仓库信息</span></span><br><span class="line">[git@qfedu.com app.git]$ ls -a</span><br><span class="line">. .. branches config description HEAD hooks info objects refs</span><br></pre></td></tr></table></figure>
+<p>配置完仓库后，我们需要找一台机器测试是否能够成功从仓库中拉取代码，或者上传代码到该仓库。</p>
+<p>IP：172.16.1.5，web服务器进行测试</p>
+<h4 id="3、安装-git-客户端"><a href="#3、安装-git-客户端" class="headerlink" title="3、安装 git 客户端"></a>3、安装 git 客户端</h4><p>拉取代码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# yum install -y git   #首先还是安装git</span><br><span class="line">[root@qfedu.com ~]# mkdir -p test</span><br><span class="line">[root@qfedu.com ~]# cd test</span><br><span class="line">[root@qfedu.com test]# git clone git@172.16.1.4:/home/git/repos/app.git  ##测试clone远端git仓库</span><br><span class="line">[root@qfedu.com test]# ls </span><br><span class="line">app</span><br></pre></td></tr></table></figure>
+<h4 id="4、push-测试"><a href="#4、push-测试" class="headerlink" title="4、push 测试"></a>4、push 测试</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com app]# touch index.html</span><br><span class="line">[root@qfedu.com app]# git add .</span><br><span class="line">[root@qfedu.com app]# git commit -m &quot;test&quot; </span><br><span class="line"><span class="meta">#</span><span class="bash">第一次的话会有报错警告，说让配置邮箱和姓名。配置一下即可，或者直接执行给出的命令执行即可。</span></span><br><span class="line">[root@qfedu.com app]# git push origin master #提交到主分支（默认分支）</span><br></pre></td></tr></table></figure>
+<p>测试成功！</p>
+<h4 id="5、补充：配置免秘钥"><a href="#5、补充：配置免秘钥" class="headerlink" title="5、补充：配置免秘钥"></a>5、补充：配置免秘钥</h4><h5 id="1、172-16-1-5-服务器生成公钥"><a href="#1、172-16-1-5-服务器生成公钥" class="headerlink" title="1、172.16.1.5 服务器生成公钥"></a>1、172.16.1.5 服务器生成公钥</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# ssh-keygen</span><br><span class="line">[root@qfedu.com ~]# cat /root/.ssh/id_rsa.pub </span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDmmIOOJCRjlcNyM9zQ4yNeSFgJhBYZUTHMJ3D6sy6IgyOQi/LW9IzBF8mVjmc9wBzQBzg9obCJ/2YiGtvgl00v8A6Clamx6XdQpHPbnVcgHznhEhaa5X0TONcyJ0/z9e8wdppafAsrgRYdpRcXfrPC7xlzDIRpjgWG9YEMzrqCDcWAoWLMYvr2GHwhFyJa5OpMNGH5NjaWJbzYlgdP5cwh/QX04xVZ0QKghQsol9HmbRbqJ8Hl8WrgDoy2BPE41XKEwR4drgUGCFXZDH4s9ZodC4zI76TWIyCeKKM0XbTNHRU6Cb6xWb/iFhpsa7m14A5usUH6RfIjzJBr3IcyUkk3 root@qfedu.com</span><br></pre></td></tr></table></figure>
+<h5 id="2、172-16-1-4-git-服务器进行配置"><a href="#2、172-16-1-4-git-服务器进行配置" class="headerlink" title="2、172.16.1.4 git 服务器进行配置"></a>2、172.16.1.4 git 服务器进行配置</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[git@qfedu.com ~]$ mkdir -p .ssh</span><br><span class="line">[git@qfedu.com ~]$ chmod 700 .ssh/  # 给予目录700权限</span><br><span class="line">[git@qfedu.com ~]$ vi .ssh/authorized_keys  # 写入172.16.1.5服务器的公钥</span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDmmIOOJCRjlcNyM9zQ4yNeSFgJhBYZUTHMJ3D6sy6IgyOQi/LW9IzBF8mVjmc9wBzQBzg9obCJ/2Yi</span><br><span class="line">Gtvgl00v8A6Clamx6XdQpHPbnVcgHznhEhaa5X0TONcyJ0/z9e8wdppafAsrgRYdpRcXfrPC7xlzDIRpjgWG9YEMzrqCDcWAoWLMYvr2GHwhFyJa5OpM</span><br><span class="line">NGH5NjaWJbzYlgdP5cwh/QX04xVZ0QKghQsol9HmbRbqJ8Hl8WrgDoy2BPE41XKEwR4drgUGCFXZDH4s9ZodC4zI76TWIyCeKKM0XbTNHRU6Cb6xWb/i</span><br><span class="line">Fhpsa7m14A5usUH6RfIjzJBr3IcyUkk3 root@qfedu.com</span><br><span class="line">[git@qfedu.com ~]$ chmod 600 .ssh/authorized_keys  # 给予文件600权限</span><br></pre></td></tr></table></figure>
+<h3 id="2、Jenkins-安装配置"><a href="#2、Jenkins-安装配置" class="headerlink" title="2、Jenkins 安装配置"></a>2、Jenkins 安装配置</h3><h4 id="1、jenkins-安装"><a href="#1、jenkins-安装" class="headerlink" title="1、jenkins 安装"></a>1、jenkins 安装</h4><p>官网： <a target="_blank" rel="noopener" href="https://jenkins.io/">https://jenkins.io</a></p>
+<p>插件：<a target="_blank" rel="noopener" href="http://updates.jenkins-ci.org/download/plugins/">http://updates.jenkins-ci.org/download/plugins/</a></p>
+<h5 id="1、安装-java-环境（jenkins-依赖-java-环境）"><a href="#1、安装-java-环境（jenkins-依赖-java-环境）" class="headerlink" title="1、安装 java 环境（jenkins 依赖 java 环境）"></a>1、安装 java 环境（jenkins 依赖 java 环境）</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com tools]# ls                 # 查看解压包</span><br><span class="line">jdk-8u45-linux-x64.tar.gz</span><br><span class="line">[root@qfedu.com tools]# tar zxf jdk-8u45-linux-x64.tar.gz    # 解压</span><br><span class="line">[root@qfedu.com tools]# mv jdk1.8.0_45/ /usr/local/jdk1.8    # 移动至指定目录</span><br><span class="line">[root@qfedu.com tools]# vim /etc/profile    # 配置环境变量</span><br><span class="line">JAVA_HOME=/usr/local/java</span><br><span class="line">export MAVEN_HOME=/usr/local/maven</span><br><span class="line">export JRE_HOME=/usr/local/java/jre</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH</span><br><span class="line">export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$MAVEN_HOME/bin:$PATH</span><br><span class="line">[root@qfedu.com tools]# source /etc/profile  # 配置生效</span><br><span class="line">[root@qfedu.com tools]# java -version        # 查看java版本</span><br><span class="line">java version &quot;1.8.0_45&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_45-b14)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02, mixed mode)</span><br></pre></td></tr></table></figure>
+<h5 id="2、yum-安装-jenkins"><a href="#2、yum-安装-jenkins" class="headerlink" title="2、yum 安装 jenkins"></a>2、yum 安装 jenkins</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo</span><br><span class="line"><span class="meta">#</span><span class="bash"> 导入jenkins源</span></span><br><span class="line">[root@qfedu.com ~]# rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key</span><br><span class="line"><span class="meta">#</span><span class="bash"> 导入jenkins官方证书</span></span><br><span class="line">[root@qfedu.com ~]# yum install -y jenkins</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装jenkins（安装的是最新的LTS版本）</span></span><br><span class="line"></span><br><span class="line">[root@qfedu.com ~]# rpm -ql jenkins   # 查看yum都安装了哪些东西</span><br><span class="line">/etc/init.d/jenkins</span><br><span class="line">/etc/logrotate.d/jenkins</span><br><span class="line">/etc/sysconfig/jenkins</span><br><span class="line">/usr/lib/jenkins</span><br><span class="line">/usr/lib/jenkins/jenkins.war</span><br><span class="line">/usr/sbin/rcjenkins</span><br><span class="line">/var/cache/jenkins</span><br><span class="line">/var/lib/jenkins</span><br><span class="line">/var/log/jenkins</span><br></pre></td></tr></table></figure>
+<h4 id="2、配置文件"><a href="#2、配置文件" class="headerlink" title="2、配置文件"></a>2、配置文件</h4><h5 id="1、查询-yum-下载-Jenkins-安装的文件"><a href="#1、查询-yum-下载-Jenkins-安装的文件" class="headerlink" title="1、查询 yum 下载 Jenkins 安装的文件"></a>1、查询 yum 下载 Jenkins 安装的文件</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# rpm -ql jenkins</span><br><span class="line">/etc/init.d/jenkins         # 启动文件</span><br><span class="line">/etc/logrotate.d/jenkins    # 日志分割配置文件</span><br><span class="line">/etc/sysconfig/jenkins      # jenkins主配置文件</span><br><span class="line">/usr/lib/jenkins            # 存放war包目录</span><br><span class="line">/usr/lib/jenkins/jenkins.war   # war 包 </span><br><span class="line">/usr/sbin/rcjenkins         # 命令</span><br><span class="line">/var/cache/jenkins          # war包解压目录 jenkins网页代码目录</span><br><span class="line">/var/lib/jenkins            # jenkins 工作目录</span><br><span class="line">/var/log/jenkins            # 日志</span><br></pre></td></tr></table></figure>
+<h5 id="2、修改配置文件"><a href="#2、修改配置文件" class="headerlink" title="2、修改配置文件"></a>2、修改配置文件</h5><p><strong>配置文件说明</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# grep &quot;^[a-Z]&quot; /etc/sysconfig/jenkins</span><br><span class="line">JENKINS_HOME=&quot;/var/lib/jenkins&quot;    # jenkins工作目录</span><br><span class="line">JENKINS_JAVA_CMD=&quot;&quot;</span><br><span class="line">JENKINS_USER=&quot;jenkins&quot;             # jenkinx启动用户</span><br><span class="line">JENKINS_JAVA_OPTIONS=&quot;-Djava.awt.headless=true&quot;</span><br><span class="line">JENKINS_PORT=&quot;8080&quot;                # 端口</span><br><span class="line">JENKINS_LISTEN_ADDRESS=&quot;&quot;</span><br><span class="line">JENKINS_HTTPS_PORT=&quot;&quot;</span><br><span class="line">JENKINS_HTTPS_KEYSTORE=&quot;&quot;</span><br><span class="line">JENKINS_HTTPS_KEYSTORE_PASSWORD=&quot;&quot;</span><br><span class="line">JENKINS_HTTPS_LISTEN_ADDRESS=&quot;&quot;</span><br><span class="line">JENKINS_DEBUG_LEVEL=&quot;5&quot;</span><br><span class="line">JENKINS_ENABLE_ACCESS_LOG=&quot;no&quot;</span><br><span class="line">JENKINS_HANDLER_MAX=&quot;100&quot;          # 最大连接</span><br><span class="line">JENKINS_HANDLER_IDLE=&quot;20&quot;</span><br><span class="line">JENKINS_ARGS=&quot;&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="3、启动-jenkins"><a href="#3、启动-jenkins" class="headerlink" title="3、启动 jenkins"></a>3、启动 jenkins</h5><ul>
+<li>首先需要修改一下启动脚本，文件在/etc/init.d/jenkins</li>
+</ul>
+<ul>
+<li>因为jenkins的启动脚本默认java路径为：/usr/bin/java</li>
+</ul>
+<ul>
+<li>但是我们新安装的java路径并不是在这个，所以我们需要新添加路径。如图下所示：</li>
+</ul>
+<ul>
+<li>新路径地址为：/usr/local/jdk1.8/bin/java</li>
+</ul>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831163720584-519105319.png" alt="img"></p>
+<p>接下来启动：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# systemctl start jenkins</span><br></pre></td></tr></table></figure>
+<h5 id="3、验证安装"><a href="#3、验证安装" class="headerlink" title="3、验证安装"></a>3、验证安装</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# ps -ef|grep jenkins</span><br><span class="line">jenkins   16037      1  1 16:20 ?        00:00:13 /usr/local/jdk1.8/bin/java -Dcom.sun.akuma.Daemon=daemonized -Djava.awt.headless=true -DJENKINS_HOME=/var/lib/jenkins -jar /usr/lib/jenkins/jenkins.war --logfile=/var/log/jenkins/jenkins.log --webroot=/var/cache/jenkins/war --daemon --httpPort=8080 --debug=5 --handlerCountMax=100 --handlerCountMaxIdle=20</span><br><span class="line">root      16107   1215  0 16:39 pts/1    00:00:00 grep --color=auto jenkins</span><br><span class="line">[root@qfedu.com ~]# netstat -lnutp|grep jenkins</span><br><span class="line">[root@qfedu.com ~]# netstat -lnutp|grep 8080</span><br><span class="line">tcp6       0      0 :::8080                 :::*                    LISTEN      16037/java</span><br></pre></td></tr></table></figure>
+<h4 id="3、jenkins配置（web页面）"><a href="#3、jenkins配置（web页面）" class="headerlink" title="3、jenkins配置（web页面）"></a>3、jenkins配置（web页面）</h4><h5 id="1、管理员密码获取"><a href="#1、管理员密码获取" class="headerlink" title="1、管理员密码获取"></a>1、管理员密码获取</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831164228925-1838027306.png" alt="img"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# cat /var/lib/jenkins/secrets/initialAdminPassword</span><br><span class="line">5d3f57bea6e546139fc48ea28f9d5ae5</span><br></pre></td></tr></table></figure>
+<h5 id="2、安装插件-（选择在线安装）"><a href="#2、安装插件-（选择在线安装）" class="headerlink" title="2、安装插件 （选择在线安装）"></a>2、安装插件 （选择在线安装）</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831164323740-27120837.png" alt="img"></p>
+<p>出现离线安装解决方法：</p>
+<h6 id="1、修改-var-lib-jenkins-updates-default-json"><a href="#1、修改-var-lib-jenkins-updates-default-json" class="headerlink" title="1、修改 /var/lib/jenkins/updates/default.json"></a>1、修改 /var/lib/jenkins/updates/default.json</h6><p>jenkins 在下载插件之前会先检查网络连接，其会读取这个文件中的网址。默认是访问谷歌，肯定监测失败，所以将图下的google改为<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a>即可，更改完重启服务。</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831164343689-623098101.png" alt="img"></p>
+<h6 id="2、-修改-var-lib-jenkins-hudson-model-UpdateCenter-xml"><a href="#2、-修改-var-lib-jenkins-hudson-model-UpdateCenter-xml" class="headerlink" title="2、 修改/var/lib/jenkins/hudson.model.UpdateCenter.xml"></a>2、 修改/var/lib/jenkins/hudson.model.UpdateCenter.xml</h6><p>该文件为jenkins下载插件的源地址，改地址默认jenkins默认为：<a target="_blank" rel="noopener" href="https://updates.jenkins.io/update-center.json，就是因为https的问题，此处我们将其改为http即可，之后重启jenkins服务即可。">https://updates.jenkins.io/update-center.json，就是因为https的问题，此处我们将其改为http即可，之后重启jenkins服务即可。</a></p>
+<p>其他国内备用地址（也可以选择使用）：</p>
+<p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json">https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json</a></p>
+<p><a target="_blank" rel="noopener" href="http://mirror.esuni.jp/jenkins/updates/update-center.json">http://mirror.esuni.jp/jenkins/updates/update-center.json</a></p>
+<p>在修复完之后，我们发现离线问题已经解决</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831164430177-1121878419.png" alt="img"></p>
+<p>选择安装推荐的插件：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831164621224-1822838670.png" alt="img"></p>
+<h5 id="3、创建第一个管理员用户"><a href="#3、创建第一个管理员用户" class="headerlink" title="3、创建第一个管理员用户"></a>3、创建第一个管理员用户</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/image-20200511143418502.png" alt="image-20200511143418502"></p>
+<h5 id="4、url-配置"><a href="#4、url-配置" class="headerlink" title="4、url 配置"></a>4、url 配置</h5><p>之前版本没有这个选项，这里默认即可:</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/image-20200511144405337.png" alt="image-20200511144405337"></p>
+<h5 id="5、安装完成"><a href="#5、安装完成" class="headerlink" title="5、安装完成"></a>5、安装完成</h5><p>出现如下页面时，表示安装完成</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/image-20200511144436540.png" alt="image-20200511144436540"></p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/image-20200511144551020.png" alt="image-20200511144551020"></p>
+<p>这里面有很多配置，下面我们只介绍我们要用到的要修改的配置（之后案例会用到的）。我们不需要全部都配置，等需要什么的时候再去研究一下即可。</p>
+<h5 id="6、配置-jdk、git、maven"><a href="#6、配置-jdk、git、maven" class="headerlink" title="6、配置 jdk、git、maven"></a>6、配置 jdk、git、maven</h5><p>系统管理-&gt;全局工具配置</p>
+<p>jdk：可以自动安装，但是我们已经安装了，这里写入我们jdk的路径即可</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831165049786-1605588288.png" alt="img"></p>
+<p>git:</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831165130860-316104310.png" alt="img"></p>
+<p>maven：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831165146493-1904811526.png" alt="img"></p>
+<h5 id="7、jenkins-下载插件失败处理办法"><a href="#7、jenkins-下载插件失败处理办法" class="headerlink" title="7、jenkins 下载插件失败处理办法"></a>7、jenkins 下载插件失败处理办法</h5><p>jenkins 下载插件失败,提示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">java.io.IOException: Downloaded file /app/jenkins_home/plugins/jacoco.jpi.tmp does not match expected SHA-1, expected &#x27;CtK02wHdFOxTutqhUQzmue6uvpg=&#x27;, actual &#x27;YGO05utKyaaFzpGCgCE95GS0WsU=&#x27;</span><br><span class="line">	at hudson.model.UpdateCenter.verifyChecksums(UpdateCenter.java:1783)</span><br><span class="line">	at hudson.model.UpdateCenter.access$1100(UpdateCenter.java:147)</span><br><span class="line">	at hudson.model.UpdateCenter$InstallationJob.replace(UpdateCenter.java:1934)</span><br><span class="line">	at hudson.model.UpdateCenter$UpdateCenterConfiguration.install(UpdateCenter.java:1178)</span><br><span class="line">	at hudson.model.UpdateCenter$DownloadJob._run(UpdateCenter.java:1653)</span><br><span class="line">	at hudson.model.UpdateCenter$InstallationJob._run(UpdateCenter.java:1848)</span><br><span class="line">	at hudson.model.UpdateCenter$DownloadJob.run(UpdateCenter.java:1624)</span><br><span class="line">	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)</span><br><span class="line">	at java.util.concurrent.FutureTask.run(FutureTask.java:266)</span><br><span class="line">	at hudson.remoting.AtmostOneThreadExecutor$Worker.run(AtmostOneThreadExecutor.java:110)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:745)</span><br></pre></td></tr></table></figure>
+<p>中国源的问题。需要换个源就可，换源方法：</p>
+<p>jenkins-&gt;系统管理-&gt;管理插件-&gt;高级<br>选择升级站点</p>
+<p>把：<a target="_blank" rel="noopener" href="http://updates.jenkins-ci.org/update-center.json">http://updates.jenkins-ci.org/update-center.json</a></p>
+<p>换成：<a target="_blank" rel="noopener" href="http://mirror.esuni.jp/jenkins/updates/update-center.json">http://mirror.esuni.jp/jenkins/updates/update-center.json</a></p>
+<p>镜像地址查询：</p>
+<p><a target="_blank" rel="noopener" href="http://mirrors.jenkins-ci.org/status.html">http://mirrors.jenkins-ci.org/status.html</a> </p>
+<h2 id="四、使用Jenkins"><a href="#四、使用Jenkins" class="headerlink" title="四、使用Jenkins"></a>四、使用Jenkins</h2><h3 id="1、Jenkins-用户权限管理"><a href="#1、Jenkins-用户权限管理" class="headerlink" title="1、Jenkins 用户权限管理"></a>1、Jenkins 用户权限管理</h3><h4 id="1、-用户管理背景"><a href="#1、-用户管理背景" class="headerlink" title="1、 用户管理背景"></a>1、 用户管理背景</h4><p>针对开发、运维、测试针对不同角色进行不同权限划分，</p>
+<p>基于插件： Role-based Authorization Strategy ，Authorize Project 来实现。</p>
+<h4 id="2、-安装用户管理插件"><a href="#2、-安装用户管理插件" class="headerlink" title="2、 安装用户管理插件"></a>2、 安装用户管理插件</h4><p>安装该插件：</p>
+<p>系统管理-&gt;管理插件-可选插件-&gt;搜索该插件选中直接安装即可。</p>
+<p> <img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831165508676-16362769.png" alt="img"></p>
+<h4 id="3、-开启该插件功能"><a href="#3、-开启该插件功能" class="headerlink" title="3、 开启该插件功能"></a>3、 开启该插件功能</h4><p>系统管理-&gt;全局安全设置-授权策略-&gt;选中该插件功能即可-&gt;保存</p>
+<p> <img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831165538054-922830046.png" alt="img"></p>
+<h4 id="4、-验证用户管理"><a href="#4、-验证用户管理" class="headerlink" title="4、 验证用户管理"></a>4、 验证用户管理</h4><p>关闭用户管理功能来进行实践测试</p>
+<h5 id="1、策略改回原来的（全局安全配置）"><a href="#1、策略改回原来的（全局安全配置）" class="headerlink" title="1、策略改回原来的（全局安全配置）"></a>1、策略改回原来的（全局安全配置）</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831165635226-1917360681.png" alt="img"></p>
+<h5 id="2、开启允许用户注册（全局安全配置）"><a href="#2、开启允许用户注册（全局安全配置）" class="headerlink" title="2、开启允许用户注册（全局安全配置）"></a>2、开启允许用户注册（全局安全配置）</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831165700914-329576958.png" alt="img"></p>
+<h5 id="3、注册一个新用户"><a href="#3、注册一个新用户" class="headerlink" title="3、注册一个新用户"></a>3、注册一个新用户</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831165719453-1979689954.png" alt="img"></p>
+<h5 id="4、登录之后，其默认就是管理员用户，可以进行任何操作"><a href="#4、登录之后，其默认就是管理员用户，可以进行任何操作" class="headerlink" title="4、登录之后，其默认就是管理员用户，可以进行任何操作"></a>4、登录之后，其默认就是管理员用户，可以进行任何操作</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831165742247-244014865.png" alt="img"></p>
+<h5 id="5、开启-Role-Based-Strategy"><a href="#5、开启-Role-Based-Strategy" class="headerlink" title="5、开启 Role-Based Strategy"></a>5、开启 Role-Based Strategy</h5><h5 id="6、重新登录新创建-test1-用户，显示已经没有任何权限了"><a href="#6、重新登录新创建-test1-用户，显示已经没有任何权限了" class="headerlink" title="6、重新登录新创建 test1 用户，显示已经没有任何权限了"></a>6、重新登录新创建 test1 用户，显示已经没有任何权限了</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831165853876-101591569.png" alt="img"></p>
+<h4 id="5、-权限划分"><a href="#5、-权限划分" class="headerlink" title="5、 权限划分"></a>5、 权限划分</h4><p>安装 Role-Based Strategy 插件后，<strong>系统管理</strong> 中多了如图下所示的一个功能，用户权限的划分就是靠他来做的。</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831165923312-691685234.png" alt="img"></p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831165930038-36894234.png" alt="img"></p>
+<h5 id="1、Manage-Roles（管理角色）"><a href="#1、Manage-Roles（管理角色）" class="headerlink" title="1、Manage Roles（管理角色）"></a>1、Manage Roles（管理角色）</h5><ul>
+<li>Manage Roles：管理角色，相当于针对角色赋予不同权限，然后在将该角色分配给用户。角色就相当于一个组。其里面又有Global roles（全局）、Project roles（项目）、Slave roles（），来进行不同划分。</li>
+</ul>
+<p>默认如图下所示：</p>
+<p> <img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831170007658-2106612170.png" alt="img"></p>
+<h6 id="1、Global-roles"><a href="#1、Global-roles" class="headerlink" title="1、Global roles"></a>1、Global roles</h6><p>默认是有一个admin用户的，是所有权限都有的，所有权限都是勾选了的。</p>
+<p>接下来我们来添加一个角色：user</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831170026530-949346396.png" alt="img"></p>
+<p>给其一个读的权限。</p>
+<h6 id="2、Project-roles"><a href="#2、Project-roles" class="headerlink" title="2、Project roles"></a>2、Project roles</h6><ul>
+<li>roles to add：表示项目角色</li>
+</ul>
+<ul>
+<li>Pattern：是用来做正则匹配的（匹配的内容是Job(项目名)），比如说根据正则匹配到的项目项目角色就都有权限；</li>
+</ul>
+<p>接下来新建一个 ItemA 项目角色，改项目角色一般给其构建、取消、读取、读取空间权限，一般配置这4个即可</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831170046126-1725883669.png" alt="img"></p>
+<p>还可以在新建一个 ItemB 项目角色：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831170101681-1099638023.png" alt="img"></p>
+<ul>
+<li>Slave roles（奴隶角色）：节点相关的权限</li>
+</ul>
+<ul>
+<li>roles to add：表示项目角色</li>
+</ul>
+<ul>
+<li>Pattern：是用来做正则匹配的（匹配的内容是节点(slavej节点）），比如说根据正则匹配到的项目项目角色就都有权限；</li>
+</ul>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/360截图168212206791118.png" alt="360截图168212206791118"></p>
+<h5 id="2、Assigin-roles（分配角色）"><a href="#2、Assigin-roles（分配角色）" class="headerlink" title="2、Assigin roles（分配角色）"></a>2、Assigin roles（分配角色）</h5><h6 id="1、给予test1用户分配-user-角色"><a href="#1、给予test1用户分配-user-角色" class="headerlink" title="1、给予test1用户分配 user 角色"></a>1、给予test1用户分配 user 角色</h6><p>这样其就有 manage roles 中刚才创建的user角色的权限了。</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831170141093-1106115356.png" alt="img"></p>
+<p>此时再去看 test1用户，已有查看的权限了</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171312583-2109653620.png" alt="img"></p>
+<h6 id="2、针对指定用户分配项目角色（一般最常用的就是针对不同用户进行项目角色分配）"><a href="#2、针对指定用户分配项目角色（一般最常用的就是针对不同用户进行项目角色分配）" class="headerlink" title="2、针对指定用户分配项目角色（一般最常用的就是针对不同用户进行项目角色分配）"></a>2、针对指定用户分配项目角色（一般最常用的就是针对不同用户进行项目角色分配）</h6><p>比如将test1用户分配有 ItemA 项目角色，这样其就可以有刚才我们创建的 ItemA 项目角色正则匹配到的项目的权限了。</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171359961-22018225.png" alt="img"></p>
+<p>test2 也为其分配一个 ItemB 项目角色</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171420831-1902633716.png" alt="img"></p>
+<p>此时可以在 test1 用户这里看到 ItemA 项目角色所匹配到的项目 A-web1</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171437298-1904913991.png" alt="img"></p>
+<p>新建一个B-web1项目，同理 test2 用户这里看到I temB 项目角色所匹配到的项目B-web1</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171454823-363550384.png" alt="img"></p>
+<p>为了方便项目管理，可以对不同项目进行分类（借助视图）：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171509279-1030579839.png" alt="img"></p>
+<p>分类完如图下所示：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171525036-576038453.png" alt="img"></p>
+<h3 id="2、Jenkins-参数化构建"><a href="#2、Jenkins-参数化构建" class="headerlink" title="2、Jenkins 参数化构建"></a>2、Jenkins 参数化构建</h3><h4 id="1、-参数化构建背景"><a href="#1、-参数化构建背景" class="headerlink" title="1、 参数化构建背景"></a>1、 参数化构建背景</h4><p> 如果只是简单的构建，jenkins自己默认的插件可以做，但是如果我们想要在构建过程中有更多功能，比如说：选择性构建、传参、项目指定变量等等其他功能，基础的参数化构建可以实现一些简单功能，但是要想使用更多功能这时候我们就需要借助参数化构建来实现交互的功能。此处我们来借助以下插件来进行实现：</p>
+<ul>
+<li>Extended Choice Parameter（更丰富的参数化构建插件）</li>
+</ul>
+<ul>
+<li>Git Parameter</li>
+</ul>
+<h4 id="2、安装插件"><a href="#2、安装插件" class="headerlink" title="2、安装插件"></a>2、安装插件</h4><p>首先还是安装该插件，去管理插件里面进行安装 Extended Choice Parameter</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171721299-2027054343.png" alt="img"></p>
+<h5 id="1、项目配置"><a href="#1、项目配置" class="headerlink" title="1、项目配置"></a>1、项目配置</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171807151-657567536.png" alt="img"></p>
+<h5 id="2、选择安装过的插件"><a href="#2、选择安装过的插件" class="headerlink" title="2、选择安装过的插件"></a>2、选择安装过的插件</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171825735-1550501382.png" alt="img"></p>
+<h5 id="3、进行配置"><a href="#3、进行配置" class="headerlink" title="3、进行配置"></a>3、进行配置</h5><p>​                                                             <img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171852747-2039805021.png" alt="img"></p>
+<p>这里这个branch 我们就相当于给其当做一个变量，然后来为其进行传参。</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171908041-686186905.png" alt="img"></p>
+<h5 id="4、构建选择执行shell进行测试"><a href="#4、构建选择执行shell进行测试" class="headerlink" title="4、构建选择执行shell进行测试"></a>4、构建选择执行shell进行测试</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171925310-877234848.png" alt="img"></p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171931759-1794610138.png" alt="img"></p>
+<h5 id="5、参数化配置已经生效"><a href="#5、参数化配置已经生效" class="headerlink" title="5、参数化配置已经生效"></a>5、参数化配置已经生效</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831171946619-1779475535.png" alt="img"></p>
+<h5 id="6、构建-test02"><a href="#6、构建-test02" class="headerlink" title="6、构建 test02"></a>6、构建 test02</h5><p>可以发现控制台的输出也是成功了的</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831172008888-985342835.png" alt="img"></p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/image-20200823112054238.png" alt="image-20200823112054238"></p>
+<h5 id="7、数据来源选择文件"><a href="#7、数据来源选择文件" class="headerlink" title="7、数据来源选择文件"></a>7、数据来源选择文件</h5><p>在jenkins所在服务器进行如下操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# vim /opt/jenkins.property   # 建立一个文件</span><br><span class="line">abc=t1,t2,t3,t4</span><br></pre></td></tr></table></figure>
+<p> web 端配置：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831172044249-467635589.png" alt="img"></p>
+<p>进行测试：</p>
+<p>构建前：（可以发现也是生效的）</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831172105902-1561453754.png" alt="img"></p>
+<p>构建后查看结果：（也是成功的）</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831172117350-824962931.png" alt="img"></p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/image-20200823112204773.png" alt="image-20200823112204773"></p>
+<h4 id="3、Git-插件"><a href="#3、Git-插件" class="headerlink" title="3、Git 插件"></a>3、Git 插件</h4><p>再用 git 时使用该插件是非常方便的。</p>
+<h5 id="1、安装插件-Git-Parameter"><a href="#1、安装插件-Git-Parameter" class="headerlink" title="1、安装插件 Git Parameter"></a>1、安装插件 Git Parameter</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831172312057-1192977432.png" alt="img"></p>
+<h5 id="2、进行配置"><a href="#2、进行配置" class="headerlink" title="2、进行配置"></a>2、进行配置</h5><p>在配置之前我们先来说一个坑，当我们在配置git中写了远端地址后，会有如下报错：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831172344503-595645026.png" alt="img"></p>
+<p>这是因为 jenkins 我们 yum 装的运行用户是 jenkins 用户，此处是 jenkins 用户去 git 仓库进行拉取，而 jenkins 用户的话默认是 /bin/false 的，不但不能登录，也没有 git 命令权限，所以肯定是失败的。</p>
+<p>解决此问题两种办法：</p>
+<ul>
+<li>更改jenkins用户为root用户；</li>
+</ul>
+<ul>
+<li>更改jenkins用户为正常的普通用户/bin/bash，将其的公钥加入到git服务器的git用户中。</li>
+</ul>
+<p>此处暂时先用第一种解决办法，更改 jenkins 的运行用户为 root 用户，通过如下方式进行更改：</p>
+<ul>
+<li>将/etc/sysconfig/jenkins文件由<img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831172403790-793357643.png" alt="img">改为<img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180831172419499-231798333.png" alt="img"></li>
+</ul>
+<ul>
+<li>然后再重启即可。</li>
+</ul>
+<h5 id="3、进行相关配置"><a href="#3、进行相关配置" class="headerlink" title="3、进行相关配置"></a>3、进行相关配置</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174228683-1325675254.png" alt="img"></p>
+<h5 id="4、配置-git-仓库"><a href="#4、配置-git-仓库" class="headerlink" title="4、配置 git 仓库"></a>4、配置 git 仓库</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174238241-1229199729.png" alt="img"></p>
+<p>凭据这里有两种方式：</p>
+<p>第一种：选择无</p>
+<ul>
+<li>其实就是基于免秘钥的。</li>
+</ul>
+<p>第二种：用户（其实就是git用户）</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174257903-1112577737.png" alt="img"></p>
+<p>当构建时给一个选择列表，这个变量是代表分支。有哪些分支传递给这个变量。</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174314569-1455405236.png" alt="img"></p>
+<h5 id="5、进行构建"><a href="#5、进行构建" class="headerlink" title="5、进行构建"></a>5、进行构建</h5><h6 id="1、列表中已经有了可选的分支"><a href="#1、列表中已经有了可选的分支" class="headerlink" title="1、列表中已经有了可选的分支"></a>1、列表中已经有了可选的分支</h6><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174352937-817873860.png" alt="img"></p>
+<h6 id="2、构建成功"><a href="#2、构建成功" class="headerlink" title="2、构建成功"></a>2、构建成功</h6><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174410958-2125207362.png" alt="img"></p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/image-20200823112303658.png" alt="image-20200823112303658"></p>
+<h6 id="3、新建分支增添内容再来验证插件"><a href="#3、新建分支增添内容再来验证插件" class="headerlink" title="3、新建分支增添内容再来验证插件"></a>3、新建分支增添内容再来验证插件</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com app]# git branch </span><br><span class="line">* master</span><br><span class="line">[root@qfedu.com app]# git branch test</span><br><span class="line">[root@qfedu.com app]# git checkout test</span><br><span class="line">Switched to branch &#x27;test&#x27;</span><br><span class="line">[root@qfedu.com app]# git branch</span><br><span class="line">  master</span><br><span class="line">* test</span><br><span class="line">[root@qfedu.com app]# touch a</span><br><span class="line">[root@qfedu.com app]# git add .</span><br><span class="line">[root@qfedu.com app]# git commit -m &quot;a&quot;</span><br><span class="line">[test c286460] a</span><br><span class="line"> 1 file changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line"> create mode 100644 a</span><br><span class="line">[root@qfedu.com app]# git push origin test</span><br><span class="line">Counting objects: 3, done.</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (2/2), 231 bytes | 0 bytes/s, done.</span><br><span class="line">Total 2 (delta 0), reused 0 (delta 0)</span><br><span class="line">To git@172.16.1.3:/home/git/repos/app.git</span><br><span class="line"> * [new branch]      test -&gt; test</span><br></pre></td></tr></table></figure>
+<h6 id="4、jenkins-构建查看"><a href="#4、jenkins-构建查看" class="headerlink" title="4、jenkins 构建查看"></a>4、jenkins 构建查看</h6><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174449507-511735917.png" alt="img"></p>
+<p>可以发现已经有了我们新建的分支。</p>
+<p>构建成功！！</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174509176-598896431.png" alt="img"></p>
+<h3 id="3、Jenkins-Master-Slave-架构"><a href="#3、Jenkins-Master-Slave-架构" class="headerlink" title="3、Jenkins Master-Slave 架构"></a>3、Jenkins Master-Slave 架构</h3><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174647968-1070498866.png" alt="img"></p>
+<ul>
+<li>jenkins的Master-slave分布式架构主要是为了解决jenkins单点构建任务多、负载较高、性能不足的场景。</li>
+</ul>
+<ul>
+<li>Master/Slave相当于Server和agent的概念。Master提供web接口让用户来管理job和slave，job可以运行在master本机或者被分配到slave上运行构建。一个master（jenkins服务所在机器）可以关联多个slave用来为不同的job或相同的job的不同配置来服务。</li>
+</ul>
+<h4 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h4><p><strong>前提：slave 所在服务器必须有 java环境</strong></p>
+<p>jenkins web 端进行操作：</p>
+<p>系统管理-&gt;管理节点-&gt;新建节点</p>
+<p>1、进行基础配置</p>
+<p>配置选项中的内容是可变的，根据情况来</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174740210-1910187239.png" alt="img"></p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174812065-1298673844.png" alt="img"></p>
+<p>注意这里需要配置凭据，也就是配置slave所在服务器用户和密码</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174833717-113155048.png" alt="img"></p>
+<p>之后保存，如果无误的话就会直接启动了，如图下所示是有问题的</p>
+<p> <img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174858307-1689117384.png" alt="img"></p>
+<p>通过看输出日志，发现是 jdk 的问题，一般来说，其会判断 slave 所在服务器有没有 jdk，如果有就会进行检测，如下图所示，就是没有检查到（因为jdk是我们自己装的，路径并不是默认的路径）。</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905174933937-2072546466.png" alt="img"></p>
+<p>没有检查到的话其就会去oracle官网下载，来为 slave 所在服务器进行安装，但是因为中国的原因，被墙了，所以也会下载失败，最终就导致彻底失败了，失败如图下：</p>
+<p> <img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905175013098-1305201866.png" alt="img"></p>
+<p>有两种方法解决：推荐方法1：</p>
+<p>方法1：</p>
+<p>在配置时高级的选项里指定java路径：如下图所示：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905175036117-145610379.png" alt="img"></p>
+<p>方法2：</p>
+<p>为 java 路径做一个软链接，保证 jenkins 可以检测到 java。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# ln -s /usr/local/jdk1.8/bin/java /usr/bin/java</span><br><span class="line">[root@qfedu.com ~]# ll /usr/bin/java </span><br><span class="line">lrwxrwxrwx 1 root root 26 Jul 25 17:33 /usr/bin/java -&gt; /usr/local/jdk1.8/bin/java</span><br></pre></td></tr></table></figure>
+<p> 之后在看已经成功了！</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905175117966-1877923320.png" alt="img"></p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905175129896-1990617523.png" alt="img"></p>
+<p>并且也可以在 slave 所在服务器看到：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905175143501-1725798918.png" alt="img"></p>
+<p>jar 包就是负责接收 master 任务的。</p>
+<h4 id="2、配置"><a href="#2、配置" class="headerlink" title="2、配置"></a>2、配置</h4><p>在项目 job 中进行配置：</p>
+<p>可通过标签或者名称进行匹配（标签可在安装时配置）</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905175239298-1454561108.png" alt="img"></p>
+<h4 id="3、构建"><a href="#3、构建" class="headerlink" title="3、构建"></a>3、构建</h4><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905175325125-311183582.png" alt="img"></p>
+<p>可以发现控制台的日志，其也是 slave 构建的</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905175346873-1882059918.png" alt="img"></p>
+<p>之后查看构建完的工作目录，也有预想中的文件。</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905175404104-944359554.png" alt="img"></p>
+<p>这样基本上就实现了借助 jenkins 的 slave 去构建 job了。</p>
+<p>目前是在 slave 构建也在 slave 上部署，之后我们可以通过脚本，比如借助 rsync、ansible 等部署在其他服务器上。</p>
+<h4 id="4、扩展"><a href="#4、扩展" class="headerlink" title="4、扩展"></a>4、扩展</h4><p>可以为slave服务器在配置时候加上标签，这样也会方便我们选择，用法也不单单局限在一台服务器上，可以让多台 slave 去竞选。</p>
+<h3 id="4、Jenkins-pipeline"><a href="#4、Jenkins-pipeline" class="headerlink" title="4、Jenkins pipeline"></a>4、Jenkins pipeline</h3><h4 id="1、概览"><a href="#1、概览" class="headerlink" title="1、概览"></a>1、概览</h4><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905175950688-621991737.png" alt="img"></p>
+<h4 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h4><p>在对 jenkins 进行初始化安装时，默认已经安装了 jenkins 的相关插件，如下图所示：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905180059074-2046998049.png" alt="img"></p>
+<h4 id="3、实操"><a href="#3、实操" class="headerlink" title="3、实操"></a>3、实操</h4><h5 id="1、新建任务"><a href="#1、新建任务" class="headerlink" title="1、新建任务"></a>1、新建任务</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905180134440-703318370.png" alt="img"></p>
+<h5 id="2、编写-pipeline-脚本"><a href="#2、编写-pipeline-脚本" class="headerlink" title="2、编写 pipeline 脚本"></a>2、编写 pipeline 脚本</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905180200172-202457638.png" alt="img"></p>
+<p>可以借助流水线语法去做。</p>
+<p>test 流水线脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">   def mvnHome</span><br><span class="line">   stage(&#x27;git checkout&#x27;) &#123; #for display purposes</span><br><span class="line">        checkout([$class: &#x27;GitSCM&#x27;, branches: [[name: &#x27;*/master&#x27;]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: &#x27;git@172.16.1.3:/home/git/repos/app.git&#x27;]]])</span><br><span class="line">   &#125;</span><br><span class="line">   stage(&#x27;maven Build&#x27;) &#123;</span><br><span class="line">        echo &quot;maven build.........&quot;</span><br><span class="line">   &#125;</span><br><span class="line">   stage(&#x27;deploy&#x27;) &#123;</span><br><span class="line">        echo &quot;deploy...........&quot;</span><br><span class="line">   &#125;</span><br><span class="line">   stage(&#x27;test&#x27;) &#123;</span><br><span class="line">        echo &quot;test...........&quot;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3、构建测试"><a href="#3、构建测试" class="headerlink" title="3、构建测试"></a>3、构建测试</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905180243809-1620313434.png" alt="img"></p>
+<p>可以去服务器上验证一下（git checkout）刚才拉取下来的代码：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905180256704-210794930.png" alt="img"></p>
+<p>补充：</p>
+<ul>
+<li>可以从代码版本管理仓库中读取 pipeline 脚本（相当于将 pipeline 脚本放在仓库中）我们可以选择git。</li>
+</ul>
+<ul>
+<li>首先需要将 pipeline 脚本提交到我们新建的 git仓库中（步骤再此忽略。）</li>
+</ul>
+<p>jenkins 项目中需要进行如下配置：</p>
+<p>其中脚本路径的配置，一定要和版本仓库中的路径相一致。</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905180344737-1469717868.png" alt="img"></p>
+<p>之后如果要更改步骤，不需要再更改 jenkins 的步骤，直接更改文件即可。</p>
+<p>补充：</p>
+<p>此外之前的测试一直是在 master上构建的，我们还可以通过在 jenkinsfile 中指定节点在相应节点去构建</p>
+<p>具体在 jenkinsfile 的 node 后进行指定：</p>
+<p>如下图所示：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905180411824-506078483-1581427002304.png" alt="img"></p>
+<p>格式为：node (“节点名称”)</p>
+<p><strong>具体配置详解请参考</strong> <a target="_blank" rel="noopener" href="https://jenkins.io/doc/book/pipeline/">https://jenkins.io/doc/book/pipeline/</a></p>
+<h3 id="5、Jenkins-构建邮件状态通知"><a href="#5、Jenkins-构建邮件状态通知" class="headerlink" title="5、Jenkins 构建邮件状态通知"></a>5、Jenkins 构建邮件状态通知</h3><h4 id="1、-前提"><a href="#1、-前提" class="headerlink" title="1、 前提"></a>1、 前提</h4><p>前提：服务器开启邮箱服务</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905180750936-201397371-1581427002304.png" alt="img"></p>
+<h4 id="2、-基础配置"><a href="#2、-基础配置" class="headerlink" title="2、 基础配置"></a>2、 基础配置</h4><p>需要安装一个插件：</p>
+<p>插件： Email Extension Plugin</p>
+<p>进行配置：</p>
+<p>系统管理-&gt;系统设置-&gt;相关配置如下图：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905180920720-1267268825-1581427002304.png" alt="img"></p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905181032556-219409886-1581427002304.png" alt="img"></p>
+<p>可以在此处进行测试发送！检验配置是否正确</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905181105795-859970074-1581427002304.png" alt="img"></p>
+<h4 id="3、-配置到项目中"><a href="#3、-配置到项目中" class="headerlink" title="3、 配置到项目中"></a>3、 配置到项目中</h4><p>在项目的配置中选择构建后操作</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905181815334-1545576302-1581427002304.png" alt="img"></p>
+<p>选择我们对应的插件</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905181902914-1329981046-1581427002304.png" alt="img"></p>
+<p>填写发件人信息</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905181920357-2050627859-1581427002304.png" alt="img"></p>
+<p>配置构建成功发送邮件</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905181944795-1066960449-1581427002304.png" alt="img"></p>
+<p>控制台也有邮件发送成功输出</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905182332647-1761846010-1581427002304.png" alt="img"></p>
+<p>检查实际是否接收到邮件</p>
+<h3 id="6、Jenkins-流水线自动化发布PHP项目"><a href="#6、Jenkins-流水线自动化发布PHP项目" class="headerlink" title="6、Jenkins 流水线自动化发布PHP项目"></a>6、Jenkins 流水线自动化发布PHP项目</h3><h4 id="1、前提"><a href="#1、前提" class="headerlink" title="1、前提"></a>1、前提</h4><p><strong>环境为</strong>：lnmp</p>
+<p><strong>PHP项目</strong>：wordpress（此处我们下载一个wordpress的源码。将其模拟为我们的代码上传到我们的git仓库）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# git config --global user.name &quot;Administrator&quot;</span><br><span class="line">[root@qfedu.com ~]# git config --global user.email &#x27;18611142071@163.com&#x27;</span><br><span class="line">[root@qfedu.com ~]# git status</span><br><span class="line">[root@qfedu.com ~]# git clone git@192.168.152.138:plat-sp/wordpress.git</span><br><span class="line">[root@qfedu.com ~]# tar xf wordpress-5.2.1.tar.gz</span><br><span class="line">[root@qfedu.com ~]# cd wordpress</span><br><span class="line">[root@qfedu.com ~]# mv /root/wordpress/* .</span><br><span class="line">[root@qfedu.com ~]# git add .</span><br><span class="line">[root@qfedu.com ~]# git commit -m &#x27;new1&#x27;</span><br><span class="line">[root@qfedu.com ~]# git push  -u origin master</span><br></pre></td></tr></table></figure>
+<p><strong>部署节点</strong>： node 节点需要在系统管理中配置节点</p>
+<h4 id="2、配置-1"><a href="#2、配置-1" class="headerlink" title="2、配置"></a>2、配置</h4><h5 id="1、创建job"><a href="#1、创建job" class="headerlink" title="1、创建job"></a>1、创建job</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905183039989-769081353-1581427002305.png" alt="img"></p>
+<h5 id="2、参数化构建"><a href="#2、参数化构建" class="headerlink" title="2、参数化构建"></a>2、参数化构建</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905183208466-356358757-1581427002305.png" alt="img"></p>
+<h5 id="3、配置pipeline脚本-（直接配置或者git获取）"><a href="#3、配置pipeline脚本-（直接配置或者git获取）" class="headerlink" title="3、配置pipeline脚本 （直接配置或者git获取）"></a>3、配置pipeline脚本 （直接配置或者git获取）</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/360截图18620330175141-1581427002305.png" alt="360截图18620330175141"></p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/360截图18260727588956-1581427002305.png" alt="360截图18260727588956"></p>
+<h5 id="4、保存"><a href="#4、保存" class="headerlink" title="4、保存"></a>4、保存</h5><h4 id="3、编写-jenkinsfile"><a href="#3、编写-jenkinsfile" class="headerlink" title="3、编写 jenkinsfile"></a>3、编写 jenkinsfile</h4><p>接下里编写jenkinsfile文件：</p>
+<p>jenkinsfile-PHP：</p>
+<p>源码文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">node (&quot;jenkins-slave2&quot;) &#123;</span><br><span class="line">   stage(&#x27;git checkout&#x27;) &#123;</span><br><span class="line">       checkout([$class: &#x27;GitSCM&#x27;, branches: [[name: &#x27;$&#123;branch&#125;&#x27;]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: &#x27;git@192.168.152.138:plat-sp/wordpress.git&#x27;]]])</span><br><span class="line">   &#125;</span><br><span class="line">   stage(&#x27;code copy&#x27;) &#123;</span><br><span class="line">        sh &#x27;&#x27;&#x27;rm -rf $&#123;WORKSPACE&#125;/.git</span><br><span class="line">        mkdir -p /data/backup/web-$(date +&quot;%F&quot;)</span><br><span class="line">        mv /home/wwwroot/default/* /data/backup/web-$(date +&quot;%F&quot;)</span><br><span class="line">        cp -rf $&#123;WORKSPACE&#125;/* /home/wwwroot/default/&#x27;&#x27;&#x27;</span><br><span class="line">   &#125;</span><br><span class="line">   stage(&#x27;test&#x27;) &#123;</span><br><span class="line">       sh &quot;curl http://192.168.152.153/status.html&quot;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">node (&quot;slave01-172.16.1.2&quot;) &#123;</span><br><span class="line">   stage(&#x27;git checkout&#x27;) &#123;</span><br><span class="line">       checkout([$class: &#x27;GitSCM&#x27;, branches: [[name: &#x27;$&#123;branch&#125;&#x27;]], doGenerateSubmoduleConfigurations: false, extensions: [], subm</span><br><span class="line">oduleCfg: [], userRemoteConfigs: [[url: &#x27;git@172.16.1.3:/home/git/repos/wordpress&#x27;]]])</span><br><span class="line">   &#125;</span><br><span class="line">   stage(&#x27;code copy&#x27;) &#123;</span><br><span class="line">        sh &#x27;&#x27;&#x27;rm -rf $&#123;WORKSPACE&#125;/.git</span><br><span class="line">        mv /usr/share/nginx/html/wp.com /data/backup/wp.com-$(date +&quot;%F_%T&quot;)</span><br><span class="line">        cp -rf $&#123;WORKSPACE&#125; /usr/share/nginx/html/wp.com&#x27;&#x27;&#x27;</span><br><span class="line">   &#125;</span><br><span class="line">   stage(&#x27;test&#x27;) &#123;</span><br><span class="line">       sh &quot;curl http://wp.test.com/status.html&quot;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面为带解释版，但不可以使用，部分注释会造成问题</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">node (&quot;slave01-172.16.1.2&quot;) &#123;   # 绑定到该节点去执行</span><br><span class="line">   stage(&#x27;git checkout&#x27;) &#123;      # 拉代码</span><br><span class="line">       checkout([$class: &#x27;GitSCM&#x27;, branches: [[name: &#x27;$&#123;branch&#125;&#x27;]], doGenerateSubmoduleConfigurations: false, extensions: [], su</span><br><span class="line">bmoduleCfg: [], userRemoteConfigs: [[url: &#x27;git@172.16.1.3:/home/git/repos/wordpress&#x27;]]])</span><br><span class="line">   &#125;</span><br><span class="line"><span class="meta">   #</span><span class="bash"> <span class="variable">$class</span>: <span class="string">&#x27;GitSCM&#x27;</span> git插件获取代码的工具</span></span><br><span class="line"><span class="meta">   #</span><span class="bash"> branches 分支名称</span></span><br><span class="line"><span class="meta">   #</span><span class="bash"> doGenerateSubmoduleConfigurations 是否包含子模块配置</span></span><br><span class="line"><span class="meta">   #</span><span class="bash"> extensions 扩展功能</span></span><br><span class="line"><span class="meta">   #</span><span class="bash"> submoduleCfg  子模块配置</span></span><br><span class="line"><span class="meta">   #</span><span class="bash"> userRemoteConfigs 远程用户配置（仓库地址）</span></span><br><span class="line">   stage(&#x27;code copy&#x27;) &#123;    # 复制代码</span><br><span class="line">        sh &#x27;&#x27;&#x27;rm -rf $&#123;WORKSPACE&#125;/.git   # 删除拉下来的项目的.git敏感文件</span><br><span class="line">        mv /usr/share/nginx/html/wp.com /data/backup/wp.com-$(date +&quot;%F_%T&quot;)  # 备份旧文件</span><br><span class="line">        cp -rf $&#123;WORKSPACE&#125; /usr/share/nginx/html/wp.com&#x27;&#x27;&#x27;  # 新文件复制到站点目录</span><br><span class="line">   &#125;</span><br><span class="line">   stage(&#x27;test&#x27;) &#123;  # 测试</span><br><span class="line">       sh &quot;curl http://wp.test.com/status.html&quot;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4、构建"><a href="#4、构建" class="headerlink" title="4、构建"></a>4、构建</h4><p>构建概览：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905184051509-1764641810-1581427002305.png" alt="img"></p>
+<p>控制台输出详情：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905184107686-644530379-1581427002305.png" alt="img"></p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905184123455-512468351-1581427002305.png" alt="img"></p>
+<p>可以看到每一步的执行详情，最后也是成功的！！！！！！</p>
+<p>此外我们可以查看服务器及网页实际体验效果进行验证。</p>
+<h3 id="7、Jenkins流水线自动化发布Java项目"><a href="#7、Jenkins流水线自动化发布Java项目" class="headerlink" title="7、Jenkins流水线自动化发布Java项目"></a>7、Jenkins流水线自动化发布Java项目</h3><h4 id="1、前提-1"><a href="#1、前提-1" class="headerlink" title="1、前提"></a>1、前提</h4><p><strong>插件</strong>：Maven Integration plugin</p>
+<p><strong>环境：</strong>maven、tomcat，git</p>
+<p>用的博客系统代码：</p>
+<p>git clone <a target="_blank" rel="noopener" href="https://github.com/b3log/solo.git">https://github.com/b3log/solo.git</a></p>
+<p>远端git服务器：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# mkdir -p solo</span><br><span class="line">[root@qfedu.com ~]# cd solo/</span><br><span class="line">[root@qfedu.com ~]# git --bare init</span><br><span class="line">Initialized empty Git repository in /home/git/repos/solo/</span><br></pre></td></tr></table></figure>
+<p>本地web：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# git remote -v</span><br><span class="line">origin    git@172.16.1.3:/home/git/repos/solo (fetch)</span><br><span class="line">origin    git@172.16.1.3:/home/git/repos/solo (push)</span><br><span class="line">[root@qfedu.com ~]# git remote rm origin</span><br><span class="line">[root@qfedu.com ~]# git init</span><br><span class="line">Reinitialized existing Git repository in /root/solo/.git/</span><br><span class="line">[root@qfedu.com ~]# git remote add origin git@172.16.1.3:/home/git/repos/solo</span><br><span class="line">[root@qfedu.com ~]# git add .</span><br><span class="line">[root@qfedu.com ~]# git commit -m &quot;java solo all&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> On branch master</span></span><br><span class="line">nothing to commit, working directory clean</span><br><span class="line">[root@qfedu.com ~]# git push origin master</span><br><span class="line">Counting objects: 29058, done.</span><br><span class="line">Compressing objects: 100% (9854/9854), done.</span><br><span class="line">Writing objects: 100% (29058/29058), 47.77 MiB | 39.28 MiB/s, done.</span><br><span class="line">Total 29058 (delta 15768), reused 29058 (delta 15768)</span><br><span class="line">To git@172.16.1.3:/home/git/repos/solo</span><br><span class="line"> * [new branch]      master -&gt; master</span><br></pre></td></tr></table></figure>
+<p>因为solo需要改如下配置才可以访问：（改serverhost为指定的域名）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# vim /root/solo/src/main/resources/latke.properties</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905184545173-2047374097-1581427002305.png" alt="img"></p>
+<p>然后再重新提交上去</p>
+<p><strong>部署节点：</strong> node 节点需要在系统管理中配置节点</p>
+<h4 id="2、配置-2"><a href="#2、配置-2" class="headerlink" title="2、配置"></a>2、配置</h4><h5 id="1、新建job"><a href="#1、新建job" class="headerlink" title="1、新建job"></a>1、新建job</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905184625352-2046318711-1581427002305.png" alt="img"></p>
+<h5 id="2、参数化构建-1"><a href="#2、参数化构建-1" class="headerlink" title="2、参数化构建"></a>2、参数化构建</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905184640513-596342130-1581427002305.png" alt="img"></p>
+<h5 id="3、配置git仓库（针对jenkinsfile）"><a href="#3、配置git仓库（针对jenkinsfile）" class="headerlink" title="3、配置git仓库（针对jenkinsfile）"></a>3、配置git仓库（针对jenkinsfile）</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905184651748-234872141-1581427002305.png" alt="img"></p>
+<h4 id="3、编写Jenkinsfile"><a href="#3、编写Jenkinsfile" class="headerlink" title="3、编写Jenkinsfile"></a>3、编写Jenkinsfile</h4><p>源码配置文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">node (&quot;slave02-172.16.1.3&quot;) &#123;</span><br><span class="line"><span class="meta">   #</span><span class="bash"> def mvnHome = <span class="string">&#x27;/usr/local/maven&#x27;</span></span></span><br><span class="line">   stage(&#x27;git checkout&#x27;) &#123;</span><br><span class="line">        checkout([$class: &#x27;GitSCM&#x27;, branches: [[name: &#x27;$&#123;branch&#125;&#x27;]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: &#x27;git@172.16.1.3:/home/git/repos/solo&#x27;]]])</span><br><span class="line">   &#125;</span><br><span class="line">   stage(&#x27;maven build&#x27;) &#123;</span><br><span class="line">        sh &#x27;&#x27;&#x27;export JAVA_HOME=/usr/local/java</span><br><span class="line">        /usr/local/maven/bin/mvn clean package -Dmaven.test.skip=true&#x27;&#x27;&#x27;</span><br><span class="line">   &#125;</span><br><span class="line">   stage(&#x27;deploy&#x27;) &#123;</span><br><span class="line">        sh &#x27;&#x27;&#x27;</span><br><span class="line">    JENKINS_NODE_COOKIE=dontkillme</span><br><span class="line">    export JAVA_HOME=/usr/local/java</span><br><span class="line">        TOMCAT_NAME=tomcat</span><br><span class="line">        TOMCAT_HOME=/usr/local/$TOMCAT_NAME</span><br><span class="line">        WWWROOT=$TOMCAT_HOME/webapps/ROOT</span><br><span class="line"></span><br><span class="line">        if [ -d $WWWROOT ]; then</span><br><span class="line">           mv $WWWROOT /data/backup/$&#123;TOMCAT_NAME&#125;-$(date +&quot;%F_%T&quot;)</span><br><span class="line">        fi</span><br><span class="line">        unzip $&#123;WORKSPACE&#125;/target/*.war -d $WWWROOT</span><br><span class="line">        PID=$(ps -ef |grep $TOMCAT_NAME |egrep -v &quot;grep|$$&quot; |awk \&#x27;&#123;print $2&#125;\&#x27;)</span><br><span class="line">        [ -n &quot;$PID&quot; ] &amp;&amp; kill -9 $PID</span><br><span class="line">        /bin/bash $TOMCAT_HOME/bin/startup.sh</span><br><span class="line">       &#x27;&#x27;&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">   stage(&#x27;test&#x27;) &#123;</span><br><span class="line">    sh &quot;curl http://192.168.152.138:8080/status.html&quot;</span><br><span class="line">    echo &quot;test ok!!!!!!!&quot;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面为带解释版，但不可以使用，部分注释会造成问题</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">node (&quot;slave02-172.16.1.3&quot;) &#123;   # 绑定到该节点构建</span><br><span class="line"><span class="meta">   #</span><span class="bash"> def mvnHome = <span class="string">&#x27;/usr/local/maven&#x27;</span></span></span><br><span class="line">   stage(&#x27;git checkout&#x27;) &#123;      # 拉代码</span><br><span class="line">        checkout([$class: &#x27;GitSCM&#x27;, branches: [[name: &#x27;$&#123;branch&#125;&#x27;]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: &#x27;git@172.16.1.3:/home/git/repos/solo&#x27;]]])</span><br><span class="line">   &#125;</span><br><span class="line">   stage(&#x27;maven build&#x27;) &#123;    # maven build</span><br><span class="line">        sh &#x27;&#x27;&#x27;export JAVA_HOME=/usr/local/java    # 在指定java环境变量</span><br><span class="line">        /usr/local/maven/bin/mvn clean package -Dmaven.test.skip=true&#x27;&#x27;&#x27;   # 构建maven包 clean package表示构建之前会清理之前构建的包，-Dmaven.test.skip=true表示跳过单元测试</span><br><span class="line">   &#125;</span><br><span class="line">   stage(&#x27;deploy&#x27;) &#123;   # 部署</span><br><span class="line">        sh &#x27;&#x27;&#x27;</span><br><span class="line">        JENKINS_NODE_COOKIE=dontkillme  # tomcat启动时会衍生出一些子进程，然后才能成功启动，但是jenkins会在构建结束杀掉tomcat的那些衍生子进程，造成tomcat启动失败，此处加上这个参数可以解决这个问题。</span><br><span class="line">        export JAVA_HOME=/usr/local/java</span><br><span class="line">        TOMCAT_NAME=tomcat</span><br><span class="line">        TOMCAT_HOME=/usr/local/$TOMCAT_NAME</span><br><span class="line">        WWWROOT=$TOMCAT_HOME/webapps/ROOT</span><br><span class="line"></span><br><span class="line">        if [ -d $WWWROOT ]; then   # 如果目录存在，先备份</span><br><span class="line">           mv $WWWROOT /data/backup/$&#123;TOMCAT_NAME&#125;-$(date +&quot;%F_%T&quot;)</span><br><span class="line">        fi</span><br><span class="line">        unzip $&#123;WORKSPACE&#125;/target/*.war -d $WWWROOT   # 项目包解压到站点目录</span><br><span class="line">        PID=$(ps -ef |grep $TOMCAT_NAME |egrep -v &quot;grep|$$&quot; |awk \&#x27;&#123;print $2&#125;\&#x27;)   # 重启tomcat</span><br><span class="line">        [ -n &quot;$PID&quot; ] &amp;&amp; kill -9 $PID</span><br><span class="line">        /bin/bash $TOMCAT_HOME/bin/startup.sh&#x27;&#x27;&#x27;</span><br><span class="line">   &#125;</span><br><span class="line">   stage(&#x27;test&#x27;) &#123;  # 测试</span><br><span class="line">        # sh &quot;curl http://wp.test.com/status.html&quot;</span><br><span class="line">        echo &quot;test ok!!!!!!!&quot;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4、构建-1"><a href="#4、构建-1" class="headerlink" title="4、构建"></a>4、构建</h4><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905184913443-2058202273-1581427002305.png" alt="img"></p>
+<h4 id="5、访问"><a href="#5、访问" class="headerlink" title="5、访问"></a>5、访问</h4><p><img src= "/img/loading.gif" data-src="CICD03-assets/1235834-20180905184940777-1980161350-1581427002305.png" alt="img"></p>
+<p><strong>报错处理</strong></p>
+<p>pipeline script from SCM方式下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Started by user ***</span><br><span class="line">java.io.FileNotFoundException</span><br><span class="line">    at jenkins.plugins.git.GitSCMFile$3.invoke(GitSCMFile.java:167)</span><br><span class="line">    at jenkins.plugins.git.GitSCMFile$3.invoke(GitSCMFile.java:159)</span><br><span class="line">    at jenkins.plugins.git.GitSCMFileSystem$3.invoke(GitSCMFileSystem.java:193)</span><br><span class="line">    ...l</span><br><span class="line">Finished: FAILURE</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/4276633-a4aee92aa7677655-1581427002305.png" alt="img"></p>
+<p>​                                                  <strong>原因是git工程下，没有找到Script Path路径下的脚本文件</strong>。</p>
+<h3 id="8、Jenkins-结合-gitlab-使用"><a href="#8、Jenkins-结合-gitlab-使用" class="headerlink" title="8、Jenkins 结合 gitlab 使用"></a>8、Jenkins 结合 gitlab 使用</h3><h4 id="1、创建一个新的任务"><a href="#1、创建一个新的任务" class="headerlink" title="1、创建一个新的任务"></a>1、创建一个新的任务</h4><p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192354042-830010134-1581427002305.png" alt="img"></p>
+<p>输入项目的名称，选择构建只有分风格的软件</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192401401-883929242-1581427002305.png" alt="img"></p>
+<h4 id="2、将Jenkins与gitlab联合"><a href="#2、将Jenkins与gitlab联合" class="headerlink" title="2、将Jenkins与gitlab联合"></a>2、将Jenkins与gitlab联合</h4><h5 id="1、Jenkins创建公钥和私钥"><a href="#1、Jenkins创建公钥和私钥" class="headerlink" title="1、Jenkins创建公钥和私钥"></a>1、Jenkins创建公钥和私钥</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# ssh-keygen </span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line"></span><br><span class="line">Enter file in which to save the key (/root/.ssh/id_rsa): Enter passphrase (empty for no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved in /root/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /root/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:5SGYye8oxCKFJjddb4W8JC0RAQhBWCvuG8aZL8eMJs4 root@Jenkins</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|==....=* ..      |</span><br><span class="line">|...o oo==.       |</span><br><span class="line">|+.= . =++.o      |</span><br><span class="line">|++ o   o.+ .     |</span><br><span class="line">|... o   S .      |</span><br><span class="line">|o.oo   o         |</span><br><span class="line">| B+ . . .        |</span><br><span class="line">|++++ .           |</span><br><span class="line">|+Eo.             |</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line">[root@qfedu.com ~]# cat .ssh/id_rsa.pub </span><br><span class="line">[root@qfedu.com ~]# cat .ssh/id_rsa</span><br></pre></td></tr></table></figure>
+<h5 id="2、在gitlab中添加公钥id-rsa-pub"><a href="#2、在gitlab中添加公钥id-rsa-pub" class="headerlink" title="2、在gitlab中添加公钥id_rsa.pub"></a>2、在gitlab中添加公钥id_rsa.pub</h5><p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192426354-684435689-1581427002305.png" alt="img"></p>
+<h5 id="3、在jenkins中添加私钥id-rsa"><a href="#3、在jenkins中添加私钥id-rsa" class="headerlink" title="3、在jenkins中添加私钥id_rsa"></a>3、在jenkins中添加私钥id_rsa</h5><p>​         在首页中，点击项目名称的下拉监听</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192438933-1952523900-1581427002305.png" alt="img"></p>
+<p>​         选择源码管理，先将gitlab的项目地址复制过来</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192448667-1624864487-1581427002305.png" alt="img"></p>
+<p>​         选择SSH密钥和证书，然后选择直接输入，将私钥复制到下框中即可</p>
+<p>​         添加完成后，点击保存</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192456448-898723804-1581427002305.png" alt="img"></p>
+<p>​         选择刚才创建的证书，完成后，选择构建</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192504808-1018752536-1581427002305.png" alt="img"></p>
+<p><strong>选择构建</strong></p>
+<p>​         拉到最底部，选择使用shell脚本</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192512214-519514729-1581427002305.png" alt="img"></p>
+<p>​         脚本内容</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192518948-2060407751-1581427002305.png" alt="img"></p>
+<p>​         创建测试环境</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# mkdir -p /data/www</span><br><span class="line">[root@qfedu.com ~]# chown -R jenkins.jenkins /data/</span><br></pre></td></tr></table></figure>
+<p>​         选择构建后的操作，让每次构建完成后都将结果发送给管理员</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192536214-662773016-1581427002307.png" alt="img"></p>
+<h4 id="3、测试手动集成"><a href="#3、测试手动集成" class="headerlink" title="3、测试手动集成"></a>3、测试手动集成</h4><p>回到主页，点击右侧的按钮进行测试</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192552839-1669748311-1581427002307.png" alt="img"></p>
+<p>部署完成</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192558886-1289295614-1581427002307.png" alt="img"></p>
+<p>查看部署日志</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192606261-1352544543-1581427002307.png" alt="img"></p>
+<p>查看部署结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@qfedu.com ~]# ll &#x2F;data&#x2F;www&#x2F;</span><br><span class="line">总用量 4</span><br><span class="line">-rw-r--r-- 1 jenkins jenkins 4 11月 30 21:22 flag</span><br><span class="line">-rw-r--r-- 1 jenkins jenkins 0 11月 30 21:22 README.md</span><br></pre></td></tr></table></figure>
+<h4 id="4、自动测试（gitlab主动通知Jenkins测试）"><a href="#4、自动测试（gitlab主动通知Jenkins测试）" class="headerlink" title="4、自动测试（gitlab主动通知Jenkins测试）"></a>4、自动测试（gitlab主动通知Jenkins测试）</h4><p>该功能会使用到一个插件 <strong>gitlab plugin</strong></p>
+<p>配置gitlab认证</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192624433-157495203-1581427002307.png" alt="img"></p>
+<p>添加一个新的凭证</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192631683-372513748-1581427002307.png" alt="img"></p>
+<p>   从gitlab的设置中将 token复制过来（需要手动创建token）</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/360截图18620331606393-1581427002307.png" alt="360截图18620331606393"></p>
+<p> 将复制的token粘贴到api token中，点ok</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192651667-606045732-1581427002307.png" alt="img"></p>
+<p> 在系统配置中找到<strong>Gitlab</strong> 将信息进行填写，Credentials 选择刚刚创建对的即可</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192700729-449236192-1581427002307.png" alt="img"></p>
+<p>打开项目，编辑项目的构建触发器</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192710183-1810385177-1581427002307.png" alt="img"></p>
+<p>在gitlab上配置连接jenkins ，将Jenkins的Secret token 与Build URL 复制到gitlab中</p>
+<p>注意： 在项目设置中的集成</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192718448-1860661215-1581427002307.png" alt="img"></p>
+<p>保存之前先进程测试，测试成功后进行保存</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192726448-895582851-1581427002307.png" alt="img"></p>
+<p> 在gitlab进行上传文件，可以测试。</p>
+<p>在日志中显示是 Started by GitLab push by Administrator 即表示自动集成成功</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/1190037-20171201192733104-716903443-1581427002307.png" alt="img"></p>
+<h4 id="5、错误解决"><a href="#5、错误解决" class="headerlink" title="5、错误解决"></a>5、错误解决</h4><ul>
+<li><p><strong>错误提示：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#很多朋友使用最新版本的gitlab做自动部署时，在增加web钩子那一步，</span><br><span class="line">#点击test  push events时会报错：Url is blocked: Requests to the local network are not allowed</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/b36a6a1bc5d58b0186618d020a801cc7-1581427002307.png" alt="Gitlab+Jenkins实现自动部署"></p>
+</li>
+<li><p>解决方法：</p>
+<p>这是因为新版的gitlab为了安全默认禁止了本地局域网地址调用web hook<br>我们在设置里允许就行，具体步骤如下：</p>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/2ac7f84e086f61d521781c3027576b1e-1581427002308.png" alt="Gitlab+Jenkins实现自动部署"><br><img src= "/img/loading.gif" data-src="CICD03-assets/f13e07e857b8d7677bb04f2631692e06-1581427002308.png" alt="Gitlab+Jenkins实现自动部署"></p>
+</li>
+</ul>
+<p><img src= "/img/loading.gif" data-src="CICD03-assets/360截图17370510273154-1581427002308.png" alt="360截图17370510273154"></p>
+<!-- flag of hidden posts --></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jiaqi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://deal-ii.com/post/4a7cf290/">http://deal-ii.com/post/4a7cf290/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://deal-ii.com" target="_blank">DEAL-II-Fluid</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Jenkins/">Jenkins</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/12/22/d7YjSwNqreOA91K.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div class="comments-items-1" data-name="Valine"><div class="vcomment" id="vcomment"></div><script>function loadvaline () {  
+  var requestSetting = function (from,set) {
+    var from = from
+    var setting = set.split(',').filter(function(item){
+    return from.indexOf(item) > -1
+    });
+    setting = setting.length == 0 ? from :setting;
+    return setting
+  }
+
+  var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+  var requiredFields = requestSetting(['nick','mail'],'nick,mail')
+
+  function initValine () {
+    window.valine = new Valine({
+      el:'#vcomment',
+      appId: 'lJ3vEzEWaeVa6HpWNNbPrauw-gzGzoHsz',
+      appKey: '16FI6zgDXwvw71g04yhHnnW0',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: guestInfo,
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      requiredFields: requiredFields
+    });
+  }
+  loadScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || false) {
+  window.addEventListener('load', loadvaline)
+}
+else {
+  function loadOtherComment () {
+    loadvaline()
+  }
+}</script></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Jiaqi</div><div class="framework-info"><span>驱动 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></head></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/calendar.js"></script><script src="/js/languages.js"></script><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/gitcalendar/js/gitcalendar.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":120,"height":260},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

@@ -1,0 +1,78 @@
+.rp-article {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 45px;
+}
+
+.rp-caption {
+    display: block;
+    margin: auto;
+    margin-top: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.rp-head-caption {
+    font-weight: bold;
+}
+
+@media (max-width: 767px) {
+    .rp-article {
+        padding: 15px;
+    }
+}
+
+.rp-article eq {
+    display: block;
+    margin: auto;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.rp-eq {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+
+.rp-eq-number {
+    display: inline-block;
+    margin-left:-40px;
+}
+
+.rp-article diagram {
+    display: block;
+    margin: auto;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.rp-article p5diagram {
+    display: block;
+    margin: auto;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.rp-article shaderdiagram {
+    display: block;
+    margin: auto;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.rp-diagram canvas {
+    display: block;
+    margin: auto;
+}
+
+.rp-article img {
+    display: block;
+    margin: auto;
+}

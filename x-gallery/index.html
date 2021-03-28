@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/darcula.min.css'>
+    <link rel='stylesheet' href='rp.css'>
+</head>
+<body>
+    <div id='content' class='markdown-body rp-article'>
+    </div>
+
+    <script src="bundle.js"></script>
+    <script>
+        window.onload = function() {
+            let str = String.raw`
+# H1
+
+## H2
+
+* dot dot dot
+
+1. wow
+1. hoho
+1. no
+
+This is a reference to Eq. \ref{eq:irradiance2} and Fig. \ref{fig:scanline}. Fig. \ref{fig:airplane2}.
+
+Also, this is a inline math equation $f(x) = x^2 + x + 1$. Another one: $f(x) = 2x^3 + x^2 + 1$
+
+::: diagram
+\image{https://homepages.cae.wisc.edu/~ece533/images/airplane.png}
+\width{128}
+\label{fig:airplane1}
+\caption{A picture of a plane.}
+:::
+
+::: eq
+\sum_i^{N} \dfrac{1}{2} P(\mathbf{n} \cdot \mathbf{e}_i)
+\label{eq:irradiance1}
+:::
+
+::: eq
+\sum_i^{N} \dfrac{1}{2} P(\mathbf{n} \cdot \mathbf{e}_i)
+\label{eq:irradiance2}
+:::
+
+::: diagram
+\image{https://homepages.cae.wisc.edu/~ece533/images/airplane.png}
+\width{128}
+\label{fig:airplane2}
+\caption{A picture of a plane.}
+:::
+
+\import{https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.0.2/math.min.js}
+\import{https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.1/dist/tf.min.js}
+
+::: p5diagram
+\begin{setup}
+    p.createCanvas(128, 128);
+    p.stroke(255);
+    p.frameRate(30);
+    p.ud = {};
+    p.ud.y = 100;
+    p.ud.A = math.matrix([[1, 2], [3, 4]]);
+    p.ud.t = tf.tensor([1, 2]);
+
+    console.log(p.ud.A);
+    console.log(p.ud.t);
+\end{setup}
+
+\begin{draw}
+    p.background(0);
+    p.ud.y = p.ud.y - 1;
+    if (p.ud.y < 0) {
+        p.ud.y = p.height;
+    }
+    p.line(0, p.ud.y, p.width, p.ud.y);
+\end{draw}
+\label{fig:scanline}
+\caption{This is a caption for scanline diagram}
+:::
+
+::: p5diagram
+\begin{setup}
+    p.createCanvas(128, 128);
+    p.stroke(255);
+    p.frameRate(30);
+    p.ud = {};
+    p.ud.y = 100;
+
+\end{setup}
+
+\begin{draw}
+    p.background(0);
+    p.ud.y = p.ud.y - 1;
+    if (p.ud.y < 0) {
+        p.ud.y = p.height;
+    }
+    p.line(0, p.ud.y, p.width, p.ud.y);
+\end{draw}
+\label{fig:scanline2}
+\caption{This is a caption for scanline diagram2}
+:::
+
+::: shaderdiagram
+  <script type="x-shader/x-fragment">
+    void main() {
+      vec2 st = gl_FragCoord.xy / u_resolution.xy;
+      vec3 color = vec3(st.x, st.y, abs(sin(u_time)));
+
+      gl_FragColor = vec4(color, 1.0);
+    }
+  <\/script>
+\label{fig:shader}
+\caption{This is a caption for shader}
+:::
+
+Another text comes here Lorem Impsum.
+
+        `;
+        
+        str+="\n\n```cpp\n#include<iostream>\n\nint main(){\n return 0; // $Hard case$ \n // \\ref{hardcase2} \n}\n```";
+        renderpost.render_rp(document.getElementById('content'), str);
+}
+    </script>
+</body>
+</html>

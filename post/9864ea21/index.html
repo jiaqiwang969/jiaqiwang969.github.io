@@ -1,0 +1,770 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>machine learning for chaos system-执行篇 | DEAL-II-Fluid</title><meta name="description" content="参考资料： https:&#x2F;&#x2F;mblondel.org&#x2F;teaching&#x2F;autodiff-2020.pdf 18.337J &#x2F; 6.338J：并行计算和科学机器学习技术计算主要有两个分支：机器学习和科学计算。在过去的十年中，机器学习受到了很多炒作，例如卷积神经网络和TSne非线性降维等技术为新一代数据驱动的分析提供了动力。另一方面，许多科学学科通过微分方程建模进行大规模建模，着眼于描述科学定律的随"><meta name="keywords" content="SciML"><meta name="author" content="Jiaqi"><meta name="copyright" content="Jiaqi"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://deal-ii.com/post/9864ea21/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta property="og:type" content="article"><meta property="og:title" content="machine learning for chaos system-执行篇"><meta property="og:url" content="http://deal-ii.com/post/9864ea21/"><meta property="og:site_name" content="DEAL-II-Fluid"><meta property="og:description" content="参考资料： https:&#x2F;&#x2F;mblondel.org&#x2F;teaching&#x2F;autodiff-2020.pdf 18.337J &#x2F; 6.338J：并行计算和科学机器学习技术计算主要有两个分支：机器学习和科学计算。在过去的十年中，机器学习受到了很多炒作，例如卷积神经网络和TSne非线性降维等技术为新一代数据驱动的分析提供了动力。另一方面，许多科学学科通过微分方程建模进行大规模建模，着眼于描述科学定律的随"><meta property="og:image" content="https://i.loli.net/2020/12/22/d7YjSwNqreOA91K.png"><meta property="article:published_time" content="2020-12-22T02:58:33.000Z"><meta property="article:modified_time" content="2021-01-29T07:25:51.369Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="next" title="julia-a beautiful language" href="http://deal-ii.com/post/5d8b8de9/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: true,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: true,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-01-29 15:25:51'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@master/Hexo/css/flink.min.css"><link rel="stylesheet" href="/gitcalendar/css/gitcalendar.css"/><meta name="generator" content="Hexo 5.3.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/Jiaqi-knight/imgBase@main/me.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">23</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">31</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#18-337J-6-338J%EF%BC%9A%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E5%92%8C%E7%A7%91%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">18.337J &#x2F; 6.338J：并行计算和科学机器学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.1.</span> <span class="toc-text">最终项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98%E8%A1%A8"><span class="toc-number">1.2.</span> <span class="toc-text">主题表</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B6%E5%BA%AD%E4%BD%9C%E4%B8%9A"><span class="toc-number">2.</span> <span class="toc-text">家庭作业</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%B2%E5%BA%A7%E6%91%98%E8%A6%81%E5%92%8C%E8%AE%B2%E4%B9%89"><span class="toc-number">3.</span> <span class="toc-text">讲座摘要和讲义</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC1%E8%AF%BE%EF%BC%9A%E7%AE%80%E4%BB%8B%E5%92%8C%E8%AF%BE%E7%A8%8B%E6%8F%90%E7%BA%B2"><span class="toc-number">3.1.</span> <span class="toc-text">第1课：简介和课程提纲</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E5%BA%A7%E4%B8%8E%E7%AC%94%E8%AE%B0"><span class="toc-number">3.1.1.</span> <span class="toc-text">讲座与笔记</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%B2%E5%BA%A71-1%EF%BC%9AJulia%E5%85%A5%E9%97%A8"><span class="toc-number">3.2.</span> <span class="toc-text">讲座1.1：Julia入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E5%BA%A7%E4%B8%8E%E7%AC%94%E8%AE%B0-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">讲座与笔记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%80%89%E7%9A%84%E9%A2%9D%E5%A4%96%E8%B5%84%E6%BA%90"><span class="toc-number">3.2.2.</span> <span class="toc-text">可选的额外资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC2%E8%AF%BE%EF%BC%9A%E4%BC%98%E5%8C%96%E4%B8%B2%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="toc-number">3.3.</span> <span class="toc-text">第2课：优化串行代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E5%BA%A7%E4%B8%8E%E7%AC%94%E8%AE%B0-2"><span class="toc-number">3.3.1.</span> <span class="toc-text">讲座与笔记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%80%89%E7%9A%84%E9%A2%9D%E5%A4%96%E8%B5%84%E6%BA%90-1"><span class="toc-number">3.3.2.</span> <span class="toc-text">可选的额外资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC3%E8%AF%BE%EF%BC%9A%E9%80%9A%E8%BF%87%E7%89%A9%E7%90%86%E4%BF%A1%E6%81%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%BF%9B%E8%A1%8C%E7%A7%91%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%AE%80%E4%BB%8B"><span class="toc-number">3.4.</span> <span class="toc-text">第3课：通过物理信息神经网络进行科学机器学习的简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%80%89%E7%9A%84%E9%A2%9D%E5%A4%96%E8%B5%84%E6%BA%90-2"><span class="toc-number">3.4.1.</span> <span class="toc-text">可选的额外资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%B2%E5%BA%A74%EF%BC%9A%E7%A6%BB%E6%95%A3%E5%8A%A8%E5%8A%9B%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B"><span class="toc-number">3.5.</span> <span class="toc-text">讲座4：离散动力系统简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%80%89%E7%9A%84%E9%A2%9D%E5%A4%96%E8%B5%84%E6%BA%90-3"><span class="toc-number">3.5.1.</span> <span class="toc-text">可选的额外资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC5%E8%AF%BE%EF%BC%9A%E5%9F%BA%E4%BA%8E%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B6%E8%A1%8C%EF%BC%8C%E5%B0%B4%E5%B0%AC%E7%9A%84%E5%B9%B6%E8%A1%8C%E9%97%AE%E9%A2%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8C%EF%BC%9A%E5%8D%95%E8%8A%82%E7%82%B9%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E7%9A%84%E5%9F%BA%E7%A1%80"><span class="toc-number">3.6.</span> <span class="toc-text">第5课：基于数组的并行，尴尬的并行问题和数据并行：单节点并行计算的基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%80%89%E7%9A%84%E9%A2%9D%E5%A4%96%E8%B5%84%E6%BA%90-4"><span class="toc-number">3.6.1.</span> <span class="toc-text">可选的额外资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC6%E8%AE%B2%EF%BC%9A%E5%B9%B6%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="toc-number">3.7.</span> <span class="toc-text">第6讲：并行方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC7%E8%AF%BE%EF%BC%9A%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%EF%BC%9A%E5%BA%94%E7%94%A8%E5%92%8C%E7%A6%BB%E6%95%A3%E5%8C%96"><span class="toc-number">3.8.</span> <span class="toc-text">第7课：常微分方程：应用和离散化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC8%E8%AF%BE%EF%BC%9A%E5%89%8D%E5%90%91%E6%A8%A1%E5%BC%8F%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86"><span class="toc-number">3.9.</span> <span class="toc-text">第8课：前向模式自动微分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC9%E8%AF%BE%EF%BC%9A%E6%B1%82%E8%A7%A3%E5%88%9A%E6%80%A7%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">3.10.</span> <span class="toc-text">第9课：求解刚性常微分方程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BC%94%E8%AE%B2%E7%AC%94%E8%AE%B0"><span class="toc-number">3.10.0.1.</span> <span class="toc-text">演讲笔记</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%89%9B%E9%A1%BF%E6%B3%95%E6%94%B6%E6%95%9B%E6%80%A7%E7%9A%84%E8%A1%A5%E5%85%85%E8%AF%BB%E7%89%A9"><span class="toc-number">3.10.0.2.</span> <span class="toc-text">关于牛顿法收敛性的补充读物</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%B2%E5%BA%A710%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%EF%BC%8C%E5%8F%8D%E5%90%91%E6%A8%A1%E5%BC%8FAD%E5%92%8C%E5%8F%8D%E9%97%AE%E9%A2%98"><span class="toc-number">3.11.</span> <span class="toc-text">讲座10：基本参数估计，反向模式AD和反问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC11%E8%AF%BE%EF%BC%9A%E5%8F%AF%E5%BE%AE%E7%BC%96%E7%A8%8B%E5%92%8C%E7%A5%9E%E7%BB%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-number">3.12.</span> <span class="toc-text">第11课：可微编程和神经微分方程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%85%B3AD%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%85%B6%E4%BB%96%E9%98%85%E8%AF%BB"><span class="toc-number">3.12.1.</span> <span class="toc-text">有关AD实现的其他阅读</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%94%E8%AE%B212-1%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E7%9A%84MPI"><span class="toc-number">3.13.</span> <span class="toc-text">演讲12.1：分布式计算的MPI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%94%E8%AE%B212-2%EF%BC%9A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97%E7%9A%84%E6%95%B0%E5%AD%A6"><span class="toc-number">3.14.</span> <span class="toc-text">演讲12.2：机器学习和高性能计算的数学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%B2%E5%BA%A713%EF%BC%9AGPU%E8%AE%A1%E7%AE%97"><span class="toc-number">3.15.</span> <span class="toc-text">讲座13：GPU计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC14%E8%AF%BE%EF%BC%9A%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E5%92%8C%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">3.16.</span> <span class="toc-text">第14课：偏微分方程和卷积神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E8%AF%BB%E7%89%A9"><span class="toc-number">3.16.1.</span> <span class="toc-text">其他读物</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC15%E8%AF%BE%EF%BC%9A%E8%BF%9E%E6%8E%A5%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E5%92%8C%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%9B%B4%E5%A4%9A%E7%AE%97%E6%B3%95"><span class="toc-number">3.17.</span> <span class="toc-text">第15课：连接微分方程和机器学习的更多算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC16%E8%AE%B2%EF%BC%9A%E6%A6%82%E7%8E%87%E7%BC%96%E7%A8%8B"><span class="toc-number">3.18.</span> <span class="toc-text">第16讲：概率编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%83%E8%AE%B2%EF%BC%9A%E5%85%A8%E7%90%83%E6%95%8F%E6%84%9F%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-number">3.19.</span> <span class="toc-text">第十七讲：全球敏感性分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC18%E8%AF%BE%EF%BC%9A%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E5%92%8C%E4%BC%98%E5%8C%96"><span class="toc-number">3.20.</span> <span class="toc-text">第18课：代码分析和优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E4%B9%9D%E8%AE%B2%EF%BC%9A%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E7%BC%96%E7%A8%8B%E5%92%8C%E5%B9%BF%E4%B9%89%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E9%87%8F%E5%8C%96"><span class="toc-number">3.21.</span> <span class="toc-text">第十九讲：不确定性编程和广义不确定性量化</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2020/12/22/d7YjSwNqreOA91K.png)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">DEAL-II-Fluid</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 索引</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/x-swirlflow/"><i class="fa-fw fa fa-book"></i><span> swirlflow</span></a></li><li><a class="site-page" href="/x-codepen/"><i class="fa-fw fa fa-magic"></i><span> codepen</span></a></li><li><a class="site-page" href="/x-gallery/"><i class="fa-fw fa fa-beer"></i><span> gallery</span></a></li><li><a class="site-page" href="/x-shadertoy/"><i class="fa-fw fa fa-star"></i><span> shadertoy</span></a></li><li><a class="site-page" href="/x-webgl1/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl1</span></a></li><li><a class="site-page" href="/x-webgl2/"><i class="fa-fw fa fa-camera-retro"></i><span> webgl2</span></a></li><li><a class="site-page" href="/x-markdown/"><i class="fa-fw fa fa-tree"></i><span> Vditor</span></a></li><li><a class="site-page" href="/x-DNN/"><i class="fa-fw fa fa-heartbeat"></i><span> DNN</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">machine learning for chaos system-执行篇</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-12-22 10:58:33"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-12-22</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-01-29 15:25:51"><i class="fas fa-history fa-fw"></i> 更新于 2021-01-29</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/code/">code</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://mblondel.org/teaching/autodiff-2020.pdf">https://mblondel.org/teaching/autodiff-2020.pdf</a></p>
+<h1 id="18-337J-6-338J：并行计算和科学机器学习"><a href="#18-337J-6-338J：并行计算和科学机器学习" class="headerlink" title="18.337J / 6.338J：并行计算和科学机器学习"></a><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/">18.337J / 6.338J：并行计算和科学机器学习</a></h1><p>技术计算主要有两个分支：机器学习和科学计算。在过去的十年中，机器学习受到了很多炒作，例如卷积神经网络和TSne非线性降维等技术为新一代数据驱动的分析提供了动力。另一方面，许多科学学科通过微分方程建模进行大规模建模，着眼于描述科学定律的随机微分方程和偏微分方程。</p>
+<p>但是，这两个学科最近融合在一起。科学机器学习这个领域一直在展示一些结果，例如如何使用神经网络加速偏微分方程的仿真。已经开始专门开发新方法，例如概率编程和微分编程，以增强该领域的工具。但是，该领域的技术将计算和数值实践的两个巨大领域结合在一起，这意味着这些方法足够复杂。您如何反向传播由神经网络定义的ODE？您如何进行科学模拟器的无监督学习？</p>
+<p>在本课程中，我们将深入研究这些方法，并了解它们的作用，制造原因，以及如何在各个领域整合数值方法，以突出其利弊，同时减轻其弊端。本课程将对数字技术进行一次调查，展示多少门学科以不同的名称从事同一工作，并使用一种通用的数学语言来导出有效的例程，以捕获数据驱动和基于机械的建模。</p>
+<p>但是，如果天真地编码，这些方法将很快遇到扩展问题。为了解决这个问题，所有工作都将重点放在性能工程上。我们将从关注本质上是串行的算法开始，并学习优化串行代码。然后，我们将展示如何通过多线程和分布式计算技术（如MPI）并行处理逻辑繁重的代码，而直接的数学描述可以通过GPU计算并行化。</p>
+<p>课程的最后一部分将是一个独特的项目，将这些技术结合在一起。作为一个新领域，学生将接触到“垂头丧气的果实”，并被引导到可以迅速产生影响的领域。在最后的项目中，学生将联手解决科学机器学习领域的新问题，并获得帮助撰写有关其工作的出版物质量分析。</p>
+<p>一些资料：</p>
+<p>微分编程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/105662113">https://zhuanlan.zhihu.com/p/105662113</a></p>
+<h2 id="最终项目"><a href="#最终项目" class="headerlink" title="最终项目"></a>最终项目</h2><p>最终项目是使用<a target="_blank" rel="noopener" href="http://www.siam.org/journals/auth-info.php"><em>SIAM数值分析期刊</em></a> （或类似<a target="_blank" rel="noopener" href="http://www.siam.org/journals/auth-info.php"><em>刊物）中</em></a>的样式模板的10-20页论文。最终项目必须以其他人可以使用的形式包含用于算法的高性能（或并行化）实现的代码。期望进行全面的性能分析。根据学术评论文章（例如，阅读<em>SIAM评论</em>和类似期刊作为示例）对论文进行建模。</p>
+<p>一种可能是复习本课程中未涵盖的有趣算法，并开发出高性能的实现。一些示例包括：</p>
+<ul>
+<li>适用于Navier-Stokes等特定PDE的高性能PDE求解器</li>
+<li>常见的高性能算法（例如：PDE的免费Jacobon-Free Newton Krylov）</li>
+<li>在生物学，药理学或气候科学等领域进行参数敏感性研究</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.01681">增广神经常微分方程</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1905.10403.pdf">神经跳跃随机微分方程</a></li>
+<li>平行模板计算</li>
+<li>分布式线性代数核</li>
+<li>统计库的并行实现，例如生存统计或大数据的线性模型。这是<a target="_blank" rel="noopener" href="https://github.com/harrelfe/rms">一个并行库示例）</a> 和<a target="_blank" rel="noopener" href="https://bioconductor.org/packages/release/data/experiment/html/RegParallel.html">第二个示例</a>。</li>
+<li>数据分析方法的并行化</li>
+<li>稀疏线性代数方法的类型通用实现</li>
+<li>快速的正则表达式库</li>
+<li>数学库原语（exp，log等）</li>
+</ul>
+<p>另一种可能性是进行最先进的性能工程。这将实现新的自动并行化或性能增强。对于这些类型的项目，不需要实施用于基准测试的应用程序，而是可以对已经存在的代码进行基准测试，以找出有利的情况（或导致性能下降）。可能的示例是：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/JuliaLang/julia/issues/19777">创建一个用于数组操作的自动多线程并行化的系统，</a>并查看哪种包最终会更有效</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/JuliaLang/julia/issues/32786">使用PARTR后端设置BLAS</a> 并研究下游对多线程代码的影响，例如现有的PDE求解器</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/JuliaLang/julia/issues/21017">研究多线程循环中的工作窃取效果</a></li>
+<li>快速并行类型通用FFT。史蒂芬·约翰逊（FFTW的创建者）和马英博的入门代码<a target="_blank" rel="noopener" href="https://github.com/YingboMa/DFT.jl">可在此处找到</a></li>
+<li>类型通用BLAS。<a target="_blank" rel="noopener" href="https://github.com/JuliaBLAS/JuliaBLAS.jl">入门代码可以在这里找到</a></li>
+<li>并行映射减少方法的实现。例如， 对此的<code>pmapreduce</code> <a target="_blank" rel="noopener" href="https://docs.julialang.org/en/v1/manual/parallel-computing/index.html">扩展会<code>pmap</code></a>添加并行压缩，或者基于GPU的快速map-reduce。</li>
+<li>使用诸如<a target="_blank" rel="noopener" href="https://github.com/JuliaGPU/CUDAnative.jl">CUDAnative</a>和/或 <a target="_blank" rel="noopener" href="https://github.com/vchuravy/GPUifyLoops.jl">GPUifyLoops之</a>类的工具研究将完整的软件包代码自动编译到GPU 。</li>
+<li>研究数据库和数据框的替代实现。 <a target="_blank" rel="noopener" href="https://github.com/JuliaData/DataFrames.jl/issues/1335">DataFrames的NamedTuple后端</a>，其他<a target="_blank" rel="noopener" href="https://github.com/FugroRoames/TypedTables.jl">类型稳定的DataFrames</a>，用于CSV读取的默认值以及其他大表格式（如<a target="_blank" rel="noopener" href="https://github.com/JuliaComputing/JuliaDB.jl">JuliaDB）</a>。</li>
+</ul>
+<p>此外，科学机器学习是一个广阔的领域，有很多低落的果实。代替评审，可以将合适的研究项目用于最终项目。可能性包括：</p>
+<ul>
+<li>微分方程伴随的加速方法</li>
+<li>物理信息神经网络的改进方法</li>
+<li>神经微分方程的新应用</li>
+<li>大型ODE系统的并行隐式ODE求解器</li>
+<li>适用于小型系统的GPU并行ODE / SDE求解器</li>
+</ul>
+<p>最终项目主题必须在10月30日之前声明，并附上一页摘要。</p>
+<h2 id="主题表"><a href="#主题表" class="headerlink" title="主题表"></a>主题表</h2><p>每个主题由三部分组成：数值方法，性能工程技术和科学应用。这三个一起构成了一个完整的可用程序，并进行了演示。</p>
+<ul>
+<li>科学模拟器的基础知识（第1-2周）<ul>
+<li>什么是科学机器学习？</li>
+<li>优化序列号。</li>
+<li>离散和连续动力系统简介。</li>
+</ul>
+</li>
+<li>并行计算入门（第2-3周）<ul>
+<li>并行形式和应用</li>
+<li>并行微分方程求解器</li>
+<li>通过多线程优化局部并行</li>
+<li>您应该知道的线性代数库</li>
+</ul>
+</li>
+</ul>
+<p>作业1：并行动力学系统仿真和ODE积分器</p>
+<ul>
+<li>连续动力学（第4周）<ul>
+<li>常微分方程是生态学，牛顿力学及其他领域的语言。</li>
+<li>非刚性常微分方程的数值方法</li>
+<li>刚度的定义</li>
+<li>有效求解刚性常微分方程</li>
+<li>发育生物学和生态学中生化相互作用产生的刚性微分方程</li>
+<li>将类型系统和通用算法用作数学工具</li>
+<li>前向自动微分求解f（x）= 0</li>
+<li>基质着色和稀疏区分</li>
+</ul>
+</li>
+</ul>
+<p>作业2：动态系统中的参数估计和并行性开销</p>
+<ul>
+<li>反问题和可微编程（第6周）<ul>
+<li>反问题的定义及其在临床药理学和智能电网优化中的应用</li>
+<li>快速梯度的伴随方法</li>
+<li>通过反向模式自动区分（反向传播）实现自动伴随</li>
+<li>微分方程的伴随</li>
+<li>使用神经常微分方程作为记忆有效的RNN进行深度学习</li>
+</ul>
+</li>
+<li>神经网络和基于数组的并行性（第8周）<ul>
+<li>数值线性代数中的缓存优化</li>
+<li>通过数组操作实现并行</li>
+<li>如何为GPU优化算法</li>
+</ul>
+</li>
+<li>分布式并行计算（Jeremy Kepner：7-8周）<ul>
+<li>并行形式</li>
+<li>使用分布式计算与多线程</li>
+<li>消息传递和死锁</li>
+<li>Map-Reduce作为分布式并行性的框架</li>
+<li>使用MPI实现分布式并行算法</li>
+</ul>
+</li>
+</ul>
+<p>作业3：训练神经常微分方程（使用GPU）</p>
+<ul>
+<li>物理信息神经网络和神经微分方程（第9-10周）<ul>
+<li>自动发现微分方程</li>
+<li>用神经网络求解微分方程</li>
+<li>PDE的离散化</li>
+<li>神经网络的基础和定义</li>
+<li>卷积神经网络与PDE之间的关系</li>
+</ul>
+</li>
+<li>概率编程，程序的贝叶斯估计（第10-11周）<ul>
+<li>优化与贝叶斯方法之间的联系：贝叶斯后验与MAP优化</li>
+<li>马尔可夫链蒙特卡罗方法简介</li>
+<li>哈密顿蒙特卡洛只是辛辛的ODE求解器</li>
+<li>通过后验参数估计的不确定性量化</li>
+</ul>
+</li>
+<li>全球化对模型的理解（第11周至第12周）<ul>
+<li>全局敏感性分析</li>
+<li>全局优化</li>
+<li>替代模型</li>
+<li>不确定度量化</li>
+</ul>
+</li>
+</ul>
+<h1 id="家庭作业"><a href="#家庭作业" class="headerlink" title="家庭作业"></a>家庭作业</h1><ul>
+<li><p><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/hw1/hw1">作业1：并行动力学。10月1日到期</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/hw2/hw2">作业2：动态系统中的参数估计和带宽最大化。由于11月5日</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/hw3/hw3">作业3：神经常微分方程伴随。截止到12月9日</a></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://github.com/kazimuth/6.338">https://github.com/kazimuth/6.338</a></p>
+</li>
+</ul>
+<h1 id="讲座摘要和讲义"><a href="#讲座摘要和讲义" class="headerlink" title="讲座摘要和讲义"></a>讲座摘要和讲义</h1><p>请注意，讲座按主题分类，而不是按天细分。有些讲座多于1节课，有些则少。</p>
+<h2 id="第1课：简介和课程提纲"><a href="#第1课：简介和课程提纲" class="headerlink" title="第1课：简介和课程提纲"></a>第1课：简介和课程提纲</h2><h3 id="讲座与笔记"><a href="#讲座与笔记" class="headerlink" title="讲座与笔记"></a>讲座与笔记</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/3IoqyXmAAkU">介绍和课程提纲（讲座）</a></li>
+</ul>
+<p>这是为了确保我们都在同一页面上。它涵盖了课程提纲以及整个课程对您的期望。如果您尚未加入Slack，请使用介绍电子邮件中的链接（如果需要此链接，请给我发电子邮件！）。</p>
+<h2 id="讲座1-1：Julia入门"><a href="#讲座1-1：Julia入门" class="headerlink" title="讲座1.1：Julia入门"></a>讲座1.1：Julia入门</h2><h3 id="讲座与笔记-1"><a href="#讲座与笔记-1" class="headerlink" title="讲座与笔记"></a>讲座与笔记</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/-lJK92bEKow">Julia经验丰富的程序员入门（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mitmath/julia-mit">朱莉娅在麻省理工学院课程中的数值计算</a></li>
+<li><a target="_blank" rel="noopener" href="https://mit.zoom.us/rec/play/E4zN_2MXQmCjX12admWsmsbG6hIlWJztnMmFjlfDEBnlAj8V2qisRn-CLI_WVnUGJFZ4bV6JGM-41m-u.LeAWxiLriV5HwqBK?startTime=1599594382000">史蒂文·约翰逊：麻省理工学院朱莉娅教程</a></li>
+</ul>
+<h3 id="可选的额外资源"><a href="#可选的额外资源" class="headerlink" title="可选的额外资源"></a>可选的额外资源</h3><p>如果您对Julia还是不满意，这里有一些资源可以帮助您快速入门：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.julialang.org/en/v1/">朱莉娅手册</a></li>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/QVmU29rCjaA">开发Julia软件包</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=8h8rQyEpiZA">朱莉娅教程（Youtube Video by Jane Herriman）</a></li>
+</ul>
+<p>一些更深层次的材料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://benlauwens.github.io/ThinkJulia.jl/latest/book.html">ThinkJulia</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikibooks.org/wiki/Introducing_Julia">朱莉娅Wikibook</a></li>
+<li><a target="_blank" rel="noopener" href="http://ucidatascienceinitiative.github.io/IntroToJulia/">朱莉娅（Julia）数据科学和科学计算入门（有问题和解答）</a></li>
+<li><a target="_blank" rel="noopener" href="https://cheatsheets.quantecon.org/">QuantEcon备忘单</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.julialang.org/en/v1/manual/noteworthy-differences/">朱莉娅·沃特（Julia Noteworthy）与其他语言的区别</a></li>
+</ul>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">julia&gt; Threads.nthreads()</span><br><span class="line">win:<span class="number">12</span>;ubuntu:<span class="number">24</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="第2课：优化串行代码"><a href="#第2课：优化串行代码" class="headerlink" title="第2课：优化串行代码"></a>第2课：优化串行代码</h2><h3 id="讲座与笔记-2"><a href="#讲座与笔记-2" class="headerlink" title="讲座与笔记"></a>讲座与笔记</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://youtu.be/M2i7sSRcSIw">在Julia 1中优化串行代码：内存模型，变异和向量化（讲座）</a> <a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture2/optimizing">文档</a></p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/23/WUX8VBRFD3472Lr.jpg" alt="WUX8VBRFD3472Lr"></p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/23/HhZ6TwazJ32LQb5.png" alt="HhZ6TwazJ32LQb5"></p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pkg&gt; add BenchmarkTools</span><br><span class="line">A = rand(<span class="number">100</span>,<span class="number">100</span>)</span><br><span class="line">B = rand(<span class="number">100</span>,<span class="number">100</span>)</span><br><span class="line">C = rand(<span class="number">100</span>,<span class="number">100</span>)</span><br><span class="line"><span class="keyword">using</span> BenchmarkTools</span><br><span class="line"><span class="keyword">function</span> inner_rows!(C,A,B)</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">100</span>, j <span class="keyword">in</span> <span class="number">1</span>:<span class="number">100</span></span><br><span class="line">    C[i,j] = A[i,j] + B[i,j]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="meta">@btime</span> inner_rows!(C,A,B)</span><br></pre></td></tr></table></figure>
+<p><strong>Tip</strong>：</p>
+</li>
+</ul>
+<ol>
+<li><p>Heap allocation 需要一些时间，相比stack要快的多；</p>
+</li>
+<li><p>Mutation to Avoid Heap Allocations 函数后加“！”；</p>
+</li>
+<li><p>Julia Broadcasting mechanism；可大大提高performance，至少3倍</p>
+</li>
+<li><p>减少heap内存分配；</p>
+</li>
+<li><p>loop 损耗；</p>
+</li>
+<li><p>方程算子整体操作，一行代码；</p>
+</li>
+<li><p>heap allocation from slicing： A[50,50], @btime @view A[1:5,1:5] 只不过移动指针，没有创造内存，但如果没有@view，则需要创建内存</p>
+</li>
+<li><p>c ， c++比较快的一大原因是，全部指定type，这样，程序就可以提前编译打包，运行的时也无后顾之忧。julia虽然没有这么做，但也有一套打包成函数的机制。</p>
+</li>
+<li><p>julia分发机制（多态）：ff(x::Int,y::Int) = 2x + y； ff(x::Float64,y::Float64) = x/y； @show ff(2,5)； @show ff(2.0,5.0)</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> vectorized!(tmp, A, B, C)</span><br><span class="line">  tmp .= A .* B .* C</span><br><span class="line">  <span class="literal">nothing</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">function</span> non_vectorized!(tmp, A, B, C)</span><br><span class="line">  <span class="meta">@boundscheck</span> A, B, C <span class="comment">#保证不越界修改内存，否则会导致计算机出错</span></span><br><span class="line">  <span class="meta">@inbounds</span> <span class="keyword">for</span> i <span class="keyword">in</span> length(tmp) <span class="comment">#这样的for循环速度和上面的一样，在julia中，for循环速度很快，如果不用check bounds的话</span></span><br><span class="line">    tmp[i] = A[i] * B[i] * C[i]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="literal">nothing</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line"><span class="meta">@btime</span> vectorized!(tmp, A, B, C) -&gt;<span class="number">3.7</span>us</span><br><span class="line"><span class="meta">@btime</span> non_vectorized!(tmp, A, B, C)-&gt;<span class="number">9.4</span>us</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/23/yTNFk6qzCS5VQ4P.png" alt="yTNFk6qzCS5VQ4P"></p>
+</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/10_Ukm9wr9g">在Julia 2中优化串行代码：类型推断，函数专门化和调度（讲座）</a></li>
+</ul>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture2/optimizing">优化序列号（注释）</a></li>
+</ul>
+<h3 id="可选的额外资源-1"><a href="#可选的额外资源-1" class="headerlink" title="可选的额外资源"></a>可选的额外资源</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://tutorials.sciml.ai/html/introduction/03-optimizing_diffeq_code.html">优化您的DiffEq代码</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.stochasticlifestyle.com/type-dispatch-design-post-object-oriented-programming-julia/">类型调度设计：Julia的后面向对象编程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=r-TLSBdHe1A0">绩效问题</a></li>
+<li><a target="_blank" rel="noopener" href="http://phk.freebsd.dk/B-Heap/queue.html">您做错了（B堆vs二进制堆和Big O）</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=YQs6IC-vgmo">Bjarne Stroustrup：为什么应该避免链接列表</a></li>
+<li><a target="_blank" rel="noopener" href="https://biojulia.net/post/hardware/">科学家必须具备哪些硬件知识才能编写快速代码</a></li>
+</ul>
+<p>在开始并行化代码，构建庞大的模型并自动学习物理学之前，我们需要确保我们的代码“良好”。您怎么知道您正在编写“好的”代码？这就是本讲座要回答的内容。在本讲座中，我们将介绍编写良好的串行代码并检查代码是否有效的技术。</p>
+<h2 id="第3课：通过物理信息神经网络进行科学机器学习的简介"><a href="#第3课：通过物理信息神经网络进行科学机器学习的简介" class="headerlink" title="第3课：通过物理信息神经网络进行科学机器学习的简介"></a>第3课：通过物理信息神经网络进行科学机器学习的简介</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://youtu.be/C3vf9ZFYbjI">科学机器学习简介1：作为函数逼近的深度学习（讲座）</a><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture3/sciml.html">文档</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://youtu.be/hKHl68Fdpq4">科学机器学习简介2：物理信息神经网络（讲座）</a></p>
+<script type="math/tex; mode=display">
+x''= -kx +0.1sin(x)</script><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过DifferentialEquation求解</span></span><br><span class="line"><span class="keyword">using</span> Plots</span><br><span class="line"><span class="keyword">using</span> DifferentialEquations</span><br><span class="line">k = <span class="number">1.0</span></span><br><span class="line">force(dx,x,k,t) = -k*x +<span class="number">0.1</span>sin(x)</span><br><span class="line">prob = SecondOrderODEProblem(force,<span class="number">1.0</span>,<span class="number">0.0</span>,(<span class="number">0.0</span>,<span class="number">10.0</span>),k)</span><br><span class="line">sol = solve(prob)</span><br><span class="line">plot(sol, label=[<span class="string">&quot;velocity&quot;</span> <span class="string">&quot;Position&quot;</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">plot_t = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">10</span></span><br><span class="line">data_plot = sol(plot_t)</span><br><span class="line">positions_plot = [state[<span class="number">2</span>] <span class="keyword">for</span> state <span class="keyword">in</span> data_plot]</span><br><span class="line">force_plot = [force(state[<span class="number">1</span>],state[<span class="number">2</span>],k,t) <span class="keyword">for</span> state <span class="keyword">in</span> data_plot]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Generate the dataset</span></span><br><span class="line">t = <span class="number">0</span>:<span class="number">3.3</span>:<span class="number">10</span></span><br><span class="line">dataset = sol(t)</span><br><span class="line">position_data = [state[<span class="number">2</span>] <span class="keyword">for</span> state <span class="keyword">in</span> sol(t)]</span><br><span class="line">force_data = [force(state[<span class="number">1</span>],state[<span class="number">2</span>],k,t) <span class="keyword">for</span> state <span class="keyword">in</span> sol(t)]</span><br><span class="line"></span><br><span class="line">plot(plot_t,force_plot,xlabel=<span class="string">&quot;t&quot;</span>,label=<span class="string">&quot;True Force&quot;</span>)</span><br><span class="line">scatter!(t,force_data,label=<span class="string">&quot;Force Measurements&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NNForce = Chain(x -&gt; [x],</span><br><span class="line">           Dense(<span class="number">1</span>,<span class="number">32</span>,tanh),</span><br><span class="line">           Dense(<span class="number">32</span>,<span class="number">1</span>),</span><br><span class="line">           first)</span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">loss() = sum(abs2,NNForce(position_data[i]) - force_data[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:length(position_data))</span><br><span class="line">loss()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture3/sciml.html">通过物理信息神经网络进行科学机器学习简介（注）</a></li>
+</ul>
+<h3 id="可选的额外资源-2"><a href="#可选的额外资源-2" class="headerlink" title="可选的额外资源"></a>可选的额外资源</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=QwVO0Xh2Hbg">做科学机器学习（4小时研讨会）</a></p>
+<iframe src="./sciML.pdf" width="100%" height="600"></iframe>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=5zaB1B4hOnQ">科学机器学习的通用微分方程</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.osti.gov/servlets/purl/1478744">DOE关于科学机器学习的基础研究需求的研讨会报告</a></p>
+</li>
+</ul>
+<p>现在，让我们首先来看看应用程序：科学机器学习。什么是科学机器学习？我们将通过研究人们采用的几种方法以及使用科学机器学习解决的问题类型来定义领域。将介绍科学机器学习的领域及其在计算科学到气候建模和航空航天中的应用的跨度。将以各种名称介绍将要研究的方法，并列出该学科中出现的一般公式：将诸如微分方程之类的科学模拟工具与诸如神经网络之类的机器学习原语结合在一起通过微分编程来实现以前不可能的结果。做完调查后</p>
+<h2 id="讲座4：离散动力系统简介"><a href="#讲座4：离散动力系统简介" class="headerlink" title="讲座4：离散动力系统简介"></a>讲座4：离散动力系统简介</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=GhBARuHEydM">循环的工作原理1：离散动力系统理论简介（讲座）</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://youtu.be/AXHLyHfyEuA">循环的工作原理2：计算有效的离散动力学（讲座）</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture4/dynamical_systems.html">循环的工作原理，离散动力学简介（注）</a></p>
+</li>
+</ul>
+<h3 id="可选的额外资源-3"><a href="#可选的额外资源-3" class="headerlink" title="可选的额外资源"></a>可选的额外资源</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.amazon.com/Nonlinear-Dynamics-Chaos-Applications-Nonlinearity/dp/0738204536">Strogatz：非线性动力学和混沌</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mathinsight.org/equilibria_discrete_dynamical_systems_stability">离散动力学平衡的稳定性</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://chrisrackauckas.com/assets/Papers/ChrisRackauckas-ContinuousDynamics.pdf">连续线性动力系统的行为</a></p>
+<p>二维矩阵的性质：<a target="_blank" rel="noopener" href="http://www4.hcmut.edu.vn/~nttien/Lectures/Applied%20nonlinear%20control/C.2%20Phase%20Plane%20Analysis.pdf">http://www4.hcmut.edu.vn/~nttien/Lectures/Applied%20nonlinear%20control/C.2%20Phase%20Plane%20Analysis.pdf</a> <a target="_blank" rel="noopener" href="https://www.wikiwand.com/en/Phase_plane">https://www.wikiwand.com/en/Phase_plane</a></p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/26/ijzDUYThxaefmFk.png" alt="ijzDUYThxaefmFk" style="zoom:33%;" /><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/26/i14lTqHMjNcUK9C.png" alt="i14lTqHMjNcUK9C" style="zoom:33%;" /><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/26/o4YxiRtAymNspv8.png" alt="o4YxiRtAymNspv8" style="zoom:33%;" /><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/26/UXL4alhpw18YM7x.png" alt="UXL4alhpw18YM7x" style="zoom:33%;" /><img src= "/img/loading.gif" data-src="/Users/wjq/Library/Application Support/typora-user-images/image-20201226151132016.png" alt="image-20201226151132016" style="zoom:33%;" /></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/facebook/folly/blob/master/folly/docs/FBVector.md">黄金分割率增长论点</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/JuliaLang/julia/pull/16305">黄金分割率增长PR和时间</a></p>
+</li>
+</ul>
+<p>现在已经准备好阶段，我们看到要更深入地了解，我们将需要很好地了解离散和连续动力学系统是如何工作的。我们将从开发科学模拟器的基础开始：微分和差分方程。快速研究微分方程和差分方程的几何结果将为理解非线性动力学奠定基础，我们将快速转向数值方法来可视化。即使没有动力学系统的解析解，也可以通过渐近方法和线性化确定总体行为，例如收敛到零。稍后我们将看到这些相同的技术为微分方程数值方法的分析奠定了基础，例如Runge-Kutta方法和Adams-Bashforth方法。</p>
+<p>由于微分方程的离散化确实是一个离散的动力系统，因此我们将以此为案例研究如何优化串行标量重代码。SIMD，就地操作，广播，堆分配和静态数组将用于获取用于动态系统仿真的快速代码。然后，这些模拟将用于揭示动力系统的一些有趣特性，在本课程的其余部分中将进一步探讨这些特性。</p>
+<h2 id="第5课：基于数组的并行，尴尬的并行问题和数据并行：单节点并行计算的基础"><a href="#第5课：基于数组的并行，尴尬的并行问题和数据并行：单节点并行计算的基础" class="headerlink" title="第5课：基于数组的并行，尴尬的并行问题和数据并行：单节点并行计算的基础"></a>第5课：基于数组的并行，尴尬的并行问题和数据并行：单节点并行计算的基础</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/eca6kcFntiE">单节点并行计算的基础知识（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture5/parallelism_overview.html">单节点并行计算的基础（注）</a></li>
+</ul>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/26/KR4OeNgzmDuQLsi.png" alt="KR4OeNgzmDuQLsi"></p>
+<h3 id="可选的额外资源-4"><a href="#可选的额外资源-4" class="headerlink" title="可选的额外资源"></a>可选的额外资源</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://ithare.com/wp-content/uploads/part101_infographics_v08.png">CPU运行成本图</a></li>
+</ul>
+<p>现在我们有了一个具体的问题，让我们开始研究使其解决方案并行化的方法。首先，我们将看到许多系统几乎具有通过数组操作进行并行化的方式，我们将其称为基于数组的并行性。将讨论轻松并行化大块线性代数的能力，以及像OpenBLAS，Intel MKL，CuBLAS（GPU并行性）和Elemental.jl之类的库。这给出了一种方法内并行的形式，我们可以使用它来优化利用线性的特定算法。并行化的另一种形式是对输入进行并行化。我们将描述这是一种数据并行性的形式，并将其用作引入共享内存和分布式并行性的框架。将讨论这些并行化方法与应用程序注意事项之间的相互作用。</p>
+<h2 id="第6讲：并行方式"><a href="#第6讲：并行方式" class="headerlink" title="第6讲：并行方式"></a>第6讲：并行方式</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/EP5VWwPIews">并行性的不同风味：并行编程模型（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture6/styles_of_parallelism.html">并行性的不同风味（注释）</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28602957/article/details/53538329">哲学家进餐问题，防止死锁</a></li>
+</ul>
+<p>在这里，我们通过对并行化类型进行高级概述来继续描述并行化方法。SIMD和多线程被视为并行性的基本形式，其中消息传递是无关紧要的。然后介绍了加速器，例如GPU和TPU。进一步介绍了分布式并行计算及其模型。我们将看到的是，我们实际上正在执行哪种并行性并不是决定我们如何考虑并行性的主要决定因素。相反，决定因素是并行编程模型，在所有不同的硬件抽象中只能看到少数模型，例如基于任务的并行性或SPMD模型。</p>
+<h2 id="第7课：常微分方程：应用和离散化"><a href="#第7课：常微分方程：应用和离散化" class="headerlink" title="第7课：常微分方程：应用和离散化"></a>第7课：常微分方程：应用和离散化</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/riAbPZy9gFc">常微分方程1：应用和求解特征（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/HMmOk9GIhsw">常微分方程2：离散化和稳定性（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture7/discretizing_odes.html">常微分方程：应用和离散化（注释）</a></li>
+<li><a target="_blank" rel="noopener" href="https://diffeq.sciml.ai/latest/">https://diffeq.sciml.ai/latest/</a> 自学网址</li>
+<li>部分类似博客CFD-julia的内容</li>
+</ul>
+<p>在本讲座中，我们将描述常微分方程，它们在科学环境中出现的位置以及如何求解它们。我们将看到，了解数值方法的属性需要了解从逼近到连续系统生成的离散系统的动力学，因此，数值方法的稳定性直接与动力学的稳定性有关。这给出了刚度的概念，这是关于病态系统的更大的计算思想。</p>
+<h2 id="第8课：前向模式自动微分"><a href="#第8课：前向模式自动微分" class="headerlink" title="第8课：前向模式自动微分"></a>第8课：前向模式自动微分</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://youtu.be/zHPXGBiTM5A">通过高维代数进行正向模式自动微分（AD）（讲座）</a> 利用Dual的性质计算雅可比矩阵（非常有意思！🉑️）</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture8/automatic_differentiation.html">通过高维代数的正向模式自动微分（AD）（注）</a></p>
+<p>roundoff error</p>
+<p>考虑到数值误差的引入。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.demofox.org/2014/12/30/dual-numbers-automatic-differentiation/#comments">Dual用来自动微分</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/JuliaDiff">https://github.com/JuliaDiff</a> <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1607.07892.pdf">https://arxiv.org/pdf/1607.07892.pdf</a></p>
+</li>
+</ul>
+<p><strong>Multidimensional dual number</strong></p>
+<script type="math/tex; mode=display">
+f(x+\sum_{i=1}^k y_i\epsilon_i)=f(x) + f'(x)\sum_{i=1}^k y_i \epsilon_i</script><p>Where $\epsilon_i \epsilon_j =0$.</p>
+<script type="math/tex; mode=display">
+\vec{x} = \begin{vmatrix}
+x_1   \\
+\vdots  \\
+x_i \\
+\vdots \\
+x_k
+\end{vmatrix} \rightarrow \vec{x}_\epsilon = \begin{vmatrix}
+x_1+\epsilon_1 +0\sum_{n=2}^k \epsilon_n  \\
+\vdots  \\
+x_i+\epsilon_i +0\sum_{n\neq i} \epsilon_n \\
+\vdots \\
+x_k+\epsilon_k +0\sum_{n=1}^{k-1} \epsilon_n
+\end{vmatrix}=\begin{vmatrix}
+x_1+\epsilon_1   \\
+\vdots  \\
+x_i+\epsilon_i \\
+\vdots \\
+x_k+\epsilon_k
+\end{vmatrix} \rightarrow f(\vec{x}_\epsilon)=f(\vec{x})+\sum_{i=1}^k {\partial f(\vec{x})\over \partial x_i} \epsilon_i</script><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> Dual&#123;T&#125;</span><br><span class="line">    val::T   <span class="comment"># value</span></span><br><span class="line">    der::T  <span class="comment"># derivative</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">Base.:+(f::Dual, g::Dual) = Dual(f.val + g.val, f.der + g.der)</span><br><span class="line">Base.:+(f::Dual, α::<span class="built_in">Number</span>) = Dual(f.val + α, f.der)</span><br><span class="line">Base.:+(α::<span class="built_in">Number</span>, f::Dual) = f + α</span><br><span class="line"></span><br><span class="line"><span class="comment">#=</span></span><br><span class="line"><span class="comment">You can also write:</span></span><br><span class="line"><span class="comment">import Base: +</span></span><br><span class="line"><span class="comment">f::Dual + g::Dual = Dual(f.val + g.val, f.der + g.der)</span></span><br><span class="line"><span class="comment">=#</span></span><br><span class="line"></span><br><span class="line">Base.:-(f::Dual, g::Dual) = Dual(f.val - g.val, f.der - g.der)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Product Rule</span></span><br><span class="line">Base.:*(f::Dual, g::Dual) = Dual(f.val*g.val, f.der*g.val + f.val*g.der)</span><br><span class="line">Base.:*(α::<span class="built_in">Number</span>, f::Dual) = Dual(f.val * α, f.der * α)</span><br><span class="line">Base.:*(f::Dual, α::<span class="built_in">Number</span>) = α * f</span><br><span class="line"></span><br><span class="line"><span class="comment"># Quotient Rule</span></span><br><span class="line">Base.:/(f::Dual, g::Dual) = Dual(f.val/g.val, (f.der*g.val - f.val*g.der)/(g.val^<span class="number">2</span>))</span><br><span class="line">Base.:/(α::<span class="built_in">Number</span>, f::Dual) = Dual(α/f.val, -α*f.der/f.val^<span class="number">2</span>)</span><br><span class="line">Base.:/(f::Dual, α::<span class="built_in">Number</span>) = f * inv(α) <span class="comment"># Dual(f.val/α, f.der * (1/α))</span></span><br><span class="line"></span><br><span class="line">Base.:^(f::Dual, n::<span class="built_in">Integer</span>) = Base.power_by_squaring(f, n)  <span class="comment"># use repeated squaring for integer powers</span></span><br><span class="line"></span><br><span class="line">h(x) = x^<span class="number">2</span> + <span class="number">2</span></span><br><span class="line">a = <span class="number">3</span></span><br><span class="line">xx = Dual(a, <span class="number">1</span>)</span><br><span class="line">h(xx)</span><br><span class="line"></span><br><span class="line"><span class="comment">#derivative(f, x) = f(Dual(x, one(x))).der</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Jacobian：</p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/28/BKDlFmv7W6EoTYZ.png" alt="BKDlFmv7W6EoTYZ" style="zoom:50%;" /></p>
+<p>就像我们将很快看到的那样，计算导数的能力是科学计算和机器学习中很多问题的基础。我们将在后面的讲座中具体看到它，它针对刚性常微分方程求解器的隐式方程f（x）= 0的求解，以及在拟合神经网络中的应用。这样做的常见高性能方式称为自动区分。本讲座介绍了正向和反向模式自动微分的方法，以设置该技术的未来研究用途。</p>
+<p>参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=r2hhRSHiQwY">forwardDiff</a>-2016</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=SXJ0ZfawzxA">forwardDiff-2017</a></li>
+<li></li>
+</ul>
+<h2 id="第9课：求解刚性常微分方程"><a href="#第9课：求解刚性常微分方程" class="headerlink" title="第9课：求解刚性常微分方程"></a>第9课：求解刚性常微分方程</h2><h4 id="演讲笔记"><a href="#演讲笔记" class="headerlink" title="演讲笔记"></a>演讲笔记</h4><ul>
+<li><p><a target="_blank" rel="noopener" href="https://youtu.be/bY2VCoxMuo8">求解刚性常微分方程（讲座）</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture9/stiff_odes">求解常微分方程（注）</a> <a target="_blank" rel="noopener" href="https://nextjournal.com/pkj-m/a-summer-with-jacobians">https://nextjournal.com/pkj-m/a-summer-with-jacobians</a></p>
+<p><strong>Newton’s method and Jacobians</strong></p>
+<p>Implicit Euler method (for non-stiff ODE and also stiff ODE)</p>
+<script type="math/tex; mode=display">
+u_{n+1}=u_n + \Delta t f(u_{n+1},p,t+\Delta t)</script><p>If we wanted to use this method, we would need to find out how to get the value $u_{n+1}$ when only knowing the value $u_n$.  首先，将方程移项：</p>
+<script type="math/tex; mode=display">
+u_{n+1}-\Delta t f(u_{n+1},p,t+\Delta t)-u_n=0</script><p>and now we have a problem:</p>
+<script type="math/tex; mode=display">
+g(u_{n+1})=0</script><p>通过牛顿法迭代：</p>
+<script type="math/tex; mode=display">
+x_{k+1}=x_k -J(x_k)^{-1}g(x_k)</script><p>Where $J(x_k)$ is the Jacobian of g at the point $x_k$.</p>
+<p>   该过程在实际操作中，分为两步：</p>
+<ul>
+<li>Solve <em>Ja=g（x_k）</em> for a</li>
+<li>Update x_{k+1}= x_k -a</li>
+</ul>
+<p>实际在求解a的过程，更是有很多技巧，比如需要J稀疏化。当然还要于之前学到的auto forward derivation挂钩,以快速求解雅可比矩阵。最终目的是提高求解效率。</p>
+<script type="math/tex; mode=display">
+J = I -\gamma {df\over du} for \space ODE \space u'=f(u,p,t)\\\\
+J= M-\gamma {df\over du} for \space mass \space matrix \space ODE: Mu'=f(u,p,t)</script><p>After the J has been computed by forword-mode AD, we need to solve a linear equation $Ja=b$. 数学形式上来说，可以通过求J的逆矩阵来解方程。针对稀疏矩阵J来说，应该有更高效的算法（小稀疏矩阵）：</p>
+<script type="math/tex; mode=display">
+J = LU  (LU-factorization)</script><p>另外一种方法（针对大稀疏矩阵）：Jacobian-Free Newton Krylov technique</p>
+<script type="math/tex; mode=display">
+Jw-b=0\\\\
+J=A-B\\\\
+Aw_{k+1}=Bw_{k}+b\\\\
+w_{k+1}=A^{-1}(Bw_k+b)</script></li>
+</ul>
+<h4 id="关于牛顿法收敛性的补充读物"><a href="#关于牛顿法收敛性的补充读物" class="headerlink" title="关于牛顿法收敛性的补充读物"></a>关于牛顿法收敛性的补充读物</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://link.springer.com/chapter/10.1007%2F978-1-4612-0701-6_8">牛顿法</a></li>
+<li><a target="_blank" rel="noopener" href="https://pdfs.semanticscholar.org/1844/34b366f337972aa94a601fabd251d0baf62f.pdf">牛顿松弛法</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S00243795130067820">纯牛顿法和松弛牛顿法的收敛性</a></li>
+<li><a target="_blank" rel="noopener" href="http://cswiercz.info/2016/01/20/narc-talk.html">Smale牛顿收敛的阿尔法理论</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1011.1091">alphaCertified：验证多项式系统的解决方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/ftp/arxiv/papers/1503/1503.03543.pdf">牛顿的改进收敛定理</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.math.uwaterloo.ca/~wgilbert/Research/GilbertFractals.pdf">牛顿法的推广</a></li>
+</ul>
+<p>解决刚性的常微分方程，特别是那些由偏微分方程引起的常微分方程，是科学计算的常见瓶颈。规模最大的科学计算模型通常使用大量的计算能力，以解决一些隐式的时间步长PDE解决方案！因此，我们将深入探讨如何结合使用不同的方法来创建一个刚性的常微分方程求解器，并研究Jacobian计算和线性求解的不同方面以及它们的效果。</p>
+<h2 id="讲座10：基本参数估计，反向模式AD和反问题"><a href="#讲座10：基本参数估计，反向模式AD和反问题" class="headerlink" title="讲座10：基本参数估计，反向模式AD和反问题"></a>讲座10：基本参数估计，反向模式AD和反问题</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/XQAe4pEZ6L4">基本参数估计，反向模式AD和反问题（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture10/estimation_identification">基本参数估计，反向模式AD和反问题（注释）</a></li>
+</ul>
+<p><strong>优化问题</strong></p>
+<p>首先需要构建cost function,比如L2 类型：</p>
+<script type="math/tex; mode=display">
+C(p)= \sum_i^N\left\Vert f(x_i;p)-y_i \right\Vert</script><p>寻找最优的p使得C最小。</p>
+<p>求解上述最优化问题，最常用的办法为梯度下降法（牛顿法）：</p>
+<script type="math/tex; mode=display">
+p_{i+1}=p_i -({d\over dp}{dC\over dp})^{-1}{dC\over dp}</script><p>试图逼近梯度的最小值点：</p>
+<script type="math/tex; mode=display">
+{dC\over dp}=0</script><p>其中，${d\over dp}{dC\over dp}$被称为Hessian matrix, 为梯度的雅可比。但对于复杂问题来说，计算量相当大。</p>
+<p>事实上，该求解<strong>最优化问题和求解ODE有紧密的联系</strong>：</p>
+<script type="math/tex; mode=display">
+p' = -{dC\over dp}</script><p>求解上述ODE，利用上一节的Implicit Euler method方法：</p>
+<script type="math/tex; mode=display">
+p_{i+1}=p_i - \alpha {dC(p_{i+1})\over dp}</script><p>整理到同一边，得到g, 再通过牛顿法迭代：</p>
+<script type="math/tex; mode=display">
+p_{k+1}=p_k -({d\over dp}{dC\over dp})^{-1}g(x_k)</script><p>同样的，需要求解Hessian 矩阵。</p>
+<p><strong>神经网络求解优化问题</strong></p>
+<script type="math/tex; mode=display">
+NN_3(x)= W_3\sigma_2. (W_2\sigma_1.(W_1x+b_1)+b_2)+b_3)</script><script type="math/tex; mode=display">
+C(p)= \sum_k^N \left\Vert  DNN(x_k;p)-f(x_k)\right\Vert\\\\
+p=[W_i,b_i]</script><p>训练神经网络，得到参数，使得cost function最小。</p>
+<p><strong>Recurrent Neural Networks</strong></p>
+<script type="math/tex; mode=display">
+x_{k+1}=x_k + DNN(x_k,k;p)</script><p>实际上，可以写成类似ODE的形式，称为neural ODE：</p>
+<script type="math/tex; mode=display">
+x' = DNN(x,t;p)</script><p><strong>计算要素</strong>: $df(x_i)\over dp}$</p>
+<p>利用chain rule：</p>
+<script type="math/tex; mode=display">
+{dC\over dp}=\sum_i^N 2(f(x_i;p)-y_i){df(x_i)\over dp}</script><p>${df(x_i)\over dp}$的计算需要优化，可以通过之前学的Forward-Mode Automatic Differentiation。</p>
+<p>如果是神经网络模型，f用CNN来替代，那么同样要求神经网络模型的针对p参数$W_i,b_i$的梯度。pytorch类似的框架就是干这些活。</p>
+<p>对于大量的数据点，Forward-Mode Automatic Differentiation 计算量可能会很大。因此，有必要进行优化。</p>
+<p>更有效的，或者目前的神经网络常用的方法是backpropagtion。具体参考blog-machine learning 基础篇“如何求backprogation？” 本质是charin rule。</p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/29/Dxt3ql9nbc8oiUg.png" alt="Dxt3ql9nbc8oiUg"><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/29/hcuJzHd59QUWaKo.png" alt="hcuJzHd59QUWaKo"></p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/29/KahGkH2FJsbLlRp.png" alt="KahGkH2FJsbLlRp" style="zoom: 33%;" /></p>
+<p>整理成矩阵相乘的形式：</p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/29/72fsXi6YdWLhZ98.png" alt="72fsXi6YdWLhZ98" style="zoom: 33%;" /></p>
+<p><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/29/tRGaukcwpWsfTnr.png" alt="tRGaukcwpWsfTnr"><img src= "/img/loading.gif" data-src="https://i.loli.net/2020/12/29/um13SJ2R79XWNE5.png" alt="um13SJ2R79XWNE5"></p>
+<p>最后总结DNN的链式法则：</p>
+<script type="math/tex; mode=display">
+r_i = W_iv_i+b_i\\\\
+v_{i+1}=\sigma_i.(r_i)\\\\
+v_1 = x\\\\
+v_n = y\\\\
+L={1\over 2}\Vert y-t\Vert\\\\
+
+reverse \space rule:\\\\
+\overline{L} =1\\\\
+\overline{v_n} = \overline{L}(y-t)\\\\
+\overline{v_i}=W_i^T \overline{r_i} \\\\
+\overline{W_i}= \overline{r_i} v_i^T \\\\
+\overline{b_i}= \overline{r_i}\\\\
+\overline{r_i}=\overline{v_{i+1}}.*\sigma_i'(r_i)</script><p><strong>Reverse-Mode Automatic Differentiation</strong></p>
+<script type="math/tex; mode=display">
+f=f^L\circ f^{L-1}\circ ....\circ f^{1}\\\\
+f(x)=f_L(f_{L-1}(...(f_1(x))))\\\\
+f'(x)=f'_L(x)f'_{L-1}(x)f'_{L-2}...f'_1(x)\\\\</script><p>Forward AD可以写成：</p>
+<script type="math/tex; mode=display">
+Jv = J_LJ_{L-1}...J_1v</script><p>前向AD利用 Dual number高效求解,Jv。</p>
+<p>Reverse AD (backpropagation):</p>
+<script type="math/tex; mode=display">
+v^TJ =v^TJ_LJ_{L-1}...J_1\\\\
+same: (v^TJ)^T=J^Tv=J_1^TJ_2^T...J_{L-1}^TJ_{L}^Tv</script><p>we go forwards and then push back  the Jacobian transform at each step mutiplied the bar  (the vector v)</p>
+<p>对应的，后向AD利用pushback function高效求解,v^TJ。</p>
+<script type="math/tex; mode=display">
+if \space y=[y_1,y_2,...]=f(x_1,x_2,...),\\\\
+then \space [\overline{x_1},\overline{x_2},...]=\mathcal{B}_f^x(\overline{y})\\\\
+\overline{x_i}=\sum_i \overline{y_i}{\partial y_i\over \partial x_i}=\mathcal{B}_f^x(\overline{y})</script><p><strong>再次理解计算要素</strong>：利用上述关系，如何求雅可比矩阵：</p>
+<script type="math/tex; mode=display">
+J={df\over dx}= \begin{bmatrix}
+{\partial f_1\over \partial x_1} & {\partial f_1 \over \partial x_2}& \cdots & {\partial f_1\over \partial x_n} \\
+\partial f_2\over \partial x_1&  & \cdots &   \\
+\vdots & &\ddots  & \vdots  \\
+{\partial f_n \over \partial x_1} & & \cdots  &  {\partial f_n\over \partial x_n}
+\end{bmatrix}</script><p>雅可比的每一项都可以理解为只在p_i 参数起作用时，对整体的影响：</p>
+<script type="math/tex; mode=display">
+J e_i = J_i (\space i^{th} \space column \space of J) --> forward \space AD\\\\
+J^T e_i = J_i (\space i^{th} \space row \space of J) --> reverse \space AD\\\\</script><p>我们来解释之前的链式法则的推导，其中最后一步$\overline{L}=1$可以写成雅可比与v相乘的形式：</p>
+<script type="math/tex; mode=display">
+J^T v={df\over dx}v=[{\partial f_1\over \partial x_1} \space {\partial f_1\over \partial x_2} \space ... \space {\partial f_n\over \partial x_n} ]\begin{bmatrix} 1\\1\\ \vdots \\ 1 \end{bmatrix}= {\partial f_1\over \partial x_1} + {\partial f_1\over \partial x_2} + ... \space {\partial f_n\over \partial x_n}</script><p>这表明reverse AD 可以计算gradient。</p>
+<p>最终，Hessians are the Jacobian of the gradient。首先通过reverse AD计算gradient ${dC\over dp}$,然后通过forward AD 得到H的 vector product。</p>
+<script type="math/tex; mode=display">
+Hv=({dC\over dp})'v</script><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=SXJ0ZfawzxA">对比Forward和backward AD：</a></p>
+<ul>
+<li><p>Forward AD evaluates chain rule from right (inner function) to left (outer function)</p>
+</li>
+<li><p>Reverse AD evaluetes chain rule from left (outer function) to right (inner function)</p>
+</li>
+<li>Output_dimension &gt; input_dimension || input_dimension&lt;&lt; code_size -&gt; Use forward AD</li>
+<li>Output_dimension &lt; input_dimension &amp;&amp; input_dimension&gt;&gt;code_size -&gt; Use reverse AD</li>
+</ul>
+<p>单标量的拉回给出函数的梯度，而使用对偶的正向模式的前推给出方向导数。正向模式计算雅可比行列，而反向模式计算梯度（雅可比行行）。因此，两种方法的相对效率基于雅可比行列式的大小。如果f：Rn→Rm，则雅可比行列的大小为m×n。如果m远小于n，则每行的计算速度会更快，因此使用反向模式。在渐变的情况下，m = 1，而n可以很大，从而导致这种声音。同样，如果n远小于m，则按每一列进行的计算将更快。不久我们将看到反向模式AD相对于正向模式具有较高的开销，因此，如果值相对相等（或n和m小），则正向模式会更有效。</p>
+<p>现在我们有了模型，您如何使模型适合数据？本讲座讲解了用于参数估计的基本射击方法，展示了其等效于训练神经网络的方法，并深入讨论了如何在训练过程中利用反向模式自动微分来有效地计算梯度。</p>
+<p>参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://raw.githack.com/oxinabox/ChainRulesJuliaCon2020/main/out/build/index.html#1">chainrule</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nnL7yLMVu6c">火箭控制🚀-JUMP</a></li>
+<li><a target="_blank" rel="noopener" href="https://roberttlange.github.io/posts/2019/08/blog-post-6/">https://roberttlange.github.io/posts/2019/08/blog-post-6/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=wG_nF1awSSY">What is Automatic Differentiation?</a> 非常好！一点要看！🐶</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1502.05767.pdf">https://arxiv.org/pdf/1502.05767.pdf</a></li>
+<li><a target="_blank" rel="noopener" href="https://fluxml.ai/Zygote.jl/latest/">Zygote ： 什么是pushback</a></li>
+</ul>
+<h2 id="第11课：可微编程和神经微分方程"><a href="#第11课：可微编程和神经微分方程" class="headerlink" title="第11课：可微编程和神经微分方程"></a>第11课：可微编程和神经微分方程</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/fXcekZZP-1A">可微编程的第1部分：反向模式AD的实现（讲座）</a>-如何植入reverse AD代码</li>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/KCTfPyVIxpc">可微编程部分2 ：（神经）ODE的伴随推导和非线性求解（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture11/adjoints">可微编程和神经微分方程（注）</a></li>
+<li><a target="_blank" rel="noopener" href="https://math.mit.edu/~stevenj/18.336/adjoint.pdf">https://math.mit.edu/~stevenj/18.336/adjoint.pdf</a></li>
+</ul>
+<p><strong>案例1: 线性方程</strong></p>
+<script type="math/tex; mode=display">
+A_{M\times M}x(p)=b(p)\\\\
+{dg\over d p}={\partial g\over \partial p}+{\partial g \over \partial x}{\partial x\over \partial p}\\\\
+x_{p_i}=A^{-1}(b_{p_i}-A_{p_i}x)</script><p>为计算$dg\over dp$, 难点是第二项：</p>
+<script type="math/tex; mode=display">
+g_xx_p=\underbrace{g_x}_{1\times M}[\underbrace{A^{-1}}_{M\times M}\underbrace{(b_p-A_p x)}_{M\times P}]=\underbrace{[g_x A^{-1}]}_{1\times M}\underbrace{(b_p -A_p x)}_{M\times P}</script><p>引入adjoint equation</p>
+<script type="math/tex; mode=display">
+A^T \lambda = g_x^T \leftarrow \lambda^T = g_x A^{-1}</script><p>$g_x$通过pullback 获得。</p>
+<p>获得：</p>
+<script type="math/tex; mode=display">
+{dg\over dp}= g_p - \lambda^T (A_p x -b_p)</script><p>其中， $A_p, b_p$可以通过AD计算。</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/FluxML/Zygote.jl/blob/master/src/lib/array.jl 具体细节还需继续研究，还没有搞懂</span><br><span class="line">第<span class="number">400</span>行：</span><br><span class="line"></span><br><span class="line"><span class="comment"># When `A` is guaranteed to be square, definitely use the simple expression for the adjoint.</span></span><br><span class="line"><span class="meta">@adjoint</span> <span class="keyword">function</span> \(</span><br><span class="line">  A::<span class="built_in">Union</span>&#123;</span><br><span class="line">    Diagonal,</span><br><span class="line">    AbstractTriangular,</span><br><span class="line">    LinearAlgebra.Adjoint&#123;&lt;:<span class="built_in">Any</span>, &lt;:AbstractTriangular&#125;,</span><br><span class="line">    Transpose&#123;&lt;:<span class="built_in">Any</span>, &lt;:AbstractTriangular&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  B::<span class="built_in">AbstractVecOrMat</span>,</span><br><span class="line">)</span><br><span class="line">  Y = A \ B</span><br><span class="line">  <span class="keyword">return</span> Y, <span class="keyword">function</span>(Ȳ)</span><br><span class="line">    B̄ = A&#x27; \ Ȳ</span><br><span class="line">    <span class="keyword">return</span> (-B̄ * Y&#x27;, B̄)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><strong>案例2: 非线性方程</strong></p>
+<script type="math/tex; mode=display">
+f(x,p)=0\\\\
+{\partial f\over \partial x}{\partial x\over \partial p}+{\partial f \over \partial p}=0 \rightarrow {\partial x\over \partial p}=-{\partial f\over \partial x}^{-1}{\partial f\over \partial p}</script><script type="math/tex; mode=display">
+{dg\over dp}= {\partial g \over \partial p} + {\partial g \over \partial x}{\partial x\over \partial p}=g_p-\underbrace{g_x}_{1\times M}[\underbrace{f_x^{-1}}_{M\times M}\underbrace{f_p}_{M\times P}]=g_p -\underbrace{[g_x f_x^{-1}]}_{1\times M}f_p</script><p>计算1*M这个整体，引入adjoint equation</p>
+<script type="math/tex; mode=display">
+f_x^T \lambda = g_x^T \leftarrow g_x f_x^{-1}=\lambda^T</script><p>求解线性方程，using transpose of the Jacobian.</p>
+<p>获得：</p>
+<script type="math/tex; mode=display">
+{dg\over dp}=g_p-\lambda^T f_p</script><p><strong>总结步骤：</strong></p>
+<ol>
+<li>Solve the nonlinear system $f(x,p)=0$ for x; “forward”</li>
+<li>Calculate $f_x, g_p,f_p, g_x$. You’ve already calculated $f_x$ if you did a Newton method.</li>
+<li>Solve the linear system $f_x^T \lambda=g_x$ “backward”</li>
+<li>Explicitly calculate ${dg\over dp} = g_p -\lambda f_p$</li>
+</ol>
+<p>Example: f(x,p)=2x+p, g(x,p)=x^2 +p</p>
+<ul>
+<li><p>Step1: $2x+p =0 \space and \space so \sapce x=-p/2, g(x,p)=p^2/2+p$</p>
+</li>
+<li><p>Step2: $f_x=2,  g_p =1, f_p=1,g_x=2x$</p>
+</li>
+<li><p>Step3: $2\lambda = 2x, so \lambda=x$</p>
+</li>
+<li><p>Step4: ${dg\over dp}=1-x$</p>
+<p>That because for most non-linear equation, 显示解g(x,p)一般不容易获得。</p>
+</li>
+</ul>
+<p><strong>Adjoint ODE</strong></p>
+<script type="math/tex; mode=display">
+u'=f(u,p,t)</script><script type="math/tex; mode=display">
+G(u,p)=G(u(p))=\int_{t_0}^T g(u(t,p))dt</script><p>To derive this adjoint, introduce the Lagrange multiplier $\lambda$ to form, the trick of adding zero:</p>
+<script type="math/tex; mode=display">
+I(p)=G(p)- \int_{t_0}^T \lambda^* (u' -f(u,p,t))dt</script><p>So, we can derive that:</p>
+<script type="math/tex; mode=display">
+sensitivity: s(t) ={du(t)\over dp}\\\\
+{dG\over dp}={dI\over dp}=  \int_{t_0}^T (g_p +g_u s)dt - \int_{t_0}^T \lambda^* (s'-f_u s -f_p)dt</script><p>After applying integration by parts to $\lambda^* s’$, we get that:</p>
+<script type="math/tex; mode=display">
+\int_{t_0}^T \lambda^*(s'-f_u s -f_p)dt = \int_{t_0}^T \lambda^* s' dt - \int_{t_0}^T \lambda^*(f_u s-f_p)dt\\\\
+= |\lambda^* (t)s(t)|_{t_0}^T - \int_{t_0}^T {\lambda^*} ' s dt - \int_{t_0}^T \lambda^*(f_u s-f_p)dt</script><p>代入上式：</p>
+<script type="math/tex; mode=display">
+{dG\over dp}= \int_{t_0}^T (g_p +g_u s)dt + |\lambda^* (t)s(t)|_{t_0}^T - \int_{t_0}^T {\lambda^*} ' s dt - \int_{t_0}^T \lambda^*(f_u s-f_p)dt\\\\
+= \int_{t_0}^T (g_p +\lambda^* f_p)dt + |\lambda^* (t)s(t)|_{t_0}^T - \int_{t_0}^T ({\lambda^*} ' + \lambda^* f_u -g_u)sdt</script><p>假定：</p>
+<script type="math/tex; mode=display">
+{\lambda^*} '=-\lambda^* f_u + g_u\\\\
+\lambda^* (T)=0  （step3）</script><p>If that’s true, then:</p>
+<script type="math/tex; mode=display">
+{dG\over dp}=\int_{t_0}^T (g_p +\lambda^* f_p)dt</script><p>引入Lagrange multiplier $\lambda$ 后，有类似之前的效果-step4。</p>
+<ul>
+<li>Step1: Solve the ODE $u’ = f(u,p,t)$, this gives us u(t)</li>
+<li>Step2: Solve the ODE ${\lambda^<em>} ‘=-\lambda^</em> f_u + g_u$ in reverse, starting at T and ending at t_0, this gives us \lambda^*(t).</li>
+<li>Step3: Solve ${dG\over dp}=\int_{t_0}^T (g_p +\lambda(t)^* f_p)dt$</li>
+</ul>
+<p><strong>Discrete cost functions</strong></p>
+<script type="math/tex; mode=display">
+G(u,p)= G(u(p))=\int_{t_0}^T g(u(t,p))dt\\\\
+G(u,p)= \int_{t_0}^T \sum_{i=1}^N \Vert d_i -u(t_i,p)\Vert \delta(t_i -t) dt= \sum_{i=1}^N \Vert d_i -u(t_i,p)\Vert^2\\\\
+g_u(t)= \sum_{i=1}^N 2(d_i - u(t,p))\delta(t_i - t)\\\\</script><p>Solve from T to t<em>n. You change $\lambda^<em>$ by $g_u(t_n)$. Then you integrate $\lambda^</em>$ to $t</em>{n-1}$. Then change by $g<em>u(t</em>{n-1})$..</p>
+<h3 id="有关AD实现的其他阅读"><a href="#有关AD实现的其他阅读" class="headerlink" title="有关AD实现的其他阅读"></a>有关AD实现的其他阅读</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/mQnSRfseu0c">在存在动态调度的情况下进行非本地编译器转换（Diffractor.jl和通过类别理论的高阶AD）</a></li>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/BzuEGdGHKjc">JAX：通过Python中的可组合函数转换来加速机器学习研究</a></li>
+</ul>
+<p>考虑到反向模式自动微分的效率，我们想看看我们能将这一想法推进多远。一个没有计算图的人如何实现逆模态AD，并包含非线性求解和常微分方程之类的问题？除了拍摄方法外，还有其他方法可用于参数拟合吗？本讲座将探讨反向模式AD在何处与科学建模相交，以及机器学习在何处开始进入科学计算。</p>
+<h2 id="演讲12-1：分布式计算的MPI"><a href="#演讲12-1：分布式计算的MPI" class="headerlink" title="演讲12.1：分布式计算的MPI"></a>演讲12.1：分布式计算的MPI</h2><p>客座讲师：Lauren E. Milechin，麻省理工学院林肯实验室和MIT Supercloud客座作家：杰里米·开普纳（Jeremy Kepner），麻省理工学院林肯实验室和MIT Supercloud</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=LCIJj0czofo">MPI.jl简介（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mitmath/18337/blob/master/lecture12/MPI.jl.pdf">MPI.jl简介（注：PDF）</a></li>
+</ul>
+<p>在本讲座中，我们介绍了用于分布式计算的MPI（消息传递接口）的基础知识，以及有关如何使用MPI.jl编写可在多台计算机（或“计算节点”）上有效工作的并行程序的示例。演示了在MIT Supercloud HPC上使用MPI所需的MPI编程模型和作业脚本。</p>
+<h2 id="演讲12-2：机器学习和高性能计算的数学"><a href="#演讲12-2：机器学习和高性能计算的数学" class="headerlink" title="演讲12.2：机器学习和高性能计算的数学"></a>演讲12.2：机器学习和高性能计算的数学</h2><p>客座讲师：Jeremy Kepner，麻省理工学院林肯实验室和麻省理工学院超级云</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/0sKPkJME2Jw?t=26">大数据与机器学习数学（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/gZSNp6XbOK8?t=17">GraphBLAS和大数据的数学基础（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/RpPlj2HnuWg?t=1412">AI数据架构（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mitmath/18337/blob/master/lecture12/PerformanceMetricsSoftwareArchitecture.pdf">性能指标和软件体系结构（本书章节）</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mitmath/18337/blob/master/lecture12/OptimizingXeonPhi-PID6086383.pdf">优化Xeon Phi进行交互式数据分析（纸张）</a></li>
+</ul>
+<p>在本讲座中，我们讨论了大数据，机器学习和高性能计算背后的数学原理。描述并演示了诸如Amdahl定律等用于描述最大并行计算效率的部分，以展示对并行计算功能的严格限制，并在大数据计算的背景下描述了这些定律，以评估该领域内分布式计算的可行性。上下文。</p>
+<h2 id="讲座13：GPU计算"><a href="#讲座13：GPU计算" class="headerlink" title="讲座13：GPU计算"></a>讲座13：GPU计算</h2><p>客座讲师：Valentin Churavy，麻省理工学院朱莉娅实验室</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/KCYlEub_8xc">并行计算：从SIMD到SIMT（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/v9bFRg4rUfk">Julia中的GPU计算</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1C1dt8zeNW7spgswr2CmLrE0G-ayj0ItvoEWHdX_0kYc/edit#slide=id.g76b4384d33_0_5">并行计算：从SIMD到SIMT（注释）</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1QvHE_xVDKnPA3-nowzpZY1lUdXr7B8rLCu2usOz8KT8/edit#slide=id.gb00e54ec3a_0_477">Julia中的GPU计算（注）</a></li>
+</ul>
+<p>在本讲座中，我们将更深入地探讨GPU的体系结构差异，以及这如何改变获得高效代码所需的并行计算思维方式。Valentin详细介绍了编译过程以及由于基于GPU的编程和此类硬件的直接编译中的核心权衡而导致的行为。</p>
+<h2 id="第14课：偏微分方程和卷积神经网络"><a href="#第14课：偏微分方程和卷积神经网络" class="headerlink" title="第14课：偏微分方程和卷积神经网络"></a>第14课：偏微分方程和卷积神经网络</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/apkyk8n0vBo">PDE，卷积和局部数学（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture14/pdes_and_convolutions">PDE，卷积和局部数学（注）</a></li>
+</ul>
+<h3 id="其他读物"><a href="#其他读物" class="headerlink" title="其他读物"></a>其他读物</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1804.04272">偏微分方程激发的深层神经网络</a></li>
+</ul>
+<p>在本讲座中，我们将继续研究卷积神经网络与偏微分方程之间的关系，将机器学习的方法与科学计算中的方法联系起来。事实证明，它们不仅仅是相似的：两者都是对空间数据的模具计算！</p>
+<h2 id="第15课：连接微分方程和机器学习的更多算法"><a href="#第15课：连接微分方程和机器学习的更多算法" class="headerlink" title="第15课：连接微分方程和机器学习的更多算法"></a>第15课：连接微分方程和机器学习的更多算法</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/VHtugbwyNKg">混合微分方程和神经网络进行物理知识学习（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture15/diffeq_machine_learning">混合微分方程和神经网络进行物理知识学习（注释）</a></li>
+</ul>
+<p>神经常微分方程和基于物理学的神经网络只是冰山一角。在本讲座中，我们将研究利用神经网络和机器学习之间的联系的其他算法。我们将使用DiffEqFlux.jl泛化为增广的神经常微分方程和通用微分方程，这现在使得刚性方程，随机性，时滞，约束方程，事件处理等都可以以神经微分方程格式进行。然后，我们将探讨通过转换为后向随机微分方程（BSDE）来求解高维偏微分方程的方法，以及通过Black-Scholes在数学金融中的应用以及通过Hamilton-Jacobi-Bellman方程的随机最优控制。然后，我们研究使用储层计算的替代训练技术，例如连续时间回波状态网络，这些技术可缓解与在僵硬和混沌动力学系统上训练神经网络相关的某些梯度问题。我们展示了一些用于自动发现符号形式的方程式的方法，例如SINDy。最后，我们研究了通过神经替代模型来加速微分方程求解的方法，并揭示了正在发生的事情的真正思想，以及了解何时可以有效地使用这些应用程序。我们展示了一些用于自动发现符号形式的方程式的方法，例如SINDy。最后，我们研究了通过神经替代模型来加速微分方程求解的方法，并揭示了正在发生的事情的真正思想，以及了解何时可以有效地使用这些应用程序。我们展示了一些用于自动发现符号形式的方程式的方法，例如SINDy。最后，我们研究了通过神经替代模型来加速微分方程求解的方法，并揭示了正在发生的事情的真正思想，以及了解何时可以有效地使用这些应用程序。</p>
+<h2 id="第16讲：概率编程"><a href="#第16讲：概率编程" class="headerlink" title="第16讲：概率编程"></a>第16讲：概率编程</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/32rAwtTAGdU">从优化到概率编程（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture16/probabilistic_programming">从优化到概率编程（注释）</a></li>
+</ul>
+<p>我们之前的所有讨论都生活在确定性世界中。不是这个。在这里，我们转向概率视图，并允许程序具有随机变量。通过蒙特卡洛采样，可以很容易地对随机程序进行前向仿真。但是，参数估计现在要涉及得多，因为在这种情况下，我们不仅需要估计值，还需要估计概率分布。事实证明，贝叶斯规则为执行此类估计提供了框架。我们看到，经典参数估计以“最简单”的分布形式作为概率的最大值落入，因此，即使是标准参数估计也可以很好地概括，并证明了使用L2损失函数和正则化（作为a的扰动）之前）。接下来，我们转向估计分布，我们发现，使用Metropolis Hastings可能会遇到一些小问题，但对于较大的问题，我们会开发Hamiltonian Monte Carlo。事实证明，哈密顿量的蒙特卡洛与ODE和可微分程序都有很强的联系：它被定义为求解由哈密顿量产生的ODE，并且需要似然的导数，这与成本函数的导数本质上是相同的！然后，我们描述一种替代方法：自动微分变异推理（ADVI），该方法再次使用可微编程的工具来估计概率程序的分布。它被定义为求解由哈密顿量产生的ODE，并且需要似然的导数，这与成本函数的导数本质上是相同的！然后，我们描述一种替代方法：自动微分变异推理（ADVI），该方法再次使用可微编程的工具来估计概率程序的分布。它被定义为求解由哈密顿量产生的ODE，并且需要似然的导数，这与成本函数的导数本质上是相同的！然后，我们描述一种替代方法：自动微分变异推理（ADVI），该方法再次使用可微编程的工具来估计概率程序的分布。</p>
+<h2 id="第十七讲：全球敏感性分析"><a href="#第十七讲：全球敏感性分析" class="headerlink" title="第十七讲：全球敏感性分析"></a>第十七讲：全球敏感性分析</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/wzTpoINJyBQ">全球敏感性分析（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture17/global_sensitivity">全球敏感性分析（注释）</a></li>
+</ul>
+<p>我们之前对敏感性的分析都是局部的。在全球范围内举例说明模型的敏感性意味着什么？事实证明，概率编程观点为我们提供了一种可靠的方式，用于描述我们期望值如何通过描述程序输入的随机变量在较大的参数集上变化。这意味着我们可以将输出方差分解为指数，这些指数可以通过各种正交逼近来计算，然后对“变量x对均值解没有影响”给出可度量的度量。</p>
+<h2 id="第18课：代码分析和优化"><a href="#第18课：代码分析和优化" class="headerlink" title="第18课：代码分析和优化"></a>第18课：代码分析和优化</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/h-xVBD2Pk9o">代码分析和优化（讲座）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture18/code_profiling">代码分析和优化（注释）</a></li>
+</ul>
+<p>您在本课程中如何将所有内容放在一起？让我们看一下以行形式的方法给出的PDE求解器代码。在本讲座中，我将逐步讲解代码并演示如何对其进行串行优化，并展示变量缓存和自动微分之间的相互作用。</p>
+<h2 id="第十九讲：不确定性编程和广义不确定性量化"><a href="#第十九讲：不确定性编程和广义不确定性量化" class="headerlink" title="第十九讲：不确定性编程和广义不确定性量化"></a>第十九讲：不确定性编程和广义不确定性量化</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/MRTXK2Vc0YE">不确定性编程（讲座）</a></li>
+<li><p><a target="_blank" rel="noopener" href="https://mitmath.github.io/18337/lecture19/uncertainty_programming">不确定性编程（注释）</a></p>
+<p>我们通过看另一个数学主题来结束本课程，以查看是否可以用类似的方式解决它：不确定性量化（UQ）。在某些方面可以像自动区分一样进行处理。Measurements.jl通过代表正态分布并通过程序推送这些值的数字类型，提供了一种前向传播方法，有点类似于ForwardDiff的对偶数。这具有许多优点，因为它允许不进行抽样而对不确定性进行量化，但是将数字类型转换为堆分配的值。研究了其他方法，例如严格但受范围限制的区间算法。但是在另一端，显示了一种用于ODE的非通用方法，该方法利用了微分方程解的轨迹结构，并且没有给出其他方法所看到的爆炸。该展示会使用较高级别的信息可以对UQ有所帮助，并且可能需要较少的本地方法。最后，我们将Koopman算子展示为不确定性量度的前推的伴随，并作为伴随方法，它可以针对成本函数加快不确定性的计算。</p>
+</li>
+</ul>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jiaqi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://deal-ii.com/post/9864ea21/">http://deal-ii.com/post/9864ea21/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://deal-ii.com" target="_blank">DEAL-II-Fluid</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/machine-learning/">machine learning</a><a class="post-meta__tags" href="/tags/parallel-computing/">parallel computing</a><a class="post-meta__tags" href="/tags/MIT/">MIT</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/12/22/d7YjSwNqreOA91K.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/post/5d8b8de9/"><img class="next-cover" data-src="https://i.loli.net/2020/12/17/fW2LoYdiScxwTph.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">julia-a beautiful language</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/post/d03a598f/" title="machine learning for chaos system-测试篇"><img class="relatedPosts_cover" data-src="https://i.loli.net/2020/12/13/CRJOLzqKD6FlQWx.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-11</div><div class="relatedPosts_title">machine learning for chaos system-测试篇</div></div></a></div><div class="relatedPosts_item"><a href="/post/47358f5f/" title="machine learning for chaos system-应用"><img class="relatedPosts_cover" data-src="https://npg.copernicus.org/articles/27/373/2020/npg-27-373-2020-avatar-web.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-11</div><div class="relatedPosts_title">machine learning for chaos system-应用</div></div></a></div><div class="relatedPosts_item"><a href="/post/f2bbe0e7/" title="machine learning for chaos system-基础知识"><img class="relatedPosts_cover" data-src="https://i.loli.net/2020/12/13/KPc9zZ4hNn3CMta.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-11</div><div class="relatedPosts_title">machine learning for chaos system-基础知识</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div class="comments-items-1" data-name="Valine"><div class="vcomment" id="vcomment"></div><script>function loadvaline () {  
+  var requestSetting = function (from,set) {
+    var from = from
+    var setting = set.split(',').filter(function(item){
+    return from.indexOf(item) > -1
+    });
+    setting = setting.length == 0 ? from :setting;
+    return setting
+  }
+
+  var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+  var requiredFields = requestSetting(['nick','mail'],'nick,mail')
+
+  function initValine () {
+    window.valine = new Valine({
+      el:'#vcomment',
+      appId: 'lJ3vEzEWaeVa6HpWNNbPrauw-gzGzoHsz',
+      appKey: '16FI6zgDXwvw71g04yhHnnW0',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: guestInfo,
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      requiredFields: requiredFields
+    });
+  }
+  loadScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || false) {
+  window.addEventListener('load', loadvaline)
+}
+else {
+  function loadOtherComment () {
+    loadvaline()
+  }
+}</script></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Jiaqi</div><div class="framework-info"><span>驱动 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></head></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/calendar.js"></script><script src="/js/languages.js"></script><script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script><script src="/gitcalendar/js/gitcalendar.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":120,"height":260},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
