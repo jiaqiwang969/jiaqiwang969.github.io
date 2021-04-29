@@ -1,0 +1,10 @@
+<map id="Grids and Triangulations" name="Grids and Triangulations">
+<area shape="rect" id="node1" href="$group__manifold.html" title=" " alt="" coords="331,5,470,45"/>
+<area shape="rect" id="node2" href="$group__reordering.html" title="A module describing how deal.II consistently orients Triangulation objects." alt="" coords="335,69,467,109"/>
+<area shape="rect" id="node3" href="$group__output.html" title=" " alt="" coords="342,134,459,159"/>
+<area shape="rect" id="node4" href="$group__Accessors.html" title=" " alt="" coords="330,185,471,225"/>
+<area shape="rect" id="node5" href="$group__geomprimitives.html" title=" " alt="" coords="331,260,471,300"/>
+<area shape="rect" id="node6" href="$group__Iterators.html" title=" " alt="" coords="327,347,475,387"/>
+<area shape="rect" id="node7" title=" " alt="" coords="5,230,168,255"/>
+<area shape="rect" id="node8" href="$group__input.html" title=" " alt="" coords="375,435,426,461"/>
+</map>

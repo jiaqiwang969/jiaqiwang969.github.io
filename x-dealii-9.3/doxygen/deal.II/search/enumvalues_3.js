@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['data_5findex_21151',['data_index',['../classinternal_1_1TriangulationImplementation_1_1TriaObjects.html#a9775aeca5733c8d321aee3298c9bd9aba2522e6e6edba080ffbe448a677ab2574',1,'internal::TriangulationImplementation::TriaObjects']]],
+  ['data_5fpointer_21152',['data_pointer',['../classinternal_1_1TriangulationImplementation_1_1TriaObjects.html#a9775aeca5733c8d321aee3298c9bd9aba9ddd358d154b8651d3c46a368add7cd7',1,'internal::TriangulationImplementation::TriaObjects']]],
+  ['data_5funknown_21153',['data_unknown',['../classinternal_1_1TriangulationImplementation_1_1TriaObjects.html#a9775aeca5733c8d321aee3298c9bd9aba264c4d9ba0924b6a34b97a5b4235734b',1,'internal::TriangulationImplementation::TriaObjects']]],
+  ['dbmesh_21154',['dbmesh',['../classGridIn.html#a017db4751bafb6b297fc3c96494133aaa759b0bb3810c5e31e559fa7416872413',1,'GridIn']]],
+  ['deal_5fii_5fintermediate_21155',['deal_II_intermediate',['../group__Exceptions.html#gaa3cbced9f1d4ae661f13018f4c980aa1ab9c7fdc67b488efaf1b27b02985a40fb',1,'DataOutBase']]],
+  ['dealii_21156',['dealii',['../structGridOutFlags_1_1Svg.html#acd2da6d580f03e1c38c9a11bd4c554b1aac3a78ee82e4005530cbf8b20987bf01',1,'GridOutFlags::Svg']]],
+  ['decrease_5fby_5fone_21157',['decrease_by_one',['../namespaceMGTransferGlobalCoarseningTools.html#a0b3ae7f7ace3aef7bdcbca73ae07c126a6965941e454fa09603a4170a3964cfd0',1,'MGTransferGlobalCoarseningTools']]],
+  ['default_21158',['Default',['../classGridIn.html#a017db4751bafb6b297fc3c96494133aaa0c6497be4806aad7bcdd056edfc42d18',1,'GridIn']]],
+  ['default_5fcompression_21159',['default_compression',['../group__Exceptions.html#gga7ad65742b9dbfb7eeb04b511b5a08d63a90ee7d5ab92720d25ec0491e6bc19aea',1,'DataOutBase::VtkFlags']]],
+  ['default_5fformat_21160',['default_format',['../group__Exceptions.html#gaa3cbced9f1d4ae661f13018f4c980aa1aaca645a9a5b8782ed6dff8ef6b809e07',1,'DataOutBase']]],
+  ['default_5fsetting_21161',['default_setting',['../classparallel_1_1distributed_1_1Triangulation.html#a0f5f69b2f422595604c9317ea7f15c13a80dd6bc33282bb4ee59e282098beeebe',1,'parallel::distributed::Triangulation::default_setting()'],['../classparallel_1_1distributed_1_1Triangulation_3_011_00_01spacedim_01_4.html#ad9523fae2212eed0e8d31cb542c91ad5a3c8b5aab5b0db3af724cf5a09ee12db8',1,'parallel::distributed::Triangulation&lt; 1, spacedim &gt;::default_setting()'],['../namespaceTriangulationDescription.html#aa1531298eb0a267d9ceca5eb46ada8e0a7c2ea84f1b4c5f2a6aa010f600ca66b6',1,'TriangulationDescription::default_setting()']]],
+  ['defaultstyle_21162',['DefaultStyle',['../group__Exceptions.html#ga8364dda711b93753c6809eefe2a8e827aea377cb78fede823d8857c58bca5fd48',1,'ParameterHandler']]],
+  ['delta_5ft_21163',['DELTA_T',['../namespaceTimeStepping.html#a7525dd86ba25abe8627d2361b596d4c5aaf44e410811e763eafb4899325d4c681',1,'TimeStepping']]],
+  ['description_21164',['Description',['../group__Exceptions.html#ga8364dda711b93753c6809eefe2a8e827a5ed7026d01b66b89ee3c1aef3efbfd4a',1,'ParameterHandler']]],
+  ['diagonal_21165',['diagonal',['../namespaceLAPACKSupport.html#a45557450a3c1ae0e74d7ddf12c43bc98a9f7392eb627119096334bd291f1d1e86',1,'LAPACKSupport']]],
+  ['dictionary_21166',['dictionary',['../group__Exceptions.html#gga841a7b84dc17bf2ba675522093a97e8baabc20d7bde1df257f890e152af2e3470',1,'Differentiation::SD']]],
+  ['dictionary_5freinit_21167',['dictionary_reinit',['../namespaceUtilities_1_1MPI_1_1internal_1_1Tags.html#a1c190e50dabbd9b60e230b843c6caa44ad0d8cacf033f56b09ada66603941a407',1,'Utilities::MPI::internal::Tags']]],
+  ['do_5fnot_5fproduce_5funrefined_5fislands_21168',['do_not_produce_unrefined_islands',['../classTriangulation.html#a0633dd17e535a59162b79f338c6ff5aea75171630dec90d241c811d2732410303',1,'Triangulation']]],
+  ['dof_5faccess_5fcell_21169',['dof_access_cell',['../structinternal_1_1MatrixFreeFunctions_1_1DoFInfo.html#a05d58d76ae885e59efcf6a0c307d744ea354d6ccafe308ec0c56b83bd841c4f0a',1,'internal::MatrixFreeFunctions::DoFInfo']]],
+  ['dof_5faccess_5fface_5fexterior_21170',['dof_access_face_exterior',['../structinternal_1_1MatrixFreeFunctions_1_1DoFInfo.html#a05d58d76ae885e59efcf6a0c307d744ea18b5283be307d67457af87616150d718',1,'internal::MatrixFreeFunctions::DoFInfo']]],
+  ['dof_5faccess_5fface_5finterior_21171',['dof_access_face_interior',['../structinternal_1_1MatrixFreeFunctions_1_1DoFInfo.html#a05d58d76ae885e59efcf6a0c307d744eac4c166ddecbb6dd29d7f4b6bc1178924',1,'internal::MatrixFreeFunctions::DoFInfo']]],
+  ['dof_5fvector_21172',['dof_vector',['../classDataOutStack_3_01dim_00_01spacedim_00_01void_01_4.html#a737990bc628a76b7776e07e3ad756a4da6b822602b016cce0dfc25c25f45cf31c',1,'DataOutStack&lt; dim, spacedim, void &gt;']]],
+  ['dopri_21173',['DOPRI',['../namespaceTimeStepping.html#abff97b5326e452552f108a379dd6cff4ad502a4be71ee90ce567e0e65d083c595',1,'TimeStepping']]],
+  ['dual_5fproblem_21174',['dual_problem',['../classTimeStepBase.html#a524c9e9ef065d5f38c0dcbdb4839b14fa18e5b7b5d697412e161b433c5a1f8f58',1,'TimeStepBase']]],
+  ['dx_21175',['dx',['../classGridOut.html#af24aadcd00f93b7f428f44ecd40c44d9a51c7b5e43d47c5cfcb09574d8a1febef',1,'GridOut::dx()'],['../group__Exceptions.html#gaa3cbced9f1d4ae661f13018f4c980aa1af54db6e70b60a249b36f803d0657b39e',1,'DataOutBase::dx()']]]
+];

@@ -1,0 +1,9 @@
+<map id="RelaxationBlock&lt; MatrixType, InverseNumberType, VectorType &gt;" name="RelaxationBlock&lt; MatrixType, InverseNumberType, VectorType &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="560,93,789,134"/>
+<area shape="rect" id="node4" href="$classRelaxationBlock.html" title=" " alt="" coords="983,85,1180,141"/>
+<area shape="rect" id="node2" href="$classPreconditionBlockBase.html" title=" " alt="" coords="352,85,511,141"/>
+<area shape="rect" id="node3" href="$classPreconditionBlockBase.html" title=" " alt="" coords="5,93,163,134"/>
+<area shape="rect" id="node5" href="$classRelaxationBlockJacobi.html" title=" " alt="" coords="1229,5,1424,61"/>
+<area shape="rect" id="node6" href="$classRelaxationBlockSOR.html" title=" " alt="" coords="1229,85,1424,141"/>
+<area shape="rect" id="node7" href="$classRelaxationBlockSSOR.html" title=" " alt="" coords="1229,165,1424,221"/>
+</map>

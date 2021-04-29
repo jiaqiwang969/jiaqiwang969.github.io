@@ -1,0 +1,5 @@
+<map id="Parallel computing" name="Parallel computing">
+<area shape="rect" id="node1" title="A module discussing the use of multiple processors." alt="" coords="5,60,135,85"/>
+<area shape="rect" id="node2" href="$group__distributed.html" title="A module discussing the use of parallelism on distributed memory clusters." alt="" coords="186,5,358,60"/>
+<area shape="rect" id="node3" href="$group__threads.html" title="A module discussing the use of parallelism on shared memory machines. See the detailed documentation ..." alt="" coords="183,84,361,139"/>
+</map>

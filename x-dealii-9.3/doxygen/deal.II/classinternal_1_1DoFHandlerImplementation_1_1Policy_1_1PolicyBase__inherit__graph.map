@@ -1,0 +1,6 @@
+<map id="internal::DoFHandlerImplementation::Policy::PolicyBase&lt; dim, spacedim &gt;" name="internal::DoFHandlerImplementation::Policy::PolicyBase&lt; dim, spacedim &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="5,93,255,134"/>
+<area shape="rect" id="node2" href="$classinternal_1_1DoFHandlerImplementation_1_1Policy_1_1ParallelDistributed.html" title=" " alt="" coords="309,5,540,61"/>
+<area shape="rect" id="node3" href="$classinternal_1_1DoFHandlerImplementation_1_1Policy_1_1ParallelShared.html" title=" " alt="" coords="309,85,540,141"/>
+<area shape="rect" id="node4" href="$classinternal_1_1DoFHandlerImplementation_1_1Policy_1_1Sequential.html" title=" " alt="" coords="303,166,547,207"/>
+</map>

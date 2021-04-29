@@ -1,0 +1,9 @@
+<map id="FE_SimplexP_Bubbles&lt; dim, spacedim &gt;" name="FE_SimplexP_Bubbles&lt; dim, spacedim &gt;">
+<area shape="rect" id="node1" title="Enriched version of FE_P that can be used with nodal quadrature." alt="" coords="45,456,201,497"/>
+<area shape="rect" id="node2" href="$classFE__Poly.html" title=" " alt="" coords="49,380,196,407"/>
+<area shape="rect" id="node3" href="$classFiniteElement.html" title=" " alt="" coords="5,96,144,137"/>
+<area shape="rect" id="node7" href="$classFiniteElement.html" title=" " alt="" coords="172,200,311,241"/>
+<area shape="rect" id="node4" href="$classSubscriptor.html" title=" " alt="" coords="325,13,413,39"/>
+<area shape="rect" id="node5" href="$classFiniteElementData.html" title=" " alt="" coords="120,5,259,47"/>
+<area shape="rect" id="node6" href="$classFE__Poly.html" title=" " alt="" coords="145,291,327,317"/>
+</map>

@@ -1,0 +1,37 @@
+<map id="Quadrature&lt; dim &gt;" name="Quadrature&lt; dim &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="143,789,273,816"/>
+<area shape="rect" id="node3" href="$classQGaussLobatto.html" title=" " alt="" coords="718,5,862,32"/>
+<area shape="rect" id="node4" href="$classQSimplex.html" title=" " alt="" coords="735,547,845,573"/>
+<area shape="rect" id="node7" href="$classMappingQEulerian_1_1MappingQEulerianGeneric_1_1SupportQuadrature.html" title=" " alt="" coords="413,90,606,161"/>
+<area shape="rect" id="node8" href="$classNonMatching_1_1ImmersedSurfaceQuadrature.html" title=" " alt="" coords="404,185,615,226"/>
+<area shape="rect" id="node9" href="$classQAnisotropic.html" title=" " alt="" coords="438,251,581,277"/>
+<area shape="rect" id="node10" href="$classQGauss.html" title=" " alt="" coords="452,301,567,328"/>
+<area shape="rect" id="node11" href="$classQGaussChebyshev.html" title=" " alt="" coords="419,352,600,379"/>
+<area shape="rect" id="node12" href="$classQGaussLobatto.html" title=" " alt="" coords="430,39,589,65"/>
+<area shape="rect" id="node13" href="$classQGaussLobattoChebyshev.html" title=" " alt="" coords="420,454,599,495"/>
+<area shape="rect" id="node14" href="$classQGaussLog.html" title=" " alt="" coords="441,520,577,547"/>
+<area shape="rect" id="node15" href="$classQGaussLogR.html" title=" " alt="" coords="436,571,583,597"/>
+<area shape="rect" id="node16" href="$classQGaussOneOverR.html" title=" " alt="" coords="421,621,598,648"/>
+<area shape="rect" id="node17" href="$classQGaussPyramid.html" title=" " alt="" coords="428,672,591,699"/>
+<area shape="rect" id="node18" href="$classQGaussRadauChebyshev.html" title=" " alt="" coords="422,723,597,765"/>
+<area shape="rect" id="node19" href="$classQGaussWedge.html" title=" " alt="" coords="432,789,587,816"/>
+<area shape="rect" id="node20" href="$classQIterated.html" title=" " alt="" coords="449,840,570,867"/>
+<area shape="rect" id="node21" href="$classQMidpoint.html" title=" " alt="" coords="446,891,573,917"/>
+<area shape="rect" id="node22" href="$classQMilne.html" title=" " alt="" coords="455,941,563,968"/>
+<area shape="rect" id="node23" href="$classQSimplex.html" title=" " alt="" coords="447,992,571,1019"/>
+<area shape="rect" id="node26" href="$classQSimpson.html" title=" " alt="" coords="445,1043,573,1069"/>
+<area shape="rect" id="node27" href="$classQSorted.html" title=" " alt="" coords="452,1093,567,1120"/>
+<area shape="rect" id="node28" href="$classQSplit.html" title=" " alt="" coords="458,1144,561,1171"/>
+<area shape="rect" id="node29" href="$classQTelles.html" title=" " alt="" coords="454,1195,565,1221"/>
+<area shape="rect" id="node30" href="$classQTrapezoid.html" title=" " alt="" coords="442,1245,577,1272"/>
+<area shape="rect" id="node31" href="$classQWeddle.html" title=" " alt="" coords="449,1296,569,1323"/>
+<area shape="rect" id="node32" href="$classQuadratureSelector.html" title=" " alt="" coords="442,1347,577,1389"/>
+<area shape="rect" id="node33" href="$classQuadrature.html" title=" " alt="" coords="434,1413,585,1440"/>
+<area shape="rect" id="node34" href="$classQuadrature.html" title=" " alt="" coords="451,1464,568,1491"/>
+<area shape="rect" id="node35" href="$classQuadrature.html" title=" " alt="" coords="427,1515,591,1541"/>
+<area shape="rect" id="node2" href="$classSubscriptor.html" title=" " alt="" coords="5,789,93,816"/>
+<area shape="rect" id="node5" href="$classQDuffy.html" title=" " alt="" coords="953,521,1017,548"/>
+<area shape="rect" id="node6" href="$classQTrianglePolar.html" title=" " alt="" coords="931,572,1039,599"/>
+<area shape="rect" id="node24" href="$classQGaussSimplex.html" title=" " alt="" coords="709,963,871,989"/>
+<area shape="rect" id="node25" href="$classQWitherdenVincentSimplex.html" title=" " alt="" coords="699,1014,881,1055"/>
+</map>

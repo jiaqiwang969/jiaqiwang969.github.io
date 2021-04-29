@@ -1,0 +1,5 @@
+<map id="MatrixTableIterators::Iterator&lt; TableType, Constness, storage_order &gt;" name="MatrixTableIterators::Iterator&lt; TableType, Constness, storage_order &gt;">
+<area shape="rect" id="node1" title="Iterator class for both matrix&#45;like tables, i.e., Table&lt;2, T&gt; and TransposeTable." alt="" coords="663,36,851,92"/>
+<area shape="rect" id="node2" href="$classLinearIndexIterator.html" title=" " alt="" coords="413,21,613,107"/>
+<area shape="rect" id="node3" href="$classLinearIndexIterator.html" title=" " alt="" coords="5,36,187,92"/>
+</map>
