@@ -94,423 +94,424 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="step-45_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; 0,</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                                  <span class="comment">/*b_id2*/</span> 1,</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                                  <span class="comment">/*direction*/</span> 0,</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                                  matched_pairs);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keyword">@end</span>code</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;would yield periodicity constraints such that @f$u(0,y)=u(1,y)@f$ <span class="keywordflow">for</span> all</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;@f$y\in[0,1]@f$.</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;If we instead consider the <a class="code" href="namespaceGridGenerator.html#a324b8447f05b148e2f58bdbcf89f5325">parallelogram</a> given by the convex hull of</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;@f$(0,0)@f$, @f$(1,1)@f$, @f$(1,2)@f$, @f$(0,1)@f$ we can achieve the constraints</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;@f$u(0,y)=u(1,y+1)@f$ by specifying an @p offset:</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;@code</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                                  <span class="comment">/*b_id1*/</span> 0,</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                                  <span class="comment">/*b_id2*/</span> 1,</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                                  <span class="comment">/*direction*/</span> 0,</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                                  matched_pairs,</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                                  <a class="code" href="classTensor.html">Tensor&lt;1, 2&gt;</a>(0.,1.));</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keyword">@end</span>code</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;or</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;@code</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                                  <span class="comment">/*b_id1*/</span> 0,</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                                  <span class="comment">/*b_id2*/</span> 1,</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                                  <span class="comment">/*arbitrary direction*/</span> 0,</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                                  matched_pairs,</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                                  <a class="code" href="classTensor.html">Tensor&lt;1, 2&gt;</a>(1.,1.));</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="keyword">@end</span>code</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;Here, again, the assignment of boundary indicators 0 and 1 stems from</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;what <a class="code" href="namespaceGridGenerator.html#a324b8447f05b148e2f58bdbcf89f5325">GridGenerator::parallelogram</a>() documents.</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                                  <span class="comment">/*b_id2*/</span> 1,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                                  <span class="comment">/*direction*/</span> 0,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                                  matched_pairs);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">@end</span>code </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;将产生周期性约束，即 @f$u(0,y)=u(1,y)@f$ 对所有 @f$y\in[0,1]@f$ 。</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;如果我们考虑由 @f$(0,0)@f$ ,  @f$(1,1)@f$ ,  @f$(1,2)@f$ ,  @f$(0,1)@f$ 的凸壳给出的平行四边形，我们可以通过指定一个 @p offset: 来实现约束 @f$u(0,y)=u(1,y+1)@f$  。 </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;@code</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                                  <span class="comment">/*b_id1*/</span> 0,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                                  <span class="comment">/*b_id2*/</span> 1,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                                  <span class="comment">/*direction*/</span> 0,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                                  matched_pairs,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                                  <a class="code" href="classTensor.html">Tensor&lt;1, 2&gt;</a>(0.,1.));</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">@end</span>code </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;或 </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;@code</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                                  <span class="comment">/*b_id1*/</span> 0,</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                                  <span class="comment">/*b_id2*/</span> 1,</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                                  <span class="comment">/*arbitrary direction*/</span> 0,</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                                  matched_pairs,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                                  <a class="code" href="classTensor.html">Tensor&lt;1, 2&gt;</a>(1.,1.));</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">@end</span>code </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;这里，同样，边界指标0和1的分配源于 <a class="code" href="namespaceGridGenerator.html#a324b8447f05b148e2f58bdbcf89f5325">GridGenerator::parallelogram</a>() 的文件。</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;由此产生的 @p matched_pairs 可以用在 <a class="code" href="namespaceDoFTools.html">DoFTools</a>::<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a> 中，用于用周期性约束填充AffineConstraints对象。</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;@code</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<a class="code" href="namespaceDoFTools.html">DoFTools</a>::<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a>(matched_pairs, constraints);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;@endcode </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;除了这个高级接口外，还有一些 <a class="code" href="namespaceDoFTools.html">DoFTools</a>::<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a> 的变体可以结合这两个步骤（见 DofTools::<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a>). 的变体）。 </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;如果需要更多的灵活性，也有一个 <a class="code" href="namespaceDoFTools.html">DoFTools</a>::<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a> 的低级接口。该低级变体允许直接指定两个应被约束的面。</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;@code</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;using namespace <a class="code" href="namespaceDoFTools.html">DoFTools</a>;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a>(face_1,</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                             face_2,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                             affine_constraints,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                             component_mask = &lt;default value&gt;;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                             face_orientation = &lt;default value&gt;,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                             face_flip = &lt;default value&gt;,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                             face_rotation = &lt;default value&gt;,</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                             <a class="code" href="namespaceLAPACKSupport.html#a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003">matrix</a> = &lt;default value&gt;);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;@endcode </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;这里，我们需要使用 @p face_orientation,  @p face_flip 和 @p face_orientation. 来指定两个面的方向。要想了解更详细的描述，请看 <a class="code" href="namespaceDoFTools.html">DoFTools</a>::<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a>. 的文档。除了自我解释的 @p component_mask 和 @p affine_constraints. ，其余参数与高层接口相同。 </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;&lt;a name=&quot;problem&quot;&gt;&lt;/a&gt; &lt;a name=&quot;Apracticalexample&quot;&gt;&lt;/a&gt;&lt;h1&gt;<a class="code" href="namespaceLAPACKSupport.html#a40707d49114d54318c823f3b750e89a4">A</a> practical example&lt;/h1&gt;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;在下文中，我们将展示如何在一个更复杂的例子中使用上述函数。任务是对斯托克斯流的速度分量实施旋转的周期性约束。</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;在由 @f$\Omega=\{{\bf x}\in(0,1)^2:\|{\bf x}\|\in (0.5,1)\}@f$ 定义的四分之一圆上，我们要解决斯托克斯问题@f{eqnarray*}</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;The resulting @p matched_pairs can be used in</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<a class="code" href="namespaceDoFTools.html">DoFTools</a>::<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a> for populating an <a class="code" href="classAffineConstraints.html">AffineConstraints</a></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="keywordtype">object</span> with periodicity constraints:</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;@code</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<a class="code" href="namespaceDoFTools.html">DoFTools</a>::<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a>(matched_pairs, constraints);</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;@endcode</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;Apart from this high <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> interface there are also variants of</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<a class="code" href="namespaceDoFTools.html">DoFTools</a>::<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a> available that combine those two</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;steps (see the variants of DofTools::<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a>).</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;There is also a low <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> interface to</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<a class="code" href="namespaceDoFTools.html">DoFTools</a>::<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a> if more flexibility is needed. The</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;low <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> variant allows to directly specify two faces that shall be</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;constrained:</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;@code</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;using namespace <a class="code" href="namespaceDoFTools.html">DoFTools</a>;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a>(face_1,</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                             face_2,</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                             affine_constraints,</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                             component_mask = &lt;default value&gt;;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                             face_orientation = &lt;default value&gt;,</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                             face_flip = &lt;default value&gt;,</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                             face_rotation = &lt;default value&gt;,</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                             <a class="code" href="namespaceLAPACKSupport.html#a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003">matrix</a> = &lt;default value&gt;);</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;@endcode</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;Here, we need to specify the orientation of the two faces using</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;@p face_orientation, @p face_flip and @p face_orientation. For a closer description</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;have a look at the documentation of <a class="code" href="namespaceDoFTools.html">DoFTools</a>::<a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a>.</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;The remaining parameters are the same as for the high <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> interface apart</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;from the self-explaining @p component_mask and @p affine_constraints.</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  -\Delta \; \textbf{u} + \nabla p &amp;=&amp; (<a class="code" href="classVectorizedArray.html#a397a222798e245fe6ffaab3a03059557">\exp</a>(-100\|{\bf x}-(.75,0.1)^<a class="code" href="namespaceLAPACKSupport.html#a8cac1e477eff052db622c8a9a9426ea3">T</a>\|^2),0)^<a class="code" href="namespaceLAPACKSupport.html#a8cac1e477eff052db622c8a9a9426ea3">T</a>, \\</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  -\textrm{div}\;  \textbf{u}&amp;=&amp;0,\\</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;  \textbf{u}|_{\Gamma_1}&amp;=&amp;{\bf 0},</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;@f} </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;其中边界 @f$\Gamma_1@f$ 被定义为 @f$\Gamma_1 \dealcoloneq \{x\in \partial\Omega: \|x\|\in\{0.5,1\}\}@f$  。对于边界的其余部分，我们将使用周期性边界条件，即 </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;@f{align*}</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  u_x(0,\nu)&amp;=-u_y(\nu,0)&amp;\nu&amp;\in[0,1]\\</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  u_y(0,\nu)&amp;=u_x(\nu,0)&amp;\nu&amp;\in[0,1].</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;@f} </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;网格将由 <a class="code" href="namespaceGridGenerator.html#acd7c51b0e8032db65db9a5ff73ccca50">GridGenerator::quarter_hyper_shell</a>(), 生成，它也记录了如果它的`<a class="code" href="grid__out_8cc.html#a6b19797eabf24813c42dbeaabb5b4e17">colorize</a><span class="stringliteral">&#39;参数设置为`true&#39;</span>，它是如何给它的各个边界分配边界指标的。&lt;a name=<span class="stringliteral">&quot;CommProg&quot;</span>&gt;&lt;/a&gt; &lt;h1&gt; The commented program&lt;/h1&gt;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;这个例子程序是对 @ref step_22 <span class="stringliteral">&quot;step-22&quot;</span> 的轻微修改，使用Trilinos并行运行，以演示交易.II中周期性边界条件的用法。因此我们不讨论大部分的源代码，只对处理周期性约束的部分进行评论。其余的请看 @ref step_22 <span class="stringliteral">&quot;step-22&quot;</span> 和底部的完整源代码。</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;为了实现周期性边界条件，只有两个函数需要修改。</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;-  &lt;code&gt;StokesProblem&lt;dim&gt;::setup_dofs()&lt;/code&gt;  : 用周期性约束来填充AffineConstraints对象 </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;-  &lt;code&gt;StokesProblem&lt;dim&gt;::create_mesh()&lt;/code&gt;  : 为分布式三角形提供周期性信息。</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;&lt;a name=&quot;problem&quot;&gt;&lt;/a&gt;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;&lt;a name=&quot;Apracticalexample&quot;&gt;&lt;/a&gt;&lt;h1&gt;<a class="code" href="namespaceLAPACKSupport.html#a40707d49114d54318c823f3b750e89a4">A</a> practical example&lt;/h1&gt;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;程序的其余部分与 @ref step_22 <span class="stringliteral">&quot;step-22&quot;</span> 相同，所以让我们跳过这一部分，只在下面展示这两个函数。不过完整的程序可以在下面的 <span class="stringliteral">&quot;普通程序 &quot;</span>部分找到）。</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;In the following, we show how to use the above <a class="code" href="namespaceinternal_1_1p4est.html#a4b980c7b4b4d9984e93d73c7d30173ea">functions</a> in a more involved</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;example. The task is to enforce rotated periodicity constraints for the</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;velocity component of a Stokes flow.</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;On a quarter-circle defined by @f$\Omega=\{{\bf x}\in(0,1)^2:\|{\bf x}\|\in (0.5,1)\}@f$ we are</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;going to solve the Stokes problem</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;@f{eqnarray*}</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  -\Delta \; \textbf{u} + \nabla p &amp;=&amp; (<a class="code" href="classVectorizedArray.html#a397a222798e245fe6ffaab3a03059557">\exp</a>(-100\|{\bf x}-(.75,0.1)^<a class="code" href="namespaceLAPACKSupport.html#a8cac1e477eff052db622c8a9a9426ea3">T</a>\|^2),0)^<a class="code" href="namespaceLAPACKSupport.html#a8cac1e477eff052db622c8a9a9426ea3">T</a>, \\</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  -\textrm{div}\;  \textbf{u}&amp;=&amp;0,\\</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  \textbf{u}|_{\Gamma_1}&amp;=&amp;{\bf 0},</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;@f}</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;where the boundary @f$\Gamma_1@f$ is defined as @f$\Gamma_1 \dealcoloneq \{x\in \partial\Omega: \|x\|\in\{0.5,1\}\}@f$.</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;For the remaining parts of the boundary we are going to use periodic boundary conditions, i.e.</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;@f{align*}</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  u_x(0,\nu)&amp;=-u_y(\nu,0)&amp;\nu&amp;\in[0,1]\\</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  u_y(0,\nu)&amp;=u_x(\nu,0)&amp;\nu&amp;\in[0,1].</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;@f}</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;The mesh will be generated by <a class="code" href="namespaceGridGenerator.html#acd7c51b0e8032db65db9a5ff73ccca50">GridGenerator::quarter_hyper_shell</a>(),</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;which also documents how it assigns boundary indicators to its various</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;boundaries <span class="keywordflow">if</span> its `<a class="code" href="grid__out_8cc.html#a6b19797eabf24813c42dbeaabb5b4e17">colorize</a>` argument is <a class="code" href="group__CUDAWrappers.html#gabb7130e2cea54654455ca41ef304f939">set</a> to `<span class="keyword">true</span>`.</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; *</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; *</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; * &lt;a name=<span class="stringliteral">&quot;CommProg&quot;</span>&gt;&lt;/a&gt;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; * &lt;h1&gt; The commented program&lt;/h1&gt;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; * </div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; * This example program is a slight modification of @ref step_22 <span class="stringliteral">&quot;step-22&quot;</span> running in <a class="code" href="namespaceparallel.html">parallel</a></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; * <span class="keyword">using</span> Trilinos to demonstrate the usage of periodic boundary conditions in</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; * deal.II. We thus omit to discuss the majority of the source code and only</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; * comment on the parts that deal with periodicity constraints. For the rest</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; * have a look at @ref step_22 <span class="stringliteral">&quot;step-22&quot;</span> and the full source code at the bottom.</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; * </div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; * </div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; * In order to implement periodic boundary conditions only two <a class="code" href="namespaceinternal_1_1p4est.html#a4b980c7b4b4d9984e93d73c7d30173ea">functions</a></div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; * have to be modified:</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; * - &lt;code&gt;StokesProblem&lt;dim&gt;::setup_dofs()&lt;/code&gt;:</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; * To populate an <a class="code" href="classAffineConstraints.html">AffineConstraints</a> <span class="keywordtype">object</span> with periodicity constraints</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; * - &lt;code&gt;StokesProblem&lt;dim&gt;::create_mesh()&lt;/code&gt;:</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; * To supply a distributed <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a> with periodicity information.</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; * </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;   </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;&lt;a name=<span class="stringliteral">&quot;Settingupperiodicityconstraintsondistributedtriangulations&quot;</span>&gt;&lt;/a&gt; &lt;h3&gt;Setting up periodicity constraints on distributed triangulations&lt;/h3&gt;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;@code</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  <span class="keywordtype">void</span> StokesProblem&lt;dim&gt;::create_mesh()</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  {</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <a class="code" href="classPoint.html">Point&lt;dim&gt;</a>   <a class="code" href="data__out__base_8cc.html#a8188ef4709fc9a4cc076d37447783ba1">center</a>;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">double</span> inner_radius = .5;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">double</span> outer_radius = 1.;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <a class="code" href="namespaceGridGenerator.html#acd7c51b0e8032db65db9a5ff73ccca50">GridGenerator::quarter_hyper_shell</a>(</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;      <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>, <a class="code" href="data__out__base_8cc.html#a8188ef4709fc9a4cc076d37447783ba1">center</a>, inner_radius, outer_radius, 0, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="keyword">@end</span>code </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;在我们可以规定周期性约束之前，我们需要确保位于域的对面但由周期性面连接的单元是幽灵层的一部分，如果其中一个单元存储在本地处理器上。在这一点上，我们需要考虑我们要如何规定周期性。左边边界上的面的顶点 @f$\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_2@f$ 应该与下面边界上的面的顶点 @f$\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_1@f$ 相匹配，由 @f$\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_2=R\cdot</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_1+<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#ae880749870e5b45fbb6a441fd96c1a07">b</a>@f$ 给出，其中旋转矩阵 @f$R@f$ 和偏移量 @f$b@f$ 给出 </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;@f{align*}</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;R=<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#ad88a9499e01173b35d78413e5945e020">\begin</a>{pmatrix}</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;0&amp;1\\-1&amp;0</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#aee42c8e3004e2e81eac3c3356d3ec46b">\end</a>{pmatrix},</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;\quad</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#ae880749870e5b45fbb6a441fd96c1a07">b</a>=<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#ad88a9499e01173b35d78413e5945e020">\begin</a>{pmatrix}0&amp;0<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#aee42c8e3004e2e81eac3c3356d3ec46b">\end</a>{pmatrix}.</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;@f} </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;我们将所得信息保存到这里的数据结构是基于三角法的。</div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; * </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; * The rest of the program is identical to @ref step_22 <span class="stringliteral">&quot;step-22&quot;</span>, so let us skip <span class="keyword">this</span> part</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; * and only show these two <a class="code" href="namespaceinternal_1_1p4est.html#a4b980c7b4b4d9984e93d73c7d30173ea">functions</a> in the following. (The full program can be</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; * found in the <span class="stringliteral">&quot;Plain program&quot;</span> section below, though.)</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; * </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;@code</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    std::vector&lt;<a class="code" href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair</a>&lt;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;      <span class="keyword">typename</span> <a class="code" href="classTriaIterator.html">parallel::distributed::Triangulation&lt;dim&gt;::cell_iterator</a>&gt;&gt;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;      periodicity_vector;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; * </div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; * </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; * </div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; *   </div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; * </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; * </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; * &lt;a name=<span class="stringliteral">&quot;Settingupperiodicityconstraintsondistributedtriangulations&quot;</span>&gt;&lt;/a&gt; </div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; * &lt;h3&gt;Setting up periodicity constraints on distributed triangulations&lt;/h3&gt;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; * </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; * @code</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; *   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; *   <span class="keywordtype">void</span> StokesProblem&lt;dim&gt;::create_mesh()</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; *   {</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; *     <a class="code" href="classPoint.html">Point&lt;dim&gt;</a>   <a class="code" href="data__out__base_8cc.html#a8188ef4709fc9a4cc076d37447783ba1">center</a>;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; *     <span class="keyword">const</span> <span class="keywordtype">double</span> inner_radius = .5;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; *     <span class="keyword">const</span> <span class="keywordtype">double</span> outer_radius = 1.;</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; * </div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; *     <a class="code" href="namespaceGridGenerator.html#acd7c51b0e8032db65db9a5ff73ccca50">GridGenerator::quarter_hyper_shell</a>(</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; *       <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>, <a class="code" href="data__out__base_8cc.html#a8188ef4709fc9a4cc076d37447783ba1">center</a>, inner_radius, outer_radius, 0, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; * </div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; * <span class="keyword">@end</span>code</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; * </div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; * Before we can prescribe periodicity constraints, we need to ensure that</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; * cells on opposite sides of the domain but connected by periodic faces are</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; * part of the ghost layer <span class="keywordflow">if</span> <a class="code" href="namespaceLAPACKSupport.html#aceda56512460bbad2f9fdb8a3d0e1e51">one</a> of them is stored on the local processor.</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; * At <span class="keyword">this</span> <a class="code" href="namespaceOpenCASCADE.html#a7b0b2393711bae58d859be1bb9761781">point</a> we need to think about how we want to prescribe</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; * periodicity. The <a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a> @f$\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_2@f$ of a face on the left</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; * boundary should be matched to the <a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a> @f$\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_1@f$ of a face</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; * on the lower boundary given by @f$\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_2=R\cdot</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; * \text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_1+<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#ae880749870e5b45fbb6a441fd96c1a07">b</a>@f$ where the rotation <a class="code" href="namespaceLAPACKSupport.html#a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003">matrix</a> @f$R@f$ and the offset @f$b@f$ are</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; * given by</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; * @f{align*}</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; * R=<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#ad88a9499e01173b35d78413e5945e020">\begin</a>{pmatrix}</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; * 0&amp;1\\-1&amp;0</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; * <a class="code" href="namespaceTrilinosWrappers_1_1internal.html#aee42c8e3004e2e81eac3c3356d3ec46b">\end</a>{pmatrix},</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; * \quad</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; * <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#ae880749870e5b45fbb6a441fd96c1a07">b</a>=<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#ad88a9499e01173b35d78413e5945e020">\begin</a>{pmatrix}0&amp;0<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#aee42c8e3004e2e81eac3c3356d3ec46b">\end</a>{pmatrix}.</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; * @f}</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; * The data structure we are saving the resulting information into is here</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; * based on the <a class="code" href="classTriangulation.html">Triangulation</a>.</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; * </div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; * @code</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; *     std::vector&lt;<a class="code" href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair</a>&lt;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; *       <span class="keyword">typename</span> <a class="code" href="classTriaIterator.html">parallel::distributed::Triangulation&lt;dim&gt;::cell_iterator</a>&gt;&gt;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; *       periodicity_vector;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; * </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; *     <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> rotation_matrix(dim);</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; *     rotation_matrix[0][1] = 1.;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; *     rotation_matrix[1][0] = -1.;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; * </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; *     <a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>,</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; *                                       2,</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; *                                       3,</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; *                                       1,</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; *                                       periodicity_vector,</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; *                                       <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a>(),</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; *                                       rotation_matrix);</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; * </div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; * <span class="keyword">@end</span>code</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; * </div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; * Now telling the <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a> about the desired periodicity is</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; * particularly easy by just calling</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; * <a class="code" href="classparallel_1_1distributed_1_1Triangulation.html#aa7b797070e5443a18f03a4a7f0267453">parallel::distributed::Triangulation::add_periodicity</a>.</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; * </div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; * @code</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; *     <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.add_periodicity(periodicity_vector);</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; * </div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; *     <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.refine_global(4 - dim);</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; *   }</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; * </div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; * </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; *   <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; *   <span class="keywordtype">void</span> StokesProblem&lt;dim&gt;::setup_dofs()</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; *   {</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; *     dof_handler.distribute_dofs(fe);</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; * </div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; *     std::vector&lt;unsigned int&gt; block_component(dim + 1, 0);</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; *     block_component[dim] = 1;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; *     <a class="code" href="namespaceDoFRenumbering.html#a52c1941406d1ce2937e29a46edf111f4">DoFRenumbering::component_wise</a>(dof_handler, block_component);</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; * </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; *     <span class="keyword">const</span> std::vector&lt;types::global_dof_index&gt; dofs_per_block =</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; *       <a class="code" href="namespaceDoFTools.html#a796721b56b3a90e4e3973c7caae4c3d8">DoFTools::count_dofs_per_fe_block</a>(dof_handler, block_component);</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; *     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_u = dofs_per_block[0], n_p = dofs_per_block[1];</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; * </div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; *     {</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; *       owned_partitioning.clear();</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; *       <a class="code" href="classIndexSet.html">IndexSet</a> locally_owned_dofs = dof_handler.locally_owned_dofs();</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; *       owned_partitioning.push_back(locally_owned_dofs.<a class="code" href="classIndexSet.html#add590b083cdde3fa61e637a058b51835">get_view</a>(0, n_u));</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; *       owned_partitioning.push_back(locally_owned_dofs.<a class="code" href="classIndexSet.html#add590b083cdde3fa61e637a058b51835">get_view</a>(n_u, n_u + n_p));</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; * </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; *       relevant_partitioning.<a class="code" href="classIndexSet.html#a8a3d75a9cba3f1a50866691327aa7609">clear</a>();</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; *       <a class="code" href="classIndexSet.html">IndexSet</a> locally_relevant_dofs;</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; *       <a class="code" href="namespaceDoFTools.html#acad7e0841b9046eaafddc4c617ab1d9d">DoFTools::extract_locally_relevant_dofs</a>(dof_handler,</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; *                                               locally_relevant_dofs);</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; *       relevant_partitioning.push_back(locally_relevant_dofs.<a class="code" href="classIndexSet.html#add590b083cdde3fa61e637a058b51835">get_view</a>(0, n_u));</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; *       relevant_partitioning.push_back(</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; *         locally_relevant_dofs.<a class="code" href="classIndexSet.html#add590b083cdde3fa61e637a058b51835">get_view</a>(n_u, n_u + n_p));</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; * </div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; *       constraints.clear();</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; *       constraints.reinit(locally_relevant_dofs);</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; * </div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; *       <a class="code" href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a> velocities(0);</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; * </div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; *       <a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, constraints);</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; *       <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(mapping,</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; *                                                dof_handler,</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; *                                                0,</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; *                                                BoundaryValues&lt;dim&gt;(),</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; *                                                constraints,</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; *                                                fe.component_mask(velocities));</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; *       <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(mapping,</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; *                                                dof_handler,</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; *                                                1,</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; *                                                BoundaryValues&lt;dim&gt;(),</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; *                                                constraints,</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; *                                                fe.component_mask(velocities));</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; * </div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; * <span class="keyword">@end</span>code</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; * </div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; * After we provided the mesh with the necessary information <span class="keywordflow">for</span> the</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; * periodicity constraints, we are now able to actual create them. For</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; * describing the matching we are <span class="keyword">using</span> the same approach as before, i.e.,</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; * the @f$\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_2@f$ of a face on the left boundary should be</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; * matched to the <a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a></div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; * @f$\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_1@f$ of a face on the lower boundary given by</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; * @f$\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_2=R\cdot \text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_1+<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#ae880749870e5b45fbb6a441fd96c1a07">b</a>@f$ where the rotation</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; * <a class="code" href="namespaceLAPACKSupport.html#a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003">matrix</a> @f$R@f$ and the offset @f$b@f$ are given by</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; * @f{align*}</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; * R=<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#ad88a9499e01173b35d78413e5945e020">\begin</a>{pmatrix}</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; * 0&amp;1\\-1&amp;0</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; * <a class="code" href="namespaceTrilinosWrappers_1_1internal.html#aee42c8e3004e2e81eac3c3356d3ec46b">\end</a>{pmatrix},</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; * \quad</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; * <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#ae880749870e5b45fbb6a441fd96c1a07">b</a>=<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#ad88a9499e01173b35d78413e5945e020">\begin</a>{pmatrix}0&amp;0<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#aee42c8e3004e2e81eac3c3356d3ec46b">\end</a>{pmatrix}.</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; * @f}</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; * These two objects not only describe how faces should be matched but</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; * also in which sense the solution should be transformed from</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; * @f$\text{face}_2@f$ to</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; * @f$\text{face}_1@f$.</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; * </div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; * @code</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; *       <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> rotation_matrix(dim);</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; *       rotation_matrix[0][1] = 1.;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; *       rotation_matrix[1][0] = -1.;</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; * </div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; *       <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> offset;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; * </div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; * <span class="keyword">@end</span>code</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; * </div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; * For setting up the constraints, we <a class="code" href="grid__out_8cc.html#a827a345f29da7caeb588b11013869a01">first</a> store the periodicity</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; * information in an auxiliary <span class="keywordtype">object</span> of type</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; * &lt;code&gt;std::vector@&lt;<a class="code" href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair</a>&lt;<span class="keyword">typename</span></div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; * <a class="code" href="classDoFHandler.html">DoFHandler</a>@&lt;dim@&gt;::%cell_iterator@&gt; &lt;/code&gt;. The periodic boundaries</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; * have the boundary indicators 2 (x=0) and 3 (y=0). All the other</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; * parameters we have <a class="code" href="group__CUDAWrappers.html#gabb7130e2cea54654455ca41ef304f939">set</a> up before. In <span class="keyword">this</span> <span class="keywordflow">case</span> the direction does not</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160; * matter. Due to @f$\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_2=R\cdot \text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_1+<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#ae880749870e5b45fbb6a441fd96c1a07">b</a>@f$ <span class="keyword">this</span> is</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160; * exactly what we want.</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160; * </div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; * @code</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160; *       std::vector&lt;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160; *         <a class="code" href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair&lt;typename DoFHandler&lt;dim&gt;::cell_iterator</a>&gt;&gt;</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; *         periodicity_vector;</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; * </div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; *       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> direction = 1;</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; * </div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; *       <a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; *                                         2,</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; *                                         3,</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; *                                         direction,</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; *                                         periodicity_vector,</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; *                                         offset,</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; *                                         rotation_matrix);</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; * </div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160; * <span class="keyword">@end</span>code</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; * </div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160; * Next, we need to provide information on which vector valued components</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160; * of the solution should be rotated. Since we choose here to just</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160; * constraint the velocity and <span class="keyword">this</span> starts at the <a class="code" href="grid__out_8cc.html#a827a345f29da7caeb588b11013869a01">first</a> component of the</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; * solution vector, we simply <a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda4ed1da4f7c4036896a6aeb19338d1a81">insert</a> a 0:</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; * </div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; * @code</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; *       std::vector&lt;unsigned int&gt; first_vector_components;</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; *       first_vector_components.push_back(0);</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; * </div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160; * <span class="keyword">@end</span>code</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; * </div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; * After setting up all the information in periodicity_vector all we have</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160; * to <span class="keywordflow">do</span> is to tell <a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a> to create the desired</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; * constraints.</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160; * </div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; * @code</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160; *       DoFTools::make_periodicity_constraints&lt;dim, dim&gt;(periodicity_vector,</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; *                                                        constraints,</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160; *                                                        fe.component_mask(</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160; *                                                          velocities),</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160; *                                                        first_vector_components);</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160; * </div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160; *       <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(mapping,</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160; *                                                dof_handler,</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; *                                                0,</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160; *                                                BoundaryValues&lt;dim&gt;(),</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160; *                                                constraints,</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160; *                                                fe.component_mask(velocities));</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160; *       <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(mapping,</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; *                                                dof_handler,</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; *                                                1,</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160; *                                                BoundaryValues&lt;dim&gt;(),</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160; *                                                constraints,</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160; *                                                fe.component_mask(velocities));</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160; *     }</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160; * </div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; *     constraints.close();</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160; * </div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; *     {</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160; *       <a class="code" href="classTrilinosWrappers_1_1BlockSparsityPattern.html">TrilinosWrappers::BlockSparsityPattern</a> bsp(owned_partitioning,</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; *                                                  owned_partitioning,</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160; *                                                  relevant_partitioning,</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160; *                                                  mpi_communicator);</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160; * </div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160; *       <a class="code" href="classTable.html">Table&lt;2, DoFTools::Coupling&gt;</a> coupling(dim + 1, dim + 1);</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; *       <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> c = 0; c &lt; dim + 1; ++c)</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160; *         <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> = 0; <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> &lt; dim + 1; ++<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>)</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160; *           <span class="keywordflow">if</span> (!((c == dim) &amp;&amp; (<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> == dim)))</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160; *             coupling[c][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = <a class="code" href="namespaceDoFTools.html#ad31df71a29dd76de9b4ab241b2527160a6a742e14fbc92a1c202d77d4f319d5ec">DoFTools::always</a>;</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160; *           <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160; *             coupling[c][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = <a class="code" href="namespaceDoFTools.html#ad31df71a29dd76de9b4ab241b2527160a193fa079dee88a75524f669136d6faba">DoFTools::none</a>;</div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160; * </div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160; *       <a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler,</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160; *                                       coupling,</div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160; *                                       bsp,</div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160; *                                       constraints,</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160; *                                       <span class="keyword">false</span>,</div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160; *                                       <a class="code" href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">Utilities::MPI::this_mpi_process</a>(</div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; *                                         mpi_communicator));</div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160; * </div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160; *       bsp.compress();</div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160; * </div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160; *       system_matrix.reinit(bsp);</div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160; *     }</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160; * </div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160; *     {</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160; *       <a class="code" href="classTrilinosWrappers_1_1BlockSparsityPattern.html">TrilinosWrappers::BlockSparsityPattern</a> preconditioner_bsp(</div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160; *         owned_partitioning,</div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160; *         owned_partitioning,</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160; *         relevant_partitioning,</div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160; *         mpi_communicator);</div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160; * </div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160; *       <a class="code" href="classTable.html">Table&lt;2, DoFTools::Coupling&gt;</a> preconditioner_coupling(dim + 1, dim + 1);</div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160; *       <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> c = 0; c &lt; dim + 1; ++c)</div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160; *         <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> = 0; <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> &lt; dim + 1; ++<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>)</div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160; *           <span class="keywordflow">if</span> ((c == dim) &amp;&amp; (<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> == dim))</div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; *             preconditioner_coupling[c][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = <a class="code" href="namespaceDoFTools.html#ad31df71a29dd76de9b4ab241b2527160a6a742e14fbc92a1c202d77d4f319d5ec">DoFTools::always</a>;</div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160; *           <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160; *             preconditioner_coupling[c][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = <a class="code" href="namespaceDoFTools.html#ad31df71a29dd76de9b4ab241b2527160a193fa079dee88a75524f669136d6faba">DoFTools::none</a>;</div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160; * </div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160; *       <a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler,</div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160; *                                       preconditioner_coupling,</div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160; *                                       preconditioner_bsp,</div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160; *                                       constraints,</div>
-<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160; *                                       <span class="keyword">false</span>,</div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160; *                                       <a class="code" href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">Utilities::MPI::this_mpi_process</a>(</div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160; *                                         mpi_communicator));</div>
-<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160; * </div>
-<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160; *       preconditioner_bsp.compress();</div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160; * </div>
-<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160; *       preconditioner_matrix.reinit(preconditioner_bsp);</div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160; *     }</div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160; * </div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160; *     system_rhs.reinit(owned_partitioning, mpi_communicator);</div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160; *     solution.reinit(owned_partitioning,</div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160; *                     relevant_partitioning,</div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160; *                     mpi_communicator);</div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160; *   }</div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160; * </div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160; * <span class="keyword">@end</span>code</div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160; * </div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160; * The rest of the program is then again identical to @ref step_22 <span class="stringliteral">&quot;step-22&quot;</span>. We will omit</div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160; * it here now, but as before, you can find these parts in the <span class="stringliteral">&quot;Plain program&quot;</span></div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160; * section below.</div>
-<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160; * </div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160; </div>
-<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160; * </div>
-<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;&lt;a name=<span class="stringliteral">&quot;Results&quot;</span>&gt;&lt;/a&gt;&lt;h1&gt;Results&lt;/h1&gt;</div>
-<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160; </div>
-<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160; </div>
-<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;The created output is not very surprising. We simply see that the solution is</div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;periodic with respect to the left and lower boundary:</div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160; </div>
-<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;&lt;img src=<span class="stringliteral">&quot;https://www.dealii.org/images/steps/developer/step-45.periodic.png&quot;</span> alt=<span class="stringliteral">&quot;&quot;</span>&gt;</div>
-<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160; </div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;Without the periodicity constraints we would have ended up with the following solution:</div>
-<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160; </div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;&lt;img src=<span class="stringliteral">&quot;https://www.dealii.org/images/steps/developer/step-45.non_periodic.png&quot;</span> alt=<span class="stringliteral">&quot;&quot;</span>&gt;</div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160; *</div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160; *</div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;&lt;a name=<span class="stringliteral">&quot;PlainProg&quot;</span>&gt;&lt;/a&gt;</div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;&lt;h1&gt; The plain program&lt;/h1&gt;</div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;@include <span class="stringliteral">&quot;step-45.cc&quot;</span></div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;*/</div>
-<div class="ttc" id="aclassAffineConstraints_html"><div class="ttname"><a href="classAffineConstraints.html">AffineConstraints</a></div><div class="ttdef"><b>Definition:</b> <a href="affine__constraints_8h_source.html#l00506">affine_constraints.h:507</a></div></div>
-<div class="ttc" id="aclassDoFHandler_html"><div class="ttname"><a href="classDoFHandler.html">DoFHandler</a></div><div class="ttdef"><b>Definition:</b> <a href="dofs_2dof__handler_8h_source.html#l00314">dof_handler.h:315</a></div></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> rotation_matrix(dim);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    rotation_matrix[0][1] = 1.;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    rotation_matrix[1][0] = -1.;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>,</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                                      2,</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                                      3,</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                                      1,</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                                      periodicity_vector,</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                                      <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a>(),</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                                      rotation_matrix);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="keyword">@end</span>code </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;现在，只要调用 <a class="code" href="classparallel_1_1distributed_1_1Triangulation.html#aa7b797070e5443a18f03a4a7f0267453">parallel::distributed::Triangulation::add_periodicity</a>. ，告诉三角法关于所需的周期性就特别容易。 </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;@code</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.add_periodicity(periodicity_vector);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.refine_global(4 - dim);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  }</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  <span class="keywordtype">void</span> StokesProblem&lt;dim&gt;::setup_dofs()</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  {</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    dof_handler.distribute_dofs(fe);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    std::vector&lt;unsigned int&gt; block_component(dim + 1, 0);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    block_component[dim] = 1;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <a class="code" href="namespaceDoFRenumbering.html#a52c1941406d1ce2937e29a46edf111f4">DoFRenumbering::component_wise</a>(dof_handler, block_component);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keyword">const</span> std::vector&lt;types::global_dof_index&gt; dofs_per_block =</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;      <a class="code" href="namespaceDoFTools.html#a796721b56b3a90e4e3973c7caae4c3d8">DoFTools::count_dofs_per_fe_block</a>(dof_handler, block_component);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_u = dofs_per_block[0], n_p = dofs_per_block[1];</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    {</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;      owned_partitioning.clear();</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;      <a class="code" href="classIndexSet.html">IndexSet</a> locally_owned_dofs = dof_handler.locally_owned_dofs();</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;      owned_partitioning.push_back(locally_owned_dofs.<a class="code" href="classIndexSet.html#add590b083cdde3fa61e637a058b51835">get_view</a>(0, n_u));</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;      owned_partitioning.push_back(locally_owned_dofs.<a class="code" href="classIndexSet.html#add590b083cdde3fa61e637a058b51835">get_view</a>(n_u, n_u + n_p));</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;      relevant_partitioning.<a class="code" href="classIndexSet.html#a8a3d75a9cba3f1a50866691327aa7609">clear</a>();</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;      <a class="code" href="classIndexSet.html">IndexSet</a> locally_relevant_dofs;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;      <a class="code" href="namespaceDoFTools.html#acad7e0841b9046eaafddc4c617ab1d9d">DoFTools::extract_locally_relevant_dofs</a>(dof_handler,</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                                              locally_relevant_dofs);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;      relevant_partitioning.push_back(locally_relevant_dofs.<a class="code" href="classIndexSet.html#add590b083cdde3fa61e637a058b51835">get_view</a>(0, n_u));</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;      relevant_partitioning.push_back(</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        locally_relevant_dofs.<a class="code" href="classIndexSet.html#add590b083cdde3fa61e637a058b51835">get_view</a>(n_u, n_u + n_p));</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;      constraints.clear();</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;      constraints.reinit(locally_relevant_dofs);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;      <a class="code" href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a> velocities(0);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;      <a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, constraints);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;      <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(mapping,</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                                               dof_handler,</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                                               0,</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                                               BoundaryValues&lt;dim&gt;(),</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                                               constraints,</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                                               fe.component_mask(velocities));</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;      <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(mapping,</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                                               dof_handler,</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                                               1,</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                                               BoundaryValues&lt;dim&gt;(),</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                                               constraints,</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                                               fe.component_mask(velocities));</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="keyword">@end</span>code </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;在我们为网格提供了周期性约束的必要信息后，我们现在就可以实际创建它们了。对于描述匹配，我们使用与之前相同的方法，也就是说，左边边界上的一个面的 @f$\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_2@f$ 应该与下面边界上的一个面的顶点 @f$\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_1@f$ 相匹配，这些顶点的旋转矩阵 @f$R@f$ 和偏移量 @f$b@f$ 是通过以下方式给出的 </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;@f{align*}</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;R=<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#ad88a9499e01173b35d78413e5945e020">\begin</a>{pmatrix}</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;0&amp;1\\-1&amp;0</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#aee42c8e3004e2e81eac3c3356d3ec46b">\end</a>{pmatrix},</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;\quad</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#ae880749870e5b45fbb6a441fd96c1a07">b</a>=<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#ad88a9499e01173b35d78413e5945e020">\begin</a>{pmatrix}0&amp;0<a class="code" href="namespaceTrilinosWrappers_1_1internal.html#aee42c8e3004e2e81eac3c3356d3ec46b">\end</a>{pmatrix}.</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;@f} </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;这两个对象不仅描述了面的匹配方式，而且还描述了解决方案应该从 @f$\text{face}_2@f$ 转换到 @f$\text{face}_1@f$ 的哪个意义上。</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;@code</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;      <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> rotation_matrix(dim);</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;      rotation_matrix[0][1] = 1.;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;      rotation_matrix[1][0] = -1.;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;      <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> offset;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="keyword">@end</span>code </div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;为了设置约束，我们首先将周期性信息存储在一个类型为 &lt;code&gt;std::vector@&lt;<a class="code" href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair&lt;typename   DoFHandler@&lt;dim@&gt;</a>::%cell_iterator@&gt;  &lt;/code&gt;的辅助对象中。周期性边界的边界指标为2（x=0）和3（y=0）。所有其他的参数我们之前已经设置好了。在这种情况下，方向并不重要。由于 @f$\text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_2=R\cdot \text{<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>}_1+<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#ae880749870e5b45fbb6a441fd96c1a07">b</a>@f$ 这正是我们想要的。</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;@code</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;      std::vector&lt;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        <a class="code" href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair&lt;typename DoFHandler&lt;dim&gt;::cell_iterator</a>&gt;&gt;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        periodicity_vector;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> direction = 1;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;      <a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                                        2,</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                                        3,</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                                        direction,</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                                        periodicity_vector,</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                                        offset,</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                                        rotation_matrix);</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="keyword">@end</span>code </div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;接下来，我们需要提供关于解决方案中哪些矢量值的分量应该被旋转的信息。由于我们在这里选择只约束速度，并且从解向量的第一个分量开始，我们简单地插入一个0。</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;@code</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;      std::vector&lt;unsigned int&gt; first_vector_components;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;      first_vector_components.push_back(0);</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; </div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="keyword">@end</span>code </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;在周期性_vector中设置了所有的信息后，我们要做的就是告诉make_periodicity_constraints来创建所需的约束。</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;@code</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;      DoFTools::make_periodicity_constraints&lt;dim, dim&gt;(periodicity_vector,</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                                                       constraints,</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                                                       fe.component_mask(</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                                                         velocities),</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;                                                       first_vector_components);</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; </div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160; </div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;      <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(mapping,</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                                               dof_handler,</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                                               0,</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                                               BoundaryValues&lt;dim&gt;(),</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                                               constraints,</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                                               fe.component_mask(velocities));</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;      <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(mapping,</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                                               dof_handler,</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                                               1,</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;                                               BoundaryValues&lt;dim&gt;(),</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;                                               constraints,</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;                                               fe.component_mask(velocities));</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    }</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; </div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    constraints.close();</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160; </div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    {</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;      <a class="code" href="classTrilinosWrappers_1_1BlockSparsityPattern.html">TrilinosWrappers::BlockSparsityPattern</a> bsp(owned_partitioning,</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                                                 owned_partitioning,</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;                                                 relevant_partitioning,</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;                                                 mpi_communicator);</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; </div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;      <a class="code" href="classTable.html">Table&lt;2, DoFTools::Coupling&gt;</a> coupling(dim + 1, dim + 1);</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> c = 0; c &lt; dim + 1; ++c)</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> = 0; <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> &lt; dim + 1; ++<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>)</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;          <span class="keywordflow">if</span> (!((c == dim) &amp;&amp; (<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> == dim)))</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;            coupling[c][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = <a class="code" href="namespaceDoFTools.html#ad31df71a29dd76de9b4ab241b2527160a6a742e14fbc92a1c202d77d4f319d5ec">DoFTools::always</a>;</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;          <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;            coupling[c][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = <a class="code" href="namespaceDoFTools.html#ad31df71a29dd76de9b4ab241b2527160a193fa079dee88a75524f669136d6faba">DoFTools::none</a>;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; </div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160; </div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;      <a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler,</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;                                      coupling,</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;                                      bsp,</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                                      constraints,</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;                                      <span class="keyword">false</span>,</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;                                      <a class="code" href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">Utilities::MPI::this_mpi_process</a>(</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;                                        mpi_communicator));</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160; </div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160; </div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;      bsp.compress();</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160; </div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160; </div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;      system_matrix.reinit(bsp);</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    }</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    {</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;      <a class="code" href="classTrilinosWrappers_1_1BlockSparsityPattern.html">TrilinosWrappers::BlockSparsityPattern</a> preconditioner_bsp(</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;        owned_partitioning,</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;        owned_partitioning,</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;        relevant_partitioning,</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;        mpi_communicator);</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160; </div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; </div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;      <a class="code" href="classTable.html">Table&lt;2, DoFTools::Coupling&gt;</a> preconditioner_coupling(dim + 1, dim + 1);</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> c = 0; c &lt; dim + 1; ++c)</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> = 0; <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> &lt; dim + 1; ++<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>)</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;          <span class="keywordflow">if</span> ((c == dim) &amp;&amp; (<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> == dim))</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;            preconditioner_coupling[c][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = <a class="code" href="namespaceDoFTools.html#ad31df71a29dd76de9b4ab241b2527160a6a742e14fbc92a1c202d77d4f319d5ec">DoFTools::always</a>;</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;          <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;            preconditioner_coupling[c][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = <a class="code" href="namespaceDoFTools.html#ad31df71a29dd76de9b4ab241b2527160a193fa079dee88a75524f669136d6faba">DoFTools::none</a>;</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160; </div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160; </div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;      <a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler,</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;                                      preconditioner_coupling,</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;                                      preconditioner_bsp,</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;                                      constraints,</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;                                      <span class="keyword">false</span>,</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;                                      <a class="code" href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">Utilities::MPI::this_mpi_process</a>(</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;                                        mpi_communicator));</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160; </div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160; </div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;      preconditioner_bsp.compress();</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; </div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160; </div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;      preconditioner_matrix.reinit(preconditioner_bsp);</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    }</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160; </div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160; </div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    system_rhs.reinit(owned_partitioning, mpi_communicator);</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    solution.reinit(owned_partitioning,</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;                    relevant_partitioning,</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;                    mpi_communicator);</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;  }</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160; </div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160; </div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<span class="keyword">@end</span>code </div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160; </div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160; </div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160; </div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;然后，程序的其余部分又与  @ref step_22 <span class="stringliteral">&quot;step-22&quot;</span>  相同。我们现在省略它，但和以前一样，你可以在下面的 <span class="stringliteral">&quot;普通程序 &quot;</span>部分找到这些部分。</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; </div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160; </div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160; </div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160; </div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;&lt;a name=<span class="stringliteral">&quot;Results&quot;</span>&gt;&lt;/a&gt;&lt;h1&gt;Results&lt;/h1&gt;</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160; </div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160; </div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;创建的输出并不十分令人惊讶。我们只是看到，相对于左边界和下边界而言，解是周期性的。</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160; </div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;  &lt;img src=<span class="stringliteral">&quot;https://www.dealii.org/images/steps/developer/step-45.periodic.png&quot;</span> alt=<span class="stringliteral">&quot;&quot;</span>&gt;   </div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160; </div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;如果没有周期性约束，我们最终会得到以下的解决方案。</div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160; </div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;  &lt;img src=<span class="stringliteral">&quot;https://www.dealii.org/images/steps/developer/step-45.non_periodic.png&quot;</span> alt=<span class="stringliteral">&quot;&quot;</span>&gt;  &lt;a name=<span class="stringliteral">&quot;PlainProg&quot;</span>&gt;&lt;/a&gt; &lt;h1&gt; The plain program&lt;/h1&gt;  @include <span class="stringliteral">&quot;step-45.cc&quot;</span> 。 </div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160; </div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;  */  </div>
 <div class="ttc" id="aclassFullMatrix_html"><div class="ttname"><a href="classFullMatrix.html">FullMatrix&lt; double &gt;</a></div></div>
 <div class="ttc" id="aclassIndexSet_html"><div class="ttname"><a href="classIndexSet.html">IndexSet</a></div><div class="ttdef"><b>Definition:</b> <a href="index__set_8h_source.html#l00072">index_set.h:73</a></div></div>
 <div class="ttc" id="aclassIndexSet_html_a8a3d75a9cba3f1a50866691327aa7609"><div class="ttname"><a href="classIndexSet.html#a8a3d75a9cba3f1a50866691327aa7609">IndexSet::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition:</b> <a href="index__set_8h_source.html#l01610">index_set.h:1610</a></div></div>
@@ -519,16 +520,12 @@ $(function() {
 <div class="ttc" id="aclassTable_html"><div class="ttname"><a href="classTable.html">Table</a></div><div class="ttdef"><b>Definition:</b> <a href="table_8h_source.html#l00666">table.h:667</a></div></div>
 <div class="ttc" id="aclassTensor_html"><div class="ttname"><a href="classTensor.html">Tensor</a></div><div class="ttdef"><b>Definition:</b> <a href="tensor_8h_source.html#l00449">tensor.h:450</a></div></div>
 <div class="ttc" id="aclassTriaIterator_html"><div class="ttname"><a href="classTriaIterator.html">TriaIterator</a></div><div class="ttdef"><b>Definition:</b> <a href="tria__iterator_8h_source.html#l00577">tria_iterator.h:578</a></div></div>
-<div class="ttc" id="aclassTriangulation_html"><div class="ttname"><a href="classTriangulation.html">Triangulation</a></div><div class="ttdef"><b>Definition:</b> <a href="grid_2tria_8h_source.html#l01127">tria.h:1128</a></div></div>
 <div class="ttc" id="aclassTrilinosWrappers_1_1BlockSparsityPattern_html"><div class="ttname"><a href="classTrilinosWrappers_1_1BlockSparsityPattern.html">TrilinosWrappers::BlockSparsityPattern</a></div><div class="ttdef"><b>Definition:</b> <a href="block__sparsity__pattern_8h_source.html#l00639">block_sparsity_pattern.h:641</a></div></div>
 <div class="ttc" id="aclassVectorizedArray_html_a397a222798e245fe6ffaab3a03059557"><div class="ttname"><a href="classVectorizedArray.html#a397a222798e245fe6ffaab3a03059557">VectorizedArray::exp</a></div><div class="ttdeci">VectorizedArray&lt; Number, width &gt; exp(const ::VectorizedArray&lt; Number, width &gt; &amp;x)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l05362">vectorization.h:5362</a></div></div>
 <div class="ttc" id="aclassparallel_1_1distributed_1_1Triangulation_html_aa7b797070e5443a18f03a4a7f0267453"><div class="ttname"><a href="classparallel_1_1distributed_1_1Triangulation.html#aa7b797070e5443a18f03a4a7f0267453">parallel::distributed::Triangulation::add_periodicity</a></div><div class="ttdeci">virtual void add_periodicity(const std::vector&lt;::GridTools::PeriodicFacePair&lt; cell_iterator &gt;&gt; &amp;) override</div><div class="ttdef"><b>Definition:</b> <a href="distributed_2tria_8cc_source.html#l03048">tria.cc:3048</a></div></div>
 <div class="ttc" id="adata__out__base_8cc_html_a8188ef4709fc9a4cc076d37447783ba1"><div class="ttname"><a href="data__out__base_8cc.html#a8188ef4709fc9a4cc076d37447783ba1">center</a></div><div class="ttdeci">Point&lt; 3 &gt; center</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l00170">data_out_base.cc:170</a></div></div>
 <div class="ttc" id="adata__out__base_8cc_html_accc45da40beb7ae1b485306984e904a2"><div class="ttname"><a href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a></div><div class="ttdeci">Point&lt; 3 &gt; vertices[4]</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l00175">data_out_base.cc:175</a></div></div>
 <div class="ttc" id="agrid__out_8cc_html_a6b19797eabf24813c42dbeaabb5b4e17"><div class="ttname"><a href="grid__out_8cc.html#a6b19797eabf24813c42dbeaabb5b4e17">colorize</a></div><div class="ttdeci">bool colorize</div><div class="ttdef"><b>Definition:</b> <a href="grid__out_8cc_source.html#l04589">grid_out.cc:4589</a></div></div>
-<div class="ttc" id="agrid__out_8cc_html_a827a345f29da7caeb588b11013869a01"><div class="ttname"><a href="grid__out_8cc.html#a827a345f29da7caeb588b11013869a01">first</a></div><div class="ttdeci">Point&lt; 2 &gt; first</div><div class="ttdef"><b>Definition:</b> <a href="grid__out_8cc_source.html#l04587">grid_out.cc:4587</a></div></div>
-<div class="ttc" id="agrid__out_8cc_html_a9082f945c1d289684d0bcd51ee08e11e"><div class="ttname"><a href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a></div><div class="ttdeci">unsigned int level</div><div class="ttdef"><b>Definition:</b> <a href="grid__out_8cc_source.html#l04590">grid_out.cc:4590</a></div></div>
-<div class="ttc" id="agroup__CUDAWrappers_html_gabb7130e2cea54654455ca41ef304f939"><div class="ttname"><a href="group__CUDAWrappers.html#gabb7130e2cea54654455ca41ef304f939">LinearAlgebra::CUDAWrappers::kernel::set</a></div><div class="ttdeci">__global__ void set(Number *val, const Number s, const size_type N)</div></div>
 <div class="ttc" id="agroup__constraints_html_ga3b4ea7dfd313e388d868c4e4aa685799"><div class="ttname"><a href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a></div><div class="ttdeci">void make_hanging_node_constraints(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, AffineConstraints&lt; number &gt; &amp;constraints)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__constraints_8cc_source.html#l01787">dof_tools_constraints.cc:1787</a></div></div>
 <div class="ttc" id="agroup__constraints_html_gaf78e864edbfba7e0a7477457bfb96b26"><div class="ttname"><a href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a></div><div class="ttdeci">void make_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, SparsityPatternType &amp;sparsity_pattern, const AffineConstraints&lt; number &gt; &amp;constraints=AffineConstraints&lt; number &gt;(), const bool keep_constrained_dofs=true, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__sparsity_8cc_source.html#l00064">dof_tools_sparsity.cc:64</a></div></div>
 <div class="ttc" id="anamespaceDoFRenumbering_html_a52c1941406d1ce2937e29a46edf111f4"><div class="ttname"><a href="namespaceDoFRenumbering.html#a52c1941406d1ce2937e29a46edf111f4">DoFRenumbering::component_wise</a></div><div class="ttdeci">void component_wise(DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, const std::vector&lt; unsigned int &gt; &amp;target_component=std::vector&lt; unsigned int &gt;())</div><div class="ttdef"><b>Definition:</b> <a href="dof__renumbering_8cc_source.html#l00681">dof_renumbering.cc:681</a></div></div>
@@ -544,17 +541,12 @@ $(function() {
 <div class="ttc" id="anamespaceLAPACKSupport_html_a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003"><div class="ttname"><a href="namespaceLAPACKSupport.html#a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003">LAPACKSupport::matrix</a></div><div class="ttdeci">@ matrix</div><div class="ttdoc">Contents is actually a matrix.</div><div class="ttdef"><b>Definition:</b> <a href="lapack__support_8h_source.html#l00058">lapack_support.h:58</a></div></div>
 <div class="ttc" id="anamespaceLAPACKSupport_html_a40707d49114d54318c823f3b750e89a4"><div class="ttname"><a href="namespaceLAPACKSupport.html#a40707d49114d54318c823f3b750e89a4">LAPACKSupport::A</a></div><div class="ttdeci">static const char A</div><div class="ttdef"><b>Definition:</b> <a href="lapack__support_8h_source.html#l00153">lapack_support.h:153</a></div></div>
 <div class="ttc" id="anamespaceLAPACKSupport_html_a8cac1e477eff052db622c8a9a9426ea3"><div class="ttname"><a href="namespaceLAPACKSupport.html#a8cac1e477eff052db622c8a9a9426ea3">LAPACKSupport::T</a></div><div class="ttdeci">static const char T</div><div class="ttdef"><b>Definition:</b> <a href="lapack__support_8h_source.html#l00165">lapack_support.h:165</a></div></div>
-<div class="ttc" id="anamespaceLAPACKSupport_html_aceda56512460bbad2f9fdb8a3d0e1e51"><div class="ttname"><a href="namespaceLAPACKSupport.html#aceda56512460bbad2f9fdb8a3d0e1e51">LAPACKSupport::one</a></div><div class="ttdeci">static const types::blas_int one</div><div class="ttdef"><b>Definition:</b> <a href="lapack__support_8h_source.html#l00185">lapack_support.h:185</a></div></div>
-<div class="ttc" id="anamespaceOpenCASCADE_html_a7b0b2393711bae58d859be1bb9761781"><div class="ttname"><a href="namespaceOpenCASCADE.html#a7b0b2393711bae58d859be1bb9761781">OpenCASCADE::point</a></div><div class="ttdeci">Point&lt; spacedim &gt; point(const gp_Pnt &amp;p, const double tolerance=1e-10)</div><div class="ttdef"><b>Definition:</b> <a href="opencascade_2utilities_8cc_source.html#l00188">utilities.cc:188</a></div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a15728437b942dab0b0042eb06a407d2c"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">Physics::Elasticity::Kinematics::d</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; d(const Tensor&lt; 2, dim, Number &gt; &amp;F, const Tensor&lt; 2, dim, Number &gt; &amp;dF_dt)</div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_ae880749870e5b45fbb6a441fd96c1a07"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#ae880749870e5b45fbb6a441fd96c1a07">Physics::Elasticity::Kinematics::b</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; b(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
 <div class="ttc" id="anamespaceTrilinosWrappers_1_1internal_html_ad88a9499e01173b35d78413e5945e020"><div class="ttname"><a href="namespaceTrilinosWrappers_1_1internal.html#ad88a9499e01173b35d78413e5945e020">TrilinosWrappers::internal::begin</a></div><div class="ttdeci">VectorType::value_type * begin(VectorType &amp;V)</div><div class="ttdef"><b>Definition:</b> <a href="trilinos__sparse__matrix_8cc_source.html#l00053">trilinos_sparse_matrix.cc:53</a></div></div>
 <div class="ttc" id="anamespaceTrilinosWrappers_1_1internal_html_aee42c8e3004e2e81eac3c3356d3ec46b"><div class="ttname"><a href="namespaceTrilinosWrappers_1_1internal.html#aee42c8e3004e2e81eac3c3356d3ec46b">TrilinosWrappers::internal::end</a></div><div class="ttdeci">VectorType::value_type * end(VectorType &amp;V)</div><div class="ttdef"><b>Definition:</b> <a href="trilinos__sparse__matrix_8cc_source.html#l00067">trilinos_sparse_matrix.cc:67</a></div></div>
 <div class="ttc" id="anamespaceUtilities_1_1MPI_html_a895dcd8223a0ee6f0e6a80b80e2d5982"><div class="ttname"><a href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">Utilities::MPI::this_mpi_process</a></div><div class="ttdeci">unsigned int this_mpi_process(const MPI_Comm &amp;mpi_communicator)</div><div class="ttdef"><b>Definition:</b> <a href="mpi_8cc_source.html#l00128">mpi.cc:128</a></div></div>
-<div class="ttc" id="anamespaceVectorTools_1_1EvaluationFlags_html_ac6721740e24732d6afabcf28ddfc1ffda4ed1da4f7c4036896a6aeb19338d1a81"><div class="ttname"><a href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda4ed1da4f7c4036896a6aeb19338d1a81">VectorTools::EvaluationFlags::insert</a></div><div class="ttdeci">@ insert</div><div class="ttdef"><b>Definition:</b> <a href="vector__tools__evaluate_8h_source.html#l00064">vector_tools_evaluate.h:63</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_html_ab2562d41bb26f362043f9719a8cd9b87"><div class="ttname"><a href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a></div><div class="ttdeci">void interpolate_boundary_values(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const std::map&lt; types::boundary_id, const Function&lt; spacedim, number &gt; * &gt; &amp;function_map, std::map&lt; types::global_dof_index, number &gt; &amp;boundary_values, const ComponentMask &amp;component_mask=ComponentMask())</div></div>
-<div class="ttc" id="anamespaceinternal_1_1p4est_html_a4b980c7b4b4d9984e93d73c7d30173ea"><div class="ttname"><a href="namespaceinternal_1_1p4est.html#a4b980c7b4b4d9984e93d73c7d30173ea">internal::p4est::functions</a></div><div class="ttdeci">int(&amp;) functions(const void *v1, const void *v2)</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00339">p4est_wrappers.cc:339</a></div></div>
-<div class="ttc" id="anamespaceparallel_html"><div class="ttname"><a href="namespaceparallel.html">parallel</a></div><div class="ttdef"><b>Definition:</b> <a href="distributed_8h_source.html#l00416">distributed.h:417</a></div></div>
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
 <div class="ttc" id="astructFEValuesExtractors_1_1Vector_html"><div class="ttname"><a href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__values__extractors_8h_source.html#l00150">fe_values_extractors.h:151</a></div></div>
 <div class="ttc" id="astructGridTools_1_1PeriodicFacePair_html"><div class="ttname"><a href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair</a></div><div class="ttdef"><b>Definition:</b> <a href="grid__tools_8h_source.html#l02637">grid_tools.h:2638</a></div></div>

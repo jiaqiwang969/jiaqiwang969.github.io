@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-56 tutorial program</title>
+<title>The deal.II Library: The step-56 tutorial program  。</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,109 +86,110 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-56 tutorial program </div>  </div>
+<div class="title">The step-56 tutorial program 。 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_16.html">step-16</a>, <a class="el" href="step_22.html">step-22</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_16.html">step-16</a> , <a class="el" href="step_22.html">step-22</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#StokesProblem"> Stokes Problem </a>
-        <li><a href="#LinearSolverandPreconditioningIssues"> Linear Solver and Preconditioning Issues </a>
-        <li><a href="#ReferenceSolution"> Reference Solution </a>
-        <li><a href="#ComputingErrors"> Computing Errors </a>
-        <li><a href="#DoFHandlers"> DoF Handlers </a>
-        <li><a href="#DifferencesfromtheStep22tutorial"> Differences from the Step 22 tutorial </a>
+        <li><a href="#StokesProblem"> Stokes Problem </a><a href="#StokesProblem"> Stokes Problem </a>
+        <li><a href="#LinearSolverandPreconditioningIssues"> Linear Solver and Preconditioning Issues </a><a href="#LinearSolverandPreconditioningIssues"> Linear Solver and Preconditioning Issues </a>
+        <li><a href="#ReferenceSolution"> Reference Solution </a><a href="#ReferenceSolution"> Reference Solution </a>
+        <li><a href="#ComputingErrors"> Computing Errors </a><a href="#ComputingErrors"> Computing Errors </a>
+        <li><a href="#DoFHandlers"> DoF Handlers </a><a href="#DoFHandlers"> DoF Handlers </a>
+        <li><a href="#DifferencesfromtheStep22tutorial"> Differences from the Step 22 tutorial </a><a href="#DifferencesfromtheStep22tutorial"> Differences from the Step 22 tutorial </a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#FunctionsforSolutionandRighthandside">Functions for Solution and Righthand side</a>
-        <li><a href="#ASPECTBlockSchurPreconditioner">ASPECT BlockSchurPreconditioner</a>
-        <li><a href="#TheStokesProblemclass">The StokesProblem class</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#FunctionsforSolutionandRighthandside">Functions for Solution and Righthand side</a><a href="#FunctionsforSolutionandRighthandside">Functions for Solution and Righthand side</a>
+        <li><a href="#ASPECTBlockSchurPreconditioner">ASPECT BlockSchurPreconditioner</a><a href="#ASPECTBlockSchurPreconditioner">ASPECT BlockSchurPreconditioner</a>
+        <li><a href="#TheStokesProblemclass">The StokesProblem class</a><a href="#TheStokesProblemclass">The StokesProblem class</a>
       <ul>
-        <li><a href="#StokesProblemsetup_dofs">StokesProblem::setup_dofs</a>
-        <li><a href="#StokesProblemassemble_system">StokesProblem::assemble_system</a>
-        <li><a href="#StokesProblemassemble_multigrid">StokesProblem::assemble_multigrid</a>
-        <li><a href="#StokesProblemsolve">StokesProblem::solve</a>
-        <li><a href="#StokesProblemprocess_solution">StokesProblem::process_solution</a>
-        <li><a href="#StokesProblemoutput_results">StokesProblem::output_results</a>
-        <li><a href="#StokesProblemrun">StokesProblem::run</a>
+        <li><a href="#StokesProblemsetup_dofs">StokesProblem::setup_dofs</a><a href="#StokesProblemsetup_dofs">StokesProblem::setup_dofs</a>
+        <li><a href="#StokesProblemassemble_system">StokesProblem::assemble_system</a> ]<a href="#StokesProblemassemble_system">StokesProblem::assemble_system</a>
+        <li><a href="#StokesProblemassemble_multigrid">StokesProblem::assemble_multigrid</a><a href="#StokesProblemassemble_multigrid">StokesProblem::assemble_multigrid</a>
+        <li><a href="#StokesProblemsolve">StokesProblem::solve</a><a href="#StokesProblemsolve">StokesProblem::solve</a>
+        <li><a href="#StokesProblemprocess_solution">StokesProblem::process_solution</a><a href="#StokesProblemprocess_solution">StokesProblem::process_solution</a>
+        <li><a href="#StokesProblemoutput_results">StokesProblem::output_results</a><a href="#StokesProblemoutput_results">StokesProblem::output_results</a>
+        <li><a href="#StokesProblemrun">StokesProblem::run</a><a href="#StokesProblemrun">StokesProblem::run</a>
       </ul>
-        <li><a href="#Themainfunction">The main function</a>
+        <li><a href="#Themainfunction">The main function</a><a href="#Themainfunction">The main function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Errors"> Errors </a>
-        <li><a href="#TimingResults"> Timing Results </a>
-        <li><a href="#Possibilitiesforextensions"> Possibilities for extensions </a>
+        <li><a href="#Errors"> Errors </a><a href="#Errors"> Errors </a>
+        <li><a href="#TimingResults"> Timing Results </a><a href="#TimingResults"> Timing Results </a>
+        <li><a href="#Possibilitiesforextensions"> Possibilities for extensions </a><a href="#Possibilitiesforextensions"> Possibilities for extensions </a>
       <ul>
-        <li><a href="#Checkhigherorderdiscretizations"> Check higher order discretizations </a>
-        <li><a href="#Comparewithcheappreconditioner"> Compare with cheap preconditioner </a>
+        <li><a href="#Checkhigherorderdiscretizations"> Check higher order discretizations </a><a href="#Checkhigherorderdiscretizations"> Check higher order discretizations </a>
+        <li><a href="#Comparewithcheappreconditioner"> Compare with cheap preconditioner </a><a href="#Comparewithcheappreconditioner"> Compare with cheap preconditioner </a>
     </ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
- <em>This program was contributed by Ryan Grove and Timo Heister.</em></p>
+</p>
+<p><em>This program was contributed by Ryan Grove and Timo Heister.</em></p>
 <p><em>This material is based upon work partially supported by National Science Foundation grant DMS1522191 and the Computational Infrastructure in Geodynamics initiative (CIG), through the National Science Foundation under Award No. EAR-0949446 and The University of California-Davis.</em></p>
 <p><em>The authors would like to thank the Isaac Newton Institute for Mathematical Sciences, Cambridge, for support and hospitality during the programme Melt in the Mantle where work on this tutorial was undertaken. This work was supported by EPSRC grant no EP/K032208/1. </em></p>
-<dl class="section note"><dt>Note</dt><dd>If you use this program as a basis for your own work, please consider citing it in your list of references. The initial version of this work was contributed to the deal.II project by the authors listed in the following citation: <a href="https://doi.org/10.5281/zenodo.400995"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.400995.svg" alt="10.5281/zenodo.400995"/></a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If you use this program as a basis for your own work, please consider citing it in your list of references. The initial version of this work was contributed to the deal.II project by the authors listed in the following citation: <a href="https://doi.org/10.5281/zenodo.400995"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.400995.svg" alt="10.5281/zenodo.400995"/></a>  <br  />
+</dd></dl>
 <p><a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
 <p><a class="anchor" id="StokesProblem"></a></p><h3>Stokes Problem </h3>
-<p>The purpose of this tutorial is to create an efficient linear solver for the Stokes equation and compare it to alternative approaches. Here, we will use FGMRES with geometric multigrid as a preconditioner velocity block, and we will show in the results section that this is a fundamentally better approach than the linear solvers used in <a class="el" href="step_22.html">step-22</a> (including the scheme described in "Possible Extensions"). Fundamentally, this is because only with multigrid it is possible to get \(O(n)\) solve time, where \(n\) is the number of unknowns of the linear system. Using the <a class="el" href="classTimer.html">Timer</a> class, we collect some statistics to compare setup times, solve times, and number of iterations. We also compute errors to make sure that what we have implemented is correct.</p>
-<p>Let \(u \in H_0^1 = \{ u \in H^1(\Omega), u|_{\partial \Omega} = 0 \}\) and \(p \in L_*^2 = \{ p \in L^2(\Omega), \int_\Omega p = 0 \}\). The Stokes equations read as follows in non-dimensionalized form:</p>
+<p>本教程的目的是为斯托克斯方程创建一个高效的线性求解器，并将其与其他方法进行比较。 在这里，我们将使用带有几何多网格的FGMRES作为预处理速度块，我们将在结果部分表明，这比 <a class="el" href="step_22.html">step-22</a> 中使用的线性求解器（包括 "可能的扩展 "中描述的方案）从根本上来说是一种更好的方法。 从根本上说，这是因为只有使用多网格才有可能得到 \(O(n)\) 的求解时间，其中 \(n\) 是线性系统的未知数的数量。使用Timer类，我们收集一些统计数据来比较设置时间、求解时间和迭代次数。我们还计算误差以确保我们所实现的是正确的。</p>
+<p>让 \(u \in H_0^1 = \{ u \in H^1(\Omega), u|_{\partial \Omega} = 0 \}\) 和 \(p \in L_*^2 = \{ p \in L^2(\Omega), \int_\Omega p = 0 \}\) . 斯托克斯方程在非维度化形式下读作如下。</p>
 <p class="formulaDsp">
 \begin{eqnarray*} - 2 \text{div} \frac {1}{2} \left[ (\nabla \textbf{u}) + (\nabla \textbf{u})^T\right] + \nabla p &amp; =&amp; f \\ - \nabla \cdot u &amp;=&amp; 0 \end{eqnarray*}
 </p>
-<p>Note that we are using the deformation tensor instead of \(\Delta u\) (a detailed description of the difference between the two can be found in <a class="el" href="step_22.html">step-22</a>, but in summary, the deformation tensor is more physical as well as more expensive).</p>
+<p>请注意，我们使用的是变形张量，而不是 \(\Delta u\) （关于两者之间的区别的详细描述可以在 <a class="el" href="step_22.html">step-22</a> 中找到，但总的来说，变形张量的物理性更强，也更昂贵）。</p>
 <p><a class="anchor" id="LinearSolverandPreconditioningIssues"></a></p><h3>Linear Solver and Preconditioning Issues </h3>
-<p>The weak form of the discrete equations naturally leads to the following linear system for the nodal values of the velocity and pressure fields: </p><p class="formulaDsp">
+<p>离散方程的弱形式自然导致了以下速度和压力场的节点值的线性系统。 </p><p class="formulaDsp">
 \begin{eqnarray*} \left(\begin{array}{cc} A &amp; B^T \\ B &amp; 0 \end{array}\right) \left(\begin{array}{c} U \\ P \end{array}\right) = \left(\begin{array}{c} F \\ 0 \end{array}\right). \end{eqnarray*}
 </p>
-<p>Our goal is to compare several solution approaches. While <a class="el" href="step_22.html">step-22</a> solves the linear system using a "Schur complement approach" in two separate steps, we instead attack the block system at once using FMGRES with an efficient preconditioner, in the spirit of the approach outlined in the "Results" section of <a class="el" href="step_22.html">step-22</a>. The idea is as follows: if we find a block preconditioner \(P\) such that the matrix</p>
+<p>我们的目标是比较几种解决方法。 虽然 <a class="el" href="step_22.html">step-22</a> 使用 "Schur补数法 "分两步解决线性系统，但我们本着 <a class="el" href="step_22.html">step-22</a> "结果 "一节中概述的方法，使用带有高效预处理程序的FMGRES一次性解决该块系统。其思路如下：如果我们找到一个块状预处理器 \(P\) ，使矩阵</p>
 <p class="formulaDsp">
 \begin{eqnarray*} \left(\begin{array}{cc} A &amp; B^T \\ B &amp; 0 \end{array}\right) P^{-1} \end{eqnarray*}
 </p>
-<p>is simple, then an iterative solver with that preconditioner will converge in a few iterations. Notice that we are doing right preconditioning here. Using the Schur complement \(S=BA^{-1}B^T\), we find that</p>
+<p>是简单的，那么使用该预处理程序的迭代求解器将在几次迭代中收敛。注意，我们在这里做的是正确的预处理。 使用舒尔补码 \(S=BA^{-1}B^T\) ，我们发现</p>
 <p class="formulaDsp">
 \begin{eqnarray*} P^{-1} = \left(\begin{array}{cc} A &amp; B^T \\ 0 &amp; S \end{array}\right)^{-1} \end{eqnarray*}
 </p>
-<p>is a good choice. Let \(\widetilde{A^{-1}}\) be an approximation of \(A^{-1}\) and \(\widetilde{S^{-1}}\) of \(S^{-1}\), we see </p><p class="formulaDsp">
+<p>是一个不错的选择。让 \(\widetilde{A^{-1}}\) 是 \(A^{-1}\) 的近似值， \(\widetilde{S^{-1}}\) 是 \(S^{-1}\) 的近似值，我们看到 </p><p class="formulaDsp">
 \begin{eqnarray*} P^{-1} = \left(\begin{array}{cc} A^{-1} &amp; 0 \\ 0 &amp; I \end{array}\right) \left(\begin{array}{cc} I &amp; B^T \\ 0 &amp; -I \end{array}\right) \left(\begin{array}{cc} I &amp; 0 \\ 0 &amp; S^{-1} \end{array}\right) \approx \left(\begin{array}{cc} \widetilde{A^{-1}} &amp; 0 \\ 0 &amp; I \end{array}\right) \left(\begin{array}{cc} I &amp; B^T \\ 0 &amp; -I \end{array}\right) \left(\begin{array}{cc} I &amp; 0 \\ 0 &amp; \widetilde{S^{-1}} \end{array}\right). \end{eqnarray*}
 </p>
-<p>Since \(P\) is aimed to be a preconditioner only, we shall use the approximations on the right in the equation above.</p>
-<p>As discussed in <a class="el" href="step_22.html">step-22</a>, \(-M_p^{-1}=:\widetilde{S^{-1}} \approx S^{-1}\), where \(M_p\) is the pressure mass matrix and is solved approximately by using CG with ILU as a preconditioner, and \(\widetilde{A^{-1}}\) is obtained by one of multiple methods: solving a linear system with CG and ILU as preconditioner, just using one application of an ILU, solving a linear system with CG and GMG (Geometric <a class="el" href="classMultigrid.html">Multigrid</a> as described in <a class="el" href="step_16.html">step-16</a>) as a preconditioner, or just performing a single V-cycle of GMG.</p>
-<p>As a comparison, instead of FGMRES, we also use the direct solver UMFPACK on the whole system to compare our results with. If you want to use a direct solver (like UMFPACK), the system needs to be invertible. To avoid the one dimensional null space given by the constant pressures, we fix the first pressure unknown to zero. This is not necessary for the iterative solvers.</p>
+<p>由于 \(P\) 的目的只是作为一个预处理程序，我们将在上式中使用右边的近似值。</p>
+<p>正如在 <a class="el" href="step_22.html">step-22</a> 、 \(-M_p^{-1}=:\widetilde{S^{-1}} \approx S^{-1}\) 中所讨论的，其中 \(M_p\) 是压力质量矩阵，通过使用CG与ILU作为预处理程序进行近似求解，而 \(\widetilde{A^{-1}}\) ]是通过多种方法之一得到的：用CG和ILU作为预处理程序求解线性系统，仅仅使用ILU的一次应用，用CG和GMG（如 <a class="el" href="step_16.html">step-16</a> 中描述的几何多网格）作为预处理程序求解线性系统，或者仅仅执行GMG的一个V-循环。</p>
+<p>作为比较，我们还在整个系统上使用了直接求解器UMFPACK来比较我们的结果，而不是FGMRES。 如果你想使用直接求解器（如UMFPACK），系统需要是可逆的。为了避免恒定压力给定的一维无效空间，我们将第一个压力未知数固定为零。这对迭代求解器来说是没有必要的。</p>
 <p><a class="anchor" id="ReferenceSolution"></a></p><h3>Reference Solution </h3>
-<p>The test problem is a "Manufactured Solution" (see <a class="el" href="step_7.html">step-7</a> for details), and we choose \(u=(u_1,u_2,u_3)=(2\sin (\pi x), - \pi y \cos (\pi x),- \pi z \cos (\pi x))\) and \(p = \sin (\pi x)\cos (\pi y)\sin (\pi z)\). We apply Dirichlet boundary conditions for the velocity on the whole boundary of the domain \(\Omega=[0,1]\times[0,1]\times[0,1]\). To enforce the boundary conditions we can just use our reference solution.</p>
-<p>If you look up in the deal.II manual what is needed to create a class derived from <code><a class="el" href="classFunction.html">Function</a>&lt;dim&gt;</code>, you will find that this class has numerous <code>virtual</code> functions, including <a class="el" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">Function::value()</a>, <a class="el" href="classFunction.html#ae316ebc05d21989d573024f8a23c49cb">Function::vector_value()</a>, <a class="el" href="classFunction.html#a562fc1114e95e702e6696721f71528db">Function::value_list()</a>, etc., all of which can be overloaded. Different parts of deal.II will require different ones of these particular functions. This can be confusing at first, but luckily the only thing you actually have to implement is <code>value()</code>. The other virtual functions in the <a class="el" href="classFunction.html">Function</a> class have default implementations inside that will call your implementation of <code>value</code> by default.</p>
-<p>Notice that our reference solution fulfills \(\nabla \cdot u = 0\). In addition, the pressure is chosen to have a mean value of zero. For the "Method of Manufactured Solutions" of <a class="el" href="step_7.html">step-7</a>, we need to find \(\bf f\) such that:</p>
+<p>测试问题是一个 "制造的解决方案"（详见 <a class="el" href="step_7.html">step-7</a> ），我们选择 \(u=(u_1,u_2,u_3)=(2\sin (\pi x), - \pi y \cos (\pi x),- \pi z \cos (\pi x))\) 和 \(p = \sin (\pi x)\cos (\pi y)\sin (\pi z)\) 。我们在域的整个边界上对速度应用迪里切特边界条件 \(\Omega=[0,1]\times[0,1]\times[0,1]\) 。为了执行边界条件，我们可以直接使用我们的参考解。</p>
+<p>如果你在deal.II手册中查找创建一个从 <code><a class="el" href="classFunction.html">Function</a>&lt;dim&gt;</code> 派生的类所需的内容，你会发现这个类有许多 <code>virtual</code> 函数，包括 <a class="el" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">Function::value()</a>, <a class="el" href="classFunction.html#ae316ebc05d21989d573024f8a23c49cb">Function::vector_value()</a>, <a class="el" href="classFunction.html#a562fc1114e95e702e6696721f71528db">Function::value_list()</a>, 等等，所有这些都可以被重载。 deal.II的不同部分将需要这些特定函数中的不同部分。这在一开始会让人感到困惑，但幸运的是，你真正需要实现的只有 <code>value()</code>. ，函数类中的其他虚函数在里面有默认的实现，会默认调用你对 <code>value</code> 的实现。</p>
+<p>请注意，我们的参考方案满足了 \(\nabla \cdot u = 0\) 。此外，压力被选择为平均值为零。 对于 <a class="el" href="step_7.html">step-7</a> 的 "制造解决方案的方法"，我们需要找到 \(\bf f\) ，以便。</p>
 <p class="formulaDsp">
 \begin{align*} {\bf f} = - 2 \text{div} \frac {1}{2} \left[ (\nabla \textbf{u}) + (\nabla \textbf{u})^T\right] + \nabla p. \end{align*}
 </p>
-<p>Using the reference solution above, we obtain:</p>
+<p>使用上面的参考解，我们得到。</p>
 <p class="formulaDsp">
 \begin{eqnarray*} {\bf f} &amp;=&amp; (2 \pi^2 \sin (\pi x),- \pi^3 y \cos(\pi x),- \pi^3 z \cos(\pi x))\\ &amp; &amp; + (\pi \cos(\pi x) \cos(\pi y) \sin(\pi z) ,- \pi \sin(\pi y) \sin(\pi x) \sin(\pi z), \pi \cos(\pi z) \sin(\pi x) \cos(\pi y)) \end{eqnarray*}
 </p>
 <p><a class="anchor" id="ComputingErrors"></a></p><h3>Computing Errors </h3>
-<p>Because we do not enforce the mean pressure to be zero for our numerical solution in the linear system, we need to post process the solution after solving. To do this we use the <a class="el" href="namespaceVectorTools.html#ad086eb08b8424fd7c853e389a3978a9a">VectorTools::compute_mean_value()</a> function to compute the mean value of the pressure to subtract it from the pressure.</p>
+<p>因为我们在线性系统中没有强制要求平均压力为零，所以我们需要在求解后对解决方案进行后处理。为了做到这一点，我们使用 <a class="el" href="namespaceVectorTools.html#ad086eb08b8424fd7c853e389a3978a9a">VectorTools::compute_mean_value()</a> 函数来计算压力的平均值，以便从压力中减去它。</p>
 <p><a class="anchor" id="DoFHandlers"></a></p><h3>DoF Handlers </h3>
-<p>The way we implement geometric multigrid here only executes it on the velocity variables (i.e., the \(A\) matrix described above) but not the pressure. One could implement this in different ways, including one in which one considers all coarse grid operations as acting on \(2\times 2\) block systems where we only consider the top left block. Alternatively, we can implement things by really only considering a linear system on the velocity part of the overall finite element discretization. The latter is the way we want to use here.</p>
-<p>To implement this, one would need to be able to ask questions such as "May I have just part of a DoFHandler?". This is not possible at the time when this program was written, so in order to answer this request for our needs, we simply create a separate, second <a class="el" href="classDoFHandler.html">DoFHandler</a> for just the velocities. We then build linear systems for the multigrid preconditioner based on only this second <a class="el" href="classDoFHandler.html">DoFHandler</a>, and simply transfer the first block of (overall) vectors into corresponding vectors for the entire second <a class="el" href="classDoFHandler.html">DoFHandler</a>. To make this work, we have to assure that the <em>order</em> in which the (velocity) degrees of freedom are ordered in the two <a class="el" href="classDoFHandler.html">DoFHandler</a> objects is the same. This is in fact the case by first distributing degrees of freedom on both, and then using the same sequence of <a class="el" href="namespaceDoFRenumbering.html">DoFRenumbering</a> operations on both.</p>
+<p>我们在这里实现几何多网格的方式只在速度变量（即上面描述的 \(A\) 矩阵）上执行，而不是压力。我们可以用不同的方式来实现这一点，包括将所有的粗网格操作视为作用于 \(2\times 2\) 块系统，我们只考虑左上角的块。另外，我们也可以通过真正只考虑整个有限元离散化的速度部分的线性系统来实现。后者是我们在这里想要使用的方式。</p>
+<p>为了实现这一点，我们需要能够提出诸如 "我可以只拥有DoFHandler的一部分吗？"之类的问题。在编写这个程序的时候，这是不可能的，所以为了满足我们的需求，我们只是为速度创建一个单独的、第二个DoFHandler。然后，我们只基于这个第二DoFHandler为多网格预处理程序建立线性系统，并简单地将第一块（整体）向量转移到整个第二DoFHandler的对应向量中。为了实现这一目标，我们必须保证两个DoFHandler对象中的（速度）自由度排序的<em>order</em>是相同的。事实上，首先在两个对象上分配自由度，然后在两个对象上使用相同的DoFRenumbering操作序列，就可以做到这一点。</p>
 <p><a class="anchor" id="DifferencesfromtheStep22tutorial"></a></p><h3>Differences from the Step 22 tutorial </h3>
-<p>The main difference between <a class="el" href="step_56.html">step-56</a> and <a class="el" href="step_22.html">step-22</a> is that we use block solvers instead of the Schur Complement approach used in <a class="el" href="step_22.html">step-22</a>. Details of this approach can be found under the "Block Schur
-complement preconditioner" subsection of the "Possible Extensions" section of <a class="el" href="step_22.html">step-22</a>. For the preconditioner of the velocity block, we borrow a class from <a href="https://aspect.geodynamics.org">ASPECT</a> called <code>BlockSchurPreconditioner</code> that has the option to solve for the inverse of \(A\) or just apply one preconditioner sweep for it instead, which provides us with an expensive and cheap approach, respectively.</p>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
+<p>step-56 和 step-22 之间的主要区别是，我们使用块状求解器而不是 step-22 中使用的Schur Complement方法。这种方法的细节可以在 step-22 的 "可能的扩展 "部分的 "块状Schur补码预处理 "小节中找到。对于速度块的预处理，我们从<a href="https://aspect.geodynamics.org">ASPECT</a>中借用了一个名为 <code>BlockSchurPreconditioner</code> 的类，该类可以选择求解 \(A\) 的逆，或者只对其应用一个预处理扫频，这分别为我们提供了一种昂贵和廉价的方法。<a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+<p><a class="anchor" id="Includefiles"></a></p><h3>Include files</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="quadrature__lib_8h.html">deal.II/base/quadrature_lib.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logstream_8h.html">deal.II/base/logstream.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="function_8h.html">deal.II/base/function.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="include_2deal_8II_2base_2utilities_8h.html">deal.II/base/utilities.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="block__vector_8h.html">deal.II/lac/block_vector.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="full__matrix_8h.html">deal.II/lac/full_matrix.h</a>&gt;</span></div>
@@ -200,25 +201,31 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dynamic__sparsity__pattern_8h.html">deal.II/lac/dynamic_sparsity_pattern.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="solver__gmres_8h.html">deal.II/lac/solver_gmres.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2tria_8h.html">deal.II/grid/tria.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__generator_8h.html">deal.II/grid/grid_generator.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__tools_8h.html">deal.II/grid/grid_tools.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2grid__refinement_8h.html">deal.II/grid/grid_refinement.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dofs_2dof__handler_8h.html">deal.II/dofs/dof_handler.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dof__renumbering_8h.html">deal.II/dofs/dof_renumbering.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dof__tools_8h.html">deal.II/dofs/dof_tools.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__q_8h.html">deal.II/fe/fe_q.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__system_8h.html">deal.II/fe/fe_system.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe_2fe__values_8h.html">deal.II/fe/fe_values.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector__tools_8h.html">deal.II/numerics/vector_tools.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="matrix__tools_8h.html">deal.II/numerics/matrix_tools.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="numerics_2data__out_8h.html">deal.II/numerics/data_out.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="error__estimator_8h.html">deal.II/numerics/error_estimator.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sparse__direct_8h.html">deal.II/lac/sparse_direct.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sparse__ilu_8h.html">deal.II/lac/sparse_ilu.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__out_8h.html">deal.II/grid/grid_out.h</a>&gt;</span></div>
@@ -252,10 +259,10 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="asparse__direct_8h_html"><div class="ttname"><a href="sparse__direct_8h.html">sparse_direct.h</a></div></div>
 <div class="ttc" id="asparse__ilu_8h_html"><div class="ttname"><a href="sparse__ilu_8h.html">sparse_ilu.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p>We need to include the following file to do timings:</p>
+</div><!-- fragment --><p>我们需要包括以下文件来做计时。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="timer_8h.html">deal.II/base/timer.h</a>&gt;</span></div>
 <div class="ttc" id="atimer_8h_html"><div class="ttname"><a href="timer_8h.html">timer.h</a></div></div>
-</div><!-- fragment --><p>This includes the files necessary for us to use geometric <a class="el" href="classMultigrid.html">Multigrid</a></p>
+</div><!-- fragment --><p>这包括我们使用几何多网格所需的文件</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="multigrid_8h.html">deal.II/multigrid/multigrid.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="mg__transfer_8h.html">deal.II/multigrid/mg_transfer.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="mg__tools_8h.html">deal.II/multigrid/mg_tools.h</a>&gt;</span></div>
@@ -263,8 +270,10 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="mg__smoother_8h.html">deal.II/multigrid/mg_smoother.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="mg__matrix_8h.html">deal.II/multigrid/mg_matrix.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span>Step56</div>
 <div class="line">{</div>
@@ -276,7 +285,7 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="amg__transfer_8h_html"><div class="ttname"><a href="mg__transfer_8h.html">mg_transfer.h</a></div></div>
 <div class="ttc" id="amultigrid_8h_html"><div class="ttname"><a href="multigrid_8h.html">multigrid.h</a></div></div>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="namespace__dealii_8h_source.html#l00025">namespace_dealii.h:26</a></div></div>
-</div><!-- fragment --><p>In order to make it easy to switch between the different solvers that are being used, we declare an enum that can be passed as an argument to the constructor of the main class.</p>
+</div><!-- fragment --><p>为了方便在使用的不同求解器之间进行切换，我们声明一个枚举，可以作为参数传递给主类的构造函数。</p>
 <div class="fragment"><div class="line"><span class="keyword">enum class</span> <a class="code" href="classSolverType.html">SolverType</a></div>
 <div class="line">{</div>
 <div class="line">  FGMRES_ILU,</div>
@@ -285,8 +294,11 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">};</div>
 <div class="ttc" id="aclassSolverType_html"><div class="ttname"><a href="classSolverType.html">SolverType</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="FunctionsforSolutionandRighthandside"></a> </p><h3><a class="el" href="namespaceFunctions.html">Functions</a> for Solution and Righthand side</h3>
-<p>The class Solution is used to define the boundary conditions and to compute errors of the numerical solution. Note that we need to define the values and gradients in order to compute L2 and H1 errors. Here we decided to separate the implementations for 2d and 3d using template specialization.</p>
-<p>Note that the first dim components are the velocity components and the last is the pressure.</p>
+<p><br  />
+</p>
+<p>类Solution是用来定义边界条件和计算数值解的误差的。请注意，我们需要定义值和梯度，以便计算L2和H1误差。在这里，我们决定使用模板的特殊化来分离2D和3D的实现。 <br  />
+</p>
+<p>请注意，前几个昏暗分量是速度分量，最后一个是压力。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>Solution : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
@@ -301,15 +313,18 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">           <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0) <span class="keyword">const override</span>;</div>
 <div class="line">};</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;&gt;</div>
 <div class="line"><span class="keywordtype">double</span> Solution&lt;2&gt;::value(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;2&gt;</a> &amp;   p,</div>
 <div class="line">                          <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(component &lt;= 2 + 1, <a class="code" href="group__Exceptions.html#ga0d685aad996180f9851183ae3e29019a">ExcIndexRange</a>(component, 0, 2 + 1));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">using</span> <a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a>;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> x = p(0);</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> y = p(1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">if</span> (component == 0)</div>
 <div class="line">    <span class="keywordflow">return</span> <a class="code" href="classVectorizedArray.html#ae4e256a1298425a946574012d5b81e53">sin</a>(<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * x);</div>
@@ -318,8 +333,10 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">  <span class="keywordflow">if</span> (component == 2)</div>
 <div class="line">    <span class="keywordflow">return</span> <a class="code" href="classVectorizedArray.html#ae4e256a1298425a946574012d5b81e53">sin</a>(<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * x) * <a class="code" href="classVectorizedArray.html#adea3423146bcdda2dce143cfb4d10ae8">cos</a>(<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * y);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;&gt;</div>
 <div class="line"><span class="keywordtype">double</span> Solution&lt;3&gt;::value(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;3&gt;</a> &amp;   p,</div>
@@ -327,10 +344,12 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(component &lt;= 3 + 1, <a class="code" href="group__Exceptions.html#ga0d685aad996180f9851183ae3e29019a">ExcIndexRange</a>(component, 0, 3 + 1));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">using</span> <a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a>;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> x = p(0);</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> y = p(1);</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> z = p(2);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">if</span> (component == 0)</div>
 <div class="line">    <span class="keywordflow">return</span> 2.0 * <a class="code" href="classVectorizedArray.html#ae4e256a1298425a946574012d5b81e53">sin</a>(<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * x);</div>
@@ -340,6 +359,7 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">    <span class="keywordflow">return</span> -<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * z * <a class="code" href="classVectorizedArray.html#adea3423146bcdda2dce143cfb4d10ae8">cos</a>(<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * x);</div>
 <div class="line">  <span class="keywordflow">if</span> (component == 3)</div>
 <div class="line">    <span class="keywordflow">return</span> <a class="code" href="classVectorizedArray.html#ae4e256a1298425a946574012d5b81e53">sin</a>(<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * x) * <a class="code" href="classVectorizedArray.html#adea3423146bcdda2dce143cfb4d10ae8">cos</a>(<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * y) * <a class="code" href="classVectorizedArray.html#ae4e256a1298425a946574012d5b81e53">sin</a>(<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * z);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
@@ -353,16 +373,18 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="agroup__Exceptions_html_ga0d685aad996180f9851183ae3e29019a"><div class="ttname"><a href="group__Exceptions.html#ga0d685aad996180f9851183ae3e29019a">StandardExceptions::ExcIndexRange</a></div><div class="ttdeci">static ::ExceptionBase &amp; ExcIndexRange(int arg1, int arg2, int arg3)</div></div>
 <div class="ttc" id="agroup__Exceptions_html_ga70a0bb353656e704acf927945277bbc6"><div class="ttname"><a href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a></div><div class="ttdeci">#define Assert(cond, exc)</div><div class="ttdef"><b>Definition:</b> <a href="include_2deal_8II_2base_2exceptions_8h_source.html#l01473">exceptions.h:1473</a></div></div>
 <div class="ttc" id="anamespacenumbers_html_a3e24f194a9cb9b6ff4442b8a7a877d4a"><div class="ttname"><a href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a></div><div class="ttdeci">static constexpr double PI</div><div class="ttdef"><b>Definition:</b> <a href="numbers_8h_source.html#l00231">numbers.h:231</a></div></div>
-</div><!-- fragment --><p>Note that for the gradient we need to return a <a class="el" href="classTensor.html">Tensor&lt;1,dim&gt;</a></p>
+</div><!-- fragment --><p>请注意，对于梯度，我们需要返回一个Tensor&lt;1,dim&gt;。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;&gt;</div>
 <div class="line"><a class="code" href="classTensor.html">Tensor&lt;1, 2&gt;</a> Solution&lt;2&gt;::gradient(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;2&gt;</a> &amp;   p,</div>
 <div class="line">                                   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(component &lt;= 2, <a class="code" href="group__Exceptions.html#ga0d685aad996180f9851183ae3e29019a">ExcIndexRange</a>(component, 0, 2 + 1));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">using</span> <a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a>;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> x = p(0);</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> y = p(1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classTensor.html">Tensor&lt;1, 2&gt;</a> return_value;</div>
 <div class="line">  <span class="keywordflow">if</span> (component == 0)</div>
@@ -381,8 +403,10 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">      return_value[1] = -<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * <a class="code" href="classVectorizedArray.html#ae4e256a1298425a946574012d5b81e53">sin</a>(<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * x) * <a class="code" href="classVectorizedArray.html#ae4e256a1298425a946574012d5b81e53">sin</a>(<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * y);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> return_value;</div>
 <div class="line">}</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;&gt;</div>
 <div class="line"><a class="code" href="classTensor.html">Tensor&lt;1, 3&gt;</a> Solution&lt;3&gt;::gradient(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;3&gt;</a> &amp;   p,</div>
@@ -390,10 +414,12 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(component &lt;= 3, <a class="code" href="group__Exceptions.html#ga0d685aad996180f9851183ae3e29019a">ExcIndexRange</a>(component, 0, 3 + 1));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">using</span> <a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a>;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> x = p(0);</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> y = p(1);</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> z = p(2);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classTensor.html">Tensor&lt;1, 3&gt;</a> return_value;</div>
 <div class="line">  <span class="keywordflow">if</span> (component == 0)</div>
@@ -421,9 +447,10 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">      return_value[2] = <a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * <a class="code" href="classVectorizedArray.html#ae4e256a1298425a946574012d5b81e53">sin</a>(<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * x) * <a class="code" href="classVectorizedArray.html#adea3423146bcdda2dce143cfb4d10ae8">cos</a>(<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * y) * <a class="code" href="classVectorizedArray.html#adea3423146bcdda2dce143cfb4d10ae8">cos</a>(<a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">PI</a> * z);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> return_value;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Implementation of \(f\). See the introduction for more information.</p>
+</div><!-- fragment --><p>\(f\) 的实现。更多信息请参见介绍。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>RightHandSide : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
@@ -432,15 +459,18 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">    : <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;(dim + 1)</div>
 <div class="line">  {}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">value</a>(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp; p,</div>
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0) <span class="keyword">const override</span>;</div>
 <div class="line">};</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;&gt;</div>
 <div class="line"><span class="keywordtype">double</span> RightHandSide&lt;2&gt;::value(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;2&gt;</a> &amp;   p,</div>
 <div class="line">                               <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(component &lt;= 2, <a class="code" href="group__Exceptions.html#ga0d685aad996180f9851183ae3e29019a">ExcIndexRange</a>(component, 0, 2 + 1));</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">using</span> <a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a>;</div>
 <div class="line">  <span class="keywordtype">double</span> x = p(0);</div>
@@ -452,14 +482,17 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">  <span class="keywordflow">if</span> (component == 2)</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;&gt;</div>
 <div class="line"><span class="keywordtype">double</span> RightHandSide&lt;3&gt;::value(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;3&gt;</a> &amp;   p,</div>
 <div class="line">                               <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(component &lt;= 3, <a class="code" href="group__Exceptions.html#ga0d685aad996180f9851183ae3e29019a">ExcIndexRange</a>(component, 0, 3 + 1));</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">using</span> <a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a>;</div>
 <div class="line">  <span class="keywordtype">double</span> x = p(0);</div>
@@ -477,16 +510,16 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">  <span class="keywordflow">if</span> (component == 3)</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="ASPECTBlockSchurPreconditioner"></a> </p><h3>ASPECT BlockSchurPreconditioner</h3>
-<p>In the following, we will implement a preconditioner that expands on the ideas discussed in the Results section of <a class="el" href="step_22.html">step-22</a>. Specifically, we</p><ol type="1">
-<li>use an upper block-triangular preconditioner because we want to use right preconditioning.</li>
-<li>optionally allow using an inner solver for the velocity block instead of a single preconditioner application.</li>
-<li>do not use InverseMatrix but explicitly call <a class="el" href="classSolverCG.html">SolverCG</a>. This approach is also used in the ASPECT code (see <a href="https://aspect.geodynamics.org">https://aspect.geodynamics.org</a>) that solves the Stokes equations in the context of simulating convection in the earth mantle, and which has been used to solve problems on many thousands of processors.</li>
-</ol>
-<p>The bool flag <code>do_solve_A</code> in the constructor allows us to either apply the preconditioner for the velocity block once or use an inner iterative solver for a more accurate approximation instead.</p>
-<p>Notice how we keep track of the sum of the inner iterations (preconditioner applications).</p>
+<p>．</p>
+<p>在下文中，我们将实现一个预处理程序，它扩展了 <a class="el" href="step_22.html">step-22</a> 的结果部分所讨论的想法。具体来说，我们1.使用一个上块三角的预处理器，因为我们想使用右预处理。2.可选择允许使用速度块的内部求解器，而不是单一的预处理程序应用。3.不使用InverseMatrix，而是明确地调用SolverCG。这种方法也用于ASPECT代码（见https://aspect.geodynamics.org），该代码在模拟地幔对流的背景下求解斯托克斯方程，该代码已被用于解决成千上万个处理器上的问题。 <br  />
+</p>
+<p>构造函数中的bool标志 <code>do_solve_A</code> 允许我们对速度块应用一次预处理，或者使用内部迭代求解器来代替更精确的近似。 <br  />
+</p>
+<p>注意我们是如何跟踪内部迭代的总和（预处理程序的应用）的。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> PreconditionerAType, <span class="keyword">class</span> PreconditionerSType&gt;</div>
 <div class="line"><span class="keyword">class </span>BlockSchurPreconditioner : <span class="keyword">public</span> <a class="code" href="classSubscriptor.html">Subscriptor</a></div>
 <div class="line">{</div>
@@ -498,10 +531,13 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">    <span class="keyword">const</span> PreconditionerSType &amp;      preconditioner_S,</div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">bool</span>                       do_solve_A);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> vmult(<a class="code" href="classBlockVector.html">BlockVector&lt;double&gt;</a> &amp;dst, <span class="keyword">const</span> <a class="code" href="classBlockVector.html">BlockVector&lt;double&gt;</a> &amp;src) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">mutable</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_iterations_A;</div>
 <div class="line">  <span class="keyword">mutable</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_iterations_S;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classBlockSparseMatrix.html">BlockSparseMatrix&lt;double&gt;</a> &amp;system_matrix;</div>
@@ -509,8 +545,10 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">  <span class="keyword">const</span> PreconditionerAType &amp;      preconditioner_A;</div>
 <div class="line">  <span class="keyword">const</span> PreconditionerSType &amp;      preconditioner_S;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">bool</span> do_solve_A;</div>
 <div class="line">};</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> PreconditionerAType, <span class="keyword">class</span> PreconditionerSType&gt;</div>
 <div class="line">BlockSchurPreconditioner&lt;PreconditionerAType, PreconditionerSType&gt;::</div>
@@ -531,6 +569,8 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> PreconditionerAType, <span class="keyword">class</span> PreconditionerSType&gt;</div>
 <div class="line"><span class="keywordtype">void</span></div>
 <div class="line">BlockSchurPreconditioner&lt;PreconditionerAType, PreconditionerSType&gt;::vmult(</div>
@@ -544,10 +584,11 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="aclassSubscriptor_html"><div class="ttname"><a href="classSubscriptor.html">Subscriptor</a></div><div class="ttdef"><b>Definition:</b> <a href="subscriptor_8h_source.html#l00061">subscriptor.h:62</a></div></div>
 <div class="ttc" id="aclassVector_html"><div class="ttname"><a href="classVector.html">Vector&lt; double &gt;</a></div></div>
 <div class="ttc" id="agroup__Exceptions_html_gae05a0e26814f032473ed2ef66da018bd"><div class="ttname"><a href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">BlockVectorBase::block</a></div><div class="ttdeci">BlockType &amp; block(const unsigned int i)</div></div>
-</div><!-- fragment --><p>First solve with the approximation for S</p>
+</div><!-- fragment --><p>首先用S的近似值求解</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  <a class="code" href="classSolverControl.html">SolverControl</a> solver_control(1000, 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-6 * src.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(1).l2_norm());</div>
 <div class="line">  <a class="code" href="classSolverCG.html">SolverCG&lt;Vector&lt;double&gt;</a>&gt; cg(solver_control);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  dst.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(1) = 0.0;</div>
 <div class="line">  cg.solve(schur_complement_matrix,</div>
@@ -555,29 +596,32 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">           src.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(1),</div>
 <div class="line">           preconditioner_S);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  n_iterations_S += solver_control.last_step();</div>
 <div class="line">  dst.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(1) *= -1.0;</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassSolverCG_html"><div class="ttname"><a href="classSolverCG.html">SolverCG</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__cg_8h_source.html#l00095">solver_cg.h:96</a></div></div>
 <div class="ttc" id="aclassSolverControl_html"><div class="ttname"><a href="classSolverControl.html">SolverControl</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__control_8h_source.html#l00065">solver_control.h:66</a></div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a9587d5229555daa5b1fa1ba2f8a40adb"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">Physics::Elasticity::Kinematics::e</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; e(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
-</div><!-- fragment --><p>Second, apply the top right block (B^T)</p>
+</div><!-- fragment --><p>其次，应用右上角的块（B^T）。</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  system_matrix.block(0, 1).vmult(utmp, dst.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(1));</div>
 <div class="line">  utmp *= -1.0;</div>
 <div class="line">  utmp += src.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(0);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Finally, either solve with the top left block or just apply one preconditioner sweep</p>
+</div><!-- fragment --><p>最后，要么用左上角的块求解，要么只应用一个预处理程序扫频。</p>
 <div class="fragment"><div class="line">  <span class="keywordflow">if</span> (do_solve_A == <span class="keyword">true</span>)</div>
 <div class="line">    {</div>
 <div class="line">      <a class="code" href="classSolverControl.html">SolverControl</a>            solver_control(10000, utmp.l2_norm() * 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-4);</div>
 <div class="line">      <a class="code" href="classSolverCG.html">SolverCG&lt;Vector&lt;double&gt;</a>&gt; cg(solver_control);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      dst.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(0) = 0.0;</div>
 <div class="line">      cg.solve(system_matrix.block(0, 0),</div>
 <div class="line">               dst.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(0),</div>
 <div class="line">               utmp,</div>
 <div class="line">               preconditioner_A);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      n_iterations_A += solver_control.last_step();</div>
 <div class="line">    }</div>
@@ -587,8 +631,10 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">      n_iterations_A += 1;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="TheStokesProblemclass"></a> </p><h3>The StokesProblem class</h3>
-<p>This is the main class of the problem.</p>
+</div><!-- fragment --><p><a class="anchor" id="TheStokesProblemclass"></a></p><h3>The StokesProblem class</h3>
+<p><br  />
+</p>
+<p>这是该问题的主要类别。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>StokesProblem</div>
 <div class="line">{</div>
@@ -596,6 +642,7 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">  StokesProblem(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pressure_degree,</div>
 <div class="line">                <span class="keyword">const</span> <a class="code" href="classSolverType.html">SolverType</a>   solver_type);</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keywordtype">void</span> setup_dofs();</div>
@@ -605,8 +652,10 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">  <span class="keywordtype">void</span> compute_errors();</div>
 <div class="line">  <span class="keywordtype">void</span> output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> refinement_cycle) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pressure_degree;</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classSolverType.html">SolverType</a>   solver_type;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classTriangulation.html">Triangulation&lt;dim&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
 <div class="line">  <a class="code" href="classFESystem.html">FESystem&lt;dim&gt;</a>      velocity_fe;</div>
@@ -614,28 +663,36 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">  <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a>    dof_handler;</div>
 <div class="line">  <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a>    velocity_dof_handler;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> constraints;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classBlockSparsityPattern.html">BlockSparsityPattern</a>      sparsity_pattern;</div>
 <div class="line">  <a class="code" href="classBlockSparseMatrix.html">BlockSparseMatrix&lt;double&gt;</a> system_matrix;</div>
 <div class="line">  <a class="code" href="classSparseMatrix.html">SparseMatrix&lt;double&gt;</a>      pressure_mass_matrix;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classBlockVector.html">BlockVector&lt;double&gt;</a> solution;</div>
 <div class="line">  <a class="code" href="classBlockVector.html">BlockVector&lt;double&gt;</a> system_rhs;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classMGLevelObject.html">MGLevelObject&lt;SparsityPattern&gt;</a>      mg_sparsity_patterns;</div>
 <div class="line">  <a class="code" href="classMGLevelObject.html">MGLevelObject&lt;SparseMatrix&lt;double&gt;</a>&gt; mg_matrices;</div>
 <div class="line">  <a class="code" href="classMGLevelObject.html">MGLevelObject&lt;SparseMatrix&lt;double&gt;</a>&gt; mg_interface_matrices;</div>
 <div class="line">  <a class="code" href="classMGConstrainedDoFs.html">MGConstrainedDoFs</a>                   mg_constrained_dofs;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classTimerOutput.html">TimerOutput</a> computing_timer;</div>
 <div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">StokesProblem&lt;dim&gt;::StokesProblem(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pressure_degree,</div>
 <div class="line">                                  <span class="keyword">const</span> <a class="code" href="classSolverType.html">SolverType</a>   solver_type)</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  : pressure_degree(pressure_degree)</div>
 <div class="line">  , solver_type(solver_type)</div>
@@ -651,11 +708,11 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="aclassTriangulation_html"><div class="ttname"><a href="classTriangulation.html">Triangulation</a></div><div class="ttdef"><b>Definition:</b> <a href="grid_2tria_8h_source.html#l01127">tria.h:1128</a></div></div>
 <div class="ttc" id="anamespaceWorkStream_1_1internal_1_1tbb__no__coloring_html_a8673698a405bf47aa24002aeb6d76d70"><div class="ttname"><a href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">WorkStream::internal::tbb_no_coloring::run</a></div><div class="ttdeci">void run(const Iterator &amp;begin, const typename identity&lt; Iterator &gt;::type &amp;end, Worker worker, Copier copier, const ScratchData &amp;sample_scratch_data, const CopyData &amp;sample_copy_data, const unsigned int queue_length, const unsigned int chunk_size)</div><div class="ttdef"><b>Definition:</b> <a href="work__stream_8h_source.html#l00691">work_stream.h:691</a></div></div>
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
-</div><!-- fragment --><p>Finite element for the velocity only:</p>
+</div><!-- fragment --><p>只针对速度的有限元。</p>
 <div class="fragment"><div class="line">velocity_fe(<a class="code" href="classFE__Q.html">FE_Q&lt;dim&gt;</a>(pressure_degree + 1), dim)</div>
 <div class="line">,</div>
 <div class="ttc" id="aclassFE__Q_html"><div class="ttname"><a href="classFE__Q.html">FE_Q</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__q_8h_source.html#l00548">fe_q.h:549</a></div></div>
-</div><!-- fragment --><p>Finite element for the whole system:</p>
+</div><!-- fragment --><p>整个系统的有限元。</p>
 <div class="fragment"><div class="line">  fe(velocity_fe, 1, <a class="code" href="classFE__Q.html">FE_Q&lt;dim&gt;</a>(pressure_degree), 1)</div>
 <div class="line">  , dof_handler(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>)</div>
 <div class="line">  , velocity_dof_handler(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>)</div>
@@ -664,33 +721,35 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="aclassTimerOutput_html_a2405ae1b041a57d11a61a8cbfad3b487aa1bf9100145d06321277979f4ca77ba2"><div class="ttname"><a href="classTimerOutput.html#a2405ae1b041a57d11a61a8cbfad3b487aa1bf9100145d06321277979f4ca77ba2">TimerOutput::wall_times</a></div><div class="ttdeci">@ wall_times</div><div class="ttdef"><b>Definition:</b> <a href="timer_8h_source.html#l00647">timer.h:647</a></div></div>
 <div class="ttc" id="aclassTimerOutput_html_a643d0e642b80048e91b37109fe9357cbaed9deac359496981f6275d6d6962e652"><div class="ttname"><a href="classTimerOutput.html#a643d0e642b80048e91b37109fe9357cbaed9deac359496981f6275d6d6962e652">TimerOutput::never</a></div><div class="ttdeci">@ never</div><div class="ttdef"><b>Definition:</b> <a href="timer_8h_source.html#l00612">timer.h:611</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="StokesProblemsetup_dofs"></a> </p><h4>StokesProblem::setup_dofs</h4>
-<p>This function sets up the <a class="el" href="classDoFHandler.html">DoFHandler</a>, matrices, vectors, and <a class="el" href="classMultigrid.html">Multigrid</a> structures (if needed).</p>
+<p>该函数设置了DoFHandler、矩阵、向量和Multigrid结构（如果需要）。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StokesProblem&lt;dim&gt;::setup_dofs()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> scope(computing_timer, <span class="stringliteral">&quot;Setup&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  system_matrix.clear();</div>
 <div class="line">  pressure_mass_matrix.clear();</div>
 <div class="ttc" id="aclassTimerOutput_1_1Scope_html"><div class="ttname"><a href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a></div><div class="ttdef"><b>Definition:</b> <a href="timer_8h_source.html#l00552">timer.h:553</a></div></div>
-</div><!-- fragment --><p>The main <a class="el" href="classDoFHandler.html">DoFHandler</a> only needs active DoFs, so we are not calling distribute_mg_dofs() here</p>
+</div><!-- fragment --><p>主DoFHandler只需要活动的DoF，所以我们不在这里调用distribution_mg_dofs()</p>
 <div class="fragment"><div class="line">dof_handler.distribute_dofs(fe);</div>
-</div><!-- fragment --><p>This block structure separates the dim velocity components from the pressure component (used for reordering). Note that we have 2 instead of dim+1 blocks like in <a class="el" href="step_22.html">step-22</a>, because our <a class="el" href="classFESystem.html">FESystem</a> is nested and the dim velocity components appear as one block.</p>
+</div><!-- fragment --><p>这个块结构将dim速度分量与压力分量（用于重新排序）分开。注意，我们有2个而不是像 <a class="el" href="step_22.html">step-22</a> 中的dim+1块，因为我们的FESystem是嵌套的，dim速度分量作为一个块出现。</p>
 <div class="fragment"><div class="line">std::vector&lt;unsigned int&gt; block_component(2);</div>
 <div class="line">block_component[0] = 0;</div>
 <div class="line">block_component[1] = 1;</div>
-</div><!-- fragment --><p>Velocities start at component 0:</p>
+</div><!-- fragment --><p>速度从分量0开始。</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code" href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a> velocities(0);</div>
 <div class="ttc" id="astructFEValuesExtractors_1_1Vector_html"><div class="ttname"><a href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__values__extractors_8h_source.html#l00150">fe_values_extractors.h:151</a></div></div>
-</div><!-- fragment --><p>ILU behaves better if we apply a reordering to reduce fillin. There is no advantage in doing this for the other solvers.</p>
+</div><!-- fragment --><p>如果我们应用重新排序来减少填充，ILU的表现会更好。对于其他求解器来说，这样做并没有什么好处。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (solver_type == SolverType::FGMRES_ILU)</div>
 <div class="line">  {</div>
 <div class="line">    <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> ilu_specific(computing_timer, <span class="stringliteral">&quot;(ILU specific)&quot;</span>);</div>
 <div class="line">    <a class="code" href="namespaceDoFRenumbering.html#a68651164485490b86d901d9ae1fbfc3b">DoFRenumbering::Cuthill_McKee</a>(dof_handler);</div>
 <div class="line">  }</div>
 <div class="ttc" id="anamespaceDoFRenumbering_html_a68651164485490b86d901d9ae1fbfc3b"><div class="ttname"><a href="namespaceDoFRenumbering.html#a68651164485490b86d901d9ae1fbfc3b">DoFRenumbering::Cuthill_McKee</a></div><div class="ttdeci">void Cuthill_McKee(DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, const bool reversed_numbering=false, const bool use_constraints=false, const std::vector&lt; types::global_dof_index &gt; &amp;starting_indices=std::vector&lt; types::global_dof_index &gt;())</div><div class="ttdef"><b>Definition:</b> <a href="dof__renumbering_8cc_source.html#l00366">dof_renumbering.cc:366</a></div></div>
-</div><!-- fragment --><p>This ensures that all velocities DoFs are enumerated before the pressure unknowns. This allows us to use blocks for vectors and matrices and allows us to get the same DoF numbering for dof_handler and velocity_dof_handler.</p>
+</div><!-- fragment --><p>这确保了所有的速度DoF在压力未知数之前被列举出来。这允许我们使用块来处理向量和矩阵，并允许我们为dof_handler和velocity_dof_handler获得相同的DoF编号。</p>
 <div class="fragment"><div class="line"><a class="code" href="namespaceDoFRenumbering.html#a658593cab0e93a92a7d8ce0ffe086518">DoFRenumbering::block_wise</a>(dof_handler);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">if</span> (solver_type == SolverType::FGMRES_GMG)</div>
 <div class="line">  {</div>
@@ -699,12 +758,13 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">    <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> setup_multigrid(computing_timer,</div>
 <div class="line">                                       <span class="stringliteral">&quot;Setup - Multigrid&quot;</span>);</div>
 <div class="ttc" id="anamespaceDoFRenumbering_html_a658593cab0e93a92a7d8ce0ffe086518"><div class="ttname"><a href="namespaceDoFRenumbering.html#a658593cab0e93a92a7d8ce0ffe086518">DoFRenumbering::block_wise</a></div><div class="ttdeci">void block_wise(DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler)</div><div class="ttdef"><b>Definition:</b> <a href="dof__renumbering_8cc_source.html#l00997">dof_renumbering.cc:997</a></div></div>
-</div><!-- fragment --><p>This distributes the active dofs and multigrid dofs for the velocity space in a separate <a class="el" href="classDoFHandler.html">DoFHandler</a> as described in the introduction.</p>
+</div><!-- fragment --><p>这将速度空间的主动道次和多网格道次分布在一个单独的DoFHandler中，如介绍中所述。</p>
 <div class="fragment"><div class="line">velocity_dof_handler.distribute_dofs(velocity_fe);</div>
 <div class="line">velocity_dof_handler.distribute_mg_dofs();</div>
-</div><!-- fragment --><p>The following block of code initializes the MGConstrainedDofs (using the boundary conditions for the velocity), and the sparsity patterns and matrices for each level. The resize() function of MGLevelObject&lt;T&gt; will destroy all existing contained objects.</p>
+</div><!-- fragment --><p>下面的代码块初始化了MGConstrainedDofs（使用速度的边界条件），以及每个层次的稀疏模式和矩阵。MGLevelObject&lt;T&gt;的resize()函数将销毁所有现有的包含对象。</p>
 <div class="fragment"><div class="line">    std::set&lt;types::boundary_id&gt; zero_boundary_ids;</div>
 <div class="line">    zero_boundary_ids.insert(0);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    mg_constrained_dofs.clear();</div>
 <div class="line">    mg_constrained_dofs.initialize(velocity_dof_handler);</div>
@@ -712,9 +772,11 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">                                                       zero_boundary_ids);</div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_levels = <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_levels();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    mg_interface_matrices.resize(0, n_levels - 1);</div>
 <div class="line">    mg_matrices.resize(0, n_levels - 1);</div>
 <div class="line">    mg_sparsity_patterns.resize(0, n_levels - 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> = 0; <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> &lt; n_levels; ++<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>)</div>
 <div class="line">      {</div>
@@ -723,15 +785,18 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">        <a class="code" href="namespaceMGTools.html#a19ba9ee4a2b65235c8bb3fb65ea8f4e0">MGTools::make_sparsity_pattern</a>(velocity_dof_handler, csp, <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>);</div>
 <div class="line">        mg_sparsity_patterns[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].copy_from(csp);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        mg_matrices[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].reinit(mg_sparsity_patterns[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>]);</div>
 <div class="line">        mg_interface_matrices[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].reinit(mg_sparsity_patterns[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>]);</div>
 <div class="line">      }</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">const</span> std::vector&lt;types::global_dof_index&gt; dofs_per_block =</div>
 <div class="line">  <a class="code" href="namespaceDoFTools.html#a796721b56b3a90e4e3973c7caae4c3d8">DoFTools::count_dofs_per_fe_block</a>(dof_handler, block_component);</div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_u = dofs_per_block[0];</div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_p = dofs_per_block[1];</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">{</div>
 <div class="line">  constraints.clear();</div>
@@ -739,7 +804,7 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="agrid__out_8cc_html_a9082f945c1d289684d0bcd51ee08e11e"><div class="ttname"><a href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a></div><div class="ttdeci">unsigned int level</div><div class="ttdef"><b>Definition:</b> <a href="grid__out_8cc_source.html#l04590">grid_out.cc:4590</a></div></div>
 <div class="ttc" id="anamespaceDoFTools_html_a796721b56b3a90e4e3973c7caae4c3d8"><div class="ttname"><a href="namespaceDoFTools.html#a796721b56b3a90e4e3973c7caae4c3d8">DoFTools::count_dofs_per_fe_block</a></div><div class="ttdeci">std::vector&lt; types::global_dof_index &gt; count_dofs_per_fe_block(const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const std::vector&lt; unsigned int &gt; &amp;target_block=std::vector&lt; unsigned int &gt;())</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools_8cc_source.html#l02047">dof_tools.cc:2047</a></div></div>
 <div class="ttc" id="anamespaceMGTools_html_a19ba9ee4a2b65235c8bb3fb65ea8f4e0"><div class="ttname"><a href="namespaceMGTools.html#a19ba9ee4a2b65235c8bb3fb65ea8f4e0">MGTools::make_sparsity_pattern</a></div><div class="ttdeci">void make_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, SparsityPatternType &amp;sparsity, const unsigned int level, const AffineConstraints&lt; number &gt; &amp;constraints=AffineConstraints&lt; number &gt;(), const bool keep_constrained_dofs=true)</div><div class="ttdef"><b>Definition:</b> <a href="mg__tools_8cc_source.html#l00593">mg_tools.cc:593</a></div></div>
-</div><!-- fragment --><p>The following makes use of a component mask for interpolation of the boundary values for the velocity only, which is further explained in the vector valued dealii <a class="el" href="step_20.html">step-20</a> tutorial.</p>
+</div><!-- fragment --><p>下面利用分量掩码，只对速度的边界值进行插值，这在矢量值dealii <a class="el" href="step_20.html">step-20</a> 教程中进一步解释。</p>
 <div class="fragment"><div class="line"><a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, constraints);</div>
 <div class="line"><a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(dof_handler,</div>
 <div class="line">                                         0,</div>
@@ -748,17 +813,20 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">                                         fe.component_mask(velocities));</div>
 <div class="ttc" id="agroup__constraints_html_ga3b4ea7dfd313e388d868c4e4aa685799"><div class="ttname"><a href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a></div><div class="ttdeci">void make_hanging_node_constraints(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, AffineConstraints&lt; number &gt; &amp;constraints)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__constraints_8cc_source.html#l01787">dof_tools_constraints.cc:1787</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_html_ab2562d41bb26f362043f9719a8cd9b87"><div class="ttname"><a href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a></div><div class="ttdeci">void interpolate_boundary_values(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const std::map&lt; types::boundary_id, const Function&lt; spacedim, number &gt; * &gt; &amp;function_map, std::map&lt; types::global_dof_index, number &gt; &amp;boundary_values, const ComponentMask &amp;component_mask=ComponentMask())</div></div>
-</div><!-- fragment --><p>As discussed in the introduction, we need to fix one degree of freedom of the pressure variable to ensure solvability of the problem. We do this here by marking the first pressure dof, which has index n_u as a constrained dof.</p>
+</div><!-- fragment --><p>正如介绍中所讨论的，我们需要固定压力变量的一个自由度以确保问题的可解性。我们在这里通过标记第一个压力自由度来做到这一点，该自由度的索引为n_u，是一个受约束的自由度。</p>
 <div class="fragment"><div class="line">    <span class="keywordflow">if</span> (solver_type == SolverType::UMFPACK)</div>
 <div class="line">      constraints.add_line(n_u);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    constraints.close();</div>
 <div class="line">  }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\tNumber of active cells: &quot;</span> &lt;&lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells()</div>
 <div class="line">            &lt;&lt; std::endl</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tNumber of degrees of freedom: &quot;</span> &lt;&lt; dof_handler.n_dofs()</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot; (&quot;</span> &lt;&lt; n_u &lt;&lt; <span class="charliteral">&#39;+&#39;</span> &lt;&lt; n_p &lt;&lt; <span class="charliteral">&#39;)&#39;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  {</div>
 <div class="line">    <a class="code" href="classBlockDynamicSparsityPattern.html">BlockDynamicSparsityPattern</a> csp(dofs_per_block, dofs_per_block);</div>
@@ -767,13 +835,14 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">  }</div>
 <div class="line">  system_matrix.reinit(sparsity_pattern);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  solution.reinit(dofs_per_block);</div>
 <div class="line">  system_rhs.reinit(dofs_per_block);</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassBlockDynamicSparsityPattern_html"><div class="ttname"><a href="classBlockDynamicSparsityPattern.html">BlockDynamicSparsityPattern</a></div><div class="ttdef"><b>Definition:</b> <a href="block__sparsity__pattern_8h_source.html#l00524">block_sparsity_pattern.h:526</a></div></div>
 <div class="ttc" id="agroup__constraints_html_gaf78e864edbfba7e0a7477457bfb96b26"><div class="ttname"><a href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a></div><div class="ttdeci">void make_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, SparsityPatternType &amp;sparsity_pattern, const AffineConstraints&lt; number &gt; &amp;constraints=AffineConstraints&lt; number &gt;(), const bool keep_constrained_dofs=true, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__sparsity_8cc_source.html#l00064">dof_tools_sparsity.cc:64</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="StokesProblemassemble_system"></a> </p><h4>StokesProblem::assemble_system</h4>
-<p>In this function, the system matrix is assembled. We assemble the pressure mass matrix in the (1,1) block (if needed) and move it out of this location at the end of this function.</p>
+</div><!-- fragment --><p><a class="anchor" id="StokesProblemassemble_system"></a></p><h4>StokesProblem::assemble_system</h4>
+<p>在这个函数中，系统矩阵被组装起来。我们在(1,1)块中装配压力质量矩阵（如果需要），并在此函数结束时将其移出该位置。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StokesProblem&lt;dim&gt;::assemble_system()</div>
 <div class="line">{</div>
@@ -781,35 +850,45 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">  system_matrix = 0;</div>
 <div class="line">  system_rhs    = 0;</div>
 <div class="ttc" id="anamespaceinternal_html_a2b3d48efdf7c94da455dc6a3553bab79"><div class="ttname"><a href="namespaceinternal.html#a2b3d48efdf7c94da455dc6a3553bab79">internal::assemble</a></div><div class="ttdeci">void assemble(const MeshWorker::DoFInfoBox&lt; dim, DOFINFO &gt; &amp;dinfo, A *assembler)</div><div class="ttdef"><b>Definition:</b> <a href="loop_8h_source.html#l00071">loop.h:71</a></div></div>
-</div><!-- fragment --><p>If true, we will assemble the pressure mass matrix in the (1,1) block:</p>
+</div><!-- fragment --><p>如果为真，我们将在(1,1)块中装配压力质量矩阵。</p>
 <div class="fragment"><div class="line">  <span class="keyword">const</span> <span class="keywordtype">bool</span> assemble_pressure_mass_matrix =</div>
 <div class="line">    (solver_type == SolverType::UMFPACK) ? <span class="keyword">false</span> : <span class="keyword">true</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a> quadrature_formula(pressure_degree + 2);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> fe_values(fe,</div>
 <div class="line">                          quadrature_formula,</div>
 <div class="line">                          <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> |</div>
 <div class="line">                            <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = fe.n_dofs_per_cell();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points = quadrature_formula.size();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> local_matrix(dofs_per_cell, dofs_per_cell);</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a>     local_rhs(dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices(dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> RightHandSide&lt;dim&gt;    right_hand_side;</div>
 <div class="line">  std::vector&lt;Vector&lt;double&gt;&gt; rhs_values(n_q_points, <a class="code" href="classVector.html">Vector&lt;double&gt;</a>(dim + 1));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a> velocities(0);</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="structFEValuesExtractors_1_1Scalar.html">FEValuesExtractors::Scalar</a> pressure(dim);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;SymmetricTensor&lt;2, dim&gt;&gt; symgrad_phi_u(dofs_per_cell);</div>
 <div class="line">  std::vector&lt;double&gt;                  div_phi_u(dofs_per_cell);</div>
 <div class="line">  std::vector&lt;double&gt;                  phi_p(dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">    {</div>
@@ -817,8 +896,10 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">      local_matrix = 0;</div>
 <div class="line">      local_rhs    = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      right_hand_side.vector_value_list(fe_values.get_quadrature_points(),</div>
 <div class="line">                                        rhs_values);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; ++q)</div>
 <div class="line">        {</div>
@@ -829,6 +910,7 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">              div_phi_u[k] = fe_values[velocities].divergence(k, q);</div>
 <div class="line">              phi_p[k]     = fe_values[pressure].value(k, q);</div>
 <div class="line">            }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">            {</div>
@@ -842,6 +924,7 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">                    fe_values.JxW(q);</div>
 <div class="line">                }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">              <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component_i =</div>
 <div class="line">                fe.system_to_component_index(i).first;</div>
 <div class="line">              local_rhs(i) += fe_values.shape_value(i, q) *</div>
@@ -849,9 +932,11 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">            }</div>
 <div class="line">        }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = i + 1; j &lt; dofs_per_cell; ++j)</div>
 <div class="line">          local_matrix(i, j) = local_matrix(j, i);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      cell-&gt;get_dof_indices(local_dof_indices);</div>
 <div class="line">      constraints.distribute_local_to_global(local_matrix,</div>
@@ -860,6 +945,7 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">                                             system_matrix,</div>
 <div class="line">                                             system_rhs);</div>
 <div class="line">    }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">if</span> (solver_type != SolverType::UMFPACK)</div>
 <div class="line">    {</div>
@@ -877,7 +963,7 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a></div><div class="ttdeci">@ update_quadrature_points</div><div class="ttdoc">Transformed quadrature points.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00122">fe_update_flags.h:122</a></div></div>
 <div class="ttc" id="astructFEValuesExtractors_1_1Scalar_html"><div class="ttname"><a href="structFEValuesExtractors_1_1Scalar.html">FEValuesExtractors::Scalar</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__values__extractors_8h_source.html#l00095">fe_values_extractors.h:96</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="StokesProblemassemble_multigrid"></a> </p><h4>StokesProblem::assemble_multigrid</h4>
-<p>Here, like in <a class="el" href="step_16.html">step-16</a>, we have a function that assembles the level and interface matrices necessary for the multigrid preconditioner.</p>
+<p>在这里，就像在 <a class="el" href="step_16.html">step-16</a> 中一样，我们有一个函数来组装多网格预处理程序所需的水平和界面矩阵。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StokesProblem&lt;dim&gt;::assemble_multigrid()</div>
 <div class="line">{</div>
@@ -886,25 +972,34 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> assemble_multigrid(computing_timer,</div>
 <div class="line">                                        <span class="stringliteral">&quot;Assemble Multigrid&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  mg_matrices = 0.;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a> quadrature_formula(pressure_degree + 2);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> fe_values(velocity_fe,</div>
 <div class="line">                          quadrature_formula,</div>
 <div class="line">                          <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> |</div>
 <div class="line">                            <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = velocity_fe.n_dofs_per_cell();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points    = quadrature_formula.size();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>(dofs_per_cell, dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices(dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a> velocities(0);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;SymmetricTensor&lt;2, dim&gt;&gt; symgrad_phi_u(dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;AffineConstraints&lt;double&gt;&gt; boundary_constraints(</div>
 <div class="line">    <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_levels());</div>
@@ -918,24 +1013,28 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">        mg_constrained_dofs.get_boundary_indices(<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>));</div>
 <div class="line">      boundary_constraints[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].close();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <a class="code" href="classIndexSet.html">IndexSet</a> idx = mg_constrained_dofs.get_refinement_edge_indices(<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>) &amp;</div>
 <div class="line">                     mg_constrained_dofs.get_boundary_indices(<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      boundary_interface_constraints[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].add_lines(idx);</div>
 <div class="line">      boundary_interface_constraints[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].close();</div>
 <div class="line">    }</div>
 <div class="ttc" id="aclassIndexSet_html"><div class="ttname"><a href="classIndexSet.html">IndexSet</a></div><div class="ttdef"><b>Definition:</b> <a href="index__set_8h_source.html#l00072">index_set.h:73</a></div></div>
 <div class="ttc" id="anamespaceLocalIntegrators_1_1Advection_html_a8bc7b8136646134f73a4193adefe15f8"><div class="ttname"><a href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">LocalIntegrators::Advection::cell_matrix</a></div><div class="ttdeci">void cell_matrix(FullMatrix&lt; double &gt; &amp;M, const FEValuesBase&lt; dim &gt; &amp;fe, const FEValuesBase&lt; dim &gt; &amp;fetest, const ArrayView&lt; const std::vector&lt; double &gt;&gt; &amp;velocity, const double factor=1.)</div><div class="ttdef"><b>Definition:</b> <a href="advection_8h_source.html#l00075">advection.h:75</a></div></div>
-</div><!-- fragment --><p>This iterator goes over all cells (not just active)</p>
+</div><!-- fragment --><p>这个迭代器覆盖了所有的单元（不仅仅是活动的）。</p>
 <div class="fragment"><div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : velocity_dof_handler.cell_iterators())</div>
 <div class="line">    {</div>
 <div class="line">      fe_values.reinit(cell);</div>
 <div class="line">      <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a> = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; ++q)</div>
 <div class="line">        {</div>
 <div class="line">          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k = 0; k &lt; dofs_per_cell; ++k)</div>
 <div class="line">            symgrad_phi_u[k] = fe_values[velocities].symmetric_gradient(k, q);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt;= i; ++j)</div>
@@ -945,14 +1044,18 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">              }</div>
 <div class="line">        }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = i + 1; j &lt; dofs_per_cell; ++j)</div>
 <div class="line">          <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>(i, j) = <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>(j, i);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      cell-&gt;get_mg_dof_indices(local_dof_indices);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      boundary_constraints[cell-&gt;level()].distribute_local_to_global(</div>
 <div class="line">        <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>, local_dof_indices, mg_matrices[cell-&gt;level()]);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; dofs_per_cell; ++j)</div>
@@ -962,6 +1065,7 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">                                                     local_dof_indices[j]))</div>
 <div class="line">            <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>(i, j) = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      boundary_interface_constraints[cell-&gt;level()]</div>
 <div class="line">        .distribute_local_to_global(<a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>,</div>
 <div class="line">                                    local_dof_indices,</div>
@@ -969,23 +1073,27 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="StokesProblemsolve"></a> </p><h4>StokesProblem::solve</h4>
-<p>This function sets up things differently based on if you want to use ILU or GMG as a preconditioner. Both methods share the same solver (FGMRES) but require a different preconditioner to be initialized. Here we time not only the entire solve function, but we separately time the setup of the preconditioner as well as the solve itself.</p>
+<p>这个函数根据你是想使用ILU还是GMG作为预处理程序来设置不同的东西。 这两种方法共享相同的求解器（FGMRES），但需要初始化不同的预处理器。在这里，我们不仅对整个求解函数进行计时，而且对预调节器的设置以及求解本身分别进行计时。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StokesProblem&lt;dim&gt;::solve()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> solve(computing_timer, <span class="stringliteral">&quot;Solve&quot;</span>);</div>
 <div class="line">  constraints.set_zero(solution);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">if</span> (solver_type == SolverType::UMFPACK)</div>
 <div class="line">    {</div>
 <div class="line">      computing_timer.enter_subsection(<span class="stringliteral">&quot;(UMFPACK specific)&quot;</span>);</div>
 <div class="line">      computing_timer.enter_subsection(<span class="stringliteral">&quot;Solve - Initialize&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <a class="code" href="classSparseDirectUMFPACK.html">SparseDirectUMFPACK</a> A_direct;</div>
 <div class="line">      A_direct.<a class="code" href="classSparseDirectUMFPACK.html#a25b1d3c7dbb88158a76165a4a56a16d6">initialize</a>(system_matrix);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      computing_timer.leave_subsection();</div>
 <div class="line">      computing_timer.leave_subsection();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      {</div>
 <div class="line">        <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> solve_backslash(computing_timer,</div>
@@ -993,35 +1101,42 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">        A_direct.<a class="code" href="classSparseDirectUMFPACK.html#adc154e4830b0e16be265f10a5c8b7103">vmult</a>(solution, system_rhs);</div>
 <div class="line">      }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      constraints.distribute(solution);</div>
 <div class="line">      <span class="keywordflow">return</span>;</div>
 <div class="line">    }</div>
 <div class="ttc" id="aclassSparseDirectUMFPACK_html"><div class="ttname"><a href="classSparseDirectUMFPACK.html">SparseDirectUMFPACK</a></div><div class="ttdef"><b>Definition:</b> <a href="sparse__direct_8h_source.html#l00087">sparse_direct.h:88</a></div></div>
 <div class="ttc" id="aclassSparseDirectUMFPACK_html_a25b1d3c7dbb88158a76165a4a56a16d6"><div class="ttname"><a href="classSparseDirectUMFPACK.html#a25b1d3c7dbb88158a76165a4a56a16d6">SparseDirectUMFPACK::initialize</a></div><div class="ttdeci">void initialize(const SparsityPattern &amp;sparsity_pattern)</div><div class="ttdef"><b>Definition:</b> <a href="sparse__direct_8cc_source.html#l00049">sparse_direct.cc:49</a></div></div>
 <div class="ttc" id="aclassSparseDirectUMFPACK_html_adc154e4830b0e16be265f10a5c8b7103"><div class="ttname"><a href="classSparseDirectUMFPACK.html#adc154e4830b0e16be265f10a5c8b7103">SparseDirectUMFPACK::vmult</a></div><div class="ttdeci">void vmult(Vector&lt; double &gt; &amp;dst, const Vector&lt; double &gt; &amp;src) const</div><div class="ttdef"><b>Definition:</b> <a href="sparse__direct_8cc_source.html#l00762">sparse_direct.cc:762</a></div></div>
-</div><!-- fragment --><p>Here we must make sure to solve for the residual with "good enough" accuracy</p>
+</div><!-- fragment --><p>这里我们必须确保以 "足够好 "的精度求解残差。</p>
 <div class="fragment"><div class="line"><a class="code" href="classSolverControl.html">SolverControl</a> solver_control(system_matrix.m(),</div>
 <div class="line">                             1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-10 * system_rhs.l2_norm());</div>
 <div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>  n_iterations_A;</div>
 <div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>  n_iterations_S;</div>
-</div><!-- fragment --><p>This is used to pass whether or not we want to solve for A inside the preconditioner. One could change this to false to see if there is still convergence and if so does the program then run faster or slower</p>
+</div><!-- fragment --><p>这是用来传递我们是否要在预处理程序中求解A。 我们可以把它改为false，看看是否仍有收敛性，如果有，程序会不会运行得更快或更慢。</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">bool</span> use_expensive = <span class="keyword">true</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><a class="code" href="classSolverFGMRES.html">SolverFGMRES&lt;BlockVector&lt;double&gt;</a>&gt; solver(solver_control);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">if</span> (solver_type == SolverType::FGMRES_ILU)</div>
 <div class="line">  {</div>
 <div class="line">    computing_timer.enter_subsection(<span class="stringliteral">&quot;(ILU specific)&quot;</span>);</div>
 <div class="line">    computing_timer.enter_subsection(<span class="stringliteral">&quot;Solve - Set-up Preconditioner&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;   Computing preconditioner...&quot;</span> &lt;&lt; std::endl</div>
 <div class="line">              &lt;&lt; std::flush;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="classSparseILU.html">SparseILU&lt;double&gt;</a> A_preconditioner;</div>
 <div class="line">    A_preconditioner.<a class="code" href="group__Preconditioners.html#gae4b56dfaab3fd8820faa1b21160b1acb">initialize</a>(system_matrix.block(0, 0));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <a class="code" href="classSparseILU.html">SparseILU&lt;double&gt;</a> S_preconditioner;</div>
 <div class="line">    S_preconditioner.<a class="code" href="group__Preconditioners.html#gae4b56dfaab3fd8820faa1b21160b1acb">initialize</a>(pressure_mass_matrix);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> BlockSchurPreconditioner&lt;SparseILU&lt;double&gt;, <a class="code" href="classSparseILU.html">SparseILU&lt;double&gt;</a>&gt;</div>
 <div class="line">      preconditioner(system_matrix,</div>
@@ -1030,11 +1145,14 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">                     S_preconditioner,</div>
 <div class="line">                     use_expensive);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    computing_timer.leave_subsection();</div>
 <div class="line">    computing_timer.leave_subsection();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    {</div>
 <div class="line">      <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> solve_fmgres(computing_timer, <span class="stringliteral">&quot;Solve - FGMRES&quot;</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      solver.solve(system_matrix, solution, system_rhs, preconditioner);</div>
 <div class="line">      n_iterations_A = preconditioner.n_iterations_A;</div>
@@ -1048,15 +1166,16 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="aclassSolverFGMRES_html"><div class="ttname"><a href="classSolverFGMRES.html">SolverFGMRES</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__gmres_8h_source.html#l00459">solver_gmres.h:460</a></div></div>
 <div class="ttc" id="aclassSparseILU_html"><div class="ttname"><a href="classSparseILU.html">SparseILU</a></div><div class="ttdef"><b>Definition:</b> <a href="sparse__ilu_8h_source.html#l00059">sparse_ilu.h:60</a></div></div>
 <div class="ttc" id="agroup__Preconditioners_html_gae4b56dfaab3fd8820faa1b21160b1acb"><div class="ttname"><a href="group__Preconditioners.html#gae4b56dfaab3fd8820faa1b21160b1acb">SparseILU::initialize</a></div><div class="ttdeci">void initialize(const SparseMatrix&lt; somenumber &gt; &amp;matrix, const AdditionalData &amp;parameters=AdditionalData())</div></div>
-</div><!-- fragment --><p>Transfer operators between levels</p>
+</div><!-- fragment --><p>在各级之间转移运算符</p>
 <div class="fragment"><div class="line"><a class="code" href="classMGTransferPrebuilt.html">MGTransferPrebuilt&lt;Vector&lt;double&gt;</a>&gt; mg_transfer(mg_constrained_dofs);</div>
 <div class="line">mg_transfer.build(velocity_dof_handler);</div>
 <div class="ttc" id="aclassMGTransferPrebuilt_html"><div class="ttname"><a href="classMGTransferPrebuilt.html">MGTransferPrebuilt</a></div><div class="ttdef"><b>Definition:</b> <a href="mg__transfer_8h_source.html#l00636">mg_transfer.h:637</a></div></div>
-</div><!-- fragment --><p>Setup coarse grid solver</p>
+</div><!-- fragment --><p>设置粗略的网格解算器</p>
 <div class="fragment"><div class="line"><a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> coarse_matrix;</div>
 <div class="line">coarse_matrix.<a class="code" href="classFullMatrix.html#ae9e8fbf00e15c7b66d527a5de4b31404">copy_from</a>(mg_matrices[0]);</div>
 <div class="line"><a class="code" href="classMGCoarseGridHouseholder.html">MGCoarseGridHouseholder&lt;double, Vector&lt;double&gt;</a>&gt; coarse_grid_solver;</div>
 <div class="line">coarse_grid_solver.<a class="code" href="classMGCoarseGridHouseholder.html#a07bd76dc7f6f66cb22d3e7951a558f50">initialize</a>(coarse_matrix);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">using</span> Smoother = <a class="code" href="classPreconditionSOR.html">PreconditionSOR&lt;SparseMatrix&lt;double&gt;</a>&gt;;</div>
 <div class="line"><a class="code" href="classmg_1_1SmootherRelaxation.html">mg::SmootherRelaxation&lt;Smoother, Vector&lt;double&gt;</a>&gt; mg_smoother;</div>
@@ -1069,25 +1188,29 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="aclassPreconditionSOR_html"><div class="ttname"><a href="classPreconditionSOR.html">PreconditionSOR</a></div><div class="ttdef"><b>Definition:</b> <a href="precondition_8h_source.html#l00583">precondition.h:584</a></div></div>
 <div class="ttc" id="aclassmg_1_1SmootherRelaxation_html"><div class="ttname"><a href="classmg_1_1SmootherRelaxation.html">mg::SmootherRelaxation</a></div><div class="ttdef"><b>Definition:</b> <a href="mg__smoother_8h_source.html#l00183">mg_smoother.h:185</a></div></div>
 <div class="ttc" id="aclassmg_1_1SmootherRelaxation_html_ae9e03c626c50a1b13dffe338f5f977b0"><div class="ttname"><a href="classmg_1_1SmootherRelaxation.html#ae9e03c626c50a1b13dffe338f5f977b0">mg::SmootherRelaxation::initialize</a></div><div class="ttdeci">void initialize(const MGLevelObject&lt; MatrixType2 &gt; &amp;matrices, const typename RelaxationType::AdditionalData &amp;additional_data=typename RelaxationType::AdditionalData())</div></div>
-</div><!-- fragment --><p><a class="el" href="classMultigrid.html">Multigrid</a>, when used as a preconditioner for CG, needs to be a symmetric operator, so the smoother must be symmetric</p>
+</div><!-- fragment --><p>多网格作为CG的预处理程序时，需要是一个对称算子，所以平滑器必须是对称的。</p>
 <div class="fragment"><div class="line">mg_smoother.<a class="code" href="classMGSmoother.html#abed2837ee4e224f94c6a98405906df8f">set_symmetric</a>(<span class="keyword">true</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><a class="code" href="classmg_1_1Matrix.html">mg::Matrix&lt;Vector&lt;double&gt;</a>&gt; mg_matrix(mg_matrices);</div>
 <div class="line"><a class="code" href="classmg_1_1Matrix.html">mg::Matrix&lt;Vector&lt;double&gt;</a>&gt; mg_interface_up(mg_interface_matrices);</div>
 <div class="line"><a class="code" href="classmg_1_1Matrix.html">mg::Matrix&lt;Vector&lt;double&gt;</a>&gt; mg_interface_down(mg_interface_matrices);</div>
 <div class="ttc" id="aclassMGSmoother_html_abed2837ee4e224f94c6a98405906df8f"><div class="ttname"><a href="classMGSmoother.html#abed2837ee4e224f94c6a98405906df8f">MGSmoother::set_symmetric</a></div><div class="ttdeci">void set_symmetric(const bool)</div></div>
 <div class="ttc" id="aclassmg_1_1Matrix_html"><div class="ttname"><a href="classmg_1_1Matrix.html">mg::Matrix</a></div><div class="ttdef"><b>Definition:</b> <a href="mg__matrix_8h_source.html#l00044">mg_matrix.h:45</a></div></div>
-</div><!-- fragment --><p>Now, we are ready to set up the V-cycle operator and the multilevel preconditioner.</p>
+</div><!-- fragment --><p>现在，我们准备设置V型循环算子和多级预处理器。</p>
 <div class="fragment"><div class="line">      <a class="code" href="classMultigrid.html">Multigrid&lt;Vector&lt;double&gt;</a>&gt; <a class="code" href="namespacemg.html">mg</a>(</div>
 <div class="line">        mg_matrix, coarse_grid_solver, mg_transfer, mg_smoother, mg_smoother);</div>
 <div class="line">      <a class="code" href="namespacemg.html">mg</a>.set_edge_matrices(mg_interface_down, mg_interface_up);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <a class="code" href="classPreconditionMG.html">PreconditionMG&lt;dim, Vector&lt;double&gt;</a>, <a class="code" href="classMGTransferPrebuilt.html">MGTransferPrebuilt&lt;Vector&lt;double&gt;</a>&gt;&gt;</div>
 <div class="line">        A_Multigrid(velocity_dof_handler, <a class="code" href="namespacemg.html">mg</a>, mg_transfer);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <a class="code" href="classSparseILU.html">SparseILU&lt;double&gt;</a> S_preconditioner;</div>
 <div class="line">      S_preconditioner.<a class="code" href="group__Preconditioners.html#gae4b56dfaab3fd8820faa1b21160b1acb">initialize</a>(pressure_mass_matrix,</div>
 <div class="line">                                  <a class="code" href="group__Preconditioners.html#gae21347f3202a1186060eac36dcb45817">SparseILU&lt;double&gt;::AdditionalData</a>());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keyword">const</span> BlockSchurPreconditioner&lt;</div>
 <div class="line">        <a class="code" href="classPreconditionMG.html">PreconditionMG</a>&lt;dim,</div>
@@ -1100,8 +1223,10 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">                       S_preconditioner,</div>
 <div class="line">                       use_expensive);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      computing_timer.leave_subsection();</div>
 <div class="line">      computing_timer.leave_subsection();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      {</div>
 <div class="line">        <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> solve_fmgres(computing_timer, <span class="stringliteral">&quot;Solve - FGMRES&quot;</span>);</div>
@@ -1111,7 +1236,9 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">      }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  constraints.distribute(solution);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::cout</div>
 <div class="line">    &lt;&lt; std::endl</div>
@@ -1128,20 +1255,22 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="agroup__Preconditioners_html_gae21347f3202a1186060eac36dcb45817"><div class="ttname"><a href="group__Preconditioners.html#gae21347f3202a1186060eac36dcb45817">SparseILU::AdditionalData</a></div><div class="ttdeci">typename SparseLUDecomposition&lt; number &gt;::AdditionalData AdditionalData</div><div class="ttdef"><b>Definition:</b> <a href="sparse__ilu_8h_source.html#l00079">sparse_ilu.h:79</a></div></div>
 <div class="ttc" id="anamespacemg_html"><div class="ttname"><a href="namespacemg.html">mg</a></div><div class="ttdef"><b>Definition:</b> <a href="mg_8h_source.html#l00081">mg.h:82</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="StokesProblemprocess_solution"></a> </p><h4>StokesProblem::process_solution</h4>
-<p>This function computes the L2 and H1 errors of the solution. For this, we need to make sure the pressure has mean zero.</p>
+<p>这个函数计算解的L2和H1误差。为此，我们需要确保压力的平均值为零。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StokesProblem&lt;dim&gt;::compute_errors()</div>
 <div class="line">{</div>
-</div><!-- fragment --><p>Compute the mean pressure \(\frac{1}{\Omega} \int_{\Omega} p(x) dx \) and then subtract it from each pressure coefficient. This will result in a pressure with mean value zero. Here we make use of the fact that the pressure is component \(dim\) and that the finite element space is nodal.</p>
+</div><!-- fragment --><p>计算平均压力 \(\frac{1}{\Omega} \int_{\Omega} p(x) dx \) ，然后从每个压力系数中减去它。这将导致压力的平均值为零。这里我们利用了压力是分量 \(dim\) 和有限元空间是节点的事实。</p>
 <div class="fragment"><div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> mean_pressure = <a class="code" href="namespaceVectorTools.html#ad086eb08b8424fd7c853e389a3978a9a">VectorTools::compute_mean_value</a>(</div>
 <div class="line">    dof_handler, <a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a>(pressure_degree + 2), solution, dim);</div>
 <div class="line">  solution.block(1).add(-mean_pressure);</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;   Note: The mean value was adjusted by &quot;</span> &lt;&lt; -mean_pressure</div>
 <div class="line">            &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classComponentSelectFunction.html">ComponentSelectFunction&lt;dim&gt;</a> pressure_mask(dim, dim + 1);</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classComponentSelectFunction.html">ComponentSelectFunction&lt;dim&gt;</a> velocity_mask(std::make_pair(0, dim),</div>
 <div class="line">                                                   dim + 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;float&gt;</a> difference_per_cell(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
 <div class="line">  <a class="code" href="namespaceVectorTools.html#a676190d2c897ac5da68a9c460fa95832">VectorTools::integrate_difference</a>(dof_handler,</div>
@@ -1152,10 +1281,12 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">                                    <a class="code" href="namespaceVectorTools.html#a69967cb7a148a7169963126249213db1aa3903caf348e2d5dc54d1b49e15c1e8e">VectorTools::L2_norm</a>,</div>
 <div class="line">                                    &amp;velocity_mask);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> Velocity_L2_error =</div>
 <div class="line">    <a class="code" href="namespaceVectorTools.html#a21eb62d70953182dcc2b15c4e14dd533">VectorTools::compute_global_error</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>,</div>
 <div class="line">                                      difference_per_cell,</div>
 <div class="line">                                      <a class="code" href="namespaceVectorTools.html#a69967cb7a148a7169963126249213db1aa3903caf348e2d5dc54d1b49e15c1e8e">VectorTools::L2_norm</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="namespaceVectorTools.html#a676190d2c897ac5da68a9c460fa95832">VectorTools::integrate_difference</a>(dof_handler,</div>
 <div class="line">                                    solution,</div>
@@ -1165,10 +1296,12 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">                                    <a class="code" href="namespaceVectorTools.html#a69967cb7a148a7169963126249213db1aa3903caf348e2d5dc54d1b49e15c1e8e">VectorTools::L2_norm</a>,</div>
 <div class="line">                                    &amp;pressure_mask);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> Pressure_L2_error =</div>
 <div class="line">    <a class="code" href="namespaceVectorTools.html#a21eb62d70953182dcc2b15c4e14dd533">VectorTools::compute_global_error</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>,</div>
 <div class="line">                                      difference_per_cell,</div>
 <div class="line">                                      <a class="code" href="namespaceVectorTools.html#a69967cb7a148a7169963126249213db1aa3903caf348e2d5dc54d1b49e15c1e8e">VectorTools::L2_norm</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="namespaceVectorTools.html#a676190d2c897ac5da68a9c460fa95832">VectorTools::integrate_difference</a>(dof_handler,</div>
 <div class="line">                                    solution,</div>
@@ -1178,10 +1311,12 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">                                    <a class="code" href="namespaceVectorTools.html#a69967cb7a148a7169963126249213db1a6a4df2311989608627aa7bff3898fd3c">VectorTools::H1_norm</a>,</div>
 <div class="line">                                    &amp;velocity_mask);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> Velocity_H1_error =</div>
 <div class="line">    <a class="code" href="namespaceVectorTools.html#a21eb62d70953182dcc2b15c4e14dd533">VectorTools::compute_global_error</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>,</div>
 <div class="line">                                      difference_per_cell,</div>
 <div class="line">                                      <a class="code" href="namespaceVectorTools.html#a69967cb7a148a7169963126249213db1a6a4df2311989608627aa7bff3898fd3c">VectorTools::H1_norm</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; std::endl</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;   Velocity L2 Error: &quot;</span> &lt;&lt; Velocity_L2_error &lt;&lt; std::endl</div>
@@ -1195,7 +1330,7 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="anamespaceVectorTools_html_a69967cb7a148a7169963126249213db1aa3903caf348e2d5dc54d1b49e15c1e8e"><div class="ttname"><a href="namespaceVectorTools.html#a69967cb7a148a7169963126249213db1aa3903caf348e2d5dc54d1b49e15c1e8e">VectorTools::L2_norm</a></div><div class="ttdeci">@ L2_norm</div><div class="ttdef"><b>Definition:</b> <a href="vector__tools__common_8h_source.html#l00113">vector_tools_common.h:113</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_html_ad086eb08b8424fd7c853e389a3978a9a"><div class="ttname"><a href="namespaceVectorTools.html#ad086eb08b8424fd7c853e389a3978a9a">VectorTools::compute_mean_value</a></div><div class="ttdeci">VectorType::value_type compute_mean_value(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const Quadrature&lt; dim &gt; &amp;quadrature, const VectorType &amp;v, const unsigned int component)</div></div>
 </div><!-- fragment --><p><a class="anchor" id="StokesProblemoutput_results"></a> </p><h4>StokesProblem::output_results</h4>
-<p>This function generates graphical output like it is done in <a class="el" href="step_22.html">step-22</a>.</p>
+<p>这个函数生成图形输出，就像在 <a class="el" href="step_22.html">step-22</a> 中所做的那样。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span></div>
 <div class="line">StokesProblem&lt;dim&gt;::output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> refinement_cycle)<span class="keyword"> const</span></div>
@@ -1203,11 +1338,13 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">  std::vector&lt;std::string&gt; solution_names(dim, <span class="stringliteral">&quot;velocity&quot;</span>);</div>
 <div class="line">  solution_names.emplace_back(<span class="stringliteral">&quot;pressure&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;DataComponentInterpretation::DataComponentInterpretation&gt;</div>
 <div class="line">    data_component_interpretation(</div>
 <div class="line">      dim, <a class="code" href="namespaceDataComponentInterpretation.html#a0cd2da3afe902f9004c23a73dbcc8ab0aa783915dbc182d5a49e111815fd23fe0">DataComponentInterpretation::component_is_part_of_vector</a>);</div>
 <div class="line">  data_component_interpretation.push_back(</div>
 <div class="line">    <a class="code" href="namespaceDataComponentInterpretation.html#a0cd2da3afe902f9004c23a73dbcc8ab0a1f3cd50135818a6458f1d3ff7ea4bb51">DataComponentInterpretation::component_is_scalar</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classDataOut.html">DataOut&lt;dim&gt;</a> data_out;</div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ac1eb26168177faa30ffbcf9cbb9c3cd5">attach_dof_handler</a>(dof_handler);</div>
@@ -1216,6 +1353,7 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">                           <a class="code" href="classDataOut.html">DataOut&lt;dim&gt;::type_dof_data</a>,</div>
 <div class="line">                           data_component_interpretation);</div>
 <div class="line">  data_out.<a class="code" href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">build_patches</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::ofstream output(</div>
 <div class="line">    <span class="stringliteral">&quot;solution-&quot;</span> + <a class="code" href="namespaceUtilities.html#a6195c5f009ea8c7c536c6ffdf108c32f">Utilities::int_to_string</a>(refinement_cycle, 2) + <span class="stringliteral">&quot;.vtk&quot;</span>);</div>
@@ -1230,12 +1368,14 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="anamespaceDataComponentInterpretation_html_a0cd2da3afe902f9004c23a73dbcc8ab0aa783915dbc182d5a49e111815fd23fe0"><div class="ttname"><a href="namespaceDataComponentInterpretation.html#a0cd2da3afe902f9004c23a73dbcc8ab0aa783915dbc182d5a49e111815fd23fe0">DataComponentInterpretation::component_is_part_of_vector</a></div><div class="ttdeci">@ component_is_part_of_vector</div><div class="ttdef"><b>Definition:</b> <a href="data__component__interpretation_8h_source.html#l00059">data_component_interpretation.h:59</a></div></div>
 <div class="ttc" id="anamespaceUtilities_html_a6195c5f009ea8c7c536c6ffdf108c32f"><div class="ttname"><a href="namespaceUtilities.html#a6195c5f009ea8c7c536c6ffdf108c32f">Utilities::int_to_string</a></div><div class="ttdeci">std::string int_to_string(const unsigned int value, const unsigned int digits=numbers::invalid_unsigned_int)</div><div class="ttdef"><b>Definition:</b> <a href="base_2utilities_8cc_source.html#l00473">utilities.cc:473</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="StokesProblemrun"></a> </p><h4>StokesProblem::run</h4>
-<p>The last step in the Stokes class is, as usual, the function that generates the initial grid and calls the other functions in the respective order.</p>
+<p>．</p>
+<p>斯托克斯类的最后一步是，像往常一样，生成初始网格的函数，并按各自的顺序调用其他函数。</p>
 <div class="fragment"><div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">StokesProblem&lt;dim&gt;::run</a>()</div>
 <div class="line">  {</div>
 <div class="line">    <a class="code" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>);</div>
 <div class="line">    <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.refine_global(6 - dim);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (solver_type == SolverType::FGMRES_ILU)</div>
 <div class="line">      std::cout &lt;&lt; <span class="stringliteral">&quot;Now running with ILU&quot;</span> &lt;&lt; std::endl;</div>
@@ -1245,37 +1385,48 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">      std::cout &lt;&lt; <span class="stringliteral">&quot;Now running with UMFPACK&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> refinement_cycle = 0; refinement_cycle &lt; 3;</div>
 <div class="line">         ++refinement_cycle)</div>
 <div class="line">      {</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Refinement cycle &quot;</span> &lt;&lt; refinement_cycle &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        <span class="keywordflow">if</span> (refinement_cycle &gt; 0)</div>
 <div class="line">          <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.refine_global(1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;   Set-up...&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">        setup_dofs();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;   Assembling...&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">        assemble_system();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">if</span> (solver_type == SolverType::FGMRES_GMG)</div>
 <div class="line">          {</div>
 <div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;   Assembling Multigrid...&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">            assemble_multigrid();</div>
 <div class="line">          }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;   Solving...&quot;</span> &lt;&lt; std::flush;</div>
 <div class="line">        solve();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        compute_errors();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        output_results(refinement_cycle);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <a class="code" href="structUtilities_1_1System_1_1MemoryStats.html">Utilities::System::MemoryStats</a> mem;</div>
 <div class="line">        <a class="code" href="namespaceUtilities_1_1System.html#a25db0fc07c298b5bef3d6f738283bd6d">Utilities::System::get_memory_stats</a>(mem);</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;   VM Peak: &quot;</span> &lt;&lt; mem.<a class="code" href="structUtilities_1_1System_1_1MemoryStats.html#a61f9c5964eabf0f746ae35019042f28a">VmPeak</a> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        computing_timer.print_summary();</div>
 <div class="line">        computing_timer.reset();</div>
@@ -1286,17 +1437,19 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="anamespaceUtilities_1_1System_html_a25db0fc07c298b5bef3d6f738283bd6d"><div class="ttname"><a href="namespaceUtilities_1_1System.html#a25db0fc07c298b5bef3d6f738283bd6d">Utilities::System::get_memory_stats</a></div><div class="ttdeci">void get_memory_stats(MemoryStats &amp;stats)</div><div class="ttdef"><b>Definition:</b> <a href="base_2utilities_8cc_source.html#l00970">utilities.cc:970</a></div></div>
 <div class="ttc" id="astructUtilities_1_1System_1_1MemoryStats_html"><div class="ttname"><a href="structUtilities_1_1System_1_1MemoryStats.html">Utilities::System::MemoryStats</a></div><div class="ttdef"><b>Definition:</b> <a href="include_2deal_8II_2base_2utilities_8h_source.html#l00860">utilities.h:861</a></div></div>
 <div class="ttc" id="astructUtilities_1_1System_1_1MemoryStats_html_a61f9c5964eabf0f746ae35019042f28a"><div class="ttname"><a href="structUtilities_1_1System_1_1MemoryStats.html#a61f9c5964eabf0f746ae35019042f28a">Utilities::System::MemoryStats::VmPeak</a></div><div class="ttdeci">unsigned long int VmPeak</div><div class="ttdef"><b>Definition:</b> <a href="include_2deal_8II_2base_2utilities_8h_source.html#l00865">utilities.h:865</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="Themainfunction"></a> </p><h3>The main function</h3>
+</div><!-- fragment --><p><a class="anchor" id="Themainfunction"></a></p><h3>The main function</h3>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">try</span></div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using namespace </span>Step56;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">int</span> degree = 1;</div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">int</span> dim    = 3;</div>
-</div><!-- fragment --><p>options for <a class="el" href="classSolverType.html">SolverType</a>: UMFPACK FGMRES_ILU FGMRES_GMG</p>
+</div><!-- fragment --><p>SolverType的选项。umfpack fgmres_ilu fgmres_gmg</p>
 <div class="fragment"><div class="line">      StokesProblem&lt;dim&gt; flow_problem(degree, SolverType::FGMRES_GMG);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      flow_problem.run();</div>
 <div class="line">    }</div>
@@ -1311,6 +1464,7 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">                &lt;&lt; <span class="stringliteral">&quot;Aborting!&quot;</span> &lt;&lt; std::endl</div>
 <div class="line">                &lt;&lt; <span class="stringliteral">&quot;----------------------------------------------------&quot;</span></div>
 <div class="line">                &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
@@ -1327,15 +1481,16 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
+</div><!-- fragment --><p><a class="anchor" id="Results"></a></p><h1>Results</h1>
 <p><a class="anchor" id="Errors"></a></p><h3>Errors </h3>
-<p>We first run the code and confirm that the finite element solution converges with the correct rates as predicted by the error analysis of mixed finite element problems. Given sufficiently smooth exact solutions \(u\) and \(p\), the errors of the Taylor-Hood element \(Q_k \times Q_{k-1}\) should be</p>
+<p>我们首先运行代码，确认有限元解以混合有限元问题的误差分析所预测的正确速率收敛。给定足够平滑的精确解 \(u\) 和 \(p\) ，Taylor-Hood元素 \(Q_k \times Q_{k-1}\) 的误差应该是</p>
 <p class="formulaDsp">
 \[ \| u -u_h \|_0 + h ( \| u- u_h\|_1 + \|p - p_h \|_0) \leq C h^{k+1} ( \|u \|_{k+1} + \| p \|_k ) \]
 </p>
-<p>see for example Ern/Guermond "Theory and Practice of Finite Elements", Section 4.2.5 p195. This is indeed what we observe, using the \(Q_2 \times Q_1\) element as an example (this is what is done in the code, but is easily changed in <code>main()</code>):</p>
+<p>例如，见Ern/Guermond "有限元的理论与实践"，第4.2.5节第195页。这确实是我们观察到的，以 \(Q_2 \times Q_1\) 元素为例（这就是代码中的做法，但在 <code>main()</code> 中很容易改变）。</p>
 <table align="center" class="doxtable">
 <tr>
 <th>&#160; </th><th>L2 Velocity </th><th>Reduction </th><th>L2 Pressure </th><th>Reduction </th><th>H1 Velocity </th><th>Reduction  </th></tr>
@@ -1346,8 +1501,10 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <tr>
 <td>3D, 5 global refinements </td><td>1.05E-005 </td><td>8.0 </td><td>0.000220253 </td><td>4.0 </td><td>0.00259519 </td><td>4.0   </td></tr>
 </table>
+<p><br  />
+</p>
 <p><a class="anchor" id="TimingResults"></a></p><h3>Timing Results </h3>
-<p>Let us compare the direct solver approach using UMFPACK to the two methods in which we choose \(\widetilde {A^{-1}}=A^{-1}\) and \(\widetilde{S^{-1}}=S^{-1}\) by solving linear systems with \(A,S\) using CG. The preconditioner for CG is then either ILU or GMG. The following table summarizes solver iterations, timings, and virtual memory (VM) peak usage:</p>
+<p>让我们比较一下使用UMFPACK的直接求解方法和我们选择 \(\widetilde {A^{-1}}=A^{-1}\) 和 \(\widetilde{S^{-1}}=S^{-1}\) 的两种方法，用CG求解 \(A,S\) 的线性系统。然后CG的预处理程序是ILU或GMG。下表总结了求解器的迭代、时间和虚拟内存（VM）的峰值使用。</p>
 <table align="center" class="doxtable">
 <tr>
 <th></th><th colspan="3">General </th><th colspan="6">GMG </th><th colspan="6">ILU </th><th colspan="3">UMFPACK  </th></tr>
@@ -1362,21 +1519,22 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <tr>
 <td>2 </td><td>859812 </td><td>9.0s </td><td>20s </td><td>20s </td><td>101s </td><td>20 </td><td>65 </td><td>21 </td><td>10641 </td><td>27s </td><td>268s </td><td>21 </td><td>592 </td><td>22 </td><td>8307 </td><td>- </td><td>- </td><td>-  </td></tr>
 </table>
-<p>As can be seen from the table:</p>
+<p><br  />
+</p>
+<p>从表中可以看出。</p>
 <ol type="1">
-<li>UMFPACK uses large amounts of memory, especially in 3d. Also, UMFPACK timings do not scale favorably with problem size.</li>
-<li>Because we are using inner solvers for \(A\) and \(S\), ILU and GMG require the same number of outer iterations.</li>
-<li>The number of (inner) iterations for \(A\) increases for ILU with refinement, leading to worse than linear scaling in solve time. In contrast, the number of inner iterations for \(A\) stays constant with GMG leading to nearly perfect scaling in solve time.</li>
-<li>GMG needs slightly more memory than ILU to store the level and interface matrices.</li>
+<li>UMFPACK使用了大量的内存，特别是在3D中。另外，UMFPACK的时序并不随问题大小而变化。</li>
+<li>因为我们对 \(A\) 和 \(S\) 使用内部求解器，ILU和GMG需要相同数量的外部迭代。</li>
+<li>3. 对于ILU来说， \(A\) 的（内部）迭代次数随着细化而增加，导致求解时间的线性扩展性较差。相比之下， \(A\) 的内部迭代次数在GMG中保持不变，导致求解时间几乎完美的缩放。</li>
+<li>GMG需要比ILU多一点的内存来存储水平和界面矩阵。</li>
 </ol>
 <p><a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions </h3>
 <p><a class="anchor" id="Checkhigherorderdiscretizations"></a></p><h4>Check higher order discretizations </h4>
-<p>Experiment with higher order stable FE pairs and check that you observe the correct convergence rates.</p>
+<p>用更高阶的稳定FE对进行实验，并检查你是否观察到正确的收敛率。</p>
 <p><a class="anchor" id="Comparewithcheappreconditioner"></a></p><h4>Compare with cheap preconditioner </h4>
-<p>The introduction also outlined another option to precondition the overall system, namely one in which we do not choose \(\widetilde {A^{-1}}=A^{-1}\) as in the table above, but in which \(\widetilde{A^{-1}}\) is only a single preconditioner application with GMG or ILU, respectively.</p>
-<p>This is in fact implemented in the code: Currently, the boolean <code>use_expensive</code> in <code>solve()</code> is set to <code>true</code>. The option mentioned above is obtained by setting it to <code>false</code>.</p>
-<p>What you will find is that the number of FGMRES iterations stays constant under refinement if you use GMG this way. This means that the <a class="el" href="classMultigrid.html">Multigrid</a> is optimal and independent of \(h\).</p>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+<p>介绍中还概述了另一种对整个系统进行预处理的方案，即我们不选择上表中的 \(\widetilde {A^{-1}}=A^{-1}\) ，而是在 \(\widetilde{A^{-1}}\) 中只分别使用GMG或ILU的单一预处理程序。</p>
+<p>这实际上是在代码中实现的。目前，布尔值 <code>use_expensive</code> in <code>solve()</code> 被设置为 <code>true</code>. 上面提到的选项是通过设置为 <code>false</code>. 得到的。</p>
+<p>你会发现的是，如果你这样使用GMG，FGMRES的迭代次数在细化中保持不变。这意味着多重网格是最优的，并且不受 \(h\) 的影响。<a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2016 - 2020 by the deal.II authors</span></div>
@@ -2408,7 +2566,8 @@ complement preconditioner" subsection of the "Possible Extensions" section of <a
 <div class="ttc" id="anamespaceinternal_html_aa5bef221c94bc6b9c5441c306a72cdbaae2b6dfb8a5c48206992d8310d176c37c"><div class="ttname"><a href="namespaceinternal.html#aa5bef221c94bc6b9c5441c306a72cdbaae2b6dfb8a5c48206992d8310d176c37c">internal::EvaluatorQuantity::gradient</a></div><div class="ttdeci">@ gradient</div></div>
 <div class="ttc" id="anumbers_8h_html_a02761f62f66f685e954daed42bcb3a1b"><div class="ttname"><a href="numbers_8h.html#a02761f62f66f685e954daed42bcb3a1b">std::cos</a></div><div class="ttdeci">::VectorizedArray&lt; Number, width &gt; cos(const ::VectorizedArray&lt; Number, width &gt; &amp;)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l05318">vectorization.h:5318</a></div></div>
 <div class="ttc" id="anumbers_8h_html_a27989bdc7b4b828564982787d126bd91"><div class="ttname"><a href="numbers_8h.html#a27989bdc7b4b828564982787d126bd91">std::sin</a></div><div class="ttdeci">::VectorizedArray&lt; Number, width &gt; sin(const ::VectorizedArray&lt; Number, width &gt; &amp;)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l05291">vectorization.h:5291</a></div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> 。 </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

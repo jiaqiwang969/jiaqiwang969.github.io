@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-62 tutorial program</title>
+<title>The deal.II Library: The step-62 tutorial program   &lt;br&gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,130 +86,144 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-62 tutorial program </div>  </div>
+<div class="title">The step-62 tutorial program <br  />
+ </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_8.html">step-8</a>, <a class="el" href="step_40.html">step-40</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_8.html">step-8</a> , <a class="el" href="step_40.html">step-40</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Elasticequations">Elastic equations</a>
-        <li><a href="#Simulationparameters">Simulation parameters</a>
+        <li><a href="#Elasticequations">Elastic equations</a><a href="#Elasticequations">Elastic equations</a>
+        <li><a href="#Simulationparameters">Simulation parameters</a><a href="#Simulationparameters">Simulation parameters</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#Auxiliaryclassesandfunctions">Auxiliary classes and functions</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#Auxiliaryclassesandfunctions">Auxiliary classes and functions</a><a href="#Auxiliaryclassesandfunctions">Auxiliary classes and functions</a>
       <ul>
-        <li><a href="#TheRightHandSideclass">The `RightHandSide` class</a>
-        <li><a href="#ThePMLclass">The `PML` class</a>
-        <li><a href="#TheRhoclass">The `Rho` class</a>
-        <li><a href="#TheParametersclass">The `Parameters` class</a>
-        <li><a href="#TheQuadratureCacheclass">The `QuadratureCache` class</a>
-        <li><a href="#Theget_stiffness_tensorfunction">The `get_stiffness_tensor()` function</a>
+        <li><a href="#TheRightHandSideclass">The `RightHandSide` class</a><a href="#TheRightHandSideclass">The `RightHandSide` class</a>
+        <li><a href="#ThePMLclass">The `PML` class</a><a href="#ThePMLclass">The `PML` class</a>
+        <li><a href="#TheRhoclass">The `Rho` class</a><a href="#TheRhoclass">The `Rho` class</a>
+        <li><a href="#TheParametersclass">The `Parameters` class</a><a href="#TheParametersclass">The `Parameters` class</a>
+        <li><a href="#TheQuadratureCacheclass">The `QuadratureCache` class</a><a href="#TheQuadratureCacheclass">The `QuadratureCache` class</a>
+        <li><a href="#Theget_stiffness_tensorfunction">The `get_stiffness_tensor()` function</a><a href="#Theget_stiffness_tensorfunction">The `get_stiffness_tensor()` function</a>
       </ul>
-        <li><a href="#TheElasticWaveclass">The `ElasticWave` class</a>
-        <li><a href="#Implementationoftheauxiliaryclasses">Implementation of the auxiliary classes</a>
+        <li><a href="#TheElasticWaveclass">The `ElasticWave` class</a><a href="#TheElasticWaveclass">The `ElasticWave` class</a>
+        <li><a href="#Implementationoftheauxiliaryclasses">Implementation of the auxiliary classes</a><a href="#Implementationoftheauxiliaryclasses">Implementation of the auxiliary classes</a>
       <ul>
-        <li><a href="#TheRightHandSideclassimplementation">The `RightHandSide` class implementation</a>
-        <li><a href="#ThePMLclassimplementation">The `PML` class implementation</a>
-        <li><a href="#TheRhoclassimplementation">The `Rho` class implementation</a>
-        <li><a href="#TheParametersclassimplementation">The `Parameters` class implementation</a>
-        <li><a href="#TheQuadratureCacheclassimplementation">The `QuadratureCache` class implementation</a>
+        <li><a href="#TheRightHandSideclassimplementation">The `RightHandSide` class implementation</a><a href="#TheRightHandSideclassimplementation">The `RightHandSide` class implementation</a>
+        <li><a href="#ThePMLclassimplementation">The `PML` class implementation</a><a href="#ThePMLclassimplementation">The `PML` class implementation</a>
+        <li><a href="#TheRhoclassimplementation">The `Rho` class implementation</a><a href="#TheRhoclassimplementation">The `Rho` class implementation</a>
+        <li><a href="#TheParametersclassimplementation">The `Parameters` class implementation</a><a href="#TheParametersclassimplementation">The `Parameters` class implementation</a>
+        <li><a href="#TheQuadratureCacheclassimplementation">The `QuadratureCache` class implementation</a> ]<a href="#TheQuadratureCacheclassimplementation">The `QuadratureCache` class implementation</a>
       </ul>
-        <li><a href="#ImplementationoftheElasticWaveclass">Implementation of the `ElasticWave` class</a>
+        <li><a href="#ImplementationoftheElasticWaveclass">Implementation of the `ElasticWave` class</a><a href="#ImplementationoftheElasticWaveclass">Implementation of the `ElasticWave` class</a>
       <ul>
-        <li><a href="#Constructor">Constructor</a>
-        <li><a href="#ElasticWavesetup_system">ElasticWave::setup_system</a>
-        <li><a href="#ElasticWaveassemble_system">ElasticWave::assemble_system</a>
-        <li><a href="#ElasticWavesolve">ElasticWave::solve</a>
-        <li><a href="#ElasticWaveinitialize_position_vector">ElasticWave::initialize_position_vector</a>
-        <li><a href="#ElasticWavestore_frequency_step_data">ElasticWave::store_frequency_step_data</a>
-        <li><a href="#ElasticWaveoutput_results">ElasticWave::output_results</a>
-        <li><a href="#ElasticWavesetup_quadrature_cache">ElasticWave::setup_quadrature_cache</a>
-        <li><a href="#ElasticWavefrequency_sweep">ElasticWave::frequency_sweep</a>
-        <li><a href="#ElasticWaverun">ElasticWave::run</a>
-        <li><a href="#Themainfunction">The main function</a>
+        <li><a href="#Constructor">Constructor</a><a href="#Constructor">Constructor</a>
+        <li><a href="#ElasticWavesetup_system">ElasticWave::setup_system</a><a href="#ElasticWavesetup_system">ElasticWave::setup_system</a>
+        <li><a href="#ElasticWaveassemble_system">ElasticWave::assemble_system</a><a href="#ElasticWaveassemble_system">ElasticWave::assemble_system</a>
+        <li><a href="#ElasticWavesolve">ElasticWave::solve</a><a href="#ElasticWavesolve">ElasticWave::solve</a>
+        <li><a href="#ElasticWaveinitialize_position_vector">ElasticWave::initialize_position_vector</a><a href="#ElasticWaveinitialize_position_vector">ElasticWave::initialize_position_vector</a>
+        <li><a href="#ElasticWavestore_frequency_step_data">ElasticWave::store_frequency_step_data</a><a href="#ElasticWavestore_frequency_step_data">ElasticWave::store_frequency_step_data</a>
+        <li><a href="#ElasticWaveoutput_results">ElasticWave::output_results</a><a href="#ElasticWaveoutput_results">ElasticWave::output_results</a>
+        <li><a href="#ElasticWavesetup_quadrature_cache">ElasticWave::setup_quadrature_cache</a><a href="#ElasticWavesetup_quadrature_cache">ElasticWave::setup_quadrature_cache</a>
+        <li><a href="#ElasticWavefrequency_sweep">ElasticWave::frequency_sweep</a><a href="#ElasticWavefrequency_sweep">ElasticWave::frequency_sweep</a>
+        <li><a href="#ElasticWaverun">ElasticWave::run</a><a href="#ElasticWaverun">ElasticWave::run</a>
+        <li><a href="#Themainfunction">The main function</a><a href="#Themainfunction">The main function</a>
       </ul>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Resonancefrequencyandbandgap">Resonance frequency and bandgap</a>
-        <li><a href="#Modeprofile">Mode profile</a>
-        <li><a href="#Experimentalapplications">Experimental applications</a>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Resonancefrequencyandbandgap">Resonance frequency and bandgap</a><a href="#Resonancefrequencyandbandgap">Resonance frequency and bandgap</a>
+        <li><a href="#Modeprofile">Mode profile</a><a href="#Modeprofile">Mode profile</a>
+        <li><a href="#Experimentalapplications">Experimental applications</a><a href="#Experimentalapplications">Experimental applications</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
+</p>
+<p><br  />
  <br  />
 </p>
 <p><em>This program was contributed by Daniel Garcia-Sanchez.</em> <br  />
-</p>
-<dl class="section note"><dt>Note</dt><dd>As a prerequisite of this program, you need to have <a class="el" href="namespaceHDF5.html">HDF5</a>, complex PETSc, and the p4est libraries installed. The installation of deal.II together with these additional libraries is described in the <a href="../../readme.html" target="body">README</a> file.</dd></dl>
+ <br  />
+ 。</p>
+<dl class="section note"><dt>Note</dt><dd>作为这个程序的先决条件，你需要安装HDF5、复杂的PETSc和p4est库。在<a href="../../readme.html" target="body">README</a>文件中描述了deal.II与这些附加库的安装情况。</dd></dl>
 <p><a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
-<p>A phononic crystal is a periodic nanostructure that modifies the motion of mechanical vibrations or <a href="https://en.wikipedia.org/wiki/Phonon">phonons</a>. Phononic structures can be used to disperse, route and confine mechanical vibrations. These structures have potential applications in <a href="https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.86.1391">quantum information</a> and have been used to study <a href="https://science.sciencemag.org/content/358/6360/203">macroscopic quantum phenomena</a>. Phononic crystals are usually fabricated in <a href="https://en.wikipedia.org/wiki/Cleanroom">cleanrooms</a>.</p>
-<p>In this tutorial we show how to a design a <a href="https://doi.org/10.1103/PhysRevA.94.033813">phononic superlattice cavity</a> which is a particular type of phononic crystal that can be used to confine mechanical vibrations. A phononic superlattice cavity is formed by two <a href="https://en.wikipedia.org/wiki/Distributed_Bragg_reflector">Distributed Bragg Reflector</a>, mirrors and a \(\lambda/2\) cavity where \(\lambda\) is the acoustic wavelength. Acoustic DBRs are periodic structures where a set of bilayer stacks with contrasting physical properties (sound velocity index) is repeated \(N\) times. Superlattice cavities are usually grown on a <a href="https://en.wikipedia.org/wiki/Gallium_arsenide">Gallium Arsenide</a> wafer by <a href="https://en.wikipedia.org/wiki/Molecular-beam_epitaxy">Molecular Beam Epitaxy</a>. The bilayers correspond to GaAs/AlAs mirror pairs. As shown below, the thickness of the mirror layers (brown and green) is \(\lambda/4\) and the thickness of the cavity (blue) is \(\lambda/2\).</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-62.01.svg" alt="Phononic superlattice cavity" style="pointer-events: none;" height="200" class="inline"/></p>
-<p>In this tutorial we calculate the <a href="https://en.wikipedia.org/wiki/Band_gap">band gap</a> and the mechanical resonance of a phononic superlattice cavity but the code presented here can be easily used to design and calculate other types of <a href="https://science.sciencemag.org/content/358/6360/203">phononic crystals</a>.</p>
-<p>The device is a waveguide in which the wave goes from left to right. The simulations of this tutorial are done in 2D, but the code is dimension independent and can be easily used with 3D simulations. The waveguide width is equal to the \(y\) dimension of the domain and the waveguide length is equal to the \(x\) dimension of the domain. There are two regimes that depend on the waveguide width:</p><ul>
-<li>Single mode: In this case the width of the structure is much smaller than the wavelength. This case can be solved either with FEM (the approach that we take here) or with a simple semi-analytical <a href="https://en.wikipedia.org/wiki/Transfer_matrix">1D transfer matrix formalism</a>.</li>
-<li>Multimode: In this case the width of the structure is larger than the wavelength. This case can be solved using FEM or with a <a href="https://doi.org/10.1103/PhysRevA.94.033813">scattering matrix formalism</a>. Although we do not study this case in this tutorial, it is very easy to reach the multimode regime by increasing the parameter waveguide width (<code>dimension_y</code> in the jupyter notebook).</li>
+<p>声子晶体是一种周期性的纳米结构，它可以改变机械振动或[声子]的运动（https://en.wikipedia.org/wiki/Phonon）。声子结构可以用来分散、引导和限制机械振动。这些结构在<a href="https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.86.1391">量子信息</a>方面有潜在的应用，并已被用于研究<a href="https://science.sciencemag.org/content/358/6360/203">宏观量子现象</a>。声波晶体通常是在[洁净室]中制造的(<a href="https://en.wikipedia.org/wiki/Cleanroom">https://en.wikipedia.org/wiki/Cleanroom</a>)。</p>
+<p>在本教程中，我们将展示如何设计一个<a href="https://doi.org/10.1103/PhysRevA.94.033813">声子超晶格腔</a>，这是一种特殊类型的声子晶体，可用于限制机械振动。声子超晶格空腔是由两个<a href="https://en.wikipedia.org/wiki/Distributed_Bragg_reflector">分布式布拉格反射器</a>、镜子和一个 \(\lambda/2\) 空腔组成，其中 \(\lambda\) 是声学波长。声学DBRs是周期性结构，其中一组具有对比物理特性（声速指数）的双层堆栈被重复 \(N\) 次。超晶格空腔通常是通过<a href="https://en.wikipedia.org/wiki/Molecular-beam_epitaxy">分子束外延</a>在<a href="https://en.wikipedia.org/wiki/Gallium_arsenide">砷化镓</a>晶圆上生长的。双层对应于砷化镓/砷化铝镜像对。如下图所示，镜像层（棕色和绿色）的厚度为 \(\lambda/4\) ，空腔（蓝色）的厚度为 \(\lambda/2\) 。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-62.01.svg" alt="Phononic superlattice cavity" style="pointer-events: none;" height="200" class="inline"/> <br  />
+</p>
+<p>在本教程中，我们计算了<a href="https://en.wikipedia.org/wiki/Band_gap">带隙</a>和声子超晶格空腔的机械共振，但这里介绍的代码可以很容易地用于设计和计算其他类型的<a href="https://science.sciencemag.org/content/358/6360/203">声子晶体</a>。</p>
+<p>该装置是一个波导，其中波从左到右。本教程的模拟是在二维中完成的，但代码是独立于尺寸的，可以很容易地用于三维模拟。波导的宽度等于域的 \(y\) 维，波导的长度等于域的 \(x\) 维。有两种取决于波导宽度的制度。</p>
+<ul>
+<li>单一模式。在这种情况下，结构的宽度要比波长小得多。 这种情况可以用有限元法（我们在此采取的方法）或用简单的半分析法[一维转移矩阵形式]（https://en.wikipedia.org/wiki/Transfer_matrix）来解决。</li>
+<li>多模。在这种情况下，结构的宽度比波长大。 这种情况可以用有限元法或<a href="https://doi.org/10.1103/PhysRevA.94.033813">散射矩阵形式主义</a>来解决。 尽管我们在本教程中没有研究这种情况，但通过增加波导宽度参数（jupyter笔记本中的`dimension_y'），很容易达到多模制度。</li>
 </ul>
-<p>The simulations of this tutorial are performed in the frequency domain. To calculate the transmission spectrum, we use a <a href="https://meep.readthedocs.io/en/latest/Python_Tutorials/Resonant_Modes_and_Transmission_in_a_Waveguide_Cavity/">procedure</a> that is commonly used in time domain <a href="https://en.wikipedia.org/wiki/Finite-difference_time-domain_method">FDTD</a> simulations. A pulse at a certain frequency is generated on the left side of the structure and the transmitted energy is measured on the right side of the structure. The simulation is run twice. First, we run the simulation with the phononic structure and measure the transmitted energy:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-62.02.svg" alt="Phononic superlattice cavity" style="pointer-events: none;" height="200" class="inline"/></p>
-<p>Then, we run the simulation without the phononic structure and measure the transmitted energy. We use the simulation without the structure for the calibration:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-62.03.svg" alt="Phononic superlattice cavity" style="pointer-events: none;" height="200" class="inline"/></p>
-<p>The transmission coefficient corresponds to the energy of the first simulation divided by the calibration energy. We repeat this procedure for each frequency step.</p>
+<p>本教程的模拟是在频域中进行的。为了计算传输光谱，我们使用了一个在时域<a href="https://meep.readthedocs.io/en/latest/Python_Tutorials/Resonant_Modes_and_Transmission_in_a_Waveguide_Cavity/">FDTD</a>模拟中常用的<a href="https://en.wikipedia.org/wiki/Finite-difference_time-domain_method">程序</a>。在结构的左侧产生一个特定频率的脉冲，在结构的右侧测量传输的能量。仿真运行了两次。首先，我们用声子结构运行模拟，并测量传输的能量。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-62.02.svg" alt="Phononic superlattice cavity" style="pointer-events: none;" height="200" class="inline"/> <br  />
+</p>
+<p>然后，我们运行没有声学结构的模拟，测量传输的能量。我们使用没有结构的模拟来进行校准。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-62.03.svg" alt="Phononic superlattice cavity" style="pointer-events: none;" height="200" class="inline"/> <br  />
+</p>
+<p>传输系数对应于第一个模拟的能量除以校准能量。我们对每个频率步骤重复这一程序。</p>
 <p><a class="anchor" id="Elasticequations"></a></p><h3>Elastic equations</h3>
-<p>What we want to simulate here is the transmission of elastic waves. Consequently, the right description of the problem uses the elastic equations, which in the time domain are given by </p><p class="formulaDsp">
+<p>我们在这里想要模拟的是弹性波的传输。因此，对问题的正确描述使用了弹性方程，在时域中由 </p><p class="formulaDsp">
 \[ \rho\partial_{tt} u_i - \partial_j (c_{ijkl} \varepsilon_{kl}) = f_i, \qquad i=0,1,2 \]
 </p>
-<p> where the stiffness tensor \(c_{ijkl}\) depends on the spatial coordinates and the strain is the symmetrized gradient of the displacement, given by </p><p class="formulaDsp">
+<p>给出，其中刚度张量 \(c_{ijkl}\) 取决于空间坐标，应变是位移的对称梯度，由 </p><p class="formulaDsp">
 \[ \varepsilon_{kl} =\frac{1}{2}(\partial_k u_l + \partial_l u_k) \]
 </p>
-<p><a href="https://en.wikipedia.org/wiki/Perfectly_matched_layer">A perfectly matched layer (PML)</a> can be used to truncate the solution at the boundaries. A PML is a transformation that results in a complex coordinate stretching.</p>
-<p>Instead of a time domain approach, this tutorial program converts the equations above into the frequency domain by performing a Fourier transform with regard to the time variable. The elastic equations in the frequency domain then read as follows </p><p class="formulaDsp">
+<p>给出。</p>
+<p><a href="https://en.wikipedia.org/wiki/Perfectly_matched_layer">完全匹配层（PML）</a>可以用来截断边界处的解决方案。PML是一种导致复杂坐标拉伸的变换。</p>
+<p>本教程程序没有采用时域方法，而是通过对时间变量进行傅里叶变换，将上述方程转换为频域。然后，频域中的弹性方程如下 </p><p class="formulaDsp">
 \begin{eqnarray*} \nabla\cdot(\boldsymbol{\bar\sigma} \xi \boldsymbol{\Lambda})&amp;=&amp;-\omega^2\rho\xi\mathbf{\bar u}\\ \boldsymbol{\bar \sigma} &amp;=&amp;\mathbf{C}\boldsymbol{\bar\varepsilon}\\ \boldsymbol{\bar\varepsilon}&amp;=&amp;\frac{1}{2}[(\nabla\mathbf{\bar{u}}\boldsymbol{\Lambda}+\boldsymbol{\Lambda}^\mathrm{T}(\nabla\mathbf{\bar{u}})^\mathrm{T})]\\ \xi &amp;=&amp;\prod_i^\textrm{dim}s_i\\ \boldsymbol{\Lambda} &amp;=&amp; \operatorname{diag}(1/s_0,1/s_1,1/s_2)\qquad\textrm{for 3D}\\ \boldsymbol{\Lambda} &amp;=&amp; \operatorname{diag}(1/s_0,1/s_1)\qquad\textrm{for 2D} \end{eqnarray*}
 </p>
-<p> where the coefficients \(s_i = 1+is_i&#39;(x,y,z)\) account for the absorption. There are 3 \(s_i\) coefficients in 3D and 2 in 2D. The imaginary par of \(s_i\) is equal to zero outside the PML. The PMLs are reflectionless only for the exact wave equations. When the set of equations is discretized the PML is no longer reflectionless. The reflections can be made arbitrarily small as long as the medium is slowly varying, see <a href="https://doi.org/10.1103/PhysRevE.66.066608">the adiabatic theorem</a>. In the code a quadratic turn-on of the PML has been used. A linear and cubic turn-on is also <a href="https://doi.org/10.1364/OE.16.011376">known to work</a>. These equations can be expanded into </p><p class="formulaDsp">
+<p>其中系数 \(s_i = 1+is_i&#39;(x,y,z)\) 说明了吸收的情况。在三维有3个 \(s_i\) 系数，在二维有2个系数。 \(s_i\) 的虚部在PML外等于零。PML仅对精确的波浪方程是无反射的。当方程组被离散化时，PML就不再是无反射的了。只要介质是缓慢变化的，反射就可以变得任意小，见<a href="https://doi.org/10.1103/PhysRevE.66.066608">绝热定理</a>。在代码中，已经使用了PML的二次开启。线性和立方开启也是<a href="https://doi.org/10.1364/OE.16.011376">已知可行的</a>。这些方程可以扩展为 </p><p class="formulaDsp">
 \[ -\omega^2\rho \xi u_m - \partial_n \left(\frac{\xi}{s_n}c_{mnkl} \varepsilon_{kl}\right) = f_m \]
 </p>
  <p class="formulaDsp">
 \[ \varepsilon_{kl} =\frac{1}{2}\left(\frac{1}{s_k}\partial_k u_l + \frac{1}{s_l}\partial_l u_k\right) \]
 </p>
-<p> where summation over repeated indices (here \(n\), as well as \(k\) and \(l\)) is as always implied. Note that the strain is no longer symmetric after applying the complex coordinate stretching of the PML. This set of equations can be written as </p><p class="formulaDsp">
+<p>，其中重复指数的求和（这里是 \(n\) ，以及 \(k\) 和 \(l\) ）一如既往地被暗示。请注意，在应用PML的复数坐标拉伸后，应变不再是对称的了。这组方程可以写成 </p><p class="formulaDsp">
 \[ -\omega^2\rho \xi u_m - \partial_n \left(\frac{\xi c_{mnkl}}{2s_n s_k} \partial_k u_l + \frac{\xi c_{mnkl}}{2s_n s_l} \partial_l u_k\right) = f_m \]
 </p>
-<p>The same as the strain, the stress tensor is not symmetric inside the PML ( \(s_j\neq 0\)). Indeed the fields inside the PML are not physical. It is useful to introduce the tensors \(\alpha_{mnkl}\) and \(\beta_{mnkl}\). </p><p class="formulaDsp">
+<p>。</p>
+<p>与应变相同，应力张量在PML内也不是对称的（ \(s_j\neq 0\) ）。事实上，PML内部的场不是物理的。介绍张量 \(\alpha_{mnkl}\) 和 \(\beta_{mnkl}\) 是有用的。 </p><p class="formulaDsp">
 \[ -\omega^2\rho \xi u_m - \partial_n \left(\alpha_{mnkl}\partial_k u_l + \beta_{mnkl}\partial_l u_k\right) = f_m \]
 </p>
-<p>We can multiply by \(\varphi_m\) and integrate over the domain \(\Omega\) and integrate by parts. </p><p class="formulaDsp">
+<p>我们可以乘以 \(\varphi_m\) 并在域 \(\Omega\) 上进行积分，并通过部分积分。 </p><p class="formulaDsp">
 \begin{eqnarray*} -\omega^2\int_\Omega\rho\xi\varphi_m u_m + \int_\Omega\partial_n\varphi_m \left(\frac{\xi c_{mnkl}}{2s_n s_k} \partial_k u_l + \frac{\xi c_{mnkl}}{2s_n s_l} \partial_l u_k\right) = \int_\Omega\varphi_m f_m \end{eqnarray*}
 </p>
-<p> It is this set of equations we want to solve for a set of frequencies \(\omega\) in order to compute the transmission coefficient as function of frequency. The linear system becomes </p><p class="formulaDsp">
+<p>正是这组方程，我们要为一组频率 \(\omega\) 求解，以计算传输系数与频率的关系。线性系统成为 </p><p class="formulaDsp">
 \begin{eqnarray*} AU&amp;=&amp;F\\ A_{ij} &amp;=&amp; -\omega^2\int_\Omega\rho \xi\varphi_m^i \varphi_m^j + \int_\Omega\partial_n\varphi_m^i \left(\frac{\xi c_{mnkl}}{2s_n s_k} \partial_k \varphi_l^j + \frac{\xi c_{mnkl}}{2s_n s_l} \partial_l \varphi_k^j\right)\\ F_i &amp;=&amp; \int_\Omega\varphi_m^i f_m \end{eqnarray*}
 </p>
 <p><a class="anchor" id="Simulationparameters"></a></p><h3>Simulation parameters</h3>
-<p>In this tutorial we use a python <a href="https://github.com/dealii/dealii/blob/phononic-cavity/examples/step-62/step-62.ipynb">jupyter notebook</a> to set up the parameters and run the simulation. First we create a <a class="el" href="namespaceHDF5.html">HDF5</a> file where we store the parameters and the results of the simulation.</p>
-<p>Each of the simulations (displacement and calibration) is stored in a separate <a class="el" href="namespaceHDF5.html">HDF5</a> group: </p><div class="fragment"><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<p>在本教程中，我们使用python[jupyter notebook](<a href="https://github.com/dealii/dealii/blob/phononic-cavity/examples/">https://github.com/dealii/dealii/blob/phononic-cavity/examples/</a> <a class="el" href="step_62.html">step-62</a> / <a class="el" href="step_62.html">step-62</a> .ipynb)来设置参数和运行仿真。首先，我们创建一个HDF5文件，在其中存储参数和模拟结果。</p>
+<p>每个模拟（位移和校准）都存储在一个单独的HDF5组中。</p>
+<div class="fragment"><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
 <div class="line"><span class="keyword">import</span> h5py</div>
 <div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
 <div class="line"><span class="keyword">import</span> subprocess</div>
 <div class="line"><span class="keyword">import</span> scipy.constants <span class="keyword">as</span> constants</div>
 <div class="line"><span class="keyword">import</span> scipy.optimize</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="comment"># This considerably reduces the size of the svg data</span></div>
 <div class="line">plt.rcParams[<span class="stringliteral">&#39;svg.fonttype&#39;</span>] = <span class="stringliteral">&#39;none&#39;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">h5_file = h5py.File(<span class="stringliteral">&#39;results.h5&#39;</span>, <span class="stringliteral">&#39;w&#39;</span>)</div>
 <div class="line">data = h5_file.create_group(<span class="stringliteral">&#39;data&#39;</span>)</div>
 <div class="line">displacement = data.create_group(<span class="stringliteral">&#39;displacement&#39;</span>)</div>
 <div class="line">calibration = data.create_group(<span class="stringliteral">&#39;calibration&#39;</span>)</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="comment"># Set the parameters</span></div>
 <div class="line"><span class="keywordflow">for</span> group <span class="keywordflow">in</span> [displacement, calibration]:</div>
@@ -219,20 +233,25 @@ $(function() {
 <div class="line">    <span class="comment"># The waveguide width is equal to dimension_y</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;dimension_y&#39;</span>] = 2e-8</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment"># Position of the probe that we use to measure the flux</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;probe_pos_x&#39;</span>]   = 8e-6</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;probe_pos_y&#39;</span>]   = 0</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;probe_width_y&#39;</span>] = 2e-08</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment"># Number of points in the probe</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;nb_probe_points&#39;</span>] = 5</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="comment"># Global refinement</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;grid_level&#39;</span>] = 1</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment"># Cavity</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;cavity_resonance_frequency&#39;</span>] = 20e9</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;nb_mirror_pairs&#39;</span>]            = 15</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="comment"># Material</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;poissons_ratio&#39;</span>] = 0.27</div>
@@ -247,6 +266,7 @@ $(function() {
 <div class="line">                           (1 - 2 * group.attrs[<span class="stringliteral">&#39;poissons_ratio&#39;</span>])))</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;mu&#39;</span>]= (group.attrs[<span class="stringliteral">&#39;youngs_modulus&#39;</span>] / (2 * (1 + group.attrs[<span class="stringliteral">&#39;poissons_ratio&#39;</span>])))</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment"># Force</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;max_force_amplitude&#39;</span>] = 1e26</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;force_sigma_x&#39;</span>]       = 1e-7</div>
@@ -256,6 +276,7 @@ $(function() {
 <div class="line">    group.attrs[<span class="stringliteral">&#39;force_x_pos&#39;</span>]         = -8e-6</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;force_y_pos&#39;</span>]         = 0</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment"># PML</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;pml_x&#39;</span>]            = <span class="keyword">True</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;pml_y&#39;</span>]            = <span class="keyword">False</span></div>
@@ -264,12 +285,14 @@ $(function() {
 <div class="line">    group.attrs[<span class="stringliteral">&#39;pml_coeff&#39;</span>]        = 1.6</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;pml_coeff_degree&#39;</span>] = 2</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment"># Frequency sweep</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;center_frequency&#39;</span>]    = 20e9</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;frequency_range&#39;</span>]     = 0.5e9</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;start_frequency&#39;</span>]     = group.attrs[<span class="stringliteral">&#39;center_frequency&#39;</span>] - group.attrs[<span class="stringliteral">&#39;frequency_range&#39;</span>] / 2</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;stop_frequency&#39;</span>]      = group.attrs[<span class="stringliteral">&#39;center_frequency&#39;</span>] + group.attrs[<span class="stringliteral">&#39;frequency_range&#39;</span>] / 2</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;nb_frequency_points&#39;</span>] = 400</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="comment"># Other parameters</span></div>
 <div class="line">    <span class="keywordflow">if</span> group == displacement:</div>
@@ -278,27 +301,33 @@ $(function() {
 <div class="line">        group.attrs[<span class="stringliteral">&#39;simulation_name&#39;</span>] = <span class="stringliteral">&#39;phononic_cavity_calibration&#39;</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;save_vtu_files&#39;</span>] = <span class="keyword">False</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">h5_file.close()</div>
 </div><!-- fragment --><p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
 <p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
-<p>Most of the include files we need for this program have already been discussed in previous programs, in particular in <a class="el" href="step_40.html">step-40</a>.</p>
+<p>我们在这个程序中需要的大部分包含文件已经在以前的程序中讨论过了，特别是在 <a class="el" href="step_40.html">step-40</a> .</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="conditional__ostream_8h.html">deal.II/base/conditional_ostream.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="function_8h.html">deal.II/base/function.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="index__set_8h.html">deal.II/base/index_set.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="quadrature__lib_8h.html">deal.II/base/quadrature_lib.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="timer_8h.html">deal.II/base/timer.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="include_2deal_8II_2base_2utilities_8h.html">deal.II/base/utilities.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dofs_2dof__handler_8h.html">deal.II/dofs/dof_handler.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dof__tools_8h.html">deal.II/dofs/dof_tools.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__q_8h.html">deal.II/fe/fe_q.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__system_8h.html">deal.II/fe/fe_system.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe_2fe__values_8h.html">deal.II/fe/fe_values.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__generator_8h.html">deal.II/grid/grid_generator.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2grid__refinement_8h.html">deal.II/grid/grid_refinement.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="affine__constraints_8h.html">deal.II/lac/affine_constraints.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dynamic__sparsity__pattern_8h.html">deal.II/lac/dynamic_sparsity_pattern.h</a>&gt;</span></div>
@@ -307,8 +336,10 @@ $(function() {
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="petsc__solver_8h.html">deal.II/lac/petsc_solver.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector_8h.html">deal.II/lac/vector.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="numerics_2data__out_8h.html">deal.II/numerics/data_out.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="error__estimator_8h.html">deal.II/numerics/error_estimator.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -333,17 +364,18 @@ $(function() {
 <div class="ttc" id="aquadrature__lib_8h_html"><div class="ttname"><a href="quadrature__lib_8h.html">quadrature_lib.h</a></div></div>
 <div class="ttc" id="atimer_8h_html"><div class="ttname"><a href="timer_8h.html">timer.h</a></div></div>
 <div class="ttc" id="avector_8h_html"><div class="ttname"><a href="vector_8h.html">vector.h</a></div></div>
-</div><!-- fragment --><p>The following header provides the <a class="el" href="classTensor.html">Tensor</a> class that we use to represent the material properties.</p>
+</div><!-- fragment --><p>下面的头文件提供了我们用来表示材料属性的张量类。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="tensor_8h.html">deal.II/base/tensor.h</a>&gt;</span></div>
 <div class="ttc" id="atensor_8h_html"><div class="ttname"><a href="tensor_8h.html">tensor.h</a></div></div>
-</div><!-- fragment --><p>The following header is necessary for the <a class="el" href="namespaceHDF5.html">HDF5</a> interface of deal.II.</p>
+</div><!-- fragment --><p>下面的标头对于deal.II的HDF5接口是必要的。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="hdf5_8h.html">deal.II/base/hdf5.h</a>&gt;</span></div>
 <div class="ttc" id="ahdf5_8h_html"><div class="ttname"><a href="hdf5_8h.html">hdf5.h</a></div></div>
-</div><!-- fragment --><p>This header is required for the function <a class="el" href="namespaceVectorTools.html#acd358e9b110ccbf4a7f76796d206b9c7">VectorTools::point_value</a> that we use to evaluate the result of the simulation.</p>
+</div><!-- fragment --><p>这个标头是我们用来评估模拟结果的函数 <a class="el" href="namespaceVectorTools.html#acd358e9b110ccbf4a7f76796d206b9c7">VectorTools::point_value</a> 所需要的。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector__tools_8h.html">deal.II/numerics/vector_tools.h</a>&gt;</span></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p>We need this header for the function <a class="el" href="namespaceGridTools.html#a2e10aeb1c8e76110a84b6945eac3aaf0">GridTools::find_active_cell_around_point</a> that we use in the function <code>ElasticWave::store_frequency_step_data()</code></p>
+</div><!-- fragment --><p>我们在函数 <code>ElasticWave::store_frequency_step_data()</code> 中使用的函数 <a class="el" href="namespaceGridTools.html#a2e10aeb1c8e76110a84b6945eac3aaf0">GridTools::find_active_cell_around_point</a> 需要这个标头。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__tools_8h.html">deal.II/grid/grid_tools.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span>step62</div>
 <div class="line">{</div>
@@ -351,26 +383,28 @@ $(function() {
 <div class="ttc" id="agrid__tools_8h_html"><div class="ttname"><a href="grid__tools_8h.html">grid_tools.h</a></div></div>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="namespace__dealii_8h_source.html#l00025">namespace_dealii.h:26</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="Auxiliaryclassesandfunctions"></a> </p><h3>Auxiliary classes and functions</h3>
-<p>The following classes are used to store the parameters of the simulation.</p>
+<p>以下类用于存储模拟的参数。</p>
 <p><a class="anchor" id="TheRightHandSideclass"></a> </p><h4>The <code>RightHandSide</code> class</h4>
-<p>This class is used to define the force pulse on the left side of the structure:</p>
+<p>该类用于定义结构左侧的力脉冲。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>RightHandSide : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  RightHandSide(<a class="code" href="classHDF5_1_1Group.html">HDF5::Group</a> &amp;data);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">value</a>(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp; p,</div>
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component) <span class="keyword">const override</span>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="ttc" id="aclassFunction_html"><div class="ttname"><a href="classFunction.html">Function</a></div><div class="ttdef"><b>Definition:</b> <a href="function_8h_source.html#l00150">function.h:153</a></div></div>
 <div class="ttc" id="aclassFunction_html_acbfcab66b2fc63bfea59268f40772bb4"><div class="ttname"><a href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">Function::value</a></div><div class="ttdeci">virtual RangeNumberType value(const Point&lt; dim &gt; &amp;p, const unsigned int component=0) const</div></div>
 <div class="ttc" id="aclassHDF5_1_1Group_html"><div class="ttname"><a href="classHDF5_1_1Group.html">HDF5::Group</a></div><div class="ttdef"><b>Definition:</b> <a href="hdf5_8h_source.html#l00976">hdf5.h:977</a></div></div>
 <div class="ttc" id="aclassPoint_html"><div class="ttname"><a href="classPoint.html">Point</a></div><div class="ttdef"><b>Definition:</b> <a href="base_2point_8h_source.html#l00110">point.h:111</a></div></div>
-</div><!-- fragment --><p>The variable <code>data</code> is the <a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> in which all the simulation results will be stored. Note that the variables <code>RightHandSide::data</code>, <code>PML::data</code>, <code>Rho::data</code> and <code>Parameters::data</code> point to the same group of the <a class="el" href="namespaceHDF5.html">HDF5</a> file. When a <a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> is copied, it will point to the same group of the <a class="el" href="namespaceHDF5.html">HDF5</a> file.</p>
+</div><!-- fragment --><p>变量<code>data</code>是 <a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> ，所有的仿真结果都将被储存在其中。注意，变量 <code>RightHandSide::data</code>, <code>PML::data</code>, <code>Rho::data</code> 和 <code>Parameters::data</code> 指向HDF5文件的同一组。当 <a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> 被复制时，它将指向HDF5文件的同一组。</p>
 <div class="fragment"><div class="line"><a class="code" href="classHDF5_1_1Group.html">HDF5::Group</a> data;</div>
-</div><!-- fragment --><p>The simulation parameters are stored in <code>data</code> as <a class="el" href="namespaceHDF5.html">HDF5</a> attributes. The following attributes are defined in the jupyter notebook, stored in <code>data</code> as <a class="el" href="namespaceHDF5.html">HDF5</a> attributes and then read by the constructor.</p>
+</div><!-- fragment --><p>仿真参数作为HDF5属性存储在<code>data</code>中。以下属性在jupyter笔记本中定义，作为HDF5属性存储在<code>data</code>中，然后由构造器读取。</p>
 <div class="fragment"><div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span>     max_force_amplitude;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span>     force_sigma_x;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span>     force_sigma_y;</div>
@@ -378,25 +412,28 @@ $(function() {
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span>     max_force_width_y;</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> force_center;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">public</span>:</div>
-</div><!-- fragment --><p>In this particular simulation the force has only a \(x\) component, \(F_y=0\).</p>
+</div><!-- fragment --><p>在这个特定的模拟中，力只有一个 \(x\) 分量， \(F_y=0\) 。</p>
 <div class="fragment"><div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> force_component = 0;</div>
 <div class="line">};</div>
 </div><!-- fragment --><p><a class="anchor" id="ThePMLclass"></a> </p><h4>The <code>PML</code> class</h4>
-<p>This class is used to define the shape of the Perfectly Matches Layer (PML) to absorb waves traveling towards the boundary:</p>
+<p>该类用于定义完美匹配层（PML）的形状，以吸收向边界移动的波。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>PML : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim, std::complex&lt;double&gt;&gt;</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  PML(<a class="code" href="classHDF5_1_1Group.html">HDF5::Group</a> &amp;data);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">virtual</span> std::complex&lt;double&gt;</div>
 <div class="line">  <a class="code" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">value</a>(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp;p, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component) <span class="keyword">const override</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
-</div><!-- fragment --><p><a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> in which all the simulation results will be stored.</p>
+</div><!-- fragment --><p><a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> 所有的模拟结果将被储存在其中。</p>
 <div class="fragment"><div class="line"><a class="code" href="classHDF5_1_1Group.html">HDF5::Group</a> data;</div>
-</div><!-- fragment --><p>The same as before, the following attributes are defined in the jupyter notebook, stored in <code>data</code> as <a class="el" href="namespaceHDF5.html">HDF5</a> attributes and then read by the constructor.</p>
+</div><!-- fragment --><p>和以前一样，在jupyter笔记本中定义以下属性，作为HDF5属性存储在<code>data</code>中，然后由构造器读取。</p>
 <div class="fragment"><div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> pml_coeff;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">int</span>    pml_coeff_degree;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> dimension_x;</div>
@@ -409,20 +446,22 @@ $(function() {
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> a_coeff_y;</div>
 <div class="line">};</div>
 </div><!-- fragment --><p><a class="anchor" id="TheRhoclass"></a> </p><h4>The <code>Rho</code> class</h4>
-<p>This class is used to define the mass density.</p>
+<p>这个类是用来定义质量密度的。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>Rho : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  Rho(<a class="code" href="classHDF5_1_1Group.html">HDF5::Group</a> &amp;data);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">value</a>(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp; p,</div>
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0) <span class="keyword">const override</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
-</div><!-- fragment --><p><a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> in which all the simulation results will be stored.</p>
+</div><!-- fragment --><p><a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> 所有的模拟结果将被储存在其中。</p>
 <div class="fragment"><div class="line"><a class="code" href="classHDF5_1_1Group.html">HDF5::Group</a> data;</div>
-</div><!-- fragment --><p>The same as before, the following attributes are defined in the jupyter notebook, stored in <code>data</code> as <a class="el" href="namespaceHDF5.html">HDF5</a> attributes and then read by the constructor.</p>
+</div><!-- fragment --><p>和以前一样，在jupyter笔记本中定义以下属性，作为HDF5属性存储在<code>data</code>中，然后由构造函数读取。</p>
 <div class="fragment"><div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span>       <a class="code" href="group__Exceptions.html#gga841a7b84dc17bf2ba675522093a97e8ba945f3fc449518a73b9f5f32868db466c">lambda</a>;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span>       <a class="code" href="namespacemu.html">mu</a>;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span>       material_a_rho;</div>
@@ -436,15 +475,15 @@ $(function() {
 <div class="ttc" id="agroup__Exceptions_html_gga841a7b84dc17bf2ba675522093a97e8ba945f3fc449518a73b9f5f32868db466c"><div class="ttname"><a href="group__Exceptions.html#gga841a7b84dc17bf2ba675522093a97e8ba945f3fc449518a73b9f5f32868db466c">Differentiation::SD::OptimizerType::lambda</a></div><div class="ttdeci">@ lambda</div></div>
 <div class="ttc" id="anamespacemu_html"><div class="ttname"><a href="namespacemu.html">mu</a></div><div class="ttdef"><b>Definition:</b> <a href="function__parser_8h_source.html#l00032">function_parser.h:33</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="TheParametersclass"></a> </p><h4>The <code>Parameters</code> class</h4>
-<p>This class contains all the parameters that will be used in the simulation.</p>
+<p>这个类包含所有将在模拟中使用的参数。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>Parameters</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  Parameters(<a class="code" href="classHDF5_1_1Group.html">HDF5::Group</a> &amp;data);</div>
-</div><!-- fragment --><p><a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> in which all the simulation results will be stored.</p>
+</div><!-- fragment --><p><a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> 所有的模拟结果将被储存在其中。</p>
 <div class="fragment"><div class="line"><a class="code" href="classHDF5_1_1Group.html">HDF5::Group</a> data;</div>
-</div><!-- fragment --><p>The same as before, the following attributes are defined in the jupyter notebook, stored in <code>data</code> as <a class="el" href="namespaceHDF5.html">HDF5</a> attributes and then read by the constructor.</p>
+</div><!-- fragment --><p>和以前一样，以下属性在jupyter笔记本中定义，作为HDF5属性存储在<code>data</code>中，然后由构造函数读取。</p>
 <div class="fragment"><div class="line">  <span class="keyword">const</span> std::string        simulation_name;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">bool</span>               save_vtu_files;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span>             start_frequency;</div>
@@ -462,23 +501,26 @@ $(function() {
 <div class="line">  <span class="keyword">const</span> PML&lt;dim&gt;           pml;</div>
 <div class="line">  <span class="keyword">const</span> Rho&lt;dim&gt;           rho;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> comparison_float_constant = 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-12;</div>
 <div class="line">};</div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a9587d5229555daa5b1fa1ba2f8a40adb"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">Physics::Elasticity::Kinematics::e</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; e(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
 </div><!-- fragment --><p><a class="anchor" id="TheQuadratureCacheclass"></a> </p><h4>The <code>QuadratureCache</code> class</h4>
-<p>The calculation of the mass and stiffness matrices is very expensive. These matrices are the same for all the frequency steps. The right hand side vector is also the same for all the frequency steps. We use this class to store these objects and re-use them at each frequency step. Note that here we don't store the assembled mass and stiffness matrices and right hand sides, but instead the data for a single cell. <code>QuadratureCache</code> class is very similar to the <code>PointHistory</code> class that has been used in <a class="el" href="step_18.html">step-18</a>.</p>
+<p>质量和刚度矩阵的计算非常昂贵。这些矩阵对所有的频率步骤都是一样的。右手边的向量对所有的频率步骤也是一样的。我们用这个类来存储这些对象，并在每个频率步骤中重新使用它们。请注意，这里我们不存储集合的质量和刚度矩阵以及右手边，而是存储单个单元的数据。QuadratureCache "类与 "PointHistory "类非常相似，后者已在 step-18 中使用。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>QuadratureCache</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  QuadratureCache(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">public</span>:</div>
-</div><!-- fragment --><p>We store the mass and stiffness matrices in the variables mass_coefficient and stiffness_coefficient. We store as well the right_hand_side and JxW values which are going to be the same for all the frequency steps.</p>
+</div><!-- fragment --><p>我们在变量mass_coefficient和stiffness_coefficient中存储质量和刚度矩阵。我们还存储了右手边和JxW值，这些值对所有的频率步骤都是一样的。</p>
 <div class="fragment"><div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;std::complex&lt;double&gt;</a>&gt;  mass_coefficient;</div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;std::complex&lt;double&gt;</a>&gt;  stiffness_coefficient;</div>
 <div class="line">  std::vector&lt;std::complex&lt;double&gt;&gt; right_hand_side;</div>
@@ -486,9 +528,10 @@ $(function() {
 <div class="line">};</div>
 <div class="ttc" id="aclassFullMatrix_html"><div class="ttname"><a href="classFullMatrix.html">FullMatrix</a></div><div class="ttdef"><b>Definition:</b> <a href="full__matrix_8h_source.html#l00069">full_matrix.h:70</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="Theget_stiffness_tensorfunction"></a> </p><h4>The <code>get_stiffness_tensor()</code> function</h4>
-<p>This function returns the stiffness tensor of the material. For the sake of simplicity we consider the stiffness to be isotropic and homogeneous; only the density \(\rho\) depends on the position. As we have previously shown in <a class="el" href="step_8.html">step-8</a>, if the stiffness is isotropic and homogeneous, the stiffness coefficients \(c_{ijkl}\) can be expressed as a function of the two coefficients \(\lambda\) and \(\mu\). The coefficient tensor reduces to </p><p class="formulaDsp">
+<p>该函数返回材料的刚度张量。为了简单起见，我们认为刚度是各向同性和同质的；只有密度 \(\rho\) 取决于位置。正如我们之前在 <a class="el" href="step_8.html">step-8</a> 中所表明的，如果刚度是各向同性和均质的，刚度系数 \(c_{ijkl}\) 可以表示为两个系数 \(\lambda\) 和 \(\mu\) 的函数。系数张量简化为 </p><p class="formulaDsp">
 \[ c_{ijkl} = \lambda \delta_{ij} \delta_{kl} + \mu (\delta_{ik} \delta_{jl} + \delta_{il} \delta_{jk}). \]
 </p>
+<p> 。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><a class="code" href="classSymmetricTensor.html">SymmetricTensor&lt;4, dim&gt;</a> get_stiffness_tensor(<span class="keyword">const</span> <span class="keywordtype">double</span> lambda,</div>
 <div class="line">                                             <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code" href="namespacemu.html">mu</a>)</div>
@@ -507,10 +550,11 @@ $(function() {
 <div class="ttc" id="aclassSymmetricTensor_html"><div class="ttname"><a href="classSymmetricTensor.html">SymmetricTensor&lt; 4, dim &gt;</a></div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_adb1b44ad6f1741fbbbecc43f95d26baf"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#adb1b44ad6f1741fbbbecc43f95d26baf">Physics::Elasticity::Kinematics::l</a></div><div class="ttdeci">Tensor&lt; 2, dim, Number &gt; l(const Tensor&lt; 2, dim, Number &gt; &amp;F, const Tensor&lt; 2, dim, Number &gt; &amp;dF_dt)</div></div>
 </div><!-- fragment --><p><a class="anchor" id="TheElasticWaveclass"></a> </p><h3>The <code>ElasticWave</code> class</h3>
-<p>Next let's declare the main class of this program. Its structure is very similar to the <a class="el" href="step_40.html">step-40</a> tutorial program. The main differences are:</p><ul>
-<li>The sweep over the frequency values.</li>
-<li>We save the stiffness and mass matrices in <code>quadrature_cache</code> and use them for each frequency step.</li>
-<li>We store the measured energy by the probe for each frequency step in the <a class="el" href="namespaceHDF5.html">HDF5</a> file.</li>
+<p>接下来让我们声明这个程序的主类。其结构与 <a class="el" href="step_40.html">step-40</a> 的教程程序非常相似。主要的区别是。</p>
+<ul>
+<li>对频率值的扫描。</li>
+<li>我们在<code>quadrature_cache</code>中保存刚度和质量矩阵，并在每个频率步骤中使用它们。</li>
+<li>我们在HDF5文件中存储每个频率步骤的探头测量的能量。</li>
 </ul>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>ElasticWave</div>
@@ -518,6 +562,7 @@ $(function() {
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  ElasticWave(<span class="keyword">const</span> Parameters&lt;dim&gt; &amp;parameters);</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keywordtype">void</span> setup_system();</div>
@@ -528,32 +573,39 @@ $(function() {
 <div class="line">  <span class="keywordtype">void</span> store_frequency_step_data(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> frequency_idx);</div>
 <div class="line">  <span class="keywordtype">void</span> output_results();</div>
 <div class="ttc" id="anamespaceWorkStream_1_1internal_1_1tbb__no__coloring_html_a8673698a405bf47aa24002aeb6d76d70"><div class="ttname"><a href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">WorkStream::internal::tbb_no_coloring::run</a></div><div class="ttdeci">void run(const Iterator &amp;begin, const typename identity&lt; Iterator &gt;::type &amp;end, Worker worker, Copier copier, const ScratchData &amp;sample_scratch_data, const CopyData &amp;sample_copy_data, const unsigned int queue_length, const unsigned int chunk_size)</div><div class="ttdef"><b>Definition:</b> <a href="work__stream_8h_source.html#l00691">work_stream.h:691</a></div></div>
-</div><!-- fragment --><p>This is called before every frequency step to set up a pristine state for the cache variables.</p>
+</div><!-- fragment --><p>在每一个频率步骤之前调用，为缓存变量设置一个原始状态。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> setup_quadrature_cache();</div>
-</div><!-- fragment --><p>This function loops over the frequency vector and runs the simulation for each frequency step.</p>
+</div><!-- fragment --><p>这个函数在频率向量上循环，为每个频率步骤运行仿真。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> frequency_sweep();</div>
-</div><!-- fragment --><p>The parameters are stored in this variable.</p>
+</div><!-- fragment --><p>参数被存储在这个变量中。</p>
 <div class="fragment"><div class="line">Parameters&lt;dim&gt; parameters;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">MPI_Comm mpi_communicator;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><a class="code" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation&lt;dim&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a> quadrature_formula;</div>
 <div class="ttc" id="aclassQGauss_html"><div class="ttname"><a href="classQGauss.html">QGauss</a></div><div class="ttdef"><b>Definition:</b> <a href="quadrature__lib_8h_source.html#l00038">quadrature_lib.h:39</a></div></div>
 <div class="ttc" id="aclassparallel_1_1distributed_1_1Triangulation_html"><div class="ttname"><a href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a></div><div class="ttdef"><b>Definition:</b> <a href="distributed_2tria_8h_source.html#l00252">tria.h:254</a></div></div>
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
-</div><!-- fragment --><p>We store the mass and stiffness matrices for each cell this vector.</p>
+</div><!-- fragment --><p>我们把每个单元的质量和刚度矩阵存储在这个向量中。</p>
 <div class="fragment"><div class="line">std::vector&lt;QuadratureCache&lt;dim&gt;&gt; quadrature_cache;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><a class="code" href="classFESystem.html">FESystem&lt;dim&gt;</a>   fe;</div>
 <div class="line"><a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a> dof_handler;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><a class="code" href="classIndexSet.html">IndexSet</a> locally_owned_dofs;</div>
 <div class="line"><a class="code" href="classIndexSet.html">IndexSet</a> locally_relevant_dofs;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><a class="code" href="classAffineConstraints.html">AffineConstraints&lt;std::complex&lt;double&gt;</a>&gt; constraints;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><a class="code" href="classPETScWrappers_1_1MPI_1_1SparseMatrix.html">LinearAlgebraPETSc::MPI::SparseMatrix</a> system_matrix;</div>
 <div class="line"><a class="code" href="classPETScWrappers_1_1MPI_1_1Vector.html">LinearAlgebraPETSc::MPI::Vector</a>       locally_relevant_solution;</div>
@@ -564,16 +616,17 @@ $(function() {
 <div class="ttc" id="aclassIndexSet_html"><div class="ttname"><a href="classIndexSet.html">IndexSet</a></div><div class="ttdef"><b>Definition:</b> <a href="index__set_8h_source.html#l00072">index_set.h:73</a></div></div>
 <div class="ttc" id="aclassPETScWrappers_1_1MPI_1_1SparseMatrix_html"><div class="ttname"><a href="classPETScWrappers_1_1MPI_1_1SparseMatrix.html">PETScWrappers::MPI::SparseMatrix</a></div><div class="ttdef"><b>Definition:</b> <a href="petsc__sparse__matrix_8h_source.html#l00365">petsc_sparse_matrix.h:366</a></div></div>
 <div class="ttc" id="aclassPETScWrappers_1_1MPI_1_1Vector_html"><div class="ttname"><a href="classPETScWrappers_1_1MPI_1_1Vector.html">PETScWrappers::MPI::Vector</a></div><div class="ttdef"><b>Definition:</b> <a href="petsc__vector_8h_source.html#l00156">petsc_vector.h:157</a></div></div>
-</div><!-- fragment --><p>This vector contains the range of frequencies that we are going to simulate.</p>
+</div><!-- fragment --><p>这个向量包含我们要模拟的频率范围。</p>
 <div class="fragment"><div class="line">std::vector&lt;double&gt; frequency;</div>
-</div><!-- fragment --><p>This vector contains the coordinates \((x,y)\) of the points of the measurement probe.</p>
+</div><!-- fragment --><p>这个向量包含测量探头各点的坐标 \((x,y)\) 。</p>
 <div class="fragment"><div class="line"><a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> probe_positions;</div>
-</div><!-- fragment --><p><a class="el" href="namespaceHDF5.html">HDF5</a> datasets to store the frequency and <code>probe_positions</code> vectors.</p>
+</div><!-- fragment --><p>HDF5数据集用于存储频率和<code>探针位置</code>向量。</p>
 <div class="fragment"><div class="line"><a class="code" href="classHDF5_1_1DataSet.html">HDF5::DataSet</a> frequency_dataset;</div>
 <div class="line"><a class="code" href="classHDF5_1_1DataSet.html">HDF5::DataSet</a> probe_positions_dataset;</div>
 <div class="ttc" id="aclassHDF5_1_1DataSet_html"><div class="ttname"><a href="classHDF5_1_1DataSet.html">HDF5::DataSet</a></div><div class="ttdef"><b>Definition:</b> <a href="hdf5_8h_source.html#l00426">hdf5.h:427</a></div></div>
-</div><!-- fragment --><p><a class="el" href="namespaceHDF5.html">HDF5</a> dataset that stores the values of the energy measured by the probe.</p>
+</div><!-- fragment --><p>HDF5数据集，用于存储探头测量的能量值。</p>
 <div class="fragment"><div class="line">  <a class="code" href="classHDF5_1_1DataSet.html">HDF5::DataSet</a> displacement;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classConditionalOStream.html">ConditionalOStream</a> pcout;</div>
@@ -582,8 +635,9 @@ $(function() {
 <div class="ttc" id="aclassConditionalOStream_html"><div class="ttname"><a href="classConditionalOStream.html">ConditionalOStream</a></div><div class="ttdef"><b>Definition:</b> <a href="conditional__ostream_8h_source.html#l00080">conditional_ostream.h:81</a></div></div>
 <div class="ttc" id="aclassTimerOutput_html"><div class="ttname"><a href="classTimerOutput.html">TimerOutput</a></div><div class="ttdef"><b>Definition:</b> <a href="timer_8h_source.html#l00544">timer.h:545</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="Implementationoftheauxiliaryclasses"></a> </p><h3>Implementation of the auxiliary classes</h3>
-<p><a class="anchor" id="TheRightHandSideclassimplementation"></a> </p><h4>The <code>RightHandSide</code> class implementation</h4>
-<p>The constructor reads all the parameters from the <a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> <code>data</code> using the <a class="el" href="classHDF5_1_1HDF5Object.html#a25c71292aba2399ad5a21d5d855ea2eb">HDF5::Group::get_attribute()</a> function.</p>
+<h3>Implementation of the auxiliary classes</h3>
+<p><a class="anchor" id="TheRightHandSideclassimplementation"></a> <a class="anchor" id="TheRightHandSideclassimplementation"></a> </p><h4>The <code>RightHandSide</code> class implementation</h4>
+<p>构造函数使用 <a class="el" href="classHDF5_1_1HDF5Object.html#a25c71292aba2399ad5a21d5d855ea2eb">HDF5::Group::get_attribute()</a> 函数从 <a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> <code>data</code>中读取所有参数。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">RightHandSide&lt;dim&gt;::RightHandSide(<a class="code" href="classHDF5_1_1Group.html">HDF5::Group</a> &amp;data)</div>
 <div class="line">  : <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;(dim)</div>
@@ -597,10 +651,11 @@ $(function() {
 <div class="line">                            data.get_attribute&lt;<a class="code" href="classdouble.html">double</a>&gt;(<span class="stringliteral">&quot;force_y_pos&quot;</span>)))</div>
 <div class="line">{}</div>
 <div class="ttc" id="aclassdouble_html"><div class="ttname"><a href="classdouble.html">double</a></div></div>
-</div><!-- fragment --><p>This function defines the spatial shape of the force vector pulse which takes the form of a Gaussian function </p><p class="formulaDsp">
+</div><!-- fragment --><p>这个函数定义了力矢量脉冲的空间形状，其形式为高斯函数。</p>
+<p class="formulaDsp">
 \begin{align*} F_x &amp;= \left\{ \begin{array}{ll} a \exp(- (\frac{(x-b_x)^2 }{ 2 \sigma_x^2}+\frac{(y-b_y)^2 }{ 2 \sigma_y^2})) &amp; \text{if}\, x_\textrm{min} &lt;x&lt;x_\textrm{max}\, \text{and}\, y_\textrm{min} &lt;y&lt;y_\textrm{max} \\ 0 &amp; \text{otherwise}, \end{array} \right.\\ F_y &amp;= 0 \end{align*}
 </p>
-<p> where \(a\) is the maximum amplitude that takes the force and \(\sigma_x\) and \(\sigma_y\) are the standard deviations for the \(x\) and \(y\) components. Note that the pulse has been cropped to \(x_\textrm{min}&lt;x&lt;x_\textrm{max}\) and \(y_\textrm{min} &lt;y&lt;y_\textrm{max}\).</p>
+<p>其中 \(a\) 是取力的最大振幅， \(\sigma_x\) 和 \(\sigma_y\) 是 \(x\) 和 \(y\) 成分的标准偏差。请注意，脉冲已被裁剪为 \(x_\textrm{min}&lt;x&lt;x_\textrm{max}\) 和 \(y_\textrm{min} &lt;y&lt;y_\textrm{max}\) 。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">double</span> RightHandSide&lt;dim&gt;::value(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp; p,</div>
 <div class="line">                                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
@@ -628,7 +683,7 @@ $(function() {
 <div class="line">}</div>
 <div class="ttc" id="anumbers_8h_html_a372e01cd9d1d07fdf136f4f40975d5cf"><div class="ttname"><a href="numbers_8h.html#a372e01cd9d1d07fdf136f4f40975d5cf">std::exp</a></div><div class="ttdeci">::VectorizedArray&lt; Number, width &gt; exp(const ::VectorizedArray&lt; Number, width &gt; &amp;)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l05362">vectorization.h:5362</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="ThePMLclassimplementation"></a> </p><h4>The <code>PML</code> class implementation</h4>
-<p>As before, the constructor reads all the parameters from the <a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> <code>data</code> using the <a class="el" href="classHDF5_1_1HDF5Object.html#a25c71292aba2399ad5a21d5d855ea2eb">HDF5::Group::get_attribute()</a> function. As we have discussed, a quadratic turn-on of the PML has been defined in the jupyter notebook. It is possible to use a linear, cubic or another power degree by changing the parameter <code>pml_coeff_degree</code>. The parameters <code>pml_x</code> and <code>pml_y</code> can be used to turn on and off the <code>x</code> and <code>y</code> PMLs.</p>
+<p>和以前一样，构造函数使用 <a class="el" href="classHDF5_1_1HDF5Object.html#a25c71292aba2399ad5a21d5d855ea2eb">HDF5::Group::get_attribute()</a> 函数从 <a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> <code>data</code>中读取所有参数。正如我们所讨论的，在jupyter笔记本中已经定义了PML的二次开机。通过改变参数<code>pml_coeff_degree</code>，可以使用线性、立方或其他幂度。参数<code>pml_x</code>和<code>pml_y</code>可以用来打开和关闭<code>x</code>和<code>y</code>PML。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">PML&lt;dim&gt;::PML(<a class="code" href="classHDF5_1_1Group.html">HDF5::Group</a> &amp;data)</div>
 <div class="line">  : <a class="code" href="classFunction.html">Function</a>&lt;dim, std::complex&lt;<a class="code" href="classdouble.html">double</a>&gt;&gt;(dim)</div>
@@ -646,13 +701,14 @@ $(function() {
 <div class="line">{}</div>
 <div class="ttc" id="aclassVectorizedArray_html_a88a75c587436aef435bd528ab65ac3fe"><div class="ttname"><a href="classVectorizedArray.html#a88a75c587436aef435bd528ab65ac3fe">VectorizedArray::pow</a></div><div class="ttdeci">VectorizedArray&lt; Number, width &gt; pow(const ::VectorizedArray&lt; Number, width &gt; &amp;x, const Number p)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l05422">vectorization.h:5422</a></div></div>
 <div class="ttc" id="aclassbool_html"><div class="ttname"><a href="classbool.html">bool</a></div></div>
-</div><!-- fragment --><p>The PML coefficient for the <code>x</code> component takes the form \(s&#39;_x = a_x x^{\textrm{degree}}\)</p>
+</div><!-- fragment --><p><code>x</code>分量的PML系数的形式为 \(s&#39;_x = a_x x^{\textrm{degree}}\) 。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">std::complex&lt;double&gt; PML&lt;dim&gt;::value(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp; p,</div>
 <div class="line">                                     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <span class="keywordtype">double</span> calculated_pml_x_coeff = 0;</div>
 <div class="line">  <span class="keywordtype">double</span> calculated_pml_y_coeff = 0;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">if</span> ((component == 0) &amp;&amp; pml_x)</div>
 <div class="line">    {</div>
@@ -665,6 +721,7 @@ $(function() {
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">if</span> ((component == 1) &amp;&amp; pml_y)</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> pml_y_start_position = dimension_y / 2 - pml_width_y;</div>
@@ -676,6 +733,7 @@ $(function() {
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 1. + <a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">std::max</a>(calculated_pml_x_coeff, calculated_pml_y_coeff) *</div>
 <div class="line">                std::complex&lt;double&gt;(0., 1.);</div>
 <div class="line">}</div>
@@ -683,7 +741,7 @@ $(function() {
 <div class="ttc" id="anumbers_8h_html_a0ebae11c64606a73e80a6328b1ab0802"><div class="ttname"><a href="numbers_8h.html#a0ebae11c64606a73e80a6328b1ab0802">std::abs</a></div><div class="ttdeci">::VectorizedArray&lt; Number, width &gt; abs(const ::VectorizedArray&lt; Number, width &gt; &amp;)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l05444">vectorization.h:5444</a></div></div>
 <div class="ttc" id="anumbers_8h_html_af44aee1db5cdcd0bab54e3c011d2be66"><div class="ttname"><a href="numbers_8h.html#af44aee1db5cdcd0bab54e3c011d2be66">std::pow</a></div><div class="ttdeci">::VectorizedArray&lt; Number, width &gt; pow(const ::VectorizedArray&lt; Number, width &gt; &amp;, const Number p)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l05422">vectorization.h:5422</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="TheRhoclassimplementation"></a> </p><h4>The <code>Rho</code> class implementation</h4>
-<p>This class is used to define the mass density. As we have explaine before, a phononic superlattice cavity is formed by two <a href="https://en.wikipedia.org/wiki/Band_gap">Distributed Reflector</a>, mirrors and a \(\lambda/2\) cavity where \(\lambda\) is the acoustic wavelength. Acoustic DBRs are periodic structures where a set of bilayer stacks with contrasting physical properties (sound velocity index) is repeated \(N\) times. The change of in the wave velocity is generated by alternating layers with different density.</p>
+<p>这个类是用来定义质量密度的。正如我们之前所解释的，一个声学超晶格空腔是由两个<a href="https://en.wikipedia.org/wiki/Band_gap">分布式反射器</a>、镜子和一个 \(\lambda/2\) 空腔组成，其中 \(\lambda\) 是声学波长。声学DBRs是一种周期性结构，其中一组具有对比物理特性（声速指数）的双层叠层被重复 \(N\) 次。波速的变化是由具有不同密度的层交替产生的。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">Rho&lt;dim&gt;::Rho(<a class="code" href="classHDF5_1_1Group.html">HDF5::Group</a> &amp;data)</div>
 <div class="line">  : <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;(1)</div>
@@ -698,10 +756,12 @@ $(function() {
 <div class="line">  , dimension_y(data.get_attribute&lt;<a class="code" href="classdouble.html">double</a>&gt;(<span class="stringliteral">&quot;dimension_y&quot;</span>))</div>
 <div class="line">  , grid_level(data.get_attribute&lt;int&gt;(<span class="stringliteral">&quot;grid_level&quot;</span>))</div>
 <div class="line">{</div>
-</div><!-- fragment --><p>In order to increase the precision we use <a href="https://meep.readthedocs.io/en/latest/Subpixel_Smoothing/">subpixel smoothing</a>.</p>
+</div><!-- fragment --><p>为了提高精度，我们使用了<a href="https://meep.readthedocs.io/en/latest/Subpixel_Smoothing/">子像素平滑法</a>。</p>
 <div class="fragment"><div class="line">  average_rho_width = dimension_y / (<a class="code" href="numbers_8h.html#af44aee1db5cdcd0bab54e3c011d2be66">std::pow</a>(2.0, grid_level));</div>
 <div class="line">  data.<a class="code" href="classHDF5_1_1HDF5Object.html#a655831e44bf7595fbc984a8126e44172">set_attribute</a>(<span class="stringliteral">&quot;average_rho_width&quot;</span>, average_rho_width);</div>
 <div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -710,13 +770,13 @@ $(function() {
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="comment">/*component*/</span>)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="ttc" id="aclassHDF5_1_1HDF5Object_html_a655831e44bf7595fbc984a8126e44172"><div class="ttname"><a href="classHDF5_1_1HDF5Object.html#a655831e44bf7595fbc984a8126e44172">HDF5::HDF5Object::set_attribute</a></div><div class="ttdeci">void set_attribute(const std::string &amp;attr_name, const T value)</div><div class="ttdef"><b>Definition:</b> <a href="hdf5_8h_source.html#l01665">hdf5.h:1665</a></div></div>
-</div><!-- fragment --><p>The speed of sound is defined by </p><p class="formulaDsp">
+</div><!-- fragment --><p>声速由 </p><p class="formulaDsp">
 \[ c = \frac{K_e}{\rho} \]
 </p>
-<p> where \(K_e\) is the effective elastic constant and \(\rho\) the density. Here we consider the case in which the waveguide width is much smaller than the wavelength. In this case it can be shown that for the two dimensional case </p><p class="formulaDsp">
+<p>定义，其中 \(K_e\) 是有效弹性常数， \(\rho\) 是密度。这里我们考虑波导宽度远小于波长的情况。在这种情况下，可以证明对于二维的情况 </p><p class="formulaDsp">
 \[ K_e = 4\mu\frac{\lambda +\mu}{\lambda+2\mu} \]
 </p>
-<p> and for the three dimensional case \(K_e\) is equal to the Young's modulus. </p><p class="formulaDsp">
+<p>和三维的情况 \(K_e\) 等于杨氏模量。 </p><p class="formulaDsp">
 \[ K_e = \mu\frac{3\lambda +2\mu}{\lambda+\mu} \]
 </p>
 <div class="fragment"><div class="line"><span class="keywordtype">double</span> elastic_constant;</div>
@@ -743,7 +803,7 @@ $(function() {
 <div class="ttc" id="agroup__Exceptions_html_ga31978c026b8b6b5116df30b8e748f6b7"><div class="ttname"><a href="group__Exceptions.html#ga31978c026b8b6b5116df30b8e748f6b7">StandardExceptions::ExcInternalError</a></div><div class="ttdeci">static ::ExceptionBase &amp; ExcInternalError()</div></div>
 <div class="ttc" id="agroup__Exceptions_html_ga70a0bb353656e704acf927945277bbc6"><div class="ttname"><a href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a></div><div class="ttdeci">#define Assert(cond, exc)</div><div class="ttdef"><b>Definition:</b> <a href="include_2deal_8II_2base_2exceptions_8h_source.html#l01473">exceptions.h:1473</a></div></div>
 <div class="ttc" id="anumbers_8h_html_ac4a2ed1890a931d0b6a55933310eadca"><div class="ttname"><a href="numbers_8h.html#ac4a2ed1890a931d0b6a55933310eadca">std::sqrt</a></div><div class="ttdeci">::VectorizedArray&lt; Number, width &gt; sqrt(const ::VectorizedArray&lt; Number, width &gt; &amp;)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l05406">vectorization.h:5406</a></div></div>
-</div><!-- fragment --><p>The density \(\rho\) takes the following form <img src="https://www.dealii.org/images/steps/developer/step-62.04.svg" alt="Phononic superlattice cavity" style="pointer-events: none;" height="200" class="inline"/> where the brown color represents material_a and the green color represents material_b.</p>
+</div><!-- fragment --><p>密度 \(\rho\) 采取以下形式 <img src="https://www.dealii.org/images/steps/developer/  step-62  .04.svg" alt="声学超晶格空腔" style="pointer-events: none;" height="200" class="inline"/> 其中棕色代表材料_a，绿色代表材料_b。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> idx = 0; idx &lt; nb_mirror_pairs; idx++)</div>
 <div class="line">  {</div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">double</span> layer_transition_center =</div>
@@ -761,7 +821,7 @@ $(function() {
 <div class="line">               coefficient * material_b_rho;</div>
 <div class="line">      }</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>Here we define the <a href="https://meep.readthedocs.io/en/latest/Subpixel_Smoothing/">subpixel smoothing</a> which improves the precision of the simulation.</p>
+</div><!-- fragment --><p>这里我们定义了<a href="https://meep.readthedocs.io/en/latest/Subpixel_Smoothing/">subpixel smoothing</a>，它提高了模拟的精度。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> idx = 0; idx &lt; nb_mirror_pairs; idx++)</div>
 <div class="line">  {</div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">double</span> layer_transition_center =</div>
@@ -780,12 +840,12 @@ $(function() {
 <div class="line">               coefficient * material_a_rho;</div>
 <div class="line">      }</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>then the cavity</p>
+</div><!-- fragment --><p>然后是腔体</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (std::abs(p[0]) &lt;= material_a_wavelength / 2)</div>
 <div class="line">  {</div>
 <div class="line">    <span class="keywordflow">return</span> material_a_rho;</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>the material_a layers</p>
+</div><!-- fragment --><p>材料_A层</p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> idx = 0; idx &lt; nb_mirror_pairs; idx++)</div>
 <div class="line">  {</div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">double</span> layer_center =</div>
@@ -799,7 +859,7 @@ $(function() {
 <div class="line">        <span class="keywordflow">return</span> material_a_rho;</div>
 <div class="line">      }</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>the material_b layers</p>
+</div><!-- fragment --><p>材料_B层</p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> idx = 0; idx &lt; nb_mirror_pairs; idx++)</div>
 <div class="line">  {</div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">double</span> layer_center =</div>
@@ -813,11 +873,11 @@ $(function() {
 <div class="line">        <span class="keywordflow">return</span> material_b_rho;</div>
 <div class="line">      }</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>and finally the default is material_a.</p>
+</div><!-- fragment --><p>最后是默认的 material_a。</p>
 <div class="fragment"><div class="line">  <span class="keywordflow">return</span> material_a_rho;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="TheParametersclassimplementation"></a> </p><h4>The <code>Parameters</code> class implementation</h4>
-<p>The constructor reads all the parameters from the <a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> <code>data</code> using the <a class="el" href="classHDF5_1_1HDF5Object.html#a25c71292aba2399ad5a21d5d855ea2eb">HDF5::Group::get_attribute()</a> function.</p>
+<p>构造函数使用 <a class="el" href="classHDF5_1_1HDF5Object.html#a25c71292aba2399ad5a21d5d855ea2eb">HDF5::Group::get_attribute()</a> 函数从 <a class="el" href="classHDF5_1_1Group.html">HDF5::Group</a> <code>data</code>读取所有参数。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">Parameters&lt;dim&gt;::Parameters(<a class="code" href="classHDF5_1_1Group.html">HDF5::Group</a> &amp;data)</div>
 <div class="line">  : data(data)</div>
@@ -843,7 +903,7 @@ $(function() {
 <div class="line">  , rho(data)</div>
 <div class="line">{}</div>
 </div><!-- fragment --><p><a class="anchor" id="TheQuadratureCacheclassimplementation"></a> </p><h4>The <code>QuadratureCache</code> class implementation</h4>
-<p>We need to reserve enough space for the mass and stiffness matrices and the right hand side vector.</p>
+<p>我们需要为质量和刚度矩阵以及右手边的向量保留足够的空间。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">QuadratureCache&lt;dim&gt;::QuadratureCache(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell)</div>
 <div class="line">  : dofs_per_cell(dofs_per_cell)</div>
@@ -852,8 +912,9 @@ $(function() {
 <div class="line">  , right_hand_side(dofs_per_cell)</div>
 <div class="line">{}</div>
 </div><!-- fragment --><p><a class="anchor" id="ImplementationoftheElasticWaveclass"></a> </p><h3>Implementation of the <code>ElasticWave</code> class</h3>
-<p><a class="anchor" id="Constructor"></a> </p><h4>Constructor</h4>
-<p>This is very similar to the constructor of <a class="el" href="step_40.html">step-40</a>. In addition we create the <a class="el" href="namespaceHDF5.html">HDF5</a> datasets <code>frequency_dataset</code>, <code>position_dataset</code> and <code>displacement</code>. Note the use of the <code>template</code> keyword for the creation of the <a class="el" href="namespaceHDF5.html">HDF5</a> datasets. It is a C++ requirement to use the <code>template</code> keyword in order to treat <code>create_dataset</code> as a dependent template name.</p>
+<h3>Implementation of the <code>ElasticWave</code> class</h3>
+<p><a class="anchor" id="Constructor"></a></p><h4>Constructor</h4>
+<p>这与 <a class="el" href="step_40.html">step-40</a> 的构造函数非常相似。此外，我们创建了HDF5数据集<code>frequency_dataset</code>，<code>position_dataset</code>和<code>displacement</code>。注意在创建HDF5数据集时使用了<code>template'关键字。这是C++的要求，使用</code>template<code>关键字是为了将</code>create_dataset`作为一个依赖的模板名称。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">ElasticWave&lt;dim&gt;::ElasticWave(<span class="keyword">const</span> Parameters&lt;dim&gt; &amp;parameters)</div>
 <div class="line">  : parameters(parameters)</div>
@@ -890,37 +951,46 @@ $(function() {
 <div class="ttc" id="aclassTimerOutput_html_a643d0e642b80048e91b37109fe9357cba6e77a7039cabde1578e2aa8fe7d5f726"><div class="ttname"><a href="classTimerOutput.html#a643d0e642b80048e91b37109fe9357cba6e77a7039cabde1578e2aa8fe7d5f726">TimerOutput::summary</a></div><div class="ttdeci">@ summary</div><div class="ttdef"><b>Definition:</b> <a href="timer_8h_source.html#l00603">timer.h:603</a></div></div>
 <div class="ttc" id="aclassTriangulation_html"><div class="ttname"><a href="classTriangulation.html">Triangulation</a></div><div class="ttdef"><b>Definition:</b> <a href="grid_2tria_8h_source.html#l01127">tria.h:1128</a></div></div>
 <div class="ttc" id="anamespaceUtilities_1_1MPI_html_a895dcd8223a0ee6f0e6a80b80e2d5982"><div class="ttname"><a href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">Utilities::MPI::this_mpi_process</a></div><div class="ttdeci">unsigned int this_mpi_process(const MPI_Comm &amp;mpi_communicator)</div><div class="ttdef"><b>Definition:</b> <a href="mpi_8cc_source.html#l00128">mpi.cc:128</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="ElasticWavesetup_system"></a> </p><h4>ElasticWave::setup_system</h4>
-<p>There is nothing new in this function, the only difference with <a class="el" href="step_40.html">step-40</a> is that we don't have to apply boundary conditions because we use the PMLs to truncate the domain.</p>
+</div><!-- fragment --><p><a class="anchor" id="ElasticWavesetup_system"></a></p><h4>ElasticWave::setup_system</h4>
+<p>这个函数没有什么新内容，与 <a class="el" href="step_40.html">step-40</a> 的唯一区别是，我们不必应用边界条件，因为我们使用PML来截断域。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> ElasticWave&lt;dim&gt;::setup_system()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> t(computing_timer, <span class="stringliteral">&quot;setup&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  dof_handler.distribute_dofs(fe);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  locally_owned_dofs = dof_handler.locally_owned_dofs();</div>
 <div class="line">  <a class="code" href="namespaceDoFTools.html#acad7e0841b9046eaafddc4c617ab1d9d">DoFTools::extract_locally_relevant_dofs</a>(dof_handler, locally_relevant_dofs);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  locally_relevant_solution.reinit(locally_owned_dofs,</div>
 <div class="line">                                   locally_relevant_dofs,</div>
 <div class="line">                                   mpi_communicator);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  system_rhs.reinit(locally_owned_dofs, mpi_communicator);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  constraints.clear();</div>
 <div class="line">  constraints.reinit(locally_relevant_dofs);</div>
 <div class="line">  <a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, constraints);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  constraints.close();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a> dsp(locally_relevant_dofs);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler, dsp, constraints, <span class="keyword">false</span>);</div>
 <div class="line">  <a class="code" href="namespaceSparsityTools.html#afbc0c7a206ced91b154666215ea3c218">SparsityTools::distribute_sparsity_pattern</a>(dsp,</div>
 <div class="line">                                             locally_owned_dofs,</div>
 <div class="line">                                             mpi_communicator,</div>
 <div class="line">                                             locally_relevant_dofs);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  system_matrix.reinit(locally_owned_dofs,</div>
 <div class="line">                       locally_owned_dofs,</div>
@@ -934,12 +1004,13 @@ $(function() {
 <div class="ttc" id="anamespaceDoFTools_html_acad7e0841b9046eaafddc4c617ab1d9d"><div class="ttname"><a href="namespaceDoFTools.html#acad7e0841b9046eaafddc4c617ab1d9d">DoFTools::extract_locally_relevant_dofs</a></div><div class="ttdeci">void extract_locally_relevant_dofs(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, IndexSet &amp;dof_set)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools_8cc_source.html#l01210">dof_tools.cc:1210</a></div></div>
 <div class="ttc" id="anamespaceSparsityTools_html_afbc0c7a206ced91b154666215ea3c218"><div class="ttname"><a href="namespaceSparsityTools.html#afbc0c7a206ced91b154666215ea3c218">SparsityTools::distribute_sparsity_pattern</a></div><div class="ttdeci">void distribute_sparsity_pattern(DynamicSparsityPattern &amp;dsp, const IndexSet &amp;locally_owned_rows, const MPI_Comm &amp;mpi_comm, const IndexSet &amp;locally_relevant_rows)</div><div class="ttdef"><b>Definition:</b> <a href="sparsity__tools_8cc_source.html#l01045">sparsity_tools.cc:1045</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="ElasticWaveassemble_system"></a> </p><h4>ElasticWave::assemble_system</h4>
-<p>This function is also very similar to <a class="el" href="step_40.html">step-40</a>, though there are notable differences. We assemble the system for each frequency/omega step. In the first step we set <code>calculate_quadrature_data = True</code> and we calculate the mass and stiffness matrices and the right hand side vector. In the subsequent steps we will use that data to accelerate the calculation.</p>
+<p>这个函数也与 <a class="el" href="step_40.html">step-40</a> 非常相似，尽管有明显的区别。我们为每个频率/欧米茄步骤组装系统。在第一步，我们设置`calculate_quadrature_data = True'，我们计算质量和刚度矩阵以及右手边的矢量。在随后的步骤中，我们将使用这些数据来加速计算。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> ElasticWave&lt;dim&gt;::assemble_system(<span class="keyword">const</span> <span class="keywordtype">double</span> omega,</div>
 <div class="line">                                       <span class="keyword">const</span> <span class="keywordtype">bool</span>   calculate_quadrature_data)</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> t(computing_timer, <span class="stringliteral">&quot;assembly&quot;</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a>      fe_values(fe,</div>
 <div class="line">                          quadrature_formula,</div>
@@ -948,8 +1019,10 @@ $(function() {
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = fe.n_dofs_per_cell();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points    = quadrature_formula.size();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;std::complex&lt;double&gt;</a>&gt; <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>(dofs_per_cell, dofs_per_cell);</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;std::complex&lt;double&gt;</a>&gt;     cell_rhs(dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices(dofs_per_cell);</div>
 <div class="ttc" id="aclassFEValues_html"><div class="ttname"><a href="classFEValues.html">FEValues</a></div><div class="ttdef"><b>Definition:</b> <a href="fe_2fe__values_8h_source.html#l03905">fe_values.h:3906</a></div></div>
@@ -959,16 +1032,17 @@ $(function() {
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a></div><div class="ttdeci">@ update_gradients</div><div class="ttdoc">Shape function gradients.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00084">fe_update_flags.h:84</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a></div><div class="ttdeci">@ update_quadrature_points</div><div class="ttdoc">Transformed quadrature points.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00122">fe_update_flags.h:122</a></div></div>
 <div class="ttc" id="anamespaceLocalIntegrators_1_1Advection_html_a8bc7b8136646134f73a4193adefe15f8"><div class="ttname"><a href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">LocalIntegrators::Advection::cell_matrix</a></div><div class="ttdeci">void cell_matrix(FullMatrix&lt; double &gt; &amp;M, const FEValuesBase&lt; dim &gt; &amp;fe, const FEValuesBase&lt; dim &gt; &amp;fetest, const ArrayView&lt; const std::vector&lt; double &gt;&gt; &amp;velocity, const double factor=1.)</div><div class="ttdef"><b>Definition:</b> <a href="advection_8h_source.html#l00075">advection.h:75</a></div></div>
-</div><!-- fragment --><p>Here we store the value of the right hand side, rho and the PML.</p>
+</div><!-- fragment --><p>这里我们存储右手边的值，rho和PML。</p>
 <div class="fragment"><div class="line">std::vector&lt;Vector&lt;double&gt;&gt; rhs_values(n_q_points, <a class="code" href="classVector.html">Vector&lt;double&gt;</a>(dim));</div>
 <div class="line">std::vector&lt;double&gt;         rho_values(n_q_points);</div>
 <div class="line">std::vector&lt;Vector&lt;std::complex&lt;double&gt;&gt;&gt; pml_values(</div>
 <div class="line">  n_q_points, <a class="code" href="classVector.html">Vector</a>&lt;std::complex&lt;double&gt;&gt;(dim));</div>
-</div><!-- fragment --><p>We calculate the stiffness tensor for the \(\lambda\) and \(\mu\) that have been defined in the jupyter notebook. Note that contrary to \(\rho\) the stiffness is constant among for the whole domain.</p>
+</div><!-- fragment --><p>我们计算在jupyter笔记本中已经定义的 \(\lambda\) 和 \(\mu\) 的刚度张量。注意，与 \(\rho\) 相反，刚度在整个领域中是恒定的。</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code" href="classSymmetricTensor.html">SymmetricTensor&lt;4, dim&gt;</a> stiffness_tensor =</div>
 <div class="line">  get_stiffness_tensor&lt;dim&gt;(parameters.lambda, parameters.mu);</div>
-</div><!-- fragment --><p>We use the same method of <a class="el" href="step_20.html">step-20</a> for vector-valued problems.</p>
+</div><!-- fragment --><p>我们使用与 <a class="el" href="step_20.html">step-20</a> 相同的方法处理矢量值问题。</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code" href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a> displacement(0);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">  <span class="keywordflow">if</span> (cell-&gt;is_locally_owned())</div>
@@ -976,10 +1050,11 @@ $(function() {
 <div class="line">      <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a> = 0;</div>
 <div class="line">      cell_rhs    = 0;</div>
 <div class="ttc" id="astructFEValuesExtractors_1_1Vector_html"><div class="ttname"><a href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__values__extractors_8h_source.html#l00150">fe_values_extractors.h:151</a></div></div>
-</div><!-- fragment --><p>We have to calculate the values of the right hand side, rho and the PML only if we are going to calculate the mass and the stiffness matrices. Otherwise we can skip this calculation which considerably reduces the total calculation time.</p>
+</div><!-- fragment --><p>只有当我们要计算质量和刚度矩阵时，我们才必须计算右手边的值、rho和PML。否则我们可以跳过这个计算，这将大大减少总的计算时间。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (calculate_quadrature_data)</div>
 <div class="line">  {</div>
 <div class="line">    fe_values.reinit(cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    parameters.right_hand_side.vector_value_list(</div>
 <div class="line">      fe_values.get_quadrature_points(), rhs_values);</div>
@@ -988,7 +1063,7 @@ $(function() {
 <div class="line">    parameters.pml.vector_value_list(</div>
 <div class="line">      fe_values.get_quadrature_points(), pml_values);</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>We have done this in <a class="el" href="step_18.html">step-18</a>. Get a pointer to the quadrature cache data local to the present cell, and, as a defensive measure, make sure that this pointer is within the bounds of the global array:</p>
+</div><!-- fragment --><p>我们在 <a class="el" href="step_18.html">step-18</a> 中已经这样做了。获得一个指向当前单元本地正交缓存数据的指针，作为防御措施，确保这个指针在全局数组的范围内。</p>
 <div class="fragment"><div class="line">QuadratureCache&lt;dim&gt; *local_quadrature_points_data =</div>
 <div class="line">  <span class="keyword">reinterpret_cast&lt;</span>QuadratureCache&lt;dim&gt; *<span class="keyword">&gt;</span>(cell-&gt;user_pointer());</div>
 <div class="line"><a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(local_quadrature_points_data &gt;= &amp;quadrature_cache.front(),</div>
@@ -997,28 +1072,29 @@ $(function() {
 <div class="line">       <a class="code" href="group__Exceptions.html#ga31978c026b8b6b5116df30b8e748f6b7">ExcInternalError</a>());</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; ++q)</div>
 <div class="line">  {</div>
-</div><!-- fragment --><p>The quadrature_data variable is used to store the mass and stiffness matrices, the right hand side vector and the value of <code>JxW</code>.</p>
+</div><!-- fragment --><p>quadrature_data变量用于存储质量和刚度矩阵、右手边向量和<code>JxW</code>的值。</p>
 <div class="fragment"><div class="line">QuadratureCache&lt;dim&gt; &amp;quadrature_data =</div>
 <div class="line">  local_quadrature_points_data[q];</div>
-</div><!-- fragment --><p>Below we declare the force vector and the parameters of the PML \(s\) and \(\xi\).</p>
+</div><!-- fragment --><p>下面我们声明力向量和PML的参数 \(s\) 和 \(\xi\) 。</p>
 <div class="fragment"><div class="line"><a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a>                       force;</div>
 <div class="line"><a class="code" href="classTensor.html">Tensor&lt;1, dim, std::complex&lt;double&gt;</a>&gt; s;</div>
 <div class="line">std::complex&lt;double&gt;                 xi(1, 0);</div>
 <div class="ttc" id="aclassTensor_html"><div class="ttname"><a href="classTensor.html">Tensor&lt; 1, dim &gt;</a></div></div>
-</div><!-- fragment --><p>The following block is calculated only in the first frequency step.</p>
+</div><!-- fragment --><p>下面的块只在第一个频率步骤中计算。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (calculate_quadrature_data)</div>
 <div class="line">  {</div>
-</div><!-- fragment --><p>Store the value of <code>JxW</code>.</p>
+</div><!-- fragment --><p>存储<code>JxW</code>的值。</p>
 <div class="fragment"><div class="line">quadrature_data.JxW = fe_values.JxW(q);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0; component &lt; dim; ++component)</div>
 <div class="line">  {</div>
-</div><!-- fragment --><p>Convert vectors to tensors and calculate xi</p>
+</div><!-- fragment --><p>将向量转换为张量并计算xi</p>
 <div class="fragment"><div class="line">  force[component] = rhs_values[q][component];</div>
 <div class="line">  s[component]     = pml_values[q][component];</div>
 <div class="line">  xi *= s[component];</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Here we calculate the \(\alpha_{mnkl}\) and \(\beta_{mnkl}\) tensors.</p>
+</div><!-- fragment --><p>这里我们计算 \(\alpha_{mnkl}\) 和 \(\beta_{mnkl}\) 的张量。</p>
 <div class="fragment"><div class="line"><a class="code" href="classTensor.html">Tensor&lt;4, dim, std::complex&lt;double&gt;</a>&gt; alpha;</div>
 <div class="line"><a class="code" href="classTensor.html">Tensor&lt;4, dim, std::complex&lt;double&gt;</a>&gt; beta;</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m = 0; m &lt; dim; ++m)</div>
@@ -1034,6 +1110,7 @@ $(function() {
 <div class="line">                             (2.0 * s[n] * s[<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#adb1b44ad6f1741fbbbecc43f95d26baf">l</a>]);</div>
 <div class="line">        }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">  {</div>
 <div class="line">    <span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> phi_i =</div>
@@ -1041,41 +1118,42 @@ $(function() {
 <div class="line">    <span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;2, dim&gt;</a> grad_phi_i =</div>
 <div class="line">      fe_values[displacement].gradient(i, q);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; dofs_per_cell; ++j)</div>
 <div class="line">      {</div>
 <div class="line">        <span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> phi_j =</div>
 <div class="line">          fe_values[displacement].value(j, q);</div>
 <div class="line">        <span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;2, dim&gt;</a> grad_phi_j =</div>
 <div class="line">          fe_values[displacement].gradient(j, q);</div>
-</div><!-- fragment --><p>calculate the values of the mass matrix.</p>
+</div><!-- fragment --><p>计算质量矩阵的值。</p>
 <div class="fragment"><div class="line">quadrature_data.mass_coefficient[i][j] =</div>
 <div class="line">  rho_values[q] * xi * phi_i * phi_j;</div>
-</div><!-- fragment --><p>Loop over the \(mnkl\) indices of the stiffness tensor.</p>
+</div><!-- fragment --><p>循环计算刚度张量的 \(mnkl\) 指数。</p>
 <div class="fragment"><div class="line">std::complex&lt;double&gt; stiffness_coefficient = 0;</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m = 0; m &lt; dim; ++m)</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n = 0; n &lt; dim; ++n)</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k = 0; k &lt; dim; ++k)</div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#adb1b44ad6f1741fbbbecc43f95d26baf">l</a> = 0; <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#adb1b44ad6f1741fbbbecc43f95d26baf">l</a> &lt; dim; ++<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#adb1b44ad6f1741fbbbecc43f95d26baf">l</a>)</div>
 <div class="line">        {</div>
-</div><!-- fragment --><p>Here we calculate the stiffness matrix. Note that the stiffness matrix is not symmetric because of the PMLs. We use the gradient function (see the <a href="https://www.dealii.org/current/doxygen/deal.II/group__vector__valued.html">documentation</a>) which is a <code><a class="el" href="classTensor.html">Tensor</a>&lt;2,dim&gt;</code>. The matrix \(G_{ij}\) consists of entries </p><p class="formulaDsp">
+</div><!-- fragment --><p>这里我们计算刚度矩阵。注意，由于PML的存在，刚度矩阵不是对称的。我们使用梯度函数（见<a href="https://www.dealii.org/current/doxygen/deal.II/group__vector__valued.html">文件</a>），它是一个 <code><a class="el" href="classTensor.html">Tensor</a>&lt;2,dim&gt;</code> 。矩阵 \(G_{ij}\) 由条目 </p><p class="formulaDsp">
 \[ G_{ij}= \frac{\partial\phi_i}{\partial x_j} =\partial_j \phi_i \]
 </p>
-<p> Note the position of the indices \(i\) and \(j\) and the notation that we use in this tutorial: \(\partial_j\phi_i\). As the stiffness tensor is not symmetric, it is very easy to make a mistake.</p>
+<p>组成 注意指数 \(i\) 和 \(j\) 的位置以及我们在本教程中使用的符号。 \(\partial_j\phi_i\) . 由于刚度张量不是对称的，所以很容易出错。</p>
 <div class="fragment"><div class="line">  stiffness_coefficient +=</div>
 <div class="line">    grad_phi_i[m][n] *</div>
 <div class="line">    (alpha[m][n][k][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#adb1b44ad6f1741fbbbecc43f95d26baf">l</a>] * grad_phi_j[<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#adb1b44ad6f1741fbbbecc43f95d26baf">l</a>][k] +</div>
 <div class="line">     beta[m][n][k][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#adb1b44ad6f1741fbbbecc43f95d26baf">l</a>] * grad_phi_j[k][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#adb1b44ad6f1741fbbbecc43f95d26baf">l</a>]);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>We save the value of the stiffness matrix in quadrature_data</p>
+</div><!-- fragment --><p>我们将刚度矩阵的值保存在quadrature_data中</p>
 <div class="fragment"><div class="line">  quadrature_data.stiffness_coefficient[i][j] =</div>
 <div class="line">    stiffness_coefficient;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>and the value of the right hand side in quadrature_data.</p>
+</div><!-- fragment --><p>并在quadrature_data中保存右手边的值。</p>
 <div class="fragment"><div class="line">      quadrature_data.right_hand_side[i] =</div>
 <div class="line">        phi_i * force * fe_values.JxW(q);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>We loop again over the degrees of freedom of the cells to calculate the system matrix. These loops are really quick because we have already calculated the stiffness and mass matrices, only the value of \(\omega\) changes.</p>
+</div><!-- fragment --><p>我们再次在单元格的自由度上循环，计算系统矩阵。这些循环真的很快，因为我们已经计算了刚度和质量矩阵，只有 \(\omega\) 的值会改变。</p>
 <div class="fragment"><div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">              {</div>
 <div class="line">                <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; dofs_per_cell; ++j)</div>
@@ -1097,12 +1175,13 @@ $(function() {
 <div class="line">                                               system_rhs);</div>
 <div class="line">      }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  system_matrix.compress(<a class="code" href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a>);</div>
 <div class="line">  system_rhs.compress(<a class="code" href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a>);</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__Vectors_html_gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708"><div class="ttname"><a href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a></div><div class="ttdeci">@ add</div><div class="ttdef"><b>Definition:</b> <a href="vector__operation_8h_source.html#l00053">vector_operation.h:53</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="ElasticWavesolve"></a> </p><h4>ElasticWave::solve</h4>
-<p>This is even more simple than in <a class="el" href="step_40.html">step-40</a>. We use the parallel direct solver MUMPS which requires less options than an iterative solver. The drawback is that it does not scale very well. It is not straightforward to solve the Helmholtz equation with an iterative solver. The shifted Laplacian multigrid method is a well known approach to precondition this system, but this is beyond the scope of this tutorial.</p>
+<p>这比 <a class="el" href="step_40.html">step-40</a> 中更简单。我们使用并行的直接求解器MUMPS，它比迭代求解器需要更少的选项。缺点是它不能很好地扩展。用迭代求解器来解决Helmholtz方程并不简单。移位拉普拉斯多网格法是一种众所周知的预处理该系统的方法，但这超出了本教程的范围。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> ElasticWave&lt;dim&gt;::solve()</div>
 <div class="line">{</div>
@@ -1110,9 +1189,11 @@ $(function() {
 <div class="line">  <a class="code" href="classPETScWrappers_1_1MPI_1_1Vector.html">LinearAlgebraPETSc::MPI::Vector</a> completely_distributed_solution(</div>
 <div class="line">    locally_owned_dofs, mpi_communicator);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classSolverControl.html">SolverControl</a>                    solver_control;</div>
 <div class="line">  <a class="code" href="classPETScWrappers_1_1SparseDirectMUMPS.html">PETScWrappers::SparseDirectMUMPS</a> solver(solver_control, mpi_communicator);</div>
 <div class="line">  solver.solve(system_matrix, completely_distributed_solution, system_rhs);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  pcout &lt;&lt; <span class="stringliteral">&quot;   Solved in &quot;</span> &lt;&lt; solver_control.<a class="code" href="classSolverControl.html#a42aeae81cd6b67ce93b5fbea3328371f">last_step</a>() &lt;&lt; <span class="stringliteral">&quot; iterations.&quot;</span></div>
 <div class="line">        &lt;&lt; std::endl;</div>
@@ -1122,8 +1203,8 @@ $(function() {
 <div class="ttc" id="aclassPETScWrappers_1_1SparseDirectMUMPS_html"><div class="ttname"><a href="classPETScWrappers_1_1SparseDirectMUMPS.html">PETScWrappers::SparseDirectMUMPS</a></div><div class="ttdef"><b>Definition:</b> <a href="petsc__solver_8h_source.html#l00923">petsc_solver.h:924</a></div></div>
 <div class="ttc" id="aclassSolverControl_html"><div class="ttname"><a href="classSolverControl.html">SolverControl</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__control_8h_source.html#l00065">solver_control.h:66</a></div></div>
 <div class="ttc" id="aclassSolverControl_html_a42aeae81cd6b67ce93b5fbea3328371f"><div class="ttname"><a href="classSolverControl.html#a42aeae81cd6b67ce93b5fbea3328371f">SolverControl::last_step</a></div><div class="ttdeci">unsigned int last_step() const</div><div class="ttdef"><b>Definition:</b> <a href="solver__control_8cc_source.html#l00127">solver_control.cc:127</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="ElasticWaveinitialize_position_vector"></a> </p><h4>ElasticWave::initialize_position_vector</h4>
-<p>We use this function to calculate the values of the position vector.</p>
+</div><!-- fragment --><p><a class="anchor" id="ElasticWaveinitialize_position_vector"></a></p><h4>ElasticWave::initialize_position_vector</h4>
+<p>我们用这个函数来计算位置向量的值。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> ElasticWave&lt;dim&gt;::initialize_probe_positions_vector()</div>
 <div class="line">{</div>
@@ -1131,7 +1212,7 @@ $(function() {
 <div class="line">       position_idx &lt; parameters.nb_probe_points;</div>
 <div class="line">       ++position_idx)</div>
 <div class="line">    {</div>
-</div><!-- fragment --><p>Because of the way the operator + and - are overloaded to subtract two points, the following has to be done: <code>Point_b&lt;dim&gt; + (-Point_a&lt;dim&gt;)</code></p>
+</div><!-- fragment --><p>由于运算符+和-的重载方式是为了减去两个点，所以必须做以下工作。<code>Point_b&lt;dim&gt; + (-Point_a&lt;dim&gt;)</code>。</p>
 <div class="fragment"><div class="line">      <span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> p =</div>
 <div class="line">        (position_idx / ((<a class="code" href="classdouble.html">double</a>)(parameters.nb_probe_points - 1))) *</div>
 <div class="line">          (parameters.probe_stop_point + (-parameters.probe_start_point)) +</div>
@@ -1144,16 +1225,16 @@ $(function() {
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="ElasticWavestore_frequency_step_data"></a> </p><h4>ElasticWave::store_frequency_step_data</h4>
-<p>This function stores in the <a class="el" href="namespaceHDF5.html">HDF5</a> file the measured energy by the probe.</p>
+</div><!-- fragment --><p><a class="anchor" id="ElasticWavestore_frequency_step_data"></a></p><h4>ElasticWave::store_frequency_step_data</h4>
+<p>该函数在HDF5文件中存储探头测量的能量。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span></div>
 <div class="line">ElasticWave&lt;dim&gt;::store_frequency_step_data(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> frequency_idx)</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> t(computing_timer, <span class="stringliteral">&quot;store_frequency_step_data&quot;</span>);</div>
-</div><!-- fragment --><p>We store the displacement in the \(x\) direction; the displacement in the \(y\) direction is negligible.</p>
+</div><!-- fragment --><p>我们存储 \(x\) 方向的位移； \(y\) 方向的位移可以忽略不计。</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> probe_displacement_component = 0;</div>
-</div><!-- fragment --><p>The vector coordinates contains the coordinates in the <a class="el" href="namespaceHDF5.html">HDF5</a> file of the points of the probe that are located in locally owned cells. The vector displacement_data contains the value of the displacement at these points.</p>
+</div><!-- fragment --><p>向量坐标包含HDF5文件中位于本地所有单元中的探针点的坐标。向量displacement_data包含这些点的位移值。</p>
 <div class="fragment"><div class="line">std::vector&lt;hsize_t&gt;              coordinates;</div>
 <div class="line">std::vector&lt;std::complex&lt;double&gt;&gt; displacement_data;</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> position_idx = 0;</div>
@@ -1168,7 +1249,7 @@ $(function() {
 <div class="line">    <span class="keywordtype">bool</span> point_in_locally_owned_cell;</div>
 <div class="line">    {</div>
 <div class="ttc" id="anamespaceOpenCASCADE_html_a7b0b2393711bae58d859be1bb9761781"><div class="ttname"><a href="namespaceOpenCASCADE.html#a7b0b2393711bae58d859be1bb9761781">OpenCASCADE::point</a></div><div class="ttdeci">Point&lt; spacedim &gt; point(const gp_Pnt &amp;p, const double tolerance=1e-10)</div><div class="ttdef"><b>Definition:</b> <a href="opencascade_2utilities_8cc_source.html#l00188">utilities.cc:188</a></div></div>
-</div><!-- fragment --><p>First we have to find out if the point is in a locally owned cell.</p>
+</div><!-- fragment --><p>首先，我们要找出该点是否在本地拥有的单元中。</p>
 <div class="fragment"><div class="line">  <span class="keyword">auto</span> mapping = <a class="code" href="structStaticMappingQ1.html">StaticMappingQ1&lt;dim&gt;::mapping</a>;</div>
 <div class="line">  <span class="keyword">const</span> std::pair&lt;typename DoFHandler&lt;dim&gt;::active_cell_iterator,</div>
 <div class="line">                  <a class="code" href="classPoint.html">Point&lt;dim&gt;</a>&gt;</div>
@@ -1176,13 +1257,14 @@ $(function() {
 <div class="line">                                                          dof_handler,</div>
 <div class="line">                                                          <a class="code" href="namespaceOpenCASCADE.html#a7b0b2393711bae58d859be1bb9761781">point</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  point_in_locally_owned_cell = cell_point.first-&gt;is_locally_owned();</div>
 <div class="line">}</div>
 <div class="line"><span class="keywordflow">if</span> (point_in_locally_owned_cell)</div>
 <div class="line">  {</div>
 <div class="ttc" id="anamespaceGridTools_html_a2e10aeb1c8e76110a84b6945eac3aaf0"><div class="ttname"><a href="namespaceGridTools.html#a2e10aeb1c8e76110a84b6945eac3aaf0">GridTools::find_active_cell_around_point</a></div><div class="ttdeci">std::pair&lt; typename MeshType&lt; dim, spacedim &gt;::active_cell_iterator, Point&lt; dim &gt; &gt; find_active_cell_around_point(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const MeshType&lt; dim, spacedim &gt; &amp;mesh, const Point&lt; spacedim &gt; &amp;p, const std::vector&lt; bool &gt; &amp;marked_vertices={}, const double tolerance=1.e-10)</div><div class="ttdef"><b>Definition:</b> <a href="grid__tools__dof__handlers_8cc_source.html#l00436">grid_tools_dof_handlers.cc:436</a></div></div>
 <div class="ttc" id="astructStaticMappingQ1_html"><div class="ttname"><a href="structStaticMappingQ1.html">StaticMappingQ1</a></div><div class="ttdef"><b>Definition:</b> <a href="mapping__q1_8h_source.html#l00091">mapping_q1.h:92</a></div></div>
-</div><!-- fragment --><p>Then we can store the values of the displacement in the points of the probe in <code>displacement_data</code>.</p>
+</div><!-- fragment --><p>然后我们可以将探针中各点的位移值储存在<code>displacement_data</code>中。</p>
 <div class="fragment"><div class="line">      <a class="code" href="classVector.html">Vector&lt;std::complex&lt;double&gt;</a>&gt; tmp_vector(dim);</div>
 <div class="line">      <a class="code" href="namespaceVectorTools.html#acd358e9b110ccbf4a7f76796d206b9c7">VectorTools::point_value</a>(dof_handler,</div>
 <div class="line">                               locally_relevant_solution,</div>
@@ -1195,23 +1277,25 @@ $(function() {
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespaceVectorTools_html_acd358e9b110ccbf4a7f76796d206b9c7"><div class="ttname"><a href="namespaceVectorTools.html#acd358e9b110ccbf4a7f76796d206b9c7">VectorTools::point_value</a></div><div class="ttdeci">void point_value(const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const VectorType &amp;fe_function, const Point&lt; spacedim, double &gt; &amp;point, Vector&lt; typename VectorType::value_type &gt; &amp;value)</div></div>
-</div><!-- fragment --><p>We write the displacement data in the <a class="el" href="namespaceHDF5.html">HDF5</a> file. The call <a class="el" href="classHDF5_1_1DataSet.html#a75f9f53f0c656a7e4aa00757290efb9e">HDF5::DataSet::write_selection()</a> is MPI collective which means that all the processes have to participate.</p>
+</div><!-- fragment --><p>我们将位移数据写入HDF5文件中。调用 <a class="el" href="classHDF5_1_1DataSet.html#a75f9f53f0c656a7e4aa00757290efb9e">HDF5::DataSet::write_selection()</a> 是MPI集体的，这意味着所有的进程都要参与。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (coordinates.size() &gt; 0)</div>
 <div class="line">  {</div>
 <div class="line">    displacement.write_selection(displacement_data, coordinates);</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>Therefore even if the process has no data to write it has to participate in the collective call. For this we can use <a class="el" href="classHDF5_1_1DataSet.html#a9ca9525c41fe37c9c64f2b41ad0b871e">HDF5::DataSet::write_none()</a>. Note that we have to specify the data type, in this case <code>std::complex&lt;double&gt;</code>.</p>
+</div><!-- fragment --><p>因此，即使进程没有数据要写，它也必须参与到集体调用中。为此，我们可以使用 <a class="el" href="classHDF5_1_1DataSet.html#a9ca9525c41fe37c9c64f2b41ad0b871e">HDF5::DataSet::write_none()</a>. 注意，我们必须指定数据类型，在这种情况下 <code>std::complex&lt;double&gt;</code>. <br  />
+</p>
 <div class="fragment"><div class="line"><span class="keywordflow">else</span></div>
 <div class="line">  {</div>
 <div class="line">    displacement.write_none&lt;std::complex&lt;double&gt;&gt;();</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>If the variable <code>save_vtu_files</code> in the input file equals <code>True</code> then all the data will be saved as vtu. The procedure to write <code>vtu</code> files has been described in <a class="el" href="step_40.html">step-40</a>.</p>
+</div><!-- fragment --><p>如果输入文件中的变量<code>save_vtu_files</code>等于<code>True</code>，那么所有数据将被保存为vtu。写入`vtu'文件的程序已经在 <a class="el" href="step_40.html">step-40</a> 中描述。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (parameters.save_vtu_files)</div>
 <div class="line">  {</div>
 <div class="line">    std::vector&lt;std::string&gt; solution_names(dim, <span class="stringliteral">&quot;displacement&quot;</span>);</div>
 <div class="line">    std::vector&lt;DataComponentInterpretation::DataComponentInterpretation&gt;</div>
 <div class="line">      interpretation(</div>
 <div class="line">        dim, <a class="code" href="namespaceDataComponentInterpretation.html#a0cd2da3afe902f9004c23a73dbcc8ab0aa783915dbc182d5a49e111815fd23fe0">DataComponentInterpretation::component_is_part_of_vector</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="classDataOut.html">DataOut&lt;dim&gt;</a> data_out;</div>
 <div class="line">    data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(dof_handler,</div>
@@ -1223,11 +1307,13 @@ $(function() {
 <div class="line">      subdomain(i) = <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.locally_owned_subdomain();</div>
 <div class="line">    data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(subdomain, <span class="stringliteral">&quot;subdomain&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    std::vector&lt;Vector&lt;double&gt;&gt; force(</div>
 <div class="line">      dim, <a class="code" href="classVector.html">Vector&lt;double&gt;</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells()));</div>
 <div class="line">    std::vector&lt;Vector&lt;double&gt;&gt; pml(</div>
 <div class="line">      dim, <a class="code" href="classVector.html">Vector&lt;double&gt;</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells()));</div>
 <div class="line">    <a class="code" href="classVector.html">Vector&lt;double&gt;</a> rho(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;cell : <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.active_cell_iterators())</div>
 <div class="line">      {</div>
@@ -1246,7 +1332,7 @@ $(function() {
 <div class="ttc" id="aclassDataOut__DoFData_html_ace4b76e565ba0701c4d32c26075ed3b9"><div class="ttname"><a href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">DataOut_DoFData::add_data_vector</a></div><div class="ttdeci">void add_data_vector(const VectorType &amp;data, const std::vector&lt; std::string &gt; &amp;names, const DataVectorType type=type_automatic, const std::vector&lt; DataComponentInterpretation::DataComponentInterpretation &gt; &amp;data_component_interpretation=std::vector&lt; DataComponentInterpretation::DataComponentInterpretation &gt;())</div><div class="ttdef"><b>Definition:</b> <a href="data__out__dof__data_8h_source.html#l01087">data_out_dof_data.h:1087</a></div></div>
 <div class="ttc" id="aclassDataOut_html"><div class="ttname"><a href="classDataOut.html">DataOut</a></div><div class="ttdef"><b>Definition:</b> <a href="numerics_2data__out_8h_source.html#l00147">data_out.h:150</a></div></div>
 <div class="ttc" id="anamespaceDataComponentInterpretation_html_a0cd2da3afe902f9004c23a73dbcc8ab0aa783915dbc182d5a49e111815fd23fe0"><div class="ttname"><a href="namespaceDataComponentInterpretation.html#a0cd2da3afe902f9004c23a73dbcc8ab0aa783915dbc182d5a49e111815fd23fe0">DataComponentInterpretation::component_is_part_of_vector</a></div><div class="ttdeci">@ component_is_part_of_vector</div><div class="ttdef"><b>Definition:</b> <a href="data__component__interpretation_8h_source.html#l00059">data_component_interpretation.h:59</a></div></div>
-</div><!-- fragment --><p>And on the cells that we are not interested in, set the respective value to a bogus value in order to make sure that if we were somehow wrong about our assumption we would find out by looking at the graphical output:</p>
+</div><!-- fragment --><p>在我们不感兴趣的单元格上，将各自的值设置为一个假值，以确保如果我们的假设有什么错误，我们会通过查看图形输出发现的。</p>
 <div class="fragment"><div class="line">          <span class="keywordflow">else</span></div>
 <div class="line">            {</div>
 <div class="line">              <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dim_idx = 0; dim_idx &lt; dim; ++dim_idx)</div>
@@ -1258,6 +1344,7 @@ $(function() {
 <div class="line">            }</div>
 <div class="line">        }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dim_idx = 0; dim_idx &lt; dim; ++dim_idx)</div>
 <div class="line">        {</div>
 <div class="line">          data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(force[dim_idx],</div>
@@ -1267,7 +1354,9 @@ $(function() {
 <div class="line">        }</div>
 <div class="line">      data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(rho, <span class="stringliteral">&quot;rho&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      data_out.<a class="code" href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">build_patches</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      std::stringstream  frequency_idx_stream;</div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> nb_number_positions =</div>
@@ -1284,11 +1373,11 @@ $(function() {
 <div class="ttc" id="agroup__Exceptions_html_ga72743302dcb1a0fb1f2f8dc5122d299e"><div class="ttname"><a href="group__Exceptions.html#ga72743302dcb1a0fb1f2f8dc5122d299e">Patterns::Tools::to_string</a></div><div class="ttdeci">std::string to_string(const T &amp;t)</div><div class="ttdef"><b>Definition:</b> <a href="patterns_8h_source.html#l02329">patterns.h:2329</a></div></div>
 <div class="ttc" id="anamespaceDifferentiation_1_1SD_html_af3073c01113bca5a5e9a1b921643ced4"><div class="ttname"><a href="namespaceDifferentiation_1_1SD.html#af3073c01113bca5a5e9a1b921643ced4">Differentiation::SD::log10</a></div><div class="ttdeci">Expression log10(const Expression &amp;x)</div><div class="ttdef"><b>Definition:</b> <a href="symengine__math_8cc_source.html#l00084">symengine_math.cc:84</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="ElasticWaveoutput_results"></a> </p><h4>ElasticWave::output_results</h4>
-<p>This function writes the datasets that have not already been written.</p>
+<p>这个函数写入尚未写入的数据集。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> ElasticWave&lt;dim&gt;::output_results()</div>
 <div class="line">{</div>
-</div><!-- fragment --><p>The vectors <code>frequency</code> and <code>position</code> are the same for all the processes. Therefore any of the processes can write the corresponding <code>datasets</code>. Because the call <a class="el" href="classHDF5_1_1DataSet.html#a0f51f04d2fcddac7c0c5f863d665253f">HDF5::DataSet::write</a> is MPI collective, the rest of the processes will have to call <a class="el" href="classHDF5_1_1DataSet.html#a9ca9525c41fe37c9c64f2b41ad0b871e">HDF5::DataSet::write_none</a>.</p>
+</div><!-- fragment --><p>向量<code>频率</code>和<code>位置</code>对所有进程都是一样的。因此，任何进程都可以写入相应的`数据集'。因为调用 <a class="el" href="classHDF5_1_1DataSet.html#a0f51f04d2fcddac7c0c5f863d665253f">HDF5::DataSet::write</a> 是MPI集体的，其余的进程将不得不调用 <a class="el" href="classHDF5_1_1DataSet.html#a9ca9525c41fe37c9c64f2b41ad0b871e">HDF5::DataSet::write_none</a>. 。</p>
 <div class="fragment"><div class="line">  <span class="keywordflow">if</span> (<a class="code" href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">Utilities::MPI::this_mpi_process</a>(mpi_communicator) == 0)</div>
 <div class="line">    {</div>
 <div class="line">      frequency_dataset.write(frequency);</div>
@@ -1301,16 +1390,18 @@ $(function() {
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="ElasticWavesetup_quadrature_cache"></a> </p><h4>ElasticWave::setup_quadrature_cache</h4>
-<p>We use this function at the beginning of our computations to set up initial values of the cache variables. This function has been described in <a class="el" href="step_18.html">step-18</a>. There are no differences with the function of <a class="el" href="step_18.html">step-18</a>.</p>
+<p>我们在计算开始时使用这个函数来设置缓存变量的初始值。这个函数在 <a class="el" href="step_18.html">step-18</a> 中已经描述过。与 <a class="el" href="step_18.html">step-18</a> 的函数没有区别。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> ElasticWave&lt;dim&gt;::setup_quadrature_cache()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.clear_user_data();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  {</div>
 <div class="line">    std::vector&lt;QuadratureCache&lt;dim&gt;&gt; tmp;</div>
 <div class="line">    quadrature_cache.swap(tmp);</div>
 <div class="line">  }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  quadrature_cache.resize(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_locally_owned_active_cells() *</div>
 <div class="line">                            quadrature_formula.size(),</div>
@@ -1325,7 +1416,7 @@ $(function() {
 <div class="line">  <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(cache_index == quadrature_cache.size(), <a class="code" href="group__Exceptions.html#ga31978c026b8b6b5116df30b8e748f6b7">ExcInternalError</a>());</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="ElasticWavefrequency_sweep"></a> </p><h4>ElasticWave::frequency_sweep</h4>
-<p>For clarity we divide the function <code>run</code> of <a class="el" href="step_40.html">step-40</a> into the functions <code>run</code> and <code>frequency_sweep</code>. In the function <code>frequency_sweep</code> we place the iteration over the frequency vector.</p>
+<p>为清楚起见，我们将 <a class="el" href="step_40.html">step-40</a> 的函数<code>run</code>分为函数<code>run</code>和<code>frequency_sweep</code>。在函数<code>frequency_sweep</code>中，我们对频率向量进行迭代。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> ElasticWave&lt;dim&gt;::frequency_sweep()</div>
 <div class="line">{</div>
@@ -1339,6 +1430,8 @@ $(function() {
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      setup_system();</div>
 <div class="line">      <span class="keywordflow">if</span> (frequency_idx == 0)</div>
 <div class="line">        {</div>
@@ -1348,15 +1441,16 @@ $(function() {
 <div class="line">                &lt;&lt; dof_handler.n_dofs() &lt;&lt; std::endl;</div>
 <div class="line">        }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">if</span> (frequency_idx == 0)</div>
 <div class="line">        {</div>
-</div><!-- fragment --><p>Write the simulation parameters only once</p>
+</div><!-- fragment --><p>只写一次仿真参数</p>
 <div class="fragment"><div class="line">  parameters.data.set_attribute(<span class="stringliteral">&quot;active_cells&quot;</span>,</div>
 <div class="line">                                <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
 <div class="line">  parameters.data.set_attribute(<span class="stringliteral">&quot;degrees_of_freedom&quot;</span>,</div>
 <div class="line">                                dof_handler.n_dofs());</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>We calculate the frequency and omega values for this particular step.</p>
+</div><!-- fragment --><p>我们计算这个特定步骤的频率和omega值。</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">double</span> current_loop_frequency =</div>
 <div class="line">  (parameters.start_frequency +</div>
 <div class="line">   frequency_idx *</div>
@@ -1365,21 +1459,23 @@ $(function() {
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">double</span> current_loop_omega =</div>
 <div class="line">  2 * <a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a> * current_loop_frequency;</div>
 <div class="ttc" id="anamespacenumbers_html_a3e24f194a9cb9b6ff4442b8a7a877d4a"><div class="ttname"><a href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a></div><div class="ttdeci">static constexpr double PI</div><div class="ttdef"><b>Definition:</b> <a href="numbers_8h_source.html#l00231">numbers.h:231</a></div></div>
-</div><!-- fragment --><p>In the first frequency step we calculate the mass and stiffness matrices and the right hand side. In the subsequent frequency steps we will use those values. This improves considerably the calculation time.</p>
+</div><!-- fragment --><p>在第一个频率步骤中，我们计算质量和刚度矩阵以及右手边。在随后的频率步骤中，我们将使用这些值。这大大地改善了计算时间。</p>
 <div class="fragment"><div class="line">      assemble_system(current_loop_omega,</div>
 <div class="line">                      (frequency_idx == 0) ? <span class="keyword">true</span> : <span class="keyword">false</span>);</div>
 <div class="line">      solve();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      frequency[frequency_idx] = current_loop_frequency;</div>
 <div class="line">      store_frequency_step_data(frequency_idx);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      computing_timer.print_summary();</div>
 <div class="line">      computing_timer.reset();</div>
 <div class="line">      pcout &lt;&lt; std::endl;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="ElasticWaverun"></a> </p><h4>ElasticWave::run</h4>
-<p>This function is very similar to the one in <a class="el" href="step_40.html">step-40</a>.</p>
+</div><!-- fragment --><p><a class="anchor" id="ElasticWaverun"></a></p><h4>ElasticWave::run</h4>
+<p>这个函数与 <a class="el" href="step_40.html">step-40</a> 中的函数非常相似。</p>
 <div class="fragment"><div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">ElasticWave&lt;dim&gt;::run</a>()</div>
 <div class="line">  {</div>
@@ -1388,6 +1484,7 @@ $(function() {
 <div class="line"><span class="preprocessor">#else</span></div>
 <div class="line">    pcout &lt;&lt; <span class="stringliteral">&quot;Release mode&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    {</div>
 <div class="line">      <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> p1;</div>
@@ -1417,20 +1514,25 @@ $(function() {
 <div class="line">                                                p2);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.refine_global(parameters.grid_level);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    setup_quadrature_cache();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    initialize_probe_positions_vector();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    frequency_sweep();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    output_results();</div>
 <div class="line">  }</div>
 <div class="line">} <span class="comment">// namespace step62</span></div>
 <div class="ttc" id="anamespaceGridGenerator_html_ac76417d7404b75cf53c732f456e6e971"><div class="ttname"><a href="namespaceGridGenerator.html#ac76417d7404b75cf53c732f456e6e971">GridGenerator::subdivided_hyper_rectangle</a></div><div class="ttdeci">void subdivided_hyper_rectangle(Triangulation&lt; dim, spacedim &gt; &amp;tria, const std::vector&lt; unsigned int &gt; &amp;repetitions, const Point&lt; dim &gt; &amp;p1, const Point&lt; dim &gt; &amp;p2, const bool colorize=false)</div></div>
 </div><!-- fragment --><p><a class="anchor" id="Themainfunction"></a> </p><h4>The main function</h4>
-<p>The main function is very similar to the one in <a class="el" href="step_40.html">step-40</a>.</p>
+<p>主函数与 <a class="el" href="step_40.html">step-40</a> 中的函数非常相似。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">try</span></div>
@@ -1438,7 +1540,9 @@ $(function() {
 <div class="line">      <span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dim = 2;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <a class="code" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a> mpi_initialization(argc, argv, 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <a class="code" href="classHDF5_1_1File.html">HDF5::File</a> data_file(<span class="stringliteral">&quot;results.h5&quot;</span>,</div>
 <div class="line">                           <a class="code" href="classHDF5_1_1File.html#ac3dc680d4e4ca3dd7139085c5056ff5fa76ea0bebb3c22822b4f0dd9c9fd021c5">HDF5::File::FileAccessMode::create</a>,</div>
@@ -1448,24 +1552,26 @@ $(function() {
 <div class="ttc" id="aclassHDF5_1_1File_html_ac3dc680d4e4ca3dd7139085c5056ff5fa76ea0bebb3c22822b4f0dd9c9fd021c5"><div class="ttname"><a href="classHDF5_1_1File.html#ac3dc680d4e4ca3dd7139085c5056ff5fa76ea0bebb3c22822b4f0dd9c9fd021c5">HDF5::File::FileAccessMode::create</a></div><div class="ttdeci">@ create</div></div>
 <div class="ttc" id="aclassHDF5_1_1Group_html_aa311ff3ca4d33dfaaba627a24df9029d"><div class="ttname"><a href="classHDF5_1_1Group.html#aa311ff3ca4d33dfaaba627a24df9029d">HDF5::Group::create_group</a></div><div class="ttdeci">Group create_group(const std::string &amp;name) const</div><div class="ttdef"><b>Definition:</b> <a href="hdf5_8cc_source.html#l00379">hdf5.cc:379</a></div></div>
 <div class="ttc" id="aclassUtilities_1_1MPI_1_1MPI__InitFinalize_html"><div class="ttname"><a href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a></div><div class="ttdef"><b>Definition:</b> <a href="mpi_8h_source.html#l00902">mpi.h:903</a></div></div>
-</div><!-- fragment --><p>Each of the simulations (displacement and calibration) is stored in a separate <a class="el" href="namespaceHDF5.html">HDF5</a> group:</p>
+</div><!-- fragment --><p>每个模拟（位移和校准）都存储在一个单独的HDF5组中。</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> std::vector&lt;std::string&gt; group_names = {<span class="stringliteral">&quot;displacement&quot;</span>,</div>
 <div class="line">                                              <span class="stringliteral">&quot;calibration&quot;</span>};</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> group_name : group_names)</div>
 <div class="line">  {</div>
-</div><!-- fragment --><p>For each of these two group names, we now create the group and put attributes into these groups. Specifically, these are:</p><ul>
-<li>The dimensions of the waveguide (in \(x\) and \(y\) directions)</li>
-<li>The position of the probe (in \(x\) and \(y\) directions)</li>
-<li>The number of points in the probe</li>
-<li>The global refinement level</li>
-<li>The cavity resonance frequency</li>
-<li>The number of mirror pairs</li>
-<li>The material properties</li>
-<li>The force parameters</li>
-<li>The PML parameters</li>
-<li>The frequency parameters</li>
+</div><!-- fragment --><p>对于这两个组的名称，我们现在创建组并将属性放入这些组中。具体来说，这些是。</p>
+<ul>
+<li>波导的尺寸（在 \(x\) 和 \(y\) 方向）。</li>
+<li>探针的位置（在 \(x\) 和 \(y\) 方向）。</li>
+<li>探针中的点的数量</li>
+<li>全局细化水平</li>
+<li>腔体谐振频率</li>
+<li>镜像对的数量</li>
+<li>材料属性</li>
+<li>力的参数</li>
+<li>PML参数</li>
+<li>频率参数</li>
 </ul>
 <div class="fragment"><div class="line">    <span class="keyword">auto</span> group = data.<a class="code" href="classHDF5_1_1Group.html#aa311ff3ca4d33dfaaba627a24df9029d">create_group</a>(group_name);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    group.<a class="code" href="classHDF5_1_1HDF5Object.html#a655831e44bf7595fbc984a8126e44172">set_attribute</a>&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;dimension_x&quot;</span>, 2<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-5);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;dimension_y&quot;</span>, 2<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-8);</div>
@@ -1477,14 +1583,17 @@ $(function() {
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;cavity_resonance_frequency&quot;</span>, 20e9);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>&gt;(<span class="stringliteral">&quot;nb_mirror_pairs&quot;</span>, 15);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;poissons_ratio&quot;</span>, 0.27);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;youngs_modulus&quot;</span>, 270000000000.0);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;material_a_rho&quot;</span>, 3200);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (group_name == std::string(<span class="stringliteral">&quot;displacement&quot;</span>))</div>
 <div class="line">      group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;material_b_rho&quot;</span>, 2000);</div>
 <div class="line">    <span class="keywordflow">else</span></div>
 <div class="line">      group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;material_b_rho&quot;</span>, 3200);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    group.set_attribute(</div>
 <div class="line">      <span class="stringliteral">&quot;lambda&quot;</span>,</div>
@@ -1497,6 +1606,7 @@ $(function() {
 <div class="line">                          (2 * (1 + group.get_attribute&lt;<span class="keywordtype">double</span>&gt;(</div>
 <div class="line">                                      <span class="stringliteral">&quot;poissons_ratio&quot;</span>))));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;max_force_amplitude&quot;</span>, 1e26);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;force_sigma_x&quot;</span>, 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-7);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;force_sigma_y&quot;</span>, 1);</div>
@@ -1505,12 +1615,14 @@ $(function() {
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;force_x_pos&quot;</span>, -8<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-6);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;force_y_pos&quot;</span>, 0);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">bool</span>&gt;(<span class="stringliteral">&quot;pml_x&quot;</span>, <span class="keyword">true</span>);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">bool</span>&gt;(<span class="stringliteral">&quot;pml_y&quot;</span>, <span class="keyword">false</span>);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;pml_width_x&quot;</span>, 1.8e-6);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;pml_width_y&quot;</span>, 5<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-7);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;pml_coeff&quot;</span>, 1.6);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>&gt;(<span class="stringliteral">&quot;pml_coeff_degree&quot;</span>, 2);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;center_frequency&quot;</span>, 20e9);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;frequency_range&quot;</span>, 0.5e9);</div>
@@ -1524,6 +1636,7 @@ $(function() {
 <div class="line">        group.get_attribute&lt;<span class="keywordtype">double</span>&gt;(<span class="stringliteral">&quot;frequency_range&quot;</span>) / 2);</div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>&gt;(<span class="stringliteral">&quot;nb_frequency_points&quot;</span>, 400);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (group_name == std::string(<span class="stringliteral">&quot;displacement&quot;</span>))</div>
 <div class="line">      group.set_attribute&lt;std::string&gt;(</div>
 <div class="line">        <span class="stringliteral">&quot;simulation_name&quot;</span>, std::string(<span class="stringliteral">&quot;phononic_cavity_displacement&quot;</span>));</div>
@@ -1531,23 +1644,28 @@ $(function() {
 <div class="line">      group.set_attribute&lt;std::string&gt;(</div>
 <div class="line">        <span class="stringliteral">&quot;simulation_name&quot;</span>, std::string(<span class="stringliteral">&quot;phononic_cavity_calibration&quot;</span>));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    group.set_attribute&lt;<span class="keywordtype">bool</span>&gt;(<span class="stringliteral">&quot;save_vtu_files&quot;</span>, <span class="keyword">false</span>);</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">{</div>
-</div><!-- fragment --><p>Displacement simulation. The parameters are read from the displacement <a class="el" href="namespaceHDF5.html">HDF5</a> group and the results are saved in the same <a class="el" href="namespaceHDF5.html">HDF5</a> group.</p>
+</div><!-- fragment --><p>位移模拟。参数从位移HDF5组中读取，结果保存在同一HDF5组中。</p>
 <div class="fragment"><div class="line">  <span class="keyword">auto</span>                    displacement = data.<a class="code" href="classHDF5_1_1Group.html#a2b04ace059bee4871c19bb6d15c07e6e">open_group</a>(<span class="stringliteral">&quot;displacement&quot;</span>);</div>
 <div class="line">  step62::Parameters&lt;dim&gt; parameters(displacement);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  step62::ElasticWave&lt;dim&gt; elastic_problem(parameters);</div>
 <div class="line">  elastic_problem.run();</div>
 <div class="line">}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">{</div>
 <div class="ttc" id="aclassHDF5_1_1Group_html_a2b04ace059bee4871c19bb6d15c07e6e"><div class="ttname"><a href="classHDF5_1_1Group.html#a2b04ace059bee4871c19bb6d15c07e6e">HDF5::Group::open_group</a></div><div class="ttdeci">Group open_group(const std::string &amp;name) const</div><div class="ttdef"><b>Definition:</b> <a href="hdf5_8cc_source.html#l00371">hdf5.cc:371</a></div></div>
-</div><!-- fragment --><p>Calibration simulation. The parameters are read from the calibration <a class="el" href="namespaceHDF5.html">HDF5</a> group and the results are saved in the same <a class="el" href="namespaceHDF5.html">HDF5</a> group.</p>
+</div><!-- fragment --><p>校准模拟。从校准HDF5组中读取参数，并将结果保存在同一HDF5组中。</p>
 <div class="fragment"><div class="line">        <span class="keyword">auto</span>                    calibration = data.<a class="code" href="classHDF5_1_1Group.html#a2b04ace059bee4871c19bb6d15c07e6e">open_group</a>(<span class="stringliteral">&quot;calibration&quot;</span>);</div>
 <div class="line">        step62::Parameters&lt;dim&gt; parameters(calibration);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        step62::ElasticWave&lt;dim&gt; elastic_problem(parameters);</div>
 <div class="line">        elastic_problem.run();</div>
@@ -1565,6 +1683,7 @@ $(function() {
 <div class="line">                &lt;&lt; <span class="stringliteral">&quot;----------------------------------------------------&quot;</span></div>
 <div class="line">                &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line">  <span class="keywordflow">catch</span> (...)</div>
@@ -1580,12 +1699,15 @@ $(function() {
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
+</div><!-- fragment --><p><a class="anchor" id="Results"></a></p><h1>Results</h1>
 <p><a class="anchor" id="Resonancefrequencyandbandgap"></a></p><h3>Resonance frequency and bandgap</h3>
-<p>The results are analyzed in the <a href="https://github.com/dealii/dealii/blob/phononic-cavity/examples/step-62/step-62.ipynb">jupyter notebook</a> with the following code </p><div class="fragment"><div class="line">h5_file = h5py.File(<span class="stringliteral">&#39;results.h5&#39;</span>, <span class="stringliteral">&#39;r&#39;</span>)</div>
+<p>在[jupyter notebook](<a href="https://github.com/dealii/dealii/blob/phononic-cavity/examples/">https://github.com/dealii/dealii/blob/phononic-cavity/examples/</a> <a class="el" href="step_62.html">step-62</a> / <a class="el" href="step_62.html">step-62</a> .ipynb)中用以下代码分析结果</p>
+<div class="fragment"><div class="line">h5_file = h5py.File(<span class="stringliteral">&#39;results.h5&#39;</span>, <span class="stringliteral">&#39;r&#39;</span>)</div>
 <div class="line">data = h5_file[<span class="stringliteral">&#39;data&#39;</span>]</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="comment"># Gaussian function that we use to fit the resonance</span></div>
 <div class="line"><span class="keyword">def </span>resonance_f(freq, freq_m, quality_factor, max_amplitude):</div>
@@ -1594,6 +1716,7 @@ $(function() {
 <div class="line">    gamma = omega_m / quality_factor</div>
 <div class="line">    <span class="keywordflow">return</span> max_amplitude * omega_m**2 * gamma**2 / (((omega_m**2 - omega**2)**2 + gamma**2 * omega**2))</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">frequency = data[<span class="stringliteral">&#39;displacement&#39;</span>][<span class="stringliteral">&#39;frequency&#39;</span>][...]</div>
 <div class="line"><span class="comment"># Average the probe points</span></div>
 <div class="line">displacement = np.mean(data[<span class="stringliteral">&#39;displacement&#39;</span>][<span class="stringliteral">&#39;displacement&#39;</span>], axis=0)</div>
@@ -1601,6 +1724,7 @@ $(function() {
 <div class="line">reflection_coefficient = displacement / calibration_displacement</div>
 <div class="line">reflectivity = (np.abs(np.mean(data[<span class="stringliteral">&#39;displacement&#39;</span>][<span class="stringliteral">&#39;displacement&#39;</span>][...]**2, axis=0))/</div>
 <div class="line">                np.abs(np.mean(data[<span class="stringliteral">&#39;calibration&#39;</span>][<span class="stringliteral">&#39;displacement&#39;</span>][...]**2, axis=0)))</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">try</span>:</div>
 <div class="line">    x_data = frequency</div>
@@ -1615,6 +1739,7 @@ $(function() {
 <div class="line">    max_amplitude = fit_result[2]</div>
 <div class="line">    y_data_fit = resonance_f(x_data, freq_m, quality_factor, max_amplitude)</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    fig = plt.figure()</div>
 <div class="line">    plt.plot(frequency / 1e9, reflectivity, frequency / 1e9, y_data_fit)</div>
 <div class="line">    plt.xlabel(<span class="stringliteral">&#39;frequency (GHz)&#39;</span>)</div>
@@ -1627,35 +1752,40 @@ $(function() {
 <div class="line">    plt.ylabel(<span class="stringliteral">&#39;amplitude^2 (a.u.)&#39;</span>)</div>
 <div class="line">    plt.title(<span class="stringliteral">&#39;Transmission&#39;</span>)</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">fig = plt.figure()</div>
 <div class="line">plt.plot(frequency / 1e9, np.angle(reflection_coefficient))</div>
 <div class="line">plt.xlabel(<span class="stringliteral">&#39;frequency (GHz)&#39;</span>)</div>
 <div class="line">plt.ylabel(<span class="stringliteral">&#39;phase (rad)&#39;</span>)</div>
 <div class="line">plt.title(<span class="stringliteral">&#39;Phase (transmission coefficient)\n&#39;</span>)</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">plt.show()</div>
 <div class="line">h5_file.close()</div>
-</div><!-- fragment --><p>A phononic cavity is characterized by the <a href="https://en.wikipedia.org/wiki/Resonance">resonance frequency</a> and the <a href="https://en.wikipedia.org/wiki/Q_factor">the quality factor</a>. The quality factor is equal to the ratio between the stored energy in the resonator and the energy dissipated energy per cycle, which is approximately equivalent to the ratio between the resonance frequency and the <a href="https://en.wikipedia.org/wiki/Full_width_at_half_maximum">full width at half maximum (FWHM)</a>. The FWHM is equal to the bandwidth over which the power of vibration is greater than half the power at the resonant frequency. </p><p class="formulaDsp">
+</div><!-- fragment --><p>声腔的特点是<a href="https://en.wikipedia.org/wiki/Resonance">共振频率</a>和<a href="https://en.wikipedia.org/wiki/Q_factor">品质因子</a>。质量因子等于谐振器中储存的能量和每周期耗散的能量之间的比率，这大约相当于谐振频率和<a href="https://en.wikipedia.org/wiki/Full_width_at_half_maximum">半最大值全宽（FWHM）</a>之间的比率。FWHM等于振动功率大于谐振频率的一半的带宽。 </p><p class="formulaDsp">
 \[ Q = \frac{f_r}{\Delta f} = \frac{\omega_r}{\Delta \omega} = 2 \pi \times \frac{\text{energy stored}}{\text{energy dissipated per cycle}} \]
 </p>
-<p>The square of the amplitude of the mechanical resonance \(a^2\) as a function of the frequency has a gaussian shape </p><p class="formulaDsp">
+<p>机械共振 \(a^2\) 振幅的平方作为频率的函数具有高斯形状 </p><p class="formulaDsp">
 \[ a^2 = a_\textrm{max}^2\frac{\omega^2\Gamma^2}{(\omega_r^2-\omega^2)^2+\Gamma^2\omega^2} \]
 </p>
-<p> where \(f_r = \frac{\omega_r}{2\pi}\) is the resonance frequency and \(\Gamma=\frac{\omega_r}{Q}\) is the dissipation rate. We used the previous equation in the jupyter notebook to fit the mechanical resonance.</p>
-<p>Given the values we have chosen for the parameters, one could estimate the resonance frequency analytically. Indeed, this is then confirmed by what we get in this program: the phononic superlattice cavity exhibits a mechanical resonance at 20GHz and a quality factor of 5046. The following images show the transmission amplitude and phase as a function of frequency in the vicinity of the resonance frequency:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-62.05.png" alt="Phononic superlattice cavity" height="400" class="inline"/> <img src="https://www.dealii.org/images/steps/developer/step-62.06.png" alt="Phononic superlattice cavity" height="400" class="inline"/></p>
-<p>The images above suggest that the periodic structure has its intended effect: It really only lets waves of a very specific frequency pass through, whereas all other waves are reflected. This is of course precisely what one builds these sorts of devices for. But it is not quite this easy. In practice, there is really only a "band gap", i.e., the device blocks waves other than the desired one at 20GHz only within a certain frequency range. Indeed, to find out how large this "gap" is within which waves are blocked, we can extend the frequency range to 16 GHz through the appropriate parameters in the input file. We then obtain the following image:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-62.07.png" alt="Phononic superlattice cavity" height="400" class="inline"/></p>
-<p>What this image suggests is that in the range of around 18 to around 22 GHz, really only the waves with a frequency of 20 GHz are allowed to pass through, but beyond this range, there are plenty of other frequencies that can pass through the device.</p>
+<p>，其中 \(f_r = \frac{\omega_r}{2\pi}\) 是共振频率， \(\Gamma=\frac{\omega_r}{Q}\) 是耗损率。我们使用jupyter笔记本中的前一个方程式来拟合机械共振。</p>
+<p>鉴于我们为参数选择的值，人们可以通过分析来估计共振频率。事实上，这一点随后被我们在这个程序中得到的结果所证实：声子超晶格空腔在20GHz时表现出机械共振，质量系数为5046。下面的图片显示了在共振频率附近的传输振幅和相位与频率的关系。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-62.05.png" alt="Phononic superlattice cavity" height="400" class="inline"/> <img src="https://www.dealii.org/images/steps/developer/step-62.06.png" alt="Phononic superlattice cavity" height="400" class="inline"/> 。</p>
+<p>上述图像表明，周期性结构有其预期的效果：它确实只让非常特定频率的波通过，而所有其他波都被反射。当然，这正是人们建造这类装置的目的。但这并不十分容易。在实践中，实际上只有一个 "带隙"，也就是说，该设备只在一定的频率范围内阻止20GHz频率以外的波。事实上，要想知道这个被阻挡的 "间隙 "有多大，我们可以通过输入文件中的适当参数将频率范围扩大到16GHz。然后我们得到以下图像。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-62.07.png" alt="Phononic superlattice cavity" height="400" class="inline"/> <br  />
+</p>
+<p>这张图片表明，在18到22GHz左右的范围内，实际上只有频率为20GHz的波被允许通过，但在这个范围之外，还有很多其他频率的波可以通过设备。</p>
 <p><a class="anchor" id="Modeprofile"></a></p><h3>Mode profile</h3>
-<p>We can inspect the mode profile with Paraview or VisIt. As we have discussed, at resonance all the mechanical energy is transmitted and the amplitude of motion is amplified inside the cavity. It can be observed that the PMLs are quite effective to truncate the solution. The following image shows the mode profile at resonance:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-62.08.png" alt="Phononic superlattice cavity" height="400" class="inline"/></p>
-<p>On the other hand, out of resonance all the mechanical energy is reflected. The following image shows the profile at 19.75 GHz. Note the interference between the force pulse and the reflected wave at the position \(x=-8\mu\textrm{m}\).</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-62.09.png" alt="Phononic superlattice cavity" height="400" class="inline"/></p>
+<p>我们可以用Paraview或VisIt检查模式轮廓。正如我们所讨论的，在共振时，所有的机械能都被传递，运动的振幅在腔内被放大。可以看出，PMLs对于截断解决方案是相当有效的。下面的图片显示了共振时的模式轮廓。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-62.08.png" alt="Phononic superlattice cavity" height="400" class="inline"/> <br  />
+</p>
+<p>另一方面，在共振之外，所有的机械能都被反射。下图显示了19.75GHz时的轮廓。注意力脉冲和反射波在位置 \(x=-8\mu\textrm{m}\) 的干扰。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-62.09.png" alt="Phononic superlattice cavity" height="400" class="inline"/> <br  />
+</p>
 <p><a class="anchor" id="Experimentalapplications"></a></p><h3>Experimental applications</h3>
-<p>Phononic superlattice cavities find application in <a href="https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.86.1391">quantum optomechanics</a>. Here we have presented the simulation of a 2D superlattice cavity, but this code can be used as well to simulate "real world" 3D devices such as <a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.99.060101">micropillar superlattice cavities</a>, which are promising candidates to study macroscopic quantum phenomena. The 20GHz mode of a micropillar superlattice cavity is essentially a mechanical harmonic oscillator that is very well isolated from the environment. If the device is cooled down to 20mK in a dilution fridge, the mode would then become a macroscopic quantum harmonic oscillator.</p>
+<p>声波超晶格空腔在<a href="https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.86.1391">量子光学力学</a>中找到了应用。这里我们介绍了二维超晶格空腔的模拟，但这个代码也可以用来模拟 "现实世界 "的三维器件，如<a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.99.060101">微柱超晶格空腔</a>，它是研究宏观量子现象的有希望的候选者。微柱超晶格空腔的20GHz模式本质上是一个机械谐波振荡器，与环境隔离得非常好。如果该装置在稀释冰箱中被冷却到20mK，那么该模式就会成为一个宏观的量子谐波振荡器。</p>
 <p><a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions</h3>
-<p>Instead of setting the parameters in the C++ file we could set the parameters using a python script and save them in the <a class="el" href="namespaceHDF5.html">HDF5</a> file that we will use for the simulations. Then the deal.II program will read the parameters from the <a class="el" href="namespaceHDF5.html">HDF5</a> file.</p>
+<p>我们可以不在C++文件中设置参数，而是使用python脚本设置参数，并将其保存在我们将用于模拟的HDF5文件中。然后deal.II程序将从HDF5文件中读取参数。</p>
 <div class="fragment"><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
 <div class="line"><span class="keyword">import</span> h5py</div>
 <div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
@@ -1663,13 +1793,16 @@ $(function() {
 <div class="line"><span class="keyword">import</span> scipy.constants <span class="keyword">as</span> constants</div>
 <div class="line"><span class="keyword">import</span> scipy.optimize</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="comment"># This considerably reduces the size of the svg data</span></div>
 <div class="line">plt.rcParams[<span class="stringliteral">&#39;svg.fonttype&#39;</span>] = <span class="stringliteral">&#39;none&#39;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">h5_file = h5py.File(<span class="stringliteral">&#39;results.h5&#39;</span>, <span class="stringliteral">&#39;w&#39;</span>)</div>
 <div class="line">data = h5_file.create_group(<span class="stringliteral">&#39;data&#39;</span>)</div>
 <div class="line">displacement = data.create_group(<span class="stringliteral">&#39;displacement&#39;</span>)</div>
 <div class="line">calibration = data.create_group(<span class="stringliteral">&#39;calibration&#39;</span>)</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="comment"># Set the parameters</span></div>
 <div class="line"><span class="keywordflow">for</span> group <span class="keywordflow">in</span> [displacement, calibration]:</div>
@@ -1679,20 +1812,25 @@ $(function() {
 <div class="line">    <span class="comment"># The waveguide width is equal to dimension_y</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;dimension_y&#39;</span>] = 2e-8</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment"># Position of the probe that we use to measure the flux</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;probe_pos_x&#39;</span>]   = 8e-6</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;probe_pos_y&#39;</span>]   = 0</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;probe_width_y&#39;</span>] = 2e-08</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment"># Number of points in the probe</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;nb_probe_points&#39;</span>] = 5</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="comment"># Global refinement</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;grid_level&#39;</span>] = 1</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment"># Cavity</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;cavity_resonance_frequency&#39;</span>] = 20e9</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;nb_mirror_pairs&#39;</span>]            = 15</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="comment"># Material</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;poissons_ratio&#39;</span>] = 0.27</div>
@@ -1707,6 +1845,7 @@ $(function() {
 <div class="line">                           (1 - 2 * group.attrs[<span class="stringliteral">&#39;poissons_ratio&#39;</span>])))</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;mu&#39;</span>]= (group.attrs[<span class="stringliteral">&#39;youngs_modulus&#39;</span>] / (2 * (1 + group.attrs[<span class="stringliteral">&#39;poissons_ratio&#39;</span>])))</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment"># Force</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;max_force_amplitude&#39;</span>] = 1e26</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;force_sigma_x&#39;</span>]       = 1e-7</div>
@@ -1716,6 +1855,7 @@ $(function() {
 <div class="line">    group.attrs[<span class="stringliteral">&#39;force_x_pos&#39;</span>]         = -8e-6</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;force_y_pos&#39;</span>]         = 0</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment"># PML</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;pml_x&#39;</span>]            = <span class="keyword">True</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;pml_y&#39;</span>]            = <span class="keyword">False</span></div>
@@ -1724,12 +1864,14 @@ $(function() {
 <div class="line">    group.attrs[<span class="stringliteral">&#39;pml_coeff&#39;</span>]        = 1.6</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;pml_coeff_degree&#39;</span>] = 2</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="comment"># Frequency sweep</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;center_frequency&#39;</span>]    = 20e9</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;frequency_range&#39;</span>]     = 0.5e9</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;start_frequency&#39;</span>]     = group.attrs[<span class="stringliteral">&#39;center_frequency&#39;</span>] - group.attrs[<span class="stringliteral">&#39;frequency_range&#39;</span>] / 2</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;stop_frequency&#39;</span>]      = group.attrs[<span class="stringliteral">&#39;center_frequency&#39;</span>] + group.attrs[<span class="stringliteral">&#39;frequency_range&#39;</span>] / 2</div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;nb_frequency_points&#39;</span>] = 400</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="comment"># Other parameters</span></div>
 <div class="line">    <span class="keywordflow">if</span> group == displacement:</div>
@@ -1738,8 +1880,10 @@ $(function() {
 <div class="line">        group.attrs[<span class="stringliteral">&#39;simulation_name&#39;</span>] = <span class="stringliteral">&#39;phononic_cavity_calibration&#39;</span></div>
 <div class="line">    group.attrs[<span class="stringliteral">&#39;save_vtu_files&#39;</span>] = <span class="keyword">False</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">h5_file.close()</div>
-</div><!-- fragment --><p>In order to read the <a class="el" href="namespaceHDF5.html">HDF5</a> parameters we have to use the <a class="el" href="classHDF5_1_1File.html#ac3dc680d4e4ca3dd7139085c5056ff5fa7cef8a734855777c2a9d0caf42666e69">HDF5::File::FileAccessMode::open</a> flag. </p><div class="fragment"><div class="line">HDF5::File data_file(<span class="stringliteral">&quot;results.h5&quot;</span>,</div>
+</div><!-- fragment --><p>为了读取HDF5参数，我们必须使用 <a class="el" href="classHDF5_1_1File.html#ac3dc680d4e4ca3dd7139085c5056ff5fa7cef8a734855777c2a9d0caf42666e69">HDF5::File::FileAccessMode::open</a> 标志。</p>
+<div class="fragment"><div class="line">HDF5::File data_file(<span class="stringliteral">&quot;results.h5&quot;</span>,</div>
 <div class="line">                     HDF5::File::FileAccessMode::open,</div>
 <div class="line">                     MPI_COMM_WORLD);</div>
 <div class="line">auto       data = data_file.open_group(<span class="stringliteral">&quot;data&quot;</span>);</div>
@@ -2946,7 +3090,8 @@ $(function() {
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespaceinternal_html_aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804"><div class="ttname"><a href="namespaceinternal.html#aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804">internal::EvaluatorQuantity::value</a></div><div class="ttdeci">@ value</div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> 。 </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

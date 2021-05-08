@@ -1,63 +1,64 @@
-/**
-@page step_46 The step-46 tutorial program
-This tutorial depends on step-8, step-22, step-27.
+  /**   @page step_46 The step-46 tutorial program 。 
+
+本教程取决于  step-8  ,  step-22  ,  step-27  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Thegeneralidea">The general idea</a>
-        <li><a href="#Implementation">Implementation</a>
-        <li><a href="#Specificsoftheimplementation"> Specifics of the implementation </a>
+        <li><a href="#Thegeneralidea">The general idea</a><a href="#Thegeneralidea">The general idea</a>
+        <li><a href="#Implementation">Implementation</a><a href="#Implementation">Implementation</a>
+        <li><a href="#Specificsoftheimplementation"> Specifics of the implementation </a><a href="#Specificsoftheimplementation"> Specifics of the implementation </a>
       <ul>
-        <li><a href="#Dealingwiththeinterfaceterms">Dealing with the interface terms</a>
-        <li><a href="#Velocityboundaryconditionsontheinterface">Velocity boundary conditions on the interface</a>
+        <li><a href="#Dealingwiththeinterfaceterms">Dealing with the interface terms</a><a href="#Dealingwiththeinterfaceterms">Dealing with the interface terms</a>
+        <li><a href="#Velocityboundaryconditionsontheinterface">Velocity boundary conditions on the interface</a><a href="#Velocityboundaryconditionsontheinterface">Velocity boundary conditions on the interface</a>
       </ul>
-        <li><a href="#Thetestcase">The testcase</a>
+        <li><a href="#Thetestcase">The testcase</a><a href="#Thetestcase">The testcase</a>
       <ul>
-        <li><a href="#Identifyingwhichsubdomainacellisin">Identifying which subdomain a cell is in</a>
-        <li><a href="#Linearsolvers">Linear solvers</a>
-        <li><a href="#Meshrefinement">Mesh refinement</a>
+        <li><a href="#Identifyingwhichsubdomainacellisin">Identifying which subdomain a cell is in</a><a href="#Identifyingwhichsubdomainacellisin">Identifying which subdomain a cell is in</a>
+        <li><a href="#Linearsolvers">Linear solvers</a><a href="#Linearsolvers">Linear solvers</a>
+        <li><a href="#Meshrefinement">Mesh refinement</a><a href="#Meshrefinement">Mesh refinement</a>
     </ul>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#ThecodeFluidStructureProblemcodeclasstemplate">The <code>FluidStructureProblem</code> class template</a>
-        <li><a href="#Boundaryvaluesandrighthandside">Boundary values and right hand side</a>
-        <li><a href="#ThecodeFluidStructureProblemcodeimplementation">The <code>FluidStructureProblem</code> implementation</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#ThecodeFluidStructureProblemcodeclasstemplate">The <code>FluidStructureProblem</code> class template</a><a href="#ThecodeFluidStructureProblemcodeclasstemplate">The <code>FluidStructureProblem</code> class template</a>
+        <li><a href="#Boundaryvaluesandrighthandside">Boundary values and right hand side</a><a href="#Boundaryvaluesandrighthandside">Boundary values and right hand side</a>
+        <li><a href="#ThecodeFluidStructureProblemcodeimplementation">The <code>FluidStructureProblem</code> implementation</a><a href="#ThecodeFluidStructureProblemcodeimplementation">The <code>FluidStructureProblem</code> implementation</a>
       <ul>
-        <li><a href="#Constructorsandhelperfunctions">Constructors and helper functions</a>
-        <li><a href="#Meshesandassigningsubdomains">Meshes and assigning subdomains</a>
-        <li><a href="#codeFluidStructureProblemsetup_dofscode"><code>FluidStructureProblem::setup_dofs</code></a>
-        <li><a href="#codeFluidStructureProblemassemble_systemcode"><code>FluidStructureProblem::assemble_system</code></a>
-        <li><a href="#codeFluidStructureProblemsolvecode"><code>FluidStructureProblem::solve</code></a>
-        <li><a href="#codeFluidStructureProblemoutput_resultscode"><code>FluidStructureProblem::output_results</code></a>
-        <li><a href="#codeFluidStructureProblemrefine_meshcode"><code>FluidStructureProblem::refine_mesh</code></a>
-        <li><a href="#codeFluidStructureProblemruncode"><code>FluidStructureProblem::run</code></a>
-        <li><a href="#Thecodemaincodefunction">The <code>main()</code> function</a>
+        <li><a href="#Constructorsandhelperfunctions">Constructors and helper functions</a><a href="#Constructorsandhelperfunctions">Constructors and helper functions</a>
+        <li><a href="#Meshesandassigningsubdomains">Meshes and assigning subdomains</a> ]<a href="#Meshesandassigningsubdomains">Meshes and assigning subdomains</a>
+        <li><a href="#codeFluidStructureProblemsetup_dofscode"><code>FluidStructureProblem::setup_dofs</code></a><a href="#codeFluidStructureProblemsetup_dofscode"><code>FluidStructureProblem::setup_dofs</code></a>
+        <li><a href="#codeFluidStructureProblemassemble_systemcode"><code>FluidStructureProblem::assemble_system</code></a><a href="#codeFluidStructureProblemassemble_systemcode"><code>FluidStructureProblem::assemble_system</code></a>
+        <li><a href="#codeFluidStructureProblemsolvecode"><code>FluidStructureProblem::solve</code></a><a href="#codeFluidStructureProblemsolvecode"><code>FluidStructureProblem::solve</code></a>
+        <li><a href="#codeFluidStructureProblemoutput_resultscode"><code>FluidStructureProblem::output_results</code></a><a href="#codeFluidStructureProblemoutput_resultscode"><code>FluidStructureProblem::output_results</code></a>
+        <li><a href="#codeFluidStructureProblemrefine_meshcode"><code>FluidStructureProblem::refine_mesh</code></a><a href="#codeFluidStructureProblemrefine_meshcode"><code>FluidStructureProblem::refine_mesh</code></a>
+        <li><a href="#codeFluidStructureProblemruncode"><code>FluidStructureProblem::run</code></a><a href="#codeFluidStructureProblemruncode"><code>FluidStructureProblem::run</code></a>
+        <li><a href="#Thecodemaincodefunction">The <code>main()</code> function</a><a href="#Thecodemaincodefunction">The <code>main()</code> function</a>
       </ul>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#2dresults">2d results</a>
-        <li><a href="#3dresults">3d results</a>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#2dresults">2d results</a><a href="#2dresults">2d results</a>
+        <li><a href="#3dresults">3d results</a><a href="#3dresults">3d results</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
       <ul>
-        <li><a href="#Linearsolversandpreconditioners">Linear solvers and preconditioners</a>
-        <li><a href="#Refinementindicators">Refinement indicators</a>
-        <li><a href="#Verification">Verification</a>
-        <li><a href="#Bettermodels">Better models</a>
+        <li><a href="#Linearsolversandpreconditioners">Linear solvers and preconditioners</a><a href="#Linearsolversandpreconditioners">Linear solvers and preconditioners</a>
+        <li><a href="#Refinementindicators">Refinement indicators</a><a href="#Refinementindicators">Refinement indicators</a>
+        <li><a href="#Verification">Verification</a><a href="#Verification">Verification</a>
+        <li><a href="#Bettermodels">Better models</a><a href="#Bettermodels">Better models</a>
     </ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<br>
+@endhtmlonly 
+
+  <br>   
 
 <i>This program was contributed by Wolfgang Bangerth.
 <br>
@@ -66,131 +67,102 @@ Foundation under Award No. EAR-0949446 and The University of California
 &ndash; Davis. Any opinions, findings, and conclusions or recommendations
 expressed in this publication are those of the author and do not necessarily
 reflect the views of the National Science Foundation or of The University of
-California &ndash; Davis.  </i>
+California &ndash; Davis.  </i> 
 
 
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+<a name="Intro"></a><a name="Introduction"></a><h1>Introduction</h1>
 
 
-This program deals with the problem of coupling different physics in different
-parts of the domain. Specifically, let us consider the following
-situation that couples a Stokes fluid with an elastic solid (these two
-problems were previously discussed separately in step-22 and step-8,
-where you may want to read up on the individual equations):
+这个程序处理的是在领域的不同部分耦合不同物理学的问题。具体来说，让我们考虑以下情况，将斯托克斯流体与弹性固体耦合起来（这两个问题之前在 step-22 和 step-8 中分别讨论过，你可能想在那里阅读一下各个方程）。
 
-- In a part $\Omega_f$ of $\Omega$, we have a fluid flowing that satisfies the
-  time independent Stokes equations (in the form that involves the strain
-  tensor):
-  @f{align*}
+- 在 $\Omega$ 的 $\Omega_f$ 部分，我们有一个满足时间独立的斯托克斯方程（以涉及应变张量的形式）的流体在流动。  @f{align*}
+
+
     -2\eta\nabla \cdot \varepsilon(\mathbf v) + \nabla p &= 0,
           \qquad \qquad && \text{in}\ \Omega_f\\
+
+
     -\nabla \cdot \mathbf v &= 0  && \text{in}\ \Omega_f.
-  @f}
-  Here, $\mathbf v, p$ are the fluid velocity and pressure, respectively.
-  We prescribe the velocity on part of the external boundary,
-  @f{align*}
+  @f} 
+
+  这里， $\mathbf v, p$ 分别是流体的速度和压力。  我们规定了部分外部边界上的速度，@f{align*}
     \mathbf v = \mathbf v_0 \qquad\qquad
      \text{on}\ \Gamma_{f,1} \subset \partial\Omega \cap \partial\Omega_f
   @f}
-  while we assume free-flow conditions on the remainder of the external
-  boundary,
-  @f{align*}
+
+  而我们假设外部边界的其余部分为自由流动条件，@f{align*}
     (2\eta \varepsilon(\mathbf v) - p \mathbf 1) \cdot \mathbf n = 0
      \qquad\qquad
      \text{on}\ \Gamma_{f,2} = \partial\Omega \cap \partial\Omega_f \backslash
      \Gamma_{f,1}.
   @f}
-- The remainder of the domain, $\Omega_s = \Omega \backslash \Omega_f$ is
-  occupied by a solid whose deformation field $\mathbf u$ satisfies the
-  elasticity equation,
-  @f{align*}
+
+
+
+- 域的其余部分， $\Omega_s = \Omega \backslash \Omega_f$ 被一个固体占据，其变形场 $\mathbf u$ 满足弹性方程，@f{align*}
+
+
     -\nabla \cdot C \varepsilon(\mathbf u) = 0 \qquad\qquad
     & \text{in}\ \Omega_s,
-  @f}
-  where $C$ is the rank-4 elasticity tensor (for which we will use a
-  particularly simple form by assuming that the solid is isotropic).
-  It deforms in reaction to the forces exerted by the
-  fluid flowing along the boundary of the solid. We assume this deformation to
-  be so small that it has no feedback effect on the fluid, i.e. the coupling
-  is only in one direction. For simplicity, we will assume that the
-  solid's external boundary is clamped, i.e.
-  @f{align*}
+  @f} 
+
+  其中 $C$ 是等级4的弹性张量（我们将使用一个特别简单的形式，假设该固体是各向同性的）。  它在对沿固体边界流动的流体所施加的力的反应中发生变形。我们假设这种变形非常小，以至于它对流体没有反馈作用，也就是说，这种耦合只是在一个方向。为了简单起见，我们将假设固体的外部边界是被夹紧的，即@f{align*}
     \mathbf u = \mathbf 0 \qquad\qquad
      \text{on}\ \Gamma_{s,1} = \partial\Omega \cap \partial\Omega_s
   @f}
-- As a consequence of the small displacement assumption, we will pose the
-  following boundary conditions on the interface between the fluid and solid:
-  first, we have no slip boundary conditions for the fluid,
-  @f{align*}
+
+
+
+- 作为小位移假设的结果，我们将在流体和固体之间的界面上提出以下边界条件：首先，我们对流体没有滑移边界条件，@f{align*}
     \mathbf v = \mathbf 0 \qquad\qquad
      \text{on}\ \Gamma_{i} = \partial\Omega_s \cap \partial\Omega_f.
-  @f}
-  Secondly, the forces (traction) on the solid equal the normal stress from the fluid,
-  @f{align*}
+  @f} 
+
+  第二，固体上的力（牵引力）等于流体的法向应力，@f{align*}
     (C \varepsilon(\mathbf u)) \mathbf n =
     (2 \eta \varepsilon(\mathbf v) - p \mathbf 1) \mathbf n \qquad\qquad
      \text{on}\ \Gamma_{i} = \partial\Omega_s \cap \partial\Omega_f,
   @f}
-  where $\mathbf{n}$ is the normal vector on $\Gamma_{i}$ pointing from
-  the solid to the fluid.
 
-We get a weak formulation of this problem by following our usual rule of
-multiplying from the left by a test function and integrating over the
-domain. It then looks like this: Find $y = \{\mathbf v, p,
+  其中 $\mathbf{n}$ 是 $\Gamma_{i}$ 上从固体指向流体的法向量。
+
+通过遵循我们通常的规则，即从左边乘以一个测试函数并在域上进行积分，我们得到了这个问题的弱表述。然后它看起来像这样。找到 $y = \{\mathbf v, p,
 \mathbf u\} \in Y \subset H^1(\Omega_f)^d \times L_2(\Omega_f) \times
-H^1(\Omega_s)^d$ such that
+H^1(\Omega_s)^d$ ，使得 
+
 @f{align*}
 	2 \eta (\varepsilon(\mathbf a), \varepsilon(\mathbf v))_{\Omega_f}
+
+
 	- (\nabla \cdot \mathbf a, p)_{\Omega_f}
+
+
 	- (q, \nabla \cdot \mathbf v)_{\Omega_f} &
 	\\
 	+ (\varepsilon(\mathbf b), C \varepsilon(\mathbf u))_{\Omega_s} &
 	\\
+
+
 	- (\mathbf b,
            (2 \eta \varepsilon(\mathbf v) - p \mathbf 1) \mathbf n)_{\Gamma_i}
 	&=
 	0,
-@f}
-for all test functions $\mathbf a, q, \mathbf b$; the first, second, and
-third lines correspond to the fluid, solid, and interface
-contributions, respectively.
-Note that $Y$ is only a subspace of the spaces listed above to accommodate for
-the various Dirichlet boundary conditions.
+@f} 
 
-This sort of coupling is of course possible by simply having two Triangulation
-and two DoFHandler objects, one each for each of the two subdomains. On the
-other hand, deal.II is much simpler to use if there is a single DoFHandler
-object that knows about the discretization of the entire problem.
+为所有测试函数 $\mathbf a, q, \mathbf b$ ；第一、第二和第三行分别对应于流体、固体和界面贡献。注意， $Y$ 只是上述空间的一个子空间，以适应各种迪里希特边界条件。
 
-This program is about how this can be achieved. Note that the goal is not to
-present a particularly useful physical model (a realistic fluid-structure
-interaction model would have to take into account the finite deformation of
-the solid and the effect this has on the fluid): this is, after all, just a
-tutorial program intended to demonstrate techniques, not to solve actual
-problems. Furthermore, we will make the assumption that the interface between
-the subdomains is aligned with coarse mesh cell faces.
+这种耦合当然可以通过简单地拥有两个Triangulation和两个DoFHandler对象来实现，两个子域各一个。另一方面，如果有一个知道整个问题离散化的单一DoFHandler对象，那么deal.II的使用就简单多了。
+
+这个程序是关于如何实现这一点的。请注意，我们的目标并不是要提出一个特别有用的物理模型（一个现实的流体-结构相互作用模型必须考虑到固体的有限变形和它对流体的影响）：这毕竟只是一个旨在演示技术的教程程序，而不是为了解决实际问题。此外，我们将假设子域之间的界面与粗略的网格单元面对齐。
 
 
 <a name="Thegeneralidea"></a><h3>The general idea</h3>
 
 
-Before going into more details let us state the obvious: this is a
-problem with multiple solution variables; for this, you will probably
-want to read the @ref vector_valued documentation module first, which
-presents the basic philosophical framework in which we address
-problems with more than one solution variable. But back to the problem
-at hand:
+在讨论更多的细节之前，让我们先说明一个显而易见的问题：这是一个有多个求解变量的问题；为此，你可能想先阅读 @ref vector_valued 文件模块，它介绍了我们处理有多个求解变量问题的基本哲学框架。但回到手头的问题上。
 
-The fundamental idea to implement these sort of problems in deal.II goes as
-follows: in the problem formulation, the velocity and pressure variables
-$\mathbf v, p$ only live in the fluid subdomain $\Omega_f$. But let's assume
-that we extend them by zero to the entire domain $\Omega$ (in the general case
-this means that they will be discontinuous along $\Gamma_i$). So what is the
-appropriate function space for these variables? We know that on $\Omega_f$ we
-should require $\mathbf v \in H^1(\Omega_f)^d, p \in L_2(\Omega_f)$, so for
-the extensions $\tilde{\mathbf v}, \tilde p$ to the whole domain the following
-appears a useful set of function spaces:
+在deal.II中实现这类问题的基本思路如下：在问题的表述中，速度和压力变量 $\mathbf v, p$ 只存在于流体子域中 $\Omega_f$ 。但我们假设将它们以零点扩展到整个域 $\Omega$ （在一般情况下，这意味着它们沿 $\Gamma_i$ 将是不连续的）。那么，对于这些变量来说，什么是合适的函数空间呢？我们知道在 $\Omega_f$ 上我们应该要求 $\mathbf v \in H^1(\Omega_f)^d, p \in L_2(\Omega_f)$ ，所以对于 $\tilde{\mathbf v}, \tilde p$ 到整个领域的扩展，下面出现了一组有用的函数空间。
+
 @f{align*}
   \tilde {\mathbf v} &\in V
    = \{\tilde {\mathbf v}|_{\Omega_f} \in H^1(\Omega_f)^d, \quad
@@ -199,24 +171,15 @@ appears a useful set of function spaces:
   \tilde p &\in P
   = \{\tilde p|_{\Omega_f} \in L_2(\Omega_f), \quad
        \tilde p|_{\Omega_s} = 0 \}.
-@f}
-(Since this is not important for the current discussion, we have omitted the
-question of boundary values from the choice of function spaces; this question
-also affects whether we can choose $L_2$ for the pressure or whether we have
-to choose the space $L_{2,0}(\Omega_f)=\{q\in L_2(\Omega_f): \int_{\Omega_f} q
-= 0\}$ for the pressure. None of these questions are relevant to the following
-discussion, however.)
+@f} 
 
-Note that these are indeed a linear function spaces with obvious norm. Since no
-confusion is possible in practice, we will henceforth omit the tilde again to
-denote the extension of a function to the whole domain and simply refer by
-$\mathbf v, p$ to both the original and the extended function.
+由于这对目前的讨论并不重要，我们在选择函数空间时省略了边界值的问题；这个问题也影响到我们是否可以为压力选择 $L_2$ ，或者我们是否必须为压力选择空间 $L_{2,0}(\Omega_f)=\{q\in L_2(\Omega_f): \int_{\Omega_f} q
+= 0\}$ 。不过，这些问题都与下面的讨论无关)。
 
-For discretization, we need finite dimensional subspaces $V_h,P_h$ of
-$V, P$. For Stokes, we know from step-22 that an appropriate choice is
-$Q_{p+1}^d\times Q_P$ but this only holds for that part of the domain
-occupied by the fluid. For the extended field, let's use the following
-subspaces defined on the triangulation $\mathbb T$:
+请注意，这些确实是一个具有明显规范的线性函数空间。由于在实践中不可能发生混淆，因此我们将再次省略省略号，以表示一个函数对整个域的扩展，并简单地用 $\mathbf v, p$ 指代原始函数和扩展函数。
+
+对于离散化，我们需要 $V, P$ 的有限维子空间 $V_h,P_h$  。对于斯托克斯，我们从 step-22 中知道，适当的选择是 $Q_{p+1}^d\times Q_P$ ，但这只适用于流体占据的那部分域。对于扩展场，让我们使用以下定义在三角形上的子空间  $\mathbb T$  。
+
 @f{align*}
   V_h
    &= \{{\mathbf v}_h \quad | \quad
@@ -233,33 +196,22 @@ subspaces defined on the triangulation $\mathbb T$:
        p_h|_{\Omega_f}\ \text{is continuous}, \quad
        p_h|_K = 0\ \text{if}\ K\subset {\Omega_s}\ \}
    && \subset P.
-@f}
-In other words, on $\Omega_f$ we choose the usual discrete spaces but
-we keep the (discontinuous) extension by zero. The point to make is
-that we now need a description of a finite element space for functions
-that are zero on a cell &mdash; and this is where the FE_Nothing class
-comes in: it describes a finite dimensional function space of
-functions that are constant zero. A particular property of this
-peculiar linear vector space is that it has no degrees of freedom: it
-isn't just finite dimensional, it is in fact zero dimensional, and
-consequently for objects of this type, FiniteElement::n_dofs_per_cell()
-will return zero. For discussion below, let us give this space a
-proper symbol:
-@f[
-  Z = \{ \varphi: \varphi(x)=0 \}.
-@f]
-The symbol $Z$ reminds of the fact that functions in this space are
-zero. Obviously, we choose $Z_h=Z$.
+@f} 
 
-This entire discussion above can be repeated for the variables we use to
-describe the elasticity equation. Here, for the extended variables, we
-have
+换句话说，在 $\Omega_f$ 上，我们选择通常的离散空间，但我们保持（不连续的）扩展为零。要说明的是，我们现在需要一个描述在单元上为零的函数的有限元空间&mdash；这就是FE_Nothing类的作用：它描述了一个恒定为零的函数的有限维函数空间。这个奇特的线性向量空间的一个特殊属性是它没有自由度：它不仅仅是有限维度的，它实际上是零维的，因此对于这种类型的对象， FiniteElement::n_dofs_per_cell() 将返回零。为了下面的讨论，让我们给这个空间一个适当的符号。@f[
+  Z = \{ \varphi: \varphi(x)=0 \}.
+@f] 符号 $Z$ 提醒了这个空间的函数为零的事实。很明显，我们选择 $Z_h=Z$  。
+
+对于我们用来描述弹性方程的变量，上面的整个讨论都可以重复。这里，对于扩展变量，我们有 
+
 @f{align*}
   \tilde {\mathbf u} &\in U
    = \{\tilde {\mathbf u}|_{\Omega_s} \in H^1(\Omega_f)^d, \quad
        \tilde {\mathbf u}|_{\Omega_f} \in Z(\Omega_s)^d \},
-@f}
-and we will typically use a finite element space of the kind
+@f} 
+
+而我们通常会使用这样的有限元空间 
+
 @f{align*}
   U_h
    &= \{{\mathbf u}_h \quad | \quad
@@ -268,213 +220,127 @@ and we will typically use a finite element space of the kind
        {\mathbf u}_h|_{\Omega_f}\ \text{is continuous}, \quad
        {\mathbf u}_h|_K \in Z^d\ \text{if}\ K\subset {\Omega_f}\}
    && \subset U
-@f}
-of polynomial degree $r$.
+@f} 
 
-So to sum up, we are going to look for a discrete vector-valued
-solution $y_h = \{\mathbf v_h, p_h, \mathbf u_h\}$ in the following
-space:
+的多项式度数 $r$  。
+
+所以总结起来，我们要在以下空间中寻找离散的矢量值解 $y_h = \{\mathbf v_h, p_h, \mathbf u_h\}$ 。
+
 @f{align*}
   Y_h = \{
       & y_h = \{\mathbf v_h, p_h, \mathbf u_h\} : \\
       & y_h|_{\Omega_f} \in Q_{p+1}^d \times Q_p \times Z^d, \\
       & y_h|_{\Omega_s} \in Z^d \times Z \times Q_r^d \}.
-@f}
+@f} 
+
+
+
 
 
 
 <a name="Implementation"></a><h3>Implementation</h3>
 
 
-So how do we implement this sort of thing? First, we realize that the discrete
-space $Y_h$ essentially calls for two different finite elements: First, on the
-fluid subdomain, we need the element $Q_{p+1}^d \times Q_p \times Z^d$ which
-in deal.II is readily implemented by
+那么，我们如何实现这种事情呢？首先，我们意识到离散空间 $Y_h$ 本质上需要两个不同的有限元。首先，在流体子域上，我们需要元素 $Q_{p+1}^d \times Q_p \times Z^d$ ，这在deal.II中很容易实现，即 
+
 @code
   FESystem<dim> (FE_Q<dim>(p+1), dim,
 		 FE_Q<dim>(p), 1,
 		 FE_Nothing<dim>(), dim),
-@endcode
-where <code>FE_Nothing</code> implements the space of functions that are
-always zero. Second, on the solid subdomain, we need the element
-$\in Z^d \times Z \times Q_r^d$, which we get using
+@endcode 
+
+其中 <code>FE_Nothing</code> 实现了永远为零的函数空间。第二，在实体子域上，我们需要元素 $\in Z^d \times Z \times Q_r^d$ ，我们用@code
+  FESystem<dim> (FE_Nothing<dim>(), dim,
+		 FE_Nothing<dim>(), 1,
+		 FE_Q<dim>(r), dim),
+@endcode得到它。
+
 @code
   FESystem<dim> (FE_Nothing<dim>(), dim,
 		 FE_Nothing<dim>(), 1,
 		 FE_Q<dim>(r), dim),
-@endcode
-
-The next step is that we associate each of these two elements with the cells
-that occupy each of the two subdomains. For this we realize that in a sense
-the two elements are just variations of each other in that they have the same
-number of vector components but have different polynomial degrees &mdash; this
-smells very much like what one would do in $hp$ finite element methods, and it
-is exactly what we are going to do here: we are going to (ab)use the classes
-and facilities of the hp-namespace to assign different elements to different
-cells. In other words, we will use collect the two finite elements in an
-hp::FECollection, will integrate with an appropriate hp::QCollection using an
-hp::FEValues object, and our DoFHandler will be in <i>hp</i>-mode. You
-may wish to take a look at step-27 for an overview of all of these concepts.
-
-Before going on describing the testcase, let us clarify a bit <i>why</i> this
-approach of extending the functions by zero to the entire domain and then
-mapping the problem on to the hp-framework makes sense:
-
-- It makes things uniform: On all cells, the number of vector components is
-  the same (here, <code>2*dim+1</code>). This makes all sorts of
-  things possible since a uniform description allows for code
-  re-use. For example, counting degrees of freedom per vector
-  component (DoFTools::count_dofs_per_fe_component), sorting degrees of
-  freedom by component (DoFRenumbering::component_wise), subsequent
-  partitioning of matrices and vectors into blocks and many other
-  functions work as they always did without the need to add special
-  logic to them that describes cases where some of the variables only
-  live on parts of the domain. Consequently, you have all sorts of
-  tools already available to you in programs like the current one that
-  weren't originally written for the multiphysics case but work just
-  fine in the current context.
-
-- It allows for easy graphical output: All graphical output formats we support
-  require that each field in the output is defined on all nodes of the
-  mesh. But given that now all solution components live everywhere,
-  our existing DataOut routines work as they always did, and produce
-  graphical output suitable for visualization -- the fields will
-  simply be extended by zero, a value that can easily be filtered out
-  by visualization programs if not desired.
-
-- There is essentially no cost: The trick with the FE_Nothing does not add any
-  degrees of freedom to the overall problem, nor do we ever have to handle a
-  shape function that belongs to these components &mdash; the FE_Nothing has
-  no degrees of freedom, not does it have shape functions, all it does is take
-  up vector components.
+@endcode 
 
 
-<a name="Specificsoftheimplementation"></a><h3> Specifics of the implementation </h3>
+
+下一步是，我们将这两个元素分别与占据两个子域的单元相关联。为此，我们认识到，从某种意义上说，这两个元素只是彼此的变化，因为它们具有相同数量的向量分量，但具有不同的多项式度数&mdash；这听起来非常像 $hp$ 有限元方法中的做法，这也正是我们在这里要做的：我们将（ab）使用hp-namespace的类和设施，将不同的元素分配给不同的单元。换句话说，我们将使用 hp::FECollection, 中的两个有限元与适当的 hp::QCollection 集成，使用 hp::FEValues 对象，而我们的DoFHandler将处于<i>hp</i>模式。你不妨看看 step-27 ，了解所有这些概念的概况。
+
+在继续描述测试案例之前，让我们先澄清一下<i>why</i>这种将函数以0扩展到整个领域，然后将问题映射到hp-framework上的方法是有意义的。
+
+- 它使事情变得统一。在所有单元上，向量分量的数量是相同的（这里是 <code>2*dim+1</code> ）。这使得各种事情都成为可能，因为统一的描述允许代码的重复使用。例如，计算每个向量分量的自由度 (DoFTools::count_dofs_per_fe_component), 按分量对自由度进行排序 (DoFRenumbering::component_wise), ，随后将矩阵和向量分割成块，以及其他许多函数都能像以前一样工作，而不需要给它们添加特殊的逻辑，描述某些变量只存在于部分域的情况。因此，你在像现在这样的程序中已经有了各种工具，这些工具最初并不是为多物理场情况编写的，但在目前的情况下却能正常工作。
+
+- 它允许简单的图形化输出。我们支持的所有图形输出格式都要求输出中的每个字段都定义在网格的所有节点上。但是考虑到现在所有的解决方案组件都存在于各个地方，我们现有的DataOut例程可以像以前一样工作，并产生适合于可视化的图形输出--这些字段将简单地被扩展为0，如果不需要，可视化程序可以很容易地过滤掉这个值。
+
+- 基本上没有任何成本。FE_Nothing的技巧并没有给整个问题增加任何自由度，我们也不需要处理属于这些分量的形状函数&mdash；FE_Nothing没有自由度，也没有形状函数，它所做的只是占用矢量分量。
 
 
-More specifically, in the program we have to address the following
-points:
-- Implementing the bilinear form, and in particular dealing with the
-  interface term, both in the matrix and the sparsity pattern.
-- Implementing Dirichlet boundary conditions on the external and
-  internal parts of the boundaries
-  $\partial\Omega_f,\partial\Omega_s$.
+<a name="Specificsoftheimplementation"></a><h3> Specifics of the implementation </h3> 
+
+
+更具体地说，在程序中我们要解决以下几点。
+
+- 实现双线性形式，特别是处理界面项，包括矩阵和稀疏模式。
+
+- 在边界的外部和内部部分实现迪里希特边界条件 $\partial\Omega_f,\partial\Omega_s$  。
 
 
 <a name="Dealingwiththeinterfaceterms"></a><h4>Dealing with the interface terms</h4>
 
 
-Let us first discuss implementing the bilinear form, which at the
-discrete level we recall to be
+让我们首先讨论实现双线性形式，在离散水平上，我们记得它是 
+
 @f{align*}
 	2 \eta (\varepsilon(\mathbf a_h), \varepsilon(\mathbf v_h))_{\Omega_f}
+
+
 	- (\nabla \cdot \mathbf a_h, p_h)_{\Omega_f}
+
+
 	- (q_h, \nabla \cdot \mathbf v_h)_{\Omega_f} &
 	\\
 	+ (\varepsilon(\mathbf b_h), C \varepsilon(\mathbf u_h))_{\Omega_s} &
 	\\
+
+
 	- (\mathbf b_h,
            (2 \eta \varepsilon(\mathbf v_h) - p \mathbf 1) \mathbf n)_{\Gamma_i}
 	&=
 	0,
-@f}
-Given that we have extended the fields by zero, we could in principle
-write the integrals over subdomains to the entire domain $\Omega$,
-though it is little additional effort to first ask whether a cell is
-part of the elastic or fluid region before deciding which terms to
-integrate. Actually integrating these terms is not very difficult; for
-the Stokes equations, the relevant steps have been shown in step-22,
-whereas for the elasticity equation we take essentially the form shown
-in the @ref vector_valued module (rather than the one from step-8).
+@f} 
 
-The term that is of more interest is the interface term,
-@f[
+鉴于我们已经将场扩展为零，原则上我们可以将子域上的积分写成整个域 $\Omega$ ，尽管在决定哪些项要积分之前，首先询问一个单元是弹性区域还是流体区域的一部分，这几乎没有什么额外的努力。实际上，对这些项进行积分并不十分困难；对于斯托克斯方程，相关步骤已在 step-22 中显示，而对于弹性方程，我们基本上采取 @ref vector_valued 模块中的形式（而不是 step-8 中的形式）。
+
+更感兴趣的是界面项，@f[
+
+
 	-(\mathbf b_h,
            (2 \eta \varepsilon(\mathbf v_h) - p \mathbf 1) \mathbf n)_{\Gamma_i}.
-@f]
-Based on our assumption that the interface $\Gamma_i$ coincides with
-cell boundaries, this can in fact be written as a set of face
-integrals. If we denote the velocity, pressure and displacement
-components of shape function $\psi_i\in Y_h$ using the extractor
-notation $\psi_i[\mathbf v],\psi_i[p], \psi_i[\mathbf u]$, then the
-term above yields the following contribution to the global matrix
-entry $i,j$:
-@f[
+@f] 基于我们的假设，即界面 $\Gamma_i$ 与细胞边界重合，这实际上可以写成一组面积分。如果我们用提取器符号 $\psi_i[\mathbf v],\psi_i[p], \psi_i[\mathbf u]$ 表示形状函数 $\psi_i\in Y_h$ 的速度、压力和位移分量，那么上面的项对全局矩阵项 $i,j$ 的贡献如下：@f[
+
+
 	-\sum_K (\psi_i[\mathbf u],
            (2 \eta \varepsilon(\psi_j[\mathbf v]) - \psi_j[p] \mathbf 1)
 	   \mathbf n)_{\partial K \cap \Gamma_i}.
-@f]
-Although it isn't immediately obvious, this term presents a slight
-complication: while $\psi_i[\mathbf u]$ and $\mathbf n$ are evaluated
-on the solid side of the interface (they are test functions for the
-displacement and the normal vector to $\Omega_s$, respectively, we
-need to evaluate $\psi_j[\mathbf v],\psi_j[p]$ on the fluid
-side of the interface since they correspond to the stress/force
-exerted by the fluid. In other words, in our implementation, we will
-need FEFaceValue objects for both sides of the interface. To make
-things slightly worse, we may also have to deal with the fact that one
-side or the other may be refined, leaving us with the need to
-integrate over parts of a face. Take a look at the implementation
-below on how to deal with this.
+@f] 虽然不是很明显，但这个项有一个小小的复杂化：虽然 $\psi_i[\mathbf u]$  ]和 $\mathbf n$ 是在界面的实体侧评估的（它们分别是位移和法向量 $\Omega_s$ 的测试函数，我们需要在界面的流体侧评估 $\psi_j[\mathbf v],\psi_j[p]$ ，因为它们对应于流体施加的应力/力。换句话说，在我们的实现中，我们将需要界面两边的FEFaceValue对象。让事情变得更糟糕的是，我们可能还必须处理这样一个事实，即一方或另一方可能被细化，使我们需要在一个面的部分区域进行整合。看看下面的实现，看看如何处理这个问题。
 
-As an additional complication, the matrix entries that result from this term
-need to be added to the sparsity pattern of the matrix somehow. This is the
-realm of various functions in the DoFTools namespace like
-DoFTools::make_sparsity_pattern and
-DoFTools::make_flux_sparsity_pattern. Essentially, what these functions do is
-simulate what happens during assembly of the system matrix: whenever assembly
-would write a nonzero entry into the global matrix, the functions in DoFTools
-would add an entry to the sparsity pattern. We could therefore do the
-following: let DoFTools::make_sparsity_pattern add all those entries to the
-sparsity pattern that arise from the regular cell-by-cell integration, and
-then do the same by hand that arise from the interface terms. If you look at
-the implementation of the interface integrals in the program below, it should
-be obvious how to do that and would require no more than maybe 100 lines of
-code at most.
+作为一个额外的复杂因素，这个项产生的矩阵条目需要以某种方式添加到矩阵的稀疏模式中。这是DoFTools命名空间中各种函数的领域，比如 DoFTools::make_sparsity_pattern 和 DoFTools::make_flux_sparsity_pattern. 本质上，这些函数所做的是模拟系统矩阵装配过程中发生的事情：每当装配将非零条目写入全局矩阵，DoFTools中的函数将添加一个条目到稀疏模式中。因此，我们可以这样做：让 DoFTools::make_sparsity_pattern 将所有由常规的逐格积分产生的条目添加到稀疏性模式中，然后用手做同样的事情，即由接口项产生的条目。如果你看一下下面的程序中界面积分的实现，那么如何做应该是显而易见的，最多只需要不超过100行的代码。
 
-But we're lazy people: the interface term couples degrees of freedom from two
-adjacent cells along a face, which is exactly the kind of thing one would do
-in discontinuous Galerkin schemes for which the function
-DoFTools::make_flux_sparsity_pattern was written. This is a superset of matrix
-entries compared to the usual DoFTools::make_sparsity_pattern: it will also
-add all entries that result from computing terms coupling the degrees of
-freedom from both sides of all faces. Unfortunately, for the simplest version
-of this function, this is a pretty big superset. Consider for example the
-following mesh with two cells and a $Q_1$ finite element:
+但我们是懒人：界面项是沿一个面的两个相邻单元的自由度的耦合，这正是人们在非连续Galerkin方案中要做的事情，函数 DoFTools::make_flux_sparsity_pattern 就是为这种方案而写的。与通常的 DoFTools::make_sparsity_pattern: 相比，这是一个矩阵条目的超集，它还将添加所有计算来自所有面的两侧自由度耦合项的条目。不幸的是，对于这个函数的最简单版本，这是一个相当大的超集。例如，考虑以下有两个单元和一个 $Q_1$ 有限元的网格。
+
 @code
   2---3---5
   |   |   |
   0---1---4
-@endcode
-Here, the sparsity pattern produced by DoFTools::make_sparsity_pattern will
-only have entries for degrees of freedom that couple on a cell. However, it
-will not have sparsity pattern entries $(0,4),(0,5),(2,4),(2,5)$. The sparsity
-pattern generated by DoFTools::make_flux_sparsity_pattern will have these
-entries, however: it assumes that you want to build a sparsity pattern for a
-bilinear form that couples <i>all</i> degrees of freedom from adjacent
-cells. This is not what we want: our interface term acts only on a small
-subset of cells, and we certainly don't need all the extra couplings between
-two adjacent fluid cells, or two adjacent solid cells. Furthermore, the fact that we
-use higher order elements means that we would really generate many many more
-entries than we actually need: on the coarsest mesh, in 2d, 44,207 nonzero
-entries instead of 16,635 for DoFTools::make_sparsity_pattern, leading to
-plenty of zeros in the matrix we later build (of course, the 16,635 are not
-enough since they don't include the interface entries). This ratio would be
-even worse in 3d.
+@endcode 
 
-So being extremely lazy comes with a cost: too many entries in the matrix. But
-we can get away with being moderately lazy: there is a variant of
-DoFTools::make_flux_sparsity_pattern that allows us
-to specify which vector components of the finite element couple with which
-other components, both in cell terms as well as in face terms. For cells that
-are in the solid subdomain, we couple all displacements with each other; for
-fluid cells, all velocities with all velocities and the pressure, but not the
-pressure with itself. Since no cell has both sets of
-variables, there is no need to distinguish between the two kinds of cells, so
-we can write the mask like this:
+这里，由 DoFTools::make_sparsity_pattern 产生的稀疏模式将只有在单元上耦合的自由度的条目。然而，它不会有稀疏模式条目  $(0,4),(0,5),(2,4),(2,5)$  。然而，由 DoFTools::make_flux_sparsity_pattern 产生的稀疏模式将有这些条目：它假定你想为一个双线性形式建立一个稀疏模式，该形式将<i>all</i>自由度从相邻的单元中耦合起来。这不是我们想要的：我们的界面项只作用于一小部分单元，我们当然不需要两个相邻流体单元或两个相邻固体单元之间的所有额外耦合。此外，我们使用高阶元素的事实意味着我们确实会产生比实际需要多得多的条目：在最粗的网格上，在2D中，44,207个非零条目而不是16,635个 DoFTools::make_sparsity_pattern, ，导致我们后来建立的矩阵中出现大量的零（当然，16,635是不够的，因为它们不包括界面条目）。这个比例在三维中会更糟糕。
+
+所以极度懒惰是有代价的：矩阵中的条目太多。但我们可以适度偷懒：有一个 DoFTools::make_flux_sparsity_pattern 的变种，允许我们指定有限元的哪些矢量分量与哪些其他分量相耦合，既可以是单元，也可以是面。对于处于实体子域中的单元，我们将所有位移相互耦合；对于流体单元，所有速度与所有速度和压力耦合，但压力不与自身耦合。由于没有一个单元同时拥有两组变量，所以没有必要区分这两种单元，所以我们可以这样写掩码。
+
 @code
     Table<2,DoFTools::Coupling> cell_coupling (fe_collection.n_components(),
 					       fe_collection.n_components());
+
 
     for (unsigned int c=0; c<fe_collection.n_components(); ++c)
       for (unsigned int d=0; d<fe_collection.n_components(); ++d)
@@ -483,52 +349,31 @@ we can write the mask like this:
 	    ||
 	    ((c>=dim+1) && (d>=dim+1)))
 	  cell_coupling[c][d] = DoFTools::Coupling::always;
-@endcode
-Here, we have used the fact that the first <code>dim</code> components of the
-finite element are the velocities, then the pressure, and then the
-<code>dim</code> displacements. (We could as well have stated that the
-velocities/pressure also couple with the displacements since no cell ever has
-both sets of variables.) On the other hand, the interface terms require a mask
-like this:
+@endcode 
+
+这里，我们利用了这样一个事实：有限元的第一个 <code>dim</code> 分量是速度，然后是压力，最后是 <code>dim</code> 位移。(我们也可以说，速度/压力也与位移耦合，因为没有一个单元同时拥有两组变量)。另一方面，界面条款需要一个像这样的掩码。
+
 @code
     Table<2,DoFTools::Coupling> face_coupling (fe_collection.n_components(),
 					       fe_collection.n_components());
+
 
     for (unsigned int c=0; c<fe_collection.n_components(); ++c)
       for (unsigned int d=0; d<fe_collection.n_components(); ++d)
 	if ((c>=dim+1) && (d<dim+1))
 	  face_coupling[c][d] = DoFTools::Coupling::always;
-@endcode
-In other words, all displacement test functions (components
-<code>c@>=dim+1</code>) couple with all velocity and pressure shape functions
-on the other side of an interface. This is not entirely true, though close: in
-fact, the exact form of the interface term only those pressure displacement
-shape functions that are indeed nonzero on the common interface, which is not
-true for all shape functions; on the other hand, it really couples all
-velocities (since the integral involves gradients of the velocity shape
-functions, which are all nonzero on all faces of the cell). However, the mask we
-build above, is not capable of these subtleties. Nevertheless, through these
-masks we manage to get the number of sparsity pattern entries down to 21,028
-&mdash; good enough for now.
+@endcode 
+
+换句话说，所有位移测试函数（组件 <code>c@>=dim+1</code> ）与界面另一侧的所有速度和压力形状函数耦合。这并不完全正确，尽管很接近：事实上，界面的确切形式仅指那些在共同界面上确实为非零的压力位移形状函数，这对所有形状函数来说并不正确；另一方面，它确实耦合了所有速度（因为积分涉及速度形状函数的梯度，这些梯度在单元的所有面上均为非零）。然而，我们在上面建立的掩码，并不具备这些微妙的能力。尽管如此，通过这些掩码，我们设法将稀疏模式的条目数降低到21028个&mdash;目前来说已经足够了。
+
 
 
 
 <a name="Velocityboundaryconditionsontheinterface"></a><h4>Velocity boundary conditions on the interface</h4>
 
 
-The second difficulty is that while we know how to enforce a zero
-velocity or stress on the external boundary (using
-VectorTools::interpolate_boundary_values, called with an appropriate
-component mask and setting different boundary indicators for solid and
-fluid external boundaries), we now also needed the velocity to be zero
-on the interior interface, i.e. $\mathbf v|_{\Gamma_i}=0$. At the time
-of writing this, there is no function in deal.II that handles this
-part, but it isn't particularly difficult to implement by hand:
-essentially, we just have to loop over all cells, and if it is a fluid
-cell and its neighbor is a solid cell, then add constraints that
-ensure that the velocity degrees of freedom on this face are
-zero. Some care is necessary to deal with the case that the adjacent
-solid cell is refined, yielding the following code:
+第二个困难是，虽然我们知道如何在外部边界上强制执行速度或应力为零（使用 VectorTools::interpolate_boundary_values, 调用适当的分量掩码，并为固体和流体外部边界设置不同的边界指标），但我们现在也需要在内部界面上的速度为零，即 $\mathbf v|_{\Gamma_i}=0$  。在写这篇文章时，deal.II中没有处理这部分的函数，但用手实现并不特别困难：基本上，我们只需要在所有单元上循环，如果它是一个流体单元，而它的邻居是一个固体单元，然后添加约束，确保这个面上的速度自由度是零。在处理相邻的固体单元被细化的情况下，需要注意一些问题，产生的代码如下。
+
 @code
 std::vector<unsigned int> local_face_dof_indices (stokes_fe.dofs_per_face);
 for (const auto &cell: dof_handler.active_cell_iterators())
@@ -537,6 +382,7 @@ for (const auto &cell: dof_handler.active_cell_iterators())
       if (!cell->at_boundary(f))
         {
           bool face_is_on_interface = false;
+
 
           if ((cell->neighbor(f)->has_children() == false)
 	          &&
@@ -554,6 +400,7 @@ for (const auto &cell: dof_handler.active_cell_iterators())
 	              }
 	        }
 
+
           if (face_is_on_interface)
            {
              cell->face(f)->get_dof_indices (local_face_dof_indices, 0);
@@ -562,124 +409,68 @@ for (const auto &cell: dof_handler.active_cell_iterators())
                constraints.add_line (local_face_dof_indices[i]);
            }
         }
-@endcode
+@endcode 
 
-The call <code>constraints.add_line(t)</code> tells the
-AffineConstraints to start a new constraint for degree of freedom
-<code>t</code> of the form $x_t=\sum_{l=0}^{N-1} c_{tl} x_l +
-b_t$. Typically, one would then proceed to set individual coefficients
-$c_{tl}$ to nonzero values (using AffineConstraints::add_entry) or set
-$b_t$ to something nonzero (using
-AffineConstraints::set_inhomogeneity); doing nothing as above, funny as
-it looks, simply leaves the constraint to be $x_t=0$, which is exactly
-what we need in the current context. The call to
-FiniteElement::face_system_to_component_index makes sure that we only set
-boundary values to zero for velocity but not pressure components.
 
-Note that there are cases where this may yield incorrect results:
-notably, once we find a solid neighbor child to a current fluid cell,
-we assume that all neighbor children on the common face are in the
-solid subdomain. But that need not be so; consider, for example, the
-following mesh:
+
+调用 <code>constraints.add_line(t)</code> 告诉AffineConstraints为自由度 <code>t</code> 启动一个新的约束，其形式为 $x_t=\sum_{l=0}^{N-1} c_{tl} x_l +
+b_t$  。通常情况下，我们会将单个系数 $c_{tl}$ 设置为非零值（使用 AffineConstraints::add_entry) 或将 $b_t$ 设置为非零值（使用 AffineConstraints::set_inhomogeneity); 像上面那样什么都不做，看起来很有趣，只是让约束成为 $x_t=0$ ，这正是我们在当前情况下需要的。对 FiniteElement::face_system_to_component_index 的调用确保了我们只将速度分量的边界值设置为零，而不是压力分量。
+
+请注意，在有些情况下，这可能会产生不正确的结果：特别是，一旦我们找到当前流体单元的一个实体邻接子，我们就会认为共同面上的所有邻接子都在实体子域中。但事实并非如此，例如，考虑以下的网格。
+
 @code
 +---------+----+----+
 |         | f  |    |
 |    f    +----+----+
 |         | s  |    |
 +---------+----+----+
-@endcode
+@endcode 
 
-In this case, we would set all velocity degrees of freedom on the
-right face of the left cell to zero, which is incorrect for the top
-degree of freedom on that face. That said, that can only happen if the
-fluid and solid subdomains do not coincide with a set of complete
-coarse mesh cells &mdash; but this is a contradiction to the
-assumption stated at the end of the first section of this
-introduction.
+
+
+在这种情况下，我们会将左单元右面的所有速度自由度设置为零，这对该面的顶部自由度来说是不正确的。也就是说，只有当流体和固体子域不与一组完整的粗网格单元重合时才会发生这种情况&mdash;但这与本介绍第一节末尾所述的假设相矛盾。
+
 
 
 
 <a name="Thetestcase"></a><h3>The testcase</h3>
 
 
-We will consider the following situation as a testcase:
+我们将考虑以下情况作为一个测试案例。
 
-<img src="https://www.dealii.org/images/steps/developer/step-46.layout.png" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-46.layout.png" alt="">   
 
-As discussed at the top of this document, we need to assume in a few places
-that a cell is either entirely in the fluid or solid part of the domain and,
-furthermore, that all children of an inactive cell also belong to the same
-subdomain. This can definitely be ensured if the coarse mesh already
-subdivides the mesh into solid and fluid coarse mesh cells; given the geometry
-outlined above, we can do that by using an $8\times 8$ coarse mesh,
-conveniently provided by the GridGenerator::subdivided_hyper_rectangle
-function.
+正如本文顶部所讨论的，我们需要在一些地方假设一个单元完全处于域的流体部分或固体部分，此外，一个不活动单元的所有子域也属于同一个子域。如果粗略网格已经将网格细分为固体和流体粗略网格单元，这一点肯定可以得到保证；考虑到上面概述的几何形状，我们可以通过使用 $8\times 8$ 粗略网格，方便地提供 GridGenerator::subdivided_hyper_rectangle 函数来实现。
 
-The fixed boundary at the bottom implies $\mathbf u=0$, and we also
-prescribe Dirichlet conditions for the flow at the top so that we get
-inflow at the left and outflow at the right. At the left and right
-boundaries, no boundary conditions are imposed explicitly for the
-flow, yielding the implicit no-stress condition $(2\eta
-\varepsilon(\mathbf v) - p \mathbf 1) \cdot \mathbf n = 0$.
-The conditions on the interface between the two domains has already been
-discussed above.
+底部的固定边界意味着 $\mathbf u=0$ ，我们也为顶部的流动规定了迪里希特条件，因此我们在左边得到流入，在右边得到流出。在左边和右边的边界，没有对流动施加明确的边界条件，产生隐含的无应力条件  $(2\eta
+\varepsilon(\mathbf v) - p \mathbf 1) \cdot \mathbf n = 0$  。上面已经讨论了两个域之间的界面条件。
 
-For simplicity, we choose the material parameters to be
-$\eta=\lambda=\mu=1$. In the results section below, we will also show
-a 3d simulation that can be obtained from the same program. The
-boundary conditions and geometry are defined nearly analogously to the
-2d situation above.
+为了简单起见，我们选择材料参数为  $\eta=\lambda=\mu=1$  。在下面的结果部分，我们还将展示一个可以从同一程序中获得的三维模拟。边界条件和几何形状的定义几乎与上面的2d情况类似。
 
 
 <a name="Identifyingwhichsubdomainacellisin"></a><h4>Identifying which subdomain a cell is in</h4>
 
 
-In the program, we need a way to identify which part of the domain a cell is
-in. There are many different ways of doing this. A typical way would be to use
-the @ref GlossSubdomainId "subdomain_id" tag available with each cell, though
-this field has a special meaning in %parallel computations. An alternative
-is the @ref GlossMaterialId "material_id" field also available with
-every cell. It has the additional advantage that it is inherited from the
-mother to the child cell upon mesh refinement; in other words, we would set
-the material id once upon creating the mesh and it will be correct for all
-active cells even after several refinement cycles. We therefore go with this
-alternative: we define an <code>enum</code> with symbolic names for
-material_id numbers and will use them to identify which part of the domain a
-cell is on.
+在程序中，我们需要一种方法来识别一个单元所处的域的哪一部分。有许多不同的方法可以做到这一点。一个典型的方法是使用每个单元的 @ref GlossSubdomainId "subdomain_id "标签，尽管这个字段在%并行计算中具有特殊意义。另一种方法是 @ref GlossMaterialId "material_id "字段，也是每个单元格都有的。它有一个额外的优点，即在网格细化时，它可以从母体继承到子体；换句话说，我们在创建网格时设置一次材料ID，即使经过几次细化循环，它对所有活动单元都是正确的。因此，我们采用这种方法：我们定义一个 <code>enum</code> ，用符号名称来表示material_id数字，并将用它们来识别一个单元在域的哪一部分。
 
-Secondly, we use an object of type DoFHandler operating in <i>hp</i>-mode. This
-class needs to know which cells will use the Stokes and which the elasticity
-finite element. At the beginning of each refinement cycle we will therefore
-have to walk over all cells and set the (in hp-parlance) active FE index to
-whatever is appropriate in the current situation. While we can use symbolic
-names for the material id, the active FE index is in fact a number that will
-frequently be used to index into collections of objects (e.g. of type
-hp::FECollection and hp::QCollection); that means that the active FE index
-actually has to have value zero for the fluid and one for the elastic part of
-the domain.
+其次，我们使用一个在<i>hp</i>模式下操作的DoFHandler类型的对象。该类需要知道哪些单元将使用斯托克斯有限元，哪些使用弹性有限元。因此，在每个细化周期的开始，我们必须走过所有的单元，并将（在hp-parlance中）活动FE索引设置为任何适合当前情况的索引。虽然我们可以使用符号名称来表示材料ID，但实际上主动FE索引是一个数字，经常用于索引对象的集合（例如 hp::FECollection 和 hp::QCollection); 类型，这意味着主动FE索引实际上必须对流体部分的数值为0，对领域的弹性部分为1。
 
 
 <a name="Linearsolvers"></a><h4>Linear solvers</h4>
 
 
-This program is primarily intended to show how to deal with different
-physics in different parts of the domain, and how to implement such
-models in deal.II. As a consequence, we won't bother coming up with a
-good solver: we'll just use the SparseDirectUMFPACK class which always
-works, even if not with optimal complexity. We will, however, comment
-on possible other solvers in the <a href="#Results">results</a> section.
+这个程序主要是为了展示如何处理域的不同部分的不同物理现象，以及如何在deal.II中实现这样的模型。因此，我们不会费力想出一个好的求解器：我们只是使用SparseDirectUMFPACK类，它总是有效的，即使不是以最佳的复杂性。然而，我们将在<a href="#Results">results</a>部分对可能的其他求解器进行评论。
 
 
 <a name="Meshrefinement"></a><h4>Mesh refinement</h4>
 
 
-One of the trickier aspects of this program is how to estimate the
-error. Because it works on almost any program, we'd like to use the
-KellyErrorEstimator, and we can relatively easily do that here as well using
-code like the following:
+这个程序的一个比较棘手的方面是如何估计误差。因为它几乎适用于任何程序，所以我们想使用KellyErrorEstimator，在这里我们也可以用下面这样的代码相对容易地做到。
+
 @code
   Vector<float> stokes_estimated_error_per_cell (triangulation.n_active_cells());
   Vector<float> elasticity_estimated_error_per_cell (triangulation.n_active_cells());
+
 
   std::vector<bool> stokes_component_mask (dim+1+dim, false);
   for (unsigned int d=0; d<dim; ++d)
@@ -691,6 +482,7 @@ code like the following:
                                       stokes_estimated_error_per_cell,
                                       stokes_component_mask);
 
+
   std::vector<bool> elasticity_component_mask (dim+1+dim, false);
   for (unsigned int d=0; d<dim; ++d)
     elasticity_component_mask[dim+1+d] = true;
@@ -700,1299 +492,1282 @@ code like the following:
                                       solution,
                                       elasticity_estimated_error_per_cell,
                                       elasticity_component_mask);
-@endcode
-This gives us two sets of error indicators for each cell. We would then
-somehow combine them into one for mesh refinement, for example using something
-like the following (note that we normalize the squared error indicator in the
-two vectors because error quantities have physical units that do not match in
-the current situation, leading to error indicators that may differ by orders
-of magnitude between the two subdomains):
+@endcode 
+
+这就为每个单元格提供了两套误差指标。然后，我们将以某种方式将它们合并为一个网格细化，例如使用如下代码（注意，我们将两个向量中的平方误差指标归一化，因为误差量的物理单位在当前情况下并不匹配，导致两个子域之间的误差指标可能有数量级的差异）。
+
 @code
   stokes_estimated_error_per_cell /= stokes_estimated_error_per_cell.l2_norm();
   elasticity_estimated_error_per_cell /= elasticity_estimated_error_per_cell.l2_norm();
 
+
   Vector<float> estimated_error_per_cell (triangulation.n_active_cells());
   estimated_error_per_cell += stokes_estimated_error_per_cell;
   estimated_error_per_cell += elasticity_estimated_error_per_cell;
-@endcode
-(In the code, we actually weigh the error indicators 4:1 in favor of the ones
-computed on the Stokes subdomain since refinement is otherwise heavily biased
-towards the elastic subdomain, but this is just a technicality. The factor 4
-has been determined heuristically to work reasonably well.)
+@endcode 
 
-While this principle is sound, it doesn't quite work as expected. The reason
-is that the KellyErrorEstimator class computes error indicators by integrating
-the jump in the solution's gradient around the faces of each cell. This jump
-is likely to be very large at the locations where the solution is
-discontinuous and extended by zero; it also doesn't become smaller as the mesh
-is refined. The KellyErrorEstimator class can't just ignore the interface
-because it essentially only sees a DoFHandler in <i>hp</i>-mode where the element
-type changes from one cell to another &mdash; precisely the thing that the
-<i>hp</i>-mode was designed for, the interface in the current program looks no
-different than the interfaces in step-27, for example, and certainly no less
-legitimate. Be that as it may, the end results is that there is a layer of
-cells on both sides of the interface between the two subdomains where error
-indicators are irrationally large. Consequently, most of the mesh refinement
-is focused on the interface.
+(在代码中，我们实际上以4:1的比例权衡误差指标，有利于在斯托克斯子域上计算的误差指标，因为细化在其他方面严重偏向弹性子域，但这只是一个技术问题。因素4已经被启发式地确定为合理的工作。) 
 
-This clearly wouldn't happen if we had a refinement indicator that actually
-understood something about the problem and simply ignore the interface between
-subdomains when integrating jump terms.
-On the other hand, this program is
-about showing how to represent problems where we have different physics in
-different subdomains, not about the peculiarities of the KellyErrorEstimator,
-and so we resort to the big hammer called "heuristics": we simply set the
-error indicators of cells at the interface to zero. This cuts off the spikes
-in the error indicators. At first sight one would also think that it prevents
-the mesh from being refined at the interface, but the requirement that
-neighboring cells may only differ by one level of refinement will still lead
-to a reasonably refined mesh.
+虽然这个原则是合理的，但它并不完全像预期的那样工作。原因是KellyErrorEstimator类是通过整合每个单元面周围的解的梯度跳跃来计算误差指标。这个跳跃在解不连续和扩展为零的位置可能非常大；它也不会随着网格的细化而变小。KellyErrorEstimator类不能忽视这个接口，因为它基本上只看到<i>hp</i>模式下的DoFHandler，其中元素类型从一个单元改变到另一个单元&mdash；正是<i>hp</i>模式所设计的东西，当前程序中的接口看起来与 step-27 中的接口没有区别，例如，当然也不乏合法性。尽管如此，最终的结果是，在两个子域之间的界面两侧都有一层单元，其误差指标大得不合理。因此，大部分的网格细化工作都集中在界面上。
 
-While this is clearly a suboptimal solution, it works for now and leaves room
-for future improvement.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * 
- * <a name="Includefiles"></a> 
- * <h3>Include files</h3>
- * 
+如果我们有一个真正了解问题的细化指标，在积分跳跃项时简单地忽略子域之间的界面，这种情况显然不会发生。另一方面，这个程序是关于展示如何表示我们在不同子域有不同物理学的问题，而不是关于KellyErrorEstimator的特殊性，因此我们求助于被称为 "启发式 "的大锤子：我们简单地将界面上的单元的误差指标设置为零。这就切断了误差指标中的尖峰。乍看之下，人们也会认为它阻止了网格在界面上的细化，但是相邻的单元只能有一级细化的要求，仍然会导致一个合理的细化网格。
 
- * 
- * The include files for this program are the same as for many others
- * before. The only new one is the one that declares FE_Nothing as discussed
- * in the introduction. The ones in the hp directory have already been
- * discussed in step-27.
- * 
+虽然这显然是一个次优的解决方案，但它目前是可行的，并为未来的改进留下了空间。<a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * 
- * @code
- * #include <deal.II/base/quadrature_lib.h>
- * #include <deal.II/base/logstream.h>
- * #include <deal.II/base/function.h>
- * #include <deal.II/base/utilities.h>
- * 
- * #include <deal.II/lac/vector.h>
- * #include <deal.II/lac/full_matrix.h>
- * #include <deal.II/lac/sparse_matrix.h>
- * #include <deal.II/lac/sparse_direct.h>
- * #include <deal.II/lac/affine_constraints.h>
- * 
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/grid_refinement.h>
- * 
- * #include <deal.II/dofs/dof_tools.h>
- * 
- * #include <deal.II/fe/fe_q.h>
- * #include <deal.II/fe/fe_nothing.h>
- * #include <deal.II/fe/fe_system.h>
- * #include <deal.II/fe/fe_values.h>
- * 
- * #include <deal.II/hp/fe_collection.h>
- * #include <deal.II/hp/fe_values.h>
- * 
- * #include <deal.II/numerics/vector_tools.h>
- * #include <deal.II/numerics/data_out.h>
- * #include <deal.II/numerics/error_estimator.h>
- * 
- * #include <iostream>
- * #include <fstream>
- * 
- * 
- * namespace Step46
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeFluidStructureProblemcodeclasstemplate"></a> 
- * <h3>The <code>FluidStructureProblem</code> class template</h3>
- * 
 
- * 
- * This is the main class. It is, if you want, a combination of step-8 and
- * step-22 in that it has member variables that either address the global
- * problem (the Triangulation and DoFHandler objects, as well as the
- * hp::FECollection and various linear algebra objects) or that pertain to
- * either the elasticity or Stokes sub-problems. The general structure of
- * the class, however, is like that of most of the other programs
- * implementing stationary problems.
- *   
+<a name="Includefiles"></a> <h3>Include files</h3> 
 
- * 
- * There are a few helper functions (<code>cell_is_in_fluid_domain,
- * cell_is_in_solid_domain</code>) of self-explanatory nature (operating on
- * the symbolic names for the two subdomains that will be used as
- * material_ids for cells belonging to the subdomains, as explained in the
- * introduction) and a few functions (<code>make_grid,
- * set_active_fe_indices, assemble_interface_terms</code>) that have been
- * broken out of other functions that can be found in many of the other
- * tutorial programs and that will be discussed as we get to their
- * implementation.
- *   
 
- * 
- * The final set of variables (<code>viscosity, lambda, eta</code>)
- * describes the material properties used for the two physics models.
- * 
- * @code
- *   template <int dim>
- *   class FluidStructureProblem
- *   {
- *   public:
- *     FluidStructureProblem(const unsigned int stokes_degree,
- *                           const unsigned int elasticity_degree);
- *     void run();
- * 
- *   private:
- *     enum
- *     {
- *       fluid_domain_id,
- *       solid_domain_id
- *     };
- * 
- *     static bool cell_is_in_fluid_domain(
- *       const typename DoFHandler<dim>::cell_iterator &cell);
- * 
- *     static bool cell_is_in_solid_domain(
- *       const typename DoFHandler<dim>::cell_iterator &cell);
- * 
- * 
- *     void make_grid();
- *     void set_active_fe_indices();
- *     void setup_dofs();
- *     void assemble_system();
- *     void assemble_interface_term(
- *       const FEFaceValuesBase<dim> &         elasticity_fe_face_values,
- *       const FEFaceValuesBase<dim> &         stokes_fe_face_values,
- *       std::vector<Tensor<1, dim>> &         elasticity_phi,
- *       std::vector<SymmetricTensor<2, dim>> &stokes_symgrad_phi_u,
- *       std::vector<double> &                 stokes_phi_p,
- *       FullMatrix<double> &                  local_interface_matrix) const;
- *     void solve();
- *     void output_results(const unsigned int refinement_cycle) const;
- *     void refine_mesh();
- * 
- *     const unsigned int stokes_degree;
- *     const unsigned int elasticity_degree;
- * 
- *     Triangulation<dim>    triangulation;
- *     FESystem<dim>         stokes_fe;
- *     FESystem<dim>         elasticity_fe;
- *     hp::FECollection<dim> fe_collection;
- *     DoFHandler<dim>       dof_handler;
- * 
- *     AffineConstraints<double> constraints;
- * 
- *     SparsityPattern      sparsity_pattern;
- *     SparseMatrix<double> system_matrix;
- * 
- *     Vector<double> solution;
- *     Vector<double> system_rhs;
- * 
- *     const double viscosity;
- *     const double lambda;
- *     const double mu;
- *   };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Boundaryvaluesandrighthandside"></a> 
- * <h3>Boundary values and right hand side</h3>
- * 
 
- * 
- * The following class does as its name suggests. The boundary values for
- * the velocity are $\mathbf u=(0, \sin(\pi x))^T$ in 2d and $\mathbf u=(0,
- * 0, \sin(\pi x)\sin(\pi y))^T$ in 3d, respectively. The remaining boundary
- * conditions for this problem are all homogeneous and have been discussed in
- * the introduction. The right hand side forcing term is zero for both the
- * fluid and the solid so we don't need an extra class for it.
- * 
- * @code
- *   template <int dim>
- *   class StokesBoundaryValues : public Function<dim>
- *   {
- *   public:
- *     StokesBoundaryValues()
- *       : Function<dim>(dim + 1 + dim)
- *     {}
- * 
- *     virtual double value(const Point<dim> & p,
- *                          const unsigned int component = 0) const override;
- * 
- *     virtual void vector_value(const Point<dim> &p,
- *                               Vector<double> &  value) const override;
- *   };
- * 
- * 
- *   template <int dim>
- *   double StokesBoundaryValues<dim>::value(const Point<dim> & p,
- *                                           const unsigned int component) const
- *   {
- *     Assert(component < this->n_components,
- *            ExcIndexRange(component, 0, this->n_components));
- * 
- *     if (component == dim - 1)
- *       switch (dim)
- *         {
- *           case 2:
- *             return std::sin(numbers::PI * p[0]);
- *           case 3:
- *             return std::sin(numbers::PI * p[0]) * std::sin(numbers::PI * p[1]);
- *           default:
- *             Assert(false, ExcNotImplemented());
- *         }
- * 
- *     return 0;
- *   }
- * 
- * 
- *   template <int dim>
- *   void StokesBoundaryValues<dim>::vector_value(const Point<dim> &p,
- *                                                Vector<double> &  values) const
- *   {
- *     for (unsigned int c = 0; c < this->n_components; ++c)
- *       values(c) = StokesBoundaryValues<dim>::value(p, c);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeFluidStructureProblemcodeimplementation"></a> 
- * <h3>The <code>FluidStructureProblem</code> implementation</h3>
- * 
 
- * 
- * 
- * <a name="Constructorsandhelperfunctions"></a> 
- * <h4>Constructors and helper functions</h4>
- * 
+这个程序的包含文件与之前许多其他程序的包含文件相同。唯一的新文件是在介绍中讨论的声明FE_Nothing的文件。hp目录下的文件已经在  step-27  中讨论过了。
 
- * 
- * Let's now get to the implementation of the primary class of this
- * program. The first few functions are the constructor and the helper
- * functions that can be used to determine which part of the domain a cell
- * is in. Given the discussion of these topics in the introduction, their
- * implementation is rather obvious. In the constructor, note that we have
- * to construct the hp::FECollection object from the base elements for
- * Stokes and elasticity; using the hp::FECollection::push_back function
- * assigns them spots zero and one in this collection, an order that we have
- * to remember and use consistently in the rest of the program.
- * 
- * @code
- *   template <int dim>
- *   FluidStructureProblem<dim>::FluidStructureProblem(
- *     const unsigned int stokes_degree,
- *     const unsigned int elasticity_degree)
- *     : stokes_degree(stokes_degree)
- *     , elasticity_degree(elasticity_degree)
- *     , triangulation(Triangulation<dim>::maximum_smoothing)
- *     , stokes_fe(FE_Q<dim>(stokes_degree + 1),
- *                 dim,
- *                 FE_Q<dim>(stokes_degree),
- *                 1,
- *                 FE_Nothing<dim>(),
- *                 dim)
- *     , elasticity_fe(FE_Nothing<dim>(),
- *                     dim,
- *                     FE_Nothing<dim>(),
- *                     1,
- *                     FE_Q<dim>(elasticity_degree),
- *                     dim)
- *     , dof_handler(triangulation)
- *     , viscosity(2)
- *     , lambda(1)
- *     , mu(1)
- *   {
- *     fe_collection.push_back(stokes_fe);
- *     fe_collection.push_back(elasticity_fe);
- *   }
- * 
- * 
- * 
- *   template <int dim>
- *   bool FluidStructureProblem<dim>::cell_is_in_fluid_domain(
- *     const typename DoFHandler<dim>::cell_iterator &cell)
- *   {
- *     return (cell->material_id() == fluid_domain_id);
- *   }
- * 
- * 
- *   template <int dim>
- *   bool FluidStructureProblem<dim>::cell_is_in_solid_domain(
- *     const typename DoFHandler<dim>::cell_iterator &cell)
- *   {
- *     return (cell->material_id() == solid_domain_id);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Meshesandassigningsubdomains"></a> 
- * <h4>Meshes and assigning subdomains</h4>
- * 
 
- * 
- * The next pair of functions deals with generating a mesh and making sure
- * all flags that denote subdomains are correct. <code>make_grid</code>, as
- * discussed in the introduction, generates an $8\times 8$ mesh (or an
- * $8\times 8\times 8$ mesh in 3d) to make sure that each coarse mesh cell
- * is completely within one of the subdomains. After generating this mesh,
- * we loop over its boundary and set the boundary indicator to one at the
- * top boundary, the only place where we set nonzero Dirichlet boundary
- * conditions. After this, we loop again over all cells to set the material
- * indicator &mdash; used to denote which part of the domain we are in, to
- * either the fluid or solid indicator.
- * 
- * @code
- *   template <int dim>
- *   void FluidStructureProblem<dim>::make_grid()
- *   {
- *     GridGenerator::subdivided_hyper_cube(triangulation, 8, -1, 1);
- * 
- *     for (const auto &cell : triangulation.active_cell_iterators())
- *       for (const auto &face : cell->face_iterators())
- *         if (face->at_boundary() && (face->center()[dim - 1] == 1))
- *           face->set_all_boundary_ids(1);
- * 
- * 
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       if (((std::fabs(cell->center()[0]) < 0.25) &&
- *            (cell->center()[dim - 1] > 0.5)) ||
- *           ((std::fabs(cell->center()[0]) >= 0.25) &&
- *            (cell->center()[dim - 1] > -0.5)))
- *         cell->set_material_id(fluid_domain_id);
- *       else
- *         cell->set_material_id(solid_domain_id);
- *   }
- * 
- * 
- * @endcode
- * 
- * The second part of this pair of functions determines which finite element
- * to use on each cell. Above we have set the material indicator for each
- * coarse mesh cell, and as mentioned in the introduction, this information
- * is inherited from mother to child cell upon mesh refinement.
- *   
 
- * 
- * In other words, whenever we have refined (or created) the mesh, we can
- * rely on the material indicators to be a correct description of which part
- * of the domain a cell is in. We then use this to set the active FE index
- * of the cell to the corresponding element of the hp::FECollection member
- * variable of this class: zero for fluid cells, one for solid cells.
- * 
- * @code
- *   template <int dim>
- *   void FluidStructureProblem<dim>::set_active_fe_indices()
- *   {
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       {
- *         if (cell_is_in_fluid_domain(cell))
- *           cell->set_active_fe_index(0);
- *         else if (cell_is_in_solid_domain(cell))
- *           cell->set_active_fe_index(1);
- *         else
- *           Assert(false, ExcNotImplemented());
- *       }
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeFluidStructureProblemsetup_dofscode"></a> 
- * <h4><code>FluidStructureProblem::setup_dofs</code></h4>
- * 
 
- * 
- * The next step is to setup the data structures for the linear system. To
- * this end, we first have to set the active FE indices with the function
- * immediately above, then distribute degrees of freedom, and then determine
- * constraints on the linear system. The latter includes hanging node
- * constraints as usual, but also the inhomogeneous boundary values at the
- * top fluid boundary, and zero boundary values along the perimeter of the
- * solid subdomain.
- * 
- * @code
- *   template <int dim>
- *   void FluidStructureProblem<dim>::setup_dofs()
- *   {
- *     set_active_fe_indices();
- *     dof_handler.distribute_dofs(fe_collection);
- * 
- *     {
- *       constraints.clear();
- *       DoFTools::make_hanging_node_constraints(dof_handler, constraints);
- * 
- *       const FEValuesExtractors::Vector velocities(0);
- *       VectorTools::interpolate_boundary_values(dof_handler,
- *                                                1,
- *                                                StokesBoundaryValues<dim>(),
- *                                                constraints,
- *                                                fe_collection.component_mask(
- *                                                  velocities));
- * 
- *       const FEValuesExtractors::Vector displacements(dim + 1);
- *       VectorTools::interpolate_boundary_values(
- *         dof_handler,
- *         0,
- *         Functions::ZeroFunction<dim>(dim + 1 + dim),
- *         constraints,
- *         fe_collection.component_mask(displacements));
- *     }
- * 
- * @endcode
- * 
- * There are more constraints we have to handle, though: we have to make
- * sure that the velocity is zero at the interface between fluid and
- * solid. The following piece of code was already presented in the
- * introduction:
- * 
- * @code
- *     {
- *       std::vector<types::global_dof_index> local_face_dof_indices(
- *         stokes_fe.n_dofs_per_face());
- *       for (const auto &cell : dof_handler.active_cell_iterators())
- *         if (cell_is_in_fluid_domain(cell))
- *           for (const auto face_no : cell->face_indices())
- *             if (cell->face(face_no)->at_boundary() == false)
- *               {
- *                 bool face_is_on_interface = false;
- * 
- *                 if ((cell->neighbor(face_no)->has_children() == false) &&
- *                     (cell_is_in_solid_domain(cell->neighbor(face_no))))
- *                   face_is_on_interface = true;
- *                 else if (cell->neighbor(face_no)->has_children() == true)
- *                   {
- *                     for (unsigned int sf = 0;
- *                          sf < cell->face(face_no)->n_children();
- *                          ++sf)
- *                       if (cell_is_in_solid_domain(
- *                             cell->neighbor_child_on_subface(face_no, sf)))
- *                         {
- *                           face_is_on_interface = true;
- *                           break;
- *                         }
- *                   }
- * 
- *                 if (face_is_on_interface)
- *                   {
- *                     cell->face(face_no)->get_dof_indices(local_face_dof_indices,
- *                                                          0);
- *                     for (unsigned int i = 0; i < local_face_dof_indices.size();
- *                          ++i)
- *                       if (stokes_fe.face_system_to_component_index(i).first <
- *                           dim)
- *                         constraints.add_line(local_face_dof_indices[i]);
- *                   }
- *               }
- *     }
- * 
- * @endcode
- * 
- * At the end of all this, we can declare to the constraints object that
- * we now have all constraints ready to go and that the object can rebuild
- * its internal data structures for better efficiency:
- * 
- * @code
- *     constraints.close();
- * 
- *     std::cout << "   Number of active cells: " << triangulation.n_active_cells()
- *               << std::endl
- *               << "   Number of degrees of freedom: " << dof_handler.n_dofs()
- *               << std::endl;
- * 
- * @endcode
- * 
- * In the rest of this function we create a sparsity pattern as discussed
- * extensively in the introduction, and use it to initialize the matrix;
- * then also set vectors to their correct sizes:
- * 
- * @code
- *     {
- *       DynamicSparsityPattern dsp(dof_handler.n_dofs(), dof_handler.n_dofs());
- * 
- *       Table<2, DoFTools::Coupling> cell_coupling(fe_collection.n_components(),
- *                                                  fe_collection.n_components());
- *       Table<2, DoFTools::Coupling> face_coupling(fe_collection.n_components(),
- *                                                  fe_collection.n_components());
- * 
- *       for (unsigned int c = 0; c < fe_collection.n_components(); ++c)
- *         for (unsigned int d = 0; d < fe_collection.n_components(); ++d)
- *           {
- *             if (((c < dim + 1) && (d < dim + 1) &&
- *                  !((c == dim) && (d == dim))) ||
- *                 ((c >= dim + 1) && (d >= dim + 1)))
- *               cell_coupling[c][d] = DoFTools::always;
- * 
- *             if ((c >= dim + 1) && (d < dim + 1))
- *               face_coupling[c][d] = DoFTools::always;
- *           }
- * 
- *       DoFTools::make_flux_sparsity_pattern(dof_handler,
- *                                            dsp,
- *                                            cell_coupling,
- *                                            face_coupling);
- *       constraints.condense(dsp);
- *       sparsity_pattern.copy_from(dsp);
- *     }
- * 
- *     system_matrix.reinit(sparsity_pattern);
- * 
- *     solution.reinit(dof_handler.n_dofs());
- *     system_rhs.reinit(dof_handler.n_dofs());
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeFluidStructureProblemassemble_systemcode"></a> 
- * <h4><code>FluidStructureProblem::assemble_system</code></h4>
- * 
 
- * 
- * Following is the central function of this program: the one that assembles
- * the linear system. It has a long section of setting up auxiliary
- * functions at the beginning: from creating the quadrature formulas and
- * setting up the FEValues, FEFaceValues and FESubfaceValues objects
- * necessary to integrate the cell terms as well as the interface terms for
- * the case where cells along the interface come together at same size or
- * with differing levels of refinement...
- * 
- * @code
- *   template <int dim>
- *   void FluidStructureProblem<dim>::assemble_system()
- *   {
- *     system_matrix = 0;
- *     system_rhs    = 0;
- * 
- *     const QGauss<dim> stokes_quadrature(stokes_degree + 2);
- *     const QGauss<dim> elasticity_quadrature(elasticity_degree + 2);
- * 
- *     hp::QCollection<dim> q_collection;
- *     q_collection.push_back(stokes_quadrature);
- *     q_collection.push_back(elasticity_quadrature);
- * 
- *     hp::FEValues<dim> hp_fe_values(fe_collection,
- *                                    q_collection,
- *                                    update_values | update_quadrature_points |
- *                                      update_JxW_values | update_gradients);
- * 
- *     const QGauss<dim - 1> common_face_quadrature(
- *       std::max(stokes_degree + 2, elasticity_degree + 2));
- * 
- *     FEFaceValues<dim>    stokes_fe_face_values(stokes_fe,
- *                                             common_face_quadrature,
- *                                             update_JxW_values |
- *                                               update_gradients | update_values);
- *     FEFaceValues<dim>    elasticity_fe_face_values(elasticity_fe,
- *                                                 common_face_quadrature,
- *                                                 update_normal_vectors |
- *                                                   update_values);
- *     FESubfaceValues<dim> stokes_fe_subface_values(stokes_fe,
- *                                                   common_face_quadrature,
- *                                                   update_JxW_values |
- *                                                     update_gradients |
- *                                                     update_values);
- *     FESubfaceValues<dim> elasticity_fe_subface_values(elasticity_fe,
- *                                                       common_face_quadrature,
- *                                                       update_normal_vectors |
- *                                                         update_values);
- * 
- * @endcode
- * 
- * ...to objects that are needed to describe the local contributions to
- * the global linear system...
- * 
- * @code
- *     const unsigned int stokes_dofs_per_cell = stokes_fe.n_dofs_per_cell();
- *     const unsigned int elasticity_dofs_per_cell =
- *       elasticity_fe.n_dofs_per_cell();
- * 
- *     FullMatrix<double> local_matrix;
- *     FullMatrix<double> local_interface_matrix(elasticity_dofs_per_cell,
- *                                               stokes_dofs_per_cell);
- *     Vector<double>     local_rhs;
- * 
- *     std::vector<types::global_dof_index> local_dof_indices;
- *     std::vector<types::global_dof_index> neighbor_dof_indices(
- *       stokes_dofs_per_cell);
- * 
- *     const Functions::ZeroFunction<dim> right_hand_side(dim + 1);
- * 
- * @endcode
- * 
- * ...to variables that allow us to extract certain components of the
- * shape functions and cache their values rather than having to recompute
- * them at every quadrature point:
- * 
- * @code
- *     const FEValuesExtractors::Vector velocities(0);
- *     const FEValuesExtractors::Scalar pressure(dim);
- *     const FEValuesExtractors::Vector displacements(dim + 1);
- * 
- *     std::vector<SymmetricTensor<2, dim>> stokes_symgrad_phi_u(
- *       stokes_dofs_per_cell);
- *     std::vector<double> stokes_div_phi_u(stokes_dofs_per_cell);
- *     std::vector<double> stokes_phi_p(stokes_dofs_per_cell);
- * 
- *     std::vector<Tensor<2, dim>> elasticity_grad_phi(elasticity_dofs_per_cell);
- *     std::vector<double>         elasticity_div_phi(elasticity_dofs_per_cell);
- *     std::vector<Tensor<1, dim>> elasticity_phi(elasticity_dofs_per_cell);
- * 
- * @endcode
- * 
- * Then comes the main loop over all cells and, as in step-27, the
- * initialization of the hp::FEValues object for the current cell and the
- * extraction of a FEValues object that is appropriate for the current
- * cell:
- * 
- * @code
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       {
- *         hp_fe_values.reinit(cell);
- * 
- *         const FEValues<dim> &fe_values = hp_fe_values.get_present_fe_values();
- * 
- *         local_matrix.reinit(cell->get_fe().n_dofs_per_cell(),
- *                             cell->get_fe().n_dofs_per_cell());
- *         local_rhs.reinit(cell->get_fe().n_dofs_per_cell());
- * 
- * @endcode
- * 
- * With all of this done, we continue to assemble the cell terms for
- * cells that are part of the Stokes and elastic regions. While we
- * could in principle do this in one formula, in effect implementing
- * the one bilinear form stated in the introduction, we realize that
- * our finite element spaces are chosen in such a way that on each
- * cell, one set of variables (either velocities and pressure, or
- * displacements) are always zero, and consequently a more efficient
- * way of computing local integrals is to do only what's necessary
- * based on an <code>if</code> clause that tests which part of the
- * domain we are in.
- *         
 
- * 
- * The actual computation of the local matrix is the same as in
- * step-22 as well as that given in the @ref vector_valued
- * documentation module for the elasticity equations:
- * 
- * @code
- *         if (cell_is_in_fluid_domain(cell))
- *           {
- *             const unsigned int dofs_per_cell = cell->get_fe().n_dofs_per_cell();
- *             Assert(dofs_per_cell == stokes_dofs_per_cell, ExcInternalError());
- * 
- *             for (unsigned int q = 0; q < fe_values.n_quadrature_points; ++q)
- *               {
- *                 for (unsigned int k = 0; k < dofs_per_cell; ++k)
- *                   {
- *                     stokes_symgrad_phi_u[k] =
- *                       fe_values[velocities].symmetric_gradient(k, q);
- *                     stokes_div_phi_u[k] =
- *                       fe_values[velocities].divergence(k, q);
- *                     stokes_phi_p[k] = fe_values[pressure].value(k, q);
- *                   }
- * 
- *                 for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *                   for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *                     local_matrix(i, j) +=
- *                       (2 * viscosity * stokes_symgrad_phi_u[i] *
- *                          stokes_symgrad_phi_u[j] -
- *                        stokes_div_phi_u[i] * stokes_phi_p[j] -
- *                        stokes_phi_p[i] * stokes_div_phi_u[j]) *
- *                       fe_values.JxW(q);
- *               }
- *           }
- *         else
- *           {
- *             const unsigned int dofs_per_cell = cell->get_fe().n_dofs_per_cell();
- *             Assert(dofs_per_cell == elasticity_dofs_per_cell,
- *                    ExcInternalError());
- * 
- *             for (unsigned int q = 0; q < fe_values.n_quadrature_points; ++q)
- *               {
- *                 for (unsigned int k = 0; k < dofs_per_cell; ++k)
- *                   {
- *                     elasticity_grad_phi[k] =
- *                       fe_values[displacements].gradient(k, q);
- *                     elasticity_div_phi[k] =
- *                       fe_values[displacements].divergence(k, q);
- *                   }
- * 
- *                 for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *                   for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *                     {
- *                       local_matrix(i, j) +=
- *                         (lambda * elasticity_div_phi[i] *
- *                            elasticity_div_phi[j] +
- *                          mu * scalar_product(elasticity_grad_phi[i],
- *                                              elasticity_grad_phi[j]) +
- *                          mu *
- *                            scalar_product(elasticity_grad_phi[i],
- *                                           transpose(elasticity_grad_phi[j]))) *
- *                         fe_values.JxW(q);
- *                     }
- *               }
- *           }
- * 
- * @endcode
- * 
- * Once we have the contributions from cell integrals, we copy them
- * into the global matrix (taking care of constraints right away,
- * through the AffineConstraints::distribute_local_to_global
- * function). Note that we have not written anything into the
- * <code>local_rhs</code> variable, though we still need to pass it
- * along since the elimination of nonzero boundary values requires the
- * modification of local and consequently also global right hand side
- * values:
- * 
- * @code
- *         local_dof_indices.resize(cell->get_fe().n_dofs_per_cell());
- *         cell->get_dof_indices(local_dof_indices);
- *         constraints.distribute_local_to_global(local_matrix,
- *                                                local_rhs,
- *                                                local_dof_indices,
- *                                                system_matrix,
- *                                                system_rhs);
- * 
- * @endcode
- * 
- * The more interesting part of this function is where we see about
- * face terms along the interface between the two subdomains. To this
- * end, we first have to make sure that we only assemble them once
- * even though a loop over all faces of all cells would encounter each
- * part of the interface twice. We arbitrarily make the decision that
- * we will only evaluate interface terms if the current cell is part
- * of the solid subdomain and if, consequently, a face is not at the
- * boundary and the potential neighbor behind it is part of the fluid
- * domain. Let's start with these conditions:
- * 
- * @code
- *         if (cell_is_in_solid_domain(cell))
- *           for (const auto f : cell->face_indices())
- *             if (cell->face(f)->at_boundary() == false)
- *               {
- * @endcode
- * 
- * At this point we know that the current cell is a candidate
- * for integration and that a neighbor behind face
- * <code>f</code> exists. There are now three possibilities:
- *                 
 
- * 
- * - The neighbor is at the same refinement level and has no
- * children.
- * - The neighbor has children.
- * - The neighbor is coarser.
- *                 
+@code
+#include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/logstream.h>
+#include <deal.II/base/function.h>
+#include <deal.II/base/utilities.h>
 
- * 
- * In all three cases, we are only interested in it if it is
- * part of the fluid subdomain. So let us start with the first
- * and simplest case: if the neighbor is at the same level,
- * has no children, and is a fluid cell, then the two cells
- * share a boundary that is part of the interface along which
- * we want to integrate interface terms. All we have to do is
- * initialize two FEFaceValues object with the current face
- * and the face of the neighboring cell (note how we find out
- * which face of the neighboring cell borders on the current
- * cell) and pass things off to the function that evaluates
- * the interface terms (the third through fifth arguments to
- * this function provide it with scratch arrays). The result
- * is then again copied into the global matrix, using a
- * function that knows that the DoF indices of rows and
- * columns of the local matrix result from different cells:
- * 
- * @code
- *                 if ((cell->neighbor(f)->level() == cell->level()) &&
- *                     (cell->neighbor(f)->has_children() == false) &&
- *                     cell_is_in_fluid_domain(cell->neighbor(f)))
- *                   {
- *                     elasticity_fe_face_values.reinit(cell, f);
- *                     stokes_fe_face_values.reinit(cell->neighbor(f),
- *                                                  cell->neighbor_of_neighbor(f));
- * 
- *                     assemble_interface_term(elasticity_fe_face_values,
- *                                             stokes_fe_face_values,
- *                                             elasticity_phi,
- *                                             stokes_symgrad_phi_u,
- *                                             stokes_phi_p,
- *                                             local_interface_matrix);
- * 
- *                     cell->neighbor(f)->get_dof_indices(neighbor_dof_indices);
- *                     constraints.distribute_local_to_global(
- *                       local_interface_matrix,
- *                       local_dof_indices,
- *                       neighbor_dof_indices,
- *                       system_matrix);
- *                   }
- * 
- * @endcode
- * 
- * The second case is if the neighbor has further children. In
- * that case, we have to loop over all the children of the
- * neighbor to see if they are part of the fluid subdomain. If
- * they are, then we integrate over the common interface,
- * which is a face for the neighbor and a subface of the
- * current cell, requiring us to use an FEFaceValues for the
- * neighbor and an FESubfaceValues for the current cell:
- * 
- * @code
- *                 else if ((cell->neighbor(f)->level() == cell->level()) &&
- *                          (cell->neighbor(f)->has_children() == true))
- *                   {
- *                     for (unsigned int subface = 0;
- *                          subface < cell->face(f)->n_children();
- *                          ++subface)
- *                       if (cell_is_in_fluid_domain(
- *                             cell->neighbor_child_on_subface(f, subface)))
- *                         {
- *                           elasticity_fe_subface_values.reinit(cell, f, subface);
- *                           stokes_fe_face_values.reinit(
- *                             cell->neighbor_child_on_subface(f, subface),
- *                             cell->neighbor_of_neighbor(f));
- * 
- *                           assemble_interface_term(elasticity_fe_subface_values,
- *                                                   stokes_fe_face_values,
- *                                                   elasticity_phi,
- *                                                   stokes_symgrad_phi_u,
- *                                                   stokes_phi_p,
- *                                                   local_interface_matrix);
- * 
- *                           cell->neighbor_child_on_subface(f, subface)
- *                             ->get_dof_indices(neighbor_dof_indices);
- *                           constraints.distribute_local_to_global(
- *                             local_interface_matrix,
- *                             local_dof_indices,
- *                             neighbor_dof_indices,
- *                             system_matrix);
- *                         }
- *                   }
- * 
- * @endcode
- * 
- * The last option is that the neighbor is coarser. In that
- * case we have to use an FESubfaceValues object for the
- * neighbor and a FEFaceValues for the current cell; the rest
- * is the same as before:
- * 
- * @code
- *                 else if (cell->neighbor_is_coarser(f) &&
- *                          cell_is_in_fluid_domain(cell->neighbor(f)))
- *                   {
- *                     elasticity_fe_face_values.reinit(cell, f);
- *                     stokes_fe_subface_values.reinit(
- *                       cell->neighbor(f),
- *                       cell->neighbor_of_coarser_neighbor(f).first,
- *                       cell->neighbor_of_coarser_neighbor(f).second);
- * 
- *                     assemble_interface_term(elasticity_fe_face_values,
- *                                             stokes_fe_subface_values,
- *                                             elasticity_phi,
- *                                             stokes_symgrad_phi_u,
- *                                             stokes_phi_p,
- *                                             local_interface_matrix);
- * 
- *                     cell->neighbor(f)->get_dof_indices(neighbor_dof_indices);
- *                     constraints.distribute_local_to_global(
- *                       local_interface_matrix,
- *                       local_dof_indices,
- *                       neighbor_dof_indices,
- *                       system_matrix);
- *                   }
- *               }
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * In the function that assembles the global system, we passed computing
- * interface terms to a separate function we discuss here. The key is that
- * even though we can't predict the combination of FEFaceValues and
- * FESubfaceValues objects, they are both derived from the FEFaceValuesBase
- * class and consequently we don't have to care: the function is simply
- * called with two such objects denoting the values of the shape functions
- * on the quadrature points of the two sides of the face. We then do what we
- * always do: we fill the scratch arrays with the values of shape functions
- * and their derivatives, and then loop over all entries of the matrix to
- * compute the local integrals. The details of the bilinear form we evaluate
- * here are given in the introduction.
- * 
- * @code
- *   template <int dim>
- *   void FluidStructureProblem<dim>::assemble_interface_term(
- *     const FEFaceValuesBase<dim> &         elasticity_fe_face_values,
- *     const FEFaceValuesBase<dim> &         stokes_fe_face_values,
- *     std::vector<Tensor<1, dim>> &         elasticity_phi,
- *     std::vector<SymmetricTensor<2, dim>> &stokes_symgrad_phi_u,
- *     std::vector<double> &                 stokes_phi_p,
- *     FullMatrix<double> &                  local_interface_matrix) const
- *   {
- *     Assert(stokes_fe_face_values.n_quadrature_points ==
- *              elasticity_fe_face_values.n_quadrature_points,
- *            ExcInternalError());
- *     const unsigned int n_face_quadrature_points =
- *       elasticity_fe_face_values.n_quadrature_points;
- * 
- *     const FEValuesExtractors::Vector velocities(0);
- *     const FEValuesExtractors::Scalar pressure(dim);
- *     const FEValuesExtractors::Vector displacements(dim + 1);
- * 
- *     local_interface_matrix = 0;
- *     for (unsigned int q = 0; q < n_face_quadrature_points; ++q)
- *       {
- *         const Tensor<1, dim> normal_vector =
- *           elasticity_fe_face_values.normal_vector(q);
- * 
- *         for (unsigned int k = 0; k < stokes_fe_face_values.dofs_per_cell; ++k)
- *           {
- *             stokes_symgrad_phi_u[k] =
- *               stokes_fe_face_values[velocities].symmetric_gradient(k, q);
- *             stokes_phi_p[k] = stokes_fe_face_values[pressure].value(k, q);
- *           }
- *         for (unsigned int k = 0; k < elasticity_fe_face_values.dofs_per_cell;
- *              ++k)
- *           elasticity_phi[k] =
- *             elasticity_fe_face_values[displacements].value(k, q);
- * 
- *         for (unsigned int i = 0; i < elasticity_fe_face_values.dofs_per_cell;
- *              ++i)
- *           for (unsigned int j = 0; j < stokes_fe_face_values.dofs_per_cell; ++j)
- *             local_interface_matrix(i, j) +=
- *               -((2 * viscosity * (stokes_symgrad_phi_u[j] * normal_vector) -
- *                  stokes_phi_p[j] * normal_vector) *
- *                 elasticity_phi[i] * stokes_fe_face_values.JxW(q));
- *       }
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeFluidStructureProblemsolvecode"></a> 
- * <h4><code>FluidStructureProblem::solve</code></h4>
- * 
 
- * 
- * As discussed in the introduction, we use a rather trivial solver here: we
- * just pass the linear system off to the SparseDirectUMFPACK direct solver
- * (see, for example, step-29). The only thing we have to do after solving
- * is ensure that hanging node and boundary value constraints are correct.
- * 
- * @code
- *   template <int dim>
- *   void FluidStructureProblem<dim>::solve()
- *   {
- *     SparseDirectUMFPACK direct_solver;
- *     direct_solver.initialize(system_matrix);
- *     direct_solver.vmult(solution, system_rhs);
- * 
- *     constraints.distribute(solution);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeFluidStructureProblemoutput_resultscode"></a> 
- * <h4><code>FluidStructureProblem::output_results</code></h4>
- * 
+#include <deal.II/lac/vector.h>
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/sparse_matrix.h>
+#include <deal.II/lac/sparse_direct.h>
+#include <deal.II/lac/affine_constraints.h>
 
- * 
- * Generating graphical output is rather trivial here: all we have to do is
- * identify which components of the solution vector belong to scalars and/or
- * vectors (see, for example, step-22 for a previous example), and then pass
- * it all on to the DataOut class:
- * 
- * @code
- *   template <int dim>
- *   void FluidStructureProblem<dim>::output_results(
- *     const unsigned int refinement_cycle) const
- *   {
- *     std::vector<std::string> solution_names(dim, "velocity");
- *     solution_names.emplace_back("pressure");
- *     for (unsigned int d = 0; d < dim; ++d)
- *       solution_names.emplace_back("displacement");
- * 
- *     std::vector<DataComponentInterpretation::DataComponentInterpretation>
- *       data_component_interpretation(
- *         dim, DataComponentInterpretation::component_is_part_of_vector);
- *     data_component_interpretation.push_back(
- *       DataComponentInterpretation::component_is_scalar);
- *     for (unsigned int d = 0; d < dim; ++d)
- *       data_component_interpretation.push_back(
- *         DataComponentInterpretation::component_is_part_of_vector);
- * 
- *     DataOut<dim> data_out;
- *     data_out.attach_dof_handler(dof_handler);
- * 
- *     data_out.add_data_vector(solution,
- *                              solution_names,
- *                              DataOut<dim>::type_dof_data,
- *                              data_component_interpretation);
- *     data_out.build_patches();
- * 
- *     std::ofstream output(
- *       "solution-" + Utilities::int_to_string(refinement_cycle, 2) + ".vtk");
- *     data_out.write_vtk(output);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeFluidStructureProblemrefine_meshcode"></a> 
- * <h4><code>FluidStructureProblem::refine_mesh</code></h4>
- * 
 
- * 
- * The next step is to refine the mesh. As was discussed in the
- * introduction, this is a bit tricky primarily because the fluid and the
- * solid subdomains use variables that have different physical dimensions
- * and for which the absolute magnitude of error estimates is consequently
- * not directly comparable. We will therefore have to scale them. At the top
- * of the function, we therefore first compute error estimates for the
- * different variables separately (using the velocities but not the pressure
- * for the fluid domain, and the displacements in the solid domain):
- * 
- * @code
- *   template <int dim>
- *   void FluidStructureProblem<dim>::refine_mesh()
- *   {
- *     Vector<float> stokes_estimated_error_per_cell(
- *       triangulation.n_active_cells());
- *     Vector<float> elasticity_estimated_error_per_cell(
- *       triangulation.n_active_cells());
- * 
- *     const QGauss<dim - 1> stokes_face_quadrature(stokes_degree + 2);
- *     const QGauss<dim - 1> elasticity_face_quadrature(elasticity_degree + 2);
- * 
- *     hp::QCollection<dim - 1> face_q_collection;
- *     face_q_collection.push_back(stokes_face_quadrature);
- *     face_q_collection.push_back(elasticity_face_quadrature);
- * 
- *     const FEValuesExtractors::Vector velocities(0);
- *     KellyErrorEstimator<dim>::estimate(
- *       dof_handler,
- *       face_q_collection,
- *       std::map<types::boundary_id, const Function<dim> *>(),
- *       solution,
- *       stokes_estimated_error_per_cell,
- *       fe_collection.component_mask(velocities));
- * 
- *     const FEValuesExtractors::Vector displacements(dim + 1);
- *     KellyErrorEstimator<dim>::estimate(
- *       dof_handler,
- *       face_q_collection,
- *       std::map<types::boundary_id, const Function<dim> *>(),
- *       solution,
- *       elasticity_estimated_error_per_cell,
- *       fe_collection.component_mask(displacements));
- * 
- * @endcode
- * 
- * We then normalize error estimates by dividing by their norm and scale
- * the fluid error indicators by a factor of 4 as discussed in the
- * introduction. The results are then added together into a vector that
- * contains error indicators for all cells:
- * 
- * @code
- *     stokes_estimated_error_per_cell *=
- *       4. / stokes_estimated_error_per_cell.l2_norm();
- *     elasticity_estimated_error_per_cell *=
- *       1. / elasticity_estimated_error_per_cell.l2_norm();
- * 
- *     Vector<float> estimated_error_per_cell(triangulation.n_active_cells());
- * 
- *     estimated_error_per_cell += stokes_estimated_error_per_cell;
- *     estimated_error_per_cell += elasticity_estimated_error_per_cell;
- * 
- * @endcode
- * 
- * The second to last part of the function, before actually refining the
- * mesh, involves a heuristic that we have already mentioned in the
- * introduction: because the solution is discontinuous, the
- * KellyErrorEstimator class gets all confused about cells that sit at the
- * boundary between subdomains: it believes that the error is large there
- * because the jump in the gradient is large, even though this is entirely
- * expected and a feature that is in fact present in the exact solution as
- * well and therefore not indicative of any numerical error.
- *     
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/grid_refinement.h>
 
- * 
- * Consequently, we set the error indicators to zero for all cells at the
- * interface; the conditions determining which cells this affects are
- * slightly awkward because we have to account for the possibility of
- * adaptively refined meshes, meaning that the neighboring cell can be
- * coarser than the current one, or could in fact be refined some
- * more. The structure of these nested conditions is much the same as we
- * encountered when assembling interface terms in
- * <code>assemble_system</code>.
- * 
- * @code
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       for (const auto f : cell->face_indices())
- *         if (cell_is_in_solid_domain(cell))
- *           {
- *             if ((cell->at_boundary(f) == false) &&
- *                 (((cell->neighbor(f)->level() == cell->level()) &&
- *                   (cell->neighbor(f)->has_children() == false) &&
- *                   cell_is_in_fluid_domain(cell->neighbor(f))) ||
- *                  ((cell->neighbor(f)->level() == cell->level()) &&
- *                   (cell->neighbor(f)->has_children() == true) &&
- *                   (cell_is_in_fluid_domain(
- *                     cell->neighbor_child_on_subface(f, 0)))) ||
- *                  (cell->neighbor_is_coarser(f) &&
- *                   cell_is_in_fluid_domain(cell->neighbor(f)))))
- *               estimated_error_per_cell(cell->active_cell_index()) = 0;
- *           }
- *         else
- *           {
- *             if ((cell->at_boundary(f) == false) &&
- *                 (((cell->neighbor(f)->level() == cell->level()) &&
- *                   (cell->neighbor(f)->has_children() == false) &&
- *                   cell_is_in_solid_domain(cell->neighbor(f))) ||
- *                  ((cell->neighbor(f)->level() == cell->level()) &&
- *                   (cell->neighbor(f)->has_children() == true) &&
- *                   (cell_is_in_solid_domain(
- *                     cell->neighbor_child_on_subface(f, 0)))) ||
- *                  (cell->neighbor_is_coarser(f) &&
- *                   cell_is_in_solid_domain(cell->neighbor(f)))))
- *               estimated_error_per_cell(cell->active_cell_index()) = 0;
- *           }
- * 
- *     GridRefinement::refine_and_coarsen_fixed_number(triangulation,
- *                                                     estimated_error_per_cell,
- *                                                     0.3,
- *                                                     0.0);
- *     triangulation.execute_coarsening_and_refinement();
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeFluidStructureProblemruncode"></a> 
- * <h4><code>FluidStructureProblem::run</code></h4>
- * 
 
- * 
- * This is, as usual, the function that controls the overall flow of
- * operation. If you've read through tutorial programs step-1 through
- * step-6, for example, then you are already quite familiar with the
- * following structure:
- * 
- * @code
- *   template <int dim>
- *   void FluidStructureProblem<dim>::run()
- *   {
- *     make_grid();
- * 
- *     for (unsigned int refinement_cycle = 0; refinement_cycle < 10 - 2 * dim;
- *          ++refinement_cycle)
- *       {
- *         std::cout << "Refinement cycle " << refinement_cycle << std::endl;
- * 
- *         if (refinement_cycle > 0)
- *           refine_mesh();
- * 
- *         setup_dofs();
- * 
- *         std::cout << "   Assembling..." << std::endl;
- *         assemble_system();
- * 
- *         std::cout << "   Solving..." << std::endl;
- *         solve();
- * 
- *         std::cout << "   Writing output..." << std::endl;
- *         output_results(refinement_cycle);
- * 
- *         std::cout << std::endl;
- *       }
- *   }
- * } // namespace Step46
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Thecodemaincodefunction"></a> 
- * <h4>The <code>main()</code> function</h4>
- * 
+#include <deal.II/dofs/dof_tools.h>
 
- * 
- * This, final, function contains pretty much exactly what most of the other
- * tutorial programs have:
- * 
- * @code
- * int main()
- * {
- *   try
- *     {
- *       using namespace Step46;
- * 
- *       FluidStructureProblem<2> flow_problem(1, 1);
- *       flow_problem.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- * 
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
-<a name="Results"></a>
-<a name="Results"></a><h1>Results</h1>
+
+#include <deal.II/fe/fe_q.h>
+#include <deal.II/fe/fe_nothing.h>
+#include <deal.II/fe/fe_system.h>
+#include <deal.II/fe/fe_values.h>
+
+
+#include <deal.II/hp/fe_collection.h>
+#include <deal.II/hp/fe_values.h>
+
+
+#include <deal.II/numerics/vector_tools.h>
+#include <deal.II/numerics/data_out.h>
+#include <deal.II/numerics/error_estimator.h>
+
+
+#include <iostream>
+#include <fstream>
+
+
+
+namespace Step46
+{
+  using namespace dealii;
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeFluidStructureProblemcodeclasstemplate"></a> <h3>The <code>FluidStructureProblem</code> class template</h3>
+
+
+
+
+这是主类。如果你想的话，它是 step-8 和 step-22 的组合，因为它的成员变量要么针对全局问题（Triangulation和DoFHandler对象，以及 hp::FECollection 和各种线性代数对象），要么与弹性或斯托克斯子问题有关。然而，该类的一般结构与其他大多数实现静止问题的程序一样。   
+
+
+有几个不言自明的辅助函数（<code>cell_is_in_fluid_domain, cell_is_in_solid_domain</code>）（对两个子域的符号名称进行操作，这些符号名称将被用作属于子域的单元的 material_ids。正如介绍中所解释的那样）和几个函数（<code>make_grid, set_active_fe_indices, assemble_interface_terms</code>），这些函数已经从其他函数中分离出来，可以在其他许多教程程序中找到，我们将在实现它们时讨论。   
+
+
+最后一组变量（  <code>viscosity, lambda, eta</code>  ）描述了用于两个物理模型的材料属性。
+
+@code
+  template <int dim>
+  class FluidStructureProblem
+  {
+  public:
+    FluidStructureProblem(const unsigned int stokes_degree,
+                          const unsigned int elasticity_degree);
+    void run();
+
+
+  private:
+    enum
+    {
+      fluid_domain_id,
+      solid_domain_id
+    };
+
+
+    static bool cell_is_in_fluid_domain(
+      const typename DoFHandler<dim>::cell_iterator &cell);
+
+
+    static bool cell_is_in_solid_domain(
+      const typename DoFHandler<dim>::cell_iterator &cell);
+
+
+
+    void make_grid();
+    void set_active_fe_indices();
+    void setup_dofs();
+    void assemble_system();
+    void assemble_interface_term(
+      const FEFaceValuesBase<dim> &         elasticity_fe_face_values,
+      const FEFaceValuesBase<dim> &         stokes_fe_face_values,
+      std::vector<Tensor<1, dim>> &         elasticity_phi,
+      std::vector<SymmetricTensor<2, dim>> &stokes_symgrad_phi_u,
+      std::vector<double> &                 stokes_phi_p,
+      FullMatrix<double> &                  local_interface_matrix) const;
+    void solve();
+    void output_results(const unsigned int refinement_cycle) const;
+    void refine_mesh();
+
+
+    const unsigned int stokes_degree;
+    const unsigned int elasticity_degree;
+
+
+    Triangulation<dim>    triangulation;
+    FESystem<dim>         stokes_fe;
+    FESystem<dim>         elasticity_fe;
+    hp::FECollection<dim> fe_collection;
+    DoFHandler<dim>       dof_handler;
+
+
+    AffineConstraints<double> constraints;
+
+
+    SparsityPattern      sparsity_pattern;
+    SparseMatrix<double> system_matrix;
+
+
+    Vector<double> solution;
+    Vector<double> system_rhs;
+
+
+    const double viscosity;
+    const double lambda;
+    const double mu;
+  };
+
+
+
+@endcode 
+
+
+
+
+<a name="Boundaryvaluesandrighthandside"></a> <h3>Boundary values and right hand side</h3>
+
+
+
+
+下面这个类就像它的名字所暗示的那样。速度的边界值分别为2d的 $\mathbf u=(0, \sin(\pi x))^T$ 和3d的 $\mathbf u=(0,
+0, \sin(\pi x)\sin(\pi y))^T$ 。这个问题的其余边界条件都是同质的，在引言中已经讨论过。右边的强迫项对于流体和固体来说都是零，所以我们不需要为它提供一个额外的类。
+
+@code
+  template <int dim>
+  class StokesBoundaryValues : public Function<dim>
+  {
+  public:
+    StokesBoundaryValues()
+      : Function<dim>(dim + 1 + dim)
+    {}
+
+
+    virtual double value(const Point<dim> & p,
+                         const unsigned int component = 0) const override;
+
+
+    virtual void vector_value(const Point<dim> &p,
+                              Vector<double> &  value) const override;
+  };
+
+
+
+  template <int dim>
+  double StokesBoundaryValues<dim>::value(const Point<dim> & p,
+                                          const unsigned int component) const
+  {
+    Assert(component < this->n_components,
+           ExcIndexRange(component, 0, this->n_components));
+
+
+    if (component == dim - 1)
+      switch (dim)
+        {
+          case 2:
+            return std::sin(numbers::PI * p[0]);
+          case 3:
+            return std::sin(numbers::PI * p[0]) * std::sin(numbers::PI * p[1]);
+          default:
+            Assert(false, ExcNotImplemented());
+        }
+
+
+    return 0;
+  }
+
+
+
+  template <int dim>
+  void StokesBoundaryValues<dim>::vector_value(const Point<dim> &p,
+                                               Vector<double> &  values) const
+  {
+    for (unsigned int c = 0; c < this->n_components; ++c)
+      values(c) = StokesBoundaryValues<dim>::value(p, c);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeFluidStructureProblemcodeimplementation"></a> <h3>The <code>FluidStructureProblem</code> implementation</h3>
+
+
+
+
+
+<a name="Constructorsandhelperfunctions"></a> <h4>Constructors and helper functions</h4> 
+
+
+
+
+现在我们来谈谈这个程序的主类的实现。最初的几个函数是构造函数和辅助函数，可以用来确定一个单元格在域的哪个部分。鉴于介绍中对这些主题的讨论，它们的实现是相当明显的。在构造函数中，注意我们必须从斯托克斯和弹性的基本元素中构造 hp::FECollection 对象；使用 hp::FECollection::push_back 函数将它们在这个集合中的位置分配为0和1，这个顺序我们必须记住，并在程序的其余部分一致使用。
+
+@code
+  template <int dim>
+  FluidStructureProblem<dim>::FluidStructureProblem(
+    const unsigned int stokes_degree,
+    const unsigned int elasticity_degree)
+    : stokes_degree(stokes_degree)
+    , elasticity_degree(elasticity_degree)
+    , triangulation(Triangulation<dim>::maximum_smoothing)
+    , stokes_fe(FE_Q<dim>(stokes_degree + 1),
+                dim,
+                FE_Q<dim>(stokes_degree),
+                1,
+                FE_Nothing<dim>(),
+                dim)
+    , elasticity_fe(FE_Nothing<dim>(),
+                    dim,
+                    FE_Nothing<dim>(),
+                    1,
+                    FE_Q<dim>(elasticity_degree),
+                    dim)
+    , dof_handler(triangulation)
+    , viscosity(2)
+    , lambda(1)
+    , mu(1)
+  {
+    fe_collection.push_back(stokes_fe);
+    fe_collection.push_back(elasticity_fe);
+  }
+
+
+
+
+
+  template <int dim>
+  bool FluidStructureProblem<dim>::cell_is_in_fluid_domain(
+    const typename DoFHandler<dim>::cell_iterator &cell)
+  {
+    return (cell->material_id() == fluid_domain_id);
+  }
+
+
+
+  template <int dim>
+  bool FluidStructureProblem<dim>::cell_is_in_solid_domain(
+    const typename DoFHandler<dim>::cell_iterator &cell)
+  {
+    return (cell->material_id() == solid_domain_id);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="Meshesandassigningsubdomains"></a> <h4>Meshes and assigning subdomains</h4>
+
+
+
+
+下一对函数是处理生成网格，并确保所有表示子域的标志都是正确的。  <code>make_grid</code>  ，正如在介绍中所讨论的，生成一个 $8\times 8$ 的网格（或者一个 $8\times 8\times 8$ 的三维网格）以确保每个粗略的网格单元完全在一个子域中。生成这个网格后，我们在其边界上循环，并在顶部边界设置边界指标为1，这是我们设置非零迪里希特边界条件的唯一地方。在这之后，我们再次在所有单元上循环，设置材料指标&mdash；用来表示我们处于域的哪一部分，是流体指标还是固体指标。
+
+@code
+  template <int dim>
+  void FluidStructureProblem<dim>::make_grid()
+  {
+    GridGenerator::subdivided_hyper_cube(triangulation, 8, -1, 1);
+
+
+    for (const auto &cell : triangulation.active_cell_iterators())
+      for (const auto &face : cell->face_iterators())
+        if (face->at_boundary() && (face->center()[dim - 1] == 1))
+          face->set_all_boundary_ids(1);
+
+
+
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      if (((std::fabs(cell->center()[0]) < 0.25) &&
+           (cell->center()[dim - 1] > 0.5)) ||
+          ((std::fabs(cell->center()[0]) >= 0.25) &&
+           (cell->center()[dim - 1] > -0.5)))
+        cell->set_material_id(fluid_domain_id);
+      else
+        cell->set_material_id(solid_domain_id);
+  }
+
+
+
+@endcode 
+
+
+
+这对函数的第二部分决定了在每个单元上使用哪一个有限元。上面我们已经为每个粗略网格单元设置了材料指标，正如介绍中提到的，这个信息在网格细化时是由母单元继承到子单元的。   
+
+
+换句话说，只要我们细化（或创建）了网格，我们就可以依靠材料指标来正确描述一个单元所处的域的哪一部分。然后我们利用这一点将单元的活动FE索引设置为该类的 hp::FECollection 成员变量的相应元素：流体单元为0，固体单元为1。
+
+@code
+  template <int dim>
+  void FluidStructureProblem<dim>::set_active_fe_indices()
+  {
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      {
+        if (cell_is_in_fluid_domain(cell))
+          cell->set_active_fe_index(0);
+        else if (cell_is_in_solid_domain(cell))
+          cell->set_active_fe_index(1);
+        else
+          Assert(false, ExcNotImplemented());
+      }
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="codeFluidStructureProblemsetup_dofscode"></a> <h4><code>FluidStructureProblem::setup_dofs</code></h4>
+
+
+
+
+下一步是为线性系统设置数据结构。为此，我们首先要用上面的函数设置活动FE指数，然后分配自由度，再确定线性系统的约束。后者包括像往常一样的悬挂节点约束，但也包括顶部流体边界的不均匀边界值，以及沿固体子域周边的零边界值。
+
+@code
+  template <int dim>
+  void FluidStructureProblem<dim>::setup_dofs()
+  {
+    set_active_fe_indices();
+    dof_handler.distribute_dofs(fe_collection);
+
+
+    {
+      constraints.clear();
+      DoFTools::make_hanging_node_constraints(dof_handler, constraints);
+
+
+      const FEValuesExtractors::Vector velocities(0);
+      VectorTools::interpolate_boundary_values(dof_handler,
+                                               1,
+                                               StokesBoundaryValues<dim>(),
+                                               constraints,
+                                               fe_collection.component_mask(
+                                                 velocities));
+
+
+      const FEValuesExtractors::Vector displacements(dim + 1);
+      VectorTools::interpolate_boundary_values(
+        dof_handler,
+        0,
+        Functions::ZeroFunction<dim>(dim + 1 + dim),
+        constraints,
+        fe_collection.component_mask(displacements));
+    }
+
+
+@endcode 
+
+
+
+不过，我们还必须处理更多的约束条件：我们必须确保在流体和固体的界面上速度为零。下面这段代码已经在介绍中介绍过了。
+
+@code
+    {
+      std::vector<types::global_dof_index> local_face_dof_indices(
+        stokes_fe.n_dofs_per_face());
+      for (const auto &cell : dof_handler.active_cell_iterators())
+        if (cell_is_in_fluid_domain(cell))
+          for (const auto face_no : cell->face_indices())
+            if (cell->face(face_no)->at_boundary() == false)
+              {
+                bool face_is_on_interface = false;
+
+
+                if ((cell->neighbor(face_no)->has_children() == false) &&
+                    (cell_is_in_solid_domain(cell->neighbor(face_no))))
+                  face_is_on_interface = true;
+                else if (cell->neighbor(face_no)->has_children() == true)
+                  {
+                    for (unsigned int sf = 0;
+                         sf < cell->face(face_no)->n_children();
+                         ++sf)
+                      if (cell_is_in_solid_domain(
+                            cell->neighbor_child_on_subface(face_no, sf)))
+                        {
+                          face_is_on_interface = true;
+                          break;
+                        }
+                  }
+
+
+                if (face_is_on_interface)
+                  {
+                    cell->face(face_no)->get_dof_indices(local_face_dof_indices,
+                                                         0);
+                    for (unsigned int i = 0; i < local_face_dof_indices.size();
+                         ++i)
+                      if (stokes_fe.face_system_to_component_index(i).first <
+                          dim)
+                        constraints.add_line(local_face_dof_indices[i]);
+                  }
+              }
+    }
+
+
+@endcode 
+
+
+
+在这一切结束时，我们可以向约束对象声明，我们现在已经准备好了所有的约束，并且该对象可以重建其内部数据结构以获得更好的效率。
+
+@code
+    constraints.close();
+
+
+    std::cout << "   Number of active cells: " << triangulation.n_active_cells()
+              << std::endl
+              << "   Number of degrees of freedom: " << dof_handler.n_dofs()
+              << std::endl;
+
+
+@endcode 
+
+
+
+在这个函数的其余部分，我们创建了一个在介绍中广泛讨论的稀疏模式，并使用它来初始化矩阵；然后还将向量设置为正确的大小。
+
+@code
+    {
+      DynamicSparsityPattern dsp(dof_handler.n_dofs(), dof_handler.n_dofs());
+
+
+      Table<2, DoFTools::Coupling> cell_coupling(fe_collection.n_components(),
+                                                 fe_collection.n_components());
+      Table<2, DoFTools::Coupling> face_coupling(fe_collection.n_components(),
+                                                 fe_collection.n_components());
+
+
+      for (unsigned int c = 0; c < fe_collection.n_components(); ++c)
+        for (unsigned int d = 0; d < fe_collection.n_components(); ++d)
+          {
+            if (((c < dim + 1) && (d < dim + 1) &&
+                 !((c == dim) && (d == dim))) ||
+                ((c >= dim + 1) && (d >= dim + 1)))
+              cell_coupling[c][d] = DoFTools::always;
+
+
+            if ((c >= dim + 1) && (d < dim + 1))
+              face_coupling[c][d] = DoFTools::always;
+          }
+
+
+      DoFTools::make_flux_sparsity_pattern(dof_handler,
+                                           dsp,
+                                           cell_coupling,
+                                           face_coupling);
+      constraints.condense(dsp);
+      sparsity_pattern.copy_from(dsp);
+    }
+
+
+    system_matrix.reinit(sparsity_pattern);
+
+
+    solution.reinit(dof_handler.n_dofs());
+    system_rhs.reinit(dof_handler.n_dofs());
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="codeFluidStructureProblemassemble_systemcode"></a> <h4><code>FluidStructureProblem::assemble_system</code></h4>
+
+
+
+
+下面是这个程序的中心函数：组装线性系统的函数。它在开始时有一长段设置辅助函数的内容：从创建正交公式到设置FEValues、FEFaceValues和FESubfaceValues对象，这些都是整合单元项以及界面项所必需的，以应对界面上的单元以相同尺寸或不同的细化程度聚集在一起的情况... 
+
+@code
+  template <int dim>
+  void FluidStructureProblem<dim>::assemble_system()
+  {
+    system_matrix = 0;
+    system_rhs    = 0;
+
+
+    const QGauss<dim> stokes_quadrature(stokes_degree + 2);
+    const QGauss<dim> elasticity_quadrature(elasticity_degree + 2);
+
+
+    hp::QCollection<dim> q_collection;
+    q_collection.push_back(stokes_quadrature);
+    q_collection.push_back(elasticity_quadrature);
+
+
+    hp::FEValues<dim> hp_fe_values(fe_collection,
+                                   q_collection,
+                                   update_values | update_quadrature_points |
+                                     update_JxW_values | update_gradients);
+
+
+    const QGauss<dim - 1> common_face_quadrature(
+      std::max(stokes_degree + 2, elasticity_degree + 2));
+
+
+    FEFaceValues<dim>    stokes_fe_face_values(stokes_fe,
+                                            common_face_quadrature,
+                                            update_JxW_values |
+                                              update_gradients | update_values);
+    FEFaceValues<dim>    elasticity_fe_face_values(elasticity_fe,
+                                                common_face_quadrature,
+                                                update_normal_vectors |
+                                                  update_values);
+    FESubfaceValues<dim> stokes_fe_subface_values(stokes_fe,
+                                                  common_face_quadrature,
+                                                  update_JxW_values |
+                                                    update_gradients |
+                                                    update_values);
+    FESubfaceValues<dim> elasticity_fe_subface_values(elasticity_fe,
+                                                      common_face_quadrature,
+                                                      update_normal_vectors |
+                                                        update_values);
+
+
+@endcode 
+
+
+
+...描述对全局线性系统的局部贡献所需的对象... 
+
+@code
+    const unsigned int stokes_dofs_per_cell = stokes_fe.n_dofs_per_cell();
+    const unsigned int elasticity_dofs_per_cell =
+      elasticity_fe.n_dofs_per_cell();
+
+
+    FullMatrix<double> local_matrix;
+    FullMatrix<double> local_interface_matrix(elasticity_dofs_per_cell,
+                                              stokes_dofs_per_cell);
+    Vector<double>     local_rhs;
+
+
+    std::vector<types::global_dof_index> local_dof_indices;
+    std::vector<types::global_dof_index> neighbor_dof_indices(
+      stokes_dofs_per_cell);
+
+
+    const Functions::ZeroFunction<dim> right_hand_side(dim + 1);
+
+
+@endcode 
+
+
+
+...允许我们提取形状函数的某些成分并缓存其值的变量，而不必在每个正交点重新计算它们。
+
+@code
+    const FEValuesExtractors::Vector velocities(0);
+    const FEValuesExtractors::Scalar pressure(dim);
+    const FEValuesExtractors::Vector displacements(dim + 1);
+
+
+    std::vector<SymmetricTensor<2, dim>> stokes_symgrad_phi_u(
+      stokes_dofs_per_cell);
+    std::vector<double> stokes_div_phi_u(stokes_dofs_per_cell);
+    std::vector<double> stokes_phi_p(stokes_dofs_per_cell);
+
+
+    std::vector<Tensor<2, dim>> elasticity_grad_phi(elasticity_dofs_per_cell);
+    std::vector<double>         elasticity_div_phi(elasticity_dofs_per_cell);
+    std::vector<Tensor<1, dim>> elasticity_phi(elasticity_dofs_per_cell);
+
+
+@endcode 
+
+
+
+然后是所有单元的主循环，和 step-27 一样，为当前单元初始化 hp::FEValues 对象，并提取适合当前单元的FEValues对象。
+
+@code
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      {
+        hp_fe_values.reinit(cell);
+
+
+        const FEValues<dim> &fe_values = hp_fe_values.get_present_fe_values();
+
+
+        local_matrix.reinit(cell->get_fe().n_dofs_per_cell(),
+                            cell->get_fe().n_dofs_per_cell());
+        local_rhs.reinit(cell->get_fe().n_dofs_per_cell());
+
+
+@endcode 
+
+
+
+所有这些完成后，我们继续为属于斯托克斯和弹性区域的单元组装单元项。虽然我们原则上可以在一个公式中完成，实际上是实现了介绍中所说的一个双线性形式，但我们意识到，我们的有限元空间的选择方式是，在每个单元上，一组变量（速度和压力，或位移）总是零，因此，计算局部积分的一个更有效的方法是，根据 <code>if</code> 条款，只做必要的，测试我们在域的哪一部分。         
+
+
+局部矩阵的实际计算与 step-22 以及 @ref vector_valued 文件模块中给出的弹性方程的计算相同。
+
+@code
+        if (cell_is_in_fluid_domain(cell))
+          {
+            const unsigned int dofs_per_cell = cell->get_fe().n_dofs_per_cell();
+            Assert(dofs_per_cell == stokes_dofs_per_cell, ExcInternalError());
+
+
+            for (unsigned int q = 0; q < fe_values.n_quadrature_points; ++q)
+              {
+                for (unsigned int k = 0; k < dofs_per_cell; ++k)
+                  {
+                    stokes_symgrad_phi_u[k] =
+                      fe_values[velocities].symmetric_gradient(k, q);
+                    stokes_div_phi_u[k] =
+                      fe_values[velocities].divergence(k, q);
+                    stokes_phi_p[k] = fe_values[pressure].value(k, q);
+                  }
+
+
+                for (unsigned int i = 0; i < dofs_per_cell; ++i)
+                  for (unsigned int j = 0; j < dofs_per_cell; ++j)
+                    local_matrix(i, j) +=
+                      (2 * viscosity * stokes_symgrad_phi_u[i] *
+                         stokes_symgrad_phi_u[j] -
+                       stokes_div_phi_u[i] * stokes_phi_p[j] -
+                       stokes_phi_p[i] * stokes_div_phi_u[j]) *
+                      fe_values.JxW(q);
+              }
+          }
+        else
+          {
+            const unsigned int dofs_per_cell = cell->get_fe().n_dofs_per_cell();
+            Assert(dofs_per_cell == elasticity_dofs_per_cell,
+                   ExcInternalError());
+
+
+            for (unsigned int q = 0; q < fe_values.n_quadrature_points; ++q)
+              {
+                for (unsigned int k = 0; k < dofs_per_cell; ++k)
+                  {
+                    elasticity_grad_phi[k] =
+                      fe_values[displacements].gradient(k, q);
+                    elasticity_div_phi[k] =
+                      fe_values[displacements].divergence(k, q);
+                  }
+
+
+                for (unsigned int i = 0; i < dofs_per_cell; ++i)
+                  for (unsigned int j = 0; j < dofs_per_cell; ++j)
+                    {
+                      local_matrix(i, j) +=
+                        (lambda * elasticity_div_phi[i] *
+                           elasticity_div_phi[j] +
+                         mu * scalar_product(elasticity_grad_phi[i],
+                                             elasticity_grad_phi[j]) +
+                         mu *
+                           scalar_product(elasticity_grad_phi[i],
+                                          transpose(elasticity_grad_phi[j]))) *
+                        fe_values.JxW(q);
+                    }
+              }
+          }
+
+
+@endcode 
+
+
+
+一旦我们有了单元积分的贡献，我们就把它们复制到全局矩阵中（通过 AffineConstraints::distribute_local_to_global 函数，立即处理约束）。请注意，我们没有向 <code>local_rhs</code> 变量中写入任何东西，尽管我们仍然需要传递它，因为消除非零边界值需要修改局部，因此也需要修改全局的右手值。
+
+@code
+        local_dof_indices.resize(cell->get_fe().n_dofs_per_cell());
+        cell->get_dof_indices(local_dof_indices);
+        constraints.distribute_local_to_global(local_matrix,
+                                               local_rhs,
+                                               local_dof_indices,
+                                               system_matrix,
+                                               system_rhs);
+
+
+@endcode 
+
+
+
+这个函数更有趣的部分是我们在两个子域之间的界面上看到的关于面的条款。为此，我们首先要确保我们只组装一次，尽管在所有单元的所有面的循环会遇到界面的每个部分两次。我们武断地决定，只有当当前单元是固体子域的一部分，并且因此一个面不在边界上，并且它后面的潜在邻居是流体域的一部分时，我们才会评估界面条款。让我们从这些条件开始。
+
+@code
+        if (cell_is_in_solid_domain(cell))
+          for (const auto f : cell->face_indices())
+            if (cell->face(f)->at_boundary() == false)
+              {
+@endcode 
+
+
+
+在这一点上，我们知道当前的单元是一个候选的积分，并且面 <code>f</code> 后面存在一个邻居。现在有三种可能性。
+
+                 
+
+
+
+
+- 邻居处于相同的细化水平，没有子女。
+
+- 邻居有孩子。
+
+- 邻居更粗。                 
+
+
+在所有这三种情况下，我们只对它感兴趣，如果它是流体子域的一部分。因此，让我们从第一种最简单的情况开始：如果邻居处于同一层次，没有子女，并且是一个流体单元，那么这两个单元共享一个边界，这个边界是我们想要整合接口项的一部分。我们所要做的就是用当前面和邻接单元的面初始化两个FEFaceValues对象（注意我们是如何找出邻接单元的哪个面与当前单元接壤的），然后把东西传给评估界面项的函数（这个函数的第三个到第五个参数为它提供了抓取数组）。然后，结果再次被复制到全局矩阵中，使用一个知道本地矩阵的行和列的DoF指数来自不同单元的函数。
+
+@code
+                if ((cell->neighbor(f)->level() == cell->level()) &&
+                    (cell->neighbor(f)->has_children() == false) &&
+                    cell_is_in_fluid_domain(cell->neighbor(f)))
+                  {
+                    elasticity_fe_face_values.reinit(cell, f);
+                    stokes_fe_face_values.reinit(cell->neighbor(f),
+                                                 cell->neighbor_of_neighbor(f));
+
+
+                    assemble_interface_term(elasticity_fe_face_values,
+                                            stokes_fe_face_values,
+                                            elasticity_phi,
+                                            stokes_symgrad_phi_u,
+                                            stokes_phi_p,
+                                            local_interface_matrix);
+
+
+                    cell->neighbor(f)->get_dof_indices(neighbor_dof_indices);
+                    constraints.distribute_local_to_global(
+                      local_interface_matrix,
+                      local_dof_indices,
+                      neighbor_dof_indices,
+                      system_matrix);
+                  }
+
+
+@endcode 
+
+
+
+第二种情况是如果邻居有更多的孩子。在这种情况下，我们必须对邻居的所有子代进行循环，看它们是否属于流体子域。如果它们是，那么我们就在共同界面上进行整合，这个界面是邻居的一个面和当前单元的一个子面，要求我们对邻居使用FEFaceValues，对当前单元使用FESubfaceValues。
+
+@code
+                else if ((cell->neighbor(f)->level() == cell->level()) &&
+                         (cell->neighbor(f)->has_children() == true))
+                  {
+                    for (unsigned int subface = 0;
+                         subface < cell->face(f)->n_children();
+                         ++subface)
+                      if (cell_is_in_fluid_domain(
+                            cell->neighbor_child_on_subface(f, subface)))
+                        {
+                          elasticity_fe_subface_values.reinit(cell, f, subface);
+                          stokes_fe_face_values.reinit(
+                            cell->neighbor_child_on_subface(f, subface),
+                            cell->neighbor_of_neighbor(f));
+
+
+                          assemble_interface_term(elasticity_fe_subface_values,
+                                                  stokes_fe_face_values,
+                                                  elasticity_phi,
+                                                  stokes_symgrad_phi_u,
+                                                  stokes_phi_p,
+                                                  local_interface_matrix);
+
+
+                          cell->neighbor_child_on_subface(f, subface)
+
+
+                            ->get_dof_indices(neighbor_dof_indices);
+                          constraints.distribute_local_to_global(
+                            local_interface_matrix,
+                            local_dof_indices,
+                            neighbor_dof_indices,
+                            system_matrix);
+                        }
+                  }
+
+
+@endcode 
+
+
+
+最后一个选项是，邻居是比较粗糙的。在这种情况下，我们必须为邻居使用一个FESubfaceValues对象，为当前单元使用一个FEFaceValues；其余部分与之前相同。
+
+@code
+                else if (cell->neighbor_is_coarser(f) &&
+                         cell_is_in_fluid_domain(cell->neighbor(f)))
+                  {
+                    elasticity_fe_face_values.reinit(cell, f);
+                    stokes_fe_subface_values.reinit(
+                      cell->neighbor(f),
+                      cell->neighbor_of_coarser_neighbor(f).first,
+                      cell->neighbor_of_coarser_neighbor(f).second);
+
+
+                    assemble_interface_term(elasticity_fe_face_values,
+                                            stokes_fe_subface_values,
+                                            elasticity_phi,
+                                            stokes_symgrad_phi_u,
+                                            stokes_phi_p,
+                                            local_interface_matrix);
+
+
+                    cell->neighbor(f)->get_dof_indices(neighbor_dof_indices);
+                    constraints.distribute_local_to_global(
+                      local_interface_matrix,
+                      local_dof_indices,
+                      neighbor_dof_indices,
+                      system_matrix);
+                  }
+              }
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+在组装全局系统的函数中，我们将计算接口条款传递给了我们在此讨论的一个单独的函数。关键是，尽管我们无法预测FEFaceValues和FESubfaceValues对象的组合，但它们都是从FEFaceValuesBase类派生出来的，因此我们不必在意：调用该函数时，只需输入两个这样的对象，表示面的两边正交点上的形状函数值。然后我们做我们一直在做的事情：我们用形状函数的值和它们的导数来填充从头数组，然后循环计算矩阵的所有条目来计算局部积分。我们在这里评估的双线性形式的细节在介绍中给出。
+
+@code
+  template <int dim>
+  void FluidStructureProblem<dim>::assemble_interface_term(
+    const FEFaceValuesBase<dim> &         elasticity_fe_face_values,
+    const FEFaceValuesBase<dim> &         stokes_fe_face_values,
+    std::vector<Tensor<1, dim>> &         elasticity_phi,
+    std::vector<SymmetricTensor<2, dim>> &stokes_symgrad_phi_u,
+    std::vector<double> &                 stokes_phi_p,
+    FullMatrix<double> &                  local_interface_matrix) const
+  {
+    Assert(stokes_fe_face_values.n_quadrature_points ==
+             elasticity_fe_face_values.n_quadrature_points,
+           ExcInternalError());
+    const unsigned int n_face_quadrature_points =
+      elasticity_fe_face_values.n_quadrature_points;
+
+
+    const FEValuesExtractors::Vector velocities(0);
+    const FEValuesExtractors::Scalar pressure(dim);
+    const FEValuesExtractors::Vector displacements(dim + 1);
+
+
+    local_interface_matrix = 0;
+    for (unsigned int q = 0; q < n_face_quadrature_points; ++q)
+      {
+        const Tensor<1, dim> normal_vector =
+          elasticity_fe_face_values.normal_vector(q);
+
+
+        for (unsigned int k = 0; k < stokes_fe_face_values.dofs_per_cell; ++k)
+          {
+            stokes_symgrad_phi_u[k] =
+              stokes_fe_face_values[velocities].symmetric_gradient(k, q);
+            stokes_phi_p[k] = stokes_fe_face_values[pressure].value(k, q);
+          }
+        for (unsigned int k = 0; k < elasticity_fe_face_values.dofs_per_cell;
+             ++k)
+          elasticity_phi[k] =
+            elasticity_fe_face_values[displacements].value(k, q);
+
+
+        for (unsigned int i = 0; i < elasticity_fe_face_values.dofs_per_cell;
+             ++i)
+          for (unsigned int j = 0; j < stokes_fe_face_values.dofs_per_cell; ++j)
+            local_interface_matrix(i, j) +=
+
+
+              -((2 * viscosity * (stokes_symgrad_phi_u[j] * normal_vector) -
+                 stokes_phi_p[j] * normal_vector) *
+                elasticity_phi[i] * stokes_fe_face_values.JxW(q));
+      }
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="codeFluidStructureProblemsolvecode"></a><h4><code>FluidStructureProblem::solve</code></h4> 
+
+
+
+
+正如介绍中所讨论的，我们在这里使用了一个相当琐碎的求解器：我们只是将线性系统传递给SparseDirectUMFPACK直接求解器（例如，见 step-29 ）。我们在求解后唯一要做的是确保悬挂的节点和边界值约束是正确的。
+
+@code
+  template <int dim>
+  void FluidStructureProblem<dim>::solve()
+  {
+    SparseDirectUMFPACK direct_solver;
+    direct_solver.initialize(system_matrix);
+    direct_solver.vmult(solution, system_rhs);
+
+
+    constraints.distribute(solution);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="codeFluidStructureProblemoutput_resultscode"></a> <h4><code>FluidStructureProblem::output_results</code></h4>
+
+
+
+
+生成图形输出在这里是相当微不足道的：我们所要做的就是确定解向量的哪些分量属于标量和/或向量（例如，见 step-22 之前的例子），然后把它全部传递给DataOut类。
+
+@code
+  template <int dim>
+  void FluidStructureProblem<dim>::output_results(
+    const unsigned int refinement_cycle) const
+  {
+    std::vector<std::string> solution_names(dim, "velocity");
+    solution_names.emplace_back("pressure");
+    for (unsigned int d = 0; d < dim; ++d)
+      solution_names.emplace_back("displacement");
+
+
+    std::vector<DataComponentInterpretation::DataComponentInterpretation>
+      data_component_interpretation(
+        dim, DataComponentInterpretation::component_is_part_of_vector);
+    data_component_interpretation.push_back(
+      DataComponentInterpretation::component_is_scalar);
+    for (unsigned int d = 0; d < dim; ++d)
+      data_component_interpretation.push_back(
+        DataComponentInterpretation::component_is_part_of_vector);
+
+
+    DataOut<dim> data_out;
+    data_out.attach_dof_handler(dof_handler);
+
+
+    data_out.add_data_vector(solution,
+                             solution_names,
+                             DataOut<dim>::type_dof_data,
+                             data_component_interpretation);
+    data_out.build_patches();
+
+
+    std::ofstream output(
+      "solution-" + Utilities::int_to_string(refinement_cycle, 2) + ".vtk");
+    data_out.write_vtk(output);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="codeFluidStructureProblemrefine_meshcode"></a> <h4><code>FluidStructureProblem::refine_mesh</code></h4>
+
+
+
+
+下一步是细化网格。正如在介绍中所讨论的，这有点棘手，主要是因为流体和固体子域使用的变量具有不同的物理尺寸，因此误差估计的绝对大小不能直接比较。因此，我们将不得不对它们进行缩放。因此，在函数的顶部，我们首先分别计算不同变量的误差估计值（在流体域中使用速度而不是压力，在固体域中使用位移）。
+
+@code
+  template <int dim>
+  void FluidStructureProblem<dim>::refine_mesh()
+  {
+    Vector<float> stokes_estimated_error_per_cell(
+      triangulation.n_active_cells());
+    Vector<float> elasticity_estimated_error_per_cell(
+      triangulation.n_active_cells());
+
+
+    const QGauss<dim - 1> stokes_face_quadrature(stokes_degree + 2);
+    const QGauss<dim - 1> elasticity_face_quadrature(elasticity_degree + 2);
+
+
+    hp::QCollection<dim - 1> face_q_collection;
+    face_q_collection.push_back(stokes_face_quadrature);
+    face_q_collection.push_back(elasticity_face_quadrature);
+
+
+    const FEValuesExtractors::Vector velocities(0);
+    KellyErrorEstimator<dim>::estimate(
+      dof_handler,
+      face_q_collection,
+      std::map<types::boundary_id, const Function<dim> *>(),
+      solution,
+      stokes_estimated_error_per_cell,
+      fe_collection.component_mask(velocities));
+
+
+    const FEValuesExtractors::Vector displacements(dim + 1);
+    KellyErrorEstimator<dim>::estimate(
+      dof_handler,
+      face_q_collection,
+      std::map<types::boundary_id, const Function<dim> *>(),
+      solution,
+      elasticity_estimated_error_per_cell,
+      fe_collection.component_mask(displacements));
+
+
+@endcode 
+
+
+
+然后我们将误差估计值除以其常数进行归一化处理，并将流体误差指标按导言中讨论的4的系数进行缩放。然后将结果加在一起，形成一个包含所有单元的误差指标的向量。
+
+@code
+    stokes_estimated_error_per_cell *=
+      4. / stokes_estimated_error_per_cell.l2_norm();
+    elasticity_estimated_error_per_cell *=
+      1. / elasticity_estimated_error_per_cell.l2_norm();
+
+
+    Vector<float> estimated_error_per_cell(triangulation.n_active_cells());
+
+
+    estimated_error_per_cell += stokes_estimated_error_per_cell;
+    estimated_error_per_cell += elasticity_estimated_error_per_cell;
+
+
+@endcode 
+
+
+
+在实际细化网格之前，函数的倒数第二部分涉及到我们在介绍中已经提到的启发式方法：由于解是不连续的，KellyErrorEstimator类会对位于子域之间边界的单元感到困惑：它认为那里的误差大是因为梯度的跳跃大，尽管这完全是预期的，事实上在精确解中也存在这一特征，因此不表明任何数值误差。     
+
+
+因此，我们将界面上的所有单元的误差指标设置为零；决定影响哪些单元的条件略显尴尬，因为我们必须考虑到自适应细化网格的可能性，这意味着邻近的单元可能比当前的单元更粗，或者事实上可能被细化一些。这些嵌套条件的结构与我们在 <code>assemble_system</code> 中组装界面条款时遇到的情况大致相同。
+
+@code
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      for (const auto f : cell->face_indices())
+        if (cell_is_in_solid_domain(cell))
+          {
+            if ((cell->at_boundary(f) == false) &&
+                (((cell->neighbor(f)->level() == cell->level()) &&
+                  (cell->neighbor(f)->has_children() == false) &&
+                  cell_is_in_fluid_domain(cell->neighbor(f))) ||
+                 ((cell->neighbor(f)->level() == cell->level()) &&
+                  (cell->neighbor(f)->has_children() == true) &&
+                  (cell_is_in_fluid_domain(
+                    cell->neighbor_child_on_subface(f, 0)))) ||
+                 (cell->neighbor_is_coarser(f) &&
+                  cell_is_in_fluid_domain(cell->neighbor(f)))))
+              estimated_error_per_cell(cell->active_cell_index()) = 0;
+          }
+        else
+          {
+            if ((cell->at_boundary(f) == false) &&
+                (((cell->neighbor(f)->level() == cell->level()) &&
+                  (cell->neighbor(f)->has_children() == false) &&
+                  cell_is_in_solid_domain(cell->neighbor(f))) ||
+                 ((cell->neighbor(f)->level() == cell->level()) &&
+                  (cell->neighbor(f)->has_children() == true) &&
+                  (cell_is_in_solid_domain(
+                    cell->neighbor_child_on_subface(f, 0)))) ||
+                 (cell->neighbor_is_coarser(f) &&
+                  cell_is_in_solid_domain(cell->neighbor(f)))))
+              estimated_error_per_cell(cell->active_cell_index()) = 0;
+          }
+
+
+    GridRefinement::refine_and_coarsen_fixed_number(triangulation,
+                                                    estimated_error_per_cell,
+                                                    0.3,
+                                                    0.0);
+    triangulation.execute_coarsening_and_refinement();
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="codeFluidStructureProblemruncode"></a> <h4><code>FluidStructureProblem::run</code></h4>
+
+
+
+
+像往常一样，这是控制整个操作流程的函数。如果你读过教程程序 step-1 到 step-6 ，例如，那么你已经对以下结构相当熟悉。
+
+@code
+  template <int dim>
+  void FluidStructureProblem<dim>::run()
+  {
+    make_grid();
+
+
+    for (unsigned int refinement_cycle = 0; refinement_cycle < 10 - 2 * dim;
+         ++refinement_cycle)
+      {
+        std::cout << "Refinement cycle " << refinement_cycle << std::endl;
+
+
+        if (refinement_cycle > 0)
+          refine_mesh();
+
+
+        setup_dofs();
+
+
+        std::cout << "   Assembling..." << std::endl;
+        assemble_system();
+
+
+        std::cout << "   Solving..." << std::endl;
+        solve();
+
+
+        std::cout << "   Writing output..." << std::endl;
+        output_results(refinement_cycle);
+
+
+        std::cout << std::endl;
+      }
+  }
+} // namespace Step46
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Thecodemaincodefunction"></a> <h4>The <code>main()</code> function</h4>
+
+
+
+
+这个，也就是最后的函数，包含的内容几乎与其他大多数教程程序的内容完全一样。
+
+@code
+int main()
+{
+  try
+    {
+      using namespace Step46;
+
+
+      FluidStructureProblem<2> flow_problem(1, 1);
+      flow_problem.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+
+
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
+<a name="Results"></a> <a name="Results"></a><h1>Results</h1>
 
 
 <a name="2dresults"></a><h3>2d results</h3>
 
 
 
-When running the program, you should get output like the following:
+
+当运行该程序时，你应该得到如下的输出。
+
 @code
 Refinement cycle 0
    Number of active cells: 64
@@ -2001,12 +1776,14 @@ Refinement cycle 0
    Solving...
    Writing output...
 
+
 Refinement cycle 1
    Number of active cells: 136
    Number of degrees of freedom: 1260
    Assembling...
    Solving...
    Writing output...
+
 
 Refinement cycle 2
    Number of active cells: 436
@@ -2015,12 +1792,14 @@ Refinement cycle 2
    Solving...
    Writing output...
 
+
 Refinement cycle 3
    Number of active cells: 1072
    Number of degrees of freedom: 7493
    Assembling...
    Solving...
    Writing output...
+
 
 Refinement cycle 4
    Number of active cells: 2632
@@ -2029,17 +1808,20 @@ Refinement cycle 4
    Solving...
    Writing output...
 
+
 Refinement cycle 5
    Number of active cells: 5944
    Number of degrees of freedom: 29437
    Assembling...
    Solving...
    Writing output...
-@endcode
+@endcode 
 
-The results are easily visualized:
 
-<table width="80%" align="center">
+
+结果很容易就能看出来。
+
+  <table width="80%" align="center">
   <tr valign="top">
     <td valign="top" align="center">
       <img src="https://www.dealii.org/images/steps/developer/step-46.9.2.velocity-2d.png" alt="">
@@ -2063,20 +1845,16 @@ The results are easily visualized:
       </p>
     </td>
   </tr>
-</table>
+</table>   
 
-The plots are easily interpreted: as the flow drives down on the left side and
-up on the right side of the upright part of the solid, it produces a
-pressure that is high on the left and low on the right, and these
-forces bend the vertical part of the solid to the right.
+图形很容易解释：当水流在固体直立部分的左侧向下、右侧向上时，它产生的压力在左侧高、右侧低，这些力量使固体的垂直部分向右弯曲。
 
 
-<a name="3dresults"></a><h3>3d results</h3>
+<a name="3dresults"></a><h3>3d results</h3> 
 
 
-By changing the dimension of the <code>FluidStructureProblem</code>
-class in <code>main()</code> to 3, we can also run the same problem
-3d. You'd get output along the following lines:
+通过将 <code>main()</code> 中的 <code>FluidStructureProblem</code> 类的尺寸改为3，我们也可以运行同样的问题3D。你会得到如下的输出。
+
 @code
 Refinement cycle 0
    Number of active cells: 512
@@ -2085,6 +1863,7 @@ Refinement cycle 0
    Solving...
    Writing output...
 
+
 Refinement cycle 1
    Number of active cells: 1716
    Number of degrees of freedom: 48984
@@ -2092,186 +1871,101 @@ Refinement cycle 1
    Solving...
    Writing output...
 
+
 Refinement cycle 2
    Number of active cells: 8548
    Number of degrees of freedom: 245746
    Assembling...
    Solving...
-@endcode
-You'll notice that the big bottleneck is the solver: SparseDirectUmfpack needs
-nearly 5 hours and some 80 GB of memory to solve the last iteration of
-this problem on a 2016 workstation (the second to last iteration took only 16
-minutes). Clearly a better solver is needed here, a topic discussed below.
+@endcode 
 
-The results can also be visualized and yield good pictures as
-well. Here is one, showing both a vector plot for the velocity (in
-oranges), the solid displacement (in blues), and shading the solid region:
+你会注意到，最大的瓶颈是求解器。SparseDirectUmfpack在2016年的工作站上解决这个问题的最后一次迭代需要将近5个小时和大约80GB的内存（倒数第二次迭代只需要16分钟）。显然，这里需要一个更好的求解器，这个话题在下面讨论。
 
-<p align="center">
+结果也可以被可视化，并产生良好的图片。这里有一张，显示了速度的矢量图（橙色），实体位移（蓝色），以及实体区域的阴影。
+
+  <p align="center">
   <img src="https://www.dealii.org/images/steps/developer/step-46.9.2.3d.png" alt="">
-</p>
+</p>   
 
-In addition to the lack of a good solver, the mesh is a bit
-unbalanced: mesh refinement heavily favors the fluid subdomain (in 2d,
-it was the other way around, prompting us to weigh the fluid error
-indicators higher). Clearly, some tweaking of the relative importance
-of error indicators in the two subdomains is important if one wanted
-to go on doing more 3d computations.
+除了缺乏一个好的求解器外，网格也有点不平衡：网格细化严重偏向于流体子域（在2D中，情况正好相反，促使我们对流体误差指标的权重更高）。显然，如果想继续做更多的三维计算，对两个子域中误差指标的相对重要性进行一些调整是很重要的。
 
 
-<a name="extensions"></a>
-<a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
+<a name="extensions"></a> <a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
 
 
 <a name="Linearsolversandpreconditioners"></a><h4>Linear solvers and preconditioners</h4>
 
 
-An obvious place to improve the program would be to use a more
-sophisticated solver &mdash; in particular one that scales well and
-will also work for realistic 3d problems. This shouldn't actually be
-too hard to achieve here, because of the one-way coupling from fluid
-into solid. To this end, assume we had re-ordered degrees of freedom
-in such a way that we first have all velocity and pressure degrees of
-freedom, and then all displacements (this is easily possible using
-DoFRenumbering::component_wise). Then the system matrix could be split
-into the following block form:
-@f[
+改进程序的一个明显的地方是使用一个更复杂的求解器&mdash；特别是一个能很好地扩展并能解决现实的三维问题的求解器。这在这里其实不难实现，因为从流体到固体是单向耦合的。为此，假设我们对自由度进行了重新排序，首先是所有的速度和压力自由度，然后是所有的位移（这很容易用 DoFRenumbering::component_wise). 实现），那么系统矩阵可以分成以下的块状形式。@f[
   A_\text{global}
   =
   \begin{pmatrix}
     A_{\text{fluid}} & 0 \\
     B & A_{\text{solid}}
   \end{pmatrix}
-@f]
-where $A_{\text{fluid}}$ is the Stokes matrix for velocity and pressure (it
-could be further subdivided into a $2\times 2$ matrix as in step-22, though
-this is immaterial for the current purpose),
-$A_{\text{solid}}$ results from the elasticity equations for the
-displacements, and $B$ is the matrix that comes from the interface
-conditions. Now notice that the matrix
-@f[
+@f] 其中 $A_{\text{fluid}}$ 是速度和压力的斯托克斯矩阵（它可以进一步细分为 step-22 中的 $2\times 2$ 矩阵，尽管这对目前的目的并不重要）， $A_{\text{solid}}$ 是位移的弹性方程的结果，而 $B$ 是来自界面条件的矩阵。现在注意到，矩阵@f[
   A_\text{global}^{-1}
   =
   \begin{pmatrix}
     A_{\text{fluid}}^{-1} & 0 \\
+
+
     -A_\text{solid}^{-1} B
       A_\text{fluid}^{-1} & A_{\text{solid}}^{-1}
   \end{pmatrix}
-@f]
-is the inverse of $A_\text{global}$. Applying this matrix requires
-only one solve with $A_\text{fluid}$ and $A_\text{solid}$ each since
-@f[
+@f]是 $A_\text{global}$ 的逆。应用这个矩阵只需要用 $A_\text{fluid}$ 和 $A_\text{solid}$ 各解一次，因为@f[
   \begin{pmatrix}
     p_x \\ p_y
   \end{pmatrix}
   =
   \begin{pmatrix}
     A_{\text{fluid}}^{-1} & 0 \\
+
+
     -A_\text{solid}^{-1} B
       A_\text{fluid}^{-1} & A_{\text{solid}}^{-1}
   \end{pmatrix}
   \begin{pmatrix}
     x \\ y
   \end{pmatrix}
-@f]
-can be computed as $p_x = A_{\text{fluid}}^{-1} x$ followed by
-$p_y = A_{\text{solid}}^{-1} (y-Bp_x)$.
+@f]可以被计算为 $p_x = A_{\text{fluid}}^{-1} x$ ，然后是 $p_y = A_{\text{solid}}^{-1} (y-Bp_x)$  。
 
-One can therefore expect that
-@f[
+因此，我们可以预期，如果 $\widetilde{A_{\text{fluid}}^{-1}}
+\approx A_{\text{fluid}}^{-1}, \widetilde{A_{\text{solid}}^{-1}}
+\approx A_{\text{solid}}^{-1}$ ，@f[
   \widetilde{A_\text{global}^{-1}}
   =
   \begin{pmatrix}
     \widetilde{A_{\text{fluid}}^{-1}} & 0 \\
+
+
     -\widetilde{A_\text{solid}^{-1}} B
       \widetilde{A_\text{fluid}^{-1}} & \widetilde{A_{\text{solid}}^{-1}}
   \end{pmatrix}
-@f]
-would be a good preconditioner if $\widetilde{A_{\text{fluid}}^{-1}}
-\approx A_{\text{fluid}}^{-1}, \widetilde{A_{\text{solid}}^{-1}}
-\approx A_{\text{solid}}^{-1}$.
+@f]将是一个好的预处理程序。
 
-That means, we only need good preconditioners for Stokes and the
-elasticity equations separately. These are well known: for
-Stokes, we can use the preconditioner discussed in the results section
-of step-22; for elasticity, a good preconditioner would be a single
-V-cycle of a geometric or algebraic multigrid. There are more open
-questions, however: For an "optimized" solver block-triangular
-preconditioner built from two sub-preconditioners, one point that
-often comes up is that, when choosing parameters for the
-sub-preconditioners, values that work well when solving the two
-problems separately may not be optimal when combined into a
-multiphysics preconditioner.  In particular, when solving just a solid
-or fluid mechanics problem separately, the balancing act between the
-number of iterations to convergence and the cost of applying the
-preconditioner on a per iteration basis may lead one to choose an
-expensive preconditioner for the Stokes problem and a cheap
-preconditioner for the elasticity problem (or vice versa).  When
-combined, however, there is the additional constraint that you want
-the two sub-preconditioners to converge at roughly the same rate, or
-else the cheap one may drive up the global number of iterations while
-the expensive one drives up the cost-per-iteration. For example, while a single AMG
-V-cycle is a good approach for elasticity by itself, when combined
-into a multiphysics problem there may be an incentive to using a full
-W-cycle or multiple cycles to help drive down the total solve time.
+这意味着，我们只需要为斯托克斯和弹性方程分别提供良好的预处理。这些都是众所周知的：对于斯托克斯，我们可以使用 step-22 的结果部分所讨论的预处理器；对于弹性，一个好的预处理器将是一个几何或代数多重网格的单一V形周期。然而，还有更多的问题有待解决。对于由两个子调节器构建的 "优化 "求解器块-三角调节器，经常出现的一点是，在为子调节器选择参数时，单独解决两个问题时效果好的值，在组合成多物理学调节器时可能不是最佳值。 特别是，当单独解决固体或流体力学问题时，在收敛所需的迭代次数和每次迭代应用预调节器的成本之间进行平衡，可能导致人们为斯托克斯问题选择昂贵的预调节器，为弹性问题选择便宜的预调节器（或者反之）。 然而，当结合在一起时，还有一个额外的约束，即你希望两个子预处理程序以大致相同的速度收敛，否则，便宜的预处理程序可能会增加全局的迭代次数，而昂贵的预处理程序则会增加每迭代的成本。例如，虽然单一的AMG V-循环本身是一个很好的弹性方法，但当结合到一个多物理问题时，可能会有动力使用一个完整的W-循环或多个循环来帮助降低总求解时间。
 
 
-<a name="Refinementindicators"></a><h4>Refinement indicators</h4>
+<a name="Refinementindicators"></a><h4>Refinement indicators</h4> 
 
 
-As mentioned in the introduction, the refinement indicator we use for this
-program is rather ad hoc. A better one would understand that the jump in the
-gradient of the solution across the interface is not indicative of the error
-but to be expected and ignore the interface when integrating the jump
-terms. Nevertheless, this is not what the KellyErrorEstimator class
-does. Another, bigger question, is whether this kind of estimator is a good
-strategy in the first place: for example, if we want to have maximal accuracy
-in one particular aspect of the displacement (e.g. the displacement at the top
-right corner of the solid), then is it appropriate to scale the error
-indicators for fluid and solid to the same magnitude? Maybe it is necessary to
-solve the fluid problem with more accuracy than the solid because the fluid
-solution directly affects the solids solution? Maybe the other way around?
+正如介绍中提到的，我们在这个程序中使用的细化指标是相当临时的。一个更好的会明白，解的梯度在界面上的跳跃并不表示错误，而是可以预期的，并且在积分跳跃项的时候忽略界面。然而，这并不是KellyErrorEstimator类所做的。另一个更大的问题是，这种估计器首先是否是一个好的策略：例如，如果我们想在位移的某个特定方面（例如实体右上角的位移）有最大的准确性，那么将流体和实体的误差指标放大到相同的程度是否合适？也许有必要用比固体更高的精度来解决流体问题，因为流体的解决方案直接影响到固体的解决方案？也许恰恰相反？
 
-Consequently, an obvious possibility for improving the program would be to
-implement a better refinement criterion. There is some literature on this
-topic; one of a variety of possible starting points would be the paper by
-Thomas Wick on "Adaptive finite elements for monolithic fluid-structure
-interaction on a prolongated domain: Applied to an heart valve simulation",
-Proceedings of the Computer Methods in Mechanics Conference 2011 (CMM-2011),
-9-12 May 2011, Warszaw, Poland.
+因此，改进程序的一个明显的可能性是实施一个更好的细化标准。关于这个问题有一些文献；Thomas Wick的论文 "Adaptive finite elements for monolithic fluid-structure interaction on a prolongated domain "是各种可能的起点之一。应用于心脏瓣膜模拟"，2011年机械学计算机方法会议论文集（CMM-2011），2011年5月9-12日，波兰华沙。
 
 
 <a name="Verification"></a><h4>Verification</h4>
 
 
-The results above are purely qualitative as there is no evidence that our
-scheme in fact converges. An obvious thing to do would therefore be to add
-some quantitative measures to check that the scheme at least converges to
-<i>something</i>. For example, we could output for each refinement cycle the
-deflection of the top right corner of the part of the solid that protrudes
-into the fluid subdomain. Or we could compute the net force vector or torque
-the fluid exerts on the solid.
+上面的结果纯粹是定性的，因为没有证据表明我们的方案实际上是收敛的。因此，一个显而易见的事情是增加一些定量的措施来检查该方案至少收敛到<i>something</i>。例如，我们可以为每个细化周期输出实体的右上角突出到流体子域的部分的偏移。或者我们可以计算出流体对实体施加的净力向量或扭矩。
 
 
-<a name="Bettermodels"></a><h4>Better models</h4>
+<a name="Bettermodels"></a><h4>Better models</h4> 
 
 
-In reality, most fluid structure interaction problems are so that the movement
-of the solid does affect the flow of the fluid. For example, the forces of the
-air around an air foil cause it to flex and to change its shape. Likewise, a
-flag flaps in the wind, completely changing its shape.
+在现实中，大多数流体结构的相互作用问题是这样的，即固体的运动确实影响到流体的流动。例如，空气在气箔周围的作用力导致它弯曲并改变其形状。同样地，一面旗子在风中飘动，完全改变了它的形状。
 
-Such problems where the coupling goes both ways are typically handled in an
-Arbitrary Lagrangian Eulerian (ALE) framework, in which the displacement of
-the solid is extended into the fluid domain in some smooth way, rather than by
-zero as we do here. The extended displacement field is then used to deform the
-mesh on which we compute the fluid flow. Furthermore, the boundary conditions
-for the fluid on the interface are no longer that the velocity is zero;
-rather, in a time dependent program, the fluid velocity must be equal to the
-time derivative of the displacement along the interface.
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-46.cc"
-*/
+这种双向耦合的问题通常在任意拉格朗日欧拉（ALE）框架中处理，其中固体的位移以某种平滑的方式扩展到流体领域，而不是像我们在这里做的那样以零为单位。然后，扩展的位移场被用来对我们计算流体流动的网格进行变形。此外，界面上流体的边界条件不再是速度为零；相反，在一个时间相关的程序中，流体速度必须等于沿界面的位移的时间导数。<a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-46.cc"   
+
+  */  

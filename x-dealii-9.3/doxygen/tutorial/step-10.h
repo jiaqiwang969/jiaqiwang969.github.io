@@ -1,696 +1,641 @@
-/**
-@page step_10 The step-10 tutorial program
-This tutorial depends on step-7.
+  /**   @page step_10 The step-10 tutorial program  。 
+
+本教程取决于  step-7  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+@endhtmlonly 
+
+<a name="Intro"></a> <a name="Introduction"></a><h1>Introduction</h1>
 
 
 
-This is a rather short example which only shows some aspects of using
-higher order mappings. By <em>mapping</em> we mean the transformation
-between the unit cell (i.e. the unit line, square, or cube) to the
-cells in real space. In all the previous examples, we have implicitly
-used linear or d-linear mappings; you will not have noticed this at
-all, since this is what happens if you do not do anything
-special. However, if your domain has curved boundaries, there are
-cases where the piecewise linear approximation of the boundary
-(i.e. by straight line segments) is not sufficient, and you want that
-your computational domain is an approximation to the real domain using
-curved boundaries as well. If the boundary approximation uses
-piecewise quadratic parabolas to approximate the true boundary, then
-we say that this is a quadratic or $Q_2$ approximation. If we
-use piecewise graphs of cubic polynomials, then this is a $Q_3$
-approximation, and so on.
+
+这是一个相当短的例子，只显示了使用高阶映射的一些方面。通过 <em> 映射 </em> ，我们指的是单元格（即单位线、正方形或立方体）与现实空间中的单元格之间的转换。在前面所有的例子中，我们都隐含地使用了线性或d-线性映射；你根本不会注意到这一点，因为如果你不做任何特别的事情，这就是发生的情况。然而，如果你的域有弯曲的边界，在有些情况下，边界的片状线性逼近（即通过直线段）是不够的，你希望你的计算域也是一个使用弯曲边界的真实域的逼近。如果边界近似使用分片的二次抛物线来近似真实边界，那么我们说这是二次或 $Q_2$ 的近似。如果我们使用成片的立体多项式图形，那么这就是 $Q_3$ 近似，以此类推。
 
 
 
-For some differential equations, it is known that piecewise linear
-approximations of the boundary, i.e. $Q_1$ mappings, are not
-sufficient if the boundary of the exact domain is curved. Examples are the
-biharmonic equation using $C^1$ elements, or the Euler
-equations of gas dynamics on domains with curved reflective boundaries. In these cases,
-it is necessary to compute the integrals using a higher order
-mapping. If we do not use such a higher
-order mapping, the order of approximation of the boundary dominates
-the order of convergence of the entire numerical scheme, irrespective
-of the order of convergence of the discretization in the interior of
-the domain.
+
+对于某些微分方程，已知如果精确域的边界是弯曲的，那么边界的分片线性近似，即 $Q_1$ 映射，是不够的。例如，使用 $C^1$ 元素的偏谐方程，或具有弯曲反射边界的域上的气体动力学的欧拉方程。在这些情况下，有必要使用高阶映射来计算积分。如果我们不使用这样的高阶映射，边界的逼近顺序将主导整个数值方案的收敛顺序，而不考虑域的内部离散化的收敛顺序。
 
 
 
-Rather than demonstrating the use of higher order mappings with one of
-these more complicated examples, we do only a brief computation:
-calculating the value of $\pi=3.141592653589793238462643\ldots$ by two
-different methods.
+
+我们没有用这些更复杂的例子来证明高阶映射的使用，而是只做一个简单的计算：用两种不同的方法计算 $\pi=3.141592653589793238462643\ldots$ 的值。
 
 
 
-The first method uses a triangulated approximation of the circle with unit
-radius and integrates a unit magnitude constant function ($f = 1$) over it. Of
-course, if the domain were the exact unit circle, then the area would be $\pi$,
-but since we only use an approximation by piecewise polynomial segments, the
-value of the area we integrate over is not exactly $\pi$. However, it is known
-that as we refine the triangulation, a $Q_p$ mapping approximates the boundary
-with an order $h^{p+1}$, where $h$ is the mesh size. We will check the values
-of the computed area of the circle and their convergence towards $\pi$ under
-mesh refinement for different mappings. We will also find a convergence
-behavior that is surprising at first, but has a good explanation.
+
+第一种方法使用单位半径的圆的三角形近似，并在其上积分一个单位幅度的常数函数（ $f = 1$ ）。当然，如果领域是精确的单位圆，那么面积将是 $\pi$ ，但由于我们只使用分片多项式段的近似，我们积分的面积值不完全是 $\pi$  。然而，众所周知，当我们细化三角形时， $Q_p$ 映射以 $h^{p+1}$ 的阶数逼近边界，其中 $h$ 是网格大小。我们将检查计算的圆的面积值和它们在不同映射的网格细化下向 $\pi$ 收敛的情况。我们还将发现一种收敛行为，一开始令人惊讶，但有很好的解释。
 
 
 
-The second method works similarly, but this time does not use the area
-of the triangulated unit circle, but rather its perimeter. $\pi$ is then
-approximated by half of the perimeter, as we choose the radius equal to one.
 
-
-@note This tutorial shows in essence how to choose a particular
-mapping for integrals, by attaching a particular geometry to the
-triangulation (as had already been done in step-1, for example) and
-then passing a mapping argument to the FEValues class that is used for
-all integrals in deal.II. The geometry we choose is a circle, for
-which deal.II already has a class (SphericalManifold) that can be
-used. If you want to define your own geometry, for example because it
-is complicated and cannot be described by the classes already
-available in deal.II, you will want to read through step-53.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * The first of the following include files are probably well-known by now and
- * need no further explanation.
- * 
- * @code
- * #include <deal.II/base/quadrature_lib.h>
- * #include <deal.II/base/convergence_table.h>
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/manifold_lib.h>
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_out.h>
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/fe/fe_values.h>
- * 
- * @endcode
- * 
- * This include file is new. Even if we are not solving a PDE in this tutorial,
- * we want to use a dummy finite element with zero degrees of freedoms provided
- * by the FE_Nothing class.
- * 
- * @code
- * #include <deal.II/fe/fe_nothing.h>
- * 
- * @endcode
- * 
- * The following header file is also new: in it, we declare the MappingQ class
- * which we will use for polynomial mappings of arbitrary order:
- * 
- * @code
- * #include <deal.II/fe/mapping_q.h>
- * 
- * @endcode
- * 
- * And this again is C++:
- * 
- * @code
- * #include <iostream>
- * #include <fstream>
- * #include <cmath>
- * 
- * @endcode
- * 
- * The last step is as in previous programs:
- * 
- * @code
- * namespace Step10
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * Now, as we want to compute the value of $\pi$, we have to compare to
- * something. These are the first few digits of $\pi$, which we define
- * beforehand for later use. Since we would like to compute the difference
- * between two numbers which are quite accurate, with the accuracy of the
- * computed approximation to $\pi$ being in the range of the number of
- * digits which a double variable can hold, we rather declare the reference
- * value as a <code>long double</code> and give it a number of extra digits:
- * 
- * @code
- *   const long double pi = 3.141592653589793238462643L;
- * 
- * 
- * 
- * @endcode
- * 
- * Then, the first task will be to generate some output. Since this program
- * is so small, we do not employ object oriented techniques in it and do not
- * declare classes (although, of course, we use the object oriented features
- * of the library). Rather, we just pack the functionality into separate
- * functions. We make these functions templates on the number of space
- * dimensions to conform to usual practice when using deal.II, although we
- * will only use them for two space dimensions and throw an exception when
- * attempted to use for any other spatial dimension.
- *   
-
- * 
- * The first of these functions just generates a triangulation of a circle
- * (hyperball) and outputs the $Q_p$ mapping of its cells for different values
- * of <code>p</code>. Then, we refine the grid once and do so again.
- * 
- * @code
- *   template <int dim>
- *   void gnuplot_output()
- *   {
- *     std::cout << "Output of grids into gnuplot files:" << std::endl
- *               << "===================================" << std::endl;
- * 
- * @endcode
- * 
- * So first generate a coarse triangulation of the circle and associate a
- * suitable boundary description to it. By default,
- * GridGenerator::hyper_ball attaches a SphericalManifold to the boundary
- * (and uses FlatManifold for the interior) so we simply call that
- * function and move on:
- * 
- * @code
- *     Triangulation<dim> triangulation;
- *     GridGenerator::hyper_ball(triangulation);
- * 
- * @endcode
- * 
- * Then alternate between generating output on the current mesh
- * for $Q_1$, $Q_2$, and $Q_3$ mappings, and (at the end of the
- * loop body) refining the mesh once globally.
- * 
- * @code
- *     for (unsigned int refinement = 0; refinement < 2; ++refinement)
- *       {
- *         std::cout << "Refinement level: " << refinement << std::endl;
- * 
- *         std::string filename_base = "ball_" + std::to_string(refinement);
- * 
- *         for (unsigned int degree = 1; degree < 4; ++degree)
- *           {
- *             std::cout << "Degree = " << degree << std::endl;
- * 
- * @endcode
- * 
- * For this, first set up an object describing the mapping. This
- * is done using the MappingQ class, which takes as
- * argument to the constructor the polynomial degree which it
- * shall use.
- * 
- * @code
- *             const MappingQ<dim> mapping(degree);
- * @endcode
- * 
- * As a side note, for a piecewise linear mapping, you
- * could give a value of <code>1</code> to the constructor
- * of MappingQ, but there is also a class MappingQ1 that
- * achieves the same effect. Historically, it did a lot of
- * things in a simpler way than MappingQ but is today just
- * a wrapper around the latter. It is, however, still the
- * class that is used implicitly in many places of the
- * library if you do not specify another mapping
- * explicitly.
- * 
-
- * 
- * 
-
- * 
- * In order to actually write out the present grid with this
- * mapping, we set up an object which we will use for output. We
- * will generate Gnuplot output, which consists of a set of lines
- * describing the mapped triangulation. By default, only one line
- * is drawn for each face of the triangulation, but since we want
- * to explicitly see the effect of the mapping, we want to have
- * the faces in more detail. This can be done by passing the
- * output object a structure which contains some flags. In the
- * present case, since Gnuplot can only draw straight lines, we
- * output a number of additional points on the faces so that each
- * face is drawn by 30 small lines instead of only one. This is
- * sufficient to give us the impression of seeing a curved line,
- * rather than a set of straight lines.
- * 
- * @code
- *             GridOut               grid_out;
- *             GridOutFlags::Gnuplot gnuplot_flags(false, 60);
- *             grid_out.set_flags(gnuplot_flags);
- * 
- * @endcode
- * 
- * Finally, generate a filename and a file for output:
- * 
- * @code
- *             std::string filename =
- *               filename_base + "_mapping_q_" + std::to_string(degree) + ".dat";
- *             std::ofstream gnuplot_file(filename);
- * 
- * @endcode
- * 
- * Then write out the triangulation to this file. The last
- * argument of the function is a pointer to a mapping object. This
- * argument has a default value, and if no value is given a simple
- * MappingQ1 object is taken, which we briefly
- * described above. This would then result in a piecewise linear
- * approximation of the true boundary in the output.
- * 
- * @code
- *             grid_out.write_gnuplot(triangulation, gnuplot_file, &mapping);
- *           }
- *         std::cout << std::endl;
- * 
- * @endcode
- * 
- * At the end of the loop, refine the mesh globally.
- * 
- * @code
- *         triangulation.refine_global();
- *       }
- *   }
- * 
- * @endcode
- * 
- * Now we proceed with the main part of the code, the approximation of
- * $\pi$. The area of a circle is of course given by $\pi r^2$, so having a
- * circle of radius 1, the area represents just the number that is searched
- * for. The numerical computation of the area is performed by integrating
- * the constant function of value 1 over the whole computational domain,
- * i.e. by computing the areas $\int_K 1 dx=\int_{\hat K} 1
- * \ \textrm{det}\ J(\hat x) d\hat x \approx \sum_i \textrm{det}
- * \ J(\hat x_i)w(\hat x_i)$,
- * where the sum extends over all quadrature points on all active cells in
- * the triangulation, with $w(x_i)$ being the weight of quadrature point
- * $x_i$. The integrals on each cell are approximated by numerical
- * quadrature, hence the only additional ingredient we need is to set up a
- * FEValues object that provides the corresponding `JxW` values of each
- * cell. (Note that `JxW` is meant to abbreviate <i>Jacobian determinant
- * times weight</i>; since in numerical quadrature the two factors always
- * occur at the same places, we only offer the combined quantity, rather
- * than two separate ones.) We note that here we won't use the FEValues
- * object in its original purpose, i.e. for the computation of values of
- * basis functions of a specific finite element at certain quadrature
- * points. Rather, we use it only to gain the `JxW` at the quadrature
- * points, irrespective of the (dummy) finite element we will give to the
- * constructor of the FEValues object. The actual finite element given to
- * the FEValues object is not used at all, so we could give any.
- * 
- * @code
- *   template <int dim>
- *   void compute_pi_by_area()
- *   {
- *     std::cout << "Computation of Pi by the area:" << std::endl
- *               << "==============================" << std::endl;
- * 
- * @endcode
- * 
- * For the numerical quadrature on all cells we employ a quadrature rule
- * of sufficiently high degree. We choose QGauss that is of order 8 (4
- * points), to be sure that the errors due to numerical quadrature are of
- * higher order than the order (maximal 6) that will occur due to the
- * order of the approximation of the boundary, i.e. the order of the
- * mappings employed. Note that the integrand, the Jacobian determinant,
- * is not a polynomial function (rather, it is a rational one), so we do
- * not use Gauss quadrature in order to get the exact value of the
- * integral as done often in finite element computations, but could as
- * well have used any quadrature formula of like order instead.
- * 
- * @code
- *     const QGauss<dim> quadrature(4);
- * 
- * @endcode
- * 
- * Now start by looping over polynomial mapping degrees=1..4:
- * 
- * @code
- *     for (unsigned int degree = 1; degree < 5; ++degree)
- *       {
- *         std::cout << "Degree = " << degree << std::endl;
- * 
- * @endcode
- * 
- * First generate the triangulation, the boundary and the mapping
- * object as already seen.
- * 
- * @code
- *         Triangulation<dim> triangulation;
- *         GridGenerator::hyper_ball(triangulation);
- * 
- *         const MappingQ<dim> mapping(degree);
- * 
- * @endcode
- * 
- * We now create a finite element. Unlike the rest of the example
- * programs, we do not actually need to do any computations with shape
- * functions; we only need the `JxW` values from an FEValues
- * object. Hence we use the special finite element class FE_Nothing
- * which has exactly zero degrees of freedom per cell (as the name
- * implies, the local basis on each cell is the empty set). A more
- * typical usage of FE_Nothing is shown in step-46.
- * 
- * @code
- *         const FE_Nothing<dim> fe;
- * 
- * @endcode
- * 
- * Likewise, we need to create a DoFHandler object. We do not actually
- * use it, but it will provide us with `active_cell_iterators` that
- * are needed to reinitialize the FEValues object on each cell of the
- * triangulation.
- * 
- * @code
- *         DoFHandler<dim> dof_handler(triangulation);
- * 
- * @endcode
- * 
- * Now we set up the FEValues object, giving the Mapping, the dummy
- * finite element and the quadrature object to the constructor,
- * together with the update flags asking for the `JxW` values at the
- * quadrature points only. This tells the FEValues object that it
- * needs not compute other quantities upon calling the
- * <code>reinit</code> function, thus saving computation time.
- *         
-
- * 
- * The most important difference in the construction of the FEValues
- * object compared to previous example programs is that we pass a
- * mapping object as first argument, which is to be used in the
- * computation of the mapping from unit to real cell. In previous
- * examples, this argument was omitted, resulting in the implicit use
- * of an object of type MappingQ1.
- * 
- * @code
- *         FEValues<dim> fe_values(mapping, fe, quadrature, update_JxW_values);
- * 
- * @endcode
- * 
- * We employ an object of the ConvergenceTable class to store all
- * important data like the approximated values for $\pi$ and the error
- * with respect to the true value of $\pi$. We will also use functions
- * provided by the ConvergenceTable class to compute convergence rates
- * of the approximations to $\pi$.
- * 
- * @code
- *         ConvergenceTable table;
- * 
- * @endcode
- * 
- * Now we loop over several refinement steps of the triangulation.
- * 
- * @code
- *         for (unsigned int refinement = 0; refinement < 6;
- *              ++refinement, triangulation.refine_global(1))
- *           {
- * @endcode
- * 
- * In this loop we first add the number of active cells of the
- * current triangulation to the table. This function automatically
- * creates a table column with superscription `cells`, in case
- * this column was not created before.
- * 
- * @code
- *             table.add_value("cells", triangulation.n_active_cells());
- * 
- * @endcode
- * 
- * Then we distribute the degrees of freedom for the dummy finite
- * element. Strictly speaking we do not need this function call in
- * our special case but we call it to make the DoFHandler happy --
- * otherwise it would throw an assertion in the FEValues::reinit
- * function below.
- * 
- * @code
- *             dof_handler.distribute_dofs(fe);
- * 
- * @endcode
- * 
- * We define the variable area as `long double` like we did for
- * the `pi` variable before.
- * 
- * @code
- *             long double area = 0;
- * 
- * @endcode
- * 
- * Now we loop over all cells, reinitialize the FEValues object
- * for each cell, and add up all the `JxW` values for this cell to
- * `area`...
- * 
- * @code
- *             for (const auto &cell : dof_handler.active_cell_iterators())
- *               {
- *                 fe_values.reinit(cell);
- *                 for (unsigned int i = 0; i < fe_values.n_quadrature_points; ++i)
- *                   area += static_cast<long double>(fe_values.JxW(i));
- *               }
- * 
- * @endcode
- * 
- * ...and store the resulting area values and the errors in the
- * table. We need a static cast to double as there is no
- * add_value(string, long double) function implemented. Note that
- * this also concerns the second call as the <code>fabs</code>
- * function in the <code>std</code> namespace is overloaded on its
- * argument types, so there exists a version taking and returning
- * a <code>long double</code>, in contrast to the global namespace
- * where only one such function is declared (which takes and
- * returns a double).
- * 
- * @code
- *             table.add_value("eval.pi", static_cast<double>(area));
- *             table.add_value("error", static_cast<double>(std::fabs(area - pi)));
- *           }
- * 
- * @endcode
- * 
- * We want to compute the convergence rates of the `error`
- * column. Therefore we need to omit the other columns from the
- * convergence rate evaluation before calling
- * `evaluate_all_convergence_rates`
- * 
- * @code
- *         table.omit_column_from_convergence_rate_evaluation("cells");
- *         table.omit_column_from_convergence_rate_evaluation("eval.pi");
- *         table.evaluate_all_convergence_rates(
- *           ConvergenceTable::reduction_rate_log2);
- * 
- * @endcode
- * 
- * Finally we set the precision and scientific mode for output of some
- * of the quantities...
- * 
- * @code
- *         table.set_precision("eval.pi", 16);
- *         table.set_scientific("error", true);
- * 
- * @endcode
- * 
- * ...and write the whole table to std::cout.
- * 
- * @code
- *         table.write_text(std::cout);
- * 
- *         std::cout << std::endl;
- *       }
- *   }
- * 
- * 
- * @endcode
- * 
- * The following, second function also computes an approximation of $\pi$
- * but this time via the perimeter $2\pi r$ of the domain instead of the
- * area. This function is only a variation of the previous function. So we
- * will mainly give documentation for the differences.
- * 
- * @code
- *   template <int dim>
- *   void compute_pi_by_perimeter()
- *   {
- *     std::cout << "Computation of Pi by the perimeter:" << std::endl
- *               << "===================================" << std::endl;
- * 
- * @endcode
- * 
- * We take the same order of quadrature but this time a `dim-1`
- * dimensional quadrature as we will integrate over (boundary) lines
- * rather than over cells.
- * 
- * @code
- *     const QGauss<dim - 1> quadrature(4);
- * 
- * @endcode
- * 
- * We loop over all degrees, create the triangulation, the boundary, the
- * mapping, the dummy finite element and the DoFHandler object as seen
- * before.
- * 
- * @code
- *     for (unsigned int degree = 1; degree < 5; ++degree)
- *       {
- *         std::cout << "Degree = " << degree << std::endl;
- *         Triangulation<dim> triangulation;
- *         GridGenerator::hyper_ball(triangulation);
- * 
- *         const MappingQ<dim>   mapping(degree);
- *         const FE_Nothing<dim> fe;
- * 
- *         DoFHandler<dim> dof_handler(triangulation);
- * 
- * @endcode
- * 
- * Then we create a FEFaceValues object instead of a FEValues object
- * as in the previous function. Again, we pass a mapping as first
- * argument.
- * 
- * @code
- *         FEFaceValues<dim> fe_face_values(mapping,
- *                                          fe,
- *                                          quadrature,
- *                                          update_JxW_values);
- *         ConvergenceTable  table;
- * 
- *         for (unsigned int refinement = 0; refinement < 6;
- *              ++refinement, triangulation.refine_global(1))
- *           {
- *             table.add_value("cells", triangulation.n_active_cells());
- * 
- *             dof_handler.distribute_dofs(fe);
- * 
- * @endcode
- * 
- * Now we run over all cells and over all faces of each cell. Only
- * the contributions of the `JxW` values on boundary faces are
- * added to the long double variable `perimeter`.
- * 
- * @code
- *             long double perimeter = 0;
- *             for (const auto &cell : dof_handler.active_cell_iterators())
- *               for (const auto &face : cell->face_iterators())
- *                 if (face->at_boundary())
- *                   {
- * @endcode
- * 
- * We reinit the FEFaceValues object with the cell
- * iterator and the number of the face.
- * 
- * @code
- *                     fe_face_values.reinit(cell, face);
- *                     for (unsigned int i = 0;
- *                          i < fe_face_values.n_quadrature_points;
- *                          ++i)
- *                       perimeter +=
- *                         static_cast<long double>(fe_face_values.JxW(i));
- *                   }
- * @endcode
- * 
- * Then store the evaluated values in the table...
- * 
- * @code
- *             table.add_value("eval.pi", static_cast<double>(perimeter / 2.0L));
- *             table.add_value(
- *               "error", static_cast<double>(std::fabs(perimeter / 2.0L - pi)));
- *           }
- * 
- * @endcode
- * 
- * ...and end this function as we did in the previous one:
- * 
- * @code
- *         table.omit_column_from_convergence_rate_evaluation("cells");
- *         table.omit_column_from_convergence_rate_evaluation("eval.pi");
- *         table.evaluate_all_convergence_rates(
- *           ConvergenceTable::reduction_rate_log2);
- * 
- *         table.set_precision("eval.pi", 16);
- *         table.set_scientific("error", true);
- * 
- *         table.write_text(std::cout);
- * 
- *         std::cout << std::endl;
- *       }
- *   }
- * } // namespace Step10
- * 
- * 
- * @endcode
- * 
- * The following main function just calls the above functions in the order of
- * their appearance. Apart from this, it looks just like the main functions of
- * previous tutorial programs.
- * 
- * @code
- * int main()
- * {
- *   try
- *     {
- *       std::cout.precision(16);
- * 
- *       const unsigned int dim = 2;
- * 
- *       Step10::gnuplot_output<dim>();
- * 
- *       Step10::compute_pi_by_area<dim>();
- *       Step10::compute_pi_by_perimeter<dim>();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- * 
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
-<a name="Results"></a><h1>Results</h1>
+第二种方法的工作原理类似，但这次不使用三角形单位圆的面积，而是使用其周长。  $\pi$ 然后用周长的一半来近似，因为我们选择半径等于1。
 
 
 
-The program performs two tasks, the first being to generate a
-visualization of the mapped domain, the second to compute pi by the
-two methods described. Let us first take a look at the generated
-graphics. They are generated in Gnuplot format, and can be viewed with
-the commands
+
+  @note  本教程实质上展示了如何为积分选择一个特定的映射，通过将一个特定的几何体附加到三角形上（例如在 step-1 中已经做过），然后将一个映射参数传递给FEValues类，该类在deal.II中用于所有积分。我们选择的几何体是一个圆，对于这个圆，deal.II已经有一个类（SphericalManifold）可以使用了。如果你想定义你自己的几何体，例如，因为它很复杂，不能用deal.II中已有的类来描述，你会想阅读一下  step-53  。<a name="CommProg"></a> <h1> The commented program</h1>
+
+以下第一个include文件现在可能已经众所周知，不需要进一步解释。
+
+@code
+#include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/convergence_table.h>
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/manifold_lib.h>
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_out.h>
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/fe/fe_values.h>
+
+
+@endcode 
+
+
+
+这个包含文件是新的。即使我们在本教程中不求解PDE，我们也想使用FE_Nothing类提供的自由度为零的假有限元。
+
+@code
+#include <deal.II/fe/fe_nothing.h>
+
+
+@endcode 
+
+
+
+下面的头文件也是新的：在其中，我们声明了MappingQ类，我们将使用它来处理任意阶的多项式映射。
+
+@code
+#include <deal.II/fe/mapping_q.h>
+
+
+@endcode 
+
+
+
+而这又是C++的。
+
+@code
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
+
+@endcode 
+
+
+
+最后一步和以前的程序一样。
+
+@code
+namespace Step10
+{
+  using namespace dealii;
+
+
+@endcode 
+
+
+
+现在，由于我们要计算 $\pi$ 的值，我们必须与一些东西进行比较。这些是 $\pi$ 的前几个数字，我们事先定义好，以便以后使用。由于我们想计算两个相当精确的数字之间的差值，计算出的 $\pi$ 的近似值的精度在一个双变量可以容纳的数字的范围内，我们宁愿声明参考值为 <code>long double</code> ，并给它一个额外的数字。
+
+@code
+  const long double pi = 3.141592653589793238462643L;
+
+
+
+
+
+@endcode 
+
+
+
+然后，第一个任务将是生成一些输出。由于这个程序非常小，我们在其中没有采用面向对象的技术，也没有声明类（当然，我们使用了库的面向对象的功能）。相反，我们只是将功能打包成独立的函数。我们使这些函数成为空间维数的模板，以符合使用deal.II时的通常做法，尽管我们只对两个空间维数使用这些函数，当试图对任何其他空间维数使用时，会出现异常。   
+
+
+这些函数中的第一个只是生成一个圆的三角形（hyperball），并输出 $Q_p$ 的不同值的单元的映射。然后，我们细化一次网格，再做一次。
+
+@code
+  template <int dim>
+  void gnuplot_output()
+  {
+    std::cout << "Output of grids into gnuplot files:" << std::endl
+              << "===================================" << std::endl;
+
+
+@endcode 
+
+
+
+所以首先生成一个圆的粗略三角形，并将一个合适的边界描述关联到它。默认情况下， GridGenerator::hyper_ball 将SphericalManifold附加到边界上（内部则使用FlatManifold），所以我们只需调用该函数就可以继续。
+
+@code
+    Triangulation<dim> triangulation;
+    GridGenerator::hyper_ball(triangulation);
+
+
+@endcode 
+
+
+
+然后在当前网格上交替生成 $Q_1$ 、 $Q_2$ 和 $Q_3$ 映射的输出，以及（在循环体的末端）对网格进行一次全局细化。
+
+@code
+    for (unsigned int refinement = 0; refinement < 2; ++refinement)
+      {
+        std::cout << "Refinement level: " << refinement << std::endl;
+
+
+        std::string filename_base = "ball_" + std::to_string(refinement);
+
+
+        for (unsigned int degree = 1; degree < 4; ++degree)
+          {
+            std::cout << "Degree = " << degree << std::endl;
+
+
+@endcode 
+
+
+
+为此，首先设置一个描述映射的对象。这是用MappingQ类来完成的，它的构造函数的参数是它应该使用的多项式程度。
+
+@code
+            const MappingQ<dim> mapping(degree);
+@endcode 
+
+
+
+顺便提一下，对于一个片状线性映射，你可以给MappingQ的构造函数一个 <code>1</code> 的值，但也有一个MappingQ1类可以达到同样的效果。历史上，它以比MappingQ更简单的方式做了很多事情，但今天只是后者的一个包装。然而，如果你没有明确指定另一个映射，它仍然是库中许多地方隐含使用的类。
+
+
+
+
+
+
+
+
+为了真正用这个映射写出现在的网格，我们设置了一个对象，我们将用它来输出。我们将生成Gnuplot输出，它由一组描述映射的三角图的线组成。默认情况下，三角剖分的每个面只画一条线，但由于我们想明确地看到映射的效果，所以我们想更详细地了解这些面。这可以通过传递给输出对象一个包含一些标志的结构来实现。在目前的情况下，由于Gnuplot只能画直线，我们在面孔上输出了一些额外的点，这样每个面孔就由30条小线来画，而不是只有一条。这足以让我们看到一条弯曲的线，而不是一组直线的印象。
+
+@code
+            GridOut               grid_out;
+            GridOutFlags::Gnuplot gnuplot_flags(false, 60);
+            grid_out.set_flags(gnuplot_flags);
+
+
+@endcode 
+
+
+
+最后，生成一个文件名和一个用于输出的文件。
+
+@code
+            std::string filename =
+              filename_base + "_mapping_q_" + std::to_string(degree) + ".dat";
+            std::ofstream gnuplot_file(filename);
+
+
+@endcode 
+
+
+
+然后把三角图写到这个文件里。该函数的最后一个参数是一个指向映射对象的指针。这个参数有一个默认值，如果没有给出值，就会取一个简单的MappingQ1对象，我们在上面简单介绍了一下。这样就会在输出中产生一个对真实边界的片状线性近似。
+
+@code
+            grid_out.write_gnuplot(triangulation, gnuplot_file, &mapping);
+          }
+        std::cout << std::endl;
+
+
+@endcode 
+
+
+
+在循环的最后，对网格进行全局细化。
+
+@code
+        triangulation.refine_global();
+      }
+  }
+
+
+@endcode 
+
+
+
+现在我们进行代码的主要部分，即  $\pi$  的近似。圆的面积当然是由 $\pi r^2$ 给出的，所以有一个半径为1的圆，面积代表的只是搜索到的数字。面积的数值计算是通过在整个计算域中积分值为1的常数函数来进行的，即通过计算面积 $\int_K 1 dx=\int_{\hat K} 1
+\ \textrm{det}\ J(\hat x) d\hat x \approx \sum_i \textrm{det}
+\ J(\hat x_i)w(\hat x_i)$ ，其中总和扩展到三角形中所有活动单元上的所有正交点， $w(x_i)$ 是正交点的权重 $x_i$ 。每个单元上的积分都是通过数字正交来逼近的，因此我们唯一需要的额外成分是建立一个FEValues对象，提供每个单元的相应`JxW`值。注意`JxW`是指<i>Jacobian determinant
+times weight</i>的缩写；因为在数值正交中，两个因子总是出现在相同的地方，所以我们只提供合并的数量，而不是两个单独的数量）。我们注意到，在这里我们不会在其最初的目的中使用FEValues对象，即用于计算特定正交点上的特定有限元的基函数值。相反，我们只用它来获得正交点的 "JxW"，而不考虑我们将给FEValues对象的构造者的（假）有限元。给予FEValues对象的实际有限元根本不使用，所以我们可以给任何。
+
+@code
+  template <int dim>
+  void compute_pi_by_area()
+  {
+    std::cout << "Computation of Pi by the area:" << std::endl
+              << "==============================" << std::endl;
+
+
+@endcode 
+
+
+
+对于所有单元上的数字正交，我们采用了一个足够高的正交规则。我们选择8阶的QGauss（4点），以确保数字正交引起的误差比由于边界近似的阶数，即所采用的映射的阶数所引起的阶数（最大6）更高。请注意，积分，雅各布行列式，不是一个多项式函数（相反，它是一个有理函数），所以我们不使用高斯正交来获得积分的精确值，就像在有限元计算中经常做的那样，而是可以使用任何类似阶数的正交公式来代替。
+
+@code
+    const QGauss<dim> quadrature(4);
+
+
+@endcode 
+
+
+
+现在开始在多项式映射度=1...4的基础上进行循环。
+
+@code
+    for (unsigned int degree = 1; degree < 5; ++degree)
+      {
+        std::cout << "Degree = " << degree << std::endl;
+
+
+@endcode 
+
+
+
+首先生成三角形、边界和映射对象，正如已经看到的。
+
+@code
+        Triangulation<dim> triangulation;
+        GridGenerator::hyper_ball(triangulation);
+
+
+        const MappingQ<dim> mapping(degree);
+
+
+@endcode 
+
+
+
+我们现在创建一个有限元。与其他的例子程序不同，我们实际上不需要用形状函数做任何计算；我们只需要FEValues对象的`JxW`值。因此，我们使用特殊的有限元类FE_Nothing，它的每个单元的自由度正好为零（顾名思义，每个单元的局部基础为空集）。FE_Nothing的一个比较典型的用法见于  step-46  。
+
+@code
+        const FE_Nothing<dim> fe;
+
+
+@endcode 
+
+
+
+同样地，我们需要创建一个DoFHandler对象。我们实际上并没有使用它，但是它将为我们提供 "active_cell_iterators"，这是重新初始化三角形的每个单元上的FEValues对象所需要的。
+
+@code
+        DoFHandler<dim> dof_handler(triangulation);
+
+
+@endcode 
+
+
+
+现在我们设置FEValues对象，给构造函数提供Mapping、假有限元和正交对象，以及要求只在正交点提供`JxW`值的更新标志。这告诉FEValues对象在调用 <code>reinit</code> 函数时不需要计算其他数量，从而节省计算时间。         
+
+
+与以前的例子程序相比，构建FEValues对象的最重要的区别是，我们传递了一个映射对象作为第一个参数，它将用于计算从单元到实数单元的映射。在以前的例子中，这个参数被省略了，结果是隐含地使用了MappingQ1类型的对象。
+
+@code
+        FEValues<dim> fe_values(mapping, fe, quadrature, update_JxW_values);
+
+
+@endcode 
+
+
+
+我们使用一个ConvergenceTable类的对象来存储所有重要的数据，如 $\pi$ 的近似值和与 $\pi$ 的真值相比的误差。我们还将使用ConvergenceTable类提供的函数来计算 $\pi$ 的近似值的收敛率。
+
+@code
+        ConvergenceTable table;
+
+
+@endcode 
+
+
+
+现在，我们在三角形的几个细化步骤上进行循环。
+
+@code
+        for (unsigned int refinement = 0; refinement < 6;
+             ++refinement, triangulation.refine_global(1))
+          {
+@endcode 
+
+
+
+在这个循环中，我们首先将当前三角形的活动单元的数量添加到表格中。这个函数会自动创建一个上标为 "cells "的表格列，以防这个列之前没有被创建。
+
+@code
+            table.add_value("cells", triangulation.n_active_cells());
+
+
+@endcode 
+
+
+
+然后我们为虚拟有限元分配自由度。严格来说，在我们的特殊情况下，我们不需要这个函数调用，但我们调用它是为了让DoFHandler高兴--否则它将在下面的 FEValues::reinit 函数中抛出一个断言。
+
+@code
+            dof_handler.distribute_dofs(fe);
+
+
+@endcode 
+
+
+
+我们将变量面积定义为 "长双"，就像我们之前为 "pi "变量所做的那样。
+
+@code
+            long double area = 0;
+
+
+@endcode 
+
+
+
+现在我们循环所有单元，重新初始化每个单元的FEValues对象，并将该单元的所有`JxW`值加到`area`中...... 
+
+@code
+            for (const auto &cell : dof_handler.active_cell_iterators())
+              {
+                fe_values.reinit(cell);
+                for (unsigned int i = 0; i < fe_values.n_quadrature_points; ++i)
+                  area += static_cast<long double>(fe_values.JxW(i));
+              }
+
+
+@endcode 
+
+
+
+...并将得到的面积值和误差存储在表中。我们需要静态转换为双数，因为没有实现add_value(string, long double)函数。请注意，这也涉及到第二次调用，因为 <code>std</code> 命名空间中的 <code>fabs</code> 函数在其参数类型上是重载的，所以存在一个获取和返回 <code>long double</code> 的版本，而全局命名空间中只有一个这样的函数被声明（它获取和返回一个双数）。
+
+@code
+            table.add_value("eval.pi", static_cast<double>(area));
+            table.add_value("error", static_cast<double>(std::fabs(area - pi)));
+          }
+
+
+@endcode 
+
+
+
+我们想计算 "错误 "列的收敛率。因此我们需要在调用`evaluate_all_convergence_rates`之前，将其他列从收敛率评估中省略。
+
+@code
+        table.omit_column_from_convergence_rate_evaluation("cells");
+        table.omit_column_from_convergence_rate_evaluation("eval.pi");
+        table.evaluate_all_convergence_rates(
+          ConvergenceTable::reduction_rate_log2);
+
+
+@endcode 
+
+
+
+最后，我们为一些数量的输出设置精度和科学模式... 
+
+@code
+        table.set_precision("eval.pi", 16);
+        table.set_scientific("error", true);
+
+
+@endcode 
+
+
+
+...并将整个表格写到 std::cout. 。 
+
+@code
+        table.write_text(std::cout);
+
+
+        std::cout << std::endl;
+      }
+  }
+
+
+
+@endcode 
+
+
+
+下面，第二个函数也是计算 $\pi$ 的近似值，但这次是通过域的周长 $2\pi r$ 而不是面积。这个函数只是前一个函数的一个变化。因此，我们主要给出不同之处的文件。
+
+@code
+  template <int dim>
+  void compute_pi_by_perimeter()
+  {
+    std::cout << "Computation of Pi by the perimeter:" << std::endl
+              << "===================================" << std::endl;
+
+
+@endcode 
+
+
+
+我们采取同样的正交顺序，但这次是`dim-1`维正交，因为我们将对（边界）线而不是单元进行积分。
+
+@code
+    const QGauss<dim - 1> quadrature(4);
+
+
+@endcode 
+
+
+
+我们在所有度数上循环，创建三角形、边界、映射、假有限元和DoFHandler对象，如之前所见。
+
+@code
+    for (unsigned int degree = 1; degree < 5; ++degree)
+      {
+        std::cout << "Degree = " << degree << std::endl;
+        Triangulation<dim> triangulation;
+        GridGenerator::hyper_ball(triangulation);
+
+
+        const MappingQ<dim>   mapping(degree);
+        const FE_Nothing<dim> fe;
+
+
+        DoFHandler<dim> dof_handler(triangulation);
+
+
+@endcode 
+
+
+
+然后我们创建一个FEFaceValues对象，而不是像前一个函数中的FEValues对象。同样，我们传递一个映射作为第一个参数。
+
+@code
+        FEFaceValues<dim> fe_face_values(mapping,
+                                         fe,
+                                         quadrature,
+                                         update_JxW_values);
+        ConvergenceTable  table;
+
+
+        for (unsigned int refinement = 0; refinement < 6;
+             ++refinement, triangulation.refine_global(1))
+          {
+            table.add_value("cells", triangulation.n_active_cells());
+
+
+            dof_handler.distribute_dofs(fe);
+
+
+@endcode 
+
+
+
+现在我们对所有单元和每个单元的所有面进行运算。只有边界面上的 "JxW "值的贡献被添加到长双变量 "perimeter "中。
+
+@code
+            long double perimeter = 0;
+            for (const auto &cell : dof_handler.active_cell_iterators())
+              for (const auto &face : cell->face_iterators())
+                if (face->at_boundary())
+                  {
+@endcode 
+
+
+
+我们用单元格的迭代器和面的编号重新启动FEFaceValues对象。
+
+@code
+                    fe_face_values.reinit(cell, face);
+                    for (unsigned int i = 0;
+                         i < fe_face_values.n_quadrature_points;
+                         ++i)
+                      perimeter +=
+                        static_cast<long double>(fe_face_values.JxW(i));
+                  }
+@endcode 
+
+
+
+然后将评估的数值存储在表格中... 
+
+@code
+            table.add_value("eval.pi", static_cast<double>(perimeter / 2.0L));
+            table.add_value(
+              "error", static_cast<double>(std::fabs(perimeter / 2.0L - pi)));
+          }
+
+
+@endcode 
+
+
+
+...然后像我们在前一个函数中做的那样结束这个函数。
+
+@code
+        table.omit_column_from_convergence_rate_evaluation("cells");
+        table.omit_column_from_convergence_rate_evaluation("eval.pi");
+        table.evaluate_all_convergence_rates(
+          ConvergenceTable::reduction_rate_log2);
+
+
+        table.set_precision("eval.pi", 16);
+        table.set_scientific("error", true);
+
+
+        table.write_text(std::cout);
+
+
+        std::cout << std::endl;
+      }
+  }
+} // namespace Step10
+
+
+
+@endcode 
+
+
+
+下面的主函数只是按照上述函数的出现顺序调用它们。除此以外，它看起来就像以前的教程程序的主函数。
+
+@code
+int main()
+{
+  try
+    {
+      std::cout.precision(16);
+
+
+      const unsigned int dim = 2;
+
+
+      Step10::gnuplot_output<dim>();
+
+
+      Step10::compute_pi_by_area<dim>();
+      Step10::compute_pi_by_perimeter<dim>();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+
+
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
+<a name="Results"></a> <h1>Results</h1> 
+
+
+
+
+该程序执行两个任务，第一个是生成映射域的可视化，第二个是通过所述的两种方法计算π。让我们先看一下生成的图形。它们是以Gnuplot格式生成的，可以用以下命令查看 
+
 @code
 set style data lines
 set size ratio -1
@@ -698,22 +643,13 @@ unset key
 unset xtics
 unset ytics
 plot [-1:1][-1:1] "ball_0_mapping_q_1.dat" lw 4 lt rgb "black"
-@endcode
-or using one of the other filenames. The second line makes sure that
-the aspect ratio of the generated output is actually 1:1, i.e. a
-circle is drawn as a circle on your screen, rather than as an
-ellipse. The third line switches off the key in the graphic, as that
-will only print information (the filename) which is not that important
-right now. Similarly, the fourth and fifth disable tick marks. The plot
-is then generated with a specific line width ("lw", here set to 4)
-and line type ("lt", here chosen by saying that the line should be
-drawn using the RGB color "black").
+@endcode 
 
-The following table shows the triangulated computational domain for $Q_1$,
-$Q_2$, and $Q_3$ mappings, for the original coarse grid (left), and a once
-uniformly refined grid (right).
+或使用其他的文件名。第二行确保生成的输出的长宽比实际上是1:1，也就是说，一个圆在你的屏幕上被画成一个圆，而不是一个椭圆。第三行关闭了图形中的键，因为那只会打印信息（文件名），而这些信息现在并不那么重要。同样地，第四行和第五行关闭了刻度线。然后生成具有特定线宽（"lw"，这里设置为4）和线型（"lt"，这里选择的是线应该用RGB颜色 "黑色 "绘制）的图。
 
-<div class="twocolumn" style="width: 80%">
+下表显示了 $Q_1$ 、 $Q_2$ 和 $Q_3$ 映射的三角计算域，为原始粗网格（左）和一次均匀细化的网格（右）。
+
+  <div class="twocolumn" style="width: 80%">
   <div>
     <img src="https://www.dealii.org/images/steps/developer/step_10_ball_0_q1.svg"
          alt="Five-cell discretization of the disk."
@@ -748,15 +684,11 @@ uniformly refined grid (right).
          alt="20-cell discretization with cubic edges."
          width="400" height="400">
   </div>
-</div>
+</div>   
 
-These pictures show the obvious advantage of higher order mappings: they
-approximate the true boundary quite well also on rather coarse meshes. To
-demonstrate this a little further, here is part of the upper right quarter
-circle of the coarse meshes with $Q_2$ and $Q_3$ mappings, where the dashed
-red line marks the actual circle:
+这些图片显示了高阶映射的明显优势：它们在相当粗的网格上也能很好地接近真实边界。为了进一步证明这一点，这里是用 $Q_2$ 和 $Q_3$ 映射的粗网格的右上角四分之一圈的一部分，其中红色虚线标志着实际的圆。
 
-<div class="twocolumn" style="width: 80%">
+  <div class="twocolumn" style="width: 80%">
   <div>
     <img src="https://www.dealii.org/images/steps/developer/step_10_exact_vs_interpolate_q2.svg"
          alt="Close-up of quadratic discretization. The distance between the
@@ -769,23 +701,15 @@ red line marks the actual circle:
          cubic interpolant and the actual circle is very small."
          width="400" height="400">
   </div>
-</div>
+</div>   
 
-Obviously the quadratic mapping approximates the boundary quite well,
-while for the cubic mapping the difference between approximated domain
-and true one is hardly visible already for the coarse grid. You can
-also see that the mapping only changes something at the outer
-boundaries of the triangulation. In the interior, all lines are still
-represented by linear functions, resulting in additional computations
-only on cells at the boundary. Higher order mappings are therefore
-usually not noticeably slower than lower order ones, because the
-additional computations are only performed on a small subset of all
-cells.
+很明显，二次映射很好地逼近了边界，而对于三次映射来说，对于粗网格来说，近似域和真实域之间的差异已经几乎看不到了。你还可以看到，映射只在三角形的外部边界有一些变化。在内部，所有的线条仍然是由线性函数表示的，这就导致了只在边界的单元上进行额外的计算。因此，高阶映射通常不会比低阶映射明显地慢，因为额外的计算只在所有单元格的小子集上执行。
 
 
 
-The second purpose of the program was to compute the value of pi to
-good accuracy. This is the output of this part of the program:
+
+该程序的第二个目的是计算出准确的pi值。这是程序的这一部分的输出。
+
 @code
 Output of grids into gnuplot files:
 ===================================
@@ -794,10 +718,12 @@ Degree = 1
 Degree = 2
 Degree = 3
 
+
 Refinement level: 1
 Degree = 1
 Degree = 2
 Degree = 3
+
 
 Computation of Pi by the area:
 ==============================
@@ -810,6 +736,7 @@ cells      eval.pi            error
  1280 3.1365484905459380 5.0442e-03 2.00
  5120 3.1403311569547516 1.2615e-03 2.00
 
+
 Degree = 2
 cells      eval.pi            error
     5 3.1045694996615860 3.7023e-02    -
@@ -818,6 +745,7 @@ cells      eval.pi            error
   320 3.1415829366419006 9.7169e-06 4.00
  1280 3.1415920457576898 6.0783e-07 4.00
  5120 3.1415926155921117 3.7998e-08 4.00
+
 
 Degree = 3
 cells      eval.pi            error
@@ -828,6 +756,7 @@ cells      eval.pi            error
  1280 3.1415926535525927 3.7200e-11 6.00
  5120 3.1415926535892100 5.8302e-13 6.00
 
+
 Degree = 4
 cells      eval.pi            error
     5 3.1415871927401131 5.4608e-06    -
@@ -836,6 +765,7 @@ cells      eval.pi            error
   320 3.1415926535894498 3.4350e-13 7.99
  1280 3.1415926535897896 3.4671e-15 6.63
  5120 3.1415926535897909 2.4009e-15 0.53
+
 
 Computation of Pi by the perimeter:
 ===================================
@@ -848,6 +778,7 @@ cells      eval.pi            error
  1280 3.1403311569547525 1.2615e-03 2.00
  5120 3.1412772509327724 3.1540e-04 2.00
 
+
 Degree = 2
 cells      eval.pi            error
     5 3.1248930668550594 1.6700e-02    -
@@ -856,6 +787,7 @@ cells      eval.pi            error
   320 3.1415878042798613 4.8493e-06 3.99
  1280 3.1415923498174534 3.0377e-07 4.00
  5120 3.1415926345931995 1.8997e-08 4.00
+
 
 Degree = 3
 cells      eval.pi            error
@@ -866,6 +798,7 @@ cells      eval.pi            error
  1280 3.1415926535851355 4.6578e-12 6.00
  5120 3.1415926535897190 7.4216e-14 5.97
 
+
 Degree = 4
 cells      eval.pi            error
     5 3.1415921029432572 5.5065e-07     -
@@ -874,37 +807,18 @@ cells      eval.pi            error
   320 3.1415926535897576 3.5525e-14  7.94
  1280 3.1415926535897936 4.6729e-16  6.25
  5120 3.1415926535897918 1.4929e-15 -1.68
-@endcode
+@endcode 
 
 
 
-One of the immediate observations from the output is that in all cases the
-values converge quickly to the true value of
-$\pi=3.141592653589793238462643$. Note that for the $Q_4$ mapping, we are
-already in the regime of roundoff errors and the convergence rate levels off,
-which is already quite a lot. However, also note that for the $Q_1$ mapping,
-even on the finest grid the accuracy is significantly worse than on the coarse
-grid for a $Q_3$ mapping!
 
 
 
-The last column of the output shows the convergence order, in powers of the
-mesh width $h$. In the introduction, we had stated that the convergence order
-for a $Q_p$ mapping should be $h^{p+1}$. However, in the example shown, the
-order is rather $h^{2p}$! This at first surprising fact is explained by the
-properties of the $Q_p$ mapping. At order <i>p</i>, it uses support points
-that are based on the <i>p</i>+1 point Gauss-Lobatto quadrature rule that
-selects the support points in such a way that the quadrature rule converges at
-order 2<i>p</i>. Even though these points are here only used for interpolation
-of a <i>p</i>th order polynomial, we get a superconvergence effect when
-numerically evaluating the integral, resulting in the observed high order of
-convergence. (This effect is also discussed in detail in the following
-publication: A. Bonito, A. Demlow, and J. Owen: "A priori error
-estimates for finite element approximations to eigenvalues and
-eigenfunctions of the Laplace-Beltrami operator", submitted, 2018.)
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-10.cc"
-*/
+从输出中可以直接观察到，在所有情况下，这些值都能迅速收敛到真实值 $\pi=3.141592653589793238462643$ 。请注意，对于 $Q_4$ 的映射，我们已经进入了四舍五入误差的制度，收敛率趋于平缓，这已经是相当多的了。然而，也请注意，对于 $Q_1$ 映射，即使在最细的网格上，精度也明显比 $Q_3$ 映射的粗网格上要差得多! 
+
+
+
+
+输出的最后一列显示了收敛顺序，以网格宽度 $h$ 为单位。在介绍中，我们曾说过 $Q_p$ 映射的收敛顺序应该是 $h^{p+1}$  。然而，在所示的例子中，顺序是 $h^{2p}$  ! 这个起初令人惊讶的事实可以用 $Q_p$ 映射的特性来解释。在<i>p</i>阶，它使用的支持点是基于<i>p</i>+1点Gauss-Lobatto正交规则，该规则选择支持点的方式使正交规则在2<i>p</i>阶收敛。尽管这些点在这里只用于插值<i>p</i>阶多项式，但我们在数值评估积分时得到了超收敛效应，导致观察到的高阶收敛。这种效应在下面的出版物中也有详细讨论。A. Bonito, A. Demlow, and J. Owen: "对拉普拉斯-贝特拉米算子的特征值和特征函数的有限元近似的先验误差估计"，已提交，2018年）。) <a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-10.cc"   
+
+  */  

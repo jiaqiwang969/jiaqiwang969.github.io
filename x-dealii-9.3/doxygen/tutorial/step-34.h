@@ -1,188 +1,147 @@
-/**
-@page step_34 The step-34 tutorial program
-This tutorial depends on step-4.
+  /**   @page step_34 The step-34 tutorial program 。 
+
+本教程取决于  step-4  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Irrotationalflow"> Irrotational flow </a>
-        <li><a href="#Thenumericalapproximation">The numerical approximation</a>
-        <li><a href="#Collocationboundaryelementmethod"> Collocation boundary element method </a>
-        <li><a href="#Treatingthesingularintegrals"> Treating the singular integrals. </a>
-        <li><a href="#Implementation">Implementation</a>
-        <li><a href="#Testcase">Testcase</a>
+        <li><a href="#Irrotationalflow"> Irrotational flow </a><a href="#Irrotationalflow"> Irrotational flow </a>
+        <li><a href="#Thenumericalapproximation">The numerical approximation</a><a href="#Thenumericalapproximation">The numerical approximation</a>
+        <li><a href="#Collocationboundaryelementmethod"> Collocation boundary element method </a><a href="#Collocationboundaryelementmethod"> Collocation boundary element method </a>
+        <li><a href="#Treatingthesingularintegrals"> Treating the singular integrals. </a><a href="#Treatingthesingularintegrals"> Treating the singular integrals. </a>
+        <li><a href="#Implementation">Implementation</a><a href="#Implementation">Implementation</a>
+        <li><a href="#Testcase">Testcase</a><a href="#Testcase">Testcase</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#Singleanddoublelayeroperatorkernels">Single and double layer operator kernels</a>
-        <li><a href="#TheBEMProblemclass">The BEMProblem class</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#Singleanddoublelayeroperatorkernels">Single and double layer operator kernels</a><a href="#Singleanddoublelayeroperatorkernels">Single and double layer operator kernels</a>
+        <li><a href="#TheBEMProblemclass">The BEMProblem class</a><a href="#TheBEMProblemclass">The BEMProblem class</a>
       <ul>
-        <li><a href="#BEMProblemBEMProblemandBEMProblemread_parameters">BEMProblem::BEMProblem and BEMProblem::read_parameters</a>
-        <li><a href="#BEMProblemread_domain">BEMProblem::read_domain</a>
-        <li><a href="#BEMProblemrefine_and_resize">BEMProblem::refine_and_resize</a>
-        <li><a href="#BEMProblemassemble_system">BEMProblem::assemble_system</a>
-        <li><a href="#BEMProblemsolve_system">BEMProblem::solve_system</a>
-        <li><a href="#BEMProblemcompute_errors">BEMProblem::compute_errors</a>
-        <li><a href="#BEMProblemcompute_exterior_solution">BEMProblem::compute_exterior_solution</a>
-        <li><a href="#BEMProblemoutput_results">BEMProblem::output_results</a>
-        <li><a href="#BEMProblemrun">BEMProblem::run</a>
+        <li><a href="#BEMProblemBEMProblemandBEMProblemread_parameters">BEMProblem::BEMProblem and BEMProblem::read_parameters</a><a href="#BEMProblemBEMProblemandBEMProblemread_parameters">BEMProblem::BEMProblem and BEMProblem::read_parameters</a>
+        <li><a href="#BEMProblemread_domain">BEMProblem::read_domain</a><a href="#BEMProblemread_domain">BEMProblem::read_domain</a>
+        <li><a href="#BEMProblemrefine_and_resize">BEMProblem::refine_and_resize</a><a href="#BEMProblemrefine_and_resize">BEMProblem::refine_and_resize</a>
+        <li><a href="#BEMProblemassemble_system">BEMProblem::assemble_system</a><a href="#BEMProblemassemble_system">BEMProblem::assemble_system</a>
+        <li><a href="#BEMProblemsolve_system">BEMProblem::solve_system</a><a href="#BEMProblemsolve_system">BEMProblem::solve_system</a>
+        <li><a href="#BEMProblemcompute_errors">BEMProblem::compute_errors</a><a href="#BEMProblemcompute_errors">BEMProblem::compute_errors</a>
+        <li><a href="#BEMProblemcompute_exterior_solution">BEMProblem::compute_exterior_solution</a><a href="#BEMProblemcompute_exterior_solution">BEMProblem::compute_exterior_solution</a>
+        <li><a href="#BEMProblemoutput_results">BEMProblem::output_results</a><a href="#BEMProblemoutput_results">BEMProblem::output_results</a>
+        <li><a href="#BEMProblemrun">BEMProblem::run</a><a href="#BEMProblemrun">BEMProblem::run</a>
       </ul>
-        <li><a href="#Themainfunction">The main() function</a>
+        <li><a href="#Themainfunction">The main() function</a><a href="#Themainfunction">The main() function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<br>
+@endhtmlonly 
+
+  <br>   
 
 <i>This program was contributed by Luca Heltai (thanks to Michael
 Gratton for pointing out what the exact solution should have been in
-the three dimensional case).  </i>
+the three dimensional case).  </i> 
 
-@dealiiTutorialDOI{10.5281/zenodo.495473,https://zenodo.org/badge/DOI/10.5281/zenodo.495473.svg}
+  @dealiiTutorialDOI{10.5281/zenodo.495473,https://zenodo.org/badge/DOI/10.5281/zenodo.495473.svg}   
 
-<a name="Intro"></a>
+<a name="Intro"></a> 
 
-<a name="Introduction"></a><h1>Introduction</h1>
+<a name="Introduction"></a><h1>Introduction</h1> 
 
 
 <a name="Irrotationalflow"></a><h3> Irrotational flow </h3>
 
-The incompressible motion of an inviscid fluid past a body (for
-example air past an airplane wing, or air or water past a propeller) is
-usually modeled by the Euler equations of fluid dynamics:
+无粘性流体经过一个物体（例如空气经过飞机机翼，或空气或水经过螺旋桨）的不可压缩运动，通常用流体力学的欧拉方程来模拟。
 
 \f{align*}
   \frac{\partial }{\partial t}\mathbf{v} + (\mathbf{v}\cdot\nabla)\mathbf{v}
   &=
+
+
   -\frac{1}{\rho}\nabla p + \mathbf{g}
   \qquad &\text{in } \mathbb{R}^n \backslash \Omega
   \\
   \nabla \cdot \mathbf{v}&=0
   &\text{in } \mathbb{R}^n\backslash\Omega
-\f}
-where the fluid density $\rho$ and the acceleration $\mathbf{g}$ due
-to external forces are given and the velocity $\mathbf{v}$ and the
-pressure $p$ are the unknowns. Here $\Omega$ is a closed bounded
-region representing the body around which the fluid moves.
+\f}其中流体密度 $\rho$ 和由外力引起的加速度 $\mathbf{g}$ 已经给出，速度 $\mathbf{v}$ 和压力 $p$ 是未知数。这里 $\Omega$ 是一个封闭的有界区域，代表流体围绕其运动的体。
 
-The above equations can be derived from Navier-Stokes equations
-assuming that the effects due to viscosity are negligible compared to
-those due to the pressure gradient, inertial forces and the external
-forces. This is the opposite case of the Stokes equations discussed in
-step-22 which are the limit case of dominant viscosity,
-i.e. where the velocity is so small that inertia forces can be
-neglected. On the other hand, owing to the assumed incompressibility,
-the equations are not suited for very high speed gas flows where
-compressibility and the equation of state of the gas have to be taken
-into account, leading to the Euler equations of gas dynamics, a
-hyperbolic system.
+上述方程可以从纳维-斯托克斯方程推导出来，假设与压力梯度、惯性力和外力的影响相比，粘度引起的影响可以忽略不计。这与 step-22 中讨论的斯托克斯方程的情况相反，斯托克斯方程是主导粘度的极限情况，即速度非常小，惯性力可以被忽略。另一方面，由于假定的不可压缩性，该方程不适合于非常高速的气体流动，在这种情况下，必须考虑到压缩性和气体的状态方程，从而导致气体动力学的欧拉方程，这是一个双曲系统。
 
-For the purpose of this tutorial program, we will consider only stationary
-flow without external forces:
-\f{align*}
+为了本教程程序的目的，我们将只考虑没有外力的静止流动。\f{align*}
   (\mathbf{v}\cdot\nabla)\mathbf{v}
   &=
+
+
   -\frac{1}{\rho}\nabla p
   \qquad &\text{in } \mathbb{R}^n \backslash \Omega
   \\
   \nabla \cdot \mathbf{v}&=0
   &\text{in } \mathbb{R}^n\backslash\Omega
-\f}
+\f} 
 
 
-Uniqueness of the solution of the Euler equations is ensured by adding the
-boundary conditions
-\f[
+欧拉方程的解的唯一性是通过添加边界条件\f[
   \label{eq:boundary-conditions}
   \begin{aligned}
     \mathbf{n}\cdot\mathbf{v}& = 0 \qquad && \text{ on } \partial\Omega \\
     \mathbf{v}& = \mathbf{v}_\infty && \text{ when } |\mathbf{x}| \to \infty,
   \end{aligned}
-\f]
+\f]来保证的。
 
-which is to say that the body is at rest in our coordinate systems and
-is not permeable, and that the fluid has (constant) velocity
-$\mathbf{v}_\infty$ at infinity. An alternative viewpoint is that our
-coordinate system moves along with the body whereas the background
-fluid is at rest at infinity. Notice that we define the normal
-$\mathbf{n}$ as the <i>outer</i> normal to the domain $\Omega$, which
-is the opposite of the outer normal to the integration domain.
+也就是说，在我们的坐标系中，物体处于静止状态，不具有渗透性，并且流体在无限远处具有（恒定）速度 $\mathbf{v}_\infty$ 。另一种观点是，我们的坐标系随着身体移动，而背景流体在无限远处处于静止状态。注意，我们将法线 $\mathbf{n}$ 定义为域 $\Omega$ 的<i>outer</i>法线，它与积分域的外法线相反。
 
-For both stationary and non stationary flow, the solution process
-starts by solving for the velocity in the second equation and
-substituting in the first equation in order to find the pressure.
-The solution of the stationary Euler equations is typically performed
-in order to understand the behavior of the given (possibly complex)
-geometry when a prescribed motion is enforced on the system.
+对于静止和非静止的流动，求解过程从求解第二个方程中的速度开始，然后代入第一个方程，以求得压力。静止欧拉方程的求解通常是为了了解给定的（可能是复杂的）几何形状在系统上强制执行规定运动时的行为。
 
-The first step in this process is to change the frame of reference from a
-coordinate system moving along with the body to one in which the body moves
-through a fluid that is at rest at infinity. This can be expressed by
-introducing a new velocity $\mathbf{\tilde{v}}=\mathbf{v}-\mathbf{v}_\infty$ for
-which we find that the same equations hold (because $\nabla\cdot
-\mathbf{v}_\infty=0$) and we have boundary conditions
-\f[
+这个过程的第一步是将参照系从一个与身体一起运动的坐标系改变为一个身体在一个无限大的静止流体中运动的坐标系。这可以通过引入一个新的速度 $\mathbf{\tilde{v}}=\mathbf{v}-\mathbf{v}_\infty$ 来表示，对于这个速度，我们发现同样的方程是成立的（因为 $\nabla\cdot
+\mathbf{v}_\infty=0$ ），我们有边界条件\f[
   \label{eq:boundary-conditions-tilde}
   \begin{aligned}
     \mathbf{n}\cdot\mathbf{\tilde{v}}& = -\mathbf{n}\cdot\mathbf{v}_\infty \qquad && \text{ on } \partial\Omega \\
     \mathbf{\tilde{v}}& = 0 && \text{ when } |\mathbf{x}| \to \infty,
   \end{aligned}
-\f]
+\f] 
 
-If we assume that the fluid is irrotational, i.e., $\nabla \times
-\mathbf{v}=0$ in $\mathbb{R}^n\backslash\Omega$, we can represent the
-velocity, and consequently also the perturbation velocity, as the
-gradient of a scalar function:
-\f[
+如果我们假设流体是无旋转的，即 $\nabla \times
+\mathbf{v}=0$ 中的 $\mathbb{R}^n\backslash\Omega$ ，我们可以用标量函数的梯度来表示速度，从而也可以表示扰动速度。\f[
   \mathbf{\tilde{v}}=\nabla\phi,
-\f]
-and so the second part of Euler equations above can be rewritten
-as the homogeneous Laplace equation for the unknown $\phi$:
-\f{align*}
+\f]因此，上述欧拉方程的第二部分可以改写为未知数 $\phi$ 的同质拉普拉斯方程：\f{align*}
 \label{laplace}
 \Delta\phi &= 0 \qquad &&\text{in}\ \mathbb{R}^n\backslash\Omega,
 	   \\
 	   \mathbf{n}\cdot\nabla\phi &= -\mathbf{n}\cdot\mathbf{v}_\infty
 	   && \text{on}\ \partial\Omega
-\f}
-while the momentum equation reduces to Bernoulli's equation that expresses the
-pressure $p$ as a function of the potential $\phi$:
-\f[
+\f}，而动量方程则简化为伯努利方程，将压力 $p$ 表示为势的函数 $\phi$  ：\f[
 \frac{p}{\rho} +\frac{1}{2} | \nabla \phi |^2 = 0 \in \Omega.
-\f]
+\f] 
 
-So we can solve the problem by solving the Laplace equation for the
-potential.  We recall that the following functions, called fundamental
-solutions of the Laplace equation,
+因此，我们可以通过解决电势的拉普拉斯方程来解决这个问题。 我们回顾一下，下列函数，称为拉普拉斯方程的基本解。
 
 \f[ \begin{aligned}
 \label{eq:3} G(\mathbf{y}-\mathbf{x}) = &
+
+
 -\frac{1}{2\pi}\ln|\mathbf{y}-\mathbf{x}| \qquad && \text{for } n=2 \\
 G(\mathbf{y}-\mathbf{x}) = &
 \frac{1}{4\pi}\frac{1}{|\mathbf{y}-\mathbf{x}|}&& \text{for } n=3,
 \end{aligned}
-\f]
+\f] 
 
-satisfy in a distributional sense the equation:
+在分布意义上满足该方程。
 
 \f[
--\Delta_y G(\mathbf{y}-\mathbf{x}) = \delta(\mathbf{y}-\mathbf{x}),
-\f]
 
-where the derivative is done in the variable $\mathbf{y}$. By using
-the usual Green identities, our problem can be written on the boundary
-$\partial\Omega = \Gamma$ only. We recall the general definition of
-the second Green %identity:
+
+-\Delta_y G(\mathbf{y}-\mathbf{x}) = \delta(\mathbf{y}-\mathbf{x}),
+\f] 
+
+其中导数是在变量 $\mathbf{y}$ 中完成的。通过使用通常的格林定理，我们的问题可以只写在边界 $\partial\Omega = \Gamma$ 上。我们回顾一下第二个格林同位数的一般定义。
 
 \f[\label{green}
   \int_{\omega}
@@ -190,139 +149,97 @@ the second Green %identity:
   =
   \int_{\omega}
   (-\Delta v)u\,dx + \int_{\partial\omega} u\frac{\partial v}{\partial \tilde{\mathbf{n}}} \,ds,
-\f]
+\f] 
 
-where $\tilde{\mathbf{n}}$ is the normal to the surface of $\omega$ pointing
-outwards from the domain of integration $\omega$.
+其中 $\tilde{\mathbf{n}}$ 是 $\omega$ 表面的法线，从积分域 $\omega$ 向外指向。
 
-In our case the domain of integration is the domain
-$\mathbb{R}^n\backslash\Omega$, whose boundary is $ \Gamma_\infty \cup
-\Gamma$, where the "boundary" at infinity is defined as
+在我们的例子中，积分域是域 $\mathbb{R}^n\backslash\Omega$ ，其边界是 $ \Gamma_\infty \cup
+\Gamma$ ，其中无穷大的 "边界 "被定义为 
 
 \f[
 \Gamma_\infty \dealcoloneq \lim_{r\to\infty} \partial B_r(0).
-\f]
+\f] 
 
-In our program the normals are defined as <i>outer</i> to the domain
-$\Omega$, that is, they are in fact <i>inner</i> to the integration
-domain, and some care is required in defining the various integrals
-with the correct signs for the normals, i.e. replacing $\tilde{\mathbf{n}}$
-by $-\mathbf{n}$.
+在我们的程序中，法线被定义为域 $\Omega$ 的<i>outer</i>，也就是说，它们实际上是积分域的<i>inner</i>，在定义各种积分时需要注意法线的正确符号，即用 $-\mathbf{n}$ 取代 $\tilde{\mathbf{n}}$ 。
 
-If we substitute $u$ and $v$ in the Green %identity with the solution
-$\phi$ and with the fundamental solution of the Laplace equation
-respectively, as long as $\mathbf{x}$ is chosen in the region
-$\mathbb{R}^n\backslash\Omega$, we obtain:
-\f[
+如果我们将 $u$ 和 $v$ 分别替换为格林%同位素的解 $\phi$ 和拉普拉斯方程的基本解，只要 $\mathbf{x}$ 被选在 $\mathbb{R}^n\backslash\Omega$ 区域内，就可以得到。\f[
   \phi(\mathbf{x}) -
   \int_{\Gamma\cup\Gamma_\infty}\frac{\partial G(\mathbf{y}-\mathbf{x})}{\partial \mathbf{n}_y}\phi(\mathbf{y})\,ds_y
   =
+
+
   -\int_{\Gamma\cup\Gamma_\infty}G(\mathbf{y}-\mathbf{x})\frac{\partial \phi}{\partial \mathbf{n}_y}(\mathbf{y})\,ds_y
   \qquad \forall\mathbf{x}\in \mathbb{R}^n\backslash\Omega
-\f]
+\f] 
 
-where the normals are now pointing <i>inward</i> the domain of
-integration.
+其中法线现在指向<i>inward</i>这个积分域。
 
-Notice that in the above equation, we also have the integrals on the
-portion of the boundary at $\Gamma_\infty$. Using the boundary
-conditions of our problem, we have that $\nabla \phi$ is zero at
-infinity (which simplifies the integral on $\Gamma_\infty$ on the
-right hand side).
+请注意，在上述方程中，我们也有在 $\Gamma_\infty$ 处的边界部分的积分。利用我们问题的边界条件，我们有 $\nabla \phi$ 在无限远处为零（这简化了右侧 $\Gamma_\infty$ 上的积分）。
 
-The integral on $\Gamma_\infty$ that appears on the left hand side can
-be treated by observing that $\nabla\phi=0$ implies that $\phi$ at
-infinity is necessarily constant. We define its value to be
-$\phi_\infty$.  It is an easy exercise to prove that
+左手边出现的 $\Gamma_\infty$ 上的积分可以通过观察 $\nabla\phi=0$ 来处理，这意味着 $\phi$ 在无限远处必然是常数。我们把它的值定义为 $\phi_\infty$  。 要证明这一点是很容易的 
 
 \f[
+
+
 -\int_{\Gamma_\infty} \frac{\partial G(\mathbf{y}-\mathbf{x})}
 {\partial \mathbf{n}_y}\phi_\infty \,ds_y =
 \lim_{r\to\infty} \int_{\partial B_r(0)} \frac{\mathbf{r}}{r} \cdot \nabla G(\mathbf{y}-\mathbf{x})
 \phi_\infty \,ds_y = -\phi_\infty.
-\f]
+\f] 
 
-Using this result, we can reduce the above equation only on the
-boundary $\Gamma$ using the so-called Single and Double Layer
-Potential operators:
+利用这一结果，我们可以利用所谓的单层和双层势能算子，只在边界 $\Gamma$ 上还原上述方程。
 
 \f[\label{integral}
   \phi(\mathbf{x}) - (D\phi)(\mathbf{x}) = \phi_\infty
+
+
   -\left(S \frac{\partial \phi}{\partial n_y}\right)(\mathbf{x})
   \qquad \forall\mathbf{x}\in \mathbb{R}^n\backslash\Omega.
-\f]
+\f] 
 
-(The name of these operators comes from the fact that they describe the
-electric potential in $\mathbb{R}^n$ due to a single thin sheet of charges
-along a surface, and due to a double sheet of charges and anti-charges along
-the surface, respectively.)
+(这些算子的名字来自于它们分别描述了 $\mathbb{R}^n$ 中沿表面的单层薄电荷和沿表面的双层电荷和反电荷所产生的电动势。) 
 
-In our case, we know the Neumann values of $\phi$ on the boundary:
-$\mathbf{n}\cdot\nabla\phi = -\mathbf{n}\cdot\mathbf{v}_\infty$.
-Consequently,
-\f[
+在我们的例子中，我们知道边界上 $\phi$ 的纽曼值： $\mathbf{n}\cdot\nabla\phi = -\mathbf{n}\cdot\mathbf{v}_\infty$  。因此，\f[
   \phi(\mathbf{x}) - (D\phi)(\mathbf{x}) = \phi_\infty +
    \left(S[\mathbf{n}\cdot\mathbf{v}_\infty]\right)(\mathbf{x})
    \qquad \forall\mathbf{x} \in \mathbb{R}^n\backslash\Omega.
-\f]
-If we take the limit for $\mathbf{x}$ tending to $\Gamma$ of
-the above equation, using well known properties of the single and double layer
-operators, we obtain an equation for $\phi$ just on the boundary $\Gamma$ of
-$\Omega$:
+\f] 如果我们对上述方程的 $\mathbf{x}$ 采取趋向于 $\Gamma$ 的极限，利用众所周知的单层和双层算子的特性，我们得到一个 $\phi$ 的方程，就在 $\Gamma$ 的边界上。
 
 \f[\label{SD}
   \alpha(\mathbf{x})\phi(\mathbf{x}) - (D\phi)(\mathbf{x}) = \phi_\infty +
   \left(S [\mathbf{n}\cdot\mathbf{v}_\infty]\right)(\mathbf{x})
   \quad \mathbf{x}\in \partial\Omega,
-\f]
+\f] 
 
-which is the Boundary Integral Equation (BIE) we were looking for,
-where the quantity $\alpha(\mathbf{x})$ is the fraction of angle or
-solid angle by which the point $\mathbf{x}$ sees the domain of
-integration $\mathbb{R}^n\backslash\Omega$.
+这就是我们要找的边界积分方程（BIE），其中量 $\alpha(\mathbf{x})$ 是点 $\mathbf{x}$ 看到积分域 $\mathbb{R}^n\backslash\Omega$ 的角度或实体角的分数。
 
-In particular, at points $\mathbf{x}$ where the boundary
-$\partial\Omega$ is differentiable (i.e. smooth) we have
-$\alpha(\mathbf{x})=\frac 12$, but the value may be smaller or larger
-at points where the boundary has a corner or an edge.
+特别是在边界 $\partial\Omega$ 可微的点 $\mathbf{x}$ （即光滑），我们有 $\alpha(\mathbf{x})=\frac 12$ ，但在边界有角落或边缘的点，该值可能较小或较大。
 
-Substituting the single and double layer operators we get:
-\f[
+代入单层和双层算子，我们得到。二维流动的\f[
   \alpha(\mathbf{x}) \phi(\mathbf{x})
   + \frac{1}{2\pi}\int_{\partial \Omega}  \frac{
   (\mathbf{y}-\mathbf{x})\cdot\mathbf{n}_y  }{ |\mathbf{y}-\mathbf{x}|^2 }
   \phi(\mathbf{y}) \,ds_y
   = \phi_\infty
+
+
     -\frac{1}{2\pi}\int_{\partial \Omega}  \ln|\mathbf{y}-\mathbf{x}| \, \mathbf{n}\cdot\mathbf{v_\infty}\,ds_y
-\f]
-for two dimensional flows and
-\f[
+\f]和三维流动的\f[
   \alpha(\mathbf{x}) \phi(\mathbf{x})
    + \frac{1}{4\pi}\int_{\partial \Omega} \frac{ (\mathbf{y}-\mathbf{x})\cdot\mathbf{n}_y  }{ |\mathbf{y}-\mathbf{x}|^3 }\phi(\mathbf{y})\,ds_y
   = \phi_\infty +
   \frac{1}{4\pi}\int_{\partial \Omega} \frac{1}{|\mathbf{y}-\mathbf{x}|} \, \mathbf{n}\cdot\mathbf{v_\infty}\,ds_y
-\f]
-for three dimensional flows, where the normal derivatives of the fundamental
-solutions have been written in a form that makes computation easier. In either
-case, $\phi$ is the solution of an integral equation posed entirely on the
-boundary since both $\mathbf{x},\mathbf{y}\in\partial\Omega$.
+\f]，其中基本解的法向导数已被写成一种形式，使计算更容易。在这两种情况下， $\phi$ 都是完全在边界上提出的积分方程的解，因为 $\mathbf{x},\mathbf{y}\in\partial\Omega$  . 
 
-Notice that the fraction of angle (in 2d) or solid angle (in 3d)
-$\alpha(\mathbf{x})$ by which the point $\mathbf{x}$ sees the domain
-$\Omega$ can be defined using the double layer potential itself:
-\f[
+注意，点 $\mathbf{x}$ 看到域 $\Omega$ 的角度（2D）或实体角（3D） $\alpha(\mathbf{x})$ 的分数可以用双层势本身定义。\f[
 \alpha(\mathbf{x}) \dealcoloneq 1 -
 \frac{1}{2(n-1)\pi}\int_{\partial \Omega} \frac{ (\mathbf{y}-\mathbf{x})\cdot\mathbf{n}_y  }
 { |\mathbf{y}-\mathbf{x}|^{n} }\phi(\mathbf{y})\,ds_y = 1+
 \int_{\partial \Omega} \frac{ \partial G(\mathbf{y}-\mathbf{x}) }{\partial \mathbf{n}_y} \, ds_y.
-\f]
+\f] 
 
-The reason why this is possible can be understood if we consider the
-fact that the solution of a pure Neumann problem is known up to an
-arbitrary constant $c$, which means that, if we set the Neumann data
-to be zero, then any constant $\phi = \phi_\infty$ will be a solution.
-Inserting the constant solution and the Neumann boundary condition in the
-boundary integral equation, we have
+如果我们考虑纯诺伊曼问题的解是已知的，直到一个任意的常数 $c$ ，这意味着，如果我们设置诺伊曼数据为零，那么任何常数 $\phi = \phi_\infty$ 都将是一个解，就可以理解这一点的原因。在边界积分方程中插入常数解和诺伊曼边界条件，我们有 
+
 @f{align*}
 \alpha\left(\mathbf{x}\right)\phi\left(\mathbf{x}\right)
 &=\int_{\Omega}\phi\left(\mathbf{y}\right)\delta\left(\mathbf{y}-\mathbf{x}\right)\, dy\\
@@ -332,17 +249,11 @@ boundary integral equation, we have
 =\phi_\infty\left[\int_{\Gamma_\infty}\frac{ \partial G(\mathbf{y}-\mathbf{x}) }{\partial \mathbf{n}_y} \, ds_y
 +\int_{\Gamma}\frac{ \partial G(\mathbf{y}-\mathbf{x}) }{\partial \mathbf{n}_y} \, ds_y
 \right]
-@f}
-The integral on $\Gamma_\infty$ is unity, see above, so division by the constant $\phi_\infty$ gives us the explicit
-expression above for $\alpha(\mathbf{x})$.
+@f} 
 
-While this example program is really only focused on the solution of the
-boundary integral equation, in a realistic setup one would still need to solve
-for the velocities. To this end, note that we have just computed
-$\phi(\mathbf{x})$ for all $\mathbf{x}\in\partial\Omega$. In the next step, we
-can compute (analytically, if we want) the solution $\phi(\mathbf{x})$ in all
-of $\mathbb{R}^n\backslash\Omega$. To this end, recall that we had
-\f[
+在 $\Gamma_\infty$ 上的积分是统一的，见上文，所以除以常数 $\phi_\infty$ 就可以得到上面的 $\alpha(\mathbf{x})$ 的明确表达式。
+
+虽然本例程序实际上只关注边界积分方程的求解，但在现实的设置中，仍然需要求解速度。为此，请注意，我们刚刚计算了所有 $\mathbf{x}\in\partial\Omega$ 的 $\phi(\mathbf{x})$ 。在下一步，我们可以在所有的 $\mathbb{R}^n\backslash\Omega$ 中计算（如果我们愿意的话，可以用分析方法）解 $\phi(\mathbf{x})$ 。为此，回顾一下我们曾有过\f[
   \phi(\mathbf{x})
   =
   \phi_\infty +
@@ -350,25 +261,14 @@ of $\mathbb{R}^n\backslash\Omega$. To this end, recall that we had
   +
   \left(S[\mathbf{n}\cdot\mathbf{v}_\infty]\right)(\mathbf{x})
   \qquad \forall\mathbf{x}\in \mathbb{R}^n\backslash\Omega.
-\f]
-where now we have everything that is on the right hand side ($S$ and $D$ are
-integrals we can evaluate, the normal velocity on the boundary is given, and
-$\phi$ on the boundary we have just computed). Finally, we can then recover
-the velocity as $\mathbf{\tilde v}=\nabla \phi$.
+\f]，现在我们有了右手边的所有东西（ $S$ 和 $D$ 是我们可以评估的积分，边界上的法线速度是给定的，边界上的 $\phi$ 我们刚刚计算出来）。最后，我们就可以恢复速度为  $\mathbf{\tilde v}=\nabla \phi$  。
 
-Notice that the evaluation of the above formula for $\mathbf{x} \in
-\Omega$ should yield zero as a result, since the integration of the
-Dirac delta $\delta(\mathbf{x})$ in the domain
-$\mathbb{R}^n\backslash\Omega$ is always zero by definition.
+注意，对 $\mathbf{x} \in
+\Omega$ 的上述公式的评估结果应该是零，因为狄拉克三角 $\delta(\mathbf{x})$ 在域 $\mathbb{R}^n\backslash\Omega$ 的积分根据定义总是零。
 
-As a final test, let us verify that this velocity indeed satisfies the
-momentum balance equation for a stationary flow field, i.e., whether
-$\mathbf{v}\cdot\nabla\mathbf{v} = -\frac 1\rho \nabla p$ where
-$\mathbf{v}=\mathbf{\tilde
-v}+\mathbf{v}_\infty=\nabla\phi+\mathbf{v}_\infty$ for some (unknown) pressure
-$p$ and a given constant $\rho$. In other words, we would like to verify that
-Bernoulli's law as stated above indeed holds. To show this, we use that
-the left hand side of this equation equates to
+作为最后的测试，让我们验证这个速度是否确实满足静止流场的动量平衡方程，也就是说，对于某个（未知的）压力 $p$ 和一个给定的常数 $\rho$ ， $\mathbf{v}\cdot\nabla\mathbf{v} = -\frac 1\rho \nabla p$ 中是否有 $\mathbf{v}=\mathbf{\tilde
+v}+\mathbf{v}_\infty=\nabla\phi+\mathbf{v}_\infty$ 。换句话说，我们想验证上面所说的伯努利定律是否确实成立。为了证明这一点，我们用这个方程的左手边等价于 
+
 @f{align*}
   \mathbf{v}\cdot\nabla\mathbf{v}
   &=
@@ -376,12 +276,10 @@ the left hand side of this equation equates to
   \\
   &=
   [(\nabla\phi+\mathbf{v}_\infty)\cdot\nabla] (\nabla\phi)
-@f}
-where we have used that $\mathbf{v}_\infty$ is constant. We would like to
-write this expression as the gradient of something (remember that $\rho$ is a
-constant). The next step is more
-convenient if we consider the components of the equation individually
-(summation over indices that appear twice is implied):
+@f} 
+
+其中我们使用了 $\mathbf{v}_\infty$ 是常数。我们想把这个表达式写成某个东西的梯度（记住 $\rho$ 是一个常数）。如果我们单独考虑方程的组成部分，下一步会更方便（对出现两次的指数求和是隐含的）。
+
 @f{align*}
   [\mathbf{v}\cdot\nabla\mathbf{v}]_i
   &=
@@ -389,14 +287,18 @@ convenient if we consider the components of the equation individually
   \\
   &=
   \partial_j [(\partial_j\phi+v_{\infty,j}) \partial_i\phi]
+
+
   -
   \partial_j [(\partial_j\phi+v_{\infty,j})] \partial_i\phi
   \\
   &=
   \partial_j [(\partial_j\phi+v_{\infty,j}) \partial_i\phi]
-@f}
-because $\partial_j \partial_j\phi = \Delta \phi = 0$ and $\textrm{div}
-\ \mathbf{v}_\infty=0$. Next,
+@f} 
+
+因为 $\partial_j \partial_j\phi = \Delta \phi = 0$ 和 $\textrm{div}
+\ \mathbf{v}_\infty=0$  。接下来。
+
 @f{align*}
   [\mathbf{v}\cdot\nabla\mathbf{v}]_i
   &=
@@ -421,45 +323,58 @@ because $\partial_j \partial_j\phi = \Delta \phi = 0$ and $\textrm{div}
   \\
   &=
   \partial_i \partial_j [(\partial_j\phi) \phi]
+
+
   -
   \partial_j [\partial_i (\partial_j\phi) \phi]
   +
   \partial_i [v_{\infty,j} \partial_j \phi]
+
+
   -
   \partial_i [v_{\infty,j}] \partial_j \phi
-@f}
-Again, the last term disappears because $\mathbf{v}_\infty$ is constant and we
-can merge the first and third term into one:
+@f} 
+
+同样，最后一项消失了，因为 $\mathbf{v}_\infty$ 是常数，我们可以将第一项和第三项合并为一项。
+
 @f{align*}
   [\mathbf{v}\cdot\nabla\mathbf{v}]_i
   &=
   \partial_i (\partial_j [(\partial_j\phi) \phi + v_{\infty,j} \partial_j \phi])
+
+
   -
   \partial_j [\partial_i (\partial_j\phi) \phi]
   \\
   &=
   \partial_i [(\partial_j\phi)(\partial_j \phi) + v_{\infty,j} \partial_j \phi]
+
+
   -
   \partial_j [\partial_i (\partial_j\phi) \phi]
-@f}
+@f} 
 
-We now only need to massage that last term a bit more. Using the product rule,
-we get
+
+
+我们现在只需要对最后一项再做一下按摩。使用乘积规则，我们可以得到 
+
 @f{align*}
   \partial_j [\partial_i (\partial_j\phi) \phi]
   &=
   \partial_i [\partial_j \partial_j\phi] \phi
   +
   \partial_i [\partial_j \phi] (\partial_j \phi).
-@f}
-The first of these terms is zero (because, again, the summation over $j$ gives
-$\Delta\phi$, which is zero). The last term can be written as $\frac 12
-\partial_i [(\partial_j\phi)(\partial_j\phi)]$ which is in the desired gradient
-form. As a consequence, we can now finally state that
+@f} 
+
+其中第一项是零（因为，同样，对 $j$ 的求和得到 $\Delta\phi$ ，它是零）。最后一项可以写成 $\frac 12
+\partial_i [(\partial_j\phi)(\partial_j\phi)]$ ，它是理想的梯度形式。因此，我们现在可以最终说明 
+
 @f{align*}
   [\mathbf{v}\cdot\nabla\mathbf{v}]_i
   &=
   \partial_i (\partial_j [(\partial_j\phi) \phi + v_{\infty,j} \partial_j \phi])
+
+
   -
   \partial_j [\partial_i (\partial_j\phi) \phi]
   \\
@@ -467,6 +382,8 @@ form. As a consequence, we can now finally state that
   \partial_i
   \left[
     (\partial_j\phi)(\partial_j \phi) + v_{\infty,j} \partial_j \phi
+
+
     -
     \frac 12 (\partial_j\phi)(\partial_j\phi)
   \right],
@@ -476,9 +393,9 @@ form. As a consequence, we can now finally state that
   \left[
     \frac 12 (\partial_j\phi)(\partial_j \phi) + v_{\infty,j} \partial_j \phi
   \right],
-@f}
-or in vector form:
-@f[
+@f} 
+
+或以矢量形式。@f[
   \mathbf{v}\cdot\nabla\mathbf{v}
   =
   \nabla
@@ -486,117 +403,81 @@ or in vector form:
     \frac 12 \mathbf{\tilde v}^2
     + \mathbf{v}_{\infty} \cdot \mathbf{\tilde v}
   \right],
-@f]
-or in other words:
-@f[
+@f]或者换句话说。@f[
   p
   =
+
+
   -\rho
   \left[
     \frac 12 \mathbf{\tilde v}^2
     + \mathbf{v}_{\infty} \cdot \mathbf{\tilde v}
   \right]
   =
+
+
   -\rho
   \left[
     \frac 12 \mathbf{v}^2
+
+
     -
     \frac 12 \mathbf{v}_{\infty}^2
   \right]
   .
-@f]
-Because the pressure is only determined up to a constant (it appears only with
-a gradient in the equations), an equally valid definition is
-@f[
+@f] 因为压力只确定到一个常数（它在方程中只以梯度形式出现），同样有效的定义是@f[
   p
   =
+
+
   -\frac 12 \rho \mathbf{v}^2
   .
-@f]
-This is exactly Bernoulli's law mentioned above.
+@f] 这正是上面提到的伯努利定律。
 
 
-<a name="Thenumericalapproximation"></a><h3>The numerical approximation</h3>
+<a name="Thenumericalapproximation"></a><h3>The numerical approximation</h3> 
 
 
-Numerical approximations of Boundary Integral Equations (BIE) are commonly
-referred to as the boundary element method or panel method (the latter
-expression being used mostly in the computational fluid dynamics community).
-The goal of the following test problem is to solve the integral
-formulation of the Laplace equation with Neumann boundary conditions,
-using a circle and a sphere respectively in two and three space
-dimensions, illustrating along the way the features that allow one to
-treat boundary element problems almost as easily as finite element
-problems using the deal.II library.
+边界积分方程（BIE）的数值近似通常被称为边界元素法或面板法（后者的表达方式多用于计算流体力学界）。以下测试问题的目的是解决具有Neumann边界条件的拉普拉斯方程的积分表述，分别使用二维和三维空间的圆和球体，沿途说明允许人们使用deal.II库处理边界元素问题几乎与有限元问题一样容易的特点。
 
-To this end, let $\mathcal{T}_h = \bigcup_i K_i$ be a subdivision of the
-manifold $\Gamma = \partial \Omega$ into $M$ line segments if $n=2$, or $M$
-quadrilaterals if $n=3$. We will call each individual segment or
-quadrilateral an <i>element</i> or <i>cell</i>, independently of the
-dimension $n$ of the surrounding space $\mathbb{R}^n$.
-We define the finite dimensional space $V_h$ as
-\f[
+为此，让 $\mathcal{T}_h = \bigcup_i K_i$ 成为流形 $\Gamma = \partial \Omega$ 的细分，如果 $n=2$ ，则为 $M$ 四边形，如果 $n=3$ ，则为 $M$ 线段。我们将每个单独的线段或四边形称为<i>element</i>或<i>cell</i>，与周围空间的维度 $n$ 无关。我们将有限维空间 $V_h$ 定义为具有基函数 $\psi_i(\mathbf{x})$ 的\f[
   \label{eq:definition-Vh}
   V_h \dealcoloneq \{ v \in C^0(\Gamma) \text{ s.t. } v|_{K_i} \in \mathcal{Q}^1(K_i),
   \forall i\},
-\f]
-with basis functions $\psi_i(\mathbf{x})$ for which we will use the usual FE_Q
-finite element, with the catch that this time it is defined on a manifold of
-codimension one (which we do by using the second template argument that is
-usually defaulted to equal the first; here, we will create objects
-<code>FE_Q@<dim-1,dim@></code> to indicate that we have <code>dim-1</code>
-dimensional cells in a <code>dim</code> dimensional space).
-An element $\phi_h$ of $V_h$ is uniquely
-identified by the vector $\boldsymbol{\phi}$ of its coefficients
-$\phi_i$, that is:
-\f[
+\f]，我们将使用通常的FE_Q有限元，但需要注意的是这次它是定义在一个一维的流形上（我们通过使用第二个模板参数来实现，通常默认为等于第一个；这里，我们将在一个 <code>dim</code> 维空间中创建对象 <code>FE_Q@<dim-1,dim@></code> to indicate that we have <code>dim-1</code> 维单元）。 $V_h$ 的一个元素 $\phi_h$ 是由其系数的向量 $\boldsymbol{\phi}$ 唯一识别的，也就是。\f[
   \label{eq:definition-of-element}
   \phi_h(\mathbf{x}) \dealcoloneq \phi_i \psi_i(\mathbf{x}), \qquad
   \boldsymbol{\phi} \dealcoloneq \{ \phi_i \},
-\f]
-where summation  is implied over repeated indexes. Note that we could use
-discontinuous elements here &mdash; in fact, there is no real reason to use
-continuous ones since the integral formulation does not
-imply any derivatives on our trial functions so continuity is unnecessary,
-and often in the literature only piecewise constant elements are used.
+\f]，这里的求和是指对重复索引的求和。请注意，我们可以在这里使用不连续的元素&mdash；事实上，没有真正的理由使用连续的元素，因为积分表述并不意味着我们的试验函数的任何导数，所以连续性是不必要的，而且在文献中通常只使用片状常数元素。
 
-<a name="Collocationboundaryelementmethod"></a><h3> Collocation boundary element method </h3>
+<a name="Collocationboundaryelementmethod"></a><h3> Collocation boundary element method </h3> 
 
 
-By far, the most common approximation of boundary integral equations
-is by use of the collocation based boundary element method.
+到目前为止，最常见的边界积分方程的近似方法是使用基于碰撞的边界元素方法。
 
-This method requires the evaluation of the boundary integral equation
-at a number of collocation points which is equal to the number of
-unknowns of the system. The choice of these points is a delicate
-matter, that requires a careful study. Assume that these points are
-known for the moment, and call them $\mathbf x_i$ with $i=0...n\_dofs$.
+这种方法要求在一些与系统未知数数量相等的坐标点上对边界积分方程进行评估。这些点的选择是一个微妙的问题，需要仔细研究。假设这些点暂时是已知的，并称它们为 $\mathbf x_i$ 和 $i=0...n\_dofs$  。
 
-The problem then becomes:
-Given the datum $\mathbf{v}_\infty$, find a function $\phi_h$ in $V_h$
-such that the following $n\_dofs$ equations are satisfied:
+那么问题就变成了。给定基准点 $\mathbf{v}_\infty$ ，在 $V_h$ 中找到一个函数 $\phi_h$ ，使以下 $n\_dofs$ 方程得到满足。
 
 \f{align*}
     \alpha(\mathbf{x}_i) \phi_h(\mathbf{x}_i)
+
+
     - \int_{\Gamma_y} \frac{ \partial G(\mathbf{y}-\mathbf{x}_i)}{\partial\mathbf{n}_y }
     \phi_h(\mathbf{y}) \,ds_y =
     \int_{\Gamma_y} G(\mathbf{y}-\mathbf{x}_i) \,
     \mathbf{n}_y\cdot\mathbf{v_\infty} \,ds_y
     ,
-\f}
+\f} 
 
-where the quantity $\alpha(\mathbf{x}_i)$ is the fraction of (solid)
-angle by which the point $\mathbf{x}_i$ sees the domain $\Omega$, as
-explained above, and we set $\phi_\infty$ to be zero.  If the support
-points $\mathbf{x}_i$ are chosen appropriately, then the problem can
-be written as the following linear system:
+其中数量 $\alpha(\mathbf{x}_i)$ 是点 $\mathbf{x}_i$ 看到域 $\Omega$ 的（实体）角度的分数，如上所述，我们设置 $\phi_\infty$ 为零。 如果适当地选择支持点 $\mathbf{x}_i$ ，那么问题可以写成以下线性系统。
 
 \f[
 \label{eq:linear-system}
 (\mathbf{A}+\mathbf{N})\boldsymbol\phi = \mathbf{b},
-\f]
+\f] 
 
-where
+其中 
 
 \f[
 \begin{aligned}
@@ -614,1546 +495,1447 @@ where
    G(\mathbf{y}-\mathbf{x}_i)  \, \mathbf{n}_y\cdot\mathbf{v_\infty}
    ds_y.
 \end{aligned}
-\f]
+\f] 
 
-From a linear algebra point of view, the best possible choice of the
-collocation points is the one that renders the matrix
-$\mathbf{A}+\mathbf{N}$ the most diagonally dominant. A natural choice
-is then to select the $\mathbf{x}_i$ collocation points to be the
-support points of the nodal basis functions $\psi_i(\mathbf{x})$. In that
-case, $\psi_j(\mathbf{x}_i)=\delta_{ij}$, and as a consequence the matrix
-$\mathbf{A}$ is diagonal with entries
-\f[
+从线性代数的角度来看，可能的最佳匹配点选择是使矩阵 $\mathbf{A}+\mathbf{N}$ 成为最对角线的主导。一个自然的选择是选择 $\mathbf{x}_i$ 搭配点作为节点基函数 $\psi_i(\mathbf{x})$ 的支持点。在这种情况下， $\psi_j(\mathbf{x}_i)=\delta_{ij}$  ，因此矩阵 $\mathbf{A}$ 是对角线，其条目\f[
   \mathbf{A}_{ii}
   =
   1+\int_\Gamma
   \frac{\partial G(\mathbf{y}-\mathbf{x}_i)}{\partial \mathbf{n}_y}\,ds_y
   =
   1-\sum_j N_{ij},
-\f]
-where we have used that $\sum_j \psi_j(\mathbf{y})=1$ for the usual Lagrange
-elements.
-With this choice of collocation points, the computation of the entries
-of the matrices $\mathbf{A}$, $\mathbf{N}$ and of the right hand side
-$\mathbf{b}$ requires the evaluation of singular integrals on the
-elements $K_i$ of the triangulation $\mathcal{T}_h$.
-As usual in these cases, all integrations are performed on a reference
-simple domain, i.e., we assume that each element $K_i$ of
-$\mathcal{T}_h$ can be expressed as a linear (in two dimensions) or
-bi-linear (in three dimensions) transformation of the reference
-boundary element $\hat K \dealcoloneq [0,1]^{n-1}$, and we perform the integrations after a
-change of variables from the real element $K_i$ to the reference
-element $\hat K$.
+\f]，我们用 $\sum_j \psi_j(\mathbf{y})=1$ 作为通常的拉格朗日元素。在这样的选择下，矩阵 $\mathbf{A}$ 、 $\mathbf{N}$ 和右手边 $\mathbf{b}$ 的条目的计算需要对三角形 $\mathcal{T}_h$ 的元素 $K_i$ 进行奇异积分评估。在这些情况下，通常所有的积分都是在参考简单域上进行的，也就是说，我们假设 $\mathcal{T}_h$ 的每个元素 $K_i$ 可以表示为参考边界元素 $\hat K \dealcoloneq [0,1]^{n-1}$ 的线性（二维）或双线性（三维）变换，并且我们在从实数元素 $K_i$ 到参考元素 $\hat K$ 的变量改变后进行积分。
 
 <a name="Treatingthesingularintegrals"></a><h3> Treating the singular integrals. </h3>
 
 
-In two dimensions it is not necessary to compute the diagonal elements
-$\mathbf{N}_{ii}$ of the system matrix, since, even if the denominator
-goes to zero when $\mathbf{x}=\mathbf{y}$, the numerator is always
-zero because $\mathbf{n}_y$ and $(\mathbf{y}-\mathbf{x})$ are
-orthogonal (on our polygonal approximation of the boundary of $\Omega$), and
-the only singular integral arises in the computation
-of $\mathbf{b}_i$ on the i-th element of $\mathcal{T}_h$:
-\f[
+在二维中，没有必要计算系统矩阵的对角线元素 $\mathbf{N}_{ii}$ ，因为即使分母在 $\mathbf{x}=\mathbf{y}$ 时归零，分子也总是零，因为 $\mathbf{n}_y$  ]和 $(\mathbf{y}-\mathbf{x})$ 是正交的（在我们对 $\Omega$ 边界的多边形近似上），唯一的奇异积分出现在对 $\mathbf{b}_i$ 的第i个元素的计算上：\f[
   \frac{1}{\pi}
   \int_{K_i}
   \ln|\mathbf{y}-\mathbf{x}_i| \, \mathbf{n}_y\cdot\mathbf{v_\infty} \,ds_y.
-\f]
+\f] 
 
-This can be easily treated by the QGaussLogR quadrature
-formula.
+这可以通过QGaussLogR正交公式轻松处理。
 
-Similarly, it is possible to use the QGaussOneOverR quadrature formula
-to perform the singular integrations in three dimensions. The
-interested reader will find detailed explanations on how these
-quadrature rules work in their documentation.
+同样，也可以用QGaussOneOverR正交公式来进行三维空间的奇异积分。有兴趣的读者可以在其文档中找到关于这些正交规则如何工作的详细解释。
 
-The resulting matrix $\mathbf{A}+\mathbf{N}$ is full. Depending on its
-size, it might be convenient to use a direct solver or an iterative
-one. For the purpose of this example code, we chose to use only an
-iterative solver, without providing any preconditioner.
+得到的矩阵 $\mathbf{A}+\mathbf{N}$ 是完整的。根据其大小，使用直接求解器或迭代求解器可能比较方便。为了这个例子代码的目的，我们选择只使用迭代求解器，不提供任何预处理。
 
-If this were a production code rather than a demonstration of principles,
-there are techniques that are available to not store full matrices but instead
-store only those entries that are large and/or relevant. In the literature on
-boundary element methods, a plethora of methods is available that allows to
-determine which elements are important and which are not, leading to a
-significantly sparser representation of these matrices that also facilitates
-rapid evaluations of the scalar product between vectors and matrices. This not
-being the goal of this program, we leave this for more sophisticated
-implementations.
+如果这是一个生产代码，而不是一个原理演示，有一些技术可以用来不存储完整的矩阵，而只存储那些大的和/或相关的条目。在边界元素方法的文献中，有大量的方法可以确定哪些元素是重要的，哪些是不重要的，从而使这些矩阵的表示明显稀疏，也有利于快速评估向量和矩阵之间的标量积。这不是本程序的目标，我们把它留给更复杂的实现。
 
 
 <a name="Implementation"></a><h3>Implementation</h3>
 
 
-The implementation is rather straight forward. The main point that hasn't been
-used in any of the previous tutorial programs is that most classes in deal.II
-are not only templated on the dimension, but in fact on the dimension of the
-manifold on which we pose the differential equation as well as the dimension
-of the space into which this manifold is embedded. By default, the second
-template argument equals the first, meaning for example that we want to solve
-on a two-dimensional region of two-dimensional space. The triangulation class
-to use in this case would be <code>Triangulation@<2@></code>, which is an
-equivalent way of writing <code>Triangulation@<2,2@></code>.
+这个实现是相当直接的。在以前的教程程序中没有使用过的主要一点是，deal.II中的大多数类不仅在维度上有模板，而且实际上在我们提出微分方程的流形的维度以及这个流形嵌入的空间的维度上也有模板。默认情况下，第二个模板参数等于第一个，这意味着我们要在二维空间的一个二维区域上求解。在这种情况下，要使用的三角化类是 <code>Triangulation@<2@></code> ，这相当于写成 <code>Triangulation@<2,2@></code> 。
 
-However, this doesn't have to be so: in the current example, we will for
-example want to solve on the surface of a sphere, which is a two-dimensional
-manifold embedded in a three-dimensional space. Consequently, the right class
-will be <code>Triangulation@<2,3@></code>, and correspondingly we will use
-<code>DoFHandler@<2,3@></code> as the DoF handler class and
-<code>FE_Q@<2,3@></code> for finite elements.
+然而，情况并非如此：在目前的例子中，我们想在一个球体的表面上求解，这是一个嵌入三维空间的二维流形。因此，正确的类将是 <code>Triangulation@<2,3@></code> ，相应地，我们将使用 <code>DoFHandler@<2,3@></code> 作为DoF处理类， <code>FE_Q@<2,3@></code> 作为有限元。
 
-Some further details on what one can do with things that live on
-curved manifolds can be found in the report
-<a target="_top"
+关于如何处理生活在弯曲流形上的事物的一些进一步细节，可以在报告<a target="_top"
 href="http://www.dealii.org/reports/codimension-one/desimone-heltai-manigrasso.pdf"><i>Tools
 for the Solution of PDEs Defined on Curved Manifolds with the deal.II
-Library</i> by A. DeSimone, L. Heltai, C. Manigrasso</a>. In addition, the
-step-38 tutorial program extends what we show here to cases where the equation
-posed on the manifold is not an integral operator but in fact involves
-derivatives.
+Library</i><i>Tools
+for the Solution of PDEs Defined on Curved Manifolds with the deal.II
+Library</i> by A. DeSimone, L. Heltai, C. Manigrasso</a>中找到。此外， step-38 教程程序将我们在这里展示的内容扩展到流形上提出的方程不是积分算子而实际上涉及导数的情况。
 
 
-<a name="Testcase"></a><h3>Testcase</h3>
+<a name="Testcase"></a><h3>Testcase</h3> 
 
 
-The testcase we will be solving is for a circular (in 2d) or spherical
-(in 3d) obstacle. Meshes for these geometries will be read in from
-files in the current directory and an object of type SphericalManifold
-will then be attached to the triangulation to allow mesh refinement
-that respects the continuous geometry behind the discrete initial
-mesh.
+我们要解决的测试案例是一个圆形（2D）或球形（3D）的障碍物。这些几何体的网格将从当前目录下的文件中读入，然后一个SphericalManifold类型的对象将被附加到三角形上，以允许网格细化，尊重离散初始网格背后的连续几何体。
 
-For a sphere of radius $a$ translating at a velocity of $U$ in the $x$ direction, the potential reads
+对于一个半径为 $a$ 的球体，以 $U$ 的速度向 $x$ 方向平移，其势为 
+
 @f{align*}
 \phi = -\frac{1}{2}U \left(\frac{a}{r}\right)3 r \cos\theta
-@f}
-see, e.g. J. N. Newman, <i>Marine Hydrodynamics</i>, 1977,
-pp. 127. For unit speed and radius, and restricting $(x,y,z)$ to lie
-on the surface of the sphere,
-$\phi = -x/2$. In the test problem,
-the flow is $(1,1,1)$, so the appropriate exact solution on the
-surface of the sphere is the superposition of the above solution with
-the analogous solution along the $y$ and $z$ axes, or $\phi =
-\frac{1}{2}(x + y + z)$.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * 
- * <a name="Includefiles"></a> 
- * <h3>Include files</h3>
- * 
+@f} 
 
- * 
- * The program starts with including a bunch of include files that we will use
- * in the various parts of the program. Most of them have been discussed in
- * previous tutorials already:
- * 
- * @code
- * #include <deal.II/base/smartpointer.h>
- * #include <deal.II/base/convergence_table.h>
- * #include <deal.II/base/quadrature_lib.h>
- * #include <deal.II/base/quadrature_selector.h>
- * #include <deal.II/base/parsed_function.h>
- * #include <deal.II/base/utilities.h>
- * 
- * #include <deal.II/lac/full_matrix.h>
- * #include <deal.II/lac/vector.h>
- * #include <deal.II/lac/solver_control.h>
- * #include <deal.II/lac/solver_gmres.h>
- * #include <deal.II/lac/precondition.h>
- * 
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/grid_in.h>
- * #include <deal.II/grid/grid_out.h>
- * #include <deal.II/grid/manifold_lib.h>
- * 
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/dofs/dof_tools.h>
- * 
- * #include <deal.II/fe/fe_q.h>
- * #include <deal.II/fe/fe_values.h>
- * #include <deal.II/fe/mapping_q.h>
- * 
- * #include <deal.II/numerics/data_out.h>
- * #include <deal.II/numerics/vector_tools.h>
- * 
- * @endcode
- * 
- * And here are a few C++ standard header files that we will need:
- * 
- * @code
- * #include <cmath>
- * #include <iostream>
- * #include <fstream>
- * #include <string>
- * 
- * @endcode
- * 
- * The last part of this preamble is to import everything in the dealii
- * namespace into the one into which everything in this program will go:
- * 
- * @code
- * namespace Step34
- * {
- *   using namespace dealii;
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Singleanddoublelayeroperatorkernels"></a> 
- * <h3>Single and double layer operator kernels</h3>
- * 
+例如，见J.N.纽曼，<i>Marine Hydrodynamics</i>，1977，第127页。对于单位速度和半径，并限制 $(x,y,z)$ 位于球体表面， $\phi = -x/2$  。在试验问题中，流向是 $(1,1,1)$  ，所以在球面上适当的精确解是上述解与沿 $y$ 和 $z$ 轴的类似解的叠加，即 $\phi =
+\frac{1}{2}(x + y + z)$  。<a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * First, let us define a bit of the boundary integral equation machinery.
- * 
 
- * 
- * The following two functions are the actual calculations of the single and
- * double layer potential kernels, that is $G$ and $\nabla G$. They are well
- * defined only if the vector $R = \mathbf{y}-\mathbf{x}$ is different from
- * zero.
- * 
- * @code
- *   namespace LaplaceKernel
- *   {
- *     template <int dim>
- *     double single_layer(const Tensor<1, dim> &R)
- *     {
- *       switch (dim)
- *         {
- *           case 2:
- *             return (-std::log(R.norm()) / (2 * numbers::PI));
- * 
- *           case 3:
- *             return (1. / (R.norm() * 4 * numbers::PI));
- * 
- *           default:
- *             Assert(false, ExcInternalError());
- *             return 0.;
- *         }
- *     }
- * 
- * 
- * 
- *     template <int dim>
- *     Tensor<1, dim> double_layer(const Tensor<1, dim> &R)
- *     {
- *       switch (dim)
- *         {
- *           case 2:
- *             return R / (-2 * numbers::PI * R.norm_square());
- *           case 3:
- *             return R / (-4 * numbers::PI * R.norm_square() * R.norm());
- * 
- *           default:
- *             Assert(false, ExcInternalError());
- *             return Tensor<1, dim>();
- *         }
- *     }
- *   } // namespace LaplaceKernel
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TheBEMProblemclass"></a> 
- * <h3>The BEMProblem class</h3>
- * 
+<a name="Includefiles"></a> <h3>Include files</h3>
 
- * 
- * The structure of a boundary element method code is very similar to the
- * structure of a finite element code, and so the member functions of this
- * class are like those of most of the other tutorial programs. In
- * particular, by now you should be familiar with reading parameters from an
- * external file, and with the splitting of the different tasks into
- * different modules. The same applies to boundary element methods, and we
- * won't comment too much on them, except on the differences.
- * 
- * @code
- *   template <int dim>
- *   class BEMProblem
- *   {
- *   public:
- *     BEMProblem(const unsigned int fe_degree      = 1,
- *                const unsigned int mapping_degree = 1);
- * 
- *     void run();
- * 
- *   private:
- *     void read_parameters(const std::string &filename);
- * 
- *     void read_domain();
- * 
- *     void refine_and_resize();
- * 
- * @endcode
- * 
- * The only really different function that we find here is the assembly
- * routine. We wrote this function in the most possible general way, in
- * order to allow for easy generalization to higher order methods and to
- * different fundamental solutions (e.g., Stokes or Maxwell).
- *     
 
- * 
- * The most noticeable difference is the fact that the final matrix is
- * full, and that we have a nested loop inside the usual loop on cells
- * that visits all support points of the degrees of freedom.  Moreover,
- * when the support point lies inside the cell which we are visiting, then
- * the integral we perform becomes singular.
- *     
 
- * 
- * The practical consequence is that we have two sets of quadrature
- * formulas, finite element values and temporary storage, one for standard
- * integration and one for the singular integration, which are used where
- * necessary.
- * 
- * @code
- *     void assemble_system();
- * 
- * @endcode
- * 
- * There are two options for the solution of this problem. The first is to
- * use a direct solver, and the second is to use an iterative solver. We
- * opt for the second option.
- *     
 
- * 
- * The matrix that we assemble is not symmetric, and we opt to use the
- * GMRES method; however the construction of an efficient preconditioner
- * for boundary element methods is not a trivial issue. Here we use a non
- * preconditioned GMRES solver. The options for the iterative solver, such
- * as the tolerance, the maximum number of iterations, are selected
- * through the parameter file.
- * 
- * @code
- *     void solve_system();
- * 
- * @endcode
- * 
- * Once we obtained the solution, we compute the $L^2$ error of the
- * computed potential as well as the $L^\infty$ error of the approximation
- * of the solid angle. The mesh we are using is an approximation of a
- * smooth curve, therefore the computed diagonal matrix of fraction of
- * angles or solid angles $\alpha(\mathbf{x})$ should be constantly equal
- * to $\frac 12$. In this routine we output the error on the potential and
- * the error in the approximation of the computed angle. Notice that the
- * latter error is actually not the error in the computation of the angle,
- * but a measure of how well we are approximating the sphere and the
- * circle.
- *     
+程序一开始就包括了一堆include文件，我们将在程序的各个部分使用这些文件。它们中的大多数已经在以前的教程中讨论过了。
 
- * 
- * Experimenting a little with the computation of the angles gives very
- * accurate results for simpler geometries. To verify this you can comment
- * out, in the read_domain() method, the tria.set_manifold(1, manifold)
- * line, and check the alpha that is generated by the program. By removing
- * this call, whenever the mesh is refined new nodes will be placed along
- * the straight lines that made up the coarse mesh, rather than be pulled
- * onto the surface that we really want to approximate. In the three
- * dimensional case, the coarse grid of the sphere is obtained starting
- * from a cube, and the obtained values of alphas are exactly $\frac 12$
- * on the nodes of the faces, $\frac 34$ on the nodes of the edges and
- * $\frac 78$ on the 8 nodes of the vertices.
- * 
- * @code
- *     void compute_errors(const unsigned int cycle);
- * 
- * @endcode
- * 
- * Once we obtained a solution on the codimension one domain, we want to
- * interpolate it to the rest of the space. This is done by performing
- * again the convolution of the solution with the kernel in the
- * compute_exterior_solution() function.
- *     
+@code
+#include <deal.II/base/smartpointer.h>
+#include <deal.II/base/convergence_table.h>
+#include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/quadrature_selector.h>
+#include <deal.II/base/parsed_function.h>
+#include <deal.II/base/utilities.h>
 
- * 
- * We would like to plot the velocity variable which is the gradient of
- * the potential solution. The potential solution is only known on the
- * boundary, but we use the convolution with the fundamental solution to
- * interpolate it on a standard dim dimensional continuous finite element
- * space. The plot of the gradient of the extrapolated solution will give
- * us the velocity we want.
- *     
 
- * 
- * In addition to the solution on the exterior domain, we also output the
- * solution on the domain's boundary in the output_results() function, of
- * course.
- * 
- * @code
- *     void compute_exterior_solution();
- * 
- *     void output_results(const unsigned int cycle);
- * 
- * @endcode
- * 
- * To allow for dimension independent programming, we specialize this
- * single function to extract the singular quadrature formula needed to
- * integrate the singular kernels in the interior of the cells.
- * 
- * @code
- *     const Quadrature<dim - 1> &get_singular_quadrature(
- *       const typename DoFHandler<dim - 1, dim>::active_cell_iterator &cell,
- *       const unsigned int index) const;
- * 
- * 
- * @endcode
- * 
- * The usual deal.II classes can be used for boundary element methods by
- * specifying the "codimension" of the problem. This is done by setting
- * the optional second template arguments to Triangulation, FiniteElement
- * and DoFHandler to the dimension of the embedding space. In our case we
- * generate either 1 or 2 dimensional meshes embedded in 2 or 3
- * dimensional spaces.
- *     
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/vector.h>
+#include <deal.II/lac/solver_control.h>
+#include <deal.II/lac/solver_gmres.h>
+#include <deal.II/lac/precondition.h>
 
- * 
- * The optional argument by default is equal to the first argument, and
- * produces the usual finite element classes that we saw in all previous
- * examples.
- *     
 
- * 
- * The class is constructed in a way to allow for arbitrary order of
- * approximation of both the domain (through high order mapping) and the
- * finite element space. The order of the finite element space and of the
- * mapping can be selected in the constructor of the class.
- * 
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/grid_in.h>
+#include <deal.II/grid/grid_out.h>
+#include <deal.II/grid/manifold_lib.h>
 
- * 
- * 
- * @code
- *     Triangulation<dim - 1, dim> tria;
- *     FE_Q<dim - 1, dim>          fe;
- *     DoFHandler<dim - 1, dim>    dof_handler;
- *     MappingQ<dim - 1, dim>      mapping;
- * 
- * @endcode
- * 
- * In BEM methods, the matrix that is generated is dense. Depending on the
- * size of the problem, the final system might be solved by direct LU
- * decomposition, or by iterative methods. In this example we use an
- * unpreconditioned GMRES method. Building a preconditioner for BEM method
- * is non trivial, and we don't treat this subject here.
- * 
 
- * 
- * 
- * @code
- *     FullMatrix<double> system_matrix;
- *     Vector<double>     system_rhs;
- * 
- * @endcode
- * 
- * The next two variables will denote the solution $\phi$ as well as a
- * vector that will hold the values of $\alpha(\mathbf x)$ (the fraction
- * of $\Omega$ visible from a point $\mathbf x$) at the support points of
- * our shape functions.
- * 
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/dofs/dof_tools.h>
 
- * 
- * 
- * @code
- *     Vector<double> phi;
- *     Vector<double> alpha;
- * 
- * @endcode
- * 
- * The convergence table is used to output errors in the exact solution
- * and in the computed alphas.
- * 
 
- * 
- * 
- * @code
- *     ConvergenceTable convergence_table;
- * 
- * @endcode
- * 
- * The following variables are the ones that we fill through a parameter
- * file.  The new objects that we use in this example are the
- * Functions::ParsedFunction object and the QuadratureSelector object.
- *     
+#include <deal.II/fe/fe_q.h>
+#include <deal.II/fe/fe_values.h>
+#include <deal.II/fe/mapping_q.h>
 
- * 
- * The Functions::ParsedFunction class allows us to easily and quickly
- * define new function objects via parameter files, with custom
- * definitions which can be very complex (see the documentation of that
- * class for all the available options).
- *     
 
- * 
- * We will allocate the quadrature object using the QuadratureSelector
- * class that allows us to generate quadrature formulas based on an
- * identifying string and on the possible degree of the formula itself. We
- * used this to allow custom selection of the quadrature formulas for the
- * standard integration, and to define the order of the singular
- * quadrature rule.
- *     
+#include <deal.II/numerics/data_out.h>
+#include <deal.II/numerics/vector_tools.h>
 
- * 
- * We also define a couple of parameters which are used in case we wanted
- * to extend the solution to the entire domain.
- * 
 
- * 
- * 
- * @code
- *     Functions::ParsedFunction<dim> wind;
- *     Functions::ParsedFunction<dim> exact_solution;
- * 
- *     unsigned int                         singular_quadrature_order;
- *     std::shared_ptr<Quadrature<dim - 1>> quadrature;
- * 
- *     SolverControl solver_control;
- * 
- *     unsigned int n_cycles;
- *     unsigned int external_refinement;
- * 
- *     bool run_in_this_dimension;
- *     bool extend_solution;
- *   };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="BEMProblemBEMProblemandBEMProblemread_parameters"></a> 
- * <h4>BEMProblem::BEMProblem and BEMProblem::read_parameters</h4>
- * 
+@endcode 
 
- * 
- * The constructor initializes the various object in much the same way as
- * done in the finite element programs such as step-4 or step-6. The only
- * new ingredient here is the ParsedFunction object, which needs, at
- * construction time, the specification of the number of components.
- *   
 
- * 
- * For the exact solution the number of vector components is one, and no
- * action is required since one is the default value for a ParsedFunction
- * object. The wind, however, requires dim components to be
- * specified. Notice that when declaring entries in a parameter file for the
- * expression of the Functions::ParsedFunction, we need to specify the
- * number of components explicitly, since the function
- * Functions::ParsedFunction::declare_parameters is static, and has no
- * knowledge of the number of components.
- * 
- * @code
- *   template <int dim>
- *   BEMProblem<dim>::BEMProblem(const unsigned int fe_degree,
- *                               const unsigned int mapping_degree)
- *     : fe(fe_degree)
- *     , dof_handler(tria)
- *     , mapping(mapping_degree, true)
- *     , wind(dim)
- *     , singular_quadrature_order(5)
- *     , n_cycles(4)
- *     , external_refinement(5)
- *     , run_in_this_dimension(true)
- *     , extend_solution(true)
- *   {}
- * 
- * 
- *   template <int dim>
- *   void BEMProblem<dim>::read_parameters(const std::string &filename)
- *   {
- *     deallog << std::endl
- *             << "Parsing parameter file " << filename << std::endl
- *             << "for a " << dim << " dimensional simulation. " << std::endl;
- * 
- *     ParameterHandler prm;
- * 
- *     prm.declare_entry("Number of cycles", "4", Patterns::Integer());
- *     prm.declare_entry("External refinement", "5", Patterns::Integer());
- *     prm.declare_entry("Extend solution on the -2,2 box",
- *                       "true",
- *                       Patterns::Bool());
- *     prm.declare_entry("Run 2d simulation", "true", Patterns::Bool());
- *     prm.declare_entry("Run 3d simulation", "true", Patterns::Bool());
- * 
- *     prm.enter_subsection("Quadrature rules");
- *     {
- *       prm.declare_entry(
- *         "Quadrature type",
- *         "gauss",
- *         Patterns::Selection(
- *           QuadratureSelector<(dim - 1)>::get_quadrature_names()));
- *       prm.declare_entry("Quadrature order", "4", Patterns::Integer());
- *       prm.declare_entry("Singular quadrature order", "5", Patterns::Integer());
- *     }
- *     prm.leave_subsection();
- * 
- * @endcode
- * 
- * For both two and three dimensions, we set the default input data to be
- * such that the solution is $x+y$ or $x+y+z$. The actually computed
- * solution will have value zero at infinity. In this case, this coincide
- * with the exact solution, and no additional corrections are needed, but
- * you should be aware of the fact that we arbitrarily set $\phi_\infty$,
- * and the exact solution we pass to the program needs to have the same
- * value at infinity for the error to be computed correctly.
- *     
 
- * 
- * The use of the Functions::ParsedFunction object is pretty straight
- * forward. The Functions::ParsedFunction::declare_parameters function
- * takes an additional integer argument that specifies the number of
- * components of the given function. Its default value is one. When the
- * corresponding Functions::ParsedFunction::parse_parameters method is
- * called, the calling object has to have the same number of components
- * defined here, otherwise an exception is thrown.
- *     
+而这里有一些我们将需要的C++标准头文件。
 
- * 
- * When declaring entries, we declare both 2 and three dimensional
- * functions. However only the dim-dimensional one is ultimately
- * parsed. This allows us to have only one parameter file for both 2 and 3
- * dimensional problems.
- *     
+@code
+#include <cmath>
+#include <iostream>
+#include <fstream>
+#include <string>
 
- * 
- * Notice that from a mathematical point of view, the wind function on the
- * boundary should satisfy the condition $\int_{\partial\Omega}
- * \mathbf{v}\cdot \mathbf{n} d \Gamma = 0$, for the problem to have a
- * solution. If this condition is not satisfied, then no solution can be
- * found, and the solver will not converge.
- * 
- * @code
- *     prm.enter_subsection("Wind function 2d");
- *     {
- *       Functions::ParsedFunction<2>::declare_parameters(prm, 2);
- *       prm.set("Function expression", "1; 1");
- *     }
- *     prm.leave_subsection();
- * 
- *     prm.enter_subsection("Wind function 3d");
- *     {
- *       Functions::ParsedFunction<3>::declare_parameters(prm, 3);
- *       prm.set("Function expression", "1; 1; 1");
- *     }
- *     prm.leave_subsection();
- * 
- *     prm.enter_subsection("Exact solution 2d");
- *     {
- *       Functions::ParsedFunction<2>::declare_parameters(prm);
- *       prm.set("Function expression", "x+y");
- *     }
- *     prm.leave_subsection();
- * 
- *     prm.enter_subsection("Exact solution 3d");
- *     {
- *       Functions::ParsedFunction<3>::declare_parameters(prm);
- *       prm.set("Function expression", "x+y+z");
- *     }
- *     prm.leave_subsection();
- * 
- * 
- * @endcode
- * 
- * In the solver section, we set all SolverControl parameters. The object
- * will then be fed to the GMRES solver in the solve_system() function.
- * 
- * @code
- *     prm.enter_subsection("Solver");
- *     SolverControl::declare_parameters(prm);
- *     prm.leave_subsection();
- * 
- * @endcode
- * 
- * After declaring all these parameters to the ParameterHandler object,
- * let's read an input file that will give the parameters their values. We
- * then proceed to extract these values from the ParameterHandler object:
- * 
- * @code
- *     prm.parse_input(filename);
- * 
- *     n_cycles            = prm.get_integer("Number of cycles");
- *     external_refinement = prm.get_integer("External refinement");
- *     extend_solution     = prm.get_bool("Extend solution on the -2,2 box");
- * 
- *     prm.enter_subsection("Quadrature rules");
- *     {
- *       quadrature = std::shared_ptr<Quadrature<dim - 1>>(
- *         new QuadratureSelector<dim - 1>(prm.get("Quadrature type"),
- *                                         prm.get_integer("Quadrature order")));
- *       singular_quadrature_order = prm.get_integer("Singular quadrature order");
- *     }
- *     prm.leave_subsection();
- * 
- *     prm.enter_subsection("Wind function " + std::to_string(dim) + "d");
- *     {
- *       wind.parse_parameters(prm);
- *     }
- *     prm.leave_subsection();
- * 
- *     prm.enter_subsection("Exact solution " + std::to_string(dim) + "d");
- *     {
- *       exact_solution.parse_parameters(prm);
- *     }
- *     prm.leave_subsection();
- * 
- *     prm.enter_subsection("Solver");
- *     solver_control.parse_parameters(prm);
- *     prm.leave_subsection();
- * 
- * 
- * @endcode
- * 
- * Finally, here's another example of how to use parameter files in
- * dimension independent programming.  If we wanted to switch off one of
- * the two simulations, we could do this by setting the corresponding "Run
- * 2d simulation" or "Run 3d simulation" flag to false:
- * 
- * @code
- *     run_in_this_dimension =
- *       prm.get_bool("Run " + std::to_string(dim) + "d simulation");
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="BEMProblemread_domain"></a> 
- * <h4>BEMProblem::read_domain</h4>
- * 
 
- * 
- * A boundary element method triangulation is basically the same as a
- * (dim-1) dimensional triangulation, with the difference that the vertices
- * belong to a (dim) dimensional space.
- *   
+@endcode 
 
- * 
- * Some of the mesh formats supported in deal.II use by default three
- * dimensional points to describe meshes. These are the formats which are
- * compatible with the boundary element method capabilities of deal.II. In
- * particular we can use either UCD or GMSH formats. In both cases, we have
- * to be particularly careful with the orientation of the mesh, because,
- * unlike in the standard finite element case, no reordering or
- * compatibility check is performed here.  All meshes are considered as
- * oriented, because they are embedded in a higher dimensional space. (See
- * the documentation of the GridIn and of the Triangulation for further
- * details on orientation of cells in a triangulation.) In our case, the
- * normals to the mesh are external to both the circle in 2d or the sphere
- * in 3d.
- *   
 
- * 
- * The other detail that is required for appropriate refinement of
- * the boundary element mesh is an accurate description of the
- * manifold that the mesh approximates. We already saw this
- * several times for the boundary of standard finite element meshes
- * (for example in step-5 and step-6), and here the principle and
- * usage is the same, except that the SphericalManifold class takes
- * an additional template parameter that specifies the embedding
- * space dimension.
- * 
 
- * 
- * 
- * @code
- *   template <int dim>
- *   void BEMProblem<dim>::read_domain()
- *   {
- *     const Point<dim>                      center = Point<dim>();
- *     const SphericalManifold<dim - 1, dim> manifold(center);
- * 
- *     std::ifstream in;
- *     switch (dim)
- *       {
- *         case 2:
- *           in.open("coarse_circle.inp");
- *           break;
- * 
- *         case 3:
- *           in.open("coarse_sphere.inp");
- *           break;
- * 
- *         default:
- *           Assert(false, ExcNotImplemented());
- *       }
- * 
- *     GridIn<dim - 1, dim> gi;
- *     gi.attach_triangulation(tria);
- *     gi.read_ucd(in);
- * 
- *     tria.set_all_manifold_ids(1);
- * @endcode
- * 
- * The call to Triangulation::set_manifold copies the manifold (via
- * Manifold::clone()), so we do not need to worry about invalid pointers
- * to <code>manifold</code>:
- * 
- * @code
- *     tria.set_manifold(1, manifold);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="BEMProblemrefine_and_resize"></a> 
- * <h4>BEMProblem::refine_and_resize</h4>
- * 
+本序言的最后一部分是将dealii命名空间中的所有内容导入本程序中的所有内容。
 
- * 
- * This function globally refines the mesh, distributes degrees of freedom,
- * and resizes matrices and vectors.
- * 
+@code
+namespace Step34
+{
+  using namespace dealii;
 
- * 
- * 
- * @code
- *   template <int dim>
- *   void BEMProblem<dim>::refine_and_resize()
- *   {
- *     tria.refine_global(1);
- * 
- *     dof_handler.distribute_dofs(fe);
- * 
- *     const unsigned int n_dofs = dof_handler.n_dofs();
- * 
- *     system_matrix.reinit(n_dofs, n_dofs);
- * 
- *     system_rhs.reinit(n_dofs);
- *     phi.reinit(n_dofs);
- *     alpha.reinit(n_dofs);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="BEMProblemassemble_system"></a> 
- * <h4>BEMProblem::assemble_system</h4>
- * 
 
- * 
- * The following is the main function of this program, assembling the matrix
- * that corresponds to the boundary integral equation.
- * 
- * @code
- *   template <int dim>
- *   void BEMProblem<dim>::assemble_system()
- *   {
- * @endcode
- * 
- * First we initialize an FEValues object with the quadrature formula for
- * the integration of the kernel in non singular cells. This quadrature is
- * selected with the parameter file, and needs to be quite precise, since
- * the functions we are integrating are not polynomial functions.
- * 
- * @code
- *     FEValues<dim - 1, dim> fe_v(mapping,
- *                                 fe,
- *                                 *quadrature,
- *                                 update_values | update_normal_vectors |
- *                                   update_quadrature_points | update_JxW_values);
- * 
- *     const unsigned int n_q_points = fe_v.n_quadrature_points;
- * 
- *     std::vector<types::global_dof_index> local_dof_indices(
- *       fe.n_dofs_per_cell());
- * 
- *     std::vector<Vector<double>> cell_wind(n_q_points, Vector<double>(dim));
- *     double                      normal_wind;
- * 
- * @endcode
- * 
- * Unlike in finite element methods, if we use a collocation boundary
- * element method, then in each assembly loop we only assemble the
- * information that refers to the coupling between one degree of freedom
- * (the degree associated with support point $i$) and the current
- * cell. This is done using a vector of fe.dofs_per_cell elements, which
- * will then be distributed to the matrix in the global row $i$. The
- * following object will hold this information:
- * 
- * @code
- *     Vector<double> local_matrix_row_i(fe.n_dofs_per_cell());
- * 
- * @endcode
- * 
- * The index $i$ runs on the collocation points, which are the support
- * points of the $i$th basis function, while $j$ runs on inner integration
- * points.
- * 
 
- * 
- * We construct a vector of support points which will be used in the local
- * integrations:
- * 
- * @code
- *     std::vector<Point<dim>> support_points(dof_handler.n_dofs());
- *     DoFTools::map_dofs_to_support_points<dim - 1, dim>(mapping,
- *                                                        dof_handler,
- *                                                        support_points);
- * 
- * 
- * @endcode
- * 
- * After doing so, we can start the integration loop over all cells, where
- * we first initialize the FEValues object and get the values of
- * $\mathbf{\tilde v}$ at the quadrature points (this vector field should
- * be constant, but it doesn't hurt to be more general):
- * 
- * @code
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       {
- *         fe_v.reinit(cell);
- *         cell->get_dof_indices(local_dof_indices);
- * 
- *         const std::vector<Point<dim>> &q_points = fe_v.get_quadrature_points();
- *         const std::vector<Tensor<1, dim>> &normals = fe_v.get_normal_vectors();
- *         wind.vector_value_list(q_points, cell_wind);
- * 
- * @endcode
- * 
- * We then form the integral over the current cell for all degrees of
- * freedom (note that this includes degrees of freedom not located on
- * the current cell, a deviation from the usual finite element
- * integrals). The integral that we need to perform is singular if one
- * of the local degrees of freedom is the same as the support point
- * $i$. A the beginning of the loop we therefore check whether this is
- * the case, and we store which one is the singular index:
- * 
- * @code
- *         for (unsigned int i = 0; i < dof_handler.n_dofs(); ++i)
- *           {
- *             local_matrix_row_i = 0;
- * 
- *             bool         is_singular    = false;
- *             unsigned int singular_index = numbers::invalid_unsigned_int;
- * 
- *             for (unsigned int j = 0; j < fe.n_dofs_per_cell(); ++j)
- *               if (local_dof_indices[j] == i)
- *                 {
- *                   singular_index = j;
- *                   is_singular    = true;
- *                   break;
- *                 }
- * 
- * @endcode
- * 
- * We then perform the integral. If the index $i$ is not one of
- * the local degrees of freedom, we simply have to add the single
- * layer terms to the right hand side, and the double layer terms
- * to the matrix:
- * 
- * @code
- *             if (is_singular == false)
- *               {
- *                 for (unsigned int q = 0; q < n_q_points; ++q)
- *                   {
- *                     normal_wind = 0;
- *                     for (unsigned int d = 0; d < dim; ++d)
- *                       normal_wind += normals[q][d] * cell_wind[q](d);
- * 
- *                     const Tensor<1, dim> R = q_points[q] - support_points[i];
- * 
- *                     system_rhs(i) += (LaplaceKernel::single_layer(R) *
- *                                       normal_wind * fe_v.JxW(q));
- * 
- *                     for (unsigned int j = 0; j < fe.n_dofs_per_cell(); ++j)
- * 
- *                       local_matrix_row_i(j) -=
- *                         ((LaplaceKernel::double_layer(R) * normals[q]) *
- *                          fe_v.shape_value(j, q) * fe_v.JxW(q));
- *                   }
- *               }
- *             else
- *               {
- * @endcode
- * 
- * Now we treat the more delicate case. If we are here, this
- * means that the cell that runs on the $j$ index contains
- * support_point[i]. In this case both the single and the
- * double layer potential are singular, and they require
- * special treatment.
- *                 
+@endcode 
 
- * 
- * Whenever the integration is performed with the singularity
- * inside the given cell, then a special quadrature formula is
- * used that allows one to integrate arbitrary functions
- * against a singular weight on the reference cell.
- *                 
 
- * 
- * The correct quadrature formula is selected by the
- * get_singular_quadrature function, which is explained in
- * detail below.
- * 
- * @code
- *                 Assert(singular_index != numbers::invalid_unsigned_int,
- *                        ExcInternalError());
- * 
- *                 const Quadrature<dim - 1> &singular_quadrature =
- *                   get_singular_quadrature(cell, singular_index);
- * 
- *                 FEValues<dim - 1, dim> fe_v_singular(
- *                   mapping,
- *                   fe,
- *                   singular_quadrature,
- *                   update_jacobians | update_values | update_normal_vectors |
- *                     update_quadrature_points);
- * 
- *                 fe_v_singular.reinit(cell);
- * 
- *                 std::vector<Vector<double>> singular_cell_wind(
- *                   singular_quadrature.size(), Vector<double>(dim));
- * 
- *                 const std::vector<Tensor<1, dim>> &singular_normals =
- *                   fe_v_singular.get_normal_vectors();
- *                 const std::vector<Point<dim>> &singular_q_points =
- *                   fe_v_singular.get_quadrature_points();
- * 
- *                 wind.vector_value_list(singular_q_points, singular_cell_wind);
- * 
- *                 for (unsigned int q = 0; q < singular_quadrature.size(); ++q)
- *                   {
- *                     const Tensor<1, dim> R =
- *                       singular_q_points[q] - support_points[i];
- *                     double normal_wind = 0;
- *                     for (unsigned int d = 0; d < dim; ++d)
- *                       normal_wind +=
- *                         (singular_cell_wind[q](d) * singular_normals[q][d]);
- * 
- *                     system_rhs(i) += (LaplaceKernel::single_layer(R) *
- *                                       normal_wind * fe_v_singular.JxW(q));
- * 
- *                     for (unsigned int j = 0; j < fe.n_dofs_per_cell(); ++j)
- *                       {
- *                         local_matrix_row_i(j) -=
- *                           ((LaplaceKernel::double_layer(R) *
- *                             singular_normals[q]) *
- *                            fe_v_singular.shape_value(j, q) *
- *                            fe_v_singular.JxW(q));
- *                       }
- *                   }
- *               }
- * 
- * @endcode
- * 
- * Finally, we need to add the contributions of the current cell
- * to the global matrix.
- * 
- * @code
- *             for (unsigned int j = 0; j < fe.n_dofs_per_cell(); ++j)
- *               system_matrix(i, local_dof_indices[j]) += local_matrix_row_i(j);
- *           }
- *       }
- * 
- * @endcode
- * 
- * The second part of the integral operator is the term
- * $\alpha(\mathbf{x}_i) \phi_j(\mathbf{x}_i)$. Since we use a collocation
- * scheme, $\phi_j(\mathbf{x}_i)=\delta_{ij}$ and the corresponding matrix
- * is a diagonal one with entries equal to $\alpha(\mathbf{x}_i)$.
- * 
 
- * 
- * One quick way to compute this diagonal matrix of the solid angles, is
- * to use the Neumann matrix itself. It is enough to multiply the matrix
- * with a vector of elements all equal to -1, to get the diagonal matrix
- * of the alpha angles, or solid angles (see the formula in the
- * introduction for this). The result is then added back onto the system
- * matrix object to yield the final form of the matrix:
- * 
- * @code
- *     Vector<double> ones(dof_handler.n_dofs());
- *     ones.add(-1.);
- * 
- *     system_matrix.vmult(alpha, ones);
- *     alpha.add(1);
- *     for (unsigned int i = 0; i < dof_handler.n_dofs(); ++i)
- *       system_matrix(i, i) += alpha(i);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="BEMProblemsolve_system"></a> 
- * <h4>BEMProblem::solve_system</h4>
- * 
 
- * 
- * The next function simply solves the linear system.
- * 
- * @code
- *   template <int dim>
- *   void BEMProblem<dim>::solve_system()
- *   {
- *     SolverGMRES<Vector<double>> solver(solver_control);
- *     solver.solve(system_matrix, phi, system_rhs, PreconditionIdentity());
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="BEMProblemcompute_errors"></a> 
- * <h4>BEMProblem::compute_errors</h4>
- * 
+<a name="Singleanddoublelayeroperatorkernels"></a><h3>Single and double layer operator kernels</h3>
 
- * 
- * The computation of the errors is exactly the same in all other example
- * programs, and we won't comment too much. Notice how the same methods that
- * are used in the finite element methods can be used here.
- * 
- * @code
- *   template <int dim>
- *   void BEMProblem<dim>::compute_errors(const unsigned int cycle)
- *   {
- *     Vector<float> difference_per_cell(tria.n_active_cells());
- *     VectorTools::integrate_difference(mapping,
- *                                       dof_handler,
- *                                       phi,
- *                                       exact_solution,
- *                                       difference_per_cell,
- *                                       QGauss<(dim - 1)>(2 * fe.degree + 1),
- *                                       VectorTools::L2_norm);
- *     const double L2_error =
- *       VectorTools::compute_global_error(tria,
- *                                         difference_per_cell,
- *                                         VectorTools::L2_norm);
- * 
- * @endcode
- * 
- * The error in the alpha vector can be computed directly using the
- * Vector::linfty_norm() function, since on each node, the value should be
- * $\frac 12$. All errors are then output and appended to our
- * ConvergenceTable object for later computation of convergence rates:
- * 
- * @code
- *     Vector<double> difference_per_node(alpha);
- *     difference_per_node.add(-.5);
- * 
- *     const double       alpha_error    = difference_per_node.linfty_norm();
- *     const unsigned int n_active_cells = tria.n_active_cells();
- *     const unsigned int n_dofs         = dof_handler.n_dofs();
- * 
- *     deallog << "Cycle " << cycle << ':' << std::endl
- *             << "   Number of active cells:       " << n_active_cells
- *             << std::endl
- *             << "   Number of degrees of freedom: " << n_dofs << std::endl;
- * 
- *     convergence_table.add_value("cycle", cycle);
- *     convergence_table.add_value("cells", n_active_cells);
- *     convergence_table.add_value("dofs", n_dofs);
- *     convergence_table.add_value("L2(phi)", L2_error);
- *     convergence_table.add_value("Linfty(alpha)", alpha_error);
- *   }
- * 
- * 
- * @endcode
- * 
- * Singular integration requires a careful selection of the quadrature
- * rules. In particular the deal.II library provides quadrature rules which
- * are tailored for logarithmic singularities (QGaussLog, QGaussLogR), as
- * well as for 1/R singularities (QGaussOneOverR).
- *   
 
- * 
- * Singular integration is typically obtained by constructing weighted
- * quadrature formulas with singular weights, so that it is possible to
- * write
- *   
 
- * 
- * \f[ \int_K f(x) s(x) dx = \sum_{i=1}^N w_i f(q_i) \f]
- *   
 
- * 
- * where $s(x)$ is a given singularity, and the weights and quadrature
- * points $w_i,q_i$ are carefully selected to make the formula above an
- * equality for a certain class of functions $f(x)$.
- *   
+首先，让我们定义一下边界积分方程的机制。
 
- * 
- * In all the finite element examples we have seen so far, the weight of the
- * quadrature itself (namely, the function $s(x)$), was always constantly
- * equal to 1.  For singular integration, we have two choices: we can use
- * the definition above, factoring out the singularity from the integrand
- * (i.e., integrating $f(x)$ with the special quadrature rule), or we can
- * ask the quadrature rule to "normalize" the weights $w_i$ with $s(q_i)$:
- *   
 
- * 
- * \f[ \int_K f(x) s(x) dx = \int_K g(x) dx = \sum_{i=1}^N
- * \frac{w_i}{s(q_i)} g(q_i) \f]
- *   
 
- * 
- * We use this second option, through the @p factor_out_singularity
- * parameter of both QGaussLogR and QGaussOneOverR.
- *   
 
- * 
- * These integrals are somewhat delicate, especially in two dimensions, due
- * to the transformation from the real to the reference cell, where the
- * variable of integration is scaled with the determinant of the
- * transformation.
- *   
+下面两个函数是单层和双层势能核的实际计算，即  $G$  和  $\nabla G$  。只有当矢量 $R = \mathbf{y}-\mathbf{x}$ 不同于零时，它们才是定义良好的。
 
- * 
- * In two dimensions this process does not result only in a factor appearing
- * as a constant factor on the entire integral, but also on an additional
- * integral altogether that needs to be evaluated:
- *   
+@code
+  namespace LaplaceKernel
+  {
+    template <int dim>
+    double single_layer(const Tensor<1, dim> &R)
+    {
+      switch (dim)
+        {
+          case 2:
+            return (-std::log(R.norm()) / (2 * numbers::PI));
 
- * 
- * \f[ \int_0^1 f(x)\ln(x/\alpha) dx = \int_0^1 f(x)\ln(x) dx - \int_0^1
- * f(x) \ln(\alpha) dx.  \f]
- *   
 
- * 
- * This process is taken care of by the constructor of the QGaussLogR class,
- * which adds additional quadrature points and weights to take into
- * consideration also the second part of the integral.
- *   
+          case 3:
+            return (1. / (R.norm() * 4 * numbers::PI));
 
- * 
- * A similar reasoning should be done in the three dimensional case, since
- * the singular quadrature is tailored on the inverse of the radius $r$ in
- * the reference cell, while our singular function lives in real space,
- * however in the three dimensional case everything is simpler because the
- * singularity scales linearly with the determinant of the
- * transformation. This allows us to build the singular two dimensional
- * quadrature rules only once and, reuse them over all cells.
- *   
 
- * 
- * In the one dimensional singular integration this is not possible, since
- * we need to know the scaling parameter for the quadrature, which is not
- * known a priori. Here, the quadrature rule itself depends also on the size
- * of the current cell. For this reason, it is necessary to create a new
- * quadrature for each singular integration.
- *   
+          default:
+            Assert(false, ExcInternalError());
+            return 0.;
+        }
+    }
 
- * 
- * The different quadrature rules are built inside the
- * get_singular_quadrature, which is specialized for dim=2 and dim=3, and
- * they are retrieved inside the assemble_system function. The index given
- * as an argument is the index of the unit support point where the
- * singularity is located.
- * 
 
- * 
- * 
- * @code
- *   template <>
- *   const Quadrature<2> &BEMProblem<3>::get_singular_quadrature(
- *     const DoFHandler<2, 3>::active_cell_iterator &,
- *     const unsigned int index) const
- *   {
- *     Assert(index < fe.n_dofs_per_cell(),
- *            ExcIndexRange(0, fe.n_dofs_per_cell(), index));
- * 
- *     static std::vector<QGaussOneOverR<2>> quadratures;
- *     if (quadratures.size() == 0)
- *       for (unsigned int i = 0; i < fe.n_dofs_per_cell(); ++i)
- *         quadratures.emplace_back(singular_quadrature_order,
- *                                  fe.get_unit_support_points()[i],
- *                                  true);
- *     return quadratures[index];
- *   }
- * 
- * 
- *   template <>
- *   const Quadrature<1> &BEMProblem<2>::get_singular_quadrature(
- *     const DoFHandler<1, 2>::active_cell_iterator &cell,
- *     const unsigned int                            index) const
- *   {
- *     Assert(index < fe.n_dofs_per_cell(),
- *            ExcIndexRange(0, fe.n_dofs_per_cell(), index));
- * 
- *     static Quadrature<1> *q_pointer = nullptr;
- *     if (q_pointer)
- *       delete q_pointer;
- * 
- *     q_pointer = new QGaussLogR<1>(singular_quadrature_order,
- *                                   fe.get_unit_support_points()[index],
- *                                   1. / cell->measure(),
- *                                   true);
- *     return (*q_pointer);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="BEMProblemcompute_exterior_solution"></a> 
- * <h4>BEMProblem::compute_exterior_solution</h4>
- * 
 
- * 
- * We'd like to also know something about the value of the potential $\phi$
- * in the exterior domain: after all our motivation to consider the boundary
- * integral problem was that we wanted to know the velocity in the exterior
- * domain!
- *   
 
- * 
- * To this end, let us assume here that the boundary element domain is
- * contained in the box $[-2,2]^{\text{dim}}$, and we extrapolate the actual
- * solution inside this box using the convolution with the fundamental
- * solution. The formula for this is given in the introduction.
- *   
 
- * 
- * The reconstruction of the solution in the entire space is done on a
- * continuous finite element grid of dimension dim. These are the usual
- * ones, and we don't comment any further on them. At the end of the
- * function, we output this exterior solution in, again, much the usual way.
- * 
- * @code
- *   template <int dim>
- *   void BEMProblem<dim>::compute_exterior_solution()
- *   {
- *     Triangulation<dim> external_tria;
- *     GridGenerator::hyper_cube(external_tria, -2, 2);
- * 
- *     FE_Q<dim>       external_fe(1);
- *     DoFHandler<dim> external_dh(external_tria);
- *     Vector<double>  external_phi;
- * 
- *     external_tria.refine_global(external_refinement);
- *     external_dh.distribute_dofs(external_fe);
- *     external_phi.reinit(external_dh.n_dofs());
- * 
- *     FEValues<dim - 1, dim> fe_v(mapping,
- *                                 fe,
- *                                 *quadrature,
- *                                 update_values | update_normal_vectors |
- *                                   update_quadrature_points | update_JxW_values);
- * 
- *     const unsigned int n_q_points = fe_v.n_quadrature_points;
- * 
- *     std::vector<types::global_dof_index> dofs(fe.n_dofs_per_cell());
- * 
- *     std::vector<double>         local_phi(n_q_points);
- *     std::vector<double>         normal_wind(n_q_points);
- *     std::vector<Vector<double>> local_wind(n_q_points, Vector<double>(dim));
- * 
- *     std::vector<Point<dim>> external_support_points(external_dh.n_dofs());
- *     DoFTools::map_dofs_to_support_points<dim>(StaticMappingQ1<dim>::mapping,
- *                                               external_dh,
- *                                               external_support_points);
- * 
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       {
- *         fe_v.reinit(cell);
- * 
- *         const std::vector<Point<dim>> &q_points = fe_v.get_quadrature_points();
- *         const std::vector<Tensor<1, dim>> &normals = fe_v.get_normal_vectors();
- * 
- *         cell->get_dof_indices(dofs);
- *         fe_v.get_function_values(phi, local_phi);
- * 
- *         wind.vector_value_list(q_points, local_wind);
- * 
- *         for (unsigned int q = 0; q < n_q_points; ++q)
- *           {
- *             normal_wind[q] = 0;
- *             for (unsigned int d = 0; d < dim; ++d)
- *               normal_wind[q] += normals[q][d] * local_wind[q](d);
- *           }
- * 
- *         for (unsigned int i = 0; i < external_dh.n_dofs(); ++i)
- *           for (unsigned int q = 0; q < n_q_points; ++q)
- *             {
- *               const Tensor<1, dim> R = q_points[q] - external_support_points[i];
- * 
- *               external_phi(i) +=
- *                 ((LaplaceKernel::single_layer(R) * normal_wind[q] +
- *                   (LaplaceKernel::double_layer(R) * normals[q]) *
- *                     local_phi[q]) *
- *                  fe_v.JxW(q));
- *             }
- *       }
- * 
- *     DataOut<dim> data_out;
- * 
- *     data_out.attach_dof_handler(external_dh);
- *     data_out.add_data_vector(external_phi, "external_phi");
- *     data_out.build_patches();
- * 
- *     const std::string filename = std::to_string(dim) + "d_external.vtk";
- *     std::ofstream     file(filename);
- * 
- *     data_out.write_vtk(file);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="BEMProblemoutput_results"></a> 
- * <h4>BEMProblem::output_results</h4>
- * 
+    template <int dim>
+    Tensor<1, dim> double_layer(const Tensor<1, dim> &R)
+    {
+      switch (dim)
+        {
+          case 2:
+            return R / (-2 * numbers::PI * R.norm_square());
+          case 3:
+            return R / (-4 * numbers::PI * R.norm_square() * R.norm());
 
- * 
- * Outputting the results of our computations is a rather mechanical
- * tasks. All the components of this function have been discussed before.
- * 
- * @code
- *   template <int dim>
- *   void BEMProblem<dim>::output_results(const unsigned int cycle)
- *   {
- *     DataOut<dim - 1, DoFHandler<dim - 1, dim>> dataout;
- * 
- *     dataout.attach_dof_handler(dof_handler);
- *     dataout.add_data_vector(
- *       phi, "phi", DataOut<dim - 1, DoFHandler<dim - 1, dim>>::type_dof_data);
- *     dataout.add_data_vector(
- *       alpha,
- *       "alpha",
- *       DataOut<dim - 1, DoFHandler<dim - 1, dim>>::type_dof_data);
- *     dataout.build_patches(
- *       mapping,
- *       mapping.get_degree(),
- *       DataOut<dim - 1, DoFHandler<dim - 1, dim>>::curved_inner_cells);
- * 
- *     const std::string filename = std::to_string(dim) + "d_boundary_solution_" +
- *                                  std::to_string(cycle) + ".vtk";
- *     std::ofstream file(filename);
- * 
- *     dataout.write_vtk(file);
- * 
- *     if (cycle == n_cycles - 1)
- *       {
- *         convergence_table.set_precision("L2(phi)", 3);
- *         convergence_table.set_precision("Linfty(alpha)", 3);
- * 
- *         convergence_table.set_scientific("L2(phi)", true);
- *         convergence_table.set_scientific("Linfty(alpha)", true);
- * 
- *         convergence_table.evaluate_convergence_rates(
- *           "L2(phi)", ConvergenceTable::reduction_rate_log2);
- *         convergence_table.evaluate_convergence_rates(
- *           "Linfty(alpha)", ConvergenceTable::reduction_rate_log2);
- *         deallog << std::endl;
- *         convergence_table.write_text(std::cout);
- *       }
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="BEMProblemrun"></a> 
- * <h4>BEMProblem::run</h4>
- * 
 
- * 
- * This is the main function. It should be self explanatory in its
- * briefness:
- * 
- * @code
- *   template <int dim>
- *   void BEMProblem<dim>::run()
- *   {
- *     read_parameters("parameters.prm");
- * 
- *     if (run_in_this_dimension == false)
- *       {
- *         deallog << "Run in dimension " << dim
- *                 << " explicitly disabled in parameter file. " << std::endl;
- *         return;
- *       }
- * 
- *     read_domain();
- * 
- *     for (unsigned int cycle = 0; cycle < n_cycles; ++cycle)
- *       {
- *         refine_and_resize();
- *         assemble_system();
- *         solve_system();
- *         compute_errors(cycle);
- *         output_results(cycle);
- *       }
- * 
- *     if (extend_solution == true)
- *       compute_exterior_solution();
- *   }
- * } // namespace Step34
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Themainfunction"></a> 
- * <h3>The main() function</h3>
- * 
+          default:
+            Assert(false, ExcInternalError());
+            return Tensor<1, dim>();
+        }
+    }
+  } // namespace LaplaceKernel
 
- * 
- * This is the main function of this program. It is exactly like all previous
- * tutorial programs:
- * 
- * @code
- * int main()
- * {
- *   try
- *     {
- *       using namespace Step34;
- * 
- *       const unsigned int degree         = 1;
- *       const unsigned int mapping_degree = 1;
- * 
- *       deallog.depth_console(3);
- *       BEMProblem<2> laplace_problem_2d(degree, mapping_degree);
- *       laplace_problem_2d.run();
- * 
- *       BEMProblem<3> laplace_problem_3d(degree, mapping_degree);
- *       laplace_problem_3d.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- * 
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
+
+
+@endcode 
+
+
+
+
+<a name="TheBEMProblemclass"></a><h3>The BEMProblem class</h3>
+
+
+
+
+边界元素方法代码的结构与有限元素代码的结构非常相似，因此这个类的成员函数与其他大多数教程程序的成员函数一样。特别是，现在你应该熟悉从外部文件读取参数，以及将不同的任务分割成不同的模块。这同样适用于边界元素方法，除了区别之外，我们不会对其进行过多的评论。
+
+@code
+  template <int dim>
+  class BEMProblem
+  {
+  public:
+    BEMProblem(const unsigned int fe_degree      = 1,
+               const unsigned int mapping_degree = 1);
+
+
+    void run();
+
+
+  private:
+    void read_parameters(const std::string &filename);
+
+
+    void read_domain();
+
+
+    void refine_and_resize();
+
+
+@endcode 
+
+
+
+在这里，我们发现唯一真正不同的函数是装配例程。我们以尽可能通用的方式编写了这个函数，以便能够方便地推广到高阶方法和不同的基本解（例如，斯托克斯或麦克斯韦）。     
+
+
+最明显的区别是，最终的矩阵是完整的，而且我们在通常的单元格循环内有一个嵌套循环，访问所有自由度的支持点。 此外，当支持点位于我们所访问的单元内时，我们所执行的积分就会变成单数。     
+
+
+实际结果是，我们有两套正交公式、有限元值和临时存储，一套用于标准积分，另一套用于奇异积分，在必要时使用。
+
+@code
+    void assemble_system();
+
+
+@endcode 
+
+
+
+这个问题的解决有两种选择。第一个是使用直接求解器，第二个是使用迭代求解器。我们选择了第二种方案。     
+
+
+我们收集的矩阵不是对称的，我们选择使用GMRES方法；然而，为边界元素方法构建一个有效的预处理程序不是一个简单的问题。这里我们使用了一个非预处理的GMRES求解器。迭代求解器的选项，如公差、最大迭代次数等，都是通过参数文件选择的。
+
+@code
+    void solve_system();
+
+
+@endcode 
+
+
+
+一旦我们得到了解决方案，我们就计算出计算出的势的 $L^2$ 误差以及实体角的近似值的 $L^\infty$ 误差。我们使用的网格是平滑曲线的近似值，因此计算出的角的分量或实体角的对角线矩阵  $\alpha(\mathbf{x})$  应该一直等于  $\frac 12$  。在这个例程中，我们输出势的误差和计算角度的近似值的误差。注意，后者的误差实际上不是计算角度的误差，而是衡量我们对球体和圆的近似程度。     
+
+
+对角度的计算做一些实验，对于较简单的几何形状，可以得到非常准确的结果。为了验证这一点，你可以在read_domain()方法中注释掉tria.set_manifold(1, manifold)一行，并检查程序生成的alpha。通过删除这个调用，每当细化网格时，新的节点将沿着构成粗略网格的直线放置，而不是被拉到我们真正想要近似的表面。在三维案例中，球体的粗网格是从一个立方体开始得到的，得到的字母值在面的节点上正好是 $\frac 12$ ，在边的节点上是 $\frac 34$ ，在顶点的八个节点上是 $\frac 78$ 。
+
+@code
+    void compute_errors(const unsigned int cycle);
+
+
+@endcode 
+
+
+
+一旦我们在一维域上得到一个解决方案，我们就想把它插值到空间的其他部分。这可以通过在compute_exterior_solution()函数中再次进行解与核的卷积来实现。     
+
+
+我们想绘制速度变量，也就是势解的梯度。势解只在边界上是已知的，但我们使用与基本解的卷积在标准的二维连续有限元空间上进行内插。外推解的梯度图将给我们提供我们想要的速度。     
+
+
+当然，除了外域上的解之外，我们还在output_results()函数中输出域的边界上的解。
+
+@code
+    void compute_exterior_solution();
+
+
+    void output_results(const unsigned int cycle);
+
+
+@endcode 
+
+
+
+为了允许不受维度限制的编程，我们对这个单一的函数进行了专业化处理，以提取整合单元内部的奇异核所需的奇异正交公式。
+
+@code
+    const Quadrature<dim - 1> &get_singular_quadrature(
+      const typename DoFHandler<dim - 1, dim>::active_cell_iterator &cell,
+      const unsigned int index) const;
+
+
+
+@endcode 
+
+
+
+通常的deal.II类可以通过指定问题的 "二维 "来用于边界元素方法。这是通过将Triangulation, FiniteElement和DoFHandler的可选第二模板参数设置为嵌入空间的维度来实现的。在我们的例子中，我们生成的是嵌入在2或3维空间的1或2维网格。     
+
+
+默认情况下，可选参数等于第一个参数，并产生我们在之前所有例子中看到的通常的有限元类。     
+
+
+该类的构造方式是允许任意的域（通过高阶映射）和有限元空间的逼近顺序。有限元空间和映射的顺序可以在该类的构造函数中选择。
+
+
+
+
+
+
+
+@code
+    Triangulation<dim - 1, dim> tria;
+    FE_Q<dim - 1, dim>          fe;
+    DoFHandler<dim - 1, dim>    dof_handler;
+    MappingQ<dim - 1, dim>      mapping;
+
+
+@endcode 
+
+
+
+在BEM方法中，生成的矩阵是密集的。根据问题的大小，最终的系统可能通过直接的LU分解来解决，或者通过迭代方法来解决。在这个例子中，我们使用了一个无条件的GMRES方法。为BEM方法建立一个预处理程序是不容易的，我们在此不作处理。
+
+
+
+
+
+
+
+@code
+    FullMatrix<double> system_matrix;
+    Vector<double>     system_rhs;
+
+
+@endcode 
+
+
+
+接下来的两个变量将表示解决方案 $\phi$ 以及一个向量，它将保持 $\alpha(\mathbf x)$ 的值（从一个点 $\mathbf x$ 可见的 $\Omega$ 的部分）在我们形状函数的支持点。
+
+
+
+
+
+
+
+@code
+    Vector<double> phi;
+    Vector<double> alpha;
+
+
+@endcode 
+
+
+
+收敛表用于输出精确解和计算的字母的误差。
+
+
+
+
+
+
+
+@code
+    ConvergenceTable convergence_table;
+
+
+@endcode 
+
+
+
+下面的变量是我们通过参数文件来填充的。 本例中我们使用的新对象是 Functions::ParsedFunction 对象和QuadratureSelector对象。     
+
+
+ Functions::ParsedFunction 类允许我们通过参数文件轻松快速地定义新的函数对象，自定义的定义可以非常复杂（所有可用的选项请参见该类的文档）。     
+
+
+我们将使用QuadratureSelector类来分配正交对象，该类允许我们根据一个识别字符串和公式本身的可能程度来生成正交公式。我们用它来允许自定义选择标准积分的正交公式，并定义奇异正交规则的顺序。     
+
+
+我们还定义了几个参数，这些参数是在我们想把解决方案扩展到整个领域的情况下使用的。
+
+
+
+
+
+
+
+@code
+    Functions::ParsedFunction<dim> wind;
+    Functions::ParsedFunction<dim> exact_solution;
+
+
+    unsigned int                         singular_quadrature_order;
+    std::shared_ptr<Quadrature<dim - 1>> quadrature;
+
+
+    SolverControl solver_control;
+
+
+    unsigned int n_cycles;
+    unsigned int external_refinement;
+
+
+    bool run_in_this_dimension;
+    bool extend_solution;
+  };
+
+
+
+@endcode 
+
+
+
+
+<a name="BEMProblemBEMProblemandBEMProblemread_parameters"></a> <h4>BEMProblem::BEMProblem and BEMProblem::read_parameters</h4> 
+
+
+
+
+构造器初始化各种对象的方式与有限元程序（如  step-4  或  step-6  ）中的方式大致相同。这里唯一的新成分是ParsedFunction对象，它在构造时需要指定组件的数量。   
+
+
+对于精确解来说，向量分量的数量是1，而且不需要任何操作，因为1是ParsedFunction对象的默认值。然而，风需要指定dim组件。注意，在为 Functions::ParsedFunction, 的表达式声明参数文件中的条目时，我们需要明确指定分量的数量，因为函数 Functions::ParsedFunction::declare_parameters 是静态的，对分量的数量没有了解。
+
+@code
+  template <int dim>
+  BEMProblem<dim>::BEMProblem(const unsigned int fe_degree,
+                              const unsigned int mapping_degree)
+    : fe(fe_degree)
+    , dof_handler(tria)
+    , mapping(mapping_degree, true)
+    , wind(dim)
+    , singular_quadrature_order(5)
+    , n_cycles(4)
+    , external_refinement(5)
+    , run_in_this_dimension(true)
+    , extend_solution(true)
+  {}
+
+
+
+  template <int dim>
+  void BEMProblem<dim>::read_parameters(const std::string &filename)
+  {
+    deallog << std::endl
+            << "Parsing parameter file " << filename << std::endl
+            << "for a " << dim << " dimensional simulation. " << std::endl;
+
+
+    ParameterHandler prm;
+
+
+    prm.declare_entry("Number of cycles", "4", Patterns::Integer());
+    prm.declare_entry("External refinement", "5", Patterns::Integer());
+    prm.declare_entry("Extend solution on the -2,2 box",
+                      "true",
+                      Patterns::Bool());
+    prm.declare_entry("Run 2d simulation", "true", Patterns::Bool());
+    prm.declare_entry("Run 3d simulation", "true", Patterns::Bool());
+
+
+    prm.enter_subsection("Quadrature rules");
+    {
+      prm.declare_entry(
+        "Quadrature type",
+        "gauss",
+        Patterns::Selection(
+          QuadratureSelector<(dim - 1)>::get_quadrature_names()));
+      prm.declare_entry("Quadrature order", "4", Patterns::Integer());
+      prm.declare_entry("Singular quadrature order", "5", Patterns::Integer());
+    }
+    prm.leave_subsection();
+
+
+@endcode 
+
+
+
+对于二维和三维，我们将默认的输入数据设置为，解是 $x+y$ 或 $x+y+z$  。实际计算出的解在无穷大时的值为零。在这种情况下，这与精确解相吻合，不需要额外的修正，但你应该注意的是，我们任意设置 $\phi_\infty$ ，而我们传递给程序的精确解需要在无穷远处有相同的值才能正确计算出误差。     
+
+
+ Functions::ParsedFunction 对象的使用是非常直接的。 Functions::ParsedFunction::declare_parameters 函数需要一个额外的整数参数，指定给定函数的分量数量。它的默认值是1。当相应的 Functions::ParsedFunction::parse_parameters 方法被调用时，调用对象必须有与这里定义的相同数量的组件，否则就会抛出一个异常。     
+
+
+在声明条目时，我们同时声明二维和三维的函数。然而，最终只有二维的那个被解析。这样我们就可以对二维和三维的问题都只有一个参数文件。     
+
+
+注意，从数学的角度来看，边界上的风函数应该满足条件 $\int_{\partial\Omega}
+\mathbf{v}\cdot \mathbf{n} d \Gamma = 0$ ，这样问题才有解。如果不满足这个条件，那么就找不到解，求解器也就不会收敛。
+
+@code
+    prm.enter_subsection("Wind function 2d");
+    {
+      Functions::ParsedFunction<2>::declare_parameters(prm, 2);
+      prm.set("Function expression", "1; 1");
+    }
+    prm.leave_subsection();
+
+
+    prm.enter_subsection("Wind function 3d");
+    {
+      Functions::ParsedFunction<3>::declare_parameters(prm, 3);
+      prm.set("Function expression", "1; 1; 1");
+    }
+    prm.leave_subsection();
+
+
+    prm.enter_subsection("Exact solution 2d");
+    {
+      Functions::ParsedFunction<2>::declare_parameters(prm);
+      prm.set("Function expression", "x+y");
+    }
+    prm.leave_subsection();
+
+
+    prm.enter_subsection("Exact solution 3d");
+    {
+      Functions::ParsedFunction<3>::declare_parameters(prm);
+      prm.set("Function expression", "x+y+z");
+    }
+    prm.leave_subsection();
+
+
+
+@endcode 
+
+
+
+在求解器部分，我们设置所有的SolverControl参数。然后，该对象将被送入GMRES求解器的solve_system()函数中。
+
+@code
+    prm.enter_subsection("Solver");
+    SolverControl::declare_parameters(prm);
+    prm.leave_subsection();
+
+
+@endcode 
+
+
+
+在向ParameterHandler对象声明了所有这些参数后，让我们读取一个输入文件，该文件将给这些参数提供值。然后我们继续从ParameterHandler对象中提取这些值。
+
+@code
+    prm.parse_input(filename);
+
+
+    n_cycles            = prm.get_integer("Number of cycles");
+    external_refinement = prm.get_integer("External refinement");
+    extend_solution     = prm.get_bool("Extend solution on the -2,2 box");
+
+
+    prm.enter_subsection("Quadrature rules");
+    {
+      quadrature = std::shared_ptr<Quadrature<dim - 1>>(
+        new QuadratureSelector<dim - 1>(prm.get("Quadrature type"),
+                                        prm.get_integer("Quadrature order")));
+      singular_quadrature_order = prm.get_integer("Singular quadrature order");
+    }
+    prm.leave_subsection();
+
+
+    prm.enter_subsection("Wind function " + std::to_string(dim) + "d");
+    {
+      wind.parse_parameters(prm);
+    }
+    prm.leave_subsection();
+
+
+    prm.enter_subsection("Exact solution " + std::to_string(dim) + "d");
+    {
+      exact_solution.parse_parameters(prm);
+    }
+    prm.leave_subsection();
+
+
+    prm.enter_subsection("Solver");
+    solver_control.parse_parameters(prm);
+    prm.leave_subsection();
+
+
+
+@endcode 
+
+
+
+最后，这里有另一个例子说明如何在独立维度编程中使用参数文件。 如果我们想关闭两个模拟中的一个，我们可以通过设置相应的 "运行2D模拟 "或 "运行3D模拟 "标志为假来实现。
+
+@code
+    run_in_this_dimension =
+      prm.get_bool("Run " + std::to_string(dim) + "d simulation");
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="BEMProblemread_domain"></a><h4>BEMProblem::read_domain</h4>
+
+
+
+
+边界元素法三角剖分与(dim-1)维三角剖分基本相同，不同之处在于顶点属于(dim)维空间。   
+
+
+deal.II中支持的一些网格格式默认使用三维点来描述网格。这些格式与deal.II的边界元素方法功能兼容。特别是我们可以使用UCD或GMSH格式。在这两种情况下，我们必须特别注意网格的方向，因为与标准有限元的情况不同，这里没有进行重新排序或兼容性检查。 所有的网格都被认为是有方向性的，因为它们被嵌入到一个高维空间中。参见GridIn和Triangulation的文档，以进一步了解三角结构中单元的方向。在我们的例子中，网格的法线是外在于2D的圆或3D的球体。   
+
+
+对边界元素网格进行适当细化的另一个细节是对网格近似的流形的准确描述。对于标准有限元网格的边界，我们已经多次看到了这一点（例如在 step-5 和 step-6 中），这里的原理和用法是一样的，只是SphericalManifold类需要一个额外的模板参数来指定嵌入空间维度。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  void BEMProblem<dim>::read_domain()
+  {
+    const Point<dim>                      center = Point<dim>();
+    const SphericalManifold<dim - 1, dim> manifold(center);
+
+
+    std::ifstream in;
+    switch (dim)
+      {
+        case 2:
+          in.open("coarse_circle.inp");
+          break;
+
+
+        case 3:
+          in.open("coarse_sphere.inp");
+          break;
+
+
+        default:
+          Assert(false, ExcNotImplemented());
+      }
+
+
+    GridIn<dim - 1, dim> gi;
+    gi.attach_triangulation(tria);
+    gi.read_ucd(in);
+
+
+    tria.set_all_manifold_ids(1);
+@endcode 
+
+
+
+对 Triangulation::set_manifold 的调用复制了流形（通过 Manifold::clone()), ，所以我们不需要担心对 <code>manifold</code> 的无效指针。
+
+@code
+    tria.set_manifold(1, manifold);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="BEMProblemrefine_and_resize"></a> <h4>BEMProblem::refine_and_resize</h4>
+
+
+
+
+这个函数全局地细化网格，分配自由度，并调整矩阵和向量的大小。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  void BEMProblem<dim>::refine_and_resize()
+  {
+    tria.refine_global(1);
+
+
+    dof_handler.distribute_dofs(fe);
+
+
+    const unsigned int n_dofs = dof_handler.n_dofs();
+
+
+    system_matrix.reinit(n_dofs, n_dofs);
+
+
+    system_rhs.reinit(n_dofs);
+    phi.reinit(n_dofs);
+    alpha.reinit(n_dofs);
+  }
+
+
+
+@endcode 
+
+
+
+
+［<a name="BEMProblemassemble_system"></a>］ ［<h4>BEMProblem::assemble_system</h4> 
+
+
+
+
+下面是这个程序的主要功能，组装与边界积分方程相对应的矩阵。
+
+@code
+  template <int dim>
+  void BEMProblem<dim>::assemble_system()
+  {
+@endcode 
+
+
+
+首先，我们用正交公式初始化一个FEValues对象，用于在非奇异单元中进行内核积分。这个正交公式是通过参数文件选择的，而且需要相当精确，因为我们要积分的函数不是多项式函数。
+
+@code
+    FEValues<dim - 1, dim> fe_v(mapping,
+                                fe,
+                                *quadrature,
+                                update_values | update_normal_vectors |
+                                  update_quadrature_points | update_JxW_values);
+
+
+    const unsigned int n_q_points = fe_v.n_quadrature_points;
+
+
+    std::vector<types::global_dof_index> local_dof_indices(
+      fe.n_dofs_per_cell());
+
+
+    std::vector<Vector<double>> cell_wind(n_q_points, Vector<double>(dim));
+    double                      normal_wind;
+
+
+@endcode 
+
+
+
+与有限元方法不同的是，如果我们使用拼合边界元方法，那么在每个装配循环中，我们只装配与一个自由度（与支持点 $i$ 相关的自由度）和当前单元之间的耦合信息。这是用fe.dofs_per_cell元素的向量完成的，然后将其分配到全局行的矩阵中  $i$  。以下对象将持有这一信息。
+
+@code
+    Vector<double> local_matrix_row_i(fe.n_dofs_per_cell());
+
+
+@endcode 
+
+
+
+索引  $i$  在拼合点上运行，这些拼合点是  $i$  第三个基函数的支持点，而  $j$  在内部积分点上运行。
+
+
+
+
+我们构建了一个支持点的向量，将用于局部积分。
+
+@code
+    std::vector<Point<dim>> support_points(dof_handler.n_dofs());
+    DoFTools::map_dofs_to_support_points<dim - 1, dim>(mapping,
+                                                       dof_handler,
+                                                       support_points);
+
+
+
+@endcode 
+
+
+
+这样做之后，我们就可以开始对所有单元进行积分循环，首先初始化FEValues对象，并在正交点获得 $\mathbf{\tilde v}$ 的值（这个向量场应该是常数，但更通用也无妨）。
+
+@code
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      {
+        fe_v.reinit(cell);
+        cell->get_dof_indices(local_dof_indices);
+
+
+        const std::vector<Point<dim>> &q_points = fe_v.get_quadrature_points();
+        const std::vector<Tensor<1, dim>> &normals = fe_v.get_normal_vectors();
+        wind.vector_value_list(q_points, cell_wind);
+
+
+@endcode 
+
+
+
+然后我们对当前单元的所有自由度形成积分（注意这包括不在当前单元上的自由度，这与通常的有限元积分不同）。如果其中一个局部自由度与支持点 $i$ 相同，我们需要执行的积分是单数。因此，在循环的开始，我们检查是否是这种情况，并存储哪一个是奇异指数。
+
+@code
+        for (unsigned int i = 0; i < dof_handler.n_dofs(); ++i)
+          {
+            local_matrix_row_i = 0;
+
+
+            bool         is_singular    = false;
+            unsigned int singular_index = numbers::invalid_unsigned_int;
+
+
+            for (unsigned int j = 0; j < fe.n_dofs_per_cell(); ++j)
+              if (local_dof_indices[j] == i)
+                {
+                  singular_index = j;
+                  is_singular    = true;
+                  break;
+                }
+
+
+@endcode 
+
+
+
+然后我们进行积分。如果索引 $i$ 不是局部自由度之一，我们只需将单层项加到右手边，将双层项加到矩阵中。
+
+@code
+            if (is_singular == false)
+              {
+                for (unsigned int q = 0; q < n_q_points; ++q)
+                  {
+                    normal_wind = 0;
+                    for (unsigned int d = 0; d < dim; ++d)
+                      normal_wind += normals[q][d] * cell_wind[q](d);
+
+
+                    const Tensor<1, dim> R = q_points[q] - support_points[i];
+
+
+                    system_rhs(i) += (LaplaceKernel::single_layer(R) *
+                                      normal_wind * fe_v.JxW(q));
+
+
+                    for (unsigned int j = 0; j < fe.n_dofs_per_cell(); ++j)
+
+
+                      local_matrix_row_i(j) -=
+                        ((LaplaceKernel::double_layer(R) * normals[q]) *
+                         fe_v.shape_value(j, q) * fe_v.JxW(q));
+                  }
+              }
+            else
+              {
+@endcode 
+
+
+
+现在我们处理更微妙的情况。如果我们在这里，这意味着在 $j$ 索引上运行的单元包含support_point[i]。在这种情况下，单层和双层势都是奇异的，它们需要特殊处理。                 
+
+
+每当在给定单元内进行积分时，就会使用一个特殊的正交公式，允许人们对参考单元上的奇异权重进行任意函数的积分。                 
+
+
+正确的正交公式由get_singular_quadrature函数选择，下面有详细说明。
+
+@code
+                Assert(singular_index != numbers::invalid_unsigned_int,
+                       ExcInternalError());
+
+
+                const Quadrature<dim - 1> &singular_quadrature =
+                  get_singular_quadrature(cell, singular_index);
+
+
+                FEValues<dim - 1, dim> fe_v_singular(
+                  mapping,
+                  fe,
+                  singular_quadrature,
+                  update_jacobians | update_values | update_normal_vectors |
+                    update_quadrature_points);
+
+
+                fe_v_singular.reinit(cell);
+
+
+                std::vector<Vector<double>> singular_cell_wind(
+                  singular_quadrature.size(), Vector<double>(dim));
+
+
+                const std::vector<Tensor<1, dim>> &singular_normals =
+                  fe_v_singular.get_normal_vectors();
+                const std::vector<Point<dim>> &singular_q_points =
+                  fe_v_singular.get_quadrature_points();
+
+
+                wind.vector_value_list(singular_q_points, singular_cell_wind);
+
+
+                for (unsigned int q = 0; q < singular_quadrature.size(); ++q)
+                  {
+                    const Tensor<1, dim> R =
+                      singular_q_points[q] - support_points[i];
+                    double normal_wind = 0;
+                    for (unsigned int d = 0; d < dim; ++d)
+                      normal_wind +=
+                        (singular_cell_wind[q](d) * singular_normals[q][d]);
+
+
+                    system_rhs(i) += (LaplaceKernel::single_layer(R) *
+                                      normal_wind * fe_v_singular.JxW(q));
+
+
+                    for (unsigned int j = 0; j < fe.n_dofs_per_cell(); ++j)
+                      {
+                        local_matrix_row_i(j) -=
+                          ((LaplaceKernel::double_layer(R) *
+                            singular_normals[q]) *
+                           fe_v_singular.shape_value(j, q) *
+                           fe_v_singular.JxW(q));
+                      }
+                  }
+              }
+
+
+@endcode 
+
+
+
+最后，我们需要将当前单元的贡献添加到全局矩阵中。
+
+@code
+            for (unsigned int j = 0; j < fe.n_dofs_per_cell(); ++j)
+              system_matrix(i, local_dof_indices[j]) += local_matrix_row_i(j);
+          }
+      }
+
+
+@endcode 
+
+
+
+积分算子的第二部分是术语  $\alpha(\mathbf{x}_i) \phi_j(\mathbf{x}_i)$  。由于我们使用的是配位方案， $\phi_j(\mathbf{x}_i)=\delta_{ij}$ 和相应的矩阵是一个对角线，其条目等于 $\alpha(\mathbf{x}_i)$  。
+
+
+
+
+计算这个实体角的对角矩阵的一个快速方法是使用诺伊曼矩阵本身。只需将该矩阵与一个元素都等于-1的向量相乘，就可以得到阿尔法角的对角线矩阵，或者说是实心角（见介绍中的公式）。然后将这个结果加回系统矩阵对象上，得到矩阵的最终形式。
+
+@code
+    Vector<double> ones(dof_handler.n_dofs());
+    ones.add(-1.);
+
+
+    system_matrix.vmult(alpha, ones);
+    alpha.add(1);
+    for (unsigned int i = 0; i < dof_handler.n_dofs(); ++i)
+      system_matrix(i, i) += alpha(i);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="BEMProblemsolve_system"></a> <h4>BEMProblem::solve_system</h4>
+
+
+
+
+下一个函数简单地解决了线性系统。
+
+@code
+  template <int dim>
+  void BEMProblem<dim>::solve_system()
+  {
+    SolverGMRES<Vector<double>> solver(solver_control);
+    solver.solve(system_matrix, phi, system_rhs, PreconditionIdentity());
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="BEMProblemcompute_errors"></a><h4>BEMProblem::compute_errors</h4>
+
+
+
+
+误差的计算在其他所有的例子程序中都是完全一样的，我们就不做过多的评论。请注意，这里可以使用有限元方法中的相同方法。
+
+@code
+  template <int dim>
+  void BEMProblem<dim>::compute_errors(const unsigned int cycle)
+  {
+    Vector<float> difference_per_cell(tria.n_active_cells());
+    VectorTools::integrate_difference(mapping,
+                                      dof_handler,
+                                      phi,
+                                      exact_solution,
+                                      difference_per_cell,
+                                      QGauss<(dim - 1)>(2 * fe.degree + 1),
+                                      VectorTools::L2_norm);
+    const double L2_error =
+      VectorTools::compute_global_error(tria,
+                                        difference_per_cell,
+                                        VectorTools::L2_norm);
+
+
+@endcode 
+
+
+
+α向量的误差可以直接使用 Vector::linfty_norm() 函数来计算，因为在每个节点上，其数值应该是 $\frac 12$  。然后，所有的误差都被输出并附加到我们的ConvergenceTable对象中，以便以后计算收敛率。
+
+@code
+    Vector<double> difference_per_node(alpha);
+    difference_per_node.add(-.5);
+
+
+    const double       alpha_error    = difference_per_node.linfty_norm();
+    const unsigned int n_active_cells = tria.n_active_cells();
+    const unsigned int n_dofs         = dof_handler.n_dofs();
+
+
+    deallog << "Cycle " << cycle << ':' << std::endl
+            << "   Number of active cells:       " << n_active_cells
+            << std::endl
+            << "   Number of degrees of freedom: " << n_dofs << std::endl;
+
+
+    convergence_table.add_value("cycle", cycle);
+    convergence_table.add_value("cells", n_active_cells);
+    convergence_table.add_value("dofs", n_dofs);
+    convergence_table.add_value("L2(phi)", L2_error);
+    convergence_table.add_value("Linfty(alpha)", alpha_error);
+  }
+
+
+
+@endcode 
+
+
+
+奇异积分需要仔细选择正交规则。特别是deal.II库提供了专为对数奇异性（QGaussLog、QGaussLogR）以及1/R奇异性（QGaussOneOverR）定制的正交规则。   
+
+
+奇异积分通常是通过构建具有奇异权重的加权正交公式得到的，因此可以写成    
+
+
+\f[ \int_K f(x) s(x) dx = \sum_{i=1}^N w_i f(q_i) \f]    
+
+
+其中 $s(x)$ 是一个给定的奇点，权重和正交点 $w_i,q_i$ 是精心选择的，以使上述公式对某类函数 $f(x)$ 是一个等式。   
+
+
+在我们迄今为止看到的所有有限元例子中，正交点本身的权重（即函数 $s(x)$ ），总是不断等于1。 对于奇异积分，我们有两个选择：我们可以使用上面的定义，从积分中剔除奇异性（即用特殊的正交规则对 $f(x)$ 进行积分），或者我们可以要求正交规则用 $s(q_i)$ 对权重 $w_i$ 进行 "标准化"。   
+
+
+\f[ \int_K f(x) s(x) dx = \int_K g(x) dx = \sum_{i=1}^N
+\frac{w_i}{s(q_i)} g(q_i) \f]    
+
+
+我们通过QGaussLogR和QGaussOneOverR的 @p factor_out_singularity 参数来使用这第二个选项。   
+
+
+这些积分有些微妙，特别是在二维空间，由于从实数到参考单元的转换，积分的变量会随着转换的行列式而缩放。   
+
+
+在二维中，这个过程不仅导致一个因素作为常数出现在整个积分上，而且还导致一个需要评估的额外积分。   
+
+
+\f[ \int_0^1 f(x)\ln(x/\alpha) dx = \int_0^1 f(x)\ln(x) dx - \int_0^1
+f(x) \ln(\alpha) dx.  \f]    
+
+
+这个过程由QGaussLogR类的构造函数来处理，它增加了额外的正交点和权重，以考虑到积分的第二部分。   
+
+
+类似的推理应该在三维情况下进行，因为奇异正交是在参考单元的半径 $r$ 的逆上定制的，而我们的奇异函数生活在实空间，然而在三维情况下一切都更简单，因为奇异性与变换的行列式呈线性比例。这使我们可以只建立一次奇异的二维正交规则，并在所有单元中重复使用它们。   
+
+
+在一维的奇异积分中，这是不可能的，因为我们需要知道正交的缩放参数，而这个参数并不是先验的。这里，正交规则本身也取决于当前单元的大小。由于这个原因，有必要为每个单数积分创建一个新的正交规则。   
+
+
+不同的正交规则是在get_singular_quadrature中建立的，它专门用于dim=2和dim=3，它们在assemble_system函数中被检索。作为参数给出的索引是奇点所在的单位支持点的索引。
+
+
+
+
+
+
+
+@code
+  template <>
+  const Quadrature<2> &BEMProblem<3>::get_singular_quadrature(
+    const DoFHandler<2, 3>::active_cell_iterator &,
+    const unsigned int index) const
+  {
+    Assert(index < fe.n_dofs_per_cell(),
+           ExcIndexRange(0, fe.n_dofs_per_cell(), index));
+
+
+    static std::vector<QGaussOneOverR<2>> quadratures;
+    if (quadratures.size() == 0)
+      for (unsigned int i = 0; i < fe.n_dofs_per_cell(); ++i)
+        quadratures.emplace_back(singular_quadrature_order,
+                                 fe.get_unit_support_points()[i],
+                                 true);
+    return quadratures[index];
+  }
+
+
+
+  template <>
+  const Quadrature<1> &BEMProblem<2>::get_singular_quadrature(
+    const DoFHandler<1, 2>::active_cell_iterator &cell,
+    const unsigned int                            index) const
+  {
+    Assert(index < fe.n_dofs_per_cell(),
+           ExcIndexRange(0, fe.n_dofs_per_cell(), index));
+
+
+    static Quadrature<1> *q_pointer = nullptr;
+    if (q_pointer)
+      delete q_pointer;
+
+
+    q_pointer = new QGaussLogR<1>(singular_quadrature_order,
+                                  fe.get_unit_support_points()[index],
+                                  1. / cell->measure(),
+                                  true);
+    return (*q_pointer);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="BEMProblemcompute_exterior_solution"></a><h4>BEMProblem::compute_exterior_solution</h4> 
+
+
+
+
+我们还想知道一些关于外域中电势 $\phi$ 的值：毕竟我们考虑边界积分问题的动机是我们想知道外域中的速度!    
+
+
+为此，我们在此假设边界元域包含在盒子 $[-2,2]^{\text{dim}}$ 中，我们用与基本解的卷积来推算这个盒子内的实际解。这方面的公式在引言中已经给出。   
+
+
+整个空间中的解的重构是在一个维度为dim的连续有限元网格上完成的。这些都是常用的，我们不做进一步评论。在函数的最后，我们再次以通常的方式输出这个外部解。
+
+@code
+  template <int dim>
+  void BEMProblem<dim>::compute_exterior_solution()
+  {
+    Triangulation<dim> external_tria;
+    GridGenerator::hyper_cube(external_tria, -2, 2);
+
+
+    FE_Q<dim>       external_fe(1);
+    DoFHandler<dim> external_dh(external_tria);
+    Vector<double>  external_phi;
+
+
+    external_tria.refine_global(external_refinement);
+    external_dh.distribute_dofs(external_fe);
+    external_phi.reinit(external_dh.n_dofs());
+
+
+    FEValues<dim - 1, dim> fe_v(mapping,
+                                fe,
+                                *quadrature,
+                                update_values | update_normal_vectors |
+                                  update_quadrature_points | update_JxW_values);
+
+
+    const unsigned int n_q_points = fe_v.n_quadrature_points;
+
+
+    std::vector<types::global_dof_index> dofs(fe.n_dofs_per_cell());
+
+
+    std::vector<double>         local_phi(n_q_points);
+    std::vector<double>         normal_wind(n_q_points);
+    std::vector<Vector<double>> local_wind(n_q_points, Vector<double>(dim));
+
+
+    std::vector<Point<dim>> external_support_points(external_dh.n_dofs());
+    DoFTools::map_dofs_to_support_points<dim>(StaticMappingQ1<dim>::mapping,
+                                              external_dh,
+                                              external_support_points);
+
+
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      {
+        fe_v.reinit(cell);
+
+
+        const std::vector<Point<dim>> &q_points = fe_v.get_quadrature_points();
+        const std::vector<Tensor<1, dim>> &normals = fe_v.get_normal_vectors();
+
+
+        cell->get_dof_indices(dofs);
+        fe_v.get_function_values(phi, local_phi);
+
+
+        wind.vector_value_list(q_points, local_wind);
+
+
+        for (unsigned int q = 0; q < n_q_points; ++q)
+          {
+            normal_wind[q] = 0;
+            for (unsigned int d = 0; d < dim; ++d)
+              normal_wind[q] += normals[q][d] * local_wind[q](d);
+          }
+
+
+        for (unsigned int i = 0; i < external_dh.n_dofs(); ++i)
+          for (unsigned int q = 0; q < n_q_points; ++q)
+            {
+              const Tensor<1, dim> R = q_points[q] - external_support_points[i];
+
+
+              external_phi(i) +=
+                ((LaplaceKernel::single_layer(R) * normal_wind[q] +
+                  (LaplaceKernel::double_layer(R) * normals[q]) *
+                    local_phi[q]) *
+                 fe_v.JxW(q));
+            }
+      }
+
+
+    DataOut<dim> data_out;
+
+
+    data_out.attach_dof_handler(external_dh);
+    data_out.add_data_vector(external_phi, "external_phi");
+    data_out.build_patches();
+
+
+    const std::string filename = std::to_string(dim) + "d_external.vtk";
+    std::ofstream     file(filename);
+
+
+    data_out.write_vtk(file);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="BEMProblemoutput_results"></a><h4>BEMProblem::output_results</h4>
+
+
+
+
+输出我们的计算结果是一个相当机械的任务。这个函数的所有组成部分在前面已经讨论过了。
+
+@code
+  template <int dim>
+  void BEMProblem<dim>::output_results(const unsigned int cycle)
+  {
+    DataOut<dim - 1, DoFHandler<dim - 1, dim>> dataout;
+
+
+    dataout.attach_dof_handler(dof_handler);
+    dataout.add_data_vector(
+      phi, "phi", DataOut<dim - 1, DoFHandler<dim - 1, dim>>::type_dof_data);
+    dataout.add_data_vector(
+      alpha,
+      "alpha",
+      DataOut<dim - 1, DoFHandler<dim - 1, dim>>::type_dof_data);
+    dataout.build_patches(
+      mapping,
+      mapping.get_degree(),
+      DataOut<dim - 1, DoFHandler<dim - 1, dim>>::curved_inner_cells);
+
+
+    const std::string filename = std::to_string(dim) + "d_boundary_solution_" +
+                                 std::to_string(cycle) + ".vtk";
+    std::ofstream file(filename);
+
+
+    dataout.write_vtk(file);
+
+
+    if (cycle == n_cycles - 1)
+      {
+        convergence_table.set_precision("L2(phi)", 3);
+        convergence_table.set_precision("Linfty(alpha)", 3);
+
+
+        convergence_table.set_scientific("L2(phi)", true);
+        convergence_table.set_scientific("Linfty(alpha)", true);
+
+
+        convergence_table.evaluate_convergence_rates(
+          "L2(phi)", ConvergenceTable::reduction_rate_log2);
+        convergence_table.evaluate_convergence_rates(
+          "Linfty(alpha)", ConvergenceTable::reduction_rate_log2);
+        deallog << std::endl;
+        convergence_table.write_text(std::cout);
+      }
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="BEMProblemrun"></a> <h4>BEMProblem::run</h4> 
+
+
+
+
+这是最主要的功能。它应该是不言自明的简短。
+
+@code
+  template <int dim>
+  void BEMProblem<dim>::run()
+  {
+    read_parameters("parameters.prm");
+
+
+    if (run_in_this_dimension == false)
+      {
+        deallog << "Run in dimension " << dim
+                << " explicitly disabled in parameter file. " << std::endl;
+        return;
+      }
+
+
+    read_domain();
+
+
+    for (unsigned int cycle = 0; cycle < n_cycles; ++cycle)
+      {
+        refine_and_resize();
+        assemble_system();
+        solve_system();
+        compute_errors(cycle);
+        output_results(cycle);
+      }
+
+
+    if (extend_solution == true)
+      compute_exterior_solution();
+  }
+} // namespace Step34
+
+
+
+@endcode 
+
+
+
+
+<a name="Themainfunction"></a> <h3>The main() function</h3> 
+
+
+
+
+这是本程序的主要功能。它与以前所有的教程程序完全一样。
+
+@code
+int main()
+{
+  try
+    {
+      using namespace Step34;
+
+
+      const unsigned int degree         = 1;
+      const unsigned int mapping_degree = 1;
+
+
+      deallog.depth_console(3);
+      BEMProblem<2> laplace_problem_2d(degree, mapping_degree);
+      laplace_problem_2d.run();
+
+
+      BEMProblem<3> laplace_problem_3d(degree, mapping_degree);
+      laplace_problem_3d.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+
+
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
-We ran the program using the following <code>parameters.prm</code> file (which
-can also be found in the directory in which all the other source files are):
+我们使用以下 <code>parameters.prm</code> 文件（也可以在所有其他源文件所在的目录中找到）运行该程序。
+
 @verbatim
 # Listing of Parameters
 # ---------------------
@@ -2164,13 +1946,16 @@ set Run 2d simulation               = true
 set Run 3d simulation               = true
 
 
+
 subsection Exact solution 2d
   # Any constant used inside the function which is not a variable name.
   set Function constants  =
 
+
   # Separate vector valued expressions by ';' as ',' is used internally by the
   # function parser.
   set Function expression = x+y   # default: 0
+
 
   # The name of the variables as they will be used in the function, separated
   # by ','.
@@ -2178,13 +1963,16 @@ subsection Exact solution 2d
 end
 
 
+
 subsection Exact solution 3d
   # Any constant used inside the function which is not a variable name.
   set Function constants  =
 
+
   # Separate vector valued expressions by ';' as ',' is used internally by the
   # function parser.
   set Function expression = .5*(x+y+z)   # default: 0
+
 
   # The name of the variables as they will be used in the function, separated
   # by ','.
@@ -2192,11 +1980,13 @@ subsection Exact solution 3d
 end
 
 
+
 subsection Quadrature rules
   set Quadrature order          = 4
   set Quadrature type           = gauss
   set Singular quadrature order = 5
 end
+
 
 
 subsection Solver
@@ -2208,13 +1998,16 @@ subsection Solver
 end
 
 
+
 subsection Wind function 2d
   # Any constant used inside the function which is not a variable name.
   set Function constants  =
 
+
   # Separate vector valued expressions by ';' as ',' is used internally by the
   # function parser.
   set Function expression = 1; 1  # default: 0; 0
+
 
   # The name of the variables as they will be used in the function, separated
   # by ','.
@@ -2222,21 +2015,27 @@ subsection Wind function 2d
 end
 
 
+
 subsection Wind function 3d
   # Any constant used inside the function which is not a variable name.
   set Function constants  =
+
 
   # Separate vector valued expressions by ';' as ',' is used internally by the
   # function parser.
   set Function expression = 1; 1; 1 # default: 0; 0; 0
 
+
   # The name of the variables as they will be used in the function, separated
   # by ','.
   set Variable names      = x,y,z,t
 end
-@endverbatim
+@endverbatim 
 
-When we run the program, the following is printed on screen:
+
+
+当我们运行该程序时，屏幕上打印出以下内容。
+
 @verbatim
 DEAL::
 DEAL::Parsing parameter file parameters.prm
@@ -2296,26 +2095,15 @@ cycle cells dofs    L2(phi)     Linfty(alpha)
     1    96   98 9.794e-02 1.81 1.239e-01 0.91
     2   384  386 2.417e-02 2.02 6.319e-02 0.97
     3  1536 1538 5.876e-03 2.04 3.176e-02 0.99
-@endverbatim
+@endverbatim 
 
-As we can see from the convergence table in 2d, if we choose
-quadrature formulas which are accurate enough, then the error we
-obtain for $\alpha(\mathbf{x})$ should be exactly the inverse of the
-number of elements. The approximation of the circle with N segments of
-equal size generates a regular polygon with N faces, whose angles are
-exactly $\pi-\frac {2\pi}{N}$, therefore the error we commit should be
-exactly $\frac 12 - (\frac 12 -\frac 1N) = \frac 1N$. In fact this is
-a very good indicator that we are performing the singular integrals in
-an appropriate manner.
 
-The error in the approximation of the potential $\phi$ is largely due
-to approximation of the domain. A much better approximation could be
-obtained by using higher order mappings.
 
-If we modify the main() function, setting fe_degree and mapping_degree
-to two, and raise the order of the quadrature formulas  in
-the parameter file, we obtain the following convergence table for the
-two dimensional simulation
+从2d中的收敛表可以看出，如果我们选择足够精确的正交公式，那么我们得到的 $\alpha(\mathbf{x})$ 的误差应该正好是元素数的倒数。用N段大小相等的圆近似产生一个有N个面的正多边形，其角度正好是 $\pi-\frac {2\pi}{N}$ ，因此我们的误差应该正好是 $\frac 12 - (\frac 12 -\frac 1N) = \frac 1N$  。事实上，这是一个很好的指标，表明我们正在以适当的方式进行奇异积分。
+
+势的近似 $\phi$ 的误差主要是由于域的近似。通过使用高阶映射可以得到更好的近似值。
+
+如果我们修改main()函数，将fe_degree和mapping_degree设置为2，并提高参数文件中正交公式的阶数，我们可以得到以下二维模拟的收敛表 
 
 @verbatim
 cycle cells dofs    L2(phi)     Linfty(alpha)
@@ -2323,9 +2111,11 @@ cycle cells dofs    L2(phi)     Linfty(alpha)
     1    40   80 3.623e-06 3.90 1.737e-05 3.73
     2    80  160 2.690e-07 3.75 1.253e-05 0.47
     3   160  320 2.916e-08 3.21 7.670e-06 0.71
-@endverbatim
+@endverbatim 
 
-and
+
+
+和 
 
 @verbatim
 cycle cells dofs    L2(phi)     Linfty(alpha)
@@ -2333,95 +2123,50 @@ cycle cells dofs    L2(phi)     Linfty(alpha)
     1    96  386 1.804e-04 4.39 1.182e-03 2.92
     2   384 1538 9.557e-06 4.24 1.499e-04 2.98
     3  1536 6146 6.617e-07 3.85 1.892e-05 2.99
-@endverbatim
-
-for the three dimensional case. As we can see, convergence results are
-much better with higher order mapping, mainly due to a better
-resolution of the curved geometry. Notice that, given the same number
-of degrees of freedom, for example in step 3 of the Q1 case and step 2
-of Q2 case in the three dimensional simulation, the error is roughly
-three orders of magnitude lower.
-
-The result of running these computations is a bunch of output files that we
-can pass to our visualization program of choice.
-The output files are of two kind: the potential on the boundary
-element surface, and the potential extended to the outer and inner
-domain. The combination of the two for the two dimensional case looks
-like
-
-<img src="https://www.dealii.org/images/steps/developer/step-34_2d.png" alt="">
-
-while in three dimensions we show first the potential on the surface,
-together with a contour plot,
-
-<img src="https://www.dealii.org/images/steps/developer/step-34_3d.png" alt="">
-
-and then the external contour plot of the potential, with opacity set to 25%:
-
-<img src="https://www.dealii.org/images/steps/developer/step-34_3d-2.png" alt="">
+@endverbatim 
 
 
-<a name="extensions"></a>
-<a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
+
+为三维案例。我们可以看到，高阶映射的收敛结果要好得多，这主要是由于曲面几何的分辨率更高。请注意，在自由度相同的情况下，例如在三维模拟中Q1情况的第3步和Q2情况的第2步，误差大约要低三个数量级。
+
+运行这些计算的结果是一堆输出文件，我们可以将其传递给我们选择的可视化程序。这些输出文件有两种：边界元素表面的势，以及扩展到外域和内域的势。在二维的情况下，这两个文件的组合看起来像 
+
+  <img src="https://www.dealii.org/images/steps/developer/step-34_2d.png" alt="">   
+
+而在三维情况下，我们首先显示的是表面上的势，同时还有一个等高线图。
+
+  <img src="https://www.dealii.org/images/steps/developer/step-34_3d.png" alt="">   
+
+然后是电位的外部等高线图，不透明度设置为25%。
+
+  <img src="https://www.dealii.org/images/steps/developer/step-34_3d-2.png" alt="">   
 
 
-This is the first tutorial program that considers solving equations defined on
-surfaces embedded in higher dimensional spaces. But the equation discussed
-here was relatively simple because it only involved an integral operator, not
-derivatives which are more difficult to define on the surface. The step-38
-tutorial program considers such problems and provides the necessary tools.
+<a name="extensions"></a> <a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
 
-From a practical perspective, the Boundary Element Method (BEM) used
-here suffers from two bottlenecks. The first is that assembling the
-matrix has a cost that is *quadratic* in the number of unknowns, that
-is ${\cal O}(N^2)$ where $N$ is the total number of unknowns. This can
-be seen by looking at the `assemble_system()` function, which has this
-structure:
+
+这是第一个考虑解决定义在嵌入高维空间的曲面上的方程的教程程序。但这里讨论的方程相对简单，因为它只涉及一个积分算子，而不涉及在曲面上更难定义的导数。 step-38 教程程序考虑了这类问题并提供了必要的工具。
+
+从实际的角度来看，这里使用的边界元素法（BEM）受到两个瓶颈的影响。首先是组装矩阵的成本是*二次方的未知数，即 ${\cal O}(N^2)$ ，其中 $N$ 是未知数的总数。这可以通过查看`assemble_system()`函数来了解，它有这样的结构。
+
 @code
     for (const auto &cell : dof_handler.active_cell_iterators())
       {
         ...
 
+
         for (unsigned int i = 0; i < dof_handler.n_dofs(); ++i)
           ...
-@endcode
-Here, the first loop walks over all cells (one factor of $N$) whereas
-the inner loop contributes another factor of $N$.
+@endcode 
 
-This has to be contrasted with the finite element method for *local*
-differential operators: There, we loop over all cells (one factor of
-$N$) and on each cell do an amount of work that is independent of how
-many cells or unknowns there are. This clearly presents a
-bottleneck.
+在这里，第一个循环遍历了所有的单元（ $N$ 的一个因子），而内循环则贡献了 $N$ 的另一个因子。
 
-The second bottleneck is that the system matrix is dense (i.e., is of
-type FullMatrix) because every degree of freedom couples with every
-other degree of freedom. As pointed out above, just *computing* this
-matrix with its $N^2$ nonzero entries necessarily requires at least
-${\cal O}(N^2)$ operations, but it's worth pointing out that it also
-costs this many operations to just do one matrix-vector product. If
-the GMRES method used to solve the linear system requires a number of
-iterations that grows with the size of the problem, as is typically
-the case, then solving the linear system will require a number of
-operations that grows even faster than just ${\cal O}(N^2)$.
+这必须与*本地*微分算子的有限元方法进行对比。在那里，我们在所有单元上循环（一个 $N$ 的因子），在每个单元上做的工作与有多少个单元或未知数无关。这显然是一个瓶颈。
 
-"Real" boundary element methods address these issues by strategies
-that determine which entries of the matrix will be small and can
-consequently be neglected (at the cost of introducing an additional
-error, of course). This is possible by recognizing that the matrix
-entries decay with the (physical) distance between the locations where
-degrees of freedom $i$ and $j$ are defined. This can be exploited in
-methods such as the Fast Multipole Method (FMM) that control which
-matrix entries must be stored and computed to achieve a certain
-accuracy, and -- if done right -- result in methods in which both
-assembly and solution of the linear system requires less than
-${\cal O}(N^2)$ operations.
+第二个瓶颈是系统矩阵是密集的（即是FullMatrix类型），因为每个自由度都与其他自由度相耦合。如上所述，仅仅*计算*这个带有 $N^2$ 非零项的矩阵必然需要至少 ${\cal O}(N^2)$ 次操作，但值得指出的是，仅仅做一个矩阵-向量乘积也需要这么多操作。如果用于求解线性系统的GMRES方法需要的迭代次数随着问题的大小而增长，这就是典型的情况，那么求解线性系统需要的运算次数甚至比 ${\cal O}(N^2)$ 还要快。
 
-Implementing these methods clearly presents opportunities to extend
-the current program.
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-34.cc"
-*/
+真正的 "边界元素方法 "通过确定矩阵的哪些条目会很小，因此可以忽略的策略来解决这些问题（当然是以引入额外的误差为代价）。这可以通过认识到矩阵项随着自由度 $i$ 和 $j$ 定义的位置之间的（物理）距离衰减而实现。这可以在快速多极法（FMM）等方法中得到利用，这些方法可以控制哪些矩阵项必须被存储和计算以达到一定的精度，并且--如果做得好的话--导致线性系统的组装和求解都需要少于 ${\cal O}(N^2)$ 的操作。
+
+实现这些方法显然提供了扩展当前程序的机会。<a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-34.cc" 。 
+
+  */  

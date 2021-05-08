@@ -1,94 +1,83 @@
-/**
-@page step_67 The step-67 tutorial program
-This tutorial depends on step-33, step-48, step-59.
+  /**   @page step_67 The step-67 tutorial program   
+
+本教程取决于  step-33  ,  step-48  ,  step-59  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#TheEulerequations">The Euler equations</a>
-        <li><a href="#HighorderdiscontinuousGalerkindiscretization">High-order discontinuous Galerkin discretization</a>
-        <li><a href="#Explicittimeintegration">Explicit time integration</a>
-        <li><a href="#Fastevaluationofintegralsbymatrixfreetechniques">Fast evaluation of integrals by matrix-free techniques</a>
-        <li><a href="#Evaluationoftheinversemassmatrixwithmatrixfreetechniques">Evaluation of the inverse mass matrix with matrix-free techniques</a>
-        <li><a href="#Thetestcase">The test case</a>
+        <li><a href="#TheEulerequations">The Euler equations</a><a href="#TheEulerequations">The Euler equations</a>
+        <li><a href="#HighorderdiscontinuousGalerkindiscretization">High-order discontinuous Galerkin discretization</a><a href="#HighorderdiscontinuousGalerkindiscretization">High-order discontinuous Galerkin discretization</a>
+        <li><a href="#Explicittimeintegration">Explicit time integration</a><a href="#Explicittimeintegration">Explicit time integration</a>
+        <li><a href="#Fastevaluationofintegralsbymatrixfreetechniques">Fast evaluation of integrals by matrix-free techniques</a><a href="#Fastevaluationofintegralsbymatrixfreetechniques">Fast evaluation of integrals by matrix-free techniques</a>
+        <li><a href="#Evaluationoftheinversemassmatrixwithmatrixfreetechniques">Evaluation of the inverse mass matrix with matrix-free techniques</a><a href="#Evaluationoftheinversemassmatrixwithmatrixfreetechniques">Evaluation of the inverse mass matrix with matrix-free techniques</a>
+        <li><a href="#Thetestcase">The test case</a><a href="#Thetestcase">The test case</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Equationdata">Equation data</a>
-        <li><a href="#LowstorageexplicitRungeKuttatimeintegrators">Low-storage explicit Runge&mdash;Kutta time integrators</a>
-        <li><a href="#ImplementationofpointwiseoperationsoftheEulerequations">Implementation of point-wise operations of the Euler equations</a>
-        <li><a href="#TheEulerOperationclass">The EulerOperation class</a>
+        <li><a href="#Equationdata">Equation data</a><a href="#Equationdata">Equation data</a>
+        <li><a href="#LowstorageexplicitRungeKuttatimeintegrators">Low-storage explicit Runge&mdash;Kutta time integrators</a><a href="#LowstorageexplicitRungeKuttatimeintegrators">Low-storage explicit Runge&mdash;Kutta time integrators</a>
+        <li><a href="#ImplementationofpointwiseoperationsoftheEulerequations">Implementation of point-wise operations of the Euler equations</a><a href="#ImplementationofpointwiseoperationsoftheEulerequations">Implementation of point-wise operations of the Euler equations</a>
+        <li><a href="#TheEulerOperationclass">The EulerOperation class</a><a href="#TheEulerOperationclass">The EulerOperation class</a>
       <ul>
-        <li><a href="#Localevaluators">Local evaluators</a>
-        <li><a href="#Theapplyandrelatedfunctions">The apply() and related functions</a>
+        <li><a href="#Localevaluators">Local evaluators</a><a href="#Localevaluators">Local evaluators</a>
+        <li><a href="#Theapplyandrelatedfunctions">The apply() and related functions</a> ]<a href="#Theapplyandrelatedfunctions">The apply() and related functions</a>
       </ul>
-        <li><a href="#TheEulerProblemclass">The EulerProblem class</a>
+        <li><a href="#TheEulerProblemclass">The EulerProblem class</a><a href="#TheEulerProblemclass">The EulerProblem class</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Programoutput">Program output</a>
-        <li><a href="#Convergenceratesfortheanalyticaltestcase">Convergence rates for the analytical test case</a>
-        <li><a href="#Resultsforflowinchannelaroundcylinderin2D">Results for flow in channel around cylinder in 2D</a>
-        <li><a href="#Resultsforflowinchannelaroundcylinderin3D">Results for flow in channel around cylinder in 3D</a>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Programoutput">Program output</a><a href="#Programoutput">Program output</a>
+        <li><a href="#Convergenceratesfortheanalyticaltestcase">Convergence rates for the analytical test case</a><a href="#Convergenceratesfortheanalyticaltestcase">Convergence rates for the analytical test case</a>
+        <li><a href="#Resultsforflowinchannelaroundcylinderin2D">Results for flow in channel around cylinder in 2D</a><a href="#Resultsforflowinchannelaroundcylinderin2D">Results for flow in channel around cylinder in 2D</a>
+        <li><a href="#Resultsforflowinchannelaroundcylinderin3D">Results for flow in channel around cylinder in 3D</a><a href="#Resultsforflowinchannelaroundcylinderin3D">Results for flow in channel around cylinder in 3D</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
       <ul>
-        <li><a href="#Moreadvancednumericalfluxfunctionsandskewsymmetricformulations">More advanced numerical flux functions and skew-symmetric formulations</a>
-        <li><a href="#Equippingthecodeforsupersoniccalculations">Equipping the code for supersonic calculations</a>
-        <li><a href="#ExtensiontothelinearizedEulerequations">Extension to the linearized Euler equations</a>
-        <li><a href="#ExtensiontothecompressibleNavierStokesequations">Extension to the compressible Navier-Stokes equations</a>
+        <li><a href="#Moreadvancednumericalfluxfunctionsandskewsymmetricformulations">More advanced numerical flux functions and skew-symmetric formulations</a><a href="#Moreadvancednumericalfluxfunctionsandskewsymmetricformulations">More advanced numerical flux functions and skew-symmetric formulations</a>
+        <li><a href="#Equippingthecodeforsupersoniccalculations">Equipping the code for supersonic calculations</a><a href="#Equippingthecodeforsupersoniccalculations">Equipping the code for supersonic calculations</a>
+        <li><a href="#ExtensiontothelinearizedEulerequations">Extension to the linearized Euler equations</a><a href="#ExtensiontothelinearizedEulerequations">Extension to the linearized Euler equations</a>
+        <li><a href="#ExtensiontothecompressibleNavierStokesequations">Extension to the compressible Navier-Stokes equations</a><a href="#ExtensiontothecompressibleNavierStokesequations">Extension to the compressible Navier-Stokes equations</a>
     </ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
+@endhtmlonly 
 
-<br>
+
+
+  <br>   
 
 <i>
 This program was contributed by Martin Kronbichler. Many ideas presented here
 are the result of common code development with Niklas Fehn, Katharina Kormann,
 Peter Munch, and Svenja Schoeder.
 
+
 This work was partly supported by the German Research Foundation (DFG) through
 the project "High-order discontinuous Galerkin for the exa-scale" (ExaDG)
 within the priority program "Software for Exascale Computing" (SPPEXA).
-</i>
+</i> 
 
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+<a name="Intro"></a> <a name="Introduction"></a> <h1>Introduction</h1> 
 
 
-This tutorial program solves the Euler equations of fluid dynamics using an
-explicit time integrator with the matrix-free framework applied to a
-high-order discontinuous Galerkin discretization in space. For details about
-the Euler system and an alternative implicit approach, we also refer to the
-step-33 tutorial program. You might also want to look at step-69 for
-an alternative approach to solving these equations.
+本教程程序使用显式时间积分器求解流体力学的欧拉方程，其无矩阵框架应用于空间的高阶非连续Galerkin离散化。关于欧拉系统的细节和另一种隐式方法，我们也参考了 step-33 的教程程序。你可能还想看看 step-69 ，看看解决这些方程的另一种方法。
 
 
 <a name="TheEulerequations"></a><h3>The Euler equations</h3>
 
 
-The Euler equations are a conservation law, describing the motion of a
-compressible inviscid gas,
-@f[
+欧拉方程是一个守恒定律，描述了可压缩无iscid气体的运动， @f[
 \frac{\partial \mathbf{w}}{\partial t} + \nabla \cdot \mathbf{F}(\mathbf{w}) =
 \mathbf{G}(\mathbf w),
-@f]
-where the $d+2$ components of the solution vector are $\mathbf{w}=(\rho, \rho
-u_1,\ldots,\rho u_d,E)^{\mathrm T}$. Here, $\rho$ denotes the fluid density,
-${\mathbf u}=(u_1,\ldots, u_d)^\mathrm T$ the fluid velocity, and $E$ the
-energy density of the gas. The velocity is not directly solved for, but rather
-the variable $\rho \mathbf{u}$, the linear momentum (since this is the
-conserved quantity).
+@f] 其中解矢量的 $d+2$  分量为  $\mathbf{w}=(\rho, \rho
+u_1,\ldots,\rho u_d,E)^{\mathrm T}$  。这里， $\rho$  表示流体密度， ${\mathbf u}=(u_1,\ldots, u_d)^\mathrm T$  表示流体速度， $E$  表示气体的能量密度。速度不直接求解，而是用变量 $\rho \mathbf{u}$ ，即线性动量（因为这是个守恒量）。
 
-The Euler flux function, a $(d+2)\times d$ matrix, is defined as
-@f[
+欧拉通量函数是一个 $(d+2)\times d$ 矩阵，定义为@f[
   \mathbf F(\mathbf w)
   =
   \begin{pmatrix}
@@ -96,11 +85,7 @@ The Euler flux function, a $(d+2)\times d$ matrix, is defined as
   \rho \mathbf{u} \otimes \mathbf{u} + \mathbb{I}p\\
   (E+p)\mathbf{u}
   \end{pmatrix}
-@f]
-with $\mathbb{I}$ the $d\times d$ identity matrix and $\otimes$ the outer
-product; its components denote the mass, momentum, and energy fluxes, respectively.
-The right hand side forcing is given by
-@f[
+@f]，其中 $\mathbb{I}$ 为 $d\times d$ 身份矩阵， $\otimes$ 为外积；其组成部分分别表示质量、动量和能量通量。右手边的强制力由@f[
   \mathbf G(\mathbf w)
   =
   \begin{pmatrix}
@@ -108,156 +93,54 @@ The right hand side forcing is given by
   \rho\mathbf{g}\\
   \rho \mathbf{u} \cdot \mathbf{g}
   \end{pmatrix},
-@f]
-where the vector $\mathbf g$ denotes the direction and magnitude of
-gravity. It could, however, also denote any other external force per unit mass
-that is acting on the fluid. (Think, for example, of the electrostatic
-forces exerted by an external electric field on charged particles.)
+@f]给出，其中矢量 $\mathbf g$ 表示重力的方向和大小。然而，它也可以表示作用于流体的任何其他单位质量的外力。例如，想想外部电场对带电粒子所施加的静电力）。
 
-The three blocks of equations, the second involving $d$ components, describe
-the conservation of mass, momentum, and energy. The pressure is not a
-solution variable but needs to be expressed through a "closure relationship"
-by the other variables; we here choose the relationship appropriate
-for a gas with molecules composed of two atoms, which at moderate
-temperatures is given by $p=(\gamma - 1) \left(E-\frac 12 \rho
-\mathbf{u}\cdot \mathbf{u}\right)$ with the constant $\gamma = 1.4$.
+三个方程组，第二个涉及 $d$ 部分，描述了质量、动量和能量的守恒。压力不是一个解决方案的变量，但需要通过其他变量的 "闭合关系 "来表达；我们在这里选择适合由两个原子组成的分子的气体的关系，在中等温度下，由 $p=(\gamma - 1) \left(E-\frac 12 \rho
+\mathbf{u}\cdot \mathbf{u}\right)$ 给出，常数为 $\gamma = 1.4$  。
 
 
 <a name="HighorderdiscontinuousGalerkindiscretization"></a><h3>High-order discontinuous Galerkin discretization</h3>
 
 
-For spatial discretization, we use a high-order discontinuous Galerkin (DG)
-discretization, using a solution expansion of the form
-@f[
+对于空间离散化，我们使用高阶不连续Galerkin（DG）离散化，使用@f[
 \mathbf{w}_h(\mathbf{x}, t) =
 \sum_{j=1}^{n_\mathbf{dofs}} \boldsymbol{\varphi}_j(\mathbf{x}) {w}_j(t).
-@f]
-Here, $\boldsymbol{\varphi}_j$ denotes the $j$th basis function, written
-in vector form with separate shape functions for the different components and
-letting $w_j(t)$ go through the density, momentum, and energy variables,
-respectively. In this form, the space dependence is contained in the shape
-functions and the time dependence in the unknown coefficients $w_j$. As
-opposed to the continuous finite element method where some shape functions
-span across element boundaries, the shape functions are local to a single
-element in DG methods, with a discontinuity from one element to the next. The
-connection of the solution from one cell to its neighbors is instead
-imposed by the numerical fluxes
-specified below. This allows for some additional flexibility, for example to
-introduce directionality in the numerical method by, e.g., upwinding.
+@f]形式的解扩展。 这里， $\boldsymbol{\varphi}_j$ 表示 $j$ 第1个基函数，以矢量形式写出不同成分的独立形状函数，让 $w_j(t)$ 分别通过密度、动量和能量变量。在这种形式下，空间依赖性包含在形状函数中，时间依赖性包含在未知系数中  $w_j$  。与连续有限元方法中一些形状函数跨越元素边界不同，在DG方法中，形状函数是单个元素的局部，从一个元素到下一个元素是不连续的。从一个单元到其相邻单元的解的连接是由下面规定的数值通量来实现的。这允许一些额外的灵活性，例如在数值方法中引入方向性，例如，上卷法。
 
-DG methods are popular methods for solving problems of transport character
-because they combine low dispersion errors with controllable dissipation on
-barely resolved scales. This makes them particularly attractive for simulation
-in the field of fluid dynamics where a wide range of active scales needs to be
-represented and inadequately resolved features are prone to disturb the
-important well-resolved features. Furthermore, high-order DG methods are
-well-suited for modern hardware with the right implementation. At the same
-time, DG methods are no silver bullet. In particular when the solution
-develops discontinuities (shocks), as is typical for the Euler equations in
-some flow regimes, high-order DG methods tend to oscillatory solutions, like
-all high-order methods when not using flux- or slope-limiters. This is a consequence of <a
-href="https://en.wikipedia.org/wiki/Godunov%27s_theorem">Godunov's theorem</a>
-that states that any total variation limited (TVD) scheme that is linear (like
-a basic DG discretization) can at most be first-order accurate. Put
-differently, since DG methods aim for higher order accuracy, they cannot be
-TVD on solutions that develop shocks. Even though some communities claim that
-the numerical flux in DG methods can control dissipation, this is of limited
-value unless <b>all</b> shocks in a problem align with cell boundaries. Any
-shock that passes through the interior of cells will again produce oscillatory
-components due to the high-order polynomials. In the finite element and DG
-communities, there exist a number of different approaches to deal with shocks,
-for example the introduction of artificial diffusion on troubled cells (using
-a troubled-cell indicator based e.g. on a modal decomposition of the
-solution), a switch to dissipative low-order finite volume methods on a
-subgrid, or the addition of some limiting procedures. Given the ample
-possibilities in this context, combined with the considerable implementation
-effort, we here refrain from the regime of the Euler equations with pronounced
-shocks, and rather concentrate on the regime of subsonic flows with wave-like
-phenomena. For a method that works well with shocks (but is more expensive per
-unknown), we refer to the step-69 tutorial program.
+DG方法是解决传输特性问题的流行方法，因为它们结合了低分散误差和几乎没有解决的尺度上的可控耗散。这使得它们在流体动力学领域的模拟中特别有吸引力，因为在这些领域中，需要代表广泛的活动尺度，而不充分解决的特征很容易干扰重要的良好解决的特征。此外，高阶DG方法非常适用于现代硬件的正确实施。同时，DG方法也不是万能的。特别是当解出现不连续（冲击）时，就像欧拉方程在某些流态下的典型情况一样，高阶DG方法容易出现振荡解，就像所有不使用通量或坡度限制器的高阶方法一样。这是<a
+href="https://en.wikipedia.org/wiki/Godunov%27s_theorem">Godunov's theorem</a>的结果，即任何线性的总变差（TVD）方案（如基本的DG离散化）最多能达到一阶精度。换句话说，由于DG方法的目标是高阶精度，所以它们不可能对产生冲击的解进行TVD。尽管有些人声称DG方法中的数值通量可以控制耗散，但这一点价值有限，除非<b>all</b>问题中的冲击与单元边界一致。任何穿过单元内部的冲击都会因为高阶多项式而再次产生振荡成分。在有限元和DG界，存在许多不同的方法来处理冲击，例如在有问题的单元上引入人工扩散（使用基于解的模态分解等的有问题单元指标），在子网格上转换为耗散性低阶有限体积方法，或者增加一些限制性程序。考虑到这种情况下的大量可能性，再加上相当大的实施努力，我们在这里不考虑带有明显冲击的欧拉方程系统，而是集中在带有波浪状现象的亚音速流动系统。对于一个能很好地处理冲击的方法（但每个未知数的成本更高），我们参考了 step-69 的教程程序。
 
-For the derivation of the DG formulation, we multiply the Euler equations with
-test functions $\mathbf{v}$ and integrate over an individual cell $K$, which
-gives
-@f[
+对于DG公式的推导，我们将欧拉方程与测试函数 $\mathbf{v}$ 相乘，并对单个单元 $K$ 进行积分，从而得到@f[
 \left(\mathbf{v}, \frac{\partial \mathbf{w}}{\partial t}\right)_{K}
 + \left(\mathbf{v}, \nabla \cdot \mathbf{F}(\mathbf{w})\right)_{K} =
 \left(\mathbf{v},\mathbf{G}(\mathbf w)\right)_{K}.
-@f]
+@f] 。
 
-We then integrate the second term by parts, moving the divergence
-from the solution slot to the test function slot, and producing an integral
-over the element boundary:
-@f[
+然后我们对第二项进行分项积分，将发散从解槽移到测试函数槽，并产生元素边界上的积分：@f[
 \left(\mathbf{v}, \frac{\partial \mathbf{w}}{\partial t}\right)_{K}
+
+
 - \left(\nabla \mathbf{v}, \mathbf{F}(\mathbf{w})\right)_{K}
 + \left<\mathbf{v}, \mathbf{n} \cdot \widehat{\mathbf{F}}(\mathbf{w})
 \right>_{\partial K} =
 \left(\mathbf{v},\mathbf{G}(\mathbf w)\right)_{K}.
-@f]
-In the surface integral, we have replaced the term $\mathbf{F}(\mathbf w)$ by
-the term $\widehat{\mathbf{F}}(\mathbf w)$, the numerical flux. The role of
-the numerical flux is to connect the solution on neighboring elements and
-weakly impose continuity of the solution. This ensures that the global
-coupling of the PDE is reflected in the discretization, despite independent
-basis functions on the cells. The connectivity to the neighbor is included by
-defining the numerical flux as a function $\widehat{\mathbf{F}}(\mathbf w^-,
-\mathbf w^+)$ of the solution from both sides of an interior face, $\mathbf
-w^-$ and $\mathbf w^+$. A basic property we require is that the numerical flux
-needs to be <b>conservative</b>. That is, we want all information (i.e.,
-mass, momentum, and energy) that leaves a cell over
-a face to enter the neighboring cell in its entirety and vice versa. This can
-be expressed as $\widehat{\mathbf{F}}(\mathbf w^-, \mathbf w^+) =
-\widehat{\mathbf{F}}(\mathbf w^+, \mathbf w^-)$, meaning that the numerical
-flux evaluates to the same result from either side. Combined with the fact
-that the numerical flux is multiplied by the unit outer normal vector on the
-face under consideration, which points in opposite direction from the two
-sides, we see that the conservation is fulfilled. An alternative point of view
-of the numerical flux is as a single-valued intermediate state that links the
-solution weakly from both sides.
+@f] 在表面积分中，我们用项 $\widehat{\mathbf{F}}(\mathbf w)$ 代替项 $\mathbf{F}(\mathbf w)$ ，即数值流量。数值通量的作用是连接相邻元素上的解并弱化解的连续性。这保证了PDE的全局耦合反映在离散化中，尽管单元上有独立的基函数。通过将数值通量定义为来自内部面两侧的解的函数  $\widehat{\mathbf{F}}(\mathbf w^-,
+\mathbf w^+)$  和  $\mathbf w^+$  ，包括与邻居的连接。我们要求的一个基本属性是，数值通量需要是<b>conservative</b>。也就是说，我们希望所有的信息（即质量、动量和能量）在一个面上离开一个单元时，都能完整地进入邻近的单元，反之亦然。这可以表示为 $\widehat{\mathbf{F}}(\mathbf w^-, \mathbf w^+) =
+\widehat{\mathbf{F}}(\mathbf w^+, \mathbf w^-)$ ，也就是说，数值通量从任何一边都评估为相同的结果。结合数值通量与所考虑的面的单位外法向量相乘的事实，即从两边指向相反的方向，我们看到守恒被满足了。数值通量的另一个观点是作为一个单值的中间状态，从两边微弱地连接解决方案。
 
-There is a large number of numerical flux functions available, also called
-Riemann solvers. For the Euler equations, there exist so-called exact Riemann
-solvers -- meaning that the states from both sides are combined in a way that
-is consistent with the Euler equations along a discontinuity -- and
-approximate Riemann solvers, which violate some physical properties and rely
-on other mechanisms to render the scheme accurate overall. Approxiate Riemann
-solvers have the advantage of beging cheaper to compute. Most flux functions
-have their origin in the finite volume community, which are similar to DG
-methods with polynomial degree 0 within the cells (called volumes). As the
-volume integral of the Euler operator $\mathbf{F}$ would disappear for
-constant solution and test functions, the numerical flux must fully represent
-the physical operator, explaining why there has been a large body of research
-in that community. For DG methods, consistency is guaranteed by higher order
-polynomials within the cells, making the numerical flux less of an issue and
-usually affecting only the convergence rate, e.g., whether the solution
-converges as $\mathcal O(h^p)$, $\mathcal O(h^{p+1/2})$ or $\mathcal
-O(h^{p+1})$ in the $L_2$ norm for polynomials of degree $p$. The numerical
-flux can thus be seen as a mechanism to select more advantageous
-dissipation/dispersion properties or regarding the extremal eigenvalue of the
-discretized and linearized operator, which affect the maximal admissible time
-step size in explicit time integrators.
+有大量的数值通量函数可用，也叫黎曼求解器。对于欧拉方程来说，存在所谓的精确黎曼求解器--意味着来自两边的状态以符合欧拉方程的方式沿着不连续点结合起来--以及近似黎曼求解器，它违反了一些物理特性，并依靠其他机制来使方案总体上准确。近似黎曼求解器的优点是计算成本较低。大多数通量函数都起源于有限体积界，它类似于单元（称为体积）内的多项式0度的DG方法。由于欧拉算子 $\mathbf{F}$ 的体积积分对于恒定解和检验函数会消失，所以数值通量必须完全代表物理算子，这也解释了为什么在该界有大量的研究。对于DG方法，一致性是由单元内的高阶多项式保证的，这使得数值通量不再是一个问题，通常只影响收敛率，例如，对于度数为 $p$ 的多项式，解是否收敛为 $\mathcal O(h^p)$ 、 $\mathcal O(h^{p+1/2})$ 或 $\mathcal
+O(h^{p+1})$ 准则。因此，数值通量可以被看作是一种机制，用于选择更有利的耗散/分散特性或关于离散化和线性化算子的极值特征，这影响到显式时间积分器中最大的可接受的时间步长。
 
-In this tutorial program, we implement two variants of fluxes that can be
-controlled via a switch in the program (of course, it would be easy to make
-them a run time parameter controlled via an input file). The first flux is
-the local Lax--Friedrichs flux
-@f[
+在这个教程中，我们实现了两种通量的变体，可以通过程序中的开关来控制（当然，通过输入文件来控制它们的运行时间参数也很容易）。第一个通量是局部的Lax--Friedrichs通量@f[
 \hat{\mathbf{F}}(\mathbf{w}^-,\mathbf{w}^+) =
 \frac{\mathbf{F}(\mathbf{w}^-)+\mathbf{F}(\mathbf{w}^+)}{2} +
    \frac{\lambda}{2}\left[\mathbf{w}^--\mathbf{w}^+\right]\otimes
    \mathbf{n^-}.
-@f]
+@f] 。
 
-In the original definition of the Lax--Friedrichs flux, a factor $\lambda =
-\max\left(\|\mathbf{u}^-\|+c^-, \|\mathbf{u}^+\|+c^+\right)$ is used
-(corresponding to the maximal speed at which information is moving on
-the two sides of the interface), stating
-that the difference between the two states, $[\![\mathbf{w}]\!]$ is penalized
-by the largest eigenvalue in the Euler flux, which is $\|\mathbf{u}\|+c$,
-where $c=\sqrt{\gamma p / \rho}$ is the speed of sound. In the implementation
-below, we modify the penalty term somewhat, given that the penalty is of
-approximate nature anyway. We use
+在Lax--Friedrichs通量的原始定义中，使用了一个系数 $\lambda =
+\max\left(\|\mathbf{u}^-\|+c^-, \|\mathbf{u}^+\|+c^+\right)$ （对应于信息在界面两边移动的最大速度），说明两个状态之间的差异， $[\![\mathbf{w}]\!]$ 被欧拉通量中的最大特征值惩罚，即 $\|\mathbf{u}\|+c$  ，其中 $c=\sqrt{\gamma p / \rho}$ 为音速。在下面的实现中，我们对惩罚项进行了一些修改，因为无论如何，惩罚都是近似的性质。我们使用 
+
 @f{align*}{
 \lambda
 &=
@@ -267,200 +150,87 @@ approximate nature anyway. We use
 &=
 \frac{1}{2}\sqrt{\max\left(\|\mathbf{u^-}\|^2+(c^-)^2,
                            \|\mathbf{u}^+\|^2+(c^+)^2\right)}.
-@f}
-The additional factor $\frac 12$ reduces the penalty strength (which results
-in a reduced negative real part of the eigenvalues, and thus increases the
-admissible time step size). Using the squares within the sums allows us to
-reduce the number of expensive square root operations, which is 4 for the
-original Lax--Friedrichs definition, to a single one.
-This simplification leads to at most a factor of
-2 in the reduction of the parameter $\lambda$, since $\|\mathbf{u}\|^2+c^2 \leq
+@f} 
+
+额外的因子 $\frac 12$ 降低了惩罚强度（这导致特征值的负实部减少，从而增加了可接受的时间步长）。使用和内的平方允许我们减少昂贵的平方根操作的数量，对于原始的Lax--Friedrichs定义是4个，现在只需要一个。这种简化导致参数 $\lambda$ 的减少最多为2倍，因为 $\|\mathbf{u}\|^2+c^2 \leq
 \|\mathbf{u}\|^2+2 c |\mathbf{u}\| + c^2 = \left(\|\mathbf{u}\|+c\right)^2
-\leq 2 \left(\|\mathbf{u}\|^2+c^2\right)$, with the last inequality following
-from Young's inequality.
+\leq 2 \left(\|\mathbf{u}\|^2+c^2\right)$ ，最后一个不等式来自杨氏不等式。
 
-The second numerical flux is one proposed by Harten, Lax and van Leer, called
-the HLL flux. It takes the different directions of propagation of the Euler
-equations into account, depending on the speed of sound. It utilizes some
-intermediate states $\bar{\mathbf{u}}$ and $\bar{c}$ to define the two
-branches $s^\mathrm{p} = \max\left(0, \bar{\mathbf{u}}\cdot \mathbf{n} +
-\bar{c}\right)$ and $s^\mathrm{n} = \min\left(0, \bar{\mathbf{u}}\cdot
-\mathbf{n} - \bar{c}\right)$. From these branches, one then defines the flux
-@f[
-\hat{\mathbf{F}}(\mathbf{w}^-,\mathbf{w}^+) =
-\frac{s^\mathrm{p} \mathbf{F}(\mathbf{w}^-)-s^\mathrm{n} \mathbf{F}(\mathbf{w}^+)}
-                   {s^\mathrm p - s^\mathrm{n} } +
-\frac{s^\mathrm{p} s^\mathrm{n}}{s^\mathrm{p}-s^\mathrm{n}}
-\left[\mathbf{w}^--\mathbf{w}^+\right]\otimes \mathbf{n^-}.
-@f]
-Regarding the definition of the intermediate state $\bar{\mathbf{u}}$ and
-$\bar{c}$, several variants have been proposed. The variant originally
-proposed uses a density-averaged definition of the velocity, $\bar{\mathbf{u}}
+第二个数值通量是由Harten, Lax和van Leer提出的，称为HLL通量。它考虑到欧拉方程的不同传播方向，取决于声速。它利用一些中间状态  $\bar{\mathbf{u}}$  和  $\bar{c}$  来定义两个分支  $s^\mathrm{p} = \max\left(0, \bar{\mathbf{u}}\cdot \mathbf{n} +
+\bar{c}\right)$  和  $s^\mathrm{n} = \min\left(0, \bar{\mathbf{u}}\cdot
+\mathbf{n} - \bar{c}\right)$  。关于中间状态 $\bar{\mathbf{u}}$ 和 $\bar{c}$ 的定义，已经提出了几个变种。最初提出的变体采用密度平均的速度定义，  $\bar{\mathbf{u}}
 = \frac{\sqrt{\rho^-} \mathbf{u}^- + \sqrt{\rho^+}\mathbf{u}^+}{\sqrt{\rho^-}
-+ \sqrt{\rho^+}}$. Since we consider the Euler equations without shocks, we
-simply use arithmetic means, $\bar{\mathbf{u}} = \frac{\mathbf{u}^- +
-\mathbf{u}^+}{2}$ and $\bar{c} = \frac{c^- + c^+}{2}$, with $c^{\pm} =
-\sqrt{\gamma p^{\pm} / \rho^{\pm}}$, in this tutorial program, and leave other
-variants to a possible extension. We also note that the HLL flux has been
-extended in the literature to the so-called HLLC flux, where C stands for the
-ability to represent contact discontinuities.
++ \sqrt{\rho^+}}$  。由于我们考虑的是没有冲击的欧拉方程，因此在本教程程序中，我们简单地使用算术手段， $\bar{\mathbf{u}} = \frac{\mathbf{u}^- +
+\mathbf{u}^+}{2}$ 和 $\bar{c} = \frac{c^- + c^+}{2}$ ，与 $c^{\pm} =
+\sqrt{\gamma p^{\pm} / \rho^{\pm}}$ ，而将其他变体留给可能的扩展。我们还注意到，HLL通量在文献中被扩展为所谓的HLLC通量，其中C代表表示接触不连续的能力。
 
-At the boundaries with no neighboring state $\mathbf{w}^+$ available, it is
-common practice to deduce suitable exterior values from the boundary
-conditions (see the general literature on DG methods for details). In this
-tutorial program, we consider three types of boundary conditions, namely
-<b>inflow boundary conditions</b> where all components are prescribed,
-@f[
+在没有邻接状态 $\mathbf{w}^+$ 的边界上，通常的做法是从边界条件中推导出合适的外部值（详见关于DG方法的一般文献）。在本教程程序中，我们考虑三种类型的边界条件，即<b>inflow boundary conditions</b>，其中所有分量都是规定的；@f[
 \mathbf{w}^+ = \begin{pmatrix} \rho_\mathrm{D}(t)\\
 (\rho \mathbf u)_{\mathrm D}(t) \\ E_\mathrm{D}(t)\end{pmatrix} \quad
  \text{(Dirichlet)},
-@f]
-<b>subsonic outflow boundaries</b>, where we do not prescribe exterior
-solutions as the flow field is leaving the domain and use the interior values
-instead; we still need to prescribe the energy as there is one incoming
-characteristic left in the Euler flux,
-@f[
+@f]<b>subsonic outflow boundaries</b>，其中我们不规定外部解，因为流场要离开域，而使用内部值；我们仍然需要规定能量，因为欧拉通量中还剩下一个传入特性；@f[
 \mathbf{w}^+ = \begin{pmatrix} \rho^-\\
 (\rho \mathbf u)^- \\ E_\mathrm{D}(t)\end{pmatrix} \quad
  \text{(mixed Neumann/Dirichlet)},
-@f]
-and <b>wall boundary condition</b> which describe a no-penetration
-configuration:
-@f[
+@f]和<b>wall boundary condition</b>，描述一个无穿透的配置。@f[
 \mathbf{w}^+ = \begin{pmatrix} \rho^-\\
 (\rho \mathbf u)^- - 2 [(\rho \mathbf u)^-\cdot \mathbf n] \mathbf{n}
  \\ E^-\end{pmatrix}.
-@f]
+@f] 
 
-The polynomial expansion of the solution is finally inserted to the weak form
-and test functions are replaced by the basis functions. This gives a discrete
-in space, continuous in time nonlinear system with a finite number of unknown
-coefficient values $w_j$, $j=1,\ldots,n_\text{dofs}$. Regarding the choice of
-the polynomial degree in the DG method, there is no consensus in literature as
-of 2019 as to what polynomial degrees are most efficient and the decision is
-problem-dependent. Higher order polynomials ensure better convergence rates
-and are thus superior for moderate to high accuracy requirements for
-<b>smooth</b> solutions. At the same time, the volume-to-surface ratio
-of where degrees of freedom are located,
-increases with higher degrees, and this makes the effect of the numerical flux
-weaker, typically reducing dissipation. However, in most of the cases the
-solution is not smooth, at least not compared to the resolution that can be
-afforded. This is true for example in incompressible fluid dynamics,
-compressible fluid dynamics, and the related topic of wave propagation. In this
-pre-asymptotic regime, the error is approximately proportional to the
-numerical resolution, and other factors such as dispersion errors or the
-dissipative behavior become more important. Very high order methods are often
-ruled out because they come with more restrictive CFL conditions measured
-against the number of unknowns, and they are also not as flexible when it
-comes to representing complex geometries. Therefore, polynomial degrees
-between two and six are most popular in practice, see e.g. the efficiency
-evaluation in @cite FehnWallKronbichler2019 and references cited therein.
+解的多项式展开最后被插入到弱形式中，测试函数被基础函数取代。这就得到了一个空间上离散、时间上连续的非线性系统，其未知系数的数量有限  $w_j$  ,  $j=1,\ldots,n_\text{dofs}$  。关于DG方法中多项式度数的选择，截至2019年，文献中并没有关于什么多项式度数最有效的共识，决定权取决于问题。高阶多项式可以确保更好的收敛率，因此对于中等到高精确度要求的<b>smooth</b>解来说，高阶多项式更有优势。同时，自由度所在的体积与表面的比率，随着高阶度的增加而增加，这使得数值通量的影响变弱，通常会减少耗散。然而，在大多数情况下，解决方案是不平滑的，至少与可以承受的分辨率相比是不平滑的。例如，在不可压缩流体力学、可压缩流体力学以及与之相关的波浪传播课题中都是如此。在这个前渐进制度中，误差大约与数值分辨率成正比，而其他因素，如分散误差或耗散行为变得更加重要。非常高阶的方法往往被排除在外，因为它们带有根据未知数衡量的更多限制性的CFL条件，而且当涉及到表示复杂几何形状时，它们也不那么灵活。因此，2到6的多项式度数在实践中是最受欢迎的，见例如 @cite FehnWallKronbichler2019 中的效率评估和其中引用的参考文献。
 
-<a name="Explicittimeintegration"></a><h3>Explicit time integration</h3>
+<a name="Explicittimeintegration"></a><h3>Explicit time integration</h3> 
 
 
-To discretize in time, we slightly rearrange the weak form and sum over all
-cells:
-@f[
+为了在时间上进行离散，我们稍微重新排列弱的形式，并在所有单元上求和。@f[
 \sum_{K \in \mathcal T_h} \left(\boldsymbol{\varphi}_i,
 \frac{\partial \mathbf{w}}{\partial t}\right)_{K}
 =
 \sum_{K\in \mathcal T_h}
 \left[
 \left(\nabla \boldsymbol{\varphi}_i, \mathbf{F}(\mathbf{w})\right)_{K}
+
+
 -\left<\boldsymbol{\varphi}_i,
 \mathbf{n} \cdot \widehat{\mathbf{F}}(\mathbf{w})\right>_{\partial K} +
 \left(\boldsymbol{\varphi}_i,\mathbf{G}(\mathbf w)\right)_{K}
 \right],
-@f]
-where $\boldsymbol{\varphi}_i$ runs through all basis functions with from 1 to
-$n_\text{dofs}$.
+@f] 其中 $\boldsymbol{\varphi}_i$ 贯穿所有基函数，从1到 $n_\text{dofs}$  。
 
-We now denote by $\mathcal M$ the mass matrix with entries $\mathcal M_{ij} =
+我们现在用 $\mathcal M$ 表示质量矩阵，其条目为 $\mathcal M_{ij} =
 \sum_{K} \left(\boldsymbol{\varphi}_i,
-\boldsymbol{\varphi}_j\right)_K$, and by
-@f[
+\boldsymbol{\varphi}_j\right)_K$  ，用@f[
 \mathcal L_h(t,\mathbf{w}_h) = \left[\sum_{K\in \mathcal T_h}
 \left[
 \left(\nabla \boldsymbol{\varphi}_i, \mathbf{F}(\mathbf{w}_h)\right)_{K}
+
+
 - \left<\boldsymbol{\varphi}_i,
 \mathbf{n} \cdot \widehat{\mathbf{F}}(\mathbf{w}_h)\right>_{\partial K}
 + \left(\boldsymbol{\varphi}_i,\mathbf{G}(\mathbf w_h)\right)_{K}
 \right]\right]_{i=1,\ldots,n_\text{dofs}}.
-@f]
-the operator evaluating the right-hand side of the Euler operator, given a
-function $\mathbf{w}_h$ associated with a global vector of unknowns
-and the finite element in use. This function $\mathcal L_h$ is explicitly time-dependent as the
-numerical flux evaluated at the boundary will involve time-dependent data
-$\rho_\mathrm{D}$, $(\rho \mathbf{u})_\mathrm{D}$, and $E_\mathbf{D}$ on some
-parts of the boundary, depending on the assignment of boundary
-conditions. With this notation, we can write the discrete in space, continuous
-in time system compactly as
-@f[
+@f]表示评价欧拉算子右边的算子，给定一个与全局未知数矢量和使用中的有限元相关的函数 $\mathbf{w}_h$ 。这个函数 $\mathcal L_h$ 是明确随时间变化的，因为在边界上评估的数值通量将涉及边界某些部分的随时间变化的数据 $\rho_\mathrm{D}$ 、 $(\rho \mathbf{u})_\mathrm{D}$ 和 $E_\mathbf{D}$ ，取决于边界条件的分配。有了这个符号，我们可以把空间离散、时间连续的系统紧凑地写成@f[
 \mathcal M \frac{\partial \mathbf{w}_h}{\partial t} =
 \mathcal L_h(t, \mathbf{w}_h),
-@f]
-where we have taken the liberty to also denote the global solution
-vector by $\mathbf{w}_h$ (in addition to the the corresponding finite
-element function). Equivalently, the system above has the form
-@f[
+@f]，其中我们还冒昧地用 $\mathbf{w}_h$ 来表示全局解向量（除了相应的有限元函数）。等价地，上述系统的形式为@f[
 \frac{\partial \mathbf{w}_h}{\partial t} =
 \mathcal M^{-1} \mathcal L_h(t, \mathbf{w}_h).
-@f]
+@f] 。
 
-For hyperbolic systems discretized by high-order discontinuous Galerkin
-methods, explicit time integration of this system is very popular. This is due
-to the fact that the mass matrix $\mathcal M$ is block-diagonal (with each
-block corresponding to only variables of the same kind defined on the same
-cell) and thus easily inverted. In each time step -- or stage of a
-Runge--Kutta scheme -- one only needs to evaluate the differential operator
-once using the given data and subsequently apply the inverse of the mass
-matrix. For implicit time stepping, on the other hand, one would first have to
-linearize the equations and then iteratively solve the linear system, which
-involves several residual evaluations and at least a dozen applications of
-the linearized operator, as has been demonstrated in the step-33 tutorial
-program.
+对于用高阶非连续Galerkin方法离散的双曲系统，该系统的显式时间积分非常流行。这是由于质量矩阵 $\mathcal M$ 是块对角线的（每个块只对应于定义在同一单元上的同类变量），因此很容易倒置。在每个时间步长--或Runge-Kutta方案的阶段--我们只需要用给定的数据评估一次微分算子，然后再应用质量矩阵的逆值。另一方面，对于隐式时间步进，人们首先必须将方程线性化，然后迭代求解线性系统，这涉及到几个残差评估和至少十几个线性化算子的应用，这在 step-33 教程程序中已经得到证明。
 
-Of course, the simplicity of explicit time stepping comes with a price, namely
-conditional stability due to the so-called Courant--Friedrichs--Lewy (CFL)
-condition. It states that the time step cannot be larger than the fastest
-propagation of information by the discretized differential operator. In more
-modern terms, the speed of propagation corresponds to the largest eigenvalue
-in the discretized operator, and in turn depends on the mesh size, the
-polynomial degree $p$ and the physics of the Euler operator, i.e., the
-eigenvalues of the linearization of $\mathbf F(\mathbf w)$ with respect to
-$\mathbf{w}$. In this program, we set the time step as follows:
-@f[
+当然，显式时间步长的简单性是有代价的，即由于所谓的Courant-Friedrichs-Lewy（CFL）条件而产生的条件稳定性。它指出，时间步长不能大于离散微分算子的最快信息传播。用更现代的术语来说，传播速度对应于离散算子的最大特征值，反过来又取决于网格大小、多项式程度 $p$ 和欧拉算子的物理学，即 $\mathbf F(\mathbf w)$ 相对于 $\mathbf{w}$ 的线性化的特征值。在这个程序中，我们将时间步长设置为：。@f[
 \Delta t = \frac{\mathrm{Cr}}{p^{1.5}}\left(\frac{1}
            {\max\left[\frac{\|\mathbf{u}\|}{h_u} + \frac{c}{h_c}\right]}\right),
-@f]
+@f] 
 
-with the maximum taken over all quadrature points and all cells. The
-dimensionless number $\mathrm{Cr}$ denotes the Courant number and can be
-chosen up to a maximally stable number $\mathrm{Cr}_\text{max}$, whose value
-depends on the selected time stepping method and its stability properties. The
-power $p^{1.5}$ used for the polynomial scaling is heuristic and represents
-the closest fit for polynomial degrees between 1 and 8, see e.g.
-@cite SchoederKormann2018. In the limit of higher degrees, $p>10$, a scaling of
-$p^2$ is more accurate, related to the inverse estimates typically used for
-interior penalty methods. Regarding the <i>effective</i> mesh sizes $h_u$ and
-$h_c$ used in the formula, we note that the convective transport is
-directional. Thus an appropriate scaling is to use the element length in the
-direction of the velocity $\mathbf u$. The code below derives this scaling
-from the inverse of the Jacobian from the reference to real cell, i.e., we
-approximate $\frac{\|\mathbf{u}\|}{h_u} \approx \|J^{-1} \mathbf
-u\|_{\infty}$. The acoustic waves, instead, are isotropic in character, which
-is why we use the smallest feature size, represented by the smallest singular
-value of $J$, for the acoustic scaling $h_c$. Finally, we need to add the
-convective and acoustic limits, as the Euler equations can transport
-information with speed $\|\mathbf{u}\|+c$.
+以所有正交点和所有单元的最大值为准。无量纲数 $\mathrm{Cr}$ 表示Courant数，可以选择到最大稳定数 $\mathrm{Cr}_\text{max}$ ，其值取决于所选择的时间步进方法及其稳定性能。用于多项式缩放的幂 $p^{1.5}$ 是启发式的，代表1到8之间的多项式度数的最接近，例如见 @cite SchoederKormann2018  。在更高的度数限制下， $p>10$ ， $p^2$ 的比例更准确，与通常用于内部惩罚方法的逆向估计有关。关于公式中使用的<i>effective</i>网格尺寸 $h_u$ 和 $h_c$ ，我们注意到对流传输是定向的。因此，一个适当的比例是使用速度方向上的元素长度  $\mathbf u$  。下面的代码从参考单元到实际单元的Jacobian的倒数得出这个比例，即我们近似  $\frac{\|\mathbf{u}\|}{h_u} \approx \|J^{-1} \mathbf
+u\|_{\infty}$  。相反，声波具有各向同性的特点，这就是为什么我们使用最小的特征尺寸，由 $J$ 的最小奇异值代表，用于声学缩放  $h_c$  。最后，我们需要添加对流和声学限制，因为欧拉方程可以以速度传输信息  $\|\mathbf{u}\|+c$  。
 
-In this tutorial program, we use a specific variant of <a
+在这个教程程序中，我们使用了<a
 href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">explicit
-Runge--Kutta methods</a>, which in general use the following update procedure
-from the state $\mathbf{w}_h^{n}$ at time $t^n$ to the new time $t^{n+1}$ with
-$\Delta t = t^{n+1}-t^n$:
-@f[
+Runge--Kutta methods</a>的一个具体变体，一般来说，它使用以下更新程序，从时间 $t^n$ 的状态 $\mathbf{w}_h^{n}$ 到新时间 $t^{n+1}$ 的 $\Delta t = t^{n+1}-t^n$  ：@f[
 \begin{aligned}
 \mathbf{k}_1 &= \mathcal M^{-1} \mathcal L_h\left(t^n, \mathbf{w}_h^n\right),
 \\
@@ -474,18 +244,9 @@ $\Delta t = t^{n+1}-t^n$:
 \mathbf{w}_h^{n+1} &= \mathbf{w}_h^n + \Delta t\left(b_1 \mathbf{k}_1 +
 b_2 \mathbf{k}_2 + \ldots + b_s \mathbf{k}_s\right).
 \end{aligned}
-@f]
-The vectors $\mathbf{k}_i$, $i=1,\ldots,s$, in an $s$-stage scheme are
-evaluations of the operator at some intermediate state and used to define the
-end-of-step value $\mathbf{w}_h^{n+1}$ via some linear combination. The scalar
-coefficients in this scheme, $c_i$, $a_{ij}$, and $b_j$, are defined such that
-certain conditions are satisfied for higher order schemes, the most basic one
-being $c_i = \sum_{j=1}^{i-1}a_{ij}$. The parameters are typically collected in
-the form of a so-called <a
+@f] ] 在 $s$ 阶段方案中，向量 $\mathbf{k}_i$ 、 $i=1,\ldots,s$ 是算子在某个中间状态的评价，并通过某种线性组合用于定义步骤结束值 $\mathbf{w}_h^{n+1}$ 。该方案中的标量系数 $c_i$ 、 $a_{ij}$ 和 $b_j$ 的定义，使高阶方案满足某些条件，最基本的是 $c_i = \sum_{j=1}^{i-1}a_{ij}$ 。参数通常以所谓的<a
 href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods#Explicit_Runge%E2%80%93Kutta_methods">Butcher
-tableau</a> that collects all of the coefficients that define the
-scheme. For a five-stage scheme, it would look like this:
-@f[
+tableau</a>的形式收集，它收集了定义该方案的所有系数。对于一个五阶段的方案，它看起来像这样。@f[
 \begin{array}{c|ccccc}
 0 \\
 c_2 & a_{21} \\
@@ -495,14 +256,9 @@ c_5 & a_{51} & a_{52} & a_{53} & a_{54} \\
 \hline
 & b_1 & b_2 & b_3 & b_4 & b_5
 \end{array}
-@f]
+@f] 
 
-In this tutorial program, we use a subset of explicit Runge--Kutta methods,
-so-called low-storage Runge--Kutta methods (LSRK), which assume additional
-structure in the coefficients. In the variant used by reference
-@cite KennedyCarpenterLewis2000, the assumption is to use Butcher tableaus of
-the form
-@f[
+在本教程中，我们使用显式Runge--Kutta方法的一个子集，即所谓的低存储Runge--Kutta方法（LSRK），它假定了系数的额外结构。在参考文献 @cite KennedyCarpenterLewis2000 所使用的变体中，假设使用形式为@f[
 \begin{array}{c|ccccc}
 0 \\
 c_2 & a_1 \\
@@ -512,2897 +268,2277 @@ c_5 & b_1 & b_2 & b_3 & a_4 \\
 \hline
 & b_1 & b_2 & b_3 & b_4 & b_5
 \end{array}
-@f]
-With such a definition, the update to $\mathbf{w}_h^n$ shares the storage with
-the information for the intermediate values $\mathbf{k}_i$. Starting with
-$\mathbf{w}^{n+1}=\mathbf{w}^n$ and $\mathbf{r}_1 = \mathbf{w}^n$, the update
-in each of the $s$ stages simplifies to
-@f[
+@f]的Butcher tableaus 有了这样的定义，对 $\mathbf{w}_h^n$ 的更新与中间值的信息共享存储  $\mathbf{k}_i$  。从 $\mathbf{w}^{n+1}=\mathbf{w}^n$ 和 $\mathbf{r}_1 = \mathbf{w}^n$ 开始，每个 $s$ 阶段的更新简化为@f[
 \begin{aligned}
 \mathbf{k}_i &=
 \mathcal M^{-1} \mathcal L_h\left(t^n+c_i\Delta t, \mathbf{r}_{i} \right),\\
 \mathbf{r}_{i+1} &= \mathbf{w}_h^{n+1} + \Delta t \, a_i \mathbf{k}_i,\\
 \mathbf{w}_h^{n+1} &= \mathbf{w}_h^{n+1} + \Delta t \, b_i \mathbf{k}_i.
 \end{aligned}
-@f]
-Besides the vector $\mathbf w_h^{n+1}$ that is successively updated, this scheme
-only needs two auxiliary vectors, namely the vector $\mathbf{k}_i$ to hold the
-evaluation of the differential operator, and the vector $\mathbf{r}_i$ that
-holds the right-hand side for the differential operator application. In
-subsequent stages $i$, the values $\mathbf{k}_i$ and $\mathbf{r}_i$ can use
-the same storage.
+@f] 除了连续更新的向量 $\mathbf w_h^{n+1}$ ，这个方案只需要两个辅助向量，即保存微分算子评估的向量 $\mathbf{k}_i$ 和保存微分算子应用的右手边的向量 $\mathbf{r}_i$  。在后续阶段 $i$ ，值 $\mathbf{k}_i$ 和 $\mathbf{r}_i$ 可以使用相同的存储。
 
-The main advantages of low-storage variants are the reduced memory consumption
-on the one hand (if a very large number of unknowns must be fit in memory,
-holding all $\mathbf{k}_i$ to compute subsequent updates can be a limit
-already for $s$ in between five and eight -- recall that we are using
-an explicit scheme, so we do not need to store any matrices that are
-typically much larger than a few vectors), and the reduced memory access on
-the other. In this program, we are particularly interested in the latter
-aspect. Since cost of operator evaluation is only a small multiple of the cost
-of simply streaming the input and output vector from memory with the optimized
-matrix-free methods of deal.II, we must consider the cost of vector updates,
-and low-storage variants can deliver up to twice the throughput of
-conventional explicit Runge--Kutta methods for this reason, see e.g. the
-analysis in @cite SchoederKormann2018.
+低存储量变体的主要优点是一方面减少了内存消耗（如果必须在内存中装入非常多的未知数，持有所有的 $\mathbf{k}_i$ 来计算后续的更新，对于 $s$ 来说已经是一个极限，在5到8之间 - 记得我们使用的是显式方案，所以我们不需要存储任何通常比几个向量大很多的矩阵），另一方面是减少内存访问。在这个程序中，我们对后一个方面特别感兴趣。由于运算符评估的成本只是简单地从内存中流转输入和输出向量的一小部分，我们必须考虑向量更新的成本，低存储量的变体可以提供两倍于传统显式Runge--Kutta方法的吞吐量，因为这个原因，见例如  @cite SchoederKormann2018  中的分析。
 
-Besides three variants for third, fourth and fifth order accuracy from the
-reference @cite KennedyCarpenterLewis2000, we also use a fourth-order accurate
-variant with seven stages that was optimized for acoustics setups from
-@cite TseliosSimos2007. Acoustic problems are one of the interesting aspects of
-the subsonic regime of the Euler equations where compressibility leads to the
-transmission of sound waves; often, one uses further simplifications of the
-linearized Euler equations around a background state or the acoustic wave
-equation around a fixed frame.
+除了参考文献 @cite KennedyCarpenterLewis2000 中的三阶、四阶和五阶精度的三个变体外，我们还使用了一个四阶精度的七级变体，该变体针对声学设置进行了优化  @cite TseliosSimos2007  。声学问题是欧拉方程的亚音速体系中有趣的方面之一，其中可压缩性导致了声波的传播；通常，人们使用围绕背景状态的线性化欧拉方程的进一步简化，或围绕固定框架的声波方程。
 
 
-<a name="Fastevaluationofintegralsbymatrixfreetechniques"></a><h3>Fast evaluation of integrals by matrix-free techniques</h3>
+<a name="Fastevaluationofintegralsbymatrixfreetechniques"></a><h3>Fast evaluation of integrals by matrix-free techniques</h3> 
 
 
-The major ingredients used in this program are the fast matrix-free techniques
-we use to evaluate the operator $\mathcal L_h$ and the inverse mass matrix
-$\mathcal M$. Actually, the term <i>matrix-free</i> is a slight misnomer,
-because we are working with a nonlinear operator and do not linearize the
-operator that in turn could be represented by a matrix. However, fast
-evaluation of integrals has become popular as a replacement of sparse
-matrix-vector products, as shown in step-37 and step-59, and we have coined
-this infrastructure <i>matrix-free functionality</i> in deal.II for this
-reason. Furthermore, the inverse mass matrix is indeed applied in a
-matrix-free way, as detailed below.
+这个程序中使用的主要成分是我们用来评估算子  $\mathcal L_h$  和反质量矩阵  $\mathcal M$  的快速无矩阵技术。实际上，术语<i>matrix-free</i>有点名不副实，因为我们是在处理一个非线性算子，并没有将算子线性化，而算子又可以用矩阵表示。然而，如 step-37 和 step-59 所示，积分的快速评估已成为流行的稀疏矩阵-向量产品的替代方法，为此我们在交易二中创造了这个基础设施<i>matrix-free functionality</i>。此外，反质量矩阵确实是以无矩阵的方式应用的，详见下文。
 
-The matrix-free infrastructure allows us to quickly evaluate the integrals in
-the weak forms. The ingredients are the fast interpolation from solution
-coefficients into values and derivatives at quadrature points, point-wise
-operations at quadrature points (where we implement the differential operator
-as derived above), as well as multiplication by all test functions and
-summation over quadrature points. The first and third component make use of
-sum factorization and have been extensively discussed in the step-37 tutorial
-program for the cell integrals and step-59 for the face integrals. The only
-difference is that we now deal with a system of $d+2$ components, rather than
-the scalar systems in previous tutorial programs. In the code, all that
-changes is a template argument of the FEEvaluation and FEFaceEvaluation
-classes, the one to set the number of components. The access to the vector is
-the same as before, all handled transparently by the evaluator. We also note
-that the variant with a single evaluator chosen in the code below is not the
-only choice -- we could also have used separate evalators for the separate
-components $\rho$, $\rho \mathbf u$, and $E$; given that we treat all
-components similarly (also reflected in the way we state the equation as a
-vector system), this would be more complicated here. As before, the
-FEEvaluation class provides explicit vectorization by combining the operations
-on several cells (and faces), involving data types called
-VectorizedArray. Since the arithmetic operations are overloaded for this type,
-we do not have to bother with it all that much, except for the evaluation of
-functions through the Function interface, where we need to provide particular
-<i>vectorized</i> evaluations for several quadrature point locations at once.
+无矩阵的基础设施使我们能够快速评估弱形式的积分。其成分是将解系数快速插值为正交点的值和导数，在正交点进行逐点操作（在这里我们实现了上面推导的微分算子），以及与所有测试函数相乘和对正交点求和。第一和第三部分利用了和因子化，并在 step-37 的单元积分和 step-59 的面积分的教程程序中得到了广泛的讨论。唯一的区别是，我们现在处理的是一个 $d+2$ 分量系统，而不是以前教程中的标量系统。在代码中，所有的变化是FEEvaluation和FEFaceEvaluation类的一个模板参数，即设置分量的数量。对向量的访问和以前一样，都由评价器透明地处理。我们还注意到，下面的代码中选择的单一评价器的变体并不是唯一的选择--我们也可以为单独的组件 $\rho$ 、 $\rho \mathbf u$ 和 $E$ 使用单独的评价器；鉴于我们对所有组件的处理是相似的（也反映在我们把方程作为一个向量系统的方式），这里会更加复杂。和以前一样，FEEvaluation类通过结合对几个单元（和面）的操作来提供显式的矢量化，涉及的数据类型称为VectorizedArray。由于这种类型的算术运算都是重载的，所以我们不必为它费心，除了通过函数接口对函数进行评估，我们需要同时为几个正交点的位置提供特殊的<i>vectorized</i>评估结果。
 
-A more substantial change in this program is the operation at quadrature
-points: Here, the multi-component evaluators provide us with return types not
-discussed before. Whereas FEEvaluation::get_value() would return a scalar
-(more precisely, a VectorizedArray type due to vectorization across cells) for
-the Laplacian of step-37, it now returns a type that is
-`Tensor<1,dim+2,VectorizedArray<Number>>`. Likewise, the gradient type is now
-`Tensor<1,dim+2,Tensor<1,dim,VectorizedArray<Number>>>`, where the outer
-tensor collects the `dim+2` components of the Euler system, and the inner
-tensor the partial derivatives in the various directions. For example, the
-flux $\mathbf{F}(\mathbf{w})$ of the Euler system is of this type. In order to reduce the amount of
-code we have to write for spelling out these types, we use the C++ `auto`
-keyword where possible.
+这个程序中更大的变化是在正交点的操作。在这里，多分量评估器为我们提供了以前没有讨论过的返回类型。当 FEEvaluation::get_value() 为 step-37 的拉普拉斯返回一个标量（由于跨单元的矢量化，更准确地说，是一个VectorizedArray类型）时，它现在返回的类型是 "Tensor<1,dim+2,VectorizedArray<Number>"。同样，梯度类型现在是`张量<1,dim+2,张量<1,dim,矢量化数组<Number>>`，其中外部张量收集了欧拉系统的`dim+2'分量，内部张量是各个方向的偏导数。例如，欧拉系统的通量 $\mathbf{F}(\mathbf{w})$ 就属于这种类型。为了减少我们为拼出这些类型而写的代码量，我们尽可能使用C++的`自动'关键字。
 
-From an implementation point of view, the nonlinearity is not a big
-difficulty: It is introduced naturally as we express the terms of the Euler
-weak form, for example in the form of the momentum term $\rho \mathbf{u}
-\otimes \mathbf{u}$. To obtain this expression, we first deduce the velocity
-$\mathbf{u}$ from the momentum variable $\rho \mathbf{u}$. Given that $\rho
-\mathbf{u}$ is represented as a $p$-degree polynomial, as is $\rho$, the
-velocity $\mathbf{u}$ is a rational expression in terms of the reference
-coordinates $\hat{\mathbf{x}}$. As we perform the multiplication $(\rho
-\mathbf{u})\otimes \mathbf{u}$, we obtain an expression that is the
-ratio of two polynomials, with polynomial degree $2p$ in the
-numerator and polynomial degree $p$ in the denominator. Combined with the
-gradient of the test function, the integrand is of degree $3p$ in the
-numerator and $p$ in the denominator already for affine cells, i.e.,
-for parallelograms/ parallelepipeds.
-For curved cells, additional polynomial and rational expressions
-appear when multiplying the integrand by the determinant of the Jacobian of
-the mapping. At this point, one usually needs to give up on insisting on exact
-integration, and take whatever accuracy the Gaussian (more precisely,
-Gauss--Legrende) quadrature provides. The situation is then similar to the one
-for the Laplace equation, where the integrand contains rational expressions on
-non-affince cells and is also only integrated approximately. As these formulas
-only integrate polynomials exactly, we have to live with the <a
+从实现的角度来看，非线性并不是一个很大的困难。它是在我们表达欧拉弱形式的条款时自然引入的，例如在动量项的形式中  $\rho \mathbf{u}
+\otimes \mathbf{u}$  。为了得到这个表达式，我们首先从动量变量  $\rho \mathbf{u}$  推导出速度  $\mathbf{u}$  。鉴于 $\rho
+\mathbf{u}$ 被表示为 $p$ 度的多项式，正如 $\rho$ 一样，速度 $\mathbf{u}$ 是参考坐标 $\hat{\mathbf{x}}$ 的一个有理表达。当我们进行乘法 $(\rho
+\mathbf{u})\otimes \mathbf{u}$ 时，我们得到的表达式是两个多项式的比值，分子中的多项式程度 $2p$ 和分母中的多项式程度 $p$ 。结合测试函数的梯度，对于仿形单元，即平行四边形/平行四边形，分子中的积分为 $3p$ ，分母中的积分为 $p$ 。对于曲线单元，当积分乘以映射的雅各布系数的行列式时，会出现额外的多项式和有理数表达。在这一点上，人们通常需要放弃坚持精确的积分，而采取高斯（更确切地说，高斯-勒格伦德）正交提供的任何精度。这时的情况与拉普拉斯方程的情况类似，积分项包含非affince单元上的有理表达式，也只能进行近似积分。由于这些公式只对多项式进行精确积分，我们不得不以积分误差的形式忍受<a
 href="https://mathoverflow.net/questions/26018/what-are-variational-crimes-and-who-coined-the-term">variational
-crime</a> in the form of an integration error.
+crime</a>的影响。
 
-While inaccurate integration is usually tolerable for elliptic problems, for
-hyperbolic problems inexact integration causes some headache in the form of an
-effect called <b>aliasing</b>. The term comes from signal processing and
-expresses the situation of inappropriate, too coarse sampling. In terms of
-quadrature, the inappropriate sampling means that we use too few quadrature
-points compared to what would be required to accurately sample the
-variable-coefficient integrand. It has been shown in the DG literature that
-aliasing errors can introduce unphysical oscillations in the numerical
-solution for <i>barely</i> resolved simulations. The fact that aliasing mostly
-affects coarse resolutions -- whereas finer meshes with the same scheme
-work fine -- is not surprising because well-resolved simulations
-tend to be smooth on length-scales of a cell (i.e., they have
-small coefficients in the higher polynomial degrees that are missed by
-too few quadrature points, whereas the main solution contribution in the lower
-polynomial degrees is still well-captured -- this is simply a consequence of Taylor's
-theorem). To address this topic, various approaches have been proposed in the
-DG literature. One technique is filtering which damps the solution components
-pertaining to higher polynomial degrees. As the chosen nodal basis is not
-hierarchical, this would mean to transform from the nodal basis into a
-hierarchical one (e.g., a modal one based on Legendre polynomials) where the
-contributions within a cell are split by polynomial degrees. In that basis,
-one could then multiply the solution coefficients associated with higher
-degrees by a small number, keep the lower ones intact (to not destroy consistency), and
-then transform back to the nodal basis. However, filters reduce the accuracy of the
-method. Another, in some sense simpler, strategy is to use more quadrature
-points to capture non-linear terms more accurately. Using more than $p+1$
-quadrature points per coordinate directions is sometimes called
-over-integration or consistent integration. The latter name is most common in
-the context of the incompressible Navier-Stokes equations, where the
-$\mathbf{u}\otimes \mathbf{u}$ nonlinearity results in polynomial integrands
-of degree $3p$ (when also considering the test function), which can be
-integrated exactly with $\textrm{floor}\left(\frac{3p}{2}\right)+1$ quadrature
-points per direction as long as the element geometry is affine. In the context
-of the Euler equations with non-polynomial integrands, the choice is less
-clear. Depending on the variation in the various variables both
-$\textrm{floor}\left(\frac{3p}{2}\right)+1$ or $2p+1$ points (integrating
-exactly polynomials of degree $3p$ or $4p$, respectively) are common.
+虽然不准确的积分对于椭圆问题来说通常是可以容忍的，但对于双曲问题来说，不准确的积分会引起一些令人头痛的效应，这种效应称为<b>aliasing</b>。这个术语来自于信号处理，表达了不适当的、太粗糙的采样的情况。就正交而言，不适当的采样意味着我们使用的正交点与准确采样变系数积分所需的点相比太少。在DG文献中已经表明，别离误差会在<i>barely</i>解析模拟的数值解中引入非物理性的振荡。别名主要影响到粗略的分辨率--而采用相同方案的更细的网格则工作良好--这一事实并不令人惊讶，因为分辨率高的模拟往往在一个单元的长度尺度上是平滑的（即，它们在较高的多项式程度上有小的系数，由于正交点太少而被遗漏，而在较低的多项式程度上的主要解贡献仍然被很好地捕获--这只是泰勒定理的一个结果）。为了解决这个问题，DG文献中提出了各种方法。一种技术是过滤，它可以抑制与高次多项式度数有关的解成分。由于所选择的节点基不是分层的，这就意味着要从节点基转化为分层基（例如，基于Legendre多项式的模态基），其中单元内的贡献是按多项式程度划分的。在这个基础上，我们可以将与高度数相关的求解系数乘以一个小数，保持低度数不变（以避免破坏一致性），然后再转换回节点基础。然而，过滤器会降低该方法的准确性。另一个在某种意义上更简单的策略是使用更多的正交点来更准确地捕捉非线性项。每个坐标方向使用超过 $p+1$ 的正交点有时被称为过度积分或一致积分。后者在不可压缩的Navier-Stokes方程的背景下最为常见，其中 $\mathbf{u}\otimes \mathbf{u}$ 非线性导致度数为 $3p$ 的多项式积分（当同时考虑测试函数时），只要元素的几何形状是仿生的，就可以用每个方向的 $\textrm{floor}\left(\frac{3p}{2}\right)+1$ 正交点精确积分。在非多项式积分的欧拉方程的背景下，选择就不那么明确了。根据各种变量的变化， $\textrm{floor}\left(\frac{3p}{2}\right)+1$ 或 $2p+1$ 点（分别精确积分度为 $3p$ 或 $4p$ 的多项式）都很常见。
 
-To reflect this variability in the choice of quadrature in the program, we
-keep the number of quadrature points a variable to be specified just as the
-polynomial degree, and note that one would make different choices depending
-also on the flow configuration. The default choice is $p+2$ points -- a bit
-more than the minimum possible of $p+1$ points. The FEEvaluation and
-FEFaceEvaluation classes allow to seamlessly change the number of points by a
-template parameter, such that the program does not get more complicated
-because of that.
+为了反映程序中正交选择的这种可变性，我们把正交点的数量作为一个变量来指定，就像多项式的度数一样，并注意到人们会根据流量配置做出不同的选择。默认选择是 $p+2$ 点--比最小可能的 $p+1$ 点多一点。FEEvaluation和FEFaceEvaluation类允许通过模板参数无缝地改变点的数量，这样程序就不会因此而变得更复杂。
 
 
 <a name="Evaluationoftheinversemassmatrixwithmatrixfreetechniques"></a><h3>Evaluation of the inverse mass matrix with matrix-free techniques</h3>
 
 
-The last ingredient is the evaluation of the inverse mass matrix $\mathcal
-M^{-1}$. In DG methods with explicit time integration, mass matrices are
-block-diagonal and thus easily inverted -- one only needs to invert the
-diagonal blocks. However, given the fact that matrix-free evaluation of
-integrals is closer in cost to the access of the vectors only, even the
-application of a block-diagonal matrix (e.g. via an array of LU factors) would
-be several times more expensive than evaluation of $\mathcal L_h$
-simply because just storing and loading matrices of size
-`dofs_per_cell` times `dofs_per_cell` for higher order finite elements
-repeatedly is expensive. As this is
-clearly undesirable, part of the community has moved to bases where the mass
-matrix is diagonal, for example the <i>L<sub>2</sub></i>-orthogonal Legendre basis using
-hierarchical polynomials or Lagrange polynomials on the points of the Gaussian
-quadrature (which is just another way of utilizing Legendre
-information). While the diagonal property breaks down for deformed elements,
-the error made by taking a diagonal mass matrix and ignoring the rest (a
-variant of mass lumping, though not the one with an additional integration
-error as utilized in step-48) has been shown to not alter discretization
-accuracy. The Lagrange basis in the points of Gaussian quadrature is sometimes
-also referred to as a collocation setup, as the nodal points of the
-polynomials coincide (= are "co-located") with the points of quadrature, obviating some
-interpolation operations. Given the fact that we want to use more quadrature
-points for nonlinear terms in $\mathcal L_h$, however, the collocation
-property is lost. (More precisely, it is still used in FEEvaluation and
-FEFaceEvaluation after a change of basis, see the matrix-free paper
-@cite KronbichlerKormann2019.)
+最后一个要素是反质量矩阵的评估  $\mathcal
+M^{-1}$  。在具有显式时间积分的DG方法中，质量矩阵是块状对角线，因此很容易反转--只需要反转对角线块。然而，考虑到无矩阵的积分评估在成本上更接近于只访问向量，即使应用块对角矩阵（例如通过LU因子的数组）也会比评估 $\mathcal L_h$ 的成本高几倍，仅仅是因为对于高阶有限元来说，仅仅存储和加载大小为`dofs_per_cell`乘`dofs_per_cell`的矩阵是昂贵的。由于这显然是不可取的，部分社区已经转向质量矩阵是对角线的基，例如<i>L<sub>2</sub></i>正交Legendre基，使用分层多项式或高斯四分法点上的拉格朗日多项式（这只是利用Legendre信息的另一种方式）。虽然对角线属性对于变形元素来说是失效的，但通过采取对角线质量矩阵而忽略其余部分（质量包络的变种，尽管不是 step-48 中利用的具有额外积分误差的变种）所产生的误差已被证明不会改变离散化精度。高斯正交点中的拉格朗日基础有时也被称为同位设置，因为多项式的结点与正交点重合（="同位"），避免了一些内插操作。鉴于我们想在 $\mathcal L_h$ 中对非线性项使用更多的正交点，然而，拼合属性就失去了。(更确切地说，在改变基础后，它仍然用于FEEvaluation和FEFaceEvaluation，见无矩阵论文  @cite KronbichlerKormann2019  ) 。
 
-In this tutorial program, we use the collocation idea for the application of
-the inverse mass matrix, but with a slight twist. Rather than using the
-collocation via Lagrange polynomials in the points of Gaussian quadrature, we
-prefer a conventional Lagrange basis in Gauss-Lobatto points as those make the
-evaluation of face integrals cheap. This is because for Gauss-Lobatto
-points, some of the node points are located on the faces of the cell
-and it is not difficult to show that on any given face, the only shape
-functions with non-zero values are exactly the ones whose node points
-are in fact located on that face. One could of course also use the
-Gauss-Lobatto quadrature (with some additional integration error) as was done
-in step-48, but we do not want to sacrifice accuracy as these
-quadrature formulas are generally of lower order than the general
-Gauss quadrature formulas. Instead, we use an idea described in the reference
-@cite KronbichlerSchoeder2016 where it was proposed to change the basis for the
-sake of applying the inverse mass matrix. Let us denote by $S$ the matrix of
-shape functions evaluated at quadrature points, with shape functions in the row
-of the matrix and quadrature points in columns. Then, the mass matrix on a cell
-$K$ is given by
-@f[
+在这个教程程序中，我们使用拼合的思想来应用反质量矩阵，但有一个小小的转折。与其在高斯四分法的点上通过拉格朗日多项式使用配位，我们更喜欢在高斯-洛巴托的点上使用传统的拉格朗日基础，因为那些使面积分的评估变得便宜。这是因为对于高斯-洛巴托点来说，一些节点点位于单元格的面上，而且不难证明，在任何给定的面上，唯一具有非零值的形状函数正是其节点点事实上位于该面上的那些。当然，我们也可以像 step-48 中那样使用高斯-洛巴托正交（有一些额外的积分误差），但我们不想牺牲精度，因为这些正交公式通常比一般高斯正交公式的阶数低。相反，我们使用参考文献 @cite KronbichlerSchoeder2016 中描述的一个想法，其中提出为了应用反质量矩阵而改变基础。让我们用 $S$ 表示在正交点评估的形状函数矩阵，形状函数在矩阵的行中，正交点在列中。然后，单元格 $K$ 上的质量矩阵由@f[
 \mathcal M^K = S J^K S^\mathrm T.
-@f]
-Here, $J^K$ is the diagonal matrix with the determinant of the Jacobian times
-the quadrature weight (JxW) as entries. The matrix $S$ is constructed as the
-Kronecker product (tensor product) of one-dimensional matrices, e.g. in 3D as
-@f[
+@f]给出 这里， $J^K$ 是对角线矩阵，其条目为雅各布系数乘以正交权重（JxW）的决定数。矩阵 $S$ 被构造为一维矩阵的克朗克积（张量积），例如在三维中为@f[
 S = S_{\text{1D}}\otimes S_{\text{1D}}\otimes S_{\text{1D}},
-@f]
-which is the result of the basis functions being a tensor product of
-one-dimensional shape functions and the quadrature formula being the tensor
-product of 1D quadrature formulas. For the case that the number of polynomials
-equals the number of quadrature points, all matrices in $S J^K S^\mathrm T$
-are square, and also the ingredients to $S$ in the Kronecker product are
-square. Thus, one can invert each matrix to form the overall inverse,
-@f[
+@f]，这是基础函数是一维形状函数的张量积，正交公式是一维正交公式的张量积的结果。对于多项式的数量等于正交点的数量的情况， $S J^K S^\mathrm T$ 中的所有矩阵都是方形的，同样，克朗克积中的 $S$ 的成分也是方形的。因此，我们可以对每个矩阵进行反转，形成整体的逆，@f[
 \left(\mathcal M^K\right)^{-1} = S_{\text{1D}}^{-\mathrm T}\otimes
 S_{\text{1D}}^{-\mathrm T}\otimes S_{\text{1D}}^{-\mathrm T}
 \left(J^K\right)^{-1}
 S_{\text{1D}}^{-1}\otimes S_{\text{1D}}^{-1}\otimes S_{\text{1D}}^{-1}.
-@f]
-This formula is of exactly the same structure as the steps in the forward
-evaluation of integrals with sum factorization techniques (i.e., the
-FEEvaluation and MatrixFree framework of deal.II). Hence, we can utilize the
-same code paths with a different interpolation matrix,
-$S_{\mathrm{1D}}^{-\mathrm{T}}$ rather than $S_{\mathrm{1D}}$.
+@f]这个公式的结构与用和因子化技术对积分进行正向评估的步骤完全相同（即交易二的FEEvaluation和MatrixFree框架）。因此，我们可以利用相同的代码路径，采用不同的插值矩阵， $S_{\mathrm{1D}}^{-\mathrm{T}}$ 而不是 $S_{\mathrm{1D}}$  。
 
-The class MatrixFreeOperators::CellwiseInverseMassMatrix implements this
-operation: It changes from the basis contained in the finite element (in this
-case, FE_DGQ) to the Lagrange basis in Gaussian quadrature points. Here, the
-inverse of a diagonal mass matrix can be evaluated, which is simply the inverse
-of the `JxW` factors (i.e., the quadrature weight times the determinant of the
-Jacobian from reference to real coordinates). Once this is done, we can change
-back to the standard nodal Gauss-Lobatto basis.
+类 MatrixFreeOperators::CellwiseInverseMassMatrix 实现了这个操作。它从有限元中包含的基（在此情况下，FE_DGQ）变为高斯正交点中的拉格朗日基。在这里，可以评估对角线质量矩阵的逆，这只是`JxW`因子的逆（即正交权重乘以从参考坐标到实坐标的雅各布系数）。一旦这样做了，我们就可以变回标准的节点高斯-洛巴托基础。
 
-The advantage of this particular way of applying the inverse mass matrix is
-a cost similar to the forward application of a mass matrix, which is cheaper
-than the evaluation of the spatial operator $\mathcal L_h$
-with over-integration and face integrals. (We
-will demonstrate this with detailed timing information in the
-<a href="#Results">results section</a>.) In fact, it
-is so cheap that it is limited by the bandwidth of reading the source vector,
-reading the diagonal, and writing into the destination vector on most modern
-architectures. The hardware used for the result section allows to do the
-computations at least twice as fast as the streaming of the vectors from
-memory.
+这种应用反质量矩阵的特殊方式的优点是成本类似于质量矩阵的正向应用，比用超积分和面积分评估空间算子 $\mathcal L_h$ 要便宜。(我们将在<a href="#Results">results section</a>中用详细的时序信息证明这一点。)事实上，它是如此便宜，以至于在大多数现代架构上，它受到读取源向量、读取对角线和写入目标向量的带宽限制。用于结果部分的硬件可以使计算的速度至少比从内存流向量的速度快一倍。
 
 
-<a name="Thetestcase"></a><h3>The test case</h3>
+<a name="Thetestcase"></a><h3>The test case</h3> 
 
 
-In this tutorial program, we implement two test cases. The first case is a
-convergence test limited to two space dimensions. It runs a so-called
-isentropic vortex which is transported via a background flow field. The second
-case uses a more exciting setup: We start with a cylinder immersed in a
-channel, using the GridGenerator::channel_with_cylinder() function. Here, we
-impose a subsonic initial field at Mach number of $\mathrm{Ma}=0.307$ with a
-constant velocity in $x$ direction. At the top and bottom walls as well as at
-the cylinder, we impose a no-penetration (i.e., tangential flow)
-condition. This setup forces the flow to re-orient as compared to the initial
-condition, which results in a big sound wave propagating away from the
-cylinder. In upstream direction, the wave travels more slowly (as it
-has to move against the oncoming gas), including a
-discontinuity in density and pressure. In downstream direction, the transport
-is faster as sound propagation and fluid flow go in the same direction, which smears
-out the discontinuity somewhat. Once the sound wave hits the upper and lower
-walls, the sound is reflected back, creating some nice shapes as illustrated
-in the <a href="#Results">results section</a> below.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * The include files are similar to the previous matrix-free tutorial programs
- * step-37, step-48, and step-59
- * 
- * @code
- * #include <deal.II/base/conditional_ostream.h>
- * #include <deal.II/base/function.h>
- * #include <deal.II/base/logstream.h>
- * #include <deal.II/base/timer.h>
- * #include <deal.II/base/time_stepping.h>
- * #include <deal.II/base/utilities.h>
- * #include <deal.II/base/vectorization.h>
- * 
- * #include <deal.II/distributed/tria.h>
- * 
- * #include <deal.II/dofs/dof_handler.h>
- * 
- * #include <deal.II/fe/fe_dgq.h>
- * #include <deal.II/fe/fe_system.h>
- * 
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/tria.h>
- * 
- * #include <deal.II/lac/affine_constraints.h>
- * #include <deal.II/lac/la_parallel_vector.h>
- * 
- * #include <deal.II/matrix_free/fe_evaluation.h>
- * #include <deal.II/matrix_free/matrix_free.h>
- * 
- * #include <deal.II/numerics/data_out.h>
- * 
- * #include <fstream>
- * #include <iomanip>
- * #include <iostream>
- * 
- * @endcode
- * 
- * The following file includes the CellwiseInverseMassMatrix data structure
- * that we will use for the mass matrix inversion, the only new include
- * file for this tutorial program:
- * 
- * @code
- * #include <deal.II/matrix_free/operators.h>
- * 
- * 
- * 
- * namespace Euler_DG
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * Similarly to the other matrix-free tutorial programs, we collect all
- * parameters that control the execution of the program at the top of the
- * file. Besides the dimension and polynomial degree we want to run with, we
- * also specify a number of points in the Gaussian quadrature formula we
- * want to use for the nonlinear terms in the Euler equations. Furthermore,
- * we specify the time interval for the time-dependent problem, and
- * implement two different test cases. The first one is an analytical
- * solution in 2D, whereas the second is a channel flow around a cylinder as
- * described in the introduction. Depending on the test case, we also change
- * the final time up to which we run the simulation, and a variable
- * `output_tick` that specifies in which intervals we want to write output
- * (assuming that the tick is larger than the time step size).
- * 
- * @code
- *   constexpr unsigned int testcase             = 0;
- *   constexpr unsigned int dimension            = 2;
- *   constexpr unsigned int n_global_refinements = 3;
- *   constexpr unsigned int fe_degree            = 5;
- *   constexpr unsigned int n_q_points_1d        = fe_degree + 2;
- * 
- *   using Number = double;
- * 
- *   constexpr double gamma       = 1.4;
- *   constexpr double final_time  = testcase == 0 ? 10 : 2.0;
- *   constexpr double output_tick = testcase == 0 ? 1 : 0.05;
- * 
- * @endcode
- * 
- * Next off are some details of the time integrator, namely a Courant number
- * that scales the time step size in terms of the formula $\Delta t =
- * \text{Cr} n_\text{stages} \frac{h}{(p+1)^{1.5} (\|\mathbf{u} +
- * c)_\text{max}}$, as well as a selection of a few low-storage Runge--Kutta
- * methods. We specify the Courant number per stage of the Runge--Kutta
- * scheme, as this gives a more realistic expression of the numerical cost
- * for schemes of various numbers of stages.
- * 
- * @code
- *   const double courant_number = 0.15 / std::pow(fe_degree, 1.5);
- *   enum LowStorageRungeKuttaScheme
- *   {
- *     stage_3_order_3, /* Kennedy, Carpenter, Lewis, 2000 */
- *     stage_5_order_4, /* Kennedy, Carpenter, Lewis, 2000 */
- *     stage_7_order_4, /* Tselios, Simos, 2007 */
- *     stage_9_order_5, /* Kennedy, Carpenter, Lewis, 2000 */
- *   };
- *   constexpr LowStorageRungeKuttaScheme lsrk_scheme = stage_5_order_4;
- * 
- * @endcode
- * 
- * Eventually, we select a detail of the spatial discretization, namely the
- * numerical flux (Riemann solver) at the faces between cells. For this
- * program, we have implemented a modified variant of the Lax--Friedrichs
- * flux and the Harten--Lax--van Leer (HLL) flux.
- * 
- * @code
- *   enum EulerNumericalFlux
- *   {
- *     lax_friedrichs_modified,
- *     harten_lax_vanleer,
- *   };
- *   constexpr EulerNumericalFlux numerical_flux_type = lax_friedrichs_modified;
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Equationdata"></a> 
- * <h3>Equation data</h3>
- * 
+在这个教程程序中，我们实现了两个测试案例。第一个案例是限于两个空间维度的收敛性测试。它运行一个所谓的等熵涡旋，通过背景流场进行传输。第二个案例使用了一个更令人兴奋的设置。我们从一个浸在通道中的圆柱体开始，使用 GridGenerator::channel_with_cylinder() 函数。在这里，我们强加一个马赫数为 $\mathrm{Ma}=0.307$ 的亚音速初始场，在 $x$ 方向上速度不变。在顶壁和底壁以及圆柱体上，我们施加了一个无穿透（即切向流动）的条件。与初始条件相比，这种设置迫使气流重新定向，从而导致大的声波从圆柱体上传播出去。在上游方向，波的传播速度较慢（因为它必须逆着迎面而来的气体移动），包括密度和压力的不连续。在下游方向，由于声音的传播和流体的流动方向相同，传输速度较快，这在一定程度上抹去了不连续性。一旦声波碰到上下壁，声音就会被反射回来，形成一些漂亮的形状，如下图<a href="#Results">results section</a>所示。<a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * We now define a class with the exact solution for the test case 0 and one
- * with a background flow field for test case 1 of the channel. Given that
- * the Euler equations are a problem with $d+2$ equations in $d$ dimensions,
- * we need to tell the Function base class about the correct number of
- * components.
- * 
- * @code
- *   template <int dim>
- *   class ExactSolution : public Function<dim>
- *   {
- *   public:
- *     ExactSolution(const double time)
- *       : Function<dim>(dim + 2, time)
- *     {}
- * 
- *     virtual double value(const Point<dim> & p,
- *                          const unsigned int component = 0) const override;
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * As far as the actual function implemented is concerned, the analytical
- * test case is an isentropic vortex case (see e.g. the book by Hesthaven
- * and Warburton, Example 6.1 in Section 6.6 on page 209) which fulfills the
- * Euler equations with zero force term on the right hand side. Given that
- * definition, we return either the density, the momentum, or the energy
- * depending on which component is requested. Note that the original
- * definition of the density involves the $\frac{1}{\gamma -1}$-th power of
- * some expression. Since `std::pow()` has pretty slow implementations on
- * some systems, we replace it by logarithm followed by exponentiation (of
- * base 2), which is mathematically equivalent but usually much better
- * optimized. This formula might lose accuracy in the last digits
- * for very small numbers compared to `std::pow()`, but we are happy with
- * it anyway, since small numbers map to data close to 1.
- *   
+包含的文件与之前的无矩阵教程程序 step-37 ,  step-48 , 和 step-59 相似。 
 
- * 
- * For the channel test case, we simply select a density of 1, a velocity of
- * 0.4 in $x$ direction and zero in the other directions, and an energy that
- * corresponds to a speed of sound of 1.3 measured against the background
- * velocity field, computed from the relation $E = \frac{c^2}{\gamma (\gamma
- * -1)} + \frac 12 \rho \|u\|^2$.
- * 
- * @code
- *   template <int dim>
- *   double ExactSolution<dim>::value(const Point<dim> & x,
- *                                    const unsigned int component) const
- *   {
- *     const double t = this->get_time();
- * 
- *     switch (testcase)
- *       {
- *         case 0:
- *           {
- *             Assert(dim == 2, ExcNotImplemented());
- *             const double beta = 5;
- * 
- *             Point<dim> x0;
- *             x0[0] = 5.;
- *             const double radius_sqr =
- *               (x - x0).norm_square() - 2. * (x[0] - x0[0]) * t + t * t;
- *             const double factor =
- *               beta / (numbers::PI * 2) * std::exp(1. - radius_sqr);
- *             const double density_log = std::log2(
- *               std::abs(1. - (gamma - 1.) / gamma * 0.25 * factor * factor));
- *             const double density = std::exp2(density_log * (1. / (gamma - 1.)));
- *             const double u       = 1. - factor * (x[1] - x0[1]);
- *             const double v       = factor * (x[0] - t - x0[0]);
- * 
- *             if (component == 0)
- *               return density;
- *             else if (component == 1)
- *               return density * u;
- *             else if (component == 2)
- *               return density * v;
- *             else
- *               {
- *                 const double pressure =
- *                   std::exp2(density_log * (gamma / (gamma - 1.)));
- *                 return pressure / (gamma - 1.) +
- *                        0.5 * (density * u * u + density * v * v);
- *               }
- *           }
- * 
- *         case 1:
- *           {
- *             if (component == 0)
- *               return 1.;
- *             else if (component == 1)
- *               return 0.4;
- *             else if (component == dim + 1)
- *               return 3.097857142857143;
- *             else
- *               return 0.;
- *           }
- * 
- *         default:
- *           Assert(false, ExcNotImplemented());
- *           return 0.;
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="LowstorageexplicitRungeKuttatimeintegrators"></a> 
- * <h3>Low-storage explicit Runge--Kutta time integrators</h3>
- * 
+@code
+#include <deal.II/base/conditional_ostream.h>
+#include <deal.II/base/function.h>
+#include <deal.II/base/logstream.h>
+#include <deal.II/base/timer.h>
+#include <deal.II/base/time_stepping.h>
+#include <deal.II/base/utilities.h>
+#include <deal.II/base/vectorization.h>
 
- * 
- * The next few lines implement a few low-storage variants of Runge--Kutta
- * methods. These methods have specific Butcher tableaux with coefficients
- * $b_i$ and $a_i$ as shown in the introduction. As usual in Runge--Kutta
- * method, we can deduce time steps, $c_i = \sum_{j=1}^{i-2} b_i + a_{i-1}$
- * from those coefficients. The main advantage of this kind of scheme is the
- * fact that only two vectors are needed per stage, namely the accumulated
- * part of the solution $\mathbf{w}$ (that will hold the solution
- * $\mathbf{w}^{n+1}$ at the new time $t^{n+1}$ after the last stage), the
- * update vector $\mathbf{r}_i$ that gets evaluated during the stages, plus
- * one vector $\mathbf{k}_i$ to hold the evaluation of the operator. Such a
- * Runge--Kutta setup reduces the memory storage and memory access. As the
- * memory bandwidth is often the performance-limiting factor on modern
- * hardware when the evaluation of the differential operator is
- * well-optimized, performance can be improved over standard time
- * integrators. This is true also when taking into account that a
- * conventional Runge--Kutta scheme might allow for slightly larger time
- * steps as more free parameters allow for better stability properties.
- *   
 
- * 
- * In this tutorial programs, we concentrate on a few variants of
- * low-storage schemes defined in the article by Kennedy, Carpenter, and
- * Lewis (2000), as well as one variant described by Tselios and Simos
- * (2007). There is a large series of other schemes available, which could
- * be addressed by additional sets of coefficients or slightly different
- * update formulas.
- *   
+#include <deal.II/distributed/tria.h>
 
- * 
- * We define a single class for the four integrators, distinguished by the
- * enum described above. To each scheme, we then fill the vectors for the
- * $b_i$ and $a_i$ to the given variables in the class.
- * 
- * @code
- *   class LowStorageRungeKuttaIntegrator
- *   {
- *   public:
- *     LowStorageRungeKuttaIntegrator(const LowStorageRungeKuttaScheme scheme)
- *     {
- *       TimeStepping::runge_kutta_method lsrk;
- * @endcode
- * 
- * First comes the three-stage scheme of order three by Kennedy et al.
- * (2000). While its stability region is significantly smaller than for
- * the other schemes, it only involves three stages, so it is very
- * competitive in terms of the work per stage.
- * 
- * @code
- *       switch (scheme)
- *         {
- *           case stage_3_order_3:
- *             {
- *               lsrk = TimeStepping::LOW_STORAGE_RK_STAGE3_ORDER3;
- *               break;
- *             }
- * 
- * @endcode
- * 
- * The next scheme is a five-stage scheme of order four, again
- * defined in the paper by Kennedy et al. (2000).
- * 
- * @code
- *           case stage_5_order_4:
- *             {
- *               lsrk = TimeStepping::LOW_STORAGE_RK_STAGE5_ORDER4;
- *               break;
- *             }
- * 
- * @endcode
- * 
- * The following scheme of seven stages and order four has been
- * explicitly derived for acoustics problems. It is a balance of
- * accuracy for imaginary eigenvalues among fourth order schemes,
- * combined with a large stability region. Since DG schemes are
- * dissipative among the highest frequencies, this does not
- * necessarily translate to the highest possible time step per
- * stage. In the context of the present tutorial program, the
- * numerical flux plays a crucial role in the dissipation and thus
- * also the maximal stable time step size. For the modified
- * Lax--Friedrichs flux, this scheme is similar to the
- * `stage_5_order_4` scheme in terms of step size per stage if only
- * stability is considered, but somewhat less efficient for the HLL
- * flux.
- * 
- * @code
- *           case stage_7_order_4:
- *             {
- *               lsrk = TimeStepping::LOW_STORAGE_RK_STAGE7_ORDER4;
- *               break;
- *             }
- * 
- * @endcode
- * 
- * The last scheme included here is the nine-stage scheme of order
- * five from Kennedy et al. (2000). It is the most accurate among
- * the schemes used here, but the higher order of accuracy
- * sacrifices some stability, so the step length normalized per
- * stage is less than for the fourth order schemes.
- * 
- * @code
- *           case stage_9_order_5:
- *             {
- *               lsrk = TimeStepping::LOW_STORAGE_RK_STAGE9_ORDER5;
- *               break;
- *             }
- * 
- *           default:
- *             AssertThrow(false, ExcNotImplemented());
- *         }
- *       TimeStepping::LowStorageRungeKutta<
- *         LinearAlgebra::distributed::Vector<Number>>
- *         rk_integrator(lsrk);
- *       rk_integrator.get_coefficients(ai, bi, ci);
- *     }
- * 
- *     unsigned int n_stages() const
- *     {
- *       return bi.size();
- *     }
- * 
- * @endcode
- * 
- * The main function of the time integrator is to go through the stages,
- * evaluate the operator, prepare the $\mathbf{r}_i$ vector for the next
- * evaluation, and update the solution vector $\mathbf{w}$. We hand off
- * the work to the `pde_operator` involved in order to be able to merge
- * the vector operations of the Runge--Kutta setup with the evaluation of
- * the differential operator for better performance, so all we do here is
- * to delegate the vectors and coefficients.
- *     
 
- * 
- * We separately call the operator for the first stage because we need
- * slightly modified arguments there: We evaluate the solution from
- * the old solution $\mathbf{w}^n$ rather than a $\mathbf r_i$ vector, so
- * the first argument is `solution`. We here let the stage vector
- * $\mathbf{r}_i$ also hold the temporary result of the evaluation, as it
- * is not used otherwise. For all subsequent stages, we use the vector
- * `vec_ki` as the second vector argument to store the result of the
- * operator evaluation. Finally, when we are at the last stage, we must
- * skip the computation of the vector $\mathbf{r}_{s+1}$ as there is no
- * coefficient $a_s$ available (nor will it be used).
- * 
- * @code
- *     template <typename VectorType, typename Operator>
- *     void perform_time_step(const Operator &pde_operator,
- *                            const double    current_time,
- *                            const double    time_step,
- *                            VectorType &    solution,
- *                            VectorType &    vec_ri,
- *                            VectorType &    vec_ki) const
- *     {
- *       AssertDimension(ai.size() + 1, bi.size());
- * 
- *       pde_operator.perform_stage(current_time,
- *                                  bi[0] * time_step,
- *                                  ai[0] * time_step,
- *                                  solution,
- *                                  vec_ri,
- *                                  solution,
- *                                  vec_ri);
- * 
- *       for (unsigned int stage = 1; stage < bi.size(); ++stage)
- *         {
- *           const double c_i = ci[stage];
- *           pde_operator.perform_stage(current_time + c_i * time_step,
- *                                      bi[stage] * time_step,
- *                                      (stage == bi.size() - 1 ?
- *                                         0 :
- *                                         ai[stage] * time_step),
- *                                      vec_ri,
- *                                      vec_ki,
- *                                      solution,
- *                                      vec_ri);
- *         }
- *     }
- * 
- *   private:
- *     std::vector<double> bi;
- *     std::vector<double> ai;
- *     std::vector<double> ci;
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ImplementationofpointwiseoperationsoftheEulerequations"></a> 
- * <h3>Implementation of point-wise operations of the Euler equations</h3>
- * 
+#include <deal.II/dofs/dof_handler.h>
 
- * 
- * In the following functions, we implement the various problem-specific
- * operators pertaining to the Euler equations. Each function acts on the
- * vector of conserved variables $[\rho, \rho\mathbf{u}, E]$ that we hold in
- * the solution vectors, and computes various derived quantities.
- *   
 
- * 
- * First out is the computation of the velocity, that we derive from the
- * momentum variable $\rho \mathbf{u}$ by division by $\rho$. One thing to
- * note here is that we decorate all those functions with the keyword
- * `DEAL_II_ALWAYS_INLINE`. This is a special macro that maps to a
- * compiler-specific keyword that tells the compiler to never create a
- * function call for any of those functions, and instead move the
- * implementation <a
- * href="https://en.wikipedia.org/wiki/Inline_function">inline</a> to where
- * they are called. This is critical for performance because we call into some
- * of those functions millions or billions of times: For example, we both use
- * the velocity for the computation of the flux further down, but also for the
- * computation of the pressure, and both of these places are evaluated at
- * every quadrature point of every cell. Making sure these functions are
- * inlined ensures not only that the processor does not have to execute a jump
- * instruction into the function (and the corresponding return jump), but also
- * that the compiler can re-use intermediate information from one function's
- * context in code that comes after the place where the function was called.
- * (We note that compilers are generally quite good at figuring out which
- * functions to inline by themselves. Here is a place where compilers may or
- * may not have figured it out by themselves but where we know for sure that
- * inlining is a win.)
- *   
+#include <deal.II/fe/fe_dgq.h>
+#include <deal.II/fe/fe_system.h>
 
- * 
- * Another trick we apply is a separate variable for the inverse density
- * $\frac{1}{\rho}$. This enables the compiler to only perform a single
- * division for the flux, despite the division being used at several
- * places. As divisions are around ten to twenty times as expensive as
- * multiplications or additions, avoiding redundant divisions is crucial for
- * performance. We note that taking the inverse first and later multiplying
- * with it is not equivalent to a division in floating point arithmetic due
- * to roundoff effects, so the compiler is not allowed to exchange one way by
- * the other with standard optimization flags. However, it is also not
- * particularly difficult to write the code in the right way.
- *   
 
- * 
- * To summarize, the chosen strategy of always inlining and careful
- * definition of expensive arithmetic operations allows us to write compact
- * code without passing all intermediate results around, despite making sure
- * that the code maps to excellent machine code.
- * 
- * @code
- *   template <int dim, typename Number>
- *   inline DEAL_II_ALWAYS_INLINE 
- *     Tensor<1, dim, Number>
- *     euler_velocity(const Tensor<1, dim + 2, Number> &conserved_variables)
- *   {
- *     const Number inverse_density = Number(1.) / conserved_variables[0];
- * 
- *     Tensor<1, dim, Number> velocity;
- *     for (unsigned int d = 0; d < dim; ++d)
- *       velocity[d] = conserved_variables[1 + d] * inverse_density;
- * 
- *     return velocity;
- *   }
- * 
- * @endcode
- * 
- * The next function computes the pressure from the vector of conserved
- * variables, using the formula $p = (\gamma - 1) \left(E - \frac 12 \rho
- * \mathbf{u}\cdot \mathbf{u}\right)$. As explained above, we use the
- * velocity from the `euler_velocity()` function. Note that we need to
- * specify the first template argument `dim` here because the compiler is
- * not able to deduce it from the arguments of the tensor, whereas the
- * second argument (number type) can be automatically deduced.
- * 
- * @code
- *   template <int dim, typename Number>
- *   inline DEAL_II_ALWAYS_INLINE 
- *     Number
- *     euler_pressure(const Tensor<1, dim + 2, Number> &conserved_variables)
- *   {
- *     const Tensor<1, dim, Number> velocity =
- *       euler_velocity<dim>(conserved_variables);
- * 
- *     Number rho_u_dot_u = conserved_variables[1] * velocity[0];
- *     for (unsigned int d = 1; d < dim; ++d)
- *       rho_u_dot_u += conserved_variables[1 + d] * velocity[d];
- * 
- *     return (gamma - 1.) * (conserved_variables[dim + 1] - 0.5 * rho_u_dot_u);
- *   }
- * 
- * @endcode
- * 
- * Here is the definition of the Euler flux function, i.e., the definition
- * of the actual equation. Given the velocity and pressure (that the
- * compiler optimization will make sure are done only once), this is
- * straight-forward given the equation stated in the introduction.
- * 
- * @code
- *   template <int dim, typename Number>
- *   inline DEAL_II_ALWAYS_INLINE 
- *     Tensor<1, dim + 2, Tensor<1, dim, Number>>
- *     euler_flux(const Tensor<1, dim + 2, Number> &conserved_variables)
- *   {
- *     const Tensor<1, dim, Number> velocity =
- *       euler_velocity<dim>(conserved_variables);
- *     const Number pressure = euler_pressure<dim>(conserved_variables);
- * 
- *     Tensor<1, dim + 2, Tensor<1, dim, Number>> flux;
- *     for (unsigned int d = 0; d < dim; ++d)
- *       {
- *         flux[0][d] = conserved_variables[1 + d];
- *         for (unsigned int e = 0; e < dim; ++e)
- *           flux[e + 1][d] = conserved_variables[e + 1] * velocity[d];
- *         flux[d + 1][d] += pressure;
- *         flux[dim + 1][d] =
- *           velocity[d] * (conserved_variables[dim + 1] + pressure);
- *       }
- * 
- *     return flux;
- *   }
- * 
- * @endcode
- * 
- * This next function is a helper to simplify the implementation of the
- * numerical flux, implementing the action of a tensor of tensors (with
- * non-standard outer dimension of size `dim + 2`, so the standard overloads
- * provided by deal.II's tensor classes do not apply here) with another
- * tensor of the same inner dimension, i.e., a matrix-vector product.
- * 
- * @code
- *   template <int n_components, int dim, typename Number>
- *   inline DEAL_II_ALWAYS_INLINE 
- *     Tensor<1, n_components, Number>
- *     operator*(const Tensor<1, n_components, Tensor<1, dim, Number>> &matrix,
- *               const Tensor<1, dim, Number> &                         vector)
- *   {
- *     Tensor<1, n_components, Number> result;
- *     for (unsigned int d = 0; d < n_components; ++d)
- *       result[d] = matrix[d] * vector;
- *     return result;
- *   }
- * 
- * @endcode
- * 
- * This function implements the numerical flux (Riemann solver). It gets the
- * state from the two sides of an interface and the normal vector, oriented
- * from the side of the solution $\mathbf{w}^-$ towards the solution
- * $\mathbf{w}^+$. In finite volume methods which rely on piece-wise
- * constant data, the numerical flux is the central ingredient as it is the
- * only place where the physical information is entered. In DG methods, the
- * numerical flux is less central due to the polynomials within the elements
- * and the physical flux used there. As a result of higher-degree
- * interpolation with consistent values from both sides in the limit of a
- * continuous solution, the numerical flux can be seen as a control of the
- * jump of the solution from both sides to weakly impose continuity. It is
- * important to realize that a numerical flux alone cannot stabilize a
- * high-order DG method in the presence of shocks, and thus any DG method
- * must be combined with further shock-capturing techniques to handle those
- * cases. In this tutorial, we focus on wave-like solutions of the Euler
- * equations in the subsonic regime without strong discontinuities where our
- * basic scheme is sufficient.
- *   
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/tria.h>
 
- * 
- * Nonetheless, the numerical flux is decisive in terms of the numerical
- * dissipation of the overall scheme and influences the admissible time step
- * size with explicit Runge--Kutta methods. We consider two choices, a
- * modified Lax--Friedrichs scheme and the widely used Harten--Lax--van Leer
- * (HLL) flux. For both variants, we first need to get the velocities and
- * pressures from both sides of the interface and evaluate the physical
- * Euler flux.
- *   
 
- * 
- * For the local Lax--Friedrichs flux, the definition is $\hat{\mathbf{F}}
- * =\frac{\mathbf{F}(\mathbf{w}^-)+\mathbf{F}(\mathbf{w}^+)}{2} +
- * \frac{\lambda}{2}\left[\mathbf{w}^--\mathbf{w}^+\right]\otimes
- * \mathbf{n^-}$, where the factor $\lambda =
- * \max\left(\|\mathbf{u}^-\|+c^-, \|\mathbf{u}^+\|+c^+\right)$ gives the
- * maximal wave speed and $c = \sqrt{\gamma p / \rho}$ is the speed of
- * sound. Here, we choose two modifications of that expression for reasons
- * of computational efficiency, given the small impact of the flux on the
- * solution. For the above definition of the factor $\lambda$, we would need
- * to take four square roots, two for the two velocity norms and two for the
- * speed of sound on either side. The first modification is hence to rather
- * use $\sqrt{\|\mathbf{u}\|^2+c^2}$ as an estimate of the maximal speed
- * (which is at most a factor of 2 away from the actual maximum, as shown in
- * the introduction). This allows us to pull the square root out of the
- * maximum and get away with a single square root computation. The second
- * modification is to further relax on the parameter $\lambda$---the smaller
- * it is, the smaller the dissipation factor (which is multiplied by the
- * jump in $\mathbf{w}$, which might result in a smaller or bigger
- * dissipation in the end). This allows us to fit the spectrum into the
- * stability region of the explicit Runge--Kutta integrator with bigger time
- * steps. However, we cannot make dissipation too small because otherwise
- * imaginary eigenvalues grow larger. Finally, the current conservative
- * formulation is not energy-stable in the limit of $\lambda\to 0$ as it is
- * not skew-symmetric, and would need additional measures such as split-form
- * DG schemes in that case.
- *   
+#include <deal.II/lac/affine_constraints.h>
+#include <deal.II/lac/la_parallel_vector.h>
 
- * 
- * For the HLL flux, we follow the formula from literature, introducing an
- * additional weighting of the two states from Lax--Friedrichs by a
- * parameter $s$. It is derived from the physical transport directions of
- * the Euler equations in terms of the current direction of velocity and
- * sound speed. For the velocity, we here choose a simple arithmetic average
- * which is sufficient for DG scenarios and moderate jumps in material
- * parameters.
- *   
 
- * 
- * Since the numerical flux is multiplied by the normal vector in the weak
- * form, we multiply by the result by the normal vector for all terms in the
- * equation. In these multiplications, the `operator*` defined above enables
- * a compact notation similar to the mathematical definition.
- *   
+#include <deal.II/matrix_free/fe_evaluation.h>
+#include <deal.II/matrix_free/matrix_free.h>
 
- * 
- * In this and the following functions, we use variable suffixes `_m` and
- * `_p` to indicate quantities derived from $\mathbf{w}^-$ and $\mathbf{w}^+$,
- * i.e., values "here" and "there" relative to the current cell when looking
- * at a neighbor cell.
- * 
- * @code
- *   template <int dim, typename Number>
- *   inline DEAL_II_ALWAYS_INLINE 
- *     Tensor<1, dim + 2, Number>
- *     euler_numerical_flux(const Tensor<1, dim + 2, Number> &u_m,
- *                          const Tensor<1, dim + 2, Number> &u_p,
- *                          const Tensor<1, dim, Number> &    normal)
- *   {
- *     const auto velocity_m = euler_velocity<dim>(u_m);
- *     const auto velocity_p = euler_velocity<dim>(u_p);
- * 
- *     const auto pressure_m = euler_pressure<dim>(u_m);
- *     const auto pressure_p = euler_pressure<dim>(u_p);
- * 
- *     const auto flux_m = euler_flux<dim>(u_m);
- *     const auto flux_p = euler_flux<dim>(u_p);
- * 
- *     switch (numerical_flux_type)
- *       {
- *         case lax_friedrichs_modified:
- *           {
- *             const auto lambda =
- *               0.5 * std::sqrt(std::max(velocity_p.norm_square() +
- *                                          gamma * pressure_p * (1. / u_p[0]),
- *                                        velocity_m.norm_square() +
- *                                          gamma * pressure_m * (1. / u_m[0])));
- * 
- *             return 0.5 * (flux_m * normal + flux_p * normal) +
- *                    0.5 * lambda * (u_m - u_p);
- *           }
- * 
- *         case harten_lax_vanleer:
- *           {
- *             const auto avg_velocity_normal =
- *               0.5 * ((velocity_m + velocity_p) * normal);
- *             const auto   avg_c = std::sqrt(std::abs(
- *               0.5 * gamma *
- *               (pressure_p * (1. / u_p[0]) + pressure_m * (1. / u_m[0]))));
- *             const Number s_pos =
- *               std::max(Number(), avg_velocity_normal + avg_c);
- *             const Number s_neg =
- *               std::min(Number(), avg_velocity_normal - avg_c);
- *             const Number inverse_s = Number(1.) / (s_pos - s_neg);
- * 
- *             return inverse_s *
- *                    ((s_pos * (flux_m * normal) - s_neg * (flux_p * normal)) -
- *                     s_pos * s_neg * (u_m - u_p));
- *           }
- * 
- *         default:
- *           {
- *             Assert(false, ExcNotImplemented());
- *             return {};
- *           }
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * This and the next function are helper functions to provide compact
- * evaluation calls as multiple points get batched together via a
- * VectorizedArray argument (see the step-37 tutorial for details). This
- * function is used for the subsonic outflow boundary conditions where we
- * need to set the energy component to a prescribed value. The next one
- * requests the solution on all components and is used for inflow boundaries
- * where all components of the solution are set.
- * 
- * @code
- *   template <int dim, typename Number>
- *   VectorizedArray<Number>
- *   evaluate_function(const Function<dim> &                      function,
- *                     const Point<dim, VectorizedArray<Number>> &p_vectorized,
- *                     const unsigned int                         component)
- *   {
- *     VectorizedArray<Number> result;
- *     for (unsigned int v = 0; v < VectorizedArray<Number>::size(); ++v)
- *       {
- *         Point<dim> p;
- *         for (unsigned int d = 0; d < dim; ++d)
- *           p[d] = p_vectorized[d][v];
- *         result[v] = function.value(p, component);
- *       }
- *     return result;
- *   }
- * 
- * 
- *   template <int dim, typename Number, int n_components = dim + 2>
- *   Tensor<1, n_components, VectorizedArray<Number>>
- *   evaluate_function(const Function<dim> &                      function,
- *                     const Point<dim, VectorizedArray<Number>> &p_vectorized)
- *   {
- *     AssertDimension(function.n_components, n_components);
- *     Tensor<1, n_components, VectorizedArray<Number>> result;
- *     for (unsigned int v = 0; v < VectorizedArray<Number>::size(); ++v)
- *       {
- *         Point<dim> p;
- *         for (unsigned int d = 0; d < dim; ++d)
- *           p[d] = p_vectorized[d][v];
- *         for (unsigned int d = 0; d < n_components; ++d)
- *           result[d][v] = function.value(p, d);
- *       }
- *     return result;
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TheEulerOperationclass"></a> 
- * <h3>The EulerOperation class</h3>
- * 
 
- * 
- * This class implements the evaluators for the Euler problem, in analogy to
- * the `LaplaceOperator` class of step-37 or step-59. Since the present
- * operator is non-linear and does not require a matrix interface (to be
- * handed over to preconditioners), we skip the various `vmult` functions
- * otherwise present in matrix-free operators and only implement an `apply`
- * function as well as the combination of `apply` with the required vector
- * updates for the low-storage Runge--Kutta time integrator mentioned above
- * (called `perform_stage`). Furthermore, we have added three additional
- * functions involving matrix-free routines, namely one to compute an
- * estimate of the time step scaling (that is combined with the Courant
- * number for the actual time step size) based on the velocity and speed of
- * sound in the elements, one for the projection of solutions (specializing
- * VectorTools::project() for the DG case), and one to compute the errors
- * against a possible analytical solution or norms against some background
- * state.
- *   
+#include <deal.II/numerics/data_out.h>
 
- * 
- * The rest of the class is similar to other matrix-free tutorials. As
- * discussed in the introduction, we provide a few functions to allow a user
- * to pass in various forms of boundary conditions on different parts of the
- * domain boundary marked by types::boundary_id variables, as well as
- * possible body forces.
- * 
- * @code
- *   template <int dim, int degree, int n_points_1d>
- *   class EulerOperator
- *   {
- *   public:
- *     static constexpr unsigned int n_quadrature_points_1d = n_points_1d;
- * 
- *     EulerOperator(TimerOutput &timer_output);
- * 
- *     void reinit(const Mapping<dim> &   mapping,
- *                 const DoFHandler<dim> &dof_handler);
- * 
- *     void set_inflow_boundary(const types::boundary_id       boundary_id,
- *                              std::unique_ptr<Function<dim>> inflow_function);
- * 
- *     void set_subsonic_outflow_boundary(
- *       const types::boundary_id       boundary_id,
- *       std::unique_ptr<Function<dim>> outflow_energy);
- * 
- *     void set_wall_boundary(const types::boundary_id boundary_id);
- * 
- *     void set_body_force(std::unique_ptr<Function<dim>> body_force);
- * 
- *     void apply(const double                                      current_time,
- *                const LinearAlgebra::distributed::Vector<Number> &src,
- *                LinearAlgebra::distributed::Vector<Number> &      dst) const;
- * 
- *     void
- *     perform_stage(const Number cur_time,
- *                   const Number factor_solution,
- *                   const Number factor_ai,
- *                   const LinearAlgebra::distributed::Vector<Number> &current_ri,
- *                   LinearAlgebra::distributed::Vector<Number> &      vec_ki,
- *                   LinearAlgebra::distributed::Vector<Number> &      solution,
- *                   LinearAlgebra::distributed::Vector<Number> &next_ri) const;
- * 
- *     void project(const Function<dim> &                       function,
- *                  LinearAlgebra::distributed::Vector<Number> &solution) const;
- * 
- *     std::array<double, 3> compute_errors(
- *       const Function<dim> &                             function,
- *       const LinearAlgebra::distributed::Vector<Number> &solution) const;
- * 
- *     double compute_cell_transport_speed(
- *       const LinearAlgebra::distributed::Vector<Number> &solution) const;
- * 
- *     void
- *     initialize_vector(LinearAlgebra::distributed::Vector<Number> &vector) const;
- * 
- *   private:
- *     MatrixFree<dim, Number> data;
- * 
- *     TimerOutput &timer;
- * 
- *     std::map<types::boundary_id, std::unique_ptr<Function<dim>>>
- *       inflow_boundaries;
- *     std::map<types::boundary_id, std::unique_ptr<Function<dim>>>
- *                                    subsonic_outflow_boundaries;
- *     std::set<types::boundary_id>   wall_boundaries;
- *     std::unique_ptr<Function<dim>> body_force;
- * 
- *     void local_apply_inverse_mass_matrix(
- *       const MatrixFree<dim, Number> &                   data,
- *       LinearAlgebra::distributed::Vector<Number> &      dst,
- *       const LinearAlgebra::distributed::Vector<Number> &src,
- *       const std::pair<unsigned int, unsigned int> &     cell_range) const;
- * 
- *     void local_apply_cell(
- *       const MatrixFree<dim, Number> &                   data,
- *       LinearAlgebra::distributed::Vector<Number> &      dst,
- *       const LinearAlgebra::distributed::Vector<Number> &src,
- *       const std::pair<unsigned int, unsigned int> &     cell_range) const;
- * 
- *     void local_apply_face(
- *       const MatrixFree<dim, Number> &                   data,
- *       LinearAlgebra::distributed::Vector<Number> &      dst,
- *       const LinearAlgebra::distributed::Vector<Number> &src,
- *       const std::pair<unsigned int, unsigned int> &     face_range) const;
- * 
- *     void local_apply_boundary_face(
- *       const MatrixFree<dim, Number> &                   data,
- *       LinearAlgebra::distributed::Vector<Number> &      dst,
- *       const LinearAlgebra::distributed::Vector<Number> &src,
- *       const std::pair<unsigned int, unsigned int> &     face_range) const;
- *   };
- * 
- * 
- * 
- *   template <int dim, int degree, int n_points_1d>
- *   EulerOperator<dim, degree, n_points_1d>::EulerOperator(TimerOutput &timer)
- *     : timer(timer)
- *   {}
- * 
- * 
- * 
- * @endcode
- * 
- * For the initialization of the Euler operator, we set up the MatrixFree
- * variable contained in the class. This can be done given a mapping to
- * describe possible curved boundaries as well as a DoFHandler object
- * describing the degrees of freedom. Since we use a discontinuous Galerkin
- * discretization in this tutorial program where no constraints are imposed
- * strongly on the solution field, we do not need to pass in an
- * AffineConstraints object and rather use a dummy for the
- * construction. With respect to quadrature, we want to select two different
- * ways of computing the underlying integrals: The first is a flexible one,
- * based on a template parameter `n_points_1d` (that will be assigned the
- * `n_q_points_1d` value specified at the top of this file). More accurate
- * integration is necessary to avoid the aliasing problem due to the
- * variable coefficients in the Euler operator. The second less accurate
- * quadrature formula is a tight one based on `fe_degree+1` and needed for
- * the inverse mass matrix. While that formula provides an exact inverse
- * only on affine element shapes and not on deformed elements, it enables
- * the fast inversion of the mass matrix by tensor product techniques,
- * necessary to ensure optimal computational efficiency overall.
- * 
- * @code
- *   template <int dim, int degree, int n_points_1d>
- *   void EulerOperator<dim, degree, n_points_1d>::reinit(
- *     const Mapping<dim> &   mapping,
- *     const DoFHandler<dim> &dof_handler)
- *   {
- *     const std::vector<const DoFHandler<dim> *> dof_handlers = {&dof_handler};
- *     const AffineConstraints<double>            dummy;
- *     const std::vector<const AffineConstraints<double> *> constraints = {&dummy};
- *     const std::vector<Quadrature<1>> quadratures = {QGauss<1>(n_q_points_1d),
- *                                                     QGauss<1>(fe_degree + 1)};
- * 
- *     typename MatrixFree<dim, Number>::AdditionalData additional_data;
- *     additional_data.mapping_update_flags =
- *       (update_gradients | update_JxW_values | update_quadrature_points |
- *        update_values);
- *     additional_data.mapping_update_flags_inner_faces =
- *       (update_JxW_values | update_quadrature_points | update_normal_vectors |
- *        update_values);
- *     additional_data.mapping_update_flags_boundary_faces =
- *       (update_JxW_values | update_quadrature_points | update_normal_vectors |
- *        update_values);
- *     additional_data.tasks_parallel_scheme =
- *       MatrixFree<dim, Number>::AdditionalData::none;
- * 
- *     data.reinit(
- *       mapping, dof_handlers, constraints, quadratures, additional_data);
- *   }
- * 
- * 
- * 
- *   template <int dim, int degree, int n_points_1d>
- *   void EulerOperator<dim, degree, n_points_1d>::initialize_vector(
- *     LinearAlgebra::distributed::Vector<Number> &vector) const
- *   {
- *     data.initialize_dof_vector(vector);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * The subsequent four member functions are the ones that must be called from
- * outside to specify the various types of boundaries. For an inflow boundary,
- * we must specify all components in terms of density $\rho$, momentum $\rho
- * \mathbf{u}$ and energy $E$. Given this information, we then store the
- * function alongside the respective boundary id in a map member variable of
- * this class. Likewise, we proceed for the subsonic outflow boundaries (where
- * we request a function as well, which we use to retrieve the energy) and for
- * wall (no-penetration) boundaries where we impose zero normal velocity (no
- * function necessary, so we only request the boundary id). For the present
- * DG code where boundary conditions are solely applied as part of the weak
- * form (during time integration), the call to set the boundary conditions
- * can appear both before or after the `reinit()` call to this class. This
- * is different from continuous finite element codes where the boundary
- * conditions determine the content of the AffineConstraints object that is
- * sent into MatrixFree for initialization, thus requiring to be set before
- * the initialization of the matrix-free data structures.
- *   
 
- * 
- * The checks added in each of the four function are used to
- * ensure that boundary conditions are mutually exclusive on the various
- * parts of the boundary, i.e., that a user does not accidentally designate a
- * boundary as both an inflow and say a subsonic outflow boundary.
- * 
- * @code
- *   template <int dim, int degree, int n_points_1d>
- *   void EulerOperator<dim, degree, n_points_1d>::set_inflow_boundary(
- *     const types::boundary_id       boundary_id,
- *     std::unique_ptr<Function<dim>> inflow_function)
- *   {
- *     AssertThrow(subsonic_outflow_boundaries.find(boundary_id) ==
- *                     subsonic_outflow_boundaries.end() &&
- *                   wall_boundaries.find(boundary_id) == wall_boundaries.end(),
- *                 ExcMessage("You already set the boundary with id " +
- *                            std::to_string(static_cast<int>(boundary_id)) +
- *                            " to another type of boundary before now setting " +
- *                            "it as inflow"));
- *     AssertThrow(inflow_function->n_components == dim + 2,
- *                 ExcMessage("Expected function with dim+2 components"));
- * 
- *     inflow_boundaries[boundary_id] = std::move(inflow_function);
- *   }
- * 
- * 
- *   template <int dim, int degree, int n_points_1d>
- *   void EulerOperator<dim, degree, n_points_1d>::set_subsonic_outflow_boundary(
- *     const types::boundary_id       boundary_id,
- *     std::unique_ptr<Function<dim>> outflow_function)
- *   {
- *     AssertThrow(inflow_boundaries.find(boundary_id) ==
- *                     inflow_boundaries.end() &&
- *                   wall_boundaries.find(boundary_id) == wall_boundaries.end(),
- *                 ExcMessage("You already set the boundary with id " +
- *                            std::to_string(static_cast<int>(boundary_id)) +
- *                            " to another type of boundary before now setting " +
- *                            "it as subsonic outflow"));
- *     AssertThrow(outflow_function->n_components == dim + 2,
- *                 ExcMessage("Expected function with dim+2 components"));
- * 
- *     subsonic_outflow_boundaries[boundary_id] = std::move(outflow_function);
- *   }
- * 
- * 
- *   template <int dim, int degree, int n_points_1d>
- *   void EulerOperator<dim, degree, n_points_1d>::set_wall_boundary(
- *     const types::boundary_id boundary_id)
- *   {
- *     AssertThrow(inflow_boundaries.find(boundary_id) ==
- *                     inflow_boundaries.end() &&
- *                   subsonic_outflow_boundaries.find(boundary_id) ==
- *                     subsonic_outflow_boundaries.end(),
- *                 ExcMessage("You already set the boundary with id " +
- *                            std::to_string(static_cast<int>(boundary_id)) +
- *                            " to another type of boundary before now setting " +
- *                            "it as wall boundary"));
- * 
- *     wall_boundaries.insert(boundary_id);
- *   }
- * 
- * 
- *   template <int dim, int degree, int n_points_1d>
- *   void EulerOperator<dim, degree, n_points_1d>::set_body_force(
- *     std::unique_ptr<Function<dim>> body_force)
- *   {
- *     AssertDimension(body_force->n_components, dim);
- * 
- *     this->body_force = std::move(body_force);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Localevaluators"></a> 
- * <h4>Local evaluators</h4>
- * 
+#include <fstream>
+#include <iomanip>
+#include <iostream>
 
- * 
- * Now we proceed to the local evaluators for the Euler problem. The
- * evaluators are relatively simple and follow what has been presented in
- * step-37, step-48, or step-59. The first notable difference is the fact
- * that we use an FEEvaluation with a non-standard number of quadrature
- * points. Whereas we previously always set the number of quadrature points
- * to equal the polynomial degree plus one (ensuring exact integration on
- * affine element shapes), we now set the number quadrature points as a
- * separate variable (e.g. the polynomial degree plus two or three halves of
- * the polynomial degree) to more accurately handle nonlinear terms. Since
- * the evaluator is fed with the appropriate loop lengths via the template
- * argument and keeps the number of quadrature points in the whole cell in
- * the variable FEEvaluation::n_q_points, we now automatically operate on
- * the more accurate formula without further changes.
- *   
 
- * 
- * The second difference is due to the fact that we are now evaluating a
- * multi-component system, as opposed to the scalar systems considered
- * previously. The matrix-free framework provides several ways to handle the
- * multi-component case. The variant shown here utilizes an FEEvaluation
- * object with multiple components embedded into it, specified by the fourth
- * template argument `dim + 2` for the components in the Euler system. As a
- * consequence, the return type of FEEvaluation::get_value() is not a scalar
- * any more (that would return a VectorizedArray type, collecting data from
- * several elements), but a Tensor of `dim+2` components. The functionality
- * is otherwise similar to the scalar case; it is handled by a template
- * specialization of a base class, called FEEvaluationAccess. An alternative
- * variant would have been to use several FEEvaluation objects, a scalar one
- * for the density, a vector-valued one with `dim` components for the
- * momentum, and another scalar evaluator for the energy. To ensure that
- * those components point to the correct part of the solution, the
- * constructor of FEEvaluation takes three optional integer arguments after
- * the required MatrixFree field, namely the number of the DoFHandler for
- * multi-DoFHandler systems (taking the first by default), the number of the
- * quadrature point in case there are multiple Quadrature objects (see more
- * below), and as a third argument the component within a vector system. As
- * we have a single vector for all components, we would go with the third
- * argument, and set it to `0` for the density, `1` for the vector-valued
- * momentum, and `dim+1` for the energy slot. FEEvaluation then picks the
- * appropriate subrange of the solution vector during
- * FEEvaluationBase::read_dof_values() and
- * FEEvaluation::distributed_local_to_global() or the more compact
- * FEEvaluation::gather_evaluate() and FEEvaluation::integrate_scatter()
- * calls.
- *   
+@endcode 
 
- * 
- * When it comes to the evaluation of the body force vector, we distinguish
- * between two cases for efficiency reasons: In case we have a constant
- * function (derived from Functions::ConstantFunction), we can precompute
- * the value outside the loop over quadrature points and simply use the
- * value everywhere. For a more general function, we instead need to call
- * the `evaluate_function()` method we provided above; this path is more
- * expensive because we need to access the memory associated with the
- * quadrature point data.
- *   
 
- * 
- * The rest follows the other tutorial programs. Since we have implemented
- * all physics for the Euler equations in the separate `euler_flux()`
- * function, all we have to do here is to call this function
- * given the current solution evaluated at quadrature points, returned by
- * `phi.get_value(q)`, and tell the FEEvaluation object to queue the flux
- * for testing it by the gradients of the shape functions (which is a Tensor
- * of outer `dim+2` components, each holding a tensor of `dim` components
- * for the $x,y,z$ component of the Euler flux). One final thing worth
- * mentioning is the order in which we queue the data for testing by the
- * value of the test function, `phi.submit_value()`, in case we are given an
- * external function: We must do this after calling `phi.get_value(q)`,
- * because `get_value()` (reading the solution) and `submit_value()`
- * (queuing the value for multiplication by the test function and summation
- * over quadrature points) access the same underlying data field. Here it
- * would be easy to achieve also without temporary variable `w_q` since
- * there is no mixing between values and gradients. For more complicated
- * setups, one has to first copy out e.g. both the value and gradient at a
- * quadrature point and then queue results again by
- * FEEvaluationBase::submit_value() and FEEvaluationBase::submit_gradient().
- *   
 
- * 
- * As a final note, we mention that we do not use the first MatrixFree
- * argument of this function, which is a call-back from MatrixFree::loop().
- * The interfaces imposes the present list of arguments, but since we are in
- * a member function where the MatrixFree object is already available as the
- * `data` variable, we stick with that to avoid confusion.
- * 
- * @code
- *   template <int dim, int degree, int n_points_1d>
- *   void EulerOperator<dim, degree, n_points_1d>::local_apply_cell(
- *     const MatrixFree<dim, Number> &,
- *     LinearAlgebra::distributed::Vector<Number> &      dst,
- *     const LinearAlgebra::distributed::Vector<Number> &src,
- *     const std::pair<unsigned int, unsigned int> &     cell_range) const
- *   {
- *     FEEvaluation<dim, degree, n_points_1d, dim + 2, Number> phi(data);
- * 
- *     Tensor<1, dim, VectorizedArray<Number>> constant_body_force;
- *     const Functions::ConstantFunction<dim> *constant_function =
- *       dynamic_cast<Functions::ConstantFunction<dim> *>(body_force.get());
- * 
- *     if (constant_function)
- *       constant_body_force = evaluate_function<dim, Number, dim>(
- *         *constant_function, Point<dim, VectorizedArray<Number>>());
- * 
- *     for (unsigned int cell = cell_range.first; cell < cell_range.second; ++cell)
- *       {
- *         phi.reinit(cell);
- *         phi.gather_evaluate(src, EvaluationFlags::values);
- * 
- *         for (unsigned int q = 0; q < phi.n_q_points; ++q)
- *           {
- *             const auto w_q = phi.get_value(q);
- *             phi.submit_gradient(euler_flux<dim>(w_q), q);
- *             if (body_force.get() != nullptr)
- *               {
- *                 const Tensor<1, dim, VectorizedArray<Number>> force =
- *                   constant_function ? constant_body_force :
- *                                       evaluate_function<dim, Number, dim>(
- *                                         *body_force, phi.quadrature_point(q));
- * 
- *                 Tensor<1, dim + 2, VectorizedArray<Number>> forcing;
- *                 for (unsigned int d = 0; d < dim; ++d)
- *                   forcing[d + 1] = w_q[0] * force[d];
- *                 for (unsigned int d = 0; d < dim; ++d)
- *                   forcing[dim + 1] += force[d] * w_q[d + 1];
- * 
- *                 phi.submit_value(forcing, q);
- *               }
- *           }
- * 
- *         phi.integrate_scatter(((body_force.get() != nullptr) ?
- *                                  EvaluationFlags::values :
- *                                  EvaluationFlags::nothing) |
- *                                 EvaluationFlags::gradients,
- *                               dst);
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * The next function concerns the computation of integrals on interior
- * faces, where we need evaluators from both cells adjacent to the face. We
- * associate the variable `phi_m` with the solution component $\mathbf{w}^-$
- * and the variable `phi_p` with the solution component $\mathbf{w}^+$. We
- * distinguish the two sides in the constructor of FEFaceEvaluation by the
- * second argument, with `true` for the interior side and `false` for the
- * exterior side, with interior and exterior denoting the orientation with
- * respect to the normal vector.
- *   
+下面的文件包括CellwiseInverseMassMatrix数据结构，我们将用它来进行质量矩阵反演，这是本教程程序唯一一个新的包含文件。
 
- * 
- * Note that the calls FEFaceEvaluation::gather_evaluate() and
- * FEFaceEvaluation::integrate_scatter() combine the access to the vectors
- * and the sum factorization parts. This combined operation not only saves a
- * line of code, but also contains an important optimization: Given that we
- * use a nodal basis in terms of the Lagrange polynomials in the points of
- * the Gauss-Lobatto quadrature formula, only $(p+1)^{d-1}$ out of the
- * $(p+1)^d$ basis functions evaluate to non-zero on each face. Thus, the
- * evaluator only accesses the necessary data in the vector and skips the
- * parts which are multiplied by zero. If we had first read the vector, we
- * would have needed to load all data from the vector, as the call in
- * isolation would not know what data is required in subsequent
- * operations. If the subsequent FEFaceEvaluation::evaluate() call requests
- * values and derivatives, indeed all $(p+1)^d$ vector entries for each
- * component are needed, as the normal derivative is nonzero for all basis
- * functions.
- *   
+@code
+#include <deal.II/matrix_free/operators.h>
 
- * 
- * The arguments to the evaluators as well as the procedure is similar to
- * the cell evaluation. We again use the more accurate (over-)integration
- * scheme due to the nonlinear terms, specified as the third template
- * argument in the list. At the quadrature points, we then go to our
- * free-standing function for the numerical flux. It receives the solution
- * evaluated at quadrature points from both sides (i.e., $\mathbf{w}^-$ and
- * $\mathbf{w}^+$), as well as the normal vector onto the minus side. As
- * explained above, the numerical flux is already multiplied by the normal
- * vector from the minus side. We need to switch the sign because the
- * boundary term comes with a minus sign in the weak form derived in the
- * introduction. The flux is then queued for testing both on the minus sign
- * and on the plus sign, with switched sign as the normal vector from the
- * plus side is exactly opposed to the one from the minus side.
- * 
- * @code
- *   template <int dim, int degree, int n_points_1d>
- *   void EulerOperator<dim, degree, n_points_1d>::local_apply_face(
- *     const MatrixFree<dim, Number> &,
- *     LinearAlgebra::distributed::Vector<Number> &      dst,
- *     const LinearAlgebra::distributed::Vector<Number> &src,
- *     const std::pair<unsigned int, unsigned int> &     face_range) const
- *   {
- *     FEFaceEvaluation<dim, degree, n_points_1d, dim + 2, Number> phi_m(data,
- *                                                                       true);
- *     FEFaceEvaluation<dim, degree, n_points_1d, dim + 2, Number> phi_p(data,
- *                                                                       false);
- * 
- *     for (unsigned int face = face_range.first; face < face_range.second; ++face)
- *       {
- *         phi_p.reinit(face);
- *         phi_p.gather_evaluate(src, EvaluationFlags::values);
- * 
- *         phi_m.reinit(face);
- *         phi_m.gather_evaluate(src, EvaluationFlags::values);
- * 
- *         for (unsigned int q = 0; q < phi_m.n_q_points; ++q)
- *           {
- *             const auto numerical_flux =
- *               euler_numerical_flux<dim>(phi_m.get_value(q),
- *                                         phi_p.get_value(q),
- *                                         phi_m.get_normal_vector(q));
- *             phi_m.submit_value(-numerical_flux, q);
- *             phi_p.submit_value(numerical_flux, q);
- *           }
- * 
- *         phi_p.integrate_scatter(EvaluationFlags::values, dst);
- *         phi_m.integrate_scatter(EvaluationFlags::values, dst);
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * For faces located at the boundary, we need to impose the appropriate
- * boundary conditions. In this tutorial program, we implement four cases as
- * mentioned above. (A fifth case, for supersonic outflow conditions is
- * discussed in the "Results" section below.) The discontinuous Galerkin
- * method imposes boundary conditions not as constraints, but only
- * weakly. Thus, the various conditions are imposed by finding an appropriate
- * <i>exterior</i> quantity $\mathbf{w}^+$ that is then handed to the
- * numerical flux function also used for the interior faces. In essence,
- * we "pretend" a state on the outside of the domain in such a way that
- * if that were reality, the solution of the PDE would satisfy the boundary
- * conditions we want.
- *   
 
- * 
- * For wall boundaries, we need to impose a no-normal-flux condition on the
- * momentum variable, whereas we use a Neumann condition for the density and
- * energy with $\rho^+ = \rho^-$ and $E^+ = E^-$. To achieve the no-normal
- * flux condition, we set the exterior values to the interior values and
- * subtract two times the velocity in wall-normal direction, i.e., in the
- * direction of the normal vector.
- *   
 
- * 
- * For inflow boundaries, we simply set the given Dirichlet data
- * $\mathbf{w}_\mathrm{D}$ as a boundary value. An alternative would have been
- * to use $\mathbf{w}^+ = -\mathbf{w}^- + 2 \mathbf{w}_\mathrm{D}$, the
- * so-called mirror principle.
- *   
 
- * 
- * The imposition of outflow is essentially a Neumann condition, i.e.,
- * setting $\mathbf{w}^+ = \mathbf{w}^-$. For the case of subsonic outflow,
- * we still need to impose a value for the energy, which we derive from the
- * respective function. A special step is needed for the case of
- * <i>backflow</i>, i.e., the case where there is a momentum flux into the
- * domain on the Neumann portion. According to the literature (a fact that can
- * be derived by appropriate energy arguments), we must switch to another
- * variant of the flux on inflow parts, see Gravemeier, Comerford,
- * Yoshihara, Ismail, Wall, "A novel formulation for Neumann inflow
- * conditions in biomechanics", Int. J. Numer. Meth. Biomed. Eng., vol. 28
- * (2012). Here, the momentum term needs to be added once again, which
- * corresponds to removing the flux contribution on the momentum
- * variables. We do this in a post-processing step, and only for the case
- * when we both are at an outflow boundary and the dot product between the
- * normal vector and the momentum (or, equivalently, velocity) is
- * negative. As we work on data of several quadrature points at once for
- * SIMD vectorizations, we here need to explicitly loop over the array
- * entries of the SIMD array.
- *   
 
- * 
- * In the implementation below, we check for the various types
- * of boundaries at the level of quadrature points. Of course, we could also
- * have moved the decision out of the quadrature point loop and treat entire
- * faces as of the same kind, which avoids some map/set lookups in the inner
- * loop over quadrature points. However, the loss of efficiency is hardly
- * noticeable, so we opt for the simpler code here. Also note that the final
- * `else` clause will catch the case when some part of the boundary was not
- * assigned any boundary condition via `EulerOperator::set_..._boundary(...)`.
- * 
- * @code
- *   template <int dim, int degree, int n_points_1d>
- *   void EulerOperator<dim, degree, n_points_1d>::local_apply_boundary_face(
- *     const MatrixFree<dim, Number> &,
- *     LinearAlgebra::distributed::Vector<Number> &      dst,
- *     const LinearAlgebra::distributed::Vector<Number> &src,
- *     const std::pair<unsigned int, unsigned int> &     face_range) const
- *   {
- *     FEFaceEvaluation<dim, degree, n_points_1d, dim + 2, Number> phi(data, true);
- * 
- *     for (unsigned int face = face_range.first; face < face_range.second; ++face)
- *       {
- *         phi.reinit(face);
- *         phi.gather_evaluate(src, EvaluationFlags::values);
- * 
- *         for (unsigned int q = 0; q < phi.n_q_points; ++q)
- *           {
- *             const auto w_m    = phi.get_value(q);
- *             const auto normal = phi.get_normal_vector(q);
- * 
- *             auto rho_u_dot_n = w_m[1] * normal[0];
- *             for (unsigned int d = 1; d < dim; ++d)
- *               rho_u_dot_n += w_m[1 + d] * normal[d];
- * 
- *             bool at_outflow = false;
- * 
- *             Tensor<1, dim + 2, VectorizedArray<Number>> w_p;
- *             const auto boundary_id = data.get_boundary_id(face);
- *             if (wall_boundaries.find(boundary_id) != wall_boundaries.end())
- *               {
- *                 w_p[0] = w_m[0];
- *                 for (unsigned int d = 0; d < dim; ++d)
- *                   w_p[d + 1] = w_m[d + 1] - 2. * rho_u_dot_n * normal[d];
- *                 w_p[dim + 1] = w_m[dim + 1];
- *               }
- *             else if (inflow_boundaries.find(boundary_id) !=
- *                      inflow_boundaries.end())
- *               w_p =
- *                 evaluate_function(*inflow_boundaries.find(boundary_id)->second,
- *                                   phi.quadrature_point(q));
- *             else if (subsonic_outflow_boundaries.find(boundary_id) !=
- *                      subsonic_outflow_boundaries.end())
- *               {
- *                 w_p          = w_m;
- *                 w_p[dim + 1] = evaluate_function(
- *                   *subsonic_outflow_boundaries.find(boundary_id)->second,
- *                   phi.quadrature_point(q),
- *                   dim + 1);
- *                 at_outflow = true;
- *               }
- *             else
- *               AssertThrow(false,
- *                           ExcMessage("Unknown boundary id, did "
- *                                      "you set a boundary condition for "
- *                                      "this part of the domain boundary?"));
- * 
- *             auto flux = euler_numerical_flux<dim>(w_m, w_p, normal);
- * 
- *             if (at_outflow)
- *               for (unsigned int v = 0; v < VectorizedArray<Number>::size(); ++v)
- *                 {
- *                   if (rho_u_dot_n[v] < -1e-12)
- *                     for (unsigned int d = 0; d < dim; ++d)
- *                       flux[d + 1][v] = 0.;
- *                 }
- * 
- *             phi.submit_value(-flux, q);
- *           }
- * 
- *         phi.integrate_scatter(EvaluationFlags::values, dst);
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * The next function implements the inverse mass matrix operation. The
- * algorithms and rationale have been discussed extensively in the
- * introduction, so we here limit ourselves to the technicalities of the
- * MatrixFreeOperators::CellwiseInverseMassMatrix class. It does similar
- * operations as the forward evaluation of the mass matrix, except with a
- * different interpolation matrix, representing the inverse $S^{-1}$
- * factors. These represent a change of basis from the specified basis (in
- * this case, the Lagrange basis in the points of the Gauss--Lobatto
- * quadrature formula) to the Lagrange basis in the points of the Gauss
- * quadrature formula. In the latter basis, we can apply the inverse of the
- * point-wise `JxW` factor, i.e., the quadrature weight times the
- * determinant of the Jacobian of the mapping from reference to real
- * coordinates. Once this is done, the basis is changed back to the nodal
- * Gauss-Lobatto basis again. All of these operations are done by the
- * `apply()` function below. What we need to provide is the local fields to
- * operate on (which we extract from the global vector by an FEEvaluation
- * object) and write the results back to the destination vector of the mass
- * matrix operation.
- *   
+namespace Euler_DG
+{
+  using namespace dealii;
 
- * 
- * One thing to note is that we added two integer arguments (that are
- * optional) to the constructor of FEEvaluation, the first being 0
- * (selecting among the DoFHandler in multi-DoFHandler systems; here, we
- * only have one) and the second being 1 to make the quadrature formula
- * selection. As we use the quadrature formula 0 for the over-integration of
- * nonlinear terms, we use the formula 1 with the default $p+1$ (or
- * `fe_degree+1` in terms of the variable name) points for the mass
- * matrix. This leads to square contributions to the mass matrix and ensures
- * exact integration, as explained in the introduction.
- * 
- * @code
- *   template <int dim, int degree, int n_points_1d>
- *   void EulerOperator<dim, degree, n_points_1d>::local_apply_inverse_mass_matrix(
- *     const MatrixFree<dim, Number> &,
- *     LinearAlgebra::distributed::Vector<Number> &      dst,
- *     const LinearAlgebra::distributed::Vector<Number> &src,
- *     const std::pair<unsigned int, unsigned int> &     cell_range) const
- *   {
- *     FEEvaluation<dim, degree, degree + 1, dim + 2, Number> phi(data, 0, 1);
- *     MatrixFreeOperators::CellwiseInverseMassMatrix<dim, degree, dim + 2, Number>
- *       inverse(phi);
- * 
- *     for (unsigned int cell = cell_range.first; cell < cell_range.second; ++cell)
- *       {
- *         phi.reinit(cell);
- *         phi.read_dof_values(src);
- * 
- *         inverse.apply(phi.begin_dof_values(), phi.begin_dof_values());
- * 
- *         phi.set_dof_values(dst);
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Theapplyandrelatedfunctions"></a> 
- * <h4>The apply() and related functions</h4>
- * 
 
- * 
- * We now come to the function which implements the evaluation of the Euler
- * operator as a whole, i.e., $\mathcal M^{-1} \mathcal L(t, \mathbf{w})$,
- * calling into the local evaluators presented above. The steps should be
- * clear from the previous code. One thing to note is that we need to adjust
- * the time in the functions we have associated with the various parts of
- * the boundary, in order to be consistent with the equation in case the
- * boundary data is time-dependent. Then, we call MatrixFree::loop() to
- * perform the cell and face integrals, including the necessary ghost data
- * exchange in the `src` vector. The seventh argument to the function,
- * `true`, specifies that we want to zero the `dst` vector as part of the
- * loop, before we start accumulating integrals into it. This variant is
- * preferred over explicitly calling `dst = 0.;` before the loop as the
- * zeroing operation is done on a subrange of the vector in parts that are
- * written by the integrals nearby. This enhances data locality and allows
- * for caching, saving one roundtrip of vector data to main memory and
- * enhancing performance. The last two arguments to the loop determine which
- * data is exchanged: Since we only access the values of the shape functions
- * one faces, typical of first-order hyperbolic problems, and since we have
- * a nodal basis with nodes at the reference element surface, we only need
- * to exchange those parts. This again saves precious memory bandwidth.
- *   
+@endcode 
 
- * 
- * Once the spatial operator $\mathcal L$ is applied, we need to make a
- * second round and apply the inverse mass matrix. Here, we call
- * MatrixFree::cell_loop() since only cell integrals appear. The cell loop
- * is cheaper than the full loop as access only goes to the degrees of
- * freedom associated with the locally owned cells, which is simply the
- * locally owned degrees of freedom for DG discretizations. Thus, no ghost
- * exchange is needed here.
- *   
 
- * 
- * Around all these functions, we put timer scopes to record the
- * computational time for statistics about the contributions of the various
- * parts.
- * 
- * @code
- *   template <int dim, int degree, int n_points_1d>
- *   void EulerOperator<dim, degree, n_points_1d>::apply(
- *     const double                                      current_time,
- *     const LinearAlgebra::distributed::Vector<Number> &src,
- *     LinearAlgebra::distributed::Vector<Number> &      dst) const
- *   {
- *     {
- *       TimerOutput::Scope t(timer, "apply - integrals");
- * 
- *       for (auto &i : inflow_boundaries)
- *         i.second->set_time(current_time);
- *       for (auto &i : subsonic_outflow_boundaries)
- *         i.second->set_time(current_time);
- * 
- *       data.loop(&EulerOperator::local_apply_cell,
- *                 &EulerOperator::local_apply_face,
- *                 &EulerOperator::local_apply_boundary_face,
- *                 this,
- *                 dst,
- *                 src,
- *                 true,
- *                 MatrixFree<dim, Number>::DataAccessOnFaces::values,
- *                 MatrixFree<dim, Number>::DataAccessOnFaces::values);
- *     }
- * 
- *     {
- *       TimerOutput::Scope t(timer, "apply - inverse mass");
- * 
- *       data.cell_loop(&EulerOperator::local_apply_inverse_mass_matrix,
- *                      this,
- *                      dst,
- *                      dst);
- *     }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * Let us move to the function that does an entire stage of a Runge--Kutta
- * update. It calls EulerOperator::apply() followed by some updates
- * to the vectors, namely `next_ri = solution + factor_ai * k_i` and
- * `solution += factor_solution * k_i`. Rather than performing these
- * steps through the vector interfaces, we here present an alternative
- * strategy that is faster on cache-based architectures. As the memory
- * consumed by the vectors is often much larger than what fits into caches,
- * the data has to effectively come from the slow RAM memory. The situation
- * can be improved by loop fusion, i.e., performing both the updates to
- * `next_ki` and `solution` within a single sweep. In that case, we would
- * read the two vectors `rhs` and `solution` and write into `next_ki` and
- * `solution`, compared to at least 4 reads and two writes in the baseline
- * case. Here, we go one step further and perform the loop immediately when
- * the mass matrix inversion has finished on a part of the
- * vector. MatrixFree::cell_loop() provides a mechanism to attach an
- * `std::function` both before the loop over cells first touches a vector
- * entry (which we do not use here, but is e.g. used for zeroing the vector)
- * and a second `std::function` to be called after the loop last touches
- * an entry. The callback is in form of a range over the given vector (in
- * terms of the local index numbering in the MPI universe) that can be
- * addressed by `local_element()` functions.
- *   
 
- * 
- * For this second callback, we create a lambda that works on a range and
- * write the respective update on this range. Ideally, we would add the
- * `DEAL_II_OPENMP_SIMD_PRAGMA` before the local loop to suggest to the
- * compiler to SIMD parallelize this loop (which means in practice that we
- * ensure that there is no overlap, also called aliasing, between the index
- * ranges of the pointers we use inside the loops). It turns out that at the
- * time of this writing, GCC 7.2 fails to compile an OpenMP pragma inside a
- * lambda function, so we comment this pragma out below. If your compiler is
- * newer, you should be able to uncomment these lines again.
- *   
+与其他无矩阵教程程序类似，我们在文件顶部收集所有控制程序执行的参数。除了我们想要运行的维度和多项式程度，我们还指定了我们想要用于欧拉方程中的非线性项的高斯正交公式中的点数。此外，我们指定了随时间变化的问题的时间间隔，并实现了两个不同的测试案例。第一个是二维的分析解，而第二个是介绍中描述的围绕圆柱体的通道流。根据测试案例，我们还改变了运行仿真的最终时间，以及一个变量`output_tick`，它指定了我们要在哪个时间间隔内写入输出（假设tick大于时间步长）。
 
- * 
- * Note that we select a different code path for the last
- * Runge--Kutta stage when we do not need to update the `next_ri`
- * vector. This strategy gives a considerable speedup. Whereas the inverse
- * mass matrix and vector updates take more than 60% of the computational
- * time with default vector updates on a 40-core machine, the percentage is
- * around 35% with the more optimized variant. In other words, this is a
- * speedup of around a third.
- * 
- * @code
- *   template <int dim, int degree, int n_points_1d>
- *   void EulerOperator<dim, degree, n_points_1d>::perform_stage(
- *     const Number                                      current_time,
- *     const Number                                      factor_solution,
- *     const Number                                      factor_ai,
- *     const LinearAlgebra::distributed::Vector<Number> &current_ri,
- *     LinearAlgebra::distributed::Vector<Number> &      vec_ki,
- *     LinearAlgebra::distributed::Vector<Number> &      solution,
- *     LinearAlgebra::distributed::Vector<Number> &      next_ri) const
- *   {
- *     {
- *       TimerOutput::Scope t(timer, "rk_stage - integrals L_h");
- * 
- *       for (auto &i : inflow_boundaries)
- *         i.second->set_time(current_time);
- *       for (auto &i : subsonic_outflow_boundaries)
- *         i.second->set_time(current_time);
- * 
- *       data.loop(&EulerOperator::local_apply_cell,
- *                 &EulerOperator::local_apply_face,
- *                 &EulerOperator::local_apply_boundary_face,
- *                 this,
- *                 vec_ki,
- *                 current_ri,
- *                 true,
- *                 MatrixFree<dim, Number>::DataAccessOnFaces::values,
- *                 MatrixFree<dim, Number>::DataAccessOnFaces::values);
- *     }
- * 
- * 
- *     {
- *       TimerOutput::Scope t(timer, "rk_stage - inv mass + vec upd");
- *       data.cell_loop(
- *         &EulerOperator::local_apply_inverse_mass_matrix,
- *         this,
- *         next_ri,
- *         vec_ki,
- *         std::function<void(const unsigned int, const unsigned int)>(),
- *         [&](const unsigned int start_range, const unsigned int end_range) {
- *           const Number ai = factor_ai;
- *           const Number bi = factor_solution;
- *           if (ai == Number())
- *             {
- *               /* DEAL_II_OPENMP_SIMD_PRAGMA */
- *               for (unsigned int i = start_range; i < end_range; ++i)
- *                 {
- *                   const Number k_i          = next_ri.local_element(i);
- *                   const Number sol_i        = solution.local_element(i);
- *                   solution.local_element(i) = sol_i + bi * k_i;
- *                 }
- *             }
- *           else
- *             {
- *               /* DEAL_II_OPENMP_SIMD_PRAGMA */
- *               for (unsigned int i = start_range; i < end_range; ++i)
- *                 {
- *                   const Number k_i          = next_ri.local_element(i);
- *                   const Number sol_i        = solution.local_element(i);
- *                   solution.local_element(i) = sol_i + bi * k_i;
- *                   next_ri.local_element(i)  = sol_i + ai * k_i;
- *                 }
- *             }
- *         });
- *     }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * Having discussed the implementation of the functions that deal with
- * advancing the solution by one time step, let us now move to functions
- * that implement other, ancillary operations. Specifically, these are
- * functions that compute projections, evaluate errors, and compute the speed
- * of information transport on a cell.
- *   
+@code
+  constexpr unsigned int testcase             = 0;
+  constexpr unsigned int dimension            = 2;
+  constexpr unsigned int n_global_refinements = 3;
+  constexpr unsigned int fe_degree            = 5;
+  constexpr unsigned int n_q_points_1d        = fe_degree + 2;
 
- * 
- * The first of these functions is essentially equivalent to
- * VectorTools::project(), just much faster because it is specialized for DG
- * elements where there is no need to set up and solve a linear system, as
- * each element has independent basis functions. The reason why we show the
- * code here, besides a small speedup of this non-critical operation, is that
- * it shows additional functionality provided by
- * MatrixFreeOperators::CellwiseInverseMassMatrix.
- *   
 
- * 
- * The projection operation works as follows: If we denote the matrix of
- * shape functions evaluated at quadrature points by $S$, the projection on
- * cell $K$ is an operation of the form $\underbrace{S J^K S^\mathrm
- * T}_{\mathcal M^K} \mathbf{w}^K = S J^K
- * \tilde{\mathbf{w}}(\mathbf{x}_q)_{q=1:n_q}$, where $J^K$ is the diagonal
- * matrix containing the determinant of the Jacobian times the quadrature
- * weight (JxW), $\mathcal M^K$ is the cell-wise mass matrix, and
- * $\tilde{\mathbf{w}}(\mathbf{x}_q)_{q=1:n_q}$ is the evaluation of the
- * field to be projected onto quadrature points. (In reality the matrix $S$
- * has additional structure through the tensor product, as explained in the
- * introduction.) This system can now equivalently be written as
- * $\mathbf{w}^K = \left(S J^K S^\mathrm T\right)^{-1} S J^K
- * \tilde{\mathbf{w}}(\mathbf{x}_q)_{q=1:n_q} = S^{-\mathrm T}
- * \left(J^K\right)^{-1} S^{-1} S J^K
- * \tilde{\mathbf{w}}(\mathbf{x}_q)_{q=1:n_q}$. Now, the term $S^{-1} S$ and
- * then $\left(J^K\right)^{-1} J^K$ cancel, resulting in the final
- * expression $\mathbf{w}^K = S^{-\mathrm T}
- * \tilde{\mathbf{w}}(\mathbf{x}_q)_{q=1:n_q}$. This operation is
- * implemented by
- * MatrixFreeOperators::CellwiseInverseMassMatrix::transform_from_q_points_to_basis().
- * The name is derived from the fact that this projection is simply
- * the multiplication by $S^{-\mathrm T}$, a basis change from the
- * nodal basis in the points of the Gaussian quadrature to the given finite
- * element basis. Note that we call FEEvaluation::set_dof_values() to write
- * the result into the vector, overwriting previous content, rather than
- * accumulating the results as typical in integration tasks -- we can do
- * this because every vector entry has contributions from only a single
- * cell for discontinuous Galerkin discretizations.
- * 
- * @code
- *   template <int dim, int degree, int n_points_1d>
- *   void EulerOperator<dim, degree, n_points_1d>::project(
- *     const Function<dim> &                       function,
- *     LinearAlgebra::distributed::Vector<Number> &solution) const
- *   {
- *     FEEvaluation<dim, degree, degree + 1, dim + 2, Number> phi(data, 0, 1);
- *     MatrixFreeOperators::CellwiseInverseMassMatrix<dim, degree, dim + 2, Number>
- *       inverse(phi);
- *     solution.zero_out_ghost_values();
- *     for (unsigned int cell = 0; cell < data.n_cell_batches(); ++cell)
- *       {
- *         phi.reinit(cell);
- *         for (unsigned int q = 0; q < phi.n_q_points; ++q)
- *           phi.submit_dof_value(evaluate_function(function,
- *                                                  phi.quadrature_point(q)),
- *                                q);
- *         inverse.transform_from_q_points_to_basis(dim + 2,
- *                                                  phi.begin_dof_values(),
- *                                                  phi.begin_dof_values());
- *         phi.set_dof_values(solution);
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * The next function again repeats functionality also provided by the
- * deal.II library, namely VectorTools::integrate_difference(). We here show
- * the explicit code to highlight how the vectorization across several cells
- * works and how to accumulate results via that interface: Recall that each
- * <i>lane</i> of the vectorized array holds data from a different cell. By
- * the loop over all cell batches that are owned by the current MPI process,
- * we could then fill a VectorizedArray of results; to obtain a global sum,
- * we would need to further go on and sum across the entries in the SIMD
- * array. However, such a procedure is not stable as the SIMD array could in
- * fact not hold valid data for all its lanes. This happens when the number
- * of locally owned cells is not a multiple of the SIMD width. To avoid
- * invalid data, we must explicitly skip those invalid lanes when accessing
- * the data. While one could imagine that we could make it work by simply
- * setting the empty lanes to zero (and thus, not contribute to a sum), the
- * situation is more complicated than that: What if we were to compute a
- * velocity out of the momentum? Then, we would need to divide by the
- * density, which is zero -- the result would consequently be NaN and
- * contaminate the result. This trap is avoided by accumulating the results
- * from the valid SIMD range as we loop through the cell batches, using the
- * function MatrixFree::n_active_entries_per_cell_batch() to give us the
- * number of lanes with valid data. It equals VectorizedArray::size() on
- * most cells, but can be less on the last cell batch if the number of cells
- * has a remainder compared to the SIMD width.
- * 
- * @code
- *   template <int dim, int degree, int n_points_1d>
- *   std::array<double, 3> EulerOperator<dim, degree, n_points_1d>::compute_errors(
- *     const Function<dim> &                             function,
- *     const LinearAlgebra::distributed::Vector<Number> &solution) const
- *   {
- *     TimerOutput::Scope t(timer, "compute errors");
- *     double             errors_squared[3] = {};
- *     FEEvaluation<dim, degree, n_points_1d, dim + 2, Number> phi(data, 0, 0);
- * 
- *     for (unsigned int cell = 0; cell < data.n_cell_batches(); ++cell)
- *       {
- *         phi.reinit(cell);
- *         phi.gather_evaluate(solution, EvaluationFlags::values);
- *         VectorizedArray<Number> local_errors_squared[3] = {};
- *         for (unsigned int q = 0; q < phi.n_q_points; ++q)
- *           {
- *             const auto error =
- *               evaluate_function(function, phi.quadrature_point(q)) -
- *               phi.get_value(q);
- *             const auto JxW = phi.JxW(q);
- * 
- *             local_errors_squared[0] += error[0] * error[0] * JxW;
- *             for (unsigned int d = 0; d < dim; ++d)
- *               local_errors_squared[1] += (error[d + 1] * error[d + 1]) * JxW;
- *             local_errors_squared[2] += (error[dim + 1] * error[dim + 1]) * JxW;
- *           }
- *         for (unsigned int v = 0; v < data.n_active_entries_per_cell_batch(cell);
- *              ++v)
- *           for (unsigned int d = 0; d < 3; ++d)
- *             errors_squared[d] += local_errors_squared[d][v];
- *       }
- * 
- *     Utilities::MPI::sum(errors_squared, MPI_COMM_WORLD, errors_squared);
- * 
- *     std::array<double, 3> errors;
- *     for (unsigned int d = 0; d < 3; ++d)
- *       errors[d] = std::sqrt(errors_squared[d]);
- * 
- *     return errors;
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * This final function of the EulerOperator class is used to estimate the
- * transport speed, scaled by the mesh size, that is relevant for setting
- * the time step size in the explicit time integrator. In the Euler
- * equations, there are two speeds of transport, namely the convective
- * velocity $\mathbf{u}$ and the propagation of sound waves with sound
- * speed $c = \sqrt{\gamma p/\rho}$ relative to the medium moving at
- * velocity $\mathbf u$.
- *   
+  using Number = double;
 
- * 
- * In the formula for the time step size, we are interested not by
- * these absolute speeds, but by the amount of time it takes for
- * information to cross a single cell. For information transported along with
- * the medium, $\mathbf u$ is scaled by the mesh size,
- * so an estimate of the maximal velocity can be obtained by computing
- * $\|J^{-\mathrm T} \mathbf{u}\|_\infty$, where $J$ is the Jacobian of the
- * transformation from real to the reference domain. Note that
- * FEEvaluationBase::inverse_jacobian() returns the inverse and transpose
- * Jacobian, representing the metric term from real to reference
- * coordinates, so we do not need to transpose it again. We store this limit
- * in the variable `convective_limit` in the code below.
- *   
 
- * 
- * The sound propagation is isotropic, so we need to take mesh sizes in any
- * direction into account. The appropriate mesh size scaling is then given
- * by the minimal singular value of $J$ or, equivalently, the maximal
- * singular value of $J^{-1}$. Note that one could approximate this quantity
- * by the minimal distance between vertices of a cell when ignoring curved
- * cells. To get the maximal singular value of the Jacobian, the general
- * strategy would be some LAPACK function. Since all we need here is an
- * estimate, we can avoid the hassle of decomposing a tensor of
- * VectorizedArray numbers into several matrices and go into an (expensive)
- * eigenvalue function without vectorization, and instead use a few
- * iterations (five in the code below) of the power method applied to
- * $J^{-1}J^{-\mathrm T}$. The speed of convergence of this method depends
- * on the ratio of the largest to the next largest eigenvalue and the
- * initial guess, which is the vector of all ones. This might suggest that
- * we get slow convergence on cells close to a cube shape where all
- * lengths are almost the same. However, this slow convergence means that
- * the result will sit between the two largest singular values, which both
- * are close to the maximal value anyway. In all other cases, convergence
- * will be quick. Thus, we can merely hardcode 5 iterations here and be
- * confident that the result is good.
- * 
- * @code
- *   template <int dim, int degree, int n_points_1d>
- *   double EulerOperator<dim, degree, n_points_1d>::compute_cell_transport_speed(
- *     const LinearAlgebra::distributed::Vector<Number> &solution) const
- *   {
- *     TimerOutput::Scope t(timer, "compute transport speed");
- *     Number             max_transport = 0;
- *     FEEvaluation<dim, degree, degree + 1, dim + 2, Number> phi(data, 0, 1);
- * 
- *     for (unsigned int cell = 0; cell < data.n_cell_batches(); ++cell)
- *       {
- *         phi.reinit(cell);
- *         phi.gather_evaluate(solution, EvaluationFlags::values);
- *         VectorizedArray<Number> local_max = 0.;
- *         for (unsigned int q = 0; q < phi.n_q_points; ++q)
- *           {
- *             const auto solution = phi.get_value(q);
- *             const auto velocity = euler_velocity<dim>(solution);
- *             const auto pressure = euler_pressure<dim>(solution);
- * 
- *             const auto inverse_jacobian = phi.inverse_jacobian(q);
- *             const auto convective_speed = inverse_jacobian * velocity;
- *             VectorizedArray<Number> convective_limit = 0.;
- *             for (unsigned int d = 0; d < dim; ++d)
- *               convective_limit =
- *                 std::max(convective_limit, std::abs(convective_speed[d]));
- * 
- *             const auto speed_of_sound =
- *               std::sqrt(gamma * pressure * (1. / solution[0]));
- * 
- *             Tensor<1, dim, VectorizedArray<Number>> eigenvector;
- *             for (unsigned int d = 0; d < dim; ++d)
- *               eigenvector[d] = 1.;
- *             for (unsigned int i = 0; i < 5; ++i)
- *               {
- *                 eigenvector = transpose(inverse_jacobian) *
- *                               (inverse_jacobian * eigenvector);
- *                 VectorizedArray<Number> eigenvector_norm = 0.;
- *                 for (unsigned int d = 0; d < dim; ++d)
- *                   eigenvector_norm =
- *                     std::max(eigenvector_norm, std::abs(eigenvector[d]));
- *                 eigenvector /= eigenvector_norm;
- *               }
- *             const auto jac_times_ev   = inverse_jacobian * eigenvector;
- *             const auto max_eigenvalue = std::sqrt(
- *               (jac_times_ev * jac_times_ev) / (eigenvector * eigenvector));
- *             local_max =
- *               std::max(local_max,
- *                        max_eigenvalue * speed_of_sound + convective_limit);
- *           }
- * 
- * @endcode
- * 
- * Similarly to the previous function, we must make sure to accumulate
- * speed only on the valid cells of a cell batch.
- * 
- * @code
- *         for (unsigned int v = 0; v < data.n_active_entries_per_cell_batch(cell);
- *              ++v)
- *           for (unsigned int d = 0; d < 3; ++d)
- *             max_transport = std::max(max_transport, local_max[v]);
- *       }
- * 
- *     max_transport = Utilities::MPI::max(max_transport, MPI_COMM_WORLD);
- * 
- *     return max_transport;
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TheEulerProblemclass"></a> 
- * <h3>The EulerProblem class</h3>
- * 
+  constexpr double gamma       = 1.4;
+  constexpr double final_time  = testcase == 0 ? 10 : 2.0;
+  constexpr double output_tick = testcase == 0 ? 1 : 0.05;
 
- * 
- * This class combines the EulerOperator class with the time integrator and
- * the usual global data structures such as FiniteElement and DoFHandler, to
- * actually run the simulations of the Euler problem.
- *   
 
- * 
- * The member variables are a triangulation, a finite element, a mapping (to
- * create high-order curved surfaces, see e.g. step-10), and a DoFHandler to
- * describe the degrees of freedom. In addition, we keep an instance of the
- * EulerOperator described above around, which will do all heavy lifting in
- * terms of integrals, and some parameters for time integration like the
- * current time or the time step size.
- *   
+@endcode 
 
- * 
- * Furthermore, we use a PostProcessor instance to write some additional
- * information to the output file, in similarity to what was done in
- * step-33. The interface of the DataPostprocessor class is intuitive,
- * requiring us to provide information about what needs to be evaluated
- * (typically only the values of the solution, except for the Schlieren plot
- * that we only enable in 2D where it makes sense), and the names of what
- * gets evaluated. Note that it would also be possible to extract most
- * information by calculator tools within visualization programs such as
- * ParaView, but it is so much more convenient to do it already when writing
- * the output.
- * 
- * @code
- *   template <int dim>
- *   class EulerProblem
- *   {
- *   public:
- *     EulerProblem();
- * 
- *     void run();
- * 
- *   private:
- *     void make_grid_and_dofs();
- * 
- *     void output_results(const unsigned int result_number);
- * 
- *     LinearAlgebra::distributed::Vector<Number> solution;
- * 
- *     ConditionalOStream pcout;
- * 
- * #ifdef DEAL_II_WITH_P4EST
- *     parallel::distributed::Triangulation<dim> triangulation;
- * #else
- *     Triangulation<dim> triangulation;
- * #endif
- * 
- *     FESystem<dim>        fe;
- *     MappingQGeneric<dim> mapping;
- *     DoFHandler<dim>      dof_handler;
- * 
- *     TimerOutput timer;
- * 
- *     EulerOperator<dim, fe_degree, n_q_points_1d> euler_operator;
- * 
- *     double time, time_step;
- * 
- *     class Postprocessor : public DataPostprocessor<dim>
- *     {
- *     public:
- *       Postprocessor();
- * 
- *       virtual void evaluate_vector_field(
- *         const DataPostprocessorInputs::Vector<dim> &inputs,
- *         std::vector<Vector<double>> &computed_quantities) const override;
- * 
- *       virtual std::vector<std::string> get_names() const override;
- * 
- *       virtual std::vector<
- *         DataComponentInterpretation::DataComponentInterpretation>
- *       get_data_component_interpretation() const override;
- * 
- *       virtual UpdateFlags get_needed_update_flags() const override;
- * 
- *     private:
- *       const bool do_schlieren_plot;
- *     };
- *   };
- * 
- * 
- * 
- *   template <int dim>
- *   EulerProblem<dim>::Postprocessor::Postprocessor()
- *     : do_schlieren_plot(dim == 2)
- *   {}
- * 
- * 
- * 
- * @endcode
- * 
- * For the main evaluation of the field variables, we first check that the
- * lengths of the arrays equal the expected values (the lengths `2*dim+4` or
- * `2*dim+5` are derived from the sizes of the names we specify in the
- * get_names() function below). Then we loop over all evaluation points and
- * fill the respective information: First we fill the primal solution
- * variables of density $\rho$, momentum $\rho \mathbf{u}$ and energy $E$,
- * then we compute the derived velocity $\mathbf u$, the pressure $p$, the
- * speed of sound $c=\sqrt{\gamma p / \rho}$, as well as the Schlieren plot
- * showing $s = |\nabla \rho|^2$ in case it is enabled. (See step-69 for
- * another example where we create a Schlieren plot.)
- * 
- * @code
- *   template <int dim>
- *   void EulerProblem<dim>::Postprocessor::evaluate_vector_field(
- *     const DataPostprocessorInputs::Vector<dim> &inputs,
- *     std::vector<Vector<double>> &               computed_quantities) const
- *   {
- *     const unsigned int n_evaluation_points = inputs.solution_values.size();
- * 
- *     if (do_schlieren_plot == true)
- *       Assert(inputs.solution_gradients.size() == n_evaluation_points,
- *              ExcInternalError());
- * 
- *     Assert(computed_quantities.size() == n_evaluation_points,
- *            ExcInternalError());
- *     Assert(inputs.solution_values[0].size() == dim + 2, ExcInternalError());
- *     Assert(computed_quantities[0].size() ==
- *              dim + 2 + (do_schlieren_plot == true ? 1 : 0),
- *            ExcInternalError());
- * 
- *     for (unsigned int q = 0; q < n_evaluation_points; ++q)
- *       {
- *         Tensor<1, dim + 2> solution;
- *         for (unsigned int d = 0; d < dim + 2; ++d)
- *           solution[d] = inputs.solution_values[q](d);
- * 
- *         const double         density  = solution[0];
- *         const Tensor<1, dim> velocity = euler_velocity<dim>(solution);
- *         const double         pressure = euler_pressure<dim>(solution);
- * 
- *         for (unsigned int d = 0; d < dim; ++d)
- *           computed_quantities[q](d) = velocity[d];
- *         computed_quantities[q](dim)     = pressure;
- *         computed_quantities[q](dim + 1) = std::sqrt(gamma * pressure / density);
- * 
- *         if (do_schlieren_plot == true)
- *           computed_quantities[q](dim + 2) =
- *             inputs.solution_gradients[q][0] * inputs.solution_gradients[q][0];
- *       }
- *   }
- * 
- * 
- * 
- *   template <int dim>
- *   std::vector<std::string> EulerProblem<dim>::Postprocessor::get_names() const
- *   {
- *     std::vector<std::string> names;
- *     for (unsigned int d = 0; d < dim; ++d)
- *       names.emplace_back("velocity");
- *     names.emplace_back("pressure");
- *     names.emplace_back("speed_of_sound");
- * 
- *     if (do_schlieren_plot == true)
- *       names.emplace_back("schlieren_plot");
- * 
- *     return names;
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * For the interpretation of quantities, we have scalar density, energy,
- * pressure, speed of sound, and the Schlieren plot, and vectors for the
- * momentum and the velocity.
- * 
- * @code
- *   template <int dim>
- *   std::vector<DataComponentInterpretation::DataComponentInterpretation>
- *   EulerProblem<dim>::Postprocessor::get_data_component_interpretation() const
- *   {
- *     std::vector<DataComponentInterpretation::DataComponentInterpretation>
- *       interpretation;
- *     for (unsigned int d = 0; d < dim; ++d)
- *       interpretation.push_back(
- *         DataComponentInterpretation::component_is_part_of_vector);
- *     interpretation.push_back(DataComponentInterpretation::component_is_scalar);
- *     interpretation.push_back(DataComponentInterpretation::component_is_scalar);
- * 
- *     if (do_schlieren_plot == true)
- *       interpretation.push_back(
- *         DataComponentInterpretation::component_is_scalar);
- * 
- *     return interpretation;
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * With respect to the necessary update flags, we only need the values for
- * all quantities but the Schlieren plot, which is based on the density
- * gradient.
- * 
- * @code
- *   template <int dim>
- *   UpdateFlags EulerProblem<dim>::Postprocessor::get_needed_update_flags() const
- *   {
- *     if (do_schlieren_plot == true)
- *       return update_values | update_gradients;
- *     else
- *       return update_values;
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * The constructor for this class is unsurprising: We set up a parallel
- * triangulation based on the `MPI_COMM_WORLD` communicator, a vector finite
- * element with `dim+2` components for density, momentum, and energy, a
- * high-order mapping of the same degree as the underlying finite element,
- * and initialize the time and time step to zero.
- * 
- * @code
- *   template <int dim>
- *   EulerProblem<dim>::EulerProblem()
- *     : pcout(std::cout, Utilities::MPI::this_mpi_process(MPI_COMM_WORLD) == 0)
- * #ifdef DEAL_II_WITH_P4EST
- *     , triangulation(MPI_COMM_WORLD)
- * #endif
- *     , fe(FE_DGQ<dim>(fe_degree), dim + 2)
- *     , mapping(fe_degree)
- *     , dof_handler(triangulation)
- *     , timer(pcout, TimerOutput::never, TimerOutput::wall_times)
- *     , euler_operator(timer)
- *     , time(0)
- *     , time_step(0)
- *   {}
- * 
- * 
- * 
- * @endcode
- * 
- * As a mesh, this tutorial program implements two options, depending on the
- * global variable `testcase`: For the analytical variant (`testcase==0`),
- * the domain is $(0, 10) \times (-5, 5)$, with Dirichlet boundary
- * conditions (inflow) all around the domain. For `testcase==1`, we set the
- * domain to a cylinder in a rectangular box, derived from the flow past
- * cylinder testcase for incompressible viscous flow by Sch&auml;fer and
- * Turek (1996). Here, we have a larger variety of boundaries. The inflow
- * part at the left of the channel is given the inflow type, for which we
- * choose a constant inflow profile, whereas we set a subsonic outflow at
- * the right. For the boundary around the cylinder (boundary id equal to 2)
- * as well as the channel walls (boundary id equal to 3) we use the wall
- * boundary type, which is no-normal flow. Furthermore, for the 3D cylinder
- * we also add a gravity force in vertical direction. Having the base mesh
- * in place (including the manifolds set by
- * GridGenerator::channel_with_cylinder()), we can then perform the
- * specified number of global refinements, create the unknown numbering from
- * the DoFHandler, and hand the DoFHandler and Mapping objects to the
- * initialization of the EulerOperator.
- * 
- * @code
- *   template <int dim>
- *   void EulerProblem<dim>::make_grid_and_dofs()
- *   {
- *     switch (testcase)
- *       {
- *         case 0:
- *           {
- *             Point<dim> lower_left;
- *             for (unsigned int d = 1; d < dim; ++d)
- *               lower_left[d] = -5;
- * 
- *             Point<dim> upper_right;
- *             upper_right[0] = 10;
- *             for (unsigned int d = 1; d < dim; ++d)
- *               upper_right[d] = 5;
- * 
- *             GridGenerator::hyper_rectangle(triangulation,
- *                                            lower_left,
- *                                            upper_right);
- *             triangulation.refine_global(2);
- * 
- *             euler_operator.set_inflow_boundary(
- *               0, std::make_unique<ExactSolution<dim>>(0));
- * 
- *             break;
- *           }
- * 
- *         case 1:
- *           {
- *             GridGenerator::channel_with_cylinder(
- *               triangulation, 0.03, 1, 0, true);
- * 
- *             euler_operator.set_inflow_boundary(
- *               0, std::make_unique<ExactSolution<dim>>(0));
- *             euler_operator.set_subsonic_outflow_boundary(
- *               1, std::make_unique<ExactSolution<dim>>(0));
- * 
- *             euler_operator.set_wall_boundary(2);
- *             euler_operator.set_wall_boundary(3);
- * 
- *             if (dim == 3)
- *               euler_operator.set_body_force(
- *                 std::make_unique<Functions::ConstantFunction<dim>>(
- *                   std::vector<double>({0., 0., -0.2})));
- * 
- *             break;
- *           }
- * 
- *         default:
- *           Assert(false, ExcNotImplemented());
- *       }
- * 
- *     triangulation.refine_global(n_global_refinements);
- * 
- *     dof_handler.distribute_dofs(fe);
- * 
- *     euler_operator.reinit(mapping, dof_handler);
- *     euler_operator.initialize_vector(solution);
- * 
- * @endcode
- * 
- * In the following, we output some statistics about the problem. Because we
- * often end up with quite large numbers of cells or degrees of freedom, we
- * would like to print them with a comma to separate each set of three
- * digits. This can be done via "locales", although the way this works is
- * not particularly intuitive. step-32 explains this in slightly more
- * detail.
- * 
- * @code
- *     std::locale s = pcout.get_stream().getloc();
- *     pcout.get_stream().imbue(std::locale(""));
- *     pcout << "Number of degrees of freedom: " << dof_handler.n_dofs()
- *           << " ( = " << (dim + 2) << " [vars] x "
- *           << triangulation.n_global_active_cells() << " [cells] x "
- *           << Utilities::pow(fe_degree + 1, dim) << " [dofs/cell/var] )"
- *           << std::endl;
- *     pcout.get_stream().imbue(s);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * For output, we first let the Euler operator compute the errors of the
- * numerical results. More precisely, we compute the error against the
- * analytical result for the analytical solution case, whereas we compute
- * the deviation against the background field with constant density and
- * energy and constant velocity in $x$ direction for the second test case.
- *   
 
- * 
- * The next step is to create output. This is similar to what is done in
- * step-33: We let the postprocessor defined above control most of the
- * output, except for the primal field that we write directly. For the
- * analytical solution test case, we also perform another projection of the
- * analytical solution and print the difference between that field and the
- * numerical solution. Once we have defined all quantities to be written, we
- * build the patches for output. Similarly to step-65, we create a
- * high-order VTK output by setting the appropriate flag, which enables us
- * to visualize fields of high polynomial degrees. Finally, we call the
- * `DataOutInterface::write_vtu_in_parallel()` function to write the result
- * to the given file name. This function uses special MPI parallel write
- * facilities, which are typically more optimized for parallel file systems
- * than the standard library's `std::ofstream` variants used in most other
- * tutorial programs. A particularly nice feature of the
- * `write_vtu_in_parallel()` function is the fact that it can combine output
- * from all MPI ranks into a single file, making it unnecessary to have a
- * central record of all such files (namely, the "pvtu" file).
- *   
 
- * 
- * For parallel programs, it is often instructive to look at the partitioning
- * of cells among processors. To this end, one can pass a vector of numbers
- * to DataOut::add_data_vector() that contains as many entries as the
- * current processor has active cells; these numbers should then be the
- * rank of the processor that owns each of these cells. Such a vector
- * could, for example, be obtained from
- * GridTools::get_subdomain_association(). On the other hand, on each MPI
- * process, DataOut will only read those entries that correspond to locally
- * owned cells, and these of course all have the same value: namely, the rank
- * of the current process. What is in the remaining entries of the vector
- * doesn't actually matter, and so we can just get away with a cheap trick: We
- * just fill *all* values of the vector we give to DataOut::add_data_vector()
- * with the rank of the current MPI process. The key is that on each process,
- * only the entries corresponding to the locally owned cells will be read,
- * ignoring the (wrong) values in other entries. The fact that every process
- * submits a vector in which the correct subset of entries is correct is all
- * that is necessary.
- * 
- * @code
- *   template <int dim>
- *   void EulerProblem<dim>::output_results(const unsigned int result_number)
- *   {
- *     const std::array<double, 3> errors =
- *       euler_operator.compute_errors(ExactSolution<dim>(time), solution);
- *     const std::string quantity_name = testcase == 0 ? "error" : "norm";
- * 
- *     pcout << "Time:" << std::setw(8) << std::setprecision(3) << time
- *           << ", dt: " << std::setw(8) << std::setprecision(2) << time_step
- *           << ", " << quantity_name << " rho: " << std::setprecision(4)
- *           << std::setw(10) << errors[0] << ", rho * u: " << std::setprecision(4)
- *           << std::setw(10) << errors[1] << ", energy:" << std::setprecision(4)
- *           << std::setw(10) << errors[2] << std::endl;
- * 
- *     {
- *       TimerOutput::Scope t(timer, "output");
- * 
- *       Postprocessor postprocessor;
- *       DataOut<dim>  data_out;
- * 
- *       DataOutBase::VtkFlags flags;
- *       flags.write_higher_order_cells = true;
- *       data_out.set_flags(flags);
- * 
- *       data_out.attach_dof_handler(dof_handler);
- *       {
- *         std::vector<std::string> names;
- *         names.emplace_back("density");
- *         for (unsigned int d = 0; d < dim; ++d)
- *           names.emplace_back("momentum");
- *         names.emplace_back("energy");
- * 
- *         std::vector<DataComponentInterpretation::DataComponentInterpretation>
- *           interpretation;
- *         interpretation.push_back(
- *           DataComponentInterpretation::component_is_scalar);
- *         for (unsigned int d = 0; d < dim; ++d)
- *           interpretation.push_back(
- *             DataComponentInterpretation::component_is_part_of_vector);
- *         interpretation.push_back(
- *           DataComponentInterpretation::component_is_scalar);
- * 
- *         data_out.add_data_vector(dof_handler, solution, names, interpretation);
- *       }
- *       data_out.add_data_vector(solution, postprocessor);
- * 
- *       LinearAlgebra::distributed::Vector<Number> reference;
- *       if (testcase == 0 && dim == 2)
- *         {
- *           reference.reinit(solution);
- *           euler_operator.project(ExactSolution<dim>(time), reference);
- *           reference.sadd(-1., 1, solution);
- *           std::vector<std::string> names;
- *           names.emplace_back("error_density");
- *           for (unsigned int d = 0; d < dim; ++d)
- *             names.emplace_back("error_momentum");
- *           names.emplace_back("error_energy");
- * 
- *           std::vector<DataComponentInterpretation::DataComponentInterpretation>
- *             interpretation;
- *           interpretation.push_back(
- *             DataComponentInterpretation::component_is_scalar);
- *           for (unsigned int d = 0; d < dim; ++d)
- *             interpretation.push_back(
- *               DataComponentInterpretation::component_is_part_of_vector);
- *           interpretation.push_back(
- *             DataComponentInterpretation::component_is_scalar);
- * 
- *           data_out.add_data_vector(dof_handler,
- *                                    reference,
- *                                    names,
- *                                    interpretation);
- *         }
- * 
- *       Vector<double> mpi_owner(triangulation.n_active_cells());
- *       mpi_owner = Utilities::MPI::this_mpi_process(MPI_COMM_WORLD);
- *       data_out.add_data_vector(mpi_owner, "owner");
- * 
- *       data_out.build_patches(mapping,
- *                              fe.degree,
- *                              DataOut<dim>::curved_inner_cells);
- * 
- *       const std::string filename =
- *         "solution_" + Utilities::int_to_string(result_number, 3) + ".vtu";
- *       data_out.write_vtu_in_parallel(filename, MPI_COMM_WORLD);
- *     }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * The EulerProblem::run() function puts all pieces together. It starts off
- * by calling the function that creates the mesh and sets up data structures,
- * and then initializing the time integrator and the two temporary vectors of
- * the low-storage integrator. We call these vectors `rk_register_1` and
- * `rk_register_2`, and use the first vector to represent the quantity
- * $\mathbf{r}_i$ and the second one for $\mathbf{k}_i$ in the formulas for
- * the Runge--Kutta scheme outlined in the introduction. Before we start the
- * time loop, we compute the time step size by the
- * `EulerOperator::compute_cell_transport_speed()` function. For reasons of
- * comparison, we compare the result obtained there with the minimal mesh
- * size and print them to screen. For velocities and speeds of sound close
- * to unity as in this tutorial program, the predicted effective mesh size
- * will be close, but they could vary if scaling were different.
- * 
- * @code
- *   template <int dim>
- *   void EulerProblem<dim>::run()
- *   {
- *     {
- *       const unsigned int n_vect_number = VectorizedArray<Number>::size();
- *       const unsigned int n_vect_bits   = 8 * sizeof(Number) * n_vect_number;
- * 
- *       pcout << "Running with "
- *             << Utilities::MPI::n_mpi_processes(MPI_COMM_WORLD)
- *             << " MPI processes" << std::endl;
- *       pcout << "Vectorization over " << n_vect_number << " "
- *             << (std::is_same<Number, double>::value ? "doubles" : "floats")
- *             << " = " << n_vect_bits << " bits ("
- *             << Utilities::System::get_current_vectorization_level() << ")"
- *             << std::endl;
- *     }
- * 
- *     make_grid_and_dofs();
- * 
- *     const LowStorageRungeKuttaIntegrator integrator(lsrk_scheme);
- * 
- *     LinearAlgebra::distributed::Vector<Number> rk_register_1;
- *     LinearAlgebra::distributed::Vector<Number> rk_register_2;
- *     rk_register_1.reinit(solution);
- *     rk_register_2.reinit(solution);
- * 
- *     euler_operator.project(ExactSolution<dim>(time), solution);
- * 
- *     double min_vertex_distance = std::numeric_limits<double>::max();
- *     for (const auto &cell : triangulation.active_cell_iterators())
- *       if (cell->is_locally_owned())
- *         min_vertex_distance =
- *           std::min(min_vertex_distance, cell->minimum_vertex_distance());
- *     min_vertex_distance =
- *       Utilities::MPI::min(min_vertex_distance, MPI_COMM_WORLD);
- * 
- *     time_step = courant_number * integrator.n_stages() /
- *                 euler_operator.compute_cell_transport_speed(solution);
- *     pcout << "Time step size: " << time_step
- *           << ", minimal h: " << min_vertex_distance
- *           << ", initial transport scaling: "
- *           << 1. / euler_operator.compute_cell_transport_speed(solution)
- *           << std::endl
- *           << std::endl;
- * 
- *     output_results(0);
- * 
- * @endcode
- * 
- * Now we are ready to start the time loop, which we run until the time
- * has reached the desired end time. Every 5 time steps, we compute a new
- * estimate for the time step -- since the solution is nonlinear, it is
- * most effective to adapt the value during the course of the
- * simulation. In case the Courant number was chosen too aggressively, the
- * simulation will typically blow up with time step NaN, so that is easy
- * to detect here. One thing to note is that roundoff errors might
- * propagate to the leading digits due to an interaction of slightly
- * different time step selections that in turn lead to slightly different
- * solutions. To decrease this sensitivity, it is common practice to round
- * or truncate the time step size to a few digits, e.g. 3 in this case. In
- * case the current time is near the prescribed 'tick' value for output
- * (e.g. 0.02), we also write the output. After the end of the time loop,
- * we summarize the computation by printing some statistics, which is
- * mostly done by the TimerOutput::print_wall_time_statistics() function.
- * 
- * @code
- *     unsigned int timestep_number = 0;
- * 
- *     while (time < final_time - 1e-12)
- *       {
- *         ++timestep_number;
- *         if (timestep_number % 5 == 0)
- *           time_step =
- *             courant_number * integrator.n_stages() /
- *             Utilities::truncate_to_n_digits(
- *               euler_operator.compute_cell_transport_speed(solution), 3);
- * 
- *         {
- *           TimerOutput::Scope t(timer, "rk time stepping total");
- *           integrator.perform_time_step(euler_operator,
- *                                        time,
- *                                        time_step,
- *                                        solution,
- *                                        rk_register_1,
- *                                        rk_register_2);
- *         }
- * 
- *         time += time_step;
- * 
- *         if (static_cast<int>(time / output_tick) !=
- *               static_cast<int>((time - time_step) / output_tick) ||
- *             time >= final_time - 1e-12)
- *           output_results(
- *             static_cast<unsigned int>(std::round(time / output_tick)));
- *       }
- * 
- *     timer.print_wall_time_statistics(MPI_COMM_WORLD);
- *     pcout << std::endl;
- *   }
- * 
- * } // namespace Euler_DG
- * 
- * 
- * 
- * @endcode
- * 
- * The main() function is not surprising and follows what was done in all
- * previous MPI programs: As we run an MPI program, we need to call `MPI_Init()`
- * and `MPI_Finalize()`, which we do through the
- * Utilities::MPI::MPI_InitFinalize data structure. Note that we run the program
- * only with MPI, and set the thread count to 1.
- * 
- * @code
- * int main(int argc, char **argv)
- * {
- *   using namespace Euler_DG;
- *   using namespace dealii;
- * 
- *   Utilities::MPI::MPI_InitFinalize mpi_initialization(argc, argv, 1);
- * 
- *   try
- *     {
- *       deallog.depth_console(0);
- * 
- *       EulerProblem<dimension> euler_problem;
- *       euler_problem.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- * 
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
+接下来是时间积分器的一些细节，即用公式 $\Delta t =
+\text{Cr} n_\text{stages} \frac{h}{(p+1)^{1.5} (\|\mathbf{u} +
+c)_\text{max}}$ 来衡量时间步长的Courant数，以及选择一些低存储量的Runge-Kutta方法。我们指定Runge--Kutta方案的每一阶段的Courant数，因为这对不同阶段数的方案给出了一个更现实的数字成本表达。
+
+@code
+  const double courant_number = 0.15 / std::pow(fe_degree, 1.5);
+  enum LowStorageRungeKuttaScheme
+  {
+    stage_3_order_3, /* Kennedy, Carpenter, Lewis, 2000 */
+    stage_5_order_4, /* Kennedy, Carpenter, Lewis, 2000 */
+    stage_7_order_4, /* Tselios, Simos, 2007 */
+    stage_9_order_5, /* Kennedy, Carpenter, Lewis, 2000 */
+  };
+  constexpr LowStorageRungeKuttaScheme lsrk_scheme = stage_5_order_4;
+
+
+@endcode 
+
+
+
+最终，我们选择了空间离散化的一个细节，即单元间面的数值通量（黎曼求解器）。对于这个程序，我们实现了Lax--Friedrichs通量和Harten--Lax--van Leer(HLL)通量的一个修正变体。
+
+@code
+  enum EulerNumericalFlux
+  {
+    lax_friedrichs_modified,
+    harten_lax_vanleer,
+  };
+  constexpr EulerNumericalFlux numerical_flux_type = lax_friedrichs_modified;
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Equationdata"></a> <h3>Equation data</h3>
+
+
+
+
+我们现在定义了一个具有试验例0的精确解的类，以及一个具有试验例1的通道背景流场的类。鉴于欧拉方程是一个在 $d$ 维度上有 $d+2$ 个方程的问题，我们需要告诉函数基类关于正确的分量数量。
+
+@code
+  template <int dim>
+  class ExactSolution : public Function<dim>
+  {
+  public:
+    ExactSolution(const double time)
+      : Function<dim>(dim + 2, time)
+    {}
+
+
+    virtual double value(const Point<dim> & p,
+                         const unsigned int component = 0) const override;
+  };
+
+
+
+
+
+@endcode 
+
+
+
+就实际实现的函数而言，分析性测试案例是一个等熵涡流案例（例如，见Hesthaven和Warburton的书，第209页第6.6节的例6.1），它满足欧拉方程，其右侧的力项为零。考虑到这个定义，我们返回密度、动量或能量，这取决于所要求的成分。请注意，密度的原始定义涉及一些表达式的 $\frac{1}{\gamma -1}$ -次方。由于 `std::pow()` 在某些系统上的实现速度相当慢，我们用对数和指数（以2为底）来代替它，这在数学上是等价的，但通常优化得更好。与 `std::pow()`, 相比，这个公式对于非常小的数字来说，在最后一位数上可能会失去准确性，但我们还是很满意，因为小数字映射到接近1的数据。   
+
+
+对于通道测试案例，我们简单地选择密度为1， $x$ 方向的速度为0.4，其他方向的速度为0，以及对应于根据背景速度场测量的1.3声速的能量，根据关系 $E = \frac{c^2}{\gamma (\gamma
+
+
+-1)} + \frac 12 \rho \|u\|^2$ 计算。
+
+@code
+  template <int dim>
+  double ExactSolution<dim>::value(const Point<dim> & x,
+                                   const unsigned int component) const
+  {
+    const double t = this->get_time();
+
+
+    switch (testcase)
+      {
+        case 0:
+          {
+            Assert(dim == 2, ExcNotImplemented());
+            const double beta = 5;
+
+
+            Point<dim> x0;
+            x0[0] = 5.;
+            const double radius_sqr =
+              (x - x0).norm_square() - 2. * (x[0] - x0[0]) * t + t * t;
+            const double factor =
+              beta / (numbers::PI * 2) * std::exp(1. - radius_sqr);
+            const double density_log = std::log2(
+              std::abs(1. - (gamma - 1.) / gamma * 0.25 * factor * factor));
+            const double density = std::exp2(density_log * (1. / (gamma - 1.)));
+            const double u       = 1. - factor * (x[1] - x0[1]);
+            const double v       = factor * (x[0] - t - x0[0]);
+
+
+            if (component == 0)
+              return density;
+            else if (component == 1)
+              return density * u;
+            else if (component == 2)
+              return density * v;
+            else
+              {
+                const double pressure =
+                  std::exp2(density_log * (gamma / (gamma - 1.)));
+                return pressure / (gamma - 1.) +
+                       0.5 * (density * u * u + density * v * v);
+              }
+          }
+
+
+        case 1:
+          {
+            if (component == 0)
+              return 1.;
+            else if (component == 1)
+              return 0.4;
+            else if (component == dim + 1)
+              return 3.097857142857143;
+            else
+              return 0.;
+          }
+
+
+        default:
+          Assert(false, ExcNotImplemented());
+          return 0.;
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="LowstorageexplicitRungeKuttatimeintegrators"></a> <h3>Low-storage explicit Runge--Kutta time integrators</h3>
+
+
+
+
+接下来的几行实现了一些低存储量的Runge--Kutta方法的变体。这些方法有特定的布彻表，系数为 $b_i$ 和 $a_i$ ，如介绍中所示。如同Runge--Kutta方法中的惯例，我们可以从这些系数中推导出时间步长 $c_i = \sum_{j=1}^{i-2} b_i + a_{i-1}$ 。这种方案的主要优点是每个阶段只需要两个向量，即解的累积部分 $\mathbf{w}$ （在最后一个阶段后的新时间 $t^{n+1}$ 保持解 $\mathbf{w}^{n+1}$ ），在各阶段被评估的更新向量 $\mathbf{r}_i$ ，加上一个向量 $\mathbf{k}_i$ 以保持运算器的评估。这样的Runge-Kutta设置减少了内存存储和内存访问。由于内存带宽通常是现代硬件上的性能限制因素，当微分算子的评估得到很好的优化时，性能可以比标准的时间积分器得到改善。考虑到传统的Runge--Kutta方案可能允许稍大的时间步长，因为更多的自由参数可以获得更好的稳定性，这也是事实。   
+
+
+在本教程中，我们集中讨论Kennedy, Carpenter和Lewis(2000)文章中定义的低存储方案的几个变体，以及Tselios和Simos(2007)描述的一个变体。还有一大系列的其他方案，可以通过额外的系数集或稍微不同的更新公式来解决。   
+
+
+我们为这四种积分器定义了一个单一的类别，以上述枚举的方式加以区分。对每个方案，我们再将 $b_i$ 和 $a_i$ 的向量填充到类中的给定变量。
+
+@code
+  class LowStorageRungeKuttaIntegrator
+  {
+  public:
+    LowStorageRungeKuttaIntegrator(const LowStorageRungeKuttaScheme scheme)
+    {
+      TimeStepping::runge_kutta_method lsrk;
+@endcode 
+
+
+
+首先是Kennedy等人（2000）的三阶方案。虽然它的稳定区域明显小于其他方案，但它只涉及三个阶段，所以在每个阶段的工作方面非常有竞争力。
+
+@code
+      switch (scheme)
+        {
+          case stage_3_order_3:
+            {
+              lsrk = TimeStepping::LOW_STORAGE_RK_STAGE3_ORDER3;
+              break;
+            }
+
+
+@endcode 
+
+
+
+下一个方案是四阶的五级方案，同样在Kennedy等人（2000）的论文中定义。
+
+@code
+          case stage_5_order_4:
+            {
+              lsrk = TimeStepping::LOW_STORAGE_RK_STAGE5_ORDER4;
+              break;
+            }
+
+
+@endcode 
+
+
+
+以下是针对声学问题明确导出的七级四阶方案。它在四阶方案中兼顾了虚特征值的精度，并结合了大的稳定区域。由于DG方案在最高频率之间是耗散的，这不一定转化为每级可能的最高时间步长。在本教程方案的背景下，数值通量在耗散中起着至关重要的作用，因此也是最大的稳定时间步长。对于修正的Lax--Friedrichs通量，如果只考虑稳定性，这个方案在每阶段的步长方面与`stage_5_order_4`方案相似，但对于HLL通量来说，效率略低。
+
+@code
+          case stage_7_order_4:
+            {
+              lsrk = TimeStepping::LOW_STORAGE_RK_STAGE7_ORDER4;
+              break;
+            }
+
+
+@endcode 
+
+
+
+这里包括的最后一个方案是Kennedy等人（2000）的九级五阶方案。它是这里使用的方案中最精确的，但较高的精度等级牺牲了一些稳定性，所以每级的归一化步长小于四阶方案。
+
+@code
+          case stage_9_order_5:
+            {
+              lsrk = TimeStepping::LOW_STORAGE_RK_STAGE9_ORDER5;
+              break;
+            }
+
+
+          default:
+            AssertThrow(false, ExcNotImplemented());
+        }
+      TimeStepping::LowStorageRungeKutta<
+        LinearAlgebra::distributed::Vector<Number>>
+        rk_integrator(lsrk);
+      rk_integrator.get_coefficients(ai, bi, ci);
+    }
+
+
+    unsigned int n_stages() const
+    {
+      return bi.size();
+    }
+
+
+@endcode 
+
+
+
+时间积分器的主要功能是经历各阶段，评估算子，为下一次评估准备 $\mathbf{r}_i$ 向量，并更新解向量 $\mathbf{w}$  。我们将工作移交给所涉及的`pde_operator`，以便能够将Runge--Kutta设置的矢量操作与微分算子的评估合并起来，以获得更好的性能，所以我们在这里所做的只是委托矢量和系数。     
+
+
+我们单独调用第一阶段的算子，因为我们在那里需要稍微修改一下参数。我们从旧的解决方案 $\mathbf{w}^n$ 而不是 $\mathbf r_i$ 向量中评估解决方案，所以第一个参数是`solution'。我们在这里让阶段向量 $\mathbf{r}_i$ 也持有评估的临时结果，因为它不用于其他方面。对于所有后续阶段，我们使用向量`vec_ki`作为第二个向量参数来存储运算符的求值结果。最后，当我们处于最后阶段时，我们必须跳过对向量 $\mathbf{r}_{s+1}$ 的计算，因为没有系数 $a_s$ 可用（也不会用到）。
+
+@code
+    template <typename VectorType, typename Operator>
+    void perform_time_step(const Operator &pde_operator,
+                           const double    current_time,
+                           const double    time_step,
+                           VectorType &    solution,
+                           VectorType &    vec_ri,
+                           VectorType &    vec_ki) const
+    {
+      AssertDimension(ai.size() + 1, bi.size());
+
+
+      pde_operator.perform_stage(current_time,
+                                 bi[0] * time_step,
+                                 ai[0] * time_step,
+                                 solution,
+                                 vec_ri,
+                                 solution,
+                                 vec_ri);
+
+
+      for (unsigned int stage = 1; stage < bi.size(); ++stage)
+        {
+          const double c_i = ci[stage];
+          pde_operator.perform_stage(current_time + c_i * time_step,
+                                     bi[stage] * time_step,
+                                     (stage == bi.size() - 1 ?
+                                        0 :
+                                        ai[stage] * time_step),
+                                     vec_ri,
+                                     vec_ki,
+                                     solution,
+                                     vec_ri);
+        }
+    }
+
+
+  private:
+    std::vector<double> bi;
+    std::vector<double> ai;
+    std::vector<double> ci;
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="ImplementationofpointwiseoperationsoftheEulerequations"></a> <h3>Implementation of point-wise operations of the Euler equations</h3>
+
+
+
+
+在下面的函数中，我们实现了与欧拉方程有关的各种特定问题的运算符。每个函数都作用于我们在解向量中持有的守恒变量向量 $[\rho, \rho\mathbf{u}, E]$ ，并计算各种衍生量。   
+
+
+首先是速度的计算，我们通过除以 $\rho$ 从动量变量 $\rho \mathbf{u}$ 中得出。这里需要注意的是，我们用关键字`DEAL_II_ALWAYS_INLINE`来装饰所有这些函数。这是一个特殊的宏，映射到一个编译器专用的关键字，告诉编译器永远不要为这些函数创建一个函数调用，而是将实现<a
+href="https://en.wikipedia.org/wiki/Inline_function">inline</a>移到它们被调用的地方。这对性能至关重要，因为我们对其中一些函数的调用达到了几百万甚至几十亿次。例如，我们既使用速度来计算通量，也使用速度来计算压力，而这两个地方都要在每个单元的每个正交点进行计算。确保这些函数是内联的，不仅可以确保处理器不必执行跳转指令进入函数（以及相应的返回跳转），而且编译器可以在调用函数的地方之后的代码中重新使用一个函数的上下文的中间信息。(我们注意到，编译器通常很善于自己找出哪些函数要内联。在这里，编译器可能会也可能不会自己想出来，但我们可以肯定的是，内联是一个胜利。)    
+
+
+我们应用的另一个技巧是为逆密度设置一个单独的变量  $\frac{1}{\rho}$  。这使得编译器只对通量进行一次除法，尽管除法在多个地方使用。由于除法的费用大约是乘法或加法的10到20倍，避免多余的除法对性能至关重要。我们注意到，由于四舍五入的影响，在浮点运算中，先取反数，后与之相乘并不等同于除法，所以编译器不允许用标准的优化标志来交换一种方式。然而，以正确的方式编写代码也不是特别困难。   
+
+
+总而言之，所选择的总是内联和仔细定义昂贵的算术运算的策略使我们能够写出紧凑的代码，而不传递所有的中间结果，尽管要确保代码映射到优秀的机器代码。
+
+@code
+  template <int dim, typename Number>
+  inline DEAL_II_ALWAYS_INLINE 
+    Tensor<1, dim, Number>
+    euler_velocity(const Tensor<1, dim + 2, Number> &conserved_variables)
+  {
+    const Number inverse_density = Number(1.) / conserved_variables[0];
+
+
+    Tensor<1, dim, Number> velocity;
+    for (unsigned int d = 0; d < dim; ++d)
+      velocity[d] = conserved_variables[1 + d] * inverse_density;
+
+
+    return velocity;
+  }
+
+
+@endcode 
+
+
+
+下一个函数使用公式 $p = (\gamma - 1) \left(E - \frac 12 \rho
+\mathbf{u}\cdot \mathbf{u}\right)$ 从保守变量矢量计算压力。如上所述，我们使用来自`euler_velocity()`函数的速度。注意，我们需要在这里指定第一个模板参数`dim`，因为编译器无法从张量的参数中推导出它，而第二个参数（数字类型）可以自动推导出来。
+
+@code
+  template <int dim, typename Number>
+  inline DEAL_II_ALWAYS_INLINE 
+    Number
+    euler_pressure(const Tensor<1, dim + 2, Number> &conserved_variables)
+  {
+    const Tensor<1, dim, Number> velocity =
+      euler_velocity<dim>(conserved_variables);
+
+
+    Number rho_u_dot_u = conserved_variables[1] * velocity[0];
+    for (unsigned int d = 1; d < dim; ++d)
+      rho_u_dot_u += conserved_variables[1 + d] * velocity[d];
+
+
+    return (gamma - 1.) * (conserved_variables[dim + 1] - 0.5 * rho_u_dot_u);
+  }
+
+
+@endcode 
+
+
+
+这里是欧拉通量函数的定义，也就是实际方程的定义。考虑到速度和压力（编译器的优化将确保只做一次），考虑到引言中所述的方程，这是直截了当的。
+
+@code
+  template <int dim, typename Number>
+  inline DEAL_II_ALWAYS_INLINE 
+    Tensor<1, dim + 2, Tensor<1, dim, Number>>
+    euler_flux(const Tensor<1, dim + 2, Number> &conserved_variables)
+  {
+    const Tensor<1, dim, Number> velocity =
+      euler_velocity<dim>(conserved_variables);
+    const Number pressure = euler_pressure<dim>(conserved_variables);
+
+
+    Tensor<1, dim + 2, Tensor<1, dim, Number>> flux;
+    for (unsigned int d = 0; d < dim; ++d)
+      {
+        flux[0][d] = conserved_variables[1 + d];
+        for (unsigned int e = 0; e < dim; ++e)
+          flux[e + 1][d] = conserved_variables[e + 1] * velocity[d];
+        flux[d + 1][d] += pressure;
+        flux[dim + 1][d] =
+          velocity[d] * (conserved_variables[dim + 1] + pressure);
+      }
+
+
+    return flux;
+  }
+
+
+@endcode 
+
+
+
+下一个函数是简化数值通量实现的辅助工具，实现了张量的张量（具有非标准的外维尺寸`dim + 2`，所以deal.II的张量类提供的标准重载在此不适用）与另一个相同内维的张量的作用，即矩阵-向量乘积。
+
+@code
+  template <int n_components, int dim, typename Number>
+  inline DEAL_II_ALWAYS_INLINE 
+    Tensor<1, n_components, Number>
+    operator*(const Tensor<1, n_components, Tensor<1, dim, Number>> &matrix,
+              const Tensor<1, dim, Number> &                         vector)
+  {
+    Tensor<1, n_components, Number> result;
+    for (unsigned int d = 0; d < n_components; ++d)
+      result[d] = matrix[d] * vector;
+    return result;
+  }
+
+
+@endcode 
+
+
+
+这个函数实现了数值通量（黎曼求解器）。它从一个界面的两边获得状态和法向量，从解的一边向解  $\mathbf{w}^-$  。在依赖片断恒定数据的有限体积方法中，数值通量是核心成分，因为它是唯一输入物理信息的地方。在DG方法中，由于元素内部的多项式和那里使用的物理通量，数值通量就不那么核心了。由于在连续解的极限中，两边的数值一致的高阶插值，数值通量可以被看作是对两边解的跳跃的控制，以弱化连续性。必须认识到，在存在冲击的情况下，仅靠数值通量是无法稳定高阶DG方法的，因此任何DG方法都必须与进一步的冲击捕捉技术相结合，以处理这些情况。在本教程中，我们重点讨论了欧拉方程在亚声速体系中没有强不连续的波状解，我们的基本方案是足够的。   
+
+
+然而，数值通量对整个方案的数值耗散起着决定性作用，并影响到显式Runge-Kutta方法的可接受的时间步长。我们考虑两种选择，一种是改良的Lax-Friedrichs方案，另一种是广泛使用的Harten-Lax-van Leer（HLL）通量。对于这两种变体，我们首先需要得到界面两侧的速度和压力，并评估物理欧拉通量。   
+
+
+对于局部Lax--Friedrichs通量，其定义为 $\hat{\mathbf{F}}
+=\frac{\mathbf{F}(\mathbf{w}^-)+\mathbf{F}(\mathbf{w}^+)}{2} +
+\frac{\lambda}{2}\left[\mathbf{w}^--\mathbf{w}^+\right]\otimes
+\mathbf{n^-}$ ，其中因子 $\lambda =
+\max\left(\|\mathbf{u}^-\|+c^-, \|\mathbf{u}^+\|+c^+\right)$ 给出了最大波速， $c = \sqrt{\gamma p / \rho}$ 是音速。在这里，考虑到通量对解的影响较小，出于计算效率的考虑，我们选择该表达式的两个修改。对于上述因子 $\lambda$ 的定义，我们需要取四个平方根，两个用于两个速度规范，两个用于两侧的声速。因此，第一个修改是宁可使用 $\sqrt{\|\mathbf{u}\|^2+c^2}$ 作为最大速度的估计（如介绍中所示，它与实际最大速度最多相差2倍）。这使得我们可以从最大速度中抽出平方根，并且只需进行一次平方根计算就可以了。第二个修改是进一步放宽参数 $\lambda$ --它越小，耗散系数就越小（与 $\mathbf{w}$ 中的跳跃相乘，最终可能会导致耗散变小或增大）。这使我们能够将频谱纳入显式Runge--Kutta积分器的稳定区域，并具有更大的时间步长。然而，我们不能使耗散太小，因为否则假想的特征值会越来越大。最后，目前的保守公式在 $\lambda\to 0$ 的极限中不是能量稳定的，因为它不是偏斜对称的，在这种情况下需要额外的措施，如分裂形式的DG方案。   
+
+
+对于HLL通量，我们遵循文献中的公式，通过一个参数引入Lax--Friedrichs的两个状态的额外加权  $s$  。它是由欧拉方程的物理传输方向得出的，以当前的速度方向和声速为准。对于速度，我们在这里选择一个简单的算术平均数，这对于危险情况和材料参数的适度跳跃是足够的。   
+
+
+由于数值通量在弱形式下是与法向量相乘的，因此我们对方程中的所有项都用法向量来乘以结果。在这些乘法中，上面定义的 "运算器*"能够实现类似于数学定义的紧凑符号。   
+
+
+在这个函数和下面的函数中，我们使用变量后缀`_m`和`_p`来表示从 $\mathbf{w}^-$ 和 $\mathbf{w}^+$ 中得到的量，即在观察相邻单元时，相对于当前单元的 "这里 "和 "那里 "的值。
+
+@code
+  template <int dim, typename Number>
+  inline DEAL_II_ALWAYS_INLINE 
+    Tensor<1, dim + 2, Number>
+    euler_numerical_flux(const Tensor<1, dim + 2, Number> &u_m,
+                         const Tensor<1, dim + 2, Number> &u_p,
+                         const Tensor<1, dim, Number> &    normal)
+  {
+    const auto velocity_m = euler_velocity<dim>(u_m);
+    const auto velocity_p = euler_velocity<dim>(u_p);
+
+
+    const auto pressure_m = euler_pressure<dim>(u_m);
+    const auto pressure_p = euler_pressure<dim>(u_p);
+
+
+    const auto flux_m = euler_flux<dim>(u_m);
+    const auto flux_p = euler_flux<dim>(u_p);
+
+
+    switch (numerical_flux_type)
+      {
+        case lax_friedrichs_modified:
+          {
+            const auto lambda =
+              0.5 * std::sqrt(std::max(velocity_p.norm_square() +
+                                         gamma * pressure_p * (1. / u_p[0]),
+                                       velocity_m.norm_square() +
+                                         gamma * pressure_m * (1. / u_m[0])));
+
+
+            return 0.5 * (flux_m * normal + flux_p * normal) +
+                   0.5 * lambda * (u_m - u_p);
+          }
+
+
+        case harten_lax_vanleer:
+          {
+            const auto avg_velocity_normal =
+              0.5 * ((velocity_m + velocity_p) * normal);
+            const auto   avg_c = std::sqrt(std::abs(
+              0.5 * gamma *
+              (pressure_p * (1. / u_p[0]) + pressure_m * (1. / u_m[0]))));
+            const Number s_pos =
+              std::max(Number(), avg_velocity_normal + avg_c);
+            const Number s_neg =
+              std::min(Number(), avg_velocity_normal - avg_c);
+            const Number inverse_s = Number(1.) / (s_pos - s_neg);
+
+
+            return inverse_s *
+                   ((s_pos * (flux_m * normal) - s_neg * (flux_p * normal)) -
+                    s_pos * s_neg * (u_m - u_p));
+          }
+
+
+        default:
+          {
+            Assert(false, ExcNotImplemented());
+            return {};
+          }
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+这个和下一个函数是辅助函数，提供紧凑的评估调用，因为多个点通过VectorizedArray参数被分批放在一起（详见 step-37 教程）。这个函数用于亚音速外流边界条件，我们需要将能量分量设置为一个规定值。下一个函数请求所有分量上的解，用于流入边界，其中解的所有分量都被设置。
+
+@code
+  template <int dim, typename Number>
+  VectorizedArray<Number>
+  evaluate_function(const Function<dim> &                      function,
+                    const Point<dim, VectorizedArray<Number>> &p_vectorized,
+                    const unsigned int                         component)
+  {
+    VectorizedArray<Number> result;
+    for (unsigned int v = 0; v < VectorizedArray<Number>::size(); ++v)
+      {
+        Point<dim> p;
+        for (unsigned int d = 0; d < dim; ++d)
+          p[d] = p_vectorized[d][v];
+        result[v] = function.value(p, component);
+      }
+    return result;
+  }
+
+
+
+  template <int dim, typename Number, int n_components = dim + 2>
+  Tensor<1, n_components, VectorizedArray<Number>>
+  evaluate_function(const Function<dim> &                      function,
+                    const Point<dim, VectorizedArray<Number>> &p_vectorized)
+  {
+    AssertDimension(function.n_components, n_components);
+    Tensor<1, n_components, VectorizedArray<Number>> result;
+    for (unsigned int v = 0; v < VectorizedArray<Number>::size(); ++v)
+      {
+        Point<dim> p;
+        for (unsigned int d = 0; d < dim; ++d)
+          p[d] = p_vectorized[d][v];
+        for (unsigned int d = 0; d < n_components; ++d)
+          result[d][v] = function.value(p, d);
+      }
+    return result;
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TheEulerOperationclass"></a><h3>The EulerOperation class</h3>
+
+
+
+
+该类实现了欧拉问题的评估器，类似于  step-37  或  step-59  的 `LaplaceOperator` 类。由于本算子是非线性的，不需要矩阵接口（交给预处理程序），我们跳过了无矩阵算子中的各种`vmult`函数，只实现了`apply`函数以及`apply`与上述低存储Runge-Kutta时间积分器所需的矢量更新的组合（称为`perform_stage`）。此外，我们还增加了三个涉及无矩阵例程的函数，即根据元素中的速度和声速计算时间步长的估计值（与实际时间步长的Courant数相结合），一个用于解决方案的投影（专门针对DG情况的 VectorTools::project() ），以及一个用于计算与可能的分析解决方案或与某些背景状态的规范的误差。   
+
+
+这门课的其余部分与其他无矩阵教程类似。正如介绍中所讨论的，我们提供了一些函数，允许用户在由 types::boundary_id 变量标记的领域边界的不同部分传递各种形式的边界条件，以及可能的体力。
+
+@code
+  template <int dim, int degree, int n_points_1d>
+  class EulerOperator
+  {
+  public:
+    static constexpr unsigned int n_quadrature_points_1d = n_points_1d;
+
+
+    EulerOperator(TimerOutput &timer_output);
+
+
+    void reinit(const Mapping<dim> &   mapping,
+                const DoFHandler<dim> &dof_handler);
+
+
+    void set_inflow_boundary(const types::boundary_id       boundary_id,
+                             std::unique_ptr<Function<dim>> inflow_function);
+
+
+    void set_subsonic_outflow_boundary(
+      const types::boundary_id       boundary_id,
+      std::unique_ptr<Function<dim>> outflow_energy);
+
+
+    void set_wall_boundary(const types::boundary_id boundary_id);
+
+
+    void set_body_force(std::unique_ptr<Function<dim>> body_force);
+
+
+    void apply(const double                                      current_time,
+               const LinearAlgebra::distributed::Vector<Number> &src,
+               LinearAlgebra::distributed::Vector<Number> &      dst) const;
+
+
+    void
+    perform_stage(const Number cur_time,
+                  const Number factor_solution,
+                  const Number factor_ai,
+                  const LinearAlgebra::distributed::Vector<Number> &current_ri,
+                  LinearAlgebra::distributed::Vector<Number> &      vec_ki,
+                  LinearAlgebra::distributed::Vector<Number> &      solution,
+                  LinearAlgebra::distributed::Vector<Number> &next_ri) const;
+
+
+    void project(const Function<dim> &                       function,
+                 LinearAlgebra::distributed::Vector<Number> &solution) const;
+
+
+    std::array<double, 3> compute_errors(
+      const Function<dim> &                             function,
+      const LinearAlgebra::distributed::Vector<Number> &solution) const;
+
+
+    double compute_cell_transport_speed(
+      const LinearAlgebra::distributed::Vector<Number> &solution) const;
+
+
+    void
+    initialize_vector(LinearAlgebra::distributed::Vector<Number> &vector) const;
+
+
+  private:
+    MatrixFree<dim, Number> data;
+
+
+    TimerOutput &timer;
+
+
+    std::map<types::boundary_id, std::unique_ptr<Function<dim>>>
+      inflow_boundaries;
+    std::map<types::boundary_id, std::unique_ptr<Function<dim>>>
+                                   subsonic_outflow_boundaries;
+    std::set<types::boundary_id>   wall_boundaries;
+    std::unique_ptr<Function<dim>> body_force;
+
+
+    void local_apply_inverse_mass_matrix(
+      const MatrixFree<dim, Number> &                   data,
+      LinearAlgebra::distributed::Vector<Number> &      dst,
+      const LinearAlgebra::distributed::Vector<Number> &src,
+      const std::pair<unsigned int, unsigned int> &     cell_range) const;
+
+
+    void local_apply_cell(
+      const MatrixFree<dim, Number> &                   data,
+      LinearAlgebra::distributed::Vector<Number> &      dst,
+      const LinearAlgebra::distributed::Vector<Number> &src,
+      const std::pair<unsigned int, unsigned int> &     cell_range) const;
+
+
+    void local_apply_face(
+      const MatrixFree<dim, Number> &                   data,
+      LinearAlgebra::distributed::Vector<Number> &      dst,
+      const LinearAlgebra::distributed::Vector<Number> &src,
+      const std::pair<unsigned int, unsigned int> &     face_range) const;
+
+
+    void local_apply_boundary_face(
+      const MatrixFree<dim, Number> &                   data,
+      LinearAlgebra::distributed::Vector<Number> &      dst,
+      const LinearAlgebra::distributed::Vector<Number> &src,
+      const std::pair<unsigned int, unsigned int> &     face_range) const;
+  };
+
+
+
+
+
+  template <int dim, int degree, int n_points_1d>
+  EulerOperator<dim, degree, n_points_1d>::EulerOperator(TimerOutput &timer)
+    : timer(timer)
+  {}
+
+
+
+
+
+@endcode 
+
+
+
+对于欧拉算子的初始化，我们设置了类中包含的MatrixFree变量。这可以给定一个描述可能的弯曲边界的映射以及描述自由度的DoFHandler对象来完成。由于我们在这个教程程序中使用的是不连续的Galerkin离散化，没有对解场施加强烈的约束，所以我们不需要传入AffineConstraints对象，而是使用一个假的来构造。关于正交，我们要选择两种不同的方式来计算基础积分。第一种是灵活的，基于模板参数`n_points_1d`（将被分配到本文件顶部指定的`n_q_points_1d`值）。更精确的积分是必要的，以避免由于欧拉算子中的可变系数而产生的混叠问题。第二个不太精确的正交公式是一个基于`fe_degree+1`的严密公式，需要用于反质量矩阵。虽然该公式仅在仿生元素形状上提供了精确的反，而在变形元素上则没有，但它能够通过张量乘积技术快速反转质量矩阵，这对于确保整体的最佳计算效率是必要的。
+
+@code
+  template <int dim, int degree, int n_points_1d>
+  void EulerOperator<dim, degree, n_points_1d>::reinit(
+    const Mapping<dim> &   mapping,
+    const DoFHandler<dim> &dof_handler)
+  {
+    const std::vector<const DoFHandler<dim> *> dof_handlers = {&dof_handler};
+    const AffineConstraints<double>            dummy;
+    const std::vector<const AffineConstraints<double> *> constraints = {&dummy};
+    const std::vector<Quadrature<1>> quadratures = {QGauss<1>(n_q_points_1d),
+                                                    QGauss<1>(fe_degree + 1)};
+
+
+    typename MatrixFree<dim, Number>::AdditionalData additional_data;
+    additional_data.mapping_update_flags =
+      (update_gradients | update_JxW_values | update_quadrature_points |
+       update_values);
+    additional_data.mapping_update_flags_inner_faces =
+      (update_JxW_values | update_quadrature_points | update_normal_vectors |
+       update_values);
+    additional_data.mapping_update_flags_boundary_faces =
+      (update_JxW_values | update_quadrature_points | update_normal_vectors |
+       update_values);
+    additional_data.tasks_parallel_scheme =
+      MatrixFree<dim, Number>::AdditionalData::none;
+
+
+    data.reinit(
+      mapping, dof_handlers, constraints, quadratures, additional_data);
+  }
+
+
+
+
+
+  template <int dim, int degree, int n_points_1d>
+  void EulerOperator<dim, degree, n_points_1d>::initialize_vector(
+    LinearAlgebra::distributed::Vector<Number> &vector) const
+  {
+    data.initialize_dof_vector(vector);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+随后的四个成员函数是必须从外部调用的，以指定各种类型的边界。对于一个流入的边界，我们必须以密度  $\rho$  、动量  $\rho
+\mathbf{u}$  和能量  $E$  来指定所有成分。考虑到这些信息，我们将函数和各自的边界ID一起存储在这个类别的地图成员变量中。同样，我们对亚音速外流边界（我们也要求一个函数，用来检索能量）和壁面（无穿透）边界进行处理，在壁面上我们施加零法线速度（不需要函数，所以我们只要求边界ID）。对于目前的DG代码来说，边界条件只作为弱形式的一部分被应用（在时间积分期间），设置边界条件的调用可以出现在对这个类的`reinit()`调用之前或之后。这与连续有限元代码不同，后者的边界条件决定了被送入MatrixFree初始化的AffineConstraints对象的内容，因此需要在无矩阵数据结构的初始化之前设置。   
+
+
+在四个函数中的每一个中添加的检查是用来确保边界条件在边界的各个部分是相互排斥的，也就是说，用户不会意外地把一个边界既指定为流入边界，又指定为亚声速流出边界。
+
+@code
+  template <int dim, int degree, int n_points_1d>
+  void EulerOperator<dim, degree, n_points_1d>::set_inflow_boundary(
+    const types::boundary_id       boundary_id,
+    std::unique_ptr<Function<dim>> inflow_function)
+  {
+    AssertThrow(subsonic_outflow_boundaries.find(boundary_id) ==
+                    subsonic_outflow_boundaries.end() &&
+                  wall_boundaries.find(boundary_id) == wall_boundaries.end(),
+                ExcMessage("You already set the boundary with id " +
+                           std::to_string(static_cast<int>(boundary_id)) +
+                           " to another type of boundary before now setting " +
+                           "it as inflow"));
+    AssertThrow(inflow_function->n_components == dim + 2,
+                ExcMessage("Expected function with dim+2 components"));
+
+
+    inflow_boundaries[boundary_id] = std::move(inflow_function);
+  }
+
+
+
+  template <int dim, int degree, int n_points_1d>
+  void EulerOperator<dim, degree, n_points_1d>::set_subsonic_outflow_boundary(
+    const types::boundary_id       boundary_id,
+    std::unique_ptr<Function<dim>> outflow_function)
+  {
+    AssertThrow(inflow_boundaries.find(boundary_id) ==
+                    inflow_boundaries.end() &&
+                  wall_boundaries.find(boundary_id) == wall_boundaries.end(),
+                ExcMessage("You already set the boundary with id " +
+                           std::to_string(static_cast<int>(boundary_id)) +
+                           " to another type of boundary before now setting " +
+                           "it as subsonic outflow"));
+    AssertThrow(outflow_function->n_components == dim + 2,
+                ExcMessage("Expected function with dim+2 components"));
+
+
+    subsonic_outflow_boundaries[boundary_id] = std::move(outflow_function);
+  }
+
+
+
+  template <int dim, int degree, int n_points_1d>
+  void EulerOperator<dim, degree, n_points_1d>::set_wall_boundary(
+    const types::boundary_id boundary_id)
+  {
+    AssertThrow(inflow_boundaries.find(boundary_id) ==
+                    inflow_boundaries.end() &&
+                  subsonic_outflow_boundaries.find(boundary_id) ==
+                    subsonic_outflow_boundaries.end(),
+                ExcMessage("You already set the boundary with id " +
+                           std::to_string(static_cast<int>(boundary_id)) +
+                           " to another type of boundary before now setting " +
+                           "it as wall boundary"));
+
+
+    wall_boundaries.insert(boundary_id);
+  }
+
+
+
+  template <int dim, int degree, int n_points_1d>
+  void EulerOperator<dim, degree, n_points_1d>::set_body_force(
+    std::unique_ptr<Function<dim>> body_force)
+  {
+    AssertDimension(body_force->n_components, dim);
+
+
+    this->body_force = std::move(body_force);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Localevaluators"></a> <h4>Local evaluators</h4>
+
+
+
+
+现在我们继续讨论欧拉问题的局部评估器。评估器相对简单，并遵循  step-37  、  step-48  或  step-59  中的内容。第一个明显的区别是，我们使用的FEE估值具有非标准的正交点数量。以前我们总是将正交点的数量设置为等于多项式度数加1（确保在仿生元素形状上的精确积分），现在我们将正交点的数量设置为一个单独的变量（例如多项式度数加多项式度数的二分之一或三分之一），以便更准确地处理非线性项。由于评估器通过模板参数输入了适当的循环长度，并在变量 FEEvaluation::n_q_points, 中保留了整个单元格中的正交点数量，我们现在自动操作更精确的公式，而不需要进一步修改。   
+
+
+第二个区别是由于我们现在评估的是一个多分量系统，而不是之前考虑的标量系统。无矩阵框架提供了几种处理多成分情况的方法。这里显示的变体是利用一个嵌入了多个分量的FEEvaluation对象，由第四个模板参数`dim + 2`指定欧拉系统中的分量。因此， FEEvaluation::get_value() 的返回类型不再是标量（将返回VectorizedArray类型，收集多个元素的数据），而是`dim+2`组件的Tensor。该功能与标量的情况类似；它由一个基类的模板专业化处理，称为FEEvaluationAccess。另一个变体是使用几个FEEvaluation对象，一个标量对象用于密度，一个带`dim`分量的矢量值对象用于动量，另一个标量评估器用于能量。为了确保这些分量指向解决方案的正确部分，FEEvaluation的构造函数在所需的MatrixFree字段之后需要三个可选的整数参数，即多DoFHandler系统的DoFHandler编号（默认取第一个），如果有多个Quadrature对象，则取正交点的编号（见下文），以及作为第三个参数的矢量系统中的分量。由于我们有一个单一的矢量来表示所有的分量，我们将使用第三个参数，并将其设置为`0`表示密度，`1`表示矢量值的动量，`dim+1`表示能量槽。然后FEEvaluation在 FEEvaluationBase::read_dof_values() 和 FEEvaluation::distributed_local_to_global() 或更紧凑的 FEEvaluation::gather_evaluate() 和 FEEvaluation::integrate_scatter() 调用中挑选合适的解矢量子范围。   
+
+
+当涉及到体力向量的评估时，出于效率的考虑，我们对两种情况进行了区分。如果我们有一个常数函数（源自 Functions::ConstantFunction), ），我们可以在正交点的循环外预先计算出数值，并简单地在所有地方使用该数值。对于一个更通用的函数，我们反而需要调用我们上面提供的`evaluate_function()`方法；这个路径更昂贵，因为我们需要访问与正交点数据相关的内存。   
+
+
+其余的就按照其他教程的程序进行。由于我们已经在单独的`euler_flux()`函数中实现了欧拉方程的所有物理学，我们在这里所要做的就是调用这个函数，给定在正交点评估的当前解，由`phi.get_value(q)`返回，并告诉FEEvaluation对象排队，通过形状函数的梯度（这是一个外部`dim+2`分量的张量，每个张量持有一个`dim`成分的 $x,y,z$  ] 欧拉通量的分量）。) 最后值得一提的是，在我们得到一个外部函数的情况下，我们通过测试函数`phi.submit_value()`的值来排队测试数据的顺序。我们必须在调用`phi.get_value(q)'之后进行，因为`get_value()'（读取解决方案）和`submit_value()'（排队等待测试函数的乘法和正交点的求和）访问同一个底层数据域。这里很容易实现没有临时变量`w_q`，因为值和梯度之间没有混合。对于更复杂的设置，我们必须首先复制出例如一个正交点的值和梯度，然后通过 FEEvaluationBase::submit_value() 和 FEEvaluationBase::submit_gradient(). 再次排队等待结果。    
+
+
+最后，我们提到我们没有使用这个函数的第一个MatrixFree参数，这是一个来自 MatrixFree::loop(). 的回调，接口规定了现在的参数列表，但由于我们在一个成员函数中，MatrixFree对象已经可以作为`data`变量使用，我们坚持使用以避免混淆。
+
+@code
+  template <int dim, int degree, int n_points_1d>
+  void EulerOperator<dim, degree, n_points_1d>::local_apply_cell(
+    const MatrixFree<dim, Number> &,
+    LinearAlgebra::distributed::Vector<Number> &      dst,
+    const LinearAlgebra::distributed::Vector<Number> &src,
+    const std::pair<unsigned int, unsigned int> &     cell_range) const
+  {
+    FEEvaluation<dim, degree, n_points_1d, dim + 2, Number> phi(data);
+
+
+    Tensor<1, dim, VectorizedArray<Number>> constant_body_force;
+    const Functions::ConstantFunction<dim> *constant_function =
+      dynamic_cast<Functions::ConstantFunction<dim> *>(body_force.get());
+
+
+    if (constant_function)
+      constant_body_force = evaluate_function<dim, Number, dim>(
+        *constant_function, Point<dim, VectorizedArray<Number>>());
+
+
+    for (unsigned int cell = cell_range.first; cell < cell_range.second; ++cell)
+      {
+        phi.reinit(cell);
+        phi.gather_evaluate(src, EvaluationFlags::values);
+
+
+        for (unsigned int q = 0; q < phi.n_q_points; ++q)
+          {
+            const auto w_q = phi.get_value(q);
+            phi.submit_gradient(euler_flux<dim>(w_q), q);
+            if (body_force.get() != nullptr)
+              {
+                const Tensor<1, dim, VectorizedArray<Number>> force =
+                  constant_function ? constant_body_force :
+                                      evaluate_function<dim, Number, dim>(
+                                        *body_force, phi.quadrature_point(q));
+
+
+                Tensor<1, dim + 2, VectorizedArray<Number>> forcing;
+                for (unsigned int d = 0; d < dim; ++d)
+                  forcing[d + 1] = w_q[0] * force[d];
+                for (unsigned int d = 0; d < dim; ++d)
+                  forcing[dim + 1] += force[d] * w_q[d + 1];
+
+
+                phi.submit_value(forcing, q);
+              }
+          }
+
+
+        phi.integrate_scatter(((body_force.get() != nullptr) ?
+                                 EvaluationFlags::values :
+                                 EvaluationFlags::nothing) |
+                                EvaluationFlags::gradients,
+                              dst);
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+下一个函数涉及到内部面的积分计算，在这里我们需要来自面附近的两个单元的评估器。我们将变量`phi_m`与解分量  $\mathbf{w}^-$  相关联，将变量`phi_p`与解分量  $\mathbf{w}^+$  相关联。在FEFaceEvaluation的构造函数中，我们通过第二个参数来区分两边，`true`代表内侧，`false`代表外侧，内侧和外侧表示相对于法向量的方向。   
+
+
+注意，调用 FEFaceEvaluation::gather_evaluate() 和 FEFaceEvaluation::integrate_scatter() 结合了对向量和因式分解部分的访问。这种合并操作不仅节省了一行代码，而且还包含了一个重要的优化。鉴于我们在Gauss-Lobatto正交公式的点上使用拉格朗日多项式的节点基础， $(p+1)^{d-1}$ 中只有 $(p+1)^d$ 的基础函数在每个面上评估为非零。因此，评估器只访问了向量中的必要数据，而跳过了乘以零的部分。如果我们首先读取向量，我们就需要从向量中加载所有的数据，因为孤立的调用不知道后续操作中需要哪些数据。如果随后的 FEFaceEvaluation::evaluate() 调用要求数值和导数，确实需要每个分量的所有 $(p+1)^d$ 向量条目，因为所有基函数的正常导数都是非零的。   
+
+
+评价器的参数以及程序与单元评价相似。由于非线性项的存在，我们再次使用更精确的（过度）积分方案，指定为列表中第三个模板参数。在正交点上，我们再去找我们的自由函数来计算数值通量。它从两边（即 $\mathbf{w}^-$ 和 $\mathbf{w}^+$ ）接收在正交点评估的解决方案，以及到负边的法向量。正如上面所解释的，数值通量已经乘以来自减法侧的法向量了。我们需要转换符号，因为在引言中导出的弱形式中，边界项带有一个减号。然后，通量在减号和加号上都排队等待测试，由于来自加号的法向量与来自减号的法向量正好相反，所以换了符号。
+
+@code
+  template <int dim, int degree, int n_points_1d>
+  void EulerOperator<dim, degree, n_points_1d>::local_apply_face(
+    const MatrixFree<dim, Number> &,
+    LinearAlgebra::distributed::Vector<Number> &      dst,
+    const LinearAlgebra::distributed::Vector<Number> &src,
+    const std::pair<unsigned int, unsigned int> &     face_range) const
+  {
+    FEFaceEvaluation<dim, degree, n_points_1d, dim + 2, Number> phi_m(data,
+                                                                      true);
+    FEFaceEvaluation<dim, degree, n_points_1d, dim + 2, Number> phi_p(data,
+                                                                      false);
+
+
+    for (unsigned int face = face_range.first; face < face_range.second; ++face)
+      {
+        phi_p.reinit(face);
+        phi_p.gather_evaluate(src, EvaluationFlags::values);
+
+
+        phi_m.reinit(face);
+        phi_m.gather_evaluate(src, EvaluationFlags::values);
+
+
+        for (unsigned int q = 0; q < phi_m.n_q_points; ++q)
+          {
+            const auto numerical_flux =
+              euler_numerical_flux<dim>(phi_m.get_value(q),
+                                        phi_p.get_value(q),
+                                        phi_m.get_normal_vector(q));
+            phi_m.submit_value(-numerical_flux, q);
+            phi_p.submit_value(numerical_flux, q);
+          }
+
+
+        phi_p.integrate_scatter(EvaluationFlags::values, dst);
+        phi_m.integrate_scatter(EvaluationFlags::values, dst);
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+对于位于边界的面，我们需要施加适当的边界条件。在这个教程程序中，我们实现了上述的四种情况。第五种情况，即超音速流出条件，将在下面的 "结果 "部分讨论）。不连续的Galerkin方法对边界条件的施加不是作为约束条件，而只是弱化。因此，各种条件是通过找到一个适当的<i>exterior</i>量 $\mathbf{w}^+$ 来施加的，然后交给也用于内部面的数值通量函数。实质上，我们在域外 "假装 "一个状态，如果那是现实，PDE的解就会满足我们想要的边界条件。   
+
+
+对于墙的边界，我们需要对动量变量施加一个无正态通量的条件，而对于密度和能量，我们使用的是诺伊曼条件  $\rho^+ = \rho^-$  和  $E^+ = E^-$  。为了实现无正态通量条件，我们将外部数值设置为内部数值，并减去壁面法线方向的2倍速度，即法线矢量方向的速度。   
+
+
+对于流入边界，我们简单地将给定的Dirichlet数据 $\mathbf{w}_\mathrm{D}$ 作为边界值。另一种方法是使用 $\mathbf{w}^+ = -\mathbf{w}^- + 2 \mathbf{w}_\mathrm{D}$  ，即所谓的镜像原理。   
+
+
+强加外流实质上是一个诺伊曼条件，即设置  $\mathbf{w}^+ = \mathbf{w}^-$  。对于亚音速流出的情况，我们仍然需要强加一个能量值，我们从各自的函数中得出这个值。对于<i>backflow</i>的情况，即在Neumann部分有动量通入域的情况，需要一个特殊的步骤。根据文献（这一事实可以通过适当的能量论证得出），我们必须改用流入部分的通量的另一种变体，见Gravemeier, Comerford, Yoshihara, Ismail, Wall, "A novel formulation for Neumann inflow conditions in biomechanics", Int. J. Numer. Meth. 生物医学。Eng., vol. 28 (2012). 这里，动量项需要再次添加，这相当于去除动量变量上的通量贡献。我们在后处理步骤中这样做，而且只适用于我们都处于外流边界且法向量与动量（或等同于速度）之间的点积为负的情况。由于我们在SIMD矢量化时一次处理几个正交点的数据，因此我们在这里需要明确地在SIMD数组的条目上循环。   
+
+
+在下面的实现中，我们在正交点的层面上检查各种类型的边界。当然，我们也可以将决定权移出正交点循环，将整个面作为同类处理，这就避免了在正交点的内循环中进行一些地图/集合查找。然而，效率的损失并不明显，所以我们在这里选择了更简单的代码。还要注意的是，最后的 "else "子句会捕捉到边界的某些部分没有通过 `EulerOperator::set_..._boundary(...)`. 分配任何边界条件的情况。 
+
+@code
+  template <int dim, int degree, int n_points_1d>
+  void EulerOperator<dim, degree, n_points_1d>::local_apply_boundary_face(
+    const MatrixFree<dim, Number> &,
+    LinearAlgebra::distributed::Vector<Number> &      dst,
+    const LinearAlgebra::distributed::Vector<Number> &src,
+    const std::pair<unsigned int, unsigned int> &     face_range) const
+  {
+    FEFaceEvaluation<dim, degree, n_points_1d, dim + 2, Number> phi(data, true);
+
+
+    for (unsigned int face = face_range.first; face < face_range.second; ++face)
+      {
+        phi.reinit(face);
+        phi.gather_evaluate(src, EvaluationFlags::values);
+
+
+        for (unsigned int q = 0; q < phi.n_q_points; ++q)
+          {
+            const auto w_m    = phi.get_value(q);
+            const auto normal = phi.get_normal_vector(q);
+
+
+            auto rho_u_dot_n = w_m[1] * normal[0];
+            for (unsigned int d = 1; d < dim; ++d)
+              rho_u_dot_n += w_m[1 + d] * normal[d];
+
+
+            bool at_outflow = false;
+
+
+            Tensor<1, dim + 2, VectorizedArray<Number>> w_p;
+            const auto boundary_id = data.get_boundary_id(face);
+            if (wall_boundaries.find(boundary_id) != wall_boundaries.end())
+              {
+                w_p[0] = w_m[0];
+                for (unsigned int d = 0; d < dim; ++d)
+                  w_p[d + 1] = w_m[d + 1] - 2. * rho_u_dot_n * normal[d];
+                w_p[dim + 1] = w_m[dim + 1];
+              }
+            else if (inflow_boundaries.find(boundary_id) !=
+                     inflow_boundaries.end())
+              w_p =
+                evaluate_function(*inflow_boundaries.find(boundary_id)->second,
+                                  phi.quadrature_point(q));
+            else if (subsonic_outflow_boundaries.find(boundary_id) !=
+                     subsonic_outflow_boundaries.end())
+              {
+                w_p          = w_m;
+                w_p[dim + 1] = evaluate_function(
+                  *subsonic_outflow_boundaries.find(boundary_id)->second,
+                  phi.quadrature_point(q),
+                  dim + 1);
+                at_outflow = true;
+              }
+            else
+              AssertThrow(false,
+                          ExcMessage("Unknown boundary id, did "
+                                     "you set a boundary condition for "
+                                     "this part of the domain boundary?"));
+
+
+            auto flux = euler_numerical_flux<dim>(w_m, w_p, normal);
+
+
+            if (at_outflow)
+              for (unsigned int v = 0; v < VectorizedArray<Number>::size(); ++v)
+                {
+                  if (rho_u_dot_n[v] < -1e-12)
+                    for (unsigned int d = 0; d < dim; ++d)
+                      flux[d + 1][v] = 0.;
+                }
+
+
+            phi.submit_value(-flux, q);
+          }
+
+
+        phi.integrate_scatter(EvaluationFlags::values, dst);
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+下一个函数实现了质量矩阵的逆运算。算法和原理已经在介绍中进行了广泛的讨论，所以我们在这里只讨论 MatrixFreeOperators::CellwiseInverseMassMatrix 类的技术问题。它所做的操作与质量矩阵的正向评估类似，只是使用了不同的插值矩阵，代表反 $S^{-1}$ 因子。这些代表了从指定的基础（在这种情况下，高斯--洛巴托正交公式点中的拉格朗日基础）到高斯正交公式点中的拉格朗日基础的改变。在后者的基础上，我们可以应用点的逆向`JxW`因子，即正交权重乘以从参考坐标到实坐标的映射的雅各布系数。一旦完成了这一操作，基数将再次变回节点高斯-洛巴托基数。所有这些操作都由下面的 "apply() "函数完成。我们需要提供的是要操作的局部场（我们通过FEEvaluation对象从全局向量中提取），并将结果写回质量矩阵操作的目标向量。   
+
+
+需要注意的一点是，我们在FEEvaluation的构造函数中添加了两个整数参数（可选），第一个是0（在多DoFHandler系统中选择DoFHandler；在这里，我们只有一个），第二个是1，用于进行正交公式选择。由于我们将正交公式0用于非线性项的过度积分，我们将公式1与默认的 $p+1$ （或变量名称中的`fe_degree+1`）点用于质量矩阵。这导致了对质量矩阵的平方贡献，并确保了精确的积分，正如介绍中所解释的。
+
+@code
+  template <int dim, int degree, int n_points_1d>
+  void EulerOperator<dim, degree, n_points_1d>::local_apply_inverse_mass_matrix(
+    const MatrixFree<dim, Number> &,
+    LinearAlgebra::distributed::Vector<Number> &      dst,
+    const LinearAlgebra::distributed::Vector<Number> &src,
+    const std::pair<unsigned int, unsigned int> &     cell_range) const
+  {
+    FEEvaluation<dim, degree, degree + 1, dim + 2, Number> phi(data, 0, 1);
+    MatrixFreeOperators::CellwiseInverseMassMatrix<dim, degree, dim + 2, Number>
+      inverse(phi);
+
+
+    for (unsigned int cell = cell_range.first; cell < cell_range.second; ++cell)
+      {
+        phi.reinit(cell);
+        phi.read_dof_values(src);
+
+
+        inverse.apply(phi.begin_dof_values(), phi.begin_dof_values());
+
+
+        phi.set_dof_values(dst);
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Theapplyandrelatedfunctions"></a><h4>The apply() and related functions</h4> 
+
+
+
+
+现在我们来看看实现欧拉算子整体评价的函数，即 $\mathcal M^{-1} \mathcal L(t, \mathbf{w})$ ，调用上述的局部评价器。这些步骤在前面的代码中应该是清楚的。需要注意的一点是，我们需要调整与边界各部分相关的函数中的时间，以便在边界数据随时间变化的情况下与方程一致。然后，我们调用 MatrixFree::loop() 来执行单元和面的积分，包括在`src`向量中进行必要的ghost数据交换。该函数的第七个参数，"true"，指定我们要在开始向其累积积分之前，将 "dst "向量作为循环的一部分归零。这个变体比在循环之前明确调用`dst = 0.;`要好，因为归零操作是在矢量的子范围内完成的，其部分是由附近的积分写入的。这加强了数据的定位，并允许缓存，节省了向量数据到主内存的一次往返，提高了性能。循环的最后两个参数决定了哪些数据被交换：由于我们只访问一个面的形状函数的值，这是典型的一阶双曲问题，并且由于我们有一个节点基础，节点位于参考元素表面，我们只需要交换这些部分。这又节省了宝贵的内存带宽。   
+
+
+一旦应用了空间算子 $\mathcal L$ ，我们需要进行第二轮，应用反质量矩阵。这里，我们称之为 MatrixFree::cell_loop() ，因为只有单元积分出现。单元循环比全循环更便宜，因为只访问与局部拥有的单元相关的自由度，这只是DG离散化的局部拥有的自由度。因此，这里不需要鬼魂交换。   
+
+
+在所有这些函数的周围，我们设置了定时器范围来记录计算时间，以统计各部分的贡献。
+
+@code
+  template <int dim, int degree, int n_points_1d>
+  void EulerOperator<dim, degree, n_points_1d>::apply(
+    const double                                      current_time,
+    const LinearAlgebra::distributed::Vector<Number> &src,
+    LinearAlgebra::distributed::Vector<Number> &      dst) const
+  {
+    {
+      TimerOutput::Scope t(timer, "apply - integrals");
+
+
+      for (auto &i : inflow_boundaries)
+        i.second->set_time(current_time);
+      for (auto &i : subsonic_outflow_boundaries)
+        i.second->set_time(current_time);
+
+
+      data.loop(&EulerOperator::local_apply_cell,
+                &EulerOperator::local_apply_face,
+                &EulerOperator::local_apply_boundary_face,
+                this,
+                dst,
+                src,
+                true,
+                MatrixFree<dim, Number>::DataAccessOnFaces::values,
+                MatrixFree<dim, Number>::DataAccessOnFaces::values);
+    }
+
+
+    {
+      TimerOutput::Scope t(timer, "apply - inverse mass");
+
+
+      data.cell_loop(&EulerOperator::local_apply_inverse_mass_matrix,
+                     this,
+                     dst,
+                     dst);
+    }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+让我们转到做Runge--Kutta更新的整个阶段的函数。它调用 EulerOperator::apply() ，然后对向量进行一些更新，即`next_ri = solution + factor_ai * k_i`和`solution += factor_solution * k_i`。与其通过向量接口执行这些步骤，我们在这里提出了一个替代策略，在基于缓存的架构上速度更快。由于向量所消耗的内存往往比缓存所能容纳的要大得多，所以数据必须有效地来自缓慢的RAM内存。这种情况可以通过循环融合来改善，即在一次扫描中对`next_ki`和`solution`进行更新。在这种情况下，我们将读取两个向量`rhs`和`solution`并写入`next_ki`和`solution`，而在基线情况下，至少有4次读取和两次写入。在这里，我们更进一步，当质量矩阵反转在向量的某一部分完成后，立即执行循环。  MatrixFree::cell_loop() 提供了一种机制，在单元格的循环第一次接触到一个向量条目之前，附加一个 `std::function` （我们在这里没有使用，但是例如用于向量的清零），以及在循环最后接触到一个条目之后，再调用第二个 `std::function` 。回调的形式是给定向量上的一个范围（就MPI宇宙中的本地索引编号而言），可以由`local_element()`函数处理。   
+
+
+对于这第二个回调，我们创建一个在范围上工作的lambda，并在这个范围上写入相应的更新。理想情况下，我们会在本地循环之前添加`DEAL_II_OPENMP_SIMD_PRAGMA`，以建议编译器对这个循环进行SIMD并行化（这意味着在实践中，我们要确保我们在循环内使用的指针的索引范围之间没有重叠，也称为别名）。事实证明，在写这篇文章的时候，GCC 7.2无法编译lambda函数中的OpenMP pragma，所以我们在下面注释了这个pragma。如果你的编译器比较新，你应该可以再次取消注释这些行。   
+
+
+注意，当我们不需要更新`next_ri`向量时，我们为最后的Runge--Kutta阶段选择了不同的代码路径。这个策略带来了相当大的速度提升。在40核机器上，默认矢量更新时，逆质量矩阵和矢量更新需要60%以上的计算时间，而在更优化的变体中，这一比例约为35%。换句话说，这是一个大约三分之一的速度。
+
+@code
+  template <int dim, int degree, int n_points_1d>
+  void EulerOperator<dim, degree, n_points_1d>::perform_stage(
+    const Number                                      current_time,
+    const Number                                      factor_solution,
+    const Number                                      factor_ai,
+    const LinearAlgebra::distributed::Vector<Number> &current_ri,
+    LinearAlgebra::distributed::Vector<Number> &      vec_ki,
+    LinearAlgebra::distributed::Vector<Number> &      solution,
+    LinearAlgebra::distributed::Vector<Number> &      next_ri) const
+  {
+    {
+      TimerOutput::Scope t(timer, "rk_stage - integrals L_h");
+
+
+      for (auto &i : inflow_boundaries)
+        i.second->set_time(current_time);
+      for (auto &i : subsonic_outflow_boundaries)
+        i.second->set_time(current_time);
+
+
+      data.loop(&EulerOperator::local_apply_cell,
+                &EulerOperator::local_apply_face,
+                &EulerOperator::local_apply_boundary_face,
+                this,
+                vec_ki,
+                current_ri,
+                true,
+                MatrixFree<dim, Number>::DataAccessOnFaces::values,
+                MatrixFree<dim, Number>::DataAccessOnFaces::values);
+    }
+
+
+
+    {
+      TimerOutput::Scope t(timer, "rk_stage - inv mass + vec upd");
+      data.cell_loop(
+        &EulerOperator::local_apply_inverse_mass_matrix,
+        this,
+        next_ri,
+        vec_ki,
+        std::function<void(const unsigned int, const unsigned int)>(),
+        [&](const unsigned int start_range, const unsigned int end_range) {
+          const Number ai = factor_ai;
+          const Number bi = factor_solution;
+          if (ai == Number())
+            {
+              /* DEAL_II_OPENMP_SIMD_PRAGMA */
+              for (unsigned int i = start_range; i < end_range; ++i)
+                {
+                  const Number k_i          = next_ri.local_element(i);
+                  const Number sol_i        = solution.local_element(i);
+                  solution.local_element(i) = sol_i + bi * k_i;
+                }
+            }
+          else
+            {
+              /* DEAL_II_OPENMP_SIMD_PRAGMA */
+              for (unsigned int i = start_range; i < end_range; ++i)
+                {
+                  const Number k_i          = next_ri.local_element(i);
+                  const Number sol_i        = solution.local_element(i);
+                  solution.local_element(i) = sol_i + bi * k_i;
+                  next_ri.local_element(i)  = sol_i + ai * k_i;
+                }
+            }
+        });
+    }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+在讨论了处理推进解的一个时间步长的函数的实现后，现在让我们来看看实现其他辅助操作的函数。具体来说，这些是计算投影、评估误差和计算单元上信息传输速度的函数。   
+
+
+其中第一个函数基本上等同于 VectorTools::project(), ，只是速度快得多，因为它是专门针对DG元素的，不需要设置和解决线性系统，因为每个元素都有独立的基函数。我们在这里展示代码的原因，除了这个非关键操作的小幅提速之外，还因为它显示了 MatrixFreeOperators::CellwiseInverseMassMatrix. 提供的额外功能     
+
+
+投影操作的工作原理如下。如果我们用 $S$ 表示在正交点评估的形状函数矩阵，在单元格 $K$ 上的投影是一个形式为 $\underbrace{S J^K S^\mathrm
+T}_{\mathcal M^K} \mathbf{w}^K = S J^K
+\tilde{\mathbf{w}}(\mathbf{x}_q)_{q=1:n_q}$ 的操作，其中 $J^K$ 是包含雅各布系数乘以正交权重（JxW）的对角线矩阵， $\mathcal M^K$ 是单元格的质量矩阵， $\tilde{\mathbf{w}}(\mathbf{x}_q)_{q=1:n_q}$ 是要投影到正交点的场的评估。实际上，矩阵 $S$ 通过张量积有额外的结构，如介绍中所解释的）。这个系统现在可以等效地写成 $\mathbf{w}^K = \left(S J^K S^\mathrm T\right)^{-1} S J^K
+\tilde{\mathbf{w}}(\mathbf{x}_q)_{q=1:n_q} = S^{-\mathrm T}
+\left(J^K\right)^{-1} S^{-1} S J^K
+\tilde{\mathbf{w}}(\mathbf{x}_q)_{q=1:n_q}$  。现在，项 $S^{-1} S$ 和 $\left(J^K\right)^{-1} J^K$ 相抵消，导致最终表达式 $\mathbf{w}^K = S^{-\mathrm T}
+\tilde{\mathbf{w}}(\mathbf{x}_q)_{q=1:n_q}$  。这个操作由 MatrixFreeOperators::CellwiseInverseMassMatrix::transform_from_q_points_to_basis(). 实现。这个名字来自于这个投影只是乘以 $S^{-\mathrm T}$ ，一个从高斯正交点的节点基到给定的有限元基的基数变化。请注意，我们调用 FEEvaluation::set_dof_values() 将结果写入矢量，覆盖之前的内容，而不是像典型的积分任务那样累积结果--我们可以这样做，因为对于不连续的Galerkin离散，每个矢量条目都只有一个单元的贡献。
+
+@code
+  template <int dim, int degree, int n_points_1d>
+  void EulerOperator<dim, degree, n_points_1d>::project(
+    const Function<dim> &                       function,
+    LinearAlgebra::distributed::Vector<Number> &solution) const
+  {
+    FEEvaluation<dim, degree, degree + 1, dim + 2, Number> phi(data, 0, 1);
+    MatrixFreeOperators::CellwiseInverseMassMatrix<dim, degree, dim + 2, Number>
+      inverse(phi);
+    solution.zero_out_ghost_values();
+    for (unsigned int cell = 0; cell < data.n_cell_batches(); ++cell)
+      {
+        phi.reinit(cell);
+        for (unsigned int q = 0; q < phi.n_q_points; ++q)
+          phi.submit_dof_value(evaluate_function(function,
+                                                 phi.quadrature_point(q)),
+                               q);
+        inverse.transform_from_q_points_to_basis(dim + 2,
+                                                 phi.begin_dof_values(),
+                                                 phi.begin_dof_values());
+        phi.set_dof_values(solution);
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+下一个函数再次重复了deal.II库提供的功能，即 VectorTools::integrate_difference(). ，我们在此展示了明确的代码，以强调跨多个单元的矢量化是如何工作的，以及如何通过该接口累积结果。回顾一下，矢量化数组的每个<i>lane</i>都持有来自不同单元的数据。通过对当前MPI进程所拥有的所有单元批的循环，我们就可以填充一个结果的VectorizedArray；为了得到一个全局的总和，我们需要进一步去对SIMD阵列中的条目进行求和。然而，这样的程序并不稳定，因为SIMD数组事实上可能并不持有其所有通道的有效数据。当本地拥有的单元的数量不是SIMD宽度的倍数时，就会发生这种情况。为了避免无效数据，我们必须在访问数据时明确地跳过那些无效的通道。虽然人们可以想象，我们可以通过简单地将空车道设置为零（从而不对总和做出贡献）来使其工作，但情况比这更复杂。如果我们要从动量中计算出一个速度呢？那么，我们就需要除以密度，而密度是零--结果就会是NaN，并污染结果。当我们在单元格批次中循环时，使用函数 MatrixFree::n_active_entries_per_cell_batch() 给我们提供有效数据的通道数，累积有效SIMD范围内的结果，就可以避免这个陷阱了。它在大多数单元上等于 VectorizedArray::size() ，但如果与SIMD宽度相比，单元数有余数，则在最后一个单元批上可能更少。
+
+@code
+  template <int dim, int degree, int n_points_1d>
+  std::array<double, 3> EulerOperator<dim, degree, n_points_1d>::compute_errors(
+    const Function<dim> &                             function,
+    const LinearAlgebra::distributed::Vector<Number> &solution) const
+  {
+    TimerOutput::Scope t(timer, "compute errors");
+    double             errors_squared[3] = {};
+    FEEvaluation<dim, degree, n_points_1d, dim + 2, Number> phi(data, 0, 0);
+
+
+    for (unsigned int cell = 0; cell < data.n_cell_batches(); ++cell)
+      {
+        phi.reinit(cell);
+        phi.gather_evaluate(solution, EvaluationFlags::values);
+        VectorizedArray<Number> local_errors_squared[3] = {};
+        for (unsigned int q = 0; q < phi.n_q_points; ++q)
+          {
+            const auto error =
+              evaluate_function(function, phi.quadrature_point(q)) -
+              phi.get_value(q);
+            const auto JxW = phi.JxW(q);
+
+
+            local_errors_squared[0] += error[0] * error[0] * JxW;
+            for (unsigned int d = 0; d < dim; ++d)
+              local_errors_squared[1] += (error[d + 1] * error[d + 1]) * JxW;
+            local_errors_squared[2] += (error[dim + 1] * error[dim + 1]) * JxW;
+          }
+        for (unsigned int v = 0; v < data.n_active_entries_per_cell_batch(cell);
+             ++v)
+          for (unsigned int d = 0; d < 3; ++d)
+            errors_squared[d] += local_errors_squared[d][v];
+      }
+
+
+    Utilities::MPI::sum(errors_squared, MPI_COMM_WORLD, errors_squared);
+
+
+    std::array<double, 3> errors;
+    for (unsigned int d = 0; d < 3; ++d)
+      errors[d] = std::sqrt(errors_squared[d]);
+
+
+    return errors;
+  }
+
+
+
+
+
+@endcode 
+
+
+
+EulerOperator类的最后一个函数用于估计传输速度，由网格大小缩放，这与设置显式时间积分器中的时间步长有关。在欧拉方程中，有两种传输速度，即对流速度 $\mathbf{u}$ 和声波的传播速度 $c = \sqrt{\gamma p/\rho}$ ，相对于以速度运动的介质 $\mathbf u$  。   
+
+
+在时间步长的公式中，我们感兴趣的不是这些绝对速度，而是信息穿过一个单元所需的时间量。对于与介质一起传输的信息， $\mathbf u$ 是由网格大小缩放的，所以最大速度的估计可以通过计算 $\|J^{-\mathrm T} \mathbf{u}\|_\infty$ 得到，其中 $J$ 是由实域到参考域的转换的雅各布系数。注意， FEEvaluationBase::inverse_jacobian() 返回的是反转和转置的Jacobian，代表从实数到参考坐标的度量项，所以我们不需要再转置它。在下面的代码中，我们将这个极限存储在变量`convective_limit`中。   
+
+
+声音的传播是各向同性的，所以我们需要考虑到任何方向的网格大小。适当的网格大小比例由 $J$ 的最小奇异值给出，或者说， $J^{-1}$ 的最大奇异值。请注意，当忽略弯曲的单元时，可以通过单元顶点之间的最小距离来近似这个量。为了得到Jacobian的最大奇异值，一般的策略是使用一些LAPACK函数。由于我们在这里所需要的是一个估计值，我们可以避免将一个向量数组的张量分解成几个矩阵的麻烦，并进入一个（昂贵的）没有向量的特征值函数，而是使用应用于 $J^{-1}J^{-\mathrm T}$ 的幂方法的几次迭代（在下面的代码中为五次）。这个方法的收敛速度取决于最大特征值与次大特征值的比率以及初始猜测，也就是所有1的矢量。这可能表明，我们在接近立方体形状的单元上得到缓慢的收敛，在这种情况下，所有的长度几乎都是一样的。然而，这种缓慢的收敛意味着结果将位于两个最大的奇异值之间，而这两个奇异值无论如何都是接近最大值的。在所有其他情况下，收敛将是快速的。因此，我们可以在这里仅仅硬编码5次迭代，并确信结果是好的。
+
+@code
+  template <int dim, int degree, int n_points_1d>
+  double EulerOperator<dim, degree, n_points_1d>::compute_cell_transport_speed(
+    const LinearAlgebra::distributed::Vector<Number> &solution) const
+  {
+    TimerOutput::Scope t(timer, "compute transport speed");
+    Number             max_transport = 0;
+    FEEvaluation<dim, degree, degree + 1, dim + 2, Number> phi(data, 0, 1);
+
+
+    for (unsigned int cell = 0; cell < data.n_cell_batches(); ++cell)
+      {
+        phi.reinit(cell);
+        phi.gather_evaluate(solution, EvaluationFlags::values);
+        VectorizedArray<Number> local_max = 0.;
+        for (unsigned int q = 0; q < phi.n_q_points; ++q)
+          {
+            const auto solution = phi.get_value(q);
+            const auto velocity = euler_velocity<dim>(solution);
+            const auto pressure = euler_pressure<dim>(solution);
+
+
+            const auto inverse_jacobian = phi.inverse_jacobian(q);
+            const auto convective_speed = inverse_jacobian * velocity;
+            VectorizedArray<Number> convective_limit = 0.;
+            for (unsigned int d = 0; d < dim; ++d)
+              convective_limit =
+                std::max(convective_limit, std::abs(convective_speed[d]));
+
+
+            const auto speed_of_sound =
+              std::sqrt(gamma * pressure * (1. / solution[0]));
+
+
+            Tensor<1, dim, VectorizedArray<Number>> eigenvector;
+            for (unsigned int d = 0; d < dim; ++d)
+              eigenvector[d] = 1.;
+            for (unsigned int i = 0; i < 5; ++i)
+              {
+                eigenvector = transpose(inverse_jacobian) *
+                              (inverse_jacobian * eigenvector);
+                VectorizedArray<Number> eigenvector_norm = 0.;
+                for (unsigned int d = 0; d < dim; ++d)
+                  eigenvector_norm =
+                    std::max(eigenvector_norm, std::abs(eigenvector[d]));
+                eigenvector /= eigenvector_norm;
+              }
+            const auto jac_times_ev   = inverse_jacobian * eigenvector;
+            const auto max_eigenvalue = std::sqrt(
+              (jac_times_ev * jac_times_ev) / (eigenvector * eigenvector));
+            local_max =
+              std::max(local_max,
+                       max_eigenvalue * speed_of_sound + convective_limit);
+          }
+
+
+@endcode 
+
+
+
+与前面的函数类似，我们必须确保只在一个单元格批的有效单元格上积累速度。
+
+@code
+        for (unsigned int v = 0; v < data.n_active_entries_per_cell_batch(cell);
+             ++v)
+          for (unsigned int d = 0; d < 3; ++d)
+            max_transport = std::max(max_transport, local_max[v]);
+      }
+
+
+    max_transport = Utilities::MPI::max(max_transport, MPI_COMM_WORLD);
+
+
+    return max_transport;
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TheEulerProblemclass"></a> <h3>The EulerProblem class</h3> 
+
+
+
+
+这个类将EulerOperator类与时间积分器和通常的全局数据结构（如FiniteElement和DoFHandler）相结合，以实际运行Euler问题的模拟。   
+
+
+成员变量是一个三角形、一个有限元、一个映射（用于创建高阶曲面，见 step-10 ），以及一个描述自由度的DoFHandler。此外，我们还保留了上面描述的EulerOperator的一个实例，它将完成所有积分方面的繁重工作，以及一些时间积分的参数，如当前时间或时间步长。   
+
+
+此外，我们使用一个PostProcessor实例来向输出文件写入一些额外的信息，这与  step-33  中的做法类似。DataPostprocessor类的接口很直观，要求我们提供关于需要评估的信息（通常只有解的值，除了Schlieren图，我们只在二维中启用它是有意义的），以及被评估的内容的名称。请注意，也可以通过可视化程序（如ParaView）中的计算器工具来提取大部分信息，但在写输出时就已经做了，这要方便得多。
+
+@code
+  template <int dim>
+  class EulerProblem
+  {
+  public:
+    EulerProblem();
+
+
+    void run();
+
+
+  private:
+    void make_grid_and_dofs();
+
+
+    void output_results(const unsigned int result_number);
+
+
+    LinearAlgebra::distributed::Vector<Number> solution;
+
+
+    ConditionalOStream pcout;
+
+
+#ifdef DEAL_II_WITH_P4EST
+    parallel::distributed::Triangulation<dim> triangulation;
+#else
+    Triangulation<dim> triangulation;
+#endif
+
+
+    FESystem<dim>        fe;
+    MappingQGeneric<dim> mapping;
+    DoFHandler<dim>      dof_handler;
+
+
+    TimerOutput timer;
+
+
+    EulerOperator<dim, fe_degree, n_q_points_1d> euler_operator;
+
+
+    double time, time_step;
+
+
+    class Postprocessor : public DataPostprocessor<dim>
+    {
+    public:
+      Postprocessor();
+
+
+      virtual void evaluate_vector_field(
+        const DataPostprocessorInputs::Vector<dim> &inputs,
+        std::vector<Vector<double>> &computed_quantities) const override;
+
+
+      virtual std::vector<std::string> get_names() const override;
+
+
+      virtual std::vector<
+        DataComponentInterpretation::DataComponentInterpretation>
+      get_data_component_interpretation() const override;
+
+
+      virtual UpdateFlags get_needed_update_flags() const override;
+
+
+    private:
+      const bool do_schlieren_plot;
+    };
+  };
+
+
+
+
+
+  template <int dim>
+  EulerProblem<dim>::Postprocessor::Postprocessor()
+    : do_schlieren_plot(dim == 2)
+  {}
+
+
+
+
+
+@endcode 
+
+
+
+对于字段变量的主要评估，我们首先检查数组的长度是否等于预期值（长度`2*dim+4`或`2*dim+5`是由我们在下面的get_names()函数中指定的名字的大小得出）。然后我们在所有的评估点上循环，填充相应的信息。首先，我们填写密度 $\rho$ 、动量 $\rho \mathbf{u}$ 和能量 $E$ 的原始解变量，然后计算得出速度 $\mathbf u$ 、压力 $p$ 、声速 $c=\sqrt{\gamma p / \rho}$ ，以及显示 $s = |\nabla \rho|^2$ 的Schlieren图，如果它被启用。参见 step-69 ，了解另一个创建Schlieren图的例子）。
+
+@code
+  template <int dim>
+  void EulerProblem<dim>::Postprocessor::evaluate_vector_field(
+    const DataPostprocessorInputs::Vector<dim> &inputs,
+    std::vector<Vector<double>> &               computed_quantities) const
+  {
+    const unsigned int n_evaluation_points = inputs.solution_values.size();
+
+
+    if (do_schlieren_plot == true)
+      Assert(inputs.solution_gradients.size() == n_evaluation_points,
+             ExcInternalError());
+
+
+    Assert(computed_quantities.size() == n_evaluation_points,
+           ExcInternalError());
+    Assert(inputs.solution_values[0].size() == dim + 2, ExcInternalError());
+    Assert(computed_quantities[0].size() ==
+             dim + 2 + (do_schlieren_plot == true ? 1 : 0),
+           ExcInternalError());
+
+
+    for (unsigned int q = 0; q < n_evaluation_points; ++q)
+      {
+        Tensor<1, dim + 2> solution;
+        for (unsigned int d = 0; d < dim + 2; ++d)
+          solution[d] = inputs.solution_values[q](d);
+
+
+        const double         density  = solution[0];
+        const Tensor<1, dim> velocity = euler_velocity<dim>(solution);
+        const double         pressure = euler_pressure<dim>(solution);
+
+
+        for (unsigned int d = 0; d < dim; ++d)
+          computed_quantities[q](d) = velocity[d];
+        computed_quantities[q](dim)     = pressure;
+        computed_quantities[q](dim + 1) = std::sqrt(gamma * pressure / density);
+
+
+        if (do_schlieren_plot == true)
+          computed_quantities[q](dim + 2) =
+            inputs.solution_gradients[q][0] * inputs.solution_gradients[q][0];
+      }
+  }
+
+
+
+
+
+  template <int dim>
+  std::vector<std::string> EulerProblem<dim>::Postprocessor::get_names() const
+  {
+    std::vector<std::string> names;
+    for (unsigned int d = 0; d < dim; ++d)
+      names.emplace_back("velocity");
+    names.emplace_back("pressure");
+    names.emplace_back("speed_of_sound");
+
+
+    if (do_schlieren_plot == true)
+      names.emplace_back("schlieren_plot");
+
+
+    return names;
+  }
+
+
+
+
+
+@endcode 
+
+
+
+对于量的解释，我们有标量密度、能量、压力、声速和Schlieren图，以及动量和速度的向量。
+
+@code
+  template <int dim>
+  std::vector<DataComponentInterpretation::DataComponentInterpretation>
+  EulerProblem<dim>::Postprocessor::get_data_component_interpretation() const
+  {
+    std::vector<DataComponentInterpretation::DataComponentInterpretation>
+      interpretation;
+    for (unsigned int d = 0; d < dim; ++d)
+      interpretation.push_back(
+        DataComponentInterpretation::component_is_part_of_vector);
+    interpretation.push_back(DataComponentInterpretation::component_is_scalar);
+    interpretation.push_back(DataComponentInterpretation::component_is_scalar);
+
+
+    if (do_schlieren_plot == true)
+      interpretation.push_back(
+        DataComponentInterpretation::component_is_scalar);
+
+
+    return interpretation;
+  }
+
+
+
+
+
+@endcode 
+
+
+
+关于必要的更新标志，我们只需要所有量的值，但Schlieren图除外，它是基于密度梯度的。
+
+@code
+  template <int dim>
+  UpdateFlags EulerProblem<dim>::Postprocessor::get_needed_update_flags() const
+  {
+    if (do_schlieren_plot == true)
+      return update_values | update_gradients;
+    else
+      return update_values;
+  }
+
+
+
+
+
+@endcode 
+
+
+
+这个类的构造函数并不令人惊讶。我们设置了一个基于 "MPI_COMM_WORLD "通信器的平行三角形，一个具有 "dim+2 "分量的密度、动量和能量的矢量有限元，一个与底层有限元相同程度的高阶映射，并将时间和时间步长初始化为零。
+
+@code
+  template <int dim>
+  EulerProblem<dim>::EulerProblem()
+    : pcout(std::cout, Utilities::MPI::this_mpi_process(MPI_COMM_WORLD) == 0)
+#ifdef DEAL_II_WITH_P4EST
+    , triangulation(MPI_COMM_WORLD)
+#endif
+    , fe(FE_DGQ<dim>(fe_degree), dim + 2)
+    , mapping(fe_degree)
+    , dof_handler(triangulation)
+    , timer(pcout, TimerOutput::never, TimerOutput::wall_times)
+    , euler_operator(timer)
+    , time(0)
+    , time_step(0)
+  {}
+
+
+
+
+
+@endcode 
+
+
+
+作为一个网格，本教程程序实现了两个选项，取决于全局变量`testcase`。对于分析变量（`testcase==0`），域是 $(0, 10) \times (-5, 5)$ ，域周围都有迪里希特边界条件（流入）。对于 "testcase==1"，我们将域设置为矩形框内的圆柱体，源自Sch&auml;fer和Turek(1996)对不可压缩的粘性流动的圆柱体的流动测试案例。在这里，我们有更多种类的边界。通道左侧的流入部分是给定的流入类型，为此我们选择了一个恒定的流入轮廓，而我们在右侧设置了一个亚声速的流出。对于圆柱体周围的边界（边界id等于2）以及通道壁（边界id等于3），我们使用壁的边界类型，即无正态流。此外，对于三维圆柱体，我们还在垂直方向上增加了一个重力。有了基础网格（包括由 GridGenerator::channel_with_cylinder()), 设置的流形），我们就可以执行指定数量的全局细化，从DoFHandler中创建未知编号，并将DoFHandler和Mapping对象交给EulerOperator的初始化。
+
+@code
+  template <int dim>
+  void EulerProblem<dim>::make_grid_and_dofs()
+  {
+    switch (testcase)
+      {
+        case 0:
+          {
+            Point<dim> lower_left;
+            for (unsigned int d = 1; d < dim; ++d)
+              lower_left[d] = -5;
+
+
+            Point<dim> upper_right;
+            upper_right[0] = 10;
+            for (unsigned int d = 1; d < dim; ++d)
+              upper_right[d] = 5;
+
+
+            GridGenerator::hyper_rectangle(triangulation,
+                                           lower_left,
+                                           upper_right);
+            triangulation.refine_global(2);
+
+
+            euler_operator.set_inflow_boundary(
+              0, std::make_unique<ExactSolution<dim>>(0));
+
+
+            break;
+          }
+
+
+        case 1:
+          {
+            GridGenerator::channel_with_cylinder(
+              triangulation, 0.03, 1, 0, true);
+
+
+            euler_operator.set_inflow_boundary(
+              0, std::make_unique<ExactSolution<dim>>(0));
+            euler_operator.set_subsonic_outflow_boundary(
+              1, std::make_unique<ExactSolution<dim>>(0));
+
+
+            euler_operator.set_wall_boundary(2);
+            euler_operator.set_wall_boundary(3);
+
+
+            if (dim == 3)
+              euler_operator.set_body_force(
+                std::make_unique<Functions::ConstantFunction<dim>>(
+                  std::vector<double>({0., 0., -0.2})));
+
+
+            break;
+          }
+
+
+        default:
+          Assert(false, ExcNotImplemented());
+      }
+
+
+    triangulation.refine_global(n_global_refinements);
+
+
+    dof_handler.distribute_dofs(fe);
+
+
+    euler_operator.reinit(mapping, dof_handler);
+    euler_operator.initialize_vector(solution);
+
+
+@endcode 
+
+
+
+在下文中，我们输出一些关于这个问题的统计数据。因为我们经常会出现相当多的单元格或自由度，所以我们希望用逗号来分隔每一组三位数来打印它们。这可以通过 "locales "来实现，尽管这种工作方式并不特别直观。  step-32 对此有稍微详细的解释。
+
+@code
+    std::locale s = pcout.get_stream().getloc();
+    pcout.get_stream().imbue(std::locale(""));
+    pcout << "Number of degrees of freedom: " << dof_handler.n_dofs()
+          << " ( = " << (dim + 2) << " [vars] x "
+          << triangulation.n_global_active_cells() << " [cells] x "
+          << Utilities::pow(fe_degree + 1, dim) << " [dofs/cell/var] )"
+          << std::endl;
+    pcout.get_stream().imbue(s);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+对于输出，我们首先让欧拉算子计算出数值结果的误差。更确切地说，对于分析解的情况，我们计算与分析结果的误差，而对于第二个测试情况，我们计算与密度和能量恒定、速度恒定的背景场的偏差 $x$ 方向的偏差。   
+
+
+下一步是创建输出。这与 step-33 中的做法类似：我们让上面定义的后处理器控制大部分的输出，除了我们直接写的原始场。对于分析解的测试案例，我们还对分析解进行了另一次投影，并打印出该场和数值解之间的差异。一旦我们定义了所有要写的量，我们就建立输出的补丁。与 step-65 类似，我们通过设置适当的标志来创建一个高阶VTK输出，这使我们能够可视化高多项式度的场。最后，我们调用 `DataOutInterface::write_vtu_in_parallel()` 函数，将结果写入给定的文件名。这个函数使用了特殊的MPI并行写设施，与其他大多数教程程序中使用的标准库的 `std::ofstream` 变体相比，它通常对并行文件系统更加优化。`write_vtu_in_parallel()`函数的一个特别好的特点是，它可以将所有MPI行列的输出合并到一个文件中，使得没有必要有一个所有此类文件的中央记录（即 "pvtu "文件）。   
+
+
+对于并行程序来说，看一下单元格在处理器之间的划分往往是有启发的。为此，我们可以向 DataOut::add_data_vector() 传递一个数字向量，其中包含与当前处理器拥有的活动单元一样多的条目；然后这些数字应该是拥有这些单元的处理器的等级。例如，这样一个向量可以从 GridTools::get_subdomain_association(). 中获得。另一方面，在每个MPI进程中，DataOut将只读取那些对应于本地拥有的单元的条目，这些条目当然都有相同的值：即当前进程的等级。矢量的其余条目中的内容实际上并不重要，因此我们可以用一个廉价的技巧逃脱。我们只是把我们给 DataOut::add_data_vector() 的向量的**值都填上当前MPI进程的等级。关键是在每个进程中，只有对应于本地拥有的单元格的条目会被读取，而忽略其他条目中的（错误的）值。事实上，每个进程提交的向量中，正确的条目子集是正确的，这就足够了。
+
+@code
+  template <int dim>
+  void EulerProblem<dim>::output_results(const unsigned int result_number)
+  {
+    const std::array<double, 3> errors =
+      euler_operator.compute_errors(ExactSolution<dim>(time), solution);
+    const std::string quantity_name = testcase == 0 ? "error" : "norm";
+
+
+    pcout << "Time:" << std::setw(8) << std::setprecision(3) << time
+          << ", dt: " << std::setw(8) << std::setprecision(2) << time_step
+          << ", " << quantity_name << " rho: " << std::setprecision(4)
+          << std::setw(10) << errors[0] << ", rho * u: " << std::setprecision(4)
+          << std::setw(10) << errors[1] << ", energy:" << std::setprecision(4)
+          << std::setw(10) << errors[2] << std::endl;
+
+
+    {
+      TimerOutput::Scope t(timer, "output");
+
+
+      Postprocessor postprocessor;
+      DataOut<dim>  data_out;
+
+
+      DataOutBase::VtkFlags flags;
+      flags.write_higher_order_cells = true;
+      data_out.set_flags(flags);
+
+
+      data_out.attach_dof_handler(dof_handler);
+      {
+        std::vector<std::string> names;
+        names.emplace_back("density");
+        for (unsigned int d = 0; d < dim; ++d)
+          names.emplace_back("momentum");
+        names.emplace_back("energy");
+
+
+        std::vector<DataComponentInterpretation::DataComponentInterpretation>
+          interpretation;
+        interpretation.push_back(
+          DataComponentInterpretation::component_is_scalar);
+        for (unsigned int d = 0; d < dim; ++d)
+          interpretation.push_back(
+            DataComponentInterpretation::component_is_part_of_vector);
+        interpretation.push_back(
+          DataComponentInterpretation::component_is_scalar);
+
+
+        data_out.add_data_vector(dof_handler, solution, names, interpretation);
+      }
+      data_out.add_data_vector(solution, postprocessor);
+
+
+      LinearAlgebra::distributed::Vector<Number> reference;
+      if (testcase == 0 && dim == 2)
+        {
+          reference.reinit(solution);
+          euler_operator.project(ExactSolution<dim>(time), reference);
+          reference.sadd(-1., 1, solution);
+          std::vector<std::string> names;
+          names.emplace_back("error_density");
+          for (unsigned int d = 0; d < dim; ++d)
+            names.emplace_back("error_momentum");
+          names.emplace_back("error_energy");
+
+
+          std::vector<DataComponentInterpretation::DataComponentInterpretation>
+            interpretation;
+          interpretation.push_back(
+            DataComponentInterpretation::component_is_scalar);
+          for (unsigned int d = 0; d < dim; ++d)
+            interpretation.push_back(
+              DataComponentInterpretation::component_is_part_of_vector);
+          interpretation.push_back(
+            DataComponentInterpretation::component_is_scalar);
+
+
+          data_out.add_data_vector(dof_handler,
+                                   reference,
+                                   names,
+                                   interpretation);
+        }
+
+
+      Vector<double> mpi_owner(triangulation.n_active_cells());
+      mpi_owner = Utilities::MPI::this_mpi_process(MPI_COMM_WORLD);
+      data_out.add_data_vector(mpi_owner, "owner");
+
+
+      data_out.build_patches(mapping,
+                             fe.degree,
+                             DataOut<dim>::curved_inner_cells);
+
+
+      const std::string filename =
+        "solution_" + Utilities::int_to_string(result_number, 3) + ".vtu";
+      data_out.write_vtu_in_parallel(filename, MPI_COMM_WORLD);
+    }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+ EulerProblem::run() 函数将所有的碎片放在一起。它首先调用创建网格和设置数据结构的函数，然后初始化时间积分器和低存储积分器的两个临时向量。我们称这些向量为`rk_register_1`和`rk_register_2`，并使用第一个向量表示 $\mathbf{r}_i$ ，第二个向量表示 $\mathbf{k}_i$ ，在介绍中概述的Runge-Kutta方案的公式中。在我们开始时间循环之前，我们通过 `EulerOperator::compute_cell_transport_speed()` 函数计算时间步长。为了便于比较，我们将那里得到的结果与最小网格尺寸进行比较，并将它们打印到屏幕上。对于像本教程程序中的声速和速度接近统一的情况，预测的有效网格大小将是接近的，但如果缩放比例不同，它们可能会有所不同。
+
+@code
+  template <int dim>
+  void EulerProblem<dim>::run()
+  {
+    {
+      const unsigned int n_vect_number = VectorizedArray<Number>::size();
+      const unsigned int n_vect_bits   = 8 * sizeof(Number) * n_vect_number;
+
+
+      pcout << "Running with "
+            << Utilities::MPI::n_mpi_processes(MPI_COMM_WORLD)
+            << " MPI processes" << std::endl;
+      pcout << "Vectorization over " << n_vect_number << " "
+            << (std::is_same<Number, double>::value ? "doubles" : "floats")
+            << " = " << n_vect_bits << " bits ("
+            << Utilities::System::get_current_vectorization_level() << ")"
+            << std::endl;
+    }
+
+
+    make_grid_and_dofs();
+
+
+    const LowStorageRungeKuttaIntegrator integrator(lsrk_scheme);
+
+
+    LinearAlgebra::distributed::Vector<Number> rk_register_1;
+    LinearAlgebra::distributed::Vector<Number> rk_register_2;
+    rk_register_1.reinit(solution);
+    rk_register_2.reinit(solution);
+
+
+    euler_operator.project(ExactSolution<dim>(time), solution);
+
+
+    double min_vertex_distance = std::numeric_limits<double>::max();
+    for (const auto &cell : triangulation.active_cell_iterators())
+      if (cell->is_locally_owned())
+        min_vertex_distance =
+          std::min(min_vertex_distance, cell->minimum_vertex_distance());
+    min_vertex_distance =
+      Utilities::MPI::min(min_vertex_distance, MPI_COMM_WORLD);
+
+
+    time_step = courant_number * integrator.n_stages() /
+                euler_operator.compute_cell_transport_speed(solution);
+    pcout << "Time step size: " << time_step
+          << ", minimal h: " << min_vertex_distance
+          << ", initial transport scaling: "
+          << 1. / euler_operator.compute_cell_transport_speed(solution)
+          << std::endl
+          << std::endl;
+
+
+    output_results(0);
+
+
+@endcode 
+
+
+
+现在我们准备开始时间循环，我们一直运行到时间达到预期的结束时间。每隔5个时间步长，我们就计算一个新的时间步长估计值--由于解决方案是非线性的，在模拟过程中调整这个值是最有效的。如果Courant数选择得过于激进，模拟通常会在时间步数为NaN时爆炸，所以在这里很容易发现。有一点需要注意的是，由于不同的时间步长选择的相互作用，四舍五入的误差可能会传播到前几位数，从而导致略有不同的解决方案。为了降低这种敏感性，通常的做法是将时间步长四舍五入或截断到几位数，例如在这种情况下是3。如果当前时间接近规定的输出 "刻度 "值（如0.02），我们也会写出输出。在时间循环结束后，我们通过打印一些统计数据来总结计算，这主要由 TimerOutput::print_wall_time_statistics() 函数完成。
+
+@code
+    unsigned int timestep_number = 0;
+
+
+    while (time < final_time - 1e-12)
+      {
+        ++timestep_number;
+        if (timestep_number % 5 == 0)
+          time_step =
+            courant_number * integrator.n_stages() /
+            Utilities::truncate_to_n_digits(
+              euler_operator.compute_cell_transport_speed(solution), 3);
+
+
+        {
+          TimerOutput::Scope t(timer, "rk time stepping total");
+          integrator.perform_time_step(euler_operator,
+                                       time,
+                                       time_step,
+                                       solution,
+                                       rk_register_1,
+                                       rk_register_2);
+        }
+
+
+        time += time_step;
+
+
+        if (static_cast<int>(time / output_tick) !=
+              static_cast<int>((time - time_step) / output_tick) ||
+            time >= final_time - 1e-12)
+          output_results(
+            static_cast<unsigned int>(std::round(time / output_tick)));
+      }
+
+
+    timer.print_wall_time_statistics(MPI_COMM_WORLD);
+    pcout << std::endl;
+  }
+
+
+} // namespace Euler_DG
+
+
+
+
+
+@endcode 
+
+
+
+main()函数并不令人惊讶，它遵循了以前所有MPI程序中的做法。当我们运行一个MPI程序时，我们需要调用`MPI_Init()`和`MPI_Finalize()`，我们通过 Utilities::MPI::MPI_InitFinalize 数据结构来完成。注意，我们只用MPI来运行程序，并将线程数设置为1。
+
+@code
+int main(int argc, char **argv)
+{
+  using namespace Euler_DG;
+  using namespace dealii;
+
+
+  Utilities::MPI::MPI_InitFinalize mpi_initialization(argc, argv, 1);
+
+
+  try
+    {
+      deallog.depth_console(0);
+
+
+      EulerProblem<dimension> euler_problem;
+      euler_problem.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+
+
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
 <a name="Programoutput"></a><h3>Program output</h3>
 
 
-Running the program with the default settings on a machine with 40 processes
-produces the following output:
+在一台有40个进程的机器上以默认设置运行程序，会产生以下输出。
+
 @code
 Running with 40 MPI processes
 Vectorization over 8 doubles = 512 bits (AVX512)
 Number of degrees of freedom: 147,456 ( = 4 [vars] x 1,024 [cells] x 36 [dofs/cell/var] )
 Time step size: 0.00689325, minimal h: 0.3125, initial transport scaling: 0.102759
+
 
 Time:       0, dt:   0.0069, error rho:   2.76e-07, rho * u:  1.259e-06, energy: 2.987e-06
 Time:    1.01, dt:   0.0069, error rho:   1.37e-06, rho * u:  2.252e-06, energy: 4.153e-06
@@ -3416,6 +2552,7 @@ Time:       8, dt:   0.0096, error rho:  8.439e-07, rho * u:  3.338e-07, energy:
 Time:       9, dt:   0.0096, error rho:  7.822e-07, rho * u:  2.984e-07, energy: 2.248e-06
 Time:      10, dt:   0.0096, error rho:  7.231e-07, rho * u:  2.666e-07, energy: 2.074e-06
 
+
 +-------------------------------------------+------------------+------------+------------------+
 | Total wallclock time elapsed              |     2.249s    30 |     2.249s |     2.249s     8 |
 |                                           |                  |                               |
@@ -3428,42 +2565,16 @@ Time:      10, dt:   0.0096, error rho:  7.231e-07, rho * u:  2.666e-07, energy:
 | rk_stage - integrals L_h      |      6415 |    0.8803s    26 |    0.9198s |    0.9619s    14 |
 | rk_stage - inv mass + vec upd |      6415 |   0.05677s    15 |   0.06487s |   0.07597s    13 |
 +-------------------------------------------+------------------+------------+------------------+
-@endcode
+@endcode 
 
-The program output shows that all errors are small. This is due to the fact
-that we use a relatively fine mesh of $32^2$ cells with polynomials of degree
-5 for a solution that is smooth. An interesting pattern shows for the time
-step size: whereas it is 0.0069 up to time 5, it increases to 0.0096 for later
-times. The step size increases once the vortex with some motion on top of the
-speed of sound (and thus faster propagation) leaves the computational domain
-between times 5 and 6.5. After that point, the flow is simply uniform
-in the same direction, and the maximum velocity of the gas is reduced
-compared to the previous state where the uniform velocity was overlaid
-by the vortex. Our time step formula recognizes this effect.
 
-The final block of output shows detailed information about the timing
-of individual parts of the programs; it breaks this down by showing
-the time taken by the fastest and the slowest processor, and the
-average time -- this is often useful in very large computations to
-find whether there are processors that are consistently overheated
-(and consequently are throttling their clock speed) or consistently
-slow for other reasons.
-The summary shows that 1283 time steps have been performed
-in 1.02 seconds (looking at the average time among all MPI processes), while
-the output of 11 files has taken additional 0.96 seconds. Broken down per time
-step and into the five Runge--Kutta stages, the compute time per evaluation is
-0.16 milliseconds. This high performance is typical of matrix-free evaluators
-and a reason why explicit time integration is very competitive against
-implicit solvers, especially for large-scale simulations. The breakdown of
-computational times at the end of the program run shows that the evaluation of
-integrals in $\mathcal L_h$ contributes with around 0.92 seconds and the
-application of the inverse mass matrix with 0.06 seconds. Furthermore, the
-estimation of the transport speed for the time step size computation
-contributes with another 0.05 seconds of compute time.
 
-If we use three more levels of global refinement and 9.4 million DoFs in total,
-the final statistics are as follows (for the modified Lax--Friedrichs flux,
-$p=5$, and the same system of 40 cores of dual-socket Intel Xeon Gold 6230):
+程序输出显示，所有的错误都很小。这是由于我们使用了一个相对较细的 $32^2$ 单元的网格，并使用5度的多项式来求得一个平滑的解决方案。一个有趣的模式显示在时间步长上：虽然在时间5之前是0.0069，但在后来的时间里增加到0.0096。在时间5和6.5之间，一旦在声速之上有一些运动的旋涡（因此传播速度更快）离开计算域，步长就会增加。在这之后，气流只是在同一方向上是均匀的，与之前均匀速度被漩涡覆盖的状态相比，气体的最大速度有所下降。我们的时间步长公式认识到了这种影响。
+
+最后一个输出块显示了关于程序各个部分时间的详细信息；它通过显示最快和最慢的处理器所花费的时间以及平均时间来细分--这在非常大的计算中通常很有用，可以发现是否有处理器持续过热（并因此节制其时钟速度）或由于其他原因持续过慢。总结显示，在1.02秒内完成了1283个时间步骤（看所有MPI进程的平均时间），而11个文件的输出又花了0.96秒。将每个时间步骤分解成五个Runge--Kutta阶段，每次评估的计算时间为0.16毫秒。这种高性能是无矩阵评估器的典型表现，也是显式时间积分对隐式求解器非常有竞争力的原因，特别是对于大规模模拟。程序运行结束时的计算时间细分显示， $\mathcal L_h$ 中的积分评估贡献了大约0.92秒，反质量矩阵的应用贡献了0.06秒。此外，对时间步长计算的运输速度的估计又贡献了0.05秒的计算时间。
+
+如果我们再使用三个级别的全局细化和总共940万个DoF，最终的统计数据如下（对于修改后的Lax--Friedrichs通量， $p=5$  ，和同一系统的40个核心的双插槽Intel Xeon Gold 6230）。
+
 @code
 +-------------------------------------------+------------------+------------+------------------+
 | Total wallclock time elapsed              |     244.9s    12 |     244.9s |     244.9s    34 |
@@ -3477,67 +2588,29 @@ $p=5$, and the same system of 40 cores of dual-socket Intel Xeon Gold 6230):
 | rk_stage - integrals L_h      |     51290 |     121.3s     6 |     126.6s |     136.3s    16 |
 | rk_stage - inv mass + vec upd |     51290 |     66.19s    16 |     77.52s |     81.84s    10 |
 +-------------------------------------------+------------------+------------+------------------+
-@endcode
+@endcode 
 
-Per time step, the solver now takes 0.02 seconds, about 25 times as long as
-for the small problem with 147k unknowns. Given that the problem involves 64
-times as many unknowns, the increase in computing time is not
-surprising. Since we also do 8 times as many time steps, the compute time
-should in theory increase by a factor of 512. The actual increase is 205 s /
-1.02 s = 202. This is because the small problem size cannot fully utilize the
-40 cores due to communication overhead. This becomes clear if we look into the
-details of the operations done per time step. The evaluation of the
-differential operator $\mathcal L_h$ with nearest neighbor communication goes
-from 0.92 seconds to 127 seconds, i.e., it increases with a factor of 138. On
-the other hand, the cost for application of the inverse mass matrix and the
-vector updates, which do not need to communicate between the MPI processes at
-all, has increased by a factor of 1195. The increase is more than the
-theoretical factor of 512 because the operation is limited by the bandwidth
-from RAM memory for the larger size while for the smaller size, all vectors
-fit into the caches of the CPU. The numbers show that the mass matrix
-evaluation and vector update part consume almost 40% of the time spent by the
-Runge--Kutta stages -- despite using a low-storage Runge--Kutta integrator and
-merging of vector operations! And despite using over-integration for the
-$\mathcal L_h$ operator. For simpler differential operators and more expensive
-time integrators, the proportion spent in the mass matrix and vector update
-part can also reach 70%. If we compute a throughput number in terms of DoFs
-processed per second and Runge--Kutta stage, we obtain @f[ \text{throughput} =
+
+
+每个时间步长，求解器现在需要0.02秒，大约是147k未知数的小问题的25倍。鉴于该问题涉及64倍的未知数，计算时间的增加并不令人惊讶。由于我们也做了8倍的时间步数，计算时间在理论上应该增加512倍。实际增加的时间是205秒/1.02秒=202。这是因为由于通信开销的原因，小问题的规模不能充分利用40个核心。如果我们研究一下每个时间步长所做操作的细节，这一点就很清楚了。带有近邻通信的微分算子 $\mathcal L_h$ 的评估从0.92秒到127秒，也就是说，它增加了138倍。另一方面，应用反质量矩阵和向量更新的成本，完全不需要在MPI进程之间通信，增加了1195倍。这一增长超过了理论上的512倍，因为对于较大的尺寸，操作受限于RAM内存的带宽，而对于较小的尺寸，所有的矢量都适合于CPU的缓存。数字显示，尽管使用了低存储量的Runge-Kutta积分器和合并矢量操作，但质量矩阵评估和矢量更新部分几乎消耗了Runge-Kutta阶段所花费的40%的时间。而且尽管对 $\mathcal L_h$ 算子使用了过度积分。对于更简单的微分算子和更昂贵的时间积分器，花费在质量矩阵和矢量更新部分的比例也可以达到70%。如果我们以每秒处理的DoFs和Runge--Kutta阶段计算一个吞吐量数字，我们得到@f[ \text{throughput} =
 \frac{n_\mathrm{time steps} n_\mathrm{stages}
 n_\mathrm{dofs}}{t_\mathrm{compute}} = \frac{10258 \cdot 5 \cdot
-9.4\,\text{MDoFs}}{205s} = 2360\, \text{MDoFs/s} @f] This throughput number is
-very high, given that simply copying one vector to another one runs at
-only around 10,000 MDoFs/s.
+9.4\,\text{MDoFs}}{205s} = 2360\, \text{MDoFs/s} @f]这个吞吐量数字非常高，因为简单地将一个向量复制到另一个向量的运行速度只有大约10,000 MDoFs/s。
 
-If we go to the next-larger size with 37.7 million DoFs, the overall
-simulation time is 2196 seconds, with 1978 seconds spent in the time
-stepping. The increase in run time is a factor of 9.3 for the L_h operator
-(1179 versus 127 seconds) and a factor of 10.3 for the inverse mass matrix and
-vector updates (797 vs 77.5 seconds). The reason for this non-optimal increase
-in run time can be traced back to cache effects on the given hardware (with 40
-MB of L2 cache and 55 MB of L3 cache): While not all of the relevant data fits
-into caches for 9.4 million DoFs (one vector takes 75 MB and we have three
-vectors plus some additional data in MatrixFree), there is capacity for one and
-a half vector nonetheless. Given that modern caches are more sophisticated than
-the naive least-recently-used strategy (where we would have little re-use as
-the data is used in a streaming-like fashion), we can assume that a sizeable
-fraction of data can indeed be delivered from caches for the 9.4 million DoFs
-case. For the larger case, even with optimal caching less than 10 percent of
-data would fit into caches, with an associated loss in performance.
+如果我们进入下一个更大的规模，有3770万个DoFs，整个模拟时间为2196秒，其中1978秒用于时间步进。L_h算子的运行时间增加了9.3倍（1179秒对127秒），反质量矩阵和向量更新增加了10.3倍（797对77.5秒）。运行时间非最佳增长的原因可以追溯到给定硬件上的缓存效应（有40MB的二级缓存和55MB的三级缓存）。虽然不是所有的相关数据都适合940万DoF的缓存（一个向量需要75MB，我们有三个向量加上MatrixFree中的一些额外数据），但还是有能力满足一个半向量的需求。考虑到现代的缓存比天真的最近使用的策略更复杂（在这种情况下，我们几乎没有重复使用，因为数据是以类似流的方式使用的），我们可以假设，在940万DoFs的情况下，确实有相当一部分数据可以从缓存中交付。对于更大的情况，即使有最佳的缓存，也只有不到10%的数据可以放入缓存中，而且会有相关的性能损失。
 
 
 <a name="Convergenceratesfortheanalyticaltestcase"></a><h3>Convergence rates for the analytical test case</h3>
 
 
-For the modified Lax--Friedrichs flux and measuring the error in the momentum
-variable, we obtain the following convergence table (the rates are very
-similar for the density and energy variables):
+对于修改后的Lax--Friedrichs通量和测量动量变量的误差，我们得到以下收敛表（密度和能量变量的速率非常相似）。
 
-<table align="center" class="doxtable">
+  <table align="center" class="doxtable">
   <tr>
     <th>&nbsp;</th>
-    <th colspan="3"><i>p</i>=2</th>
-    <th colspan="3"><i>p</i>=3</th>
-    <th colspan="3"><i>p</i>=5</th>
+    <th colspan="3">[1.x.159]=2</th>
+    <th colspan="3">[1.x.160]=3</th>
+    <th colspan="3">[1.x.161]=5</th>
   </tr>
   <tr>
     <th>n_cells</th>
@@ -3647,15 +2720,14 @@ similar for the density and energy variables):
     <td align="center">7.091e-11</td>
     <td>0.95</td>
   </tr>
-</table>
+</table>   
 
-If we switch to the Harten-Lax-van Leer flux, the results are as follows:
-<table align="center" class="doxtable">
+如果我们改用Harten-Lax-van Leer通量，结果如下。  <table align="center" class="doxtable">
   <tr>
     <th>&nbsp;</th>
-    <th colspan="3"><i>p</i>=2</th>
-    <th colspan="3"><i>p</i>=3</th>
-    <th colspan="3"><i>p</i>=5</th>
+    <th colspan="3">[1.x.162]=2</th>
+    <th colspan="3">[1.x.163]=3</th>
+    <th colspan="3">[1.x.164]=5</th>
   </tr>
   <tr>
     <th>n_cells</th>
@@ -3765,61 +2837,25 @@ If we switch to the Harten-Lax-van Leer flux, the results are as follows:
     <td align="center">5.730e-11</td>
     <td>-1.04</td>
   </tr>
-</table>
+</table>   
 
-The tables show that we get optimal $\mathcal O\left(h^{p+1}\right)$
-convergence rates for both numerical fluxes. The errors are slightly smaller
-for the Lax--Friedrichs flux for $p=2$, but the picture is reversed for
-$p=3$; in any case, the differences on this testcase are relatively
-small.
+表中显示，我们对两种数值通量都得到了最佳的 $\mathcal O\left(h^{p+1}\right)$ 收敛率。对于 $p=2$ ，Lax--Friedrichs通量的误差略小，但对于 $p=3$ ，情况则相反；无论如何，这个测试案例的差异相对较小。
 
-For $p=5$, we reach the roundoff accuracy of $10^{-11}$ with both
-fluxes on the finest grids. Also note that the errors are absolute with a
-domain length of $10^2$, so relative errors are below $10^{-12}$. The HLL flux
-is somewhat better for the highest degree, which is due to a slight inaccuracy
-of the Lax--Friedrichs flux: The Lax--Friedrichs flux sets a Dirichlet
-condition on the solution that leaves the domain, which results in a small
-artificial reflection, which is accentuated for the Lax--Friedrichs
-flux. Apart from that, we see that the influence of the numerical flux is
-minor, as the polynomial part inside elements is the main driver of the
-accucary. The limited influence of the flux also has consequences when trying
-to approach more challenging setups with the higher-order DG setup: Taking for
-example the parameters and grid of step-33, we get oscillations (which in turn
-make density negative and make the solution explode) with both fluxes once the
-high-mass part comes near the boundary, as opposed to the low-order finite
-volume case ($p=0$). Thus, any case that leads to shocks in the solution
-necessitates some form of limiting or artificial dissipation. For another
-alternative, see the step-69 tutorial program.
+对于 $p=5$ ，我们在最细的网格上用两种通量达到了 $10^{-11}$ 的舍入精度。还要注意的是，误差是绝对的，域长为 $10^2$ ，所以相对误差低于 $10^{-12}$ 。HLL通量在最高度数上要好一些，这是由于Lax--Friedrichs通量的轻微不准确造成的。Lax--Friedrichs通量对离开域的解设置了一个Dirichlet条件，这导致了一个小的人工反射，这在Lax--Friedrichs通量中被强调了。除此之外，我们看到数值通量的影响很小，因为元素内部的多项式部分是引起反射的主要动力。当试图用高阶DG设置来接近更具挑战性的设置时，通量的有限影响也会产生影响。以 step-33 的参数和网格为例，一旦高质部分接近边界，我们就会在两种通量下得到振荡（这反过来会使密度为负值，并使解决方案爆炸），这与低阶有限体积的情况不同（ $p=0$ ）。因此，任何导致溶液中出现冲击的情况都需要某种形式的限制性或人工耗散。对于另一种选择，见 step-69 的教程程序。
 
 
-<a name="Resultsforflowinchannelaroundcylinderin2D"></a><h3>Results for flow in channel around cylinder in 2D</h3>
+<a name="Resultsforflowinchannelaroundcylinderin2D"></a><h3>Results for flow in channel around cylinder in 2D</h3> 
 
 
-For the test case of the flow around a cylinder in a channel, we need to
-change the first code line to
+对于通道中圆柱体周围流动的测试案例，我们需要将第一行代码改为 
+
 @code
   constexpr unsigned int testcase = 1;
-@endcode
-This test case starts with a background field of a constant velocity
-of Mach number 0.31 and a constant initial density; the flow will have
-to go around an obstacle in the form of a cylinder. Since we impose a
-no-penetration condition on the cylinder walls, the flow that
-initially impinges head-on onto to cylinder has to rearrange,
-which creates a big sound wave. The following pictures show the pressure at
-times 0.1, 0.25, 0.5, and 1.0 (top left to bottom right) for the 2D case with
-5 levels of global refinement, using 102,400 cells with polynomial degree of
-5 and 14.7 million degrees of freedom over all 4 solution variables.
-We clearly see the discontinuity that
-propagates slowly in the upstream direction and more quickly in downstream
-direction in the first snapshot at time 0.1. At time 0.25, the sound wave has
-reached the top and bottom walls and reflected back to the interior. From the
-different distances of the reflected waves from lower and upper walls we can
-see the slight asymmetry of the Sch&auml;fer-Turek test case represented by
-GridGenerator::channel_with_cylinder() with somewhat more space above the
-cylinder compared to below. At later times, the picture is more chaotic with
-many sound waves all over the place.
+@endcode 
 
-<table align="center" class="doxtable" style="width:85%">
+这个测试案例从马赫数为0.31的恒定速度和恒定的初始密度的背景场开始；流动将不得不围绕一个圆柱体形式的障碍物。由于我们在圆柱体壁上施加了一个无穿透条件，最初正面撞击到圆柱体上的气流必须重新排列，这就产生了一个大的音波。下面的图片显示了二维情况下5级全局细化时0.1、0.25、0.5和1.0（左上至右下）的压力，使用了102,400个单元，多项式程度为5，所有4个求解变量的自由度为1470万。我们清楚地看到，在时间0.1的第一个快照中，不连续现象在上游方向传播缓慢，在下游方向传播较快。在时间0.25，声波已经到达顶部和底部的墙壁并反射到内部。从下壁和上壁反射波的不同距离，我们可以看到以 GridGenerator::channel_with_cylinder() 为代表的Sch&auml;fer-Turek试验案例的轻微不对称性，圆柱体上方的空间与下方相比要大一些。在后来的时间里，画面更加混乱，到处都是许多声波。
+
+  <table align="center" class="doxtable" style="width:85%">
   <tr>
     <td>
         <img src="https://www.dealii.org/images/steps/developer/step-67.pressure_010.png" alt="" width="100%">
@@ -3836,34 +2872,24 @@ many sound waves all over the place.
         <img src="https://www.dealii.org/images/steps/developer/step-67.pressure_100.png" alt="" width="100%">
     </td>
   </tr>
-</table>
+</table>   
 
-The next picture shows an elevation plot of the pressure at time 1.0 looking
-from the channel inlet towards the outlet at the same resolution -- here,
-we can see the large number
-of reflections. In the figure, two types of waves are visible. The
-larger-amplitude waves correspond to various reflections that happened as the
-initial discontinuity hit the walls, whereas the small-amplitude waves of
-size similar to the elements correspond to numerical artifacts. They have their
-origin in the finite resolution of the scheme and appear as the discontinuity
-travels through elements with high-order polynomials. This effect can be cured
-by increasing resolution. Apart from this effect, the rich wave structure is
-the result of the transport accuracy of the high-order DG method.
+下一张图片显示了在时间1.0时，以相同的分辨率从通道入口看向出口的压力仰角图--在这里，我们可以看到大量的反射。在该图中，可以看到两种类型的波。较大振幅的波对应于初始不连续物撞击墙壁时发生的各种反射，而与元素大小相似的小振幅波则对应于数值伪影。它们起源于方案的有限分辨率，并在不连续面通过高阶多项式的元素时出现。这种效应可以通过提高分辨率来治愈。除了这种效应外，丰富的波浪结构是高阶DG方法的传输精度的结果。
 
-<img src="https://www.dealii.org/images/steps/developer/step-67.pressure_elevated.jpg" alt="" width="40%">
+  <img src="https://www.dealii.org/images/steps/developer/step-67.pressure_elevated.jpg" alt="" width="40%">   
 
-With 2 levels of global refinement with 1,600 cells, the mesh and its
-partitioning on 40 MPI processes looks as follows:
+在对1600个单元进行2级全局细化的情况下，40个MPI进程上的网格及其划分情况如下。
 
-<img src="https://www.dealii.org/images/steps/developer/step-67.grid-owner.png" alt="" width="70%">
+  <img src="https://www.dealii.org/images/steps/developer/step-67.grid-owner.png" alt="" width="70%">   
 
-When we run the code with 4 levels of global refinements on 40 cores, we get
-the following output:
+当我们在40个核心上运行具有4级全局细化的代码时，我们得到如下输出。
+
 @code
 Running with 40 MPI processes
 Vectorization over 8 doubles = 512 bits (AVX512)
 Number of degrees of freedom: 3,686,400 ( = 4 [vars] x 25,600 [cells] x 36 [dofs/cell/var] )
 Time step size: 7.39876e-05, minimal h: 0.001875, initial transport scaling: 0.00110294
+
 
 Time:       0, dt:  7.4e-05, norm rho:   4.17e-16, rho * u:  1.629e-16, energy: 1.381e-15
 Time:    0.05, dt:  6.3e-05, norm rho:    0.02075, rho * u:    0.03801, energy:   0.08772
@@ -3874,10 +2900,13 @@ Time:    0.25, dt:  5.9e-05, norm rho:    0.01695, rho * u:    0.04203, energy: 
 Time:     0.3, dt:  5.9e-05, norm rho:    0.01653, rho * u:     0.0401, energy:   0.06604
 Time:    0.35, dt:  5.7e-05, norm rho:    0.01774, rho * u:    0.04264, energy:    0.0706
 
+
 ...
+
 
 Time:    1.95, dt:  5.8e-05, norm rho:    0.01488, rho * u:    0.03923, energy:   0.05185
 Time:       2, dt:  5.7e-05, norm rho:    0.01432, rho * u:    0.03969, energy:   0.04889
+
 
 +-------------------------------------------+------------------+------------+------------------+
 | Total wallclock time elapsed              |     273.6s    13 |     273.6s |     273.6s     0 |
@@ -3891,24 +2920,22 @@ Time:       2, dt:  5.7e-05, norm rho:    0.01432, rho * u:    0.03969, energy: 
 | rk_stage - integrals L_h      |    172820 |     153.6s     1 |     164.9s |     175.6s    27 |
 | rk_stage - inv mass + vec upd |    172820 |     47.13s    13 |     53.09s |     64.05s    33 |
 +-------------------------------------------+------------------+------------+------------------+
-@endcode
+@endcode 
 
-The norms shown here for the various quantities are the deviations
-$\rho'$, $(\rho u)'$, and $E'$ against the background field (namely, the
-initial condition). The distribution of run time is overall similar as in the
-previous test case. The only slight difference is the larger proportion of
-time spent in $\mathcal L_h$ as compared to the inverse mass matrix and vector
-updates. This is because the geometry is deformed and the matrix-free
-framework needs to load additional arrays for the geometry from memory that
-are compressed in the affine mesh case.
 
-Increasing the number of global refinements to 5, the output becomes:
+
+这里显示的各种量的规范是对背景场（即初始条件）的偏差 $\rho'$ 、 $(\rho u)'$ 和 $E'$ 。运行时间的分布总体上与之前的测试案例相似。唯一略有不同的是，与反质量矩阵和矢量更新相比， $\mathcal L_h$ 花费的时间比例较大。这是因为几何体是变形的，无矩阵框架需要从内存中为几何体加载额外的数组，这些数组在仿生网格的情况下是被压缩的。
+
+将全局细化的数量增加到5，输出变为。
+
 @code
 Running with 40 MPI processes
 Vectorization over 8 doubles = 512 bits (AVX512)
 Number of degrees of freedom: 14,745,600 ( = 4 [vars] x 102,400 [cells] x 36 [dofs/cell/var] )
 
+
 ...
+
 
 +-------------------------------------------+------------------+------------+------------------+
 | Total wallclock time elapsed              |      2693s    32 |      2693s |      2693s    23 |
@@ -3922,48 +2949,28 @@ Number of degrees of freedom: 14,745,600 ( = 4 [vars] x 102,400 [cells] x 36 [do
 | rk_stage - integrals L_h      |    346420 |      1365s    32 |      1574s |      1718s    19 |
 | rk_stage - inv mass + vec upd |    346420 |     722.5s    10 |     870.7s |      1125s    32 |
 +-------------------------------------------+------------------+------------+------------------+
-@endcode
+@endcode 
 
-The effect on performance is similar to the analytical test case -- in
-theory, computation times should increase by a factor of 8, but we actually
-see an increase by a factor of 11 for the time steps (219.5 seconds versus
-2450 seconds). This can be traced back to caches, with the small case mostly
-fitting in caches. An interesting effect, typical of programs with a mix of
-local communication (integrals $\mathcal L_h$) and global communication (computation of
-transport speed) with some load imbalance, can be observed by looking at the
-MPI ranks that encounter the minimal and maximal time of different phases,
-respectively. Rank 0 reports the fastest throughput for the "rk time stepping
-total" part. At the same time, it appears to be slowest for the "compute
-transport speed" part, almost a factor of 2 slower than the
-average and almost a factor of 4 compared to the faster rank.
-Since the latter involves global communication, we can attribute the
-slowness in this part to the fact that the local Runge--Kutta stages have
-advanced more quickly on this rank and need to wait until the other processors
-catch up. At this point, one can wonder about the reason for this imbalance:
-The number of cells is almost the same on all MPI processes.
-However, the matrix-free framework is faster on affine and Cartesian
-cells located towards the outlet of the channel, to which the lower MPI ranks
-are assigned. On the other hand, rank 32, which reports the highest run time
-for the Runga--Kutta stages, owns the curved cells near the cylinder, for
-which no data compression is possible. To improve throughput, we could assign
-different weights to different cell types when partitioning the
-parallel::distributed::Triangulation object, or even measure the run time for a
-few time steps and try to rebalance then.
 
-The throughput per Runge--Kutta stage can be computed to 2085 MDoFs/s for the
-14.7 million DoFs test case over the 346,000 Runge--Kutta stages, slightly slower
-than the Cartesian mesh throughput of 2360 MDoFs/s reported above.
 
-Finally, if we add one additional refinement, we record the following output:
+对性能的影响与分析性测试案例相似--理论上，计算时间应该增加8倍，但实际上我们看到时间步骤增加了11倍（219.5秒对2450秒）。这可以追溯到缓存，小的情况下大多适合缓存。一个有趣的效果，典型的具有一些负载不平衡的本地通信（积分 $\mathcal L_h$ ）和全局通信（计算运输速度）混合的程序，可以通过查看分别遇到不同阶段的最小和最大时间的MPI等级来观察。级别0报告了 "rk时间步进总数 "部分的最快吞吐量。同时，对于 "计算传输速度 "部分，它似乎是最慢的，几乎比平均水平慢了2倍，与较快的等级相比几乎是4倍。由于后者涉及到全局通信，我们可以将这部分的缓慢归因于本地Runge--Kutta阶段在这个等级上推进得更快，需要等到其他处理器跟上。在这一点上，人们可以怀疑这种不平衡的原因。在所有的MPI进程中，单元格的数量几乎是相同的。然而，无矩阵框架在位于通道出口处的仿生和笛卡尔单元上速度更快，较低的MPI等级被分配到这些单元。另一方面，报告Runga--Kutta阶段最高运行时间的等级32拥有靠近圆柱体的弯曲单元，对于这些单元不可能有数据压缩。为了提高吞吐量，我们可以在划分 parallel::distributed::Triangulation 对象时给不同的单元类型分配不同的权重，甚至可以测量几个时间步骤的运行时间并尝试重新平衡。
+
+对于1470万DoFs的测试案例，在346000个Runge--Kutta阶段中，每个Runge--Kutta阶段的吞吐量可以计算到2085 MDoFs/s，比上面报告的2360 MDoFs/s的笛卡尔网格吞吐量稍慢一些。
+
+最后，如果我们增加一个额外的细化，我们记录了以下输出。
+
 @code
 Running with 40 MPI processes
 Vectorization over 8 doubles = 512 bits (AVX512)
 Number of degrees of freedom: 58,982,400 ( = 4 [vars] x 409,600 [cells] x 36 [dofs/cell/var] )
 
+
 ...
+
 
 Time:    1.95, dt:  1.4e-05, norm rho:    0.01488, rho * u:    0.03923, energy:   0.05183
 Time:       2, dt:  1.4e-05, norm rho:    0.01431, rho * u:    0.03969, energy:   0.04887
+
 
 +-------------------------------------------+------------------+------------+------------------+
 | Total wallclock time elapsed              | 2.166e+04s    26 | 2.166e+04s | 2.166e+04s    24 |
@@ -3977,28 +2984,30 @@ Time:       2, dt:  1.4e-05, norm rho:    0.01431, rho * u:    0.03969, energy: 
 | rk_stage - integrals L_h      |    693665 | 1.052e+04s    32 | 1.248e+04s | 1.387e+04s    19 |
 | rk_stage - inv mass + vec upd |    693665 |      6404s    10 |      7868s | 1.018e+04s    32 |
 +-------------------------------------------+------------------+------------+------------------+
-@endcode
-
-The "rk time stepping total" part corresponds to a throughput of 2010 MDoFs/s. The
-overall run time to perform 139k time steps is 20k seconds (5.7 hours) or 7
-time steps per second -- not so bad for having nearly 60 million
-unknowns. More throughput can be achieved by adding more cores to
-the computation.
+@endcode 
 
 
-<a name="Resultsforflowinchannelaroundcylinderin3D"></a><h3>Results for flow in channel around cylinder in 3D</h3>
+
+rk时间步进总数 "部分对应的是2010 MDoFs/s的吞吐量。执行139k时间步长的总体运行时间为20k秒（5.7小时），即每秒7个时间步长--对于有近6000万个未知数来说，这还不算太坏。更多的吞吐量可以通过增加计算的核心来实现。
 
 
-Switching the channel test case to 3D with 3 global refinements, the output is
+<a name="Resultsforflowinchannelaroundcylinderin3D"></a><h3>Results for flow in channel around cylinder in 3D</h3> 
+
+
+将通道测试案例切换到3D，并进行3次全局细化，其输出结果是 
+
 @code
 Running with 40 MPI processes
 Vectorization over 8 doubles = 512 bits (AVX512)
 Number of degrees of freedom: 221,184,000 ( = 5 [vars] x 204,800 [cells] x 216 [dofs/cell/var] )
 
+
 ...
+
 
 Time:    1.95, dt:  0.00011, norm rho:    0.01131, rho * u:    0.03056, energy:   0.04091
 Time:       2, dt:  0.00011, norm rho:     0.0119, rho * u:    0.03142, energy:   0.04425
+
 
 +-------------------------------------------+------------------+------------+------------------+
 | Total wallclock time elapsed              | 1.734e+04s     4 | 1.734e+04s | 1.734e+04s    38 |
@@ -4012,40 +3021,32 @@ Time:       2, dt:  0.00011, norm rho:     0.0119, rho * u:    0.03142, energy: 
 | rk_stage - integrals L_h      |     88615 | 1.005e+04s    32 | 1.126e+04s |  1.23e+04s    11 |
 | rk_stage - inv mass + vec upd |     88615 |      3056s    11 |      4322s |      5759s    32 |
 +-------------------------------------------+------------------+------------+------------------+
-@endcode
+@endcode 
 
-The physics are similar to the 2D case, with a slight motion in the z
-direction due to the gravitational force. The throughput per Runge--Kutta
-stage in this case is
-@f[
+
+
+物理现象与二维案例相似，由于引力的作用，在z方向上有轻微的运动。这种情况下每个Runge--Kutta阶段的吞吐量为@f[
 \text{throughput} = \frac{n_\mathrm{time steps} n_\mathrm{stages}
 n_\mathrm{dofs}}{t_\mathrm{compute}} =
 \frac{17723 \cdot 5 \cdot 221.2\,\text{M}}{15580s} = 1258\, \text{MDoFs/s}.
-@f]
+@f] 。
 
-The throughput is lower than in 2D because the computation of the $\mathcal L_h$ term
-is more expensive. This is due to over-integration with `degree+2` points and
-the larger fraction of face integrals (worse volume-to-surface ratio) with
-more expensive flux computations. If we only consider the inverse mass matrix
-and vector update part, we record a throughput of 4857 MDoFs/s for the 2D case
-of the isentropic vortex with 37.7 million unknowns, whereas the 3D case
-runs with 4535 MDoFs/s. The performance is similar because both cases are in
-fact limited by the memory bandwidth.
+由于 $\mathcal L_h$ 项的计算比较昂贵，所以吞吐量比二维情况下低。这是由于 "度+2 "点的过度积分和更大比例的面积分（更差的体积-表面比率）与更昂贵的通量计算。如果我们只考虑反质量矩阵和矢量更新部分，我们记录到等熵涡旋的二维案例的吞吐量为4857 MDoFs/s，有3770万个未知数，而三维案例的运行速度为4535 MDoFs/s。性能是相似的，因为这两种情况实际上都受到内存带宽的限制。
 
-If we go to four levels of global refinement, we need to increase the number
-of processes to fit everything in memory -- the computation needs around 350
-GB of RAM memory in this case. Also, the time it takes to complete 35k time
-steps becomes more tolerable by adding additional resources. We therefore use
-6 nodes with 40 cores each, resulting in a computation with 240 MPI processes:
+如果我们进行四级全局细化，我们需要增加进程的数量，以适应内存中的所有内容--在这种情况下，计算需要大约350GB的RAM内存。另外，通过增加额外的资源，完成35k个时间步骤所需的时间也变得更容易忍受。因此，我们使用了6个节点，每个节点有40个核心，从而使计算有240个MPI进程。
+
 @code
 Running with 240 MPI processes
 Vectorization over 8 doubles = 512 bits (AVX512)
 Number of degrees of freedom: 1,769,472,000 ( = 5 [vars] x 1,638,400 [cells] x 216 [dofs/cell/var] )
 
+
 ...
+
 
 Time:    1.95, dt:  5.6e-05, norm rho:    0.01129, rho * u:     0.0306, energy:   0.04086
 Time:       2, dt:  5.6e-05, norm rho:    0.01189, rho * u:    0.03145, energy:   0.04417
+
 
 +-------------------------------------------+------------------+------------+------------------+
 | Total wallclock time elapsed              | 5.396e+04s   151 | 5.396e+04s | 5.396e+04s     0 |
@@ -4059,100 +3060,43 @@ Time:       2, dt:  5.6e-05, norm rho:    0.01189, rho * u:    0.03145, energy: 
 | rk_stage - integrals L_h      |    176750 | 2.936e+04s   134 | 3.222e+04s |  3.67e+04s    99 |
 | rk_stage - inv mass + vec upd |    176750 |      7004s    99 | 1.207e+04s |  1.55e+04s   132 |
 +-------------------------------------------+------------------+------------+------------------+
-@endcode
-This simulation had nearly 2 billion unknowns -- quite a large
-computation indeed, and still only needed around 1.5 seconds per time
-step.
+@endcode 
+
+这个模拟有近20亿个未知数--确实是一个相当大的计算，但每个时间步长仍然只需要大约1.5秒。
 
 
 <a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
 
 
-The code presented here straight-forwardly extends to adaptive meshes, given
-appropriate indicators for setting the refinement flags. Large-scale
-adaptivity of a similar solver in the context of the acoustic wave equation
-has been achieved by the <a href="https://github.com/kronbichler/exwave">exwave
-project</a>. However, in the present context, the benefits of adaptivity are often
-limited to early times and effects close to the origin of sound waves, as the
-waves eventually reflect and diffract. This leads to steep gradients all over
-the place, similar to turbulent flow, and a more or less globally
-refined mesh.
+这里介绍的代码可以直接扩展到自适应网格，给定适当的指标来设置细化标志。在声波方程的背景下，类似求解器的大规模自适应性已经由<a href="https://github.com/kronbichler/exwave">exwave
+project</a>实现。然而，在目前的情况下，自适应性的好处往往只限于靠近声波起源的早期时间和效果，因为波最终会反射和衍射。这导致了到处都是陡峭的梯度，类似于湍流，以及或多或少的全局细化网格。
 
-Another topic that we did not discuss in the results section is a comparison
-of different time integration schemes. The program provides four variants of
-low-storage Runga--Kutta integrators that each have slightly different
-accuracy and stability behavior. Among the schemes implemented here, the
-higher-order ones provide additional accuracy but come with slightly lower
-efficiency in terms of step size per stage before they violate the CFL
-condition. An interesting extension would be to compare the low-storage
-variants proposed here with standard Runge--Kutta integrators or to use vector
-operations that are run separate from the mass matrix operation and compare
-performance.
+另一个我们在结果部分没有讨论的主题是不同时间积分方案的比较。该程序提供了四种低存储Runga--Kutta积分器的变体，每一种都有略微不同的精度和稳定性行为。在这里实现的方案中，高阶方案提供了额外的精度，但在违反CFL条件之前，每级步长的效率略低。一个有趣的扩展是将这里提出的低存储变体与标准的Runge--Kutta积分器进行比较，或者使用与质量矩阵运算分开运行的矢量运算，并比较性能。
 
 
-<a name="Moreadvancednumericalfluxfunctionsandskewsymmetricformulations"></a><h4>More advanced numerical flux functions and skew-symmetric formulations</h4>
+<a name="Moreadvancednumericalfluxfunctionsandskewsymmetricformulations"></a><h4>More advanced numerical flux functions and skew-symmetric formulations</h4> 
 
 
-As mentioned in the introduction, the modified Lax--Friedrichs flux and the
-HLL flux employed in this program are only two variants of a large body of
-numerical fluxes available in the literature on the Euler equations. One
-example is the HLLC flux (Harten-Lax-van Leer-Contact) flux which adds the
-effect of rarefaction waves missing in the HLL flux, or the Roe flux. As
-mentioned in the introduction, the effect of numerical fluxes on high-order DG
-schemes is debatable (unlike for the case of low-order discretizations).
+正如介绍中所提到的，本程序中采用的修正的Lax--Friedrichs通量和HLL通量只是欧拉方程文献中大量数值通量中的两种变体。一个例子是HLLC通量（Harten-Lax-van Leer-Contact）通量，它增加了HLL通量或Roe通量中缺少的稀疏波效应。正如介绍中提到的，数值通量对高阶DG方案的影响是有争议的（与低阶离散的情况不同）。
 
-A related improvement to increase the stability of the solver is to also
-consider the spatial integral terms. A shortcoming in the rather naive
-implementation used above is the fact that the energy conservation of the
-original Euler equations (in the absence of shocks) only holds up to a
-discretization error. If the solution is under-resolved, the discretization
-error can give rise to an increase in the numerical energy and eventually
-render the discretization unstable. This is because of the inexact numerical
-integration of the terms in the Euler equations, which both contain rational
-nonlinearities and higher-degree content from curved cells. A way out of this
-dilemma are so-called skew-symmetric formulations, see @cite Gassner2013 for a
-simple variant. Skew symmetry means that switching the role of the solution
-$\mathbf{w}$ and test functions $\mathbf{v}$ in the weak form produces the
-exact negative of the original quantity, apart from some boundary terms. In
-the discrete setting, the challenge is to keep this skew symmetry also when
-the integrals are only computed approximately (in the continuous case,
-skew-symmetry is a consequence of integration by parts). Skew-symmetric
-numerical schemes balance spatial derivatives in the conservative form
-$(\nabla \mathbf v, \mathbf{F}(\mathbf w))_{K}$ with contributions in the
-convective form $(\mathbf v, \tilde{\mathbf{F}}(\mathbf w)\nabla
-\mathbf{w})_{K}$ for some $\tilde{\mathbf{F}}$. The precise terms depend on
-the equation and the integration formula, and can in some cases by understood
-by special skew-symmetric finite difference schemes.
+为了提高求解器的稳定性，一个相关的改进是也要考虑空间积分项。上面使用的相当幼稚的实现方式的一个缺点是，原始欧拉方程的能量守恒（在没有冲击的情况下）只在离散误差范围内有效。如果解决方案的分辨率不足，离散化误差会引起数值能量的增加，并最终导致离散化的不稳定。这是因为欧拉方程中的项的不精确的数值积分，其中包含有理非线性和来自弯曲单元的高阶内容。摆脱这种困境的方法是所谓的倾斜对称公式，见 @cite Gassner2013 的一个简单变体。倾斜对称意味着在弱式中切换解 $\mathbf{w}$ 和检验函数 $\mathbf{v}$ 的作用，除了一些边界项外，产生原始量的精确负值。在离散设置中，挑战在于当积分只被近似计算时也要保持这种倾斜对称性（在连续情况下，倾斜对称性是部分积分的结果）。偏斜对称的数值方案平衡了保守形式的空间导数  $(\nabla \mathbf v, \mathbf{F}(\mathbf w))_{K}$  和对流形式的贡献  $(\mathbf v, \tilde{\mathbf{F}}(\mathbf w)\nabla
+\mathbf{w})_{K}$  ，对于某些  $\tilde{\mathbf{F}}$  。准确的条款取决于方程和积分公式，在某些情况下，可以通过特殊的倾斜对称有限差分方案来理解。
 
-To get started, interested readers could take a look at
-https://github.com/kronbichler/advection_miniapp, where a
-skew-symmetric DG formulation is implemented with deal.II for a simple advection
-equation.
+要想入门，感兴趣的读者可以看一下https://github.com/kronbichler/advection_miniapp，那里用deal.II实现了一个简单的平流方程的斜对称DG公式。
 
 <a name="Equippingthecodeforsupersoniccalculations"></a><h4>Equipping the code for supersonic calculations</h4>
 
 
-As mentioned in the introduction, the solution to the Euler equations develops
-shocks as the Mach number increases, which require additional mechanisms to
-stabilize the scheme, e.g. in the form of limiters. The main challenge besides
-actually implementing the limiter or artificial viscosity approach would be to
-load-balance the computations, as the additional computations involved for
-limiting the oscillations in troubled cells would make them more expensive than the
-plain DG cells without limiting. Furthermore, additional numerical fluxes that
-better cope with the discontinuities would also be an option.
+正如介绍中提到的，随着马赫数的增加，欧拉方程的解会产生冲击，这就需要额外的机制来稳定方案，例如以限制器的形式。除了实际实施限制器或人工粘性方法外，主要的挑战是如何平衡计算，因为在有问题的单元中限制震荡所涉及的额外计算会使它们比没有限制的普通DG单元更昂贵。此外，更好地应对不连续情况的额外数值通量也是一种选择。
 
-One ingredient also necessary for supersonic flows are appropriate boundary
-conditions. As opposed to the subsonic outflow boundaries discussed in the
-introduction and implemented in the program, all characteristics are outgoing
-for supersonic outflow boundaries, so we do not want to prescribe any external
-data,
-@f[
+对于超音速流动来说，一个必要的因素是适当的边界条件。与引言中讨论的并在程序中实现的亚音速流出边界不同，超音速流出边界的所有特征都是流出的，所以我们不想规定任何外部数据，@f[
 \mathbf{w}^+ = \mathbf{w}^- = \begin{pmatrix} \rho^-\\
 (\rho \mathbf u)^- \\ E^-\end{pmatrix} \quad
  \text{(Neumann)}.
-@f]
+@f] 。
 
-In the code, we would simply add the additional statement
+在代码中，我们将简单地添加额外的语句 
+
 @code
             else if (supersonic_outflow_boundaries.find(boundary_id) !=
                      supersonic_outflow_boundaries.end())
@@ -4160,54 +3104,25 @@ In the code, we would simply add the additional statement
                 w_p        = w_m;
                 at_outflow = true;
               }
-@endcode
-in the `local_apply_boundary_face()` function.
+@endcode 
+
+在 "local_apply_boundary_face() "函数中。
 
 <a name="ExtensiontothelinearizedEulerequations"></a><h4>Extension to the linearized Euler equations</h4>
 
 
-When the interest with an Euler solution is mostly in the propagation of sound
-waves, it often makes sense to linearize the Euler equations around a
-background state, i.e., a given density, velocity and energy (or pressure)
-field, and only compute the change against these fields. This is the setting
-of the wide field of aeroacoustics. Even though the resolution requirements
-are sometimes considerably reduced, implementation gets somewhat more
-complicated as the linearization gives rise to additional terms. From a code
-perspective, in the operator evaluation we also need to equip the code with
-the state to linearize against. This information can be provided either by
-analytical functions (that are evaluated in terms of the position of the
-quadrature points) or by a vector similar to the solution. Based on that
-vector, we would create an additional FEEvaluation object to read from it and
-provide the values of the field at quadrature points. If the background
-velocity is zero and the density is constant, the linearized Euler equations
-further simplify and can equivalently be written in the form of the
-acoustic wave equation.
+当对欧拉解的兴趣主要在于声波的传播时，围绕一个背景状态，即一个给定的密度、速度和能量（或压力）场，将欧拉方程线性化，并只计算对这些场的变化，往往是有意义的。这就是航空声学的广泛领域的设置。即使有时分辨率要求大大降低，但由于线性化引起了额外的条款，实施起来就变得有些复杂了。从代码的角度来看，在算子评估中，我们还需要为代码配备要线性化的状态。这一信息可以由分析函数（根据正交点的位置进行评估）或由类似于解决方案的矢量提供。基于该矢量，我们将创建一个额外的FEEvaluation对象，从中读取并提供正交点的场值。如果背景速度为零，密度为常数，线性化的欧拉方程就会进一步简化，可以等效地写成声波方程的形式。
 
-A challenge in the context of sound propagation is often the definition of
-boundary conditions, as the computational domain needs to be of finite size,
-whereas the actual simulation often spans an infinite (or at least much
-larger) physical domain. Conventional Dirichlet or Neumann boundary conditions
-give rise to reflections of the sound waves that eventually propagate back to
-the region of interest and spoil the solution. Therefore, various variants of
-non-reflecting boundary conditions or sponge layers, often in the form of
-<a
+在声音传播的背景下，一个挑战往往是边界条件的定义，因为计算域需要是有限的，而实际模拟往往跨越无限的（或至少是大得多的）物理域。传统的Dirichlet或Neumann边界条件会引起声波的反射，最终传播到感兴趣的区域，破坏了解决方案。因此，各种非反射边界条件或海绵层的变体，通常以<a
 href="https://en.wikipedia.org/wiki/Perfectly_matched_layer">perfectly
-matched layers</a> -- where the solution is damped without reflection
--- are common.
+matched layers</a>的形式出现--其中解决方案是无反射阻尼的 
+
+-- 的形式，是很常见的。
 
 
 <a name="ExtensiontothecompressibleNavierStokesequations"></a><h4>Extension to the compressible Navier-Stokes equations</h4>
 
 
-The solver presented in this tutorial program can also be extended to the
-compressible Navier--Stokes equations by adding viscous terms, as described in
-@cite FehnWallKronbichler2019. To keep as much of the performance obtained
-here despite the additional cost of elliptic terms, e.g. via an interior
-penalty method, one can switch the basis from FE_DGQ to FE_DGQHermite like in
-the step-59 tutorial program.
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-67.cc"
-*/
+如 @cite FehnWallKronbichler2019 所述，本教程程序中提出的求解器也可以通过添加粘性项扩展到可压缩的Navier-Stokes方程。为了尽量保持这里获得的性能，尽管有额外的椭圆项的成本，例如通过内部惩罚方法，可以像 step-59 教程程序中那样将基础从FE_DGQ转换为FE_DGQHermite。<a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-67.cc" 。 
+
+  */  

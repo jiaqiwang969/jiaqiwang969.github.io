@@ -1,1541 +1,1061 @@
-/**
-@page step_17 The step-17 tutorial program
-This tutorial depends on step-8.
+  /**  @page step_17 The step-17 tutorial program  。 
+
+本教程取决于  step-8  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Overview">Overview</a>
-        <li><a href="#ParallelizingsoftwarewithMPI">Parallelizing software with MPI</a>
-        <li><a href="#Whatthisprogramdoes">What this program does</a>
+        <li><a href="#Overview">Overview</a><a href="#Overview">Overview</a>
+        <li><a href="#ParallelizingsoftwarewithMPI">Parallelizing software with MPI</a><a href="#ParallelizingsoftwarewithMPI">Parallelizing software with MPI</a>
+        <li><a href="#Whatthisprogramdoes">What this program does</a><a href="#Whatthisprogramdoes">What this program does</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#ThecodeElasticProblemcodeclasstemplate">The <code>ElasticProblem</code> class template</a>
-        <li><a href="#Righthandsidevalues">Right hand side values</a>
-        <li><a href="#ThecodeElasticProblemcodeclassimplementation">The <code>ElasticProblem</code> class implementation</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#ThecodeElasticProblemcodeclasstemplate">The <code>ElasticProblem</code> class template</a><a href="#ThecodeElasticProblemcodeclasstemplate">The <code>ElasticProblem</code> class template</a>
+        <li><a href="#Righthandsidevalues">Right hand side values</a><a href="#Righthandsidevalues">Right hand side values</a>
+        <li><a href="#ThecodeElasticProblemcodeclassimplementation">The <code>ElasticProblem</code> class implementation</a><a href="#ThecodeElasticProblemcodeclassimplementation">The <code>ElasticProblem</code> class implementation</a>
       <ul>
-        <li><a href="#ElasticProblemElasticProblem">ElasticProblem::ElasticProblem</a>
-        <li><a href="#ElasticProblemsetup_system">ElasticProblem::setup_system</a>
-        <li><a href="#ElasticProblemassemble_system">ElasticProblem::assemble_system</a>
-        <li><a href="#ElasticProblemsolve">ElasticProblem::solve</a>
-        <li><a href="#ElasticProblemrefine_grid">ElasticProblem::refine_grid</a>
-        <li><a href="#ElasticProblemoutput_results">ElasticProblem::output_results</a>
-        <li><a href="#ElasticProblemrun">ElasticProblem::run</a>
+        <li><a href="#ElasticProblemElasticProblem">ElasticProblem::ElasticProblem</a><a href="#ElasticProblemElasticProblem">ElasticProblem::ElasticProblem</a>
+        <li><a href="#ElasticProblemsetup_system">ElasticProblem::setup_system</a><a href="#ElasticProblemsetup_system">ElasticProblem::setup_system</a>
+        <li><a href="#ElasticProblemassemble_system">ElasticProblem::assemble_system</a><a href="#ElasticProblemassemble_system">ElasticProblem::assemble_system</a>
+        <li><a href="#ElasticProblemsolve">ElasticProblem::solve</a><a href="#ElasticProblemsolve">ElasticProblem::solve</a>
+        <li><a href="#ElasticProblemrefine_grid">ElasticProblem::refine_grid</a><a href="#ElasticProblemrefine_grid">ElasticProblem::refine_grid</a>
+        <li><a href="#ElasticProblemoutput_results">ElasticProblem::output_results</a><a href="#ElasticProblemoutput_results">ElasticProblem::output_results</a>
+        <li><a href="#ElasticProblemrun">ElasticProblem::run</a><a href="#ElasticProblemrun">ElasticProblem::run</a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+@endhtmlonly 
+
+<a name="Intro"></a> <a name="Introduction"></a> <h1>Introduction</h1> 
 
 
 <a name="Overview"></a><h3>Overview</h3>
 
 
-This program does not introduce any new mathematical ideas; in fact, all it
-does is to do the exact same computations that step-8
-already does, but it does so in a different manner: instead of using deal.II's
-own linear algebra classes, we build everything on top of classes deal.II
-provides that wrap around the linear algebra implementation of the <a
-href="http://www.mcs.anl.gov/petsc/" target="_top">PETSc</a> library. And
-since PETSc allows to distribute matrices and vectors across several computers
-within an MPI network, the resulting code will even be able to solve the
-problem in %parallel. If you don't know what PETSc is, then this would be a
-good time to take a quick glimpse at their homepage.
+这个程序没有引入任何新的数学思想；事实上，它所做的只是做与 step-8 已经做的完全相同的计算，但它以不同的方式来做：我们没有使用 deal.II 自己的线性代数类，而是在 deal.II 提供的类之上建立一切，这些类包裹着 <a
+href="http://www.mcs.anl.gov/petsc/" target="_top">PETSc</a> 库的线性代数实现。由于PETSc允许将矩阵和向量分布在MPI网络中的几台计算机上，因此产生的代码甚至能够以%并行方式解决问题。如果你不知道PETSc是什么，那么这将是一个快速浏览其主页的好时机。
 
-As a prerequisite of this program, you need to have PETSc installed, and if
-you want to run in %parallel on a cluster, you also need <a
+作为这个程序的先决条件，你需要安装PETSc，如果你想在集群上以%parallel方式运行，你还需要<a
 href="http://www-users.cs.umn.edu/~karypis/metis/index.html"
-target="_top">METIS</a> to partition meshes. The installation of deal.II
-together with these two additional libraries is described in the <a
-href="../../readme.html" target="body">README</a> file.
+target="_top">METIS</a>来划分网格。在<a
+href="../../readme.html" target="body">README</a>文件中描述了deal.II和这两个附加库的安装。
 
-Now, for the details: as mentioned, the program does not compute anything new,
-so the use of finite element classes, etc., is exactly the same as before. The
-difference to previous programs is that we have replaced almost all uses of
-classes <code>Vector</code> and <code>SparseMatrix</code> by their
-near-equivalents <code>PETScWrappers::MPI::Vector</code> and
-<code>PETScWrappers::MPI::SparseMatrix</code> that store data in a way so that
-every processor in the MPI network only stores
-a part of the matrix or vector. More specifically, each processor will
-only store those rows of the matrix that correspond to a degree of
-freedom it "owns". For vectors, they either store only elements that
-correspond to degrees of freedom the processor owns (this is what is
-necessary for the right hand side), or also some additional elements
-that make sure that every processor has access the solution components
-that live on the cells the processor owns (so-called
-@ref GlossLocallyActiveDof "locally active DoFs") or also on neighboring cells
-(so-called @ref GlossLocallyRelevantDof "locally relevant DoFs").
+现在，对于细节：如前所述，该程序并不计算任何新的东西，所以对有限元类等的使用与以前完全相同。与以前的程序不同的是，我们用近似的 <code>PETScWrappers::MPI::Vector</code> 和 <code>PETScWrappers::MPI::SparseMatrix</code> 代替了几乎所有的类 <code>Vector</code> and <code>SparseMatrix</code> 的使用，它们存储数据的方式使MPI网络中的每个处理器只存储矩阵或矢量的一部分。更具体地说，每个处理器将只存储与它 "拥有 "的自由度相对应的矩阵的那些行。对于向量，它们要么只存储与处理器拥有的自由度相对应的元素（这是右手边所需要的），要么也存储一些额外的元素，以确保每个处理器都能访问处理器拥有的单元（所谓的 @ref GlossLocallyActiveDof "本地活动DoFs"）或邻近单元（所谓的 @ref GlossLocallyRelevantDof "本地相关DoFs"）上的解组件。
 
-The interface the classes from the PETScWrapper namespace provide is very similar to that
-of the deal.II linear algebra classes, but instead of implementing this
-functionality themselves, they simply pass on to their corresponding PETSc
-functions. The wrappers are therefore only used to give PETSc a more modern,
-object oriented interface, and to make the use of PETSc and deal.II objects as
-interchangeable as possible. The main point of using PETSc is that it can run
-in %parallel. We will make use of this by partitioning the domain into as many
-blocks ("subdomains") as there are processes in the MPI network. At the same
-time, PETSc also provides dummy MPI stubs, so you can run this program on a
-single machine if PETSc was configured without MPI.
+PETScWrapper命名空间的类所提供的接口与deal.II线性代数类的接口非常相似，但它们不是自己实现这一功能，而是简单地传递给它们相应的PETSc函数。因此，包装器只是用来给PETSc一个更现代的、面向对象的接口，并使PETSc和deal.II对象的使用尽可能地互换。使用PETSc的主要意义在于它可以在%并行状态下运行。我们将利用这一点，将域划分为与MPI网络中的进程一样多的块（"子域"）。同时，PETSc也提供了假的MPI存根，所以如果PETSc的配置中没有MPI，你可以在一台机器上运行这个程序。
 
 
 <a name="ParallelizingsoftwarewithMPI"></a><h3>Parallelizing software with MPI</h3>
 
 
-Developing software to run in %parallel via MPI requires a bit of a change in
-mindset because one typically has to split up all data structures so that
-every processor only stores a piece of the entire problem. As a consequence,
-you can't typically access all components of a solution vector on each
-processor -- each processor may simply not have enough memory to hold the
-entire solution vector. Because data is split up or "distributed" across
-processors, we call the programming model used by MPI "distributed memory
-computing" (as opposed to "shared memory computing", which would mean
-that multiple processors can all access all data within one memory
-space, for example whenever multiple cores in a single machine work
-on a common task). Some of the fundamentals of distributed memory
-computing are discussed in the
-@ref distributed "Parallel computing with multiple processors using distributed memory"
-documentation module, which is itself a sub-module of the
-@ref Parallel "Parallel computing" module.
+开发软件以通过MPI在%parallel中运行，需要改变一下思维方式，因为通常需要分割所有的数据结构，使每个处理器只存储整个问题的一个部分。因此，你通常不能在每个处理器上访问一个解决方案向量的所有组成部分 -- 每个处理器可能根本没有足够的内存来容纳整个解决方案向量。由于数据被分割或 "分布 "在各个处理器上，我们把MPI使用的编程模型称为 "分布式内存计算"（与 "共享内存计算 "相反，后者意味着多个处理器可以访问一个内存空间中的所有数据，例如，当一台机器的多个核心在一个共同任务上工作时）。分布式内存计算的一些基本原理在 @ref distributed "使用分布式内存的多处理器并行计算 "文档模块中讨论，该模块本身就是 @ref Parallel "并行计算 "模块的一个子模块。
 
-In general, to be truly able to scale to large numbers of processors, one
-needs to split between the available processors <i>every</i> data structure
-whose size scales with the size of the overall problem. (For a definition
-of what it means for a program to "scale", see
-@ref GlossParallelScaling "this glossary entry".) This includes, for
-example, the triangulation, the matrix, and all global vectors (solution, right
-hand side). If one doesn't split all of these objects, one of those will be
-replicated on all processors and will eventually simply become too large
-if the problem size (and the number of available processors) becomes large.
-(On the other hand, it is completely fine to keep objects with a size that
-is independent of the overall problem size on every processor. For example,
-each copy of the executable will create its own finite element object, or the
-local matrix we use in the assembly.)
+一般来说，为了真正能够扩展到大量的处理器，我们需要在可用的处理器之间分割<i>every</i>数据结构，其大小与整个问题的大小相适应。关于程序 "扩展 "的定义，见 @ref GlossParallelScaling "本词汇表条目"）。例如，这包括三角形、矩阵和所有全局向量（解，右手边）。如果不拆分所有这些对象，其中一个对象将被复制到所有的处理器上，如果问题大小（和可用的处理器数量）变得很大，最终会简单地变得太大。另一方面，在每个处理器上保留大小与整个问题大小无关的对象是完全可以的。例如，每个可执行文件的副本将创建自己的有限元对象，或者我们在汇编中使用的局部矩阵）。) 
 
-In the current program (as well as in the related step-18), we will not go
-quite this far but present a gentler introduction to using MPI. More
-specifically, the only data structures we will parallelize are matrices and
-vectors. We do, however, not split up the Triangulation and
-DoFHandler classes: each process still has a complete copy of
-these objects, and all processes have exact copies of what the other processes
-have. We will then simply have to mark, in each copy of the triangulation
-on each of the processors, which processor owns which cells. This
-process is called "partitioning" a mesh into @ref GlossSubdomainId "subdomains".
+在目前的程序中（以及相关的 step-18 中），我们不会走得这么远，而是提出一个更温和的使用MPI的介绍。更具体地说，我们要并行化的数据结构只有矩阵和向量。然而，我们并没有拆分Triangulation和DoFHandler类：每个进程仍然拥有这些对象的完整副本，而且所有进程都拥有其他进程所拥有的确切副本。然后，我们只需在每个处理器上的三角形的每个副本中，标记哪个处理器拥有哪些单元。这个过程被称为将网格 "分割 "为 @ref GlossSubdomainId "子域"。
 
-For larger problems, having to store the <i>entire</i> mesh on every processor
-will clearly yield a bottleneck. Splitting up the mesh is slightly, though not
-much more complicated (from a user perspective, though it is <i>much</i> more
-complicated under the hood) to achieve and
-we will show how to do this in step-40 and some other programs. There are
-numerous occasions where, in the course of discussing how a function of this
-program works, we will comment on the fact that it will not scale to large
-problems and why not. All of these issues will be addressed in step-18 and
-in particular step-40, which scales to very large numbers of processes.
+对于较大的问题，在每个处理器上存储<i>entire</i>网格显然会产生一个瓶颈。将网格分割开来，虽然没有多复杂（从用户的角度来看，虽然它<i>much</i>下更复杂），我们将展示如何在 step-40 和其他一些程序中做到这一点。在讨论这个程序的某个功能如何工作的过程中，我们会多次评论它不会扩展到大型问题，以及为什么不会。所有这些问题都将在 step-18 ，特别是 step-40 中解决，它可以扩展到非常多的进程。
 
-Philosophically, the way MPI operates is as follows. You typically run a
-program via
+从哲学上讲，MPI的运行方式如下。你通常通过以下方式运行一个程序 
+
 @code
   mpirun -np 32 ./step-17
-@endcode
-which means to run it on (say) 32 processors. (If you are on a cluster system,
-you typically need to <i>schedule</i> the program to run whenever 32 processors
-become available; this will be described in the documentation of your
-cluster. But under the hood, whenever those processors become available,
-the same call as above will generally be executed.) What this does is that
-the MPI system will start 32 <i>copies</i> of the <code>step-17</code>
-executable. (The MPI term for each of these running executables is that you
-have 32 @ref GlossMPIProcess "MPI processes".)
-This may happen on different machines that can't even read
-from each others' memory spaces, or it may happen on the same machine, but
-the end result is the same: each of these 32 copies will run with some
-memory allocated to it by the operating system, and it will not directly
-be able to read the memory of the other 31 copies. In order to collaborate
-in a common task, these 32 copies then have to <i>communicate</i> with
-each other. MPI, short for <i>Message Passing Interface</i>, makes this
-possible by allowing programs to <i>send messages</i>. You can think
-of this as the mail service: you can put a letter to a specific address
-into the mail and it will be delivered. But that's the extent to which
-you can control things. If you want the receiver to do something
-with the content of the letter, for example return to you data you want
-from over there, then two things need to happen: (i) the receiver needs
-to actually go check whether there is anything in their mailbox, and (ii) if
-there is, react appropriately, for example by sending data back. If you
-wait for this return message but the original receiver was distracted
-and not paying attention, then you're out of luck: you'll simply have to
-wait until your requested over there will be worked on. In some cases,
-bugs will lead the original receiver to never check your mail, and in that
-case you will wait forever -- this is called a <i>deadlock</i>.
-(@dealiiVideoLectureSeeAlso{39,41,41.25,41.5})
+@endcode 
 
-In practice, one does not usually program at the level of sending and
-receiving individual messages, but uses higher level operations. For
-example, in the program we will use function calls that take a number
-from each processor, add them all up, and return the sum to all
-processors. Internally, this is implemented using individual messages,
-but to the user this is transparent. We call such operations <i>collectives</i>
-because <i>all</i> processors participate in them. Collectives allow us
-to write programs where not every copy of the executable is doing something
-completely different (this would be incredibly difficult to program) but
-where in essence all copies are doing the same thing (though on different
-data) for themselves, running through the same blocks of code; then they
-communicate data through collectives; and then go back to doing something
-for themselves again running through the same blocks of data. This is the
-key piece to being able to write programs, and it is the key component
-to making sure that programs can run on any number of processors,
-since we do not have to write different code for each of the participating
-processors.
+这意味着在（比如）32个处理器上运行它。如果你是在一个集群系统上，你通常需要<i>schedule</i>在32个处理器可用时运行该程序；这将在你的集群的文档中描述。但是在系统内部，每当这些处理器可用时，通常会执行上述相同的调用）。) 这样做的目的是，MPI系统将启动32个<i>copies</i>的 <code>step-17</code> 的可执行文件。(这些正在运行的可执行文件中的每一个的MPI术语是，你有32个 @ref GlossMPIProcess "MPI进程"。) 这可能发生在不同的机器上，甚至不能从对方的内存空间中读取，也可能发生在同一台机器上，但最终的结果是一样的：这32个副本中的每一个都将以操作系统分配给它的一些内存运行，它将不能直接读取其他31个副本的内存。为了在一个共同的任务中进行协作，这32个副本就必须<i>communicate</i>相互协作。MPI是<i>Message Passing Interface</i>的缩写，通过允许程序<i>send messages</i>来实现这一目标。你可以把它看作是邮件服务：你可以把一封写给特定地址的信放入邮件中，它将被送达。但这是你能控制事物的程度。如果你想让收信人对信的内容做些什么，例如把你想要的数据从那边返回给你，那么需要发生两件事。(i)接收方需要实际去检查他们的邮箱里是否有东西，(ii)如果有的话，做出适当的反应，比如说发送数据回来。如果你等待这个返回信息，但原来的接收者却心不在焉，没有注意，那么你就不走运了：你只需要等待，直到你在那边的请求将被解决。在某些情况下，错误会导致原始接收者永远不检查你的邮件，在这种情况下，你将永远等待 -- 这被称为<i>deadlock</i>。(  @dealiiVideoLectureSeeAlso{39,41,41.25,41.5})   
 
-(This is not to say that programs are never written in ways where
-different processors run through different blocks of code in their
-copy of the executable. Programs internally also often communicate
-in other ways than through collectives. But in practice, %parallel finite
-element codes almost always follow the scheme where every copy
-of the program runs through the same blocks of code at the same time,
-interspersed by phases where all processors communicate with each other.)
+在实践中，人们通常不在发送和接收单个消息的层面上编程，而是使用更高层次的操作。例如，在程序中，我们将使用函数调用，从每个处理器获取一个数字，将它们全部相加，并将总和返回给所有处理器。在内部，这是用单个消息实现的，但对用户来说，这是透明的。我们称这种操作为<i>collectives</i>，因为<i>all</i>处理器参与其中。集合体允许我们编写程序，其中不是每个可执行文件的副本都在做完全不同的事情（这将是难以置信的编程难度），但实质上所有副本都在为自己做同样的事情（尽管是在不同的数据上），通过相同的代码块运行；然后他们通过集合体进行数据通信；然后再回到为自己做一些事情，通过相同的数据块运行。这是能够编写程序的关键部分，也是确保程序能够在任何数量的处理器上运行的关键部分，因为我们不需要为每个参与的处理器编写不同的代码。
 
-In reality, even the level of calling MPI collective functions is too
-low. Rather, the program below will not contain any direct
-calls to MPI at all, but only deal.II functions that hide this
-communication from users of the deal.II. This has the advantage that
-you don't have to learn the details of MPI and its rather intricate
-function calls. That said, you do have to understand the general
-philosophy behind MPI as outlined above.
+这并不是说程序从来都是以不同的处理器在其可执行文件的副本中运行不同的代码块的方式来编写的。程序内部也经常以其他方式而不是通过集合体进行通信。但是在实践中，%的并行有限元代码几乎总是遵循这样的方案，即程序的每个副本在同一时间运行相同的代码块，中间穿插着所有处理器相互交流的阶段）。) 
+
+在现实中，即使是调用MPI集体函数的水平也太低了。相反，下面的程序根本不会包含对MPI的任何直接调用，而只包含对deal.II的用户隐藏这种通信的函数。这样做的好处是，你不需要学习MPI的细节和相当复杂的函数调用。也就是说，你确实必须理解上文所述的MPI背后的一般哲学。
 
 
 <a name="Whatthisprogramdoes"></a><h3>What this program does</h3>
 
 
-The techniques this program then demonstrates are:
-- How to use the PETSc wrapper classes; this will already be visible in the
-  declaration of the principal class of this program, <code>ElasticProblem</code>.
-- How to partition the mesh into subdomains; this happens in the
-  <code>ElasticProblem::setup_system()</code> function.
-- How to parallelize operations for jobs running on an MPI network; here, this
-  is something one has to pay attention to in a number of places, most
-  notably in the  <code>ElasticProblem::assemble_system()</code> function.
-- How to deal with vectors that store only a subset of vector entries
-  and for which we have to ensure that they store what we need on the
-  current processors. See for example the
-  <code>ElasticProblem::solve()</code> and <code>ElasticProblem::refine_grid()</code>
-  functions.
-- How to deal with status output from programs that run on multiple
-  processors at the same time. This is done via the <code>pcout</code>
-  variable in the program, initialized in the constructor.
+然后这个程序所演示的技术是。
 
-Since all this can only be demonstrated using actual code, let us go straight to the
-code without much further ado.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * 
- * <a name="Includefiles"></a> 
- * <h3>Include files</h3>
- * 
+- 如何使用PETSc封装类；这在本程序的主类的声明中已经可以看到，  <code>ElasticProblem</code>  。
 
- * 
- * First the usual assortment of header files we have already used in previous
- * example programs:
- * 
- * @code
- * #include <deal.II/base/quadrature_lib.h>
- * #include <deal.II/base/function.h>
- * #include <deal.II/base/logstream.h>
- * #include <deal.II/base/multithread_info.h>
- * #include <deal.II/lac/vector.h>
- * #include <deal.II/lac/full_matrix.h>
- * #include <deal.II/lac/affine_constraints.h>
- * #include <deal.II/lac/dynamic_sparsity_pattern.h>
- * #include <deal.II/lac/sparsity_tools.h>
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/grid_refinement.h>
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/dofs/dof_tools.h>
- * #include <deal.II/fe/fe_values.h>
- * #include <deal.II/fe/fe_system.h>
- * #include <deal.II/fe/fe_q.h>
- * #include <deal.II/numerics/vector_tools.h>
- * #include <deal.II/numerics/matrix_tools.h>
- * #include <deal.II/numerics/data_out.h>
- * #include <deal.II/numerics/error_estimator.h>
- * 
- * @endcode
- * 
- * And here come the things that we need particularly for this example program
- * and that weren't in step-8. First, we replace the standard output
- * <code>std::cout</code> by a new stream <code>pcout</code> which is used in
- * parallel computations for generating output only on one of the MPI
- * processes.
- * 
- * @code
- * #include <deal.II/base/conditional_ostream.h>
- * @endcode
- * 
- * We are going to query the number of processes and the number of the present
- * process by calling the respective functions in the Utilities::MPI
- * namespace.
- * 
- * @code
- * #include <deal.II/base/mpi.h>
- * @endcode
- * 
- * Then, we are going to replace all linear algebra components that involve
- * the (global) linear system by classes that wrap interfaces similar to our
- * own linear algebra classes around what PETSc offers (PETSc is a library
- * written in C, and deal.II comes with wrapper classes that provide the PETSc
- * functionality with an interface that is similar to the interface we already
- * had for our own linear algebra classes). In particular, we need vectors and
- * matrices that are distributed across several
- * @ref GlossMPIProcess "processes" in MPI programs (and
- * simply map to sequential, local vectors and matrices if there is only a
- * single process, i.e., if you are running on only one machine, and without
- * MPI support):
- * 
- * @code
- * #include <deal.II/lac/petsc_vector.h>
- * #include <deal.II/lac/petsc_sparse_matrix.h>
- * @endcode
- * 
- * Then we also need interfaces for solvers and preconditioners that PETSc
- * provides:
- * 
- * @code
- * #include <deal.II/lac/petsc_solver.h>
- * #include <deal.II/lac/petsc_precondition.h>
- * @endcode
- * 
- * And in addition, we need some algorithms for partitioning our meshes so
- * that they can be efficiently distributed across an MPI network. The
- * partitioning algorithm is implemented in the <code>GridTools</code>
- * namespace, and we need an additional include file for a function in
- * <code>DoFRenumbering</code> that allows to sort the indices associated with
- * degrees of freedom so that they are numbered according to the subdomain
- * they are associated with:
- * 
- * @code
- * #include <deal.II/grid/grid_tools.h>
- * #include <deal.II/dofs/dof_renumbering.h>
- * 
- * @endcode
- * 
- * And this is simply C++ again:
- * 
- * @code
- * #include <fstream>
- * #include <iostream>
- * 
- * @endcode
- * 
- * The last step is as in all previous programs:
- * 
- * @code
- * namespace Step17
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeElasticProblemcodeclasstemplate"></a> 
- * <h3>The <code>ElasticProblem</code> class template</h3>
- * 
+- 如何将网格划分为子域；这发生在  <code>ElasticProblem::setup_system()</code>  函数中。
 
- * 
- * The first real part of the program is the declaration of the main
- * class.  As mentioned in the introduction, almost all of this has
- * been copied verbatim from step-8, so we only comment on the few
- * differences between the two tutorials.  There is one (cosmetic)
- * change in that we let <code>solve</code> return a value, namely
- * the number of iterations it took to converge, so that we can
- * output this to the screen at the appropriate place.
- * 
- * @code
- *   template <int dim>
- *   class ElasticProblem
- *   {
- *   public:
- *     ElasticProblem();
- *     void run();
- * 
- *   private:
- *     void         setup_system();
- *     void         assemble_system();
- *     unsigned int solve();
- *     void         refine_grid();
- *     void         output_results(const unsigned int cycle) const;
- * 
- * @endcode
- * 
- * The first change is that we have to declare a variable that
- * indicates the @ref GlossMPICommunicator "MPI communicator" over
- * which we are supposed to distribute our computations.
- * 
- * @code
- *     MPI_Comm mpi_communicator;
- * 
- * @endcode
- * 
- * Then we have two variables that tell us where in the parallel
- * world we are. The first of the following variables,
- * <code>n_mpi_processes</code>, tells us how many MPI processes
- * there exist in total, while the second one,
- * <code>this_mpi_process</code>, indicates which is the number of
- * the present process within this space of processes (in MPI
- * language, this corresponds to the @ref GlossMPIRank "rank" of
- * the process). The latter will have a unique value for each
- * process between zero and (less than)
- * <code>n_mpi_processes</code>. If this program is run on a
- * single machine without MPI support, then their values are
- * <code>1</code> and <code>0</code>, respectively.
- * 
- * @code
- *     const unsigned int n_mpi_processes;
- *     const unsigned int this_mpi_process;
- * 
- * @endcode
- * 
- * Next up is a stream-like variable <code>pcout</code>. It is, in essence,
- * just something we use for convenience: in a parallel program,
- * if each process outputs status information, then there quickly
- * is a lot of clutter. Rather, we would want to only have one
- * @ref GlossMPIProcess "process" output everything once, for
- * example the one with @ref GlossMPIRank "rank" zero. At the same
- * time, it seems silly to prefix <i>every</i> place where we
- * create output with an <code>if (my_rank==0)</code> condition.
- *     
+- 如何对运行在MPI网络上的作业进行并行化操作；在这里，这是在很多地方都要注意的，最明显的是在  <code>ElasticProblem::assemble_system()</code>  函数中。
 
- * 
- * To make this simpler, the ConditionalOStream class does exactly
- * this under the hood: it acts as if it were a stream, but only
- * forwards to a real, underlying stream if a flag is set. By
- * setting this condition to <code>this_mpi_process==0</code>
- * (where <code>this_mpi_process</code> corresponds to the rank of
- * an MPI process), we make sure that output is only generated
- * from the first process and that we don't get the same lines of
- * output over and over again, once per process. Thus, we can use
- * <code>pcout</code> everywhere and in every process, but on all
- * but one process nothing will ever happen to the information
- * that is piped into the object via
- * <code>operator&lt;&lt;</code>.
- * 
- * @code
- *     ConditionalOStream pcout;
- * 
- * @endcode
- * 
- * The remainder of the list of member variables is fundamentally the
- * same as in step-8. However, we change the declarations of matrix
- * and vector types to use parallel PETSc objects instead. Note that
- * we do not use a separate sparsity pattern, since PETSc manages this
- * internally as part of its matrix data structures.
- * 
- * @code
- *     Triangulation<dim> triangulation;
- *     FESystem<dim>      fe;
- *     DoFHandler<dim>    dof_handler;
- * 
- *     AffineConstraints<double> hanging_node_constraints;
- * 
- *     PETScWrappers::MPI::SparseMatrix system_matrix;
- * 
- *     PETScWrappers::MPI::Vector solution;
- *     PETScWrappers::MPI::Vector system_rhs;
- *   };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Righthandsidevalues"></a> 
- * <h3>Right hand side values</h3>
- * 
+- 如何处理只存储矢量项子集的向量，对于这些向量，我们必须确保它们在当前的处理器上存储我们所需要的东西。例如参见 <code>ElasticProblem::solve()</code> and <code>ElasticProblem::refine_grid()</code> 函数。
 
- * 
- * The following is taken from step-8 without change:
- * 
- * @code
- *   template <int dim>
- *   class RightHandSide : public Function<dim>
- *   {
- *   public:
- *     virtual void vector_value(const Point<dim> &p,
- *                               Vector<double> &  values) const override
- *     {
- *       Assert(values.size() == dim, ExcDimensionMismatch(values.size(), dim));
- *       Assert(dim >= 2, ExcInternalError());
- * 
- *       Point<dim> point_1, point_2;
- *       point_1(0) = 0.5;
- *       point_2(0) = -0.5;
- * 
- *       if (((p - point_1).norm_square() < 0.2 * 0.2) ||
- *           ((p - point_2).norm_square() < 0.2 * 0.2))
- *         values(0) = 1;
- *       else
- *         values(0) = 0;
- * 
- *       if (p.square() < 0.2 * 0.2)
- *         values(1) = 1;
- *       else
- *         values(1) = 0;
- *     }
- * 
- *     virtual void
- *     vector_value_list(const std::vector<Point<dim>> &points,
- *                       std::vector<Vector<double>> &  value_list) const override
- *     {
- *       const unsigned int n_points = points.size();
- * 
- *       Assert(value_list.size() == n_points,
- *              ExcDimensionMismatch(value_list.size(), n_points));
- * 
- *       for (unsigned int p = 0; p < n_points; ++p)
- *         RightHandSide<dim>::vector_value(points[p], value_list[p]);
- *     }
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeElasticProblemcodeclassimplementation"></a> 
- * <h3>The <code>ElasticProblem</code> class implementation</h3>
- * 
+- 如何处理同时在多个处理器上运行的程序的状态输出。这是通过程序中的 <code>pcout</code> 变量完成的，在构造函数中初始化。
 
- * 
- * 
- * <a name="ElasticProblemElasticProblem"></a> 
- * <h4>ElasticProblem::ElasticProblem</h4>
- * 
+由于这一切只能用实际的代码来演示，让我们直接进入代码，不再多说什么了。<a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * The first step in the actual implementation is the constructor of
- * the main class. Apart from initializing the same member variables
- * that we already had in step-8, we here initialize the MPI
- * communicator variable we shall use with the global MPI
- * communicator linking all processes together (in more complex
- * applications, one could here use a communicator object that only
- * links a subset of all processes), and call the Utilities::MPI
- * helper functions to determine the number of processes and where
- * the present one fits into this picture. In addition, we make sure
- * that output is only generated by the (globally) first process.
- * We do so by passing the stream we want to output to
- * (<code>std::cout</code>) and a true/false flag as arguments where
- * the latter is determined by testing whether the process currently
- * executing the constructor call is the first in the MPI universe.
- * 
- * @code
- *   template <int dim>
- *   ElasticProblem<dim>::ElasticProblem()
- *     : mpi_communicator(MPI_COMM_WORLD)
- *     , n_mpi_processes(Utilities::MPI::n_mpi_processes(mpi_communicator))
- *     , this_mpi_process(Utilities::MPI::this_mpi_process(mpi_communicator))
- *     , pcout(std::cout, (this_mpi_process == 0))
- *     , fe(FE_Q<dim>(1), dim)
- *     , dof_handler(triangulation)
- *   {}
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ElasticProblemsetup_system"></a> 
- * <h4>ElasticProblem::setup_system</h4>
- * 
 
- * 
- * Next, the function in which we set up the various variables
- * for the global linear system to be solved needs to be implemented.
- *   
+<a name="Includefiles"></a> <h3>Include files</h3> 
 
- * 
- * However, before we proceed with this, there is one thing to do for a
- * parallel program: we need to determine which MPI process is
- * responsible for each of the cells. Splitting cells among
- * processes, commonly called "partitioning the mesh", is done by
- * assigning a @ref GlossSubdomainId "subdomain id" to each cell. We
- * do so by calling into the METIS library that does this in a very
- * efficient way, trying to minimize the number of nodes on the
- * interfaces between subdomains. Rather than trying to call METIS
- * directly, we do this by calling the
- * GridTools::partition_triangulation() function that does this at a
- * much higher level of programming.
- *   
 
- * 
- * @note As mentioned in the introduction, we could avoid this manual
- * partitioning step if we used the parallel::shared::Triangulation
- * class for the triangulation object instead (as we do in step-18).
- * That class does, in essence, everything a regular triangulation
- * does, but it then also automatically partitions the mesh after
- * every mesh creation or refinement operation.
- *   
 
- * 
- * Following partitioning, we need to enumerate all degrees of
- * freedom as usual.  However, we would like to enumerate the
- * degrees of freedom in a way so that all degrees of freedom
- * associated with cells in subdomain zero (which resides on process
- * zero) come before all DoFs associated with cells on subdomain
- * one, before those on cells on process two, and so on. We need
- * this since we have to split the global vectors for right hand
- * side and solution, as well as the matrix into contiguous chunks
- * of rows that live on each of the processors, and we will want to
- * do this in a way that requires minimal communication. This
- * particular enumeration can be obtained by re-ordering degrees of
- * freedom indices using DoFRenumbering::subdomain_wise().
- *   
 
- * 
- * The final step of this initial setup is that we get ourselves an
- * IndexSet that indicates the subset of the global number of unknowns
- * this
- * process is responsible for. (Note that a degree of freedom is not
- * necessarily owned by the process that owns a cell just because
- * the degree of freedom lives on this cell: some degrees of freedom
- * live on interfaces between subdomains, and are consequently only owned by
- * one of the processes adjacent to this interface.)
- *   
+首先是我们在以前的例子程序中已经使用过的常见的各种头文件。
 
- * 
- * Before we move on, let us recall a fact already discussed in the
- * introduction: The triangulation we use here is replicated across
- * all processes, and each process has a complete copy of the entire
- * triangulation, with all cells. Partitioning only provides a way
- * to identify which cells out of all each process "owns", but it
- * knows everything about all of them. Likewise, the DoFHandler
- * object knows everything about every cell, in particular the
- * degrees of freedom that live on each cell, whether it is one that
- * the current process owns or not. This can not scale to large
- * problems because eventually just storing the entire mesh, and
- * everything that is associated with it, on every process will
- * become infeasible if the problem is large enough. On the other
- * hand, if we split the triangulation into parts so that every
- * process stores only those cells it "owns" but nothing else (or,
- * at least a sufficiently small fraction of everything else), then
- * we can solve large problems if only we throw a large enough
- * number of MPI processes at them. This is what we are going to in
- * step-40, for example, using the
- * parallel::distributed::Triangulation class.  On the other hand,
- * most of the rest of what we demonstrate in the current program
- * will actually continue to work whether we have the entire
- * triangulation available, or only a piece of it.
- * 
- * @code
- *   template <int dim>
- *   void ElasticProblem<dim>::setup_system()
- *   {
- *     GridTools::partition_triangulation(n_mpi_processes, triangulation);
- * 
- *     dof_handler.distribute_dofs(fe);
- *     DoFRenumbering::subdomain_wise(dof_handler);
- * 
- * @endcode
- * 
- * We need to initialize the objects denoting hanging node constraints for
- * the present grid. As with the triangulation and DoFHandler objects, we
- * will simply store <i>all</i> constraints on each process; again, this
- * will not scale, but we show in step-40 how one can work around this by
- * only storing on each MPI process the constraints for degrees of freedom
- * that actually matter on this particular process.
- * 
- * @code
- *     hanging_node_constraints.clear();
- *     DoFTools::make_hanging_node_constraints(dof_handler,
- *                                             hanging_node_constraints);
- *     hanging_node_constraints.close();
- * 
- * @endcode
- * 
- * Now we create the sparsity pattern for the system matrix. Note that we
- * again compute and store all entries and not only the ones relevant
- * to this process (see step-18 or step-40 for a more efficient way to
- * handle this).
- * 
- * @code
- *     DynamicSparsityPattern dsp(dof_handler.n_dofs(), dof_handler.n_dofs());
- *     DoFTools::make_sparsity_pattern(dof_handler,
- *                                     dsp,
- *                                     hanging_node_constraints,
- *                                     false);
- * 
- * @endcode
- * 
- * Now we determine the set of locally owned DoFs and use that to
- * initialize parallel vectors and matrix. Since the matrix and vectors
- * need to work in parallel, we have to pass them an MPI communication
- * object, as well as information about the partitioning contained in the
- * IndexSet @p locally_owned_dofs.  The IndexSet contains information
- * about the global size (the <i>total</i> number of degrees of freedom)
- * and also what subset of rows is to be stored locally.  Note that the
- * system matrix needs that partitioning information for the rows and
- * columns. For square matrices, as it is the case here, the columns
- * should be partitioned in the same way as the rows, but in the case of
- * rectangular matrices one has to partition the columns in the same way
- * as vectors are partitioned with which the matrix is multiplied, while
- * rows have to partitioned in the same way as destination vectors of
- * matrix-vector multiplications:
- * 
- * @code
- *     const std::vector<IndexSet> locally_owned_dofs_per_proc =
- *       DoFTools::locally_owned_dofs_per_subdomain(dof_handler);
- *     const IndexSet locally_owned_dofs =
- *       locally_owned_dofs_per_proc[this_mpi_process];
- * 
- *     system_matrix.reinit(locally_owned_dofs,
- *                          locally_owned_dofs,
- *                          dsp,
- *                          mpi_communicator);
- * 
- *     solution.reinit(locally_owned_dofs, mpi_communicator);
- *     system_rhs.reinit(locally_owned_dofs, mpi_communicator);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ElasticProblemassemble_system"></a> 
- * <h4>ElasticProblem::assemble_system</h4>
- * 
+@code
+#include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/function.h>
+#include <deal.II/base/logstream.h>
+#include <deal.II/base/multithread_info.h>
+#include <deal.II/lac/vector.h>
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/affine_constraints.h>
+#include <deal.II/lac/dynamic_sparsity_pattern.h>
+#include <deal.II/lac/sparsity_tools.h>
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/grid_refinement.h>
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/dofs/dof_tools.h>
+#include <deal.II/fe/fe_values.h>
+#include <deal.II/fe/fe_system.h>
+#include <deal.II/fe/fe_q.h>
+#include <deal.II/numerics/vector_tools.h>
+#include <deal.II/numerics/matrix_tools.h>
+#include <deal.II/numerics/data_out.h>
+#include <deal.II/numerics/error_estimator.h>
 
- * 
- * We now assemble the matrix and right hand side of the
- * problem. There are some things worth mentioning before we go into
- * detail. First, we will be assembling the system in parallel,
- * i.e., each process will be responsible for assembling on cells
- * that belong to this particular process. Note that the degrees of
- * freedom are split in a way such that all DoFs in the interior of
- * cells and between cells belonging to the same subdomain belong to
- * the process that <code>owns</code> the cell. However, even then
- * we sometimes need to assemble on a cell with a neighbor that
- * belongs to a different process, and in these cases when we add up
- * the local contributions into the global matrix or right hand side
- * vector, we have to transfer these entries to the process that
- * owns these elements. Fortunately, we don't have to do this by
- * hand: PETSc does all this for us by caching these elements
- * locally, and sending them to the other processes as necessary
- * when we call the <code>compress()</code> functions on the matrix
- * and vector at the end of this function.
- *   
 
- * 
- * The second point is that once we have handed over matrix and
- * vector contributions to PETSc, it is a) hard, and b) very
- * inefficient to get them back for modifications. This is not only
- * the fault of PETSc, it is also a consequence of the distributed
- * nature of this program: if an entry resides on another processor,
- * then it is necessarily expensive to get it. The consequence of
- * this is that we should not try to first assemble the matrix and
- * right hand side as if there were no hanging node constraints and
- * boundary values, and then eliminate these in a second step
- * (using, for example, AffineConstraints::condense()). Rather, we
- * should try to eliminate hanging node constraints before handing
- * these entries over to PETSc. This is easy: instead of copying
- * elements by hand into the global matrix (as we do in step-4), we
- * use the AffineConstraints::distribute_local_to_global() functions
- * to take care of hanging nodes at the same time. We also already
- * did this in step-6. The second step, elimination of boundary
- * nodes, could also be done this way by putting the boundary values
- * into the same AffineConstraints object as hanging nodes (see the
- * way it is done in step-6, for example); however, it is not
- * strictly necessary to do this here because eliminating boundary
- * values can be done with only the data stored on each process
- * itself, and consequently we use the approach used before in
- * step-4, i.e., via MatrixTools::apply_boundary_values().
- *   
+@endcode 
 
- * 
- * All of this said, here is the actual implementation starting with
- * the general setup of helper variables.  (Note that we still use
- * the deal.II full matrix and vector types for the local systems as
- * these are small and need not be shared across processes.)
- * 
- * @code
- *   template <int dim>
- *   void ElasticProblem<dim>::assemble_system()
- *   {
- *     QGauss<dim>   quadrature_formula(fe.degree + 1);
- *     FEValues<dim> fe_values(fe,
- *                             quadrature_formula,
- *                             update_values | update_gradients |
- *                               update_quadrature_points | update_JxW_values);
- * 
- *     const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
- *     const unsigned int n_q_points    = quadrature_formula.size();
- * 
- *     FullMatrix<double> cell_matrix(dofs_per_cell, dofs_per_cell);
- *     Vector<double>     cell_rhs(dofs_per_cell);
- * 
- *     std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
- * 
- *     std::vector<double> lambda_values(n_q_points);
- *     std::vector<double> mu_values(n_q_points);
- * 
- *     Functions::ConstantFunction<dim> lambda(1.), mu(1.);
- * 
- *     RightHandSide<dim>          right_hand_side;
- *     std::vector<Vector<double>> rhs_values(n_q_points, Vector<double>(dim));
- * 
- * 
- * @endcode
- * 
- * The next thing is the loop over all elements. Note that we do
- * not have to do <i>all</i> the work on every process: our job
- * here is only to assemble the system on cells that actually
- * belong to this MPI process, all other cells will be taken care
- * of by other processes. This is what the if-clause immediately
- * after the for-loop takes care of: it queries the subdomain
- * identifier of each cell, which is a number associated with each
- * cell that tells us about the owner process. In more generality,
- * the subdomain id is used to split a domain into several parts
- * (we do this above, at the beginning of
- * <code>setup_system()</code>), and which allows to identify
- * which subdomain a cell is living on. In this application, we
- * have each process handle exactly one subdomain, so we identify
- * the terms <code>subdomain</code> and <code>MPI process</code>.
- *     
 
- * 
- * Apart from this, assembling the local system is relatively uneventful
- * if you have understood how this is done in step-8. As mentioned above,
- * distributing local contributions into the global matrix
- * and right hand sides also takes care of hanging node constraints in the
- * same way as is done in step-6.
- * 
- * @code
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       if (cell->subdomain_id() == this_mpi_process)
- *         {
- *           cell_matrix = 0;
- *           cell_rhs    = 0;
- * 
- *           fe_values.reinit(cell);
- * 
- *           lambda.value_list(fe_values.get_quadrature_points(), lambda_values);
- *           mu.value_list(fe_values.get_quadrature_points(), mu_values);
- * 
- *           for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *             {
- *               const unsigned int component_i =
- *                 fe.system_to_component_index(i).first;
- * 
- *               for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *                 {
- *                   const unsigned int component_j =
- *                     fe.system_to_component_index(j).first;
- * 
- *                   for (unsigned int q_point = 0; q_point < n_q_points;
- *                        ++q_point)
- *                     {
- *                       cell_matrix(i, j) +=
- *                         ((fe_values.shape_grad(i, q_point)[component_i] *
- *                           fe_values.shape_grad(j, q_point)[component_j] *
- *                           lambda_values[q_point]) +
- *                          (fe_values.shape_grad(i, q_point)[component_j] *
- *                           fe_values.shape_grad(j, q_point)[component_i] *
- *                           mu_values[q_point]) +
- *                          ((component_i == component_j) ?
- *                             (fe_values.shape_grad(i, q_point) *
- *                              fe_values.shape_grad(j, q_point) *
- *                              mu_values[q_point]) :
- *                             0)) *
- *                         fe_values.JxW(q_point);
- *                     }
- *                 }
- *             }
- * 
- *           right_hand_side.vector_value_list(fe_values.get_quadrature_points(),
- *                                             rhs_values);
- *           for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *             {
- *               const unsigned int component_i =
- *                 fe.system_to_component_index(i).first;
- * 
- *               for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
- *                 cell_rhs(i) += fe_values.shape_value(i, q_point) *
- *                                rhs_values[q_point](component_i) *
- *                                fe_values.JxW(q_point);
- *             }
- * 
- *           cell->get_dof_indices(local_dof_indices);
- *           hanging_node_constraints.distribute_local_to_global(cell_matrix,
- *                                                               cell_rhs,
- *                                                               local_dof_indices,
- *                                                               system_matrix,
- *                                                               system_rhs);
- *         }
- * 
- * @endcode
- * 
- * The next step is to "compress" the vector and the system matrix. This
- * means that each process sends the additions that were made to those
- * entries of the matrix and vector that the process did not own itself to
- * the process that owns them. After receiving these additions from other
- * processes, each process then adds them to the values it already
- * has. These additions are combining the integral contributions of shape
- * functions living on several cells just as in a serial computation, with
- * the difference that the cells are assigned to different processes.
- * 
- * @code
- *     system_matrix.compress(VectorOperation::add);
- *     system_rhs.compress(VectorOperation::add);
- * 
- * @endcode
- * 
- * The global matrix and right hand side vectors have now been
- * formed. We still have to apply boundary values, in the same way as we
- * did, for example, in step-3, step-4, and a number of other programs.
- *     
 
- * 
- * The last argument to the call to
- * MatrixTools::apply_boundary_values() below allows for some
- * optimizations. It controls whether we should also delete
- * entries (i.e., set them to zero) in the matrix columns
- * corresponding to boundary nodes, or to keep them (and passing
- * <code>true</code> means: yes, do eliminate the columns). If we
- * do eliminate columns, then the resulting matrix will be
- * symmetric again if it was before; if we don't, then it
- * won't. The solution of the resulting system should be the same,
- * though. The only reason why we may want to make the system
- * symmetric again is that we would like to use the CG method,
- * which only works with symmetric matrices. The reason why we may
- * <i>not</i> want to make the matrix symmetric is because this
- * would require us to write into column entries that actually
- * reside on other processes, i.e., it involves communicating
- * data. This is always expensive.
- *     
+然后是我们在这个例子程序中特别需要的东西，这些东西不在  step-8  中。首先，我们替换掉标准输出 <code>std::cout</code> by a new stream <code>pcout</code> ，它在并行计算中只用于在一个MPI进程中生成输出。
 
- * 
- * Experience tells us that CG also works (and works almost as
- * well) if we don't remove the columns associated with boundary
- * nodes, which can be explained by the special structure of this
- * particular non-symmetry. To avoid the expense of communication,
- * we therefore do not eliminate the entries in the affected
- * columns.
- * 
- * @code
- *     std::map<types::global_dof_index, double> boundary_values;
- *     VectorTools::interpolate_boundary_values(dof_handler,
- *                                              0,
- *                                              Functions::ZeroFunction<dim>(dim),
- *                                              boundary_values);
- *     MatrixTools::apply_boundary_values(
- *       boundary_values, system_matrix, solution, system_rhs, false);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ElasticProblemsolve"></a> 
- * <h4>ElasticProblem::solve</h4>
- * 
+@code
+#include <deal.II/base/conditional_ostream.h>
+@endcode 
 
- * 
- * Having assembled the linear system, we next need to solve
- * it. PETSc offers a variety of sequential and parallel solvers,
- * for which we have written wrappers that have almost the same
- * interface as is used for the deal.II solvers used in all previous
- * example programs. The following code should therefore look rather
- * familiar.
- *   
 
- * 
- * At the top of the function, we set up a convergence monitor, and
- * assign it the accuracy to which we would like to solve the linear
- * system. Next, we create an actual solver object using PETSc's CG
- * solver which also works with parallel (distributed) vectors and
- * matrices. And finally a preconditioner; we choose to use a block
- * Jacobi preconditioner which works by computing an incomplete LU
- * decomposition on each diagonal block of the matrix.  (In other
- * words, each MPI process computes an ILU from the rows it stores
- * by throwing away columns that correspond to row indices not
- * stored locally; this yields a square matrix block from which we
- * can compute an ILU. That means that if you run the program with
- * only one process, then you will use an ILU(0) as a
- * preconditioner, while if it is run on many processes, then we
- * will have a number of blocks on the diagonal and the
- * preconditioner is the ILU(0) of each of these blocks. In the
- * extreme case of one degree of freedom per processor, this
- * preconditioner is then simply a Jacobi preconditioner since the
- * diagonal matrix blocks consist of only a single entry. Such a
- * preconditioner is relatively easy to compute because it does not
- * require any kind of communication between processors, but it is
- * in general not very efficient for large numbers of processors.)
- *   
 
- * 
- * Following this kind of setup, we then solve the linear system:
- * 
- * @code
- *   template <int dim>
- *   unsigned int ElasticProblem<dim>::solve()
- *   {
- *     SolverControl solver_control(solution.size(), 1e-8 * system_rhs.l2_norm());
- *     PETScWrappers::SolverCG cg(solver_control, mpi_communicator);
- * 
- *     PETScWrappers::PreconditionBlockJacobi preconditioner(system_matrix);
- * 
- *     cg.solve(system_matrix, solution, system_rhs, preconditioner);
- * 
- * @endcode
- * 
- * The next step is to distribute hanging node constraints. This is a
- * little tricky, since to fill in the value of a constrained node you
- * need access to the values of the nodes to which it is constrained (for
- * example, for a Q1 element in 2d, we need access to the two nodes on the
- * big side of a hanging node face, to compute the value of the
- * constrained node in the middle).
- *     
+我们将通过调用 Utilities::MPI 命名空间中的相应函数来查询进程的数量和当前进程的数量。
 
- * 
- * The problem is that we have built our vectors (in
- * <code>setup_system()</code>) in such a way that every process
- * is responsible for storing only those elements of the solution
- * vector that correspond to the degrees of freedom this process
- * "owns". There are, however, cases where in order to compute the
- * value of the vector entry for a constrained degree of freedom
- * on one process, we need to access vector entries that are
- * stored on other processes.  PETSc (and, for that matter, the
- * MPI model on which it is built) does not allow to simply query
- * vector entries stored on other processes, so what we do here is
- * to get a copy of the "distributed" vector where we store all
- * elements locally. This is simple, since the deal.II wrappers
- * have a conversion constructor for the deal.II Vector
- * class. (This conversion of course requires communication, but
- * in essence every process only needs to send its data to every
- * other process once in bulk, rather than having to respond to
- * queries for individual elements):
- * 
- * @code
- *     Vector<double> localized_solution(solution);
- * 
- * @endcode
- * 
- * Of course, as in previous discussions, it is clear that such a
- * step cannot scale very far if you wanted to solve large
- * problems on large numbers of processes, because every process
- * now stores <i>all elements</i> of the solution vector. (We will
- * show how to do this better in step-40.)  On the other hand,
- * distributing hanging node constraints is simple on this local
- * copy, using the usual function
- * AffineConstraints::distributed(). In particular, we can compute
- * the values of <i>all</i> constrained degrees of freedom,
- * whether the current process owns them or not:
- * 
- * @code
- *     hanging_node_constraints.distribute(localized_solution);
- * 
- * @endcode
- * 
- * Then transfer everything back into the global vector. The
- * following operation copies those elements of the localized
- * solution that we store locally in the distributed solution, and
- * does not touch the other ones. Since we do the same operation
- * on all processors, we end up with a distributed vector (i.e., a
- * vector that on every process only stores the vector entries
- * corresponding to degrees of freedom that are owned by this
- * process) that has all the constrained nodes fixed.
- *     
+@code
+#include <deal.II/base/mpi.h>
+@endcode 
 
- * 
- * We end the function by returning the number of iterations it
- * took to converge, to allow for some output.
- * 
- * @code
- *     solution = localized_solution;
- * 
- *     return solver_control.last_step();
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ElasticProblemrefine_grid"></a> 
- * <h4>ElasticProblem::refine_grid</h4>
- * 
 
- * 
- * Using some kind of refinement indicator, the mesh can be
- * refined. The problem is basically the same as with distributing
- * hanging node constraints: in order to compute the error indicator
- * (even if we were just interested in the indicator on the cells
- * the current process owns), we need access to more elements of the
- * solution vector than just those the current processor stores. To
- * make this happen, we do essentially what we did in
- * <code>solve()</code> already, namely get a <i>complete</i> copy
- * of the solution vector onto every process, and use that to
- * compute. This is in itself expensive as explained above and it
- * is particular unnecessary since we had just created and then
- * destroyed such a vector in <code>solve()</code>, but efficiency
- * is not the point of this program and so let us opt for a design
- * in which every function is as self-contained as possible.
- *   
 
- * 
- * Once we have such a "localized" vector that contains <i>all</i>
- * elements of the solution vector, we can compute the indicators
- * for the cells that belong to the present process. In fact, we
- * could of course compute <i>all</i> refinement indicators since
- * our Triangulation and DoFHandler objects store information about
- * all cells, and since we have a complete copy of the solution
- * vector. But in the interest in showing how to operate in
- * %parallel, let us demonstrate how one would operate if one were
- * to only compute <i>some</i> error indicators and then exchange
- * the remaining ones with the other processes. (Ultimately, each
- * process needs a complete set of refinement indicators because
- * every process needs to refine their mesh, and needs to refine it
- * in exactly the same way as all of the other processes.)
- *   
+然后，我们将把所有涉及（全局）线性系统的线性代数组件替换为类，这些类的接口类似于我们自己的线性代数类所提供的PETSc（PETSc是一个用C语言编写的库，而deal.II附带的包装类提供的PETSc功能的接口类似于我们自己的线性代数类的接口）。特别是，我们需要在MPI程序中分布在几个 @ref GlossMPIProcess "进程 "中的向量和矩阵（如果只有一个进程，也就是说，如果你只在一台机器上运行，并且没有MPI支持，则简单地映射为顺序的、本地的向量和矩阵）。
 
- * 
- * So, to do all of this, we need to:
- * - First, get a local copy of the distributed solution vector.
- * - Second, create a vector to store the refinement indicators.
- * - Third, let the KellyErrorEstimator compute refinement
- * indicators for all cells belonging to the present
- * subdomain/process. The last argument of the call indicates
- * which subdomain we are interested in. The three arguments
- * before it are various other default arguments that one usually
- * does not need (and does not state values for, but rather uses the
- * defaults), but which we have to state here explicitly since we
- * want to modify the value of a following argument (i.e., the one
- * indicating the subdomain).
- * 
- * @code
- *   template <int dim>
- *   void ElasticProblem<dim>::refine_grid()
- *   {
- *     const Vector<double> localized_solution(solution);
- * 
- *     Vector<float> local_error_per_cell(triangulation.n_active_cells());
- *     KellyErrorEstimator<dim>::estimate(dof_handler,
- *                                        QGauss<dim - 1>(fe.degree + 1),
- *                                        {},
- *                                        localized_solution,
- *                                        local_error_per_cell,
- *                                        ComponentMask(),
- *                                        nullptr,
- *                                        MultithreadInfo::n_threads(),
- *                                        this_mpi_process);
- * 
- * @endcode
- * 
- * Now all processes have computed error indicators for their own
- * cells and stored them in the respective elements of the
- * <code>local_error_per_cell</code> vector. The elements of this
- * vector for cells not owned by the present process are
- * zero. However, since all processes have a copy of the entire
- * triangulation and need to keep these copies in sync, they need
- * the values of refinement indicators for all cells of the
- * triangulation. Thus, we need to distribute our results. We do
- * this by creating a distributed vector where each process has
- * its share and sets the elements it has computed. Consequently,
- * when you view this vector as one that lives across all
- * processes, then every element of this vector has been set
- * once. We can then assign this parallel vector to a local,
- * non-parallel vector on each process, making <i>all</i> error
- * indicators available on every process.
- *     
+@code
+#include <deal.II/lac/petsc_vector.h>
+#include <deal.II/lac/petsc_sparse_matrix.h>
+@endcode 
 
- * 
- * So in the first step, we need to set up a parallel vector. For
- * simplicity, every process will own a chunk with as many
- * elements as this process owns cells, so that the first chunk of
- * elements is stored with process zero, the next chunk with
- * process one, and so on. It is important to remark, however,
- * that these elements are not necessarily the ones we will write
- * to. This is a consequence of the order in which cells are arranged,
- * i.e., the order in which the elements of the vector correspond
- * to cells is not ordered according to the subdomain these cells
- * belong to. In other words, if on this process we compute
- * indicators for cells of a certain subdomain, we may write the
- * results to more or less random elements of the distributed
- * vector; in particular, they may not necessarily lie within the
- * chunk of vector we own on the present process. They will
- * subsequently have to be copied into another process' memory
- * space, an operation that PETSc does for us when we call the
- * <code>compress()</code> function. This inefficiency could be
- * avoided with some more code, but we refrain from it since it is
- * not a major factor in the program's total runtime.
- *     
 
- * 
- * So here is how we do it: count how many cells belong to this
- * process, set up a distributed vector with that many elements to
- * be stored locally, copy over the elements we computed
- * locally, and finally compress the result. In fact, we really only copy
- * the elements that are nonzero, so we may miss a few that we
- * computed to zero, but this won't hurt since the original values
- * of the vector are zero anyway.
- * 
- * @code
- *     const unsigned int n_local_cells =
- *       GridTools::count_cells_with_subdomain_association(triangulation,
- *                                                         this_mpi_process);
- *     PETScWrappers::MPI::Vector distributed_all_errors(
- *       mpi_communicator, triangulation.n_active_cells(), n_local_cells);
- * 
- *     for (unsigned int i = 0; i < local_error_per_cell.size(); ++i)
- *       if (local_error_per_cell(i) != 0)
- *         distributed_all_errors(i) = local_error_per_cell(i);
- *     distributed_all_errors.compress(VectorOperation::insert);
- * 
- * 
- * @endcode
- * 
- * So now we have this distributed vector that contains the
- * refinement indicators for all cells. To use it, we need to
- * obtain a local copy and then use it to mark cells for
- * refinement or coarsening, and actually do the refinement and
- * coarsening. It is important to recognize that <i>every</i>
- * process does this to its own copy of the triangulation, and
- * does it in exactly the same way.
- * 
- * @code
- *     const Vector<float> localized_all_errors(distributed_all_errors);
- * 
- *     GridRefinement::refine_and_coarsen_fixed_number(triangulation,
- *                                                     localized_all_errors,
- *                                                     0.3,
- *                                                     0.03);
- *     triangulation.execute_coarsening_and_refinement();
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ElasticProblemoutput_results"></a> 
- * <h4>ElasticProblem::output_results</h4>
- * 
 
- * 
- * The final function of significant interest is the one that
- * creates graphical output. This works the same way as in step-8,
- * with two small differences. Before discussing these, let us state
- * the general philosophy this function will work: we intend for all
- * of the data to be generated on a single process, and subsequently
- * written to a file. This is, as many other parts of this program
- * already discussed, not something that will scale. Previously, we
- * had argued that we will get into trouble with triangulations,
- * DoFHandlers, and copies of the solution vector where every
- * process has to store all of the data, and that there will come to
- * be a point where each process simply doesn't have enough memory
- * to store that much data. Here, the situation is different: it's
- * not only the memory, but also the run time that's a problem. If
- * one process is responsible for processing <i>all</i> of the data
- * while all of the other processes do nothing, then this one
- * function will eventually come to dominate the overall run time of
- * the program.  In particular, the time this function takes is
- * going to be proportional to the overall size of the problem
- * (counted in the number of cells, or the number of degrees of
- * freedom), independent of the number of processes we throw at it.
- *   
+然后我们还需要PETSc提供的求解器和预处理器的接口。
 
- * 
- * Such situations need to be avoided, and we will show in step-18
- * and step-40 how to address this issue. For the current problem,
- * the solution is to have each process generate output data only
- * for its own local cells, and write them to separate files, one
- * file per process. This is how step-18 operates. Alternatively,
- * one could simply leave everything in a set of independent files
- * and let the visualization software read all of them (possibly
- * also using multiple processors) and create a single visualization
- * out of all of them; this is the path step-40, step-32, and all
- * other parallel programs developed later on take.
- *   
+@code
+#include <deal.II/lac/petsc_solver.h>
+#include <deal.II/lac/petsc_precondition.h>
+@endcode 
 
- * 
- * More specifically for the current function, all processes call
- * this function, but not all of them need to do the work associated
- * with generating output. In fact, they shouldn't, since we would
- * try to write to the same file multiple times at once. So we let
- * only the first process do this, and all the other ones idle
- * around during this time (or start their work for the next
- * iteration, or simply yield their CPUs to other jobs that happen
- * to run at the same time). The second thing is that we not only
- * output the solution vector, but also a vector that indicates
- * which subdomain each cell belongs to. This will make for some
- * nice pictures of partitioned domains.
- *   
 
- * 
- * To implement this, process zero needs a complete set of solution
- * components in a local vector. Just as with the previous function,
- * the efficient way to do this would be to re-use the vector
- * already created in the <code>solve()</code> function, but to keep
- * things more self-contained, we simply re-create one here from the
- * distributed solution vector.
- *   
 
- * 
- * An important thing to realize is that we do this localization operation
- * on all processes, not only the one that actually needs the data. This
- * can't be avoided, however, with the simplified communication model of MPI
- * we use for vectors in this tutorial program: MPI does not have a way to
- * query data on another process, both sides have to initiate a
- * communication at the same time. So even though most of the processes do
- * not need the localized solution, we have to place the statement
- * converting the distributed into a localized vector so that all processes
- * execute it.
- *   
+此外，我们还需要一些划分网格的算法，以便它们能够有效地分布在MPI网络上。分割算法在 <code>GridTools</code> 命名空间中实现，我们还需要一个额外的包含文件，用于 <code>DoFRenumbering</code> 中的一个函数，该函数允许对与自由度相关的索引进行排序，以便根据它们所关联的子域进行编号。
 
- * 
- * (Part of this work could in fact be avoided. What we do is
- * send the local parts of all processes to all other processes. What we
- * would really need to do is to initiate an operation on all processes
- * where each process simply sends its local chunk of data to process
- * zero, since this is the only one that actually needs it, i.e., we need
- * something like a gather operation. PETSc can do this, but for
- * simplicity's sake we don't attempt to make use of this here. We don't,
- * since what we do is not very expensive in the grand scheme of things:
- * it is one vector communication among all processes, which has to be
- * compared to the number of communications we have to do when solving the
- * linear system, setting up the block-ILU for the preconditioner, and
- * other operations.)
- * 
- * @code
- *   template <int dim>
- *   void ElasticProblem<dim>::output_results(const unsigned int cycle) const
- *   {
- *     const Vector<double> localized_solution(solution);
- * 
- * @endcode
- * 
- * This being done, process zero goes ahead with setting up the
- * output file as in step-8, and attaching the (localized)
- * solution vector to the output object.
- * 
- * @code
- *     if (this_mpi_process == 0)
- *       {
- *         std::ofstream output("solution-" + std::to_string(cycle) + ".vtk");
- * 
- *         DataOut<dim> data_out;
- *         data_out.attach_dof_handler(dof_handler);
- * 
- *         std::vector<std::string> solution_names;
- *         switch (dim)
- *           {
- *             case 1:
- *               solution_names.emplace_back("displacement");
- *               break;
- *             case 2:
- *               solution_names.emplace_back("x_displacement");
- *               solution_names.emplace_back("y_displacement");
- *               break;
- *             case 3:
- *               solution_names.emplace_back("x_displacement");
- *               solution_names.emplace_back("y_displacement");
- *               solution_names.emplace_back("z_displacement");
- *               break;
- *             default:
- *               Assert(false, ExcInternalError());
- *           }
- * 
- *         data_out.add_data_vector(localized_solution, solution_names);
- * 
- * @endcode
- * 
- * The only other thing we do here is that we also output one
- * value per cell indicating which subdomain (i.e., MPI
- * process) it belongs to. This requires some conversion work,
- * since the data the library provides us with is not the one
- * the output class expects, but this is not difficult. First,
- * set up a vector of integers, one per cell, that is then
- * filled by the subdomain id of each cell.
- *         
+@code
+#include <deal.II/grid/grid_tools.h>
+#include <deal.II/dofs/dof_renumbering.h>
 
- * 
- * The elements of this vector are then converted to a
- * floating point vector in a second step, and this vector is
- * added to the DataOut object, which then goes off creating
- * output in VTK format:
- * 
- * @code
- *         std::vector<unsigned int> partition_int(triangulation.n_active_cells());
- *         GridTools::get_subdomain_association(triangulation, partition_int);
- * 
- *         const Vector<double> partitioning(partition_int.begin(),
- *                                           partition_int.end());
- * 
- *         data_out.add_data_vector(partitioning, "partitioning");
- * 
- *         data_out.build_patches();
- *         data_out.write_vtk(output);
- *       }
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ElasticProblemrun"></a> 
- * <h4>ElasticProblem::run</h4>
- * 
 
- * 
- * Lastly, here is the driver function. It is almost completely
- * unchanged from step-8, with the exception that we replace
- * <code>std::cout</code> by the <code>pcout</code> stream. Apart
- * from this, the only other cosmetic change is that we output how
- * many degrees of freedom there are per process, and how many
- * iterations it took for the linear solver to converge:
- * 
- * @code
- *   template <int dim>
- *   void ElasticProblem<dim>::run()
- *   {
- *     for (unsigned int cycle = 0; cycle < 10; ++cycle)
- *       {
- *         pcout << "Cycle " << cycle << ':' << std::endl;
- * 
- *         if (cycle == 0)
- *           {
- *             GridGenerator::hyper_cube(triangulation, -1, 1);
- *             triangulation.refine_global(3);
- *           }
- *         else
- *           refine_grid();
- * 
- *         pcout << "   Number of active cells:       "
- *               << triangulation.n_active_cells() << std::endl;
- * 
- *         setup_system();
- * 
- *         pcout << "   Number of degrees of freedom: " << dof_handler.n_dofs()
- *               << " (by partition:";
- *         for (unsigned int p = 0; p < n_mpi_processes; ++p)
- *           pcout << (p == 0 ? ' ' : '+')
- *                 << (DoFTools::count_dofs_with_subdomain_association(dof_handler,
- *                                                                     p));
- *         pcout << ")" << std::endl;
- * 
- *         assemble_system();
- *         const unsigned int n_iterations = solve();
- * 
- *         pcout << "   Solver converged in " << n_iterations << " iterations."
- *               << std::endl;
- * 
- *         output_results(cycle);
- *       }
- *   }
- * } // namespace Step17
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Thecodemaincodefunction"></a> 
- * <h3>The <code>main</code> function</h3>
- * 
+@endcode 
 
- * 
- * The <code>main()</code> works the same way as most of the main
- * functions in the other example programs, i.e., it delegates work to
- * the <code>run</code> function of a managing object, and only wraps
- * everything into some code to catch exceptions:
- * 
- * @code
- * int main(int argc, char **argv)
- * {
- *   try
- *     {
- *       using namespace dealii;
- *       using namespace Step17;
- * 
- * @endcode
- * 
- * Here is the only real difference: MPI and PETSc both require that we
- * initialize these libraries at the beginning of the program, and
- * un-initialize them at the end. The class MPI_InitFinalize takes care
- * of all of that. The trailing argument `1` means that we do want to
- * run each MPI process with a single thread, a prerequisite with the
- * PETSc parallel linear algebra.
- * 
- * @code
- *       Utilities::MPI::MPI_InitFinalize mpi_initialization(argc, argv, 1);
- * 
- *       ElasticProblem<2> elastic_problem;
- *       elastic_problem.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- * 
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
+
+
+而这又是简单的C++。
+
+@code
+#include <fstream>
+#include <iostream>
+
+
+@endcode 
+
+
+
+最后一步和以前所有的程序一样。
+
+@code
+namespace Step17
+{
+  using namespace dealii;
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeElasticProblemcodeclasstemplate"></a> <h3>The <code>ElasticProblem</code> class template</h3> 
+
+
+
+
+该程序的第一个真正的部分是主类的声明。 正如介绍中提到的，几乎所有这些都是从 step-8 中逐字复制过来的，所以我们只对这两个教程之间的少数差异进行评论。 有一个（表面上的）变化是，我们让 <code>solve</code> 返回一个值，即收敛所需的迭代次数，这样我们就可以在适当的地方将其输出到屏幕上。
+
+@code
+  template <int dim>
+  class ElasticProblem
+  {
+  public:
+    ElasticProblem();
+    void run();
+
+
+  private:
+    void         setup_system();
+    void         assemble_system();
+    unsigned int solve();
+    void         refine_grid();
+    void         output_results(const unsigned int cycle) const;
+
+
+@endcode 
+
+
+
+第一个变化是，我们必须声明一个变量，表明我们应该通过它来分配我们的计算的 @ref GlossMPICommunicator "MPI通信器"。
+
+@code
+    MPI_Comm mpi_communicator;
+
+
+@endcode 
+
+
+
+然后我们有两个变量，告诉我们在并行世界中的位置。下面的第一个变量， <code>n_mpi_processes</code>  ，告诉我们总共有多少个MPI进程，而第二个变量， <code>this_mpi_process</code>  ，表明在这个进程空间中，哪个是当前进程的编号（在MPI语言中，这相当于进程的 @ref GlossMPIRank  "等级"）。后者对每个进程都有一个唯一的值，介于零和（小于） <code>n_mpi_processes</code> 之间。如果该程序在没有MPI支持的单机上运行，那么它们的值分别为 <code>1</code> and <code>0</code>  ，。
+
+@code
+    const unsigned int n_mpi_processes;
+    const unsigned int this_mpi_process;
+
+
+@endcode 
+
+
+
+接下来是一个类似流的变量  <code>pcout</code>  。从本质上讲，它只是我们为了方便而使用的东西：在一个并行程序中，如果每个进程都输出状态信息，那么很快就会有很多杂乱的信息。相反，我们希望只让一个 @ref GlossMPIProcess "进程 "输出一次所有信息，例如 @ref GlossMPIRank "等级 "为零的那个。同时，在我们创建输出的<i>every</i>地方加上 <code>if (my_rank==0)</code> 条件的前缀似乎很傻。     
+
+
+为了使这个问题更简单，ConditionalOStream类在引擎盖下正是这样做的：它就像一个流一样，但只有在一个标志被设置的情况下才转发到一个真正的底层流。通过将这个条件设置为 <code>this_mpi_process==0</code> （其中 <code>this_mpi_process</code> 对应于MPI进程的等级），我们确保输出只从第一个进程中产生，并且我们不会在每个进程中重复得到相同的输出行。因此，我们可以在每一个地方和每一个进程中使用 <code>pcout</code> ，但是除了一个进程之外，其他的进程都不会发生通过 <code>operator&lt;&lt;</code> 输送到对象中的信息。
+
+@code
+    ConditionalOStream pcout;
+
+
+@endcode 
+
+
+
+成员变量列表的其余部分与  step-8  中的内容基本相同。然而，我们改变了矩阵和矢量类型的声明，以使用并行的PETSc对象代替。请注意，我们没有使用单独的稀疏模式，因为PETSc将其作为其矩阵数据结构的一部分进行内部管理。
+
+@code
+    Triangulation<dim> triangulation;
+    FESystem<dim>      fe;
+    DoFHandler<dim>    dof_handler;
+
+
+    AffineConstraints<double> hanging_node_constraints;
+
+
+    PETScWrappers::MPI::SparseMatrix system_matrix;
+
+
+    PETScWrappers::MPI::Vector solution;
+    PETScWrappers::MPI::Vector system_rhs;
+  };
+
+
+
+@endcode 
+
+
+
+
+<a name="Righthandsidevalues"></a> <h3>Right hand side values</h3> 
+
+
+
+
+以下内容取自 step-8 ，未作改动。
+
+@code
+  template <int dim>
+  class RightHandSide : public Function<dim>
+  {
+  public:
+    virtual void vector_value(const Point<dim> &p,
+                              Vector<double> &  values) const override
+    {
+      Assert(values.size() == dim, ExcDimensionMismatch(values.size(), dim));
+      Assert(dim >= 2, ExcInternalError());
+
+
+      Point<dim> point_1, point_2;
+      point_1(0) = 0.5;
+      point_2(0) = -0.5;
+
+
+      if (((p - point_1).norm_square() < 0.2 * 0.2) ||
+          ((p - point_2).norm_square() < 0.2 * 0.2))
+        values(0) = 1;
+      else
+        values(0) = 0;
+
+
+      if (p.square() < 0.2 * 0.2)
+        values(1) = 1;
+      else
+        values(1) = 0;
+    }
+
+
+    virtual void
+    vector_value_list(const std::vector<Point<dim>> &points,
+                      std::vector<Vector<double>> &  value_list) const override
+    {
+      const unsigned int n_points = points.size();
+
+
+      Assert(value_list.size() == n_points,
+             ExcDimensionMismatch(value_list.size(), n_points));
+
+
+      for (unsigned int p = 0; p < n_points; ++p)
+        RightHandSide<dim>::vector_value(points[p], value_list[p]);
+    }
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeElasticProblemcodeclassimplementation"></a> <h3>The <code>ElasticProblem</code> class implementation</h3> 
+
+
+
+
+
+<a name="ElasticProblemElasticProblem"></a> <h4>ElasticProblem::ElasticProblem</h4>
+
+
+
+
+实际实现的第一步是主类的构造函数。除了初始化我们在 step-8 中已经有的相同成员变量外，我们在这里用连接所有进程的全局MPI通信器来初始化我们将使用的MPI通信器变量（在更复杂的应用中，这里可以使用只连接所有进程的一个子集的通信器对象），并调用 Utilities::MPI 辅助函数来确定进程的数量以及当前进程在这个画面中的地位。此外，我们确保输出只由（全局）第一个进程产生。我们通过将我们想要输出的流传递给 (<code>std::cout</code>) 和一个真/假标志作为参数，后者是通过测试当前执行构造函数调用的进程是否是MPI宇宙中的第一个来确定的。
+
+@code
+  template <int dim>
+  ElasticProblem<dim>::ElasticProblem()
+    : mpi_communicator(MPI_COMM_WORLD)
+    , n_mpi_processes(Utilities::MPI::n_mpi_processes(mpi_communicator))
+    , this_mpi_process(Utilities::MPI::this_mpi_process(mpi_communicator))
+    , pcout(std::cout, (this_mpi_process == 0))
+    , fe(FE_Q<dim>(1), dim)
+    , dof_handler(triangulation)
+  {}
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="ElasticProblemsetup_system"></a> <h4>ElasticProblem::setup_system</h4> 
+
+
+
+
+接下来，我们需要实现为要解决的全局线性系统设置各种变量的函数。   
+
+
+然而，在我们进行这项工作之前，对于一个并行程序来说，有一件事要做：我们需要确定哪个MPI进程负责每个单元的工作。在进程之间分割单元，通常称为 "划分网格"，是通过给每个单元分配一个 @ref GlossSubdomainId "子域id "来完成的。我们通过调用METIS库来做到这一点，该库以一种非常有效的方式，试图尽量减少子域之间的接口上的节点数量。我们没有尝试直接调用METIS，而是通过调用 GridTools::partition_triangulation() 函数来完成这一工作，该函数在更高的编程水平上完成这一工作。   
+
+
+
+
+  @note 正如介绍中提到的，如果我们使用 parallel::shared::Triangulation 类来代替三角化对象，就可以避免这个手动划分的步骤（正如我们在 step-18 中所做的）。该类实质上做了所有常规三角形的工作，但它也会在每次网格创建或细化操作后自动划分网格。   
+
+
+分割之后，我们需要像往常一样列举所有的自由度。 然而，我们希望列举自由度的方式是：所有与子域0（位于过程0）的单元相关的自由度都在与子域1的单元相关的自由度之前，在过程2的单元之前，以此类推。我们需要这样做，因为我们必须将全局向量的右手边和解决方案，以及矩阵分割成连续的行块，住在每个处理器上，而且我们希望以一种需要最小通信的方式来做。这种特殊的列举可以通过使用 DoFRenumbering::subdomain_wise(). 对自由度指数重新排序来获得。    
+
+
+这个初始设置的最后一步是，我们为自己得到一个IndexSet，表示这个过程所负责的全局未知数的子集。注意，一个自由度不一定是由拥有一个单元的进程所拥有的，只是因为这个自由度生活在这个单元上：一些自由度生活在子域之间的接口上，因此只由这个接口附近的一个进程拥有）。   
+
+
+在我们继续之前，让我们回顾一下在介绍中已经讨论过的一个事实。我们在这里使用的三角形是在所有进程中复制的，每个进程都有整个三角形的完整副本，包括所有单元。分区只提供了一种方法来确定每个进程 "拥有 "哪些单元，但它知道所有单元的一切。同样，DoFHandler对象知道每个单元的一切，特别是每个单元上的自由度，不管它是否是当前进程拥有的。这不能扩展到大型问题，因为如果问题足够大，最终只是在每个进程中存储整个网格以及与之相关的所有内容将变得不可行。另一方面，如果我们将三角形分割成若干部分，使每个进程只存储它 "拥有 "的单元格，而不存储其他的单元格（或者，至少是其他所有单元格中足够小的一部分），那么我们就可以解决大型问题，只要我们将足够多的MPI进程扔给它们。这就是我们在 step-40 中要做的事情，例如，使用 parallel::distributed::Triangulation 类。 另一方面，我们在当前程序中演示的大部分其他内容实际上将继续工作，无论我们有整个三角形可用，还是只有其中的一部分。
+
+@code
+  template <int dim>
+  void ElasticProblem<dim>::setup_system()
+  {
+    GridTools::partition_triangulation(n_mpi_processes, triangulation);
+
+
+    dof_handler.distribute_dofs(fe);
+    DoFRenumbering::subdomain_wise(dof_handler);
+
+
+@endcode 
+
+
+
+我们需要初始化表示当前网格的悬挂节点约束的对象。就像三角形和DoFHandler对象一样，我们将简单地在每个进程上存储<i>all</i>约束；同样，这不会有规模，但我们在 step-40 中展示了如何通过在每个MPI进程上只存储对这个特定进程真正重要的自由度约束来解决这个问题。
+
+@code
+    hanging_node_constraints.clear();
+    DoFTools::make_hanging_node_constraints(dof_handler,
+                                            hanging_node_constraints);
+    hanging_node_constraints.close();
+
+
+@endcode 
+
+
+
+现在我们为系统矩阵创建稀疏模式。请注意，我们再次计算并存储所有条目，而不仅仅是与该进程相关的条目（参见 step-18 或 step-40 ，以了解处理这一问题的更有效方法）。
+
+@code
+    DynamicSparsityPattern dsp(dof_handler.n_dofs(), dof_handler.n_dofs());
+    DoFTools::make_sparsity_pattern(dof_handler,
+                                    dsp,
+                                    hanging_node_constraints,
+                                    false);
+
+
+@endcode 
+
+
+
+现在我们确定本地拥有的DoF的集合，并使用它来初始化并行向量和矩阵。由于矩阵和向量需要并行工作，我们必须向它们传递一个MPI通信对象，以及IndexSet @p locally_owned_dofs. 中包含的分区信息。IndexSet包含关于全局大小（<i>total</i>自由度数）的信息，也包含要在本地存储哪些行的子集。 注意，系统矩阵需要该行和列的分区信息。对于正方形矩阵，就像这里的情况一样，列的划分方式应该与行的划分方式相同，但对于矩形矩阵，我们必须按照与矩阵相乘的向量的划分方式来划分列，而行的划分方式必须与矩阵-向量乘法的目的向量相同。
+
+@code
+    const std::vector<IndexSet> locally_owned_dofs_per_proc =
+      DoFTools::locally_owned_dofs_per_subdomain(dof_handler);
+    const IndexSet locally_owned_dofs =
+      locally_owned_dofs_per_proc[this_mpi_process];
+
+
+    system_matrix.reinit(locally_owned_dofs,
+                         locally_owned_dofs,
+                         dsp,
+                         mpi_communicator);
+
+
+    solution.reinit(locally_owned_dofs, mpi_communicator);
+    system_rhs.reinit(locally_owned_dofs, mpi_communicator);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="ElasticProblemassemble_system"></a> <h4>ElasticProblem::assemble_system</h4>
+
+
+
+
+现在我们把问题的矩阵和右手边组合起来。在我们进行详细讨论之前，有一些事情值得一提。首先，我们将平行组装系统，也就是说，每个进程将负责组装属于这个特定进程的单元。请注意，自由度的分割方式是，单元内部和属于同一子域的单元之间的所有自由度都属于 <code>owns</code> 该单元的过程。然而，即使如此，我们有时也需要在一个单元上与属于不同过程的邻居集合，在这些情况下，当我们将局部贡献加到全局矩阵或右手向量中时，我们必须将这些条目转移到拥有这些元素的过程中。幸运的是，我们不需要用手去做这件事。PETSc为我们做了这一切，它在本地缓存了这些元素，当我们在这个函数的末尾调用矩阵和向量的 <code>compress()</code> 函数时，根据需要将它们发送给其他进程。   
+
+
+第二点是，一旦我们把矩阵和向量的贡献交给了PETSc，那么，a）很难，b）要把它们拿回来修改，效率非常低。这不仅是PETSc的错，也是这个程序的分布式性质的结果：如果一个条目存在于另一个处理器上，那么获取它的成本必然很高。这样做的后果是，我们不应该试图首先组装矩阵和右手边，就像没有悬挂的节点约束和边界值一样，然后在第二步中消除这些约束（例如使用 AffineConstraints::condense()). ），相反，我们应该在将这些条目交给PETSc之前尝试消除悬挂的节点约束。这很容易：我们不是用手将元素复制到全局矩阵中（就像我们在 step-4 中做的那样），而是使用 AffineConstraints::distribute_local_to_global() 函数同时处理悬空节点的问题。我们在  step-6  中也已经这样做了。第二步，消除边界节点，也可以这样做，把边界值放到与悬挂节点相同的AffineConstraints对象中（例如，见 step-6 中的方法）；但是，严格来说，在这里没有必要这样做，因为消除边界值可以只用每个进程本身存储的数据来完成，因此，我们使用之前在 step-4 中使用的方法，即通过 MatrixTools::apply_boundary_values().      
+
+
+说了这么多，下面是实际的实现，从辅助变量的一般设置开始。 请注意，我们仍然使用deal.II的全矩阵和向量类型的本地系统，因为这些类型很小，不需要在不同进程中共享）。
+
+@code
+  template <int dim>
+  void ElasticProblem<dim>::assemble_system()
+  {
+    QGauss<dim>   quadrature_formula(fe.degree + 1);
+    FEValues<dim> fe_values(fe,
+                            quadrature_formula,
+                            update_values | update_gradients |
+                              update_quadrature_points | update_JxW_values);
+
+
+    const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
+    const unsigned int n_q_points    = quadrature_formula.size();
+
+
+    FullMatrix<double> cell_matrix(dofs_per_cell, dofs_per_cell);
+    Vector<double>     cell_rhs(dofs_per_cell);
+
+
+    std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
+
+
+    std::vector<double> lambda_values(n_q_points);
+    std::vector<double> mu_values(n_q_points);
+
+
+    Functions::ConstantFunction<dim> lambda(1.), mu(1.);
+
+
+    RightHandSide<dim>          right_hand_side;
+    std::vector<Vector<double>> rhs_values(n_q_points, Vector<double>(dim));
+
+
+
+@endcode 
+
+
+
+接下来是所有元素的循环。请注意，我们不必在每个进程上做<i>all</i>工作：我们在这里的工作只是在实际属于这个MPI进程的单元上组装系统，所有其他单元将由其他进程来处理。这就是紧随for-loop之后的if-clause所要处理的：它查询每个单元的子域标识符，这是一个与每个单元相关的数字，告诉我们所有者进程的情况。在更大的范围内，子域标识被用来将一个域分成几个部分（我们在上面 <code>setup_system()</code> 的开头就这样做了），并允许识别一个单元生活在哪个子域。在这个应用中，我们让每个进程正好处理一个子域，所以我们确定了这些术语  <code>subdomain</code> and <code>MPI process</code>  。     
+
+
+除此以外，如果你已经了解了在  step-8  中是如何进行的，那么组装本地系统就相对不难了。如上所述，将本地贡献分配到全局矩阵和右手边，也是以与  step-6  中相同的方式处理悬挂节点约束。
+
+@code
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      if (cell->subdomain_id() == this_mpi_process)
+        {
+          cell_matrix = 0;
+          cell_rhs    = 0;
+
+
+          fe_values.reinit(cell);
+
+
+          lambda.value_list(fe_values.get_quadrature_points(), lambda_values);
+          mu.value_list(fe_values.get_quadrature_points(), mu_values);
+
+
+          for (unsigned int i = 0; i < dofs_per_cell; ++i)
+            {
+              const unsigned int component_i =
+                fe.system_to_component_index(i).first;
+
+
+              for (unsigned int j = 0; j < dofs_per_cell; ++j)
+                {
+                  const unsigned int component_j =
+                    fe.system_to_component_index(j).first;
+
+
+                  for (unsigned int q_point = 0; q_point < n_q_points;
+                       ++q_point)
+                    {
+                      cell_matrix(i, j) +=
+                        ((fe_values.shape_grad(i, q_point)[component_i] *
+                          fe_values.shape_grad(j, q_point)[component_j] *
+                          lambda_values[q_point]) +
+                         (fe_values.shape_grad(i, q_point)[component_j] *
+                          fe_values.shape_grad(j, q_point)[component_i] *
+                          mu_values[q_point]) +
+                         ((component_i == component_j) ?
+                            (fe_values.shape_grad(i, q_point) *
+                             fe_values.shape_grad(j, q_point) *
+                             mu_values[q_point]) :
+                            0)) *
+                        fe_values.JxW(q_point);
+                    }
+                }
+            }
+
+
+          right_hand_side.vector_value_list(fe_values.get_quadrature_points(),
+                                            rhs_values);
+          for (unsigned int i = 0; i < dofs_per_cell; ++i)
+            {
+              const unsigned int component_i =
+                fe.system_to_component_index(i).first;
+
+
+              for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
+                cell_rhs(i) += fe_values.shape_value(i, q_point) *
+                               rhs_values[q_point](component_i) *
+                               fe_values.JxW(q_point);
+            }
+
+
+          cell->get_dof_indices(local_dof_indices);
+          hanging_node_constraints.distribute_local_to_global(cell_matrix,
+                                                              cell_rhs,
+                                                              local_dof_indices,
+                                                              system_matrix,
+                                                              system_rhs);
+        }
+
+
+@endcode 
+
+
+
+下一步是 "压缩 "向量和系统矩阵。这意味着每个进程将对矩阵和向量中那些本身不拥有的条目所做的添加发送给拥有这些条目的进程。在收到其他进程的这些加法后，每个进程再把它们加到它已经拥有的值上。这些加法是将生活在几个单元上的形状函数的积分贡献结合起来，就像在串行计算中一样，不同的是这些单元被分配给不同的进程。
+
+@code
+    system_matrix.compress(VectorOperation::add);
+    system_rhs.compress(VectorOperation::add);
+
+
+@endcode 
+
+
+
+全局矩阵和右手边的向量现在已经形成。我们仍然需要应用边界值，与我们在 step-3 、 step-4 和其他一些程序中的做法相同。     
+
+
+下面调用 MatrixTools::apply_boundary_values() 的最后一个参数允许进行一些优化。它控制我们是否应该删除对应于边界节点的矩阵列中的条目（即设置为零），或者保留它们（通过 <code>true</code> 意味着：是的，消除这些列）。如果我们消除了列，那么结果矩阵将再次成为对称的，如果我们不这样做，那么它将不会。不过，结果系统的解应该是一样的。我们想让系统重新成为对称的唯一原因是我们想使用CG方法，该方法只对对称矩阵有效。我们可能<i>not</i>想让矩阵对称的原因是，这将要求我们写进实际存在于其他进程中的列项，即涉及到数据的交流。这总是很昂贵的。     
+
+
+经验告诉我们，如果我们不删除与边界节点相关的列，CG也可以工作（而且工作得几乎一样好），这可以用这种特殊的非对称性的特殊结构来解释。为了避免通信的费用，我们因此不消除受影响的列中的条目。
+
+@code
+    std::map<types::global_dof_index, double> boundary_values;
+    VectorTools::interpolate_boundary_values(dof_handler,
+                                             0,
+                                             Functions::ZeroFunction<dim>(dim),
+                                             boundary_values);
+    MatrixTools::apply_boundary_values(
+      boundary_values, system_matrix, solution, system_rhs, false);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="ElasticProblemsolve"></a><h4>ElasticProblem::solve</h4>
+
+
+
+
+组建了线性系统后，我们接下来需要解决它。PETSc提供了各种顺序和并行求解器，我们为这些求解器编写了包装器，其界面与之前所有示例程序中使用的deal.II求解器几乎相同。因此，下面的代码看起来应该相当熟悉。   
+
+
+在函数的顶部，我们设置了一个收敛监视器，并为其指定了我们希望解决线性系统的精度。接下来，我们使用PETSc的CG求解器创建一个实际的求解器对象，该求解器也适用于并行（分布式）矢量和矩阵。最后是一个预处理程序；我们选择使用一个块状雅可比预处理程序，它通过计算矩阵的每个对角线块的不完全LU分解来工作。 换句话说，每个MPI进程从其存储的行中计算出一个ILU，丢掉与本地未存储的行指数相对应的列；这就产生了一个方形的矩阵块，我们可以从中计算出一个ILU。这意味着如果你只用一个进程来运行程序，那么你将使用一个ILU(0)作为预处理程序，而如果它在许多进程上运行，那么我们将在对角线上有许多块，预处理程序是这些块中每个块的ILU(0)。在每个处理器只有一个自由度的极端情况下，这个预处理程序只是一个雅可比预处理程序，因为对角线矩阵块只由一个条目组成。这样的预处理程序相对容易计算，因为它不需要处理器之间的任何通信，但一般来说，对于大量的处理器来说，它的效率并不高）。)    
+
+
+按照这样的设置，我们就可以解决线性系统。
+
+@code
+  template <int dim>
+  unsigned int ElasticProblem<dim>::solve()
+  {
+    SolverControl solver_control(solution.size(), 1e-8 * system_rhs.l2_norm());
+    PETScWrappers::SolverCG cg(solver_control, mpi_communicator);
+
+
+    PETScWrappers::PreconditionBlockJacobi preconditioner(system_matrix);
+
+
+    cg.solve(system_matrix, solution, system_rhs, preconditioner);
+
+
+@endcode 
+
+
+
+下一步是分配悬挂的节点约束。这有点棘手，因为要填入一个约束节点的值，你需要访问它所约束的节点的值（例如，对于2d中的Q1元素，我们需要访问悬挂节点面的大边上的两个节点，以计算中间的约束节点的值）。     
+
+
+问题是，我们已经建立了我们的向量（在 <code>setup_system()</code> 中），每个进程只负责存储解向量中对应于该进程 "拥有 "的自由度的那些元素。然而，在有些情况下，为了计算一个进程中受限自由度的向量条目的值，我们需要访问存储在其他进程中的向量条目。 PETSc（以及它所基于的MPI模型）不允许简单地查询存储在其他进程上的向量条目，所以我们在这里所做的是获得一个 "分布式 "向量的副本，我们将所有元素存储在本地。这很简单，因为deal.II包装器有一个针对deal.II Vector类的转换构造函数。这种转换当然需要通信，但实质上每个进程只需要将其数据批量发送给其他每个进程一次，而不需要对单个元素的查询做出回应）。
+
+@code
+    Vector<double> localized_solution(solution);
+
+
+@endcode 
+
+
+
+当然，和以前的讨论一样，如果你想在大量进程上解决大问题，这样的步骤显然不能扩展得很远，因为现在每个进程都存储了<i>all elements</i>的解向量。(我们将在 step-40 中展示如何更好地做到这一点。) 另一方面，在这个本地副本上分配悬挂节点约束很简单，使用通常的函数 AffineConstraints::distributed().  特别是，我们可以计算<i>all</i>约束自由度的值，无论当前进程是否拥有它们。
+
+@code
+    hanging_node_constraints.distribute(localized_solution);
+
+
+@endcode 
+
+
+
+然后把所有的东西都转回全局向量中。下面的操作是复制我们在分布式解决方案中本地存储的那些本地化解决方案的元素，而不碰其他的。由于我们在所有处理器上做同样的操作，我们最终得到一个分布式向量（即在每个进程上只存储对应于该进程所拥有的自由度的向量项的向量），该向量固定了所有受限节点。     
+
+
+我们在函数的结尾返回它所花的迭代次数，以允许一些输出。
+
+@code
+    solution = localized_solution;
+
+
+    return solver_control.last_step();
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="ElasticProblemrefine_grid"></a><h4>ElasticProblem::refine_grid</h4>
+
+
+
+
+使用某种细化指标，可以对网格进行细化。问题基本上与分布悬挂节点约束相同：为了计算误差指标（即使我们只是对当前进程拥有的单元上的指标感兴趣），我们需要访问解向量的更多元素，而不仅仅是当前处理器存储的那些。为了实现这一点，我们基本上做了我们在 <code>solve()</code> 中已经做过的事情，即在每个进程中获取<i>complete</i>的解向量副本，并使用它来计算。如上所述，这本身就很昂贵，而且特别没有必要，因为我们刚刚在 <code>solve()</code> 中创建并销毁了这样一个向量，但效率不是这个程序的重点，所以让我们选择一个设计，其中每个函数都尽可能地自成一体。   
+
+
+一旦我们有了这样一个包含<i>all</i>解向量元素的 "本地化 "向量，我们就可以计算属于当前过程的单元的指标。事实上，我们当然可以计算<i>all</i>细化指标，因为我们的Triangulation和DoFHandler对象存储了所有单元的信息，而且我们有一个完整的解向量副本。但是为了展示如何平行操作，让我们演示一下，如果只计算<i>some</i>错误指标，然后与其他进程交换剩余的指标，会如何操作。最终，每个进程都需要一套完整的细化指标，因为每个进程都需要细化他们的网格，并且需要以与所有其他进程完全相同的方式细化它）。   
+
+
+所以，要做到这一切，我们需要。
+
+- 首先，获得一个分布式解决方案向量的本地拷贝。
+
+- 第二，创建一个矢量来存储细化指标。
+
+- 第三，让KellyErrorEstimator计算属于当前子域/进程的所有单元的细化指标。调用的最后一个参数表明我们对哪个子域感兴趣。在它之前的三个参数是其他各种默认参数，通常不需要（也不说明数值，而是使用默认值），但我们必须在这里明确说明，因为我们想修改下面一个参数的值（即表示子域的参数）。
+
+@code
+  template <int dim>
+  void ElasticProblem<dim>::refine_grid()
+  {
+    const Vector<double> localized_solution(solution);
+
+
+    Vector<float> local_error_per_cell(triangulation.n_active_cells());
+    KellyErrorEstimator<dim>::estimate(dof_handler,
+                                       QGauss<dim - 1>(fe.degree + 1),
+                                       {},
+                                       localized_solution,
+                                       local_error_per_cell,
+                                       ComponentMask(),
+                                       nullptr,
+                                       MultithreadInfo::n_threads(),
+                                       this_mpi_process);
+
+
+@endcode 
+
+
+
+现在，所有进程都为自己的单元格计算了错误指标，并将其存储在 <code>local_error_per_cell</code> 向量的相应元素中。该向量中不属于本进程的单元的元素为零。然而，由于所有进程都有整个三角形的副本，并需要保持这些副本的同步，他们需要三角形的所有单元的细化指标值。因此，我们需要分配我们的结果。我们通过创建一个分布式向量来做到这一点，每个进程都有自己的份额，并设置它所计算的元素。因此，当你把这个向量看作是一个存在于所有进程中的向量时，那么这个向量的每个元素都被设置过一次。然后，我们可以将这个并行向量分配给每个进程上的一个本地非并行向量，使<i>all</i>错误指标在每个进程上都可用。     
+
+
+所以在第一步，我们需要设置一个并行向量。为了简单起见，每个进程都将拥有一个元素块，其数量与该进程拥有的单元格一样多，因此第一个元素块存储在进程0，下一个元素块存储在进程1，以此类推。然而，需要注意的是，这些元素不一定是我们要写入的元素。这是单元格排列顺序的结果，也就是说，向量中的元素对应单元格的顺序并不是根据这些单元格所属的子域来排序的。换句话说，如果在这个过程中，我们计算某个子域的单元的指标，我们可能会把结果写到分布式向量的或多或少的随机元素中；特别是，它们不一定位于我们在这个过程中拥有的向量块中。它们随后将不得不被复制到另一个进程的内存空间中，当我们调用 <code>compress()</code> 函数时，PETSc为我们做了这项操作。这种低效率可以通过更多的代码来避免，但我们避免这样做，因为它不是程序总运行时间的主要因素。     
+
+
+所以我们是这样做的：计算有多少个单元属于这个过程，建立一个有这么多元素的分布式向量存储在本地，将我们在本地计算的元素复制过去，最后将结果压缩。事实上，我们实际上只复制了非零的元素，所以我们可能会错过一些我们计算为零的元素，但这不会有什么影响，因为无论如何，向量的原始值是零。
+
+@code
+    const unsigned int n_local_cells =
+      GridTools::count_cells_with_subdomain_association(triangulation,
+                                                        this_mpi_process);
+    PETScWrappers::MPI::Vector distributed_all_errors(
+      mpi_communicator, triangulation.n_active_cells(), n_local_cells);
+
+
+    for (unsigned int i = 0; i < local_error_per_cell.size(); ++i)
+      if (local_error_per_cell(i) != 0)
+        distributed_all_errors(i) = local_error_per_cell(i);
+    distributed_all_errors.compress(VectorOperation::insert);
+
+
+
+@endcode 
+
+
+
+所以现在我们有了这个分布式向量，它包含了所有单元的细化指标。为了使用它，我们需要获得一个本地副本，然后用它来标记要细化或粗化的单元，并实际进行细化和粗化。重要的是要认识到，<i>every</i>过程对它自己的三角图副本做了这个，并且以完全相同的方式做了这个。
+
+@code
+    const Vector<float> localized_all_errors(distributed_all_errors);
+
+
+    GridRefinement::refine_and_coarsen_fixed_number(triangulation,
+                                                    localized_all_errors,
+                                                    0.3,
+                                                    0.03);
+    triangulation.execute_coarsening_and_refinement();
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="ElasticProblemoutput_results"></a> <h4>ElasticProblem::output_results</h4>
+
+
+
+
+最后一个有意义的函数是创建图形输出的函数。它的工作方式与 step-8 中的相同，但有两个小的区别。在讨论这些之前，让我们说明这个函数的一般工作原理：我们打算让所有的数据在一个单一的进程中产生，然后写入一个文件。正如本程序的许多其他部分已经讨论过的那样，这不是一个可以扩展的东西。之前，我们认为我们会在三角计算、DoFHandlers和解决方案向量的副本方面遇到麻烦，每个进程都必须存储所有的数据，而且会出现一个点，即每个进程根本没有足够的内存来存储这么多数据。在这里，情况是不同的：不仅是内存，而且运行时间也是一个问题。如果一个进程负责处理<i>all</i>的数据，而其他所有的进程什么都不做，那么这一个函数最终会在程序的整个运行时间中占主导地位。 特别是，这个函数所花费的时间将与问题的整体大小（以单元数或自由度数计算）成正比，与我们扔给它的进程数量无关。   
+
+
+这种情况需要避免，我们将在 step-18 和 step-40 中展示如何解决这个问题。对于目前的问题，解决方案是让每个进程只为自己的本地单元产生输出数据，并将它们写入单独的文件，每个进程一个文件。这就是 step-18 的操作方式。另外，可以简单地把所有的东西放在一组独立的文件中，让可视化软件读取所有的文件（可能还使用多个处理器），并从所有的文件中创建一个单一的可视化；这就是 step-40 、 step-32 以及后来开发的所有其他并行程序的路径。   
+
+
+更具体地说，对于当前的函数，所有的进程都调用这个函数，但不是所有的进程都需要做与生成输出有关的工作。事实上，它们不应该这样做，因为我们会试图一次多次地写到同一个文件。所以我们只让第一个进程做这件事，而其他所有的进程在这段时间内闲置（或者为下一次迭代开始工作，或者干脆把它们的CPU让给碰巧在同一时间运行的其他作业）。第二件事是，我们不仅要输出解决方案的向量，还要输出一个向量，表明每个单元属于哪个子域。这将使一些分区域的图片变得漂亮。   
+
+
+为了实现这一点，过程零需要一个完整的本地向量中的解决方案组件。就像之前的函数一样，有效的方法是重新使用在 <code>solve()</code> 函数中已经创建的向量，但是为了使事情更加自洽，我们在这里只是从分布式解向量中重新创建一个。   
+
+
+需要认识到的一个重要问题是，我们在所有进程中都做了这个定位操作，而不仅仅是实际需要数据的那一个。然而，这一点是无法避免的，在本教程程序中，我们对向量使用的MPI简化通信模型。MPI没有办法查询另一个进程的数据，双方必须在同一时间启动通信。因此，即使大多数进程不需要本地化的解决方案，我们也必须把将分布式转换为本地化向量的语句放在所有进程中执行。   
+
+
+这个工作的一部分其实是可以避免的）。我们所做的是将所有进程的局部部分发送给所有其他进程。我们真正需要做的是在所有进程上发起一个操作，每个进程只需将其本地的数据块发送给进程0，因为只有这个进程真正需要它，也就是说，我们需要类似于收集操作的东西。PETSc可以做到这一点，但是为了简单起见，我们在这里并不试图利用这一点。我们没有这样做，因为我们所做的事情在总体上并不昂贵：它是所有进程之间的一个向量通信，这必须与我们在求解线性系统、为预处理程序设置块状ILU以及其他操作时必须进行的通信数量相比较。) 
+
+@code
+  template <int dim>
+  void ElasticProblem<dim>::output_results(const unsigned int cycle) const
+  {
+    const Vector<double> localized_solution(solution);
+
+
+@endcode 
+
+
+
+完成这些后，进程0继续设置输出文件，如 step-8 所示，并将（本地化的）解向量附加到输出对象上。
+
+@code
+    if (this_mpi_process == 0)
+      {
+        std::ofstream output("solution-" + std::to_string(cycle) + ".vtk");
+
+
+        DataOut<dim> data_out;
+        data_out.attach_dof_handler(dof_handler);
+
+
+        std::vector<std::string> solution_names;
+        switch (dim)
+          {
+            case 1:
+              solution_names.emplace_back("displacement");
+              break;
+            case 2:
+              solution_names.emplace_back("x_displacement");
+              solution_names.emplace_back("y_displacement");
+              break;
+            case 3:
+              solution_names.emplace_back("x_displacement");
+              solution_names.emplace_back("y_displacement");
+              solution_names.emplace_back("z_displacement");
+              break;
+            default:
+              Assert(false, ExcInternalError());
+          }
+
+
+        data_out.add_data_vector(localized_solution, solution_names);
+
+
+@endcode 
+
+
+
+我们在这里做的唯一其他事情是，我们也为每个单元格输出一个值，表明它属于哪个子域（即MPI进程）。这需要一些转换工作，因为库提供给我们的数据不是输出类所期望的数据，但这并不困难。首先，设置一个整数向量，每个单元格一个，然后由每个单元格的子域id填充。         
+
+
+然后在第二步中把这个向量的元素转换为浮点向量，这个向量被添加到DataOut对象中，然后去创建VTK格式的输出。
+
+@code
+        std::vector<unsigned int> partition_int(triangulation.n_active_cells());
+        GridTools::get_subdomain_association(triangulation, partition_int);
+
+
+        const Vector<double> partitioning(partition_int.begin(),
+                                          partition_int.end());
+
+
+        data_out.add_data_vector(partitioning, "partitioning");
+
+
+        data_out.build_patches();
+        data_out.write_vtk(output);
+      }
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="ElasticProblemrun"></a> <h4>ElasticProblem::run</h4>
+
+
+
+
+最后，这里是驱动函数。它几乎与 step-8 完全相同，只是我们替换了 <code>std::cout</code> by the <code>pcout</code> 流。除此之外，唯一的表面变化是我们输出了每个进程有多少个自由度，以及线性求解器花了多少次迭代才收敛。
+
+@code
+  template <int dim>
+  void ElasticProblem<dim>::run()
+  {
+    for (unsigned int cycle = 0; cycle < 10; ++cycle)
+      {
+        pcout << "Cycle " << cycle << ':' << std::endl;
+
+
+        if (cycle == 0)
+          {
+            GridGenerator::hyper_cube(triangulation, -1, 1);
+            triangulation.refine_global(3);
+          }
+        else
+          refine_grid();
+
+
+        pcout << "   Number of active cells:       "
+              << triangulation.n_active_cells() << std::endl;
+
+
+        setup_system();
+
+
+        pcout << "   Number of degrees of freedom: " << dof_handler.n_dofs()
+              << " (by partition:";
+        for (unsigned int p = 0; p < n_mpi_processes; ++p)
+          pcout << (p == 0 ? ' ' : '+')
+                << (DoFTools::count_dofs_with_subdomain_association(dof_handler,
+                                                                    p));
+        pcout << ")" << std::endl;
+
+
+        assemble_system();
+        const unsigned int n_iterations = solve();
+
+
+        pcout << "   Solver converged in " << n_iterations << " iterations."
+              << std::endl;
+
+
+        output_results(cycle);
+      }
+  }
+} // namespace Step17
+
+
+
+@endcode 
+
+
+
+
+<a name="Thecodemaincodefunction"></a> <h3>The <code>main</code> function</h3>
+
+
+
+
+ <code>main()</code> 的工作方式与其他示例程序中的大多数主函数相同，即它将工作委托给管理对象的 <code>run</code> 函数，并且只将所有内容包装成一些代码以捕获异常。
+
+@code
+int main(int argc, char **argv)
+{
+  try
+    {
+      using namespace dealii;
+      using namespace Step17;
+
+
+@endcode 
+
+
+
+这里是唯一真正的区别。MPI和PETSc都要求我们在程序开始时初始化这些库，并在结束时解除初始化。MPI_InitFinalize类处理了所有这些。后面的参数`1`意味着我们确实想用单线程运行每个MPI进程，这是PETSc并行线性代数的前提条件。
+
+@code
+      Utilities::MPI::MPI_InitFinalize mpi_initialization(argc, argv, 1);
+
+
+      ElasticProblem<2> elastic_problem;
+      elastic_problem.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+
+
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
 
-If the program above is compiled and run on a single processor
-machine, it should generate results that are very similar to those
-that we already got with step-8. However, it becomes more interesting
-if we run it on a multicore machine or a cluster of computers. The
-most basic way to run MPI programs is using a command line like
+
+如果上述程序被编译并在单处理器机器上运行，它产生的结果应该与我们已经得到的  step-8  的结果非常相似。然而，如果我们在多核机器或计算机集群上运行它，就会变得更加有趣。运行MPI程序的最基本方法是使用命令行，如 
+
 @code
   mpirun -np 32 ./step-17
-@endcode
-to run the step-17 executable with 32 processors.
+@endcode 
 
-(If you work on a cluster, then there is typically a step in between where you
-need to set up a job script and submit the script to a scheduler. The scheduler
-will execute the script whenever it can allocate 32 unused processors for your
-job. How to write such job
-scripts differs from cluster to cluster, and you should find the documentation
-of your cluster to see how to do this. On my system, I have to use the command
-<code>qsub</code> with a whole host of options to run a job in parallel.)
+来运行32个处理器的 step-17 可执行文件。
 
-Whether directly or through a scheduler, if you run this program on 8
-processors, you should get output like the following:
+(如果你在一个集群上工作，那么中间通常有一个步骤，你需要设置一个工作脚本，并将该脚本提交给调度器。只要调度器能够为你的工作分配32个未使用的处理器，它就会执行该脚本。如何编写这样的作业脚本因集群而异，你应该找到你的集群的文档来看看如何做。在我的系统上，我必须使用带有一大堆选项的命令 <code>qsub</code> 来并行运行一个作业）。) 
+
+无论是直接还是通过调度器，如果你在8个处理器上运行这个程序，你应该得到如下输出。
+
 @code
 Cycle 0:
    Number of active cells:       64
@@ -1606,93 +1126,61 @@ Cycle 16:
    Number of degrees of freedom: 3771884 (by partition: 468452+474204+470818+470884+469960+
 471186+470686+475694)
    Solver converged in 2251 iterations.
-@endcode
-(This run uses a few more refinement cycles than the code available in
-the examples/ directory. The run also used a version of METIS from
-2004 that generated different partitionings; consequently,
-the numbers you get today are slightly different.)
+@endcode 
 
-As can be seen, we can easily get to almost four million unknowns. In fact, the
-code's runtime with 8 processes was less than 7 minutes up to (and including)
-cycle 14, and 14 minutes including the second to last step. (These are numbers
-relevant to when the code was initially written, in 2004.) I lost the timing
-information for the last step, though, but you get the idea. All this is after
-release mode has been enabled by running <code>make release</code>, and
-with the generation of graphical output switched off for the reasons stated in
-the program comments above.
-(@dealiiVideoLectureSeeAlso{18})
-The biggest 2d computations I did had roughly 7.1
-million unknowns, and were done on 32 processes. It took about 40 minutes.
-Not surprisingly, the limiting factor for how far one can go is how much memory
-one has, since every process has to hold the entire mesh and DoFHandler objects,
-although matrices and vectors are split up. For the 7.1M computation, the memory
-consumption was about 600 bytes per unknown, which is not bad, but one has to
-consider that this is for every unknown, whether we store the matrix and vector
-entries locally or not.
+(这个运行比examples/目录中的代码多用了几个细化周期。该运行还使用了2004年的METIS版本，产生了不同的分区；因此，你今天得到的数字略有不同）。) 
+
+可以看出，我们可以很容易地达到近四百万个未知数。事实上，在8个进程的情况下，代码的运行时间不到7分钟，直到（包括）第14个周期，包括倒数第二步的14分钟。(这些数字与该代码最初编写的时间有关，即2004年。)虽然我失去了最后一步的时间信息，但你会明白的。所有这些都是在通过运行 <code>make release</code> 启用发布模式之后，并且由于上述程序注释中所述的原因，关闭了图形输出的生成。(  @dealiiVideoLectureSeeAlso{18})  我做的最大的2D计算大约有710万个未知数，在32个进程中完成。花了大约40分钟。毫不奇怪，一个人能够走多远的限制因素是他有多少内存，因为每个进程都必须持有整个网格和DoFHandler对象，尽管矩阵和向量被分割开来。对于7.1M的计算，每个未知数的内存消耗约为600字节，这并不坏，但我们必须考虑到这是针对每个未知数的，无论我们是否在本地存储矩阵和向量条目。
 
 
 
-Here is some output generated in the 12th cycle of the program, i.e. with roughly
-300,000 unknowns:
 
-<table align="center" style="width:80%">
+下面是在程序的第12个周期中产生的一些输出，即大约有30万个未知数。
+
+  <table align="center" style="width:80%">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-17.12-ux.png" alt="" width="100%"></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-17.12-uy.png" alt="" width="100%"></td>
   </tr>
-</table>
+</table>   
 
-As one would hope for, the x- (left) and y-displacements (right) shown here
-closely match what we already saw in step-8. As shown
-there and in step-22, we could as well have produced a
-vector plot of the displacement field, rather than plotting it as two
-separate scalar fields. What may be more interesting,
-though, is to look at the mesh and partition at this step:
+正如人们所希望的那样，这里显示的x-（左）和y-位移（右）与我们在 step-8 中已经看到的密切相关。正如那里和 step-22 中所示，我们完全可以制作一个位移场的矢量图，而不是把它绘制成两个独立的标量场。不过，更有趣的是，在这一步看一下网格和分区的情况。
 
-<table align="center" width="80%">
+  <table align="center" width="80%">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-17.12-grid.png" alt="" width="100%"></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-17.12-partition.png" alt="" width="100%"></td>
   </tr>
-</table>
+</table>   
 
-Again, the mesh (left) shows the same refinement pattern as seen
-previously. The right panel shows the partitioning of the domain across the 8
-processes, each indicated by a different color. The picture shows that the
-subdomains are smaller where mesh cells are small, a fact that needs to be
-expected given that the partitioning algorithm tries to equilibrate the number
-of cells in each subdomain; this equilibration is also easily identified in
-the output shown above, where the number of degrees per subdomain is roughly
-the same.
+同样，网格（左）显示了与之前看到的相同的细化模式。右边的面板显示了8个过程中的域的划分，每个过程用不同的颜色表示。图片显示，在网格单元较小的地方，子域较小，考虑到分区算法试图平衡每个子域的单元数，这一事实是需要预期的；这种平衡在上图所示的输出中也很容易识别，每个子域的度数大致相同。
 
 
 
-It is worth noting that if we ran the same program with a different number of
-processes, that we would likely get slightly different output: a different
-mesh, different number of unknowns and iterations to convergence. The reason
-for this is that while the matrix and right hand side are the same independent
-of the number of processes used, the preconditioner is not: it performs an
-ILU(0) on the chunk of the matrix of <em>each processor separately</em>. Thus,
-it's effectiveness as a preconditioner diminishes as the number of processes
-increases, which makes the number of iterations increase. Since a different
-preconditioner leads to slight changes in the computed solution, this will
-then lead to slightly different mesh cells tagged for refinement, and larger
-differences in subsequent steps. The solution will always look very similar,
-though.
+
+值得注意的是，如果我们用不同的进程数来运行同一个程序，那我们可能会得到稍微不同的输出：不同的网格，不同的未知数和迭代收敛的次数。其原因是，虽然矩阵和右手边是相同的，与使用的进程数无关，但预处理程序不是：它对每个处理器的矩阵块分别执行ILU(0)  <em>  。因此，随着进程数的增加，它作为预处理程序的有效性会降低，这使得迭代次数增加。由于不同的预处理程序会导致计算出的解决方案发生微小的变化，这将导致细化时标记的网格单元略有不同，并且在后续步骤中差异更大。不过，解决方案看起来总是非常相似的。
 
 
 
-Finally, here are some results for a 3d simulation. You can repeat these by
-changing
+
+最后，这里有一些三维模拟的结果。你可以通过改变以下内容来重复这些结果 
+
 @code
         ElasticProblem<2> elastic_problem;
-@endcode
-to
+@endcode 
+
+改为 
+
 @code
         ElasticProblem<3> elastic_problem;
-@endcode
-in the main function. If you then run the program in parallel,
-you get something similar to this (this is for a job with 16 processes):
+@endcode 
+
+将主函数中的@code
+        ElasticProblem<2> elastic_problem;
+@endcode改为@code
+        ElasticProblem<3> elastic_problem;
+@endcode。如果你再并行运行该程序，你会得到与此类似的东西（这是针对有16个进程的工作）。
+
 @code
 Cycle 0:
    Number of active cells:       512
@@ -1722,49 +1210,35 @@ Cycle 6:
    Number of active cells:       461392
    Number of degrees of freedom: 1497951 (by partition: 103587+100827+97611+93726+93429+88074+95892+88296+96882+93000+87864+90915+92232+86931+98091+90594)
    Solver converged in 261 iterations.
-@endcode
+@endcode 
 
 
 
-The last step, going up to 1.5 million unknowns, takes about 55 minutes with
-16 processes on 8 dual-processor machines (of the kind available in 2003). The
-graphical output generated by
-this job is rather large (cycle 5 already prints around 82 MB of data), so
-we contend ourselves with showing output from cycle 4:
 
-<table width="80%" align="center">
+
+
+最后一步，上升到150万个未知数，在8台双处理器机器（2003年可用的那种）上的16个进程需要大约55分钟。这个工作产生的图形输出相当大（第5周期已经打印了大约82MB的数据），所以我们自己争着显示第4周期的输出。
+
+  <table width="80%" align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-17.4-3d-partition.png" width="100%" alt=""></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-17.4-3d-ux.png" alt="" width="100%"></td>
   </tr>
-</table>
+</table>   
 
 
 
-The left picture shows the partitioning of the cube into 16 processes, whereas
-the right one shows the x-displacement along two cutplanes through the cube.
+
+左边的图片显示了立方体被分割成16个进程，而右边的图片显示了沿着两个穿过立方体的切割面的X位移。
 
 
 
-<a name="extensions"></a>
-<a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
+
+<a name="extensions"></a> <a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
 
 
-The program keeps a complete copy of the Triangulation and DoFHandler objects
-on every processor. It also creates complete copies of the solution vector,
-and it creates output on only one processor. All of this is obviously
-the bottleneck as far as parallelization is concerned.
+该程序在每个处理器上都保留了Triangulation和DoFHandler对象的完整副本。它还创建了解决方案矢量的完整副本，并且只在一个处理器上创建输出。就并行化而言，所有这些显然是瓶颈。
 
-Internally, within deal.II, parallelizing the data
-structures used in hierarchic and unstructured triangulations is a hard
-problem, and it took us a few more years to make this happen. The step-40
-tutorial program and the @ref distributed documentation module talk about how
-to do these steps and what it takes from an application perspective. An
-obvious extension of the current program would be to use this functionality to
-completely distribute computations to many more processors than used here.
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-17.cc"
-*/
+在内部，在deal.II内部，将分层和非结构化三角计算中使用的数据结构并行化是一个困难的问题，我们又花了几年时间才实现了这一点。 step-40 教程程序和 @ref distributed 文档模块谈到了如何做这些步骤，以及从应用角度来看需要做什么。当前程序的一个明显的扩展是使用这个功能将计算完全分布到比这里使用的更多的处理器。<a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-17.cc"   
+
+  */  

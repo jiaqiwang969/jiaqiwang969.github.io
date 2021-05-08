@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-21 tutorial program</title>
+<title>The deal.II Library: The step-21 tutorial program  。</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,219 +86,218 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-21 tutorial program </div>  </div>
+<div class="title">The step-21 tutorial program 。 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_20.html">step-20</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_20.html">step-20</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Thetwophaseflowproblem">The two phase flow problem</a>
-        <li><a href="#Timediscretization">Time discretization</a>
-        <li><a href="#Spacediscretization">Space discretization</a>
-        <li><a href="#Linearsolvers">Linear solvers</a>
-        <li><a href="#Choosingatimestep">Choosing a time step</a>
-        <li><a href="#Thetestcase">The test case</a>
+        <li><a href="#Thetwophaseflowproblem">The two phase flow problem</a><a href="#Thetwophaseflowproblem">The two phase flow problem</a>
+        <li><a href="#Timediscretization">Time discretization</a><a href="#Timediscretization">Time discretization</a>
+        <li><a href="#Spacediscretization">Space discretization</a><a href="#Spacediscretization">Space discretization</a>
+        <li><a href="#Linearsolvers">Linear solvers</a><a href="#Linearsolvers">Linear solvers</a>
+        <li><a href="#Choosingatimestep">Choosing a time step</a><a href="#Choosingatimestep">Choosing a time step</a>
+        <li><a href="#Thetestcase">The test case</a><a href="#Thetestcase">The test case</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#ThecodeTwoPhaseFlowProblemcodeclass">The <code>TwoPhaseFlowProblem</code> class</a>
-        <li><a href="#Equationdata">Equation data</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#ThecodeTwoPhaseFlowProblemcodeclass">The <code>TwoPhaseFlowProblem</code> class</a><a href="#ThecodeTwoPhaseFlowProblemcodeclass">The <code>TwoPhaseFlowProblem</code> class</a>
+        <li><a href="#Equationdata">Equation data</a><a href="#Equationdata">Equation data</a>
       <ul>
-        <li><a href="#Pressurerighthandside">Pressure right hand side</a>
-        <li><a href="#Pressureboundaryvalues">Pressure boundary values</a>
-        <li><a href="#Saturationboundaryvalues">Saturation boundary values</a>
-        <li><a href="#Initialdata">Initial data</a>
+        <li><a href="#Pressurerighthandside">Pressure right hand side</a><a href="#Pressurerighthandside">Pressure right hand side</a>
+        <li><a href="#Pressureboundaryvalues">Pressure boundary values</a><a href="#Pressureboundaryvalues">Pressure boundary values</a>
+        <li><a href="#Saturationboundaryvalues">Saturation boundary values</a><a href="#Saturationboundaryvalues">Saturation boundary values</a>
+        <li><a href="#Initialdata">Initial data</a><a href="#Initialdata">Initial data</a>
       </ul>
-        <li><a href="#Theinversepermeabilitytensor">The inverse permeability tensor</a>
+        <li><a href="#Theinversepermeabilitytensor">The inverse permeability tensor</a><a href="#Theinversepermeabilitytensor">The inverse permeability tensor</a>
       <ul>
-        <li><a href="#Singlecurvingcrackpermeability">Single curving crack permeability</a>
-        <li><a href="#Randommediumpermeability">Random medium permeability</a>
+        <li><a href="#Singlecurvingcrackpermeability">Single curving crack permeability</a><a href="#Singlecurvingcrackpermeability">Single curving crack permeability</a>
+        <li><a href="#Randommediumpermeability">Random medium permeability</a><a href="#Randommediumpermeability">Random medium permeability</a>
       </ul>
-        <li><a href="#Theinversemobilityandsaturationfunctions">The inverse mobility and saturation functions</a>
-        <li><a href="#Linearsolversandpreconditioners">Linear solvers and preconditioners</a>
-        <li><a href="#codeTwoPhaseFlowProblemcodeclassimplementation"><code>TwoPhaseFlowProblem</code> class implementation</a>
+        <li><a href="#Theinversemobilityandsaturationfunctions">The inverse mobility and saturation functions</a> ]<a href="#Theinversemobilityandsaturationfunctions">The inverse mobility and saturation functions</a>
+        <li><a href="#Linearsolversandpreconditioners">Linear solvers and preconditioners</a><a href="#Linearsolversandpreconditioners">Linear solvers and preconditioners</a>
+        <li><a href="#codeTwoPhaseFlowProblemcodeclassimplementation"><code>TwoPhaseFlowProblem</code> class implementation</a><a href="#codeTwoPhaseFlowProblemcodeclassimplementation"><code>TwoPhaseFlowProblem</code> class implementation</a>
       <ul>
-        <li><a href="#TwoPhaseFlowProblemTwoPhaseFlowProblem">TwoPhaseFlowProblem::TwoPhaseFlowProblem</a>
-        <li><a href="#TwoPhaseFlowProblemmake_grid_and_dofs">TwoPhaseFlowProblem::make_grid_and_dofs</a>
-        <li><a href="#TwoPhaseFlowProblemassemble_system">TwoPhaseFlowProblem::assemble_system</a>
-        <li><a href="#TwoPhaseFlowProblemassemble_rhs_S">TwoPhaseFlowProblem::assemble_rhs_S</a>
-        <li><a href="#TwoPhaseFlowProblemsolve">TwoPhaseFlowProblem::solve</a>
-        <li><a href="#TwoPhaseFlowProblemoutput_results">TwoPhaseFlowProblem::output_results</a>
-        <li><a href="#TwoPhaseFlowProblemproject_back_saturation">TwoPhaseFlowProblem::project_back_saturation</a>
-        <li><a href="#TwoPhaseFlowProblemget_maximal_velocity">TwoPhaseFlowProblem::get_maximal_velocity</a>
-        <li><a href="#TwoPhaseFlowProblemrun">TwoPhaseFlowProblem::run</a>
+        <li><a href="#TwoPhaseFlowProblemTwoPhaseFlowProblem">TwoPhaseFlowProblem::TwoPhaseFlowProblem</a><a href="#TwoPhaseFlowProblemTwoPhaseFlowProblem">TwoPhaseFlowProblem::TwoPhaseFlowProblem</a>
+        <li><a href="#TwoPhaseFlowProblemmake_grid_and_dofs">TwoPhaseFlowProblem::make_grid_and_dofs</a><a href="#TwoPhaseFlowProblemmake_grid_and_dofs">TwoPhaseFlowProblem::make_grid_and_dofs</a>
+        <li><a href="#TwoPhaseFlowProblemassemble_system">TwoPhaseFlowProblem::assemble_system</a><a href="#TwoPhaseFlowProblemassemble_system">TwoPhaseFlowProblem::assemble_system</a>
+        <li><a href="#TwoPhaseFlowProblemassemble_rhs_S">TwoPhaseFlowProblem::assemble_rhs_S</a><a href="#TwoPhaseFlowProblemassemble_rhs_S">TwoPhaseFlowProblem::assemble_rhs_S</a>
+        <li><a href="#TwoPhaseFlowProblemsolve">TwoPhaseFlowProblem::solve</a><a href="#TwoPhaseFlowProblemsolve">TwoPhaseFlowProblem::solve</a>
+        <li><a href="#TwoPhaseFlowProblemoutput_results">TwoPhaseFlowProblem::output_results</a><a href="#TwoPhaseFlowProblemoutput_results">TwoPhaseFlowProblem::output_results</a>
+        <li><a href="#TwoPhaseFlowProblemproject_back_saturation">TwoPhaseFlowProblem::project_back_saturation</a><a href="#TwoPhaseFlowProblemproject_back_saturation">TwoPhaseFlowProblem::project_back_saturation</a>
+        <li><a href="#TwoPhaseFlowProblemget_maximal_velocity">TwoPhaseFlowProblem::get_maximal_velocity</a><a href="#TwoPhaseFlowProblemget_maximal_velocity">TwoPhaseFlowProblem::get_maximal_velocity</a>
+        <li><a href="#TwoPhaseFlowProblemrun">TwoPhaseFlowProblem::run</a><a href="#TwoPhaseFlowProblemrun">TwoPhaseFlowProblem::run</a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
       <ul>
-        <li><a href="#Solvers">Solvers</a>
-        <li><a href="#Timestepping">Time stepping</a>
-        <li><a href="#Adaptivity">Adaptivity</a>
+        <li><a href="#Solvers">Solvers</a><a href="#Solvers">Solvers</a>
+        <li><a href="#Timestepping">Time stepping</a><a href="#Timestepping">Time stepping</a>
+        <li><a href="#Adaptivity">Adaptivity</a><a href="#Adaptivity">Adaptivity</a>
     </ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
- <a class="anchor" id="Introduction"></a><a class="anchor" id="Intro"></a> </p><h1>Introduction</h1>
-<p>This program grew out of a student project by Yan Li at Texas A&amp;M University. Most of the work for this program is by her.</p>
-<p>In this project, we propose a numerical simulation for two phase flow problems in porous media. This problem includes one elliptic equation and one nonlinear, time dependent transport equation. This is therefore also the first time-dependent tutorial program (besides the somewhat strange time-dependence of <a class="el" href="step_18.html">step-18</a>).</p>
-<p>The equations covered here are an extension of the material already covered in <a class="el" href="step_20.html">step-20</a>. In particular, they fall into the class of vector-valued problems. A toplevel overview of this topic can be found in the <a class="el" href="group__vector__valued.html">Handling vector valued problems</a> module.</p>
+</p>
+<p><a class="anchor" id="Introduction"></a><a class="anchor" id="Intro"></a></p><h1>Introduction</h1>
+<p>这个程序是由德克萨斯A&amp;M大学的Yan Li的一个学生项目发展而来的。这个程序的大部分工作都是由她完成的。</p>
+<p>在这个项目中，我们提出了一个针对多孔介质中两相流动问题的数值模拟。这个问题包括一个椭圆方程和一个非线性的、随时间变化的传输方程。因此，这也是第一个时间相关的教程程序（除了有点奇怪的时间相关的 <a class="el" href="step_18.html">@ref step_18 </a>step-18"  "）。</p>
+<p>这里涉及的方程是对 <a class="el" href="step_20.html">step-20</a> 中已经涉及的材料的扩展。特别是，它们属于矢量值问题的范畴。这个主题的顶层概述可以在 <a class="el" href="group__vector__valued.html">Handling vector valued problems</a> 模块中找到。</p>
 <p><a class="anchor" id="Thetwophaseflowproblem"></a></p><h3>The two phase flow problem</h3>
-<p>Modeling of two phase flow in porous media is important for both environmental remediation and the management of petroleum and groundwater reservoirs. Practical situations involving two phase flow include the dispersal of a nonaqueous phase liquid in an aquifer, or the joint movement of a mixture of fluids such as oil and water in a reservoir. Simulation models, if they are to provide realistic predictions, must accurately account for these effects.</p>
-<p>To derive the governing equations, consider two phase flow in a reservoir \(\Omega\) under the assumption that the movement of fluids is dominated by viscous effects; i.e. we neglect the effects of gravity, compressibility, and capillary pressure. Porosity will be considered to be constant. We will denote variables referring to either of the two phases using subscripts \(w\) and \(o\), short for water and oil. The derivation of the equations holds for other pairs of fluids as well, however.</p>
-<p>The velocity with which molecules of each of the two phases move is determined by Darcy's law that states that the velocity is proportional to the pressure gradient: </p><p class="formulaDsp">
+<p>多孔介质中的两相流建模对于环境修复以及石油和地下水库的管理都很重要。涉及两相流动的实际情况包括非水相液体在含水层中的分散，或油和水等流体混合物在储层中的联合运动。仿真模型如果要提供真实的预测，就必须准确地考虑到这些影响。</p>
+<p>为了推导出管理方程，考虑储层中的两相流动 \(\Omega\) ，假设流体的运动由粘性效应主导；也就是说，我们忽略了重力、压缩性和毛细压力的影响。孔隙率将被认为是恒定的。我们将使用下标 \(w\) 和 \(o\) 来表示两相中的任何一个变量，即水和油的简称。然而，方程的推导对其他流体对也是适用的。</p>
+<p>两相中每一相的分子移动的速度由达西定律决定，即速度与压力梯度成正比。 </p><p class="formulaDsp">
 \begin{eqnarray*} \mathbf{u}_{j} = -\frac{k_{rj}(S)}{\mu_{j}} \mathbf{K} \cdot \nabla p \end{eqnarray*}
 </p>
-<p> where \(\mathbf{u}_{j}\) is the velocity of phase \(j=o,w\), \(K\) is the permeability tensor, \(k_{rj}\) is the relative permeability of phase \(j\), \(p\) is the pressure and \(\mu_{j}\) is the viscosity of phase \(j\). Finally, \(S\) is the saturation (volume fraction), i.e. a function with values between 0 and 1 indicating the composition of the mixture of fluids. In general, the coefficients \(K, k_{rj}, \mu\) may be spatially dependent variables, and we will always treat them as non-constant functions in the following.</p>
-<p>We combine Darcy's law with the statement of conservation of mass for each phase, </p><p class="formulaDsp">
+<p>其中 \(\mathbf{u}_{j}\) 是相 \(j=o,w\) 的速度， \(K\) 是渗透性张量， \(k_{rj}\) 是相 \(j\) 的相对渗透性， \(p\) 是压力， \(\mu_{j}\) 是相 \(j\) 的黏度。最后， \(S\) 是饱和度（体积分数），即一个数值在0和1之间的函数，表示流体混合物的组成。一般来说，系数 \(K, k_{rj}, \mu\) 可能是空间上的变量，我们在下文中总是将其视为非常数函数。</p>
+<p>我们将达西定律与各相的质量守恒声明结合起来， </p><p class="formulaDsp">
 \[ \textrm{div}\ \mathbf{u}_{j} = q_j, \]
 </p>
-<p> with a source term for each phase. By summing over the two phases, we can express the governing equations in terms of the so-called pressure equation: </p><p class="formulaDsp">
+<p>为各相提供一个源项。通过对两相求和，我们可以用所谓的压力方程来表达治理方程。 </p><p class="formulaDsp">
 \begin{eqnarray*} - \nabla \cdot (\mathbf{K}\lambda(S) \nabla p)= q. \end{eqnarray*}
 </p>
-<p> Here, \(q\) is the sum source term, and </p><p class="formulaDsp">
+<p>这里， \(q\) 是和源项， </p><p class="formulaDsp">
 \[ \lambda(S) = \frac{k_{rw}(S)}{\mu_{w}}+\frac{k_{ro}(S)}{\mu_{o}} \]
 </p>
-<p> is the total mobility.</p>
-<p>So far, this looks like an ordinary stationary, Poisson-like equation that we can solve right away with the techniques of the first few tutorial programs (take a look at <a class="el" href="step_6.html">step-6</a>, for example, for something very similar). However, we have not said anything yet about the saturation, which of course is going to change as the fluids move around.</p>
-<p>The second part of the equations is the description of the dynamics of the saturation, i.e., how the relative concentration of the two fluids changes with time. The saturation equation for the displacing fluid (water) is given by the following conservation law: </p><p class="formulaDsp">
+<p>是总流动性。</p>
+<p>到目前为止，这看起来是一个普通的静止的、类似泊松的方程，我们可以用前几个教程的技术马上解决（例如，看一下 <a class="el" href="step_6.html">step-6</a> ，非常类似的东西）。然而，我们还没有说过任何关于饱和度的问题，当然，饱和度会随着流体的移动而改变。</p>
+<p>方程的第二部分是对饱和度的动态描述，即两种液体的相对浓度如何随时间变化。置换流体（水）的饱和度方程由以下守恒定律给出。 </p><p class="formulaDsp">
 \begin{eqnarray*} S_{t} + \nabla \cdot (F(S) \mathbf{u}) = q_{w}, \end{eqnarray*}
 </p>
-<p> which can be rewritten by using the product rule of the divergence operator in the previous equation: </p><p class="formulaDsp">
+<p>可以通过使用前一个方程中的发散算子的乘积规则来重写。 </p><p class="formulaDsp">
 \begin{eqnarray*} S_{t} + F(S) \left[\nabla \cdot \mathbf{u}\right] + \mathbf{u} \cdot \left[ \nabla F(S)\right] = S_{t} + F(S) q + \mathbf{u} \cdot \nabla F(S) = q_{w}. \end{eqnarray*}
 </p>
-<p> Here, \(q=\nabla\cdot \mathbf{u}\) is the total influx introduced above, and \(q_{w}\) is the flow rate of the displacing fluid (water). These two are related to the fractional flow \(F(S)\) in the following way: </p><p class="formulaDsp">
+<p>这里， \(q=\nabla\cdot \mathbf{u}\) 是上面介绍的总流入量， \(q_{w}\) 是置换流体（水）的流率。这两者与分流量 \(F(S)\) 的关系如下。 </p><p class="formulaDsp">
 \[ q_{w} = F(S) q, \]
 </p>
-<p> where the fractional flow is often parameterized via the (heuristic) expression </p><p class="formulaDsp">
+<p>其中分数流通常通过（启发式）表达式 </p><p class="formulaDsp">
 \[ F(S) = \frac{k_{rw}(S)/\mu_{w}}{k_{rw}(S)/\mu_{w} + k_{ro}(S)/\mu_{o}}. \]
 </p>
-<p> Putting it all together yields the saturation equation in the following, advected form: </p><p class="formulaDsp">
+<p>进行参数化。 把这些放在一起，可以得到以下形式的饱和度方程，平流式。 </p><p class="formulaDsp">
 \begin{eqnarray*} S_{t} + \mathbf{u} \cdot \nabla F(S) = 0, \end{eqnarray*}
 </p>
-<p> where \(\mathbf u\) is the total velocity </p><p class="formulaDsp">
+<p>其中 \(\mathbf u\) 是总速度 </p><p class="formulaDsp">
 \[ \mathbf{u} = \mathbf{u}_{o} + \mathbf{u}_{w} = -\lambda(S) \mathbf{K}\cdot\nabla p. \]
 </p>
-<p> Note that the advection equation contains the term \(\mathbf{u} \cdot \nabla F(S)\) rather than \(\mathbf{u} \cdot \nabla S\) to indicate that the saturation is not simply transported along; rather, since the two phases move with different velocities, the saturation can actually change even in the advected coordinate system. To see this, rewrite \(\mathbf{u} \cdot \nabla F(S) = \mathbf{u} F&#39;(S) \cdot \nabla S\) to observe that the <em>actual</em> velocity with which the phase with saturation \(S\) is transported is \(\mathbf u F&#39;(S)\) whereas the other phase is transported at velocity \(\mathbf u (1-F&#39;(S))\). \(F(S)\) is consequently often referred to as the <em>fractional flow</em>.</p>
-<p>In summary, what we get are the following two equations: </p><p class="formulaDsp">
+<p>。注意，平流方程包含术语 \(\mathbf{u} \cdot \nabla F(S)\) 而不是 \(\mathbf{u} \cdot \nabla S\) ，表明饱和度不是简单地沿途传送；相反，由于两相以不同的速度运动，即使在平流坐标系中，饱和度实际上也会发生变化。为了看到这一点，重写 \(\mathbf{u} \cdot \nabla F(S) = \mathbf{u} F&#39;(S) \cdot \nabla S\) ，观察到具有饱和度 \(S\) 的相的<em>actual</em>传输速度是 \(\mathbf u F&#39;(S)\) ，而另一个相的传输速度是 \(\mathbf u (1-F&#39;(S))\) 。 因此， \(F(S)\) 通常被称为<em>fractional flow</em>。</p>
+<p>总之，我们得到的是以下两个方程式。 </p><p class="formulaDsp">
 \begin{eqnarray*} - \nabla \cdot (\mathbf{K}\lambda(S) \nabla p) &amp;=&amp; q \qquad \textrm{in}\ \Omega\times[0,T], \\ S_{t} + \mathbf{u} \cdot \nabla F(S) &amp;=&amp; 0 \qquad \textrm{in}\ \Omega\times[0,T]. \end{eqnarray*}
 </p>
-<p> Here, \(p=p(\mathbf x, t), S=S(\mathbf x, t)\) are now time dependent functions: while at every time instant the flow field is in equilibrium with the pressure (i.e. we neglect dynamic accelerations), the saturation is transported along with the flow and therefore changes over time, in turn affected the flow field again through the dependence of the first equation on \(S\).</p>
-<p>This set of equations has a peculiar character: one of the two equations has a time derivative, the other one doesn't. This corresponds to the character that the pressure and velocities are coupled through an instantaneous constraint, whereas the saturation evolves over finite time scales.</p>
-<p>Such systems of equations are called Differential Algebraic Equations (DAEs), since one of the equations is a differential equation, the other is not (at least not with respect to the time variable) and is therefore an "algebraic" equation. (The notation comes from the field of ordinary differential equations, where everything that does not have derivatives with respect to the time variable is necessarily an algebraic equation.) This class of equations contains pretty well-known cases: for example, the time dependent Stokes and Navier-Stokes equations (where the algebraic constraint is that the divergence of the flow field, \(\textrm{div}\ \mathbf u\), must be zero) as well as the time dependent Maxwell equations (here, the algebraic constraint is that the divergence of the electric displacement field equals the charge density, \(\textrm{div}\ \mathbf D = \rho\) and that the divergence of the magnetic flux density is zero: \(\textrm{div}\ \mathbf B = 0\)); even the quasistatic model of <a class="el" href="step_18.html">step-18</a> falls into this category. We will see that the different character of the two equations will inform our discretization strategy for the two equations.</p>
+<p>这里， \(p=p(\mathbf x, t), S=S(\mathbf x, t)\) 现在是与时间相关的函数：虽然在每个时间瞬间，流场与压力处于平衡状态（即我们忽略了动态加速），但饱和度与流动一起传输，因此随时间变化，反过来通过第一个方程对 \(S\) 的依赖性再次影响流场。</p>
+<p>这组方程有一个特殊的特点：两个方程中的一个有时间导数，另一个没有。这对应于压力和速度通过瞬时约束耦合的特点，而饱和度在有限的时间尺度上演变。</p>
+<p>这样的方程组被称为微分代数方程（DAE），因为其中一个方程是微分方程，另一个不是（至少不是就时间变量而言），因此是一个 "代数 "方程。这个符号来自常微分方程领域，在这个领域中，所有没有关于时间变量的导数的东西都必然是一个代数方程）。这类方程包含相当知名的情况：例如，与时间相关的斯托克斯和纳维-斯托克斯方程（其中代数约束是流场的发散， \(\textrm{div}\ \mathbf u\) ，必须为零）以及与时间相关的麦克斯韦方程（这里，代数约束是电位移场的发散等于电荷密度， \(\textrm{div}\ \mathbf D = \rho\) ，磁通密度的发散为零。 \(\textrm{div}\ \mathbf B = 0\) ）；即使是 <a class="el" href="step_18.html">step-18</a> 的准静态模型也属于这个类别。我们将看到，这两个方程的不同特征将告知我们这两个方程的离散化策略。</p>
 <p><a class="anchor" id="Timediscretization"></a></p><h3>Time discretization</h3>
-<p>In the reservoir simulation community, it is common to solve the equations derived above by going back to the first order, mixed formulation. To this end, we re-introduce the total velocity \(\mathbf u\) and write the equations in the following form: </p><p class="formulaDsp">
+<p>在储层模拟界，通常是通过回到一阶混合公式来解决上面得出的方程。为此，我们重新引入总速度 \(\mathbf u\) ，将方程写成以下形式。 </p><p class="formulaDsp">
 \begin{eqnarray*} \mathbf{u}+\mathbf{K}\lambda(S) \nabla p&amp;=&amp;0 \\ \nabla \cdot\mathbf{u} &amp;=&amp; q \\ S_{t} + \mathbf{u} \cdot \nabla F(S) &amp;=&amp; 0. \end{eqnarray*}
 </p>
-<p> This formulation has the additional benefit that we do not have to express the total velocity \(\mathbf u\) appearing in the transport equation as a function of the pressure, but can rather take the primary variable for it. Given the saddle point structure of the first two equations and their similarity to the mixed Laplace formulation we have introduced in <a class="el" href="step_20.html">step-20</a>, it will come as no surprise that we will use a mixed discretization again.</p>
-<p>But let's postpone this for a moment. The first business we have with these equations is to think about the time discretization. In reservoir simulation, there is a rather standard algorithm that we will use here. It first solves the pressure using an implicit equation, then the saturation using an explicit time stepping scheme. The algorithm is called IMPES for IMplicit Pressure Explicit Saturation and was first proposed a long time ago: by Sheldon et al. in 1959 and Stone and Gardner in 1961 (J. W. Sheldon, B. Zondek and W. T. Cardwell: <em>One-dimensional, incompressible, non-capillary, two-phase fluid flow in a porous medium</em>, Trans. SPE AIME, 216 (1959), pp. 290-296; H. L. Stone and A. O. Gardner Jr: <em>Analysis of gas-cap or dissolved-gas reservoirs</em>, Trans. SPE AIME, 222 (1961), pp. 92-104). In a slightly modified form, this algorithm can be written as follows: for each time step, solve </p><p class="formulaDsp">
+<p>这种提法还有一个好处，即我们不必把出现在输运方程中的总速度 \(\mathbf u\) 表示为压力的函数，而是可以把它作为主变量。鉴于前两个方程的鞍点结构以及它们与我们在 <a class="el" href="step_20.html">step-20</a> 中介绍的混合拉普拉斯公式的相似性，我们将再次使用混合离散化，这并不奇怪。</p>
+<p>但让我们先把这个问题推迟一下。我们处理这些方程的第一件事是考虑时间离散化问题。在储层模拟中，有一个相当标准的算法，我们将在这里使用。它首先使用隐式方程解决压力问题，然后使用显式时间步进方案解决饱和问题。该算法被称为IMplicit Pressure Explicit Saturation（隐式压力显式饱和），很早以前就被提出：Sheldon等人在1959年，Stone和Gardner在1961年（J.W.Sheldon, B. Zondek and W. T. Cardwell: <em>One-dimensional, incompressible, non-capillary, two-phase fluid flow in a porous medium</em>, Trans. SPE AIME, 216 (1959), pp. 290-296; H. L. Stone and A. O. Gardner Jr: <em>Analysis of gas-cap or dissolved-gas reservoirs</em>, Trans. SPE AIME, 222 (1961), pp. 92-104）。) 在一个稍加修改的形式中，这个算法可以写成如下：对于每个时间步长，解决 </p><p class="formulaDsp">
 \begin{eqnarray*} \mathbf{u}^{n+1}+\mathbf{K}\lambda(S^n) \nabla p^{n+1}&amp;=&amp;0 \\ \nabla \cdot\mathbf{u}^{n+1} &amp;=&amp; q^{n+1} \\ \frac {S^{n+1}-S^n}{\triangle t} + \mathbf{u}^{n+1} \cdot \nabla F(S^n) &amp;=&amp; 0, \end{eqnarray*}
 </p>
-<p> where \(\triangle t\) is the length of a time step. Note how we solve the implicit pressure-velocity system that only depends on the previously computed saturation \(S^n\), and then do an explicit time step for \(S^{n+1}\) that only depends on the previously known \(S^n\) and the just computed \(\mathbf{u}^{n+1}\). This way, we never have to iterate for the nonlinearities of the system as we would have if we used a fully implicit method. (In a more modern perspective, this should be seen as an "operator
-splitting" method. <a class="el" href="step_58.html">step-58</a> has a long description of the idea behind this.)</p>
-<p>We can then state the problem in weak form as follows, by multiplying each equation with test functions \(\mathbf v\), \(\phi\), and \(\sigma\) and integrating terms by parts: </p><p class="formulaDsp">
+<p>其中 \(\triangle t\) 是一个时间步骤的长度。请注意我们是如何解决隐式压力-速度系统的，它只取决于先前计算的饱和度 \(S^n\) ，然后对 \(S^{n+1}\) 做一个显式时间步长，它只取决于先前已知的 \(S^n\) 和刚刚计算的 \(\mathbf{u}^{n+1}\) 。这样一来，我们就不必像使用全隐式方法那样对系统的非线性进行迭代。从更现代的角度来看，这应该被看作是一种 "算子分割 "方法。 <a class="el" href="step_58.html">step-58</a> 对这背后的想法有一个很长的描述）。)</p>
+<p>然后我们可以以弱的形式陈述问题如下，用测试函数 \(\mathbf v\) 、 \(\phi\) 和 \(\sigma\) 乘以每一个方程，并通过部分整合条款。 </p><p class="formulaDsp">
 \begin{eqnarray*} \left((\mathbf{K}\lambda(S^n))^{-1} \mathbf{u}^{n+1},\mathbf v\right)_\Omega - (p^{n+1}, \nabla\cdot\mathbf v)_\Omega &amp;=&amp; - (p^{n+1}, \mathbf v)_{\partial\Omega} \\ (\nabla \cdot\mathbf{u}^{n+1}, \phi)_\Omega &amp;=&amp; (q^{n+1},\phi)_\Omega \end{eqnarray*}
 </p>
-<p> Note that in the first term, we have to prescribe the pressure \(p^{n+1}\) on the boundary \(\partial\Omega\) as boundary values for our problem. \(\mathbf n\) denotes the unit outward normal vector to \(\partial K\), as usual.</p>
-<p>For the saturation equation, we obtain after integrating by parts </p><p class="formulaDsp">
+<p>注意，在第一项中，我们必须规定边界 \(\partial\Omega\) 上的压力 \(p^{n+1}\) 作为我们问题的边界值。 \(\mathbf n\) 表示对 \(\partial K\) 的单位外向法向量，如常。</p>
+<p>对于饱和方程，我们通过部分积分后得到 </p><p class="formulaDsp">
 \begin{eqnarray*} (S^{n+1}, \sigma)_\Omega - \triangle t \sum_K \left\{ \left(F(S^n), \nabla \cdot (\mathbf{u}^{n+1} \sigma)\right)_K - \left(F(S^n) (\mathbf n \cdot \mathbf{u}^{n+1}, \sigma\right)_{\partial K} \right\} &amp;=&amp; (S^n,\sigma)_\Omega. \end{eqnarray*}
 </p>
-<p> Using the fact that \(\nabla \cdot \mathbf{u}^{n+1}=q^{n+1}\), we can rewrite the cell term to get an equation as follows: </p><p class="formulaDsp">
+<p>利用 \(\nabla \cdot \mathbf{u}^{n+1}=q^{n+1}\) 这一事实，我们可以重写单元项，得到如下方程。 </p><p class="formulaDsp">
 \begin{eqnarray*} (S^{n+1}, \sigma)_\Omega - \triangle t \sum_K \left\{ \left(F(S^n) \mathbf{u}^{n+1}, \nabla \sigma\right)_K - \left(F(S^n) (\mathbf n \cdot \mathbf{u}^{n+1}), \sigma\right)_{\partial K} \right\} &amp;=&amp; (S^n,\sigma)_\Omega + \triangle t \sum_K \left(F(S^n) q^{n+1}, \sigma\right)_K. \end{eqnarray*}
 </p>
-<p> We introduce an object of type <a class="el" href="classDiscreteTime.html">DiscreteTime</a> in order to keep track of the current value of time and time step in the code. This class encapsulates many complexities regarding adjusting time step size and stopping at a specified final time.</p>
+<p>我们引入一个DiscreteTime类型的对象，以便在代码中跟踪时间和时间步长的当前值。这个类封装了许多关于调整时间步长和在指定的最终时间停止的复杂情况。</p>
 <p><a class="anchor" id="Spacediscretization"></a></p><h3>Space discretization</h3>
-<p>In each time step, we then apply the mixed finite method of <a class="el" href="step_20.html">step-20</a> to the velocity and pressure. To be well-posed, we choose Raviart-Thomas spaces \(RT_{k}\) for \(\mathbf{u}\) and discontinuous elements of class \(DGQ_{k}\) for \(p\). For the saturation, we will also choose \(DGQ_{k}\) spaces.</p>
-<p>Since we have discontinuous spaces, we have to think about how to evaluate terms on the interfaces between cells, since discontinuous functions are not really defined there. In particular, we have to give a meaning to the last term on the left hand side of the saturation equation. To this end, let us define that we want to evaluate it in the following sense: </p><p class="formulaDsp">
+<p>在每个时间步长中，我们再对速度和压力应用 <a class="el" href="step_20.html">@ref step_20 </a>step-20"  " 的混合有限方法。为了得到良好的解决，我们对 \(\mathbf{u}\) 选择Raviart-Thomas空间 \(RT_{k}\) ，对 \(p\) 选择 \(DGQ_{k}\) 类的不连续元素。对于饱和度，我们也将选择 \(DGQ_{k}\) 空间。</p>
+<p>由于我们有不连续的空间，我们必须考虑如何评估单元间界面上的项，因为不连续的函数在那里并没有真正定义。特别是，我们必须给饱和方程左手边的最后一个项赋予一个意义。为此，让我们定义，我们要在以下意义上评估它。 </p><p class="formulaDsp">
 \begin{eqnarray*} &amp;&amp;\left(F(S^n) (\mathbf n \cdot \mathbf{u}^{n+1}), \sigma\right)_{\partial K} \\ &amp;&amp;\qquad = \left(F(S^n_+) (\mathbf n \cdot \mathbf{u}^{n+1}_+), \sigma\right)_{\partial K_+} + \left(F(S^n_-) (\mathbf n \cdot \mathbf{u}^{n+1}_-), \sigma\right)_{\partial K_-}, \end{eqnarray*}
 </p>
-<p> where \(\partial K_{-} \dealcoloneq \{x\in \partial K, \mathbf{u}(x) \cdot \mathbf{n}&lt;0\}\) denotes the inflow boundary and \(\partial K_{+} \dealcoloneq \{\partial K \setminus \partial K_{-}\}\) is the outflow part of the boundary. The quantities \(S_+,\mathbf{u}_+\) then correspond to the values of these variables on the present cell, whereas \(S_-,\mathbf{u}_-\) (needed on the inflow part of the boundary of \(K\)) are quantities taken from the neighboring cell. Some more context on discontinuous element techniques and evaluation of fluxes can also be found in <a class="el" href="step_12.html">step-12</a> and <a class="el" href="step_12b.html">step-12b</a>.</p>
+<p>其中 \(\partial K_{-} \dealcoloneq \{x\in \partial K, \mathbf{u}(x) \cdot \mathbf{n}&lt;0\}\) 表示流入边界， \(\partial K_{+} \dealcoloneq \{\partial K \setminus \partial K_{-}\}\) 是边界的流出部分。那么数量 \(S_+,\mathbf{u}_+\) 对应于这些变量在当前单元上的值，而 \(S_-,\mathbf{u}_-\) （需要在 \(K\) 的边界流入部分）是取自邻近单元的数量。关于非连续单元技术和通量评价的更多背景，也可以在 <a class="el" href="step_12.html">step-12</a> 和 <a class="el" href="step_12.html">step-12</a> b中找到。</p>
 <p><a class="anchor" id="Linearsolvers"></a></p><h3>Linear solvers</h3>
-<p>The linear solvers used in this program are a straightforward extension of the ones used in <a class="el" href="step_20.html">step-20</a> (but without <a class="el" href="classLinearOperator.html">LinearOperator</a>). Essentially, we simply have to extend everything from two to three solution components. If we use the discrete spaces mentioned above and put shape functions into the bilinear forms, we arrive at the following linear system to be solved for time step \(n+1\): </p><p class="formulaDsp">
+<p>本程序中使用的线性求解器是对 <a class="el" href="step_20.html">step-20</a> 中使用的线性求解器的直接扩展（但没有LinearOperator）。从本质上讲，我们只需将一切从两个解元扩展到三个解元。如果我们使用上面提到的离散空间，并将形状函数放到双线性形式中，我们就会得到以下线性系统，以解决时间步长 \(n+1\) ： </p><p class="formulaDsp">
 \[ \left( \begin{array}{ccc} M^u(S^{n}) &amp; B^{T}&amp; 0\\ B &amp; 0 &amp; 0\\ \triangle t\; H &amp; 0&amp; M^S \end{array} \right) \left( \begin{array}{c} \mathbf{U}^{n+1} \\ P^{n+1} \\ S^{n+1} \end{array} \right) = \left( \begin{array}{c} 0 \\ F_2 \\ F_3 \end{array} \right) \]
 </p>
-<p> where the individual matrices and vectors are defined as follows using shape functions \(\mathbf v_i\) (of type Raviart Thomas \(RT_k\)) for velocities and \(\phi_i\) (of type \(DGQ_k\)) for both pressures and saturations: </p><p class="formulaDsp">
+<p>，其中各个矩阵和向量的定义如下，使用形状函数 \(\mathbf v_i\) （类型为Raviart Thomas \(RT_k\) ）用于速度， \(\phi_i\) （类型为 \(DGQ_k\) ）用于压力和饱和。 </p><p class="formulaDsp">
 \begin{eqnarray*} M^u(S^n)_{ij} &amp;=&amp; \left((\mathbf{K}\lambda(S^n))^{-1} \mathbf{v}_i,\mathbf v_j\right)_\Omega, \\ B_{ij} &amp;=&amp; -(\nabla \cdot \mathbf v_j, \phi_i)_\Omega, \\ H_{ij} &amp;=&amp; - \sum_K \left\{ \left(F(S^n) \mathbf v_i, \nabla \phi_j)\right)_K - \left(F(S^n_+) (\mathbf n \cdot (\mathbf v_i)_+), \phi_j\right)_{\partial K_+} - \left(F(S^n_-) (\mathbf n \cdot (\mathbf v_i)_-), \phi_j\right)_{\partial K_-}, \right\} \\ M^S_{ij} &amp;=&amp; (\phi_i, \phi_j)_\Omega, \\ (F_2)_i &amp;=&amp; -(q^{n+1},\phi_i)_\Omega, \\ (F_3)_i &amp;=&amp; (S^n,\phi_i)_\Omega +\triangle t \sum_K \left(F(S^n) q^{n+1}, \phi_i\right)_K. \end{eqnarray*}
 </p>
-<dl class="section note"><dt>Note</dt><dd>Due to historical accidents, the role of matrices \(B\) and \(B^T\) has been reverted in this program compared to <a class="el" href="step_20.html">step-20</a>. In other words, here \(B\) refers to the divergence and \(B^T\) to the gradient operators when it was the other way around in <a class="el" href="step_20.html">step-20</a>.</dd></dl>
-<p>The system above presents a complication: Since the matrix \(H_{ij}\) depends on \(\mathbf u^{n+1}\) implicitly (the velocities are needed to determine which parts of the boundaries \(\partial K\) of cells are influx or outflux parts), we can only assemble this matrix after we have solved for the velocities.</p>
-<p>The solution scheme then involves the following steps: </p><ol>
+<dl class="section note"><dt>Note</dt><dd>由于历史事故，与 <a class="el" href="step_20.html">step-20</a> 相比，矩阵 \(B\) 和 \(B^T\) 在本程序中的作用被还原了。换句话说，这里 \(B\) 指的是发散， \(B^T\) 指的是梯度算子，而在 <a class="el" href="step_20.html">step-20</a> 中则正好相反。</dd></dl>
+<p>上面的系统出现了一个复杂的问题。由于矩阵 \(H_{ij}\) 隐含地依赖于 \(\mathbf u^{n+1}\) （需要速度来确定细胞边界 \(\partial K\) 的哪些部分是流入或流出的部分），我们只有在解决了速度问题之后才能组装这个矩阵。</p>
+<p>然后，求解方案包括以下步骤。 </p><ol>
 <li>
-<p class="startli">Solve for the pressure \(p^{n+1}\) using the Schur complement technique introduced in <a class="el" href="step_20.html">step-20</a>.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">Solve for the velocity \(\mathbf u^{n+1}\) as also discussed in <a class="el" href="step_20.html">step-20</a>.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">Compute the term \(F_3-\triangle t\; H \mathbf u^{n+1}\), using the just computed velocities.</p>
-<p class="endli"></p>
-</li>
-<li>
-Solve for the saturation \(S^{n+1}\). </li>
-</ol>
-<p>In this scheme, we never actually build the matrix \(H\), but rather generate the right hand side of the third equation once we are ready to do so.</p>
-<p>In the program, we use a variable <code>solution</code> to store the solution of the present time step. At the end of each step, we copy its content, i.e. all three of its block components, into the variable <code>old_solution</code> for use in the next time step.</p>
-<p><a class="anchor" id="Choosingatimestep"></a></p><h3>Choosing a time step</h3>
-<p>A general rule of thumb in hyperbolic transport equations like the equation we have to solve for the saturation equation is that if we use an explicit time stepping scheme, then we should use a time step such that the distance that a particle can travel within one time step is no larger than the diameter of a single cell. In other words, here, we should choose </p><p class="formulaDsp">
+<p class="startli">使用 <a class="el" href="step_20.html">step-20</a> 中介绍的Schur补数技术求解压力 \(p^{n+1}\) 。 </p><pre class="fragment">&lt;li&gt;  解决速度 @f$\mathbf u^{n+1}@f$ ，这在 @ref step_20 "step-20" 中也有讨论。
+
+&lt;li&gt;  计算项 @f$F_3-\triangle t\; H \mathbf u^{n+1}@f$  ，使用刚刚计算的速度。
+
+&lt;li&gt;  求解饱和度  @f$S^{n+1}@f$  。  &lt;/ol&gt;   
+</pre><p> 在这个方案中，我们实际上从未建立矩阵 \(H\) ，而是在我们准备好后生成第三个方程的右边。</p>
+<p class="interli">在程序中，我们使用一个变量 <code>solution</code> 来存储当前时间步骤的解决方案。在每一步结束时，我们把它的内容，即它的所有三个块成分，复制到变量 <code>old_solution</code> 中，以便在下一个时间步骤中使用。</p>
+<p class="interli"><a class="anchor" id="Choosingatimestep"></a></p><h3>Choosing a time step</h3>
+<p class="interli"></p>
+<p class="interli">在像我们要解决的饱和方程这样的双曲运输方程中，一个一般的经验法则是，如果我们使用显式时间步长方案，那么我们应该使用这样的时间步长，即一个粒子在一个时间步长内所能移动的距离不大于一个细胞的直径。换句话说，在这里，我们应该选择 </p><p class="formulaDsp">
 \[ \triangle t_{n+1} \le \frac h{|\mathbf{u}^{n+1}(\mathbf{x})|}. \]
 </p>
-<p> Fortunately, we are in a position where we can do that: we only need the time step when we want to assemble the right hand side of the saturation equation, which is after we have already solved for \(\mathbf{u}^{n+1}\). All we therefore have to do after solving for the velocity is to loop over all quadrature points in the domain and determine the maximal magnitude of the velocity. We can then set the time step for the saturation equation to </p><p class="formulaDsp">
+<p>幸运的是，我们处于一个可以做到这一点的位置：我们只需要在我们想要组装饱和方程的右侧时，也就是在我们已经解决了 \(\mathbf{u}^{n+1}\) 之后，才需要时间步骤。因此，在求解速度之后，我们要做的就是在域中的所有正交点上循环，确定速度的最大幅度。然后我们可以将饱和方程的时间步长设置为 </p><p class="formulaDsp">
 \[ \triangle t_{n+1} = \frac {\min_K h_K}{\max_{\mathbf{x}}|\mathbf{u}^{n+1}(\mathbf{x})|}. \]
 </p>
-<p>Why is it important to do this? If we don't, then we will end up with lots of places where our saturation is larger than one or less than zero, as can easily be verified. (Remember that the saturation corresponds to something like the water fraction in the fluid mixture, and therefore must physically be between 0 and 1.) On the other hand, if we choose our time step according to the criterion listed above, this only happens very very infrequently &mdash; in fact only once for the entire run of the program. However, to be on the safe side, however, we run a function <code>project_back_saturation</code> at the end of each time step, that simply projects the saturation back onto the interval \([0,1]\), should it have gotten out of the physical range. This is useful since the functions \(\lambda(S)\) and \(F(S)\) do not represent anything physical outside this range, and we should not expect the program to do anything useful once we have negative saturations or ones larger than one.</p>
-<p>Note that we will have similar restrictions on the time step also in <a class="el" href="step_23.html">step-23</a> and <a class="el" href="step_24.html">step-24</a> where we solve the time dependent wave equation, another hyperbolic problem. We will also come back to the issue of time step choice below in the section on <a href="#extensions">possible extensions to this program</a>.</p>
-<p><a class="anchor" id="Thetestcase"></a></p><h3>The test case</h3>
-<p>For simplicity, this program assumes that there is no source, \(q=0\), and that the heterogeneous porous medium is isotropic \(\mathbf{K}(\mathbf{x}) = k(\mathbf{x}) \mathbf{I}\). The first one of these is a realistic assumption in oil reservoirs: apart from injection and production wells, there are usually no mechanisms for fluids to appear or disappear out of the blue. The second one is harder to justify: on a microscopic level, most rocks are isotropic, because they consist of a network of interconnected pores. However, this microscopic scale is out of the range of today's computer simulations, and we have to be content with simulating things on the scale of meters. On that scale, however, fluid transport typically happens through a network of cracks in the rock, rather than through pores. However, cracks often result from external stress fields in the rock layer (for example from tectonic faulting) and the cracks are therefore roughly aligned. This leads to a situation where the permeability is often orders of magnitude larger in the direction parallel to the cracks than perpendicular to the cracks. A problem typically faces in reservoir simulation, however, is that the modeler doesn't know the direction of cracks because oil reservoirs are not accessible to easy inspection. The only solution in that case is to assume an effective, isotropic permeability.</p>
-<p>Whatever the matter, both of these restrictions, no sources and isotropy, would be easy to lift with a few lines of code in the program.</p>
-<p>Next, for simplicity, our numerical simulation will be done on the unit cell \(\Omega = [0,1]\times [0,1]\) for \(t\in [0,T]\). Our initial conditions are \(S(\mathbf{x},0)=0\); in the oil reservoir picture, where \(S\) would indicate the water saturation, this means that the reservoir contains pure oil at the beginning. Note that we do not need any initial conditions for pressure or velocity, since the equations do not contain time derivatives of these variables. Finally, we impose the following pressure boundary conditions: </p><p class="formulaDsp">
+<p> 。</p>
+<p class="interli">为什么要这样做呢？如果我们不这样做，那么我们最终会有很多地方的饱和度大于1或小于0，这一点很容易得到验证。请记住，饱和度对应于流体混合物中的水比例，因此在物理上必须在0和1之间）。另一方面，如果我们根据上面列出的标准选择时间步长，这种情况只会非常非常少地发生，事实上在整个程序运行中只有一次。然而，为了安全起见，我们在每个时间步长结束时运行一个函数 <code>project_back_saturation</code> ，如果饱和度超出了物理范围，则简单地将其投影到区间 \([0,1]\) 。这很有用，因为函数 \(\lambda(S)\) 和 \(F(S)\) 并不代表这个范围之外的任何物理现象，而且一旦我们有负的饱和度或大于1的饱和度，我们不应该期望程序做任何有用的事情。</p>
+<p class="interli">请注意，我们在 <a class="el" href="step_23.html">step-23</a> 和 <a class="el" href="step_24.html">step-24</a> 中也会对时间步长有类似的限制，在那里我们解决与时间有关的波浪方程，也是一个双曲问题。我们还将在下面关于<a href="#extensions">possible extensions to this program</a>一节中再来讨论时间步长的选择问题。</p>
+<p class="interli"><a class="anchor" id="Thetestcase"></a></p><h3>The test case</h3>
+<p class="interli"></p>
+<p class="interli">为了简单起见，本程序假定没有源， \(q=0\) ，并且异质多孔介质是各向同性的 \(\mathbf{K}(\mathbf{x}) = k(\mathbf{x}) \mathbf{I}\) 。其中第一个是油藏中的现实假设：除了注水井和生产井之外，通常没有液体突然出现或消失的机制。第二个假设更难证明：在微观层面上，大多数岩石是各向同性的，因为它们是由相互连接的孔隙网络组成的。然而，这种微观尺度超出了今天计算机模拟的范围，我们不得不满足于模拟米级的东西。然而，在这个尺度上，流体运输通常是通过岩石中的裂缝网络，而不是通过孔隙发生的。然而，裂缝通常是由岩层中的外部应力场造成的（例如由构造断层造成的），因此裂缝是大致排列的。这就导致了这样一种情况：在平行于裂缝的方向上，渗透率往往比垂直于裂缝的方向大几个数量级。然而，在储层模拟中通常面临的一个问题是，建模者不知道裂缝的方向，因为油藏不容易被检查到。在这种情况下，唯一的解决办法是假设有效的、各向同性的渗透率。</p>
+<p class="interli">无论怎样，这两个限制，即无源和各向同性，只要在程序中写上几行代码就可以轻松解除。</p>
+<p class="interli">接下来，为了简单起见，我们的数值模拟将在 \(\Omega = [0,1]\times [0,1]\) 的单元格上进行，用于 \(t\in [0,T]\) 。我们的初始条件是 \(S(\mathbf{x},0)=0\) ；在油藏图片中， \(S\) 将表示水的饱和度，这意味着油藏在开始时包含纯油。请注意，我们不需要任何压力或速度的初始条件，因为这些方程不包含这些变量的时间导数。最后，我们施加以下压力边界条件。 </p><p class="formulaDsp">
 \[ p(\mathbf{x},t)=1-x_1 \qquad \textrm{on}\ \partial\Omega. \]
 </p>
-<p> Since the pressure and velocity solve a mixed form Poisson equation, the imposed pressure leads to a resulting flow field for the velocity. On the other hand, this flow field determines whether a piece of the boundary is of inflow or outflow type, which is of relevance because we have to impose boundary conditions for the saturation on the inflow part of the boundary, </p><p class="formulaDsp">
+<p> 由于压力和速度解决的是混合形式的泊松方程，强加的压力导致了速度的结果流场。另一方面，这个流场决定了边界的某一部分是流入的还是流出的，这很重要，因为我们必须在边界的流入部分施加饱和度的边界条件， </p><p class="formulaDsp">
 \[ \Gamma_{in}(t) = \{\mathbf{x}\in\partial\Omega: \mathbf{n} \cdot \mathbf{u}(\mathbf{x},t) &lt; 0\}. \]
 </p>
-<p> On this inflow boundary, we impose the following saturation values: </p><p class="formulaDsp">
+<p> 在这个流入的边界上，我们施加以下饱和度值。 </p><p class="formulaDsp">
 \begin{eqnarray} S(\mathbf{x},t) = 1 &amp; \textrm{on}\ \Gamma_{in}\cap\{x_1=0\}, \\ S(\mathbf{x},t) = 0 &amp; \textrm{on}\ \Gamma_{in}\backslash \{x_1=0\}. \end{eqnarray}
 </p>
-<p> In other words, we have pure water entering the reservoir at the left, whereas the other parts of the boundary are in contact with undisturbed parts of the reservoir and whenever influx occurs on these boundaries, pure oil will enter.</p>
-<p>In our simulations, we choose the total mobility as </p><p class="formulaDsp">
+<p class="interli">换句话说，我们有纯水在左边进入储层，而边界的其他部分与储层的未受干扰部分接触，只要这些边界上发生流入，纯油就会进入。</p>
+<p class="interli">在我们的模拟中，我们选择总的流动性为 </p><p class="formulaDsp">
 \[ \lambda (S) = \frac{1.0}{\mu} S^2 +(1-S)^2 \]
 </p>
-<p> where we use \(\mu=0.2\) for the viscosity. In addition, the fractional flow of water is given by </p><p class="formulaDsp">
+<p>，其中我们使用 \(\mu=0.2\) 的粘度。此外，水的分流量由 </p><p class="formulaDsp">
 \[ F(S)=\frac{S^2}{S^2+\mu (1-S)^2} \]
 </p>
-<dl class="section note"><dt>Note</dt><dd>Coming back to this testcase in <a class="el" href="step_43.html">step-43</a> several years later revealed an oddity in the setup of this testcase. To this end, consider that we can rewrite the advection equation for the saturation as \(S_{t} + (\mathbf{u} F&#39;(S)) \cdot \nabla S = 0\). Now, at the initial time, we have \(S=0\), and with the given choice of function \(F(S)\), we happen to have \(F&#39;(0)=0\). In other words, at \(t=0\), the equation reduces to \(S_t=0\) for all \(\mathbf x\), so the saturation is zero everywhere and it is going to stay zero everywhere! This is despite the fact that \(\mathbf u\) is not necessarily zero: the combined fluid is moving, but we've chosen our partial flux \(F(S)\) in such a way that infinitesimal amounts of wetting fluid also only move at infinitesimal speeds (i.e., they stick to the medium more than the non-wetting phase in which they are embedded). That said, how can we square this with the knowledge that wetting fluid is invading from the left, leading to the flow patterns seen in the <a href="#Results">results section</a>? That's where we get into mathematics: Equations like the transport equation we are considering here have infinitely many solutions, but only one of them is physical: the one that results from the so-called viscosity limit, called the <a href="http://en.wikipedia.org/wiki/Viscosity_solution">viscosity solution</a>. The thing is that with discontinuous elements we arrive at this viscosity limit because using a numerical flux introduces a finite amount of artificial viscosity into the numerical scheme. On the other hand, in <a class="el" href="step_43.html">step-43</a>, we use an artificial viscosity that is proportional to \(\|\mathbf u F&#39;(S)\|\) on every cell, which at the initial time is zero. Thus, the saturation there is zero and remains zero; the solution we then get is <em>one</em> solution of the advection equation, but the method does not converge to the viscosity solution without further changes. We will therefore use a different initial condition in that program.</dd></dl>
-<p>Finally, to come back to the description of the testcase, we will show results for computations with the two permeability functions introduced at the end of the results section of <a class="el" href="step_20.html">step-20</a>: </p><ul>
+<p>给出。</p>
+<dl class="section note"><dt>Note</dt><dd>几年后在 <a class="el" href="step_43.html">step-43</a> 中再来看这个测试案例，发现这个测试案例的设置有一个奇怪之处。为此，考虑到我们可以将饱和度的平流方程改写为 \(S_{t} + (\mathbf{u} F&#39;(S)) \cdot \nabla S = 0\) 。现在，在初始时间，我们有 \(S=0\) ，在给定的函数 \(F(S)\) 的选择下，我们刚好有 \(F&#39;(0)=0\) 。换句话说，在 \(t=0\) 处，方程对所有 \(\mathbf x\) 都还原为 \(S_t=0\) ，所以饱和度在任何地方都是零，而且在任何地方都会保持零！这就是为什么在 \(t=0\) 处，方程会还原为 \(S_t=0\) 。尽管 \(\mathbf u\) 不一定是零：组合流体在移动，但我们选择的部分通量 \(F(S)\) 是这样的：无穷小量的润湿流体也只以无穷小的速度移动（也就是说，它们粘在介质上的时间比它们所嵌入的非润湿相的时间长）。也就是说，我们如何将这一点与湿润流体从左边侵入，导致<a href="#Results">results section</a>中看到的流动模式的知识相联系？这就是我们进入数学的地方。像我们在这里考虑的传输方程有无限多的解决方案，但其中只有一个是物理的：由所谓的粘性极限产生的解决方案，称为<a href="http://en.wikipedia.org/wiki/Viscosity_solution">viscosity solution</a>。事情是这样的，用不连续的元素，我们到达了这个粘性极限，因为使用数值通量在数值方案中引入了有限量的人工粘性。另一方面，在 <a class="el" href="step_43.html">step-43</a> 中，我们在每个单元上使用与 \(\|\mathbf u F&#39;(S)\|\) 成比例的人工粘度，在初始时间是零。因此，那里的饱和度为零，并保持为零；然后我们得到的解是<em>one</em>的平流方程解，但如果不进一步改变，该方法不会收敛到粘度解。因此，我们将在该程序中使用一个不同的初始条件。</dd></dl>
+<p>最后，回到测试案例的描述，我们将展示用 <a class="el" href="step_20.html">@ref step_20 </a>step-20" "结果部分末尾介绍的两个渗透率函数的计算结果： </p><ul>
 <li>
-<p class="startli">A function that models a single, winding crack that snakes through the domain. In analogy to <a class="el" href="step_20.html">step-20</a>, but taking care of the slightly different geometry we have here, we describe this by the following function: </p><p class="formulaDsp">
+<p class="startli">一个函数，模拟一个蜿蜒穿过域的单一裂缝。与 <a class="el" href="step_20.html">step-20</a> 相类似，但考虑到我们这里的几何形状略有不同，我们用以下函数来描述它。 </p><p class="formulaDsp">
 \[ k(\mathbf x) = \max \left\{ e^{-\left(\frac{x_2-\frac 12 - 0.1\sin(10x_1)}{0.1}\right)^2}, 0.01 \right\}. \]
 </p>
-<p> Taking the maximum is necessary to ensure that the ratio between maximal and minimal permeability remains bounded. If we don't do that, permeabilities will span many orders of magnitude. On the other hand, the ratio between maximal and minimal permeability is a factor in the condition number of the Schur complement matrix, and if too large leads to problems for which our linear solvers will no longer converge properly.</p>
+<p> 取最大值是必要的，以确保最大和最小磁导率之间的比率保持有界。如果我们不这样做，渗透率将跨越许多数量级。另一方面，最大渗透率和最小渗透率之间的比率是Schur补充矩阵的条件数的一个因素，如果太大，会导致我们的线性求解器不再正常收敛的问题。</p>
 <p class="endli"></p>
 </li>
 <li>
-A function that models a somewhat random medium. Here, we choose <p class="formulaDsp">
+<p class="startli">一个模拟某种随机介质的函数。在这里，我们选择 </p><p class="formulaDsp">
 \begin{eqnarray*} k(\mathbf x) &amp;=&amp; \min \left\{ \max \left\{ \sum_{i=1}^N \sigma_i(\mathbf{x}), 0.01 \right\}, 4\right\}, \\ \sigma_i(\mathbf x) &amp;=&amp; e^{-\left(\frac{|\mathbf{x}-\mathbf{x}_i|}{0.05}\right)^2}, \end{eqnarray*}
 </p>
- where the centers \(\mathbf{x}_i\) are \(N\) randomly chosen locations inside the domain. This function models a domain in which there are \(N\) centers of higher permeability (for example where rock has cracked) embedded in a matrix of more pristine, unperturbed background rock. Note that here we have cut off the permeability function both above and below to ensure a bounded condition number. </li>
+<p class="endli">其中中心 \(\mathbf{x}_i\) 是域内随机选择的 \(N\) 位置。这个函数模拟了一个领域，其中有 \(N\) 个渗透率较高的中心（例如，岩石开裂的地方）嵌入到一个更原始的、未受干扰的背景岩石矩阵中。请注意，在这里我们已经切断了渗透率函数的上方和下方，以确保条件数的约束。 </p>
+</li>
 </ul>
 <p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<p>This program is an adaptation of <a class="el" href="step_20.html">step-20</a> and includes some technique of DG methods from <a class="el" href="step_12.html">step-12</a>. A good part of the program is therefore very similar to <a class="el" href="step_20.html">step-20</a> and we will not comment again on these parts. Only the new stuff will be discussed in more detail.</p>
-<p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
-<p>All of these include files have been used before:</p>
+<p class="interli"></p>
+<p class="interli">这个程序是对 <a class="el" href="step_20.html">step-20</a> 的改编，包括一些来自 <a class="el" href="step_12.html">step-12</a> 的DG方法的技术。因此，该程序的很大一部分与 <a class="el" href="step_20.html">step-20</a> 非常相似，我们将不再对这些部分进行评论。只有新的东西会被更详细地讨论。</p>
+<p class="interli"><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
+<p class="interli"></p>
+<p class="interli">所有这些包含文件以前都被使用过。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="quadrature__lib_8h.html">deal.II/base/quadrature_lib.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logstream_8h.html">deal.II/base/logstream.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="function_8h.html">deal.II/base/function.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="block__vector_8h.html">deal.II/lac/block_vector.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="full__matrix_8h.html">deal.II/lac/full_matrix.h</a>&gt;</span></div>
@@ -307,22 +306,27 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="precondition_8h.html">deal.II/lac/precondition.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="affine__constraints_8h.html">deal.II/lac/affine_constraints.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2tria_8h.html">deal.II/grid/tria.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__generator_8h.html">deal.II/grid/grid_generator.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__tools_8h.html">deal.II/grid/grid_tools.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dofs_2dof__handler_8h.html">deal.II/dofs/dof_handler.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dof__renumbering_8h.html">deal.II/dofs/dof_renumbering.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dof__tools_8h.html">deal.II/dofs/dof_tools.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__raviart__thomas_8h.html">deal.II/fe/fe_raviart_thomas.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__dgq_8h.html">deal.II/fe/fe_dgq.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__system_8h.html">deal.II/fe/fe_system.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe_2fe__values_8h.html">deal.II/fe/fe_values.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector__tools_8h.html">deal.II/numerics/vector_tools.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="matrix__tools_8h.html">deal.II/numerics/matrix_tools.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="numerics_2data__out_8h.html">deal.II/numerics/data_out.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
@@ -348,38 +352,45 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="ttc" id="aquadrature__lib_8h_html"><div class="ttname"><a href="quadrature__lib_8h.html">quadrature_lib.h</a></div></div>
 <div class="ttc" id="asolver__cg_8h_html"><div class="ttname"><a href="solver__cg_8h.html">solver_cg.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p>In this program, we use a tensor-valued coefficient. Since it may have a spatial dependence, we consider it a tensor-valued function. The following include file provides the <code><a class="el" href="classTensorFunction.html">TensorFunction</a></code> class that offers such functionality:</p>
+</div><!-- fragment --><p class="interli">在这个程序中，我们使用一个张量值的系数。由于它可能具有空间依赖性，我们认为它是一个张量值的函数。下面的include文件提供了提供这种功能的 <code><a class="el" href="classTensorFunction.html">TensorFunction</a></code> 类。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="tensor__function_8h.html">deal.II/base/tensor_function.h</a>&gt;</span></div>
 <div class="ttc" id="atensor__function_8h_html"><div class="ttname"><a href="tensor__function_8h.html">tensor_function.h</a></div></div>
-</div><!-- fragment --><p>Additionally, we use the class <code><a class="el" href="classDiscreteTime.html">DiscreteTime</a></code> to perform operations related to time incrementation.</p>
+</div><!-- fragment --><p class="interli">此外，我们使用 <code><a class="el" href="classDiscreteTime.html">DiscreteTime</a></code> 类来执行与时间递增有关的操作。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="discrete__time_8h.html">deal.II/base/discrete_time.h</a>&gt;</span></div>
 <div class="ttc" id="adiscrete__time_8h_html"><div class="ttname"><a href="discrete__time_8h.html">discrete_time.h</a></div></div>
-</div><!-- fragment --><p>The last step is as in all previous programs:</p>
+</div><!-- fragment --><p class="interli">最后一步和以前的所有程序一样。</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>Step21</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="namespace__dealii_8h_source.html#l00025">namespace_dealii.h:26</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="ThecodeTwoPhaseFlowProblemcodeclass"></a> </p><h3>The <code>TwoPhaseFlowProblem</code> class</h3>
-<p>This is the main class of the program. It is close to the one of <a class="el" href="step_20.html">step-20</a>, but with a few additional functions:</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="ThecodeTwoPhaseFlowProblemcodeclass"></a> </p><h3>The <code>TwoPhaseFlowProblem</code> class</h3>
+<p class="interli"></p>
+<p class="interli">这是该程序的主类。它接近于 <a class="el" href="step_20.html">step-20</a> 中的一个，但增加了一些功能。 <br  />
+</p>
 <ul>
 <li>
-<p class="startli"><code>assemble_rhs_S</code> assembles the right hand side of the saturation equation. As explained in the introduction, this can't be integrated into <code>assemble_rhs</code> since it depends on the velocity that is computed in the first part of the time step.</p>
+<p class="startli"><code>assemble_rhs_S</code> 组装饱和方程的右侧。正如介绍中所解释的，这不能被集成到 <code>assemble_rhs</code> 中，因为它取决于在时间步长的第一部分计算的速度。 <br  />
+</p>
 <p class="endli"></p>
 </li>
 <li>
-<p class="startli"><code>get_maximal_velocity</code> does as its name suggests. This function is used in the computation of the time step size.</p>
+<p class="startli"><code>get_maximal_velocity</code> 正如其名称所示。这个函数被用于计算时间步长。 <br  />
+</p>
 <p class="endli"></p>
 </li>
 <li>
-<code>project_back_saturation</code> resets all saturation degrees of freedom with values less than zero to zero, and all those with saturations greater than one to one. </li>
+<code>project_back_saturation</code> 将所有饱和度小于0的自由度重置为0，所有饱和度大于1的自由度重置为1。 </li>
 </ul>
-<p>The rest of the class should be pretty much obvious. The <code>viscosity</code> variable stores the viscosity \(\mu\) that enters several of the formulas in the nonlinear equations. The variable <code>time</code> keeps track of the time information within the simulation.</p>
+<p><br  />
+</p>
+<p class="interli">该类的其余部分应该是非常明显的。变量 <code>viscosity</code> 存储粘度 \(\mu\) ，它进入了非线性方程中的几个公式。变量 <code>time</code> 记录了模拟过程中的时间信息。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>TwoPhaseFlowProblem</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  TwoPhaseFlowProblem(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> degree);</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keywordtype">void</span>   make_grid_and_dofs();</div>
@@ -390,19 +401,25 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">  <span class="keywordtype">void</span>   project_back_saturation();</div>
 <div class="line">  <span class="keywordtype">void</span>   output_results() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> degree;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classTriangulation.html">Triangulation&lt;dim&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
 <div class="line">  <a class="code" href="classFESystem.html">FESystem&lt;dim&gt;</a>      fe;</div>
 <div class="line">  <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a>    dof_handler;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classBlockSparsityPattern.html">BlockSparsityPattern</a>      sparsity_pattern;</div>
 <div class="line">  <a class="code" href="classBlockSparseMatrix.html">BlockSparseMatrix&lt;double&gt;</a> system_matrix;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_refinement_steps;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classDiscreteTime.html">DiscreteTime</a> time;</div>
 <div class="line">  <span class="keywordtype">double</span>       viscosity;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classBlockVector.html">BlockVector&lt;double&gt;</a> solution;</div>
 <div class="line">  <a class="code" href="classBlockVector.html">BlockVector&lt;double&gt;</a> old_solution;</div>
@@ -417,9 +434,11 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="ttc" id="aclassTriangulation_html"><div class="ttname"><a href="classTriangulation.html">Triangulation</a></div><div class="ttdef"><b>Definition:</b> <a href="grid_2tria_8h_source.html#l01127">tria.h:1128</a></div></div>
 <div class="ttc" id="anamespaceWorkStream_1_1internal_1_1tbb__no__coloring_html_a8673698a405bf47aa24002aeb6d76d70"><div class="ttname"><a href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">WorkStream::internal::tbb_no_coloring::run</a></div><div class="ttdeci">void run(const Iterator &amp;begin, const typename identity&lt; Iterator &gt;::type &amp;end, Worker worker, Copier copier, const ScratchData &amp;sample_scratch_data, const CopyData &amp;sample_copy_data, const unsigned int queue_length, const unsigned int chunk_size)</div><div class="ttdef"><b>Definition:</b> <a href="work__stream_8h_source.html#l00691">work_stream.h:691</a></div></div>
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="Equationdata"></a> </p><h3>Equation data</h3>
-<p><a class="anchor" id="Pressurerighthandside"></a> </p><h4>Pressure right hand side</h4>
-<p>At present, the right hand side of the pressure equation is simply the zero function. However, the rest of the program is fully equipped to deal with anything else, if this is desired:</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Equationdata"></a> </p><h3>Equation data</h3>
+<p class="interli"></p>
+<p class="interli"><a class="anchor" id="Pressurerighthandside"></a> </p><h4>Pressure right hand side</h4>
+<p class="interli"></p>
+<p class="interli">目前，压力方程的右侧仅仅是零函数。然而，如果需要的话，程序的其余部分完全可以处理任何其他问题。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>PressureRightHandSide : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
@@ -427,6 +446,7 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">  PressureRightHandSide()</div>
 <div class="line">    : <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;(1)</div>
 <div class="line">  {}</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">value</a>(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp; <span class="comment">/*p*/</span>,</div>
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="comment">/*component*/</span> = 0)<span class="keyword"> const override</span></div>
@@ -437,8 +457,9 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="ttc" id="aclassFunction_html"><div class="ttname"><a href="classFunction.html">Function</a></div><div class="ttdef"><b>Definition:</b> <a href="function_8h_source.html#l00150">function.h:153</a></div></div>
 <div class="ttc" id="aclassFunction_html_acbfcab66b2fc63bfea59268f40772bb4"><div class="ttname"><a href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">Function::value</a></div><div class="ttdeci">virtual RangeNumberType value(const Point&lt; dim &gt; &amp;p, const unsigned int component=0) const</div></div>
 <div class="ttc" id="aclassPoint_html"><div class="ttname"><a href="classPoint.html">Point</a></div><div class="ttdef"><b>Definition:</b> <a href="base_2point_8h_source.html#l00110">point.h:111</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="Pressureboundaryvalues"></a> </p><h4>Pressure boundary values</h4>
-<p>The next are pressure boundary values. As mentioned in the introduction, we choose a linear pressure field:</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Pressureboundaryvalues"></a></p><h4>Pressure boundary values</h4>
+<p class="interli"></p>
+<p class="interli">接下来是压力边界值。正如介绍中提到的，我们选择一个线性压力场。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>PressureBoundaryValues : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
@@ -447,14 +468,16 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">    : <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;(1)</div>
 <div class="line">  {}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">value</a>(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp;p,</div>
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="comment">/*component*/</span> = 0)<span class="keyword"> const override</span></div>
 <div class="line"><span class="keyword">  </span>{</div>
 <div class="line">    <span class="keywordflow">return</span> 1 - p[0];</div>
 <div class="line">  }</div>
 <div class="line">};</div>
-</div><!-- fragment --><p><a class="anchor" id="Saturationboundaryvalues"></a> </p><h4>Saturation boundary values</h4>
-<p>Then we also need boundary values on the inflow portions of the boundary. The question whether something is an inflow part is decided when assembling the right hand side, we only have to provide a functional description of the boundary values. This is as explained in the introduction:</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Saturationboundaryvalues"></a> </p><h4>Saturation boundary values</h4>
+<p class="interli"></p>
+<p class="interli">然后我们还需要边界的流入部分的边界值。某物是否为流入部分的问题是在组装右手边时决定的，我们只需要提供边界值的函数描述。这正如介绍中所解释的。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>SaturationBoundaryValues : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
@@ -462,6 +485,7 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">  SaturationBoundaryValues()</div>
 <div class="line">    : <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;(1)</div>
 <div class="line">  {}</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">value</a>(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp;p,</div>
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="comment">/*component*/</span> = 0)<span class="keyword"> const override</span></div>
@@ -472,9 +496,11 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">      <span class="keywordflow">return</span> 0;</div>
 <div class="line">  }</div>
 <div class="line">};</div>
-</div><!-- fragment --><p><a class="anchor" id="Initialdata"></a> </p><h4>Initial data</h4>
-<p>Finally, we need initial data. In reality, we only need initial data for the saturation, but we are lazy, so we will later, before the first time step, simply interpolate the entire solution for the previous time step from a function that contains all vector components.</p>
-<p>We therefore simply create a function that returns zero in all components. We do that by simply forward every function to the <a class="el" href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction</a> class. Why not use that right away in the places of this program where we presently use the <code>InitialValues</code> class? Because this way it is simpler to later go back and choose a different function for initial values.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Initialdata"></a> </p><h4>Initial data</h4>
+<p class="interli"></p>
+<p class="interli">最后，我们需要初始数据。实际上，我们只需要饱和度的初始数据，但我们很懒，所以以后在第一个时间步骤之前，我们会简单地从一个包含所有矢量分量的函数中插值出前一个时间步骤的整个解。 <br  />
+</p>
+<p class="interli">因此，我们简单地创建一个在所有分量中返回零的函数。我们通过简单地将每个函数转发到 <a class="el" href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction</a> 类来做到这一点。为什么不在这个程序中我们目前使用 <code>InitialValues</code> 类的地方立即使用呢？因为这样，以后再回去选择不同的函数作为初始值就更简单了。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>InitialValues : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
@@ -483,11 +509,13 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">    : <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;(dim + 2)</div>
 <div class="line">  {}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">value</a>(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp; p,</div>
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0)<span class="keyword"> const override</span></div>
 <div class="line"><span class="keyword">  </span>{</div>
 <div class="line">    <span class="keywordflow">return</span> <a class="code" href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction&lt;dim&gt;</a>(dim + 2).<a class="code" href="classFunctions_1_1ConstantFunction.html#a9923b237d1a28f6e28538ba5fd391585">value</a>(p, component);</div>
 <div class="line">  }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classFunction.html#ae316ebc05d21989d573024f8a23c49cb">vector_value</a>(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp;p,</div>
 <div class="line">                            <a class="code" href="classVector.html">Vector&lt;double&gt;</a> &amp;  <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">values</a>)<span class="keyword"> const override</span></div>
@@ -501,10 +529,12 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="ttc" id="aclassFunctions_1_1ZeroFunction_html"><div class="ttname"><a href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction</a></div><div class="ttdef"><b>Definition:</b> <a href="function_8h_source.html#l00510">function.h:511</a></div></div>
 <div class="ttc" id="aclassVector_html"><div class="ttname"><a href="classVector.html">Vector&lt; double &gt;</a></div></div>
 <div class="ttc" id="anamespaceEvaluationFlags_html_a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58"><div class="ttname"><a href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">EvaluationFlags::values</a></div><div class="ttdeci">@ values</div><div class="ttdef"><b>Definition:</b> <a href="evaluation__flags_8h_source.html#l00051">evaluation_flags.h:51</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="Theinversepermeabilitytensor"></a> </p><h3>The inverse permeability tensor</h3>
-<p>As announced in the introduction, we implement two different permeability tensor fields. Each of them we put into a namespace of its own, so that it will be easy later to replace use of one by the other in the code.</p>
-<p><a class="anchor" id="Singlecurvingcrackpermeability"></a> </p><h4>Single curving crack permeability</h4>
-<p>The first function for the permeability was the one that models a single curving crack. It was already used at the end of <a class="el" href="step_20.html">step-20</a>, and its functional form is given in the introduction of the present tutorial program. As in some previous programs, we have to declare a (seemingly unnecessary) default constructor of the KInverse class to avoid warnings from some compilers:</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Theinversepermeabilitytensor"></a> </p><h3>The inverse permeability tensor</h3>
+<p class="interli"></p>
+<p class="interli">正如介绍中所宣布的，我们实现了两个不同的渗透性张量场。我们将它们各自放入一个命名空间，这样以后就可以很容易地在代码中用另一个来代替使用。</p>
+<p class="interli"><a class="anchor" id="Singlecurvingcrackpermeability"></a> </p><h4>Single curving crack permeability</h4>
+<p class="interli"></p>
+<p class="interli">渗透率的第一个函数是模拟单个弯曲裂缝的函数。它已经在 <a class="el" href="step_20.html">step-20</a> 的结尾处被使用了，它的函数形式在本教程程序的介绍中给出。和以前的一些程序一样，我们必须声明KInverse类的一个（看似不必要的）默认构造函数，以避免某些编译器的警告。</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>SingleCurvingCrack</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
@@ -515,6 +545,7 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">      : <a class="code" href="classTensorFunction.html">TensorFunction</a>&lt;2, dim&gt;()</div>
 <div class="line">    {}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span></div>
 <div class="line">    value_list(<span class="keyword">const</span> std::vector&lt;<a class="code" href="classPoint.html">Point&lt;dim&gt;</a>&gt; &amp;points,</div>
 <div class="line">               std::vector&lt;<a class="code" href="classTensor.html">Tensor&lt;2, dim&gt;</a>&gt; &amp;  <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">values</a>)<span class="keyword"> const override</span></div>
@@ -522,17 +553,21 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">      <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(points.size() == <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">values</a>.size(),</div>
 <div class="line">             <a class="code" href="group__Exceptions.html#ga6060b2304b8600f5efa0d31eeda0207d">ExcDimensionMismatch</a>(points.size(), <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">values</a>.size()));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> p = 0; p &lt; points.size(); ++p)</div>
 <div class="line">        {</div>
 <div class="line">          <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">values</a>[p].clear();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          <span class="keyword">const</span> <span class="keywordtype">double</span> distance_to_flowline =</div>
 <div class="line">            <a class="code" href="namespaceDifferentiation_1_1SD.html#a592560ee80355620422a86087f11b9df">std::fabs</a>(points[p][1] - 0.5 - 0.1 * std::sin(10 * points[p][0]));</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <span class="keyword">const</span> <span class="keywordtype">double</span> permeability =</div>
 <div class="line">            <a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">std::max</a>(std::exp(-(distance_to_flowline * distance_to_flowline) /</div>
 <div class="line">                              (0.1 * 0.1)),</div>
 <div class="line">                     0.01);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> = 0; <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> &lt; dim; ++<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>)</div>
 <div class="line">            <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">values</a>[p][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = 1. / permeability;</div>
@@ -547,11 +582,15 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="ttc" id="anamespaceDifferentiation_1_1SD_html_a592560ee80355620422a86087f11b9df"><div class="ttname"><a href="namespaceDifferentiation_1_1SD.html#a592560ee80355620422a86087f11b9df">Differentiation::SD::fabs</a></div><div class="ttdeci">Expression fabs(const Expression &amp;x)</div><div class="ttdef"><b>Definition:</b> <a href="symengine__math_8cc_source.html#l00273">symengine_math.cc:273</a></div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a15728437b942dab0b0042eb06a407d2c"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">Physics::Elasticity::Kinematics::d</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; d(const Tensor&lt; 2, dim, Number &gt; &amp;F, const Tensor&lt; 2, dim, Number &gt; &amp;dF_dt)</div></div>
 <div class="ttc" id="anamespaceVectorTools_1_1EvaluationFlags_html_ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420"><div class="ttname"><a href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">VectorTools::EvaluationFlags::max</a></div><div class="ttdeci">@ max</div><div class="ttdef"><b>Definition:</b> <a href="vector__tools__evaluate_8h_source.html#l00053">vector_tools_evaluate.h:53</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="Randommediumpermeability"></a> </p><h4>Random medium permeability</h4>
-<p>This function does as announced in the introduction, i.e. it creates an overlay of exponentials at random places. There is one thing worth considering for this class. The issue centers around the problem that the class creates the centers of the exponentials using a random function. If we therefore created the centers each time we create an object of the present type, we would get a different list of centers each time. That's not what we expect from classes of this type: they should reliably represent the same function.</p>
-<p>The solution to this problem is to make the list of centers a static member variable of this class, i.e. there exists exactly one such variable for the entire program, rather than for each object of this type. That's exactly what we are going to do.</p>
-<p>The next problem, however, is that we need a way to initialize this variable. Since this variable is initialized at the beginning of the program, we can't use a regular member function for that since there may not be an object of this type around at the time. The C++ standard therefore says that only non-member and static member functions can be used to initialize a static variable. We use the latter possibility by defining a function <code>get_centers</code> that computes the list of center points when called.</p>
-<p>Note that this class works just fine in both 2d and 3d, with the only difference being that we use more points in 3d: by experimenting we find that we need more exponentials in 3d than in 2d (we have more ground to cover, after all, if we want to keep the distance between centers roughly equal), so we choose 40 in 2d and 100 in 3d. For any other dimension, the function does presently not know what to do so simply throws an exception indicating exactly this.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Randommediumpermeability"></a> </p><h4>Random medium permeability</h4>
+<p class="interli"></p>
+<p class="interli">这个函数的作用与介绍中公布的一样，即在随机的地方创建一个指数的叠加。对于这个类，有一件事值得考虑。这个问题的核心是该类使用随机函数创建指数中心的问题。如果我们因此在每次创建本类型的对象时都创建中心，我们每次都会得到一个不同的中心列表。这不是我们对这种类型的类的期望：它们应该可靠地代表同一个函数。 <br  />
+</p>
+<p class="interli">解决这个问题的方法是使中心列表成为这个类的静态成员变量，也就是说，整个程序中只存在一个这样的变量，而不是为这个类型的每个对象。这正是我们要做的。 <br  />
+</p>
+<p class="interli">然而，接下来的问题是，我们需要一种方法来初始化这个变量。由于这个变量是在程序开始时初始化的，我们不能为此使用普通的成员函数，因为当时身边可能没有这种类型的对象。因此C++标准规定，只有非成员函数和静态成员函数可以用来初始化静态变量。我们通过定义一个函数 <code>get_centers</code> 来使用后一种可能性，该函数在调用时计算中心点的列表。 <br  />
+</p>
+<p class="interli">请注意，这个类在2D和3D中都能正常工作，唯一的区别是我们在3D中使用了更多的点：通过实验，我们发现我们在3D中比2D中需要更多的指数（毕竟我们有更多的地方需要覆盖，如果我们想保持中心之间的距离大致相等），所以我们在2D中选择40，在3D中选择100。对于任何其他维度，该函数目前不知道该怎么做，所以只是抛出一个异常，表明这一点。</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>RandomMedium</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
@@ -562,6 +601,7 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">      : <a class="code" href="classTensorFunction.html">TensorFunction</a>&lt;2, dim&gt;()</div>
 <div class="line">    {}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span></div>
 <div class="line">    value_list(<span class="keyword">const</span> std::vector&lt;<a class="code" href="classPoint.html">Point&lt;dim&gt;</a>&gt; &amp;points,</div>
 <div class="line">               std::vector&lt;<a class="code" href="classTensor.html">Tensor&lt;2, dim&gt;</a>&gt; &amp;  <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">values</a>)<span class="keyword"> const override</span></div>
@@ -569,39 +609,49 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">      <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(points.size() == <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">values</a>.size(),</div>
 <div class="line">             <a class="code" href="group__Exceptions.html#ga6060b2304b8600f5efa0d31eeda0207d">ExcDimensionMismatch</a>(points.size(), <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">values</a>.size()));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> p = 0; p &lt; points.size(); ++p)</div>
 <div class="line">        {</div>
 <div class="line">          <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">values</a>[p].clear();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <span class="keywordtype">double</span> permeability = 0;</div>
 <div class="line">          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; centers.size(); ++i)</div>
 <div class="line">            permeability += std::exp(-(points[p] - centers[i]).norm_square() /</div>
 <div class="line">                                     (0.05 * 0.05));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          <span class="keyword">const</span> <span class="keywordtype">double</span> normalized_permeability =</div>
 <div class="line">            <a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffdaeb244a97c0c9e9e7ca4765e096f0badc">std::min</a>(<a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">std::max</a>(permeability, 0.01), 4.);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> = 0; <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> &lt; dim; ++<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>)</div>
 <div class="line">            <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">values</a>[p][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = 1. / normalized_permeability;</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">private</span>:</div>
 <div class="line">    <span class="keyword">static</span> std::vector&lt;Point&lt;dim&gt;&gt; centers;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">static</span> std::vector&lt;Point&lt;dim&gt;&gt; get_centers()</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespaceLAPACKSupport.html#a8edacd69ab93285f82b7f63c733a86b7">N</a> =</div>
 <div class="line">        (dim == 2 ? 40 : (dim == 3 ? 100 : <span class="keywordflow">throw</span> <a class="code" href="group__Exceptions.html#ga7b52b286796c23ef9ff178faf7a4b68f">ExcNotImplemented</a>()));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      std::vector&lt;Point&lt;dim&gt;&gt; centers_list(<a class="code" href="namespaceLAPACKSupport.html#a8edacd69ab93285f82b7f63c733a86b7">N</a>);</div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="namespaceLAPACKSupport.html#a8edacd69ab93285f82b7f63c733a86b7">N</a>; ++i)</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> = 0; <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> &lt; dim; ++<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>)</div>
 <div class="line">          centers_list[i][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(rand()) / RAND_MAX;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">return</span> centers_list;</div>
 <div class="line">    }</div>
 <div class="line">  };</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -612,19 +662,22 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="ttc" id="agroup__Exceptions_html_ga7b52b286796c23ef9ff178faf7a4b68f"><div class="ttname"><a href="group__Exceptions.html#ga7b52b286796c23ef9ff178faf7a4b68f">StandardExceptions::ExcNotImplemented</a></div><div class="ttdeci">static ::ExceptionBase &amp; ExcNotImplemented()</div></div>
 <div class="ttc" id="anamespaceLAPACKSupport_html_a8edacd69ab93285f82b7f63c733a86b7"><div class="ttname"><a href="namespaceLAPACKSupport.html#a8edacd69ab93285f82b7f63c733a86b7">LAPACKSupport::N</a></div><div class="ttdeci">static const char N</div><div class="ttdef"><b>Definition:</b> <a href="lapack__support_8h_source.html#l00157">lapack_support.h:157</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_1_1EvaluationFlags_html_ac6721740e24732d6afabcf28ddfc1ffdaeb244a97c0c9e9e7ca4765e096f0badc"><div class="ttname"><a href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffdaeb244a97c0c9e9e7ca4765e096f0badc">VectorTools::EvaluationFlags::min</a></div><div class="ttdeci">@ min</div><div class="ttdef"><b>Definition:</b> <a href="vector__tools__evaluate_8h_source.html#l00059">vector_tools_evaluate.h:59</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="Theinversemobilityandsaturationfunctions"></a> </p><h3>The inverse mobility and saturation functions</h3>
-<p>There are two more pieces of data that we need to describe, namely the inverse mobility function and the saturation curve. Their form is also given in the introduction:</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Theinversemobilityandsaturationfunctions"></a></p><h3>The inverse mobility and saturation functions</h3>
+<p class="interli"></p>
+<p class="interli">还有两个数据我们需要描述，即反流动性函数和饱和度曲线。它们的形式也在介绍中给出。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">double</span> mobility_inverse(<span class="keyword">const</span> <span class="keywordtype">double</span> S, <span class="keyword">const</span> <span class="keywordtype">double</span> viscosity)</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">return</span> 1.0 / (1.0 / viscosity * S * S + (1 - S) * (1 - S));</div>
 <div class="line">}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keywordtype">double</span> fractional_flow(<span class="keyword">const</span> <span class="keywordtype">double</span> S, <span class="keyword">const</span> <span class="keywordtype">double</span> viscosity)</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">return</span> S * S / (S * S + viscosity * (1 - S) * (1 - S));</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="Linearsolversandpreconditioners"></a> </p><h3>Linear solvers and preconditioners</h3>
-<p>The linear solvers we use are also completely analogous to the ones used in <a class="el" href="step_20.html">step-20</a>. The following classes are therefore copied verbatim from there. Note that the classes here are not only copied from <a class="el" href="step_20.html">step-20</a>, but also duplicate classes in deal.II. In a future version of this example, they should be replaced by an efficient method, though. There is a single change: if the size of a linear system is small, i.e. when the mesh is very coarse, then it is sometimes not sufficient to set a maximum of <code>src.size()</code> CG iterations before the solver in the <code>vmult()</code> function converges. (This is, of course, a result of numerical round-off, since we know that on paper, the CG method converges in at most <code>src.size()</code> steps.) As a consequence, we set the maximum number of iterations equal to the maximum of the size of the linear system and 200.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Linearsolversandpreconditioners"></a> </p><h3>Linear solvers and preconditioners</h3>
+<p class="interli"></p>
+<p class="interli">我们使用的线性求解器也完全类似于 <a class="el" href="step_20.html">step-20</a> 中使用的线性求解器。因此，下面的类是逐字逐句地从那里复制的。请注意，这里的类不仅是从 <a class="el" href="step_20.html">step-20</a> 中复制的，而且在deal.II中也有重复的类。在这个例子的未来版本中，它们应该被一个有效的方法所取代，虽然。有一个变化：如果线性系统的尺寸很小，即当网格很粗时，那么在 <code>src.size()</code> 函数中的求解器收敛之前，设置最大的 <code>vmult()</code> CG迭代次数有时是不够的。(当然，这是数值取舍的结果，因为我们知道在纸面上，CG方法最多只能在 <code>src.size()</code> 步内收敛)。因此，我们设定最大迭代次数等于线性系统大小的最大值和200。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> MatrixType&gt;</div>
 <div class="line"><span class="keyword">class </span>InverseMatrix : <span class="keyword">public</span> <a class="code" href="classSubscriptor.html">Subscriptor</a></div>
 <div class="line">{</div>
@@ -633,20 +686,26 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">    : <a class="code" href="namespaceLAPACKSupport.html#a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003">matrix</a>(&amp;m)</div>
 <div class="line">  {}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> vmult(<a class="code" href="classVector.html">Vector&lt;double&gt;</a> &amp;dst, <span class="keyword">const</span> <a class="code" href="classVector.html">Vector&lt;double&gt;</a> &amp;src)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword">  </span>{</div>
 <div class="line">    <a class="code" href="classSolverControl.html">SolverControl</a> solver_control(std::max&lt;unsigned int&gt;(src.<a class="code" href="group__Vectors.html#ga81dcfa5c77bdd426603386c0844149ae">size</a>(), 200),</div>
 <div class="line">                                 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-8 * src.<a class="code" href="group__Vectors.html#ga8ee1b8309a7a9ecf109c8a7116733ef8">l2_norm</a>());</div>
 <div class="line">    <a class="code" href="classSolverCG.html">SolverCG&lt;Vector&lt;double&gt;</a>&gt; cg(solver_control);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    dst = 0;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    cg.solve(*<a class="code" href="namespaceLAPACKSupport.html#a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003">matrix</a>, dst, src, <a class="code" href="classPreconditionIdentity.html">PreconditionIdentity</a>());</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classSmartPointer.html">SmartPointer&lt;const MatrixType&gt;</a> <a class="code" href="namespaceLAPACKSupport.html#a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003">matrix</a>;</div>
 <div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -661,6 +720,7 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">    , tmp2(<a class="code" href="namespaceLAPACKSupport.html#a40707d49114d54318c823f3b750e89a4">A</a>.block(0, 0).m())</div>
 <div class="line">  {}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> vmult(<a class="code" href="classVector.html">Vector&lt;double&gt;</a> &amp;dst, <span class="keyword">const</span> <a class="code" href="classVector.html">Vector&lt;double&gt;</a> &amp;src)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword">  </span>{</div>
 <div class="line">    system_matrix-&gt;block(0, 1).vmult(tmp1, src);</div>
@@ -668,12 +728,16 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">    system_matrix-&gt;block(1, 0).vmult(dst, tmp2);</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classSmartPointer.html">SmartPointer&lt;const BlockSparseMatrix&lt;double&gt;</a>&gt;           system_matrix;</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classSmartPointer.html">SmartPointer&lt;const InverseMatrix&lt;SparseMatrix&lt;double&gt;</a>&gt;&gt; m_inverse;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">mutable</span> <a class="code" href="classVector.html">Vector&lt;double&gt;</a> tmp1, tmp2;</div>
 <div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -686,6 +750,7 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">    , tmp2(<a class="code" href="namespaceLAPACKSupport.html#a40707d49114d54318c823f3b750e89a4">A</a>.block(0, 0).m())</div>
 <div class="line">  {}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> vmult(<a class="code" href="classVector.html">Vector&lt;double&gt;</a> &amp;dst, <span class="keyword">const</span> <a class="code" href="classVector.html">Vector&lt;double&gt;</a> &amp;src)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword">  </span>{</div>
 <div class="line">    system_matrix-&gt;block(0, 1).vmult(tmp1, src);</div>
@@ -693,8 +758,10 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">    system_matrix-&gt;block(1, 0).vmult(dst, tmp2);</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classSmartPointer.html">SmartPointer&lt;const BlockSparseMatrix&lt;double&gt;</a>&gt; system_matrix;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">mutable</span> <a class="code" href="classVector.html">Vector&lt;double&gt;</a> tmp1, tmp2;</div>
 <div class="line">};</div>
@@ -709,10 +776,12 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="ttc" id="anamespaceLAPACKSupport_html_a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003"><div class="ttname"><a href="namespaceLAPACKSupport.html#a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003">LAPACKSupport::matrix</a></div><div class="ttdeci">@ matrix</div><div class="ttdoc">Contents is actually a matrix.</div><div class="ttdef"><b>Definition:</b> <a href="lapack__support_8h_source.html#l00058">lapack_support.h:58</a></div></div>
 <div class="ttc" id="anamespaceLAPACKSupport_html_a40707d49114d54318c823f3b750e89a4"><div class="ttname"><a href="namespaceLAPACKSupport.html#a40707d49114d54318c823f3b750e89a4">LAPACKSupport::A</a></div><div class="ttdeci">static const char A</div><div class="ttdef"><b>Definition:</b> <a href="lapack__support_8h_source.html#l00153">lapack_support.h:153</a></div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a9587d5229555daa5b1fa1ba2f8a40adb"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">Physics::Elasticity::Kinematics::e</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; e(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
-</div><!-- fragment --><p><a class="anchor" id="codeTwoPhaseFlowProblemcodeclassimplementation"></a> </p><h3><code>TwoPhaseFlowProblem</code> class implementation</h3>
-<p>Here now the implementation of the main class. Much of it is actually copied from <a class="el" href="step_20.html">step-20</a>, so we won't comment on it in much detail. You should try to get familiar with that program first, then most of what is happening here should be mostly clear.</p>
-<p><a class="anchor" id="TwoPhaseFlowProblemTwoPhaseFlowProblem"></a> </p><h4>TwoPhaseFlowProblem::TwoPhaseFlowProblem</h4>
-<p>First for the constructor. We use \(RT_k \times DQ_k \times DQ_k\) spaces. For initializing the <a class="el" href="classDiscreteTime.html">DiscreteTime</a> object, we don't set the time step size in the constructor because we don't have its value yet. The time step size is initially set to zero, but it will be computed before it is needed to increment time, as described in a subsection of the introduction. The time object internally prevents itself from being incremented when \(dt = 0\), forcing us to set a non-zero desired size for \(dt\) before advancing time.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="codeTwoPhaseFlowProblemcodeclassimplementation"></a></p><h3><code>TwoPhaseFlowProblem</code> class implementation</h3>
+<p class="interli"></p>
+<p class="interli">现在是主类的实现。它的大部分内容实际上是从 <a class="el" href="step_20.html">step-20</a> 中复制过来的，所以我们不会对它进行过多的评论。你应该试着先熟悉一下那个程序，然后这里发生的大部分事情就应该很清楚了。</p>
+<p class="interli"><a class="anchor" id="TwoPhaseFlowProblemTwoPhaseFlowProblem"></a> </p><h4>TwoPhaseFlowProblem::TwoPhaseFlowProblem</h4>
+<p class="interli"></p>
+<p class="interli">首先是构造函数。我们使用 \(RT_k \times DQ_k \times DQ_k\) 空间。对于初始化DiscreteTime对象，我们不在构造函数中设置时间步长，因为我们还没有它的值。时间步长最初被设置为零，但在需要增量时间之前，它将被计算出来，正如介绍的一个小节中所描述的。当 \(dt = 0\) 时，时间对象在内部阻止自己被递增，迫使我们在推进时间之前为 \(dt\) 设置一个非零的期望大小。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">TwoPhaseFlowProblem&lt;dim&gt;::TwoPhaseFlowProblem(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> degree)</div>
 <div class="line">  : degree(degree)</div>
@@ -729,16 +798,19 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">{}</div>
 <div class="ttc" id="aclassFE__DGQ_html"><div class="ttname"><a href="classFE__DGQ.html">FE_DGQ</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__dgq_8h_source.html#l00110">fe_dgq.h:111</a></div></div>
 <div class="ttc" id="aclassFE__RaviartThomas_html"><div class="ttname"><a href="classFE__RaviartThomas.html">FE_RaviartThomas</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__raviart__thomas_8h_source.html#l00127">fe_raviart_thomas.h:128</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="TwoPhaseFlowProblemmake_grid_and_dofs"></a> </p><h4>TwoPhaseFlowProblem::make_grid_and_dofs</h4>
-<p>This next function starts out with well-known functions calls that create and refine a mesh, and then associate degrees of freedom with it. It does all the same things as in <a class="el" href="step_20.html">step-20</a>, just now for three components instead of two.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="TwoPhaseFlowProblemmake_grid_and_dofs"></a> </p><h4>TwoPhaseFlowProblem::make_grid_and_dofs</h4>
+<p class="interli"></p>
+<p class="interli">接下来的函数从众所周知的函数调用开始，创建和细化一个网格，然后将自由度与之关联。它所做的事情与 <a class="el" href="step_20.html">step-20</a> 中的相同，只是现在是针对三个组件而不是两个。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> TwoPhaseFlowProblem&lt;dim&gt;::make_grid_and_dofs()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>, 0, 1);</div>
 <div class="line">  <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.refine_global(n_refinement_steps);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  dof_handler.distribute_dofs(fe);</div>
 <div class="line">  <a class="code" href="namespaceDoFRenumbering.html#a52c1941406d1ce2937e29a46edf111f4">DoFRenumbering::component_wise</a>(dof_handler);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> std::vector&lt;types::global_dof_index&gt; dofs_per_component =</div>
 <div class="line">    <a class="code" href="namespaceDoFTools.html#a956ac5c6aab03ec1c04f1ad955301db9">DoFTools::count_dofs_per_fe_component</a>(dof_handler);</div>
@@ -746,13 +818,16 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">                     n_p = dofs_per_component[dim],</div>
 <div class="line">                     n_s = dofs_per_component[dim + 1];</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Number of active cells: &quot;</span> &lt;&lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells()</div>
 <div class="line">            &lt;&lt; std::endl</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;Number of degrees of freedom: &quot;</span> &lt;&lt; dof_handler.n_dofs()</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot; (&quot;</span> &lt;&lt; n_u &lt;&lt; <span class="charliteral">&#39;+&#39;</span> &lt;&lt; n_p &lt;&lt; <span class="charliteral">&#39;+&#39;</span> &lt;&lt; n_s &lt;&lt; <span class="charliteral">&#39;)&#39;</span> &lt;&lt; std::endl</div>
 <div class="line">            &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_couplings = dof_handler.max_couplings_between_dofs();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  sparsity_pattern.reinit(3, 3);</div>
 <div class="line">  sparsity_pattern.block(0, 0).reinit(n_u, n_u, n_couplings);</div>
@@ -765,13 +840,17 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">  sparsity_pattern.block(1, 2).reinit(n_p, n_s, n_couplings);</div>
 <div class="line">  sparsity_pattern.block(2, 2).reinit(n_s, n_s, n_couplings);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  sparsity_pattern.collect_sizes();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler, sparsity_pattern);</div>
 <div class="line">  sparsity_pattern.compress();</div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  system_matrix.reinit(sparsity_pattern);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  solution.reinit(3);</div>
@@ -780,11 +859,13 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">  solution.block(2).reinit(n_s);</div>
 <div class="line">  solution.collect_sizes();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  old_solution.reinit(3);</div>
 <div class="line">  old_solution.block(0).reinit(n_u);</div>
 <div class="line">  old_solution.block(1).reinit(n_p);</div>
 <div class="line">  old_solution.block(2).reinit(n_s);</div>
 <div class="line">  old_solution.collect_sizes();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  system_rhs.reinit(3);</div>
 <div class="line">  system_rhs.block(0).reinit(n_u);</div>
@@ -796,17 +877,21 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="ttc" id="anamespaceDoFRenumbering_html_a52c1941406d1ce2937e29a46edf111f4"><div class="ttname"><a href="namespaceDoFRenumbering.html#a52c1941406d1ce2937e29a46edf111f4">DoFRenumbering::component_wise</a></div><div class="ttdeci">void component_wise(DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, const std::vector&lt; unsigned int &gt; &amp;target_component=std::vector&lt; unsigned int &gt;())</div><div class="ttdef"><b>Definition:</b> <a href="dof__renumbering_8cc_source.html#l00681">dof_renumbering.cc:681</a></div></div>
 <div class="ttc" id="anamespaceDoFTools_html_a956ac5c6aab03ec1c04f1ad955301db9"><div class="ttname"><a href="namespaceDoFTools.html#a956ac5c6aab03ec1c04f1ad955301db9">DoFTools::count_dofs_per_fe_component</a></div><div class="ttdeci">std::vector&lt; types::global_dof_index &gt; count_dofs_per_fe_component(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, const bool vector_valued_once=false, const std::vector&lt; unsigned int &gt; &amp;target_component={})</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools_8cc_source.html#l01943">dof_tools.cc:1943</a></div></div>
 <div class="ttc" id="anamespaceGridGenerator_html_acea0cbcd68e52ce8113d1134b87de403"><div class="ttname"><a href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a></div><div class="ttdeci">void hyper_cube(Triangulation&lt; dim, spacedim &gt; &amp;tria, const double left=0., const double right=1., const bool colorize=false)</div></div>
-</div><!-- fragment --><p><a class="anchor" id="TwoPhaseFlowProblemassemble_system"></a> </p><h4>TwoPhaseFlowProblem::assemble_system</h4>
-<p>This is the function that assembles the linear system, or at least everything except the (1,3) block that depends on the still-unknown velocity computed during this time step (we deal with this in <code>assemble_rhs_S</code>). Much of it is again as in <a class="el" href="step_20.html">step-20</a>, but we have to deal with some nonlinearity this time. However, the top of the function is pretty much as usual (note that we set matrix and right hand side to zero at the beginning &mdash; something we didn't have to do for stationary problems since there we use each matrix object only once and it is empty at the beginning anyway).</p>
-<p>Note that in its present form, the function uses the permeability implemented in the RandomMedium::KInverse class. Switching to the single curved crack permeability function is as simple as just changing the namespace name.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="TwoPhaseFlowProblemassemble_system"></a> </p><h4>TwoPhaseFlowProblem::assemble_system</h4>
+<p class="interli"></p>
+<p class="interli">这是组装线性系统的函数，或者至少是除了(1,3)块之外的所有东西，它取决于在这个时间步长中计算的仍然未知的速度（我们在 <code>assemble_rhs_S</code> 中处理这个问题）。它的大部分内容与 <a class="el" href="step_20.html">step-20</a> 中一样，但这次我们必须处理一些非线性问题。 然而，该函数的顶部与往常一样（注意我们在开始时将矩阵和右手边设置为零&mdash; 对于静止问题我们不必这样做，因为在那里我们只使用每个矩阵对象一次，而且在开始时它是空的）。 <br  />
+</p>
+<p class="interli">请注意，在目前的形式下，该函数使用 RandomMedium::KInverse 类中实现的渗透率。切换到单曲裂缝渗透率函数就像改变命名空间名称一样简单。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> TwoPhaseFlowProblem&lt;dim&gt;::assemble_system()</div>
 <div class="line">{</div>
 <div class="line">  system_matrix = 0;</div>
 <div class="line">  system_rhs    = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a>     quadrature_formula(degree + 2);</div>
 <div class="line">  <a class="code" href="classQGauss.html">QGauss</a>&lt;dim - 1&gt; face_quadrature_formula(degree + 2);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a>     fe_values(fe,</div>
 <div class="line">                          quadrature_formula,</div>
@@ -818,32 +903,41 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">                                     <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> |</div>
 <div class="line">                                     <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = fe.n_dofs_per_cell();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points      = quadrature_formula.size();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_face_q_points = face_quadrature_formula.size();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> local_matrix(dofs_per_cell, dofs_per_cell);</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a>     local_rhs(dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices(dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> PressureRightHandSide&lt;dim&gt;  pressure_right_hand_side;</div>
 <div class="line">  <span class="keyword">const</span> PressureBoundaryValues&lt;dim&gt; pressure_boundary_values;</div>
 <div class="line">  <span class="keyword">const</span> RandomMedium::KInverse&lt;dim&gt; k_inverse;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;double&gt;         pressure_rhs_values(n_q_points);</div>
 <div class="line">  std::vector&lt;double&gt;         boundary_values(n_face_q_points);</div>
 <div class="line">  std::vector&lt;Tensor&lt;2, dim&gt;&gt; k_inverse_values(n_q_points);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;Vector&lt;double&gt;&gt;              old_solution_values(n_q_points,</div>
 <div class="line">                                                               <a class="code" href="classVector.html">Vector&lt;double&gt;</a>(dim + 2));</div>
 <div class="line">  std::vector&lt;std::vector&lt;Tensor&lt;1, dim&gt;&gt;&gt; old_solution_grads(</div>
 <div class="line">    n_q_points, std::vector&lt;<a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a>&gt;(dim + 2));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a> velocities(0);</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="structFEValuesExtractors_1_1Scalar.html">FEValuesExtractors::Scalar</a> pressure(dim);</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="structFEValuesExtractors_1_1Scalar.html">FEValuesExtractors::Scalar</a> saturation(dim + 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">    {</div>
@@ -861,23 +955,25 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a></div><div class="ttdeci">@ update_quadrature_points</div><div class="ttdoc">Transformed quadrature points.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00122">fe_update_flags.h:122</a></div></div>
 <div class="ttc" id="astructFEValuesExtractors_1_1Scalar_html"><div class="ttname"><a href="structFEValuesExtractors_1_1Scalar.html">FEValuesExtractors::Scalar</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__values__extractors_8h_source.html#l00095">fe_values_extractors.h:96</a></div></div>
 <div class="ttc" id="astructFEValuesExtractors_1_1Vector_html"><div class="ttname"><a href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__values__extractors_8h_source.html#l00150">fe_values_extractors.h:151</a></div></div>
-</div><!-- fragment --><p>Here's the first significant difference: We have to get the values of the saturation function of the previous time step at the quadrature points. To this end, we can use the <a class="el" href="classFEValuesBase.html#a357b422e374f2f2207af3512093f3907">FEValues::get_function_values</a> (previously already used in <a class="el" href="step_9.html">step-9</a>, <a class="el" href="step_14.html">step-14</a> and <a class="el" href="step_15.html">step-15</a>), a function that takes a solution vector and returns a list of function values at the quadrature points of the present cell. In fact, it returns the complete vector-valued solution at each quadrature point, i.e. not only the saturation but also the velocities and pressure:</p>
+</div><!-- fragment --><p class="interli">这里是第一个显著的区别。我们必须在正交点上获得前一个时间步长的饱和函数值。为此，我们可以使用 <a class="el" href="classFEValuesBase.html#a357b422e374f2f2207af3512093f3907">FEValues::get_function_values</a> （之前已经在 <a class="el" href="step_9.html">step-9</a> 、 <a class="el" href="step_14.html">step-14</a> 和 <a class="el" href="step_15.html">step-15</a> 中使用），这个函数接收一个解向量并返回当前单元的正交点的函数值列表。事实上，它返回每个正交点的完整矢量值解，即不仅是饱和度，还有速度和压力。</p>
 <div class="fragment"><div class="line">fe_values.get_function_values(old_solution, old_solution_values);</div>
-</div><!-- fragment --><p>Then we also have to get the values of the pressure right hand side and of the inverse permeability tensor at the quadrature points:</p>
+</div><!-- fragment --><p class="interli">然后，我们还必须在正交点上得到压力的右手边和反渗透性张量的值。</p>
 <div class="fragment"><div class="line">pressure_right_hand_side.value_list(fe_values.get_quadrature_points(),</div>
 <div class="line">                                    pressure_rhs_values);</div>
 <div class="line">k_inverse.value_list(fe_values.get_quadrature_points(),</div>
 <div class="line">                     k_inverse_values);</div>
-</div><!-- fragment --><p>With all this, we can now loop over all the quadrature points and shape functions on this cell and assemble those parts of the matrix and right hand side that we deal with in this function. The individual terms in the contributions should be self-explanatory given the explicit form of the bilinear form stated in the introduction:</p>
+</div><!-- fragment --><p class="interli">有了所有这些，我们现在可以在这个单元的所有正交点和形状函数上进行循环，并将我们在这个函数中处理的矩阵和右手边的那些部分组合起来。鉴于引言中所述的双线性形式的明确形式，贡献中的各个条款应该是不言自明的。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; ++q)</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> old_s = old_solution_values[q](dim + 1);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> phi_i_u = fe_values[velocities].value(i, q);</div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> div_phi_i_u = fe_values[velocities].divergence(i, q);</div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> phi_i_p     = fe_values[pressure].value(i, q);</div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> phi_i_s     = fe_values[saturation].value(i, q);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; dofs_per_cell; ++j)</div>
 <div class="line">        {</div>
@@ -888,6 +984,7 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">          <span class="keyword">const</span> <span class="keywordtype">double</span> phi_j_p = fe_values[pressure].value(j, q);</div>
 <div class="line">          <span class="keyword">const</span> <span class="keywordtype">double</span> phi_j_s = fe_values[saturation].value(j, q);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          local_matrix(i, j) +=</div>
 <div class="line">            (phi_i_u * k_inverse_values[q] *</div>
 <div class="line">               mobility_inverse(old_s, viscosity) * phi_j_u -</div>
@@ -896,17 +993,20 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">            fe_values.JxW(q);</div>
 <div class="line">        }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      local_rhs(i) +=</div>
 <div class="line">        (-phi_i_p * pressure_rhs_values[q]) * fe_values.JxW(q);</div>
 <div class="line">    }</div>
-</div><!-- fragment --><p>Next, we also have to deal with the pressure boundary values. This, again is as in <a class="el" href="step_20.html">step-20</a>:</p>
+</div><!-- fragment --><p class="interli">接下来，我们还必须处理压力边界值。这也是如 <a class="el" href="step_20.html">step-20</a> 中所述。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;face : cell-&gt;face_iterators())</div>
 <div class="line">  <span class="keywordflow">if</span> (face-&gt;at_boundary())</div>
 <div class="line">    {</div>
 <div class="line">      fe_face_values.reinit(cell, face);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      pressure_boundary_values.value_list(</div>
 <div class="line">        fe_face_values.get_quadrature_points(), boundary_values);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_face_q_points; ++q)</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
@@ -914,12 +1014,15 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">            <span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> phi_i_u =</div>
 <div class="line">              fe_face_values[velocities].value(i, q);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">            local_rhs(i) +=</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line">              -(phi_i_u * fe_face_values.normal_vector(q) *</div>
 <div class="line">                boundary_values[q] * fe_face_values.JxW(q));</div>
 <div class="line">          }</div>
 <div class="line">    }</div>
-</div><!-- fragment --><p>The final step in the loop over all cells is to transfer local contributions into the global matrix and right hand side vector:</p>
+</div><!-- fragment --><p class="interli">在所有单元的循环中，最后一步是将局部贡献转移到全局矩阵和右手向量中。</p>
 <div class="fragment"><div class="line">      cell-&gt;get_dof_indices(local_dof_indices);</div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; dofs_per_cell; ++j)</div>
@@ -927,13 +1030,15 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">                            local_dof_indices[j],</div>
 <div class="line">                            local_matrix(i, j));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">        system_rhs(local_dof_indices[i]) += local_rhs(i);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>So much for assembly of matrix and right hand side. Note that we do not have to interpolate and apply boundary values since they have all been taken care of in the weak form already.</p>
-<p><a class="anchor" id="TwoPhaseFlowProblemassemble_rhs_S"></a> </p><h4>TwoPhaseFlowProblem::assemble_rhs_S</h4>
-<p>As explained in the introduction, we can only evaluate the right hand side of the saturation equation once the velocity has been computed. We therefore have this separate function to this end.</p>
+</div><!-- fragment --><p class="interli">矩阵和右手边的组装就这样了。请注意，我们不需要插值和应用边界值，因为它们都已经在弱式中得到了处理。</p>
+<p class="interli"><a class="anchor" id="TwoPhaseFlowProblemassemble_rhs_S"></a> </p><h4>TwoPhaseFlowProblem::assemble_rhs_S</h4>
+<p class="interli"></p>
+<p class="interli">正如介绍中所解释的，我们只有在计算了速度后才能评估饱和方程的右边。因此，我们有这个单独的函数来达到这个目的。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> TwoPhaseFlowProblem&lt;dim&gt;::assemble_rhs_S()</div>
 <div class="line">{</div>
@@ -952,11 +1057,14 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">                                            face_quadrature_formula,</div>
 <div class="line">                                            <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell   = fe.n_dofs_per_cell();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points      = quadrature_formula.size();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_face_q_points = face_quadrature_formula.size();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> local_rhs(dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;Vector&lt;double&gt;&gt; old_solution_values(n_q_points,</div>
 <div class="line">                                                  <a class="code" href="classVector.html">Vector&lt;double&gt;</a>(dim + 2));</div>
@@ -971,21 +1079,26 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">  std::vector&lt;Vector&lt;double&gt;&gt; present_solution_values_face(</div>
 <div class="line">    n_face_q_points, <a class="code" href="classVector.html">Vector&lt;double&gt;</a>(dim + 2));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;double&gt;                  neighbor_saturation(n_face_q_points);</div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices(dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  SaturationBoundaryValues&lt;dim&gt; saturation_boundary_values;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="structFEValuesExtractors_1_1Scalar.html">FEValuesExtractors::Scalar</a> saturation(dim + 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">    {</div>
 <div class="line">      local_rhs = 0;</div>
 <div class="line">      fe_values.reinit(cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      fe_values.get_function_values(old_solution, old_solution_values);</div>
 <div class="line">      fe_values.get_function_values(solution, present_solution_values);</div>
-</div><!-- fragment --><p>First for the cell terms. These are, following the formulas in the introduction, \((S^n,\sigma)-(F(S^n) \mathbf{v}^{n+1},\nabla \sigma)\), where \(\sigma\) is the saturation component of the test function:</p>
+</div><!-- fragment --><p class="interli">首先是单元项。按照介绍中的公式，这些是 \((S^n,\sigma)-(F(S^n) \mathbf{v}^{n+1},\nabla \sigma)\) ，其中 \(\sigma\) 是测试函数的饱和分量。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; ++q)</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">    {</div>
@@ -994,9 +1107,11 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> = 0; <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> &lt; dim; ++<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>)</div>
 <div class="line">        present_u[<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = present_solution_values[q](<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span>         phi_i_s = fe_values[saturation].value(i, q);</div>
 <div class="line">      <span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> grad_phi_i_s =</div>
 <div class="line">        fe_values[saturation].gradient(i, q);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      local_rhs(i) +=</div>
 <div class="line">        (time.get_next_step_size() * fractional_flow(old_s, viscosity) *</div>
@@ -1004,16 +1119,19 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">         old_s * phi_i_s) *</div>
 <div class="line">        fe_values.JxW(q);</div>
 <div class="line">    }</div>
-</div><!-- fragment --><p>Secondly, we have to deal with the flux parts on the face boundaries. This was a bit more involved because we first have to determine which are the influx and outflux parts of the cell boundary. If we have an influx boundary, we need to evaluate the saturation on the other side of the face (or the boundary values, if we are at the boundary of the domain).</p>
-<p>All this is a bit tricky, but has been explained in some detail already in <a class="el" href="step_9.html">step-9</a>. Take a look there how this is supposed to work!</p>
+</div><!-- fragment --><p class="interli">其次，我们必须处理面的边界上的通量部分。这就比较麻烦了，因为我们首先要确定哪些是细胞边界的流入和流出部分。如果我们有一个流入的边界，我们需要评估面的另一边的饱和度（或者边界值，如果我们在域的边界）。 <br  />
+</p>
+<p class="interli">所有这些都有点棘手，但在 <a class="el" href="step_9.html">step-9</a> 中已经有了一些详细的解释。请看一下，这应该是如何工作的!</p>
 <div class="fragment"><div class="line">      <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> face_no : cell-&gt;face_indices())</div>
 <div class="line">        {</div>
 <div class="line">          fe_face_values.reinit(cell, face_no);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          fe_face_values.get_function_values(old_solution,</div>
 <div class="line">                                             old_solution_values_face);</div>
 <div class="line">          fe_face_values.get_function_values(solution,</div>
 <div class="line">                                             present_solution_values_face);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <span class="keywordflow">if</span> (cell-&gt;at_boundary(face_no))</div>
 <div class="line">            saturation_boundary_values.value_list(</div>
@@ -1024,15 +1142,19 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">              <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> neighbor_face =</div>
 <div class="line">                cell-&gt;neighbor_of_neighbor(face_no);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">              fe_face_values_neighbor.reinit(neighbor, neighbor_face);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">              fe_face_values_neighbor.get_function_values(</div>
 <div class="line">                old_solution, old_solution_values_face_neighbor);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">              <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_face_q_points; ++q)</div>
 <div class="line">                neighbor_saturation[q] =</div>
 <div class="line">                  old_solution_values_face_neighbor[q](dim + 1);</div>
 <div class="line">            }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_face_q_points; ++q)</div>
@@ -1041,10 +1163,13 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">              <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> = 0; <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> &lt; dim; ++<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>)</div>
 <div class="line">                present_u_face[<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = present_solution_values_face[q](<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">              <span class="keyword">const</span> <span class="keywordtype">double</span> normal_flux =</div>
 <div class="line">                present_u_face * fe_face_values.normal_vector(q);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">              <span class="keyword">const</span> <span class="keywordtype">bool</span> is_outflow_q_point = (normal_flux &gt;= 0);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">              <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">                local_rhs(i) -=</div>
@@ -1058,13 +1183,15 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">            }</div>
 <div class="line">        }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      cell-&gt;get_dof_indices(local_dof_indices);</div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">        system_rhs(local_dof_indices[i]) += local_rhs(i);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="TwoPhaseFlowProblemsolve"></a> </p><h4>TwoPhaseFlowProblem::solve</h4>
-<p>After all these preparations, we finally solve the linear system for velocity and pressure in the same way as in <a class="el" href="step_20.html">step-20</a>. After that, we have to deal with the saturation equation (see below):</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="TwoPhaseFlowProblemsolve"></a> </p><h4>TwoPhaseFlowProblem::solve</h4>
+<p class="interli"></p>
+<p class="interli">在所有这些准备工作之后，我们最终以与 <a class="el" href="step_20.html">step-20</a> 相同的方式解决速度和压力的线性系统。在这之后，我们必须处理饱和方程（见下文）。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> TwoPhaseFlowProblem&lt;dim&gt;::solve()</div>
 <div class="line">{</div>
@@ -1073,44 +1200,52 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> tmp(solution.block(0).size());</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> schur_rhs(solution.block(1).size());</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> tmp2(solution.block(2).size());</div>
-</div><!-- fragment --><p>First the pressure, using the pressure Schur complement of the first two equations:</p>
+</div><!-- fragment --><p class="interli">首先是压力，使用前两个方程的压力舒尔补码。</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  m_inverse.vmult(tmp, system_rhs.block(0));</div>
 <div class="line">  system_matrix.block(1, 0).vmult(schur_rhs, tmp);</div>
 <div class="line">  schur_rhs -= system_rhs.block(1);</div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  SchurComplement <a class="code" href="group__LAOperators.html#ga76acca911f21089cd3bb385d20ccc995">schur_complement</a>(system_matrix, m_inverse);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  ApproximateSchurComplement approximate_schur_complement(system_matrix);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  InverseMatrix&lt;ApproximateSchurComplement&gt; preconditioner(</div>
 <div class="line">    approximate_schur_complement);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classSolverControl.html">SolverControl</a>            solver_control(solution.block(1).size(),</div>
 <div class="line">                               1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-12 * schur_rhs.l2_norm());</div>
 <div class="line">  <a class="code" href="classSolverCG.html">SolverCG&lt;Vector&lt;double&gt;</a>&gt; cg(solver_control);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  cg.solve(<a class="code" href="group__LAOperators.html#ga76acca911f21089cd3bb385d20ccc995">schur_complement</a>, solution.block(1), schur_rhs, preconditioner);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;   &quot;</span> &lt;&lt; solver_control.last_step()</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot; CG Schur complement iterations for pressure.&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__LAOperators_html_ga76acca911f21089cd3bb385d20ccc995"><div class="ttname"><a href="group__LAOperators.html#ga76acca911f21089cd3bb385d20ccc995">LinearOperator::schur_complement</a></div><div class="ttdeci">LinearOperator&lt; Range_2, Domain_2, Payload &gt; schur_complement(const LinearOperator&lt; Domain_1, Range_1, Payload &gt; &amp;A_inv, const LinearOperator&lt; Range_1, Domain_2, Payload &gt; &amp;B, const LinearOperator&lt; Range_2, Domain_1, Payload &gt; &amp;C, const LinearOperator&lt; Range_2, Domain_2, Payload &gt; &amp;D)</div><div class="ttdef"><b>Definition:</b> <a href="schur__complement_8h_source.html#l00248">schur_complement.h:248</a></div></div>
-</div><!-- fragment --><p>Now the velocity:</p>
+</div><!-- fragment --><p class="interli">现在是速度。</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  system_matrix.block(0, 1).vmult(tmp, solution.block(1));</div>
 <div class="line">  tmp *= -1;</div>
 <div class="line">  tmp += system_rhs.block(0);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  m_inverse.vmult(solution.block(0), tmp);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Finally, we have to take care of the saturation equation. The first business we have here is to determine the time step using the formula in the introduction. Knowing the shape of our domain and that we created the mesh by regular subdivision of cells, we can compute the diameter of each of our cells quite easily (in fact we use the linear extensions in coordinate directions of the cells, not the diameter). Note that we will learn a more general way to do this in <a class="el" href="step_24.html">step-24</a>, where we use the <a class="el" href="namespaceGridTools.html#a47c293eff2ec7ce4b90ba08b35d1f2e2">GridTools::minimal_cell_diameter</a> function.</p>
-<p>The maximal velocity we compute using a helper function to compute the maximal velocity defined below, and with all this we can evaluate our new time step length. We use the method DiscreteTime::set_desired_next_time_step() to suggest the new calculated value of the time step to the <a class="el" href="classDiscreteTime.html">DiscreteTime</a> object. In most cases, the time object uses the exact provided value to increment time. It some case, the step size may be modified further by the time object. For example, if the calculated time increment overshoots the end time, it is truncated accordingly.</p>
+</div><!-- fragment --><p class="interli">最后，我们必须处理好饱和度方程。我们在这里要做的第一件事是用介绍中的公式确定时间步长。知道了我们领域的形状和我们通过有规律地划分单元来创建网格，我们可以很容易地计算每个单元的直径（事实上我们使用的是单元坐标方向上的线性扩展，而不是直径）。请注意，我们将在 <a class="el" href="step_24.html">step-24</a> 中学习一种更通用的方法，在那里我们使用 <a class="el" href="namespaceGridTools.html#a47c293eff2ec7ce4b90ba08b35d1f2e2">GridTools::minimal_cell_diameter</a> 的函数来做这个。 <br  />
+</p>
+<p class="interli">我们使用一个辅助函数来计算下面定义的最大速度，有了这些，我们就可以评估我们新的时间步长了。我们使用方法 DiscreteTime::set_desired_next_time_step() 来向DiscreteTime对象建议新的时间步长的计算值。在大多数情况下，时间对象使用精确提供的值来增加时间。在某些情况下，时间对象可以进一步修改步骤大小。例如，如果计算出的时间增量超过了结束时间，它将被相应地截断。</p>
 <div class="fragment"><div class="line">time.set_desired_next_step_size(std::pow(0.5, <span class="keywordtype">double</span>(n_refinement_steps)) /</div>
 <div class="line">                                get_maximal_velocity());</div>
-</div><!-- fragment --><p>The next step is to assemble the right hand side, and then to pass everything on for solution. At the end, we project back saturations onto the physically reasonable range:</p>
+</div><!-- fragment --><p class="interli">下一步是组装右手边，然后把所有的东西都传给解。最后，我们将饱和度投射到物理上合理的范围内。</p>
 <div class="fragment"><div class="line">  assemble_rhs_S();</div>
 <div class="line">  {</div>
 <div class="line">    <a class="code" href="classSolverControl.html">SolverControl</a>            solver_control(system_matrix.block(2, 2).m(),</div>
@@ -1121,23 +1256,29 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">             system_rhs.block(2),</div>
 <div class="line">             <a class="code" href="classPreconditionIdentity.html">PreconditionIdentity</a>());</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    project_back_saturation();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;   &quot;</span> &lt;&lt; solver_control.last_step()</div>
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot; CG iterations for saturation.&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">  }</div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  old_solution = solution;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="TwoPhaseFlowProblemoutput_results"></a> </p><h4>TwoPhaseFlowProblem::output_results</h4>
-<p>There is nothing surprising here. Since the program will do a lot of time steps, we create an output file only every fifth time step and skip all other time steps at the top of the file already.</p>
-<p>When creating file names for output close to the bottom of the function, we convert the number of the time step to a string representation that is padded by leading zeros to four digits. We do this because this way all output file names have the same length, and consequently sort well when creating a directory listing.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="TwoPhaseFlowProblemoutput_results"></a> </p><h4>TwoPhaseFlowProblem::output_results</h4>
+<p class="interli"></p>
+<p class="interli">这里没有什么令人惊讶的。由于程序会做大量的时间步骤，我们只在每五个时间步骤创建一个输出文件，并在文件的顶部已经跳过所有其他的时间步骤。 <br  />
+</p>
+<p class="interli">在为接近函数底部的输出创建文件名时，我们将时间步长的数字转换为字符串表示，用前导零填充到四位数。我们这样做是因为这样所有的输出文件名都有相同的长度，因此在创建目录列表时可以很好地排序。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> TwoPhaseFlowProblem&lt;dim&gt;::output_results()<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <span class="keywordflow">if</span> (time.get_step_number() % 5 != 0)</div>
 <div class="line">    <span class="keywordflow">return</span>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;std::string&gt; solution_names;</div>
 <div class="line">  <span class="keywordflow">switch</span> (dim)</div>
@@ -1146,20 +1287,26 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">        solution_names = {<span class="stringliteral">&quot;u&quot;</span>, <span class="stringliteral">&quot;v&quot;</span>, <span class="stringliteral">&quot;p&quot;</span>, <span class="stringliteral">&quot;S&quot;</span>};</div>
 <div class="line">        <span class="keywordflow">break</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">case</span> 3:</div>
 <div class="line">        solution_names = {<span class="stringliteral">&quot;u&quot;</span>, <span class="stringliteral">&quot;v&quot;</span>, <span class="stringliteral">&quot;w&quot;</span>, <span class="stringliteral">&quot;p&quot;</span>, <span class="stringliteral">&quot;S&quot;</span>};</div>
 <div class="line">        <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">default</span>:</div>
 <div class="line">        <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(<span class="keyword">false</span>, <a class="code" href="group__Exceptions.html#ga7b52b286796c23ef9ff178faf7a4b68f">ExcNotImplemented</a>());</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classDataOut.html">DataOut&lt;dim&gt;</a> data_out;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ac1eb26168177faa30ffbcf9cbb9c3cd5">attach_dof_handler</a>(dof_handler);</div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(solution, solution_names);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  data_out.<a class="code" href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">build_patches</a>(degree + 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::ofstream output(<span class="stringliteral">&quot;solution-&quot;</span> +</div>
 <div class="line">                       <a class="code" href="namespaceUtilities.html#a6195c5f009ea8c7c536c6ffdf108c32f">Utilities::int_to_string</a>(time.get_step_number(), 4) +</div>
@@ -1172,9 +1319,11 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="ttc" id="aclassDataOut_html_a5eb51872b8736849bb7e8d2007fae086"><div class="ttname"><a href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">DataOut::build_patches</a></div><div class="ttdeci">virtual void build_patches(const unsigned int n_subdivisions=0)</div><div class="ttdef"><b>Definition:</b> <a href="numerics_2data__out_8cc_source.html#l01085">data_out.cc:1085</a></div></div>
 <div class="ttc" id="agroup__Exceptions_html_gacad99726038e4fca7f605fdffb3317e4"><div class="ttname"><a href="group__Exceptions.html#gacad99726038e4fca7f605fdffb3317e4">DataOutInterface::write_vtk</a></div><div class="ttdeci">void write_vtk(std::ostream &amp;out) const</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l07177">data_out_base.cc:7177</a></div></div>
 <div class="ttc" id="anamespaceUtilities_html_a6195c5f009ea8c7c536c6ffdf108c32f"><div class="ttname"><a href="namespaceUtilities.html#a6195c5f009ea8c7c536c6ffdf108c32f">Utilities::int_to_string</a></div><div class="ttdeci">std::string int_to_string(const unsigned int value, const unsigned int digits=numbers::invalid_unsigned_int)</div><div class="ttdef"><b>Definition:</b> <a href="base_2utilities_8cc_source.html#l00473">utilities.cc:473</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="TwoPhaseFlowProblemproject_back_saturation"></a> </p><h4>TwoPhaseFlowProblem::project_back_saturation</h4>
-<p>In this function, we simply run over all saturation degrees of freedom and make sure that if they should have left the physically reasonable range, that they be reset to the interval \([0,1]\). To do this, we only have to loop over all saturation components of the solution vector; these are stored in the block 2 (block 0 are the velocities, block 1 are the pressures).</p>
-<p>It may be instructive to note that this function almost never triggers when the time step is chosen as mentioned in the introduction. However, if we choose the timestep only slightly larger, we get plenty of values outside the proper range. Strictly speaking, the function is therefore unnecessary if we choose the time step small enough. In a sense, the function is therefore only a safety device to avoid situations where our entire solution becomes unphysical because individual degrees of freedom have become unphysical a few time steps earlier.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="TwoPhaseFlowProblemproject_back_saturation"></a> </p><h4>TwoPhaseFlowProblem::project_back_saturation</h4>
+<p class="interli"></p>
+<p class="interli">在这个函数中，我们简单地运行所有的饱和自由度，并确保如果它们应该离开物理上的合理范围，就将它们重置到区间 \([0,1]\) 。要做到这一点，我们只需循环查看解向量的所有饱和分量；这些分量被存储在块2中（块0是速度，块1是压力）。 <br  />
+</p>
+<p class="interli">值得注意的是，当时间步长选择如介绍中提到的那样时，这个函数几乎从未触发过，这可能很有启发。然而，如果我们只选择稍大的时间步长，我们会得到大量超出适当范围的数值。严格地说，如果我们选择的时间步长足够小，这个函数就没有必要。因此，从某种意义上说，该函数只是一个安全装置，以避免由于个别自由度在几个时间步长之前变得不符合物理条件而使我们的整个解决方案变得不符合物理条件的情况。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> TwoPhaseFlowProblem&lt;dim&gt;::project_back_saturation()</div>
 <div class="line">{</div>
@@ -1184,23 +1333,27 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (solution.block(2)(i) &gt; 1)</div>
 <div class="line">      solution.block(2)(i) = 1;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="TwoPhaseFlowProblemget_maximal_velocity"></a> </p><h4>TwoPhaseFlowProblem::get_maximal_velocity</h4>
-<p>The following function is used in determining the maximal allowable time step. What it does is to loop over all quadrature points in the domain and find what the maximal magnitude of the velocity is.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="TwoPhaseFlowProblemget_maximal_velocity"></a> </p><h4>TwoPhaseFlowProblem::get_maximal_velocity</h4>
+<p class="interli"></p>
+<p class="interli">以下函数用于确定最大的允许时间步长。它所做的是在域中的所有正交点上循环，找出速度的最大幅度。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">double</span> TwoPhaseFlowProblem&lt;dim&gt;::get_maximal_velocity()<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a>        quadrature_formula(degree + 2);</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points = quadrature_formula.size();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> fe_values(fe, quadrature_formula, <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a>);</div>
 <div class="line">  std::vector&lt;Vector&lt;double&gt;&gt; solution_values(n_q_points,</div>
 <div class="line">                                              <a class="code" href="classVector.html">Vector&lt;double&gt;</a>(dim + 2));</div>
 <div class="line">  <span class="keywordtype">double</span>                      max_velocity = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">    {</div>
 <div class="line">      fe_values.reinit(cell);</div>
 <div class="line">      fe_values.get_function_values(solution, solution_values);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; ++q)</div>
 <div class="line">        {</div>
@@ -1208,24 +1361,30 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; ++i)</div>
 <div class="line">            velocity[i] = solution_values[q](i);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          max_velocity = <a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">std::max</a>(max_velocity, velocity.<a class="code" href="classTensor.html#afd0934b4edd71063f66a9c67540e79fc">norm</a>());</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> max_velocity;</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassTensor_html_afd0934b4edd71063f66a9c67540e79fc"><div class="ttname"><a href="classTensor.html#afd0934b4edd71063f66a9c67540e79fc">Tensor::norm</a></div><div class="ttdeci">numbers::NumberTraits&lt; Number &gt;::real_type norm() const</div></div>
-</div><!-- fragment --><p><a class="anchor" id="TwoPhaseFlowProblemrun"></a> </p><h4>TwoPhaseFlowProblem::run</h4>
-<p>This is the final function of our main class. Its brevity speaks for itself. There are only two points worth noting: First, the function projects the initial values onto the finite element space at the beginning; the <a class="el" href="namespaceVectorTools.html#ac6b404bf03cb2a742b290421cc2789fe">VectorTools::project</a> function doing this requires an argument indicating the hanging node constraints. We have none in this program (we compute on a uniformly refined mesh), but the function requires the argument anyway, of course. So we have to create a constraint object. In its original state, constraint objects are unsorted, and have to be sorted (using the <a class="el" href="classAffineConstraints.html#a1611aa37f754086388ca76bcd421cce5">AffineConstraints::close</a> function) before they can be used. This is what we do here, and which is why we can't simply call the <a class="el" href="namespaceVectorTools.html#ac6b404bf03cb2a742b290421cc2789fe">VectorTools::project</a> function with an anonymous temporary object <code><a class="el" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;()</a></code> as the second argument.</p>
-<p>The second point worth mentioning is that we only compute the length of the present time step in the middle of solving the linear system corresponding to each time step. We can therefore output the present time of a time step only at the end of the time step. We increment time by calling the method <a class="el" href="classDiscreteTime.html#aa10f7326a1a864ba38e28c86624fdd51">DiscreteTime::advance_time()</a> inside the loop. Since we are reporting the time and dt after we increment it, we have to call the method <a class="el" href="classDiscreteTime.html#a9bd02740b86e63bd84e29d39fce495dd">DiscreteTime::get_previous_step_size()</a> instead of <a class="el" href="classDiscreteTime.html#a07ea63ccba26b095eaa088719b98e85d">DiscreteTime::get_next_step_size()</a>. After many steps, when the simulation reaches the end time, the last dt is chosen by the <a class="el" href="classDiscreteTime.html">DiscreteTime</a> class in such a way that the last step finishes exactly at the end time.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="TwoPhaseFlowProblemrun"></a></p><h4>TwoPhaseFlowProblem::run</h4>
+<p class="interli"></p>
+<p class="interli">这是我们主类的最后一个函数。它的简洁不言自明。只有两点是值得注意的。首先，该函数在开始时将初始值投射到有限元空间上； <a class="el" href="namespaceVectorTools.html#ac6b404bf03cb2a742b290421cc2789fe">VectorTools::project</a> 函数这样做需要一个表明悬挂节点约束的参数。我们在这个程序中没有（我们在一个均匀细化的网格上计算），但是这个函数当然需要这个参数。所以我们必须创建一个约束对象。在原始状态下，约束对象是没有排序的，在使用前必须进行排序（使用 <a class="el" href="classAffineConstraints.html#a1611aa37f754086388ca76bcd421cce5">AffineConstraints::close</a> 函数）。这就是我们在这里所做的，这也是为什么我们不能简单地用一个匿名的临时对象 <code><a class="el" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;()</a></code> 作为第二个参数来调用 <a class="el" href="namespaceVectorTools.html#ac6b404bf03cb2a742b290421cc2789fe">VectorTools::project</a> 函数。 <br  />
+</p>
+<p class="interli">第二点值得一提的是，我们只在求解每个时间步长对应的线性系统的过程中计算当前时间步长。因此，我们只有在时间步长结束时才能输出一个时间步长的当前时间。我们通过调用循环内的方法 <a class="el" href="classDiscreteTime.html#aa10f7326a1a864ba38e28c86624fdd51">DiscreteTime::advance_time()</a> 来增加时间。由于我们在递增后报告时间和dt，我们必须调用方法 <a class="el" href="classDiscreteTime.html#a9bd02740b86e63bd84e29d39fce495dd">DiscreteTime::get_previous_step_size()</a> ，而不是 <a class="el" href="classDiscreteTime.html#a07ea63ccba26b095eaa088719b98e85d">DiscreteTime::get_next_step_size()</a>. 。 经过许多步，当模拟到达结束时间时，最后的dt由DiscreteTime类选择，其方式是最后一步正好在结束时间完成。</p>
 <div class="fragment"><div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">TwoPhaseFlowProblem&lt;dim&gt;::run</a>()</div>
 <div class="line">  {</div>
 <div class="line">    make_grid_and_dofs();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    {</div>
 <div class="line">      <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> constraints;</div>
 <div class="line">      constraints.<a class="code" href="classAffineConstraints.html#a1611aa37f754086388ca76bcd421cce5">close</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <a class="code" href="namespaceVectorTools.html#ac6b404bf03cb2a742b290421cc2789fe">VectorTools::project</a>(dof_handler,</div>
 <div class="line">                           constraints,</div>
@@ -1234,15 +1393,20 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">                           old_solution);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keywordflow">do</span></div>
 <div class="line">      {</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Timestep &quot;</span> &lt;&lt; time.get_step_number() + 1 &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        assemble_system();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        solve();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        output_results();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        time.advance_time();</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;   Now at t=&quot;</span> &lt;&lt; time.get_current_time()</div>
@@ -1256,13 +1420,15 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="ttc" id="aclassAffineConstraints_html"><div class="ttname"><a href="classAffineConstraints.html">AffineConstraints&lt; double &gt;</a></div></div>
 <div class="ttc" id="aclassAffineConstraints_html_a1611aa37f754086388ca76bcd421cce5"><div class="ttname"><a href="classAffineConstraints.html#a1611aa37f754086388ca76bcd421cce5">AffineConstraints::close</a></div><div class="ttdeci">void close()</div></div>
 <div class="ttc" id="anamespaceVectorTools_html_ac6b404bf03cb2a742b290421cc2789fe"><div class="ttname"><a href="namespaceVectorTools.html#ac6b404bf03cb2a742b290421cc2789fe">VectorTools::project</a></div><div class="ttdeci">void project(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const AffineConstraints&lt; typename VectorType::value_type &gt; &amp;constraints, const Quadrature&lt; dim &gt; &amp;quadrature, const Function&lt; spacedim, typename VectorType::value_type &gt; &amp;function, VectorType &amp;vec, const bool enforce_zero_boundary=false, const Quadrature&lt; dim - 1 &gt; &amp;q_boundary=(dim &gt; 1 ? QGauss&lt; dim - 1 &gt;(2) :Quadrature&lt; dim - 1 &gt;(0)), const bool project_to_boundary_first=false)</div></div>
-</div><!-- fragment --><p><a class="anchor" id="Thecodemaincodefunction"></a> </p><h3>The <code>main</code> function</h3>
-<p>That's it. In the main function, we pass the degree of the finite element space to the constructor of the TwoPhaseFlowProblem object. Here, we use zero-th degree elements, i.e. \(RT_0\times DQ_0 \times DQ_0\). The rest is as in all the other programs.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Thecodemaincodefunction"></a></p><h3>The <code>main</code> function</h3>
+<p class="interli"></p>
+<p class="interli">就这样了。在主函数中，我们将有限元空间的度数传递给TwoPhaseFlowProblem对象的构造函数。 这里，我们使用零度元素，即 \(RT_0\times DQ_0 \times DQ_0\) 。其余的与所有其他程序一样。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">try</span></div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using namespace </span>Step21;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      TwoPhaseFlowProblem&lt;2&gt; two_phase_flow_problem(0);</div>
 <div class="line">      two_phase_flow_problem.run();</div>
@@ -1279,6 +1445,7 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">                &lt;&lt; <span class="stringliteral">&quot;----------------------------------------------------&quot;</span></div>
 <div class="line">                &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line">  <span class="keywordflow">catch</span> (...)</div>
@@ -1294,65 +1461,81 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
-<p>The code as presented here does not actually compute the results found on the web page. The reason is, that even on a decent computer it runs more than a day. If you want to reproduce these results, modify the end time of the <a class="el" href="classDiscreteTime.html">DiscreteTime</a> object to <code>250</code> within the constructor of TwoPhaseFlowProblem.</p>
-<p>If we run the program, we get the following kind of output: </p><div class="fragment"><div class="line">Number of active cells: 1024</div>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Results"></a></p><h1>Results</h1>
+<p class="interli"></p>
+<p class="interli">这里介绍的代码实际上并不计算网页上的结果。原因是，即使在一台体面的计算机上，它也要运行一天以上。如果你想重现这些结果，在TwoPhaseFlowProblem的构造函数中把DiscreteTime对象的结束时间修改为<code>250</code>。</p>
+<p class="interli">如果我们运行该程序，我们会得到以下这种输出。</p>
+<div class="fragment"><div class="line">Number of active cells: 1024</div>
 <div class="line">Number of degrees of freedom: 4160 (2112+1024+1024)</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">Timestep 1</div>
 <div class="line">   22 CG Schur complement iterations <span class="keywordflow">for</span> pressure.</div>
 <div class="line">   1 CG iterations <span class="keywordflow">for</span> saturation.</div>
 <div class="line">   Now at t=0.0326742, dt=0.0326742.</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">Timestep 2</div>
 <div class="line">   17 CG Schur complement iterations <span class="keywordflow">for</span> pressure.</div>
 <div class="line">   1 CG iterations <span class="keywordflow">for</span> saturation.</div>
 <div class="line">   Now at t=0.0653816, dt=0.0327074.</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">Timestep 3</div>
 <div class="line">   17 CG Schur complement iterations <span class="keywordflow">for</span> pressure.</div>
 <div class="line">   1 CG iterations <span class="keywordflow">for</span> saturation.</div>
 <div class="line">   Now at t=0.0980651, dt=0.0326836.</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">...</div>
-</div><!-- fragment --><p> As we can see, the time step is pretty much constant right from the start, which indicates that the velocities in the domain are not strongly dependent on changes in saturation, although they certainly are through the factor \(\lambda(S)\) in the pressure equation.</p>
-<p>Our second observation is that the number of CG iterations needed to solve the pressure Schur complement equation drops from 22 to 17 between the first and the second time step (in fact, it remains around 17 for the rest of the computations). The reason is actually simple: Before we solve for the pressure during a time step, we don't reset the <code>solution</code> variable to zero. The pressure (and the other variables) therefore have the previous time step's values at the time we get into the CG solver. Since the velocities and pressures don't change very much as computations progress, the previous time step's pressure is actually a good initial guess for this time step's pressure. Consequently, the number of iterations we need once we have computed the pressure once is significantly reduced.</p>
-<p>The final observation concerns the number of iterations needed to solve for the saturation, i.e. one. This shouldn't surprise us too much: the matrix we have to solve with is the mass matrix. However, this is the mass matrix for the \(DGQ_0\) element of piecewise constants where no element couples with the degrees of freedom on neighboring cells. The matrix is therefore a diagonal one, and it is clear that we should be able to invert this matrix in a single CG iteration.</p>
-<p>With all this, here are a few movies that show how the saturation progresses over time. First, this is for the single crack model, as implemented in the <code>SingleCurvingCrack::KInverse</code> class:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-21.centerline.gif" alt="" class="inline"/></p>
-<p>As can be seen, the water rich fluid snakes its way mostly along the high-permeability zone in the middle of the domain, whereas the rest of the domain is mostly impermeable. This and the next movie are generated using <code>n_refinement_steps=7</code>, leading to a \(128\times 128\) mesh with some 16,000 cells and about 66,000 unknowns in total.</p>
-<p>The second movie shows the saturation for the random medium model of class <code>RandomMedium::KInverse</code>, where we have randomly distributed centers of high permeability and fluid hops from one of these zones to the next:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-21.random2d.gif" alt="" class="inline"/></p>
-<p>Finally, here is the same situation in three space dimensions, on a mesh with <code>n_refinement_steps=5</code>, which produces a mesh of some 32,000 cells and 167,000 degrees of freedom:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-21.random3d.gif" alt="" class="inline"/></p>
-<p>To repeat these computations, all you have to do is to change the line </p><div class="fragment"><div class="line">TwoPhaseFlowProblem&lt;2&gt; two_phase_flow_problem(0);</div>
-</div><!-- fragment --><p> in the main function to </p><div class="fragment"><div class="line">TwoPhaseFlowProblem&lt;3&gt; two_phase_flow_problem(0);</div>
-</div><!-- fragment --><p> The visualization uses a cloud technique, where the saturation is indicated by colored but transparent clouds for each cell. This way, one can also see somewhat what happens deep inside the domain. A different way of visualizing would have been to show isosurfaces of the saturation evolving over time. There are techniques to plot isosurfaces transparently, so that one can see several of them at the same time like the layers of an onion.</p>
-<p>So why don't we show such isosurfaces? The problem lies in the way isosurfaces are computed: they require that the field to be visualized is continuous, so that the isosurfaces can be generated by following contours at least across a single cell. However, our saturation field is piecewise constant and discontinuous. If we wanted to plot an isosurface for a saturation \(S=0.5\), chances would be that there is no single point in the domain where that saturation is actually attained. If we had to define isosurfaces in that context at all, we would have to take the interfaces between cells, where one of the two adjacent cells has a saturation greater than and the other cell a saturation less than 0.5. However, it appears that most visualization programs are not equipped to do this kind of transformation.</p>
-<p><a class="anchor" id="extensions"></a> <a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions</h3>
-<p>There are a number of areas where this program can be improved. Three of them are listed below. All of them are, in fact, addressed in a tutorial program that forms the continuation of the current one: <a class="el" href="step_43.html">step-43</a>.</p>
-<p><a class="anchor" id="Solvers"></a></p><h4>Solvers</h4>
-<p>At present, the program is not particularly fast: the 2d random medium computation took about a day for the 1,000 or so time steps. The corresponding 3d computation took almost two days for 800 time steps. The reason why it isn't faster than this is twofold. First, we rebuild the entire matrix in every time step, although some parts such as the \(B\), \(B^T\), and \(M^S\) blocks never change.</p>
-<p>Second, we could do a lot better with the solver and preconditioners. Presently, we solve the Schur complement \(B^TM^u(S)^{-1}B\) with a CG method, using \([B^T (\textrm{diag}(M^u(S)))^{-1} B]^{-1}\) as a preconditioner. Applying this preconditioner is expensive, since it involves solving a linear system each time. This may have been appropriate for <a class="el" href="step_20.html">step-20</a>, where we have to solve the entire problem only once. However, here we have to solve it hundreds of times, and in such cases it is worth considering a preconditioner that is more expensive to set up the first time, but cheaper to apply later on.</p>
-<p>One possibility would be to realize that the matrix we use as preconditioner, \(B^T (\textrm{diag}(M^u(S)))^{-1} B\) is still sparse, and symmetric on top of that. If one looks at the flow field evolve over time, we also see that while \(S\) changes significantly over time, the pressure hardly does and consequently \(B^T (\textrm{diag}(M^u(S)))^{-1} B \approx B^T (\textrm{diag}(M^u(S^0)))^{-1} B\). In other words, the matrix for the first time step should be a good preconditioner also for all later time steps. With a bit of back-and-forthing, it isn't hard to actually get a representation of it as a <a class="el" href="classSparseMatrix.html">SparseMatrix</a> object. We could then hand it off to the <a class="el" href="classSparseMIC.html">SparseMIC</a> class to form a sparse incomplete Cholesky decomposition. To form this decomposition is expensive, but we have to do it only once in the first time step, and can then use it as a cheap preconditioner in the future. We could do better even by using the <a class="el" href="classSparseDirectUMFPACK.html">SparseDirectUMFPACK</a> class that produces not only an incomplete, but a complete decomposition of the matrix, which should yield an even better preconditioner.</p>
-<p>Finally, why use the approximation \(B^T (\textrm{diag}(M^u(S)))^{-1} B\) to precondition \(B^T M^u(S)^{-1} B\)? The latter matrix, after all, is the mixed form of the Laplace operator on the pressure space, for which we use linear elements. We could therefore build a separate matrix \(A^p\) on the side that directly corresponds to the non-mixed formulation of the Laplacian, for example using the bilinear form \((\mathbf{K}\lambda(S^n) \nabla \varphi_i,\nabla\varphi_j)\). We could then form an incomplete or complete decomposition of this non-mixed matrix and use it as a preconditioner of the mixed form.</p>
-<p>Using such techniques, it can reasonably be expected that the solution process will be faster by at least an order of magnitude.</p>
-<p><a class="anchor" id="Timestepping"></a></p><h4>Time stepping</h4>
-<p>In the introduction we have identified the time step restriction </p><p class="formulaDsp">
+</div><!-- fragment --><p class="interli">我们可以看到，时间步长从一开始就几乎是恒定的，这表明域中的速度并不强烈依赖于饱和度的变化，尽管它们肯定是通过压力方程中的因子 \(\lambda(S)\) 来决定的。</p>
+<p class="interli">我们的第二个观察结果是，在第一和第二时间步之间，解决压力舒尔补足方程所需的CG迭代次数从22次下降到17次（事实上，在其余的计算中，它保持在17次左右）。原因其实很简单。在我们求解一个时间步长的压力之前，我们没有将 <code>solution</code> 变量重置为零。因此，在我们进入CG求解器时，压力（和其他变量）具有前一个时间步骤的值。由于速度和压力在计算过程中变化不大，前一个时间步骤的压力实际上是对这个时间步骤压力的一个很好的初始猜测。因此，一旦我们计算了一次压力，我们需要的迭代次数就会大大减少。</p>
+<p class="interli">最后的观察是关于解决饱和度问题所需的迭代次数，即一次。这不应该让我们太惊讶：我们必须解决的矩阵是质量矩阵。然而，这是 \(DGQ_0\) 元素的分片常数的质量矩阵，其中没有元素与相邻单元的自由度耦合。因此，该矩阵是一个对角线矩阵，很明显，我们应该能够在一次CG迭代中反转该矩阵。</p>
+<p class="interli">有了这些，这里有几段电影，显示了饱和度是如何随时间推移而发展的。首先，这是针对单一裂缝模型的，如在 <code>SingleCurvingCrack::KInverse</code> 类中实现的。</p>
+<p class="interli"><img src="https://www.dealii.org/images/steps/developer/step-21.centerline.gif" alt="" class="inline"/> <br  />
+</p>
+<p class="interli">可以看出，富水流体主要是沿着域中间的高渗透区蜿蜒前行，而域的其他部分则大部分是不渗透的。这部电影和下一部电影是用 <code>n_refinement_steps=7</code> 生成的，导致 \(128\times 128\) 的网格有大约16000个单元，总共有大约66000个未知数。</p>
+<p class="interli">第二部电影显示了 <code>RandomMedium::KInverse</code> 类随机介质模型的饱和度，其中我们有随机分布的高渗透率中心，流体从一个区域跳到另一个区域。</p>
+<p class="interli"><img src="https://www.dealii.org/images/steps/developer/step-21.random2d.gif" alt="" class="inline"/> <br  />
+</p>
+<p class="interli">最后，这里是在三个空间维度上的相同情况，在一个具有 <code>n_refinement_steps=5</code> 的网格上，产生了一个大约32000个单元和167000个自由度的网格。</p>
+<p class="interli"><img src="https://www.dealii.org/images/steps/developer/step-21.random3d.gif" alt="" class="inline"/> <br  />
+</p>
+<p class="interli">要重复这些计算，你所要做的就是改变这一行</p>
+<div class="fragment"><div class="line">TwoPhaseFlowProblem&lt;2&gt; two_phase_flow_problem(0);</div>
+</div><!-- fragment --><p class="interli">改为</p>
+<div class="fragment"><div class="line">TwoPhaseFlowProblem&lt;3&gt; two_phase_flow_problem(0);</div>
+</div><!-- fragment --><p class="interli">可视化采用了云技术，每个单元的饱和度都由彩色但透明的云来表示。这样一来，人们也可以多少看到域的深处发生了什么。另一种可视化的方式是显示饱和度随时间变化的等值线。有一些技术可以透明地绘制等值面，这样人们就可以像看到洋葱的层次一样同时看到几个等值面。</p>
+<p class="interli">那么，为什么我们不显示这样的等值面呢？问题在于等值面的计算方式：它们要求被可视化的场是连续的，因此等值面可以通过至少在单个细胞中的轮廓线来生成。然而，我们的饱和场是片状常数和不连续的。如果我们想为一个饱和度 \(S=0.5\) 绘制一个等值面，那么在这个领域中就很可能没有一个点是真正达到饱和度的。如果我们必须在这种情况下定义等值面，我们将不得不采取细胞之间的界面，其中相邻的两个细胞之一的饱和度大于，另一个细胞的饱和度小于0.5。然而，大多数可视化程序似乎不具备做这种转换的能力。</p>
+<p class="interli"><a class="anchor" id="extensions"></a> <a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions</h3>
+<p class="interli"></p>
+<p class="interli">这个程序有许多可以改进的地方。下面列出了其中的三个。事实上，所有这些都在构成当前程序的延续的教程程序中得到解决。 <a class="el" href="step_43.html">step-43</a> .</p>
+<p class="interli"><a class="anchor" id="Solvers"></a></p><h4>Solvers</h4>
+<p class="interli"></p>
+<p class="interli">目前，这个程序不是特别快：二维随机介质的计算在1000个左右的时间步数中花了大约一天时间。相应的三维计算在800个时间步数上几乎花了两天时间。没有比这更快的原因有两个方面。首先，我们在每个时间步骤中都重建了整个矩阵，尽管有些部分如 \(B\) 、 \(B^T\) 和 \(M^S\) 块从未改变。</p>
+<p class="interli">第二，我们可以在求解器和预处理器方面做得更好。目前，我们用CG方法解决舒尔补码 \(B^TM^u(S)^{-1}B\) ，使用 \([B^T (\textrm{diag}(M^u(S)))^{-1} B]^{-1}\) 作为预处理。应用这个预处理程序是很昂贵的，因为它每次都要解一个线性系统。这可能适合于 <a class="el" href="step_20.html">@ref step_20 </a>step-20" "，在那里我们只需要解决整个问题一次。然而，在这里，我们必须求解数百次，在这种情况下，值得考虑一个预处理程序，它在第一次设置时比较昂贵，但在以后应用时比较便宜。</p>
+<p class="interli">一种可能性是认识到我们用作预处理的矩阵， \(B^T (\textrm{diag}(M^u(S)))^{-1} B\) 仍然是稀疏的，而且是对称的，在此之上。如果看一下流场随时间的演变，我们还可以看到，虽然 \(S\) 随时间变化很大，但压力几乎没有变化，因此 \(B^T (\textrm{diag}(M^u(S)))^{-1} B \approx B^T (\textrm{diag}(M^u(S^0)))^{-1} B\) 。换句话说，第一个时间步骤的矩阵应该是一个很好的前提条件，也适用于所有后来的时间步骤。 通过一些反反复复的操作，实际上并不难得到一个SparseMatrix对象的表示。然后我们可以把它交给SparseMIC类，以形成一个稀疏的不完全Cholesky分解。形成这种分解是很昂贵的，但是我们只需要在第一个时间步骤中做一次，然后就可以在将来把它作为一个廉价的预处理程序。我们甚至可以通过使用SparseDirectUMFPACK类来做得更好，它不仅能产生一个不完整的，而且是一个完整的矩阵分解，这应该能产生一个更好的预处理程序。</p>
+<p class="interli">最后，为什么使用近似值 \(B^T (\textrm{diag}(M^u(S)))^{-1} B\) 来预处理 \(B^T M^u(S)^{-1} B\) ？后者的矩阵毕竟是压力空间上拉普拉斯算子的混合形式，我们对其使用线性元素。因此，我们可以在直接对应于拉普拉斯的非混合形式的一侧建立一个单独的矩阵 \(A^p\) ，例如使用双线性形式 \((\mathbf{K}\lambda(S^n) \nabla \varphi_i,\nabla\varphi_j)\) 。然后我们可以形成这个非混合矩阵的不完全或完全分解，并将其作为混合形式的预处理。</p>
+<p class="interli">使用这样的技术，可以合理地预期，求解过程将至少快一个数量级。</p>
+<p class="interli"><a class="anchor" id="Timestepping"></a></p><h4>Time stepping</h4>
+<p class="interli"></p>
+<p class="interli">在引言中，我们已经确定了时间步长限制 </p><p class="formulaDsp">
 \[ \triangle t_{n+1} \le \frac h{|\mathbf{u}^{n+1}(\mathbf{x})|} \]
 </p>
-<p> that has to hold globally, i.e. for all \(\mathbf x\). After discretization, we satisfy it by choosing </p><p class="formulaDsp">
+<p>，该限制必须全局成立，即对所有 \(\mathbf x\) 。离散化后，我们通过选择 </p><p class="formulaDsp">
 \[ \triangle t_{n+1} = \frac {\min_K h_K}{\max_{\mathbf{x}}|\mathbf{u}^{n+1}(\mathbf{x})|}. \]
 </p>
-<p>This restriction on the time step is somewhat annoying: the finer we make the mesh the smaller the time step; in other words, we get punished twice: each time step is more expensive to solve and we have to do more time steps.</p>
-<p>This is particularly annoying since the majority of the additional work is spent solving the implicit part of the equations, i.e. the pressure-velocity system, whereas it is the hyperbolic transport equation for the saturation that imposes the time step restriction.</p>
-<p>To avoid this bottleneck, people have invented a number of approaches. For example, they may only re-compute the pressure-velocity field every few time steps (or, if you want, use different time step sizes for the pressure/velocity and saturation equations). This keeps the time step restriction on the cheap explicit part while it makes the solution of the implicit part less frequent. Experiments in this direction are certainly worthwhile; one starting point for such an approach is the paper by Zhangxin Chen, Guanren Huan and Baoyan Li: <em>An improved IMPES method for two-phase flow in porous media</em>, Transport in Porous Media, 54 (2004), pp. 361&mdash;376. There are certainly many other papers on this topic as well, but this one happened to land on our desk a while back.</p>
-<p><a class="anchor" id="Adaptivity"></a></p><h4>Adaptivity</h4>
-<p>Adaptivity would also clearly help. Looking at the movies, one clearly sees that most of the action is confined to a relatively small part of the domain (this particularly obvious for the saturation, but also holds for the velocities and pressures). Adaptivity can therefore be expected to keep the necessary number of degrees of freedom low, or alternatively increase the accuracy.</p>
-<p>On the other hand, adaptivity for time dependent problems is not a trivial thing: we would have to change the mesh every few time steps, and we would have to transport our present solution to the next mesh every time we change it (something that the <a class="el" href="classSolutionTransfer.html">SolutionTransfer</a> class can help with). These are not insurmountable obstacles, but they do require some additional coding and more than we felt comfortable was worth packing into this tutorial program.</p>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+<p>来满足它。</p>
+<p class="interli">这种对时间步长的限制有点令人讨厌：我们把网格做得越细，时间步长就越小；换句话说，我们受到了两次惩罚：每个时间步长的求解成本更高，我们必须做更多的时间步长。</p>
+<p class="interli">这尤其令人恼火，因为大部分额外的工作是用于解决方程的隐含部分，即压力-速度系统，而正是饱和度的双曲传输方程造成了时间步长的限制。</p>
+<p class="interli">为了避免这一瓶颈，人们发明了一些方法。例如，他们可能每隔几个时间步数才重新计算压力-速度场（或者，如果你愿意，对压力/速度和饱和度方程使用不同的时间步数）。这就保持了对廉价显式部分的时间步长限制，而使隐式部分的求解不那么频繁。这个方向的实验当然是值得的；这种方法的一个起点是陈章新、桓冠仁和李宝岩的论文：<em>An improved IMPES method for two-phase flow in porous media</em>，Transport in Porous Media，54（2004），第361&amp;mdash；376页。当然也有很多其他关于这个主题的论文，但这篇论文前段时间刚好落在我们的桌上。</p>
+<p class="interli"><a class="anchor" id="Adaptivity"></a></p><h4>Adaptivity</h4>
+<p class="interli"></p>
+<p class="interli">适应性显然也会有帮助。看一下这些电影，我们可以清楚地看到，大部分的行动都被限制在领域的一个相对较小的部分（这对饱和度来说特别明显，但对速度和压力也是如此）。因此，自适应性可望保持较低的必要自由度数，或者增加精确度。</p>
+<p class="interli">另一方面，对于时间相关问题的自适应性不是一件简单的事情：我们必须每隔几个时间步数改变网格，而且每次改变网格时，我们都必须将目前的解决方案传送到下一个网格（SolutionTransfer类可以帮助解决这个问题）。这些并不是无法克服的障碍，但它们确实需要一些额外的编码，而且比我们认为值得打包到这个教程程序中的更多。<a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2006 - 2020 by the deal.II authors</span></div>
@@ -2293,7 +2476,10 @@ A function that models a somewhat random medium. Here, we choose <p class="formu
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespaceinternal_html_aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804"><div class="ttname"><a href="namespaceinternal.html#aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804">internal::EvaluatorQuantity::value</a></div><div class="ttdeci">@ value</div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> 。 </p>
+</li>
+</ol>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

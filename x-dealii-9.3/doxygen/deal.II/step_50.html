@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-50 tutorial program</title>
+<title>The deal.II Library: The step-50 tutorial program 。</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,116 +86,129 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-50 tutorial program </div>  </div>
+<div class="title">The step-50 tutorial program 。 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_16.html">step-16</a>, <a class="el" href="step_37.html">step-37</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_16.html">step-16</a> , <a class="el" href="step_37.html">step-37</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Thetestcase">The testcase</a>
-        <li><a href="#Workloadimbalanceforgeometricmultigridmethods">Workload imbalance for geometric multigrid methods</a>
-        <li><a href="#Workloadimbalanceforalgebraicmultigridmethods">Workload imbalance for algebraic multigrid methods</a>
-        <li><a href="#Runningtheprogram">Running the program</a>
+        <li><a href="#Thetestcase">The testcase</a><a href="#Thetestcase">The testcase</a>
+        <li><a href="#Workloadimbalanceforgeometricmultigridmethods">Workload imbalance for geometric multigrid methods</a><a href="#Workloadimbalanceforgeometricmultigridmethods">Workload imbalance for geometric multigrid methods</a>
+        <li><a href="#Workloadimbalanceforalgebraicmultigridmethods">Workload imbalance for algebraic multigrid methods</a><a href="#Workloadimbalanceforalgebraicmultigridmethods">Workload imbalance for algebraic multigrid methods</a>
+        <li><a href="#Runningtheprogram">Running the program</a><a href="#Runningtheprogram">Running the program</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#Coefficientsandhelperclasses">Coefficients and helper classes</a>
-        <li><a href="#Runtimeparameters">Run time parameters</a>
-        <li><a href="#LaplaceProblemclass">LaplaceProblem class</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#Coefficientsandhelperclasses">Coefficients and helper classes</a><a href="#Coefficientsandhelperclasses">Coefficients and helper classes</a>
+        <li><a href="#Runtimeparameters">Run time parameters</a><a href="#Runtimeparameters">Run time parameters</a>
+        <li><a href="#LaplaceProblemclass">LaplaceProblem class</a><a href="#LaplaceProblemclass">LaplaceProblem class</a>
       <ul>
-        <li><a href="#LaplaceProblemsetup_system">LaplaceProblem::setup_system()</a>
-        <li><a href="#LaplaceProblemsetup_multigrid">LaplaceProblem::setup_multigrid()</a>
-        <li><a href="#LaplaceProblemassemble_system">LaplaceProblem::assemble_system()</a>
-        <li><a href="#LaplaceProblemassemble_multigrid">LaplaceProblem::assemble_multigrid()</a>
-        <li><a href="#LaplaceProblemassemble_rhs">LaplaceProblem::assemble_rhs()</a>
-        <li><a href="#LaplaceProblemsolve">LaplaceProblem::solve()</a>
+        <li><a href="#LaplaceProblemsetup_system">LaplaceProblem::setup_system()</a><a href="#LaplaceProblemsetup_system">LaplaceProblem::setup_system()</a>
+        <li><a href="#LaplaceProblemsetup_multigrid">LaplaceProblem::setup_multigrid()</a><a href="#LaplaceProblemsetup_multigrid">LaplaceProblem::setup_multigrid()</a>
+        <li><a href="#LaplaceProblemassemble_system">LaplaceProblem::assemble_system()</a><a href="#LaplaceProblemassemble_system">LaplaceProblem::assemble_system()</a>
+        <li><a href="#LaplaceProblemassemble_multigrid">LaplaceProblem::assemble_multigrid()</a> ]<a href="#LaplaceProblemassemble_multigrid">LaplaceProblem::assemble_multigrid()</a>
+        <li><a href="#LaplaceProblemassemble_rhs">LaplaceProblem::assemble_rhs()</a><a href="#LaplaceProblemassemble_rhs">LaplaceProblem::assemble_rhs()</a>
+        <li><a href="#LaplaceProblemsolve">LaplaceProblem::solve()</a><a href="#LaplaceProblemsolve">LaplaceProblem::solve()</a>
       </ul>
-        <li><a href="#Theerrorestimator">The error estimator</a>
+        <li><a href="#Theerrorestimator">The error estimator</a><a href="#Theerrorestimator">The error estimator</a>
       <ul>
-        <li><a href="#LaplaceProblemrefine_grid">LaplaceProblem::refine_grid()</a>
-        <li><a href="#LaplaceProblemoutput_results">LaplaceProblem::output_results()</a>
-        <li><a href="#LaplaceProblemrun">LaplaceProblem::run()</a>
+        <li><a href="#LaplaceProblemrefine_grid">LaplaceProblem::refine_grid()</a><a href="#LaplaceProblemrefine_grid">LaplaceProblem::refine_grid()</a>
+        <li><a href="#LaplaceProblemoutput_results">LaplaceProblem::output_results()</a><a href="#LaplaceProblemoutput_results">LaplaceProblem::output_results()</a>
+        <li><a href="#LaplaceProblemrun">LaplaceProblem::run()</a><a href="#LaplaceProblemrun">LaplaceProblem::run()</a>
       </ul>
-        <li><a href="#Themainfunction">The main() function</a>
+        <li><a href="#Themainfunction">The main() function</a><a href="#Themainfunction">The main() function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions"> Possibilities for extensions </a>
+        <li><a href="#Possibilitiesforextensions"> Possibilities for extensions </a><a href="#Possibilitiesforextensions"> Possibilities for extensions </a>
       <ul>
-        <li><a href="#Testingconvergenceandhigherorderelements"> Testing convergence and higher order elements </a>
-        <li><a href="#Coarsesolver"> Coarse solver </a>
+        <li><a href="#Testingconvergenceandhigherorderelements"> Testing convergence and higher order elements </a><a href="#Testingconvergenceandhigherorderelements"> Testing convergence and higher order elements </a>
+        <li><a href="#Coarsesolver"> Coarse solver </a><a href="#Coarsesolver"> Coarse solver </a>
     </ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
+</p>
+<p><br  />
  <br  />
 </p>
 <p><em> This program was contributed by Thomas C. Clevenger and Timo Heister. <br  />
  This material is based upon work partly supported by the National Science Foundation Award DMS-2028346, OAC-2015848, EAR-1925575, by the Computational Infrastructure in Geodynamics initiative (CIG), through the NSF under Award EAR-0949446 and EAR-1550901 and The University of California &ndash; Davis. </em></p>
-<dl class="section note"><dt>Note</dt><dd>If you use this program as a basis for your own work, please consider citing it in your list of references. The initial version of this work was contributed to the deal.II project by the authors listed in the following citation: <a href="https://doi.org/10.5281/zenodo.4004166"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4004166.svg" alt="10.5281/zenodo.4004166"/></a> </dd>
+<dl class="section note"><dt>Note</dt><dd>If you use this program as a basis for your own work, please consider citing it in your list of references. The initial version of this work was contributed to the deal.II project by the authors listed in the following citation: <a href="https://doi.org/10.5281/zenodo.4004166"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4004166.svg" alt="10.5281/zenodo.4004166"/></a>  <br  />
+</dd>
 <dd>
-As a prerequisite of this program, you need to have both p4est and either the PETSc or Trilinos library installed. The installation of deal.II together with these additional libraries is described in the <a href="../../readme.html" target="body">README</a> file.</dd></dl>
+作为本程序的先决条件，你需要同时安装p4est和PETSc或Trilinos库。在<a href="../../readme.html" target="body">README</a>文件中描述了deal.II与这些附加库的安装情况。</dd></dl>
 <p><a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
-<p>This example shows the usage of the multilevel functions in deal.II on parallel, distributed meshes and gives a comparison between geometric and algebraic multigrid methods. The algebraic multigrid (AMG) preconditioner is the same used in <a class="el" href="step_40.html">step-40</a>. Two geometric multigrid (GMG) preconditioners are considered: a matrix-based version similar to that in <a class="el" href="step_16.html">step-16</a> (but for parallel computations) and a matrix-free version discussed in <a class="el" href="step_37.html">step-37</a>. The goal is to find out which approach leads to the best solver for large parallel computations.</p>
-<p>This tutorial is based on one of the numerical examples in <b>[clevenger_par_gmg]</b>. Please see that publication for a detailed background on the multigrid implementation in deal.II. We will summarize some of the results in the following text.</p>
-<p>Algebraic multigrid methods are obviously the easiest to implement with deal.II since classes such as <a class="el" href="classTrilinosWrappers_1_1PreconditionAMG.html">TrilinosWrappers::PreconditionAMG</a> and <a class="el" href="classPETScWrappers_1_1PreconditionBoomerAMG.html">PETScWrappers::PreconditionBoomerAMG</a> are, in essence, black box preconditioners that require only a couple of lines to set up even for parallel computations. On the other hand, geometric multigrid methods require changes throughout a code base &ndash; not very many, but one has to know what one is doing.</p>
-<p>What the results of this program will show is that algebraic and geometric multigrid methods are roughly comparable in performance <em>when using matrix-based formulations</em>, and that matrix-free geometric multigrid methods are vastly better for the problem under consideration here. A secondary conclusion will be that matrix-based geometric multigrid methods really don't scale well strongly when the number of unknowns per processor becomes smaller than 20,000 or so.</p>
+<p>这个例子显示了deal.II中的多级函数在并行、分布式网格上的应用，并给出了几何多栅和代数多栅方法的比较。代数多网格(AMG)的预处理程序与 <a class="el" href="step_40.html">step-40</a> 中使用的相同。考虑了两种几何多网格（GMG）的预处理方法：一种是类似于 <a class="el" href="step_16.html">step-16</a> 中的基于矩阵的版本（但用于并行计算），一种是 <a class="el" href="step_37.html">step-37</a> 中讨论的无矩阵版本。我们的目标是找出哪种方法能导致大型并行计算的最佳解算器。</p>
+<p>本教程是基于 <b>[clevenger_par_gmg]</b> 中的一个数值例子。请参阅该出版物，以了解交易.II中多网格实现的详细背景。我们将在下面的文字中总结一些结果。</p>
+<p>代数多网格方法显然是最容易用deal.II实现的，因为诸如 <a class="el" href="classTrilinosWrappers_1_1PreconditionAMG.html">TrilinosWrappers::PreconditionAMG</a> 和 <a class="el" href="classPETScWrappers_1_1PreconditionBoomerAMG.html">PETScWrappers::PreconditionBoomerAMG</a> 这样的类本质上是黑箱预处理，即使是并行计算，也只需要几行就可以设置。另一方面，几何多网格方法需要对整个代码库进行修改&ndash;不是很多，但必须知道自己在做什么。</p>
+<p>这个程序的结果将显示，代数和几何多栅方法的性能大致相当<em>when using matrix-based formulations</em>，而无矩阵的几何多栅方法对于这里所考虑的问题来说要好得多。另一个结论是，当每个处理器的未知数小于20,000个时，基于矩阵的几何多网格方法确实不能很好地扩展。</p>
 <p><a class="anchor" id="Thetestcase"></a></p><h3>The testcase</h3>
-<p>We consider the variable-coefficient Laplacian weak formulation </p><p class="formulaDsp">
+<p>我们考虑变系数拉普拉斯的弱式公式</p>
+<p class="formulaDsp">
 \begin{align*} (\epsilon \nabla u, \nabla v) = (f,v) \quad \forall v \in V_h \end{align*}
 </p>
-<p> on the domain \(\Omega = [-1,1]^\text{dim} \setminus [0,1]^\text{dim}\) (an L-shaped domain for 2D and a Fichera corner for 3D) with \(\epsilon = 1\) if \(\min(x,y,z)&gt;-\frac{1}{2}\) and \(\epsilon = 100\) otherwise. In other words, \(\epsilon\) is small along the edges or faces of the domain that run into the reentrant corner, as will be visible in the figure below.</p>
-<p>The boundary conditions are \(u=0\) on the whole boundary and the right-hand side is \(f=1\). We use continuous \(Q_2\) elements for the discrete finite element space \(V_h\), and use a residual-based, cell-wise a posteriori error estimator \(e(K) = e_{\text{cell}}(K) + e_{\text{face}}(K)\) from <b>[karakashian2003posteriori]</b> with </p><p class="formulaDsp">
+<p>在域 \(\Omega = [-1,1]^\text{dim} \setminus [0,1]^\text{dim}\) （二维为L形域，三维为Fichera角）上，如果 \(\min(x,y,z)&gt;-\frac{1}{2}\) ，则 \(\epsilon = 100\) 。换句话说， \(\epsilon\) 是沿着域的边缘或面跑到重合角的小，这在下图中会看到。</p>
+<p>边界条件在整个边界上是 \(u=0\) ，右手边是 \(f=1\) 。我们使用连续的 \(Q_2\) 元素来表示离散的有限元空间 \(V_h\) ，并使用基于残差的、单元的后验误差估计器 \(e(K) = e_{\text{cell}}(K) + e_{\text{face}}(K)\) ，来自 <b>[karakashian2003posteriori]</b> ，有</p>
+<p class="formulaDsp">
 \begin{align*} e_{\text{cell}}(K) &amp;= h^2 \| f + \epsilon \triangle u \|_K^2, \\ e_{\text{face}}(K) &amp;= \sum_F h_F \| \jump{ \epsilon \nabla u \cdot n } \|_F^2, \end{align*}
 </p>
-<p> to adaptively refine the mesh. (This is a generalization of the Kelly error estimator used in the <a class="el" href="classKellyErrorEstimator.html">KellyErrorEstimator</a> class that drives mesh refinement in most of the other tutorial programs.) The following figure visualizes the solution and refinement for 2D: <img src="https://www.dealii.org/images/steps/developer/step-50-2d-solution.png" alt="" width="400px" class="inline"/> In 3D, the solution looks similar (see below). On the left you can see the solution and on the right we show a slice for \(x\) close to the center of the domain showing the adaptively refined mesh. </p><table width="60%" align="center">
+<p>来适应性地细化网格。这是KellyErrorEstimator类中使用的Kelly误差估计器的概括，该类驱动大多数其他教程程序中的网格细化）。下图显示了二维的求解和细化： <img src="https://www.dealii.org/images/steps/developer/step-50-2d-solution.png" alt="" width="400px" class="inline"/> 在三维中，求解看起来类似（见下文）。在左边你可以看到解决方案，在右边我们展示了靠近域中心的 \(x\) 的切片，显示了自适应细化的网格。 </p><table width="60%" align="center">
 <tr>
 <td align="center"><img src="https://www.dealii.org/images/steps/developer/step-50-3d-solution.png" alt="" width="400px" class="inline"/>  </td><td align="center"><img src="https://www.dealii.org/images/steps/developer/step-50-refinement.png" alt="" width="400px" class="inline"/>   </td></tr>
 </table>
-<p>Both in 2D and 3D you can see the adaptive refinement picking up the corner singularity and the inner singularity where the viscosity jumps, while the interface along the line that separates the two viscosities is (correctly) not refined as it is resolved adequately. This is because the kink in the solution that results from the jump in the coefficient is aligned with cell interfaces.</p>
+<p>在二维和三维中，你都可以看到自适应细化拾取了角部奇点和粘度跳跃的内部奇点，而沿分离两个粘度的线的界面（正确）没有被细化，因为它被充分解决了。这是因为由系数的跳跃导致的解的扭结与单元格界面对齐。</p>
 <p><a class="anchor" id="Workloadimbalanceforgeometricmultigridmethods"></a></p><h3>Workload imbalance for geometric multigrid methods</h3>
-<p>As mentioned above, the purpose of this program is to demonstrate the use of algebraic and geometric multigrid methods for this problem, and to do so for parallel computations. An important component of making algorithms scale to large parallel machines is ensuring that every processor has the same amount of work to do. (More precisely, what matters is that there are no small fraction of processors that have substantially more work than the rest since, if that were so, a large fraction of processors will sit idle waiting for the small fraction to finish. Conversely, a small fraction of processors having substantially <em>less</em> work is not a problem because the majority of processors continues to be productive and only the small fraction sits idle once finished with their work.)</p>
-<p>For the active mesh, we use the <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a> class as done in <a class="el" href="step_40.html">step-40</a> which uses functionality in the external library <a href="http://www.p4est.org/">p4est</a> for the distribution of the active cells among processors. For the non-active cells in the multilevel hierarchy, deal.II implements what we will refer to as the "first-child rule" where, for each cell in the hierarchy, we recursively assign the parent of a cell to the owner of the first child cell. The following figures give an example of such a distribution. Here the left image represents the active cells for a sample 2D mesh partitioned using a space-filling curve (which is what p4est uses to partition cells); the center image gives the tree representation of the active mesh; and the right image gives the multilevel hierarchy of cells. The colors and numbers represent the different processors. The circular nodes in the tree are the non-active cells which are distributed using the "first-child rule".</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-50-workload-example.png" alt="" width="800px" class="inline"/></p>
-<p>Included among the output to screen in this example is a value "Partition efficiency" given by one over <a class="el" href="namespaceMGTools.html#a8776ac550d9ac85e7e0db51625935673">MGTools::workload_imbalance()</a>. This value, which will be denoted by \(\mathbb{E}\), quantifies the overhead produced by not having a perfect work balance on each level of the multigrid hierarchy. This imbalance is evident from the example above: while level \(\ell=2\) is about as well balanced as is possible with four cells among three processors, the coarse level \(\ell=0\) has work for only one processor, and level \(\ell=1\) has work for only two processors of which one has three times as much work as the other.</p>
-<p>For defining \(\mathbb{E}\), it is important to note that, as we are using local smoothing to define the multigrid hierarchy (see the <a class="el" href="DEALGlossary.html#mg_paper">multigrid paper</a> for a description of local smoothing), the refinement level of a cell corresponds to that cell's multigrid level. Now, let \(N_{\ell}\) be the number of cells on level \(\ell\) (both active and non-active cells) and \(N_{\ell,p}\) be the subset owned by process \(p\). We will also denote by \(P\) the total number of processors. Assuming that the workload for any one processor is proportional to the number of cells owned by that processor, the optimal workload per processor is given by </p><p class="formulaDsp">
+<p>如上所述，本程序的目的是展示代数和几何多网格方法在这个问题上的应用，并做到并行计算。使算法扩展到大型并行机器的一个重要组成部分是确保每个处理器有相同的工作量。更准确地说，重要的是没有一小部分处理器比其他处理器有更多的工作，因为如果是这样的话，很大一部分处理器会闲置，等待小部分处理器完成。相反，一小部分处理器的工作大大超过<em>less</em>并不是一个问题，因为大多数处理器继续生产，只有一小部分处理器在完成工作后闲置。)</p>
+<p>对于活跃的网格，我们使用 <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a> 类，就像在 <a class="el" href="step_40.html">step-40</a> 中做的那样，它使用外部库<a href="http://www.p4est.org/">p4est</a>中的功能在处理器之间分配活跃单元。对于多级层次结构中的非活动单元，deal.II实现了我们所说的 "第一子规则"，对于层次结构中的每个单元，我们递归地将一个单元的父级分配给第一个子单元的所有者。下面的数字给出了这样一个分布的例子。这里的左图表示使用空间填充曲线划分的二维网格样本的活动单元（这也是p4est用来划分单元的方法）；中间的图片给出了活动网格的树状表示；右图给出了单元的多级层次结构。颜色和数字代表不同的处理器。树上的圆形节点是非活动单元，使用 "长子规则 "进行分配。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-50-workload-example.png" alt="" width="800px" class="inline"/> <br  />
+</p>
+<p>在这个例子的屏幕输出中，包括了一个 "分区效率 "的数值，这个数值由 <a class="el" href="namespaceMGTools.html#a8776ac550d9ac85e7e0db51625935673">MGTools::workload_imbalance()</a>. 给出，将用 \(\mathbb{E}\) 表示，量化了在多网格层次结构的每一层上没有完美工作平衡所产生的开销。这种不平衡在上面的例子中很明显：虽然 \(\ell=2\) 层在三个处理器中的四个单元是尽可能的平衡，但粗略的 \(\ell=0\) 层只有一个处理器的工作，而 \(\ell=1\) 层只有两个处理器的工作，其中一个的工作是另一个的三倍。</p>
+<p>对于定义 \(\mathbb{E}\) ，需要注意的是，由于我们使用局部平滑来定义多网格层次（见 <a class="el" href="DEALGlossary.html#mg_paper">多网格论文 </a>中对局部平滑的描述），一个单元的细化水平与该单元的多网格水平相对应。现在，让 \(N_{\ell}\) 为 \(\ell\) 层的单元数（包括活动和非活动单元）， \(N_{\ell,p}\) 为进程 \(p\) 所拥有的子集。我们还将用 \(P\) 表示处理器的总数量。假设任何一个处理器的工作量与该处理器拥有的单元格数量成正比，每个处理器的最佳工作量为</p>
+<p class="formulaDsp">
 \begin{align*} W_{\text{opt}} = \frac1{P}\sum_{\ell} N_{\ell} = \sum_{\ell}\left(\frac1{P}\sum_{p}N_{\ell,p}\right). \end{align*}
 </p>
-<p> Next, assuming a synchronization of work on each level (i.e., on each level of a V-cycle, work must be completed by all processors before moving on to the next level), the limiting effort on each level is given by </p><p class="formulaDsp">
+<p>接下来，假设每一层的工作都是同步的（即在V型循环的每一层，在进入下一层之前，所有的处理器都必须完成工作），每一层的极限工作由以下公式给出</p>
+<p class="formulaDsp">
 \begin{align*} W_\ell = \max_{p} N_{\ell,p}, \end{align*}
 </p>
-<p> and the total parallel complexity </p><p class="formulaDsp">
+<p>和总的并行复杂性</p>
+<p class="formulaDsp">
 \begin{align*} W = \sum_{\ell} W_\ell. \end{align*}
 </p>
-<p> Then we define \(\mathbb{E}\) as a ratio of the optimal partition to the parallel complexity of the current partition </p><p class="formulaDsp">
+<p>然后我们将 \(\mathbb{E}\) 定义为最佳分区与当前分区的并行复杂度的比率</p>
+<p class="formulaDsp">
 \begin{align*} \mathbb{E} = \frac{W_{\text{opt}}}{W}. \end{align*}
 </p>
-<p> For the example distribution above, we have </p><p class="formulaDsp">
+<p>对于上面的例子分布，我们有</p>
+<p class="formulaDsp">
 \begin{align*} W_{\text{opt}}&amp;=\frac{1}{P}\sum_{\ell} N_{\ell} = \frac{1}{3} \left(1+4+4\right)= 3 \qquad \\ W &amp;= \sum_\ell W_\ell = 1 + 2 + 3 = 6 \\ \mathbb{E} &amp;= \frac{W_{\text{opt}}}{W} = \frac12. \end{align*}
 </p>
-<p> The value <a class="el" href="namespaceMGTools.html#a8776ac550d9ac85e7e0db51625935673">MGTools::workload_imbalance()</a> \(= 1/\mathbb{E}\) then represents the factor increase in timings we expect for GMG methods (vmults, assembly, etc.) due to the imbalance of the mesh partition compared to a perfectly load-balanced workload. We will report on these in the results section below for a sequence of meshes, and compare with the observed slow-downs as we go to larger and larger processor numbers (where, typically, the load imbalance becomes larger as well).</p>
-<p>These sorts of considerations are considered in much greater detail in <b>[clevenger_par_gmg]</b>, which contains a full discussion of the partition efficiency model and the effect the imbalance has on the GMG V-cycle timing. In summary, the value of \(\mathbb{E}\) is highly dependent on the degree of local mesh refinement used and has an optimal value \(\mathbb{E} \approx 1\) for globally refined meshes. Typically for adaptively refined meshes, the number of processors used to distribute a single mesh has a negative impact on \(\mathbb{E}\) but only up to a leveling off point, where the imbalance remains relatively constant for an increasing number of processors, and further refinement has very little impact on \(\mathbb{E}\). Finally, \(1/\mathbb{E}\) was shown to give an accurate representation of the slowdown in parallel scaling expected for the timing of a V-cycle.</p>
-<p>It should be noted that there is potential for some asynchronous work between multigrid levels, specifically with purely nearest neighbor MPI communication, and an adaptive mesh could be constructed such that the efficiency model would far overestimate the V-cycle slowdown due to the asynchronous work "covering up" the imbalance (which assumes synchronization over levels). However, for most realistic adaptive meshes the expectation is that this asynchronous work will only cover up a very small portion of the imbalance and the efficiency model will describe the slowdown very well.</p>
+<p>然后，该值 <a class="el" href="namespaceMGTools.html#a8776ac550d9ac85e7e0db51625935673">MGTools::workload_imbalance()</a> \(= 1/\mathbb{E}\) 代表我们预期GMG方法（vmults、assembly等）由于网状分区的不平衡而与完全负载平衡的工作负载相比在时间上的系数增加。我们将在下面的结果部分报告一连串的网格，并与观察到的减速进行比较，因为我们的处理器数量越来越大（通常，负载不平衡也会变大）。</p>
+<p>这些考虑因素在 <b>[clevenger_par_gmg]</b> 中得到了更详细的考虑，其中包含了对分区效率模型和不平衡对GMG V-周期时间的影响的全面讨论。总之， \(\mathbb{E}\) 的值在很大程度上取决于所使用的局部网格细化程度，对于全局细化的网格有一个最佳值 \(\mathbb{E} \approx 1\) 。通常对于自适应细化的网格，用于分配单个网格的处理器数量对 \(\mathbb{E}\) 有负面影响，但只到一个平移点，即处理器数量增加时，不平衡度保持相对稳定，进一步细化对 \(\mathbb{E}\) 的影响很小。最后， \(1/\mathbb{E}\) 被证明可以准确地表示出对V型周期的计时所预期的并行扩展的减慢。</p>
+<p>应该注意的是，在多级网格之间有可能存在一些异步工作，特别是纯粹的近邻MPI通信，而且可以构建一个自适应网格，由于异步工作 "掩盖 "了不平衡，效率模型将远远高估V型周期的减慢（这假设了各级的同步性）。然而，对于大多数现实的自适应网格来说，预期这种异步工作只会掩盖非常小的一部分不平衡，效率模型会很好地描述减速。</p>
 <p><a class="anchor" id="Workloadimbalanceforalgebraicmultigridmethods"></a></p><h3>Workload imbalance for algebraic multigrid methods</h3>
-<p>The considerations above show that one has to expect certain limits on the scalability of the geometric multigrid algorithm as it is implemented in deal.II because even in cases where the finest levels of a mesh are perfectly load balanced, the coarser levels may not be. At the same time, the coarser levels are weighted less (the contributions of \(W_\ell\) to \(W\) are small) because coarser levels have fewer cells and, consequently, do not contribute to the overall run time as much as finer levels. In other words, imbalances in the coarser levels may not lead to large effects in the big picture.</p>
-<p>Algebraic multigrid methods are of course based on an entirely different approach to creating a hierarchy of levels. In particular, they create these purely based on analyzing the system matrix, and very sophisticated algorithms for ensuring that the problem is well load-balanced on every level are implemented in both the hypre and ML/MueLu packages that underly the <a class="el" href="classTrilinosWrappers_1_1PreconditionAMG.html">TrilinosWrappers::PreconditionAMG</a> and <a class="el" href="classPETScWrappers_1_1PreconditionBoomerAMG.html">PETScWrappers::PreconditionBoomerAMG</a> classes. In some sense, these algorithms are simpler than for geometric multigrid methods because they only deal with the matrix itself, rather than all of the connotations of meshes, neighbors, parents, and other geometric entities. At the same time, much work has also been put into making algebraic multigrid methods scale to very large problems, including questions such as reducing the number of processors that work on a given level of the hierarchy to a subset of all processors, if otherwise processors would spend less time on computations than on communication. (One might note that it is of course possible to implement these same kinds of ideas also in geometric multigrid algorithms where one purposefully idles some processors on coarser levels to reduce the amount of communication. deal.II just doesn't do this at this time.)</p>
-<p>These are not considerations we typically have to worry about here, however: For most purposes, we use algebraic multigrid methods as black-box methods.</p>
+<p>上面的考虑表明，我们必须期待在deal.II中实现的几何多网格算法的可扩展性有一定的限制，因为即使在网格的最细层是完全负载平衡的情况下，较粗的层也可能不是这样。同时，较粗层的权重较小（ \(W_\ell\) 对 \(W\) 的贡献较小），因为较粗层的单元较少，因此对整体运行时间的贡献不如较细层的大。换句话说，较粗层次的不平衡可能不会导致大的影响。</p>
+<p>当然，代数多网格方法是基于一种完全不同的方法来创建层次结构的。特别是，他们纯粹是在分析系统矩阵的基础上创建这些层次，并且在作为 <a class="el" href="classTrilinosWrappers_1_1PreconditionAMG.html">TrilinosWrappers::PreconditionAMG</a> 和 <a class="el" href="classPETScWrappers_1_1PreconditionBoomerAMG.html">PETScWrappers::PreconditionBoomerAMG</a> 类基础的hypre和ML/MueLu包中都实现了非常复杂的算法，以确保问题在每个层次上都得到良好的负载平衡。在某种意义上，这些算法比几何多网格方法更简单，因为它们只处理矩阵本身，而不是所有的网格、邻居、父母和其他几何实体的内涵。同时，为了使代数多网格方法能够扩展到非常大的问题，人们也做了很多工作，包括将在某一层次上工作的处理器数量减少到所有处理器的一个子集，如果不这样的话，处理器花在计算上的时间会比花在通信上的时间少。(人们可能会注意到，在几何多网格算法中也有可能实现这些相同的想法，在这些算法中，人们有目的地将一些处理器闲置在较粗的层次上，以减少通信量。只是目前deal.II没有这样做。)</p>
+<p>然而，这些并不是我们在这里通常需要担心的问题。在大多数情况下，我们使用代数多网格方法作为黑箱方法。</p>
 <p><a class="anchor" id="Runningtheprogram"></a></p><h3>Running the program</h3>
-<p>As mentioned above, this program can use three different ways of solving the linear system: matrix-based geometric multigrid ("MB"), matrix-free geometric multigrid ("MF"), and algebraic multigrid ("AMG"). The directory in which this program resides has input files with suffix <code>.prm</code> for all three of these options, and for both 2d and 3d.</p>
-<p>You can execute the program as in </p><div class="fragment"><div class="line">./step-50 gmg_mb_2d.prm</div>
-</div><!-- fragment --><p> and this will take the run-time parameters from the given input file (here, <code>gmg_mb_2d.prm</code>).</p>
-<p>The program is intended to be run in parallel, and you can achieve this using a command such as </p><div class="fragment"><div class="line">mpirun -np 4 ./step-50 gmg_mb_2d.prm</div>
-</div><!-- fragment --><p> if you want to, for example, run on four processors. (That said, the program is also ready to run with, say, <code>-np 28672</code> if that's how many processors you have available.)</p>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+<p>如上所述，这个程序可以使用三种不同的方法来求解线性系统：基于矩阵的几何多栅（"MB"），无矩阵几何多栅（"MF"），以及代数多栅（"AMG"）。这个程序所在的目录有后缀为".prm "的输入文件，适用于所有这三个选项，以及2d和3d。</p>
+<p>你可以按以下方式执行该程序</p>
+<div class="fragment"><div class="line">./step-50 gmg_mb_2d.prm</div>
+</div><!-- fragment --><p>你可以像</p><div class="fragment"><div class="line">./step-50 gmg_mb_2d.prm</div>
+</div><!-- fragment --><p>那样执行程序，这将从给定的输入文件（这里是<code>mg_mb_2d.prm</code>）获取运行时参数。</p>
+<p>该程序的目的是并行运行，你可以使用如下命令实现这一点</p>
+<div class="fragment"><div class="line">mpirun -np 4 ./step-50 gmg_mb_2d.prm</div>
+</div><!-- fragment --><p>如果你想，例如，在四个处理器上运行。(也就是说，如果你有这么多的处理器，程序也可以用<code>-np 28672</code>来运行)。<a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
 <p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
-<p>The include files are a combination of <a class="el" href="step_40.html">step-40</a>, <a class="el" href="step_16.html">step-16</a>, and <a class="el" href="step_37.html">step-37</a>:</p>
+<p>包含文件是 <a class="el" href="step_40.html">step-40</a> , <a class="el" href="step_16.html">step-16</a> , 和 <a class="el" href="step_37.html">step-37</a> 的组合。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="conditional__ostream_8h.html">deal.II/base/conditional_ostream.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="data__out__base_8h.html">deal.II/base/data_out_base.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="index__set_8h.html">deal.II/base/index_set.h</a>&gt;</span></div>
@@ -232,11 +245,12 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="aquadrature__lib_8h_html"><div class="ttname"><a href="quadrature__lib_8h.html">quadrature_lib.h</a></div></div>
 <div class="ttc" id="asolver__cg_8h_html"><div class="ttname"><a href="solver__cg_8h.html">solver_cg.h</a></div></div>
 <div class="ttc" id="atimer_8h_html"><div class="ttname"><a href="timer_8h.html">timer.h</a></div></div>
-</div><!-- fragment --><p>We use the same strategy as in <a class="el" href="step_40.html">step-40</a> to switch between PETSc and Trilinos:</p>
+</div><!-- fragment --><p>我们使用与 <a class="el" href="step_40.html">step-40</a> 相同的策略，在PETSc和Trilinos之间切换。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="generic__linear__algebra_8h.html">deal.II/lac/generic_linear_algebra.h</a>&gt;</span></div>
 <div class="ttc" id="ageneric__linear__algebra_8h_html"><div class="ttname"><a href="generic__linear__algebra_8h.html">generic_linear_algebra.h</a></div></div>
-</div><!-- fragment --><p>Comment the following preprocessor definition in or out if you have PETSc and Trilinos installed and you prefer using PETSc in this example:</p>
+</div><!-- fragment --><p>如果你已经安装了PETSc和Trilinos，并且你喜欢在本例中使用PETSc，请将下面的预处理程序定义注释进去或退出。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#define FORCE_USE_OF_TRILINOS</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span>LA</div>
 <div class="line">{</div>
@@ -250,6 +264,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line"><span class="preprocessor">#  error DEAL_II_WITH_PETSC or DEAL_II_WITH_TRILINOS required</span></div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line">} <span class="comment">// namespace LA</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="matrix__free_8h.html">deal.II/matrix_free/matrix_free.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="operators_8h.html">deal.II/matrix_free/operators.h</a>&gt;</span></div>
@@ -277,16 +292,17 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="anumerics_2data__out_8h_html"><div class="ttname"><a href="numerics_2data__out_8h.html">data_out.h</a></div></div>
 <div class="ttc" id="aoperators_8h_html"><div class="ttname"><a href="operators_8h.html">operators.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p>The following files are used to assemble the error estimator like in <a class="el" href="step_12.html">step-12</a>:</p>
+</div><!-- fragment --><p>以下文件用于组装误差估计器，如 <a class="el" href="step_12.html">step-12</a> 。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__interface__values_8h.html">deal.II/fe/fe_interface_values.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="mesh__loop_8h.html">deal.II/meshworker/mesh_loop.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
 <div class="ttc" id="afe__interface__values_8h_html"><div class="ttname"><a href="fe__interface__values_8h.html">fe_interface_values.h</a></div></div>
 <div class="ttc" id="amesh__loop_8h_html"><div class="ttname"><a href="mesh__loop_8h.html">mesh_loop.h</a></div></div>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="namespace__dealii_8h_source.html#l00025">namespace_dealii.h:26</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="Coefficientsandhelperclasses"></a> </p><h3>Coefficients and helper classes</h3>
-<p><a class="el" href="classMatrixFree.html">MatrixFree</a> operators must use the <a class="el" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector</a> vector type. Here we define operations which copy to and from Trilinos vectors for compatibility with the matrix-based code. Note that this functionality does not currently exist for PETSc vector types, so Trilinos must be installed to use the <a class="el" href="classMatrixFree.html">MatrixFree</a> solver in this tutorial.</p>
+<p>MatrixFree操作符必须使用 <a class="el" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector</a> 矢量类型。这里我们定义了复制到Trilinos向量的操作，以便与基于矩阵的代码兼容。注意，目前PETSc矢量类型不存在这种功能，所以必须安装Trilinos才能使用本教程中的MatrixFree求解器。</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>ChangeVectorTypes</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> number&gt;</div>
@@ -304,6 +320,8 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">    out.import(rwv, <a class="code" href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae5042eefddc828c7c31e1e8e26da8b09">VectorOperation::insert</a>);</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -332,7 +350,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="agroup__Vectors_html_gga40c50779cd14ba89bbf0bd9b4561964cae5042eefddc828c7c31e1e8e26da8b09"><div class="ttname"><a href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae5042eefddc828c7c31e1e8e26da8b09">VectorOperation::insert</a></div><div class="ttdeci">@ insert</div><div class="ttdef"><b>Definition:</b> <a href="vector__operation_8h_source.html#l00049">vector_operation.h:49</a></div></div>
 <div class="ttc" id="anamespaceLinearAlgebraDealII_html_a9fe13d579422411556954ab3f28a59be"><div class="ttname"><a href="namespaceLinearAlgebraDealII.html#a9fe13d579422411556954ab3f28a59be">LinearAlgebraDealII::Vector</a></div><div class="ttdeci">Vector&lt; double &gt; Vector</div><div class="ttdef"><b>Definition:</b> <a href="generic__linear__algebra_8h_source.html#l00043">generic_linear_algebra.h:43</a></div></div>
 <div class="ttc" id="anamespaceinternal_1_1VectorOperations_html_a40c8daa0881cff0123fbaeb08929f5cb"><div class="ttname"><a href="namespaceinternal_1_1VectorOperations.html#a40c8daa0881cff0123fbaeb08929f5cb">internal::VectorOperations::copy</a></div><div class="ttdeci">void copy(const T *begin, const T *end, U *dest)</div><div class="ttdef"><b>Definition:</b> <a href="vector__operations__internal_8h_source.html#l00068">vector_operations_internal.h:68</a></div></div>
-</div><!-- fragment --><p>Let's move on to the description of the problem we want to solve. We set the right-hand side function to 1.0. The <code>value</code> function returning a <a class="el" href="classVectorizedArray.html">VectorizedArray</a> is used by the matrix-free code path.</p>
+</div><!-- fragment --><p>让我们继续讨论我们要解决的问题的描述。我们把右手边的函数设置为1.0。 <code>value</code> 返回VectorizedArray的函数被无矩阵代码路径所使用。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>RightHandSide : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
@@ -342,6 +360,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line"><span class="keyword">  </span>{</div>
 <div class="line">    <span class="keywordflow">return</span> 1.0;</div>
 <div class="line">  }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> number&gt;</div>
@@ -356,7 +375,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="aclassFunction_html_acbfcab66b2fc63bfea59268f40772bb4"><div class="ttname"><a href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">Function::value</a></div><div class="ttdeci">virtual RangeNumberType value(const Point&lt; dim &gt; &amp;p, const unsigned int component=0) const</div></div>
 <div class="ttc" id="aclassPoint_html"><div class="ttname"><a href="classPoint.html">Point</a></div><div class="ttdef"><b>Definition:</b> <a href="base_2point_8h_source.html#l00110">point.h:111</a></div></div>
 <div class="ttc" id="aclassVectorizedArray_html"><div class="ttname"><a href="classVectorizedArray.html">VectorizedArray</a></div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l00389">vectorization.h:391</a></div></div>
-</div><!-- fragment --><p>This next class represents the diffusion coefficient. We use a variable coefficient which is 100.0 at any point where at least one coordinate is less than -0.5, and 1.0 at all other points. As above, a separate value() returning a <a class="el" href="classVectorizedArray.html">VectorizedArray</a> is used for the matrix-free code. An <code>average()</code> function computes the arithmetic average for a set of points.</p>
+</div><!-- fragment --><p>接下来的这个类表示扩散系数。我们使用一个可变系数，在任何一个至少有一个坐标小于-0.5的点上为100.0，而在所有其他点上为1.0。如上所述，一个单独的value()返回一个VectorizedArray，用于无矩阵代码。一个<code>average()函数计算了一组点的算术平均。</code> </p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>Coefficient : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
@@ -364,17 +383,21 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">value</a>(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp;p,</div>
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="comment">/*component*/</span> = 0) <span class="keyword">const override</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> number&gt;</div>
 <div class="line">  <a class="code" href="classVectorizedArray.html">VectorizedArray&lt;number&gt;</a> <a class="code" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">value</a>(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point</a>&lt;dim, <a class="code" href="classVectorizedArray.html">VectorizedArray&lt;number&gt;</a>&gt; &amp;p,</div>
 <div class="line">                                <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="comment">/*component*/</span> = 0) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> number&gt;</div>
 <div class="line">  number average_value(<span class="keyword">const</span> std::vector&lt;<a class="code" href="classPoint.html">Point&lt;dim, number&gt;</a>&gt; &amp;points) <span class="keyword">const</span>;</div>
-</div><!-- fragment --><p>When using a coefficient in the <a class="el" href="classMatrixFree.html">MatrixFree</a> framework, we also need a function that creates a <a class="el" href="classTable.html">Table</a> of coefficient values for a set of cells provided by the <a class="el" href="classMatrixFree.html">MatrixFree</a> operator argument here.</p>
+</div><!-- fragment --><p>当在MatrixFree框架中使用一个系数时，我们还需要一个函数，为这里的MatrixFree操作符参数提供的一组单元格创建一个系数值表。</p>
 <div class="fragment"><div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> number&gt;</div>
 <div class="line">  std::shared_ptr&lt;Table&lt;2, VectorizedArray&lt;number&gt;&gt;&gt; make_coefficient_table(</div>
 <div class="line">    <span class="keyword">const</span> <a class="code" href="classMatrixFree.html">MatrixFree</a>&lt;dim, number, <a class="code" href="classVectorizedArray.html">VectorizedArray&lt;number&gt;</a>&gt; &amp;mf_storage) <span class="keyword">const</span>;</div>
 <div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -388,6 +411,8 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">    }</div>
 <div class="line">  <span class="keywordflow">return</span> 1.0;</div>
 <div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -408,8 +433,11 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">          }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> return_value;</div>
 <div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -423,8 +451,11 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">    average += <a class="code" href="namespaceinternal.html#aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804">value</a>(points[i]);</div>
 <div class="line">  average /= points.size();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> average;</div>
 <div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -437,24 +468,31 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">  <span class="keyword">auto</span> coefficient_table =</div>
 <div class="line">    std::make_shared&lt;Table&lt;2, VectorizedArray&lt;number&gt;&gt;&gt;();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classFEEvaluation.html">FEEvaluation</a>&lt;dim, -1, 0, 1, number&gt; fe_eval(mf_storage);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespaceinternal_1_1TriangulationImplementation.html#a9f815604be9b560fea00beef8d720480">n_cells</a>    = mf_storage.n_cell_batches();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points = fe_eval.n_q_points;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  coefficient_table-&gt;reinit(<a class="code" href="namespaceinternal_1_1TriangulationImplementation.html#a9f815604be9b560fea00beef8d720480">n_cells</a>, 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cell = 0; cell &lt; <a class="code" href="namespaceinternal_1_1TriangulationImplementation.html#a9f815604be9b560fea00beef8d720480">n_cells</a>; ++cell)</div>
 <div class="line">    {</div>
 <div class="line">      fe_eval.reinit(cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <a class="code" href="classVectorizedArray.html">VectorizedArray&lt;number&gt;</a> average_value = 0.;</div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; ++q)</div>
 <div class="line">        average_value += <a class="code" href="namespaceinternal.html#aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804">value</a>(fe_eval.quadrature_point(q));</div>
 <div class="line">      average_value /= n_q_points;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      (*coefficient_table)(cell, 0) = average_value;</div>
 <div class="line">    }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> coefficient_table;</div>
 <div class="line">}</div>
@@ -464,10 +502,11 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="anamespaceinternal_1_1TriangulationImplementation_html_a9f815604be9b560fea00beef8d720480"><div class="ttname"><a href="namespaceinternal_1_1TriangulationImplementation.html#a9f815604be9b560fea00beef8d720480">internal::TriangulationImplementation::n_cells</a></div><div class="ttdeci">unsigned int n_cells(const internal::TriangulationImplementation::NumberCache&lt; 1 &gt; &amp;c)</div><div class="ttdef"><b>Definition:</b> <a href="grid_2tria_8cc_source.html#l12651">tria.cc:12651</a></div></div>
 <div class="ttc" id="anamespaceinternal_html_aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804"><div class="ttname"><a href="namespaceinternal.html#aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804">internal::EvaluatorQuantity::value</a></div><div class="ttdeci">@ value</div></div>
 </div><!-- fragment --><p><a class="anchor" id="Runtimeparameters"></a> </p><h3>Run time parameters</h3>
-<p>We will use <a class="el" href="classParameterHandler.html">ParameterHandler</a> to pass in parameters at runtime. The structure <code>Settings</code> parses and stores these parameters to be queried throughout the program.</p>
+<p>我们将使用ParameterHandler来在运行时传入参数。 结构 <code>Settings</code> 解析并存储这些参数，以便在整个程序中进行查询。</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span><a class="code" href="namespaceTriangulationDescription.html#aa1531298eb0a267d9ceca5eb46ada8e0">Settings</a></div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordtype">bool</span> try_parse(<span class="keyword">const</span> std::string &amp;prm_filename);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">enum</span> <a class="code" href="classSolverType.html">SolverType</a></div>
 <div class="line">  {</div>
@@ -476,7 +515,9 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">    amg</div>
 <div class="line">  };</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classSolverType.html">SolverType</a> solver;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">int</span>          dimension;</div>
 <div class="line">  <span class="keywordtype">double</span>       smoother_dampen;</div>
@@ -484,6 +525,8 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_steps;</div>
 <div class="line">  <span class="keywordtype">bool</span>         output;</div>
 <div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -513,6 +556,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                    <a class="code" href="classPatterns_1_1Bool.html">Patterns::Bool</a>(),</div>
 <div class="line">                    <span class="stringliteral">&quot;Output graphical results.&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">if</span> (prm_filename.size() == 0)</div>
 <div class="line">    {</div>
 <div class="line">      std::cout &lt;&lt; <span class="stringliteral">&quot;****  Error: No input file provided!\n&quot;</span></div>
@@ -526,6 +570,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">try</span></div>
 <div class="line">    {</div>
 <div class="line">      prm.<a class="code" href="classParameterHandler.html#a0ddaa05c5463c6c0b7701e18005717a9">parse_input</a>(prm_filename);</div>
@@ -537,6 +582,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">if</span> (prm.<a class="code" href="classParameterHandler.html#a91cfbaca954f444047302446a4e87125">get</a>(<span class="stringliteral">&quot;solver&quot;</span>) == <span class="stringliteral">&quot;MF&quot;</span>)</div>
 <div class="line">    this-&gt;solver = gmg_mf;</div>
 <div class="line">  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (prm.<a class="code" href="classParameterHandler.html#a91cfbaca954f444047302446a4e87125">get</a>(<span class="stringliteral">&quot;solver&quot;</span>) == <span class="stringliteral">&quot;MB&quot;</span>)</div>
@@ -546,11 +592,13 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">  <span class="keywordflow">else</span></div>
 <div class="line">    <a class="code" href="group__Exceptions.html#gafc0ca7ad85b3ebd64e8e51689ac85caf">AssertThrow</a>(<span class="keyword">false</span>, <a class="code" href="group__Exceptions.html#ga7b52b286796c23ef9ff178faf7a4b68f">ExcNotImplemented</a>());</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  this-&gt;dimension       = prm.<a class="code" href="classParameterHandler.html#a61fa98fdc0c52980a5b1de0ee1fc5bb2">get_integer</a>(<span class="stringliteral">&quot;dim&quot;</span>);</div>
 <div class="line">  this-&gt;n_steps         = prm.<a class="code" href="classParameterHandler.html#a61fa98fdc0c52980a5b1de0ee1fc5bb2">get_integer</a>(<span class="stringliteral">&quot;n_steps&quot;</span>);</div>
 <div class="line">  this-&gt;smoother_dampen = prm.<a class="code" href="classParameterHandler.html#aeaf3c7846747695b1f327677e3716ec5">get_double</a>(<span class="stringliteral">&quot;smoother dampen&quot;</span>);</div>
 <div class="line">  this-&gt;smoother_steps  = prm.<a class="code" href="classParameterHandler.html#a61fa98fdc0c52980a5b1de0ee1fc5bb2">get_integer</a>(<span class="stringliteral">&quot;smoother steps&quot;</span>);</div>
 <div class="line">  this-&gt;output          = prm.<a class="code" href="classParameterHandler.html#a6bb45dc67787e3fab7882461929b5fbe">get_bool</a>(<span class="stringliteral">&quot;output&quot;</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">}</div>
@@ -573,7 +621,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="anamespaceTriangulationDescription_html_aa1531298eb0a267d9ceca5eb46ada8e0"><div class="ttname"><a href="namespaceTriangulationDescription.html#aa1531298eb0a267d9ceca5eb46ada8e0">TriangulationDescription::Settings</a></div><div class="ttdeci">Settings</div><div class="ttdef"><b>Definition:</b> <a href="tria__description_8h_source.html#l00254">tria_description.h:255</a></div></div>
 <div class="ttc" id="anamespaceUtilities_1_1MPI_html_a895dcd8223a0ee6f0e6a80b80e2d5982"><div class="ttname"><a href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">Utilities::MPI::this_mpi_process</a></div><div class="ttdeci">unsigned int this_mpi_process(const MPI_Comm &amp;mpi_communicator)</div><div class="ttdef"><b>Definition:</b> <a href="mpi_8cc_source.html#l00128">mpi.cc:128</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemclass"></a> </p><h3>LaplaceProblem class</h3>
-<p>This is the main class of the program. It looks very similar to <a class="el" href="step_16.html">step-16</a>, <a class="el" href="step_37.html">step-37</a>, and <a class="el" href="step_40.html">step-40</a>. For the <a class="el" href="classMatrixFree.html">MatrixFree</a> setup, we use the <a class="el" href="classMatrixFreeOperators_1_1LaplaceOperator.html">MatrixFreeOperators::LaplaceOperator</a> class which defines <code>local_apply()</code>, <code><a class="el" href="namespaceMatrixFreeTools.html#a523190adf5671e317d745fed4b1d357f">compute_diagonal()</a></code>, and <code>set_coefficient()</code> functions internally. Note that the polynomial degree is a template parameter of this class. This is necesary for the matrix-free code.</p>
+<p>这是该程序的主类。它看起来与 <a class="el" href="step_16.html">step-16</a> , <a class="el" href="step_37.html">step-37</a> , 和 <a class="el" href="step_40.html">step-40</a> 非常相似。对于MatrixFree的设置，我们使用 <a class="el" href="classMatrixFreeOperators_1_1LaplaceOperator.html">MatrixFreeOperators::LaplaceOperator</a> 类，它在内部定义了<code>local_apply()</code>, <code><a class="el" href="namespaceMatrixFreeTools.html#a523190adf5671e317d745fed4b1d357f">compute_diagonal()</a></code>, 和<code>set_coefficient()</code>函数。请注意，多项式的度数是这个类的一个模板参数。这对无矩阵代码来说是必要的。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> degree&gt;</div>
 <div class="line"><span class="keyword">class </span>LaplaceProblem</div>
 <div class="line">{</div>
@@ -581,13 +629,15 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">  LaplaceProblem(<span class="keyword">const</span> <a class="code" href="namespaceTriangulationDescription.html#aa1531298eb0a267d9ceca5eb46ada8e0">Settings</a> &amp;settings);</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="ttc" id="anamespaceWorkStream_1_1internal_1_1tbb__no__coloring_html_a8673698a405bf47aa24002aeb6d76d70"><div class="ttname"><a href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">WorkStream::internal::tbb_no_coloring::run</a></div><div class="ttdeci">void run(const Iterator &amp;begin, const typename identity&lt; Iterator &gt;::type &amp;end, Worker worker, Copier copier, const ScratchData &amp;sample_scratch_data, const CopyData &amp;sample_copy_data, const unsigned int queue_length, const unsigned int chunk_size)</div><div class="ttdef"><b>Definition:</b> <a href="work__stream_8h_source.html#l00691">work_stream.h:691</a></div></div>
-</div><!-- fragment --><p>We will use the following types throughout the program. First the matrix-based types, after that the matrix-free classes. For the matrix-free implementation, we use <code>float</code> for the level operators.</p>
+</div><!-- fragment --><p>我们将在整个程序中使用以下类型。首先是基于矩阵的类型，然后是无矩阵类。对于无矩阵的实现，我们使用 <code>float</code> 中的水平运算符。</p>
 <div class="fragment"><div class="line">  <span class="keyword">using</span> MatrixType         = <a class="code" href="namespaceLinearAlgebraDealII.html#a912abe2208022aec6753876bcc72f6bf">LA::MPI::SparseMatrix</a>;</div>
 <div class="line">  <span class="keyword">using</span> VectorType         = <a class="code" href="namespaceLinearAlgebraDealII.html#a9fe13d579422411556954ab3f28a59be">LA::MPI::Vector</a>;</div>
 <div class="line">  <span class="keyword">using</span> <a class="code" href="namespaceLinearAlgebraPETSc_1_1MPI.html#a41f11f7a1992c6d6aa9367b12c68f791">PreconditionAMG</a>    = <a class="code" href="namespaceLinearAlgebraPETSc_1_1MPI.html#a41f11f7a1992c6d6aa9367b12c68f791">LA::MPI::PreconditionAMG</a>;</div>
 <div class="line">  <span class="keyword">using</span> <a class="code" href="classPreconditionJacobi.html">PreconditionJacobi</a> = <a class="code" href="namespaceLinearAlgebraPETSc_1_1MPI.html#a84fd288bacabd1a7e3408885fb0fad01">LA::MPI::PreconditionJacobi</a>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">using</span> MatrixFreeLevelMatrix = <a class="code" href="classMatrixFreeOperators_1_1LaplaceOperator.html">MatrixFreeOperators::LaplaceOperator</a>&lt;</div>
 <div class="line">    dim,</div>
@@ -602,8 +652,10 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">    1,</div>
 <div class="line">    <a class="code" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector&lt;double&gt;</a>&gt;;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">using</span> MatrixFreeLevelVector  = <a class="code" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector&lt;float&gt;</a>;</div>
 <div class="line">  <span class="keyword">using</span> MatrixFreeActiveVector = <a class="code" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector&lt;double&gt;</a>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> setup_system();</div>
 <div class="line">  <span class="keywordtype">void</span> setup_multigrid();</div>
@@ -615,20 +667,26 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">  <span class="keywordtype">void</span> refine_grid();</div>
 <div class="line">  <span class="keywordtype">void</span> output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="namespaceTriangulationDescription.html#aa1531298eb0a267d9ceca5eb46ada8e0">Settings</a> settings;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  MPI_Comm           mpi_communicator;</div>
 <div class="line">  <a class="code" href="classConditionalOStream.html">ConditionalOStream</a> pcout;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation&lt;dim&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classMappingQ1.html">MappingQ1&lt;dim&gt;</a>                      mapping;</div>
 <div class="line">  <a class="code" href="classFE__Q.html">FE_Q&lt;dim&gt;</a>                                 fe;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a> dof_handler;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classIndexSet.html">IndexSet</a>                  locally_owned_dofs;</div>
 <div class="line">  <a class="code" href="classIndexSet.html">IndexSet</a>                  locally_relevant_dofs;</div>
 <div class="line">  <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> constraints;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  MatrixType             system_matrix;</div>
 <div class="line">  MatrixFreeActiveMatrix mf_system_matrix;</div>
@@ -636,11 +694,14 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">  VectorType             right_hand_side;</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a>         estimated_error_square_per_cell;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classMGLevelObject.html">MGLevelObject&lt;MatrixType&gt;</a> mg_matrix;</div>
 <div class="line">  <a class="code" href="classMGLevelObject.html">MGLevelObject&lt;MatrixType&gt;</a> mg_interface_in;</div>
 <div class="line">  <a class="code" href="classMGConstrainedDoFs.html">MGConstrainedDoFs</a>         mg_constrained_dofs;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classMGLevelObject.html">MGLevelObject&lt;MatrixFreeLevelMatrix&gt;</a> mf_mg_matrix;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classTimerOutput.html">TimerOutput</a> computing_timer;</div>
 <div class="line">};</div>
@@ -661,7 +722,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="anamespaceLinearAlgebraPETSc_1_1MPI_html_a41f11f7a1992c6d6aa9367b12c68f791"><div class="ttname"><a href="namespaceLinearAlgebraPETSc_1_1MPI.html#a41f11f7a1992c6d6aa9367b12c68f791">LinearAlgebraPETSc::MPI::PreconditionAMG</a></div><div class="ttdeci">PETScWrappers::PreconditionBoomerAMG PreconditionAMG</div><div class="ttdef"><b>Definition:</b> <a href="generic__linear__algebra_8h_source.html#l00133">generic_linear_algebra.h:133</a></div></div>
 <div class="ttc" id="anamespaceLinearAlgebraPETSc_1_1MPI_html_a84fd288bacabd1a7e3408885fb0fad01"><div class="ttname"><a href="namespaceLinearAlgebraPETSc_1_1MPI.html#a84fd288bacabd1a7e3408885fb0fad01">LinearAlgebraPETSc::MPI::PreconditionJacobi</a></div><div class="ttdeci">PETScWrappers::PreconditionJacobi PreconditionJacobi</div><div class="ttdef"><b>Definition:</b> <a href="generic__linear__algebra_8h_source.html#l00148">generic_linear_algebra.h:148</a></div></div>
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
-</div><!-- fragment --><p>The only interesting part about the constructor is that we construct the multigrid hierarchy unless we use AMG. For that, we need to parse the run time parameters before this constructor completes.</p>
+</div><!-- fragment --><p>关于构造函数的唯一有趣的部分是，除非我们使用AMG，否则我们会构造多网格的层次结构。为此，我们需要在这个构造函数完成之前解析运行时参数。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> degree&gt;</div>
 <div class="line">LaplaceProblem&lt;dim, degree&gt;::LaplaceProblem(<span class="keyword">const</span> <a class="code" href="namespaceTriangulationDescription.html#aa1531298eb0a267d9ceca5eb46ada8e0">Settings</a> &amp;settings)</div>
 <div class="line">  : settings(settings)</div>
@@ -688,25 +749,30 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="anamespaceUtilities_html"><div class="ttname"><a href="namespaceUtilities.html">Utilities</a></div><div class="ttdef"><b>Definition:</b> <a href="base_2communication__pattern__base_8h_source.html#l00030">communication_pattern_base.h:31</a></div></div>
 <div class="ttc" id="anamespaceparallel_html"><div class="ttname"><a href="namespaceparallel.html">parallel</a></div><div class="ttdef"><b>Definition:</b> <a href="distributed_8h_source.html#l00416">distributed.h:417</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemsetup_system"></a> </p><h4>LaplaceProblem::setup_system()</h4>
-<p>Unlike <a class="el" href="step_16.html">step-16</a> and <a class="el" href="step_37.html">step-37</a>, we split the set up into two parts, setup_system() and setup_multigrid(). Here is the typical setup_system() function for the active mesh found in most tutorials. For matrix-free, the active mesh set up is similar to <a class="el" href="step_37.html">step-37</a>; for matrix-based (GMG and AMG solvers), the setup is similar to <a class="el" href="step_40.html">step-40</a>.</p>
+<p>与 <a class="el" href="step_16.html">step-16</a> 和 <a class="el" href="step_37.html">step-37</a> 不同，我们将设置分成两部分：setup_system()和setup_multigrid()。下面是大多数教程中常见的主动网格的典型setup_system()函数。对于无矩阵，主动网格的设置类似于 <a class="el" href="step_37.html">step-37</a> ；对于基于矩阵（GMG和AMG求解器），其设置类似于 <a class="el" href="step_40.html">step-40</a> 。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> degree&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim, degree&gt;::setup_system()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer, <span class="stringliteral">&quot;Setup&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  dof_handler.distribute_dofs(fe);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="namespaceDoFTools.html#acad7e0841b9046eaafddc4c617ab1d9d">DoFTools::extract_locally_relevant_dofs</a>(dof_handler, locally_relevant_dofs);</div>
 <div class="line">  locally_owned_dofs = dof_handler.locally_owned_dofs();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  solution.reinit(locally_owned_dofs, mpi_communicator);</div>
 <div class="line">  right_hand_side.reinit(locally_owned_dofs, mpi_communicator);</div>
 <div class="line">  constraints.reinit(locally_relevant_dofs);</div>
 <div class="line">  <a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, constraints);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(</div>
 <div class="line">    mapping, dof_handler, 0, <a class="code" href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction&lt;dim&gt;</a>(), constraints);</div>
 <div class="line">  constraints.close();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">switch</span> (settings.solver)</div>
 <div class="line">    {</div>
@@ -725,14 +791,18 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                             <a class="code" href="classQGauss.html">QGauss&lt;1&gt;</a>(degree + 1),</div>
 <div class="line">                             additional_data);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          mf_system_matrix.initialize(mf_storage);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <span class="keyword">const</span> Coefficient&lt;dim&gt; coefficient;</div>
 <div class="line">          mf_system_matrix.set_coefficient(</div>
 <div class="line">            coefficient.make_coefficient_table(*mf_storage));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          <span class="keywordflow">break</span>;</div>
 <div class="line">        }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">case</span> Settings::gmg_mb:</div>
 <div class="line">      <span class="keywordflow">case</span> Settings::amg:</div>
@@ -741,10 +811,12 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">          <a class="code" href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a> dsp(locally_relevant_dofs);</div>
 <div class="line">          <a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler, dsp, constraints);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          <a class="code" href="namespaceSparsityTools.html#afbc0c7a206ced91b154666215ea3c218">SparsityTools::distribute_sparsity_pattern</a>(dsp,</div>
 <div class="line">                                                     locally_owned_dofs,</div>
 <div class="line">                                                     mpi_communicator,</div>
 <div class="line">                                                     locally_relevant_dofs);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          system_matrix.reinit(locally_owned_dofs,</div>
 <div class="line">                               locally_owned_dofs,</div>
@@ -760,8 +832,10 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">          system_matrix.reinit(dsp);</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          <span class="keywordflow">break</span>;</div>
 <div class="line">        }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">default</span>:</div>
 <div class="line">        <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(<span class="keyword">false</span>, <a class="code" href="group__Exceptions.html#ga7b52b286796c23ef9ff178faf7a4b68f">ExcNotImplemented</a>());</div>
@@ -785,28 +859,35 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="astructMatrixFree_1_1AdditionalData_html_a0bcce2facca91b925d3e1a5a00c7704b"><div class="ttname"><a href="structMatrixFree_1_1AdditionalData.html#a0bcce2facca91b925d3e1a5a00c7704b">MatrixFree::AdditionalData::tasks_parallel_scheme</a></div><div class="ttdeci">TasksParallelScheme tasks_parallel_scheme</div><div class="ttdef"><b>Definition:</b> <a href="matrix__free_8h_source.html#l00344">matrix_free.h:344</a></div></div>
 <div class="ttc" id="astructMatrixFree_1_1AdditionalData_html_aa5d597e6c4441d273f4100b6139a2552"><div class="ttname"><a href="structMatrixFree_1_1AdditionalData.html#aa5d597e6c4441d273f4100b6139a2552">MatrixFree::AdditionalData::mapping_update_flags</a></div><div class="ttdeci">UpdateFlags mapping_update_flags</div><div class="ttdef"><b>Definition:</b> <a href="matrix__free_8h_source.html#l00368">matrix_free.h:368</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemsetup_multigrid"></a> </p><h4>LaplaceProblem::setup_multigrid()</h4>
-<p>This function does the multilevel setup for both matrix-free and matrix-based GMG. The matrix-free setup is similar to that of <a class="el" href="step_37.html">step-37</a>, and the matrix-based is similar to <a class="el" href="step_16.html">step-16</a>, except we must use appropriate distributed sparsity patterns.</p>
-<p>The function is not called for the AMG approach, but to err on the safe side, the main <code>switch</code> statement of this function nevertheless makes sure that the function only operates on known multigrid settings by throwing an assertion if the function were called for anything other than the two geometric multigrid methods.</p>
+<p>矩阵式求解器。</p>
+<p>该函数为无矩阵和基于矩阵的GMG做多级设置。无矩阵设置类似于 <a class="el" href="step_37.html">step-37</a> ，而基于矩阵的设置类似于 <a class="el" href="step_16.html">step-16</a> ，只是我们必须使用适当的分布式稀疏模式。</p>
+<p>在AMG方法中没有调用该函数，但为了安全起见，该函数的主 "开关 "语句还是确保该函数只在已知的多重网格设置下运行，如果该函数被调用到两种几何多重网格方法以外的地方，则抛出一个断言。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> degree&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim, degree&gt;::setup_multigrid()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer, <span class="stringliteral">&quot;Setup multigrid&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  dof_handler.distribute_mg_dofs();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  mg_constrained_dofs.clear();</div>
 <div class="line">  mg_constrained_dofs.initialize(dof_handler);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> std::set&lt;types::boundary_id&gt; boundary_ids = {<a class="code" href="namespacetypes.html#aed8813fee8c8a2edcc6005e6a48c321a">types::boundary_id</a>(0)};</div>
 <div class="line">  mg_constrained_dofs.make_zero_boundary_constraints(dof_handler, boundary_ids);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_levels = <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_global_levels();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">switch</span> (settings.solver)</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keywordflow">case</span> Settings::gmg_mf:</div>
 <div class="line">        {</div>
 <div class="line">          mf_mg_matrix.resize(0, n_levels - 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> = 0; <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> &lt; n_levels; ++<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>)</div>
 <div class="line">            {</div>
@@ -819,6 +900,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">              level_constraints.<a class="code" href="classAffineConstraints.html#aef97b22281acb10c914d79a3881e2735">add_lines</a>(</div>
 <div class="line">                mg_constrained_dofs.get_boundary_indices(<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>));</div>
 <div class="line">              level_constraints.<a class="code" href="classAffineConstraints.html#a1611aa37f754086388ca76bcd421cce5">close</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">              <span class="keyword">typename</span> <a class="code" href="structMatrixFree_1_1AdditionalData.html">MatrixFree&lt;dim, float&gt;::AdditionalData</a> additional_data;</div>
 <div class="line">              additional_data.<a class="code" href="structMatrixFree_1_1AdditionalData.html#a0bcce2facca91b925d3e1a5a00c7704b">tasks_parallel_scheme</a> =</div>
@@ -835,19 +917,24 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                                       <a class="code" href="classQGauss.html">QGauss&lt;1&gt;</a>(degree + 1),</div>
 <div class="line">                                       additional_data);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">              mf_mg_matrix[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].initialize(mf_storage_level,</div>
 <div class="line">                                             mg_constrained_dofs,</div>
 <div class="line">                                             <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">              <span class="keyword">const</span> Coefficient&lt;dim&gt; coefficient;</div>
 <div class="line">              mf_mg_matrix[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].set_coefficient(</div>
 <div class="line">                coefficient.make_coefficient_table(*mf_storage_level));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">              mf_mg_matrix[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].compute_diagonal();</div>
 <div class="line">            }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          <span class="keywordflow">break</span>;</div>
 <div class="line">        }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">case</span> Settings::gmg_mb:</div>
 <div class="line">        {</div>
@@ -856,12 +943,14 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">          mg_interface_in.resize(0, n_levels - 1);</div>
 <div class="line">          mg_interface_in.clear_elements();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> = 0; <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> &lt; n_levels; ++<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>)</div>
 <div class="line">            {</div>
 <div class="line">              <a class="code" href="classIndexSet.html">IndexSet</a> dof_set;</div>
 <div class="line">              <a class="code" href="namespaceDoFTools.html#a1fef7be07cf379b661646e39b9354e17">DoFTools::extract_locally_relevant_level_dofs</a>(dof_handler,</div>
 <div class="line">                                                            <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>,</div>
 <div class="line">                                                            dof_set);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">              {</div>
 <div class="line"><span class="preprocessor">#ifdef USE_PETSC_LA</span></div>
@@ -873,6 +962,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                  dof_handler.locally_owned_mg_dofs(<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>),</div>
 <div class="line">                  mpi_communicator,</div>
 <div class="line">                  dof_set);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">                mg_matrix[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].reinit(</div>
 <div class="line">                  dof_handler.locally_owned_mg_dofs(<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>),</div>
@@ -887,10 +977,12 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                  mpi_communicator);</div>
 <div class="line">                <a class="code" href="namespaceMGTools.html#a19ba9ee4a2b65235c8bb3fb65ea8f4e0">MGTools::make_sparsity_pattern</a>(dof_handler, dsp, <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">                dsp.compress();</div>
 <div class="line">                mg_matrix[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].reinit(dsp);</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line">              }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">              {</div>
 <div class="line"><span class="preprocessor">#ifdef USE_PETSC_LA</span></div>
@@ -906,6 +998,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                  mpi_communicator,</div>
 <div class="line">                  dof_set);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">                mg_interface_in[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].reinit(</div>
 <div class="line">                  dof_handler.locally_owned_mg_dofs(<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>),</div>
 <div class="line">                  dof_handler.locally_owned_mg_dofs(<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>),</div>
@@ -918,6 +1011,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                  dof_set,</div>
 <div class="line">                  mpi_communicator);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">                <a class="code" href="namespaceMGTools.html#a8c677f65f8f1d21fb1f4c55cb90079e0">MGTools::make_interface_sparsity_pattern</a>(dof_handler,</div>
 <div class="line">                                                         mg_constrained_dofs,</div>
 <div class="line">                                                         dsp,</div>
@@ -929,6 +1023,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">            }</div>
 <div class="line">          <span class="keywordflow">break</span>;</div>
 <div class="line">        }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">default</span>:</div>
 <div class="line">        <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(<span class="keyword">false</span>, <a class="code" href="group__Exceptions.html#ga7b52b286796c23ef9ff178faf7a4b68f">ExcNotImplemented</a>());</div>
@@ -944,31 +1039,38 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="anamespacetypes_html_aed8813fee8c8a2edcc6005e6a48c321a"><div class="ttname"><a href="namespacetypes.html#aed8813fee8c8a2edcc6005e6a48c321a">types::boundary_id</a></div><div class="ttdeci">unsigned int boundary_id</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00129">types.h:129</a></div></div>
 <div class="ttc" id="astructMatrixFree_1_1AdditionalData_html_a67c9ff01c51fb7fb3ada151b83cdd409"><div class="ttname"><a href="structMatrixFree_1_1AdditionalData.html#a67c9ff01c51fb7fb3ada151b83cdd409">MatrixFree::AdditionalData::mg_level</a></div><div class="ttdeci">unsigned int mg_level</div><div class="ttdef"><b>Definition:</b> <a href="matrix__free_8h_source.html#l00448">matrix_free.h:448</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemassemble_system"></a> </p><h4>LaplaceProblem::assemble_system()</h4>
-<p>The assembly is split into three parts: <code>assemble_system()</code>, <code>assemble_multigrid()</code>, and <code>assemble_rhs()</code>. The <code>assemble_system()</code> function here assembles and stores the (global) system matrix and the right-hand side for the matrix-based methods. It is similar to the assembly in <a class="el" href="step_40.html">step-40</a>.</p>
-<p>Note that the matrix-free method does not execute this function as it does not need to assemble a matrix, and it will instead assemble the right-hand side in assemble_rhs().</p>
+<p>汇编分为三个部分：<code>assemble_system()</code>，<code>assemble_multigrid()</code>，和<code>assemble_rhs()</code>。这里的<code>assemble_system()</code>函数组装并存储（全局）系统矩阵和基于矩阵的方法的右手边。它类似于 <a class="el" href="step_40.html">step-40</a> 中的装配。</p>
+<p>注意，无矩阵方法不执行这个函数，因为它不需要装配矩阵，而是在assemble_rhs()中装配右手边。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> degree&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim, degree&gt;::assemble_system()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer, <span class="stringliteral">&quot;Assemble&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a> quadrature_formula(degree + 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> fe_values(fe,</div>
 <div class="line">                          quadrature_formula,</div>
 <div class="line">                          <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a> |</div>
 <div class="line">                            <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = fe.n_dofs_per_cell();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points    = quadrature_formula.size();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>(dofs_per_cell, dofs_per_cell);</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a>     cell_rhs(dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices(dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> Coefficient&lt;dim&gt; coefficient;</div>
 <div class="line">  RightHandSide&lt;dim&gt;     rhs;</div>
 <div class="line">  std::vector&lt;double&gt;    rhs_values(n_q_points);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">    <span class="keywordflow">if</span> (cell-&gt;is_locally_owned())</div>
@@ -976,11 +1078,14 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">        <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a> = 0;</div>
 <div class="line">        cell_rhs    = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        fe_values.reinit(cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">const</span> <span class="keywordtype">double</span> coefficient_value =</div>
 <div class="line">          coefficient.average_value(fe_values.get_quadrature_points());</div>
 <div class="line">        rhs.value_list(fe_values.get_quadrature_points(), rhs_values);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q_point = 0; q_point &lt; n_q_points; ++q_point)</div>
 <div class="line">          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
@@ -992,11 +1097,13 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                  fe_values.shape_grad(j, q_point) * <span class="comment">// * grad phi_j(x)</span></div>
 <div class="line">                  fe_values.JxW(q_point);            <span class="comment">// * dx</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">              cell_rhs(i) +=</div>
 <div class="line">                fe_values.shape_value(i, q_point) * <span class="comment">// grad phi_i(x)</span></div>
 <div class="line">                rhs_values[q_point] *               <span class="comment">// * f(x)</span></div>
 <div class="line">                fe_values.JxW(q_point);             <span class="comment">// * dx</span></div>
 <div class="line">            }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        cell-&gt;get_dof_indices(local_dof_indices);</div>
 <div class="line">        constraints.distribute_local_to_global(<a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>,</div>
@@ -1005,6 +1112,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                                               system_matrix,</div>
 <div class="line">                                               right_hand_side);</div>
 <div class="line">      }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  system_matrix.compress(<a class="code" href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a>);</div>
 <div class="line">  right_hand_side.compress(<a class="code" href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a>);</div>
@@ -1015,27 +1123,34 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="agroup__Vectors_html_gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708"><div class="ttname"><a href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a></div><div class="ttdeci">@ add</div><div class="ttdef"><b>Definition:</b> <a href="vector__operation_8h_source.html#l00053">vector_operation.h:53</a></div></div>
 <div class="ttc" id="anamespaceLocalIntegrators_1_1Advection_html_a8bc7b8136646134f73a4193adefe15f8"><div class="ttname"><a href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">LocalIntegrators::Advection::cell_matrix</a></div><div class="ttdeci">void cell_matrix(FullMatrix&lt; double &gt; &amp;M, const FEValuesBase&lt; dim &gt; &amp;fe, const FEValuesBase&lt; dim &gt; &amp;fetest, const ArrayView&lt; const std::vector&lt; double &gt;&gt; &amp;velocity, const double factor=1.)</div><div class="ttdef"><b>Definition:</b> <a href="advection_8h_source.html#l00075">advection.h:75</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemassemble_multigrid"></a> </p><h4>LaplaceProblem::assemble_multigrid()</h4>
-<p>The following function assembles and stores the multilevel matrices for the matrix-based GMG method. This function is similar to the one found in <a class="el" href="step_16.html">step-16</a>, only here it works for distributed meshes. This difference amounts to adding a condition that we only assemble on locally owned level cells and a call to <a class="el" href="namespaceUtilities.html#a6155277fd058eddb1504f9562cb1c04d">compress()</a> for each matrix that is built.</p>
+<p>下面的函数为基于矩阵的GMG方法组装和存储多级矩阵。这个函数与 <a class="el" href="step_16.html">step-16</a> 中的函数类似，只是在这里它适用于分布式网格。这个区别在于增加了一个条件，即我们只在本地拥有的水平单元上进行组装，并为每个被建立的矩阵调用压缩（）。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> degree&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim, degree&gt;::assemble_multigrid()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer, <span class="stringliteral">&quot;Assemble multigrid&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a> quadrature_formula(degree + 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> fe_values(fe,</div>
 <div class="line">                          quadrature_formula,</div>
 <div class="line">                          <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a> |</div>
 <div class="line">                            <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = fe.n_dofs_per_cell();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points    = quadrature_formula.size();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>(dofs_per_cell, dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices(dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> Coefficient&lt;dim&gt; coefficient;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;AffineConstraints&lt;double&gt;&gt; boundary_constraints(</div>
 <div class="line">    <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_global_levels());</div>
@@ -1051,8 +1166,10 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">      boundary_constraints[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].add_lines(</div>
 <div class="line">        mg_constrained_dofs.get_boundary_indices(<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      boundary_constraints[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].close();</div>
 <div class="line">    }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.cell_iterators())</div>
 <div class="line">    <span class="keywordflow">if</span> (cell-&gt;level_subdomain_id() == <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.locally_owned_subdomain())</div>
@@ -1060,8 +1177,10 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">        <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a> = 0;</div>
 <div class="line">        fe_values.reinit(cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        <span class="keyword">const</span> <span class="keywordtype">double</span> coefficient_value =</div>
 <div class="line">          coefficient.average_value(fe_values.get_quadrature_points());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q_point = 0; q_point &lt; n_q_points; ++q_point)</div>
 <div class="line">          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
@@ -1070,10 +1189,13 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                coefficient_value * fe_values.shape_grad(i, q_point) *</div>
 <div class="line">                fe_values.shape_grad(j, q_point) * fe_values.JxW(q_point);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        cell-&gt;get_mg_dof_indices(local_dof_indices);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        boundary_constraints[cell-&gt;level()].distribute_local_to_global(</div>
 <div class="line">          <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>, local_dof_indices, mg_matrix[cell-&gt;level()]);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; dofs_per_cell; ++j)</div>
@@ -1084,6 +1206,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                                                 <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>(i, j));</div>
 <div class="line">      }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_global_levels(); ++i)</div>
 <div class="line">    {</div>
 <div class="line">      mg_matrix[i].compress(<a class="code" href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a>);</div>
@@ -1091,23 +1214,23 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemassemble_rhs"></a> </p><h4>LaplaceProblem::assemble_rhs()</h4>
-<p>The final function in this triptych assembles the right-hand side vector for the matrix-free method &ndash; because in the matrix-free framework, we don't have to assemble the matrix and can get away with only assembling the right hand side. We could do this by extracting the code from the <code>assemble_system()</code> function above that deals with the right hand side, but we decide instead to go all in on the matrix-free approach and do the assembly using that way as well.</p>
-<p>The result is a function that is similar to the one found in the "Use FEEvaluation::read_dof_values_plain()
-   to avoid resolving constraints" subsection in the "Possibilities
-   for extensions" section of <a class="el" href="step_37.html">step-37</a>.</p>
-<p>The reason for this function is that the <a class="el" href="classMatrixFree.html">MatrixFree</a> operators do not take into account non-homogeneous Dirichlet constraints, instead treating all Dirichlet constraints as homogeneous. To account for this, the right-hand side here is assembled as the residual \(r_0 = f-Au_0\), where \(u_0\) is a zero vector except in the Dirichlet values. Then when solving, we have that the solution is \(u = u_0 + A^{-1}r_0\). This can be seen as a Newton iteration on a linear system with initial guess \(u_0\). The CG solve in the <code>solve()</code> function below computes \(A^{-1}r_0\) and the call to <code>constraints.distribute()</code> (which directly follows) adds the \(u_0\).</p>
-<p>Obviously, since we are considering a problem with zero Dirichlet boundary, we could have taken a similar approach to <a class="el" href="step_37.html">step-37</a> <code>assemble_rhs()</code>, but this additional work allows us to change the problem declaration if we so choose.</p>
-<p>This function has two parts in the integration loop: applying the negative of matrix \(A\) to \(u_0\) by submitting the negative of the gradient, and adding the right-hand side contribution by submitting the value \(f\). We must be sure to use <code>read_dof_values_plain()</code> for evaluating \(u_0\) as <code>read_dof_vaues()</code> would set all Dirichlet values to zero.</p>
-<p>Finally, the system_rhs vector is of type LA::MPI::Vector, but the <a class="el" href="classMatrixFree.html">MatrixFree</a> class only work for <a class="el" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector</a>. Therefore we must compute the right-hand side using <a class="el" href="classMatrixFree.html">MatrixFree</a> funtionality and then use the functions in the <code>ChangeVectorType</code> namespace to copy it to the correct type.</p>
+<p>这个三要素中的最后一个函数为无矩阵方法组装右手边的向量&ndash;因为在无矩阵框架中，我们不需要组装矩阵，只需要组装右手边就可以了。我们可以通过从上面的<code>assemble_system()</code>函数中提取处理右手边的代码来实现，但是我们决定全部采用无矩阵方法，并使用这种方式进行装配。</p>
+<p>结果是一个类似于 <a class="el" href="step_37.html">step-37</a> 中 "使用 FEEvaluation::read_dof_values_plain() 避免解决约束 "一节中的函数。</p>
+<p>这个函数的原因是MatrixFree算子不考虑非同质的Dirichlet约束，而是将所有Dirichlet约束视为同质的。为了说明这一点，这里的右手边被组装成残差 \(r_0 = f-Au_0\) ，其中 \(u_0\) 是除Dirichlet值以外的零向量。然后在求解的时候，我们可以得出解决方案是 \(u = u_0 + A^{-1}r_0\) 。这可以看作是对初始猜测为 \(u_0\) 的线性系统进行的牛顿迭代。下面<code>solve()</code>函数中的CG解计算了 \(A^{-1}r_0\) ，调用<code>constraints.distribution()</code>（直接在后面）增加了 \(u_0\) 。</p>
+<p>显然，由于我们考虑的是一个零Dirichlet边界的问题，我们可以采取类似于 <a class="el" href="step_37.html">step-37</a> <code>assemble_rhs()</code>的方法，但是这个额外的工作允许我们在选择时改变问题的声明。</p>
+<p>这个函数在积分循环中有两个部分：通过提交梯度的负值将矩阵 \(A\) 的负值应用于 \(u_0\) ，通过提交值 \(f\) 添加右手边的贡献。我们必须确保使用<code>read_dof_values_plain()</code>来评估 \(u_0\) ，因为<code>read_dof_vaues()</code>会将所有Dirichlet值设为0。</p>
+<p>最后，system_rhs向量的类型是 LA::MPI::Vector, ，但MatrixFree类只对 <a class="el" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector</a>. 起作用，因此我们必须使用MatrixFree函数性计算右手边，然后使用<code>ChangeVectorType</code>命名空间中的函数将其复制到正确类型。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> degree&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim, degree&gt;::assemble_rhs()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer, <span class="stringliteral">&quot;Assemble right-hand side&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  MatrixFreeActiveVector solution_copy;</div>
 <div class="line">  MatrixFreeActiveVector right_hand_side_copy;</div>
 <div class="line">  mf_system_matrix.initialize_dof_vector(solution_copy);</div>
 <div class="line">  mf_system_matrix.initialize_dof_vector(right_hand_side_copy);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  solution_copy = 0.;</div>
 <div class="line">  constraints.distribute(solution_copy);</div>
@@ -1116,10 +1239,13 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classTable.html">Table&lt;2, VectorizedArray&lt;double&gt;</a>&gt; &amp;coefficient =</div>
 <div class="line">    *(mf_system_matrix.get_coefficient());</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  RightHandSide&lt;dim&gt; right_hand_side_function;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEEvaluation.html">FEEvaluation&lt;dim, degree, degree + 1, 1, double&gt;</a> phi(</div>
 <div class="line">    *mf_system_matrix.get_matrix_free());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cell = 0;</div>
 <div class="line">       cell &lt; mf_system_matrix.get_matrix_free()-&gt;n_cell_batches();</div>
@@ -1128,6 +1254,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">      phi.reinit(cell);</div>
 <div class="line">      phi.read_dof_values_plain(solution_copy);</div>
 <div class="line">      phi.evaluate(<a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aea91b5f00e4be473005cc331b8644ab2f1">EvaluationFlags::gradients</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; phi.n_q_points; ++q)</div>
 <div class="line">        {</div>
@@ -1138,12 +1265,15 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">            right_hand_side_function.value(phi.quadrature_point(q)), q);</div>
 <div class="line">        }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      phi.integrate_scatter(<a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">EvaluationFlags::values</a> |</div>
 <div class="line">                              <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aea91b5f00e4be473005cc331b8644ab2f1">EvaluationFlags::gradients</a>,</div>
 <div class="line">                            right_hand_side_copy);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  right_hand_side_copy.compress(<a class="code" href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="namespaceinternal_1_1VectorOperations.html#a40c8daa0881cff0123fbaeb08929f5cb">ChangeVectorTypes::copy</a>(right_hand_side, right_hand_side_copy);</div>
 <div class="line">}</div>
@@ -1151,26 +1281,30 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="anamespaceEvaluationFlags_html_a9b7c6d689cb76386839d0d13640f59aea91b5f00e4be473005cc331b8644ab2f1"><div class="ttname"><a href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aea91b5f00e4be473005cc331b8644ab2f1">EvaluationFlags::gradients</a></div><div class="ttdeci">@ gradients</div><div class="ttdef"><b>Definition:</b> <a href="evaluation__flags_8h_source.html#l00055">evaluation_flags.h:55</a></div></div>
 <div class="ttc" id="anamespaceEvaluationFlags_html_a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58"><div class="ttname"><a href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">EvaluationFlags::values</a></div><div class="ttdeci">@ values</div><div class="ttdef"><b>Definition:</b> <a href="evaluation__flags_8h_source.html#l00051">evaluation_flags.h:51</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemsolve"></a> </p><h4>LaplaceProblem::solve()</h4>
-<p>Here we set up the multigrid preconditioner, test the timing of a single V-cycle, and solve the linear system. Unsurprisingly, this is one of the places where the three methods differ the most.</p>
+<p>这里我们设置了多网格预处理程序，测试了单个V型循环的时间，并解决了线性系统。不出所料，这是三种方法差别最大的地方之一。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> degree&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim, degree&gt;::solve()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer, <span class="stringliteral">&quot;Solve&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classSolverControl.html">SolverControl</a> solver_control(1000, 1.e-10 * right_hand_side.l2_norm());</div>
 <div class="line">  solver_control.enable_history_data();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  solution = 0.;</div>
 <div class="ttc" id="aclassSolverControl_html"><div class="ttname"><a href="classSolverControl.html">SolverControl</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__control_8h_source.html#l00065">solver_control.h:66</a></div></div>
-</div><!-- fragment --><p>The solver for the matrix-free GMG method is similar to <a class="el" href="step_37.html">step-37</a>, apart from adding some interface matrices in complete analogy to <a class="el" href="step_16.html">step-16</a>.</p>
+</div><!-- fragment --><p>无矩阵GMG方法的求解器与 <a class="el" href="step_37.html">step-37</a> 相似，除了加入一些接口矩阵，完全与 <a class="el" href="step_16.html">step-16</a> 类似。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">switch</span> (settings.solver)</div>
 <div class="line">  {</div>
 <div class="line">    <span class="keywordflow">case</span> Settings::gmg_mf:</div>
 <div class="line">      {</div>
 <div class="line">        computing_timer.enter_subsection(<span class="stringliteral">&quot;Solve: Preconditioner setup&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        <a class="code" href="classMGTransferMatrixFree.html">MGTransferMatrixFree&lt;dim, float&gt;</a> mg_transfer(mg_constrained_dofs);</div>
 <div class="line">        mg_transfer.build(dof_handler);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <a class="code" href="classSolverControl.html">SolverControl</a> coarse_solver_control(1000, 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-12, <span class="keyword">false</span>, <span class="keyword">false</span>);</div>
 <div class="line">        <a class="code" href="classSolverCG.html">SolverCG&lt;MatrixFreeLevelVector&gt;</a> coarse_solver(coarse_solver_control);</div>
@@ -1180,6 +1314,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                                    MatrixFreeLevelMatrix,</div>
 <div class="line">                                    <a class="code" href="classPreconditionIdentity.html">PreconditionIdentity</a>&gt;</div>
 <div class="line">          coarse_grid_solver(coarse_solver, mf_mg_matrix[0], <a class="code" href="structidentity.html">identity</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">using</span> Smoother = <a class="code" href="classPreconditionJacobi.html">::PreconditionJacobi&lt;MatrixFreeLevelMatrix&gt;</a>;</div>
 <div class="line">        <a class="code" href="classMGSmootherPrecondition.html">MGSmootherPrecondition</a>&lt;MatrixFreeLevelMatrix,</div>
@@ -1191,7 +1326,9 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                              settings.smoother_dampen));</div>
 <div class="line">        smoother.set_steps(settings.smoother_steps);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        <a class="code" href="classmg_1_1Matrix.html">mg::Matrix&lt;MatrixFreeLevelVector&gt;</a> mg_m(mf_mg_matrix);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <a class="code" href="classMGLevelObject.html">MGLevelObject</a>&lt;</div>
 <div class="line">          <a class="code" href="classMatrixFreeOperators_1_1MGInterfaceOperator.html">MatrixFreeOperators::MGInterfaceOperator&lt;MatrixFreeLevelMatrix&gt;</a>&gt;</div>
@@ -1202,9 +1339,11 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">          mg_interface_matrices[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].initialize(mf_mg_matrix[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>]);</div>
 <div class="line">        <a class="code" href="classmg_1_1Matrix.html">mg::Matrix&lt;MatrixFreeLevelVector&gt;</a> mg_interface(mg_interface_matrices);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        <a class="code" href="classMultigrid.html">Multigrid&lt;MatrixFreeLevelVector&gt;</a> <a class="code" href="namespacemg.html">mg</a>(</div>
 <div class="line">          mg_m, coarse_grid_solver, mg_transfer, smoother, smoother);</div>
 <div class="line">        <a class="code" href="namespacemg.html">mg</a>.set_edge_matrices(mg_interface, mg_interface);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <a class="code" href="classPreconditionMG.html">PreconditionMG</a>&lt;dim,</div>
 <div class="line">                       MatrixFreeLevelVector,</div>
@@ -1222,25 +1361,27 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="aclassmg_1_1Matrix_html"><div class="ttname"><a href="classmg_1_1Matrix.html">mg::Matrix</a></div><div class="ttdef"><b>Definition:</b> <a href="mg__matrix_8h_source.html#l00044">mg_matrix.h:45</a></div></div>
 <div class="ttc" id="anamespacemg_html"><div class="ttname"><a href="namespacemg.html">mg</a></div><div class="ttdef"><b>Definition:</b> <a href="mg_8h_source.html#l00081">mg.h:82</a></div></div>
 <div class="ttc" id="astructidentity_html"><div class="ttname"><a href="structidentity.html">identity</a></div><div class="ttdef"><b>Definition:</b> <a href="template__constraints_8h_source.html#l00179">template_constraints.h:180</a></div></div>
-</div><!-- fragment --><p>Copy the solution vector and right-hand side from LA::MPI::Vector to <a class="el" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector</a> so that we can solve.</p>
+</div><!-- fragment --><p>将 LA::MPI::Vector 中的求解向量和右手边复制到 <a class="el" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector</a> 中，这样我们就可以解决。</p>
 <div class="fragment"><div class="line">MatrixFreeActiveVector solution_copy;</div>
 <div class="line">MatrixFreeActiveVector right_hand_side_copy;</div>
 <div class="line">mf_system_matrix.initialize_dof_vector(solution_copy);</div>
 <div class="line">mf_system_matrix.initialize_dof_vector(right_hand_side_copy);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><a class="code" href="namespaceinternal_1_1VectorOperations.html#a40c8daa0881cff0123fbaeb08929f5cb">ChangeVectorTypes::copy</a>(solution_copy, solution);</div>
 <div class="line"><a class="code" href="namespaceinternal_1_1VectorOperations.html#a40c8daa0881cff0123fbaeb08929f5cb">ChangeVectorTypes::copy</a>(right_hand_side_copy, right_hand_side);</div>
 <div class="line">computing_timer.leave_subsection(<span class="stringliteral">&quot;Solve: Preconditioner setup&quot;</span>);</div>
-</div><!-- fragment --><p>Timing for 1 V-cycle.</p>
+</div><!-- fragment --><p>1个V型周期的计时。</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer,</div>
 <div class="line">                            <span class="stringliteral">&quot;Solve: 1 multigrid V-cycle&quot;</span>);</div>
 <div class="line">  preconditioner.vmult(solution_copy, right_hand_side_copy);</div>
 <div class="line">}</div>
 <div class="line">solution_copy = 0.;</div>
-</div><!-- fragment --><p>Solve the linear system, update the ghost values of the solution, copy back to LA::MPI::Vector and distribute constraints.</p>
+</div><!-- fragment --><p>求解线性系统，更新解的重影值，复制回 LA::MPI::Vector 并分配约束。</p>
 <div class="fragment"><div class="line">  {</div>
 <div class="line">    <a class="code" href="classSolverCG.html">SolverCG&lt;MatrixFreeActiveVector&gt;</a> solver(solver_control);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer, <span class="stringliteral">&quot;Solve: CG&quot;</span>);</div>
 <div class="line">    solver.solve(mf_system_matrix,</div>
@@ -1249,19 +1390,23 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                 preconditioner);</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  solution_copy.update_ghost_values();</div>
 <div class="line">  <a class="code" href="namespaceinternal_1_1VectorOperations.html#a40c8daa0881cff0123fbaeb08929f5cb">ChangeVectorTypes::copy</a>(solution, solution_copy);</div>
 <div class="line">  constraints.distribute(solution);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">break</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Solver for the matrix-based GMG method, similar to <a class="el" href="step_16.html">step-16</a>, only using a Jacobi smoother instead of a SOR smoother (which is not implemented in parallel).</p>
+</div><!-- fragment --><p>基于矩阵的GMG方法的求解器，类似于 <a class="el" href="step_16.html">step-16</a> ，只是使用了雅可比平滑器，而不是SOR平滑器（该平滑器没有并行实现）。</p>
 <div class="fragment"><div class="line">      <span class="keywordflow">case</span> Settings::gmg_mb:</div>
 <div class="line">        {</div>
 <div class="line">          computing_timer.enter_subsection(<span class="stringliteral">&quot;Solve: Preconditioner setup&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          <a class="code" href="classMGTransferPrebuilt.html">MGTransferPrebuilt&lt;VectorType&gt;</a> mg_transfer(mg_constrained_dofs);</div>
 <div class="line">          mg_transfer.build(dof_handler);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <a class="code" href="classSolverControl.html">SolverControl</a>        coarse_solver_control(1000, 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-12, <span class="keyword">false</span>, <span class="keyword">false</span>);</div>
 <div class="line">          <a class="code" href="classSolverCG.html">SolverCG&lt;VectorType&gt;</a> coarse_solver(coarse_solver_control);</div>
@@ -1272,8 +1417,10 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                                      <a class="code" href="classPreconditionIdentity.html">PreconditionIdentity</a>&gt;</div>
 <div class="line">            coarse_grid_solver(coarse_solver, mg_matrix[0], <a class="code" href="structidentity.html">identity</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          <span class="keyword">using</span> Smoother = <a class="code" href="namespaceLinearAlgebraPETSc_1_1MPI.html#a84fd288bacabd1a7e3408885fb0fad01">LA::MPI::PreconditionJacobi</a>;</div>
 <div class="line">          <a class="code" href="classMGSmootherPrecondition.html">MGSmootherPrecondition&lt;MatrixType, Smoother, VectorType&gt;</a> smoother;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#ifdef USE_PETSC_LA</span></div>
 <div class="line">          smoother.<a class="code" href="classMGSmootherPrecondition.html#a3cb789b815bf6719eee79e2137c9bd84">initialize</a>(mg_matrix);</div>
@@ -1285,34 +1432,40 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">          smoother.<a class="code" href="classMGSmootherPrecondition.html#a3cb789b815bf6719eee79e2137c9bd84">initialize</a>(mg_matrix, settings.smoother_dampen);</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          smoother.<a class="code" href="classMGSmoother.html#a9976182b6b272aac7800a8fbf18c8ab9">set_steps</a>(settings.smoother_steps);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <a class="code" href="classmg_1_1Matrix.html">mg::Matrix&lt;VectorType&gt;</a> mg_m(mg_matrix);</div>
 <div class="line">          <a class="code" href="classmg_1_1Matrix.html">mg::Matrix&lt;VectorType&gt;</a> mg_in(mg_interface_in);</div>
 <div class="line">          <a class="code" href="classmg_1_1Matrix.html">mg::Matrix&lt;VectorType&gt;</a> mg_out(mg_interface_in);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <a class="code" href="classMultigrid.html">Multigrid&lt;VectorType&gt;</a> <a class="code" href="namespacemg.html">mg</a>(</div>
 <div class="line">            mg_m, coarse_grid_solver, mg_transfer, smoother, smoother);</div>
 <div class="line">          <a class="code" href="namespacemg.html">mg</a>.set_edge_matrices(mg_out, mg_in);</div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          <a class="code" href="classPreconditionMG.html">PreconditionMG&lt;dim, VectorType, MGTransferPrebuilt&lt;VectorType&gt;</a>&gt;</div>
 <div class="line">            preconditioner(dof_handler, <a class="code" href="namespacemg.html">mg</a>, mg_transfer);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          computing_timer.leave_subsection(<span class="stringliteral">&quot;Solve: Preconditioner setup&quot;</span>);</div>
 <div class="ttc" id="aclassMGSmootherPrecondition_html_a3cb789b815bf6719eee79e2137c9bd84"><div class="ttname"><a href="classMGSmootherPrecondition.html#a3cb789b815bf6719eee79e2137c9bd84">MGSmootherPrecondition::initialize</a></div><div class="ttdeci">void initialize(const MGLevelObject&lt; MatrixType2 &gt; &amp;matrices, const typename PreconditionerType::AdditionalData &amp;additional_data=typename PreconditionerType::AdditionalData())</div></div>
 <div class="ttc" id="aclassMGSmoother_html_a9976182b6b272aac7800a8fbf18c8ab9"><div class="ttname"><a href="classMGSmoother.html#a9976182b6b272aac7800a8fbf18c8ab9">MGSmoother::set_steps</a></div><div class="ttdeci">void set_steps(const unsigned int)</div></div>
 <div class="ttc" id="aclassMGTransferPrebuilt_html"><div class="ttname"><a href="classMGTransferPrebuilt.html">MGTransferPrebuilt</a></div><div class="ttdef"><b>Definition:</b> <a href="mg__transfer_8h_source.html#l00636">mg_transfer.h:637</a></div></div>
-</div><!-- fragment --><p>Timing for 1 V-cycle.</p>
+</div><!-- fragment --><p>1个V型周期的计时。</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer,</div>
 <div class="line">                            <span class="stringliteral">&quot;Solve: 1 multigrid V-cycle&quot;</span>);</div>
 <div class="line">  preconditioner.vmult(solution, right_hand_side);</div>
 <div class="line">}</div>
 <div class="line">solution = 0.;</div>
-</div><!-- fragment --><p>Solve the linear system and distribute constraints.</p>
+</div><!-- fragment --><p>解决线性系统和分配约束。</p>
 <div class="fragment"><div class="line">  {</div>
 <div class="line">    <a class="code" href="classSolverCG.html">SolverCG&lt;VectorType&gt;</a> solver(solver_control);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer, <span class="stringliteral">&quot;Solve: CG&quot;</span>);</div>
 <div class="line">    solver.solve(system_matrix,</div>
@@ -1321,17 +1474,21 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                 preconditioner);</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  constraints.distribute(solution);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">break</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Solver for the AMG method, similar to <a class="el" href="step_40.html">step-40</a>.</p>
+</div><!-- fragment --><p>AMG方法的求解器，类似于 <a class="el" href="step_40.html">step-40</a> 。</p>
 <div class="fragment"><div class="line">      <span class="keywordflow">case</span> Settings::amg:</div>
 <div class="line">        {</div>
 <div class="line">          computing_timer.enter_subsection(<span class="stringliteral">&quot;Solve: Preconditioner setup&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          <a class="code" href="namespaceLinearAlgebraPETSc_1_1MPI.html#a41f11f7a1992c6d6aa9367b12c68f791">PreconditionAMG</a>                 preconditioner;</div>
 <div class="line">          PreconditionAMG::AdditionalData Amg_data;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#ifdef USE_PETSC_LA</span></div>
 <div class="line">          Amg_data.symmetric_operator = <span class="keyword">true</span>;</div>
@@ -1343,21 +1500,24 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">          Amg_data.aggregation_threshold = 0.02;</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          Amg_data.output_details = <span class="keyword">false</span>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          preconditioner.<a class="code" href="classPETScWrappers_1_1PreconditionBoomerAMG.html#a3c82672eac786d7f369b296439859ff2">initialize</a>(system_matrix, Amg_data);</div>
 <div class="line">          computing_timer.leave_subsection(<span class="stringliteral">&quot;Solve: Preconditioner setup&quot;</span>);</div>
 <div class="ttc" id="aclassPETScWrappers_1_1PreconditionBoomerAMG_html_a3c82672eac786d7f369b296439859ff2"><div class="ttname"><a href="classPETScWrappers_1_1PreconditionBoomerAMG.html#a3c82672eac786d7f369b296439859ff2">PETScWrappers::PreconditionBoomerAMG::initialize</a></div><div class="ttdeci">void initialize(const MatrixBase &amp;matrix, const AdditionalData &amp;additional_data=AdditionalData())</div><div class="ttdef"><b>Definition:</b> <a href="petsc__precondition_8cc_source.html#l00679">petsc_precondition.cc:679</a></div></div>
-</div><!-- fragment --><p>Timing for 1 V-cycle.</p>
+</div><!-- fragment --><p>为1个V型周期计时。</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer,</div>
 <div class="line">                            <span class="stringliteral">&quot;Solve: 1 multigrid V-cycle&quot;</span>);</div>
 <div class="line">  preconditioner.vmult(solution, right_hand_side);</div>
 <div class="line">}</div>
 <div class="line">solution = 0.;</div>
-</div><!-- fragment --><p>Solve the linear system and distribute constraints.</p>
+</div><!-- fragment --><p>解决线性系统和分配约束。</p>
 <div class="fragment"><div class="line">          {</div>
 <div class="line">            <a class="code" href="classSolverCG.html">SolverCG&lt;VectorType&gt;</a> solver(solver_control);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">            <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer, <span class="stringliteral">&quot;Solve: CG&quot;</span>);</div>
 <div class="line">            solver.solve(system_matrix,</div>
@@ -1367,19 +1527,22 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">          }</div>
 <div class="line">          constraints.distribute(solution);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          <span class="keywordflow">break</span>;</div>
 <div class="line">        }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">default</span>:</div>
 <div class="line">        <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(<span class="keyword">false</span>, <a class="code" href="group__Exceptions.html#ga31978c026b8b6b5116df30b8e748f6b7">ExcInternalError</a>());</div>
 <div class="line">    }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  pcout &lt;&lt; <span class="stringliteral">&quot;   Number of CG iterations:      &quot;</span> &lt;&lt; solver_control.last_step()</div>
 <div class="line">        &lt;&lt; std::endl;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__Exceptions_html_ga31978c026b8b6b5116df30b8e748f6b7"><div class="ttname"><a href="group__Exceptions.html#ga31978c026b8b6b5116df30b8e748f6b7">StandardExceptions::ExcInternalError</a></div><div class="ttdeci">static ::ExceptionBase &amp; ExcInternalError()</div></div>
 </div><!-- fragment --><p><a class="anchor" id="Theerrorestimator"></a> </p><h3>The error estimator</h3>
-<p>We use the <a class="el" href="classFEInterfaceValues.html">FEInterfaceValues</a> class to assemble an error estimator to decide which cells to refine. See the exact definition of the cell and face integrals in the introduction. To use the method, we define Scratch and Copy objects for the <a class="el" href="group__MeshWorker.html#ga76ec61fbd188fb320fe8ca166a79b322">MeshWorker::mesh_loop()</a> with much of the following code being in essence as was set up in <a class="el" href="step_12.html">step-12</a> already (or at least similar in spirit).</p>
+<p>我们使用FEInterfaceValues类来组装一个误差估计器，以决定哪些单元需要细化。请看介绍中对单元和面积分的确切定义。为了使用该方法，我们为 <a class="el" href="group__MeshWorker.html#ga76ec61fbd188fb320fe8ca166a79b322">MeshWorker::mesh_loop()</a> 定义了Scratch和Copy对象，下面的大部分代码在本质上与 <a class="el" href="step_12.html">step-12</a> 中已经设置的一样（或者至少在精神上相似）。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">struct </span>ScratchData</div>
 <div class="line">{</div>
@@ -1396,6 +1559,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">  {}</div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  ScratchData(<span class="keyword">const</span> ScratchData&lt;dim&gt; &amp;scratch_data)</div>
 <div class="line">    : fe_values(scratch_data.fe_values.get_mapping(),</div>
 <div class="line">                scratch_data.fe_values.get_fe(),</div>
@@ -1407,9 +1571,12 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                          scratch_data.fe_interface_values.get_update_flags())</div>
 <div class="line">  {}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a>          fe_values;</div>
 <div class="line">  <a class="code" href="classFEInterfaceValues.html">FEInterfaceValues&lt;dim&gt;</a> fe_interface_values;</div>
 <div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -1420,7 +1587,9 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">    , <a class="code" href="namespaceinternal.html#aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804">value</a>(0.)</div>
 <div class="line">  {}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  CopyData(<span class="keyword">const</span> CopyData &amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">struct </span>FaceData</div>
 <div class="line">  {</div>
@@ -1428,10 +1597,12 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">    <span class="keywordtype">double</span>       <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">values</a>[2];</div>
 <div class="line">  };</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>          <a class="code" href="grid__tools_8cc.html#aff11e57deb99b39b7d7d26cf866798f2">cell_index</a>;</div>
 <div class="line">  <span class="keywordtype">double</span>                <a class="code" href="namespaceinternal.html#aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804">value</a>;</div>
 <div class="line">  std::vector&lt;FaceData&gt; face_data;</div>
 <div class="line">};</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> degree&gt;</div>
@@ -1439,15 +1610,19 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer, <span class="stringliteral">&quot;Estimate&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  VectorType temp_solution;</div>
 <div class="line">  temp_solution.reinit(locally_owned_dofs,</div>
 <div class="line">                       locally_relevant_dofs,</div>
 <div class="line">                       mpi_communicator);</div>
 <div class="line">  temp_solution = solution;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> Coefficient&lt;dim&gt; coefficient;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  estimated_error_square_per_cell.<a class="code" href="classTableBase.html#a302ef67031a523602fd39911b968d6ab">reinit</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">using</span> Iterator = <span class="keyword">typename</span> <a class="code" href="group__Iterators.html#ga6b8bbcafed8847f3030ea30c6990eb2d">DoFHandler&lt;dim&gt;::active_cell_iterator</a>;</div>
 <div class="ttc" id="aclassFEInterfaceValues_html"><div class="ttname"><a href="classFEInterfaceValues.html">FEInterfaceValues</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__interface__values_8h_source.html#l00053">fe_interface_values.h:54</a></div></div>
@@ -1459,22 +1634,28 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="agroup__Iterators_html_ga6b8bbcafed8847f3030ea30c6990eb2d"><div class="ttname"><a href="group__Iterators.html#ga6b8bbcafed8847f3030ea30c6990eb2d">DoFHandler::active_cell_iterator</a></div><div class="ttdeci">typename ActiveSelector::active_cell_iterator active_cell_iterator</div><div class="ttdef"><b>Definition:</b> <a href="dofs_2dof__handler_8h_source.html#l00438">dof_handler.h:438</a></div></div>
 <div class="ttc" id="anamespacenumbers_html"><div class="ttname"><a href="namespacenumbers.html">numbers</a></div><div class="ttdef"><b>Definition:</b> <a href="numbers_8h_source.html#l00201">numbers.h:202</a></div></div>
 <div class="ttc" id="anamespacenumbers_html_a8ae36952c7e0cc778b47b5371b3aeff1"><div class="ttname"><a href="namespacenumbers.html#a8ae36952c7e0cc778b47b5371b3aeff1">numbers::invalid_unsigned_int</a></div><div class="ttdeci">static const unsigned int invalid_unsigned_int</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00196">types.h:196</a></div></div>
-</div><!-- fragment --><p>Assembler for cell residual \(h^2 \| f + \epsilon \triangle u \|_K^2\)</p>
+</div><!-- fragment --><p>残余单元格的汇编器 \(h^2 \| f + \epsilon \triangle u \|_K^2\) <br  />
+</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> cell_worker = [&amp;](<span class="keyword">const</span> Iterator &amp;  cell,</div>
 <div class="line">                       ScratchData&lt;dim&gt; &amp;scratch_data,</div>
 <div class="line">                       CopyData &amp;        copy_data) {</div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> &amp;fe_values = scratch_data.fe_values;</div>
 <div class="line">  fe_values.<a class="code" href="classFEValues.html#a21f914e63d588e2652a9514620653d77">reinit</a>(cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  RightHandSide&lt;dim&gt; rhs;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span>       rhs_value = rhs.value(cell-&gt;center());</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> nu = coefficient.value(cell-&gt;center());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;Tensor&lt;2, dim&gt;&gt; <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaccf663e018d31c264b769c80bd91db4d">hessians</a>(fe_values.<a class="code" href="classFEValuesBase.html#a807c3049bfe81743fc0f237dfc2fbdea">n_quadrature_points</a>);</div>
 <div class="line">  fe_values.<a class="code" href="classFEValuesBase.html#ae8f183c9d6da0c7daf9d345e0bc91b0a">get_function_hessians</a>(temp_solution, <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaccf663e018d31c264b769c80bd91db4d">hessians</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  copy_data.cell_index = cell-&gt;active_cell_index();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">double</span> residual_norm_square = 0.;</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> k = 0; k &lt; fe_values.<a class="code" href="classFEValuesBase.html#a807c3049bfe81743fc0f237dfc2fbdea">n_quadrature_points</a>; ++k)</div>
@@ -1482,6 +1663,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> residual = (rhs_value + nu * <a class="code" href="classSymmetricTensor.html#a9137b6052702150e8e5b1188d1971906">trace</a>(<a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaccf663e018d31c264b769c80bd91db4d">hessians</a>[k]));</div>
 <div class="line">      residual_norm_square += residual * residual * fe_values.<a class="code" href="classFEValuesBase.html#abade89efb068b71b7ced7082012a2441">JxW</a>(k);</div>
 <div class="line">    }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  copy_data.value =</div>
 <div class="line">    cell-&gt;diameter() * cell-&gt;diameter() * residual_norm_square;</div>
@@ -1492,7 +1674,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="aclassFEValues_html_a21f914e63d588e2652a9514620653d77"><div class="ttname"><a href="classFEValues.html#a21f914e63d588e2652a9514620653d77">FEValues::reinit</a></div><div class="ttdeci">void reinit(const TriaIterator&lt; DoFCellAccessor&lt; dim, spacedim, level_dof_access &gt;&gt; &amp;cell)</div></div>
 <div class="ttc" id="aclassSymmetricTensor_html_a9137b6052702150e8e5b1188d1971906"><div class="ttname"><a href="classSymmetricTensor.html#a9137b6052702150e8e5b1188d1971906">SymmetricTensor::trace</a></div><div class="ttdeci">constexpr Number trace(const SymmetricTensor&lt; 2, dim, Number &gt; &amp;d)</div><div class="ttdef"><b>Definition:</b> <a href="symmetric__tensor_8h_source.html#l02680">symmetric_tensor.h:2680</a></div></div>
 <div class="ttc" id="anamespaceEvaluationFlags_html_a9b7c6d689cb76386839d0d13640f59aeaccf663e018d31c264b769c80bd91db4d"><div class="ttname"><a href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaccf663e018d31c264b769c80bd91db4d">EvaluationFlags::hessians</a></div><div class="ttdeci">@ hessians</div><div class="ttdef"><b>Definition:</b> <a href="evaluation__flags_8h_source.html#l00060">evaluation_flags.h:59</a></div></div>
-</div><!-- fragment --><p>Assembler for face term \(\sum_F h_F \| \jump{\epsilon \nabla u \cdot n} \|_F^2\)</p>
+</div><!-- fragment --><p>脸部术语的汇编器 \(\sum_F h_F \| \jump{\epsilon \nabla u \cdot n} \|_F^2\)</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> face_worker = [&amp;](<span class="keyword">const</span> Iterator &amp;    cell,</div>
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;f,</div>
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;sf,</div>
@@ -1505,16 +1687,21 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">    scratch_data.fe_interface_values;</div>
 <div class="line">  fe_interface_values.<a class="code" href="classFEInterfaceValues.html#af6aa20b6652c2605d4cee36021f6bcd2">reinit</a>(cell, f, sf, ncell, nf, nsf);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  copy_data.face_data.emplace_back();</div>
 <div class="line">  CopyData::FaceData &amp;copy_data_face = copy_data.face_data.back();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  copy_data_face.cell_indices[0] = cell-&gt;active_cell_index();</div>
 <div class="line">  copy_data_face.cell_indices[1] = ncell-&gt;active_cell_index();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> coeff1 = coefficient.value(cell-&gt;center());</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> coeff2 = coefficient.value(ncell-&gt;center());</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;Tensor&lt;1, dim&gt;&gt; grad_u[2];</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; 2; ++i)</div>
 <div class="line">    {</div>
@@ -1523,7 +1710,9 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">        temp_solution, grad_u[i]);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">double</span> jump_norm_square = 0.;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> qpoint = 0;</div>
 <div class="line">       qpoint &lt; fe_interface_values.<a class="code" href="classFEInterfaceValues.html#a41f6734be1313f750fa8b3b7ba470f35">n_quadrature_points</a>;</div>
@@ -1533,22 +1722,27 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">        coeff1 * grad_u[0][qpoint] * fe_interface_values.<a class="code" href="classFEInterfaceValues.html#a1a52fcfa2f54f153cc7cdda3788e5ac0">normal</a>(qpoint) -</div>
 <div class="line">        coeff2 * grad_u[1][qpoint] * fe_interface_values.<a class="code" href="classFEInterfaceValues.html#a1a52fcfa2f54f153cc7cdda3788e5ac0">normal</a>(qpoint);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      jump_norm_square += jump * jump * fe_interface_values.<a class="code" href="classFEInterfaceValues.html#a9f8f06f7da061e1c2a20c5cc68a89db1">JxW</a>(qpoint);</div>
 <div class="line">    }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> h           = cell-&gt;face(f)-&gt;measure();</div>
 <div class="line">  copy_data_face.values[0] = 0.5 * h * jump_norm_square;</div>
 <div class="line">  copy_data_face.values[1] = copy_data_face.values[0];</div>
 <div class="line">};</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> copier = [&amp;](<span class="keyword">const</span> CopyData &amp;copy_data) {</div>
 <div class="line">  <span class="keywordflow">if</span> (copy_data.cell_index != <a class="code" href="namespacenumbers.html#a8ae36952c7e0cc778b47b5371b3aeff1">numbers::invalid_unsigned_int</a>)</div>
 <div class="line">    estimated_error_square_per_cell[copy_data.cell_index] += copy_data.value;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;cdf : copy_data.face_data)</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; 2; ++j)</div>
 <div class="line">      estimated_error_square_per_cell[cdf.cell_indices[j]] += cdf.values[j];</div>
 <div class="line">};</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_gauss_points = degree + 1;</div>
 <div class="line">ScratchData&lt;dim&gt;   scratch_data(mapping,</div>
@@ -1566,7 +1760,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="aclassFEInterfaceValues_html_af6aa20b6652c2605d4cee36021f6bcd2"><div class="ttname"><a href="classFEInterfaceValues.html#af6aa20b6652c2605d4cee36021f6bcd2">FEInterfaceValues::reinit</a></div><div class="ttdeci">void reinit(const CellIteratorType &amp;cell, const unsigned int face_no, const unsigned int sub_face_no, const typename identity&lt; CellIteratorType &gt;::type &amp;cell_neighbor, const unsigned int face_no_neighbor, const unsigned int sub_face_no_neighbor)</div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fa378cbcddbdf54fb3f9f0acf47b1c4719"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa378cbcddbdf54fb3f9f0acf47b1c4719">update_hessians</a></div><div class="ttdeci">@ update_hessians</div><div class="ttdoc">Second derivatives of shape functions.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00090">fe_update_flags.h:90</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fa5e7366a91c84a50ca4e7dbd43ca6369f"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa5e7366a91c84a50ca4e7dbd43ca6369f">update_normal_vectors</a></div><div class="ttdeci">@ update_normal_vectors</div><div class="ttdoc">Normal vectors.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00136">fe_update_flags.h:136</a></div></div>
-</div><!-- fragment --><p>We need to assemble each interior face once but we need to make sure that both processes assemble the face term between a locally owned and a ghost cell. This is achieved by setting the <a class="el" href="namespaceMeshWorker.html#ac7a9db8b34d398d7d398d1e8809874aaa9396964e7e270fe0a0c5d01474721c24">MeshWorker::assemble_ghost_faces_both</a> flag. We need to do this, because we do not communicate the error estimator contributions here.</p>
+</div><!-- fragment --><p>我们需要对每个内部面进行一次组装，但我们需要确保两个进程都能对本地拥有的单元格和幽灵单元格之间的面项进行组装。这可以通过设置 <a class="el" href="namespaceMeshWorker.html#ac7a9db8b34d398d7d398d1e8809874aaa9396964e7e270fe0a0c5d01474721c24">MeshWorker::assemble_ghost_faces_both</a> 标志来实现。我们需要这样做，因为我们在这里没有交流误差估计器的贡献。</p>
 <div class="fragment"><div class="line">  <a class="code" href="group__MeshWorker.html#ga76ec61fbd188fb320fe8ca166a79b322">MeshWorker::mesh_loop</a>(dof_handler.begin_active(),</div>
 <div class="line">                        dof_handler.end(),</div>
 <div class="line">                        cell_worker,</div>
@@ -1578,6 +1772,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                          <a class="code" href="namespaceMeshWorker.html#ac7a9db8b34d398d7d398d1e8809874aaa47c6806a06155c94191629fae2755763">MeshWorker::assemble_own_interior_faces_once</a>,</div>
 <div class="line">                        <span class="comment">/*boundary_worker=*/</span><span class="keyword">nullptr</span>,</div>
 <div class="line">                        face_worker);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> global_error_estimate =</div>
 <div class="line">    <a class="code" href="numbers_8h.html#ac4a2ed1890a931d0b6a55933310eadca">std::sqrt</a>(<a class="code" href="namespaceUtilities_1_1MPI.html#ab544a3bf3301a6dd3e705ee352c5551b">Utilities::MPI::sum</a>(estimated_error_square_per_cell.l1_norm(),</div>
@@ -1592,26 +1787,29 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="anamespaceUtilities_1_1MPI_html_ab544a3bf3301a6dd3e705ee352c5551b"><div class="ttname"><a href="namespaceUtilities_1_1MPI.html#ab544a3bf3301a6dd3e705ee352c5551b">Utilities::MPI::sum</a></div><div class="ttdeci">T sum(const T &amp;t, const MPI_Comm &amp;mpi_communicator)</div></div>
 <div class="ttc" id="anumbers_8h_html_ac4a2ed1890a931d0b6a55933310eadca"><div class="ttname"><a href="numbers_8h.html#ac4a2ed1890a931d0b6a55933310eadca">std::sqrt</a></div><div class="ttdeci">::VectorizedArray&lt; Number, width &gt; sqrt(const ::VectorizedArray&lt; Number, width &gt; &amp;)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l05406">vectorization.h:5406</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemrefine_grid"></a> </p><h4>LaplaceProblem::refine_grid()</h4>
-<p>We use the cell-wise estimator stored in the vector <code>estimate_vector</code> and refine a fixed number of cells (chosen here to roughly double the number of DoFs in each step).</p>
+<p>我们使用存储在向量 <code>estimate_vector</code> 中的单元估计器，并细化固定数量的单元（这里选择的是每一步中大约两倍的DoF数量）。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> degree&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim, degree&gt;::refine_grid()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer, <span class="stringliteral">&quot;Refine grid&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> refinement_fraction = 1. / (<a class="code" href="numbers_8h.html#af44aee1db5cdcd0bab54e3c011d2be66">std::pow</a>(2.0, dim) - 1.);</div>
 <div class="line">  <a class="code" href="namespaceparallel_1_1distributed_1_1GridRefinement.html#aa2ffb707a796ae6dedb75036606ef2e6">parallel::distributed::GridRefinement::refine_and_coarsen_fixed_number</a>(</div>
 <div class="line">    <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>, estimated_error_square_per_cell, refinement_fraction, 0.0);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.execute_coarsening_and_refinement();</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespaceparallel_1_1distributed_1_1GridRefinement_html_aa2ffb707a796ae6dedb75036606ef2e6"><div class="ttname"><a href="namespaceparallel_1_1distributed_1_1GridRefinement.html#aa2ffb707a796ae6dedb75036606ef2e6">parallel::distributed::GridRefinement::refine_and_coarsen_fixed_number</a></div><div class="ttdeci">void refine_and_coarsen_fixed_number(parallel::distributed::Triangulation&lt; dim, spacedim &gt; &amp;tria, const ::Vector&lt; Number &gt; &amp;criteria, const double top_fraction_of_cells, const double bottom_fraction_of_cells, const types::global_cell_index max_n_cells=std::numeric_limits&lt; types::global_cell_index &gt;::max())</div><div class="ttdef"><b>Definition:</b> <a href="distributed_2grid__refinement_8cc_source.html#l00493">grid_refinement.cc:493</a></div></div>
 <div class="ttc" id="anumbers_8h_html_af44aee1db5cdcd0bab54e3c011d2be66"><div class="ttname"><a href="numbers_8h.html#af44aee1db5cdcd0bab54e3c011d2be66">std::pow</a></div><div class="ttdeci">::VectorizedArray&lt; Number, width &gt; pow(const ::VectorizedArray&lt; Number, width &gt; &amp;, const Number p)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l05422">vectorization.h:5422</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemoutput_results"></a> </p><h4>LaplaceProblem::output_results()</h4>
-<p>The output_results() function is similar to the ones found in many of the tutorials (see <a class="el" href="step_40.html">step-40</a> for example).</p>
+<p>output_results()函数与许多教程中的函数相似（例如，见 <a class="el" href="step_40.html">step-40</a> ）。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> degree&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim, degree&gt;::output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle)</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> timing(computing_timer, <span class="stringliteral">&quot;Output results&quot;</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  VectorType temp_solution;</div>
 <div class="line">  temp_solution.reinit(locally_owned_dofs,</div>
@@ -1619,28 +1817,35 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                       mpi_communicator);</div>
 <div class="line">  temp_solution = solution;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classDataOut.html">DataOut&lt;dim&gt;</a> data_out;</div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ac1eb26168177faa30ffbcf9cbb9c3cd5">attach_dof_handler</a>(dof_handler);</div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(temp_solution, <span class="stringliteral">&quot;solution&quot;</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;float&gt;</a> subdomain(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; subdomain.size(); ++i)</div>
 <div class="line">    subdomain(i) = <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.locally_owned_subdomain();</div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(subdomain, <span class="stringliteral">&quot;subdomain&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;float&gt;</a> <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.active_cell_iterators())</div>
 <div class="line">    <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>(cell-&gt;active_cell_index()) = cell-&gt;level();</div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>, <span class="stringliteral">&quot;level&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">if</span> (estimated_error_square_per_cell.size() &gt; 0)</div>
 <div class="line">    data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(estimated_error_square_per_cell,</div>
 <div class="line">                             <span class="stringliteral">&quot;estimated_error_square_per_cell&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  data_out.<a class="code" href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">build_patches</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> std::string pvtu_filename = data_out.<a class="code" href="group__Exceptions.html#ga0864e51eb173c87e2a3edc9391ea8009">write_vtu_with_pvtu_record</a>(</div>
 <div class="line">    <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;solution&quot;</span>, cycle, mpi_communicator, 2 <span class="comment">/*n_digits*/</span>, 1 <span class="comment">/*n_groups*/</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  pcout &lt;&lt; <span class="stringliteral">&quot;   Wrote &quot;</span> &lt;&lt; pvtu_filename &lt;&lt; std::endl;</div>
 <div class="line">}</div>
@@ -1650,7 +1855,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="ttc" id="aclassDataOut_html_a5eb51872b8736849bb7e8d2007fae086"><div class="ttname"><a href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">DataOut::build_patches</a></div><div class="ttdeci">virtual void build_patches(const unsigned int n_subdivisions=0)</div><div class="ttdef"><b>Definition:</b> <a href="numerics_2data__out_8cc_source.html#l01085">data_out.cc:1085</a></div></div>
 <div class="ttc" id="agroup__Exceptions_html_ga0864e51eb173c87e2a3edc9391ea8009"><div class="ttname"><a href="group__Exceptions.html#ga0864e51eb173c87e2a3edc9391ea8009">DataOutInterface::write_vtu_with_pvtu_record</a></div><div class="ttdeci">std::string write_vtu_with_pvtu_record(const std::string &amp;directory, const std::string &amp;filename_without_extension, const unsigned int counter, const MPI_Comm &amp;mpi_communicator, const unsigned int n_digits_for_counter=numbers::invalid_unsigned_int, const unsigned int n_groups=0) const</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l07326">data_out_base.cc:7326</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemrun"></a> </p><h4><a class="el" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">LaplaceProblem::run()</a></h4>
-<p>As in most tutorials, this function calls the various functions defined above to setup, assemble, solve, and output the results.</p>
+<p>和大多数教程一样，这个函数调用上面定义的各种函数来设置、组合、求解和输出结果。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> degree&gt;</div>
 <div class="line"><span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">LaplaceProblem&lt;dim, degree&gt;::run</a>()</div>
 <div class="line">{</div>
@@ -1660,9 +1865,10 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">      <span class="keywordflow">if</span> (cycle &gt; 0)</div>
 <div class="line">        refine_grid();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      pcout &lt;&lt; <span class="stringliteral">&quot;   Number of active cells:       &quot;</span></div>
 <div class="line">            &lt;&lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_global_active_cells();</div>
-</div><!-- fragment --><p>We only output level cell data for the GMG methods (same with DoF data below). Note that the partition efficiency is irrelevant for AMG since the level hierarchy is not distributed or used during the computation.</p>
+</div><!-- fragment --><p>我们只输出GMG方法的水平单元数据（与下面的DoF数据相同）。请注意，分区效率对于AMG来说是不相关的，因为在计算过程中没有分布或使用层次结构。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (settings.solver == Settings::gmg_mf ||</div>
 <div class="line">    settings.solver == Settings::gmg_mb)</div>
 <div class="line">  pcout &lt;&lt; <span class="stringliteral">&quot; (&quot;</span> &lt;&lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_global_levels() &lt;&lt; <span class="stringliteral">&quot; global levels)&quot;</span></div>
@@ -1671,12 +1877,14 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">        &lt;&lt; 1.0 / <a class="code" href="namespaceMGTools.html#a8776ac550d9ac85e7e0db51625935673">MGTools::workload_imbalance</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>);</div>
 <div class="line">pcout &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">setup_system();</div>
 <div class="ttc" id="anamespaceMGTools_html_a8776ac550d9ac85e7e0db51625935673"><div class="ttname"><a href="namespaceMGTools.html#a8776ac550d9ac85e7e0db51625935673">MGTools::workload_imbalance</a></div><div class="ttdeci">double workload_imbalance(const Triangulation&lt; dim, spacedim &gt; &amp;tria)</div><div class="ttdef"><b>Definition:</b> <a href="mg__tools_8cc_source.html#l01612">mg_tools.cc:1612</a></div></div>
-</div><!-- fragment --><p>Only set up the multilevel hierarchy for GMG.</p>
+</div><!-- fragment --><p>只为GMG设置多级层次结构。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (settings.solver == Settings::gmg_mf ||</div>
 <div class="line">    settings.solver == Settings::gmg_mb)</div>
 <div class="line">  setup_multigrid();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">pcout &lt;&lt; <span class="stringliteral">&quot;   Number of degrees of freedom: &quot;</span> &lt;&lt; dof_handler.n_dofs();</div>
 <div class="line"><span class="keywordflow">if</span> (settings.solver == Settings::gmg_mf ||</div>
@@ -1690,7 +1898,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">                                                               <span class="stringliteral">&quot;, &quot;</span>);</div>
 <div class="line">  }</div>
 <div class="line">pcout &lt;&lt; std::endl;</div>
-</div><!-- fragment --><p>For the matrix-free method, we only assemble the right-hand side. For both matrix-based methods, we assemble both active matrix and right-hand side, and only assemble the multigrid matrices for matrix-based GMG.</p>
+</div><!-- fragment --><p>对于无矩阵方法，我们只组装右手边。对于这两种基于矩阵的方法，我们同时组装活动矩阵和右手边，对于基于矩阵的GMG，只组装多级矩阵。</p>
 <div class="fragment"><div class="line">      <span class="keywordflow">if</span> (settings.solver == Settings::gmg_mf)</div>
 <div class="line">        assemble_rhs();</div>
 <div class="line">      <span class="keywordflow">else</span> <span class="comment">/*gmg_mb or amg*/</span></div>
@@ -1700,30 +1908,36 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">            assemble_multigrid();</div>
 <div class="line">        }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      solve();</div>
 <div class="line">      estimate();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">if</span> (settings.output)</div>
 <div class="line">        output_results(cycle);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      computing_timer.print_summary();</div>
 <div class="line">      computing_timer.reset();</div>
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="Themainfunction"></a> </p><h3>The main() function</h3>
-<p>This is a similar main function to <a class="el" href="step_40.html">step-40</a>, with the exception that we require the user to pass a .prm file as a sole command line argument (see <a class="el" href="step_29.html">step-29</a> and the documentation of the <a class="el" href="classParameterHandler.html">ParameterHandler</a> class for a complete discussion of parameter files).</p>
+<p>这是一个类似于 <a class="el" href="step_40.html">step-40</a> 的主函数，但我们要求用户传递一个.prm文件作为唯一的命令行参数（参见 <a class="el" href="step_29.html">step-29</a> 和ParameterHandler类的文档中关于参数文件的完整讨论）。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
 <div class="line">  <a class="code" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a> mpi_initialization(argc, argv, 1);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="namespaceTriangulationDescription.html#aa1531298eb0a267d9ceca5eb46ada8e0">Settings</a> settings;</div>
 <div class="line">  <span class="keywordflow">if</span> (!settings.try_parse((argc &gt; 1) ? (argv[1]) : <span class="stringliteral">&quot;&quot;</span>))</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">try</span></div>
 <div class="line">    {</div>
 <div class="line">      constexpr <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fe_degree = 2;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">switch</span> (settings.dimension)</div>
 <div class="line">        {</div>
@@ -1732,16 +1946,20 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">              LaplaceProblem&lt;2, fe_degree&gt; test(settings);</div>
 <div class="line">              test.run();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">              <span class="keywordflow">break</span>;</div>
 <div class="line">            }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <span class="keywordflow">case</span> 3:</div>
 <div class="line">            {</div>
 <div class="line">              LaplaceProblem&lt;3, fe_degree&gt; test(settings);</div>
 <div class="line">              test.run();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">              <span class="keywordflow">break</span>;</div>
 <div class="line">            }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <span class="keywordflow">default</span>:</div>
 <div class="line">            <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(<span class="keyword">false</span>, <a class="code" href="group__Exceptions.html#gae9a45f517af1401c50811a11083f9114">ExcMessage</a>(<span class="stringliteral">&quot;This program only works in 2d and 3d.&quot;</span>));</div>
@@ -1775,18 +1993,22 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassUtilities_1_1MPI_1_1MPI__InitFinalize_html"><div class="ttname"><a href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a></div><div class="ttdef"><b>Definition:</b> <a href="mpi_8h_source.html#l00902">mpi.h:903</a></div></div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
-<p>When you run the program using the following command </p><div class="fragment"><div class="line">mpirun -np 16 ./step-50  gmg_mf_2d.prm</div>
-</div><!-- fragment --><p> the screen output should look like the following: </p><div class="fragment"><div class="line">Cycle 0:</div>
+</div><!-- fragment --><p><a class="anchor" id="Results"></a></p><h1>Results</h1>
+<p>当你使用以下命令运行程序时</p>
+<div class="fragment"><div class="line">mpirun -np 16 ./step-50  gmg_mf_2d.prm</div>
+</div><!-- fragment --><p>屏幕输出应该如下。</p>
+<div class="fragment"><div class="line">Cycle 0:</div>
 <div class="line">   Number of active cells:       12 (2 global levels)</div>
 <div class="line">   Partition efficiency:         0.1875</div>
 <div class="line">   Number of degrees of freedom: 65 (by <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>: 21, 65)</div>
 <div class="line">   Number of CG iterations:      10</div>
 <div class="line">   Global error estimate:        0.355373</div>
 <div class="line">   Wrote solution_00.pvtu</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">+---------------------------------------------+------------+------------+</div>
@@ -1805,6 +2027,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">| Solve: Preconditioner setup     |         1 |   0.00125s |       7.7% |</div>
 <div class="line">+---------------------------------+-----------+------------+------------+</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">Cycle 1:</div>
 <div class="line">   Number of active cells:       24 (3 global levels)</div>
 <div class="line">   Partition efficiency:         0.276786</div>
@@ -1812,6 +2035,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">   Number of CG iterations:      10</div>
 <div class="line">   Global error estimate:        0.216726</div>
 <div class="line">   Wrote solution_01.pvtu</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">+---------------------------------------------+------------+------------+</div>
@@ -1831,6 +2055,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">| Solve: Preconditioner setup     |         1 |   0.00195s |        12% |</div>
 <div class="line">+---------------------------------+-----------+------------+------------+</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">Cycle 2:</div>
 <div class="line">   Number of active cells:       51 (4 global levels)</div>
 <div class="line">   Partition efficiency:         0.41875</div>
@@ -1838,6 +2063,7 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">   Number of CG iterations:      11</div>
 <div class="line">   Global error estimate:        0.112098</div>
 <div class="line">   Wrote solution_02.pvtu</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">+---------------------------------------------+------------+------------+</div>
@@ -1860,10 +2086,10 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line">.</div>
 <div class="line">.</div>
 <div class="ttc" id="anamespaceLAPACKSupport_html_aee5ef58d11434eb1d6a665e64bf17292"><div class="ttname"><a href="namespaceLAPACKSupport.html#aee5ef58d11434eb1d6a665e64bf17292">LAPACKSupport::V</a></div><div class="ttdeci">static const char V</div><div class="ttdef"><b>Definition:</b> <a href="lapack__support_8h_source.html#l00177">lapack_support.h:177</a></div></div>
-</div><!-- fragment --><p> Here, the timing of the <code>solve()</code> function is split up in 3 parts: setting up the multigrid preconditioner, execution of a single multigrid V-cycle, and the CG solver. The V-cycle that is timed is unnecessary for the overall solve and only meant to give an insight at the different costs for AMG and GMG. Also it should be noted that when using the AMG solver, "Workload imbalance" is not included in the output since the hierarchy of coarse meshes is not required.</p>
-<p>All results in this section are gathered on Intel Xeon Platinum 8280 (Cascade Lake) nodes which have 56 cores and 192GB per node and support AVX-512 instructions, allowing for vectorization over 8 doubles (vectorization used only in the matrix-free computations). The code is compiled using gcc 7.1.0 with intel-mpi 17.0.3. Trilinos 12.10.1 is used for the matrix-based GMG/AMG computations.</p>
-<p>We can then gather a variety of information by calling the program with the input files that are provided in the directory in which <a class="el" href="step_50.html">step-50</a> is located. Using these, and adjusting the number of mesh refinement steps, we can produce information about how well the program scales.</p>
-<p>The following table gives weak scaling timings for this program on up to 256M DoFs and 7,168 processors. (Recall that weak scaling keeps the number of degrees of freedom per processor constant while increasing the number of processors; i.e., it considers larger and larger problems.) Here, \(\mathbb{E}\) is the partition efficiency from the introduction (also equal to 1.0/workload imbalance), "Setup" is a combination of setup, setup multigrid, assemble, and assemble multigrid from the timing blocks, and "Prec" is the preconditioner setup. Ideally all times would stay constant over each problem size for the individual solvers, but since the partition efficiency decreases from 0.371 to 0.161 from largest to smallest problem size, we expect to see an approximately \(0.371/0.161=2.3\) times increase in timings for GMG. This is, in fact, pretty close to what we really get:</p>
+</div><!-- fragment --><p>这里，"solve() "函数的时序被分成三部分：设置多网格预处理程序，执行单一的多网格V型循环，以及CG求解器。被计时的V型循环对整个求解来说是不必要的，只是为了让人们了解AMG和GMG的不同成本。同样应该注意的是，当使用AMG求解器时，"工作量不平衡 "不包括在输出中，因为不需要粗网格的层次结构。</p>
+<p>本节的所有结果都是在英特尔至强铂金8280（Cascade Lake）节点上收集的，这些节点有56个核心，每个节点有192GB，支持AVX-512指令，允许在8个双倍数上进行矢量化（矢量化仅用于无矩阵计算）。代码是用gcc 7.1.0和intel-mpi 17.0.3编译的。Trilinos 12.10.1被用于基于矩阵的GMG/AMG计算。</p>
+<p>然后，我们可以用 <a class="el" href="step_50.html">step-50</a> 所在目录中提供的输入文件来调用程序，收集各种信息。使用这些文件，并调整网格细化步骤的数量，我们可以得出程序的扩展性如何的信息。</p>
+<p>下表给出了该程序在256M DoFs和7,168个处理器上的弱扩展时间。(回顾一下，弱缩放在增加处理器数量的同时保持每个处理器的自由度数量不变；也就是说，它考虑的是越来越大的问题。) 这里， \(\mathbb{E}\) 是介绍中的分区效率（也等于1.0/工作量不平衡），"Setup "是设置、设置多重网格、装配和装配多重网格的组合，"Prec "是预处理程序的设置。理想情况下，所有的时间在各个求解器的每个问题大小上保持不变，但是由于分区效率从最大问题大小到最小问题大小从0.371下降到0.161，我们期望看到GMG的时间大约增加 \(0.371/0.161=2.3\) 倍。事实上，这与我们真正得到的结果非常接近。</p>
 <table align="center" class="doxtable">
 <tr>
 <th colspan="4"></th><th></th><th colspan="4">MF-GMG </th><th></th><th colspan="4">MB-GMG </th><th></th><th colspan="4">AMG  </th></tr>
@@ -1878,18 +2104,20 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <tr>
 <td align="right">7,168 </td><td align="right">19 </td><td align="right">256M </td><td align="right">0.16 </td><td></td><td align="right">1.214 </td><td align="right">0.893 </td><td align="right">0.521 </td><td align="right">2.628 </td><td></td><td align="right">2.386 </td><td align="right">7.260 </td><td align="right">2.560 </td><td align="right">12.206 </td><td></td><td align="right">1.844 </td><td align="right">1.010 </td><td align="right">1.890 </td><td align="right">4.744  </td></tr>
 </table>
-<p>On the other hand, the algebraic multigrid in the last set of columns is relatively unaffected by the increasing imbalance of the mesh hierarchy (because it doesn't use the mesh hierarchy) and the growth in time is rather driven by other factors that are well documented in the literature (most notably that the algorithmic complexity of some parts of algebraic multigrid methods appears to be \({\cal O}(N \log N)\) instead of \({\cal O}(N)\) for geometric multigrid).</p>
-<p>The upshort of the table above is that the matrix-free geometric multigrid method appears to be the fastest approach to solving this equation if not by a huge margin. Matrix-based methods, on the other hand, are consistently the worst.</p>
-<p>The following figure provides strong scaling results for each method, i.e., we solve the same problem on more and more processors. Specifically, we consider the problems after 16 mesh refinement cycles (32M DoFs) and 19 cycles (256M DoFs), on between 56 to 28,672 processors:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-50-strong-scaling.png" alt="" width="600px" class="inline"/></p>
-<p>While the matrix-based GMG solver and AMG scale similarly and have a similar time to solution (at least as long as there is a substantial number of unknowns per processor &ndash; say, several 10,000), the matrix-free GMG solver scales much better and solves the finer problem in roughly the same time as the AMG solver for the coarser mesh with only an eighth of the number of processors. Conversely, it can solve the same problem on the same number of processors in about one eighth the time.</p>
+<p><br  />
+</p>
+<p>另一方面，最后一组列中的代数多重网格相对来说不受网格层次不平衡度增加的影响（因为它不使用网格层次），时间的增长反而是由文献中记载的其他因素驱动的（最明显的是代数多重网格方法的某些部分的算法复杂度似乎是 \({\cal O}(N \log N)\) 而不是几何多重网格的 \({\cal O}(N)\) ）。</p>
+<p>上表的短语是，无矩阵的几何多栅方法似乎是解决这个方程的最快方法，即使不是以巨大的优势。另一方面，基于矩阵的方法始终是最差的。</p>
+<p>下图提供了每种方法的强大扩展结果，也就是说，我们在越来越多的处理器上解决同一个问题。具体来说，我们考虑在56至28672个处理器上，经过16个网格细化周期（32M DoFs）和19个周期（256M DoFs）后的问题。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-50-strong-scaling.png" alt="" width="600px" class="inline"/> <br  />
+</p>
+<p>虽然基于矩阵的GMG求解器和AMG的规模相似，求解时间也相似（至少在每个处理器有大量未知数的情况下&ndash;比如几万个），但无矩阵的GMG求解器的规模要好得多，求解较细问题的时间与求解较粗网格的AMG求解器大致相同，处理器数量仅为后者的1/8。反之，在相同数量的处理器上，它可以用大约八分之一的时间解决同样的问题。</p>
 <p><a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions </h3>
 <p><a class="anchor" id="Testingconvergenceandhigherorderelements"></a></p><h4>Testing convergence and higher order elements </h4>
-<p>The finite element degree is currently hard-coded as 2, see the template arguments of the main class. It is easy to change. To test, it would be interesting to switch to a test problem with a reference solution. This way, you can compare error rates.</p>
+<p>有限元度目前是硬编码为2，见主类的模板参数。这很容易改变。为了测试，最好能切换到一个有参考解的测试问题。这样，你就可以比较错误率了。</p>
 <p><a class="anchor" id="Coarsesolver"></a></p><h4>Coarse solver </h4>
-<p>A more interesting example would involve a more complicated coarse mesh (see <a class="el" href="step_49.html">step-49</a> for inspiration). The issue in that case is that the coarsest level of the mesh hierarchy is actually quite large, and one would have to think about ways to solve the coarse level problem efficiently. (This is not an issue for algebraic multigrid methods because they would just continue to build coarser and coarser levels of the matrix, regardless of their geometric origin.)</p>
-<p>In the program here, we simply solve the coarse level problem with a Conjugate Gradient method without any preconditioner. That is acceptable if the coarse problem is really small &ndash; for example, if the coarse mesh had a single cell, then the coarse mesh problems has a \(9\times 9\) matrix in 2d, and a \(27\times 27\) matrix in 3d; for the coarse mesh we use on the \(L\)-shaped domain of the current program, these sizes are \(21\times 21\) in 2d and \(117\times 117\) in 3d. But if the coarse mesh consists of hundreds or thousands of cells, this approach will no longer work and might start to dominate the overall run-time of each V-cyle. A common approach is then to solve the coarse mesh problem using an algebraic multigrid preconditioner; this would then, however, require assembling the coarse matrix (even for the matrix-free version) as input to the AMG implementation.</p>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+<p>一个更有趣的例子是涉及到一个更复杂的粗略网格（见 <a class="el" href="step_49.html">step-49</a> 的启发）。这种情况下的问题是，网格层次的最粗层次实际上是相当大的，我们必须考虑如何有效地解决粗层次的问题。对于代数多网格方法来说，这不是一个问题，因为它们只是继续建立越来越粗的矩阵层次，而不管它们的几何来源）。</p>
+<p>在这里的程序中，我们只是用共轭梯度法解决粗级问题，没有任何预处理。如果粗略问题真的很小，这是可以接受的&ndash;例如，如果粗略网格有一个单元，那么粗略网格问题在2D中是 \(9\times 9\) 矩阵，在3D中是 \(27\times 27\) 矩阵；对于我们在当前程序的 \(L\) 形域上使用的粗略网格，这些尺寸在2D中是 \(21\times 21\) ，在3D中是 \(117\times 117\) 。但是，如果粗略的网格由数百或数千个单元组成，这种方法将不再起作用，并可能开始支配每个V形单元的整体运行时间。一个常见的方法是使用代数多网格预处理程序来解决粗网格问题；然而，这将需要组装粗矩阵（即使是无矩阵版本）作为AMG实现的输入。<a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2019 - 2020 by the deal.II authors</span></div>
@@ -3325,7 +3553,9 @@ As a prerequisite of this program, you need to have both p4est and either the PE
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> <br  />
+ </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

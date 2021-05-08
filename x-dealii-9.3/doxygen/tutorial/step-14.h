@@ -1,159 +1,102 @@
-/**
-@page step_14 The step-14 tutorial program
-This tutorial depends on step-13.
+  /**   @page step_14 The step-14 tutorial program 。 
+
+本教程取决于  step-13  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Themaths">The maths</a>
-        <li><a href="#Thesoftware">The software</a>
+        <li><a href="#Themaths">The maths</a><a href="#Themaths">The maths</a>
+        <li><a href="#Thesoftware">The software</a><a href="#Thesoftware">The software</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Evaluatingthesolution">Evaluating the solution</a>
+        <li><a href="#Evaluatingthesolution">Evaluating the solution</a><a href="#Evaluatingthesolution">Evaluating the solution</a>
       <ul>
-        <li><a href="#TheEvaluationBaseclass">The EvaluationBase class</a>
-        <li><a href="#ThePointValueEvaluationclass">The PointValueEvaluation class</a>
-        <li><a href="#ThePointXDerivativeEvaluationclass">The PointXDerivativeEvaluation class</a>
-        <li><a href="#TheGridOutputclass">The GridOutput class</a>
+        <li><a href="#TheEvaluationBaseclass">The EvaluationBase class</a><a href="#TheEvaluationBaseclass">The EvaluationBase class</a>
+        <li><a href="#ThePointValueEvaluationclass">The PointValueEvaluation class</a><a href="#ThePointValueEvaluationclass">The PointValueEvaluation class</a>
+        <li><a href="#ThePointXDerivativeEvaluationclass">The PointXDerivativeEvaluation class</a><a href="#ThePointXDerivativeEvaluationclass">The PointXDerivativeEvaluation class</a>
+        <li><a href="#TheGridOutputclass">The GridOutput class</a><a href="#TheGridOutputclass">The GridOutput class</a>
       </ul>
-        <li><a href="#TheLaplacesolverclasses">The Laplace solver classes</a>
+        <li><a href="#TheLaplacesolverclasses">The Laplace solver classes</a><a href="#TheLaplacesolverclasses">The Laplace solver classes</a>
       <ul>
-        <li><a href="#TheLaplacesolverbaseclass">The Laplace solver base class</a>
-        <li><a href="#TheLaplaceSolverclass">The Laplace Solver class</a>
-        <li><a href="#ThePrimalSolverclass">The PrimalSolver class</a>
-        <li><a href="#TheRefinementGlobalandRefinementKellyclasses">The RefinementGlobal and RefinementKelly classes</a>
-        <li><a href="#TheRefinementWeightedKellyclass">The RefinementWeightedKelly class</a>
+        <li><a href="#TheLaplacesolverbaseclass">The Laplace solver base class</a><a href="#TheLaplacesolverbaseclass">The Laplace solver base class</a>
+        <li><a href="#TheLaplaceSolverclass">The Laplace Solver class</a><a href="#TheLaplaceSolverclass">The Laplace Solver class</a>
+        <li><a href="#ThePrimalSolverclass">The PrimalSolver class</a><a href="#ThePrimalSolverclass">The PrimalSolver class</a>
+        <li><a href="#TheRefinementGlobalandRefinementKellyclasses">The RefinementGlobal and RefinementKelly classes</a><a href="#TheRefinementGlobalandRefinementKellyclasses">The RefinementGlobal and RefinementKelly classes</a>
+        <li><a href="#TheRefinementWeightedKellyclass">The RefinementWeightedKelly class</a><a href="#TheRefinementWeightedKellyclass">The RefinementWeightedKelly class</a>
       </ul>
-        <li><a href="#Equationdata">Equation data</a>
+        <li><a href="#Equationdata">Equation data</a><a href="#Equationdata">Equation data</a>
       <ul>
-        <li><a href="#TheSetUpBaseandSetUpclasses">The SetUpBase and SetUp classes</a>
-        <li><a href="#TheCurvedRidgesclass">The CurvedRidges class</a>
-        <li><a href="#TheExercise_2_3class">The Exercise_2_3 class</a>
-        <li><a href="#Discussion">Discussion</a>
+        <li><a href="#TheSetUpBaseandSetUpclasses">The SetUpBase and SetUp classes</a><a href="#TheSetUpBaseandSetUpclasses">The SetUpBase and SetUp classes</a>
+        <li><a href="#TheCurvedRidgesclass">The CurvedRidges class</a><a href="#TheCurvedRidgesclass">The CurvedRidges class</a>
+        <li><a href="#TheExercise_2_3class">The Exercise_2_3 class</a><a href="#TheExercise_2_3class">The Exercise_2_3 class</a>
+        <li><a href="#Discussion">Discussion</a><a href="#Discussion">Discussion</a>
       </ul>
-        <li><a href="#Dualfunctionals">Dual functionals</a>
+        <li><a href="#Dualfunctionals">Dual functionals</a><a href="#Dualfunctionals">Dual functionals</a>
       <ul>
-        <li><a href="#TheDualFunctionalBaseclass">The DualFunctionalBase class</a>
-        <li><a href="#ThedualfunctionalPointValueEvaluationclass">The dual functional PointValueEvaluation class</a>
-        <li><a href="#ThedualfunctionalPointXDerivativeEvaluationclass">The dual functional PointXDerivativeEvaluation class</a>
+        <li><a href="#TheDualFunctionalBaseclass">The DualFunctionalBase class</a> ]<a href="#TheDualFunctionalBaseclass">The DualFunctionalBase class</a>
+        <li><a href="#ThedualfunctionalPointValueEvaluationclass">The dual functional PointValueEvaluation class</a><a href="#ThedualfunctionalPointValueEvaluationclass">The dual functional PointValueEvaluation class</a>
+        <li><a href="#ThedualfunctionalPointXDerivativeEvaluationclass">The dual functional PointXDerivativeEvaluation class</a><a href="#ThedualfunctionalPointXDerivativeEvaluationclass">The dual functional PointXDerivativeEvaluation class</a>
       </ul>
-        <li><a href="#ExtendingtheLaplaceSolvernamespace">Extending the LaplaceSolver namespace</a>
+        <li><a href="#ExtendingtheLaplaceSolvernamespace">Extending the LaplaceSolver namespace</a><a href="#ExtendingtheLaplaceSolvernamespace">Extending the LaplaceSolver namespace</a>
       <ul>
-        <li><a href="#TheDualSolverclass">The DualSolver class</a>
-        <li><a href="#TheWeightedResidualclass">The WeightedResidual class</a>
+        <li><a href="#TheDualSolverclass">The DualSolver class</a><a href="#TheDualSolverclass">The DualSolver class</a>
+        <li><a href="#TheWeightedResidualclass">The WeightedResidual class</a><a href="#TheWeightedResidualclass">The WeightedResidual class</a>
       </ul>
-        <li><a href="#Estimatingerrors">Estimating errors</a>
+        <li><a href="#Estimatingerrors">Estimating errors</a><a href="#Estimatingerrors">Estimating errors</a>
       <ul>
-        <li><a href="#Errorestimationdriverfunctions">Error estimation driver functions</a>
-        <li><a href="#Estimatingonasinglecell">Estimating on a single cell</a>
-        <li><a href="#Computingcelltermerrorcontributions">Computing cell term error contributions</a>
-        <li><a href="#Computingedgetermerrorcontributions1">Computing edge term error contributions &mdash; 1</a>
-        <li><a href="#Computingedgetermerrorcontributions2">Computing edge term error contributions &mdash; 2</a>
+        <li><a href="#Errorestimationdriverfunctions">Error estimation driver functions</a><a href="#Errorestimationdriverfunctions">Error estimation driver functions</a>
+        <li><a href="#Estimatingonasinglecell">Estimating on a single cell</a><a href="#Estimatingonasinglecell">Estimating on a single cell</a>
+        <li><a href="#Computingcelltermerrorcontributions">Computing cell term error contributions</a><a href="#Computingcelltermerrorcontributions">Computing cell term error contributions</a>
+        <li><a href="#Computingedgetermerrorcontributions1">Computing edge term error contributions &mdash; 1</a><a href="#Computingedgetermerrorcontributions1">Computing edge term error contributions &mdash; 1</a>
+        <li><a href="#Computingedgetermerrorcontributions2">Computing edge term error contributions &mdash; 2</a><a href="#Computingedgetermerrorcontributions2">Computing edge term error contributions &mdash; 2</a>
       </ul>
-        <li><a href="#Asimulationframework">A simulation framework</a>
-        <li><a href="#Themainfunction">The main function</a>
+        <li><a href="#Asimulationframework">A simulation framework</a><a href="#Asimulationframework">A simulation framework</a>
+        <li><a href="#Themainfunction">The main function</a><a href="#Themainfunction">The main function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Pointvalues">Point values</a>
-        <li><a href="#Comparingrefinementcriteria">Comparing refinement criteria</a>
-        <li><a href="#Evaluationofpointstresses">Evaluation of point stresses</a>
-        <li><a href="#step13revisited">step-13 revisited</a>
-        <li><a href="#Conclusionsandoutlook">Conclusions and outlook</a>
+        <li><a href="#Pointvalues">Point values</a><a href="#Pointvalues">Point values</a>
+        <li><a href="#Comparingrefinementcriteria">Comparing refinement criteria</a><a href="#Comparingrefinementcriteria">Comparing refinement criteria</a>
+        <li><a href="#Evaluationofpointstresses">Evaluation of point stresses</a><a href="#Evaluationofpointstresses">Evaluation of point stresses</a>
+        <li><a href="#step13revisited">step-13 revisited</a><a href="#step13revisited">step-13 revisited</a>
+        <li><a href="#Conclusionsandoutlook">Conclusions and outlook</a><a href="#Conclusionsandoutlook">Conclusions and outlook</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+@endhtmlonly 
+
+<a name="Intro"></a> <a name="Introduction"></a> <h1>Introduction</h1> 
 
 
 <a name="Themaths"></a><h3>The maths</h3>
 
 
-The Heidelberg group of Professor Rolf Rannacher, to which the three initial
-authors of the deal.II library belonged during their PhD time and partly also
-afterwards, has been involved with adaptivity and error estimation for finite
-element discretizations since the mid-1990ies. The main achievement is the
-development of error estimates for arbitrary functionals of the solution, and
-of optimal mesh refinement for its computation.
+Rolf Rannacher教授的海德堡小组，deal.II库的三位最初的作者在他们的博士期间和部分之后都属于该小组，自90年代中期以来一直从事有限元离散化的适应性和误差估计的研究。主要成就是开发了任意函数解的误差估计，以及用于其计算的最佳网格细化。
 
-We will not discuss the derivation of these concepts in too great detail, but
-will implement the main ideas in the present example program. For a thorough
-introduction into the general idea, we refer to the seminal work of Becker and
-Rannacher @cite BR95, @cite BR96r, and the overview article of the same authors in
-Acta Numerica @cite BR01; the first introduces the concept of error
-estimation and adaptivity for general functional output for the Laplace
-equation, while the second gives many examples of applications of these
-concepts to a large number of other, more complicated equations. For
-applications to individual types of equations, see also the publications by
-Becker @cite Bec95, @cite Bec98, Kanschat @cite Kan96, @cite FK97, Suttmeier
-@cite Sut96, @cite RS97, @cite RS98c, @cite RS99, Bangerth @cite BR99b,
-@cite Ban00w, @cite BR01a, @cite Ban02, and Hartmann @cite Har02, @cite HH01,
-@cite HH01b. All of these works, from the original introduction by Becker and
-Rannacher to individual contributions to particular equations, have later been
-summarized in a book by Bangerth and Rannacher that covers all of these topics,
-see @cite BR03.
+我们不会太详细地讨论这些概念的推导，但会在本例程序中实现主要思想。对于一般概念的全面介绍，我们可以参考Becker和Rannacher的开创性工作 @cite BR95 ， @cite BR96r ，以及Acta Numerica @cite BR01 中相同作者的概述文章；前者介绍了拉普拉斯方程一般函数输出的误差估计和适应性的概念，而后者给出了这些概念在大量其他更复杂方程中应用的许多例子。关于个别类型方程的应用，也可参见Becker  @cite Bec95  ,  @cite Bec98  , Kanschat  @cite Kan96  ,  @cite FK97  , Suttmeier  @cite Sut96  的文章。 ] ,  @cite RS97  ,  @cite RS98c  ,  @cite RS99  , Bangerth  @cite BR99b  ,  @cite Ban00w  ,  @cite BR01a  ,  @cite Ban02  , 和Hartmann  @cite Har02  ,  @cite HH01  ,  @cite HH01b  。所有这些工作，从Becker和Rannacher的原始介绍到对特定方程的个别贡献，后来都被Bangerth和Rannacher总结成一本书，涵盖了所有这些主题，见  @cite BR03  。
 
 
-The basic idea is the following: in applications, one is not usually
-interested in the solution per se, but rather in certain aspects of it. For
-example, in simulations of flow problems, one may want to know the lift or
-drag of a body immersed in the fluid; it is this quantity that we want to know
-to best accuracy, and whether the rest of the solution of the describing
-equations is well resolved is not of primary interest. Likewise, in elasticity
-one might want to know about values of the stress at certain points to guess
-whether maximal load values of joints are safe, for example. Or, in radiative
-transfer problems, mean flux intensities are of interest.
+其基本思想如下：在应用中，人们通常对解本身不感兴趣，而是对它的某些方面感兴趣。例如，在流动问题的模拟中，人们可能想知道浸在流体中的物体的升力或阻力；我们想知道的是这个量的最佳精度，而描述方程的其余解是否得到很好的解决并不是主要兴趣。同样，在弹性方面，人们可能想知道某些点的应力值，以猜测关节的最大负荷值是否安全，例如。或者，在辐射传输问题中，平均通量强度是有意义的。
 
-In all the cases just listed, it is the evaluation of a functional $J(u)$ of
-the solution which we are interested in, rather than the values of $u$
-everywhere. Since the exact solution $u$ is not available, but only its
-numerical approximation $u_h$, it is sensible to ask whether the computed
-value $J(u_h)$ is within certain limits of the exact value $J(u)$, i.e. we
-want to bound the error with respect to this functional, $J(u)-J(u_h)$.
+在刚才列举的所有情况下，我们感兴趣的是解的函数 $J(u)$ 的评价，而不是各地的 $u$ 的值。由于精确的解决方案 $u$ 是不可用的，只有它的数字近似值 $u_h$ ，所以询问计算值 $J(u_h)$ 是否在精确值 $J(u)$ 的一定范围内是明智的，也就是说，我们要约束与这个函数 $J(u)-J(u_h)$ 有关的误差。
 
-For simplicity of exposition, we henceforth assume that both the quantity of
-interest $J$, as well as the equation are linear, and we will in particular
-show the derivation for the Laplace equation with homogeneous Dirichlet
-boundary conditions, although the concept is much more general. For this
-general case, we refer to the references listed above.  The goal is to obtain
-bounds on the error, $J(e)=J(u)-J(u_h)$. For this, let us denote by $z$ the
-solution of a dual problem, defined as follows:
-@f[
+为了简化论述，我们假设感兴趣的量 $J$ 以及方程都是线性的，我们将特别展示具有同质Dirichlet边界条件的拉普拉斯方程的推导，尽管这一概念更为普遍。对于这种一般情况，我们参考上面列出的参考文献。 我们的目标是获得误差的界限，  $J(e)=J(u)-J(u_h)$  。为此，让我们用 $z$ 表示对偶问题的解，定义如下。@f[
   a(\varphi,z) = J(\varphi) \qquad \forall \varphi,
-@f]
-where $a(\cdot,\cdot)$ is the bilinear form associated with the differential
-equation, and the test functions are chosen from the corresponding solution
-space. Then, taking as special test function $\varphi=e$ the error, we have
-that
-@f[
+@f] 其中 $a(\cdot,\cdot)$ 是与微分方程相关的双线性形式，而测试函数是从相应的解空间中选择。然后，以特殊的检验函数 $\varphi=e$ 作为误差，我们有@f[
   J(e) = a(e,z)
-@f]
-and we can, by Galerkin orthogonality, rewrite this as
-@f[
+@f]，通过Galerkin正交性，我们可以将其改写为@f[
   J(e) = a(e,z-\varphi_h)
-@f]
-where $\varphi_h$ can be chosen from the discrete test space in
-whatever way we find convenient.
+@f]，其中 $\varphi_h$ 可以以我们认为方便的方式从离散检验空间选择。
 
-Concretely, for Laplace's equation, the error identity reads
-@f[
+具体来说，对于拉普拉斯方程，误差标识为@f[
   J(e) = (\nabla e, \nabla(z-\varphi_h)).
-@f]
-Because we want to use this formula not only to compute error, but
-also to refine the mesh, we need to rewrite the expression above as a
-sum over cells where each cell's contribution can then be used as an
-error indicator for this cell.
-Thus, we split the scalar products into terms for each cell, and
-integrate by parts on each of them:
-@f{eqnarray*}
+@f]。 因为我们不仅要用这个公式来计算误差，还要细化网格，所以我们需要将上面的表达式重写为单元的总和，然后每个单元的贡献可以作为这个单元的误差指标。因此，我们将标量产品分成每个单元的条款，并对每个单元进行分项积分。@f{eqnarray*}
   J(e)
   &=&
   \sum_K (\nabla (u-u_h), \nabla (z-\varphi_h))_K
@@ -161,3870 +104,3753 @@ integrate by parts on each of them:
   &=&
   \sum_K (-\Delta (u-u_h), z-\varphi_h)_K
   + (\partial_n (u-u_h), z-z_h)_{\partial K}.
-@f}
-Next we use that $-\Delta u=f$, and that for solutions of the Laplace
-equation, the solution is smooth enough that $\partial_n u$ is
-continuous almost everywhere -- so the terms involving $\partial_n u$ on one
-cell cancels with that on its neighbor, where the normal vector has the
-opposite sign. (The same is not true for $\partial_n u_h$, though.)
-At the boundary of the domain, where there is no neighbor cell
-with which this term could cancel, the weight $z-\varphi_h$ can be chosen as
-zero, and the whole term disappears.
+@f} 
 
-Thus, we have
-@f{eqnarray*}
+接下来我们利用 $-\Delta u=f$ ，对于拉普拉斯方程的解来说，该解足够平滑， $\partial_n u$ 几乎在任何地方都是连续的--因此在一个单元上涉及 $\partial_n u$ 的项与在其邻近单元上的项相抵消，在那里法向量的符号相反。(对于 $\partial_n u_h$ 而言，情况并非如此。)在域的边界上，没有任何相邻的单元可以与之抵消，权重 $z-\varphi_h$ 可以选择为零，整个项就会消失。
+
+因此，我们有@f{eqnarray*}
   J(e)
   &=&
   \sum_K (f+\Delta u_h, z-\varphi_h)_K
+
+
   - (\partial_n u_h, z-\varphi_h)_{\partial K\backslash \partial\Omega}.
 @f}
-In a final step, note that when taking the normal derivative of $u_h$, we mean
-the value of this quantity as taken from this side of the cell (for the usual
-Lagrange elements, derivatives are not continuous across edges). We then
-rewrite the above formula by exchanging half of the edge integral of cell $K$
-with the neighbor cell $K'$, to obtain
-@f{eqnarray*}
+
+在最后一步，注意当取 $u_h$ 的法向导数时，我们指的是从单元格的这一边取的这个量的值（对于通常的拉格朗日元素，导数不是跨边连续的）。然后我们重写上述公式，将 $K$ 单元的一半边缘积分与邻近单元 $K'$ 交换，得到@f{eqnarray*}
   J(e)
   &=&
   \sum_K (f+\Delta u_h, z-\varphi_h)_K
+
+
   - \frac 12 (\partial_n u_h|_K + \partial_{n'} u_h|_{K'},
               z-\varphi_h)_{\partial K\backslash \partial\Omega}.
 @f}
-Using that for the normal vectors on adjacent cells we have $n'=-n$, we define the jump of the
-normal derivative by
-@f[
+
+利用相邻单元上的法向量有 $n'=-n$ ，我们用@f[
   [\partial_n u_h] \dealcoloneq \partial_n u_h|_K + \partial_{n'} u_h|_{K'}
   =
   \partial_n u_h|_K - \partial_n u_h|_{K'},
-@f]
-and get the final form after setting the discrete function $\varphi_h$, which
-is by now still arbitrary, to the point interpolation of the dual solution,
-$\varphi_h=I_h z$:
-@f{eqnarray*}
+@f]定义法向导数的跳变，在将离散函数 $\varphi_h$ （现在仍然是任意的）设定为对偶解的点插值后，得到最终形式， $\varphi_h=I_h z$  ：@f{eqnarray*}
   J(e)
   &=&
   \sum_K (f+\Delta u_h, z-I_h z)_K
+
+
   - \frac 12 ([\partial_n u_h],
               z-I_h z)_{\partial K\backslash \partial\Omega}.
-@f}
+@f} 
 
-With this, we have obtained an exact representation of the error of the finite
-element discretization with respect to arbitrary (linear) functionals
-$J(\cdot)$. Its structure is a weighted form of a residual estimator, as both
-$f+\Delta u_h$ and $[\partial_n u_h]$ are cell and edge residuals that vanish
-on the exact solution, and $z-I_h z$ are weights indicating how important the
-residuals on a certain cell is for the evaluation of the given functional.
-Furthermore, it is a cell-wise quantity, so we can use it as a mesh refinement
-criterion. The question, is: how to evaluate it? After all, the evaluation
-requires knowledge of the dual solution $z$, which carries the information
-about the quantity we want to know to best accuracy.
 
-In some, very special cases, this dual solution is known. For example, if the
-functional $J(\cdot)$ is the point evaluation, $J(\varphi)=\varphi(x_0)$, then
-the dual solution has to satisfy
-@f[
+
+这样，我们就得到了关于任意（线性）函数的有限元离散化误差的精确表示  $J(\cdot)$  。其结构是残差估计器的加权形式，因为 $f+\Delta u_h$ 和 $[\partial_n u_h]$ 都是在精确解上消失的单元和边缘残差，而 $z-I_h z$ 是表示某个单元上的残差对于给定函数的评估有多重要的权重。此外，它是一个面向单元的量，所以我们可以把它作为一个网格细化的标准。问题是：如何评估它？毕竟，评估需要了解对偶解 $z$ ，它带有我们想要知道的最准确的量的信息。
+
+在一些非常特殊的情况下，这个对偶解是已知的。例如，如果函数 $J(\cdot)$ 是点评估， $J(\varphi)=\varphi(x_0)$ ，那么对偶解必须满足@f[
+
+
   -\Delta z = \delta(x-x_0),
-@f]
-with the Dirac delta function on the right hand side, and the dual solution is
-the Green's function with respect to the point $x_0$. For simple geometries,
-this function is analytically known, and we could insert it into the error
-representation formula.
-
-However, we do not want to restrict ourselves to such special cases. Rather,
-we will compute the dual solution numerically, and approximate $z$ by some
-numerically obtained $\tilde z$. We note that it is not sufficient to compute
-this approximation $\tilde z$ using the same method as used for the primal
-solution $u_h$, since then $\tilde z-I_h \tilde z=0$, and the overall error
-estimate would be zero. Rather, the approximation $\tilde z$ has to be from a
-larger space than the primal finite element space. There are various ways to
-obtain such an approximation (see the cited literature), and we will choose to
-compute it with a higher order finite element space. While this is certainly
-not the most efficient way, it is simple since we already have all we need to
-do that in place, and it also allows for simple experimenting. For more
-efficient methods, again refer to the given literature, in particular
-@cite BR95, @cite BR03.
-
-With this, we end the discussion of the mathematical side of this program and
-turn to the actual implementation.
-
-
-@note There are two steps above that do not seem necessary if all you
-care about is computing the error: namely, (i) the subtraction of
-$\phi_h$ from $z$, and (ii) splitting the integral into a sum of cells
-and integrating by parts on each. Indeed, neither of these two steps
-change $J(e)$ at all, as we only ever consider identities above until
-the substitution of $z$ by $\tilde z$. In other words, if you care
-only about <i>estimating the global error</i> $J(e)$, then these steps
-are not necessary. On the other hand, if you want to use the error
-estimate also as a refinement criterion for each cell of the mesh,
-then it is necessary to (i) break the estimate into a sum of cells,
-and (ii) massage the formulas in such a way that each cell's
-contributions have something to do with the local error. (While the
-contortions above do not change the value of the <i>sum</i> $J(e)$,
-they change the values we compute for each cell $K$.) To this end, we
-want to write everything in the form "residual times dual weight"
-where a "residual" is something that goes to zero as the approximation
-becomes $u_h$ better and better. For example, the quantity $\partial_n
-u_h$ is not a residual, since it simply converges to the (normal
-component of) the gradient of the exact solution. On the other hand,
-$[\partial_n u_h]$ is a residual because it converges to $[\partial_n
-u]=0$. All of the steps we have taken above in developing the final
-form of $J(e)$ have indeed had the goal of bringing the final formula
-into a form where each term converges to zero as the discrete solution
-$u_h$ converges to $u$. This then allows considering each cell's
-contribution as an "error indicator" that also converges to zero -- as
-it should as the mesh is refined.
-
-
-
-<a name="Thesoftware"></a><h3>The software</h3>
-
-
-The step-14 example program builds heavily on the techniques already used in
-the step-13 program. Its implementation of the dual weighted residual error
-estimator explained above is done by deriving a second class, properly called
-<code>DualSolver</code>, from the <code>Solver</code> base class, and having a class
-(<code>WeightedResidual</code>) that joins the two again and controls the solution
-of the primal and dual problem, and then uses both to compute the error
-indicator for mesh refinement.
-
-The program continues the modular concept of the previous example, by
-implementing the dual functional, describing quantity of interest, by an
-abstract base class, and providing two different functionals which implement
-this interface. Adding a different quantity of interest is thus simple.
-
-One of the more fundamental differences is the handling of data. A common case
-is that you develop a program that solves a certain equation, and test it with
-different right hand sides, different domains, different coefficients and
-boundary values, etc. Usually, these have to match, so that exact solutions
-are known, or that their combination makes sense at all.
-
-We demonstrate a way how this can be achieved in a simple, yet very flexible
-way. We will put everything that belongs to a certain setup into one class,
-and provide a little C++ mortar around it, so that entire setups (domains,
-coefficients, right hand sides, etc.) can be exchanged by only changing
-something in <em>one</em> place.
-
-Going this way a little further, we have also centralized all the other
-parameters that describe how the program is to work in one place, such as the
-order of the finite element, the maximal number of degrees of freedom, the
-evaluation objects that shall be executed on the computed solutions, and so
-on. This allows for simpler configuration of the program, and we will show in
-a later program how to use a library class that can handle setting these
-parameters by reading an input file. The general aim is to reduce the places
-within a program where one may have to look when wanting to change some
-parameter, as it has turned out in practice that one forgets where they are as
-programs grow. Furthermore, putting all options describing what the program
-does in a certain run into a file (that can be stored with the results) helps
-repeatability of results more than if the various flags were set somewhere in
-the program, where their exact values are forgotten after the next change to
-this place.
-
-Unfortunately, the program has become rather long. While this admittedly
-reduces its usefulness as an example program, we think that it is a very good
-starting point for development of a program for other kinds of problems,
-involving different equations than the Laplace equation treated here.
-Furthermore, it shows everything that we can show you about our way of a
-posteriori error estimation, and its structure should make it simple for you
-to adjust this method to other problems, other functionals, other geometries,
-coefficients, etc.
-
-The author believes that the present program is his masterpiece among the
-example programs, regarding the mathematical complexity, as well as the
-simplicity to add extensions. If you use this program as a basis for your own
-programs, we would kindly like to ask you to state this fact and the name of
-the author of the example program, Wolfgang Bangerth, in publications that
-arise from that, of your program consists in a considerable part of the
-example program.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * Start out with well known things...
- * 
- * @code
- * #include <deal.II/base/quadrature_lib.h>
- * #include <deal.II/base/function.h>
- * #include <deal.II/base/logstream.h>
- * #include <deal.II/base/thread_management.h>
- * #include <deal.II/base/work_stream.h>
- * #include <deal.II/lac/vector.h>
- * #include <deal.II/lac/full_matrix.h>
- * #include <deal.II/lac/sparse_matrix.h>
- * #include <deal.II/lac/dynamic_sparsity_pattern.h>
- * #include <deal.II/lac/solver_cg.h>
- * #include <deal.II/lac/precondition.h>
- * #include <deal.II/lac/affine_constraints.h>
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/grid_out.h>
- * #include <deal.II/grid/grid_refinement.h>
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/dofs/dof_tools.h>
- * #include <deal.II/fe/fe_q.h>
- * #include <deal.II/fe/fe_values.h>
- * #include <deal.II/fe/fe_tools.h>
- * #include <deal.II/numerics/vector_tools.h>
- * #include <deal.II/numerics/matrix_tools.h>
- * #include <deal.II/numerics/data_out.h>
- * #include <deal.II/numerics/error_estimator.h>
- * 
- * #include <algorithm>
- * #include <fstream>
- * #include <iostream>
- * #include <list>
- * #include <memory>
- * #include <numeric>
- * 
- * @endcode
- * 
- * The last step is as in all previous programs:
- * 
- * @code
- * namespace Step14
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * 
- * <a name="Evaluatingthesolution"></a> 
- * <h3>Evaluating the solution</h3>
- * 
-
- * 
- * As mentioned in the introduction, significant parts of the program have
- * simply been taken over from the step-13 example program. We therefore
- * only comment on those things that are new.
- *   
-
- * 
- * First, the framework for evaluation of solutions is unchanged, i.e. the
- * base class is the same, and the class to evaluate the solution at a grid
- * point is unchanged:
- * 
- * @code
- *   namespace Evaluation
- *   {
- * @endcode
- * 
- * 
- * <a name="TheEvaluationBaseclass"></a> 
- * <h4>The EvaluationBase class</h4>
- * 
- * @code
- *     template <int dim>
- *     class EvaluationBase
- *     {
- *     public:
- *       virtual ~EvaluationBase() = default;
- * 
- *       void set_refinement_cycle(const unsigned int refinement_cycle);
- * 
- *       virtual void operator()(const DoFHandler<dim> &dof_handler,
- *                               const Vector<double> & solution) const = 0;
- * 
- *     protected:
- *       unsigned int refinement_cycle;
- *     };
- * 
- * 
- * 
- *     template <int dim>
- *     void EvaluationBase<dim>::set_refinement_cycle(const unsigned int step)
- *     {
- *       refinement_cycle = step;
- *     }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThePointValueEvaluationclass"></a> 
- * <h4>The PointValueEvaluation class</h4>
- * 
- * @code
- *     template <int dim>
- *     class PointValueEvaluation : public EvaluationBase<dim>
- *     {
- *     public:
- *       PointValueEvaluation(const Point<dim> &evaluation_point);
- * 
- *       virtual void operator()(const DoFHandler<dim> &dof_handler,
- *                               const Vector<double> & solution) const override;
- * 
- *       DeclException1(
- *         ExcEvaluationPointNotFound,
- *         Point<dim>,
- *         << "The evaluation point " << arg1
- *         << " was not found among the vertices of the present grid.");
- * 
- *     private:
- *       const Point<dim> evaluation_point;
- *     };
- * 
- * 
- *     template <int dim>
- *     PointValueEvaluation<dim>::PointValueEvaluation(
- *       const Point<dim> &evaluation_point)
- *       : evaluation_point(evaluation_point)
- *     {}
- * 
- * 
- * 
- *     template <int dim>
- *     void PointValueEvaluation<dim>::
- *          operator()(const DoFHandler<dim> &dof_handler,
- *                const Vector<double> & solution) const
- *     {
- *       double point_value = 1e20;
- * 
- *       bool evaluation_point_found = false;
- *       for (const auto &cell : dof_handler.active_cell_iterators())
- *         if (!evaluation_point_found)
- *           for (const auto vertex : cell->vertex_indices())
- *             if (cell->vertex(vertex).distance(evaluation_point) <
- *                 cell->diameter() * 1e-8)
- *               {
- *                 point_value = solution(cell->vertex_dof_index(vertex, 0));
- * 
- *                 evaluation_point_found = true;
- *                 break;
- *               }
- * 
- *       AssertThrow(evaluation_point_found,
- *                   ExcEvaluationPointNotFound(evaluation_point));
- * 
- *       std::cout << "   Point value=" << point_value << std::endl;
- *     }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThePointXDerivativeEvaluationclass"></a> 
- * <h4>The PointXDerivativeEvaluation class</h4>
- * 
-
- * 
- * Besides the class implementing the evaluation of the solution at one
- * point, we here provide one which evaluates the gradient at a grid
- * point. Since in general the gradient of a finite element function is
- * not continuous at a vertex, we have to be a little bit more careful
- * here. What we do is to loop over all cells, even if we have found the
- * point already on one cell, and use the mean value of the gradient at
- * the vertex taken from all adjacent cells.
- *     
-
- * 
- * Given the interface of the <code>PointValueEvaluation</code> class, the
- * declaration of this class provides little surprise, and neither does
- * the constructor:
- * 
- * @code
- *     template <int dim>
- *     class PointXDerivativeEvaluation : public EvaluationBase<dim>
- *     {
- *     public:
- *       PointXDerivativeEvaluation(const Point<dim> &evaluation_point);
- * 
- *       virtual void operator()(const DoFHandler<dim> &dof_handler,
- *                               const Vector<double> & solution) const;
- * 
- *       DeclException1(
- *         ExcEvaluationPointNotFound,
- *         Point<dim>,
- *         << "The evaluation point " << arg1
- *         << " was not found among the vertices of the present grid.");
- * 
- *     private:
- *       const Point<dim> evaluation_point;
- *     };
- * 
- * 
- *     template <int dim>
- *     PointXDerivativeEvaluation<dim>::PointXDerivativeEvaluation(
- *       const Point<dim> &evaluation_point)
- *       : evaluation_point(evaluation_point)
- *     {}
- * 
- * 
- * @endcode
- * 
- * The more interesting things happen inside the function doing the actual
- * evaluation:
- * 
- * @code
- *     template <int dim>
- *     void PointXDerivativeEvaluation<dim>::
- *          operator()(const DoFHandler<dim> &dof_handler,
- *                const Vector<double> & solution) const
- *     {
- * @endcode
- * 
- * This time initialize the return value with something useful, since we
- * will have to add up a number of contributions and take the mean value
- * afterwards...
- * 
- * @code
- *       double point_derivative = 0;
- * 
- * @endcode
- * 
- * ...then have some objects of which the meaning will become clear
- * below...
- * 
- * @code
- *       QTrapezoid<dim>             vertex_quadrature;
- *       FEValues<dim>               fe_values(dof_handler.get_fe(),
- *                               vertex_quadrature,
- *                               update_gradients | update_quadrature_points);
- *       std::vector<Tensor<1, dim>> solution_gradients(vertex_quadrature.size());
- * 
- * @endcode
- * 
- * ...and next loop over all cells and their vertices, and count how
- * often the vertex has been found:
- * 
- * @code
- *       unsigned int evaluation_point_hits = 0;
- *       for (const auto &cell : dof_handler.active_cell_iterators())
- *         for (const auto vertex : cell->vertex_indices())
- *           if (cell->vertex(vertex) == evaluation_point)
- *             {
- * @endcode
- * 
- * Things are now no more as simple, since we can't get the
- * gradient of the finite element field as before, where we
- * simply had to pick one degree of freedom at a vertex.
- *               
-
- * 
- * Rather, we have to evaluate the finite element field on this
- * cell, and at a certain point. As you know, evaluating finite
- * element fields at certain points is done through the
- * <code>FEValues</code> class, so we use that. The question is:
- * the <code>FEValues</code> object needs to be a given a
- * quadrature formula and can then compute the values of finite
- * element quantities at the quadrature points. Here, we don't
- * want to do quadrature, we simply want to specify some points!
- *               
-
- * 
- * Nevertheless, the same way is chosen: use a special
- * quadrature rule with points at the vertices, since these are
- * what we are interested in. The appropriate rule is the
- * trapezoidal rule, so that is the reason why we used that one
- * above.
- *               
-
- * 
- * Thus: initialize the <code>FEValues</code> object on this
- * cell,
- * 
- * @code
- *               fe_values.reinit(cell);
- * @endcode
- * 
- * and extract the gradients of the solution vector at the
- * vertices:
- * 
- * @code
- *               fe_values.get_function_gradients(solution, solution_gradients);
- * 
- * @endcode
- * 
- * Now we have the gradients at all vertices, so pick out that
- * one which belongs to the evaluation point (note that the
- * order of vertices is not necessarily the same as that of the
- * quadrature points):
- * 
- * @code
- *               unsigned int q_point = 0;
- *               for (; q_point < solution_gradients.size(); ++q_point)
- *                 if (fe_values.quadrature_point(q_point) == evaluation_point)
- *                   break;
- * 
- * @endcode
- * 
- * Check that the evaluation point was indeed found,
- * 
- * @code
- *               Assert(q_point < solution_gradients.size(), ExcInternalError());
- * @endcode
- * 
- * and if so take the x-derivative of the gradient there as the
- * value which we are interested in, and increase the counter
- * indicating how often we have added to that variable:
- * 
- * @code
- *               point_derivative += solution_gradients[q_point][0];
- *               ++evaluation_point_hits;
- * 
- * @endcode
- * 
- * Finally break out of the innermost loop iterating over the
- * vertices of the present cell, since if we have found the
- * evaluation point at one vertex it cannot be at a following
- * vertex as well:
- * 
- * @code
- *               break;
- *             }
- * 
- * @endcode
- * 
- * Now we have looped over all cells and vertices, so check whether the
- * point was found:
- * 
- * @code
- *       AssertThrow(evaluation_point_hits > 0,
- *                   ExcEvaluationPointNotFound(evaluation_point));
- * 
- * @endcode
- * 
- * We have simply summed up the contributions of all adjacent cells, so
- * we still have to compute the mean value. Once this is done, report
- * the status:
- * 
- * @code
- *       point_derivative /= evaluation_point_hits;
- *       std::cout << "   Point x-derivative=" << point_derivative << std::endl;
- *     }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TheGridOutputclass"></a> 
- * <h4>The GridOutput class</h4>
- * 
-
- * 
- * Since this program has a more difficult structure (it computed a dual
- * solution in addition to a primal one), writing out the solution is no
- * more done by an evaluation object since we want to write both solutions
- * at once into one file, and that requires some more information than
- * available to the evaluation classes.
- *     
-
- * 
- * However, we also want to look at the grids generated. This again can be
- * done with one such class. Its structure is analog to the
- * <code>SolutionOutput</code> class of the previous example program, so
- * we do not discuss it here in more detail. Furthermore, everything that
- * is used here has already been used in previous example programs.
- * 
- * @code
- *     template <int dim>
- *     class GridOutput : public EvaluationBase<dim>
- *     {
- *     public:
- *       GridOutput(const std::string &output_name_base);
- * 
- *       virtual void operator()(const DoFHandler<dim> &dof_handler,
- *                               const Vector<double> & solution) const override;
- * 
- *     private:
- *       const std::string output_name_base;
- *     };
- * 
- * 
- *     template <int dim>
- *     GridOutput<dim>::GridOutput(const std::string &output_name_base)
- *       : output_name_base(output_name_base)
- *     {}
- * 
- * 
- *     template <int dim>
- *     void GridOutput<dim>::operator()(const DoFHandler<dim> &dof_handler,
- *                                      const Vector<double> & /*solution*/) const
- *     {
- *       std::ofstream out(output_name_base + "-" +
- *                         std::to_string(this->refinement_cycle) + ".svg");
- *       GridOut().write_svg(dof_handler.get_triangulation(), out);
- *     }
- *   } // namespace Evaluation
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TheLaplacesolverclasses"></a> 
- * <h3>The Laplace solver classes</h3>
- * 
-
- * 
- * Next are the actual solver classes. Again, we discuss only the
- * differences to the previous program.
- * 
- * @code
- *   namespace LaplaceSolver
- *   {
- * @endcode
- * 
- * 
- * <a name="TheLaplacesolverbaseclass"></a> 
- * <h4>The Laplace solver base class</h4>
- * 
-
- * 
- * This class is almost unchanged, with the exception that it declares two
- * more functions: <code>output_solution</code> will be used to generate
- * output files from the actual solutions computed by derived classes, and
- * the <code>set_refinement_cycle</code> function by which the testing
- * framework sets the number of the refinement cycle to a local variable
- * in this class; this number is later used to generate filenames for the
- * solution output.
- * 
- * @code
- *     template <int dim>
- *     class Base
- *     {
- *     public:
- *       Base(Triangulation<dim> &coarse_grid);
- *       virtual ~Base() = default;
- * 
- *       virtual void solve_problem() = 0;
- *       virtual void postprocess(
- *         const Evaluation::EvaluationBase<dim> &postprocessor) const = 0;
- *       virtual void         refine_grid()                            = 0;
- *       virtual unsigned int n_dofs() const                           = 0;
- * 
- *       virtual void set_refinement_cycle(const unsigned int cycle);
- * 
- *       virtual void output_solution() const = 0;
- * 
- *     protected:
- *       const SmartPointer<Triangulation<dim>> triangulation;
- * 
- *       unsigned int refinement_cycle;
- *     };
- * 
- * 
- *     template <int dim>
- *     Base<dim>::Base(Triangulation<dim> &coarse_grid)
- *       : triangulation(&coarse_grid)
- *       , refinement_cycle(numbers::invalid_unsigned_int)
- *     {}
- * 
- * 
- * 
- *     template <int dim>
- *     void Base<dim>::set_refinement_cycle(const unsigned int cycle)
- *     {
- *       refinement_cycle = cycle;
- *     }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TheLaplaceSolverclass"></a> 
- * <h4>The Laplace Solver class</h4>
- * 
-
- * 
- * Likewise, the <code>Solver</code> class is entirely unchanged and will
- * thus not be discussed.
- * 
- * @code
- *     template <int dim>
- *     class Solver : public virtual Base<dim>
- *     {
- *     public:
- *       Solver(Triangulation<dim> &       triangulation,
- *              const FiniteElement<dim> & fe,
- *              const Quadrature<dim> &    quadrature,
- *              const Quadrature<dim - 1> &face_quadrature,
- *              const Function<dim> &      boundary_values);
- *       virtual ~Solver() override;
- * 
- *       virtual void solve_problem() override;
- * 
- *       virtual void postprocess(
- *         const Evaluation::EvaluationBase<dim> &postprocessor) const override;
- * 
- *       virtual unsigned int n_dofs() const override;
- * 
- *     protected:
- *       const SmartPointer<const FiniteElement<dim>>  fe;
- *       const SmartPointer<const Quadrature<dim>>     quadrature;
- *       const SmartPointer<const Quadrature<dim - 1>> face_quadrature;
- *       DoFHandler<dim>                               dof_handler;
- *       Vector<double>                                solution;
- *       const SmartPointer<const Function<dim>>       boundary_values;
- * 
- *       virtual void assemble_rhs(Vector<double> &rhs) const = 0;
- * 
- *     private:
- *       struct LinearSystem
- *       {
- *         LinearSystem(const DoFHandler<dim> &dof_handler);
- * 
- *         void solve(Vector<double> &solution) const;
- * 
- *         AffineConstraints<double> hanging_node_constraints;
- *         SparsityPattern           sparsity_pattern;
- *         SparseMatrix<double>      matrix;
- *         Vector<double>            rhs;
- *       };
- * 
- * 
- * @endcode
- * 
- * The remainder of the class is essentially a copy of step-13
- * as well, including the data structures and functions
- * necessary to compute the linear system in parallel using the
- * WorkStream framework:
- * 
- * @code
- *       struct AssemblyScratchData
- *       {
- *         AssemblyScratchData(const FiniteElement<dim> &fe,
- *                             const Quadrature<dim> &   quadrature);
- *         AssemblyScratchData(const AssemblyScratchData &scratch_data);
- * 
- *         FEValues<dim> fe_values;
- *       };
- * 
- *       struct AssemblyCopyData
- *       {
- *         FullMatrix<double>                   cell_matrix;
- *         std::vector<types::global_dof_index> local_dof_indices;
- *       };
- * 
- * 
- *       void assemble_linear_system(LinearSystem &linear_system);
- * 
- *       void local_assemble_matrix(
- *         const typename DoFHandler<dim>::active_cell_iterator &cell,
- *         AssemblyScratchData &                                 scratch_data,
- *         AssemblyCopyData &                                    copy_data) const;
- * 
- * 
- *       void copy_local_to_global(const AssemblyCopyData &copy_data,
- *                                 LinearSystem &          linear_system) const;
- *     };
- * 
- * 
- * 
- *     template <int dim>
- *     Solver<dim>::Solver(Triangulation<dim> &       triangulation,
- *                         const FiniteElement<dim> & fe,
- *                         const Quadrature<dim> &    quadrature,
- *                         const Quadrature<dim - 1> &face_quadrature,
- *                         const Function<dim> &      boundary_values)
- *       : Base<dim>(triangulation)
- *       , fe(&fe)
- *       , quadrature(&quadrature)
- *       , face_quadrature(&face_quadrature)
- *       , dof_handler(triangulation)
- *       , boundary_values(&boundary_values)
- *     {}
- * 
- * 
- *     template <int dim>
- *     Solver<dim>::~Solver()
- *     {
- *       dof_handler.clear();
- *     }
- * 
- * 
- *     template <int dim>
- *     void Solver<dim>::solve_problem()
- *     {
- *       dof_handler.distribute_dofs(*fe);
- *       solution.reinit(dof_handler.n_dofs());
- * 
- *       LinearSystem linear_system(dof_handler);
- *       assemble_linear_system(linear_system);
- *       linear_system.solve(solution);
- *     }
- * 
- * 
- *     template <int dim>
- *     void Solver<dim>::postprocess(
- *       const Evaluation::EvaluationBase<dim> &postprocessor) const
- *     {
- *       postprocessor(dof_handler, solution);
- *     }
- * 
- * 
- *     template <int dim>
- *     unsigned int Solver<dim>::n_dofs() const
- *     {
- *       return dof_handler.n_dofs();
- *     }
- * 
- * 
- * @endcode
- * 
- * The following few functions and constructors are verbatim
- * copies taken from step-13:
- * 
- * @code
- *     template <int dim>
- *     void Solver<dim>::assemble_linear_system(LinearSystem &linear_system)
- *     {
- *       Threads::Task<void> rhs_task =
- *         Threads::new_task(&Solver<dim>::assemble_rhs, *this, linear_system.rhs);
- * 
- *       auto worker =
- *         [this](const typename DoFHandler<dim>::active_cell_iterator &cell,
- *                AssemblyScratchData &scratch_data,
- *                AssemblyCopyData &   copy_data) {
- *           this->local_assemble_matrix(cell, scratch_data, copy_data);
- *         };
- * 
- *       auto copier = [this, &linear_system](const AssemblyCopyData &copy_data) {
- *         this->copy_local_to_global(copy_data, linear_system);
- *       };
- * 
- *       WorkStream::run(dof_handler.begin_active(),
- *                       dof_handler.end(),
- *                       worker,
- *                       copier,
- *                       AssemblyScratchData(*fe, *quadrature),
- *                       AssemblyCopyData());
- *       linear_system.hanging_node_constraints.condense(linear_system.matrix);
- * 
- *       std::map<types::global_dof_index, double> boundary_value_map;
- *       VectorTools::interpolate_boundary_values(dof_handler,
- *                                                0,
- *                                                *boundary_values,
- *                                                boundary_value_map);
- * 
- *       rhs_task.join();
- *       linear_system.hanging_node_constraints.condense(linear_system.rhs);
- * 
- *       MatrixTools::apply_boundary_values(boundary_value_map,
- *                                          linear_system.matrix,
- *                                          solution,
- *                                          linear_system.rhs);
- *     }
- * 
- * 
- *     template <int dim>
- *     Solver<dim>::AssemblyScratchData::AssemblyScratchData(
- *       const FiniteElement<dim> &fe,
- *       const Quadrature<dim> &   quadrature)
- *       : fe_values(fe, quadrature, update_gradients | update_JxW_values)
- *     {}
- * 
- * 
- *     template <int dim>
- *     Solver<dim>::AssemblyScratchData::AssemblyScratchData(
- *       const AssemblyScratchData &scratch_data)
- *       : fe_values(scratch_data.fe_values.get_fe(),
- *                   scratch_data.fe_values.get_quadrature(),
- *                   update_gradients | update_JxW_values)
- *     {}
- * 
- * 
- *     template <int dim>
- *     void Solver<dim>::local_assemble_matrix(
- *       const typename DoFHandler<dim>::active_cell_iterator &cell,
- *       AssemblyScratchData &                                 scratch_data,
- *       AssemblyCopyData &                                    copy_data) const
- *     {
- *       const unsigned int dofs_per_cell = fe->n_dofs_per_cell();
- *       const unsigned int n_q_points    = quadrature->size();
- * 
- *       copy_data.cell_matrix.reinit(dofs_per_cell, dofs_per_cell);
- * 
- *       copy_data.local_dof_indices.resize(dofs_per_cell);
- * 
- *       scratch_data.fe_values.reinit(cell);
- * 
- *       for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
- *         for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *           for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *             copy_data.cell_matrix(i, j) +=
- *               (scratch_data.fe_values.shape_grad(i, q_point) *
- *                scratch_data.fe_values.shape_grad(j, q_point) *
- *                scratch_data.fe_values.JxW(q_point));
- * 
- *       cell->get_dof_indices(copy_data.local_dof_indices);
- *     }
- * 
- * 
- * 
- *     template <int dim>
- *     void Solver<dim>::copy_local_to_global(const AssemblyCopyData &copy_data,
- *                                            LinearSystem &linear_system) const
- *     {
- *       for (unsigned int i = 0; i < copy_data.local_dof_indices.size(); ++i)
- *         for (unsigned int j = 0; j < copy_data.local_dof_indices.size(); ++j)
- *           linear_system.matrix.add(copy_data.local_dof_indices[i],
- *                                    copy_data.local_dof_indices[j],
- *                                    copy_data.cell_matrix(i, j));
- *     }
- * 
- * 
- * @endcode
- * 
- * Now for the functions that implement actions in the linear
- * system class. First, the constructor initializes all data
- * elements to their correct sizes, and sets up a number of
- * additional data structures, such as constraints due to hanging
- * nodes. Since setting up the hanging nodes and finding out about
- * the nonzero elements of the matrix is independent, we do that
- * in parallel (if the library was configured to use concurrency,
- * at least; otherwise, the actions are performed
- * sequentially). Note that we start only one thread, and do the
- * second action in the main thread. Since only one thread is
- * generated, we don't use the <code>Threads::ThreadGroup</code>
- * class here, but rather use the one created thread object
- * directly to wait for this particular thread's exit. The
- * approach is generally the same as the one we have used in
- * <code>Solver::assemble_linear_system()</code> above.
- *     
-
- * 
- * Note that taking the address of the
- * <code>DoFTools::make_hanging_node_constraints</code> function
- * is a little tricky, since there are actually three functions of
- * this name, one for each supported space dimension. Taking
- * addresses of overloaded functions is somewhat complicated in
- * C++, since the address-of operator <code>&</code> in that case
- * returns a set of values (the addresses of all
- * functions with that name), and selecting the right one is then
- * the next step. If the context dictates which one to take (for
- * example by assigning to a function pointer of known type), then
- * the compiler can do that by itself, but if this set of pointers
- * shall be given as the argument to a function that takes a
- * template, the compiler could choose all without having a
- * preference for one. We therefore have to make it clear to the
- * compiler which one we would like to have; for this, we could
- * use a cast, but for more clarity, we assign it to a temporary
- * <code>mhnc_p</code> (short for <code>pointer to
- * make_hanging_node_constraints</code>) with the right type, and
- * using this pointer instead.
- * 
- * @code
- *     template <int dim>
- *     Solver<dim>::LinearSystem::LinearSystem(const DoFHandler<dim> &dof_handler)
- *     {
- *       hanging_node_constraints.clear();
- * 
- *       void (*mhnc_p)(const DoFHandler<dim> &, AffineConstraints<double> &) =
- *         &DoFTools::make_hanging_node_constraints;
- * 
- * @endcode
- * 
- * Start a side task then continue on the main thread
- * 
- * @code
- *       Threads::Task<void> side_task =
- *         Threads::new_task(mhnc_p, dof_handler, hanging_node_constraints);
- * 
- *       DynamicSparsityPattern dsp(dof_handler.n_dofs(), dof_handler.n_dofs());
- *       DoFTools::make_sparsity_pattern(dof_handler, dsp);
- * 
- * 
- * 
- * @endcode
- * 
- * Wait for the side task to be done before going further
- * 
- * @code
- *       side_task.join();
- * 
- *       hanging_node_constraints.close();
- *       hanging_node_constraints.condense(dsp);
- *       sparsity_pattern.copy_from(dsp);
- * 
- *       matrix.reinit(sparsity_pattern);
- *       rhs.reinit(dof_handler.n_dofs());
- *     }
- * 
- * 
- * 
- *     template <int dim>
- *     void Solver<dim>::LinearSystem::solve(Vector<double> &solution) const
- *     {
- *       SolverControl            solver_control(5000, 1e-12);
- *       SolverCG<Vector<double>> cg(solver_control);
- * 
- *       PreconditionSSOR<SparseMatrix<double>> preconditioner;
- *       preconditioner.initialize(matrix, 1.2);
- * 
- *       cg.solve(matrix, solution, rhs, preconditioner);
- * 
- *       hanging_node_constraints.distribute(solution);
- *     }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThePrimalSolverclass"></a> 
- * <h4>The PrimalSolver class</h4>
- * 
-
- * 
- * The <code>PrimalSolver</code> class is also mostly unchanged except for
- * implementing the <code>output_solution</code> function. We keep the
- * <code>GlobalRefinement</code> and <code>RefinementKelly</code> classes
- * in this program, and they can then rely on the default implementation
- * of this function which simply outputs the primal solution. The class
- * implementing dual weighted error estimators will overload this function
- * itself, to also output the dual solution.
- * 
- * @code
- *     template <int dim>
- *     class PrimalSolver : public Solver<dim>
- *     {
- *     public:
- *       PrimalSolver(Triangulation<dim> &       triangulation,
- *                    const FiniteElement<dim> & fe,
- *                    const Quadrature<dim> &    quadrature,
- *                    const Quadrature<dim - 1> &face_quadrature,
- *                    const Function<dim> &      rhs_function,
- *                    const Function<dim> &      boundary_values);
- * 
- *       virtual void output_solution() const override;
- * 
- *     protected:
- *       const SmartPointer<const Function<dim>> rhs_function;
- *       virtual void assemble_rhs(Vector<double> &rhs) const override;
- *     };
- * 
- * 
- *     template <int dim>
- *     PrimalSolver<dim>::PrimalSolver(Triangulation<dim> &       triangulation,
- *                                     const FiniteElement<dim> & fe,
- *                                     const Quadrature<dim> &    quadrature,
- *                                     const Quadrature<dim - 1> &face_quadrature,
- *                                     const Function<dim> &      rhs_function,
- *                                     const Function<dim> &      boundary_values)
- *       : Base<dim>(triangulation)
- *       , Solver<dim>(triangulation,
- *                     fe,
- *                     quadrature,
- *                     face_quadrature,
- *                     boundary_values)
- *       , rhs_function(&rhs_function)
- *     {}
- * 
- * 
- * 
- *     template <int dim>
- *     void PrimalSolver<dim>::output_solution() const
- *     {
- *       DataOut<dim> data_out;
- *       data_out.attach_dof_handler(this->dof_handler);
- *       data_out.add_data_vector(this->solution, "solution");
- *       data_out.build_patches();
- * 
- *       std::ofstream out("solution-" + std::to_string(this->refinement_cycle) +
- *                         ".vtu");
- *       data_out.write(out, DataOutBase::vtu);
- *     }
- * 
- * 
- * 
- *     template <int dim>
- *     void PrimalSolver<dim>::assemble_rhs(Vector<double> &rhs) const
- *     {
- *       FEValues<dim> fe_values(*this->fe,
- *                               *this->quadrature,
- *                               update_values | update_quadrature_points |
- *                                 update_JxW_values);
- * 
- *       const unsigned int dofs_per_cell = this->fe->n_dofs_per_cell();
- *       const unsigned int n_q_points    = this->quadrature->size();
- * 
- *       Vector<double>                       cell_rhs(dofs_per_cell);
- *       std::vector<double>                  rhs_values(n_q_points);
- *       std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
- * 
- *       for (const auto &cell : this->dof_handler.active_cell_iterators())
- *         {
- *           cell_rhs = 0;
- * 
- *           fe_values.reinit(cell);
- * 
- *           rhs_function->value_list(fe_values.get_quadrature_points(),
- *                                    rhs_values);
- * 
- *           for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
- *             for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *               cell_rhs(i) += (fe_values.shape_value(i, q_point) * // phi_i(x_q)
- *                               rhs_values[q_point] *               // f((x_q)
- *                               fe_values.JxW(q_point));            // dx
- * 
- *           cell->get_dof_indices(local_dof_indices);
- *           for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *             rhs(local_dof_indices[i]) += cell_rhs(i);
- *         }
- *     }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TheRefinementGlobalandRefinementKellyclasses"></a> 
- * <h4>The RefinementGlobal and RefinementKelly classes</h4>
- * 
-
- * 
- * For the following two classes, the same applies as for most of the
- * above: the class is taken from the previous example as-is:
- * 
- * @code
- *     template <int dim>
- *     class RefinementGlobal : public PrimalSolver<dim>
- *     {
- *     public:
- *       RefinementGlobal(Triangulation<dim> &       coarse_grid,
- *                        const FiniteElement<dim> & fe,
- *                        const Quadrature<dim> &    quadrature,
- *                        const Quadrature<dim - 1> &face_quadrature,
- *                        const Function<dim> &      rhs_function,
- *                        const Function<dim> &      boundary_values);
- * 
- *       virtual void refine_grid() override;
- *     };
- * 
- * 
- * 
- *     template <int dim>
- *     RefinementGlobal<dim>::RefinementGlobal(
- *       Triangulation<dim> &       coarse_grid,
- *       const FiniteElement<dim> & fe,
- *       const Quadrature<dim> &    quadrature,
- *       const Quadrature<dim - 1> &face_quadrature,
- *       const Function<dim> &      rhs_function,
- *       const Function<dim> &      boundary_values)
- *       : Base<dim>(coarse_grid)
- *       , PrimalSolver<dim>(coarse_grid,
- *                           fe,
- *                           quadrature,
- *                           face_quadrature,
- *                           rhs_function,
- *                           boundary_values)
- *     {}
- * 
- * 
- * 
- *     template <int dim>
- *     void RefinementGlobal<dim>::refine_grid()
- *     {
- *       this->triangulation->refine_global(1);
- *     }
- * 
- * 
- * 
- *     template <int dim>
- *     class RefinementKelly : public PrimalSolver<dim>
- *     {
- *     public:
- *       RefinementKelly(Triangulation<dim> &       coarse_grid,
- *                       const FiniteElement<dim> & fe,
- *                       const Quadrature<dim> &    quadrature,
- *                       const Quadrature<dim - 1> &face_quadrature,
- *                       const Function<dim> &      rhs_function,
- *                       const Function<dim> &      boundary_values);
- * 
- *       virtual void refine_grid() override;
- *     };
- * 
- * 
- * 
- *     template <int dim>
- *     RefinementKelly<dim>::RefinementKelly(
- *       Triangulation<dim> &       coarse_grid,
- *       const FiniteElement<dim> & fe,
- *       const Quadrature<dim> &    quadrature,
- *       const Quadrature<dim - 1> &face_quadrature,
- *       const Function<dim> &      rhs_function,
- *       const Function<dim> &      boundary_values)
- *       : Base<dim>(coarse_grid)
- *       , PrimalSolver<dim>(coarse_grid,
- *                           fe,
- *                           quadrature,
- *                           face_quadrature,
- *                           rhs_function,
- *                           boundary_values)
- *     {}
- * 
- * 
- * 
- *     template <int dim>
- *     void RefinementKelly<dim>::refine_grid()
- *     {
- *       Vector<float> estimated_error_per_cell(
- *         this->triangulation->n_active_cells());
- *       KellyErrorEstimator<dim>::estimate(
- *         this->dof_handler,
- *         QGauss<dim - 1>(this->fe->degree + 1),
- *         std::map<types::boundary_id, const Function<dim> *>(),
- *         this->solution,
- *         estimated_error_per_cell);
- *       GridRefinement::refine_and_coarsen_fixed_number(*this->triangulation,
- *                                                       estimated_error_per_cell,
- *                                                       0.3,
- *                                                       0.03);
- *       this->triangulation->execute_coarsening_and_refinement();
- *     }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TheRefinementWeightedKellyclass"></a> 
- * <h4>The RefinementWeightedKelly class</h4>
- * 
-
- * 
- * This class is a variant of the previous one, in that it allows to
- * weight the refinement indicators we get from the library's Kelly
- * indicator by some function. We include this class since the goal of
- * this example program is to demonstrate automatic refinement criteria
- * even for complex output quantities such as point values or stresses. If
- * we did not solve a dual problem and compute the weights thereof, we
- * would probably be tempted to give a hand-crafted weighting to the
- * indicators to account for the fact that we are going to evaluate these
- * quantities. This class accepts such a weighting function as argument to
- * its constructor:
- * 
- * @code
- *     template <int dim>
- *     class RefinementWeightedKelly : public PrimalSolver<dim>
- *     {
- *     public:
- *       RefinementWeightedKelly(Triangulation<dim> &       coarse_grid,
- *                               const FiniteElement<dim> & fe,
- *                               const Quadrature<dim> &    quadrature,
- *                               const Quadrature<dim - 1> &face_quadrature,
- *                               const Function<dim> &      rhs_function,
- *                               const Function<dim> &      boundary_values,
- *                               const Function<dim> &      weighting_function);
- * 
- *       virtual void refine_grid() override;
- * 
- *     private:
- *       const SmartPointer<const Function<dim>> weighting_function;
- *     };
- * 
- * 
- * 
- *     template <int dim>
- *     RefinementWeightedKelly<dim>::RefinementWeightedKelly(
- *       Triangulation<dim> &       coarse_grid,
- *       const FiniteElement<dim> & fe,
- *       const Quadrature<dim> &    quadrature,
- *       const Quadrature<dim - 1> &face_quadrature,
- *       const Function<dim> &      rhs_function,
- *       const Function<dim> &      boundary_values,
- *       const Function<dim> &      weighting_function)
- *       : Base<dim>(coarse_grid)
- *       , PrimalSolver<dim>(coarse_grid,
- *                           fe,
- *                           quadrature,
- *                           face_quadrature,
- *                           rhs_function,
- *                           boundary_values)
- *       , weighting_function(&weighting_function)
- *     {}
- * 
- * 
- * 
- * @endcode
- * 
- * Now, here comes the main function, including the weighting:
- * 
- * @code
- *     template <int dim>
- *     void RefinementWeightedKelly<dim>::refine_grid()
- *     {
- * @endcode
- * 
- * First compute some residual based error indicators for all cells by a
- * method already implemented in the library. What exactly we compute
- * here is described in more detail in the documentation of that class.
- * 
- * @code
- *       Vector<float> estimated_error_per_cell(
- *         this->triangulation->n_active_cells());
- *       std::map<types::boundary_id, const Function<dim> *> dummy_function_map;
- *       KellyErrorEstimator<dim>::estimate(this->dof_handler,
- *                                          *this->face_quadrature,
- *                                          dummy_function_map,
- *                                          this->solution,
- *                                          estimated_error_per_cell);
- * 
- * @endcode
- * 
- * Next weigh each entry in the vector of indicators by the value of the
- * function given to the constructor, evaluated at the cell center. We
- * need to write the result into the vector entry that corresponds to the
- * current cell, which we can obtain by asking the cell what its index
- * among all active cells is using CellAccessor::active_cell_index(). (In
- * reality, this index is zero for the first cell we handle in the loop,
- * one for the second cell, etc., and we could as well just keep track of
- * this index using an integer counter; but using
- * CellAccessor::active_cell_index() makes this more explicit.)
- * 
- * @code
- *       for (const auto &cell : this->dof_handler.active_cell_iterators())
- *         estimated_error_per_cell(cell->active_cell_index()) *=
- *           weighting_function->value(cell->center());
- * 
- *       GridRefinement::refine_and_coarsen_fixed_number(*this->triangulation,
- *                                                       estimated_error_per_cell,
- *                                                       0.3,
- *                                                       0.03);
- *       this->triangulation->execute_coarsening_and_refinement();
- *     }
- * 
- *   } // namespace LaplaceSolver
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Equationdata"></a> 
- * <h3>Equation data</h3>
- *   
-
- * 
- * In this example program, we work with the same data sets as in the
- * previous one, but as it may so happen that someone wants to run the
- * program with different boundary values and right hand side functions, or
- * on a different grid, we show a simple technique to do exactly that. For
- * more clarity, we furthermore pack everything that has to do with equation
- * data into a namespace of its own.
- *   
-
- * 
- * The underlying assumption is that this is a research program, and that
- * there we often have a number of test cases that consist of a domain, a
- * right hand side, boundary values, possibly a specified coefficient, and a
- * number of other parameters. They often vary all at the same time when
- * shifting from one example to another. To make handling such sets of
- * problem description parameters simple is the goal of the following.
- *   
-
- * 
- * Basically, the idea is this: let us have a structure for each set of
- * data, in which we pack everything that describes a test case: here, these
- * are two subclasses, one called <code>BoundaryValues</code> for the
- * boundary values of the exact solution, and one called
- * <code>RightHandSide</code>, and then a way to generate the coarse
- * grid. Since the solution of the previous example program looked like
- * curved ridges, we use this name here for the enclosing class. Note that
- * the names of the two inner classes have to be the same for all enclosing
- * test case classes, and also that we have attached the dimension template
- * argument to the enclosing class rather than to the inner ones, to make
- * further processing simpler.  (From a language viewpoint, a namespace
- * would be better to encapsulate these inner classes, rather than a
- * structure. However, namespaces cannot be given as template arguments, so
- * we use a structure to allow a second object to select from within its
- * given argument. The enclosing structure, of course, has no member
- * variables apart from the classes it declares, and a static function to
- * generate the coarse mesh; it will in general never be instantiated.)
- *   
-
- * 
- * The idea is then the following (this is the right time to also take a
- * brief look at the code below): we can generate objects for boundary
- * values and right hand side by simply giving the name of the outer class
- * as a template argument to a class which we call here
- * <code>Data::SetUp</code>, and it then creates objects for the inner
- * classes. In this case, to get all that characterizes the curved ridge
- * solution, we would simply generate an instance of
- * <code>Data::SetUp@<Data::CurvedRidge@></code>, and everything we need to
- * know about the solution would be static member variables and functions of
- * that object.
- *   
-
- * 
- * This approach might seem like overkill in this case, but will become very
- * handy once a certain set up is not only characterized by Dirichlet
- * boundary values and a right hand side function, but in addition by
- * material properties, Neumann values, different boundary descriptors,
- * etc. In that case, the <code>SetUp</code> class might consist of a dozen
- * or more objects, and each descriptor class (like the
- * <code>CurvedRidges</code> class below) would have to provide them. Then,
- * you will be happy to be able to change from one set of data to another by
- * only changing the template argument to the <code>SetUp</code> class at
- * one place, rather than at many.
- *   
-
- * 
- * With this framework for different test cases, we are almost finished, but
- * one thing remains: by now we can select statically, by changing one
- * template argument, which data set to choose. In order to be able to do
- * that dynamically, i.e. at run time, we need a base class. This we provide
- * in the obvious way, see below, with virtual abstract functions. It forces
- * us to introduce a second template parameter <code>dim</code> which we
- * need for the base class (which could be avoided using some template
- * magic, but we omit that), but that's all.
- *   
-
- * 
- * Adding new testcases is now simple, you don't have to touch the framework
- * classes, only a structure like the <code>CurvedRidges</code> one is
- * needed.
- * 
- * @code
- *   namespace Data
- *   {
- * @endcode
- * 
- * 
- * <a name="TheSetUpBaseandSetUpclasses"></a> 
- * <h4>The SetUpBase and SetUp classes</h4>
- * 
-
- * 
- * Based on the above description, the <code>SetUpBase</code> class then
- * looks as follows. To allow using the <code>SmartPointer</code> class
- * with this class, we derived from the <code>Subscriptor</code> class.
- * 
- * @code
- *     template <int dim>
- *     struct SetUpBase : public Subscriptor
- *     {
- *       virtual const Function<dim> &get_boundary_values() const = 0;
- * 
- *       virtual const Function<dim> &get_right_hand_side() const = 0;
- * 
- *       virtual void
- *       create_coarse_grid(Triangulation<dim> &coarse_grid) const = 0;
- *     };
- * 
- * 
- * @endcode
- * 
- * And now for the derived class that takes the template argument as
- * explained above.
- *     
-
- * 
- * Here we pack the data elements into private variables, and allow access
- * to them through the methods of the base class.
- * 
- * @code
- *     template <class Traits, int dim>
- *     struct SetUp : public SetUpBase<dim>
- *     {
- *       virtual const Function<dim> &get_boundary_values() const override;
- * 
- *       virtual const Function<dim> &get_right_hand_side() const override;
- * 
- * 
- *       virtual void
- *       create_coarse_grid(Triangulation<dim> &coarse_grid) const override;
- * 
- *     private:
- *       static const typename Traits::BoundaryValues boundary_values;
- *       static const typename Traits::RightHandSide  right_hand_side;
- *     };
- * 
- * @endcode
- * 
- * We have to provide definitions for the static member variables of the
- * above class:
- * 
- * @code
- *     template <class Traits, int dim>
- *     const typename Traits::BoundaryValues SetUp<Traits, dim>::boundary_values;
- *     template <class Traits, int dim>
- *     const typename Traits::RightHandSide SetUp<Traits, dim>::right_hand_side;
- * 
- * @endcode
- * 
- * And definitions of the member functions:
- * 
- * @code
- *     template <class Traits, int dim>
- *     const Function<dim> &SetUp<Traits, dim>::get_boundary_values() const
- *     {
- *       return boundary_values;
- *     }
- * 
- * 
- *     template <class Traits, int dim>
- *     const Function<dim> &SetUp<Traits, dim>::get_right_hand_side() const
- *     {
- *       return right_hand_side;
- *     }
- * 
- * 
- *     template <class Traits, int dim>
- *     void SetUp<Traits, dim>::create_coarse_grid(
- *       Triangulation<dim> &coarse_grid) const
- *     {
- *       Traits::create_coarse_grid(coarse_grid);
- *     }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TheCurvedRidgesclass"></a> 
- * <h4>The CurvedRidges class</h4>
- * 
-
- * 
- * The class that is used to describe the boundary values and right hand
- * side of the <code>curved ridge</code> problem already used in the
- * step-13 example program is then like so:
- * 
- * @code
- *     template <int dim>
- *     struct CurvedRidges
- *     {
- *       class BoundaryValues : public Function<dim>
- *       {
- *       public:
- *         virtual double value(const Point<dim> & p,
- *                              const unsigned int component) const;
- *       };
- * 
- * 
- *       class RightHandSide : public Function<dim>
- *       {
- *       public:
- *         virtual double value(const Point<dim> & p,
- *                              const unsigned int component) const;
- *       };
- * 
- *       static void create_coarse_grid(Triangulation<dim> &coarse_grid);
- *     };
- * 
- * 
- *     template <int dim>
- *     double CurvedRidges<dim>::BoundaryValues::value(
- *       const Point<dim> &p,
- *       const unsigned int /*component*/) const
- *     {
- *       double q = p(0);
- *       for (unsigned int i = 1; i < dim; ++i)
- *         q += std::sin(10 * p(i) + 5 * p(0) * p(0));
- *       const double exponential = std::exp(q);
- *       return exponential;
- *     }
- * 
- * 
- * 
- *     template <int dim>
- *     double CurvedRidges<dim>::RightHandSide::value(
- *       const Point<dim> &p,
- *       const unsigned int /*component*/) const
- *     {
- *       double q = p(0);
- *       for (unsigned int i = 1; i < dim; ++i)
- *         q += std::sin(10 * p(i) + 5 * p(0) * p(0));
- *       const double u  = std::exp(q);
- *       double       t1 = 1, t2 = 0, t3 = 0;
- *       for (unsigned int i = 1; i < dim; ++i)
- *         {
- *           t1 += std::cos(10 * p(i) + 5 * p(0) * p(0)) * 10 * p(0);
- *           t2 += 10 * std::cos(10 * p(i) + 5 * p(0) * p(0)) -
- *                 100 * std::sin(10 * p(i) + 5 * p(0) * p(0)) * p(0) * p(0);
- *           t3 += 100 * std::cos(10 * p(i) + 5 * p(0) * p(0)) *
- *                   std::cos(10 * p(i) + 5 * p(0) * p(0)) -
- *                 100 * std::sin(10 * p(i) + 5 * p(0) * p(0));
- *         }
- *       t1 = t1 * t1;
- * 
- *       return -u * (t1 + t2 + t3);
- *     }
- * 
- * 
- *     template <int dim>
- *     void CurvedRidges<dim>::create_coarse_grid(Triangulation<dim> &coarse_grid)
- *     {
- *       GridGenerator::hyper_cube(coarse_grid, -1, 1);
- *       coarse_grid.refine_global(2);
- *     }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TheExercise_2_3class"></a> 
- * <h4>The Exercise_2_3 class</h4>
- * 
-
- * 
- * This example program was written while giving practical courses for a
- * lecture on adaptive finite element methods and duality based error
- * estimates. For these courses, we had one exercise, which required to
- * solve the Laplace equation with constant right hand side on a square
- * domain with a square hole in the center, and zero boundary
- * values. Since the implementation of the properties of this problem is
- * so particularly simple here, lets do it. As the number of the exercise
- * was 2.3, we take the liberty to retain this name for the class as well.
- * 
- * @code
- *     template <int dim>
- *     struct Exercise_2_3
- *     {
- * @endcode
- * 
- * We need a class to denote the boundary values of the problem. In this
- * case, this is simple: it's the zero function, so don't even declare a
- * class, just an alias:
- * 
- * @code
- *       using BoundaryValues = Functions::ZeroFunction<dim>;
- * 
- * @endcode
- * 
- * Second, a class that denotes the right hand side. Since they are
- * constant, just subclass the corresponding class of the library and be
- * done:
- * 
- * @code
- *       class RightHandSide : public Functions::ConstantFunction<dim>
- *       {
- *       public:
- *         RightHandSide()
- *           : Functions::ConstantFunction<dim>(1.)
- *         {}
- *       };
- * 
- * @endcode
- * 
- * Finally a function to generate the coarse grid. This is somewhat more
- * complicated here, see immediately below.
- * 
- * @code
- *       static void create_coarse_grid(Triangulation<dim> &coarse_grid);
- *     };
- * 
- * 
- * @endcode
- * 
- * As stated above, the grid for this example is the square [-1,1]^2 with
- * the square [-1/2,1/2]^2 as hole in it. We create the coarse grid as 4
- * times 4 cells with the middle four ones missing. To understand how
- * exactly the mesh is going to look, it may be simplest to just look
- * at the "Results" section of this tutorial program first. In general,
- * if you'd like to understand more about creating meshes either from
- * scratch by hand, as we do here, or using other techniques, you
- * should take a look at step-49.
- *     
-
- * 
- * Of course, the example has an extension to 3d, but since this function
- * cannot be written in a dimension independent way we choose not to
- * implement this here, but rather only specialize the template for
- * dim=2. If you compile the program for 3d, you'll get a message from the
- * linker that this function is not implemented for 3d, and needs to be
- * provided.
- *     
-
- * 
- * For the creation of this geometry, the library has no predefined
- * method. In this case, the geometry is still simple enough to do the
- * creation by hand, rather than using a mesh generator.
- * 
- * @code
- *     template <>
- *     void Exercise_2_3<2>::create_coarse_grid(Triangulation<2> &coarse_grid)
- *     {
- * @endcode
- * 
- * We first define the space dimension, to allow those parts of the
- * function that are actually dimension independent to use this
- * variable. That makes it simpler if you later take this as a starting
- * point to implement a 3d version of this mesh. The next step is then
- * to have a list of vertices. Here, they are 24 (5 times 5, with the
- * middle one omitted). It is probably best to draw a sketch here.
- * 
- * @code
- *       const unsigned int dim = 2;
- * 
- *       const std::vector<Point<2>> vertices = {
- *         {-1.0, -1.0}, {-0.5, -1.0}, {+0.0, -1.0}, {+0.5, -1.0}, {+1.0, -1.0}, 
- *         {-1.0, -0.5}, {-0.5, -0.5}, {+0.0, -0.5}, {+0.5, -0.5}, {+1.0, -0.5}, 
- *         {-1.0, +0.0}, {-0.5, +0.0}, {+0.5, +0.0}, {+1.0, +0.0},               
- *         {-1.0, +0.5}, {-0.5, +0.5}, {+0.0, +0.5}, {+0.5, +0.5}, {+1.0, +0.5}, 
- *         {-1.0, +1.0}, {-0.5, +1.0}, {+0.0, +1.0}, {+0.5, +1.0}, {+1.0, +1.0}};
- * 
- * @endcode
- * 
- * Next, we have to define the cells and the vertices they contain.
- * 
- * @code
- *       const std::vector<std::array<int, GeometryInfo<dim>::vertices_per_cell>>
- *         cell_vertices = {{{0, 1, 5, 6}},
- *                          {{1, 2, 6, 7}},
- *                          {{2, 3, 7, 8}},
- *                          {{3, 4, 8, 9}},
- *                          {{5, 6, 10, 11}},
- *                          {{8, 9, 12, 13}},
- *                          {{10, 11, 14, 15}},
- *                          {{12, 13, 17, 18}},
- *                          {{14, 15, 19, 20}},
- *                          {{15, 16, 20, 21}},
- *                          {{16, 17, 21, 22}},
- *                          {{17, 18, 22, 23}}};
- * 
- *       const unsigned int n_cells = cell_vertices.size();
- * 
- * @endcode
- * 
- * Again, we generate a C++ vector type from this, but this time by
- * looping over the cells (yes, this is boring). Additionally, we set
- * the material indicator to zero for all the cells:
- * 
- * @code
- *       std::vector<CellData<dim>> cells(n_cells, CellData<dim>());
- *       for (unsigned int i = 0; i < n_cells; ++i)
- *         {
- *           for (unsigned int j = 0; j < cell_vertices[i].size(); ++j)
- *             cells[i].vertices[j] = cell_vertices[i][j];
- *           cells[i].material_id = 0;
- *         }
- * 
- * @endcode
- * 
- * Finally pass all this information to the library to generate a
- * triangulation. The last parameter may be used to pass information
- * about non-zero boundary indicators at certain faces of the
- * triangulation to the library, but we don't want that here, so we give
- * an empty object:
- * 
- * @code
- *       coarse_grid.create_triangulation(vertices, cells, SubCellData());
- * 
- * @endcode
- * 
- * And since we want that the evaluation point (3/4,3/4) in this example
- * is a grid point, we refine once globally:
- * 
- * @code
- *       coarse_grid.refine_global(1);
- *     }
- *   } // namespace Data
- * 
- * @endcode
- * 
- * 
- * <a name="Discussion"></a> 
- * <h4>Discussion</h4>
- *   
-
- * 
- * As you have now read through this framework, you may be wondering why we
- * have not chosen to implement the classes implementing a certain setup
- * (like the <code>CurvedRidges</code> class) directly as classes derived
- * from <code>Data::SetUpBase</code>. Indeed, we could have done very well
- * so. The only reason is that then we would have to have member variables
- * for the solution and right hand side classes in the
- * <code>CurvedRidges</code> class, as well as member functions overloading
- * the abstract functions of the base class giving access to these member
- * variables. The <code>SetUp</code> class has the sole reason to relieve us
- * from the need to reiterate these member variables and functions that
- * would be necessary in all such classes. In some way, the template
- * mechanism here only provides a way to have default implementations for a
- * number of functions that depend on external quantities and can thus not
- * be provided using normal virtual functions, at least not without the help
- * of templates.
- *   
-
- * 
- * However, there might be good reasons to actually implement classes
- * derived from <code>Data::SetUpBase</code>, for example if the solution or
- * right hand side classes require constructors that take arguments, which
- * the <code>Data::SetUpBase</code> class cannot provide. In that case,
- * subclassing is a worthwhile strategy. Other possibilities for special
- * cases are to derive from <code>Data::SetUp@<SomeSetUp@></code> where
- * <code>SomeSetUp</code> denotes a class, or even to explicitly specialize
- * <code>Data::SetUp@<SomeSetUp@></code>. The latter allows to transparently
- * use the way the <code>SetUp</code> class is used for other set-ups, but
- * with special actions taken for special arguments.
- *   
-
- * 
- * A final observation favoring the approach taken here is the following: we
- * have found numerous times that when starting a project, the number of
- * parameters (usually boundary values, right hand side, coarse grid, just
- * as here) was small, and the number of test cases was small as well. One
- * then starts out by handcoding them into a number of <code>switch</code>
- * statements. Over time, projects grow, and so does the number of test
- * cases. The number of <code>switch</code> statements grows with that, and
- * their length as well, and one starts to find ways to consider impossible
- * examples where domains, boundary values, and right hand sides do not fit
- * together any more, and starts losing the overview over the whole
- * structure. Encapsulating everything belonging to a certain test case into
- * a structure of its own has proven worthwhile for this, as it keeps
- * everything that belongs to one test case in one place. Furthermore, it
- * allows to put these things all in one or more files that are only devoted
- * to test cases and their data, without having to bring their actual
- * implementation into contact with the rest of the program.
- * 
-
- * 
- * 
-
- * 
- * 
- * <a name="Dualfunctionals"></a> 
- * <h3>Dual functionals</h3>
- * 
-
- * 
- * As with the other components of the program, we put everything we need to
- * describe dual functionals into a namespace of its own, and define an
- * abstract base class that provides the interface the class solving the
- * dual problem needs for its work.
- *   
-
- * 
- * We will then implement two such classes, for the evaluation of a point
- * value and of the derivative of the solution at that point. For these
- * functionals we already have the corresponding evaluation objects, so they
- * are complementary.
- * 
- * @code
- *   namespace DualFunctional
- *   {
- * @endcode
- * 
- * 
- * <a name="TheDualFunctionalBaseclass"></a> 
- * <h4>The DualFunctionalBase class</h4>
- * 
-
- * 
- * First start with the base class for dual functionals. Since for linear
- * problems the characteristics of the dual problem play a role only in
- * the right hand side, we only need to provide for a function that
- * assembles the right hand side for a given discretization:
- * 
- * @code
- *     template <int dim>
- *     class DualFunctionalBase : public Subscriptor
- *     {
- *     public:
- *       virtual void assemble_rhs(const DoFHandler<dim> &dof_handler,
- *                                 Vector<double> &       rhs) const = 0;
- *     };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThedualfunctionalPointValueEvaluationclass"></a> 
- * <h4>The dual functional PointValueEvaluation class</h4>
- * 
-
- * 
- * As a first application, we consider the functional corresponding to the
- * evaluation of the solution's value at a given point which again we
- * assume to be a vertex. Apart from the constructor that takes and stores
- * the evaluation point, this class consists only of the function that
- * implements assembling the right hand side.
- * 
- * @code
- *     template <int dim>
- *     class PointValueEvaluation : public DualFunctionalBase<dim>
- *     {
- *     public:
- *       PointValueEvaluation(const Point<dim> &evaluation_point);
- * 
- *       virtual void assemble_rhs(const DoFHandler<dim> &dof_handler,
- *                                 Vector<double> &       rhs) const override;
- * 
- *       DeclException1(
- *         ExcEvaluationPointNotFound,
- *         Point<dim>,
- *         << "The evaluation point " << arg1
- *         << " was not found among the vertices of the present grid.");
- * 
- *     protected:
- *       const Point<dim> evaluation_point;
- *     };
- * 
- * 
- *     template <int dim>
- *     PointValueEvaluation<dim>::PointValueEvaluation(
- *       const Point<dim> &evaluation_point)
- *       : evaluation_point(evaluation_point)
- *     {}
- * 
- * 
- * @endcode
- * 
- * As for doing the main purpose of the class, assembling the right hand
- * side, let us first consider what is necessary: The right hand side of
- * the dual problem is a vector of values J(phi_i), where J is the error
- * functional, and phi_i is the i-th shape function. Here, J is the
- * evaluation at the point x0, i.e. J(phi_i)=phi_i(x0).
- *     
-
- * 
- * Now, we have assumed that the evaluation point is a vertex. Thus, for
- * the usual finite elements we might be using in this program, we can
- * take for granted that at such a point exactly one shape function is
- * nonzero, and in particular has the value one. Thus, we set the right
- * hand side vector to all-zeros, then seek for the shape function
- * associated with that point and set the corresponding value of the right
- * hand side vector to one:
- * 
- * @code
- *     template <int dim>
- *     void
- *     PointValueEvaluation<dim>::assemble_rhs(const DoFHandler<dim> &dof_handler,
- *                                             Vector<double> &       rhs) const
- *     {
- * @endcode
- * 
- * So, first set everything to zeros...
- * 
- * @code
- *       rhs.reinit(dof_handler.n_dofs());
- * 
- * @endcode
- * 
- * ...then loop over cells and find the evaluation point among the
- * vertices (or very close to a vertex, which may happen due to floating
- * point round-off):
- * 
- * @code
- *       for (const auto &cell : dof_handler.active_cell_iterators())
- *         for (const auto vertex : cell->vertex_indices())
- *           if (cell->vertex(vertex).distance(evaluation_point) <
- *               cell->diameter() * 1e-8)
- *             {
- * @endcode
- * 
- * Ok, found, so set corresponding entry, and leave function
- * since we are finished:
- * 
- * @code
- *               rhs(cell->vertex_dof_index(vertex, 0)) = 1;
- *               return;
- *             }
- * 
- * @endcode
- * 
- * Finally, a sanity check: if we somehow got here, then we must have
- * missed the evaluation point, so raise an exception unconditionally:
- * 
- * @code
- *       AssertThrow(false, ExcEvaluationPointNotFound(evaluation_point));
- *     }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThedualfunctionalPointXDerivativeEvaluationclass"></a> 
- * <h4>The dual functional PointXDerivativeEvaluation class</h4>
- * 
-
- * 
- * As second application, we again consider the evaluation of the
- * x-derivative of the solution at one point. Again, the declaration of
- * the class, and the implementation of its constructor is not too
- * interesting:
- * 
- * @code
- *     template <int dim>
- *     class PointXDerivativeEvaluation : public DualFunctionalBase<dim>
- *     {
- *     public:
- *       PointXDerivativeEvaluation(const Point<dim> &evaluation_point);
- * 
- *       virtual void assemble_rhs(const DoFHandler<dim> &dof_handler,
- *                                 Vector<double> &       rhs) const;
- * 
- *       DeclException1(
- *         ExcEvaluationPointNotFound,
- *         Point<dim>,
- *         << "The evaluation point " << arg1
- *         << " was not found among the vertices of the present grid.");
- * 
- *     protected:
- *       const Point<dim> evaluation_point;
- *     };
- * 
- * 
- *     template <int dim>
- *     PointXDerivativeEvaluation<dim>::PointXDerivativeEvaluation(
- *       const Point<dim> &evaluation_point)
- *       : evaluation_point(evaluation_point)
- *     {}
- * 
- * 
- * @endcode
- * 
- * What is interesting is the implementation of this functional: here,
- * J(phi_i)=d/dx phi_i(x0).
- *     
-
- * 
- * We could, as in the implementation of the respective evaluation object
- * take the average of the gradients of each shape function phi_i at this
- * evaluation point. However, we take a slightly different approach: we
- * simply take the average over all cells that surround this point. The
- * question which cells <code>surrounds</code> the evaluation point is
- * made dependent on the mesh width by including those cells for which the
- * distance of the cell's midpoint to the evaluation point is less than
- * the cell's diameter.
- *     
-
- * 
- * Taking the average of the gradient over the area/volume of these cells
- * leads to a dual solution which is very close to the one which would
- * result from the point evaluation of the gradient. It is simple to
- * justify theoretically that this does not change the method
- * significantly.
- * 
- * @code
- *     template <int dim>
- *     void PointXDerivativeEvaluation<dim>::assemble_rhs(
- *       const DoFHandler<dim> &dof_handler,
- *       Vector<double> &       rhs) const
- *     {
- * @endcode
- * 
- * Again, first set all entries to zero:
- * 
- * @code
- *       rhs.reinit(dof_handler.n_dofs());
- * 
- * @endcode
- * 
- * Initialize a <code>FEValues</code> object with a quadrature formula,
- * have abbreviations for the number of quadrature points and shape
- * functions...
- * 
- * @code
- *       QGauss<dim>        quadrature(dof_handler.get_fe().degree + 1);
- *       FEValues<dim>      fe_values(dof_handler.get_fe(),
- *                               quadrature,
- *                               update_gradients | update_quadrature_points |
- *                                 update_JxW_values);
- *       const unsigned int n_q_points    = fe_values.n_quadrature_points;
- *       const unsigned int dofs_per_cell = dof_handler.get_fe().dofs_per_cell;
- * 
- * @endcode
- * 
- * ...and have two objects that are used to store the global indices of
- * the degrees of freedom on a cell, and the values of the gradients of
- * the shape functions at the quadrature points:
- * 
- * @code
- *       Vector<double>            cell_rhs(dofs_per_cell);
- *       std::vector<unsigned int> local_dof_indices(dofs_per_cell);
- * 
- * @endcode
- * 
- * Finally have a variable in which we will sum up the area/volume of
- * the cells over which we integrate, by integrating the unit functions
- * on these cells:
- * 
- * @code
- *       double total_volume = 0;
- * 
- * @endcode
- * 
- * Then start the loop over all cells, and select those cells which are
- * close enough to the evaluation point:
- * 
- * @code
- *       for (const auto &cell : dof_handler.active_cell_iterators())
- *         if (cell->center().distance(evaluation_point) <= cell->diameter())
- *           {
- * @endcode
- * 
- * If we have found such a cell, then initialize the
- * <code>FEValues</code> object and integrate the x-component of
- * the gradient of each shape function, as well as the unit
- * function for the total area/volume.
- * 
- * @code
- *             fe_values.reinit(cell);
- *             cell_rhs = 0;
- * 
- *             for (unsigned int q = 0; q < n_q_points; ++q)
- *               {
- *                 for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *                   cell_rhs(i) +=
- *                     fe_values.shape_grad(i, q)[0] // (d/dx phi_i(x_q))
- *                     * fe_values.JxW(q);           // * dx
- *                 total_volume += fe_values.JxW(q);
- *               }
- * 
- * @endcode
- * 
- * If we have the local contributions, distribute them to the
- * global vector:
- * 
- * @code
- *             cell->get_dof_indices(local_dof_indices);
- *             for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *               rhs(local_dof_indices[i]) += cell_rhs(i);
- *           }
- * 
- * @endcode
- * 
- * After we have looped over all cells, check whether we have found any
- * at all, by making sure that their volume is non-zero. If not, then
- * the results will be botched, as the right hand side should then still
- * be zero, so throw an exception:
- * 
- * @code
- *       AssertThrow(total_volume > 0,
- *                   ExcEvaluationPointNotFound(evaluation_point));
- * 
- * @endcode
- * 
- * Finally, we have by now only integrated the gradients of the shape
- * functions, not taking their mean value. We fix this by dividing by
- * the measure of the volume over which we have integrated:
- * 
- * @code
- *       rhs /= total_volume;
- *     }
- * 
- * 
- *   } // namespace DualFunctional
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ExtendingtheLaplaceSolvernamespace"></a> 
- * <h3>Extending the LaplaceSolver namespace</h3>
- * 
- * @code
- *   namespace LaplaceSolver
- *   {
- * @endcode
- * 
- * 
- * <a name="TheDualSolverclass"></a> 
- * <h4>The DualSolver class</h4>
- * 
-
- * 
- * In the same way as the <code>PrimalSolver</code> class above, we now
- * implement a <code>DualSolver</code>. It has all the same features, the
- * only difference is that it does not take a function object denoting a
- * right hand side object, but now takes a <code>DualFunctionalBase</code>
- * object that will assemble the right hand side vector of the dual
- * problem. The rest of the class is rather trivial.
- *     
-
- * 
- * Since both primal and dual solver will use the same triangulation, but
- * different discretizations, it now becomes clear why we have made the
- * <code>Base</code> class a virtual one: since the final class will be
- * derived from both <code>PrimalSolver</code> as well as
- * <code>DualSolver</code>, it would have two <code>Base</code> instances,
- * would we not have marked the inheritance as virtual. Since in many
- * applications the base class would store much more information than just
- * the triangulation which needs to be shared between primal and dual
- * solvers, we do not usually want to use two such base classes.
- * 
- * @code
- *     template <int dim>
- *     class DualSolver : public Solver<dim>
- *     {
- *     public:
- *       DualSolver(
- *         Triangulation<dim> &                           triangulation,
- *         const FiniteElement<dim> &                     fe,
- *         const Quadrature<dim> &                        quadrature,
- *         const Quadrature<dim - 1> &                    face_quadrature,
- *         const DualFunctional::DualFunctionalBase<dim> &dual_functional);
- * 
- *     protected:
- *       const SmartPointer<const DualFunctional::DualFunctionalBase<dim>>
- *                    dual_functional;
- *       virtual void assemble_rhs(Vector<double> &rhs) const override;
- * 
- *       static const Functions::ZeroFunction<dim> boundary_values;
- *     };
- * 
- *     template <int dim>
- *     const Functions::ZeroFunction<dim> DualSolver<dim>::boundary_values;
- * 
- *     template <int dim>
- *     DualSolver<dim>::DualSolver(
- *       Triangulation<dim> &                           triangulation,
- *       const FiniteElement<dim> &                     fe,
- *       const Quadrature<dim> &                        quadrature,
- *       const Quadrature<dim - 1> &                    face_quadrature,
- *       const DualFunctional::DualFunctionalBase<dim> &dual_functional)
- *       : Base<dim>(triangulation)
- *       , Solver<dim>(triangulation,
- *                     fe,
- *                     quadrature,
- *                     face_quadrature,
- *                     boundary_values)
- *       , dual_functional(&dual_functional)
- *     {}
- * 
- * 
- * 
- *     template <int dim>
- *     void DualSolver<dim>::assemble_rhs(Vector<double> &rhs) const
- *     {
- *       dual_functional->assemble_rhs(this->dof_handler, rhs);
- *     }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TheWeightedResidualclass"></a> 
- * <h4>The WeightedResidual class</h4>
- * 
-
- * 
- * Here finally comes the main class of this program, the one that
- * implements the dual weighted residual error estimator. It joins the
- * primal and dual solver classes to use them for the computation of
- * primal and dual solutions, and implements the error representation
- * formula for use as error estimate and mesh refinement.
- *     
-
- * 
- * The first few of the functions of this class are mostly overriders of
- * the respective functions of the base class:
- * 
- * @code
- *     template <int dim>
- *     class WeightedResidual : public PrimalSolver<dim>, public DualSolver<dim>
- *     {
- *     public:
- *       WeightedResidual(
- *         Triangulation<dim> &                           coarse_grid,
- *         const FiniteElement<dim> &                     primal_fe,
- *         const FiniteElement<dim> &                     dual_fe,
- *         const Quadrature<dim> &                        quadrature,
- *         const Quadrature<dim - 1> &                    face_quadrature,
- *         const Function<dim> &                          rhs_function,
- *         const Function<dim> &                          boundary_values,
- *         const DualFunctional::DualFunctionalBase<dim> &dual_functional);
- * 
- *       virtual void solve_problem() override;
- * 
- *       virtual void postprocess(
- *         const Evaluation::EvaluationBase<dim> &postprocessor) const override;
- * 
- *       virtual unsigned int n_dofs() const override;
- * 
- *       virtual void refine_grid() override;
- * 
- *       virtual void output_solution() const override;
- * 
- *     private:
- * @endcode
- * 
- * In the private section, we have two functions that are used to call
- * the <code>solve_problem</code> functions of the primal and dual base
- * classes. These two functions will be called in parallel by the
- * <code>solve_problem</code> function of this class.
- * 
- * @code
- *       void solve_primal_problem();
- *       void solve_dual_problem();
- * @endcode
- * 
- * Then declare abbreviations for active cell iterators, to avoid that
- * we have to write this lengthy name over and over again:
- * 
-
- * 
- * 
- * @code
- *       using active_cell_iterator =
- *         typename DoFHandler<dim>::active_cell_iterator;
- * 
- * @endcode
- * 
- * Next, declare a data type that we will us to store the contribution
- * of faces to the error estimator. The idea is that we can compute the
- * face terms from each of the two cells to this face, as they are the
- * same when viewed from both sides. What we will do is to compute them
- * only once, based on some rules explained below which of the two
- * adjacent cells will be in charge to do so. We then store the
- * contribution of each face in a map mapping faces to their values, and
- * only collect the contributions for each cell by looping over the
- * cells a second time and grabbing the values from the map.
- *       
-
- * 
- * The data type of this map is declared here:
- * 
- * @code
- *       using FaceIntegrals =
- *         typename std::map<typename DoFHandler<dim>::face_iterator, double>;
- * 
- * @endcode
- * 
- * In the computation of the error estimates on cells and faces, we need
- * a number of helper objects, such as <code>FEValues</code> and
- * <code>FEFaceValues</code> functions, but also temporary objects
- * storing the values and gradients of primal and dual solutions, for
- * example. These fields are needed in the three functions that do the
- * integration on cells, and regular and irregular faces, respectively.
- *       
-
- * 
- * There are three reasonable ways to provide these fields: first, as
- * local variables in the function that needs them; second, as member
- * variables of this class; third, as arguments passed to that function.
- *       
-
- * 
- * These three alternatives all have drawbacks: the third that their
- * number is not negligible and would make calling these functions a
- * lengthy enterprise. The second has the drawback that it disallows
- * parallelization, since the threads that will compute the error
- * estimate have to have their own copies of these variables each, so
- * member variables of the enclosing class will not work. The first
- * approach, although straightforward, has a subtle but important
- * drawback: we will call these functions over and over again, many
- * thousands of times maybe; it now turns out that allocating
- * vectors and other objects that need memory from the heap is an
- * expensive business in terms of run-time, since memory allocation is
- * expensive when several threads are involved. It is thus
- * significantly better to allocate the memory only once, and recycle
- * the objects as often as possible.
- *       
-
- * 
- * What to do? Our answer is to use a variant of the third strategy.
- * In fact, this is exactly what the WorkStream concept is supposed to
- * do (we have already introduced it above, but see also @ref threads).
- * To avoid that we have to give these functions a dozen or so
- * arguments, we pack all these variables into two structures, one which
- * is used for the computations on cells, the other doing them on the
- * faces. Both are then joined into the WeightedResidualScratchData class
- * that will serve as the "scratch data" class of the WorkStream concept:
- * 
- * @code
- *       struct CellData
- *       {
- *         FEValues<dim>                           fe_values;
- *         const SmartPointer<const Function<dim>> right_hand_side;
- * 
- *         std::vector<double> cell_residual;
- *         std::vector<double> rhs_values;
- *         std::vector<double> dual_weights;
- *         std::vector<double> cell_laplacians;
- *         CellData(const FiniteElement<dim> &fe,
- *                  const Quadrature<dim> &   quadrature,
- *                  const Function<dim> &     right_hand_side);
- *         CellData(const CellData &cell_data);
- *       };
- * 
- *       struct FaceData
- *       {
- *         FEFaceValues<dim>    fe_face_values_cell;
- *         FEFaceValues<dim>    fe_face_values_neighbor;
- *         FESubfaceValues<dim> fe_subface_values_cell;
- * 
- *         std::vector<double>                  jump_residual;
- *         std::vector<double>                  dual_weights;
- *         typename std::vector<Tensor<1, dim>> cell_grads;
- *         typename std::vector<Tensor<1, dim>> neighbor_grads;
- *         FaceData(const FiniteElement<dim> & fe,
- *                  const Quadrature<dim - 1> &face_quadrature);
- *         FaceData(const FaceData &face_data);
- *       };
- * 
- *       struct WeightedResidualScratchData
- *       {
- *         WeightedResidualScratchData(
- *           const FiniteElement<dim> & primal_fe,
- *           const Quadrature<dim> &    primal_quadrature,
- *           const Quadrature<dim - 1> &primal_face_quadrature,
- *           const Function<dim> &      rhs_function,
- *           const Vector<double> &     primal_solution,
- *           const Vector<double> &     dual_weights);
- * 
- *         WeightedResidualScratchData(
- *           const WeightedResidualScratchData &scratch_data);
- * 
- *         CellData       cell_data;
- *         FaceData       face_data;
- *         Vector<double> primal_solution;
- *         Vector<double> dual_weights;
- *       };
- * 
- * 
- * @endcode
- * 
- * WorkStream::run generally wants both a scratch object and a copy
- * object. Here, for reasons similar to what we had in step-9 when
- * discussing the computation of an approximation of the gradient, we
- * don't actually need a "copy data" structure. Since WorkStream insists
- * on having one of these, we just declare an empty structure that does
- * nothing other than being there.
- * 
- * @code
- *       struct WeightedResidualCopyData
- *       {};
- * 
- * 
- * 
- * @endcode
- * 
- * Regarding the evaluation of the error estimator, we have one driver
- * function that uses WorkStream::run() to call the second function on
- * every cell:
- * 
- * @code
- *       void estimate_error(Vector<float> &error_indicators) const;
- * 
- *       void estimate_on_one_cell(const active_cell_iterator & cell,
- *                                 WeightedResidualScratchData &scratch_data,
- *                                 WeightedResidualCopyData &   copy_data,
- *                                 Vector<float> &              error_indicators,
- *                                 FaceIntegrals &face_integrals) const;
- * 
- * @endcode
- * 
- * Then we have functions that do the actual integration of the error
- * representation formula. They will treat the terms on the cell
- * interiors, on those faces that have no hanging nodes, and on those
- * faces with hanging nodes, respectively:
- * 
- * @code
- *       void integrate_over_cell(const active_cell_iterator &cell,
- *                                const Vector<double> &      primal_solution,
- *                                const Vector<double> &      dual_weights,
- *                                CellData &                  cell_data,
- *                                Vector<float> &error_indicators) const;
- * 
- *       void integrate_over_regular_face(const active_cell_iterator &cell,
- *                                        const unsigned int          face_no,
- *                                        const Vector<double> &primal_solution,
- *                                        const Vector<double> &dual_weights,
- *                                        FaceData &            face_data,
- *                                        FaceIntegrals &face_integrals) const;
- *       void integrate_over_irregular_face(const active_cell_iterator &cell,
- *                                          const unsigned int          face_no,
- *                                          const Vector<double> &primal_solution,
- *                                          const Vector<double> &dual_weights,
- *                                          FaceData &            face_data,
- *                                          FaceIntegrals &face_integrals) const;
- *     };
- * 
- * 
- * 
- * @endcode
- * 
- * In the implementation of this class, we first have the constructors of
- * the <code>CellData</code> and <code>FaceData</code> member classes, and
- * the <code>WeightedResidual</code> constructor. They only initialize
- * fields to their correct lengths, so we do not have to discuss them in
- * too much detail:
- * 
- * @code
- *     template <int dim>
- *     WeightedResidual<dim>::CellData::CellData(
- *       const FiniteElement<dim> &fe,
- *       const Quadrature<dim> &   quadrature,
- *       const Function<dim> &     right_hand_side)
- *       : fe_values(fe,
- *                   quadrature,
- *                   update_values | update_hessians | update_quadrature_points |
- *                     update_JxW_values)
- *       , right_hand_side(&right_hand_side)
- *       , cell_residual(quadrature.size())
- *       , rhs_values(quadrature.size())
- *       , dual_weights(quadrature.size())
- *       , cell_laplacians(quadrature.size())
- *     {}
- * 
- * 
- * 
- *     template <int dim>
- *     WeightedResidual<dim>::CellData::CellData(const CellData &cell_data)
- *       : fe_values(cell_data.fe_values.get_fe(),
- *                   cell_data.fe_values.get_quadrature(),
- *                   update_values | update_hessians | update_quadrature_points |
- *                     update_JxW_values)
- *       , right_hand_side(cell_data.right_hand_side)
- *       , cell_residual(cell_data.cell_residual)
- *       , rhs_values(cell_data.rhs_values)
- *       , dual_weights(cell_data.dual_weights)
- *       , cell_laplacians(cell_data.cell_laplacians)
- *     {}
- * 
- * 
- * 
- *     template <int dim>
- *     WeightedResidual<dim>::FaceData::FaceData(
- *       const FiniteElement<dim> & fe,
- *       const Quadrature<dim - 1> &face_quadrature)
- *       : fe_face_values_cell(fe,
- *                             face_quadrature,
- *                             update_values | update_gradients |
- *                               update_JxW_values | update_normal_vectors)
- *       , fe_face_values_neighbor(fe,
- *                                 face_quadrature,
- *                                 update_values | update_gradients |
- *                                   update_JxW_values | update_normal_vectors)
- *       , fe_subface_values_cell(fe, face_quadrature, update_gradients)
- *     {
- *       const unsigned int n_face_q_points = face_quadrature.size();
- * 
- *       jump_residual.resize(n_face_q_points);
- *       dual_weights.resize(n_face_q_points);
- *       cell_grads.resize(n_face_q_points);
- *       neighbor_grads.resize(n_face_q_points);
- *     }
- * 
- * 
- * 
- *     template <int dim>
- *     WeightedResidual<dim>::FaceData::FaceData(const FaceData &face_data)
- *       : fe_face_values_cell(face_data.fe_face_values_cell.get_fe(),
- *                             face_data.fe_face_values_cell.get_quadrature(),
- *                             update_values | update_gradients |
- *                               update_JxW_values | update_normal_vectors)
- *       , fe_face_values_neighbor(
- *           face_data.fe_face_values_neighbor.get_fe(),
- *           face_data.fe_face_values_neighbor.get_quadrature(),
- *           update_values | update_gradients | update_JxW_values |
- *             update_normal_vectors)
- *       , fe_subface_values_cell(
- *           face_data.fe_subface_values_cell.get_fe(),
- *           face_data.fe_subface_values_cell.get_quadrature(),
- *           update_gradients)
- *       , jump_residual(face_data.jump_residual)
- *       , dual_weights(face_data.dual_weights)
- *       , cell_grads(face_data.cell_grads)
- *       , neighbor_grads(face_data.neighbor_grads)
- *     {}
- * 
- * 
- * 
- *     template <int dim>
- *     WeightedResidual<dim>::WeightedResidualScratchData::
- *       WeightedResidualScratchData(
- *         const FiniteElement<dim> & primal_fe,
- *         const Quadrature<dim> &    primal_quadrature,
- *         const Quadrature<dim - 1> &primal_face_quadrature,
- *         const Function<dim> &      rhs_function,
- *         const Vector<double> &     primal_solution,
- *         const Vector<double> &     dual_weights)
- *       : cell_data(primal_fe, primal_quadrature, rhs_function)
- *       , face_data(primal_fe, primal_face_quadrature)
- *       , primal_solution(primal_solution)
- *       , dual_weights(dual_weights)
- *     {}
- * 
- *     template <int dim>
- *     WeightedResidual<dim>::WeightedResidualScratchData::
- *       WeightedResidualScratchData(
- *         const WeightedResidualScratchData &scratch_data)
- *       : cell_data(scratch_data.cell_data)
- *       , face_data(scratch_data.face_data)
- *       , primal_solution(scratch_data.primal_solution)
- *       , dual_weights(scratch_data.dual_weights)
- *     {}
- * 
- * 
- * 
- *     template <int dim>
- *     WeightedResidual<dim>::WeightedResidual(
- *       Triangulation<dim> &                           coarse_grid,
- *       const FiniteElement<dim> &                     primal_fe,
- *       const FiniteElement<dim> &                     dual_fe,
- *       const Quadrature<dim> &                        quadrature,
- *       const Quadrature<dim - 1> &                    face_quadrature,
- *       const Function<dim> &                          rhs_function,
- *       const Function<dim> &                          bv,
- *       const DualFunctional::DualFunctionalBase<dim> &dual_functional)
- *       : Base<dim>(coarse_grid)
- *       , PrimalSolver<dim>(coarse_grid,
- *                           primal_fe,
- *                           quadrature,
- *                           face_quadrature,
- *                           rhs_function,
- *                           bv)
- *       , DualSolver<dim>(coarse_grid,
- *                         dual_fe,
- *                         quadrature,
- *                         face_quadrature,
- *                         dual_functional)
- *     {}
- * 
- * 
- * @endcode
- * 
- * The next five functions are boring, as they simply relay their work to
- * the base classes. The first calls the primal and dual solvers in
- * parallel, while postprocessing the solution and retrieving the number
- * of degrees of freedom is done by the primal class.
- * 
- * @code
- *     template <int dim>
- *     void WeightedResidual<dim>::solve_problem()
- *     {
- *       Threads::TaskGroup<void> tasks;
- *       tasks +=
- *         Threads::new_task(&WeightedResidual<dim>::solve_primal_problem, *this);
- *       tasks +=
- *         Threads::new_task(&WeightedResidual<dim>::solve_dual_problem, *this);
- *       tasks.join_all();
- *     }
- * 
- * 
- *     template <int dim>
- *     void WeightedResidual<dim>::solve_primal_problem()
- *     {
- *       PrimalSolver<dim>::solve_problem();
- *     }
- * 
- *     template <int dim>
- *     void WeightedResidual<dim>::solve_dual_problem()
- *     {
- *       DualSolver<dim>::solve_problem();
- *     }
- * 
- * 
- *     template <int dim>
- *     void WeightedResidual<dim>::postprocess(
- *       const Evaluation::EvaluationBase<dim> &postprocessor) const
- *     {
- *       PrimalSolver<dim>::postprocess(postprocessor);
- *     }
- * 
- * 
- *     template <int dim>
- *     unsigned int WeightedResidual<dim>::n_dofs() const
- *     {
- *       return PrimalSolver<dim>::n_dofs();
- *     }
- * 
- * 
- * 
- * @endcode
- * 
- * Now, it is becoming more interesting: the <code>refine_grid()</code>
- * function asks the error estimator to compute the cell-wise error
- * indicators, then uses their absolute values for mesh refinement.
- * 
- * @code
- *     template <int dim>
- *     void WeightedResidual<dim>::refine_grid()
- *     {
- * @endcode
- * 
- * First call the function that computes the cell-wise and global error:
- * 
- * @code
- *       Vector<float> error_indicators(this->triangulation->n_active_cells());
- *       estimate_error(error_indicators);
- * 
- * @endcode
- * 
- * Then note that marking cells for refinement or coarsening only works
- * if all indicators are positive, to allow their comparison. Thus, drop
- * the signs on all these indicators:
- * 
- * @code
- *       for (float &error_indicator : error_indicators)
- *         error_indicator = std::fabs(error_indicator);
- * 
- * @endcode
- * 
- * Finally, we can select between different strategies for
- * refinement. The default here is to refine those cells with the
- * largest error indicators that make up for a total of 80 per cent of
- * the error, while we coarsen those with the smallest indicators that
- * make up for the bottom 2 per cent of the error.
- * 
- * @code
- *       GridRefinement::refine_and_coarsen_fixed_fraction(*this->triangulation,
- *                                                         error_indicators,
- *                                                         0.8,
- *                                                         0.02);
- *       this->triangulation->execute_coarsening_and_refinement();
- *     }
- * 
- * 
- * @endcode
- * 
- * Since we want to output both the primal and the dual solution, we
- * overload the <code>output_solution</code> function. The only
- * interesting feature of this function is that the primal and dual
- * solutions are defined on different finite element spaces, which is not
- * the format the <code>DataOut</code> class expects. Thus, we have to
- * transfer them to a common finite element space. Since we want the
- * solutions only to see them qualitatively, we contend ourselves with
- * interpolating the dual solution to the (smaller) primal space. For the
- * interpolation, there is a library function, that takes a
- * AffineConstraints object including the hanging node
- * constraints. The rest is standard.
- * 
- * @code
- *     template <int dim>
- *     void WeightedResidual<dim>::output_solution() const
- *     {
- *       AffineConstraints<double> primal_hanging_node_constraints;
- *       DoFTools::make_hanging_node_constraints(PrimalSolver<dim>::dof_handler,
- *                                               primal_hanging_node_constraints);
- *       primal_hanging_node_constraints.close();
- *       Vector<double> dual_solution(PrimalSolver<dim>::dof_handler.n_dofs());
- *       FETools::interpolate(DualSolver<dim>::dof_handler,
- *                            DualSolver<dim>::solution,
- *                            PrimalSolver<dim>::dof_handler,
- *                            primal_hanging_node_constraints,
- *                            dual_solution);
- * 
- *       DataOut<dim> data_out;
- *       data_out.attach_dof_handler(PrimalSolver<dim>::dof_handler);
- * 
- * @endcode
- * 
- * Add the data vectors for which we want output. Add them both, the
- * <code>DataOut</code> functions can handle as many data vectors as you
- * wish to write to output:
- * 
- * @code
- *       data_out.add_data_vector(PrimalSolver<dim>::solution, "primal_solution");
- *       data_out.add_data_vector(dual_solution, "dual_solution");
- * 
- *       data_out.build_patches();
- * 
- *       std::ofstream out("solution-" + std::to_string(this->refinement_cycle) +
- *                         ".vtu");
- *       data_out.write(out, DataOutBase::vtu);
- *     }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Estimatingerrors"></a> 
- * <h3>Estimating errors</h3>
- * 
-
- * 
- * 
- * <a name="Errorestimationdriverfunctions"></a> 
- * <h4>Error estimation driver functions</h4>
- *     
-
- * 
- * As for the actual computation of error estimates, let's start with the
- * function that drives all this, i.e. calls those functions that actually
- * do the work, and finally collects the results.
- * 
- * @code
- *     template <int dim>
- *     void
- *     WeightedResidual<dim>::estimate_error(Vector<float> &error_indicators) const
- *     {
- * @endcode
- * 
- * The first task in computing the error is to set up vectors that
- * denote the primal solution, and the weights (z-z_h)=(z-I_hz), both in
- * the finite element space for which we have computed the dual
- * solution. For this, we have to interpolate the primal solution to the
- * dual finite element space, and to subtract the interpolation of the
- * computed dual solution to the primal finite element
- * space. Fortunately, the library provides functions for the
- * interpolation into larger or smaller finite element spaces, so this
- * is mostly obvious.
- *       
-
- * 
- * First, let's do that for the primal solution: it is cell-wise
- * interpolated into the finite element space in which we have solved
- * the dual problem: But, again as in the
- * <code>WeightedResidual::output_solution</code> function we first need
- * to create an AffineConstraints object including the hanging node
- * constraints, but this time of the dual finite element space.
- * 
- * @code
- *       AffineConstraints<double> dual_hanging_node_constraints;
- *       DoFTools::make_hanging_node_constraints(DualSolver<dim>::dof_handler,
- *                                               dual_hanging_node_constraints);
- *       dual_hanging_node_constraints.close();
- *       Vector<double> primal_solution(DualSolver<dim>::dof_handler.n_dofs());
- *       FETools::interpolate(PrimalSolver<dim>::dof_handler,
- *                            PrimalSolver<dim>::solution,
- *                            DualSolver<dim>::dof_handler,
- *                            dual_hanging_node_constraints,
- *                            primal_solution);
- * 
- * @endcode
- * 
- * Then for computing the interpolation of the numerically approximated
- * dual solution z into the finite element space of the primal solution
- * and subtracting it from z: use the
- * <code>interpolate_difference</code> function, that gives (z-I_hz) in
- * the element space of the dual solution.
- * 
- * @code
- *       AffineConstraints<double> primal_hanging_node_constraints;
- *       DoFTools::make_hanging_node_constraints(PrimalSolver<dim>::dof_handler,
- *                                               primal_hanging_node_constraints);
- *       primal_hanging_node_constraints.close();
- *       Vector<double> dual_weights(DualSolver<dim>::dof_handler.n_dofs());
- *       FETools::interpolation_difference(DualSolver<dim>::dof_handler,
- *                                         dual_hanging_node_constraints,
- *                                         DualSolver<dim>::solution,
- *                                         PrimalSolver<dim>::dof_handler,
- *                                         primal_hanging_node_constraints,
- *                                         dual_weights);
- * 
- * @endcode
- * 
- * Note that this could probably have been more efficient since those
- * constraints have been used previously when assembling matrix and
- * right hand side for the primal problem and writing out the dual
- * solution. We leave the optimization of the program in this respect as
- * an exercise.
- * 
-
- * 
- * Having computed the dual weights we now proceed with computing the
- * cell and face residuals of the primal solution. First we set up a map
- * between face iterators and their jump term contributions of faces to
- * the error estimator. The reason is that we compute the jump terms
- * only once, from one side of the face, and want to collect them only
- * afterwards when looping over all cells a second time.
- *       
-
- * 
- * We initialize this map already with a value of -1e20 for all faces,
- * since this value will stand out in the results if something should go
- * wrong and we fail to compute the value for a face for some
- * reason. Secondly, this initialization already makes the std::map
- * object allocate all objects it may possibly need. This is important
- * since we will write into this structure from parallel threads,
- * and doing so would not be thread-safe if the map needed to allocate
- * memory and thereby reshape its data structures. In other words, the
- * initial initialization relieves us from the necessity to synchronize
- * the threads through a mutex each time they write to (and modify the
- * structure of) this map.
- * 
- * @code
- *       FaceIntegrals face_integrals;
- *       for (const auto &cell :
- *            DualSolver<dim>::dof_handler.active_cell_iterators())
- *         for (const auto &face : cell->face_iterators())
- *           face_integrals[face] = -1e20;
- * 
- *       auto worker = [this,
- *                      &error_indicators,
- *                      &face_integrals](const active_cell_iterator & cell,
- *                                       WeightedResidualScratchData &scratch_data,
- *                                       WeightedResidualCopyData &   copy_data) {
- *         this->estimate_on_one_cell(
- *           cell, scratch_data, copy_data, error_indicators, face_integrals);
- *       };
- * 
- *       auto do_nothing_copier =
- *         std::function<void(const WeightedResidualCopyData &)>();
- * 
- * @endcode
- * 
- * Then hand it all off to WorkStream::run() to compute the
- * estimators for all cells in parallel:
- * 
- * @code
- *       WorkStream::run(
- *         DualSolver<dim>::dof_handler.begin_active(),
- *         DualSolver<dim>::dof_handler.end(),
- *         worker,
- *         do_nothing_copier,
- *         WeightedResidualScratchData(*DualSolver<dim>::fe,
- *                                     *DualSolver<dim>::quadrature,
- *                                     *DualSolver<dim>::face_quadrature,
- *                                     *this->rhs_function,
- *                                     primal_solution,
- *                                     dual_weights),
- *         WeightedResidualCopyData());
- * 
- * @endcode
- * 
- * Once the error contributions are computed, sum them up. For this,
- * note that the cell terms are already set, and that only the edge
- * terms need to be collected. Thus, loop over all cells and their
- * faces, make sure that the contributions of each of the faces are
- * there, and add them up. Only take minus one half of the jump term,
- * since the other half will be taken by the neighboring cell.
- * 
- * @code
- *       unsigned int present_cell = 0;
- *       for (const auto &cell :
- *            DualSolver<dim>::dof_handler.active_cell_iterators())
- *         {
- *           for (const auto &face : cell->face_iterators())
- *             {
- *               Assert(face_integrals.find(face) != face_integrals.end(),
- *                      ExcInternalError());
- *               error_indicators(present_cell) -= 0.5 * face_integrals[face];
- *             }
- *           ++present_cell;
- *         }
- *       std::cout << "   Estimated error="
- *                 << std::accumulate(error_indicators.begin(),
- *                                    error_indicators.end(),
- *                                    0.)
- *                 << std::endl;
- *     }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Estimatingonasinglecell"></a> 
- * <h4>Estimating on a single cell</h4>
- * 
-
- * 
- * Next we have the function that is called to estimate the error on a
- * single cell. The function may be called multiple times if the library was
- * configured to use multithreading. Here it goes:
- * 
- * @code
- *     template <int dim>
- *     void WeightedResidual<dim>::estimate_on_one_cell(
- *       const active_cell_iterator & cell,
- *       WeightedResidualScratchData &scratch_data,
- *       WeightedResidualCopyData &   copy_data,
- *       Vector<float> &              error_indicators,
- *       FaceIntegrals &              face_integrals) const
- *     {
- * @endcode
- * 
- * Because of WorkStream, estimate_on_one_cell requires a CopyData object
- * even if it is no used. The next line silences a warning about this
- * unused variable.
- * 
- * @code
- *       (void)copy_data;
- * 
- * @endcode
- * 
- * First task on each cell is to compute the cell residual
- * contributions of this cell, and put them into the
- * <code>error_indicators</code> variable:
- * 
- * @code
- *       integrate_over_cell(cell,
- *                           scratch_data.primal_solution,
- *                           scratch_data.dual_weights,
- *                           scratch_data.cell_data,
- *                           error_indicators);
- * 
- * @endcode
- * 
- * After computing the cell terms, turn to the face terms. For this,
- * loop over all faces of the present cell, and see whether
- * something needs to be computed on it:
- * 
- * @code
- *       for (const auto face_no : cell->face_indices())
- *         {
- * @endcode
- * 
- * First, if this face is part of the boundary, then there is
- * nothing to do. However, to make things easier when summing up
- * the contributions of the faces of cells, we enter this face
- * into the list of faces with a zero contribution to the error.
- * 
- * @code
- *           if (cell->face(face_no)->at_boundary())
- *             {
- *               face_integrals[cell->face(face_no)] = 0;
- *               continue;
- *             }
- * 
- * @endcode
- * 
- * Next, note that since we want to compute the jump terms on
- * each face only once although we access it twice (if it is not
- * at the boundary), we have to define some rules who is
- * responsible for computing on a face:
- *           
-
- * 
- * First, if the neighboring cell is on the same level as this
- * one, i.e. neither further refined not coarser, then the one
- * with the lower index within this level does the work. In
- * other words: if the other one has a lower index, then skip
- * work on this face:
- * 
- * @code
- *           if ((cell->neighbor(face_no)->has_children() == false) &&
- *               (cell->neighbor(face_no)->level() == cell->level()) &&
- *               (cell->neighbor(face_no)->index() < cell->index()))
- *             continue;
- * 
- * @endcode
- * 
- * Likewise, we always work from the coarser cell if this and
- * its neighbor differ in refinement. Thus, if the neighboring
- * cell is less refined than the present one, then do nothing
- * since we integrate over the subfaces when we visit the coarse
- * cell.
- * 
- * @code
- *           if (cell->at_boundary(face_no) == false)
- *             if (cell->neighbor(face_no)->level() < cell->level())
- *               continue;
- * 
- * 
- * @endcode
- * 
- * Now we know that we are in charge here, so actually compute
- * the face jump terms. If the face is a regular one, i.e.  the
- * other side's cell is neither coarser not finer than this
- * cell, then call one function, and if the cell on the other
- * side is further refined, then use another function. Note that
- * the case that the cell on the other side is coarser cannot
- * happen since we have decided above that we handle this case
- * when we pass over that other cell.
- * 
- * @code
- *           if (cell->face(face_no)->has_children() == false)
- *             integrate_over_regular_face(cell,
- *                                         face_no,
- *                                         scratch_data.primal_solution,
- *                                         scratch_data.dual_weights,
- *                                         scratch_data.face_data,
- *                                         face_integrals);
- *           else
- *             integrate_over_irregular_face(cell,
- *                                           face_no,
- *                                           scratch_data.primal_solution,
- *                                           scratch_data.dual_weights,
- *                                           scratch_data.face_data,
- *                                           face_integrals);
- *         }
- *     }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Computingcelltermerrorcontributions"></a> 
- * <h4>Computing cell term error contributions</h4>
- * 
-
- * 
- * As for the actual computation of the error contributions, first turn to
- * the cell terms:
- * 
- * @code
- *     template <int dim>
- *     void WeightedResidual<dim>::integrate_over_cell(
- *       const active_cell_iterator &cell,
- *       const Vector<double> &      primal_solution,
- *       const Vector<double> &      dual_weights,
- *       CellData &                  cell_data,
- *       Vector<float> &             error_indicators) const
- *     {
- * @endcode
- * 
- * The tasks to be done are what appears natural from looking at the
- * error estimation formula: first get the right hand side and Laplacian
- * of the numerical solution at the quadrature points for the cell
- * residual,
- * 
- * @code
- *       cell_data.fe_values.reinit(cell);
- *       cell_data.right_hand_side->value_list(
- *         cell_data.fe_values.get_quadrature_points(), cell_data.rhs_values);
- *       cell_data.fe_values.get_function_laplacians(primal_solution,
- *                                                   cell_data.cell_laplacians);
- * 
- * @endcode
- * 
- * ...then get the dual weights...
- * 
- * @code
- *       cell_data.fe_values.get_function_values(dual_weights,
- *                                               cell_data.dual_weights);
- * 
- * @endcode
- * 
- * ...and finally build the sum over all quadrature points and store it
- * with the present cell:
- * 
- * @code
- *       double sum = 0;
- *       for (unsigned int p = 0; p < cell_data.fe_values.n_quadrature_points; ++p)
- *         sum += ((cell_data.rhs_values[p] + cell_data.cell_laplacians[p]) *
- *                 cell_data.dual_weights[p] * cell_data.fe_values.JxW(p));
- *       error_indicators(cell->active_cell_index()) += sum;
- *     }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Computingedgetermerrorcontributions1"></a> 
- * <h4>Computing edge term error contributions -- 1</h4>
- * 
-
- * 
- * On the other hand, computation of the edge terms for the error estimate
- * is not so simple. First, we have to distinguish between faces with and
- * without hanging nodes. Because it is the simple case, we first consider
- * the case without hanging nodes on a face (let's call this the `regular'
- * case):
- * 
- * @code
- *     template <int dim>
- *     void WeightedResidual<dim>::integrate_over_regular_face(
- *       const active_cell_iterator &cell,
- *       const unsigned int          face_no,
- *       const Vector<double> &      primal_solution,
- *       const Vector<double> &      dual_weights,
- *       FaceData &                  face_data,
- *       FaceIntegrals &             face_integrals) const
- *     {
- *       const unsigned int n_q_points =
- *         face_data.fe_face_values_cell.n_quadrature_points;
- * 
- * @endcode
- * 
- * The first step is to get the values of the gradients at the
- * quadrature points of the finite element field on the present
- * cell. For this, initialize the <code>FEFaceValues</code> object
- * corresponding to this side of the face, and extract the gradients
- * using that object.
- * 
- * @code
- *       face_data.fe_face_values_cell.reinit(cell, face_no);
- *       face_data.fe_face_values_cell.get_function_gradients(
- *         primal_solution, face_data.cell_grads);
- * 
- * @endcode
- * 
- * The second step is then to extract the gradients of the finite
- * element solution at the quadrature points on the other side of the
- * face, i.e. from the neighboring cell.
- *       
-
- * 
- * For this, do a sanity check before: make sure that the neighbor
- * actually exists (yes, we should not have come here if the neighbor
- * did not exist, but in complicated software there are bugs, so better
- * check this), and if this is not the case throw an error.
- * 
- * @code
- *       Assert(cell->neighbor(face_no).state() == IteratorState::valid,
- *              ExcInternalError());
- * @endcode
- * 
- * If we have that, then we need to find out with which face of the
- * neighboring cell we have to work, i.e. the <code>how-many'th</code> the
- * neighbor the present cell is of the cell behind the present face. For
- * this, there is a function, and we put the result into a variable with
- * the name <code>neighbor_neighbor</code>:
- * 
- * @code
- *       const unsigned int neighbor_neighbor =
- *         cell->neighbor_of_neighbor(face_no);
- * @endcode
- * 
- * Then define an abbreviation for the neighbor cell, initialize the
- * <code>FEFaceValues</code> object on that cell, and extract the
- * gradients on that cell:
- * 
- * @code
- *       const active_cell_iterator neighbor = cell->neighbor(face_no);
- *       face_data.fe_face_values_neighbor.reinit(neighbor, neighbor_neighbor);
- *       face_data.fe_face_values_neighbor.get_function_gradients(
- *         primal_solution, face_data.neighbor_grads);
- * 
- * @endcode
- * 
- * Now that we have the gradients on this and the neighboring cell,
- * compute the jump residual by multiplying the jump in the gradient
- * with the normal vector:
- * 
- * @code
- *       for (unsigned int p = 0; p < n_q_points; ++p)
- *         face_data.jump_residual[p] =
- *           ((face_data.cell_grads[p] - face_data.neighbor_grads[p]) *
- *            face_data.fe_face_values_cell.normal_vector(p));
- * 
- * @endcode
- * 
- * Next get the dual weights for this face:
- * 
- * @code
- *       face_data.fe_face_values_cell.get_function_values(dual_weights,
- *                                                         face_data.dual_weights);
- * 
- * @endcode
- * 
- * Finally, we have to compute the sum over jump residuals, dual
- * weights, and quadrature weights, to get the result for this face:
- * 
- * @code
- *       double face_integral = 0;
- *       for (unsigned int p = 0; p < n_q_points; ++p)
- *         face_integral +=
- *           (face_data.jump_residual[p] * face_data.dual_weights[p] *
- *            face_data.fe_face_values_cell.JxW(p));
- * 
- * @endcode
- * 
- * Double check that the element already exists and that it was not
- * already written to...
- * 
- * @code
- *       Assert(face_integrals.find(cell->face(face_no)) != face_integrals.end(),
- *              ExcInternalError());
- *       Assert(face_integrals[cell->face(face_no)] == -1e20, ExcInternalError());
- * 
- * @endcode
- * 
- * ...then store computed value at assigned location. Note that the
- * stored value does not contain the factor 1/2 that appears in the
- * error representation. The reason is that the term actually does not
- * have this factor if we loop over all faces in the triangulation, but
- * only appears if we write it as a sum over all cells and all faces of
- * each cell; we thus visit the same face twice. We take account of this
- * by using this factor -1/2 later, when we sum up the contributions for
- * each cell individually.
- * 
- * @code
- *       face_integrals[cell->face(face_no)] = face_integral;
- *     }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Computingedgetermerrorcontributions2"></a> 
- * <h4>Computing edge term error contributions -- 2</h4>
- * 
-
- * 
- * We are still missing the case of faces with hanging nodes. This is what
- * is covered in this function:
- * 
- * @code
- *     template <int dim>
- *     void WeightedResidual<dim>::integrate_over_irregular_face(
- *       const active_cell_iterator &cell,
- *       const unsigned int          face_no,
- *       const Vector<double> &      primal_solution,
- *       const Vector<double> &      dual_weights,
- *       FaceData &                  face_data,
- *       FaceIntegrals &             face_integrals) const
- *     {
- * @endcode
- * 
- * First again two abbreviations, and some consistency checks whether
- * the function is called only on faces for which it is supposed to be
- * called:
- * 
- * @code
- *       const unsigned int n_q_points =
- *         face_data.fe_face_values_cell.n_quadrature_points;
- * 
- *       const typename DoFHandler<dim>::face_iterator face = cell->face(face_no);
- *       const typename DoFHandler<dim>::cell_iterator neighbor =
- *         cell->neighbor(face_no);
- *       Assert(neighbor.state() == IteratorState::valid, ExcInternalError());
- *       Assert(neighbor->has_children(), ExcInternalError());
- *       (void)neighbor;
- * 
- * @endcode
- * 
- * Then find out which neighbor the present cell is of the adjacent
- * cell. Note that we will operate on the children of this adjacent
- * cell, but that their orientation is the same as that of their mother,
- * i.e. the neighbor direction is the same.
- * 
- * @code
- *       const unsigned int neighbor_neighbor =
- *         cell->neighbor_of_neighbor(face_no);
- * 
- * @endcode
- * 
- * Then simply do everything we did in the previous function for one
- * face for all the sub-faces now:
- * 
- * @code
- *       for (unsigned int subface_no = 0; subface_no < face->n_children();
- *            ++subface_no)
- *         {
- * @endcode
- * 
- * Start with some checks again: get an iterator pointing to the
- * cell behind the present subface and check whether its face is a
- * subface of the one we are considering. If that were not the case,
- * then there would be either a bug in the
- * <code>neighbor_neighbor</code> function called above, or -- worse
- * -- some function in the library did not keep to some underlying
- * assumptions about cells, their children, and their faces. In any
- * case, even though this assertion should not be triggered, it does
- * not harm to be cautious, and in optimized mode computations the
- * assertion will be removed anyway.
- * 
- * @code
- *           const active_cell_iterator neighbor_child =
- *             cell->neighbor_child_on_subface(face_no, subface_no);
- *           Assert(neighbor_child->face(neighbor_neighbor) ==
- *                    cell->face(face_no)->child(subface_no),
- *                  ExcInternalError());
- * 
- * @endcode
- * 
- * Now start the work by again getting the gradient of the solution
- * first at this side of the interface,
- * 
- * @code
- *           face_data.fe_subface_values_cell.reinit(cell, face_no, subface_no);
- *           face_data.fe_subface_values_cell.get_function_gradients(
- *             primal_solution, face_data.cell_grads);
- * @endcode
- * 
- * then at the other side,
- * 
- * @code
- *           face_data.fe_face_values_neighbor.reinit(neighbor_child,
- *                                                    neighbor_neighbor);
- *           face_data.fe_face_values_neighbor.get_function_gradients(
- *             primal_solution, face_data.neighbor_grads);
- * 
- * @endcode
- * 
- * and finally building the jump residuals. Since we take the normal
- * vector from the other cell this time, revert the sign of the
- * first term compared to the other function:
- * 
- * @code
- *           for (unsigned int p = 0; p < n_q_points; ++p)
- *             face_data.jump_residual[p] =
- *               ((face_data.neighbor_grads[p] - face_data.cell_grads[p]) *
- *                face_data.fe_face_values_neighbor.normal_vector(p));
- * 
- * @endcode
- * 
- * Then get dual weights:
- * 
- * @code
- *           face_data.fe_face_values_neighbor.get_function_values(
- *             dual_weights, face_data.dual_weights);
- * 
- * @endcode
- * 
- * At last, sum up the contribution of this sub-face, and set it in
- * the global map:
- * 
- * @code
- *           double face_integral = 0;
- *           for (unsigned int p = 0; p < n_q_points; ++p)
- *             face_integral +=
- *               (face_data.jump_residual[p] * face_data.dual_weights[p] *
- *                face_data.fe_face_values_neighbor.JxW(p));
- *           face_integrals[neighbor_child->face(neighbor_neighbor)] =
- *             face_integral;
- *         }
- * 
- * @endcode
- * 
- * Once the contributions of all sub-faces are computed, loop over all
- * sub-faces to collect and store them with the mother face for simple
- * use when later collecting the error terms of cells. Again make safety
- * checks that the entries for the sub-faces have been computed and do
- * not carry an invalid value.
- * 
- * @code
- *       double sum = 0;
- *       for (unsigned int subface_no = 0; subface_no < face->n_children();
- *            ++subface_no)
- *         {
- *           Assert(face_integrals.find(face->child(subface_no)) !=
- *                    face_integrals.end(),
- *                  ExcInternalError());
- *           Assert(face_integrals[face->child(subface_no)] != -1e20,
- *                  ExcInternalError());
- * 
- *           sum += face_integrals[face->child(subface_no)];
- *         }
- * @endcode
- * 
- * Finally store the value with the parent face.
- * 
- * @code
- *       face_integrals[face] = sum;
- *     }
- * 
- *   } // namespace LaplaceSolver
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Asimulationframework"></a> 
- * <h3>A simulation framework</h3>
- * 
-
- * 
- * In the previous example program, we have had two functions that were used
- * to drive the process of solving on subsequently finer grids. We extend
- * this here to allow for a number of parameters to be passed to these
- * functions, and put all of that into framework class.
- *   
-
- * 
- * You will have noted that this program is built up of a number of small
- * parts (evaluation functions, solver classes implementing various
- * refinement methods, different dual functionals, different problem and
- * data descriptions), which makes the program relatively simple to extend,
- * but also allows to solve a large number of different problems by
- * replacing one part by another. We reflect this flexibility by declaring a
- * structure in the following framework class that holds a number of
- * parameters that may be set to test various combinations of the parts of
- * this program, and which can be used to test it at various problems and
- * discretizations in a simple way.
- * 
- * @code
- *   template <int dim>
- *   struct Framework
- *   {
- *   public:
- * @endcode
- * 
- * First, we declare two abbreviations for simple use of the respective
- * data types:
- * 
- * @code
- *     using Evaluator     = Evaluation::EvaluationBase<dim>;
- *     using EvaluatorList = std::list<Evaluator *>;
- * 
- * 
- * @endcode
- * 
- * Then we have the structure which declares all the parameters that may
- * be set. In the default constructor of the structure, these values are
- * all set to default values, for simple use.
- * 
- * @code
- *     struct ProblemDescription
- *     {
- * @endcode
- * 
- * First allow for the degrees of the piecewise polynomials by which the
- * primal and dual problems will be discretized. They default to (bi-,
- * tri-)linear ansatz functions for the primal, and (bi-, tri-)quadratic
- * ones for the dual problem. If a refinement criterion is chosen that
- * does not need the solution of a dual problem, the value of the dual
- * finite element degree is of course ignored.
- * 
- * @code
- *       unsigned int primal_fe_degree;
- *       unsigned int dual_fe_degree;
- * 
- * @endcode
- * 
- * Then have an object that describes the problem type, i.e. right hand
- * side, domain, boundary values, etc. The pointer needed here defaults
- * to the Null pointer, i.e. you will have to set it in actual instances
- * of this object to make it useful.
- * 
- * @code
- *       std::unique_ptr<const Data::SetUpBase<dim>> data;
- * 
- * @endcode
- * 
- * Since we allow to use different refinement criteria (global
- * refinement, refinement by the Kelly error indicator, possibly with a
- * weight, and using the dual estimator), define a number of enumeration
- * values, and subsequently a variable of that type. It will default to
- * <code>dual_weighted_error_estimator</code>.
- * 
- * @code
- *       enum RefinementCriterion
- *       {
- *         dual_weighted_error_estimator,
- *         global_refinement,
- *         kelly_indicator,
- *         weighted_kelly_indicator
- *       };
- * 
- *       RefinementCriterion refinement_criterion;
- * 
- * @endcode
- * 
- * Next, an object that describes the dual functional. It is only needed
- * if the dual weighted residual refinement is chosen, and also defaults
- * to a Null pointer.
- * 
- * @code
- *       std::unique_ptr<const DualFunctional::DualFunctionalBase<dim>>
- *         dual_functional;
- * 
- * @endcode
- * 
- * Then a list of evaluation objects. Its default value is empty,
- * i.e. no evaluation objects.
- * 
- * @code
- *       EvaluatorList evaluator_list;
- * 
- * @endcode
- * 
- * Next to last, a function that is used as a weight to the
- * <code>RefinementWeightedKelly</code> class. The default value of this
- * pointer is zero, but you have to set it to some other value if you
- * want to use the <code>weighted_kelly_indicator</code> refinement
- * criterion.
- * 
- * @code
- *       std::unique_ptr<const Function<dim>> kelly_weight;
- * 
- * @endcode
- * 
- * Finally, we have a variable that denotes the maximum number of
- * degrees of freedom we allow for the (primal) discretization. If it is
- * exceeded, we stop the process of solving and intermittent mesh
- * refinement. Its default value is 20,000.
- * 
- * @code
- *       unsigned int max_degrees_of_freedom;
- * 
- * @endcode
- * 
- * Finally the default constructor of this class:
- * 
- * @code
- *       ProblemDescription();
- *     };
- * 
- * @endcode
- * 
- * The driver framework class only has one method which calls solver and
- * mesh refinement intermittently, and does some other small tasks in
- * between. Since it does not need data besides the parameters given to
- * it, we make it static:
- * 
- * @code
- *     static void run(const ProblemDescription &descriptor);
- *   };
- * 
- * 
- * @endcode
- * 
- * As for the implementation, first the constructor of the parameter object,
- * setting all values to their defaults:
- * 
- * @code
- *   template <int dim>
- *   Framework<dim>::ProblemDescription::ProblemDescription()
- *     : primal_fe_degree(1)
- *     , dual_fe_degree(2)
- *     , refinement_criterion(dual_weighted_error_estimator)
- *     , max_degrees_of_freedom(20000)
- *   {}
- * 
- * 
- * 
- * @endcode
- * 
- * Then the function which drives the whole process:
- * 
- * @code
- *   template <int dim>
- *   void Framework<dim>::run(const ProblemDescription &descriptor)
- *   {
- * @endcode
- * 
- * First create a triangulation from the given data object,
- * 
- * @code
- *     Triangulation<dim> triangulation(
- *       Triangulation<dim>::smoothing_on_refinement);
- *     descriptor.data->create_coarse_grid(triangulation);
- * 
- * @endcode
- * 
- * then a set of finite elements and appropriate quadrature formula:
- * 
- * @code
- *     const FE_Q<dim>       primal_fe(descriptor.primal_fe_degree);
- *     const FE_Q<dim>       dual_fe(descriptor.dual_fe_degree);
- *     const QGauss<dim>     quadrature(descriptor.dual_fe_degree + 1);
- *     const QGauss<dim - 1> face_quadrature(descriptor.dual_fe_degree + 1);
- * 
- * @endcode
- * 
- * Next, select one of the classes implementing different refinement
- * criteria.
- * 
- * @code
- *     std::unique_ptr<LaplaceSolver::Base<dim>> solver;
- *     switch (descriptor.refinement_criterion)
- *       {
- *         case ProblemDescription::dual_weighted_error_estimator:
- *           {
- *             solver = std::make_unique<LaplaceSolver::WeightedResidual<dim>>(
- *               triangulation,
- *               primal_fe,
- *               dual_fe,
- *               quadrature,
- *               face_quadrature,
- *               descriptor.data->get_right_hand_side(),
- *               descriptor.data->get_boundary_values(),
- *               *descriptor.dual_functional);
- *             break;
- *           }
- * 
- *         case ProblemDescription::global_refinement:
- *           {
- *             solver = std::make_unique<LaplaceSolver::RefinementGlobal<dim>>(
- *               triangulation,
- *               primal_fe,
- *               quadrature,
- *               face_quadrature,
- *               descriptor.data->get_right_hand_side(),
- *               descriptor.data->get_boundary_values());
- *             break;
- *           }
- * 
- *         case ProblemDescription::kelly_indicator:
- *           {
- *             solver = std::make_unique<LaplaceSolver::RefinementKelly<dim>>(
- *               triangulation,
- *               primal_fe,
- *               quadrature,
- *               face_quadrature,
- *               descriptor.data->get_right_hand_side(),
- *               descriptor.data->get_boundary_values());
- *             break;
- *           }
- * 
- *         case ProblemDescription::weighted_kelly_indicator:
- *           {
- *             solver =
- *               std::make_unique<LaplaceSolver::RefinementWeightedKelly<dim>>(
- *                 triangulation,
- *                 primal_fe,
- *                 quadrature,
- *                 face_quadrature,
- *                 descriptor.data->get_right_hand_side(),
- *                 descriptor.data->get_boundary_values(),
- *                 *descriptor.kelly_weight);
- *             break;
- *           }
- * 
- *         default:
- *           AssertThrow(false, ExcInternalError());
- *       }
- * 
- * @endcode
- * 
- * Now that all objects are in place, run the main loop. The stopping
- * criterion is implemented at the bottom of the loop.
- *     
-
- * 
- * In the loop, first set the new cycle number, then solve the problem,
- * output its solution(s), apply the evaluation objects to it, then decide
- * whether we want to refine the mesh further and solve again on this
- * mesh, or jump out of the loop.
- * 
- * @code
- *     for (unsigned int step = 0; true; ++step)
- *       {
- *         std::cout << "Refinement cycle: " << step << std::endl;
- * 
- *         solver->set_refinement_cycle(step);
- *         solver->solve_problem();
- *         solver->output_solution();
- * 
- *         std::cout << "   Number of degrees of freedom=" << solver->n_dofs()
- *                   << std::endl;
- * 
- *         for (const auto &evaluator : descriptor.evaluator_list)
- *           {
- *             evaluator->set_refinement_cycle(step);
- *             solver->postprocess(*evaluator);
- *           }
- * 
- * 
- *         if (solver->n_dofs() < descriptor.max_degrees_of_freedom)
- *           solver->refine_grid();
- *         else
- *           break;
- *       }
- * 
- * @endcode
- * 
- * Clean up the screen after the loop has run:
- * 
- * @code
- *     std::cout << std::endl;
- *   }
- * 
- * } // namespace Step14
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Themainfunction"></a> 
- * <h3>The main function</h3>
- * 
-
- * 
- * Here finally comes the main function. It drives the whole process by
- * specifying a set of parameters to be used for the simulation (polynomial
- * degrees, evaluation and dual functionals, etc), and passes them packed into
- * a structure to the frame work class above.
- * 
- * @code
- * int main()
- * {
- *   try
- *     {
- *       using namespace Step14;
- * 
- * @endcode
- * 
- * Describe the problem we want to solve here by passing a descriptor
- * object to the function doing the rest of the work:
- * 
- * @code
- *       const unsigned int                 dim = 2;
- *       Framework<dim>::ProblemDescription descriptor;
- * 
- * @endcode
- * 
- * First set the refinement criterion we wish to use:
- * 
- * @code
- *       descriptor.refinement_criterion =
- *         Framework<dim>::ProblemDescription::dual_weighted_error_estimator;
- * @endcode
- * 
- * Here, we could as well have used <code>global_refinement</code> or
- * <code>weighted_kelly_indicator</code>. Note that the information
- * given about dual finite elements, dual functional, etc is only
- * important for the given choice of refinement criterion, and is
- * ignored otherwise.
- * 
-
- * 
- * Then set the polynomial degrees of primal and dual problem. We choose
- * here bi-linear and bi-quadratic ones:
- * 
- * @code
- *       descriptor.primal_fe_degree = 1;
- *       descriptor.dual_fe_degree   = 2;
- * 
- * @endcode
- * 
- * Then set the description of the test case, i.e. domain, boundary
- * values, and right hand side. These are prepackaged in classes. We
- * take here the description of <code>Exercise_2_3</code>, but you can
- * also use <code>CurvedRidges@<dim@></code>:
- * 
- * @code
- *       descriptor.data =
- *         std::make_unique<Data::SetUp<Data::Exercise_2_3<dim>, dim>>();
- * 
- * @endcode
- * 
- * Next set first a dual functional, then a list of evaluation
- * objects. We choose as default the evaluation of the value at an
- * evaluation point, represented by the classes
- * <code>PointValueEvaluation</code> in the namespaces of evaluation and
- * dual functional classes. You can also set the
- * <code>PointXDerivativeEvaluation</code> classes for the x-derivative
- * instead of the value at the evaluation point.
- *       
-
- * 
- * Note that dual functional and evaluation objects should
- * match. However, you can give as many evaluation functionals as you
- * want, so you can have both point value and derivative evaluated after
- * each step.  One such additional evaluation is to output the grid in
- * each step.
- * 
- * @code
- *       const Point<dim> evaluation_point(0.75, 0.75);
- *       descriptor.dual_functional =
- *         std::make_unique<DualFunctional::PointValueEvaluation<dim>>(
- *           evaluation_point);
- * 
- *       Evaluation::PointValueEvaluation<dim> postprocessor1(evaluation_point);
- *       Evaluation::GridOutput<dim>           postprocessor2("grid");
- * 
- *       descriptor.evaluator_list.push_back(&postprocessor1);
- *       descriptor.evaluator_list.push_back(&postprocessor2);
- * 
- * @endcode
- * 
- * Set the maximal number of degrees of freedom after which we want the
- * program to stop refining the mesh further:
- * 
- * @code
- *       descriptor.max_degrees_of_freedom = 20000;
- * 
- * @endcode
- * 
- * Finally pass the descriptor object to a function that runs the entire
- * solution with it:
- * 
- * @code
- *       Framework<dim>::run(descriptor);
- *     }
- * 
- * @endcode
- * 
- * Catch exceptions to give information about things that failed:
- * 
- * @code
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
+@f]，右边是狄拉克三角函数，对偶解是相对于点 $x_0$ 的格林函数。对于简单的几何形状，这个函数是分析上已知的，我们可以把它插入误差表示公式中。
+
+然而，我们不想把自己限制在这种特殊情况下。相反，我们将以数值方式计算对偶解，并通过一些数值获得的 $\tilde z$ 来近似 $z$ 。我们注意到，使用与原始解 $u_h$ 相同的方法来计算这个近似值 $\tilde z$ 是不够的，因为这样 $\tilde z-I_h \tilde z=0$ 和整体误差估计值将为零。相反，近似值 $\tilde z$ 必须来自一个比原始有限元空间更大的空间。有多种方法可以获得这样的近似值（见所引用的文献），我们将选择用高阶有限元空间来计算它。虽然这肯定不是最有效的方法，但它很简单，因为我们已经有了所有需要做的事情，而且还可以进行简单的实验。对于更有效的方法，再次参考给定的文献，特别是  @cite BR95  ,  @cite BR03  。
+
+至此，我们结束了对这个程序的数学方面的讨论，转而讨论实际的实现。
+
+
+
+
+  @note  如果你只关心计算误差，上面有两个步骤似乎没有必要：即(i)从 $\phi_h$ 中减去 $z$ ，和(ii)将积分拆成单元格之和，在每个单元格上进行积分。事实上，这两个步骤根本没有改变 $J(e)$ ，因为在用 $\tilde z$ 替换 $z$ 之前，我们只考虑上面的相同点。换句话说，如果你只关心<i>estimating the global error</i> $J(e)$ ，那么这些步骤就没有必要。另一方面，如果你想把误差估计值也作为网格中每个单元的细化标准，那么就有必要(i)把估计值分解成单元的总和，(ii)以这样的方式按摩公式，使每个单元的贡献都与局部误差有关。(虽然上面的扭曲没有改变<i>sum</i> $J(e)$ 的值，但它们改变了我们为每个单元 $K$ 计算的值) 。为此，我们想把一切都写成 "残差乘以双重权重 "的形式，其中 "残差 "是随着近似度变得 $u_h$ 越来越好而归于零的东西。例如， $\partial_n
+u_h$ 这个量不是残差，因为它只是收敛到精确解的梯度的（法线分量）。另一方面， $[\partial_n u_h]$ 是一个残差，因为它收敛于 $[\partial_n
+u]=0$  。我们在制定 $J(e)$ 的最终形式时采取的所有步骤，实际上都是为了使最终公式变成这样一种形式：当离散解 $u_h$ 收敛到 $u$ 时，每个项都收敛为零。这样就可以把每个单元的贡献看作是一个 "误差指标"，也会收敛为零--因为它应该随着网格的细化而收敛。
+
+
+
+
+<a name="Thesoftware"></a> <h3>The software</h3>
+
+
+ step-14  示例程序在很大程度上建立在 step-13  程序中已经使用的技术上。它对上面解释的二重加权残差估计器的实现是通过派生出第二个类，正确地称为 <code>DualSolver</code>, from the <code>Solver</code> 基类，并有一个类(  <code>WeightedResidual</code> )将两者再次连接起来，控制原始和二重问题的解决，然后用两者来计算网格细化的误差指标。
+
+该程序延续了前面例子中的模块化概念，通过一个抽象的基类来实现对偶函数，描述兴趣量，并提供两个不同的函数来实现这个接口。因此，增加一个不同的兴趣量是很简单的。
+
+一个更根本的区别是对数据的处理。一个常见的情况是，你开发了一个解决某个方程的程序，并且用不同的右手边、不同的域、不同的系数和边界值等来测试它。通常情况下，这些必须匹配，以便知道确切的解决方案，或者它们的组合是有意义的。
+
+我们展示了一种如何以简单而又非常灵活的方式实现这一点的方法。我们将把属于某个设置的所有东西放到一个类中，并围绕它提供一个小小的C++砂浆，这样整个设置（域、系数、右手边等）就可以通过只改变 <em> 中的某个 </em> 地方来交换。
+
+再进一步，我们还将所有描述程序如何工作的其他参数集中在一个地方，如有限元的顺序、最大自由度数、应在计算出的解上执行的评估对象等等。这使得程序的配置更加简单，我们将在后面的程序中展示如何使用一个库类来处理通过读取输入文件来设置这些参数。总的来说，我们的目的是要减少程序中想要改变某些参数时可能需要查找的地方，因为在实践中发现，随着程序的发展，人们会忘记它们的位置。此外，把所有描述程序在某次运行中所做工作的选项放到一个文件中（可以和结果一起存储），比在程序中的某个地方设置各种标志更有助于结果的可重复性，因为在下次改变这个地方后，它们的确切值就会被遗忘。
+
+不幸的是，这个程序已经变得相当长了。虽然这确实降低了它作为一个示例程序的作用，但我们认为它是一个很好的起点，可以用来开发其他类型问题的程序，涉及的方程与这里处理的拉普拉斯方程不同。此外，它显示了我们可以向你展示的关于我们的后验误差估计方法的一切，它的结构应该使你能够简单地调整这个方法以适应其他问题、其他函数、其他几何、系数等等。
+
+作者认为，就数学的复杂性以及添加扩展的简单性而言，本程序是他在示例程序中的杰作。如果你使用这个程序作为你自己程序的基础，我们希望你能在由此产生的出版物中说明这一事实以及示例程序的作者Wolfgang Bangerth的名字，你的程序有相当一部分是由示例程序组成的。<a name="CommProg"></a> <h1> The commented program</h1>
+
+从众所周知的事情开始... 
+
+@code
+#include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/function.h>
+#include <deal.II/base/logstream.h>
+#include <deal.II/base/thread_management.h>
+#include <deal.II/base/work_stream.h>
+#include <deal.II/lac/vector.h>
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/sparse_matrix.h>
+#include <deal.II/lac/dynamic_sparsity_pattern.h>
+#include <deal.II/lac/solver_cg.h>
+#include <deal.II/lac/precondition.h>
+#include <deal.II/lac/affine_constraints.h>
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/grid_out.h>
+#include <deal.II/grid/grid_refinement.h>
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/dofs/dof_tools.h>
+#include <deal.II/fe/fe_q.h>
+#include <deal.II/fe/fe_values.h>
+#include <deal.II/fe/fe_tools.h>
+#include <deal.II/numerics/vector_tools.h>
+#include <deal.II/numerics/matrix_tools.h>
+#include <deal.II/numerics/data_out.h>
+#include <deal.II/numerics/error_estimator.h>
+
+
+#include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <list>
+#include <memory>
+#include <numeric>
+
+
+@endcode 
+
+
+
+最后一步和以前所有的程序一样。
+
+@code
+namespace Step14
+{
+  using namespace dealii;
+
+
+@endcode 
+
+
+
+
+<a name="Evaluatingthesolution"></a> <h3>Evaluating the solution</h3> 
+
+
+
+
+正如在介绍中提到的，该程序的重要部分只是从 step-13 示例程序中接管过来。因此，我们只对那些新的东西进行评论。   
+
+
+首先，评估解决方案的框架没有改变，即基类是相同的，评估网格点上解决方案的类也没有改变。
+
+@code
+  namespace Evaluation
+  {
+@endcode 
+
+
+
+
+<a name="TheEvaluationBaseclass"></a> <h4>The EvaluationBase class</h4> 
+
+@code
+    template <int dim>
+    class EvaluationBase
+    {
+    public:
+      virtual ~EvaluationBase() = default;
+
+
+      void set_refinement_cycle(const unsigned int refinement_cycle);
+
+
+      virtual void operator()(const DoFHandler<dim> &dof_handler,
+                              const Vector<double> & solution) const = 0;
+
+
+    protected:
+      unsigned int refinement_cycle;
+    };
+
+
+
+
+
+    template <int dim>
+    void EvaluationBase<dim>::set_refinement_cycle(const unsigned int step)
+    {
+      refinement_cycle = step;
+    }
+
+
+
+@endcode 
+
+
+
+
+<a name="ThePointValueEvaluationclass"></a> <h4>The PointValueEvaluation class</h4>
+
+@code
+    template <int dim>
+    class PointValueEvaluation : public EvaluationBase<dim>
+    {
+    public:
+      PointValueEvaluation(const Point<dim> &evaluation_point);
+
+
+      virtual void operator()(const DoFHandler<dim> &dof_handler,
+                              const Vector<double> & solution) const override;
+
+
+      DeclException1(
+        ExcEvaluationPointNotFound,
+        Point<dim>,
+        << "The evaluation point " << arg1
+        << " was not found among the vertices of the present grid.");
+
+
+    private:
+      const Point<dim> evaluation_point;
+    };
+
+
+
+    template <int dim>
+    PointValueEvaluation<dim>::PointValueEvaluation(
+      const Point<dim> &evaluation_point)
+      : evaluation_point(evaluation_point)
+    {}
+
+
+
+
+
+    template <int dim>
+    void PointValueEvaluation<dim>::
+         operator()(const DoFHandler<dim> &dof_handler,
+               const Vector<double> & solution) const
+    {
+      double point_value = 1e20;
+
+
+      bool evaluation_point_found = false;
+      for (const auto &cell : dof_handler.active_cell_iterators())
+        if (!evaluation_point_found)
+          for (const auto vertex : cell->vertex_indices())
+            if (cell->vertex(vertex).distance(evaluation_point) <
+                cell->diameter() * 1e-8)
+              {
+                point_value = solution(cell->vertex_dof_index(vertex, 0));
+
+
+                evaluation_point_found = true;
+                break;
+              }
+
+
+      AssertThrow(evaluation_point_found,
+                  ExcEvaluationPointNotFound(evaluation_point));
+
+
+      std::cout << "   Point value=" << point_value << std::endl;
+    }
+
+
+
+@endcode 
+
+
+
+
+<a name="ThePointXDerivativeEvaluationclass"></a> <h4>The PointXDerivativeEvaluation class</h4> 
+
+
+
+
+除了在一个点上实现解的评估的类，我们在这里提供一个在网格点上评估梯度的类。由于一般情况下，有限元函数的梯度在一个顶点上是不连续的，所以我们在这里要更小心一点。我们要做的是在所有单元上循环，即使我们已经在一个单元上找到了这个点，并使用所有相邻单元的顶点的梯度的平均值。     
+
+
+鉴于 <code>PointValueEvaluation</code> 类的接口，这个类的声明没有提供什么惊喜，构造函数也没有。
+
+@code
+    template <int dim>
+    class PointXDerivativeEvaluation : public EvaluationBase<dim>
+    {
+    public:
+      PointXDerivativeEvaluation(const Point<dim> &evaluation_point);
+
+
+      virtual void operator()(const DoFHandler<dim> &dof_handler,
+                              const Vector<double> & solution) const;
+
+
+      DeclException1(
+        ExcEvaluationPointNotFound,
+        Point<dim>,
+        << "The evaluation point " << arg1
+        << " was not found among the vertices of the present grid.");
+
+
+    private:
+      const Point<dim> evaluation_point;
+    };
+
+
+
+    template <int dim>
+    PointXDerivativeEvaluation<dim>::PointXDerivativeEvaluation(
+      const Point<dim> &evaluation_point)
+      : evaluation_point(evaluation_point)
+    {}
+
+
+
+@endcode 
+
+
+
+更有趣的事情发生在进行实际评估的函数中。
+
+@code
+    template <int dim>
+    void PointXDerivativeEvaluation<dim>::
+         operator()(const DoFHandler<dim> &dof_handler,
+               const Vector<double> & solution) const
+    {
+@endcode 
+
+
+
+这次用一些有用的东西来初始化返回值，因为我们将不得不把一些贡献加起来，然后取平均值...。
+
+@code
+      double point_derivative = 0;
+
+
+@endcode 
+
+
+
+...然后有一些对象，其含义将在下面变得清晰... 
+
+@code
+      QTrapezoid<dim>             vertex_quadrature;
+      FEValues<dim>               fe_values(dof_handler.get_fe(),
+                              vertex_quadrature,
+                              update_gradients | update_quadrature_points);
+      std::vector<Tensor<1, dim>> solution_gradients(vertex_quadrature.size());
+
+
+@endcode 
+
+
+
+...接下来循环所有单元格及其顶点，并计算顶点被发现的频率。
+
+@code
+      unsigned int evaluation_point_hits = 0;
+      for (const auto &cell : dof_handler.active_cell_iterators())
+        for (const auto vertex : cell->vertex_indices())
+          if (cell->vertex(vertex) == evaluation_point)
+            {
+@endcode 
+
+
+
+现在事情不再那么简单了，因为我们不能像以前那样得到有限元场的梯度，我们只需要在一个顶点上挑选一个自由度。               
+
+
+相反，我们必须评估这个单元上的有限元场，而且是在某一点。如你所知，在某一点上评估有限元场是通过 <code>FEValues</code> 类完成的，所以我们使用它。问题是： <code>FEValues</code> 对象需要给定一个正交公式，然后可以计算正交点的有限元量值。在这里，我们并不想做正交，我们只是想指定一些点!                
+
+
+尽管如此，还是选择同样的方式：使用一个特殊的正交规则，点在顶点，因为这些是我们感兴趣的。适当的规则是梯形规则，所以这就是我们上面使用该规则的原因。               
+
+
+因此：在这个单元上初始化 <code>FEValues</code> 对象。
+
+@code
+              fe_values.reinit(cell);
+@endcode 
+
+
+
+并在顶点提取解向量的梯度。
+
+@code
+              fe_values.get_function_gradients(solution, solution_gradients);
+
+
+@endcode 
+
+
+
+现在我们有了所有顶点的梯度，所以挑出属于评估点的那一个（注意顶点的顺序不一定与正交点的顺序相同）。
+
+@code
+              unsigned int q_point = 0;
+              for (; q_point < solution_gradients.size(); ++q_point)
+                if (fe_values.quadrature_point(q_point) == evaluation_point)
+                  break;
+
+
+@endcode 
+
+
+
+检查是否确实找到了评估点。
+
+@code
+              Assert(q_point < solution_gradients.size(), ExcInternalError());
+@endcode 
+
+
+
+如果是这样，就把那里的梯度的x导数作为我们感兴趣的值，并增加计数器，表示我们对该变量的加法次数。
+
+@code
+              point_derivative += solution_gradients[q_point][0];
+              ++evaluation_point_hits;
+
+
+@endcode 
+
+
+
+最后跳出最内层的循环，在当前单元的顶点上进行迭代，因为如果我们在一个顶点上找到了评估点，那么它就不可能在后面的顶点上。
+
+@code
+              break;
+            }
+
+
+@endcode 
+
+
+
+现在我们已经循环了所有的单元和顶点，所以检查是否找到了这个点。
+
+@code
+      AssertThrow(evaluation_point_hits > 0,
+                  ExcEvaluationPointNotFound(evaluation_point));
+
+
+@endcode 
+
+
+
+我们已经简单地将所有相邻单元的贡献相加，所以我们仍然要计算平均值。一旦完成，报告状态。
+
+@code
+      point_derivative /= evaluation_point_hits;
+      std::cout << "   Point x-derivative=" << point_derivative << std::endl;
+    }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TheGridOutputclass"></a> <h4>The GridOutput class</h4>
+
+
+
+
+由于这个程序有一个更困难的结构（除了原始解之外，它还计算了一个对偶解），所以写出解不再由一个评估对象来完成，因为我们想把两个解同时写进一个文件，这需要一些比评估类可用的信息。     
+
+
+然而，我们也想看看生成的网格。这也可以通过一个这样的类来完成。它的结构类似于前面例子程序中的 <code>SolutionOutput</code> 类，所以我们在这里不做更详细的讨论。此外，这里所使用的一切都已经在以前的例子程序中使用过了。
+
+@code
+    template <int dim>
+    class GridOutput : public EvaluationBase<dim>
+    {
+    public:
+      GridOutput(const std::string &output_name_base);
+
+
+      virtual void operator()(const DoFHandler<dim> &dof_handler,
+                              const Vector<double> & solution) const override;
+
+
+    private:
+      const std::string output_name_base;
+    };
+
+
+
+    template <int dim>
+    GridOutput<dim>::GridOutput(const std::string &output_name_base)
+      : output_name_base(output_name_base)
+    {}
+
+
+
+    template <int dim>
+    void GridOutput<dim>::operator()(const DoFHandler<dim> &dof_handler,
+                                     const Vector<double> & /*solution*/) const
+    {
+      std::ofstream out(output_name_base + "-" +
+                        std::to_string(this->refinement_cycle) + ".svg");
+      GridOut().write_svg(dof_handler.get_triangulation(), out);
+    }
+  } // namespace Evaluation
+
+
+
+@endcode 
+
+
+
+
+<a name="TheLaplacesolverclasses"></a> <h3>The Laplace solver classes</h3> 
+
+
+
+
+接下来是实际的求解器类。同样，我们只讨论与之前程序的区别。
+
+@code
+  namespace LaplaceSolver
+  {
+@endcode 
+
+
+
+
+<a name="TheLaplacesolverbaseclass"></a> <h4>The Laplace solver base class</h4> 
+
+
+
+
+这个类几乎没有变化，只是多声明了两个函数。  <code>output_solution</code> 将用于从派生类计算的实际解决方案中生成输出文件，以及 <code>set_refinement_cycle</code> 函数，测试框架通过该函数将细化周期的编号设置为该类中的一个局部变量；该编号后来被用于生成解决方案输出的文件名。
+
+@code
+    template <int dim>
+    class Base
+    {
+    public:
+      Base(Triangulation<dim> &coarse_grid);
+      virtual ~Base() = default;
+
+
+      virtual void solve_problem() = 0;
+      virtual void postprocess(
+        const Evaluation::EvaluationBase<dim> &postprocessor) const = 0;
+      virtual void         refine_grid()                            = 0;
+      virtual unsigned int n_dofs() const                           = 0;
+
+
+      virtual void set_refinement_cycle(const unsigned int cycle);
+
+
+      virtual void output_solution() const = 0;
+
+
+    protected:
+      const SmartPointer<Triangulation<dim>> triangulation;
+
+
+      unsigned int refinement_cycle;
+    };
+
+
+
+    template <int dim>
+    Base<dim>::Base(Triangulation<dim> &coarse_grid)
+      : triangulation(&coarse_grid)
+      , refinement_cycle(numbers::invalid_unsigned_int)
+    {}
+
+
+
+
+
+    template <int dim>
+    void Base<dim>::set_refinement_cycle(const unsigned int cycle)
+    {
+      refinement_cycle = cycle;
+    }
+
+
+
+@endcode 
+
+
+
+
+<a name="TheLaplaceSolverclass"></a> <h4>The Laplace Solver class</h4>
+
+
+
+
+同样， <code>Solver</code> 类也完全没有变化，因此将不进行讨论。
+
+@code
+    template <int dim>
+    class Solver : public virtual Base<dim>
+    {
+    public:
+      Solver(Triangulation<dim> &       triangulation,
+             const FiniteElement<dim> & fe,
+             const Quadrature<dim> &    quadrature,
+             const Quadrature<dim - 1> &face_quadrature,
+             const Function<dim> &      boundary_values);
+      virtual ~Solver() override;
+
+
+      virtual void solve_problem() override;
+
+
+      virtual void postprocess(
+        const Evaluation::EvaluationBase<dim> &postprocessor) const override;
+
+
+      virtual unsigned int n_dofs() const override;
+
+
+    protected:
+      const SmartPointer<const FiniteElement<dim>>  fe;
+      const SmartPointer<const Quadrature<dim>>     quadrature;
+      const SmartPointer<const Quadrature<dim - 1>> face_quadrature;
+      DoFHandler<dim>                               dof_handler;
+      Vector<double>                                solution;
+      const SmartPointer<const Function<dim>>       boundary_values;
+
+
+      virtual void assemble_rhs(Vector<double> &rhs) const = 0;
+
+
+    private:
+      struct LinearSystem
+      {
+        LinearSystem(const DoFHandler<dim> &dof_handler);
+
+
+        void solve(Vector<double> &solution) const;
+
+
+        AffineConstraints<double> hanging_node_constraints;
+        SparsityPattern           sparsity_pattern;
+        SparseMatrix<double>      matrix;
+        Vector<double>            rhs;
+      };
+
+
+
+@endcode 
+
+
+
+该类的其余部分基本上也是 step-13 的副本，包括使用WorkStream框架并行计算线性系统所需的数据结构和函数。
+
+@code
+      struct AssemblyScratchData
+      {
+        AssemblyScratchData(const FiniteElement<dim> &fe,
+                            const Quadrature<dim> &   quadrature);
+        AssemblyScratchData(const AssemblyScratchData &scratch_data);
+
+
+        FEValues<dim> fe_values;
+      };
+
+
+      struct AssemblyCopyData
+      {
+        FullMatrix<double>                   cell_matrix;
+        std::vector<types::global_dof_index> local_dof_indices;
+      };
+
+
+
+      void assemble_linear_system(LinearSystem &linear_system);
+
+
+      void local_assemble_matrix(
+        const typename DoFHandler<dim>::active_cell_iterator &cell,
+        AssemblyScratchData &                                 scratch_data,
+        AssemblyCopyData &                                    copy_data) const;
+
+
+
+      void copy_local_to_global(const AssemblyCopyData &copy_data,
+                                LinearSystem &          linear_system) const;
+    };
+
+
+
+
+
+    template <int dim>
+    Solver<dim>::Solver(Triangulation<dim> &       triangulation,
+                        const FiniteElement<dim> & fe,
+                        const Quadrature<dim> &    quadrature,
+                        const Quadrature<dim - 1> &face_quadrature,
+                        const Function<dim> &      boundary_values)
+      : Base<dim>(triangulation)
+      , fe(&fe)
+      , quadrature(&quadrature)
+      , face_quadrature(&face_quadrature)
+      , dof_handler(triangulation)
+      , boundary_values(&boundary_values)
+    {}
+
+
+
+    template <int dim>
+    Solver<dim>::~Solver()
+    {
+      dof_handler.clear();
+    }
+
+
+
+    template <int dim>
+    void Solver<dim>::solve_problem()
+    {
+      dof_handler.distribute_dofs(*fe);
+      solution.reinit(dof_handler.n_dofs());
+
+
+      LinearSystem linear_system(dof_handler);
+      assemble_linear_system(linear_system);
+      linear_system.solve(solution);
+    }
+
+
+
+    template <int dim>
+    void Solver<dim>::postprocess(
+      const Evaluation::EvaluationBase<dim> &postprocessor) const
+    {
+      postprocessor(dof_handler, solution);
+    }
+
+
+
+    template <int dim>
+    unsigned int Solver<dim>::n_dofs() const
+    {
+      return dof_handler.n_dofs();
+    }
+
+
+
+@endcode 
+
+
+
+以下几个函数和构造函数是逐字复制自  step-13  。
+
+@code
+    template <int dim>
+    void Solver<dim>::assemble_linear_system(LinearSystem &linear_system)
+    {
+      Threads::Task<void> rhs_task =
+        Threads::new_task(&Solver<dim>::assemble_rhs, *this, linear_system.rhs);
+
+
+      auto worker =
+        [this](const typename DoFHandler<dim>::active_cell_iterator &cell,
+               AssemblyScratchData &scratch_data,
+               AssemblyCopyData &   copy_data) {
+          this->local_assemble_matrix(cell, scratch_data, copy_data);
+        };
+
+
+      auto copier = [this, &linear_system](const AssemblyCopyData &copy_data) {
+        this->copy_local_to_global(copy_data, linear_system);
+      };
+
+
+      WorkStream::run(dof_handler.begin_active(),
+                      dof_handler.end(),
+                      worker,
+                      copier,
+                      AssemblyScratchData(*fe, *quadrature),
+                      AssemblyCopyData());
+      linear_system.hanging_node_constraints.condense(linear_system.matrix);
+
+
+      std::map<types::global_dof_index, double> boundary_value_map;
+      VectorTools::interpolate_boundary_values(dof_handler,
+                                               0,
+                                               *boundary_values,
+                                               boundary_value_map);
+
+
+      rhs_task.join();
+      linear_system.hanging_node_constraints.condense(linear_system.rhs);
+
+
+      MatrixTools::apply_boundary_values(boundary_value_map,
+                                         linear_system.matrix,
+                                         solution,
+                                         linear_system.rhs);
+    }
+
+
+
+    template <int dim>
+    Solver<dim>::AssemblyScratchData::AssemblyScratchData(
+      const FiniteElement<dim> &fe,
+      const Quadrature<dim> &   quadrature)
+      : fe_values(fe, quadrature, update_gradients | update_JxW_values)
+    {}
+
+
+
+    template <int dim>
+    Solver<dim>::AssemblyScratchData::AssemblyScratchData(
+      const AssemblyScratchData &scratch_data)
+      : fe_values(scratch_data.fe_values.get_fe(),
+                  scratch_data.fe_values.get_quadrature(),
+                  update_gradients | update_JxW_values)
+    {}
+
+
+
+    template <int dim>
+    void Solver<dim>::local_assemble_matrix(
+      const typename DoFHandler<dim>::active_cell_iterator &cell,
+      AssemblyScratchData &                                 scratch_data,
+      AssemblyCopyData &                                    copy_data) const
+    {
+      const unsigned int dofs_per_cell = fe->n_dofs_per_cell();
+      const unsigned int n_q_points    = quadrature->size();
+
+
+      copy_data.cell_matrix.reinit(dofs_per_cell, dofs_per_cell);
+
+
+      copy_data.local_dof_indices.resize(dofs_per_cell);
+
+
+      scratch_data.fe_values.reinit(cell);
+
+
+      for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
+        for (unsigned int i = 0; i < dofs_per_cell; ++i)
+          for (unsigned int j = 0; j < dofs_per_cell; ++j)
+            copy_data.cell_matrix(i, j) +=
+              (scratch_data.fe_values.shape_grad(i, q_point) *
+               scratch_data.fe_values.shape_grad(j, q_point) *
+               scratch_data.fe_values.JxW(q_point));
+
+
+      cell->get_dof_indices(copy_data.local_dof_indices);
+    }
+
+
+
+
+
+    template <int dim>
+    void Solver<dim>::copy_local_to_global(const AssemblyCopyData &copy_data,
+                                           LinearSystem &linear_system) const
+    {
+      for (unsigned int i = 0; i < copy_data.local_dof_indices.size(); ++i)
+        for (unsigned int j = 0; j < copy_data.local_dof_indices.size(); ++j)
+          linear_system.matrix.add(copy_data.local_dof_indices[i],
+                                   copy_data.local_dof_indices[j],
+                                   copy_data.cell_matrix(i, j));
+    }
+
+
+
+@endcode 
+
+
+
+现在来看看线性系统类中实现动作的函数。首先，构造函数将所有数据元素初始化为正确的大小，并设置了一些额外的数据结构，如由于悬挂节点而产生的约束。由于设置悬空节点和找出矩阵的非零元素是独立的，所以我们以并行方式进行（如果库被配置为使用并发，至少是这样；否则，这些动作是按顺序执行的）。注意，我们只启动一个线程，并在主线程中做第二个动作。由于只生成了一个线程，所以我们在这里不使用 <code>Threads::ThreadGroup</code> 类，而是直接使用创建的一个线程对象来等待这个特定线程的退出。这种方法与我们在上面的 <code>Solver::assemble_linear_system()</code> 中使用的方法大致相同。     
+
+
+注意，获取 <code>DoFTools::make_hanging_node_constraints</code> 函数的地址有点麻烦，因为实际上有三个这个名字的函数，每个支持的空间维度都有一个。在C++中，获取重载函数的地址有些复杂，因为在这种情况下，操作符 <code>&</code> 会返回一组值（所有具有该名称的函数的地址），然后选择正确的函数是下一步的事情。如果上下文决定采取哪一个（例如通过分配给一个已知类型的函数指针），那么编译器可以自己来做，但是如果这组指针应作为一个采取模板的函数的参数，编译器可以选择所有的，而不偏向于一个。因此，我们必须向编译器说明我们希望拥有哪一个；为此，我们可以使用cast，但为了更清楚，我们将其分配给一个具有正确类型的临时 <code>mhnc_p</code> （简称<code>pointer to make_hanging_node_constraints</code>），并使用这个指针代替。
+
+@code
+    template <int dim>
+    Solver<dim>::LinearSystem::LinearSystem(const DoFHandler<dim> &dof_handler)
+    {
+      hanging_node_constraints.clear();
+
+
+      void (*mhnc_p)(const DoFHandler<dim> &, AffineConstraints<double> &) =
+        &DoFTools::make_hanging_node_constraints;
+
+
+@endcode 
+
+
+
+启动一个辅助任务，然后在主线程上继续进行 
+
+@code
+      Threads::Task<void> side_task =
+        Threads::new_task(mhnc_p, dof_handler, hanging_node_constraints);
+
+
+      DynamicSparsityPattern dsp(dof_handler.n_dofs(), dof_handler.n_dofs());
+      DoFTools::make_sparsity_pattern(dof_handler, dsp);
+
+
+
+
+
+@endcode 
+
+
+
+等到边上的任务完成后再继续前进 
+
+@code
+      side_task.join();
+
+
+      hanging_node_constraints.close();
+      hanging_node_constraints.condense(dsp);
+      sparsity_pattern.copy_from(dsp);
+
+
+      matrix.reinit(sparsity_pattern);
+      rhs.reinit(dof_handler.n_dofs());
+    }
+
+
+
+
+
+    template <int dim>
+    void Solver<dim>::LinearSystem::solve(Vector<double> &solution) const
+    {
+      SolverControl            solver_control(5000, 1e-12);
+      SolverCG<Vector<double>> cg(solver_control);
+
+
+      PreconditionSSOR<SparseMatrix<double>> preconditioner;
+      preconditioner.initialize(matrix, 1.2);
+
+
+      cg.solve(matrix, solution, rhs, preconditioner);
+
+
+      hanging_node_constraints.distribute(solution);
+    }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="ThePrimalSolverclass"></a> <h4>The PrimalSolver class</h4> 
+
+
+
+
+除了实现 <code>output_solution</code> 函数， <code>PrimalSolver</code> 类也基本没有变化。我们在这个程序中保留了 <code>GlobalRefinement</code> and <code>RefinementKelly</code> 类，然后它们可以依赖这个函数的默认实现，这个函数只是输出原始解。实现双重加权误差估计的类将自行重载这个函数，以同时输出双重解。
+
+@code
+    template <int dim>
+    class PrimalSolver : public Solver<dim>
+    {
+    public:
+      PrimalSolver(Triangulation<dim> &       triangulation,
+                   const FiniteElement<dim> & fe,
+                   const Quadrature<dim> &    quadrature,
+                   const Quadrature<dim - 1> &face_quadrature,
+                   const Function<dim> &      rhs_function,
+                   const Function<dim> &      boundary_values);
+
+
+      virtual void output_solution() const override;
+
+
+    protected:
+      const SmartPointer<const Function<dim>> rhs_function;
+      virtual void assemble_rhs(Vector<double> &rhs) const override;
+    };
+
+
+
+    template <int dim>
+    PrimalSolver<dim>::PrimalSolver(Triangulation<dim> &       triangulation,
+                                    const FiniteElement<dim> & fe,
+                                    const Quadrature<dim> &    quadrature,
+                                    const Quadrature<dim - 1> &face_quadrature,
+                                    const Function<dim> &      rhs_function,
+                                    const Function<dim> &      boundary_values)
+      : Base<dim>(triangulation)
+      , Solver<dim>(triangulation,
+                    fe,
+                    quadrature,
+                    face_quadrature,
+                    boundary_values)
+      , rhs_function(&rhs_function)
+    {}
+
+
+
+
+
+    template <int dim>
+    void PrimalSolver<dim>::output_solution() const
+    {
+      DataOut<dim> data_out;
+      data_out.attach_dof_handler(this->dof_handler);
+      data_out.add_data_vector(this->solution, "solution");
+      data_out.build_patches();
+
+
+      std::ofstream out("solution-" + std::to_string(this->refinement_cycle) +
+                        ".vtu");
+      data_out.write(out, DataOutBase::vtu);
+    }
+
+
+
+
+
+    template <int dim>
+    void PrimalSolver<dim>::assemble_rhs(Vector<double> &rhs) const
+    {
+      FEValues<dim> fe_values(*this->fe,
+                              *this->quadrature,
+                              update_values | update_quadrature_points |
+                                update_JxW_values);
+
+
+      const unsigned int dofs_per_cell = this->fe->n_dofs_per_cell();
+      const unsigned int n_q_points    = this->quadrature->size();
+
+
+      Vector<double>                       cell_rhs(dofs_per_cell);
+      std::vector<double>                  rhs_values(n_q_points);
+      std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
+
+
+      for (const auto &cell : this->dof_handler.active_cell_iterators())
+        {
+          cell_rhs = 0;
+
+
+          fe_values.reinit(cell);
+
+
+          rhs_function->value_list(fe_values.get_quadrature_points(),
+                                   rhs_values);
+
+
+          for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
+            for (unsigned int i = 0; i < dofs_per_cell; ++i)
+              cell_rhs(i) += (fe_values.shape_value(i, q_point) * // phi_i(x_q)
+                              rhs_values[q_point] *               // f((x_q)
+                              fe_values.JxW(q_point));            // dx
+
+
+          cell->get_dof_indices(local_dof_indices);
+          for (unsigned int i = 0; i < dofs_per_cell; ++i)
+            rhs(local_dof_indices[i]) += cell_rhs(i);
+        }
+    }
+
+
+
+@endcode 
+
+
+
+
+<a name="TheRefinementGlobalandRefinementKellyclasses"></a> <h4>The RefinementGlobal and RefinementKelly classes</h4> 
+
+
+
+
+对于下面的两个类，和上面的大多数情况一样：该类是按原样取自前面的例子。
+
+@code
+    template <int dim>
+    class RefinementGlobal : public PrimalSolver<dim>
+    {
+    public:
+      RefinementGlobal(Triangulation<dim> &       coarse_grid,
+                       const FiniteElement<dim> & fe,
+                       const Quadrature<dim> &    quadrature,
+                       const Quadrature<dim - 1> &face_quadrature,
+                       const Function<dim> &      rhs_function,
+                       const Function<dim> &      boundary_values);
+
+
+      virtual void refine_grid() override;
+    };
+
+
+
+
+
+    template <int dim>
+    RefinementGlobal<dim>::RefinementGlobal(
+      Triangulation<dim> &       coarse_grid,
+      const FiniteElement<dim> & fe,
+      const Quadrature<dim> &    quadrature,
+      const Quadrature<dim - 1> &face_quadrature,
+      const Function<dim> &      rhs_function,
+      const Function<dim> &      boundary_values)
+      : Base<dim>(coarse_grid)
+      , PrimalSolver<dim>(coarse_grid,
+                          fe,
+                          quadrature,
+                          face_quadrature,
+                          rhs_function,
+                          boundary_values)
+    {}
+
+
+
+
+
+    template <int dim>
+    void RefinementGlobal<dim>::refine_grid()
+    {
+      this->triangulation->refine_global(1);
+    }
+
+
+
+
+
+    template <int dim>
+    class RefinementKelly : public PrimalSolver<dim>
+    {
+    public:
+      RefinementKelly(Triangulation<dim> &       coarse_grid,
+                      const FiniteElement<dim> & fe,
+                      const Quadrature<dim> &    quadrature,
+                      const Quadrature<dim - 1> &face_quadrature,
+                      const Function<dim> &      rhs_function,
+                      const Function<dim> &      boundary_values);
+
+
+      virtual void refine_grid() override;
+    };
+
+
+
+
+
+    template <int dim>
+    RefinementKelly<dim>::RefinementKelly(
+      Triangulation<dim> &       coarse_grid,
+      const FiniteElement<dim> & fe,
+      const Quadrature<dim> &    quadrature,
+      const Quadrature<dim - 1> &face_quadrature,
+      const Function<dim> &      rhs_function,
+      const Function<dim> &      boundary_values)
+      : Base<dim>(coarse_grid)
+      , PrimalSolver<dim>(coarse_grid,
+                          fe,
+                          quadrature,
+                          face_quadrature,
+                          rhs_function,
+                          boundary_values)
+    {}
+
+
+
+
+
+    template <int dim>
+    void RefinementKelly<dim>::refine_grid()
+    {
+      Vector<float> estimated_error_per_cell(
+        this->triangulation->n_active_cells());
+      KellyErrorEstimator<dim>::estimate(
+        this->dof_handler,
+        QGauss<dim - 1>(this->fe->degree + 1),
+        std::map<types::boundary_id, const Function<dim> *>(),
+        this->solution,
+        estimated_error_per_cell);
+      GridRefinement::refine_and_coarsen_fixed_number(*this->triangulation,
+                                                      estimated_error_per_cell,
+                                                      0.3,
+                                                      0.03);
+      this->triangulation->execute_coarsening_and_refinement();
+    }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TheRefinementWeightedKellyclass"></a> <h4>The RefinementWeightedKelly class</h4>
+
+
+
+
+这个类是前一个类的变种，它允许用一些函数来加权我们从库的凯利指标中得到的细化指标。我们包括这个类，因为这个例子程序的目标是展示自动细化标准，即使是复杂的输出量，如点值或应力。如果我们不解决对偶问题并计算其中的权重，我们可能会倾向于给指标一个手工制作的权重，以说明我们要评估这些数量的事实。这个类接受这样一个加权函数作为其构造函数的参数。
+
+@code
+    template <int dim>
+    class RefinementWeightedKelly : public PrimalSolver<dim>
+    {
+    public:
+      RefinementWeightedKelly(Triangulation<dim> &       coarse_grid,
+                              const FiniteElement<dim> & fe,
+                              const Quadrature<dim> &    quadrature,
+                              const Quadrature<dim - 1> &face_quadrature,
+                              const Function<dim> &      rhs_function,
+                              const Function<dim> &      boundary_values,
+                              const Function<dim> &      weighting_function);
+
+
+      virtual void refine_grid() override;
+
+
+    private:
+      const SmartPointer<const Function<dim>> weighting_function;
+    };
+
+
+
+
+
+    template <int dim>
+    RefinementWeightedKelly<dim>::RefinementWeightedKelly(
+      Triangulation<dim> &       coarse_grid,
+      const FiniteElement<dim> & fe,
+      const Quadrature<dim> &    quadrature,
+      const Quadrature<dim - 1> &face_quadrature,
+      const Function<dim> &      rhs_function,
+      const Function<dim> &      boundary_values,
+      const Function<dim> &      weighting_function)
+      : Base<dim>(coarse_grid)
+      , PrimalSolver<dim>(coarse_grid,
+                          fe,
+                          quadrature,
+                          face_quadrature,
+                          rhs_function,
+                          boundary_values)
+      , weighting_function(&weighting_function)
+    {}
+
+
+
+
+
+@endcode 
+
+
+
+现在，这里是主函数，包括加权。
+
+@code
+    template <int dim>
+    void RefinementWeightedKelly<dim>::refine_grid()
+    {
+@endcode 
+
+
+
+首先通过库中已经实现的方法为所有单元计算一些基于残差的误差指标。我们在这里计算的具体内容在该类的文档中有更详细的描述。
+
+@code
+      Vector<float> estimated_error_per_cell(
+        this->triangulation->n_active_cells());
+      std::map<types::boundary_id, const Function<dim> *> dummy_function_map;
+      KellyErrorEstimator<dim>::estimate(this->dof_handler,
+                                         *this->face_quadrature,
+                                         dummy_function_map,
+                                         this->solution,
+                                         estimated_error_per_cell);
+
+
+@endcode 
+
+
+
+接下来，用给构造函数的值来衡量指标向量中的每个条目，在单元格中心进行评估。我们需要将结果写入对应于当前单元的向量条目中，我们可以通过使用 CellAccessor::active_cell_index(). 询问单元在所有活动单元中的索引来获得这个结果（实际上，对于我们在循环中处理的第一个单元，这个索引是0，第二个单元是1，等等，我们也可以使用一个整数计数器来跟踪这个索引；但是使用 CellAccessor::active_cell_index() 使之更加明确）。
+
+@code
+      for (const auto &cell : this->dof_handler.active_cell_iterators())
+        estimated_error_per_cell(cell->active_cell_index()) *=
+          weighting_function->value(cell->center());
+
+
+      GridRefinement::refine_and_coarsen_fixed_number(*this->triangulation,
+                                                      estimated_error_per_cell,
+                                                      0.3,
+                                                      0.03);
+      this->triangulation->execute_coarsening_and_refinement();
+    }
+
+
+  } // namespace LaplaceSolver
+
+
+
+@endcode 
+
+
+
+
+<a name="Equationdata"></a> <h3>Equation data</h3>   
+
+
+在这个示例程序中，我们使用的数据集与前一个相同，但由于可能发生有人想用不同的边界值和右手函数，或在不同的网格上运行程序，我们展示了一个简单的技术来做到这一点。为了更加清晰，我们进一步将所有与方程数据有关的东西都打包到一个自己的命名空间中。   
+
+
+基本的假设是这是一个研究项目，在那里我们经常有一些测试案例，包括一个域、一个右手边、边界值，可能还有一个指定的系数和一些其他参数。当从一个例子转移到另一个例子时，它们经常同时变化。使处理这种问题描述参数集变得简单是下面的目标。   
+
+
+基本上，这个想法是这样的：让我们为每一组数据建立一个结构，在这个结构中，我们将描述一个测试案例的所有内容打包：在这里，这些是两个子类，一个叫 <code>BoundaryValues</code> ，用于精确解的边界值，一个叫 <code>RightHandSide</code> ，然后是生成粗略网格的方法。由于前面的例子程序的解看起来像弯曲的山脊，所以我们在这里用这个名字来表示包围的类。请注意，两个内层类的名字对于所有包围的测试案例类必须是相同的，同时我们将维度模板参数附加到包围类而不是内层类，以使进一步的处理更简单。 从语言的角度来看，用命名空间来封装这些内部类会比用结构来封装更好。然而，命名空间不能作为模板参数给出，所以我们使用一个结构来允许第二个对象从其给定的参数中选择。当然，这个封闭的结构除了它所声明的类之外，没有任何成员变量，还有一个静态函数来生成粗略的网格；一般来说，它永远不会被实例化）。)    
+
+
+我们的想法是这样的（现在是时候简单看看下面的代码了）：我们可以为边界值和右手边生成对象，只需将外层类的名字作为模板参数给一个类，我们在这里称之为 <code>Data::SetUp</code> ，然后它为内部类创建对象。在这种情况下，为了获得所有描述弧形山脊解决方案的特征，我们将简单地生成一个 <code>Data::SetUp@<Data::CurvedRidge@></code> 的实例，而我们需要知道的关于该解决方案的一切都将是该对象的静态成员变量和函数。   
+
+
+在这种情况下，这种方法可能看起来是多余的，但是一旦某种设定不仅有迪里希特边界值和右手函数的特征，而且还有材料属性、诺伊曼值、不同的边界描述符等，就会变得非常方便。在这种情况下， <code>SetUp</code> 类可能由十几个对象组成，而每个描述符类（如下面的 <code>CurvedRidges</code> 类）都必须提供这些对象。然后，你会很高兴，只需在一个地方改变 <code>SetUp</code> 类的模板参数，而不是在很多地方，就能从一组数据变为另一组。   
+
+
+有了这个不同测试用例的框架，我们就快完成了，但还有一件事：到现在，我们可以通过改变一个模板参数，静态地选择要选择的数据集。为了能够动态地做到这一点，即在运行时，我们需要一个基类。我们以明显的方式提供这个基类，见下文，用虚拟抽象函数。这迫使我们引入第二个模板参数 <code>dim</code> ，我们需要这个基类（这可以通过一些模板魔法来避免，但我们省略），但这就是全部。   
+
+
+现在添加新的测试用例很简单，你不需要接触框架类，只需要一个类似于  <code>CurvedRidges</code>  的结构。
+
+@code
+  namespace Data
+  {
+@endcode 
+
+
+
+
+<a name="TheSetUpBaseandSetUpclasses"></a> <h4>The SetUpBase and SetUp classes</h4>
+
+
+
+
+基于上述描述， <code>SetUpBase</code> 类便看起来如下。为了允许用这个类来使用 <code>SmartPointer</code> 类，我们从 <code>Subscriptor</code> 类派生出来。
+
+@code
+    template <int dim>
+    struct SetUpBase : public Subscriptor
+    {
+      virtual const Function<dim> &get_boundary_values() const = 0;
+
+
+      virtual const Function<dim> &get_right_hand_side() const = 0;
+
+
+      virtual void
+      create_coarse_grid(Triangulation<dim> &coarse_grid) const = 0;
+    };
+
+
+
+@endcode 
+
+
+
+现在是派生类，如上所述，它需要模板参数。     
+
+
+这里我们把数据元素打包成私有变量，并允许通过基类的方法来访问它们。
+
+@code
+    template <class Traits, int dim>
+    struct SetUp : public SetUpBase<dim>
+    {
+      virtual const Function<dim> &get_boundary_values() const override;
+
+
+      virtual const Function<dim> &get_right_hand_side() const override;
+
+
+
+      virtual void
+      create_coarse_grid(Triangulation<dim> &coarse_grid) const override;
+
+
+    private:
+      static const typename Traits::BoundaryValues boundary_values;
+      static const typename Traits::RightHandSide  right_hand_side;
+    };
+
+
+@endcode 
+
+
+
+我们必须为上述类的静态成员变量提供定义。
+
+@code
+    template <class Traits, int dim>
+    const typename Traits::BoundaryValues SetUp<Traits, dim>::boundary_values;
+    template <class Traits, int dim>
+    const typename Traits::RightHandSide SetUp<Traits, dim>::right_hand_side;
+
+
+@endcode 
+
+
+
+以及成员函数的定义。
+
+@code
+    template <class Traits, int dim>
+    const Function<dim> &SetUp<Traits, dim>::get_boundary_values() const
+    {
+      return boundary_values;
+    }
+
+
+
+    template <class Traits, int dim>
+    const Function<dim> &SetUp<Traits, dim>::get_right_hand_side() const
+    {
+      return right_hand_side;
+    }
+
+
+
+    template <class Traits, int dim>
+    void SetUp<Traits, dim>::create_coarse_grid(
+      Triangulation<dim> &coarse_grid) const
+    {
+      Traits::create_coarse_grid(coarse_grid);
+    }
+
+
+
+@endcode 
+
+
+
+
+<a name="TheCurvedRidgesclass"></a> <h4>The CurvedRidges class</h4>
+
+
+
+
+用于描述 <code>curved ridge</code> 问题的边界值和右手边的类已经在 step-13 示例程序中使用，那么像这样。
+
+@code
+    template <int dim>
+    struct CurvedRidges
+    {
+      class BoundaryValues : public Function<dim>
+      {
+      public:
+        virtual double value(const Point<dim> & p,
+                             const unsigned int component) const;
+      };
+
+
+
+      class RightHandSide : public Function<dim>
+      {
+      public:
+        virtual double value(const Point<dim> & p,
+                             const unsigned int component) const;
+      };
+
+
+      static void create_coarse_grid(Triangulation<dim> &coarse_grid);
+    };
+
+
+
+    template <int dim>
+    double CurvedRidges<dim>::BoundaryValues::value(
+      const Point<dim> &p,
+      const unsigned int /*component*/) const
+    {
+      double q = p(0);
+      for (unsigned int i = 1; i < dim; ++i)
+        q += std::sin(10 * p(i) + 5 * p(0) * p(0));
+      const double exponential = std::exp(q);
+      return exponential;
+    }
+
+
+
+
+
+    template <int dim>
+    double CurvedRidges<dim>::RightHandSide::value(
+      const Point<dim> &p,
+      const unsigned int /*component*/) const
+    {
+      double q = p(0);
+      for (unsigned int i = 1; i < dim; ++i)
+        q += std::sin(10 * p(i) + 5 * p(0) * p(0));
+      const double u  = std::exp(q);
+      double       t1 = 1, t2 = 0, t3 = 0;
+      for (unsigned int i = 1; i < dim; ++i)
+        {
+          t1 += std::cos(10 * p(i) + 5 * p(0) * p(0)) * 10 * p(0);
+          t2 += 10 * std::cos(10 * p(i) + 5 * p(0) * p(0)) -
+                100 * std::sin(10 * p(i) + 5 * p(0) * p(0)) * p(0) * p(0);
+          t3 += 100 * std::cos(10 * p(i) + 5 * p(0) * p(0)) *
+                  std::cos(10 * p(i) + 5 * p(0) * p(0)) -
+                100 * std::sin(10 * p(i) + 5 * p(0) * p(0));
+        }
+      t1 = t1 * t1;
+
+
+      return -u * (t1 + t2 + t3);
+    }
+
+
+
+    template <int dim>
+    void CurvedRidges<dim>::create_coarse_grid(Triangulation<dim> &coarse_grid)
+    {
+      GridGenerator::hyper_cube(coarse_grid, -1, 1);
+      coarse_grid.refine_global(2);
+    }
+
+
+
+@endcode 
+
+
+
+
+<a name="TheExercise_2_3class"></a> <h4>The Exercise_2_3 class</h4>
+
+
+
+
+这个例子程序是在为自适应有限元方法和基于对偶性的误差估计的讲座提供实践课程时写的。对于这些课程，我们有一个练习，要求在一个中心有方孔的正方形域上求解右方恒定的拉普拉斯方程，边界值为零。由于这个问题的属性在这里的实现特别简单，所以让我们来做。由于练习的编号是2.3，所以我们冒昧地把这个名字也保留下来，作为这个班的名字。
+
+@code
+    template <int dim>
+    struct Exercise_2_3
+    {
+@endcode 
+
+
+
+我们需要一个类来表示问题的边界值。在这种情况下，这很简单：它是零函数，所以甚至不需要声明一个类，只是一个别名。
+
+@code
+      using BoundaryValues = Functions::ZeroFunction<dim>;
+
+
+@endcode 
+
+
+
+第二，一个表示右手边的类。因为它们是常数，所以只要把库中相应的类子类化就可以了。
+
+@code
+      class RightHandSide : public Functions::ConstantFunction<dim>
+      {
+      public:
+        RightHandSide()
+          : Functions::ConstantFunction<dim>(1.)
+        {}
+      };
+
+
+@endcode 
+
+
+
+最后是一个生成粗略网格的函数。这在这里有点复杂，请看下面。
+
+@code
+      static void create_coarse_grid(Triangulation<dim> &coarse_grid);
+    };
+
+
+
+@endcode 
+
+
+
+如上所述，本例的网格是正方形[-1,1]^2，其中有一个正方形[-1/2,1/2]^2作为洞。我们将粗略的网格创建为4乘以4的单元，中间的四个单元缺失。要了解网格的具体样子，最简单的方法可能是先看一下本教程程序的 "结果 "部分。一般来说，如果你想了解更多关于创建网格的信息，无论是像我们在这里所做的那样从头开始，还是使用其他技术，你都应该看一下  step-49  。     
+
+
+当然，这个例子可以扩展到三维，但是由于这个函数不能以独立于维度的方式编写，我们选择不在这里实现，而是只对dim=2的模板进行专业化处理。如果你编译3d的程序，你会从链接器中得到一个信息，即这个函数没有为3d实现，需要提供。     
+
+
+对于这个几何体的创建，库中没有预定义的方法。在这种情况下，几何体还是很简单的，可以用手来完成创建，而不是用网格发生器。
+
+@code
+    template <>
+    void Exercise_2_3<2>::create_coarse_grid(Triangulation<2> &coarse_grid)
+    {
+@endcode 
+
+
+
+我们首先定义空间维度，以允许函数中那些实际上与维度无关的部分使用这个变量。这样，如果你以后以此为起点来实现这个网格的三维版本，就会更简单。下一步是要有一个顶点的列表。这里，它们是24个（5乘以5，中间的省略）。最好的办法是在这里画一个草图。
+
+@code
+      const unsigned int dim = 2;
+
+
+      const std::vector<Point<2>> vertices = {
+        {-1.0, -1.0}, {-0.5, -1.0}, {+0.0, -1.0}, {+0.5, -1.0}, {+1.0, -1.0}, 
+        {-1.0, -0.5}, {-0.5, -0.5}, {+0.0, -0.5}, {+0.5, -0.5}, {+1.0, -0.5}, 
+        {-1.0, +0.0}, {-0.5, +0.0}, {+0.5, +0.0}, {+1.0, +0.0},               
+        {-1.0, +0.5}, {-0.5, +0.5}, {+0.0, +0.5}, {+0.5, +0.5}, {+1.0, +0.5}, 
+        {-1.0, +1.0}, {-0.5, +1.0}, {+0.0, +1.0}, {+0.5, +1.0}, {+1.0, +1.0}};
+
+
+@endcode 
+
+
+
+接下来，我们必须定义单元格和它们所包含的顶点。
+
+@code
+      const std::vector<std::array<int, GeometryInfo<dim>::vertices_per_cell>>
+        cell_vertices = {{{0, 1, 5, 6}},
+                         {{1, 2, 6, 7}},
+                         {{2, 3, 7, 8}},
+                         {{3, 4, 8, 9}},
+                         {{5, 6, 10, 11}},
+                         {{8, 9, 12, 13}},
+                         {{10, 11, 14, 15}},
+                         {{12, 13, 17, 18}},
+                         {{14, 15, 19, 20}},
+                         {{15, 16, 20, 21}},
+                         {{16, 17, 21, 22}},
+                         {{17, 18, 22, 23}}};
+
+
+      const unsigned int n_cells = cell_vertices.size();
+
+
+@endcode 
+
+
+
+再次，我们从中生成一个C++矢量类型，但这次是通过在单元格上循环来实现的（是的，这很无聊）。此外，我们将所有单元格的材料指标设置为零。
+
+@code
+      std::vector<CellData<dim>> cells(n_cells, CellData<dim>());
+      for (unsigned int i = 0; i < n_cells; ++i)
+        {
+          for (unsigned int j = 0; j < cell_vertices[i].size(); ++j)
+            cells[i].vertices[j] = cell_vertices[i][j];
+          cells[i].material_id = 0;
+        }
+
+
+@endcode 
+
+
+
+最后将所有这些信息传递给库，以生成一个三角图。最后一个参数可以用来将三角形的某些面的非零边界指标的信息传递给库，但是我们在这里不希望这样，所以我们给出一个空对象。
+
+@code
+      coarse_grid.create_triangulation(vertices, cells, SubCellData());
+
+
+@endcode 
+
+
+
+因为我们希望本例中的评估点（3/4,3/4）是一个网格点，所以我们在全局上细化一次。
+
+@code
+      coarse_grid.refine_global(1);
+    }
+  } // namespace Data
+
+
+@endcode 
+
+
+
+
+<a name="Discussion"></a> <h4>Discussion</h4>   
+
+
+当你现在读完这个框架后，你可能会想，为什么我们没有选择将实现某种设置的类（如 <code>CurvedRidges</code> 类）直接实现为派生自 <code>Data::SetUpBase</code> 的类。事实上，我们可以很好地这样做。唯一的原因是，这样我们就必须在 <code>CurvedRidges</code> 类中为解决方案和右手边的类设置成员变量，以及重载基类的抽象函数来访问这些成员变量的成员函数。 <code>SetUp</code> 类的唯一原因是让我们不必再重申这些成员变量和函数，这些都是所有这些类所必须的。在某种程度上，这里的模板机制只是提供了一种方法，为一些依赖于外部量的函数提供默认的实现，因此不能使用正常的虚拟函数来提供，至少在没有模板的帮助下不能。   
+
+
+然而，可能有很好的理由来实际实现从  <code>Data::SetUpBase</code>  派生的类，例如，如果解或右手边的类需要带参数的构造函数，而  <code>Data::SetUpBase</code>  类无法提供。在这种情况下，子类化是一个值得考虑的策略。对于特殊情况的其他可能性是派生自 <code>Data::SetUp@<SomeSetUp@></code> ，其中 <code>SomeSetUp</code> 表示一个类，甚至明确地专门化 <code>Data::SetUp@<SomeSetUp@></code>  。后者允许透明地使用 <code>SetUp</code> 类用于其他设置的方式，但对特殊参数采取特殊行动。   
+
+
+最后一个有利于这里采取的方法的意见是：我们无数次发现，当开始一个项目时，参数的数量（通常是边界值，右侧，粗略的网格，就像这里一样）很小，测试案例的数量也很小。然后，人们一开始就把它们手工编码成一些 <code>switch</code> 的语句。随着时间的推移，项目的增长，测试用例的数量也在增长。 <code>switch</code> 语句的数量也随之增长，它们的长度也是如此，人们开始想办法考虑不可能的例子，其中域、边界值和右手边不再适合在一起，并且开始失去对整个结构的概述。事实证明，把属于某个测试用例的所有东西都封装到一个自己的结构中是值得的，因为它把属于一个测试用例的所有东西都放在一个地方。此外，它允许把这些东西都放在一个或多个文件中，这些文件只用于测试用例和它们的数据，而不需要把它们的实际实现与程序的其他部分联系起来。
+
+
+
+
+
+
+
+
+
+
+<a name="Dualfunctionals"></a> <h3>Dual functionals</h3>
+
+
+
+
+和程序的其他部分一样，我们把描述对偶函数所需的一切都放到一个自己的命名空间中，并定义一个抽象的基类，提供解决对偶问题的类在工作中所需要的接口。   
+
+
+然后，我们将实现两个这样的类，用于评估一个点的值和该点的解决方案的导数。对于这些函数，我们已经有了相应的评估对象，所以它们是互补的。
+
+@code
+  namespace DualFunctional
+  {
+@endcode 
+
+
+
+
+<a name="TheDualFunctionalBaseclass"></a><h4>The DualFunctionalBase class</h4> 
+
+
+
+
+首先从对偶函数的基类开始。因为对于线性问题来说，对偶问题的特征只在右手边起作用，所以我们只需要提供一个为给定离散化组装右手边的函数即可。
+
+@code
+    template <int dim>
+    class DualFunctionalBase : public Subscriptor
+    {
+    public:
+      virtual void assemble_rhs(const DoFHandler<dim> &dof_handler,
+                                Vector<double> &       rhs) const = 0;
+    };
+
+
+
+@endcode 
+
+
+
+
+<a name="ThedualfunctionalPointValueEvaluationclass"></a> <h4>The dual functional PointValueEvaluation class</h4>
+
+
+
+
+作为第一个应用，我们考虑对应于在给定点评估解的值的函数，我们再次假设该点为一个顶点。除了接受和存储评估点的构造函数之外，这个类只包括实现组装右手边的函数。
+
+@code
+    template <int dim>
+    class PointValueEvaluation : public DualFunctionalBase<dim>
+    {
+    public:
+      PointValueEvaluation(const Point<dim> &evaluation_point);
+
+
+      virtual void assemble_rhs(const DoFHandler<dim> &dof_handler,
+                                Vector<double> &       rhs) const override;
+
+
+      DeclException1(
+        ExcEvaluationPointNotFound,
+        Point<dim>,
+        << "The evaluation point " << arg1
+        << " was not found among the vertices of the present grid.");
+
+
+    protected:
+      const Point<dim> evaluation_point;
+    };
+
+
+
+    template <int dim>
+    PointValueEvaluation<dim>::PointValueEvaluation(
+      const Point<dim> &evaluation_point)
+      : evaluation_point(evaluation_point)
+    {}
+
+
+
+@endcode 
+
+
+
+至于做这个类的主要目的，组装右手边，让我们首先考虑一下什么是必要的。对偶问题的右侧是一个值的向量J(phi_i)，其中J是误差函数，phi_i是第i个形状函数。这里，J是在点x0处的评价，即J(phi_i)=phi_i(x0)。     
+
+
+现在，我们已经假定评价点是一个顶点。因此，对于我们在这个程序中可能使用的通常的有限元，我们可以想当然地认为在这样一个点上正好有一个形状函数是不为零的，特别是具有1的值。因此，我们将右手边的向量设置为全零，然后寻找与该点相关的形状函数，并将右手边向量的相应值设置为1。
+
+@code
+    template <int dim>
+    void
+    PointValueEvaluation<dim>::assemble_rhs(const DoFHandler<dim> &dof_handler,
+                                            Vector<double> &       rhs) const
+    {
+@endcode 
+
+
+
+所以，首先把所有的东西都设为零... 
+
+@code
+      rhs.reinit(dof_handler.n_dofs());
+
+
+@endcode 
+
+
+
+...然后循环单元格，在顶点中找到评估点（或者非常接近顶点，这可能是由于浮点舍入造成的）。
+
+@code
+      for (const auto &cell : dof_handler.active_cell_iterators())
+        for (const auto vertex : cell->vertex_indices())
+          if (cell->vertex(vertex).distance(evaluation_point) <
+              cell->diameter() * 1e-8)
+            {
+@endcode 
+
+
+
+好的，找到了，所以设置相应的条目，然后离开函数，因为我们已经完成了。
+
+@code
+              rhs(cell->vertex_dof_index(vertex, 0)) = 1;
+              return;
+            }
+
+
+@endcode 
+
+
+
+最后，一个理智的检查：如果我们以某种方式到达这里，那么我们一定是错过了评估点，所以无条件地引发一个异常。
+
+@code
+      AssertThrow(false, ExcEvaluationPointNotFound(evaluation_point));
+    }
+
+
+
+@endcode 
+
+
+
+
+<a name="ThedualfunctionalPointXDerivativeEvaluationclass"></a> <h4>The dual functional PointXDerivativeEvaluation class</h4>
+
+
+
+
+作为第二个应用，我们再次考虑在一个点上对解的x-导数进行评估。同样，类的声明和它的构造函数的实现也不是太有趣。
+
+@code
+    template <int dim>
+    class PointXDerivativeEvaluation : public DualFunctionalBase<dim>
+    {
+    public:
+      PointXDerivativeEvaluation(const Point<dim> &evaluation_point);
+
+
+      virtual void assemble_rhs(const DoFHandler<dim> &dof_handler,
+                                Vector<double> &       rhs) const;
+
+
+      DeclException1(
+        ExcEvaluationPointNotFound,
+        Point<dim>,
+        << "The evaluation point " << arg1
+        << " was not found among the vertices of the present grid.");
+
+
+    protected:
+      const Point<dim> evaluation_point;
+    };
+
+
+
+    template <int dim>
+    PointXDerivativeEvaluation<dim>::PointXDerivativeEvaluation(
+      const Point<dim> &evaluation_point)
+      : evaluation_point(evaluation_point)
+    {}
+
+
+
+@endcode 
+
+
+
+有趣的是这个函数的实现：这里，J(phi_i)=d/dx phi_i(x0)。     
+
+
+我们可以像实现各自的评价对象那样，在这个评价点上取每个形状函数phi_i的梯度的平均值。然而，我们采取了一个略微不同的方法：我们简单地取该点周围所有单元的平均值。哪些单元 <code>surrounds</code> 是评估点，这个问题取决于网格宽度，包括那些单元的中点到评估点的距离小于单元的直径的单元。     
+
+
+在这些单元的面积/体积上取梯度的平均值，可以得到一个非常接近于梯度的点评估结果的二元解。从理论上说，这并不明显改变方法，这一点很简单。
+
+@code
+    template <int dim>
+    void PointXDerivativeEvaluation<dim>::assemble_rhs(
+      const DoFHandler<dim> &dof_handler,
+      Vector<double> &       rhs) const
+    {
+@endcode 
+
+
+
+同样，首先将所有条目设置为零。
+
+@code
+      rhs.reinit(dof_handler.n_dofs());
+
+
+@endcode 
+
+
+
+用正交公式初始化一个 <code>FEValues</code> 对象，有正交点数量和形状函数的简写... 
+
+@code
+      QGauss<dim>        quadrature(dof_handler.get_fe().degree + 1);
+      FEValues<dim>      fe_values(dof_handler.get_fe(),
+                              quadrature,
+                              update_gradients | update_quadrature_points |
+                                update_JxW_values);
+      const unsigned int n_q_points    = fe_values.n_quadrature_points;
+      const unsigned int dofs_per_cell = dof_handler.get_fe().dofs_per_cell;
+
+
+@endcode 
+
+
+
+...并有两个对象，用于存储单元上自由度的全局指数，以及正交点上形状函数的梯度值。
+
+@code
+      Vector<double>            cell_rhs(dofs_per_cell);
+      std::vector<unsigned int> local_dof_indices(dofs_per_cell);
+
+
+@endcode 
+
+
+
+最后有一个变量，我们将通过对这些单元上的单位函数进行积分，总结出这些单元的面积/体积。
+
+@code
+      double total_volume = 0;
+
+
+@endcode 
+
+
+
+然后在所有单元上开始循环，并选择那些离评估点足够近的单元。
+
+@code
+      for (const auto &cell : dof_handler.active_cell_iterators())
+        if (cell->center().distance(evaluation_point) <= cell->diameter())
+          {
+@endcode 
+
+
+
+如果我们找到了这样的单元，那么初始化 <code>FEValues</code> 对象，并对每个形状函数的梯度的x分量以及总面积/体积的单位函数进行积分。
+
+@code
+            fe_values.reinit(cell);
+            cell_rhs = 0;
+
+
+            for (unsigned int q = 0; q < n_q_points; ++q)
+              {
+                for (unsigned int i = 0; i < dofs_per_cell; ++i)
+                  cell_rhs(i) +=
+                    fe_values.shape_grad(i, q)[0] // (d/dx phi_i(x_q))
+                    * fe_values.JxW(q);           // * dx
+                total_volume += fe_values.JxW(q);
+              }
+
+
+@endcode 
+
+
+
+如果我们有局部贡献，将它们分配到全局矢量。
+
+@code
+            cell->get_dof_indices(local_dof_indices);
+            for (unsigned int i = 0; i < dofs_per_cell; ++i)
+              rhs(local_dof_indices[i]) += cell_rhs(i);
+          }
+
+
+@endcode 
+
+
+
+在我们对所有单元进行循环后，通过确保其体积不为零，检查我们是否找到了任何单元。如果不是，那么结果将是错误的，因为这时的右手边应该仍然是零，所以抛出一个异常。
+
+@code
+      AssertThrow(total_volume > 0,
+                  ExcEvaluationPointNotFound(evaluation_point));
+
+
+@endcode 
+
+
+
+最后，我们现在只整合了形状函数的梯度，而没有取其平均值。我们通过除以我们所积分的体积的大小来解决这个问题。
+
+@code
+      rhs /= total_volume;
+    }
+
+
+
+  } // namespace DualFunctional
+
+
+
+@endcode 
+
+
+
+
+<a name="ExtendingtheLaplaceSolvernamespace"></a> <h3>Extending the LaplaceSolver namespace</h3> 
+
+@code
+  namespace LaplaceSolver
+  {
+@endcode 
+
+
+
+
+<a name="TheDualSolverclass"></a> <h4>The DualSolver class</h4>
+
+
+
+
+与上面的 <code>PrimalSolver</code> 类相同，我们现在实现一个 <code>DualSolver</code>  。它具有所有相同的特征，唯一的区别是它不接受表示右手边对象的函数对象，而是现在接受一个 <code>DualFunctionalBase</code> 对象，它将集合对偶问题的右手边向量。该类的其余部分是相当琐碎的。     
+
+
+由于原始求解器和对偶求解器将使用相同的三角形，但不同的离散化，现在很清楚为什么我们将 <code>Base</code> 类变成了虚拟类：因为最终类将从 <code>PrimalSolver</code> 以及 <code>DualSolver</code>, it would have two <code>Base</code> 实例中派生，我们是不是应该将继承标记为虚拟。因为在许多应用中，基类会存储更多的信息，而不仅仅是需要在原始求解器和对偶求解器之间共享的三角形，所以我们通常不希望使用两个这样的基类。
+
+@code
+    template <int dim>
+    class DualSolver : public Solver<dim>
+    {
+    public:
+      DualSolver(
+        Triangulation<dim> &                           triangulation,
+        const FiniteElement<dim> &                     fe,
+        const Quadrature<dim> &                        quadrature,
+        const Quadrature<dim - 1> &                    face_quadrature,
+        const DualFunctional::DualFunctionalBase<dim> &dual_functional);
+
+
+    protected:
+      const SmartPointer<const DualFunctional::DualFunctionalBase<dim>>
+                   dual_functional;
+      virtual void assemble_rhs(Vector<double> &rhs) const override;
+
+
+      static const Functions::ZeroFunction<dim> boundary_values;
+    };
+
+
+    template <int dim>
+    const Functions::ZeroFunction<dim> DualSolver<dim>::boundary_values;
+
+
+    template <int dim>
+    DualSolver<dim>::DualSolver(
+      Triangulation<dim> &                           triangulation,
+      const FiniteElement<dim> &                     fe,
+      const Quadrature<dim> &                        quadrature,
+      const Quadrature<dim - 1> &                    face_quadrature,
+      const DualFunctional::DualFunctionalBase<dim> &dual_functional)
+      : Base<dim>(triangulation)
+      , Solver<dim>(triangulation,
+                    fe,
+                    quadrature,
+                    face_quadrature,
+                    boundary_values)
+      , dual_functional(&dual_functional)
+    {}
+
+
+
+
+
+    template <int dim>
+    void DualSolver<dim>::assemble_rhs(Vector<double> &rhs) const
+    {
+      dual_functional->assemble_rhs(this->dof_handler, rhs);
+    }
+
+
+
+@endcode 
+
+
+
+
+<a name="TheWeightedResidualclass"></a><h4>The WeightedResidual class</h4>
+
+
+
+
+这里终于出现了本程序的主类，即实现对偶加权残差估计器的类。它连接了原始和对偶求解器类，用于计算原始和对偶解，并实现了误差表示公式，用于误差估计和网格细化。     
+
+
+这个类的前几个函数大多是对基类中各自函数的覆盖。
+
+@code
+    template <int dim>
+    class WeightedResidual : public PrimalSolver<dim>, public DualSolver<dim>
+    {
+    public:
+      WeightedResidual(
+        Triangulation<dim> &                           coarse_grid,
+        const FiniteElement<dim> &                     primal_fe,
+        const FiniteElement<dim> &                     dual_fe,
+        const Quadrature<dim> &                        quadrature,
+        const Quadrature<dim - 1> &                    face_quadrature,
+        const Function<dim> &                          rhs_function,
+        const Function<dim> &                          boundary_values,
+        const DualFunctional::DualFunctionalBase<dim> &dual_functional);
+
+
+      virtual void solve_problem() override;
+
+
+      virtual void postprocess(
+        const Evaluation::EvaluationBase<dim> &postprocessor) const override;
+
+
+      virtual unsigned int n_dofs() const override;
+
+
+      virtual void refine_grid() override;
+
+
+      virtual void output_solution() const override;
+
+
+    private:
+@endcode 
+
+
+
+在私有部分，我们有两个函数用来调用原始和对偶基类的 <code>solve_problem</code> 函数。这两个函数将被本类的 <code>solve_problem</code> 函数所平行调用。
+
+@code
+      void solve_primal_problem();
+      void solve_dual_problem();
+@endcode 
+
+
+
+然后声明活动单元迭代器的缩写，以避免我们不得不反复写这个冗长的名字。
+
+
+
+
+
+
+
+@code
+      using active_cell_iterator =
+        typename DoFHandler<dim>::active_cell_iterator;
+
+
+@endcode 
+
+
+
+接下来，声明一个数据类型，我们将用它来存储面孔对误差估计器的贡献。我们的想法是，我们可以计算从两个单元格中的每一个到这个面的面项，因为从两边看时它们都是一样的。我们要做的是，根据下面解释的一些规则，只计算一次，由相邻的两个单元负责计算。然后，我们将每个面的贡献存储在一个映射面与它们的值的地图中，并且只通过在单元格上循环第二次并从地图上抓取值来收集每个单元格的贡献。       
+
+
+这个地图的数据类型在此声明。
+
+@code
+      using FaceIntegrals =
+        typename std::map<typename DoFHandler<dim>::face_iterator, double>;
+
+
+@endcode 
+
+
+
+在计算单元和面的误差估计时，我们需要一些辅助对象，如 <code>FEValues</code> 和 <code>FEFaceValues</code> 函数，但也需要一些临时对象来存储原始和对偶解的值和梯度，例如。这些字段在三个函数中是需要的，这三个函数分别在单元格上做积分，以及规则和不规则面。       
+
+
+有三种合理的方式来提供这些字段：第一，作为需要它们的函数的局部变量；第二，作为这个类的成员变量；第三，作为参数传递给该函数。       
+
+
+这三种方式都有缺点：第三种是它们的数量不可忽略，会使调用这些函数成为一项漫长的事业。第二种方法的缺点是不允许并行化，因为计算误差估计值的线程必须各自拥有这些变量的副本，所以包围类的成员变量将不起作用。第一种方法虽然直接，但有一个微妙但重要的缺点：我们会反复调用这些函数，也许是成千上万次；现在证明，从堆中分配向量和其他需要内存的对象在运行时间上是昂贵的，因为当涉及几个线程时，内存分配是昂贵的。因此，只分配一次内存，并尽可能频繁地回收这些对象是明显更好的做法。       
+
+
+该怎么做呢？我们的答案是使用第三种策略的一个变种。事实上，这正是WorkStream概念所要做的（我们已经在上面介绍了它，但也可以参见 @ref threads ）。为了避免我们必须给这些函数十几个参数，我们将所有这些变量打包成两个结构，一个用于单元格的计算，另一个用于面的计算。然后，这两个结构被加入到WeightedResidualScratchData类中，该类将作为WorkStream概念的 "划痕数据 "类。
+
+@code
+      struct CellData
+      {
+        FEValues<dim>                           fe_values;
+        const SmartPointer<const Function<dim>> right_hand_side;
+
+
+        std::vector<double> cell_residual;
+        std::vector<double> rhs_values;
+        std::vector<double> dual_weights;
+        std::vector<double> cell_laplacians;
+        CellData(const FiniteElement<dim> &fe,
+                 const Quadrature<dim> &   quadrature,
+                 const Function<dim> &     right_hand_side);
+        CellData(const CellData &cell_data);
+      };
+
+
+      struct FaceData
+      {
+        FEFaceValues<dim>    fe_face_values_cell;
+        FEFaceValues<dim>    fe_face_values_neighbor;
+        FESubfaceValues<dim> fe_subface_values_cell;
+
+
+        std::vector<double>                  jump_residual;
+        std::vector<double>                  dual_weights;
+        typename std::vector<Tensor<1, dim>> cell_grads;
+        typename std::vector<Tensor<1, dim>> neighbor_grads;
+        FaceData(const FiniteElement<dim> & fe,
+                 const Quadrature<dim - 1> &face_quadrature);
+        FaceData(const FaceData &face_data);
+      };
+
+
+      struct WeightedResidualScratchData
+      {
+        WeightedResidualScratchData(
+          const FiniteElement<dim> & primal_fe,
+          const Quadrature<dim> &    primal_quadrature,
+          const Quadrature<dim - 1> &primal_face_quadrature,
+          const Function<dim> &      rhs_function,
+          const Vector<double> &     primal_solution,
+          const Vector<double> &     dual_weights);
+
+
+        WeightedResidualScratchData(
+          const WeightedResidualScratchData &scratch_data);
+
+
+        CellData       cell_data;
+        FaceData       face_data;
+        Vector<double> primal_solution;
+        Vector<double> dual_weights;
+      };
+
+
+
+@endcode 
+
+
+
+  WorkStream::run 一般来说，既要有抓取对象，又要有复制对象。在这里，由于与我们在 step-9 中讨论计算梯度的近似值时类似的原因，我们实际上不需要一个 "拷贝数据 "结构。既然WorkStream坚持要有一个这样的结构，我们就声明一个空的结构，除了存在之外什么都不做。
+
+@code
+      struct WeightedResidualCopyData
+      {};
+
+
+
+
+
+@endcode 
+
+
+
+关于误差估计器的评估，我们有一个驱动函数，使用  WorkStream::run()  在每个单元上调用第二个函数。
+
+@code
+      void estimate_error(Vector<float> &error_indicators) const;
+
+
+      void estimate_on_one_cell(const active_cell_iterator & cell,
+                                WeightedResidualScratchData &scratch_data,
+                                WeightedResidualCopyData &   copy_data,
+                                Vector<float> &              error_indicators,
+                                FaceIntegrals &face_integrals) const;
+
+
+@endcode 
+
+
+
+然后我们有一些函数对误差表示公式进行实际积分。它们将分别处理单元格内部、没有悬挂节点的面和有悬挂节点的面的条款。
+
+@code
+      void integrate_over_cell(const active_cell_iterator &cell,
+                               const Vector<double> &      primal_solution,
+                               const Vector<double> &      dual_weights,
+                               CellData &                  cell_data,
+                               Vector<float> &error_indicators) const;
+
+
+      void integrate_over_regular_face(const active_cell_iterator &cell,
+                                       const unsigned int          face_no,
+                                       const Vector<double> &primal_solution,
+                                       const Vector<double> &dual_weights,
+                                       FaceData &            face_data,
+                                       FaceIntegrals &face_integrals) const;
+      void integrate_over_irregular_face(const active_cell_iterator &cell,
+                                         const unsigned int          face_no,
+                                         const Vector<double> &primal_solution,
+                                         const Vector<double> &dual_weights,
+                                         FaceData &            face_data,
+                                         FaceIntegrals &face_integrals) const;
+    };
+
+
+
+
+
+@endcode 
+
+
+
+在这个类的实现中，我们首先有 <code>CellData</code> and <code>FaceData</code> 成员类的构造函数，以及 <code>WeightedResidual</code> 构造函数。它们只将字段初始化为正确的长度，所以我们不必过多地讨论它们。
+
+@code
+    template <int dim>
+    WeightedResidual<dim>::CellData::CellData(
+      const FiniteElement<dim> &fe,
+      const Quadrature<dim> &   quadrature,
+      const Function<dim> &     right_hand_side)
+      : fe_values(fe,
+                  quadrature,
+                  update_values | update_hessians | update_quadrature_points |
+                    update_JxW_values)
+      , right_hand_side(&right_hand_side)
+      , cell_residual(quadrature.size())
+      , rhs_values(quadrature.size())
+      , dual_weights(quadrature.size())
+      , cell_laplacians(quadrature.size())
+    {}
+
+
+
+
+
+    template <int dim>
+    WeightedResidual<dim>::CellData::CellData(const CellData &cell_data)
+      : fe_values(cell_data.fe_values.get_fe(),
+                  cell_data.fe_values.get_quadrature(),
+                  update_values | update_hessians | update_quadrature_points |
+                    update_JxW_values)
+      , right_hand_side(cell_data.right_hand_side)
+      , cell_residual(cell_data.cell_residual)
+      , rhs_values(cell_data.rhs_values)
+      , dual_weights(cell_data.dual_weights)
+      , cell_laplacians(cell_data.cell_laplacians)
+    {}
+
+
+
+
+
+    template <int dim>
+    WeightedResidual<dim>::FaceData::FaceData(
+      const FiniteElement<dim> & fe,
+      const Quadrature<dim - 1> &face_quadrature)
+      : fe_face_values_cell(fe,
+                            face_quadrature,
+                            update_values | update_gradients |
+                              update_JxW_values | update_normal_vectors)
+      , fe_face_values_neighbor(fe,
+                                face_quadrature,
+                                update_values | update_gradients |
+                                  update_JxW_values | update_normal_vectors)
+      , fe_subface_values_cell(fe, face_quadrature, update_gradients)
+    {
+      const unsigned int n_face_q_points = face_quadrature.size();
+
+
+      jump_residual.resize(n_face_q_points);
+      dual_weights.resize(n_face_q_points);
+      cell_grads.resize(n_face_q_points);
+      neighbor_grads.resize(n_face_q_points);
+    }
+
+
+
+
+
+    template <int dim>
+    WeightedResidual<dim>::FaceData::FaceData(const FaceData &face_data)
+      : fe_face_values_cell(face_data.fe_face_values_cell.get_fe(),
+                            face_data.fe_face_values_cell.get_quadrature(),
+                            update_values | update_gradients |
+                              update_JxW_values | update_normal_vectors)
+      , fe_face_values_neighbor(
+          face_data.fe_face_values_neighbor.get_fe(),
+          face_data.fe_face_values_neighbor.get_quadrature(),
+          update_values | update_gradients | update_JxW_values |
+            update_normal_vectors)
+      , fe_subface_values_cell(
+          face_data.fe_subface_values_cell.get_fe(),
+          face_data.fe_subface_values_cell.get_quadrature(),
+          update_gradients)
+      , jump_residual(face_data.jump_residual)
+      , dual_weights(face_data.dual_weights)
+      , cell_grads(face_data.cell_grads)
+      , neighbor_grads(face_data.neighbor_grads)
+    {}
+
+
+
+
+
+    template <int dim>
+    WeightedResidual<dim>::WeightedResidualScratchData::
+      WeightedResidualScratchData(
+        const FiniteElement<dim> & primal_fe,
+        const Quadrature<dim> &    primal_quadrature,
+        const Quadrature<dim - 1> &primal_face_quadrature,
+        const Function<dim> &      rhs_function,
+        const Vector<double> &     primal_solution,
+        const Vector<double> &     dual_weights)
+      : cell_data(primal_fe, primal_quadrature, rhs_function)
+      , face_data(primal_fe, primal_face_quadrature)
+      , primal_solution(primal_solution)
+      , dual_weights(dual_weights)
+    {}
+
+
+    template <int dim>
+    WeightedResidual<dim>::WeightedResidualScratchData::
+      WeightedResidualScratchData(
+        const WeightedResidualScratchData &scratch_data)
+      : cell_data(scratch_data.cell_data)
+      , face_data(scratch_data.face_data)
+      , primal_solution(scratch_data.primal_solution)
+      , dual_weights(scratch_data.dual_weights)
+    {}
+
+
+
+
+
+    template <int dim>
+    WeightedResidual<dim>::WeightedResidual(
+      Triangulation<dim> &                           coarse_grid,
+      const FiniteElement<dim> &                     primal_fe,
+      const FiniteElement<dim> &                     dual_fe,
+      const Quadrature<dim> &                        quadrature,
+      const Quadrature<dim - 1> &                    face_quadrature,
+      const Function<dim> &                          rhs_function,
+      const Function<dim> &                          bv,
+      const DualFunctional::DualFunctionalBase<dim> &dual_functional)
+      : Base<dim>(coarse_grid)
+      , PrimalSolver<dim>(coarse_grid,
+                          primal_fe,
+                          quadrature,
+                          face_quadrature,
+                          rhs_function,
+                          bv)
+      , DualSolver<dim>(coarse_grid,
+                        dual_fe,
+                        quadrature,
+                        face_quadrature,
+                        dual_functional)
+    {}
+
+
+
+@endcode 
+
+
+
+接下来的五个函数是很无聊的，因为它们只是简单地将它们的工作传递给基类。第一个函数并行地调用原始和对偶求解器，而解的后处理和检索自由度的数量则由原始类完成。
+
+@code
+    template <int dim>
+    void WeightedResidual<dim>::solve_problem()
+    {
+      Threads::TaskGroup<void> tasks;
+      tasks +=
+        Threads::new_task(&WeightedResidual<dim>::solve_primal_problem, *this);
+      tasks +=
+        Threads::new_task(&WeightedResidual<dim>::solve_dual_problem, *this);
+      tasks.join_all();
+    }
+
+
+
+    template <int dim>
+    void WeightedResidual<dim>::solve_primal_problem()
+    {
+      PrimalSolver<dim>::solve_problem();
+    }
+
+
+    template <int dim>
+    void WeightedResidual<dim>::solve_dual_problem()
+    {
+      DualSolver<dim>::solve_problem();
+    }
+
+
+
+    template <int dim>
+    void WeightedResidual<dim>::postprocess(
+      const Evaluation::EvaluationBase<dim> &postprocessor) const
+    {
+      PrimalSolver<dim>::postprocess(postprocessor);
+    }
+
+
+
+    template <int dim>
+    unsigned int WeightedResidual<dim>::n_dofs() const
+    {
+      return PrimalSolver<dim>::n_dofs();
+    }
+
+
+
+
+
+@endcode 
+
+
+
+现在，情况变得更加有趣了： <code>refine_grid()</code> 函数要求误差估计器计算单元的误差指标，然后使用其绝对值进行网格细化。
+
+@code
+    template <int dim>
+    void WeightedResidual<dim>::refine_grid()
+    {
+@endcode 
+
+
+
+首先调用计算单元间和全局误差的函数。
+
+@code
+      Vector<float> error_indicators(this->triangulation->n_active_cells());
+      estimate_error(error_indicators);
+
+
+@endcode 
+
+
+
+然后注意，只有当所有的指标都是正值时，标记单元进行细化或粗化才有效，以便进行比较。因此，去掉所有这些指标上的符号。
+
+@code
+      for (float &error_indicator : error_indicators)
+        error_indicator = std::fabs(error_indicator);
+
+
+@endcode 
+
+
+
+最后，我们可以选择不同的细化策略。这里默认的是细化那些误差指标最大、占总误差80%的单元格，而我们粗化那些指标最小、占总误差2%的单元格。
+
+@code
+      GridRefinement::refine_and_coarsen_fixed_fraction(*this->triangulation,
+                                                        error_indicators,
+                                                        0.8,
+                                                        0.02);
+      this->triangulation->execute_coarsening_and_refinement();
+    }
+
+
+
+@endcode 
+
+
+
+由于我们想同时输出原始解和对偶解，我们重载了 <code>output_solution</code> 函数。这个函数唯一有趣的特点是，原始解和对偶解是在不同的有限元空间上定义的，这不是 <code>DataOut</code> 类所期望的格式。因此，我们必须将它们转移到一个共同的有限元空间。由于我们只想从质量上看到这些解，所以我们要争夺将对偶解内插到（较小的）原始空间。对于插值，有一个库函数，它接收一个包括悬挂节点约束的AffineConstraints对象。其余的是标准的。
+
+@code
+    template <int dim>
+    void WeightedResidual<dim>::output_solution() const
+    {
+      AffineConstraints<double> primal_hanging_node_constraints;
+      DoFTools::make_hanging_node_constraints(PrimalSolver<dim>::dof_handler,
+                                              primal_hanging_node_constraints);
+      primal_hanging_node_constraints.close();
+      Vector<double> dual_solution(PrimalSolver<dim>::dof_handler.n_dofs());
+      FETools::interpolate(DualSolver<dim>::dof_handler,
+                           DualSolver<dim>::solution,
+                           PrimalSolver<dim>::dof_handler,
+                           primal_hanging_node_constraints,
+                           dual_solution);
+
+
+      DataOut<dim> data_out;
+      data_out.attach_dof_handler(PrimalSolver<dim>::dof_handler);
+
+
+@endcode 
+
+
+
+添加我们想要输出的数据向量。把它们都加进去， <code>DataOut</code> 函数可以处理你想写到输出的多少个数据向量。
+
+@code
+      data_out.add_data_vector(PrimalSolver<dim>::solution, "primal_solution");
+      data_out.add_data_vector(dual_solution, "dual_solution");
+
+
+      data_out.build_patches();
+
+
+      std::ofstream out("solution-" + std::to_string(this->refinement_cycle) +
+                        ".vtu");
+      data_out.write(out, DataOutBase::vtu);
+    }
+
+
+
+@endcode 
+
+
+
+
+<a name="Estimatingerrors"></a> <h3>Estimating errors</h3>
+
+
+
+
+
+<a name="Errorestimationdriverfunctions"></a> <h4>Error estimation driver functions</h4>     
+
+
+至于误差估计的实际计算，让我们从驱动这一切的函数开始，即调用那些真正做工作的函数，并最终收集结果。
+
+@code
+    template <int dim>
+    void
+    WeightedResidual<dim>::estimate_error(Vector<float> &error_indicators) const
+    {
+@endcode 
+
+
+
+计算误差的第一项任务是设置向量，表示原始解，以及权重(z-z_h)=(z-I_hz)，两者都在我们已经计算出对偶解的有限元空间。为此，我们必须将原始解内插到对偶有限元空间，并将计算出的对偶解内插到原始有限元空间。幸运的是，库中提供了插值到更大或更小的有限元空间的函数，所以这一点很明显。       
+
+
+首先，让我们为原始解做这件事：它被单元内插到我们已经解决了对偶问题的有限元空间中：但是，还是像 <code>WeightedResidual::output_solution</code> 函数中那样，我们首先需要创建一个AffineConstraints对象，包括悬挂节点约束，但这次是对偶有限元空间的。
+
+@code
+      AffineConstraints<double> dual_hanging_node_constraints;
+      DoFTools::make_hanging_node_constraints(DualSolver<dim>::dof_handler,
+                                              dual_hanging_node_constraints);
+      dual_hanging_node_constraints.close();
+      Vector<double> primal_solution(DualSolver<dim>::dof_handler.n_dofs());
+      FETools::interpolate(PrimalSolver<dim>::dof_handler,
+                           PrimalSolver<dim>::solution,
+                           DualSolver<dim>::dof_handler,
+                           dual_hanging_node_constraints,
+                           primal_solution);
+
+
+@endcode 
+
+
+
+然后，为了计算数值逼近的对偶解z插值到原始解的有限元空间，并从z中减去：使用 <code>interpolate_difference</code> 函数，在对偶解的元素空间中给出（z-I_hz）。
+
+@code
+      AffineConstraints<double> primal_hanging_node_constraints;
+      DoFTools::make_hanging_node_constraints(PrimalSolver<dim>::dof_handler,
+                                              primal_hanging_node_constraints);
+      primal_hanging_node_constraints.close();
+      Vector<double> dual_weights(DualSolver<dim>::dof_handler.n_dofs());
+      FETools::interpolation_difference(DualSolver<dim>::dof_handler,
+                                        dual_hanging_node_constraints,
+                                        DualSolver<dim>::solution,
+                                        PrimalSolver<dim>::dof_handler,
+                                        primal_hanging_node_constraints,
+                                        dual_weights);
+
+
+@endcode 
+
+
+
+请注意，这可能会更有效率，因为这些约束条件已经在之前为原始问题组装矩阵和右手边以及写出对偶解时使用过了。我们把这方面的程序优化作为一个练习。
+
+
+
+
+在计算了对偶权重之后，我们现在开始计算原始解的单元和面的残差。首先，我们在面的迭代器和它们的面的跳跃项对误差估计器的贡献之间建立一个映射。原因是我们只计算了一次面的跳跃项，并希望在第二次循环所有单元时才收集它们。       
+
+
+我们已经用一个-1e20的值来初始化这个地图，因为如果出了问题，我们由于某种原因无法计算某个面的值，这个值会在结果中脱颖而出。其次，这个初始化已经使 std::map 对象分配了它可能需要的所有对象。这一点很重要，因为我们将从并行线程写进这个结构，如果地图需要分配内存，从而重塑其数据结构，那么这样做就不是线程安全的。换句话说，初始化使我们不必在线程每次写入（和修改）该地图的结构时通过互斥来同步。
+
+@code
+      FaceIntegrals face_integrals;
+      for (const auto &cell :
+           DualSolver<dim>::dof_handler.active_cell_iterators())
+        for (const auto &face : cell->face_iterators())
+          face_integrals[face] = -1e20;
+
+
+      auto worker = [this,
+                     &error_indicators,
+                     &face_integrals](const active_cell_iterator & cell,
+                                      WeightedResidualScratchData &scratch_data,
+                                      WeightedResidualCopyData &   copy_data) {
+        this->estimate_on_one_cell(
+          cell, scratch_data, copy_data, error_indicators, face_integrals);
+      };
+
+
+      auto do_nothing_copier =
+        std::function<void(const WeightedResidualCopyData &)>();
+
+
+@endcode 
+
+
+
+然后将其全部移交给 WorkStream::run() ，以并行计算所有单元的估计值。
+
+@code
+      WorkStream::run(
+        DualSolver<dim>::dof_handler.begin_active(),
+        DualSolver<dim>::dof_handler.end(),
+        worker,
+        do_nothing_copier,
+        WeightedResidualScratchData(*DualSolver<dim>::fe,
+                                    *DualSolver<dim>::quadrature,
+                                    *DualSolver<dim>::face_quadrature,
+                                    *this->rhs_function,
+                                    primal_solution,
+                                    dual_weights),
+        WeightedResidualCopyData());
+
+
+@endcode 
+
+
+
+一旦计算出误差贡献，就把它们加起来。为此，请注意，单元项已经设置好了，只有边缘项需要收集。因此，在所有单元和它们的面中循环，确保每个面的贡献都在那里，然后把它们加起来。只取跳跃项的减去一半，因为另一半会被相邻的单元格取走。
+
+@code
+      unsigned int present_cell = 0;
+      for (const auto &cell :
+           DualSolver<dim>::dof_handler.active_cell_iterators())
+        {
+          for (const auto &face : cell->face_iterators())
+            {
+              Assert(face_integrals.find(face) != face_integrals.end(),
+                     ExcInternalError());
+              error_indicators(present_cell) -= 0.5 * face_integrals[face];
+            }
+          ++present_cell;
+        }
+      std::cout << "   Estimated error="
+                << std::accumulate(error_indicators.begin(),
+                                   error_indicators.end(),
+                                   0.)
+                << std::endl;
+    }
+
+
+
+@endcode 
+
+
+
+
+<a name="Estimatingonasinglecell"></a><h4>Estimating on a single cell</h4> 
+
+
+
+
+接下来我们有一个函数，它被调用来估计单个单元的误差。如果库被配置为使用多线程，该函数可能被多次调用。这里就有了。
+
+@code
+    template <int dim>
+    void WeightedResidual<dim>::estimate_on_one_cell(
+      const active_cell_iterator & cell,
+      WeightedResidualScratchData &scratch_data,
+      WeightedResidualCopyData &   copy_data,
+      Vector<float> &              error_indicators,
+      FaceIntegrals &              face_integrals) const
+    {
+@endcode 
+
+
+
+由于WorkStream的存在，improve_on_one_cell需要一个CopyData对象，即使它没有被使用。下一行是关于这个未使用变量的警告。
+
+@code
+      (void)copy_data;
+
+
+@endcode 
+
+
+
+每个单元的第一个任务是计算这个单元的残差贡献，并把它们放到 <code>error_indicators</code> 变量中。
+
+@code
+      integrate_over_cell(cell,
+                          scratch_data.primal_solution,
+                          scratch_data.dual_weights,
+                          scratch_data.cell_data,
+                          error_indicators);
+
+
+@endcode 
+
+
+
+计算完单元项后，转向面项。为此，循环计算当前单元的所有面，看看是否需要对其进行计算。
+
+@code
+      for (const auto face_no : cell->face_indices())
+        {
+@endcode 
+
+
+
+首先，如果这个面是边界的一部分，那么就没什么可做的。然而，为了在汇总单元格面的贡献时使事情变得简单，我们将这个面输入对误差贡献为零的面的列表中。
+
+@code
+          if (cell->face(face_no)->at_boundary())
+            {
+              face_integrals[cell->face(face_no)] = 0;
+              continue;
+            }
+
+
+@endcode 
+
+
+
+接下来，请注意，由于我们想在每个面上只计算一次跳跃项，尽管我们访问它两次（如果它不在边界），我们必须定义一些规则，谁负责在一个面上计算。           
+
+
+首先，如果相邻的单元格与这个单元格处于同一层次，也就是说，既不进一步细化，也不进一步粗化，那么这个层次中索引较低的单元格就负责计算。换句话说：如果另一个单元的指数较低，那么就跳过这个面的工作。
+
+@code
+          if ((cell->neighbor(face_no)->has_children() == false) &&
+              (cell->neighbor(face_no)->level() == cell->level()) &&
+              (cell->neighbor(face_no)->index() < cell->index()))
+            continue;
+
+
+@endcode 
+
+
+
+同样地，如果这个单元和它的邻居在细化程度上有差异，我们总是从较粗的单元开始工作。因此，如果相邻的单元比现在的单元细化程度低，那么就什么都不做，因为我们在访问粗单元时对子面进行整合。
+
+@code
+          if (cell->at_boundary(face_no) == false)
+            if (cell->neighbor(face_no)->level() < cell->level())
+              continue;
+
+
+
+@endcode 
+
+
+
+现在我们知道我们在这里负责，所以实际计算面的跳跃项。如果这个面是一个规则的面，即另一边的单元格既不比这个单元格粗也不比这个单元格细，那么就调用一个函数，如果另一边的单元格是进一步细化的，那么就使用另一个函数。请注意，另一边的单元格更粗的情况不可能发生，因为我们在上面已经决定，当我们传递到另一个单元格时，我们会处理这种情况。
+
+@code
+          if (cell->face(face_no)->has_children() == false)
+            integrate_over_regular_face(cell,
+                                        face_no,
+                                        scratch_data.primal_solution,
+                                        scratch_data.dual_weights,
+                                        scratch_data.face_data,
+                                        face_integrals);
+          else
+            integrate_over_irregular_face(cell,
+                                          face_no,
+                                          scratch_data.primal_solution,
+                                          scratch_data.dual_weights,
+                                          scratch_data.face_data,
+                                          face_integrals);
+        }
+    }
+
+
+
+@endcode 
+
+
+
+
+<a name="Computingcelltermerrorcontributions"></a><h4>Computing cell term error contributions</h4>
+
+
+
+
+至于误差贡献的实际计算，首先转向单元条款。
+
+@code
+    template <int dim>
+    void WeightedResidual<dim>::integrate_over_cell(
+      const active_cell_iterator &cell,
+      const Vector<double> &      primal_solution,
+      const Vector<double> &      dual_weights,
+      CellData &                  cell_data,
+      Vector<float> &             error_indicators) const
+    {
+@endcode 
+
+
+
+要做的工作就是看误差估计公式时显得很自然：首先得到单元残差的正交点上的数值解的右手边和拉普拉斯。
+
+@code
+      cell_data.fe_values.reinit(cell);
+      cell_data.right_hand_side->value_list(
+        cell_data.fe_values.get_quadrature_points(), cell_data.rhs_values);
+      cell_data.fe_values.get_function_laplacians(primal_solution,
+                                                  cell_data.cell_laplacians);
+
+
+@endcode 
+
+
+
+...然后得到对偶权重... 
+
+@code
+      cell_data.fe_values.get_function_values(dual_weights,
+                                              cell_data.dual_weights);
+
+
+@endcode 
+
+
+
+...最后建立所有正交点的总和，并将其与目前的单元一起存储。
+
+@code
+      double sum = 0;
+      for (unsigned int p = 0; p < cell_data.fe_values.n_quadrature_points; ++p)
+        sum += ((cell_data.rhs_values[p] + cell_data.cell_laplacians[p]) *
+                cell_data.dual_weights[p] * cell_data.fe_values.JxW(p));
+      error_indicators(cell->active_cell_index()) += sum;
+    }
+
+
+
+@endcode 
+
+
+
+
+<a name="Computingedgetermerrorcontributions1"></a> <h4>Computing edge term error contributions -- 1</h4>
+
+
+
+
+另一方面，误差估计的边缘项的计算并不那么简单。首先，我们必须区分有悬挂节点和无悬挂节点的面。因为它是简单的情况，我们首先考虑一个面上没有悬挂节点的情况（让我们称之为 "常规 "情况）。
+
+@code
+    template <int dim>
+    void WeightedResidual<dim>::integrate_over_regular_face(
+      const active_cell_iterator &cell,
+      const unsigned int          face_no,
+      const Vector<double> &      primal_solution,
+      const Vector<double> &      dual_weights,
+      FaceData &                  face_data,
+      FaceIntegrals &             face_integrals) const
+    {
+      const unsigned int n_q_points =
+        face_data.fe_face_values_cell.n_quadrature_points;
+
+
+@endcode 
+
+
+
+第一步是得到本单元上有限元场的正交点的梯度值。为此，初始化 <code>FEFaceValues</code> 对象，对应于面的这一侧，并使用该对象提取梯度。
+
+@code
+      face_data.fe_face_values_cell.reinit(cell, face_no);
+      face_data.fe_face_values_cell.get_function_gradients(
+        primal_solution, face_data.cell_grads);
+
+
+@endcode 
+
+
+
+第二步是提取面的另一侧，即相邻单元的正交点上的有限元解的梯度。       
+
+
+为此，在之前做一个理智的检查：确保邻居确实存在（是的，如果邻居不存在，我们就不应该来这里，但是在复杂的软件中会有bug，所以最好检查一下），如果不是这样就会出现错误。
+
+@code
+      Assert(cell->neighbor(face_no).state() == IteratorState::valid,
+             ExcInternalError());
+@endcode 
+
+
+
+如果我们有了这个，那么我们就需要找出相邻单元的哪个面，即 <code>how-many'th</code> 本单元与本面后面的单元的邻居。为此，有一个函数，我们将结果放入一个名为  <code>neighbor_neighbor</code>  的变量。
+
+@code
+      const unsigned int neighbor_neighbor =
+        cell->neighbor_of_neighbor(face_no);
+@endcode 
+
+
+
+然后定义一个邻近单元的缩写，在该单元上初始化 <code>FEFaceValues</code> 对象，并提取该单元上的梯度。
+
+@code
+      const active_cell_iterator neighbor = cell->neighbor(face_no);
+      face_data.fe_face_values_neighbor.reinit(neighbor, neighbor_neighbor);
+      face_data.fe_face_values_neighbor.get_function_gradients(
+        primal_solution, face_data.neighbor_grads);
+
+
+@endcode 
+
+
+
+现在我们有了这个单元和相邻单元的梯度，通过将梯度中的跳跃与法向量相乘来计算跳跃残差。
+
+@code
+      for (unsigned int p = 0; p < n_q_points; ++p)
+        face_data.jump_residual[p] =
+          ((face_data.cell_grads[p] - face_data.neighbor_grads[p]) *
+           face_data.fe_face_values_cell.normal_vector(p));
+
+
+@endcode 
+
+
+
+接下来得到这个面的双重权重。
+
+@code
+      face_data.fe_face_values_cell.get_function_values(dual_weights,
+                                                        face_data.dual_weights);
+
+
+@endcode 
+
+
+
+最后，我们必须计算跳跃残差、对偶权重和正交权重的总和，以得到这个面的结果。
+
+@code
+      double face_integral = 0;
+      for (unsigned int p = 0; p < n_q_points; ++p)
+        face_integral +=
+          (face_data.jump_residual[p] * face_data.dual_weights[p] *
+           face_data.fe_face_values_cell.JxW(p));
+
+
+@endcode 
+
+
+
+仔细检查这个元素是否已经存在，以及它是否已经被写入... 
+
+@code
+      Assert(face_integrals.find(cell->face(face_no)) != face_integrals.end(),
+             ExcInternalError());
+      Assert(face_integrals[cell->face(face_no)] == -1e20, ExcInternalError());
+
+
+@endcode 
+
+
+
+...然后在指定的位置存储计算值。请注意，存储的值并不包含错误表示中出现的因子1/2。原因是，如果我们在三角形的所有面上进行循环，这个项实际上没有这个因子，但只有当我们把它写成所有单元和每个单元的所有面的总和时才会出现；因此我们两次访问同一个面。我们在后面使用这个系数-1/2来考虑这个问题，当我们单独总结每个单元的贡献时。
+
+@code
+      face_integrals[cell->face(face_no)] = face_integral;
+    }
+
+
+
+@endcode 
+
+
+
+
+<a name="Computingedgetermerrorcontributions2"></a> <h4>Computing edge term error contributions -- 2</h4>
+
+
+
+
+我们仍然缺少有悬空节点的面的情况。这就是这个函数所涵盖的内容。
+
+@code
+    template <int dim>
+    void WeightedResidual<dim>::integrate_over_irregular_face(
+      const active_cell_iterator &cell,
+      const unsigned int          face_no,
+      const Vector<double> &      primal_solution,
+      const Vector<double> &      dual_weights,
+      FaceData &                  face_data,
+      FaceIntegrals &             face_integrals) const
+    {
+@endcode 
+
+
+
+首先还是两个缩写，以及一些一致性检查，以确定该函数是否只在它应该被调用的面上被调用。
+
+@code
+      const unsigned int n_q_points =
+        face_data.fe_face_values_cell.n_quadrature_points;
+
+
+      const typename DoFHandler<dim>::face_iterator face = cell->face(face_no);
+      const typename DoFHandler<dim>::cell_iterator neighbor =
+        cell->neighbor(face_no);
+      Assert(neighbor.state() == IteratorState::valid, ExcInternalError());
+      Assert(neighbor->has_children(), ExcInternalError());
+      (void)neighbor;
+
+
+@endcode 
+
+
+
+然后找出当前单元格是相邻单元格的哪个邻居。注意，我们将对这个相邻单元的子女进行操作，但他们的方向与他们的母亲相同，也就是说，邻居的方向是相同的。
+
+@code
+      const unsigned int neighbor_neighbor =
+        cell->neighbor_of_neighbor(face_no);
+
+
+@endcode 
+
+
+
+然后简单地对一个面的所有子面做我们在前面的函数中所做的一切。
+
+@code
+      for (unsigned int subface_no = 0; subface_no < face->n_children();
+           ++subface_no)
+        {
+@endcode 
+
+
+
+再从一些检查开始：得到一个指向当前子面后面的单元格的迭代器，并检查其面是否是我们正在考虑的子面。如果不是这样，那么要么是上面调用的 <code>neighbor_neighbor</code> 函数出现了错误，要么--更糟糕的是 
+
+-- 库中的某些函数没有遵守关于单元格、它们的子代和它们的面的一些基本假设。在任何情况下，即使这个断言不应该被触发，谨慎一点也无妨，而且在优化模式的计算中，这个断言也会被删除。
+
+@code
+          const active_cell_iterator neighbor_child =
+            cell->neighbor_child_on_subface(face_no, subface_no);
+          Assert(neighbor_child->face(neighbor_neighbor) ==
+                   cell->face(face_no)->child(subface_no),
+                 ExcInternalError());
+
+
+@endcode 
+
+
+
+现在开始工作，首先在界面的这一侧再次获得解决方案的梯度。
+
+@code
+          face_data.fe_subface_values_cell.reinit(cell, face_no, subface_no);
+          face_data.fe_subface_values_cell.get_function_gradients(
+            primal_solution, face_data.cell_grads);
+@endcode 
+
+
+
+然后在另一边。
+
+@code
+          face_data.fe_face_values_neighbor.reinit(neighbor_child,
+                                                   neighbor_neighbor);
+          face_data.fe_face_values_neighbor.get_function_gradients(
+            primal_solution, face_data.neighbor_grads);
+
+
+@endcode 
+
+
+
+最后建立跳跃残差。由于我们这次取的是另一个单元的法向量，所以与其他函数相比，要还原第一项的符号。
+
+@code
+          for (unsigned int p = 0; p < n_q_points; ++p)
+            face_data.jump_residual[p] =
+              ((face_data.neighbor_grads[p] - face_data.cell_grads[p]) *
+               face_data.fe_face_values_neighbor.normal_vector(p));
+
+
+@endcode 
+
+
+
+然后得到双重权重。
+
+@code
+          face_data.fe_face_values_neighbor.get_function_values(
+            dual_weights, face_data.dual_weights);
+
+
+@endcode 
+
+
+
+最后，总结这个子面的贡献，并将其置于全局图中。
+
+@code
+          double face_integral = 0;
+          for (unsigned int p = 0; p < n_q_points; ++p)
+            face_integral +=
+              (face_data.jump_residual[p] * face_data.dual_weights[p] *
+               face_data.fe_face_values_neighbor.JxW(p));
+          face_integrals[neighbor_child->face(neighbor_neighbor)] =
+            face_integral;
+        }
+
+
+@endcode 
+
+
+
+一旦所有子面的贡献被计算出来，在所有子面中循环收集，并与母面一起存储，以便以后收集单元格的误差项时简单使用。再次进行安全检查，确保子面的条目已经被计算出来，并且不带有无效的值。
+
+@code
+      double sum = 0;
+      for (unsigned int subface_no = 0; subface_no < face->n_children();
+           ++subface_no)
+        {
+          Assert(face_integrals.find(face->child(subface_no)) !=
+                   face_integrals.end(),
+                 ExcInternalError());
+          Assert(face_integrals[face->child(subface_no)] != -1e20,
+                 ExcInternalError());
+
+
+          sum += face_integrals[face->child(subface_no)];
+        }
+@endcode 
+
+
+
+最后将该值存储在父面。
+
+@code
+      face_integrals[face] = sum;
+    }
+
+
+  } // namespace LaplaceSolver
+
+
+
+@endcode 
+
+
+
+
+<a name="Asimulationframework"></a> <h3>A simulation framework</h3> 
+
+
+
+
+在前面的例子程序中，我们有两个函数用来驱动在随后的更细的网格上进行求解的过程。我们在这里进行了扩展，允许向这些函数传递一些参数，并将所有的参数放入框架类中。   
+
+
+你会注意到这个程序是由许多小部分组成的（评估函数、实现各种细化方法的求解器类、不同的对偶函数、不同的问题和数据描述），这使得程序的扩展相对简单，但也允许通过用一个部分替换另一个部分来解决大量的不同问题。我们通过在下面的框架类中声明一个结构来反映这种灵活性，该结构持有一些参数，这些参数可以被设置来测试这个程序的各个部分的组合，并且可以用简单的方法在各种问题和离散度上测试它。
+
+@code
+  template <int dim>
+  struct Framework
+  {
+  public:
+@endcode 
+
+
+
+首先，我们声明两个缩写，以便简单使用各自的数据类型。
+
+@code
+    using Evaluator     = Evaluation::EvaluationBase<dim>;
+    using EvaluatorList = std::list<Evaluator *>;
+
+
+
+@endcode 
+
+
+
+然后我们有一个结构，它声明了所有可能被设置的参数。在该结构的默认构造函数中，这些值都被设置为默认值，以便简单使用。
+
+@code
+    struct ProblemDescription
+    {
+@endcode 
+
+
+
+首先，允许原始和对偶问题离散化的片状多项式的度数。对于原始问题，它们默认为（双，三）线性分解函数，对于对偶问题，默认为（双，三）二次函数。如果选择了一个不需要解决对偶问题的细化准则，对偶有限元度的值当然会被忽略。
+
+@code
+      unsigned int primal_fe_degree;
+      unsigned int dual_fe_degree;
+
+
+@endcode 
+
+
+
+然后有一个描述问题类型的对象，即右手边、领域、边界值等。这里需要的指针默认为Null指针，也就是说，你必须在这个对象的实际实例中设置它，才能使它发挥作用。
+
+@code
+      std::unique_ptr<const Data::SetUpBase<dim>> data;
+
+
+@endcode 
+
+
+
+由于我们允许使用不同的细化标准（全局细化、通过凯利误差指标细化，可能有一个权重，以及使用双重估计器），定义一些枚举值，并随后定义一个该类型的变量。它将默认为 <code>dual_weighted_error_estimator</code>  。
+
+@code
+      enum RefinementCriterion
+      {
+        dual_weighted_error_estimator,
+        global_refinement,
+        kelly_indicator,
+        weighted_kelly_indicator
+      };
+
+
+      RefinementCriterion refinement_criterion;
+
+
+@endcode 
+
+
+
+接下来是一个描述对偶函数的对象。只有在选择双重加权残差细化时才需要它，并且也默认为一个Null指针。
+
+@code
+      std::unique_ptr<const DualFunctional::DualFunctionalBase<dim>>
+        dual_functional;
+
+
+@endcode 
+
+
+
+然后是一个评价对象的列表。其默认值为空，即没有评价对象。
+
+@code
+      EvaluatorList evaluator_list;
+
+
+@endcode 
+
+
+
+接下来是一个函数，作为 <code>RefinementWeightedKelly</code> 类的权重。这个指针的默认值是零，但如果你想使用 <code>weighted_kelly_indicator</code> 细化标准，你必须把它设置为其他值。
+
+@code
+      std::unique_ptr<const Function<dim>> kelly_weight;
+
+
+@endcode 
+
+
+
+最后，我们有一个变量，表示我们允许的（原始）离散化的最大自由度数。如果超过这个数值，我们将停止解算和间歇性网格细化的过程。其默认值为20,000。
+
+@code
+      unsigned int max_degrees_of_freedom;
+
+
+@endcode 
+
+
+
+最后是本类的默认构造函数。
+
+@code
+      ProblemDescription();
+    };
+
+
+@endcode 
+
+
+
+驱动程序框架类只有一个方法，它间歇性地调用求解器和网格细化，并在中间做一些其他的小任务。由于它除了给它的参数外不需要其他数据，我们把它变成静态的。
+
+@code
+    static void run(const ProblemDescription &descriptor);
+  };
+
+
+
+@endcode 
+
+
+
+至于实现，首先是参数对象的构造函数，将所有的值设置为默认值。
+
+@code
+  template <int dim>
+  Framework<dim>::ProblemDescription::ProblemDescription()
+    : primal_fe_degree(1)
+    , dual_fe_degree(2)
+    , refinement_criterion(dual_weighted_error_estimator)
+    , max_degrees_of_freedom(20000)
+  {}
+
+
+
+
+
+@endcode 
+
+
+
+然后是驱动整个过程的函数。
+
+@code
+  template <int dim>
+  void Framework<dim>::run(const ProblemDescription &descriptor)
+  {
+@endcode 
+
+
+
+首先从给定的数据对象创建一个三角形。
+
+@code
+    Triangulation<dim> triangulation(
+      Triangulation<dim>::smoothing_on_refinement);
+    descriptor.data->create_coarse_grid(triangulation);
+
+
+@endcode 
+
+
+
+然后是一组有限元和适当的正交公式。
+
+@code
+    const FE_Q<dim>       primal_fe(descriptor.primal_fe_degree);
+    const FE_Q<dim>       dual_fe(descriptor.dual_fe_degree);
+    const QGauss<dim>     quadrature(descriptor.dual_fe_degree + 1);
+    const QGauss<dim - 1> face_quadrature(descriptor.dual_fe_degree + 1);
+
+
+@endcode 
+
+
+
+接下来，选择一个实现不同细化标准的类。
+
+@code
+    std::unique_ptr<LaplaceSolver::Base<dim>> solver;
+    switch (descriptor.refinement_criterion)
+      {
+        case ProblemDescription::dual_weighted_error_estimator:
+          {
+            solver = std::make_unique<LaplaceSolver::WeightedResidual<dim>>(
+              triangulation,
+              primal_fe,
+              dual_fe,
+              quadrature,
+              face_quadrature,
+              descriptor.data->get_right_hand_side(),
+              descriptor.data->get_boundary_values(),
+              *descriptor.dual_functional);
+            break;
+          }
+
+
+        case ProblemDescription::global_refinement:
+          {
+            solver = std::make_unique<LaplaceSolver::RefinementGlobal<dim>>(
+              triangulation,
+              primal_fe,
+              quadrature,
+              face_quadrature,
+              descriptor.data->get_right_hand_side(),
+              descriptor.data->get_boundary_values());
+            break;
+          }
+
+
+        case ProblemDescription::kelly_indicator:
+          {
+            solver = std::make_unique<LaplaceSolver::RefinementKelly<dim>>(
+              triangulation,
+              primal_fe,
+              quadrature,
+              face_quadrature,
+              descriptor.data->get_right_hand_side(),
+              descriptor.data->get_boundary_values());
+            break;
+          }
+
+
+        case ProblemDescription::weighted_kelly_indicator:
+          {
+            solver =
+              std::make_unique<LaplaceSolver::RefinementWeightedKelly<dim>>(
+                triangulation,
+                primal_fe,
+                quadrature,
+                face_quadrature,
+                descriptor.data->get_right_hand_side(),
+                descriptor.data->get_boundary_values(),
+                *descriptor.kelly_weight);
+            break;
+          }
+
+
+        default:
+          AssertThrow(false, ExcInternalError());
+      }
+
+
+@endcode 
+
+
+
+现在所有对象都到位了，运行主循环。停止标准在循环的底部实现。     
+
+
+在循环中，首先设置新的循环数，然后解决问题，输出它的解，对它应用评价对象，然后决定我们是否要进一步细化网格并在这个网格上再次解决问题，或者跳出循环。
+
+@code
+    for (unsigned int step = 0; true; ++step)
+      {
+        std::cout << "Refinement cycle: " << step << std::endl;
+
+
+        solver->set_refinement_cycle(step);
+        solver->solve_problem();
+        solver->output_solution();
+
+
+        std::cout << "   Number of degrees of freedom=" << solver->n_dofs()
+                  << std::endl;
+
+
+        for (const auto &evaluator : descriptor.evaluator_list)
+          {
+            evaluator->set_refinement_cycle(step);
+            solver->postprocess(*evaluator);
+          }
+
+
+
+        if (solver->n_dofs() < descriptor.max_degrees_of_freedom)
+          solver->refine_grid();
+        else
+          break;
+      }
+
+
+@endcode 
+
+
+
+在循环运行后清理屏幕。
+
+@code
+    std::cout << std::endl;
+  }
+
+
+} // namespace Step14
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Themainfunction"></a> <h3>The main function</h3> 
+
+
+
+
+最后是主函数。它通过指定一组用于模拟的参数（多项式度数、评估和对偶函数等）来驱动整个过程，并将它们打包成一个结构传递给上面的框架工作类。
+
+@code
+int main()
+{
+  try
+    {
+      using namespace Step14;
+
+
+@endcode 
+
+
+
+在此描述我们要解决的问题，将一个描述符对象传递给做其余工作的函数。
+
+@code
+      const unsigned int                 dim = 2;
+      Framework<dim>::ProblemDescription descriptor;
+
+
+@endcode 
+
+
+
+首先设置我们希望使用的细化标准。
+
+@code
+      descriptor.refinement_criterion =
+        Framework<dim>::ProblemDescription::dual_weighted_error_estimator;
+@endcode 
+
+
+
+在这里，我们也可以使用  <code>global_refinement</code>  或  <code>weighted_kelly_indicator</code>  。请注意，给出的关于对偶有限元、对偶函数等信息只对给定的细化准则的选择很重要，否则就会被忽略。
+
+
+
+
+然后设置原始问题和对偶问题的多项式程度。我们在这里选择双线性和双二次方的。
+
+@code
+      descriptor.primal_fe_degree = 1;
+      descriptor.dual_fe_degree   = 2;
+
+
+@endcode 
+
+
+
+然后设置测试案例的描述，即域、边界值和右手边。这些都是预先打包在类中的。我们在这里采用  <code>Exercise_2_3</code>  的描述，但你也可以使用  <code>CurvedRidges@<dim@></code>  。
+
+@code
+      descriptor.data =
+        std::make_unique<Data::SetUp<Data::Exercise_2_3<dim>, dim>>();
+
+
+@endcode 
+
+
+
+接下来首先设置一个二元函数，然后是一个评价对象的列表。我们默认选择在一个评价点对值进行评价，由评价和二元函数类命名空间中的 <code>PointValueEvaluation</code> 类代表。你也可以设置 <code>PointXDerivativeEvaluation</code> 类来代替评价点的值的x-derivative。       
+
+
+注意，双功能和评价对象应该匹配。然而，你可以给你想要的评价函数，所以你可以在每一步之后让点值和导数都得到评价。 一个这样的附加评价是在每一步中输出网格。
+
+@code
+      const Point<dim> evaluation_point(0.75, 0.75);
+      descriptor.dual_functional =
+        std::make_unique<DualFunctional::PointValueEvaluation<dim>>(
+          evaluation_point);
+
+
+      Evaluation::PointValueEvaluation<dim> postprocessor1(evaluation_point);
+      Evaluation::GridOutput<dim>           postprocessor2("grid");
+
+
+      descriptor.evaluator_list.push_back(&postprocessor1);
+      descriptor.evaluator_list.push_back(&postprocessor2);
+
+
+@endcode 
+
+
+
+设置最大的自由度数，之后我们希望程序停止进一步细化网格。
+
+@code
+      descriptor.max_degrees_of_freedom = 20000;
+
+
+@endcode 
+
+
+
+最后将描述符对象传递给一个函数，用它来运行整个解决方案。
+
+@code
+      Framework<dim>::run(descriptor);
+    }
+
+
+@endcode 
+
+
+
+捕获异常，以给出失败的信息。
+
+@code
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
@@ -4032,11 +3858,9 @@ example program.
 
 
 
-This program offers a lot of possibilities to play around. We can thus
-only show a small part of all possible results that can be obtained
-with the help of this program. However, you are encouraged to just try
-it out, by changing the settings in the main program. Here, we start
-by simply letting it run, unmodified:
+
+这个程序提供了很多可以玩的可能性。因此，我们只能展示在这个程序的帮助下可以获得的所有可能结果的一小部分。然而，我们鼓励你通过改变主程序中的设置来尝试。在这里，我们先简单地让它运行，不做任何修改。
+
 @code
 Refinement cycle: 0
    Number of degrees of freedom=72
@@ -4073,15 +3897,12 @@ Refinement cycle: 7
 Refinement cycle: 8
    Number of degrees of freedom=21799
    Point value=0.0334444
-@endcode
+@endcode 
 
 
-First let's look what the program actually computed. On the seventh
-grid, primal and dual numerical solutions look like this (using a
-color scheme intended to evoke the snow-capped mountains of
-Colorado that the original author of this program now calls
-home):
-<table align="center">
+
+
+首先让我们看看程序的实际计算结果。在第七个网格上，原始和对偶数值解看起来是这样的（使用的颜色方案旨在唤起科罗拉多州白雪皑皑的山脉，这个程序的原作者现在称之为家）。  <table align="center">
   <tr>
     <td width="50%">
       <img src="https://www.dealii.org/images/steps/developer/step-14.point-value.solution-7.9.2.png" alt="">
@@ -4090,23 +3911,14 @@ home):
       <img src="https://www.dealii.org/images/steps/developer/step-14.point-value.solution-7-dual.9.2.png" alt="">
     </td>
   </tr>
-</table>
-Apparently, the region at the bottom left is so unimportant for the
-point value evaluation at the top right that the grid is left entirely
-unrefined there, even though the solution has singularities at the inner
-corner of that cell! Due
-to the symmetry in right hand side and domain, the solution should
-actually look like at the top right in all four corners, but the mesh
-refinement criterion involving the dual solution chose to refine them
-differently -- because we said that we really only care about a single
-function value somewhere at the top right.
+</table> 显然，左下角的区域对于右上角的点值评估是如此不重要，以至于网格在那里完全没有被细化，尽管解在该单元的内角有奇异点 由于右手边和领域的对称性，解决方案实际上应该是在右上角的所有四个角落，但是涉及到对偶解决方案的网格细化标准选择了不同的细化方式--因为我们说过，我们真正关心的只是右上角某处的一个函数值。
 
 
 
-Here are some of the meshes that are produced in refinement cycles 0,
-2, 4 (top row), and 5, 7, and 8 (bottom row):
 
-<table width="80%" align="center">
+下面是一些在细化周期0、2、4（顶行），以及5、7、8（底行）中产生的网格。
+
+  <table width="80%" align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.point-value.grid-0.9.2.png" alt="" width="100%"></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.point-value.grid-2.9.2.png" alt="" width="100%"></td>
@@ -4117,101 +3929,53 @@ Here are some of the meshes that are produced in refinement cycles 0,
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.point-value.grid-7.9.2.png" alt="" width="100%"></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.point-value.grid-8.9.2.png" alt="" width="100%"></td>
   </tr>
-</table>
+</table>   
 
-Note the subtle interplay between resolving the corner singularities,
-and resolving around the point of evaluation. It will be rather
-difficult to generate such a mesh by hand, as this would involve to
-judge quantitatively how much which of the four corner singularities
-should be resolved, and to set the weight compared to the vicinity of
-the evaluation point.
+注意解决角部奇点和解决评估点周围的微妙的相互作用。手工生成这样的网格是相当困难的，因为这将涉及到定量判断四个角奇点中的哪一个应该被解决，以及设置与评估点附近的权重。
 
 
 
-The program prints the point value and the estimated error in this
-quantity. From extrapolating it, we can guess that the exact value is
-somewhere close to 0.0334473, plus or minus 0.0000001 (note that we get
-almost 6 valid digits from only 22,000 (primal) degrees of
-freedom. This number cannot be obtained from the value of the
-functional alone, but I have used the assumption that the error
-estimator is mostly exact, and extrapolated the computed value plus
-the estimated error, to get an approximation of the true
-value. Computing with more degrees of freedom shows that this
-assumption is indeed valid.
+
+该程序会打印出点值和这个量的估计误差。通过推断，我们可以猜测确切的数值接近0.0334473，正负0.0000001（注意，我们只从22000个（原始）自由度中得到近6位有效数字。这个数字不能单独从函数值中得到，但我使用了误差估计器大部分是精确的假设，并将计算值加上估计误差进行外推，得到真实值的近似值。用更多自由度的计算表明，这个假设确实是有效的。
 
 
 
-From the computed results, we can generate two graphs: one that shows
-the convergence of the error $J(u)-J(u_h)$ (taking the
-extrapolated value as correct) in the point value, and the value that
-we get by adding up computed value $J(u_h)$ and estimated
-error eta (if the error estimator $eta$ were exact, then the value
-$J(u_h)+\eta$ would equal the exact point value, and the error
-in this quantity would always be zero; however, since the error
-estimator is only a - good - approximation to the true error, we can
-by this only reduce the size of the error). In this graph, we also
-indicate the complexity ${\cal O}(1/N)$ to show that mesh refinement
-acts optimal in this case. The second chart compares
-true and estimated error, and shows that the two are actually very
-close to each other, even for such a complicated quantity as the point
-value:
+
+从计算结果中，我们可以生成两个图形：一个是显示误差 $J(u)-J(u_h)$ （将外推值视为正确）在点值中的收敛情况，以及我们将计算值 $J(u_h)$ 和估计误差eta相加得到的值（如果误差估计器 $eta$  ]是精确的，那么值 $J(u_h)+\eta$ 将等于精确的点值，并且这个量的误差将总是零；然而，由于误差估计器只是对真实误差的一个-好的-近似值，我们只能通过这个来减少误差的大小）。) 在这张图中，我们还指出了复杂度 ${\cal O}(1/N)$ ，以表明在这种情况下，网格细化的作用是最佳的。第二张图比较了真实误差和估计误差，显示两者实际上是非常接近的，即使对于点值这样一个复杂的量。
 
 
-<table width="80%" align="center">
+  <table width="80%" align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.point-value.error.png" alt="" width="100%"></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.point-value.error-estimation.png" alt="" width="100%"></td>
   </tr>
-</table>
+</table>   
 
 
 <a name="Comparingrefinementcriteria"></a><h3>Comparing refinement criteria</h3>
 
 
 
-Since we have accepted quite some effort when using the mesh
-refinement driven by the dual weighted error estimator (for solving
-the dual problem, and for evaluating the error representation), it is
-worth while asking whether that effort was successful. To this end, we
-first compare the achieved error levels for different mesh refinement
-criteria. To generate this data, simply change the value of the mesh
-refinement criterion variable in the main program. The results are
-thus (for the weight in the Kelly indicator, we have chosen the
-function $1/(r^2+0.1^2)$, where $r$
-is the distance to the evaluation point; it can be shown that this is
-the optimal weight if we neglect the effects of boundaries):
 
-<img src="https://www.dealii.org/images/steps/developer/step-14.point-value.error-comparison.png" alt="">
+由于我们在使用由对偶加权误差估计器驱动的网格细化时接受了相当多的努力（用于求解对偶问题，以及评估误差表示），所以值得同时询问这种努力是否成功。为此，我们首先比较不同的网格细化标准所达到的误差水平。要产生这些数据，只需改变主程序中的网格细化准则变量的值。结果是这样的（对于Kelly指标中的权重，我们选择了函数 $1/(r^2+0.1^2)$  ，其中 $r$ 是到评估点的距离；可以证明，如果我们忽略边界的影响，这是最佳的权重）。
+
+  <img src="https://www.dealii.org/images/steps/developer/step-14.point-value.error-comparison.png" alt="">   
 
 
 
-Checking these numbers, we see that for global refinement, the error
-is proportional to $O(1/(sqrt(N) log(N)))$, and for the dual
-estimator $O(1/N)$. Generally speaking, we see that the dual
-weighted error estimator is better than the other refinement
-indicators, at least when compared with those that have a similarly
-regular behavior. The Kelly indicator produces smaller errors, but
-jumps about the picture rather irregularly, with the error also
-changing signs sometimes. Therefore, its behavior does not allow to
-extrapolate the results to larger values of N. Furthermore, if we
-trust the error estimates of the dual weighted error estimator, the
-results can be improved by adding the estimated error to the computed
-values. In terms of reliability, the weighted estimator is thus better
-than the Kelly indicator, although the latter sometimes produces
-smaller errors.
+
+检查这些数字，我们看到对于全局细化，误差与 $O(1/(sqrt(N) log(N)))$ 成正比，而对于对偶估计器 $O(1/N)$ 。一般来说，我们看到双重加权误差估计器比其他细化指标要好，至少在与那些具有类似规则行为的指标相比时是如此。凯利指标产生的误差较小，但在画面上的跳动相当不规则，误差有时也会改变符号。因此，它的行为不允许将结果推断到更大的N值。此外，如果我们相信双重加权误差估计器的误差估计值，可以通过将估计的误差加入到计算值中来改善结果。因此就可靠性而言，加权估计器比凯利指标更好，尽管后者有时会产生较小的误差。
 
 
 
-<a name="Evaluationofpointstresses"></a><h3>Evaluation of point stresses</h3>
+
+<a name="Evaluationofpointstresses"></a><h3>Evaluation of point stresses</h3> 
 
 
 
-Besides evaluating the values of the solution at a certain point, the
-program also offers the possibility to evaluate the x-derivatives at a
-certain point, and also to tailor mesh refinement for this. To let the
-program compute these quantities, simply replace the two occurrences of
-<code>PointValueEvaluation</code> in the main function by
-<code>PointXDerivativeEvaluation</code>, and let the program run:
+
+除了评估某一点上的解的值，程序还提供了评估某一点上的x-导数的可能性，也可以为此定制网格细化。要让程序计算这些量，只需将主函数中出现的两个 <code>PointValueEvaluation</code> 替换为 <code>PointXDerivativeEvaluation</code> ，然后让程序运行。
+
 @code
 Refinement cycle: 0
    Number of degrees of freedom=72
@@ -4252,15 +4016,14 @@ Refinement cycle: 8
 Refinement cycle: 9
    Number of degrees of freedom=29902
    Point x-derivative=-0.052814
-@endcode
+@endcode 
 
 
 
-The solution looks roughly the same as before (the exact solution of
-course <em>is</em> the same, only the grid changed a little), but the
-dual solution is now different. A close-up around the point of
-evaluation shows this:
-<table align="center">
+
+
+
+解决方案看起来与之前的大致相同（准确的解决方案当然是 <em> 与 </em> 相同，只是网格有一些变化），但现在的对偶解决方案是不同的。评估点周围的特写显示了这一点。  <table align="center">
   <tr>
     <td width="50%">
       <img src="https://www.dealii.org/images/steps/developer/step-14.point-derivative.solution-7-dual.png" alt="">
@@ -4268,11 +4031,9 @@ evaluation shows this:
     <td width="50%">
       <img src="https://www.dealii.org/images/steps/developer/step-14.point-derivative.solution-7-dual-close-up.png" alt="">
     </td>
-</table>
-This time, the grids in refinement cycles 0, 5, 6, 7, 8, and 9 look
-like this:
+</table>  这一次，细化周期0、5、6、7、8、9的网格是这样的。
 
-<table align="center" width="80%">
+  <table align="center" width="80%">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.point-derivative.grid-0.9.2.png" alt="" width="100%"></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.point-derivative.grid-5.9.2.png" alt="" width="100%"></td>
@@ -4283,41 +4044,29 @@ like this:
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.point-derivative.grid-8.9.2.png" alt="" width="100%"></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.point-derivative.grid-9.9.2.png" alt="" width="100%"></td>
   </tr>
-</table>
+</table>   
 
-Note the asymmetry of the grids compared with those we obtained for
-the point evaluation. This is due to the fact that the domain and the primal
-solution may be symmetric about the diagonal, but the $x$-derivative is
-not, and the latter enters the refinement criterion.
+注意与我们在点评估中获得的网格相比，这些网格是不对称的。这是由于域和原始解可能是围绕对角线对称的，但 $x$ -导数不是，后者进入了细化标准。
 
 
 
-Then, it is interesting to compare actually computed values of the
-quantity of interest (i.e. the x-derivative of the solution at one
-point) with a reference value of -0.0528223... plus or minus
-0.0000005. We get this reference value by computing on finer grid after
-some more mesh refinements, with approximately 130,000 cells.
-Recall that if the error is $O(1/N)$ in the optimal case, then
-taking a mesh with ten times more cells gives us one additional digit
-in the result.
+
+那么，将感兴趣的量的实际计算值（即某一点的解的x衍生物）与参考值-0.0528223...正负0.0000005进行比较是很有趣的。我们通过在更细的网格上计算得到这个参考值，经过一些更细的网格细化，大约有13万个单元。回顾一下，如果在最佳情况下，误差是 $O(1/N)$ ，那么采取多十倍的单元格的网格，我们的结果就会多出一位数。
 
 
 
-In the left part of the following chart, you again see the convergence
-of the error towards this extrapolated value, while on the right you
-see a comparison of true and estimated error:
 
-<table width="80%" align="center">
+在下图的左边部分，你再次看到了误差向这个外推值的收敛，而在右边你看到了真实和估计误差的比较。
+
+  <table width="80%" align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.point-derivative.error.png" alt="" width="100%"></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.point-derivative.error-estimation.png" alt="" width="100%"></td>
   </tr>
-</table>
+</table>   
 
-After an initial phase where the true error changes its sign, the
-estimated error matches it quite well, again. Also note the dramatic
-improvement in the error when using the estimated error to correct the
-computed value of $J(u_h)$.
+在初始阶段，真实的误差改变了它的符号，估计的误差再次与它很好地匹配。还请注意，当使用估计误差来修正 $J(u_h)$ 的计算值时，误差有了极大的改善。
+
 
 
 
@@ -4325,109 +4074,63 @@ computed value of $J(u_h)$.
 
 
 
-If instead of the <code>Exercise_2_3</code> data set, we choose
-<code>CurvedRidges</code> in the main function, and choose $(0.5,0.5)$
-as the evaluation point, then we can redo the
-computations of the previous example program, to compare whether the
-results obtained with the help of the dual weighted error estimator
-are better than those we had previously.
+
+如果我们不选择 <code>Exercise_2_3</code> 数据集，而是在主函数中选择 <code>CurvedRidges</code> ，并选择 $(0.5,0.5)$ 作为评价点，那么我们可以重新进行前面例子程序的计算，以比较在双重加权误差估计器的帮助下得到的结果是否比之前的结果更好。
 
 
 
-First, the meshes after 9 adaptive refinement cycles obtained with
-the point evaluation and derivative evaluation refinement
-criteria, respectively, look like this:
 
-<table width="80%" align="center">
+首先，分别用点评估和导数评估细化标准得到的9个自适应细化周期后的网格是这样的。
+
+  <table width="80%" align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.step-13.point-value.png" alt="" width="100%"></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.step-13.point-derivative.png" alt="" width="100%"></td>
   </tr>
-</table>
+</table>   
 
-The features of the solution can still be seen in the mesh, but since the
-solution is smooth, the singularities of the dual solution entirely
-dominate the mesh refinement criterion, and lead to strongly
-concentrated meshes. The solution after the seventh refinement step looks
-like the following:
+在网格中仍然可以看到解的特征，但是由于解是光滑的，对偶解的奇异点完全主导了网格细化准则，并导致网格强烈集中。第七次细化步骤后的解看起来像下面这样。
 
-<table width="40%" align="center">
+  <table width="40%" align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-14.step-13.solution-7.9.2.png" alt="" width="100%"></td>
   </tr>
-</table>
+</table>   
 
-Obviously, the solution is worse at some places, but the mesh
-refinement process should have taken care that these places are not
-important for computing the point value.
+很明显，在某些地方的解更差，但是网格细化过程中应该注意到这些地方对计算点值并不重要。
 
 
 
 
-The next point is to compare the new (duality based) mesh refinement
-criterion with the old ones. These are the results:
 
-<img src="https://www.dealii.org/images/steps/developer/step-14.step-13.error-comparison.png" alt="">
+下一步是将新的（基于对偶性的）网格细化准则与旧的准则进行比较。这些是结果。
 
-
-
-The results are, well, somewhat mixed. First, the Kelly indicator
-disqualifies itself by its unsteady behavior, changing the sign of the
-error several times, and with increasing errors under mesh
-refinement. The dual weighted error estimator has a monotone decrease
-in the error, and is better than the weighted Kelly and global
-refinement, but the margin is not as large as expected. This is, here,
-due to the fact the global refinement can exploit the regular
-structure of the meshes around the point of evaluation, which leads to
-a better order of convergence for the point error. However, if we had
-a mesh that is not locally rectangular, for example because we had to
-approximate curved boundaries, or if the coefficients were not
-constant, then this advantage of globally refinement meshes would
-vanish, while the good performance of the duality based estimator
-would remain.
+  <img src="https://www.dealii.org/images/steps/developer/step-14.step-13.error-comparison.png" alt="">   
 
 
 
 
-<a name="Conclusionsandoutlook"></a><h3>Conclusions and outlook</h3>
+结果是，嗯，有点混合。首先，Kelly指标因其不稳定的行为而失去了资格，它多次改变了误差的符号，并且在网格细化下误差越来越大。双重加权误差估计器的误差呈单调下降，比加权凯利和全局细化要好，但幅度没有预期的那么大。在这里，这是由于全局细化可以利用评估点周围网格的规则结构，从而导致点误差的收敛顺序更好。然而，如果我们的网格不是局部矩形的，例如因为我们必须近似弯曲的边界，或者如果系数不是常数，那么全局细化网格的这种优势就会消失，而基于二重性的估计器的良好性能将保持。
 
 
 
-The results here are not too clearly indicating the superiority of the
-dual weighted error estimation approach for mesh refinement over other
-mesh refinement criteria, such as the Kelly indicator. This is due to
-the relative simplicity of the shown applications. If you are not
-convinced yet that this approach is indeed superior, you are invited
-to browse through the literature indicated in the introduction, where
-plenty of examples are provided where the dual weighted approach can
-reduce the necessary numerical work by orders of magnitude, making
-this the only way to compute certain quantities to reasonable
-accuracies at all.
+
+
+<a name="Conclusionsandoutlook"></a><h3>Conclusions and outlook</h3> 
 
 
 
-Besides the objections you may raise against its use as a mesh
-refinement criterion, consider that accurate knowledge of the error in
-the quantity one might want to compute is of great use, since we can
-stop computations when we are satisfied with the accuracy. Using more
-traditional approaches, it is very difficult to get accurate estimates
-for arbitrary quantities, except for, maybe, the error in the energy
-norm, and we will then have no guarantee that the result we computed
-satisfies any requirements on its accuracy. Also, as was shown for the
-evaluation of point values and derivatives, the error estimate can be
-used to extrapolate the results, yielding much higher accuracy in the
-quantity we want to know.
+
+这里的结果并不太清楚地表明网格细化的对偶加权误差估计方法比其他网格细化标准（如Kelly指标）的优越性。这是由于所显示的应用相对简单的缘故。如果你还不相信这种方法确实优越，请你浏览一下引言中提到的文献，其中提供了大量的例子，双加权方法可以将必要的数值工作减少几个数量级，使之成为计算某些数量的合理精度的唯一途径。
 
 
 
-Leaving these mathematical considerations, we tried to write the
-program in a modular way, such that implementing another test case, or
-another evaluation and dual functional is simple. You are encouraged
-to take the program as a basis for your own experiments, and to play a
-little.
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-14.cc"
-*/
+
+除了你可能对其作为网格细化标准提出的反对意见外，考虑到对可能想要计算的量的误差的准确认识是非常有用的，因为我们可以在对精度满意时停止计算。使用更传统的方法，很难得到任意量的精确估计，也许除了能量准则的误差，我们将不能保证我们计算的结果满足对其准确性的任何要求。另外，正如对点值和导数的评价所显示的那样，误差估计可以用来推断结果，产生我们想知道的量的更高的精度。
+
+
+
+
+抛开这些数学上的考虑，我们试图以模块化的方式编写程序，这样实现另一个测试案例，或另一个评估和双重功能就很简单。我们鼓励你把这个程序作为你自己实验的基础，并且玩一玩。<a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-14.cc"  。 
+
+  */  

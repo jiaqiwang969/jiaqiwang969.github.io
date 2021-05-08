@@ -1,91 +1,76 @@
-/**
-@page step_18 The step-18 tutorial program
-This tutorial depends on step-17.
+  /**   @page step_18 The step-18 tutorial program   
+
+本教程取决于  step-17  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Quasistaticelasticdeformation">Quasistatic elastic deformation</a>
+        <li><a href="#Quasistaticelasticdeformation">Quasistatic elastic deformation</a><a href="#Quasistaticelasticdeformation">Quasistatic elastic deformation</a>
       <ul>
-        <li><a href="#Motivationofthemodel">Motivation of the model</a>
-        <li><a href="#Timediscretization">Time discretization</a>
-        <li><a href="#Updatingthestressvariable">Updating the stress variable</a>
+        <li><a href="#Motivationofthemodel">Motivation of the model</a><a href="#Motivationofthemodel">Motivation of the model</a>
+        <li><a href="#Timediscretization">Time discretization</a><a href="#Timediscretization">Time discretization</a>
+        <li><a href="#Updatingthestressvariable">Updating the stress variable</a><a href="#Updatingthestressvariable">Updating the stress variable</a>
       </ul>
-        <li><a href="#Parallelgraphicaloutput">Parallel graphical output</a>
-        <li><a href="#Atriangulationwithautomaticpartitioning">A triangulation with automatic partitioning</a>
-        <li><a href="#Overallstructureoftheprogram">Overall structure of the program</a>
+        <li><a href="#Parallelgraphicaloutput">Parallel graphical output</a><a href="#Parallelgraphicaloutput">Parallel graphical output</a>
+        <li><a href="#Atriangulationwithautomaticpartitioning">A triangulation with automatic partitioning</a><a href="#Atriangulationwithautomaticpartitioning">A triangulation with automatic partitioning</a>
+        <li><a href="#Overallstructureoftheprogram">Overall structure of the program</a><a href="#Overallstructureoftheprogram">Overall structure of the program</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#ThecodePointHistorycodeclass">The <code>PointHistory</code> class</a>
-        <li><a href="#Thestressstraintensor">The stress-strain tensor</a>
-        <li><a href="#Auxiliaryfunctions">Auxiliary functions</a>
-        <li><a href="#ThecodeTopLevelcodeclass">The <code>TopLevel</code> class</a>
-        <li><a href="#ThecodeBodyForcecodeclass">The <code>BodyForce</code> class</a>
-        <li><a href="#ThecodeIncrementalBoundaryValuecodeclass">The <code>IncrementalBoundaryValue</code> class</a>
-        <li><a href="#ImplementationofthecodeTopLevelcodeclass">Implementation of the <code>TopLevel</code> class</a>
+        <li><a href="#ThecodePointHistorycodeclass">The <code>PointHistory</code> class</a><a href="#ThecodePointHistorycodeclass">The <code>PointHistory</code> class</a>
+        <li><a href="#Thestressstraintensor">The stress-strain tensor</a><a href="#Thestressstraintensor">The stress-strain tensor</a>
+        <li><a href="#Auxiliaryfunctions">Auxiliary functions</a><a href="#Auxiliaryfunctions">Auxiliary functions</a>
+        <li><a href="#ThecodeTopLevelcodeclass">The <code>TopLevel</code> class</a><a href="#ThecodeTopLevelcodeclass">The <code>TopLevel</code> class</a>
+        <li><a href="#ThecodeBodyForcecodeclass">The <code>BodyForce</code> class</a><a href="#ThecodeBodyForcecodeclass">The <code>BodyForce</code> class</a>
+        <li><a href="#ThecodeIncrementalBoundaryValuecodeclass">The <code>IncrementalBoundaryValue</code> class</a><a href="#ThecodeIncrementalBoundaryValuecodeclass">The <code>IncrementalBoundaryValue</code> class</a>
+        <li><a href="#ImplementationofthecodeTopLevelcodeclass">Implementation of the <code>TopLevel</code> class</a><a href="#ImplementationofthecodeTopLevelcodeclass">Implementation of the <code>TopLevel</code> class</a>
       <ul>
-        <li><a href="#Thepublicinterface">The public interface</a>
-        <li><a href="#TopLevelcreate_coarse_grid">TopLevel::create_coarse_grid</a>
-        <li><a href="#TopLevelsetup_system">TopLevel::setup_system</a>
-        <li><a href="#TopLevelassemble_system">TopLevel::assemble_system</a>
-        <li><a href="#TopLevelsolve_timestep">TopLevel::solve_timestep</a>
-        <li><a href="#TopLevelsolve_linear_problem">TopLevel::solve_linear_problem</a>
-        <li><a href="#TopLeveloutput_results">TopLevel::output_results</a>
-        <li><a href="#TopLeveldo_initial_timestep">TopLevel::do_initial_timestep</a>
-        <li><a href="#TopLeveldo_timestep">TopLevel::do_timestep</a>
-        <li><a href="#TopLevelrefine_initial_grid">TopLevel::refine_initial_grid</a>
-        <li><a href="#TopLevelmove_mesh">TopLevel::move_mesh</a>
-        <li><a href="#TopLevelsetup_quadrature_point_history">TopLevel::setup_quadrature_point_history</a>
-        <li><a href="#TopLevelupdate_quadrature_point_history">TopLevel::update_quadrature_point_history</a>
+        <li><a href="#Thepublicinterface">The public interface</a><a href="#Thepublicinterface">The public interface</a>
+        <li><a href="#TopLevelcreate_coarse_grid">TopLevel::create_coarse_grid</a><a href="#TopLevelcreate_coarse_grid">TopLevel::create_coarse_grid</a>
+        <li><a href="#TopLevelsetup_system">TopLevel::setup_system</a> ]<a href="#TopLevelsetup_system">TopLevel::setup_system</a>
+        <li><a href="#TopLevelassemble_system">TopLevel::assemble_system</a><a href="#TopLevelassemble_system">TopLevel::assemble_system</a>
+        <li><a href="#TopLevelsolve_timestep">TopLevel::solve_timestep</a><a href="#TopLevelsolve_timestep">TopLevel::solve_timestep</a>
+        <li><a href="#TopLevelsolve_linear_problem">TopLevel::solve_linear_problem</a><a href="#TopLevelsolve_linear_problem">TopLevel::solve_linear_problem</a>
+        <li><a href="#TopLeveloutput_results">TopLevel::output_results</a><a href="#TopLeveloutput_results">TopLevel::output_results</a>
+        <li><a href="#TopLeveldo_initial_timestep">TopLevel::do_initial_timestep</a><a href="#TopLeveldo_initial_timestep">TopLevel::do_initial_timestep</a>
+        <li><a href="#TopLeveldo_timestep">TopLevel::do_timestep</a><a href="#TopLeveldo_timestep">TopLevel::do_timestep</a>
+        <li><a href="#TopLevelrefine_initial_grid">TopLevel::refine_initial_grid</a><a href="#TopLevelrefine_initial_grid">TopLevel::refine_initial_grid</a>
+        <li><a href="#TopLevelmove_mesh">TopLevel::move_mesh</a><a href="#TopLevelmove_mesh">TopLevel::move_mesh</a>
+        <li><a href="#TopLevelsetup_quadrature_point_history">TopLevel::setup_quadrature_point_history</a><a href="#TopLevelsetup_quadrature_point_history">TopLevel::setup_quadrature_point_history</a>
+        <li><a href="#TopLevelupdate_quadrature_point_history">TopLevel::update_quadrature_point_history</a><a href="#TopLevelupdate_quadrature_point_history">TopLevel::update_quadrature_point_history</a>
       </ul>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
       <ul>
       <ul>
-        <li><a href="#Plasticitymodels">Plasticity models</a>
-        <li><a href="#Stabilizationissues">Stabilization issues</a>
-        <li><a href="#Refinementduringtimesteps">Refinement during timesteps</a>
-        <li><a href="#Ensuringmeshregularity">Ensuring mesh regularity</a>
+        <li><a href="#Plasticitymodels">Plasticity models</a><a href="#Plasticitymodels">Plasticity models</a>
+        <li><a href="#Stabilizationissues">Stabilization issues</a><a href="#Stabilizationissues">Stabilization issues</a>
+        <li><a href="#Refinementduringtimesteps">Refinement during timesteps</a><a href="#Refinementduringtimesteps">Refinement during timesteps</a>
+        <li><a href="#Ensuringmeshregularity">Ensuring mesh regularity</a><a href="#Ensuringmeshregularity">Ensuring mesh regularity</a>
     </ul>
     </ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+@endhtmlonly 
+
+<a name="Intro"></a> <a name="Introduction"></a> <h1>Introduction</h1> 
 
 
 
-This tutorial program is another one in the series on the elasticity problem
-that we have already started with step-8 and step-17. It extends it into two
-different directions: first, it solves the quasistatic but time dependent
-elasticity problem for large deformations with a Lagrangian mesh movement
-approach. Secondly, it shows some more techniques for solving such problems
-using %parallel processing with PETSc's linear algebra. In addition to this,
-we show how to work around one of the two major bottlenecks of step-17, namely
-that we generated graphical output from only one process, and that this scaled
-very badly with larger numbers of processes and on large problems. (The other
-bottleneck, namely that every processor has to hold the entire mesh and
-DoFHandler, is addressed in step-40.) Finally, a
-good number of assorted improvements and techniques are demonstrated that have
-not been shown yet in previous programs.
 
-As before in step-17, the program runs just as fine on a single sequential
-machine as long as you have PETSc installed. Information on how to tell
-deal.II about a PETSc installation on your system can be found in the deal.II
-README file, which is linked to from the <a href="../../index.html">main
-documentation page</a>
-in your installation of deal.II, or on <a href="http://www.dealii.org/">the
-deal.II webpage</a>.
+这个教程程序是我们已经开始的关于弹性问题的系列中的另一个  step-8  和  step-17  。它将其扩展到两个不同的方向：首先，它用拉格朗日网格移动的方法解决了大变形的准静态但与时间相关的弹性问题。其次，它展示了一些使用PETSc的线性代数的%并行处理来解决此类问题的更多技术。除此之外，我们还展示了如何解决 step-17 中两个主要瓶颈中的一个，即我们只从一个进程中生成图形输出，而这在更多的进程和大型问题上扩展得非常糟糕。另一个瓶颈，即每个处理器都必须持有整个网格和DoFHandler，已在 step-40 中解决）。最后，我们展示了大量在以前的程序中没有展示过的各种改进和技术。
+
+如同之前的  step-17  一样，只要你安装了PETSc，该程序在单机上的运行也是一样的。关于如何告诉deal.II你的系统上安装了PETSc的信息可以在deal.II的README文件中找到，该文件可以从你安装deal.II的<a href="../../index.html">main
+documentation page</a>中链接到，或者在<a href="http://www.dealii.org/">the
+deal.II webpage</a>中找到。
 
 
 <a name="Quasistaticelasticdeformation"></a><h3>Quasistatic elastic deformation</h3>
@@ -94,26 +79,19 @@ deal.II webpage</a>.
 <a name="Motivationofthemodel"></a><h4>Motivation of the model</h4>
 
 
-In general, time-dependent small elastic deformations are described by the
-elastic wave equation
-@f[
+一般来说，随时间变化的小弹性变形由弹性波方程@f[
   \rho \frac{\partial^2 \mathbf{u}}{\partial t^2}
   + c \frac{\partial \mathbf{u}}{\partial t}
+
+
   - \textrm{div}\  ( C \varepsilon(\mathbf{u})) = \mathbf{f}
   \qquad
   \textrm{in}\ \Omega,
-@f]
-where $\mathbf{u}=\mathbf{u} (\mathbf{x},t)$ is the deformation of the body, $\rho$
-and $c$ the density and attenuation coefficient, and $\mathbf{f}$ external forces.
-In addition, initial conditions
-@f[
+@f]描述，其中 $\mathbf{u}=\mathbf{u} (\mathbf{x},t)$ 是体的变形， $\rho$ 和 $c$ 是密度和衰减系数，以及 $\mathbf{f}$ 外力。此外，需要指定初始条件@f[
   \mathbf{u}(\cdot, 0) = \mathbf{u}_0(\cdot)
   \qquad
   \textrm{on}\ \Omega,
-@f]
-and Dirichlet (displacement) or Neumann (traction) boundary conditions need
-to be specified for a unique solution:
-@f{eqnarray*}
+@f]和Dirichlet（位移）或Neumann（牵引）边界条件以获得唯一的解。@f{eqnarray*}
   \mathbf{u}(\mathbf{x},t) &=& \mathbf{d}(\mathbf{x},t)
   \qquad
   \textrm{on}\ \Gamma_D\subset\partial\Omega,
@@ -121,33 +99,16 @@ to be specified for a unique solution:
   \mathbf{n} \ C \varepsilon(\mathbf{u}(\mathbf{x},t)) &=& \mathbf{b}(\mathbf{x},t)
   \qquad
   \textrm{on}\ \Gamma_N=\partial\Omega\backslash\Gamma_D.
-@f}
-In above formulation, $\varepsilon(\mathbf{u})= \frac 12 (\nabla \mathbf{u} + \nabla
-\mathbf{u}^T)$ is the symmetric gradient of the displacement, also called the
-<em>strain</em>. $C$ is a tensor of rank 4, called the <em>stress-strain
-  tensor</em> (the inverse of the <a
-  href="https://en.wikipedia.org/wiki/Hooke%27s_law#Hooke's_law_for_continuous_media"><em>compliance
-  tensor</em></a>)
-that contains knowledge of the elastic strength of the material; its
-symmetry properties make sure that it maps symmetric tensors of rank 2
-(&ldquo;matrices&rdquo; of dimension $d$, where $d$ is the spatial dimensionality) onto
-symmetric tensors of the same rank. We will comment on the roles of the strain
-and stress tensors more below. For the moment it suffices to say that we
-interpret the term $\textrm{div}\  ( C \varepsilon(\mathbf{u}))$ as the vector with
-components $\frac \partial{\partial x_j} C_{ijkl} \varepsilon(\mathbf{u})_{kl}$,
-where summation over indices $j,k,l$ is implied.
+@f} 
 
-The quasistatic limit of this equation is motivated as follows: each small
-perturbation of the body, for example by changes in boundary condition or the
-forcing function, will result in a corresponding change in the configuration
-of the body. In general, this will be in the form of waves radiating away from
-the location of the disturbance. Due to the presence of the damping term,
-these waves will be attenuated on a time scale of, say, $\tau$. Now, assume
-that all changes in external forcing happen on times scales that are
-much larger than $\tau$. In that case, the dynamic nature of the change is
-unimportant: we can consider the body to always be in static equilibrium,
-i.e. we can assume that at all times the body satisfies
-@f{eqnarray*}
+在上述公式中， $\varepsilon(\mathbf{u})= \frac 12 (\nabla \mathbf{u} + \nabla
+\mathbf{u}^T)$  是位移的对称梯度，也称为 <em>  应变 </em>  。  $C$ 是一个等级为4的张量，称为 <em> 应力-应变张量 </em> （是<a
+  href="https://en.wikipedia.org/wiki/Hooke%27s_law#Hooke's_law_for_continuous_media"><em>compliance
+  tensor</em></a>的逆），它包含了材料弹性强度的知识；其对称特性确保了它将等级为2的对称张量（&ldquo;矩阵&rdquo;的维数 $d$  ，其中 $d$  是空间尺寸）映射到相同等级的对称张量。我们将在下面更多地评论应变和应力张量的作用。目前，我们只需说，我们将术语 $\textrm{div}\  ( C \varepsilon(\mathbf{u}))$ 解释为具有分量 $\frac \partial{\partial x_j} C_{ijkl} \varepsilon(\mathbf{u})_{kl}$ 的矢量，其中对指数 $j,k,l$ 的求和是暗示的。
+
+这个方程的准静态极限的动机如下：身体的每个小扰动，例如边界条件或强迫函数的变化，将导致身体配置的相应变化。一般来说，这将是以波的形式从扰动的位置辐射出去。由于阻尼项的存在，这些波将在例如 $\tau$ 的时间尺度上被衰减。现在，假设所有外部强制力的变化发生在比 $\tau$ 大得多的时间尺度上。在这种情况下，变化的动态性质并不重要：我们可以认为身体总是处于静态平衡状态，也就是说，我们可以假设在任何时候身体都满足@f{eqnarray*}
+
+
   - \textrm{div}\  ( C \varepsilon(\mathbf{u})) &=& \mathbf{f}(\mathbf{x},t)
   \qquad
   \textrm{in}\ \Omega,
@@ -160,39 +121,18 @@ i.e. we can assume that at all times the body satisfies
   \qquad
   \textrm{on}\ \Gamma_N.
 @f}
-Note that the differential equation does not contain any time derivatives any
-more -- all time dependence is introduced through boundary conditions and a
-possibly time-varying force function $\mathbf{f}(\mathbf{x},t)$. The changes in
-configuration can therefore be considered as being stationary
-instantaneously. An alternative view of this is that $t$ is not really a time
-variable, but only a time-like parameter that governs the evolution of the
-problem.
 
-While these equations are sufficient to describe small deformations, computing
-large deformations is a little more complicated and, in general, leads
-to nonlinear equations such as those treated in step-44. In the
-following, let us consider some of the tools one would employ when
-simulating problems in which the deformation becomes <i>large</i>.
+请注意，微分方程不再包含任何时间导数--所有的时间依赖性都是通过边界条件和可能的时变力函数引入的  $\mathbf{f}(\mathbf{x},t)$  。因此，配置的变化可以被认为是瞬时静止的。对此的另一种看法是， $t$ 并不是真正的时间变量，而只是一个支配问题演变的类似时间的参数。
 
-@note The model we will consider below is not founded on anything that
-would be mathematically sound: we will consider a model in which we
-produce a small deformation, deform the physical coordinates of the
-body by this deformation, and then consider the next loading step
-again as a linear problem. This isn't consistent, since the assumption
-of linearity implies that deformations are infinitesimal and so moving
-around the vertices of our mesh by a finite amount before solving the
-next linear problem is an inconsistent approach. We should therefore
-note that it is not surprising that the equations discussed below
-can't be found in the literature: <b>The model considered here has
-little to do with reality!</b> On the other hand, the implementation
-techniques we consider are very much what one would need to use when
-implementing a <i>real</i> model, as we will see in step-44.
+虽然这些方程足以描述小的变形，但计算大的变形就有点复杂了，一般来说，会导致非线性方程，如 step-44 中处理的方程。在下文中，让我们考虑在模拟变形成为<i>large</i>的问题时，会采用的一些工具。
+
+  @note  我们下面要考虑的模型不是建立在任何在数学上合理的基础上的：我们将考虑一个模型，在这个模型中，我们产生一个小的变形，通过这个变形使身体的物理坐标变形，然后再考虑下一个加载步骤，作为一个线性问题。这并不一致，因为线性的假设意味着变形是无限小的，所以在解决下一个线性问题之前，在我们的网格顶点周围移动一个有限的量是不一致的做法。因此我们应该注意到，在文献中找不到下面讨论的方程并不奇怪。<b>The model considered here has
+little to do with reality!</b> 另一方面，我们所考虑的实现技术正是人们在实现<i>real</i>模型时需要使用的，我们将在 step-44 中看到这一点。
 
 
-To come back to defining our "artificial" model, let us first
-introduce a tensorial stress variable $\sigma$, and write the differential
-equations in terms of the stress:
-@f{eqnarray*}
+回到定义我们的 "人工 "模型，让我们首先引入一个张量的应力变量 $\sigma$ ，并以应力为单位写出微分方程。@f{eqnarray*}
+
+
   - \textrm{div}\  \sigma &=& \mathbf{f}(\mathbf{x},t)
   \qquad
   \textrm{in}\ \Omega(t),
@@ -204,41 +144,30 @@ equations in terms of the stress:
   \mathbf{n} \ C \varepsilon(\mathbf{u}(\mathbf{x},t)) &=& \mathbf{b}(\mathbf{x},t)
   \qquad
   \textrm{on}\ \Gamma_N=\partial\Omega(t)\backslash\Gamma_D.
-@f}
-Note that these equations are posed on a domain $\Omega(t)$ that
-changes with time, with the boundary moving according to the
-displacements $\mathbf{u}(\mathbf{x},t)$ of the points on the boundary. To
-complete this system, we have to specify the incremental relationship between
-the stress and the strain, as follows:
-<a name="step_18.stress-strain"></a>
-@f[
+@f} 
+
+注意，这些方程是在一个随时间变化的域 $\Omega(t)$ 上提出的，边界根据边界上各点的位移 $\mathbf{u}(\mathbf{x},t)$ 而移动。为了完成这个系统，我们必须指定应力和应变之间的增量关系，如下所示。<a name="step_18.stress-strain"></a> @f[
   \dot\sigma = C \varepsilon (\dot{\mathbf{u}}),
   \qquad
   \qquad
   \textrm{[stress-strain]}
-@f]
-where a dot indicates a time derivative. Both the stress $\sigma$ and the
-strain $\varepsilon(\mathbf{u})$ are symmetric tensors of rank 2.
+@f]其中一个点表示时间导数。应力 $\sigma$ 和应变 $\varepsilon(\mathbf{u})$ 都是等级2的对称张量。
 
 
 <a name="Timediscretization"></a><h4>Time discretization</h4>
 
 
-Numerically, this system is solved as follows: first, we discretize
-the time component using a backward Euler scheme. This leads to a
-discrete equilibrium of force at time step $n$:
-@f[
+在数值上，该系统的求解方法如下：首先，我们使用后向欧拉方案对时间分量进行离散。这导致了在时间步长 $n$ 的力的离散平衡：@f[
+
+
   -\textrm{div}\  \sigma^n = f^n,
-@f]
-where
-@f[
+@f] 其中@f[
   \sigma^n = \sigma^{n-1} + C \varepsilon (\Delta \mathbf{u}^n),
-@f]
-and $\Delta \mathbf{u}^n$ the incremental displacement for time step
-$n$. In addition, we have to specify initial data $\mathbf{u}(\cdot,0)=\mathbf{u}_0$.
-This way, if we want to solve for the displacement increment, we
-have to solve the following system:
+@f]和 $\Delta \mathbf{u}^n$ 是时间步长 $n$ 的增量位移。此外，我们必须指定初始数据  $\mathbf{u}(\cdot,0)=\mathbf{u}_0$  。这样一来，如果我们想求解位移增量，我们必须求解以下系统。
+
 @f{align*}
+
+
   - \textrm{div}\   C \varepsilon(\Delta\mathbf{u}^n) &= \mathbf{f} + \textrm{div}\  \sigma^{n-1}
   \qquad
   &&\textrm{in}\ \Omega(t_{n-1}),
@@ -250,16 +179,17 @@ have to solve the following system:
   \mathbf{n} \ C \varepsilon(\Delta \mathbf{u}^n(\mathbf{x},t)) &= \mathbf{b}(\mathbf{x},t_n)-\mathbf{b}(\mathbf{x},t_{n-1})
   \qquad
   &&\textrm{on}\ \Gamma_N=\partial\Omega(t_{n-1})\backslash\Gamma_D.
-@f}
-The weak form of this set of equations, which as usual is the basis for the
-finite element formulation, reads as follows: find $\Delta \mathbf{u}^n \in
-\{v\in H^1(\Omega(t_{n-1}))^d: v|_{\Gamma_D}=\mathbf{d}(\cdot,t_n) - \mathbf{d}(\cdot,t_{n-1})\}$
-such that
-<a name="step_18.linear-system"></a>
+@f} 
+
+这组方程的弱式是有限元公式的基础，其内容如下：找到 $\Delta \mathbf{u}^n \in
+\{v\in H^1(\Omega(t_{n-1}))^d: v|_{\Gamma_D}=\mathbf{d}(\cdot,t_n) - \mathbf{d}(\cdot,t_{n-1})\}$ ，使<a name="step_18.linear-system"></a>符合条件。
+
 @f{align*}
   (C \varepsilon(\Delta\mathbf{u}^n), \varepsilon(\varphi) )_{\Omega(t_{n-1})}
   &=
   (\mathbf{f}, \varphi)_{\Omega(t_{n-1})}
+
+
   -(\sigma^{n-1},\varepsilon(\varphi))_{\Omega(t_{n-1})}
   \\
   &\qquad
@@ -268,15 +198,18 @@ such that
   \\
   &\qquad\qquad
   \forall \varphi \in \{\mathbf{v}\in H^1(\Omega(t_{n-1}))^d: \mathbf{v}|_{\Gamma_D}=0\}.
-@f}
-Using that $\sigma^{n-1} \mathbf{n}
+@f} 
+
+利用 $\sigma^{n-1} \mathbf{n}
             = [C \varepsilon(\mathbf{u}^{n-1})] \mathbf{n}
-            = \mathbf{b}(\mathbf x, t_{n-1})$,
-these equations can be simplified to
+            = \mathbf{b}(\mathbf x, t_{n-1})$ ，这些方程可以简化为 
+
 @f{align*}
   (C \varepsilon(\Delta\mathbf{u}^n), \varepsilon(\varphi) )_{\Omega(t_{n-1})}
   &=
   (\mathbf{f}, \varphi)_{\Omega(t_{n-1})}
+
+
   -(\sigma^{n-1},\varepsilon(\varphi))_{\Omega(t_{n-1})}
   +(\mathbf{b}(\mathbf{x},t_n),t_{n-1}), \varphi)_{\Gamma_N}
   \\
@@ -285,70 +218,31 @@ these equations can be simplified to
   \qquad
   \qquad
   \textrm{[linear-system]}
-@f}
+@f} 
 
-We note that, for simplicity, in the program we will always assume that there
-are no boundary forces, i.e. $\mathbf{b} = 0$, and that the deformation of the
-body is driven by body forces $\mathbf{f}$ and prescribed boundary displacements
-$\mathbf{d}$ alone. It is also worth noting that when integrating by parts, we
-would get terms of the form $(C \varepsilon(\Delta\mathbf{u}^n), \nabla \varphi
-)_{\Omega(t_{n-1})}$, but that we replace them with the term involving the
-symmetric gradient $\varepsilon(\varphi)$ instead of $\nabla\varphi$. Due to
-the symmetry of $C$, the two terms are mathematically equivalent, but
-the symmetric version avoids the potential for round-off errors making
-the resulting matrix slightly non-symmetric.
 
-The system at time step $n$, to be solved on the old domain
-$\Omega(t_{n-1})$, has exactly the form of a stationary elastic
-problem, and is therefore similar to what we have already implemented
-in previous example programs. We will therefore not comment on the
-space discretization beyond saying that we again use lowest order
-continuous finite elements.
 
-There are differences, however:
-<ol>
-  <li> We have to move (update) the mesh after each time step, in order to be
-  able to solve the next time step on a new domain;
+我们注意到，为简单起见，在程序中我们将始终假设没有边界力，即 $\mathbf{b} = 0$ ，并且身体的变形仅由身体力 $\mathbf{f}$ 和规定的边界位移 $\mathbf{d}$ 驱动。还值得注意的是，当通过部分积分时，我们会得到形式为 $(C \varepsilon(\Delta\mathbf{u}^n), \nabla \varphi
+)_{\Omega(t_{n-1})}$ 的条款，但我们用涉及对称梯度的条款 $\varepsilon(\varphi)$ 而不是 $\nabla\varphi$ 取代它们。由于 $C$ 的对称性，这两个项在数学上是等价的，但对称版本避免了可能出现的四舍五入错误，使产生的矩阵略显非对称性。
 
-  <li> We need to know $\sigma^{n-1}$ to compute the next incremental
-  displacement, i.e. we need to compute it at the end of the time step
-  to make sure it is available for the next time step. Essentially,
-  the stress variable is our window to the history of deformation of
-  the body.
-</ol>
-These two operations are done in the functions <code>move_mesh</code> and
-<code>update_quadrature_point_history</code> in the program. While moving
-the mesh is only a technicality, updating the stress is a little more
-complicated and will be discussed in the next section.
+时间步长 $n$ 的系统，要在旧域 $\Omega(t_{n-1})$ 上求解，完全具有静止弹性问题的形式，因此与我们在以前的例子程序中已经实现的类似。因此，除了说我们再次使用最低阶连续有限元之外，我们将不对空间离散化进行评论。
+
+然而，也有不同之处。  <ol>   <li>  我们必须在每个时间步骤后移动（更新）网格，以便能够在新的领域上解决下一个时间步骤。
+
+    <li>  我们需要知道 $\sigma^{n-1}$ 来计算下一个增量位移，也就是说，我们需要在时间步长结束时计算它，以确保它在下一个时间步长可用。从本质上讲，应力变量是我们了解体的变形历史的窗口。  </ol>  这两个操作在程序中的 <code>move_mesh</code> 和 <code>update_quadrature_point_history</code> 函数中完成。移动网格只是一个技术问题，而更新应力则要复杂一些，将在下一节讨论。
 
 
 <a name="Updatingthestressvariable"></a><h4>Updating the stress variable</h4>
 
 
-As indicated above, we need to have the stress variable $\sigma^n$ available
-when computing time step $n+1$, and we can compute it using
-<a name="step_18.stress-update"></a>
-@f[
+如上所述，在计算时间步长 $n+1$ 时，我们需要有应力变量 $\sigma^n$ ，我们可以用<a name="step_18.stress-update"></a>@f[
   \sigma^n = \sigma^{n-1} + C \varepsilon (\Delta \mathbf{u}^n).
   \qquad
   \qquad
   \textrm{[stress-update]}
-@f]
-There are, despite the apparent simplicity of this equation, two questions
-that we need to discuss. The first concerns the way we store $\sigma^n$: even
-if we compute the incremental updates $\Delta\mathbf{u}^n$ using lowest-order
-finite elements, then its symmetric gradient $\varepsilon(\Delta\mathbf{u}^n)$ is
-in general still a function that is not easy to describe. In particular, it is
-not a piecewise constant function, and on general meshes (with cells that are
-not rectangles %parallel to the coordinate axes) or with non-constant
-stress-strain tensors $C$ it is not even a bi- or trilinear function. Thus, it
-is a priori not clear how to store $\sigma^n$ in a computer program.
+@f]来计算，尽管这个方程明显简单，但有两个问题我们需要讨论。第一个问题是关于我们存储 $\sigma^n$ 的方式：即使我们使用最低阶有限元计算增量更新 $\Delta\mathbf{u}^n$ ，那么其对称梯度 $\varepsilon(\Delta\mathbf{u}^n)$ 一般来说仍然是一个不容易描述的函数。特别是，它不是一个片状常数函数，在一般的网格上（单元不是平行于坐标轴的矩形）或非恒定应力-应变张量 $C$ ，它甚至不是一个双线性或三线性函数。因此，先验地不清楚如何在计算机程序中存储 $\sigma^n$ 。
 
-To decide this, we have to see where it is used. The only place where we
-require the stress is in the term
-$(\sigma^{n-1},\varepsilon(\varphi))_{\Omega(t_{n-1})}$. In practice, we of
-course replace this term by numerical quadrature:
-@f[
+要决定这一点，我们必须看它在哪里被使用。我们需要强调的唯一地方是在 $(\sigma^{n-1},\varepsilon(\varphi))_{\Omega(t_{n-1})}$ 这个词中。在实践中，我们当然会用数字正交代替这个项。@f[
   (\sigma^{n-1},\varepsilon(\varphi))_{\Omega(t_{n-1})}
   =
   \sum_{K\subset {T}}
@@ -357,49 +251,10 @@ course replace this term by numerical quadrature:
   \sum_{K\subset {T}}
   \sum_q
   w_q \ \sigma^{n-1}(\mathbf{x}_q) : \varepsilon(\varphi(\mathbf{x}_q),
-@f]
-where $w_q$ are the quadrature weights and $\mathbf{x}_q$ the quadrature points on
-cell $K$. This should make clear that what we really need is not the stress
-$\sigma^{n-1}$ in itself, but only the values of the stress in the quadrature
-points on all cells. This, however, is a simpler task: we only have to provide
-a data structure that is able to hold one symmetric tensor of rank 2 for each
-quadrature point on all cells (or, since we compute in parallel, all
-quadrature points of all cells that the present MPI process &ldquo;owns&rdquo;). At the
-end of each time step we then only have to evaluate $\varepsilon(\Delta \mathbf{u}^n(\mathbf{x}_q))$, multiply it by the stress-strain tensor $C$, and use the
-result to update the stress $\sigma^n(\mathbf{x}_q)$ at quadrature point $q$.
+@f] 其中 $w_q$ 是正交权重， $\mathbf{x}_q$ 是 $K$ 单元上的正交点。这应该表明，我们真正需要的不是应力 $\sigma^{n-1}$ 本身，而只是所有单元上的正交点的应力值。然而，这是一个更简单的任务：我们只需要提供一个数据结构，能够容纳所有单元上的每个正交点的等级为2的对称张量（或者，因为我们是并行计算的，所以是目前MPI进程拥有的所有单元的所有正交点&ldquo;rdquo;）。在每个时间步骤结束时，我们只需评估 $\varepsilon(\Delta \mathbf{u}^n(\mathbf{x}_q))$ ，将其乘以应力-应变张量 $C$ ，并使用该结果来更新正交点 $q$ 的应力 $\sigma^n(\mathbf{x}_q)$ 。
 
-The second complication is not visible in our notation as chosen above. It is
-due to the fact that we compute $\Delta u^n$ on the domain $\Omega(t_{n-1})$,
-and then use this displacement increment to both update the stress as well as
-move the mesh nodes around to get to $\Omega(t_n)$ on which the next increment
-is computed. What we have to make sure, in this context, is that moving the
-mesh does not only involve moving around the nodes, but also making
-corresponding changes to the stress variable: the updated stress is a variable
-that is defined with respect to the coordinate system of the material in the
-old domain, and has to be transferred to the new domain. The reason for this
-can be understood as follows: locally, the incremental deformation $\Delta\mathbf{u}$ can be decomposed into three parts, a linear translation (the constant part
-of the displacement increment field in the neighborhood of a point), a
-dilational
-component (that part of the gradient of the displacement field that has a
-nonzero divergence), and a rotation. A linear translation of the material does
-not affect the stresses that are frozen into it -- the stress values are
-simply translated along. The dilational or compressional change produces a
-corresponding stress update. However, the rotational component does not
-necessarily induce a nonzero stress update (think, in 2d, for example of the
-situation where $\Delta\mathbf{u}=(y, -x)^T$, with which $\varepsilon(\Delta
-\mathbf{u})=0$). Nevertheless, if the material was prestressed in a certain
-direction, then this direction will be rotated along with the material.  To
-this end, we have to define a rotation matrix $R(\Delta \mathbf{u}^n)$ that
-describes, in each point the rotation due to the displacement increments. It
-is not hard to see that the actual dependence of $R$ on $\Delta \mathbf{u}^n$ can
-only be through the curl of the displacement, rather than the displacement
-itself or its full gradient (as mentioned above, the constant components of
-the increment describe translations, its divergence the dilational modes, and
-the curl the rotational modes). Since the exact form of $R$ is cumbersome, we
-only state it in the program code, and note that the correct updating formula
-for the stress variable is then
-<a name="step_18.stress-update+rot"></a>
-@f[
+第二个复杂情况在我们上面选择的符号中并不明显。这是由于我们在域 $\Omega(t_{n-1})$ 上计算了 $\Delta u^n$ ，然后用这个位移增量来更新应力以及移动网格节点来获得 $\Omega(t_n)$ ，然后再计算下一个增量。在这种情况下，我们必须确定的是，移动网格不仅涉及到节点的移动，还涉及到应力变量的相应变化：更新的应力是一个相对于旧域中材料的坐标系而定义的变量，必须转移到新域中。其原因可以理解为：在局部，增量变形 $\Delta\mathbf{u}$ 可以分解为三个部分，线性平移（点附近的位移增量场的常数部分），扩张分量（位移场的梯度中具有非零发散的那部分），以及旋转。材料的线性平移并不影响冻结在其中的应力--应力值只是沿着平移。扩张或压缩的变化产生相应的应力更新。然而，旋转分量不一定会引起非零的应力更新（想想，在2d中，例如 $\Delta\mathbf{u}=(y, -x)^T$  ，与 $\varepsilon(\Delta
+\mathbf{u})=0$  的情况）。尽管如此，如果材料在某个方向上被预应力，那么这个方向将随着材料的旋转而旋转。 为此，我们必须定义一个旋转矩阵 $R(\Delta \mathbf{u}^n)$ ，描述在每一个点上由于位移增量而产生的旋转。不难看出， $R$ 对 $\Delta \mathbf{u}^n$ 的实际依赖只能是通过位移的卷曲，而不是位移本身或其全部梯度（如上所述，增量的常数分量描述平移，其发散描述扩张模式，而卷曲描述旋转模式）。由于 $R$ 的确切形式很麻烦，我们只在程序代码中说明，并注意到应力变量的正确更新公式是<a name="step_18.stress-update+rot"></a>@f[
   \sigma^n
   =
   R(\Delta \mathbf{u}^n)^T
@@ -408,175 +263,58 @@ for the stress variable is then
   \qquad
   \qquad
   \textrm{[stress-update+rot]}
-@f]
+@f] 
 
-Both stress update and rotation are implemented in the function
-<code>update_quadrature_point_history</code> of the example program.
+应力更新和旋转都是在示例程序的函数 <code>update_quadrature_point_history</code> 中实现的。
 
 
 <a name="Parallelgraphicaloutput"></a><h3>Parallel graphical output</h3>
 
 
-In step-17, the main bottleneck for %parallel computations as far as run time
-is concerned
-was that only the first processor generated output for the entire domain.
-Since generating graphical output is expensive, this did not scale well when
-larger numbers of processors were involved. We will address this here. (For a
-definition of what it means for a program to "scale", see
-@ref GlossParallelScaling "this glossary entry".)
+在 step-17 中，就运行时间而言，%并行计算的主要瓶颈是只有第一个处理器产生整个领域的输出。由于生成图形输出是很昂贵的，当涉及到更多的处理器时，这并不能很好地扩展。我们将在这里解决这个问题。关于程序 "扩展 "的定义，见 @ref GlossParallelScaling "本词汇表条目"）。
 
-Basically, what we need to do is let every process
-generate graphical output for that subset of cells that it owns, write them
-into separate files and have a way to display all files for a certain timestep
-at the same time. This way the code produces one <code>.vtu</code> file per process per
-time step. The two common VTK file viewers ParaView and VisIt both support
-opening more than one <code>.vtu</code> file at once. To simplify the process of picking
-the correct files and allow moving around in time, both support record files
-that reference all files for a given timestep. Sadly, the record files have a
-different format between VisIt and Paraview, so we write out both formats.
+基本上，我们需要做的是让每个进程为它所拥有的那个单元子集产生图形输出，将它们写入单独的文件，并有办法在同一时间显示某个时间段的所有文件。这样，代码在每个时间步长的每个进程产生一个 <code>.vtu</code> 文件。两个常见的VTK文件查看器ParaView和Viscit都支持一次打开一个以上的 <code>.vtu</code> 文件。为了简化挑选正确文件的过程，并允许在时间上移动，两者都支持记录文件，引用特定时间步长的所有文件。遗憾的是，记录文件在VisIt和Paraview之间有不同的格式，所以我们把两种格式都写出来。
 
-The code will generate the files <code>solution-TTTT.NNN.vtu</code>,
-where <code>TTTT</code> is the timestep number (starting from 1) and
-<code>NNN</code> is the process rank (starting from
-0). These files contain the locally owned cells for the timestep and
-processor. The files <code>solution-TTTT.visit</code> is the visit record
-for timestep <code>TTTT</code>, while <code>solution-TTTT.pvtu</code> is
-the same for ParaView. (More recent versions of VisIt can actually read
-<code>.pvtu</code> files as well, but it doesn't hurt to output both
-kinds of record files.) Finally, the file
-<code>solution.pvd</code> is a special record only supported by ParaView that references
-all time steps. So in ParaView, only solution.pvd needs to be opened, while
-one needs to select the group of all .visit files in VisIt for the same
-effect.
+代码将生成文件 <code>solution-TTTT.NNN.vtu</code>  ，其中 <code>TTTT</code> 是时间步数（从1开始）， <code>NNN</code> 是进程等级（从0开始）。这些文件包含时间段和处理器的本地所有单元。文件 <code>solution-TTTT.visit</code> 是时间段的访问记录 <code>TTTT</code>, while <code>solution-TTTT.pvtu</code> 对ParaView也是如此。(较新版本的VisIt实际上也可以读取 <code>.pvtu</code> 文件，但输出两种记录文件也无妨。) 最后， <code>solution.pvd</code> 文件是只有ParaView支持的特殊记录，它引用所有的时间步骤。所以在ParaView中，只需要打开solution.pvd，而在VisIt中需要选择所有的.visit文件组，才能达到同样的效果。
 
 
 <a name="Atriangulationwithautomaticpartitioning"></a><h3>A triangulation with automatic partitioning</h3>
 
 
-In step-17, we used a regular triangulation that was simply replicated on
-every processor, and a corresponding DoFHandler. Both had no idea that they
-were used in a %parallel context -- they just existed in their entirety
-on every processor, and we argued that this was eventually going to be a
-major memory bottleneck.
+在 step-17 中，我们使用了一个在每个处理器上简单复制的常规三角形，以及一个相应的DoFHandler。两者都不知道它们是在%并行环境下使用的--它们只是完整地存在于每个处理器上，我们认为这最终会成为一个主要的内存瓶颈。
 
-We do not address this issue here (we will do so in step-40) but make
-the situation slightly more automated. In step-17, we created the triangulation
-and then manually "partitioned" it, i.e., we assigned
-@ref GlossSubdomainId "subdomain ids" to every cell that indicated which
-@ref GlossMPIProcess "MPI process" "owned" the cell. Here, we use a class
-parallel::shared::Triangulation that at least does this part automatically:
-whenever you create or refine such a triangulation, it automatically
-partitions itself among all involved processes (which it knows about because
-you have to tell it about the @ref GlossMPICommunicator "MPI communicator"
-that connects these processes upon construction of the triangulation).
-Otherwise, the parallel::shared::Triangulation looks, for all practical
-purposes, like a regular Triangulation object.
+我们在这里没有解决这个问题（我们将在 step-40 中解决这个问题），但使情况稍微自动化一些。在 step-17 中，我们创建了三角形，然后手动 "分区"，也就是说，我们为每个单元分配了 @ref GlossSubdomainId "子域ID"，表明哪个 @ref GlossMPIProcess "MPI进程 "拥有该单元。在这里，我们使用了一个类 parallel::shared::Triangulation ，它至少自动完成了这一部分：每当你创建或完善这样一个三角图时，它都会自动在所有参与的进程中进行划分（它知道这些进程，因为你必须告诉它在构建三角图时连接这些进程的 @ref GlossMPICommunicator "MPI通信器"）。否则， parallel::shared::Triangulation 就所有实际目的而言，看起来就像一个普通的三角形对象。
 
-The convenience of using this class does not only result from being able
-to avoid the manual call to GridTools::partition(). Rather, the DoFHandler
-class now also knows that you want to use it in a parallel context, and
-by default automatically enumerates degrees of freedom in such a way
-that all DoFs owned by process zero come before all DoFs owned by process 1,
-etc. In other words, you can also avoid the call to
-DoFRenumbering::subdomain_wise().
+使用这个类的便利性不仅来自于能够避免手动调用 GridTools::partition(). ，相反，DoFHandler类现在也知道你想在并行环境下使用它，并且默认情况下会自动列举自由度，使进程0拥有的所有DoF先于进程1拥有的所有DoF，等等。换句话说，你也可以避免对 DoFRenumbering::subdomain_wise(). 的调用。 
 
-There are other benefits. For example, because the triangulation knows that
-it lives in a %parallel universe, it also knows that it "owns" certain
-cells (namely, those whose subdomain id equals its MPI rank; previously,
-the triangulation only stored these subdomain ids, but had no way to
-make sense of them). Consequently, in the assembly function, you can
-test whether a cell is "locally owned" (i.e., owned by the current
-process, see @ref GlossLocallyOwnedCell) when you loop over all cells
-using the syntax
+还有其他好处。例如，因为三角计算知道它生活在一个%并行的宇宙中，它也知道它 "拥有 "某些单元（即那些子域id等于其MPI等级的单元；以前，三角计算只存储这些子域id，但没有办法使它们有意义）。因此，在汇编函数中，当你用语法循环所有单元时，你可以测试一个单元是否 "本地拥有"（即由当前进程拥有，见 @ref GlossLocallyOwnedCell ）。
+
 @code
   if (cell->is_locally_owned())
-@endcode
-This knowledge extends to the DoFHandler object built on such triangulations,
-which can then identify which degrees of freedom are locally owned
-(see @ref GlossLocallyOwnedDof) via calls such as
-DoFHandler::compute_n_locally_owned_dofs_per_processor() and
-DoFTools::extract_locally_relevant_dofs(). Finally, the DataOut class
-also knows how to deal with such triangulations and will simply skip
-generating graphical output on cells not locally owned.
+@endcode 
 
-Of course, as has been noted numerous times in the discussion in step-17,
-keeping the entire triangulation on every process will not scale: large
-problems may simply not fit into each process's memory any more, even if
-we have sufficiently many processes around to solve them in a reasonable
-time. In such cases, the parallel::shared::Triangulation is no longer
-a reasonable basis for computations and we will show in step-40 how the
-parallel::distributed::Triangulation class can be used to work around
-this, namely by letting each process store only a <i>part</i> of the
-triangulation.
+这种知识延伸到建立在这种三角形上的DoFHandler对象，它可以通过 DoFHandler::compute_n_locally_owned_dofs_per_processor() 和 DoFTools::extract_locally_relevant_dofs(). 等调用来识别哪些自由度是本地拥有的（见 @ref GlossLocallyOwnedDof ）。最后，DataOut类也知道如何处理这种三角形，并将简单地跳过在非本地拥有的单元上生成图形输出。
+
+当然，正如在 step-17 的讨论中多次指出的那样，在每个进程中保留整个三角剖分将无法扩展：大型问题可能根本无法容纳每个进程的内存，即使我们有足够多的进程可以在合理的时间内解决它们。在这种情况下， parallel::shared::Triangulation 不再是一个合理的计算基础，我们将在 step-40 中展示如何使用 parallel::distributed::Triangulation 类来解决这个问题，即让每个进程只存储三角形的一个<i>part</i>。
 
 
 <a name="Overallstructureoftheprogram"></a><h3>Overall structure of the program</h3>
 
 
-The overall structure of the program can be inferred from the <code>run()</code>
-function that first calls <code>do_initial_timestep()</code> for the first time
-step, and then <code>do_timestep()</code> on all subsequent time steps. The
-difference between these functions is only that in the first time step we
-start on a coarse mesh, solve on it, refine the mesh adaptively, and then
-start again with a clean state on that new mesh. This procedure gives us a
-better starting mesh, although we should of course keep adapting the mesh as
-iterations proceed -- this isn't done in this program, but commented on below.
+程序的整体结构可以从 <code>run()</code> 函数中推断出来，该函数首先在第一个时间步骤中调用 <code>do_initial_timestep()</code> ，然后在所有后续时间步骤中调用 <code>do_timestep()</code> 。这些函数之间的区别仅仅在于，在第一个时间步骤中，我们从一个粗略的网格开始，在其上求解，自适应地细化网格，然后在新的网格上以干净的状态重新开始。这个过程给了我们一个更好的起始网格，尽管我们当然应该在迭代过程中不断调整网格--这个程序中没有这样做，但是下面会有评论。
 
-The common part of the two functions treating time steps is the following
-sequence of operations on the present mesh:
-<ul>
-<li> <code>assemble_system ()</code> [via <code>solve_timestep ()</code>]:
-  This first function is also the most interesting one. It assembles the
-  linear system corresponding to the discretized version of equation
-  <a href="#step_18.linear-system">[linear-system]</a>. This leads to a system matrix $A_{ij} = \sum_K
-  A^K_{ij}$ built up of local contributions on each cell $K$ with entries
-  @f[
+这两个处理时间步骤的函数的共同部分是对当前网格的以下操作序列。  <ul>   <li>   <code>assemble_system ()</code> [via <code>solve_timestep ()</code>  ] 。  这第一个函数也是最有趣的一个。它集合了对应于方程<a href="#step_18.linear-system">[linear-system]</a>离散化版本的线性系统。这导致系统矩阵 $A_{ij} = \sum_K
+  A^K_{ij}$ 由每个单元 $K$ 上的局部贡献组成，其条目为@f[
     A^K_{ij} = (C \varepsilon(\varphi_j), \varepsilon(\varphi_i))_K;
-  @f]
-  In practice, $A^K$ is computed using numerical quadrature according to the
-  formula
-  @f[
+  @f] 在实践中， $A^K$ 是根据公式@f[
     A^K_{ij} = \sum_q w_q [\varepsilon(\varphi_i(\mathbf{x}_q)) : C :
                            \varepsilon(\varphi_j(\mathbf{x}_q))],
-  @f]
-  with quadrature points $\mathbf{x}_q$ and weights $w_q$. We have built these
-  contributions before, in step-8 and step-17, but in both of these cases we
-  have done so rather clumsily by using knowledge of how the rank-4 tensor $C$
-  is composed, and considering individual elements of the strain tensors
-  $\varepsilon(\varphi_i),\varepsilon(\varphi_j)$. This is not really
-  convenient, in particular if we want to consider more complicated elasticity
-  models than the isotropic case for which $C$ had the convenient form
-  $C_{ijkl}  = \lambda \delta_{ij} \delta_{kl} + \mu (\delta_{ik} \delta_{jl}
-  + \delta_{il} \delta_{jk})$. While we in fact do not use a more complicated
-  form than this in the present program, we nevertheless want to write it in a
-  way that would easily allow for this. It is then natural to introduce
-  classes that represent symmetric tensors of rank 2 (for the strains and
-  stresses) and 4 (for the stress-strain tensor $C$). Fortunately, deal.II
-  provides these: the <code>SymmetricTensor<rank,dim></code> class template
-  provides a full-fledged implementation of such tensors of rank <code>rank</code>
-  (which needs to be an even number) and dimension <code>dim</code>.
+  @f]用正交点 $\mathbf{x}_q$ 和权重 $w_q$ 的数值正交计算的。我们以前在 step-8 和 step-17 中建立过这些贡献，但在这两种情况下，我们都是通过使用等级4张量 $C$ 的组成知识，并考虑应变张量 $\varepsilon(\varphi_i),\varepsilon(\varphi_j)$ 的单个元素，相当笨拙地完成的。这其实并不方便，特别是如果我们想考虑比各向同性的情况更复杂的弹性模型，而 $C$ 有方便的形式  $C_{ijkl}  = \lambda \delta_{ij} \delta_{kl} + \mu (\delta_{ik} \delta_{jl}
+  + \delta_{il} \delta_{jk})$  。虽然我们在本程序中实际上没有使用比这更复杂的形式，但我们还是希望以一种容易实现的方式来编写它。因此，很自然地引入代表等级为2（用于应变和应力）和4（用于应力-应变张量 $C$ ）的对称张量的类。幸运的是，deal.II提供了这些： <code>SymmetricTensor<rank,dim></code> 类模板提供了等级 <code>rank</code> （需要是偶数）和维度 <code>dim</code> 的这类张量的完整实现。
 
-  What we then need is two things: a way to create the stress-strain rank-4
-  tensor $C$ as well as to create a symmetric tensor of rank 2 (the strain
-  tensor) from the gradients of a shape function $\varphi_i$ at a quadrature
-  point $\mathbf{x}_q$ on a given cell. At the top of the implementation of this
-  example program, you will find such functions. The first one,
-  <code>get_stress_strain_tensor</code>, takes two arguments corresponding to
-  the Lam&eacute; constants $\lambda$ and $\mu$ and returns the stress-strain tensor
-  for the isotropic case corresponding to these constants (in the program, we
-  will choose constants corresponding to steel); it would be simple to replace
-  this function by one that computes this tensor for the anisotropic case, or
-  taking into account crystal symmetries, for example. The second one,
-  <code>get_strain</code> takes an object of type <code>FEValues</code> and indices
-  $i$ and $q$ and returns the symmetric gradient, i.e. the strain,
-  corresponding to shape function $\varphi_i(\mathbf{x}_q)$, evaluated on the cell
-  on which the <code>FEValues</code> object was last reinitialized.
+  然后我们需要的是两件事：一种创建应力-应变等级4张量 $C$ 的方法，以及从给定单元上正交点 $\mathbf{x}_q$ 的形状函数 $\varphi_i$ 的梯度创建一个等级2的对称张量（应变张量）。在这个例子程序的执行顶部，你会发现这样的函数。第一个， <code>get_stress_strain_tensor</code>  ，需要两个参数，对应于Lam&eacute; 常数 $\lambda$ 和 $\mu$ ，并返回对应于这些常数的各向同性的应力-应变张量（在程序中，我们将选择对应于钢的常数）；用一个计算各向异性的张量的函数来代替这个函数是很简单的，或者考虑到晶体对称性，例如。第二个， <code>get_strain</code> takes an object of type <code>FEValues</code> 和指数 $i$ 和 $q$ ，并返回对称梯度，即应变，对应于形状函数 $\varphi_i(\mathbf{x}_q)$ ，在 <code>FEValues</code> 对象最后被重新初始化的单元上评估。
 
-  Given this, the innermost loop of <code>assemble_system</code> computes the
-  local contributions to the matrix in the following elegant way (the variable
-  <code>stress_strain_tensor</code>, corresponding to the tensor $C$, has
-  previously been initialized with the result of the first function above):
-  @code
+  鉴于此， <code>assemble_system</code> 的最内部循环以下列优雅的方式计算对矩阵的局部贡献（变量 <code>stress_strain_tensor</code> ，对应于张量 $C$ ，先前已用上述第一个函数的结果初始化）。  @code
 for (unsigned int i=0; i<dofs_per_cell; ++i)
   for (unsigned int j=0; j<dofs_per_cell; ++j)
     for (unsigned int q_point=0; q_point<n_q_points;
@@ -586,20 +324,16 @@ for (unsigned int i=0; i<dofs_per_cell; ++i)
           eps_phi_i = get_strain (fe_values, i, q_point),
           eps_phi_j = get_strain (fe_values, j, q_point);
 
+
         cell_matrix(i,j)
           += (eps_phi_i * stress_strain_tensor * eps_phi_j *
               fe_values.JxW (q_point));
       }
-  @endcode
-  It is worth noting the expressive power of this piece of code, and to
-  compare it with the complications we had to go through in previous examples
-  for the elasticity problem. (To be fair, the SymmetricTensor class
-  template did not exist when these previous examples were written.) For
-  simplicity, <code>operator*</code> provides for the (double summation) product
-  between symmetric tensors of even rank here.
+  @endcode 
 
-  Assembling the local contributions
-  @f{eqnarray*}
+  值得注意的是这段代码的表达能力，并将其与我们在以前的例子中为弹性问题所经历的复杂情况进行比较。公平地说，在写这些以前的例子时，SymmetricTensor类模板还不存在）。为了简单起见， <code>operator*</code> 在这里规定了偶数等级的对称张量之间的（双重求和）积。
+
+  将局部贡献@f{eqnarray*}
       f^K_i &=&
       (\mathbf{f}, \varphi_i)_K -(\sigma^{n-1},\varepsilon(\varphi_i))_K
       \\
@@ -609,2421 +343,2103 @@ for (unsigned int i=0; i<dofs_per_cell; ++i)
         \mathbf{f}(\mathbf{x}_q) \cdot \varphi_i(\mathbf{x}_q) -
         \sigma^{n-1}_q : \varepsilon(\varphi_i(\mathbf{x}_q))
       \right\}
-  @f}
-  to the right hand side of <a href="#step_18.linear-system">[linear-system]</a> is equally
-  straightforward (note that we do not consider any boundary tractions $\mathbf{b}$ here). Remember that we only had to store the old stress in the
-  quadrature points of cells. In the program, we will provide a variable
-  <code>local_quadrature_points_data</code> that allows to access the stress
-  $\sigma^{n-1}_q$ in each quadrature point. With this the code for the right
-  hand side looks as this, again rather elegant:
-  @code
+  @f}组合到@f{eqnarray*}
+      f^K_i &=&
+      (\mathbf{f}, \varphi_i)_K -(\sigma^{n-1},\varepsilon(\varphi_i))_K
+      \\
+      &\approx&
+      \sum_q
+      w_q \left\{
+        \mathbf{f}(\mathbf{x}_q) \cdot \varphi_i(\mathbf{x}_q) -
+        \sigma^{n-1}_q : \varepsilon(\varphi_i(\mathbf{x}_q))
+      \right\}
+  @f}的右侧。
+
+  到<a href="#step_18.linear-system">[linear-system]</a>的右手边也同样简单（注意，我们在这里不考虑任何边界牵引 $\mathbf{b}$ ）。请记住，我们只需要在单元格的正交点上存储旧的应力。在程序中，我们将提供一个变量 <code>local_quadrature_points_data</code> ，允许访问每个正交点的应力 $\sigma^{n-1}_q$ 。有了这个，右手边的代码看起来就像这样，同样相当优雅。  @code
 for (unsigned int i=0; i<dofs_per_cell; ++i)
   {
     const unsigned int
       component_i = fe.system_to_component_index(i).first;
+
 
     for (unsigned int q_point=0; q_point<n_q_points; ++q_point)
       {
         const SymmetricTensor<2,dim> &old_stress
           = local_quadrature_points_data[q_point].old_stress;
 
+
         cell_rhs(i) += (body_force_values[q_point](component_i) *
                         fe_values.shape_value (i,q_point)
+
+
                         -
                         old_stress *
                         get_strain (fe_values,i,q_point)) *
                        fe_values.JxW (q_point);
       }
   }
-  @endcode
-  Note that in the multiplication $\mathbf{f}(\mathbf{x}_q) \cdot \varphi_i(\mathbf{x}_q)$, we have made use of the fact that for the chosen finite element, only
-  one vector component (namely <code>component_i</code>) of $\varphi_i$ is
-  nonzero, and that we therefore also have to consider only one component of
-  $\mathbf{f}(\mathbf{x}_q)$.
-
-  This essentially concludes the new material we present in this function. It
-  later has to deal with boundary conditions as well as hanging node
-  constraints, but this parallels what we had to do previously in other
-  programs already.
-
-<li> <code>solve_linear_problem ()</code> [via <code>solve_timestep ()</code>]:
-  Unlike the previous one, this function is not really interesting, since it
-  does what similar functions have done in all previous tutorial programs --
-  solving the linear system using the CG method, using an incomplete LU
-  decomposition as a preconditioner (in the %parallel case, it uses an ILU of
-  each processor's block separately). It is virtually unchanged
-  from step-17.
-
-<li> <code>update_quadrature_point_history ()</code> [via
-  <code>solve_timestep ()</code>]: Based on the displacement field $\Delta \mathbf{u}^n$ computed before, we update the stress values in all quadrature points
-  according to <a href="#step_18.stress-update">[stress-update]</a> and <a href="#step_18.stress-update+rot">[stress-update+rot]</a>,
-  including the rotation of the coordinate system.
-
-<li> <code>move_mesh ()</code>: Given the solution computed before, in this
-  function we deform the mesh by moving each vertex by the displacement vector
-  field evaluated at this particular vertex.
-
-<li> <code>output_results ()</code>: This function simply outputs the solution
-  based on what we have said above, i.e. every processor computes output only
-  for its own portion of the domain. In addition to the solution, we also compute the norm of
-  the stress averaged over all the quadrature points on each cell.
-</ul>
-
-With this general structure of the code, we only have to define what case we
-want to solve. For the present program, we have chosen to simulate the
-quasistatic deformation of a vertical cylinder for which the bottom boundary
-is fixed and the top boundary is pushed down at a prescribed vertical
-velocity. However, the horizontal velocity of the top boundary is left
-unspecified -- one can imagine this situation as a well-greased plate pushing
-from the top onto the cylinder, the points on the top boundary of the cylinder
-being allowed to slide horizontally along the surface of the plate, but forced
-to move downward by the plate. The inner and outer boundaries of the cylinder
-are free and not subject to any prescribed deflection or traction. In
-addition, gravity acts on the body.
-
-The program text will reveal more about how to implement this situation, and
-the results section will show what displacement pattern comes out of this
-simulation.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * First the usual list of header files that have already been used in
- * previous example programs:
- * 
- * @code
- * #include <deal.II/base/quadrature_lib.h>
- * #include <deal.II/base/function.h>
- * #include <deal.II/base/logstream.h>
- * #include <deal.II/base/multithread_info.h>
- * #include <deal.II/base/conditional_ostream.h>
- * #include <deal.II/base/utilities.h>
- * #include <deal.II/lac/vector.h>
- * #include <deal.II/lac/full_matrix.h>
- * #include <deal.II/lac/dynamic_sparsity_pattern.h>
- * #include <deal.II/lac/petsc_vector.h>
- * #include <deal.II/lac/petsc_sparse_matrix.h>
- * #include <deal.II/lac/petsc_solver.h>
- * #include <deal.II/lac/petsc_precondition.h>
- * #include <deal.II/lac/affine_constraints.h>
- * #include <deal.II/lac/sparsity_tools.h>
- * #include <deal.II/distributed/shared_tria.h>
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/grid_refinement.h>
- * #include <deal.II/grid/manifold_lib.h>
- * #include <deal.II/grid/grid_tools.h>
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/dofs/dof_tools.h>
- * #include <deal.II/dofs/dof_renumbering.h>
- * #include <deal.II/fe/fe_values.h>
- * #include <deal.II/fe/fe_system.h>
- * #include <deal.II/fe/fe_q.h>
- * #include <deal.II/numerics/vector_tools.h>
- * #include <deal.II/numerics/matrix_tools.h>
- * #include <deal.II/numerics/data_out.h>
- * #include <deal.II/numerics/error_estimator.h>
- * 
- * @endcode
- * 
- * And here the only three new things among the header files: an include file in
- * which symmetric tensors of rank 2 and 4 are implemented, as introduced in
- * the introduction:
- * 
- * @code
- * #include <deal.II/base/symmetric_tensor.h>
- * 
- * @endcode
- * 
- * And lastly a header that contains some functions that will help us compute
- * rotaton matrices of the local coordinate systems at specific points in the
- * domain.
- * 
- * @code
- * #include <deal.II/physics/transformations.h>
- * 
- * @endcode
- * 
- * This is then simply C++ again:
- * 
- * @code
- * #include <fstream>
- * #include <iostream>
- * #include <iomanip>
- * 
- * @endcode
- * 
- * The last step is as in all previous programs:
- * 
- * @code
- * namespace Step18
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodePointHistorycodeclass"></a> 
- * <h3>The <code>PointHistory</code> class</h3>
- * 
-
- * 
- * As was mentioned in the introduction, we have to store the old stress in
- * quadrature point so that we can compute the residual forces at this point
- * during the next time step. This alone would not warrant a structure with
- * only one member, but in more complicated applications, we would have to
- * store more information in quadrature points as well, such as the history
- * variables of plasticity, etc. In essence, we have to store everything
- * that affects the present state of the material here, which in plasticity
- * is determined by the deformation history variables.
- *   
-
- * 
- * We will not give this class any meaningful functionality beyond being
- * able to store data, i.e. there are no constructors, destructors, or other
- * member functions. In such cases of `dumb' classes, we usually opt to
- * declare them as <code>struct</code> rather than <code>class</code>, to
- * indicate that they are closer to C-style structures than C++-style
- * classes.
- * 
- * @code
- *   template <int dim>
- *   struct PointHistory
- *   {
- *     SymmetricTensor<2, dim> old_stress;
- *   };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Thestressstraintensor"></a> 
- * <h3>The stress-strain tensor</h3>
- * 
-
- * 
- * Next, we define the linear relationship between the stress and the strain
- * in elasticity. It is given by a tensor of rank 4 that is usually written
- * in the form $C_{ijkl} = \mu (\delta_{ik} \delta_{jl} + \delta_{il}
- * \delta_{jk}) + \lambda \delta_{ij} \delta_{kl}$. This tensor maps
- * symmetric tensor of rank 2 to symmetric tensors of rank 2. A function
- * implementing its creation for given values of the Lam&eacute; constants
- * $\lambda$ and $\mu$ is straightforward:
- * 
- * @code
- *   template <int dim>
- *   SymmetricTensor<4, dim> get_stress_strain_tensor(const double lambda,
- *                                                    const double mu)
- *   {
- *     SymmetricTensor<4, dim> tmp;
- *     for (unsigned int i = 0; i < dim; ++i)
- *       for (unsigned int j = 0; j < dim; ++j)
- *         for (unsigned int k = 0; k < dim; ++k)
- *           for (unsigned int l = 0; l < dim; ++l)
- *             tmp[i][j][k][l] = (((i == k) && (j == l) ? mu : 0.0) +
- *                                ((i == l) && (j == k) ? mu : 0.0) +
- *                                ((i == j) && (k == l) ? lambda : 0.0));
- *     return tmp;
- *   }
- * 
- * @endcode
- * 
- * With this function, we will define a static member variable of the main
- * class below that will be used throughout the program as the stress-strain
- * tensor. Note that in more elaborate programs, this will probably be a
- * member variable of some class instead, or a function that returns the
- * stress-strain relationship depending on other input. For example in
- * damage theory models, the Lam&eacute; constants are considered a function
- * of the prior stress/strain history of a point. Conversely, in plasticity
- * the form of the stress-strain tensor is modified if the material has
- * reached the yield stress in a certain point, and possibly also depending on
- * its prior history.
- *   
-
- * 
- * In the present program, however, we assume that the material is
- * completely elastic and linear, and a constant stress-strain tensor is
- * sufficient for our present purposes.
- * 
-
- * 
- * 
-
- * 
- * 
-
- * 
- * 
- * <a name="Auxiliaryfunctions"></a> 
- * <h3>Auxiliary functions</h3>
- * 
-
- * 
- * Before the rest of the program, here are a few functions that we need as
- * tools. These are small functions that are called in inner loops, so we
- * mark them as <code>inline</code>.
- *   
-
- * 
- * The first one computes the symmetric strain tensor for shape function
- * <code>shape_func</code> at quadrature point <code>q_point</code> by
- * forming the symmetric gradient of this shape function. We need that when
- * we want to form the matrix, for example.
- *   
-
- * 
- * We should note that in previous examples where we have treated
- * vector-valued problems, we have always asked the finite element object in
- * which of the vector component the shape function is actually non-zero,
- * and thereby avoided to compute any terms that we could prove were zero
- * anyway. For this, we used the <code>fe.system_to_component_index</code>
- * function that returns in which component a shape function was zero, and
- * also that the <code>fe_values.shape_value</code> and
- * <code>fe_values.shape_grad</code> functions only returned the value and
- * gradient of the single non-zero component of a shape function if this is
- * a vector-valued element.
- *   
-
- * 
- * This was an optimization, and if it isn't terribly time critical, we can
- * get away with a simpler technique: just ask the <code>fe_values</code>
- * for the value or gradient of a given component of a given shape function
- * at a given quadrature point. This is what the
- * <code>fe_values.shape_grad_component(shape_func,q_point,i)</code> call
- * does: return the full gradient of the <code>i</code>th component of shape
- * function <code>shape_func</code> at quadrature point
- * <code>q_point</code>. If a certain component of a certain shape function
- * is always zero, then this will simply always return zero.
- *   
-
- * 
- * As mentioned, using <code>fe_values.shape_grad_component</code> instead
- * of the combination of <code>fe.system_to_component_index</code> and
- * <code>fe_values.shape_grad</code> may be less efficient, but its
- * implementation is optimized for such cases and shouldn't be a big
- * slowdown. We demonstrate the technique here since it is so much simpler
- * and straightforward.
- * 
- * @code
- *   template <int dim>
- *   inline SymmetricTensor<2, dim> get_strain(const FEValues<dim> &fe_values,
- *                                             const unsigned int   shape_func,
- *                                             const unsigned int   q_point)
- *   {
- * @endcode
- * 
- * Declare a temporary that will hold the return value:
- * 
- * @code
- *     SymmetricTensor<2, dim> tmp;
- * 
- * @endcode
- * 
- * First, fill diagonal terms which are simply the derivatives in
- * direction <code>i</code> of the <code>i</code> component of the
- * vector-valued shape function:
- * 
- * @code
- *     for (unsigned int i = 0; i < dim; ++i)
- *       tmp[i][i] = fe_values.shape_grad_component(shape_func, q_point, i)[i];
- * 
- * @endcode
- * 
- * Then fill the rest of the strain tensor. Note that since the tensor is
- * symmetric, we only have to compute one half (here: the upper right
- * corner) of the off-diagonal elements, and the implementation of the
- * <code>SymmetricTensor</code> class makes sure that at least to the
- * outside the symmetric entries are also filled (in practice, the class
- * of course stores only one copy). Here, we have picked the upper right
- * half of the tensor, but the lower left one would have been just as
- * good:
- * 
- * @code
- *     for (unsigned int i = 0; i < dim; ++i)
- *       for (unsigned int j = i + 1; j < dim; ++j)
- *         tmp[i][j] =
- *           (fe_values.shape_grad_component(shape_func, q_point, i)[j] +
- *            fe_values.shape_grad_component(shape_func, q_point, j)[i]) /
- *           2;
- * 
- *     return tmp;
- *   }
- * 
- * 
- * @endcode
- * 
- * The second function does something very similar (and therefore is given
- * the same name): compute the symmetric strain tensor from the gradient of
- * a vector-valued field. If you already have a solution field, the
- * <code>fe_values.get_function_gradients</code> function allows you to
- * extract the gradients of each component of your solution field at a
- * quadrature point. It returns this as a vector of rank-1 tensors: one rank-1
- * tensor (gradient) per vector component of the solution. From this we have
- * to reconstruct the (symmetric) strain tensor by transforming the data
- * storage format and symmetrization. We do this in the same way as above,
- * i.e. we avoid a few computations by filling first the diagonal and then
- * only one half of the symmetric tensor (the <code>SymmetricTensor</code>
- * class makes sure that it is sufficient to write only one of the two
- * symmetric components).
- *   
-
- * 
- * Before we do this, though, we make sure that the input has the kind of
- * structure we expect: that is that there are <code>dim</code> vector
- * components, i.e. one displacement component for each coordinate
- * direction. We test this with the <code>Assert</code> macro that will
- * simply abort our program if the condition is not met.
- * 
- * @code
- *   template <int dim>
- *   inline SymmetricTensor<2, dim>
- *   get_strain(const std::vector<Tensor<1, dim>> &grad)
- *   {
- *     Assert(grad.size() == dim, ExcInternalError());
- * 
- *     SymmetricTensor<2, dim> strain;
- *     for (unsigned int i = 0; i < dim; ++i)
- *       strain[i][i] = grad[i][i];
- * 
- *     for (unsigned int i = 0; i < dim; ++i)
- *       for (unsigned int j = i + 1; j < dim; ++j)
- *         strain[i][j] = (grad[i][j] + grad[j][i]) / 2;
- * 
- *     return strain;
- *   }
- * 
- * 
- * @endcode
- * 
- * Finally, below we will need a function that computes the rotation matrix
- * induced by a displacement at a given point. In fact, of course, the
- * displacement at a single point only has a direction and a magnitude, it
- * is the change in direction and magnitude that induces rotations. In
- * effect, the rotation matrix can be computed from the gradients of a
- * displacement, or, more specifically, from the curl.
- *   
-
- * 
- * The formulas by which the rotation matrices are determined are a little
- * awkward, especially in 3d. For 2d, there is a simpler way, so we
- * implement this function twice, once for 2d and once for 3d, so that we
- * can compile and use the program in both space dimensions if so desired --
- * after all, deal.II is all about dimension independent programming and
- * reuse of algorithm thoroughly tested with cheap computations in 2d, for
- * the more expensive computations in 3d. Here is one case, where we have to
- * implement different algorithms for 2d and 3d, but then can write the rest
- * of the program in a way that is independent of the space dimension.
- *   
-
- * 
- * So, without further ado to the 2d implementation:
- * 
- * @code
- *   Tensor<2, 2> get_rotation_matrix(const std::vector<Tensor<1, 2>> &grad_u)
- *   {
- * @endcode
- * 
- * First, compute the curl of the velocity field from the gradients. Note
- * that we are in 2d, so the rotation is a scalar:
- * 
- * @code
- *     const double curl = (grad_u[1][0] - grad_u[0][1]);
- * 
- * @endcode
- * 
- * From this, compute the angle of rotation:
- * 
- * @code
- *     const double angle = std::atan(curl);
- * 
- * @endcode
- * 
- * And from this, build the antisymmetric rotation matrix. We want this
- * rotation matrix to represent the rotation of the local coordinate system
- * with respect to the global Cartesian basis, to we construct it with a
- * negative angle. The rotation matrix therefore represents the rotation
- * required to move from the local to the global coordinate system.
- * 
- * @code
- *     return Physics::Transformations::Rotations::rotation_matrix_2d(-angle);
- *   }
- * 
- * 
- * @endcode
- * 
- * The 3d case is a little more contrived:
- * 
- * @code
- *   Tensor<2, 3> get_rotation_matrix(const std::vector<Tensor<1, 3>> &grad_u)
- *   {
- * @endcode
- * 
- * Again first compute the curl of the velocity field. This time, it is a
- * real vector:
- * 
- * @code
- *     const Point<3> curl(grad_u[2][1] - grad_u[1][2],
- *                         grad_u[0][2] - grad_u[2][0],
- *                         grad_u[1][0] - grad_u[0][1]);
- * 
- * @endcode
- * 
- * From this vector, using its magnitude, compute the tangent of the angle
- * of rotation, and from it the actual angle of rotation with respect to
- * the Cartesian basis:
- * 
- * @code
- *     const double tan_angle = std::sqrt(curl * curl);
- *     const double angle     = std::atan(tan_angle);
- * 
- * @endcode
- * 
- * Now, here's one problem: if the angle of rotation is too small, that
- * means that there is no rotation going on (for example a translational
- * motion). In that case, the rotation matrix is the identity matrix.
- *     
-
- * 
- * The reason why we stress that is that in this case we have that
- * <code>tan_angle==0</code>. Further down, we need to divide by that
- * number in the computation of the axis of rotation, and we would get
- * into trouble when dividing doing so. Therefore, let's shortcut this and
- * simply return the identity matrix if the angle of rotation is really
- * small:
- * 
- * @code
- *     if (std::abs(angle) < 1e-9)
- *       {
- *         static const double rotation[3][3] = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
- *         static const Tensor<2, 3> rot(rotation);
- *         return rot;
- *       }
- * 
- * @endcode
- * 
- * Otherwise compute the real rotation matrix. For this, again we rely on
- * a predefined function to compute the rotation matrix of the local
- * coordinate system.
- * 
- * @code
- *     const Point<3> axis = curl / tan_angle;
- *     return Physics::Transformations::Rotations::rotation_matrix_3d(axis,
- *                                                                    -angle);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeTopLevelcodeclass"></a> 
- * <h3>The <code>TopLevel</code> class</h3>
- * 
-
- * 
- * This is the main class of the program. Since the namespace already
- * indicates what problem we are solving, let's call it by what it does: it
- * directs the flow of the program, i.e. it is the toplevel driver.
- *   
-
- * 
- * The member variables of this class are essentially as before, i.e. it has
- * to have a triangulation, a DoF handler and associated objects such as
- * constraints, variables that describe the linear system, etc. There are a
- * good number of more member functions now, which we will explain below.
- *   
-
- * 
- * The external interface of the class, however, is unchanged: it has a
- * public constructor and destructor, and it has a <code>run</code>
- * function that initiated all the work.
- * 
- * @code
- *   template <int dim>
- *   class TopLevel
- *   {
- *   public:
- *     TopLevel();
- *     ~TopLevel();
- *     void run();
- * 
- *   private:
- * @endcode
- * 
- * The private interface is more extensive than in step-17. First, we
- * obviously need functions that create the initial mesh, set up the
- * variables that describe the linear system on the present mesh
- * (i.e. matrices and vectors), and then functions that actually assemble
- * the system, direct what has to be solved in each time step, a function
- * that solves the linear system that arises in each timestep (and returns
- * the number of iterations it took), and finally output the solution
- * vector on the correct mesh:
- * 
- * @code
- *     void create_coarse_grid();
- * 
- *     void setup_system();
- * 
- *     void assemble_system();
- * 
- *     void solve_timestep();
- * 
- *     unsigned int solve_linear_problem();
- * 
- *     void output_results() const;
- * 
- * @endcode
- * 
- * All, except for the first two, of these functions are called in each
- * timestep. Since the first time step is a little special, we have
- * separate functions that describe what has to happen in a timestep: one
- * for the first, and one for all following timesteps:
- * 
- * @code
- *     void do_initial_timestep();
- * 
- *     void do_timestep();
- * 
- * @endcode
- * 
- * Then we need a whole bunch of functions that do various things. The
- * first one refines the initial grid: we start on the coarse grid with a
- * pristine state, solve the problem, then look at it and refine the mesh
- * accordingly, and start the same process over again, again with a
- * pristine state. Thus, refining the initial mesh is somewhat simpler
- * than refining a grid between two successive time steps, since it does
- * not involve transferring data from the old to the new triangulation, in
- * particular the history data that is stored in each quadrature point.
- * 
- * @code
- *     void refine_initial_grid();
- * 
- * @endcode
- * 
- * At the end of each time step, we want to move the mesh vertices around
- * according to the incremental displacement computed in this time
- * step. This is the function in which this is done:
- * 
- * @code
- *     void move_mesh();
- * 
- * @endcode
- * 
- * Next are two functions that handle the history variables stored in each
- * quadrature point. The first one is called before the first timestep to
- * set up a pristine state for the history variables. It only works on
- * those quadrature points on cells that belong to the present processor:
- * 
- * @code
- *     void setup_quadrature_point_history();
- * 
- * @endcode
- * 
- * The second one updates the history variables at the end of each
- * timestep:
- * 
- * @code
- *     void update_quadrature_point_history();
- * 
- * @endcode
- * 
- * This is the new shared Triangulation:
- * 
- * @code
- *     parallel::shared::Triangulation<dim> triangulation;
- * 
- *     FESystem<dim> fe;
- * 
- *     DoFHandler<dim> dof_handler;
- * 
- *     AffineConstraints<double> hanging_node_constraints;
- * 
- * @endcode
- * 
- * One difference of this program is that we declare the quadrature
- * formula in the class declaration. The reason is that in all the other
- * programs, it didn't do much harm if we had used different quadrature
- * formulas when computing the matrix and the right hand side, for
- * example. However, in the present case it does: we store information in
- * the quadrature points, so we have to make sure all parts of the program
- * agree on where they are and how many there are on each cell. Thus, let
- * us first declare the quadrature formula that will be used throughout...
- * 
- * @code
- *     const QGauss<dim> quadrature_formula;
- * 
- * @endcode
- * 
- * ... and then also have a vector of history objects, one per quadrature
- * point on those cells for which we are responsible (i.e. we don't store
- * history data for quadrature points on cells that are owned by other
- * processors).
- * Note that, instead of storing and managing this data ourself, we
- * could use the CellDataStorage class like is done in step-44. However,
- * for the purpose of demonstration, in this case we manage the storage
- * manually.
- * 
- * @code
- *     std::vector<PointHistory<dim>> quadrature_point_history;
- * 
- * @endcode
- * 
- * The way this object is accessed is through a <code>user pointer</code>
- * that each cell, face, or edge holds: it is a <code>void*</code> pointer
- * that can be used by application programs to associate arbitrary data to
- * cells, faces, or edges. What the program actually does with this data
- * is within its own responsibility, the library just allocates some space
- * for these pointers, and application programs can set and read the
- * pointers for each of these objects.
- * 
-
- * 
- * 
-
- * 
- * Further: we need the objects of linear systems to be solved,
- * i.e. matrix, right hand side vector, and the solution vector. Since we
- * anticipate solving big problems, we use the same types as in step-17,
- * i.e. distributed %parallel matrices and vectors built on top of the
- * PETSc library. Conveniently, they can also be used when running on only
- * a single machine, in which case this machine happens to be the only one
- * in our %parallel universe.
- *     
-
- * 
- * However, as a difference to step-17, we do not store the solution
- * vector -- which here is the incremental displacements computed in each
- * time step -- in a distributed fashion. I.e., of course it must be a
- * distributed vector when computing it, but immediately after that we
- * make sure each processor has a complete copy. The reason is that we had
- * already seen in step-17 that many functions needed a complete
- * copy. While it is not hard to get it, this requires communication on
- * the network, and is thus slow. In addition, these were repeatedly the
- * same operations, which is certainly undesirable unless the gains of not
- * always having to store the entire vector outweighs it. When writing
- * this program, it turned out that we need a complete copy of the
- * solution in so many places that it did not seem worthwhile to only get
- * it when necessary. Instead, we opted to obtain the complete copy once
- * and for all, and instead get rid of the distributed copy
- * immediately. Thus, note that the declaration of
- * <code>incremental_displacement</code> does not denote a distribute
- * vector as would be indicated by the middle namespace <code>MPI</code>:
- * 
- * @code
- *     PETScWrappers::MPI::SparseMatrix system_matrix;
- * 
- *     PETScWrappers::MPI::Vector system_rhs;
- * 
- *     Vector<double> incremental_displacement;
- * 
- * @endcode
- * 
- * The next block of variables is then related to the time dependent
- * nature of the problem: they denote the length of the time interval
- * which we want to simulate, the present time and number of time step,
- * and length of present timestep:
- * 
- * @code
- *     double       present_time;
- *     double       present_timestep;
- *     double       end_time;
- *     unsigned int timestep_no;
- * 
- * @endcode
- * 
- * Then a few variables that have to do with %parallel processing: first,
- * a variable denoting the MPI communicator we use, and then two numbers
- * telling us how many participating processors there are, and where in
- * this world we are. Finally, a stream object that makes sure only one
- * processor is actually generating output to the console. This is all the
- * same as in step-17:
- * 
- * @code
- *     MPI_Comm mpi_communicator;
- * 
- *     const unsigned int n_mpi_processes;
- * 
- *     const unsigned int this_mpi_process;
- * 
- *     ConditionalOStream pcout;
- * 
- * @endcode
- * 
- * We are storing the locally owned and the locally relevant indices:
- * 
- * @code
- *     IndexSet locally_owned_dofs;
- *     IndexSet locally_relevant_dofs;
- * 
- * @endcode
- * 
- * Finally, we have a static variable that denotes the linear relationship
- * between the stress and strain. Since it is a constant object that does
- * not depend on any input (at least not in this program), we make it a
- * static variable and will initialize it in the same place where we
- * define the constructor of this class:
- * 
- * @code
- *     static const SymmetricTensor<4, dim> stress_strain_tensor;
- *   };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeBodyForcecodeclass"></a> 
- * <h3>The <code>BodyForce</code> class</h3>
- * 
-
- * 
- * Before we go on to the main functionality of this program, we have to
- * define what forces will act on the body whose deformation we want to
- * study. These may either be body forces or boundary forces. Body forces
- * are generally mediated by one of the four basic physical types of forces:
- * gravity, strong and weak interaction, and electromagnetism. Unless one
- * wants to consider subatomic objects (for which quasistatic deformation is
- * irrelevant and an inappropriate description anyway), only gravity and
- * electromagnetic forces need to be considered. Let us, for simplicity
- * assume that our body has a certain mass density, but is either
- * non-magnetic and not electrically conducting or that there are no
- * significant electromagnetic fields around. In that case, the body forces
- * are simply <code>rho g</code>, where <code>rho</code> is the material
- * density and <code>g</code> is a vector in negative z-direction with
- * magnitude 9.81 m/s^2.  Both the density and <code>g</code> are defined in
- * the function, and we take as the density 7700 kg/m^3, a value commonly
- * assumed for steel.
- *   
-
- * 
- * To be a little more general and to be able to do computations in 2d as
- * well, we realize that the body force is always a function returning a
- * <code>dim</code> dimensional vector. We assume that gravity acts along
- * the negative direction of the last, i.e. <code>dim-1</code>th
- * coordinate. The rest of the implementation of this function should be
- * mostly self-explanatory given similar definitions in previous example
- * programs. Note that the body force is independent of the location; to
- * avoid compiler warnings about unused function arguments, we therefore
- * comment out the name of the first argument of the
- * <code>vector_value</code> function:
- * 
- * @code
- *   template <int dim>
- *   class BodyForce : public Function<dim>
- *   {
- *   public:
- *     BodyForce();
- * 
- *     virtual void vector_value(const Point<dim> &p,
- *                               Vector<double> &  values) const override;
- * 
- *     virtual void
- *     vector_value_list(const std::vector<Point<dim>> &points,
- *                       std::vector<Vector<double>> &  value_list) const override;
- *   };
- * 
- * 
- *   template <int dim>
- *   BodyForce<dim>::BodyForce()
- *     : Function<dim>(dim)
- *   {}
- * 
- * 
- *   template <int dim>
- *   inline void BodyForce<dim>::vector_value(const Point<dim> & /*p*/,
- *                                            Vector<double> &values) const
- *   {
- *     Assert(values.size() == dim, ExcDimensionMismatch(values.size(), dim));
- * 
- *     const double g   = 9.81;
- *     const double rho = 7700;
- * 
- *     values          = 0;
- *     values(dim - 1) = -rho * g;
- *   }
- * 
- * 
- * 
- *   template <int dim>
- *   void BodyForce<dim>::vector_value_list(
- *     const std::vector<Point<dim>> &points,
- *     std::vector<Vector<double>> &  value_list) const
- *   {
- *     const unsigned int n_points = points.size();
- * 
- *     Assert(value_list.size() == n_points,
- *            ExcDimensionMismatch(value_list.size(), n_points));
- * 
- *     for (unsigned int p = 0; p < n_points; ++p)
- *       BodyForce<dim>::vector_value(points[p], value_list[p]);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeIncrementalBoundaryValuecodeclass"></a> 
- * <h3>The <code>IncrementalBoundaryValue</code> class</h3>
- * 
-
- * 
- * In addition to body forces, movement can be induced by boundary forces
- * and forced boundary displacement. The latter case is equivalent to forces
- * being chosen in such a way that they induce certain displacement.
- *   
-
- * 
- * For quasistatic displacement, typical boundary forces would be pressure
- * on a body, or tangential friction against another body. We chose a
- * somewhat simpler case here: we prescribe a certain movement of (parts of)
- * the boundary, or at least of certain components of the displacement
- * vector. We describe this by another vector-valued function that, for a
- * given point on the boundary, returns the prescribed displacement.
- *   
-
- * 
- * Since we have a time-dependent problem, the displacement increment of the
- * boundary equals the displacement accumulated during the length of the
- * timestep. The class therefore has to know both the present time and the
- * length of the present time step, and can then approximate the incremental
- * displacement as the present velocity times the present timestep.
- *   
-
- * 
- * For the purposes of this program, we choose a simple form of boundary
- * displacement: we displace the top boundary with constant velocity
- * downwards. The rest of the boundary is either going to be fixed (and is
- * then described using an object of type
- * <code>Functions::ZeroFunction</code>) or free (Neumann-type, in which case
- * nothing special has to be done).  The implementation of the class
- * describing the constant downward motion should then be obvious using the
- * knowledge we gained through all the previous example programs:
- * 
- * @code
- *   template <int dim>
- *   class IncrementalBoundaryValues : public Function<dim>
- *   {
- *   public:
- *     IncrementalBoundaryValues(const double present_time,
- *                               const double present_timestep);
- * 
- *     virtual void vector_value(const Point<dim> &p,
- *                               Vector<double> &  values) const override;
- * 
- *     virtual void
- *     vector_value_list(const std::vector<Point<dim>> &points,
- *                       std::vector<Vector<double>> &  value_list) const override;
- * 
- *   private:
- *     const double velocity;
- *     const double present_time;
- *     const double present_timestep;
- *   };
- * 
- * 
- *   template <int dim>
- *   IncrementalBoundaryValues<dim>::IncrementalBoundaryValues(
- *     const double present_time,
- *     const double present_timestep)
- *     : Function<dim>(dim)
- *     , velocity(.08)
- *     , present_time(present_time)
- *     , present_timestep(present_timestep)
- *   {}
- * 
- * 
- *   template <int dim>
- *   void
- *   IncrementalBoundaryValues<dim>::vector_value(const Point<dim> & /*p*/,
- *                                                Vector<double> &values) const
- *   {
- *     Assert(values.size() == dim, ExcDimensionMismatch(values.size(), dim));
- * 
- *     values    = 0;
- *     values(2) = -present_timestep * velocity;
- *   }
- * 
- * 
- * 
- *   template <int dim>
- *   void IncrementalBoundaryValues<dim>::vector_value_list(
- *     const std::vector<Point<dim>> &points,
- *     std::vector<Vector<double>> &  value_list) const
- *   {
- *     const unsigned int n_points = points.size();
- * 
- *     Assert(value_list.size() == n_points,
- *            ExcDimensionMismatch(value_list.size(), n_points));
- * 
- *     for (unsigned int p = 0; p < n_points; ++p)
- *       IncrementalBoundaryValues<dim>::vector_value(points[p], value_list[p]);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ImplementationofthecodeTopLevelcodeclass"></a> 
- * <h3>Implementation of the <code>TopLevel</code> class</h3>
- * 
-
- * 
- * Now for the implementation of the main class. First, we initialize the
- * stress-strain tensor, which we have declared as a static const
- * variable. We chose Lam&eacute; constants that are appropriate for steel:
- * 
- * @code
- *   template <int dim>
- *   const SymmetricTensor<4, dim> TopLevel<dim>::stress_strain_tensor =
- *     get_stress_strain_tensor<dim>(/*lambda = */ 9.695e10,
- *                                   /*mu     = */ 7.617e10);
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Thepublicinterface"></a> 
- * <h4>The public interface</h4>
- * 
-
- * 
- * The next step is the definition of constructors and destructors. There
- * are no surprises here: we choose linear and continuous finite elements
- * for each of the <code>dim</code> vector components of the solution, and a
- * Gaussian quadrature formula with 2 points in each coordinate
- * direction. The destructor should be obvious:
- * 
- * @code
- *   template <int dim>
- *   TopLevel<dim>::TopLevel()
- *     : triangulation(MPI_COMM_WORLD)
- *     , fe(FE_Q<dim>(1), dim)
- *     , dof_handler(triangulation)
- *     , quadrature_formula(fe.degree + 1)
- *     , present_time(0.0)
- *     , present_timestep(1.0)
- *     , end_time(10.0)
- *     , timestep_no(0)
- *     , mpi_communicator(MPI_COMM_WORLD)
- *     , n_mpi_processes(Utilities::MPI::n_mpi_processes(mpi_communicator))
- *     , this_mpi_process(Utilities::MPI::this_mpi_process(mpi_communicator))
- *     , pcout(std::cout, this_mpi_process == 0)
- *   {}
- * 
- * 
- * 
- *   template <int dim>
- *   TopLevel<dim>::~TopLevel()
- *   {
- *     dof_handler.clear();
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * The last of the public functions is the one that directs all the work,
- * <code>run()</code>. It initializes the variables that describe where in
- * time we presently are, then runs the first time step, then loops over all
- * the other time steps. Note that for simplicity we use a fixed time step,
- * whereas a more sophisticated program would of course have to choose it in
- * some more reasonable way adaptively:
- * 
- * @code
- *   template <int dim>
- *   void TopLevel<dim>::run()
- *   {
- *     do_initial_timestep();
- * 
- *     while (present_time < end_time)
- *       do_timestep();
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TopLevelcreate_coarse_grid"></a> 
- * <h4>TopLevel::create_coarse_grid</h4>
- * 
-
- * 
- * The next function in the order in which they were declared above is the
- * one that creates the coarse grid from which we start. For this example
- * program, we want to compute the deformation of a cylinder under axial
- * compression. The first step therefore is to generate a mesh for a
- * cylinder of length 3 and with inner and outer radii of 0.8 and 1,
- * respectively. Fortunately, there is a library function for such a mesh.
- *   
-
- * 
- * In a second step, we have to associated boundary conditions with the
- * upper and lower faces of the cylinder. We choose a boundary indicator of
- * 0 for the boundary faces that are characterized by their midpoints having
- * z-coordinates of either 0 (bottom face), an indicator of 1 for z=3 (top
- * face); finally, we use boundary indicator 2 for all faces on the inside
- * of the cylinder shell, and 3 for the outside.
- * 
- * @code
- *   template <int dim>
- *   void TopLevel<dim>::create_coarse_grid()
- *   {
- *     const double inner_radius = 0.8, outer_radius = 1;
- *     GridGenerator::cylinder_shell(triangulation, 3, inner_radius, outer_radius);
- *     for (const auto &cell : triangulation.active_cell_iterators())
- *       for (const auto &face : cell->face_iterators())
- *         if (face->at_boundary())
- *           {
- *             const Point<dim> face_center = face->center();
- * 
- *             if (face_center[2] == 0)
- *               face->set_boundary_id(0);
- *             else if (face_center[2] == 3)
- *               face->set_boundary_id(1);
- *             else if (std::sqrt(face_center[0] * face_center[0] +
- *                                face_center[1] * face_center[1]) <
- *                      (inner_radius + outer_radius) / 2)
- *               face->set_boundary_id(2);
- *             else
- *               face->set_boundary_id(3);
- *           }
- * 
- * @endcode
- * 
- * Once all this is done, we can refine the mesh once globally:
- * 
- * @code
- *     triangulation.refine_global(1);
- * 
- * @endcode
- * 
- * As the final step, we need to set up a clean state of the data that we
- * store in the quadrature points on all cells that are treated on the
- * present processor.
- * 
- * @code
- *     setup_quadrature_point_history();
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TopLevelsetup_system"></a> 
- * <h4>TopLevel::setup_system</h4>
- * 
-
- * 
- * The next function is the one that sets up the data structures for a given
- * mesh. This is done in most the same way as in step-17: distribute the
- * degrees of freedom, then sort these degrees of freedom in such a way that
- * each processor gets a contiguous chunk of them. Note that subdivisions into
- * chunks for each processor is handled in the functions that create or
- * refine grids, unlike in the previous example program (the point where
- * this happens is mostly a matter of taste; here, we chose to do it when
- * grids are created since in the <code>do_initial_timestep</code> and
- * <code>do_timestep</code> functions we want to output the number of cells
- * on each processor at a point where we haven't called the present function
- * yet).
- * 
- * @code
- *   template <int dim>
- *   void TopLevel<dim>::setup_system()
- *   {
- *     dof_handler.distribute_dofs(fe);
- *     locally_owned_dofs = dof_handler.locally_owned_dofs();
- *     DoFTools::extract_locally_relevant_dofs(dof_handler, locally_relevant_dofs);
- * 
- * @endcode
- * 
- * The next step is to set up constraints due to hanging nodes. This has
- * been handled many times before:
- * 
- * @code
- *     hanging_node_constraints.clear();
- *     DoFTools::make_hanging_node_constraints(dof_handler,
- *                                             hanging_node_constraints);
- *     hanging_node_constraints.close();
- * 
- * @endcode
- * 
- * And then we have to set up the matrix. Here we deviate from step-17, in
- * which we simply used PETSc's ability to just know about the size of the
- * matrix and later allocate those nonzero elements that are being written
- * to. While this works just fine from a correctness viewpoint, it is not
- * at all efficient: if we don't give PETSc a clue as to which elements
- * are written to, it is (at least at the time of this writing) unbearably
- * slow when we set the elements in the matrix for the first time (i.e. in
- * the first timestep). Later on, when the elements have been allocated,
- * everything is much faster. In experiments we made, the first timestep
- * can be accelerated by almost two orders of magnitude if we instruct
- * PETSc which elements will be used and which are not.
- *     
-
- * 
- * To do so, we first generate the sparsity pattern of the matrix we are
- * going to work with, and make sure that the condensation of hanging node
- * constraints add the necessary additional entries in the sparsity
- * pattern:
- * 
- * @code
- *     DynamicSparsityPattern sparsity_pattern(locally_relevant_dofs);
- *     DoFTools::make_sparsity_pattern(dof_handler,
- *                                     sparsity_pattern,
- *                                     hanging_node_constraints,
- *                                     /*keep constrained dofs*/ false);
- *     SparsityTools::distribute_sparsity_pattern(sparsity_pattern,
- *                                                locally_owned_dofs,
- *                                                mpi_communicator,
- *                                                locally_relevant_dofs);
- * @endcode
- * 
- * Note that we have used the <code>DynamicSparsityPattern</code> class
- * here that was already introduced in step-11, rather than the
- * <code>SparsityPattern</code> class that we have used in all other
- * cases. The reason for this is that for the latter class to work we have
- * to give an initial upper bound for the number of entries in each row, a
- * task that is traditionally done by
- * <code>DoFHandler::max_couplings_between_dofs()</code>. However, this
- * function suffers from a serious problem: it has to compute an upper
- * bound to the number of nonzero entries in each row, and this is a
- * rather complicated task, in particular in 3d. In effect, while it is
- * quite accurate in 2d, it often comes up with much too large a number in
- * 3d, and in that case the <code>SparsityPattern</code> allocates much
- * too much memory at first, often several 100 MBs. This is later
- * corrected when <code>DoFTools::make_sparsity_pattern</code> is called
- * and we realize that we don't need all that much memory, but at time it
- * is already too late: for large problems, the temporary allocation of
- * too much memory can lead to out-of-memory situations.
- *     
-
- * 
- * In order to avoid this, we resort to the
- * <code>DynamicSparsityPattern</code> class that is slower but does
- * not require any up-front estimate on the number of nonzero entries per
- * row. It therefore only ever allocates as much memory as it needs at any
- * given time, and we can build it even for large 3d problems.
- *     
-
- * 
- * It is also worth noting that due to the specifics of
- * parallel::shared::Triangulation, the sparsity pattern we construct is
- * global, i.e. comprises all degrees of freedom whether they will be
- * owned by the processor we are on or another one (in case this program
- * is run in %parallel via MPI). This of course is not optimal -- it
- * limits the size of the problems we can solve, since storing the entire
- * sparsity pattern (even if only for a short time) on each processor does
- * not scale well. However, there are several more places in the program
- * in which we do this, for example we always keep the global
- * triangulation and DoF handler objects around, even if we only work on
- * part of them. At present, deal.II does not have the necessary
- * facilities to completely distribute these objects (a task that, indeed,
- * is very hard to achieve with adaptive meshes, since well-balanced
- * subdivisions of a domain tend to become unbalanced as the mesh is
- * adaptively refined).
- *     
-
- * 
- * With this data structure, we can then go to the PETSc sparse matrix and
- * tell it to preallocate all the entries we will later want to write to:
- * 
- * @code
- *     system_matrix.reinit(locally_owned_dofs,
- *                          locally_owned_dofs,
- *                          sparsity_pattern,
- *                          mpi_communicator);
- * @endcode
- * 
- * After this point, no further explicit knowledge of the sparsity pattern
- * is required any more and we can let the <code>sparsity_pattern</code>
- * variable go out of scope without any problem.
- * 
-
- * 
- * The last task in this function is then only to reset the right hand
- * side vector as well as the solution vector to its correct size;
- * remember that the solution vector is a local one, unlike the right hand
- * side that is a distributed %parallel one and therefore needs to know
- * the MPI communicator over which it is supposed to transmit messages:
- * 
- * @code
- *     system_rhs.reinit(locally_owned_dofs, mpi_communicator);
- *     incremental_displacement.reinit(dof_handler.n_dofs());
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TopLevelassemble_system"></a> 
- * <h4>TopLevel::assemble_system</h4>
- * 
-
- * 
- * Again, assembling the system matrix and right hand side follows the same
- * structure as in many example programs before. In particular, it is mostly
- * equivalent to step-17, except for the different right hand side that now
- * only has to take into account internal stresses. In addition, assembling
- * the matrix is made significantly more transparent by using the
- * <code>SymmetricTensor</code> class: note the elegance of forming the
- * scalar products of symmetric tensors of rank 2 and 4. The implementation
- * is also more general since it is independent of the fact that we may or
- * may not be using an isotropic elasticity tensor.
- *   
-
- * 
- * The first part of the assembly routine is as always:
- * 
- * @code
- *   template <int dim>
- *   void TopLevel<dim>::assemble_system()
- *   {
- *     system_rhs    = 0;
- *     system_matrix = 0;
- * 
- *     FEValues<dim> fe_values(fe,
- *                             quadrature_formula,
- *                             update_values | update_gradients |
- *                               update_quadrature_points | update_JxW_values);
- * 
- *     const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
- *     const unsigned int n_q_points    = quadrature_formula.size();
- * 
- *     FullMatrix<double> cell_matrix(dofs_per_cell, dofs_per_cell);
- *     Vector<double>     cell_rhs(dofs_per_cell);
- * 
- *     std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
- * 
- *     BodyForce<dim>              body_force;
- *     std::vector<Vector<double>> body_force_values(n_q_points,
- *                                                   Vector<double>(dim));
- * 
- * @endcode
- * 
- * As in step-17, we only need to loop over all cells that belong to the
- * present processor:
- * 
- * @code
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       if (cell->is_locally_owned())
- *         {
- *           cell_matrix = 0;
- *           cell_rhs    = 0;
- * 
- *           fe_values.reinit(cell);
- * 
- * @endcode
- * 
- * Then loop over all indices i,j and quadrature points and assemble
- * the system matrix contributions from this cell.  Note how we
- * extract the symmetric gradients (strains) of the shape functions
- * at a given quadrature point from the <code>FEValues</code>
- * object, and the elegance with which we form the triple
- * contraction <code>eps_phi_i : C : eps_phi_j</code>; the latter
- * needs to be compared to the clumsy computations needed in
- * step-17, both in the introduction as well as in the respective
- * place in the program:
- * 
- * @code
- *           for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *             for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *               for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
- *                 {
- *                   const SymmetricTensor<2, dim>
- *                     eps_phi_i = get_strain(fe_values, i, q_point),
- *                     eps_phi_j = get_strain(fe_values, j, q_point);
- * 
- *                   cell_matrix(i, j) += (eps_phi_i *            
- *                                         stress_strain_tensor * 
- *                                         eps_phi_j              
- *                                         ) *                    
- *                                        fe_values.JxW(q_point); 
- *                 }
- * 
- * 
- * @endcode
- * 
- * Then also assemble the local right hand side contributions. For
- * this, we need to access the prior stress value in this quadrature
- * point. To get it, we use the user pointer of this cell that
- * points into the global array to the quadrature point data
- * corresponding to the first quadrature point of the present cell,
- * and then add an offset corresponding to the index of the
- * quadrature point we presently consider:
- * 
- * @code
- *           const PointHistory<dim> *local_quadrature_points_data =
- *             reinterpret_cast<PointHistory<dim> *>(cell->user_pointer());
- * @endcode
- * 
- * In addition, we need the values of the external body forces at
- * the quadrature points on this cell:
- * 
- * @code
- *           body_force.vector_value_list(fe_values.get_quadrature_points(),
- *                                        body_force_values);
- * @endcode
- * 
- * Then we can loop over all degrees of freedom on this cell and
- * compute local contributions to the right hand side:
- * 
- * @code
- *           for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *             {
- *               const unsigned int component_i =
- *                 fe.system_to_component_index(i).first;
- * 
- *               for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
- *                 {
- *                   const SymmetricTensor<2, dim> &old_stress =
- *                     local_quadrature_points_data[q_point].old_stress;
- * 
- *                   cell_rhs(i) +=
- *                     (body_force_values[q_point](component_i) *
- *                        fe_values.shape_value(i, q_point) -
- *                      old_stress * get_strain(fe_values, i, q_point)) *
- *                     fe_values.JxW(q_point);
- *                 }
- *             }
- * 
- * @endcode
- * 
- * Now that we have the local contributions to the linear system, we
- * need to transfer it into the global objects. This is done exactly
- * as in step-17:
- * 
- * @code
- *           cell->get_dof_indices(local_dof_indices);
- * 
- *           hanging_node_constraints.distribute_local_to_global(cell_matrix,
- *                                                               cell_rhs,
- *                                                               local_dof_indices,
- *                                                               system_matrix,
- *                                                               system_rhs);
- *         }
- * 
- * @endcode
- * 
- * Now compress the vector and the system matrix:
- * 
- * @code
- *     system_matrix.compress(VectorOperation::add);
- *     system_rhs.compress(VectorOperation::add);
- * 
- * 
- * @endcode
- * 
- * The last step is to again fix up boundary values, just as we already
- * did in previous programs. A slight complication is that the
- * <code>apply_boundary_values</code> function wants to have a solution
- * vector compatible with the matrix and right hand side (i.e. here a
- * distributed %parallel vector, rather than the sequential vector we use
- * in this program) in order to preset the entries of the solution vector
- * with the correct boundary values. We provide such a compatible vector
- * in the form of a temporary vector which we then copy into the
- * sequential one.
- * 
-
- * 
- * We make up for this complication by showing how boundary values can be
- * used flexibly: following the way we create the triangulation, there are
- * three distinct boundary indicators used to describe the domain,
- * corresponding to the bottom and top faces, as well as the inner/outer
- * surfaces. We would like to impose boundary conditions of the following
- * type: The inner and outer cylinder surfaces are free of external
- * forces, a fact that corresponds to natural (Neumann-type) boundary
- * conditions for which we don't have to do anything. At the bottom, we
- * want no movement at all, corresponding to the cylinder being clamped or
- * cemented in at this part of the boundary. At the top, however, we want
- * a prescribed vertical downward motion compressing the cylinder; in
- * addition, we only want to restrict the vertical movement, but not the
- * horizontal ones -- one can think of this situation as a well-greased
- * plate sitting on top of the cylinder pushing it downwards: the atoms of
- * the cylinder are forced to move downward, but they are free to slide
- * horizontally along the plate.
- * 
-
- * 
- * The way to describe this is as follows: for boundary indicator zero
- * (bottom face) we use a dim-dimensional zero function representing no
- * motion in any coordinate direction. For the boundary with indicator 1
- * (top surface), we use the <code>IncrementalBoundaryValues</code> class,
- * but we specify an additional argument to the
- * <code>VectorTools::interpolate_boundary_values</code> function denoting
- * which vector components it should apply to; this is a vector of bools
- * for each vector component and because we only want to restrict vertical
- * motion, it has only its last component set:
- * 
- * @code
- *     FEValuesExtractors::Scalar                z_component(dim - 1);
- *     std::map<types::global_dof_index, double> boundary_values;
- *     VectorTools::interpolate_boundary_values(dof_handler,
- *                                              0,
- *                                              Functions::ZeroFunction<dim>(dim),
- *                                              boundary_values);
- *     VectorTools::interpolate_boundary_values(
- *       dof_handler,
- *       1,
- *       IncrementalBoundaryValues<dim>(present_time, present_timestep),
- *       boundary_values,
- *       fe.component_mask(z_component));
- * 
- *     PETScWrappers::MPI::Vector tmp(locally_owned_dofs, mpi_communicator);
- *     MatrixTools::apply_boundary_values(
- *       boundary_values, system_matrix, tmp, system_rhs, false);
- *     incremental_displacement = tmp;
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TopLevelsolve_timestep"></a> 
- * <h4>TopLevel::solve_timestep</h4>
- * 
-
- * 
- * The next function is the one that controls what all has to happen within
- * a timestep. The order of things should be relatively self-explanatory
- * from the function names:
- * 
- * @code
- *   template <int dim>
- *   void TopLevel<dim>::solve_timestep()
- *   {
- *     pcout << "    Assembling system..." << std::flush;
- *     assemble_system();
- *     pcout << " norm of rhs is " << system_rhs.l2_norm() << std::endl;
- * 
- *     const unsigned int n_iterations = solve_linear_problem();
- * 
- *     pcout << "    Solver converged in " << n_iterations << " iterations."
- *           << std::endl;
- * 
- *     pcout << "    Updating quadrature point data..." << std::flush;
- *     update_quadrature_point_history();
- *     pcout << std::endl;
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TopLevelsolve_linear_problem"></a> 
- * <h4>TopLevel::solve_linear_problem</h4>
- * 
-
- * 
- * Solving the linear system again works mostly as before. The only
- * difference is that we want to only keep a complete local copy of the
- * solution vector instead of the distributed one that we get as output from
- * PETSc's solver routines. To this end, we declare a local temporary
- * variable for the distributed vector and initialize it with the contents
- * of the local variable (remember that the
- * <code>apply_boundary_values</code> function called in
- * <code>assemble_system</code> preset the values of boundary nodes in this
- * vector), solve with it, and at the end of the function copy it again into
- * the complete local vector that we declared as a member variable. Hanging
- * node constraints are then distributed only on the local copy,
- * i.e. independently of each other on each of the processors:
- * 
- * @code
- *   template <int dim>
- *   unsigned int TopLevel<dim>::solve_linear_problem()
- *   {
- *     PETScWrappers::MPI::Vector distributed_incremental_displacement(
- *       locally_owned_dofs, mpi_communicator);
- *     distributed_incremental_displacement = incremental_displacement;
- * 
- *     SolverControl solver_control(dof_handler.n_dofs(),
- *                                  1e-16 * system_rhs.l2_norm());
- * 
- *     PETScWrappers::SolverCG cg(solver_control, mpi_communicator);
- * 
- *     PETScWrappers::PreconditionBlockJacobi preconditioner(system_matrix);
- * 
- *     cg.solve(system_matrix,
- *              distributed_incremental_displacement,
- *              system_rhs,
- *              preconditioner);
- * 
- *     incremental_displacement = distributed_incremental_displacement;
- * 
- *     hanging_node_constraints.distribute(incremental_displacement);
- * 
- *     return solver_control.last_step();
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TopLeveloutput_results"></a> 
- * <h4>TopLevel::output_results</h4>
- * 
-
- * 
- * This function generates the graphical output in .vtu format as explained
- * in the introduction. Each process will only work on the cells it owns,
- * and then write the result into a file of its own. Additionally, processor
- * 0 will write the record files the reference all the .vtu files.
- *   
-
- * 
- * The crucial part of this function is to give the <code>DataOut</code>
- * class a way to only work on the cells that the present process owns.
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   void TopLevel<dim>::output_results() const
- *   {
- *     DataOut<dim> data_out;
- *     data_out.attach_dof_handler(dof_handler);
- * 
- * @endcode
- * 
- * Then, just as in step-17, define the names of solution variables (which
- * here are the displacement increments) and queue the solution vector for
- * output. Note in the following switch how we make sure that if the space
- * dimension should be unhandled that we throw an exception saying that we
- * haven't implemented this case yet (another case of defensive
- * programming):
- * 
- * @code
- *     std::vector<std::string> solution_names;
- *     switch (dim)
- *       {
- *         case 1:
- *           solution_names.emplace_back("delta_x");
- *           break;
- *         case 2:
- *           solution_names.emplace_back("delta_x");
- *           solution_names.emplace_back("delta_y");
- *           break;
- *         case 3:
- *           solution_names.emplace_back("delta_x");
- *           solution_names.emplace_back("delta_y");
- *           solution_names.emplace_back("delta_z");
- *           break;
- *         default:
- *           Assert(false, ExcNotImplemented());
- *       }
- * 
- *     data_out.add_data_vector(incremental_displacement, solution_names);
- * 
- * 
- * @endcode
- * 
- * The next thing is that we wanted to output something like the average
- * norm of the stresses that we have stored in each cell. This may seem
- * complicated, since on the present processor we only store the stresses
- * in quadrature points on those cells that actually belong to the present
- * process. In other words, it seems as if we can't compute the average
- * stresses for all cells. However, remember that our class derived from
- * <code>DataOut</code> only iterates over those cells that actually do
- * belong to the present processor, i.e. we don't have to compute anything
- * for all the other cells as this information would not be touched. The
- * following little loop does this. We enclose the entire block into a
- * pair of braces to make sure that the iterator variables do not remain
- * accidentally visible beyond the end of the block in which they are
- * used:
- * 
- * @code
- *     Vector<double> norm_of_stress(triangulation.n_active_cells());
- *     {
- * @endcode
- * 
- * Loop over all the cells...
- * 
- * @code
- *       for (auto &cell : triangulation.active_cell_iterators())
- *         if (cell->is_locally_owned())
- *           {
- * @endcode
- * 
- * On these cells, add up the stresses over all quadrature
- * points...
- * 
- * @code
- *             SymmetricTensor<2, dim> accumulated_stress;
- *             for (unsigned int q = 0; q < quadrature_formula.size(); ++q)
- *               accumulated_stress +=
- *                 reinterpret_cast<PointHistory<dim> *>(cell->user_pointer())[q]
- *                   .old_stress;
- * 
- * @endcode
- * 
- * ...then write the norm of the average to their destination:
- * 
- * @code
- *             norm_of_stress(cell->active_cell_index()) =
- *               (accumulated_stress / quadrature_formula.size()).norm();
- *           }
- * @endcode
- * 
- * And on the cells that we are not interested in, set the respective
- * value in the vector to a bogus value (norms must be positive, and a
- * large negative value should catch your eye) in order to make sure
- * that if we were somehow wrong about our assumption that these
- * elements would not appear in the output file, that we would find out
- * by looking at the graphical output:
- * 
- * @code
- *         else
- *           norm_of_stress(cell->active_cell_index()) = -1e+20;
- *     }
- * @endcode
- * 
- * Finally attach this vector as well to be treated for output:
- * 
- * @code
- *     data_out.add_data_vector(norm_of_stress, "norm_of_stress");
- * 
- * @endcode
- * 
- * As a last piece of data, let us also add the partitioning of the domain
- * into subdomains associated with the processors if this is a parallel
- * job. This works in the exact same way as in the step-17 program:
- * 
- * @code
- *     std::vector<types::subdomain_id> partition_int(
- *       triangulation.n_active_cells());
- *     GridTools::get_subdomain_association(triangulation, partition_int);
- *     const Vector<double> partitioning(partition_int.begin(),
- *                                       partition_int.end());
- *     data_out.add_data_vector(partitioning, "partitioning");
- * 
- * @endcode
- * 
- * Finally, with all this data, we can instruct deal.II to munge the
- * information and produce some intermediate data structures that contain
- * all these solution and other data vectors:
- * 
- * @code
- *     data_out.build_patches();
- * 
- * @endcode
- * 
- * Let us call a function that opens the necessary output files and writes
- * the data we have generated into them. The function automatically
- * constructs the file names from the given directory name (the first
- * argument) and file name base (second argument). It augments the resulting
- * string by pieces that result from the time step number and a "piece
- * number" that corresponds to a part of the overall domain that can consist
- * of one or more subdomains.
- *     
-
- * 
- * The function also writes a record files (with suffix `.pvd`) for Paraview
- * that describes how all of these output files combine into the data for
- * this single time step:
- * 
- * @code
- *     const std::string pvtu_filename = data_out.write_vtu_with_pvtu_record(
- *       "./", "solution", timestep_no, mpi_communicator, 4);
- * 
- * @endcode
- * 
- * The record files must be written only once and not by each processor,
- * so we do this on processor 0:
- * 
- * @code
- *     if (this_mpi_process == 0)
- *       {
- * @endcode
- * 
- * Finally, we write the paraview record, that references all .pvtu
- * files and their respective time. Note that the variable
- * times_and_names is declared static, so it will retain the entries
- * from the previous timesteps.
- * 
- * @code
- *         static std::vector<std::pair<double, std::string>> times_and_names;
- *         times_and_names.push_back(
- *           std::pair<double, std::string>(present_time, pvtu_filename));
- *         std::ofstream pvd_output("solution.pvd");
- *         DataOutBase::write_pvd_record(pvd_output, times_and_names);
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TopLeveldo_initial_timestep"></a> 
- * <h4>TopLevel::do_initial_timestep</h4>
- * 
-
- * 
- * This and the next function handle the overall structure of the first and
- * following timesteps, respectively. The first timestep is slightly more
- * involved because we want to compute it multiple times on successively
- * refined meshes, each time starting from a clean state. At the end of
- * these computations, in which we compute the incremental displacements
- * each time, we use the last results obtained for the incremental
- * displacements to compute the resulting stress updates and move the mesh
- * accordingly. On this new mesh, we then output the solution and any
- * additional data we consider important.
- *   
-
- * 
- * All this is interspersed by generating output to the console to update
- * the person watching the screen on what is going on. As in step-17, the
- * use of <code>pcout</code> instead of <code>std::cout</code> makes sure
- * that only one of the parallel processes is actually writing to the
- * console, without having to explicitly code an if-statement in each place
- * where we generate output:
- * 
- * @code
- *   template <int dim>
- *   void TopLevel<dim>::do_initial_timestep()
- *   {
- *     present_time += present_timestep;
- *     ++timestep_no;
- *     pcout << "Timestep " << timestep_no << " at time " << present_time
- *           << std::endl;
- * 
- *     for (unsigned int cycle = 0; cycle < 2; ++cycle)
- *       {
- *         pcout << "  Cycle " << cycle << ':' << std::endl;
- * 
- *         if (cycle == 0)
- *           create_coarse_grid();
- *         else
- *           refine_initial_grid();
- * 
- *         pcout << "    Number of active cells:       "
- *               << triangulation.n_active_cells() << " (by partition:";
- *         for (unsigned int p = 0; p < n_mpi_processes; ++p)
- *           pcout << (p == 0 ? ' ' : '+')
- *                 << (GridTools::count_cells_with_subdomain_association(
- *                      triangulation, p));
- *         pcout << ")" << std::endl;
- * 
- *         setup_system();
- * 
- *         pcout << "    Number of degrees of freedom: " << dof_handler.n_dofs()
- *               << " (by partition:";
- *         for (unsigned int p = 0; p < n_mpi_processes; ++p)
- *           pcout << (p == 0 ? ' ' : '+')
- *                 << (DoFTools::count_dofs_with_subdomain_association(dof_handler,
- *                                                                     p));
- *         pcout << ")" << std::endl;
- * 
- *         solve_timestep();
- *       }
- * 
- *     move_mesh();
- *     output_results();
- * 
- *     pcout << std::endl;
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TopLeveldo_timestep"></a> 
- * <h4>TopLevel::do_timestep</h4>
- * 
-
- * 
- * Subsequent timesteps are simpler, and probably do not require any more
- * documentation given the explanations for the previous function above:
- * 
- * @code
- *   template <int dim>
- *   void TopLevel<dim>::do_timestep()
- *   {
- *     present_time += present_timestep;
- *     ++timestep_no;
- *     pcout << "Timestep " << timestep_no << " at time " << present_time
- *           << std::endl;
- *     if (present_time > end_time)
- *       {
- *         present_timestep -= (present_time - end_time);
- *         present_time = end_time;
- *       }
- * 
- * 
- *     solve_timestep();
- * 
- *     move_mesh();
- *     output_results();
- * 
- *     pcout << std::endl;
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TopLevelrefine_initial_grid"></a> 
- * <h4>TopLevel::refine_initial_grid</h4>
- * 
-
- * 
- * The following function is called when solving the first time step on
- * successively refined meshes. After each iteration, it computes a
- * refinement criterion, refines the mesh, and sets up the history variables
- * in each quadrature point again to a clean state.
- * 
- * @code
- *   template <int dim>
- *   void TopLevel<dim>::refine_initial_grid()
- *   {
- * @endcode
- * 
- * First, let each process compute error indicators for the cells it owns:
- * 
- * @code
- *     Vector<float> error_per_cell(triangulation.n_active_cells());
- *     KellyErrorEstimator<dim>::estimate(
- *       dof_handler,
- *       QGauss<dim - 1>(fe.degree + 1),
- *       std::map<types::boundary_id, const Function<dim> *>(),
- *       incremental_displacement,
- *       error_per_cell,
- *       ComponentMask(),
- *       nullptr,
- *       MultithreadInfo::n_threads(),
- *       this_mpi_process);
- * 
- * @endcode
- * 
- * Then set up a global vector into which we merge the local indicators
- * from each of the %parallel processes:
- * 
- * @code
- *     const unsigned int n_local_cells =
- *       triangulation.n_locally_owned_active_cells();
- * 
- *     PETScWrappers::MPI::Vector distributed_error_per_cell(
- *       mpi_communicator, triangulation.n_active_cells(), n_local_cells);
- * 
- *     for (unsigned int i = 0; i < error_per_cell.size(); ++i)
- *       if (error_per_cell(i) != 0)
- *         distributed_error_per_cell(i) = error_per_cell(i);
- *     distributed_error_per_cell.compress(VectorOperation::insert);
- * 
- * @endcode
- * 
- * Once we have that, copy it back into local copies on all processors and
- * refine the mesh accordingly:
- * 
- * @code
- *     error_per_cell = distributed_error_per_cell;
- *     GridRefinement::refine_and_coarsen_fixed_number(triangulation,
- *                                                     error_per_cell,
- *                                                     0.35,
- *                                                     0.03);
- *     triangulation.execute_coarsening_and_refinement();
- * 
- * @endcode
- * 
- * Finally, set up quadrature point data again on the new mesh, and only
- * on those cells that we have determined to be ours:
- * 
- * @code
- *     setup_quadrature_point_history();
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TopLevelmove_mesh"></a> 
- * <h4>TopLevel::move_mesh</h4>
- * 
-
- * 
- * At the end of each time step, we move the nodes of the mesh according to
- * the incremental displacements computed in this time step. To do this, we
- * keep a vector of flags that indicate for each vertex whether we have
- * already moved it around, and then loop over all cells and move those
- * vertices of the cell that have not been moved yet. It is worth noting
- * that it does not matter from which of the cells adjacent to a vertex we
- * move this vertex: since we compute the displacement using a continuous
- * finite element, the displacement field is continuous as well and we can
- * compute the displacement of a given vertex from each of the adjacent
- * cells. We only have to make sure that we move each node exactly once,
- * which is why we keep the vector of flags.
- *   
-
- * 
- * There are two noteworthy things in this function. First, how we get the
- * displacement field at a given vertex using the
- * <code>cell-@>vertex_dof_index(v,d)</code> function that returns the index
- * of the <code>d</code>th degree of freedom at vertex <code>v</code> of the
- * given cell. In the present case, displacement in the k-th coordinate
- * direction corresponds to the k-th component of the finite element. Using a
- * function like this bears a certain risk, because it uses knowledge of the
- * order of elements that we have taken together for this program in the
- * <code>FESystem</code> element. If we decided to add an additional
- * variable, for example a pressure variable for stabilization, and happened
- * to insert it as the first variable of the element, then the computation
- * below will start to produce nonsensical results. In addition, this
- * computation rests on other assumptions: first, that the element we use
- * has, indeed, degrees of freedom that are associated with vertices. This
- * is indeed the case for the present Q1 element, as would be for all Qp
- * elements of polynomial order <code>p</code>. However, it would not hold
- * for discontinuous elements, or elements for mixed formulations. Secondly,
- * it also rests on the assumption that the displacement at a vertex is
- * determined solely by the value of the degree of freedom associated with
- * this vertex; in other words, all shape functions corresponding to other
- * degrees of freedom are zero at this particular vertex. Again, this is the
- * case for the present element, but is not so for all elements that are
- * presently available in deal.II. Despite its risks, we choose to use this
- * way in order to present a way to query individual degrees of freedom
- * associated with vertices.
- *   
-
- * 
- * In this context, it is instructive to point out what a more general way
- * would be. For general finite elements, the way to go would be to take a
- * quadrature formula with the quadrature points in the vertices of a
- * cell. The <code>QTrapezoid</code> formula for the trapezoidal rule does
- * exactly this. With this quadrature formula, we would then initialize an
- * <code>FEValues</code> object in each cell, and use the
- * <code>FEValues::get_function_values</code> function to obtain the values
- * of the solution function in the quadrature points, i.e. the vertices of
- * the cell. These are the only values that we really need, i.e. we are not
- * at all interested in the weights (or the <code>JxW</code> values)
- * associated with this particular quadrature formula, and this can be
- * specified as the last argument in the constructor to
- * <code>FEValues</code>. The only point of minor inconvenience in this
- * scheme is that we have to figure out which quadrature point corresponds
- * to the vertex we consider at present, as they may or may not be ordered
- * in the same order.
- *   
-
- * 
- * This inconvenience could be avoided if finite elements have support
- * points on vertices (which the one here has; for the concept of support
- * points, see @ref GlossSupport "support points"). For such a case, one
- * could construct a custom quadrature rule using
- * FiniteElement::get_unit_support_points(). The first
- * <code>cell-&gt;n_vertices()*fe.dofs_per_vertex</code>
- * quadrature points will then correspond to the vertices of the cell and
- * are ordered consistent with <code>cell-@>vertex(i)</code>, taking into
- * account that support points for vector elements will be duplicated
- * <code>fe.dofs_per_vertex</code> times.
- *   
-
- * 
- * Another point worth explaining about this short function is the way in
- * which the triangulation class exports information about its vertices:
- * through the <code>Triangulation::n_vertices</code> function, it
- * advertises how many vertices there are in the triangulation. Not all of
- * them are actually in use all the time -- some are left-overs from cells
- * that have been coarsened previously and remain in existence since deal.II
- * never changes the number of a vertex once it has come into existence,
- * even if vertices with lower number go away. Secondly, the location
- * returned by <code>cell-@>vertex(v)</code> is not only a read-only object
- * of type <code>Point@<dim@></code>, but in fact a reference that can be
- * written to. This allows to move around the nodes of a mesh with relative
- * ease, but it is worth pointing out that it is the responsibility of an
- * application program using this feature to make sure that the resulting
- * cells are still useful, i.e. are not distorted so much that the cell is
- * degenerated (indicated, for example, by negative Jacobians). Note that we
- * do not have any provisions in this function to actually ensure this, we
- * just have faith.
- *   
-
- * 
- * After this lengthy introduction, here are the full 20 or so lines of
- * code:
- * 
- * @code
- *   template <int dim>
- *   void TopLevel<dim>::move_mesh()
- *   {
- *     pcout << "    Moving mesh..." << std::endl;
- * 
- *     std::vector<bool> vertex_touched(triangulation.n_vertices(), false);
- *     for (auto &cell : dof_handler.active_cell_iterators())
- *       for (const auto v : cell->vertex_indices())
- *         if (vertex_touched[cell->vertex_index(v)] == false)
- *           {
- *             vertex_touched[cell->vertex_index(v)] = true;
- * 
- *             Point<dim> vertex_displacement;
- *             for (unsigned int d = 0; d < dim; ++d)
- *               vertex_displacement[d] =
- *                 incremental_displacement(cell->vertex_dof_index(v, d));
- * 
- *             cell->vertex(v) += vertex_displacement;
- *           }
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TopLevelsetup_quadrature_point_history"></a> 
- * <h4>TopLevel::setup_quadrature_point_history</h4>
- * 
-
- * 
- * At the beginning of our computations, we needed to set up initial values
- * of the history variables, such as the existing stresses in the material,
- * that we store in each quadrature point. As mentioned above, we use the
- * <code>user_pointer</code> for this that is available in each cell.
- *   
-
- * 
- * To put this into larger perspective, we note that if we had previously
- * available stresses in our model (which we assume do not exist for the
- * purpose of this program), then we would need to interpolate the field of
- * preexisting stresses to the quadrature points. Likewise, if we were to
- * simulate elasto-plastic materials with hardening/softening, then we would
- * have to store additional history variables like the present yield stress
- * of the accumulated plastic strains in each quadrature
- * points. Pre-existing hardening or weakening would then be implemented by
- * interpolating these variables in the present function as well.
- * 
- * @code
- *   template <int dim>
- *   void TopLevel<dim>::setup_quadrature_point_history()
- *   {
- * @endcode
- * 
- * For good measure, we set all user pointers of all cells, whether
- * ours of not, to the null pointer. This way, if we ever access the user
- * pointer of a cell which we should not have accessed, a segmentation
- * fault will let us know that this should not have happened:
- * 
-
- * 
- * 
- * @code
- *     triangulation.clear_user_data();
- * 
- * @endcode
- * 
- * Next, allocate the quadrature objects that are within the responsibility
- * of this processor. This, of course, equals the number of cells that
- * belong to this processor times the number of quadrature points our
- * quadrature formula has on each cell. Since the `resize()` function does
- * not actually shrink the amount of allocated memory if the requested new
- * size is smaller than the old size, we resort to a trick to first free all
- * memory, and then reallocate it: we declare an empty vector as a temporary
- * variable and then swap the contents of the old vector and this temporary
- * variable. This makes sure that the `quadrature_point_history` is now
- * really empty, and we can let the temporary variable that now holds the
- * previous contents of the vector go out of scope and be destroyed. In the
- * next step we can then re-allocate as many elements as we need, with the
- * vector default-initializing the `PointHistory` objects, which includes
- * setting the stress variables to zero.
- * 
- * @code
- *     {
- *       std::vector<PointHistory<dim>> tmp;
- *       quadrature_point_history.swap(tmp);
- *     }
- *     quadrature_point_history.resize(
- *       triangulation.n_locally_owned_active_cells() * quadrature_formula.size());
- * 
- * @endcode
- * 
- * Finally loop over all cells again and set the user pointers from the
- * cells that belong to the present processor to point to the first
- * quadrature point objects corresponding to this cell in the vector of
- * such objects:
- * 
- * @code
- *     unsigned int history_index = 0;
- *     for (auto &cell : triangulation.active_cell_iterators())
- *       if (cell->is_locally_owned())
- *         {
- *           cell->set_user_pointer(&quadrature_point_history[history_index]);
- *           history_index += quadrature_formula.size();
- *         }
- * 
- * @endcode
- * 
- * At the end, for good measure make sure that our count of elements was
- * correct and that we have both used up all objects we allocated
- * previously, and not point to any objects beyond the end of the
- * vector. Such defensive programming strategies are always good checks to
- * avoid accidental errors and to guard against future changes to this
- * function that forget to update all uses of a variable at the same
- * time. Recall that constructs using the <code>Assert</code> macro are
- * optimized away in optimized mode, so do not affect the run time of
- * optimized runs:
- * 
- * @code
- *     Assert(history_index == quadrature_point_history.size(),
- *            ExcInternalError());
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TopLevelupdate_quadrature_point_history"></a> 
- * <h4>TopLevel::update_quadrature_point_history</h4>
- * 
-
- * 
- * At the end of each time step, we should have computed an incremental
- * displacement update so that the material in its new configuration
- * accommodates for the difference between the external body and boundary
- * forces applied during this time step minus the forces exerted through
- * preexisting internal stresses. In order to have the preexisting
- * stresses available at the next time step, we therefore have to update the
- * preexisting stresses with the stresses due to the incremental
- * displacement computed during the present time step. Ideally, the
- * resulting sum of internal stresses would exactly counter all external
- * forces. Indeed, a simple experiment can make sure that this is so: if we
- * choose boundary conditions and body forces to be time independent, then
- * the forcing terms (the sum of external forces and internal stresses)
- * should be exactly zero. If you make this experiment, you will realize
- * from the output of the norm of the right hand side in each time step that
- * this is almost the case: it is not exactly zero, since in the first time
- * step the incremental displacement and stress updates were computed
- * relative to the undeformed mesh, which was then deformed. In the second
- * time step, we again compute displacement and stress updates, but this
- * time in the deformed mesh -- there, the resulting updates are very small
- * but not quite zero. This can be iterated, and in each such iteration the
- * residual, i.e. the norm of the right hand side vector, is reduced; if one
- * makes this little experiment, one realizes that the norm of this residual
- * decays exponentially with the number of iterations, and after an initial
- * very rapid decline is reduced by roughly a factor of about 3.5 in each
- * iteration (for one testcase I looked at, other testcases, and other
- * numbers of unknowns change the factor, but not the exponential decay).
- * 
-
- * 
- * In a sense, this can then be considered as a quasi-timestepping scheme to
- * resolve the nonlinear problem of solving large-deformation elasticity on
- * a mesh that is moved along in a Lagrangian manner.
- *   
-
- * 
- * Another complication is that the existing (old) stresses are defined on
- * the old mesh, which we will move around after updating the stresses. If
- * this mesh update involves rotations of the cell, then we need to also
- * rotate the updated stress, since it was computed relative to the
- * coordinate system of the old cell.
- *   
-
- * 
- * Thus, what we need is the following: on each cell which the present
- * processor owns, we need to extract the old stress from the data stored
- * with each quadrature point, compute the stress update, add the two
- * together, and then rotate the result together with the incremental
- * rotation computed from the incremental displacement at the present
- * quadrature point. We will detail these steps below:
- * 
- * @code
- *   template <int dim>
- *   void TopLevel<dim>::update_quadrature_point_history()
- *   {
- * @endcode
- * 
- * First, set up an <code>FEValues</code> object by which we will evaluate
- * the incremental displacements and the gradients thereof at the
- * quadrature points, together with a vector that will hold this
- * information:
- * 
- * @code
- *     FEValues<dim> fe_values(fe,
- *                             quadrature_formula,
- *                             update_values | update_gradients);
- * 
- *     std::vector<std::vector<Tensor<1, dim>>> displacement_increment_grads(
- *       quadrature_formula.size(), std::vector<Tensor<1, dim>>(dim));
- * 
- * @endcode
- * 
- * Then loop over all cells and do the job in the cells that belong to our
- * subdomain:
- * 
- * @code
- *     for (auto &cell : dof_handler.active_cell_iterators())
- *       if (cell->is_locally_owned())
- *         {
- * @endcode
- * 
- * Next, get a pointer to the quadrature point history data local to
- * the present cell, and, as a defensive measure, make sure that
- * this pointer is within the bounds of the global array:
- * 
- * @code
- *           PointHistory<dim> *local_quadrature_points_history =
- *             reinterpret_cast<PointHistory<dim> *>(cell->user_pointer());
- *           Assert(local_quadrature_points_history >=
- *                    &quadrature_point_history.front(),
- *                  ExcInternalError());
- *           Assert(local_quadrature_points_history <=
- *                    &quadrature_point_history.back(),
- *                  ExcInternalError());
- * 
- * @endcode
- * 
- * Then initialize the <code>FEValues</code> object on the present
- * cell, and extract the gradients of the displacement at the
- * quadrature points for later computation of the strains
- * 
- * @code
- *           fe_values.reinit(cell);
- *           fe_values.get_function_gradients(incremental_displacement,
- *                                            displacement_increment_grads);
- * 
- * @endcode
- * 
- * Then loop over the quadrature points of this cell:
- * 
- * @code
- *           for (unsigned int q = 0; q < quadrature_formula.size(); ++q)
- *             {
- * @endcode
- * 
- * On each quadrature point, compute the strain increment from
- * the gradients, and multiply it by the stress-strain tensor to
- * get the stress update. Then add this update to the already
- * existing strain at this point:
- * 
- * @code
- *               const SymmetricTensor<2, dim> new_stress =
- *                 (local_quadrature_points_history[q].old_stress +
- *                  (stress_strain_tensor *
- *                   get_strain(displacement_increment_grads[q])));
- * 
- * @endcode
- * 
- * Finally, we have to rotate the result. For this, we first
- * have to compute a rotation matrix at the present quadrature
- * point from the incremental displacements. In fact, it can be
- * computed from the gradients, and we already have a function
- * for that purpose:
- * 
- * @code
- *               const Tensor<2, dim> rotation =
- *                 get_rotation_matrix(displacement_increment_grads[q]);
- * @endcode
- * 
- * Note that the result, a rotation matrix, is in general an
- * antisymmetric tensor of rank 2, so we must store it as a full
- * tensor.
- * 
-
- * 
- * With this rotation matrix, we can compute the rotated tensor
- * by contraction from the left and right, after we expand the
- * symmetric tensor <code>new_stress</code> into a full tensor:
- * 
- * @code
- *               const SymmetricTensor<2, dim> rotated_new_stress =
- *                 symmetrize(transpose(rotation) *
- *                            static_cast<Tensor<2, dim>>(new_stress) * rotation);
- * @endcode
- * 
- * Note that while the result of the multiplication of these
- * three matrices should be symmetric, it is not due to floating
- * point round off: we get an asymmetry on the order of 1e-16 of
- * the off-diagonal elements of the result. When assigning the
- * result to a <code>SymmetricTensor</code>, the constructor of
- * that class checks the symmetry and realizes that it isn't
- * exactly symmetric; it will then raise an exception. To avoid
- * that, we explicitly symmetrize the result to make it exactly
- * symmetric.
- * 
-
- * 
- * The result of all these operations is then written back into
- * the original place:
- * 
- * @code
- *               local_quadrature_points_history[q].old_stress =
- *                 rotated_new_stress;
- *             }
- *         }
- *   }
- * 
- * @endcode
- * 
- * This ends the project specific namespace <code>Step18</code>. The rest is
- * as usual and as already shown in step-17: A <code>main()</code> function
- * that initializes and terminates PETSc, calls the classes that do the
- * actual work, and makes sure that we catch all exceptions that propagate
- * up to this point:
- * 
- * @code
- * } // namespace Step18
- * 
- * 
- * int main(int argc, char **argv)
- * {
- *   try
- *     {
- *       using namespace dealii;
- *       using namespace Step18;
- * 
- *       Utilities::MPI::MPI_InitFinalize mpi_initialization(argc, argv, 1);
- * 
- *       TopLevel<3> elastic_problem;
- *       elastic_problem.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- * 
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
+  @endcode 
+
+  请注意，在乘法 $\mathbf{f}(\mathbf{x}_q) \cdot \varphi_i(\mathbf{x}_q)$ 中，我们利用了这样一个事实：对于所选的有限元， $\varphi_i$ 中只有一个矢量分量（即 <code>component_i</code> ）是非零的，因此我们也只需要考虑 $\mathbf{f}(\mathbf{x}_q)$ 的一个分量。
+
+  这基本上结束了我们在这个函数中提出的新材料。它后来必须处理边界条件以及悬挂节点约束，但这与我们以前在其他程序中已经要做的事情相类似。
+
+  <li>   <code>solve_linear_problem ()</code> [via <code>solve_timestep ()</code>  ] 。  与之前的函数不同，这个函数其实并不有趣，因为它做的是之前所有教程程序中的类似函数--用CG方法求解线性系统，使用不完全的LU分解作为预处理（在%parallel情况下，它分别使用每个处理器块的ILU）。它与  step-17  几乎没有变化。
+
+  <li>   <code>update_quadrature_point_history ()</code>  [通过 <code>solve_timestep ()</code>  ] 。基于之前计算的位移场 $\Delta \mathbf{u}^n$ ，我们根据<a href="#step_18.stress-update">[stress-update]</a>和<a href="#step_18.stress-update+rot">[stress-update+rot]</a>更新所有正交点的应力值，包括坐标系的旋转。
+
+  <li>   <code>move_mesh ()</code>  ：给定之前计算的解决方案，在这个函数中，我们通过移动每个顶点的位移矢量场来实现网格的变形。
+
+  <li>   <code>output_results ()</code>  : 这个函数只是根据我们上面所说的输出解决方案，也就是说，每个处理器只对自己的那部分领域进行计算输出。除了解决方案之外，我们还计算每个单元上所有正交点平均的应力的规范。  </ul>   
+
+有了这个代码的一般结构，我们只需要定义我们要解决的情况。在本程序中，我们选择模拟一个垂直圆柱体的准静态变形，其底部边界是固定的，顶部边界以规定的垂直速度被推倒。然而，顶层边界的水平速度没有被指定--我们可以把这种情况想象成一块油性良好的板从顶部推到圆柱体上，圆柱体顶层边界上的点被允许沿着板的表面水平滑动，但被板强迫向下移动。圆柱体的内部和外部边界是自由的，不受任何规定的偏转或牵引的影响。此外，重力作用于身体。
+
+程序文本将揭示更多关于如何实现这种情况，结果部分将显示这种模拟产生的位移模式。<a name="CommProg"></a> <h1> The commented program</h1>
+
+首先是通常的头文件列表，这些文件已经在以前的例子程序中使用过了。
+
+@code
+#include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/function.h>
+#include <deal.II/base/logstream.h>
+#include <deal.II/base/multithread_info.h>
+#include <deal.II/base/conditional_ostream.h>
+#include <deal.II/base/utilities.h>
+#include <deal.II/lac/vector.h>
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/dynamic_sparsity_pattern.h>
+#include <deal.II/lac/petsc_vector.h>
+#include <deal.II/lac/petsc_sparse_matrix.h>
+#include <deal.II/lac/petsc_solver.h>
+#include <deal.II/lac/petsc_precondition.h>
+#include <deal.II/lac/affine_constraints.h>
+#include <deal.II/lac/sparsity_tools.h>
+#include <deal.II/distributed/shared_tria.h>
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/grid_refinement.h>
+#include <deal.II/grid/manifold_lib.h>
+#include <deal.II/grid/grid_tools.h>
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/dofs/dof_tools.h>
+#include <deal.II/dofs/dof_renumbering.h>
+#include <deal.II/fe/fe_values.h>
+#include <deal.II/fe/fe_system.h>
+#include <deal.II/fe/fe_q.h>
+#include <deal.II/numerics/vector_tools.h>
+#include <deal.II/numerics/matrix_tools.h>
+#include <deal.II/numerics/data_out.h>
+#include <deal.II/numerics/error_estimator.h>
+
+
+@endcode 
+
+
+
+这里是头文件中仅有的三个新东西：一个包含文件，其中实现了等级为2和4的对称张量，正如介绍中所介绍的那样。
+
+@code
+#include <deal.II/base/symmetric_tensor.h>
+
+
+@endcode 
+
+
+
+最后是一个包含一些函数的头文件，这些函数将帮助我们计算域中特定点的局部坐标系的旋转矩阵。
+
+@code
+#include <deal.II/physics/transformations.h>
+
+
+@endcode 
+
+
+
+然后这又是简单的C++。
+
+@code
+#include <fstream>
+#include <iostream>
+#include <iomanip>
+
+
+@endcode 
+
+
+
+最后一步和以前所有的程序一样。
+
+@code
+namespace Step18
+{
+  using namespace dealii;
+
+
+@endcode 
+
+
+
+
+<a name="ThecodePointHistorycodeclass"></a> <h3>The <code>PointHistory</code> class</h3> 
+
+
+
+
+正如在介绍中提到的，我们必须在正交点存储旧的应力，以便在下一个时间步骤中计算该点的残余力。仅仅这一点就不能保证只有一个构件的结构，但在更复杂的应用中，我们还必须在正交点上存储更多的信息，如塑性的历史变量等。实质上，我们必须在这里存储所有影响材料当前状态的信息，在塑性中，这是由变形历史变量决定的。   
+
+
+除了能够存储数据之外，我们不会给这个类任何有意义的功能，也就是说，没有构造函数、析构函数或其他成员函数。在这种 "哑巴 "类的情况下，我们通常选择将其声明为  <code>struct</code> rather than <code>class</code>  ，以表明它们更接近于C语言风格的结构而不是C++风格的类。
+
+@code
+  template <int dim>
+  struct PointHistory
+  {
+    SymmetricTensor<2, dim> old_stress;
+  };
+
+
+
+@endcode 
+
+
+
+
+<a name="Thestressstraintensor"></a> <h3>The stress-strain tensor</h3>
+
+
+
+
+接下来，我们定义弹性中的应力和应变的线性关系。它由一个等级为4的张量给出，通常以  $C_{ijkl} = \mu (\delta_{ik} \delta_{jl} + \delta_{il}
+\delta_{jk}) + \lambda \delta_{ij} \delta_{kl}$  的形式书写。这个张量将等级2的对称张量映射到等级2的对称张量。对于Lam&eacute;常数 $\lambda$ 和 $\mu$ 的给定值，一个实现其创建的函数是直接的。
+
+@code
+  template <int dim>
+  SymmetricTensor<4, dim> get_stress_strain_tensor(const double lambda,
+                                                   const double mu)
+  {
+    SymmetricTensor<4, dim> tmp;
+    for (unsigned int i = 0; i < dim; ++i)
+      for (unsigned int j = 0; j < dim; ++j)
+        for (unsigned int k = 0; k < dim; ++k)
+          for (unsigned int l = 0; l < dim; ++l)
+            tmp[i][j][k][l] = (((i == k) && (j == l) ? mu : 0.0) +
+                               ((i == l) && (j == k) ? mu : 0.0) +
+                               ((i == j) && (k == l) ? lambda : 0.0));
+    return tmp;
+  }
+
+
+@endcode 
+
+
+
+通过这个函数，我们将在下面定义一个主类的静态成员变量，在整个程序中作为应力应变张量使用。请注意，在更复杂的程序中，这可能是某个类的成员变量，或者是一个根据其他输入返回应力-应变关系的函数。例如，在损伤理论模型中，Lam&eacute;常数被认为是一个点的先前应力/应变历史的函数。相反，在塑性中，如果材料在某一点达到了屈服应力，那么应力-应变张量的形式就会被修改，而且可能还取决于其先前的历史。   
+
+
+然而，在本方案中，我们假设材料是完全弹性和线性的，恒定的应力-应变张量对我们目前的目的是足够的。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a name="Auxiliaryfunctions"></a> <h3>Auxiliary functions</h3>
+
+
+
+
+在程序的其他部分之前，这里有几个我们需要的函数作为工具。这些是在内循环中调用的小函数，所以我们把它们标记为  <code>inline</code>  。   
+
+
+第一个函数通过形成这个形状函数的对称梯度来计算形状函数  <code>shape_func</code> at quadrature point <code>q_point</code>  的对称应变张量。例如，当我们想形成矩阵时，我们需要这个。   
+
+
+我们应该注意到，在以前我们处理矢量值问题的例子中，我们总是问有限元对象在哪个矢量分量中的形状函数实际上是不为零的，从而避免计算任何我们可以证明反正是零的项。为此，我们使用了 <code>fe.system_to_component_index</code> 函数来返回形状函数在哪个分量中为零，同时 <code>fe_values.shape_value</code> 和 <code>fe_values.shape_grad</code> 函数只返回形状函数的单个非零分量的值和梯度，如果这是一个矢量值元素。   
+
+
+这是一个优化，如果它不是非常关键的时间，我们可以用一个更简单的技术来解决：只需向 <code>fe_values</code> 询问一个给定形状函数的给定分量在给定正交点的值或梯度。这就是 <code>fe_values.shape_grad_component(shape_func,q_point,i)</code> 调用的作用：返回形状函数 <code>i</code> 的第三个分量在正交点 <code>q_point</code> 的全部梯度。如果某个形状函数的某个分量始终为零，那么这将简单地始终返回零。   
+
+
+如前所述，使用 <code>fe_values.shape_grad_component</code> 而不是 <code>fe.system_to_component_index</code> 和 <code>fe_values.shape_grad</code> 的组合可能效率较低，但其实现已针对这种情况进行了优化，应该不会有很大的减慢。我们在此演示该技术，因为它是如此的简单和直接。
+
+@code
+  template <int dim>
+  inline SymmetricTensor<2, dim> get_strain(const FEValues<dim> &fe_values,
+                                            const unsigned int   shape_func,
+                                            const unsigned int   q_point)
+  {
+@endcode 
+
+
+
+声明一个将保存返回值的临时。
+
+@code
+    SymmetricTensor<2, dim> tmp;
+
+
+@endcode 
+
+
+
+首先，填充对角线项，这只是矢量值形状函数的方向 <code>i</code> of the <code>i</code> 分量的导数。
+
+@code
+    for (unsigned int i = 0; i < dim; ++i)
+      tmp[i][i] = fe_values.shape_grad_component(shape_func, q_point, i)[i];
+
+
+@endcode 
+
+
+
+然后填入应变张量的其余部分。注意，由于张量是对称的，我们只需要计算一半（这里：右上角）的对角线外的元素， <code>SymmetricTensor</code> 类的实现确保至少到外面的对称条目也被填充（实际上，该类当然只存储一份）。在这里，我们选择了张量的右上半部分，但左下半部分也一样好。
+
+@code
+    for (unsigned int i = 0; i < dim; ++i)
+      for (unsigned int j = i + 1; j < dim; ++j)
+        tmp[i][j] =
+          (fe_values.shape_grad_component(shape_func, q_point, i)[j] +
+           fe_values.shape_grad_component(shape_func, q_point, j)[i]) /
+          2;
+
+
+    return tmp;
+  }
+
+
+
+@endcode 
+
+
+
+第二个函数做了非常类似的事情（因此被赋予了相同的名字）：从一个矢量值场的梯度计算对称应变张量。如果你已经有了一个解场， <code>fe_values.get_function_gradients</code> 函数允许你在正交点提取解场的每个分量的梯度。它返回的是一个秩-1张量的矢量：解的每个矢量分量有一个秩-1张量（梯度）。由此，我们必须通过转换数据存储格式和对称化来重建（对称的）应变张量。我们以与上面相同的方式来做，也就是说，我们通过首先填充对角线，然后只填充对称张量的一半来避免一些计算（ <code>SymmetricTensor</code> 类确保只写两个对称分量中的一个即可）。   
+
+
+不过在这之前，我们要确保输入有我们期望的那种结构：即有 <code>dim</code> 矢量分量，即每个坐标方向有一个位移分量。我们用 <code>Assert</code> 宏来测试这一点，如果不满足条件，我们的程序就会被终止。
+
+@code
+  template <int dim>
+  inline SymmetricTensor<2, dim>
+  get_strain(const std::vector<Tensor<1, dim>> &grad)
+  {
+    Assert(grad.size() == dim, ExcInternalError());
+
+
+    SymmetricTensor<2, dim> strain;
+    for (unsigned int i = 0; i < dim; ++i)
+      strain[i][i] = grad[i][i];
+
+
+    for (unsigned int i = 0; i < dim; ++i)
+      for (unsigned int j = i + 1; j < dim; ++j)
+        strain[i][j] = (grad[i][j] + grad[j][i]) / 2;
+
+
+    return strain;
+  }
+
+
+
+@endcode 
+
+
+
+最后，下面我们将需要一个函数来计算给定点的位移所引起的旋转矩阵。当然，事实上，单点的位移只有一个方向和一个幅度，正是方向和幅度的变化诱发了旋转。实际上，旋转矩阵可以从位移的梯度计算出来，或者更具体地说，从卷曲计算出来。   
+
+
+确定旋转矩阵的公式有点笨拙，特别是在三维中。对于2D来说，有一个更简单的方法，所以我们实现了这个函数两次，一次用于2D，一次用于3D，这样我们就可以在两个空间维度上编译和使用这个程序，如果需要的话--毕竟，deal.II是所有关于维度独立的编程和重复使用的算法，在2D的廉价计算中经过测试，用于3D的更昂贵的计算。这里有一个例子，我们必须为2D和3D实现不同的算法，但可以用独立于空间维度的方式来编写程序的其余部分。   
+
+
+所以，不再多说，来看看2D的实现。
+
+@code
+  Tensor<2, 2> get_rotation_matrix(const std::vector<Tensor<1, 2>> &grad_u)
+  {
+@endcode 
+
+
+
+首先，从梯度计算出速度场的卷曲。注意，我们是在2d中，所以旋转是一个标量。
+
+@code
+    const double curl = (grad_u[1][0] - grad_u[0][1]);
+
+
+@endcode 
+
+
+
+由此，计算出旋转的角度。
+
+@code
+    const double angle = std::atan(curl);
+
+
+@endcode 
+
+
+
+并由此建立反对称的旋转矩阵。我们希望这个旋转矩阵能够代表本地坐标系相对于全局直角坐标系的旋转，因此我们用一个负的角度来构建它。因此，旋转矩阵代表了从本地坐标系移动到全局坐标系所需的旋转。
+
+@code
+    return Physics::Transformations::Rotations::rotation_matrix_2d(-angle);
+  }
+
+
+
+@endcode 
+
+
+
+三维的情况就比较复杂了。
+
+@code
+  Tensor<2, 3> get_rotation_matrix(const std::vector<Tensor<1, 3>> &grad_u)
+  {
+@endcode 
+
+
+
+同样首先计算速度场的卷曲。这一次，它是一个实向量。
+
+@code
+    const Point<3> curl(grad_u[2][1] - grad_u[1][2],
+                        grad_u[0][2] - grad_u[2][0],
+                        grad_u[1][0] - grad_u[0][1]);
+
+
+@endcode 
+
+
+
+从这个矢量，利用它的大小，计算旋转角的正切，并从它计算出相对于笛卡尔基础的实际旋转角。
+
+@code
+    const double tan_angle = std::sqrt(curl * curl);
+    const double angle     = std::atan(tan_angle);
+
+
+@endcode 
+
+
+
+现在，这里有一个问题：如果旋转角度太小，这意味着没有旋转发生（例如平移运动）。在这种情况下，旋转矩阵就是身份矩阵。     
+
+
+我们强调这一点的原因是，在这种情况下，我们有  <code>tan_angle==0</code>  。再往下看，我们在计算旋转轴的时候需要除以这个数字，这样做除法的时候会遇到麻烦。因此，让我们走捷径，如果旋转角度真的很小，就简单地返回同一矩阵。
+
+@code
+    if (std::abs(angle) < 1e-9)
+      {
+        static const double rotation[3][3] = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+        static const Tensor<2, 3> rot(rotation);
+        return rot;
+      }
+
+
+@endcode 
+
+
+
+否则就计算真实的旋转矩阵。为此，我们再次依靠一个预定义的函数来计算本地坐标系的旋转矩阵。
+
+@code
+    const Point<3> axis = curl / tan_angle;
+    return Physics::Transformations::Rotations::rotation_matrix_3d(axis,
+
+
+                                                                   -angle);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeTopLevelcodeclass"></a><h3>The <code>TopLevel</code> class</h3>
+
+
+
+
+这是该程序的主类。由于命名空间已经表明我们在解决什么问题，让我们用它的作用来称呼它：它指导程序的流程，也就是说，它是顶层驱动。   
+
+
+这个类的成员变量基本上和以前一样，即它必须有一个三角形，一个DoF处理程序和相关的对象，如约束、描述线性系统的变量等。现在还有很多成员函数，我们将在下面解释。   
+
+
+然而，该类的外部接口是不变的：它有一个公共的构造函数和析构函数，并且它有一个 <code>run</code> 函数来启动所有的工作。
+
+@code
+  template <int dim>
+  class TopLevel
+  {
+  public:
+    TopLevel();
+    ~TopLevel();
+    void run();
+
+
+  private:
+@endcode 
+
+
+
+私有接口比  step-17  中的更加广泛。首先，我们显然需要创建初始网格的函数，设置描述当前网格上的线性系统的变量（即矩阵和向量），然后是实际组装系统的函数，指导每个时间步长中必须解决的问题，一个解决每个时间步长中出现的线性系统的函数（并返回它的迭代次数），最后在正确的网格上输出解的向量。
+
+@code
+    void create_coarse_grid();
+
+
+    void setup_system();
+
+
+    void assemble_system();
+
+
+    void solve_timestep();
+
+
+    unsigned int solve_linear_problem();
+
+
+    void output_results() const;
+
+
+@endcode 
+
+
+
+除了前两个，所有这些函数都在每个时间步中被调用。由于第一个时间步骤有点特殊，我们有单独的函数来描述在一个时间步骤中必须发生的事情：一个用于第一个时间步骤，另一个用于所有后续时间步骤。
+
+@code
+    void do_initial_timestep();
+
+
+    void do_timestep();
+
+
+@endcode 
+
+
+
+然后我们需要一大堆函数来做各种事情。第一个函数是细化初始网格：我们从原始状态的粗略网格开始，解决问题，然后查看并相应地细化网格，然后再次开始同样的过程，再次以原始状态进行。因此，细化初始网格比在两个连续的时间步骤之间细化网格要简单一些，因为它不涉及将数据从旧的三角测量转移到新的三角测量，特别是存储在每个正交点的历史数据。
+
+@code
+    void refine_initial_grid();
+
+
+@endcode 
+
+
+
+在每个时间步骤结束时，我们要根据这个时间步骤计算的增量位移来移动网格顶点。这就是完成这个任务的函数。
+
+@code
+    void move_mesh();
+
+
+@endcode 
+
+
+
+接下来是两个处理存储在每个正交点的历史变量的函数。第一个函数在第一个时间步长之前被调用，以便为历史变量设置一个原始状态。它只对属于当前处理器的单元上的正交点起作用。
+
+@code
+    void setup_quadrature_point_history();
+
+
+@endcode 
+
+
+
+第二个是在每个时间段结束时更新历史变量。
+
+@code
+    void update_quadrature_point_history();
+
+
+@endcode 
+
+
+
+这是新的共享三角法。
+
+@code
+    parallel::shared::Triangulation<dim> triangulation;
+
+
+    FESystem<dim> fe;
+
+
+    DoFHandler<dim> dof_handler;
+
+
+    AffineConstraints<double> hanging_node_constraints;
+
+
+@endcode 
+
+
+
+这个程序的一个不同之处在于，我们在类声明中声明了正交公式。原因是在所有其他程序中，如果我们在计算矩阵和右手边时使用不同的正交公式，并没有什么坏处，比如说。然而，在目前的情况下，它确实如此：我们在正交点中存储了信息，所以我们必须确保程序的所有部分都同意它们的位置以及每个单元格上有多少个。因此，让我们首先声明整个程序将使用的正交公式... 
+
+@code
+    const QGauss<dim> quadrature_formula;
+
+
+@endcode 
+
+
+
+...然后也有一个历史对象的向量，在我们负责的那些单元格上的每个正交点都有一个（也就是说，我们不为其他处理器拥有的单元格上的正交点存储历史数据）。请注意，我们可以像在  step-44  中那样使用 CellDataStorage 类来代替我们自己存储和管理这些数据。然而，为了演示的目的，在这种情况下，我们手动管理存储。
+
+@code
+    std::vector<PointHistory<dim>> quadrature_point_history;
+
+
+@endcode 
+
+
+
+访问这个对象的方式是通过每个单元格、面或边持有的 <code>user pointer</code> ：它是一个 <code>void*</code> 指针，可以被应用程序用来将任意数据关联到单元格、面或边上。程序对这些数据的实际操作属于自己的职责范围，库只是为这些指针分配了一些空间，而应用程序可以设置和读取每个对象的指针。
+
+
+
+
+
+
+
+
+进一步说：我们需要要解决的线性系统的对象，即矩阵、右手边的向量和解向量。由于我们预计要解决大问题，我们使用了与 step-17 中相同的类型，即建立在PETSc库之上的分布式%并行矩阵和向量。方便的是，它们也可以在只在一台机器上运行时使用，在这种情况下，这台机器正好是我们的%并行宇宙中唯一的机器。     
+
+
+然而，与 step-17 不同的是，我们不以分布式方式存储解向量--这里是在每个时间步骤中计算的增量位移。也就是说，在计算时它当然必须是一个分布式矢量，但紧接着我们确保每个处理器都有一个完整的副本。原因是我们已经在 step-17 中看到，许多函数需要一个完整的副本。虽然得到它并不难，但这需要在网络上进行通信，因此很慢。此外，这些都是重复的相同操作，这当然是不可取的，除非不必总是存储整个向量的收益超过了它。在编写这个程序时，事实证明，我们在很多地方都需要一份完整的解决方案，以至于只在必要时才获得它似乎不值得。相反，我们选择一劳永逸地获得完整的副本，而立即摆脱分散的副本。因此，请注意， <code>incremental_displacement</code> 的声明并没有像中间命名空间 <code>MPI</code> 所表示的那样表示一个分布式向量。
+
+@code
+    PETScWrappers::MPI::SparseMatrix system_matrix;
+
+
+    PETScWrappers::MPI::Vector system_rhs;
+
+
+    Vector<double> incremental_displacement;
+
+
+@endcode 
+
+
+
+接下来的变量块与问题的时间依赖性有关：它们表示我们要模拟的时间间隔的长度，现在的时间和时间步数，以及现在时间步数的长度。
+
+@code
+    double       present_time;
+    double       present_timestep;
+    double       end_time;
+    unsigned int timestep_no;
+
+
+@endcode 
+
+
+
+然后是几个与%并行处理有关的变量：首先，一个变量表示我们使用的MPI通信器，然后是两个数字，告诉我们有多少个参与的处理器，以及我们在这个世界上的位置。最后，一个流对象，确保只有一个处理器实际产生输出到控制台。这与  step-17  中的所有内容相同。
+
+@code
+    MPI_Comm mpi_communicator;
+
+
+    const unsigned int n_mpi_processes;
+
+
+    const unsigned int this_mpi_process;
+
+
+    ConditionalOStream pcout;
+
+
+@endcode 
+
+
+
+我们正在存储本地拥有的和本地相关的索引。
+
+@code
+    IndexSet locally_owned_dofs;
+    IndexSet locally_relevant_dofs;
+
+
+@endcode 
+
+
+
+最后，我们有一个静态变量，表示应力和应变之间的线性关系。由于它是一个不依赖于任何输入的常量对象（至少在这个程序中不依赖于），我们把它作为一个静态变量，并将在我们定义这个类的构造函数的同一个地方初始化它。
+
+@code
+    static const SymmetricTensor<4, dim> stress_strain_tensor;
+  };
+
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeBodyForcecodeclass"></a> <h3>The <code>BodyForce</code> class</h3>
+
+
+
+
+在我们进入这个程序的主要功能之前，我们必须定义哪些力将作用在我们想要研究的变形的体上。这些力可以是体力，也可以是边界力。体力通常是由四种基本的物理力类型之一所介导的：重力、强弱相互作用和电磁力。除非人们想考虑亚原子物体（对于这些物体，无论如何准静态变形是不相关的，也是不合适的描述），否则只需要考虑引力和电磁力。为了简单起见，让我们假设我们的身体有一定的质量密度，但要么是非磁性的，不导电的，要么周围没有明显的电磁场。在这种情况下，身体的力只是 <code>rho g</code>, where <code>rho</code> 是材料密度， <code>g</code> 是一个负Z方向的矢量，大小为9.81米/秒^2。 密度和 <code>g</code> 都是在函数中定义的，我们把7700 kg/m^3作为密度，这是对钢的通常假设值。   
+
+
+为了更普遍一点，也为了能够在2d中进行计算，我们意识到体力总是一个返回 <code>dim</code> 维矢量的函数。我们假设重力沿着最后一个，即 <code>dim-1</code> 个坐标的负方向作用。考虑到以前的例子程序中的类似定义，这个函数的其余实现应该大部分是不言自明的。请注意，身体的力量与位置无关；为了避免编译器对未使用的函数参数发出警告，我们因此注释了 <code>vector_value</code> 函数的第一个参数的名称。
+
+@code
+  template <int dim>
+  class BodyForce : public Function<dim>
+  {
+  public:
+    BodyForce();
+
+
+    virtual void vector_value(const Point<dim> &p,
+                              Vector<double> &  values) const override;
+
+
+    virtual void
+    vector_value_list(const std::vector<Point<dim>> &points,
+                      std::vector<Vector<double>> &  value_list) const override;
+  };
+
+
+
+  template <int dim>
+  BodyForce<dim>::BodyForce()
+    : Function<dim>(dim)
+  {}
+
+
+
+  template <int dim>
+  inline void BodyForce<dim>::vector_value(const Point<dim> & /*p*/,
+                                           Vector<double> &values) const
+  {
+    Assert(values.size() == dim, ExcDimensionMismatch(values.size(), dim));
+
+
+    const double g   = 9.81;
+    const double rho = 7700;
+
+
+    values          = 0;
+    values(dim - 1) = -rho * g;
+  }
+
+
+
+
+
+  template <int dim>
+  void BodyForce<dim>::vector_value_list(
+    const std::vector<Point<dim>> &points,
+    std::vector<Vector<double>> &  value_list) const
+  {
+    const unsigned int n_points = points.size();
+
+
+    Assert(value_list.size() == n_points,
+           ExcDimensionMismatch(value_list.size(), n_points));
+
+
+    for (unsigned int p = 0; p < n_points; ++p)
+      BodyForce<dim>::vector_value(points[p], value_list[p]);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeIncrementalBoundaryValuecodeclass"></a> <h3>The <code>IncrementalBoundaryValue</code> class</h3>
+
+
+
+
+除了体外力，运动还可以由边界力和强制边界位移引起。后一种情况相当于以这样的方式选择力，使其诱发某些位移。   
+
+
+对于准静态位移，典型的边界力是对一个体的压力，或者对另一个体的切向摩擦。我们在这里选择了一个更简单的情况：我们规定边界（部分）的某种运动，或者至少是位移矢量的某些分量。我们用另一个矢量值函数来描述这一点，对于边界上的一个给定点，返回规定的位移。   
+
+
+由于我们有一个随时间变化的问题，边界的位移增量等于在时间段内累积的位移。因此，这个类必须知道当前时间和当前时间步长，然后可以将位移增量近似为当前速度乘以当前时间步长。   
+
+
+在本程序中，我们选择了一种简单的边界位移形式：我们以恒定的速度将顶部边界向下位移。边界的其余部分要么是固定的（然后用 <code>Functions::ZeroFunction</code> 类型的对象来描述），要么是自由的（Neumann类型，在这种情况下不需要做什么特别的事情）。 然后，利用我们通过之前所有的例子程序获得的知识，描述持续向下运动的类的实现应该是显而易见的。
+
+@code
+  template <int dim>
+  class IncrementalBoundaryValues : public Function<dim>
+  {
+  public:
+    IncrementalBoundaryValues(const double present_time,
+                              const double present_timestep);
+
+
+    virtual void vector_value(const Point<dim> &p,
+                              Vector<double> &  values) const override;
+
+
+    virtual void
+    vector_value_list(const std::vector<Point<dim>> &points,
+                      std::vector<Vector<double>> &  value_list) const override;
+
+
+  private:
+    const double velocity;
+    const double present_time;
+    const double present_timestep;
+  };
+
+
+
+  template <int dim>
+  IncrementalBoundaryValues<dim>::IncrementalBoundaryValues(
+    const double present_time,
+    const double present_timestep)
+    : Function<dim>(dim)
+    , velocity(.08)
+    , present_time(present_time)
+    , present_timestep(present_timestep)
+  {}
+
+
+
+  template <int dim>
+  void
+  IncrementalBoundaryValues<dim>::vector_value(const Point<dim> & /*p*/,
+                                               Vector<double> &values) const
+  {
+    Assert(values.size() == dim, ExcDimensionMismatch(values.size(), dim));
+
+
+    values    = 0;
+    values(2) = -present_timestep * velocity;
+  }
+
+
+
+
+
+  template <int dim>
+  void IncrementalBoundaryValues<dim>::vector_value_list(
+    const std::vector<Point<dim>> &points,
+    std::vector<Vector<double>> &  value_list) const
+  {
+    const unsigned int n_points = points.size();
+
+
+    Assert(value_list.size() == n_points,
+           ExcDimensionMismatch(value_list.size(), n_points));
+
+
+    for (unsigned int p = 0; p < n_points; ++p)
+      IncrementalBoundaryValues<dim>::vector_value(points[p], value_list[p]);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="ImplementationofthecodeTopLevelcodeclass"></a> <h3>Implementation of the <code>TopLevel</code> class</h3>
+
+
+
+
+现在是主类的实现。首先，我们初始化应力应变张量，我们将其声明为一个静态常量变量。我们选择了适合于钢铁的Lam&eacute;常数。
+
+@code
+  template <int dim>
+  const SymmetricTensor<4, dim> TopLevel<dim>::stress_strain_tensor =
+    get_stress_strain_tensor<dim>(/*lambda = */ 9.695e10,
+                                  /*mu     = */ 7.617e10);
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Thepublicinterface"></a> <h4>The public interface</h4>
+
+
+
+
+下一步是构造函数和析构函数的定义。这里没有什么意外：我们为解决方案的每个 <code>dim</code> 矢量分量选择线性和连续有限元，以及每个坐标方向上有2个点的高斯正交公式。解构器应该是很明显的。
+
+@code
+  template <int dim>
+  TopLevel<dim>::TopLevel()
+    : triangulation(MPI_COMM_WORLD)
+    , fe(FE_Q<dim>(1), dim)
+    , dof_handler(triangulation)
+    , quadrature_formula(fe.degree + 1)
+    , present_time(0.0)
+    , present_timestep(1.0)
+    , end_time(10.0)
+    , timestep_no(0)
+    , mpi_communicator(MPI_COMM_WORLD)
+    , n_mpi_processes(Utilities::MPI::n_mpi_processes(mpi_communicator))
+    , this_mpi_process(Utilities::MPI::this_mpi_process(mpi_communicator))
+    , pcout(std::cout, this_mpi_process == 0)
+  {}
+
+
+
+
+
+  template <int dim>
+  TopLevel<dim>::~TopLevel()
+  {
+    dof_handler.clear();
+  }
+
+
+
+
+
+@endcode 
+
+
+
+最后一个公共函数是指导所有工作的，  <code>run()</code>  。它初始化了描述我们目前所处的时间位置的变量，然后运行第一个时间步长，然后在所有其他时间步长上循环。注意，为了简单起见，我们使用一个固定的时间步长，而一个更复杂的程序当然要以某种更合理的方式自适应地选择时间步长。
+
+@code
+  template <int dim>
+  void TopLevel<dim>::run()
+  {
+    do_initial_timestep();
+
+
+    while (present_time < end_time)
+      do_timestep();
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="TopLevelcreate_coarse_grid"></a> <h4>TopLevel::create_coarse_grid</h4>
+
+
+
+
+按照上面声明的顺序，下一个函数是创建粗略网格的函数，我们从这里开始。对于这个示例程序，我们想计算圆柱体在轴向压缩下的变形。因此第一步是生成一个长度为3，内外半径分别为0.8和1的圆柱体的网格。幸运的是，有一个库函数可以生成这样的网格。   
+
+
+第二步，我们必须将边界条件与圆柱体的上下两个面联系起来。我们为边界面选择一个边界指标0，其特征是中点的Z坐标为0（底面），指标1为Z=3（顶面）；最后，我们对圆柱体外壳内部的所有面使用边界指标2，外部使用3。
+
+@code
+  template <int dim>
+  void TopLevel<dim>::create_coarse_grid()
+  {
+    const double inner_radius = 0.8, outer_radius = 1;
+    GridGenerator::cylinder_shell(triangulation, 3, inner_radius, outer_radius);
+    for (const auto &cell : triangulation.active_cell_iterators())
+      for (const auto &face : cell->face_iterators())
+        if (face->at_boundary())
+          {
+            const Point<dim> face_center = face->center();
+
+
+            if (face_center[2] == 0)
+              face->set_boundary_id(0);
+            else if (face_center[2] == 3)
+              face->set_boundary_id(1);
+            else if (std::sqrt(face_center[0] * face_center[0] +
+                               face_center[1] * face_center[1]) <
+                     (inner_radius + outer_radius) / 2)
+              face->set_boundary_id(2);
+            else
+              face->set_boundary_id(3);
+          }
+
+
+@endcode 
+
+
+
+一旦所有这些都完成了，我们就可以对网格进行一次全面的细化。
+
+@code
+    triangulation.refine_global(1);
+
+
+@endcode 
+
+
+
+作为最后一步，我们需要设置一个干净的数据状态，我们将这些数据存储在所有单元上的正交点中，在目前的处理器上处理。
+
+@code
+    setup_quadrature_point_history();
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TopLevelsetup_system"></a><h4>TopLevel::setup_system</h4> 
+
+
+
+
+下一个函数是为一个给定的网格设置数据结构。这与 step-17 中的方法基本相同：分配自由度，然后对这些自由度进行排序，使每个处理器得到一个连续的块。请注意，每个处理器的细分块是在创建或完善网格的函数中处理的，与之前的例子程序不同（发生这种情况的时间点主要是口味问题；在这里，我们选择在创建网格时进行，因为在 <code>do_initial_timestep</code> 和 <code>do_timestep</code> 函数中，我们想在尚未调用当前函数的时候输出每个处理器的单元数）。
+
+@code
+  template <int dim>
+  void TopLevel<dim>::setup_system()
+  {
+    dof_handler.distribute_dofs(fe);
+    locally_owned_dofs = dof_handler.locally_owned_dofs();
+    DoFTools::extract_locally_relevant_dofs(dof_handler, locally_relevant_dofs);
+
+
+@endcode 
+
+
+
+下一步是设置由于悬挂节点而产生的约束。这在以前已经处理过很多次了。
+
+@code
+    hanging_node_constraints.clear();
+    DoFTools::make_hanging_node_constraints(dof_handler,
+                                            hanging_node_constraints);
+    hanging_node_constraints.close();
+
+
+@endcode 
+
+
+
+然后我们要设置矩阵。这里我们偏离了  step-17  ，在那里我们简单地使用了PETSc的能力，即只知道矩阵的大小，随后分配那些被写入的非零元素。虽然从正确性的角度来看，这样做很好，但是效率却不高：如果我们不给PETSc提供关于哪些元素被写入的线索，那么当我们第一次设置矩阵中的元素时（即在第一个时间步中），它就会慢得令人难以忍受。后来，当元素被分配后，一切都快多了。在我们所做的实验中，如果我们指示PETSc哪些元素将被使用，哪些不被使用，那么第一个时间步骤可以加快近两个数量级。     
+
+
+要做到这一点，我们首先要生成我们要处理的矩阵的稀疏模式，并确保浓缩的悬挂节点约束在稀疏模式中增加必要的额外条目。
+
+@code
+    DynamicSparsityPattern sparsity_pattern(locally_relevant_dofs);
+    DoFTools::make_sparsity_pattern(dof_handler,
+                                    sparsity_pattern,
+                                    hanging_node_constraints,
+                                    /*keep constrained dofs*/ false);
+    SparsityTools::distribute_sparsity_pattern(sparsity_pattern,
+                                               locally_owned_dofs,
+                                               mpi_communicator,
+                                               locally_relevant_dofs);
+@endcode 
+
+
+
+请注意，我们在这里使用了在 step-11 中已经介绍过的 <code>DynamicSparsityPattern</code> 类，而不是我们在所有其他情况下使用的 <code>SparsityPattern</code> 类。其原因是，为了使后一个类发挥作用，我们必须给每一行的条目数提供一个初始的上限，这项任务传统上是由 <code>DoFHandler::max_couplings_between_dofs()</code> 完成。然而，这个函数有一个严重的问题：它必须计算每一行中非零项的数量的上限，而这是一个相当复杂的任务，特别是在3D中。实际上，虽然它在2D中相当准确，但在3D中经常得出太大的数字，在这种情况下， <code>SparsityPattern</code> 一开始就分配了太多的内存，经常是几百MB。后来当 <code>DoFTools::make_sparsity_pattern</code> 被调用时，我们意识到我们不需要那么多的内存，但这时已经太晚了：对于大问题，临时分配太多的内存会导致内存不足的情况。     
+
+
+为了避免这种情况，我们采用了 <code>DynamicSparsityPattern</code> 类，该类速度较慢，但不需要对每行的非零条目数进行任何预先估计。因此，它在任何时候都只分配所需的内存，而且我们甚至可以为大型的三维问题建立它。     
+
+
+同样值得注意的是，由于 parallel::shared::Triangulation, 的特殊性，我们构建的稀疏模式是全局的，即包括所有的自由度，无论它们是由我们所在的处理器还是另一个处理器拥有（如果这个程序通过MPI以%并行方式运行）。这当然不是最好的--它限制了我们可以解决的问题的规模，因为在每个处理器上存储整个稀疏模式（即使只是短时间）的规模并不大。然而，在程序中还有几个地方我们是这样做的，例如，我们总是把全局三角测量和DoF处理对象保留在周围，即使我们只对它们的一部分进行工作。目前，deal.II没有必要的设施来完全分配这些对象（事实上，这项任务在自适应网格中很难实现，因为随着网格的自适应细化，领域的均衡细分往往会变得不均衡）。     
+
+
+有了这个数据结构，我们就可以去找PETSc稀疏矩阵，告诉它预先分配所有我们以后要写的条目。
+
+@code
+    system_matrix.reinit(locally_owned_dofs,
+                         locally_owned_dofs,
+                         sparsity_pattern,
+                         mpi_communicator);
+@endcode 
+
+
+
+在这一点上，不再需要对稀疏模式有任何明确的了解，我们可以让 <code>sparsity_pattern</code> 这个变量离开范围，不会有任何问题。
+
+
+
+
+这个函数的最后一个任务是将右侧向量和求解向量重置为正确的大小；记住，求解向量是一个本地向量，不像右侧向量是一个分布式%并行向量，因此需要知道MPI通信器，它应该通过这个通信器来传输消息。
+
+@code
+    system_rhs.reinit(locally_owned_dofs, mpi_communicator);
+    incremental_displacement.reinit(dof_handler.n_dofs());
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TopLevelassemble_system"></a> <h4>TopLevel::assemble_system</h4>
+
+
+
+
+同样，组装系统矩阵和右手边的结构与之前许多例子程序的结构相同。特别是，它主要等同于 step-17 ，除了不同的右手边，现在只需要考虑到内部应力。此外，通过使用 <code>SymmetricTensor</code> 类，组装矩阵明显变得更加透明：请注意形成2级和4级对称张量的标量乘积的优雅性。这个实现也更加通用，因为它与我们可能使用或不使用各向同性的弹性张量这一事实无关。   
+
+
+汇编程序的第一部分和以往一样。
+
+@code
+  template <int dim>
+  void TopLevel<dim>::assemble_system()
+  {
+    system_rhs    = 0;
+    system_matrix = 0;
+
+
+    FEValues<dim> fe_values(fe,
+                            quadrature_formula,
+                            update_values | update_gradients |
+                              update_quadrature_points | update_JxW_values);
+
+
+    const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
+    const unsigned int n_q_points    = quadrature_formula.size();
+
+
+    FullMatrix<double> cell_matrix(dofs_per_cell, dofs_per_cell);
+    Vector<double>     cell_rhs(dofs_per_cell);
+
+
+    std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
+
+
+    BodyForce<dim>              body_force;
+    std::vector<Vector<double>> body_force_values(n_q_points,
+                                                  Vector<double>(dim));
+
+
+@endcode 
+
+
+
+如同在 step-17 中一样，我们只需要在属于当前处理器的所有单元中循环。
+
+@code
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      if (cell->is_locally_owned())
+        {
+          cell_matrix = 0;
+          cell_rhs    = 0;
+
+
+          fe_values.reinit(cell);
+
+
+@endcode 
+
+
+
+然后在所有指数i,j和正交点上循环，并从这个单元汇集系统矩阵贡献。 注意我们如何从 <code>FEValues</code> 对象中提取给定正交点的形状函数的对称梯度（应变），以及我们如何优雅地形成三重收缩 <code>eps_phi_i : C : eps_phi_j</code> ；后者需要与 step-17 中需要的笨拙计算进行比较，无论是在介绍中，还是在程序的相应位置。
+
+@code
+          for (unsigned int i = 0; i < dofs_per_cell; ++i)
+            for (unsigned int j = 0; j < dofs_per_cell; ++j)
+              for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
+                {
+                  const SymmetricTensor<2, dim>
+                    eps_phi_i = get_strain(fe_values, i, q_point),
+                    eps_phi_j = get_strain(fe_values, j, q_point);
+
+
+                  cell_matrix(i, j) += (eps_phi_i *            
+                                        stress_strain_tensor * 
+                                        eps_phi_j              
+                                        ) *                    
+                                       fe_values.JxW(q_point); 
+                }
+
+
+
+@endcode 
+
+
+
+然后也要把本地的右手边贡献集合起来。为此，我们需要获取该正交点的先验应力值。为了得到它，我们使用该单元的用户指针，该指针指向全局数组中对应于本单元第一个正交点的正交点数据，然后添加一个与我们目前考虑的正交点的索引相对应的偏移量。
+
+@code
+          const PointHistory<dim> *local_quadrature_points_data =
+            reinterpret_cast<PointHistory<dim> *>(cell->user_pointer());
+@endcode 
+
+
+
+此外，我们需要该单元上正交点的外体力值。
+
+@code
+          body_force.vector_value_list(fe_values.get_quadrature_points(),
+                                       body_force_values);
+@endcode 
+
+
+
+然后我们可以在这个单元的所有自由度上进行循环，并计算出对右手边的局部贡献。
+
+@code
+          for (unsigned int i = 0; i < dofs_per_cell; ++i)
+            {
+              const unsigned int component_i =
+                fe.system_to_component_index(i).first;
+
+
+              for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
+                {
+                  const SymmetricTensor<2, dim> &old_stress =
+                    local_quadrature_points_data[q_point].old_stress;
+
+
+                  cell_rhs(i) +=
+                    (body_force_values[q_point](component_i) *
+                       fe_values.shape_value(i, q_point) -
+                     old_stress * get_strain(fe_values, i, q_point)) *
+                    fe_values.JxW(q_point);
+                }
+            }
+
+
+@endcode 
+
+
+
+现在我们有了对线性系统的局部贡献，我们需要将其转移到全局对象中。这与 step-17 中的做法完全相同。
+
+@code
+          cell->get_dof_indices(local_dof_indices);
+
+
+          hanging_node_constraints.distribute_local_to_global(cell_matrix,
+                                                              cell_rhs,
+                                                              local_dof_indices,
+                                                              system_matrix,
+                                                              system_rhs);
+        }
+
+
+@endcode 
+
+
+
+现在压缩矢量和系统矩阵。
+
+@code
+    system_matrix.compress(VectorOperation::add);
+    system_rhs.compress(VectorOperation::add);
+
+
+
+@endcode 
+
+
+
+最后一步是再次固定边界值，就像我们在以前的程序中已经做的那样。一个稍微复杂的问题是， <code>apply_boundary_values</code> 函数希望有一个与矩阵和右手边兼容的求解向量（即这里是一个分布式%并行向量，而不是我们在这个程序中使用的顺序向量），以便用正确的边界值预设求解向量的条目。我们以临时向量的形式提供这样一个兼容向量，然后将其复制到顺序向量中。
+
+
+
+
+我们通过展示边界值如何被灵活使用来弥补这一复杂性：按照我们创建三角形的方式，有三个不同的边界指标用来描述领域，对应于底面和顶面，以及内/外表面。我们希望施加以下类型的边界条件。内外圆柱体表面没有外力，这一事实对应于自然（诺伊曼型）边界条件，我们不需要做任何事情。在底部，我们希望完全没有运动，对应于圆柱体在边界的这一部分被夹住或粘住。然而，在顶部，我们希望有一个规定的垂直向下的运动来压缩圆柱体；此外，我们只希望限制垂直运动，而不是水平运动--可以把这种情况看作是一块油性良好的板子坐在圆柱体的顶部将其向下推：圆柱体的原子被迫向下移动，但它们可以自由地沿着板子水平滑动。
+
+
+
+
+描述的方法如下：对于边界指标为零（底面），我们使用一个二维的零函数，代表在任何坐标方向没有运动。对于指标1（顶面）的边界，我们使用 <code>IncrementalBoundaryValues</code> 类，但我们为 <code>VectorTools::interpolate_boundary_values</code> 函数指定一个额外的参数，表示它应该适用于哪些矢量分量；这是一个针对每个矢量分量的bools矢量，由于我们只想限制垂直运动，它只有其最后一个分量的设置。
+
+@code
+    FEValuesExtractors::Scalar                z_component(dim - 1);
+    std::map<types::global_dof_index, double> boundary_values;
+    VectorTools::interpolate_boundary_values(dof_handler,
+                                             0,
+                                             Functions::ZeroFunction<dim>(dim),
+                                             boundary_values);
+    VectorTools::interpolate_boundary_values(
+      dof_handler,
+      1,
+      IncrementalBoundaryValues<dim>(present_time, present_timestep),
+      boundary_values,
+      fe.component_mask(z_component));
+
+
+    PETScWrappers::MPI::Vector tmp(locally_owned_dofs, mpi_communicator);
+    MatrixTools::apply_boundary_values(
+      boundary_values, system_matrix, tmp, system_rhs, false);
+    incremental_displacement = tmp;
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TopLevelsolve_timestep"></a> <h4>TopLevel::solve_timestep</h4>
+
+
+
+
+下一个函数是控制在一个时间段内所有必须发生的事情的函数。从函数名称来看，事情的顺序应该是相对不言而喻的。
+
+@code
+  template <int dim>
+  void TopLevel<dim>::solve_timestep()
+  {
+    pcout << "    Assembling system..." << std::flush;
+    assemble_system();
+    pcout << " norm of rhs is " << system_rhs.l2_norm() << std::endl;
+
+
+    const unsigned int n_iterations = solve_linear_problem();
+
+
+    pcout << "    Solver converged in " << n_iterations << " iterations."
+          << std::endl;
+
+
+    pcout << "    Updating quadrature point data..." << std::flush;
+    update_quadrature_point_history();
+    pcout << std::endl;
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TopLevelsolve_linear_problem"></a> <h4>TopLevel::solve_linear_problem</h4>
+
+
+
+
+再次求解线性系统的工作原理与之前基本相同。唯一不同的是，我们只想保留一份完整的本地解向量，而不是从PETSc的求解程序中得到的分布式解向量。为此，我们为分布式向量声明一个本地临时变量，并用本地变量的内容对其进行初始化（记得在 <code>apply_boundary_values</code> 中调用的 <code>assemble_system</code> 函数预设了该向量中边界节点的值），用它进行求解，并在函数结束时将其再次复制到我们作为成员变量声明的完整本地向量中。然后，挂起的节点约束只分布在本地拷贝上，即在每个处理器上相互独立。
+
+@code
+  template <int dim>
+  unsigned int TopLevel<dim>::solve_linear_problem()
+  {
+    PETScWrappers::MPI::Vector distributed_incremental_displacement(
+      locally_owned_dofs, mpi_communicator);
+    distributed_incremental_displacement = incremental_displacement;
+
+
+    SolverControl solver_control(dof_handler.n_dofs(),
+                                 1e-16 * system_rhs.l2_norm());
+
+
+    PETScWrappers::SolverCG cg(solver_control, mpi_communicator);
+
+
+    PETScWrappers::PreconditionBlockJacobi preconditioner(system_matrix);
+
+
+    cg.solve(system_matrix,
+             distributed_incremental_displacement,
+             system_rhs,
+             preconditioner);
+
+
+    incremental_displacement = distributed_incremental_displacement;
+
+
+    hanging_node_constraints.distribute(incremental_displacement);
+
+
+    return solver_control.last_step();
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TopLeveloutput_results"></a> <h4>TopLevel::output_results</h4> 
+
+
+
+
+这个函数生成.vtu格式的图形输出，如介绍中所解释的。每个进程将只对其拥有的单元格进行工作，然后将结果写入自己的文件中。此外，处理器0将写入引用所有.vtu文件的记录文件。   
+
+
+这个函数的关键部分是给 <code>DataOut</code> 类一个方法，使其只对当前进程拥有的单元格进行工作。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  void TopLevel<dim>::output_results() const
+  {
+    DataOut<dim> data_out;
+    data_out.attach_dof_handler(dof_handler);
+
+
+@endcode 
+
+
+
+然后，就像在 step-17 中一样，定义求解变量的名称（这里是位移增量）并排队输出求解向量。注意在下面的开关中，我们如何确保如果空间维度应该不被处理，我们会抛出一个异常，说我们还没有实现这种情况（另一个防御性编程的案例）。
+
+@code
+    std::vector<std::string> solution_names;
+    switch (dim)
+      {
+        case 1:
+          solution_names.emplace_back("delta_x");
+          break;
+        case 2:
+          solution_names.emplace_back("delta_x");
+          solution_names.emplace_back("delta_y");
+          break;
+        case 3:
+          solution_names.emplace_back("delta_x");
+          solution_names.emplace_back("delta_y");
+          solution_names.emplace_back("delta_z");
+          break;
+        default:
+          Assert(false, ExcNotImplemented());
+      }
+
+
+    data_out.add_data_vector(incremental_displacement, solution_names);
+
+
+
+@endcode 
+
+
+
+接下来的事情是，我们想输出一些类似于我们存储在每个单元格中的应力的平均法线。这看起来很复杂，因为在目前的处理器上，我们只在那些实际属于目前进程的单元上存储正交点的应力。换句话说，我们似乎无法计算出所有单元的平均应力。然而，请记住，我们源自 <code>DataOut</code> 的类只迭代那些实际属于当前处理器的单元，也就是说，我们不需要为所有其他单元计算任何东西，因为这些信息不会被触及。下面的小循环就是这样做的。我们将整个区块包围在一对大括号中，以确保迭代器变量不会在它们被使用的区块结束后仍然意外地可见。
+
+@code
+    Vector<double> norm_of_stress(triangulation.n_active_cells());
+    {
+@endcode 
+
+
+
+在所有的单元格上循环... 
+
+@code
+      for (auto &cell : triangulation.active_cell_iterators())
+        if (cell->is_locally_owned())
+          {
+@endcode 
+
+
+
+在这些单元中，将所有正交点的应力相加... 
+
+@code
+            SymmetricTensor<2, dim> accumulated_stress;
+            for (unsigned int q = 0; q < quadrature_formula.size(); ++q)
+              accumulated_stress +=
+                reinterpret_cast<PointHistory<dim> *>(cell->user_pointer())[q]
+                  .old_stress;
+
+
+@endcode 
+
+
+
+...然后将平均值的规范写到它们的目的地。
+
+@code
+            norm_of_stress(cell->active_cell_index()) =
+              (accumulated_stress / quadrature_formula.size()).norm();
+          }
+@endcode 
+
+
+
+而在我们不感兴趣的单元格上，将向量中各自的值设置为一个假值（规范必须是正值，一个大的负值应该吸引你的眼球），以确保如果我们的假设有误，即这些元素不会出现在输出文件中，我们会通过查看图形输出发现。
+
+@code
+        else
+          norm_of_stress(cell->active_cell_index()) = -1e+20;
+    }
+@endcode 
+
+
+
+最后把这个向量也附在上面，以便进行输出处理。
+
+@code
+    data_out.add_data_vector(norm_of_stress, "norm_of_stress");
+
+
+@endcode 
+
+
+
+作为最后一个数据，如果这是一个并行作业，让我们也把域划分为与处理器相关的子域。这与 step-17 程序中的工作方式完全相同。
+
+@code
+    std::vector<types::subdomain_id> partition_int(
+      triangulation.n_active_cells());
+    GridTools::get_subdomain_association(triangulation, partition_int);
+    const Vector<double> partitioning(partition_int.begin(),
+                                      partition_int.end());
+    data_out.add_data_vector(partitioning, "partitioning");
+
+
+@endcode 
+
+
+
+最后，有了所有这些数据，我们可以指示deal.II对信息进行整合，并产生一些中间数据结构，其中包含所有这些解决方案和其他数据向量。
+
+@code
+    data_out.build_patches();
+
+
+@endcode 
+
+
+
+让我们调用一个函数，打开必要的输出文件，将我们生成的数据写入其中。该函数从给定的目录名（第一个参数）和文件名基数（第二个参数）自动构建文件名。它通过由时间步数和 "片数 "产生的片断来增加所产生的字符串，"片数 "对应于整个域的一部分，可以由一个或多个子域组成。     
+
+
+该函数还为Paraview写了一个记录文件（后缀为`.pvd`），描述了所有这些输出文件如何组合成这个单一时间步骤的数据。
+
+@code
+    const std::string pvtu_filename = data_out.write_vtu_with_pvtu_record(
+      "./", "solution", timestep_no, mpi_communicator, 4);
+
+
+@endcode 
+
+
+
+记录文件必须只写一次，而且不能由每个处理器来写，所以我们在处理器0上做这个。
+
+@code
+    if (this_mpi_process == 0)
+      {
+@endcode 
+
+
+
+最后，我们写入paraview记录，它引用了所有.pvtu文件和它们各自的时间。注意，变量times_and_names被声明为静态的，所以它将保留以前的时间步数的条目。
+
+@code
+        static std::vector<std::pair<double, std::string>> times_and_names;
+        times_and_names.push_back(
+          std::pair<double, std::string>(present_time, pvtu_filename));
+        std::ofstream pvd_output("solution.pvd");
+        DataOutBase::write_pvd_record(pvd_output, times_and_names);
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TopLeveldo_initial_timestep"></a> <h4>TopLevel::do_initial_timestep</h4> 
+
+
+
+
+这个函数和下一个函数分别处理第一个和后续时间段的整体结构。第一个时间步骤的工作量稍大，因为我们要在连续细化的网格上进行多次计算，每次都从一个干净的状态开始。在这些计算的最后，我们每次都计算增量位移，我们使用最后得到的增量位移的结果来计算产生的应力更新并相应地移动网格。在这个新的网格上，我们再输出解决方案和任何我们认为重要的额外数据。   
+
+
+所有这些都会穿插着生成输出到控制台，以更新屏幕上的人正在发生的事情。如同在 step-17 中一样，使用 <code>pcout</code> instead of <code>std::cout</code> 可以确保只有一个并行进程实际在向控制台写数据，而不需要在每个产生输出的地方明确地写一个if语句。
+
+@code
+  template <int dim>
+  void TopLevel<dim>::do_initial_timestep()
+  {
+    present_time += present_timestep;
+    ++timestep_no;
+    pcout << "Timestep " << timestep_no << " at time " << present_time
+          << std::endl;
+
+
+    for (unsigned int cycle = 0; cycle < 2; ++cycle)
+      {
+        pcout << "  Cycle " << cycle << ':' << std::endl;
+
+
+        if (cycle == 0)
+          create_coarse_grid();
+        else
+          refine_initial_grid();
+
+
+        pcout << "    Number of active cells:       "
+              << triangulation.n_active_cells() << " (by partition:";
+        for (unsigned int p = 0; p < n_mpi_processes; ++p)
+          pcout << (p == 0 ? ' ' : '+')
+                << (GridTools::count_cells_with_subdomain_association(
+                     triangulation, p));
+        pcout << ")" << std::endl;
+
+
+        setup_system();
+
+
+        pcout << "    Number of degrees of freedom: " << dof_handler.n_dofs()
+              << " (by partition:";
+        for (unsigned int p = 0; p < n_mpi_processes; ++p)
+          pcout << (p == 0 ? ' ' : '+')
+                << (DoFTools::count_dofs_with_subdomain_association(dof_handler,
+                                                                    p));
+        pcout << ")" << std::endl;
+
+
+        solve_timestep();
+      }
+
+
+    move_mesh();
+    output_results();
+
+
+    pcout << std::endl;
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TopLeveldo_timestep"></a> <h4>TopLevel::do_timestep</h4>
+
+
+
+
+后续的时间步骤更简单，鉴于上面对前一个函数的解释，可能不需要更多的文件。
+
+@code
+  template <int dim>
+  void TopLevel<dim>::do_timestep()
+  {
+    present_time += present_timestep;
+    ++timestep_no;
+    pcout << "Timestep " << timestep_no << " at time " << present_time
+          << std::endl;
+    if (present_time > end_time)
+      {
+        present_timestep -= (present_time - end_time);
+        present_time = end_time;
+      }
+
+
+
+    solve_timestep();
+
+
+    move_mesh();
+    output_results();
+
+
+    pcout << std::endl;
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="TopLevelrefine_initial_grid"></a><h4>TopLevel::refine_initial_grid</h4>
+
+
+
+
+当在连续细化的网格上求解第一个时间步骤时，会调用下面的函数。在每次迭代后，它计算一个细化准则，细化网格，并将每个正交点的历史变量再次设置为干净的状态。
+
+@code
+  template <int dim>
+  void TopLevel<dim>::refine_initial_grid()
+  {
+@endcode 
+
+
+
+首先，让每个进程计算其拥有的单元的误差指标。
+
+@code
+    Vector<float> error_per_cell(triangulation.n_active_cells());
+    KellyErrorEstimator<dim>::estimate(
+      dof_handler,
+      QGauss<dim - 1>(fe.degree + 1),
+      std::map<types::boundary_id, const Function<dim> *>(),
+      incremental_displacement,
+      error_per_cell,
+      ComponentMask(),
+      nullptr,
+      MultithreadInfo::n_threads(),
+      this_mpi_process);
+
+
+@endcode 
+
+
+
+然后建立一个全局向量，我们将每个平行进程的局部指标合并到其中。
+
+@code
+    const unsigned int n_local_cells =
+      triangulation.n_locally_owned_active_cells();
+
+
+    PETScWrappers::MPI::Vector distributed_error_per_cell(
+      mpi_communicator, triangulation.n_active_cells(), n_local_cells);
+
+
+    for (unsigned int i = 0; i < error_per_cell.size(); ++i)
+      if (error_per_cell(i) != 0)
+        distributed_error_per_cell(i) = error_per_cell(i);
+    distributed_error_per_cell.compress(VectorOperation::insert);
+
+
+@endcode 
+
+
+
+一旦我们有了这个向量，就把它复制到所有处理器的本地副本中，并相应地细化网格。
+
+@code
+    error_per_cell = distributed_error_per_cell;
+    GridRefinement::refine_and_coarsen_fixed_number(triangulation,
+                                                    error_per_cell,
+                                                    0.35,
+                                                    0.03);
+    triangulation.execute_coarsening_and_refinement();
+
+
+@endcode 
+
+
+
+最后，在新的网格上再次设置正交点数据，并且只在那些我们已经确定是我们的单元上设置。
+
+@code
+    setup_quadrature_point_history();
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TopLevelmove_mesh"></a><h4>TopLevel::move_mesh</h4>
+
+
+
+
+在每个时间步骤结束时，我们根据这个时间步骤中计算的增量位移来移动网格的节点。为了做到这一点，我们保留一个标志的向量，为每个顶点指示我们是否已经移动过它，然后循环所有单元，移动那些尚未移动的单元顶点。值得注意的是，我们从某个顶点相邻的单元中移动这个顶点并不重要：因为我们使用连续有限元计算位移，位移场也是连续的，我们可以从每个相邻的单元中计算出某个顶点的位移。我们只需要确保每个节点精确地移动一次，这就是我们保留标志矢量的原因。   
+
+
+在这个函数中，有两个值得注意的地方。首先，我们如何使用 <code>cell-@>vertex_dof_index(v,d)</code> 函数获得给定顶点的位移场，该函数返回给定单元的 <code>d</code>th degree of freedom at vertex <code>v</code> 的索引。在本例中，k-th坐标方向的位移对应于有限元的k-th分量。使用这样的函数有一定的风险，因为它使用了我们在 <code>FESystem</code> 元素中为这个程序共同采取的元素顺序的知识。如果我们决定增加一个额外的变量，例如用于稳定的压力变量，并且碰巧将其作为元素的第一个变量插入，那么下面的计算将开始产生无意义的结果。此外，这种计算还依赖于其他假设：首先，我们使用的元素确实有与顶点相关的自由度。对于目前的Q1元素来说确实如此，对于所有多项式阶的Qp元素来说也是如此 <code>p</code>  。然而，这对于不连续的元素或混合公式的元素来说是不成立的。其次，它还建立在这样的假设上：一个顶点的位移只由与这个顶点相关的自由度的值决定；换句话说，所有对应于其他自由度的形状函数在这个特定的顶点是零。同样，对于目前的元素来说是这样的，但对于目前在deal.II中的所有元素来说并非如此。尽管有风险，我们还是选择使用这种方式，以便提出一种查询与顶点相关的单个自由度的方法。   
+
+
+在这种情况下，指出一种更普遍的方法是很有意义的。对于一般的有限元来说，应该采取正交公式，将正交点放在单元的顶点上。梯形规则的 <code>QTrapezoid</code> 公式正是这样做的。有了这个正交公式，我们就可以在每个单元中初始化一个 <code>FEValues</code> 对象，并使用 <code>FEValues::get_function_values</code> 函数来获得正交点，即单元顶点的解函数值。这些是我们真正需要的唯一数值，也就是说，我们对与这个特定正交公式相关的权重（或 <code>JxW</code> 值）完全不感兴趣，这可以作为 <code>FEValues</code> 构造器的最后一个参数来指定。这个方案中唯一的一点小的不便是，我们必须弄清楚哪个正交点对应于我们目前考虑的顶点，因为它们可能是以相同的顺序排列，也可能不是。   
+
+
+如果有限元在顶点上有支持点（这里的支持点有；关于支持点的概念，见 @ref GlossSupport "支持点"），则可以避免这种不便。对于这种情况，可以使用 FiniteElement::get_unit_support_points(). 构建一个自定义的正交规则，然后第一个 <code>cell-&gt;n_vertices()*fe.dofs_per_vertex</code> 正交点将对应于单元格的顶点，其顺序与 <code>cell-@>vertex(i)</code> 一致，考虑到矢量元素的支持点将被重复 <code>fe.dofs_per_vertex</code> 次。   
+
+
+关于这个简短的函数，值得解释的另一点是三角形类输出其顶点信息的方式：通过 <code>Triangulation::n_vertices</code> 函数，它公布了三角形中有多少个顶点。并非所有的顶点都是一直在使用的--有些是之前被粗化的单元的遗留物，自从deal.II以来就一直存在，一旦顶点出现，即使数量较少的顶点消失了，也不会改变它的编号。其次， <code>cell-@>vertex(v)</code> 返回的位置不仅是一个类型为 <code>Point@<dim@></code> 的只读对象，而且事实上是一个可以写入的引用。这允许相对容易地移动网格的节点，但值得指出的是，使用该功能的应用程序有责任确保所得到的单元仍然有用，即不会扭曲到使单元退化（例如，用负的雅各布系数表示）。请注意，我们在这个函数中没有任何规定来实际确保这一点，我们只是有信心。   
+
+
+在这个冗长的介绍之后，这里是完整的20行左右的代码。
+
+@code
+  template <int dim>
+  void TopLevel<dim>::move_mesh()
+  {
+    pcout << "    Moving mesh..." << std::endl;
+
+
+    std::vector<bool> vertex_touched(triangulation.n_vertices(), false);
+    for (auto &cell : dof_handler.active_cell_iterators())
+      for (const auto v : cell->vertex_indices())
+        if (vertex_touched[cell->vertex_index(v)] == false)
+          {
+            vertex_touched[cell->vertex_index(v)] = true;
+
+
+            Point<dim> vertex_displacement;
+            for (unsigned int d = 0; d < dim; ++d)
+              vertex_displacement[d] =
+                incremental_displacement(cell->vertex_dof_index(v, d));
+
+
+            cell->vertex(v) += vertex_displacement;
+          }
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="TopLevelsetup_quadrature_point_history"></a><h4>TopLevel::setup_quadrature_point_history</h4>
+
+
+
+
+在计算的开始，我们需要设置历史变量的初始值，如材料中的现有应力，我们将其存储在每个正交点。如上所述，我们使用每个单元中可用的 <code>user_pointer</code> 来做这个。   
+
+
+为了从更大的角度看这个问题，我们注意到，如果我们的模型中有先前可用的应力（为了这个程序的目的，我们假设这些应力不存在），那么我们就需要将先前存在的应力场插值到正交点上。同样，如果我们要模拟具有硬化/软化的弹塑性材料，那么我们就必须在每个正交点存储额外的历史变量，如累积塑性应变的当前屈服应力。然后，预先存在的硬化或削弱也将通过在当前函数中插值这些变量来实现。
+
+@code
+  template <int dim>
+  void TopLevel<dim>::setup_quadrature_point_history()
+  {
+@endcode 
+
+
+
+为了稳妥起见，我们将所有单元的用户指针，无论是否是我们的，都设置为空指针。这样，如果我们访问了一个我们不应该访问的单元格的用户指针，一个分段故障将让我们知道这不应该发生。
+
+
+
+
+
+
+
+@code
+    triangulation.clear_user_data();
+
+
+@endcode 
+
+
+
+接下来，分配属于这个处理器责任范围内的正交对象。当然，这等于属于这个处理器的单元格的数量乘以我们的正交公式在每个单元格上的正交点的数量。由于`resize()`函数在要求的新大小小于旧大小的情况下，实际上并没有缩小分配的内存量，所以我们采用了一个技巧，首先释放所有的内存，然后再重新分配：我们声明一个空的向量作为临时变量，然后将旧向量的内容和这个临时变量交换。这确保了`正交点历史'现在确实是空的，我们可以让现在保存着以前的向量内容的临时变量超出范围并被销毁。在下一步中，我们可以根据需要重新分配尽可能多的元素，矢量默认初始化`PointHistory`对象，这包括将压力变量设置为零。
+
+@code
+    {
+      std::vector<PointHistory<dim>> tmp;
+      quadrature_point_history.swap(tmp);
+    }
+    quadrature_point_history.resize(
+      triangulation.n_locally_owned_active_cells() * quadrature_formula.size());
+
+
+@endcode 
+
+
+
+最后再次循环所有单元，并将属于本处理器的单元的用户指针设置为指向此类对象的向量中与本单元对应的第一个正交点对象。
+
+@code
+    unsigned int history_index = 0;
+    for (auto &cell : triangulation.active_cell_iterators())
+      if (cell->is_locally_owned())
+        {
+          cell->set_user_pointer(&quadrature_point_history[history_index]);
+          history_index += quadrature_formula.size();
+        }
+
+
+@endcode 
+
+
+
+最后，为了稳妥起见，要确保我们对元素的计数是正确的，而且我们已经用完了之前分配的所有对象，并且没有指向任何超出矢量末端的对象。这样的防御性编程策略总是很好的检查，以避免意外的错误，并防止将来对这个函数的修改忘记同时更新一个变量的所有用途。回顾一下，使用 <code>Assert</code> 宏的构造在优化模式下被优化掉了，所以不影响优化运行的运行时间。
+
+@code
+    Assert(history_index == quadrature_point_history.size(),
+           ExcInternalError());
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TopLevelupdate_quadrature_point_history"></a> <h4>TopLevel::update_quadrature_point_history</h4>
+
+
+
+
+在每个时间步骤结束时，我们应该计算出一个增量的位移更新，使材料在其新的配置中能够容纳在这个时间步骤中施加的外部体和边界力减去通过预先存在的内部应力施加的力之间的差异。为了在下一个时间步骤中获得预先存在的应力，我们必须用本时间步骤中计算的增量位移引起的应力来更新预先存在的应力。理想情况下，所产生的内应力之和将完全抵消所有的外力。事实上，一个简单的实验可以确保这一点：如果我们选择边界条件和体力与时间无关，那么强迫项（外力和内应力之和）应该正好是零。如果你做了这个实验，你会从每个时间步长的右手边的规范输出中意识到这几乎是事实：它并不完全是零，因为在第一个时间步长中，增量位移和应力的更新是相对于未变形的网格计算的，然后再进行变形。在第二个时间步骤中，我们再次计算位移和应力的更新，但这次是在变形的网格中 -- 在那里，结果的更新非常小但不完全是零。这可以迭代，在每一次迭代中，残差，即右手边向量的法线，都会减少；如果做这个小实验，就会发现这个残差的法线会随着迭代次数的增加而呈指数下降，在最初的快速下降之后，每次迭代大约会减少3.5倍（对于我看的一个测试案例，其他测试案例和其他未知数都会改变这个系数，但不是指数衰减）。
+
+
+
+
+在某种意义上，这就可以被认为是一个准时序方案，以解决在一个以拉格朗日方式移动的网格上解决大变形弹性的非线性问题。   
+
+
+另一个复杂的问题是，现有的（旧的）应力是在旧的网格上定义的，我们将在更新应力后移动这个网格。如果这个网格的更新涉及到单元的旋转，那么我们也需要旋转更新的应力，因为它是相对于旧单元的坐标系计算的。   
+
+
+因此，我们需要的是：在目前处理器拥有的每个单元上，我们需要从每个正交点存储的数据中提取旧的应力，计算应力更新，将两者相加，然后将结果与从目前正交点的增量位移计算的增量旋转一起旋转。我们将在下面详细介绍这些步骤。
+
+@code
+  template <int dim>
+  void TopLevel<dim>::update_quadrature_point_history()
+  {
+@endcode 
+
+
+
+首先，建立一个 <code>FEValues</code> 对象，通过它我们将评估增量位移和其在正交点的梯度，以及一个保存这些信息的向量。
+
+@code
+    FEValues<dim> fe_values(fe,
+                            quadrature_formula,
+                            update_values | update_gradients);
+
+
+    std::vector<std::vector<Tensor<1, dim>>> displacement_increment_grads(
+      quadrature_formula.size(), std::vector<Tensor<1, dim>>(dim));
+
+
+@endcode 
+
+
+
+然后在所有单元中循环，在属于我们子域的单元中做这个工作。
+
+@code
+    for (auto &cell : dof_handler.active_cell_iterators())
+      if (cell->is_locally_owned())
+        {
+@endcode 
+
+
+
+接下来，获得一个指向当前单元的正交点历史数据的指针，作为防御措施，确保这个指针在全局数组的范围内。
+
+@code
+          PointHistory<dim> *local_quadrature_points_history =
+            reinterpret_cast<PointHistory<dim> *>(cell->user_pointer());
+          Assert(local_quadrature_points_history >=
+                   &quadrature_point_history.front(),
+                 ExcInternalError());
+          Assert(local_quadrature_points_history <=
+                   &quadrature_point_history.back(),
+                 ExcInternalError());
+
+
+@endcode 
+
+
+
+然后初始化当前单元上的 <code>FEValues</code> 对象，并提取正交点上的位移梯度，以便以后计算应变。
+
+@code
+          fe_values.reinit(cell);
+          fe_values.get_function_gradients(incremental_displacement,
+                                           displacement_increment_grads);
+
+
+@endcode 
+
+
+
+然后在这个单元的正交点上循环。
+
+@code
+          for (unsigned int q = 0; q < quadrature_formula.size(); ++q)
+            {
+@endcode 
+
+
+
+在每个正交点上，根据梯度计算应变增量，并将其乘以应力-应变张量，得到应力更新。然后将这一更新添加到该点已有的应变上。
+
+@code
+              const SymmetricTensor<2, dim> new_stress =
+                (local_quadrature_points_history[q].old_stress +
+                 (stress_strain_tensor *
+                  get_strain(displacement_increment_grads[q])));
+
+
+@endcode 
+
+
+
+最后，我们必须对结果进行旋转。为此，我们首先要从增量位移中计算出目前正交点的旋转矩阵。事实上，它可以从梯度中计算出来，而且我们已经有一个函数用于这个目的。
+
+@code
+              const Tensor<2, dim> rotation =
+                get_rotation_matrix(displacement_increment_grads[q]);
+@endcode 
+
+
+
+请注意，其结果，即旋转矩阵，一般来说是一个等级为2的反对称张量，所以我们必须将其作为一个完整的张量来存储。
+
+
+
+
+有了这个旋转矩阵，在我们将对称张量 <code>new_stress</code> 扩展为全张量之后，我们可以通过从左和右的收缩来计算旋转的张量。
+
+@code
+              const SymmetricTensor<2, dim> rotated_new_stress =
+                symmetrize(transpose(rotation) *
+                           static_cast<Tensor<2, dim>>(new_stress) * rotation);
+@endcode 
+
+
+
+请注意，虽然这三个矩阵的乘法结果应该是对称的，但由于浮点舍入，它并不是对称的：我们得到的结果的非对角线元素的不对称程度为1e-16。当把结果分配给一个 <code>SymmetricTensor</code> 时，该类的构造函数会检查对称性，并意识到它并不完全对称；然后它会引发一个异常。为了避免这种情况，我们明确地对结果进行对称，使其完全对称。
+
+
+
+
+然后，所有这些操作的结果被写回原来的地方。
+
+@code
+              local_quadrature_points_history[q].old_stress =
+                rotated_new_stress;
+            }
+        }
+  }
+
+
+@endcode 
+
+
+
+这就结束了项目特定命名空间  <code>Step18</code>  。其余的和往常一样，并且在  step-17  中已经显示：一个  <code>main()</code>  函数初始化和终止PETSc，调用做实际工作的类，并确保我们捕捉所有传播到此的异常。
+
+@code
+} // namespace Step18
+
+
+
+int main(int argc, char **argv)
+{
+  try
+    {
+      using namespace dealii;
+      using namespace Step18;
+
+
+      Utilities::MPI::MPI_InitFinalize mpi_initialization(argc, argv, 1);
+
+
+      TopLevel<3> elastic_problem;
+      elastic_problem.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+
+
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
 
-Running the program takes a good while if one uses debug mode; it takes about
-eleven minutes on my i7 desktop. Fortunately, the version compiled with
-optimizations is much faster; the program only takes about a minute and a half
-after recompiling with the command <tt>make release</tt> on the same machine, a
-much more reasonable time.
+
+如果使用调试模式，运行该程序需要很长时间；在我的i7台式机上大约需要11分钟。幸运的是，经过优化编译的版本要快得多；在同一台机器上用<tt>make release</tt>命令重新编译后，程序只需要大约一分半钟，这个时间更合理。
 
 
-If run, the program prints the following output, explaining what it is
-doing during all that time:
+如果运行，程序会打印出以下输出，解释它在所有这些时间里正在做什么。
+
 @verbatim
 \$ time make run
 [ 66%] Built target \step-18
@@ -3043,11 +2459,13 @@ Timestep 1 at time 1
     Updating quadrature point data...
     Moving mesh...
 
+
 Timestep 2 at time 2
     Assembling system... norm of rhs is 1.84169e+10
     Solver converged in 122 iterations.
     Updating quadrature point data...
     Moving mesh...
+
 
 Timestep 3 at time 3
     Assembling system... norm of rhs is 1.82355e+10
@@ -3055,11 +2473,13 @@ Timestep 3 at time 3
     Updating quadrature point data...
     Moving mesh...
 
+
 Timestep 4 at time 4
     Assembling system... norm of rhs is 1.80728e+10
     Solver converged in 117 iterations.
     Updating quadrature point data...
     Moving mesh...
+
 
 Timestep 5 at time 5
     Assembling system... norm of rhs is 1.79318e+10
@@ -3067,11 +2487,13 @@ Timestep 5 at time 5
     Updating quadrature point data...
     Moving mesh...
 
+
 Timestep 6 at time 6
     Assembling system... norm of rhs is 1.78171e+10
     Solver converged in 115 iterations.
     Updating quadrature point data...
     Moving mesh...
+
 
 Timestep 7 at time 7
     Assembling system... norm of rhs is 1.7737e+10
@@ -3079,11 +2501,13 @@ Timestep 7 at time 7
     Updating quadrature point data...
     Moving mesh...
 
+
 Timestep 8 at time 8
     Assembling system... norm of rhs is 1.77127e+10
     Solver converged in 111 iterations.
     Updating quadrature point data...
     Moving mesh...
+
 
 Timestep 9 at time 9
     Assembling system... norm of rhs is 1.78207e+10
@@ -3091,60 +2515,121 @@ Timestep 9 at time 9
     Updating quadrature point data...
     Moving mesh...
 
+
 Timestep 10 at time 10
     Assembling system... norm of rhs is 1.83544e+10
     Solver converged in 115 iterations.
     Updating quadrature point data...
     Moving mesh...
 
+
 [100%] Built target run
 make run  176.82s user 0.15s system 198% cpu 1:28.94 total
-@endverbatim
-In other words, it is computing on 12,000 cells and with some 52,000
-unknowns. Not a whole lot, but enough for a coupled three-dimensional
-problem to keep a computer busy for a while. At the end of the day,
-this is what we have for output:
+@endverbatim 
+
+换句话说，它在12,000个单元格和大约52,000个未知数上进行计算。虽然不是很多，但对于一个耦合的三维问题来说，足以让计算机忙上一阵子。在一天结束的时候，这就是我们的输出。
+
 @verbatim
 \$ ls -l *vtu *visit
+
+
 -rw-r--r-- 1 drwells users 1706059 Feb 13 19:36 solution-0010.000.vtu
+
+
 -rw-r--r-- 1 drwells users     761 Feb 13 19:36 solution-0010.pvtu
+
+
 -rw-r--r-- 1 drwells users      33 Feb 13 19:36 solution-0010.visit
+
+
 -rw-r--r-- 1 drwells users 1707907 Feb 13 19:36 solution-0009.000.vtu
+
+
 -rw-r--r-- 1 drwells users     761 Feb 13 19:36 solution-0009.pvtu
+
+
 -rw-r--r-- 1 drwells users      33 Feb 13 19:36 solution-0009.visit
+
+
 -rw-r--r-- 1 drwells users 1703771 Feb 13 19:35 solution-0008.000.vtu
+
+
 -rw-r--r-- 1 drwells users     761 Feb 13 19:35 solution-0008.pvtu
+
+
 -rw-r--r-- 1 drwells users      33 Feb 13 19:35 solution-0008.visit
+
+
 -rw-r--r-- 1 drwells users 1693671 Feb 13 19:35 solution-0007.000.vtu
+
+
 -rw-r--r-- 1 drwells users     761 Feb 13 19:35 solution-0007.pvtu
+
+
 -rw-r--r-- 1 drwells users      33 Feb 13 19:35 solution-0007.visit
+
+
 -rw-r--r-- 1 drwells users 1681847 Feb 13 19:35 solution-0006.000.vtu
+
+
 -rw-r--r-- 1 drwells users     761 Feb 13 19:35 solution-0006.pvtu
+
+
 -rw-r--r-- 1 drwells users      33 Feb 13 19:35 solution-0006.visit
+
+
 -rw-r--r-- 1 drwells users 1670115 Feb 13 19:35 solution-0005.000.vtu
+
+
 -rw-r--r-- 1 drwells users     761 Feb 13 19:35 solution-0005.pvtu
+
+
 -rw-r--r-- 1 drwells users      33 Feb 13 19:35 solution-0005.visit
+
+
 -rw-r--r-- 1 drwells users 1658559 Feb 13 19:35 solution-0004.000.vtu
+
+
 -rw-r--r-- 1 drwells users     761 Feb 13 19:35 solution-0004.pvtu
+
+
 -rw-r--r-- 1 drwells users      33 Feb 13 19:35 solution-0004.visit
+
+
 -rw-r--r-- 1 drwells users 1639983 Feb 13 19:35 solution-0003.000.vtu
+
+
 -rw-r--r-- 1 drwells users     761 Feb 13 19:35 solution-0003.pvtu
+
+
 -rw-r--r-- 1 drwells users      33 Feb 13 19:35 solution-0003.visit
+
+
 -rw-r--r-- 1 drwells users 1625851 Feb 13 19:35 solution-0002.000.vtu
+
+
 -rw-r--r-- 1 drwells users     761 Feb 13 19:35 solution-0002.pvtu
+
+
 -rw-r--r-- 1 drwells users      33 Feb 13 19:35 solution-0002.visit
+
+
 -rw-r--r-- 1 drwells users 1616035 Feb 13 19:34 solution-0001.000.vtu
+
+
 -rw-r--r-- 1 drwells users     761 Feb 13 19:34 solution-0001.pvtu
+
+
 -rw-r--r-- 1 drwells users      33 Feb 13 19:34 solution-0001.visit
-@endverbatim
+@endverbatim 
 
 
-If we visualize these files with VisIt or Paraview, we get to see the full picture
-of the disaster our forced compression wreaks on the cylinder (colors in the
-images encode the norm of the stress in the material):
 
 
-<div class="threecolumn" style="width: 80%">
+如果我们用VisIt或Paraview将这些文件可视化，我们就能看到我们的强制压缩对圆柱体造成的灾难的全貌（图像中的颜色编码了材料中的应力规范）。
+
+
+  <div class="threecolumn" style="width: 80%">
   <div class="parent">
     <div class="img" align="center">
       <img src="https://www.dealii.org/images/steps/developer/step-18.sequential-0002.0000.png"
@@ -3175,10 +2660,10 @@ images encode the norm of the stress in the material):
       Time = 7
     </div>
   </div>
-</div>
+</div>   
 
 
-<div class="threecolumn" style="width: 80%">
+  <div class="threecolumn" style="width: 80%">
   <div class="parent">
     <div class="img" align="center">
       <img src="https://www.dealii.org/images/steps/developer/step-18.sequential-0008.0000.png"
@@ -3209,21 +2694,14 @@ images encode the norm of the stress in the material):
       Time = 10
     </div>
   </div>
-</div>
+</div>   
 
 
-As is clearly visible, as we keep compressing the cylinder, it starts
-to bow out near the fully constrained bottom surface and, after about eight
-time units, buckle in an azimuthally symmetric manner.
+可以清楚地看到，随着我们不断地压缩圆柱体，它开始在完全约束的底面附近弯曲，并且在大约8个时间单位后，以方位对称的方式弯曲。
 
 
-Although the result appears plausible for the symmetric geometry and loading,
-it is yet to be established whether or not the computation is fully converged.
-In order to see whether it is, we ran the program again with one more global
-refinement at the beginning and with the time step halved. This would have
-taken a very long time on a single machine, so we used a proper workstation and
-ran it on 16 processors in parallel. The beginning of the output now looks like
-this:
+尽管这个结果对于对称的几何形状和载荷来说似乎是合理的，但计算是否完全收敛还有待确定。为了确定是否收敛，我们再次运行程序，在开始时再进行一次全局细化，并将时间步长减半。这在单机上会花费很长的时间，所以我们使用了一个合适的工作站，在16个处理器上并行运行。现在输出的开头看起来像这样。
+
 @verbatim
 Timestep 1 at time 0.5
   Cycle 0:
@@ -3240,11 +2718,13 @@ Timestep 1 at time 0.5
     Updating quadrature point data...
     Moving mesh...
 
+
 Timestep 2 at time 1
     Assembling system... norm of rhs is 1.34674e+10
     Solver converged in 267 iterations.
     Updating quadrature point data...
     Moving mesh...
+
 
 Timestep 3 at time 1.5
     Assembling system... norm of rhs is 1.33607e+10
@@ -3252,50 +2732,91 @@ Timestep 3 at time 1.5
     Updating quadrature point data...
     Moving mesh...
 
+
 Timestep 4 at time 2
     Assembling system... norm of rhs is 1.32558e+10
     Solver converged in 263 iterations.
     Updating quadrature point data...
     Moving mesh...
 
+
 [...]
+
 
 Timestep 20 at time 10
     Assembling system... norm of rhs is 1.47755e+10
     Solver converged in 425 iterations.
     Updating quadrature point data...
     Moving mesh...
-@endverbatim
-That's quite a good number of unknowns, given that we are in 3d. The output of
-this program are 16 files for each time step:
+@endverbatim 
+
+这是一个相当不错的未知数，因为我们是在3D中。这个程序的输出是每个时间步骤的16个文件。
+
 @verbatim
 \$ ls -l solution-0001*
+
+
 -rw-r--r-- 1 wellsd2 user 761065 Feb 13 21:09 solution-0001.000.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 759277 Feb 13 21:09 solution-0001.001.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 761217 Feb 13 21:09 solution-0001.002.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 761605 Feb 13 21:09 solution-0001.003.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 756917 Feb 13 21:09 solution-0001.004.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 752669 Feb 13 21:09 solution-0001.005.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 735217 Feb 13 21:09 solution-0001.006.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 750065 Feb 13 21:09 solution-0001.007.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 760273 Feb 13 21:09 solution-0001.008.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 777265 Feb 13 21:09 solution-0001.009.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 772469 Feb 13 21:09 solution-0001.010.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 760833 Feb 13 21:09 solution-0001.011.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 782241 Feb 13 21:09 solution-0001.012.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 748905 Feb 13 21:09 solution-0001.013.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 738413 Feb 13 21:09 solution-0001.014.vtu
+
+
 -rw-r--r-- 1 wellsd2 user 762133 Feb 13 21:09 solution-0001.015.vtu
+
+
 -rw-r--r-- 1 wellsd2 user   1421 Feb 13 21:09 solution-0001.pvtu
+
+
 -rw-r--r-- 1 wellsd2 user    364 Feb 13 21:09 solution-0001.visit
-@endverbatim
+@endverbatim 
 
 
-Here are first the mesh on which we compute as well as the partitioning
-for the 16 processors:
 
 
-<div class="twocolumn" style="width: 80%">
+这里首先是我们计算的网格，以及16个处理器的分区。
+
+
+  <div class="twocolumn" style="width: 80%">
   <div class="parent">
     <div class="img" align="center">
       <img src="https://www.dealii.org/images/steps/developer/step-18.parallel-000mesh.png"
@@ -3316,13 +2837,12 @@ for the 16 processors:
       Parallel partitioning
     </div>
   </div>
-</div>
+</div>   
 
 
-Finally, here is the same output as we have shown before for the much smaller
-sequential case:
+最后，这里是与我们之前展示的更小的顺序情况相同的输出。
 
-<div class="threecolumn" style="width: 80%">
+  <div class="threecolumn" style="width: 80%">
   <div class="parent">
     <div class="img" align="center">
       <img src="https://www.dealii.org/images/steps/developer/step-18.parallel-0002.s.png"
@@ -3353,10 +2873,10 @@ sequential case:
       Time = 7
     </div>
   </div>
-</div>
+</div>   
 
 
-<div class="threecolumn" style="width: 80%">
+  <div class="threecolumn" style="width: 80%">
   <div class="parent">
     <div class="img" align="center">
       <img src="https://www.dealii.org/images/steps/developer/step-18.parallel-0008.s.png"
@@ -3387,163 +2907,68 @@ sequential case:
       Time = 10
     </div>
   </div>
-</div>
+</div>   
 
 
-As before, we observe that at high axial compression the cylinder begins
-to buckle, but this time ultimately collapses on itself. In contrast to our
-first run, towards the end of the simulation the deflection pattern becomes
-nonsymmetric (the central bulge deflects laterally). The model clearly does not
-provide for this (all our forces and boundary deflections are symmetric) but the
-effect is probably physically correct anyway: in reality, small inhomogeneities
-in the body's material properties would lead it to buckle to one side
-to evade the forcing; in numerical simulations, small perturbations
-such as numerical round-off or an inexact solution of a linear system
-by an iterative solver could have the same effect. Another typical source for
-asymmetries in adaptive computations is that only a certain fraction of cells
-is refined in each step, which may lead to asymmetric meshes even if the
-original coarse mesh was symmetric.
+和以前一样，我们观察到，在高轴向压缩时，气缸开始弯曲，但这次最终是在自己身上塌陷。与我们的第一次运行相反，在模拟结束时，变形模式变得不对称（中央凸起向侧面偏转）。该模型显然没有规定这一点（我们所有的力和边界偏转都是对称的），但这种效果可能在物理上是正确的：在现实中，身体材料属性的小不均匀性会导致它向一侧弯曲以逃避强制力；在数值模拟中，小的扰动，如数值舍入或迭代求解器对线性系统的不精确求解，也会产生同样的效果。在自适应计算中，另一个典型的不对称来源是，每一步只细化一定的单元，这可能导致不对称的网格，即使原来的粗网格是对称的。
 
 
-If one compares this with the previous run, the results both qualitatively
-and quantitatively different. The previous computation was
-therefore certainly not converged, though we can't say for sure anything about
-the present one. One would need an even finer computation to find out. However,
-the point may be moot: looking at the last picture in detail, it is pretty
-obvious that not only is the linear small deformation model we chose completely
-inadequate, but for a realistic simulation we would also need to make sure that
-the body does not intersect itself during deformation (if we continued
-compressing the cylinder we would observe some self-intersection).
-Without such a formulation we cannot expect anything to make physical sense,
-even if it produces nice pictures!
+如果将其与之前的运行相比较，其结果在质和量上都有所不同。因此，之前的计算肯定是没有收敛的，尽管我们不能肯定现在的计算结果。我们需要一个更精细的计算来找出答案。然而，这一点可能是没有意义的：详细看一下最后一张图片，很明显，不仅我们选择的线性小变形模型是完全不够的，而且对于一个现实的模拟，我们还需要确保身体在变形过程中不相交（如果我们继续压缩圆柱体，我们会观察到一些自我相交）。如果没有这样的表述，我们就不能指望任何东西都有物理意义，即使它能产生漂亮的图片! 
 
 
 <a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
 
 
-The program as is does not really solve an equation that has many applications
-in practice: quasi-static material deformation based on a purely elastic law
-is almost boring. However, the program may serve as the starting point for
-more interesting experiments, and that indeed was the initial motivation for
-writing it. Here are some suggestions of what the program is missing and in
-what direction it may be extended:
+这个程序并没有真正解决一个在实践中有很多应用的方程：基于纯弹性规律的准静态材料变形几乎是无聊的。然而，该程序可以作为更有趣的实验的起点，这的确是编写该程序的最初动机。这里有一些建议，说明该程序缺少什么，以及它可以在什么方向上进行扩展。
 
 <a name="Plasticitymodels"></a><h5>Plasticity models</h5>
 
 
- The most obvious extension is to use a more
-realistic material model for large-scale quasistatic deformation. The natural
-choice for this would be plasticity, in which a nonlinear relationship between
-stress and strain replaces equation <a href="#step_18.stress-strain">[stress-strain]</a>. Plasticity
-models are usually rather complicated to program since the stress-strain
-dependence is generally non-smooth. The material can be thought of being able
-to withstand only a maximal stress (the yield stress) after which it starts to
-&ldquo;flow&rdquo;. A mathematical description to this can be given in the form of a
-variational inequality, which alternatively can be treated as minimizing the
-elastic energy
-@f[
+ 最明显的扩展是使用一个更现实的材料模型来实现大规模的静态变形。这方面的自然选择是塑性，其中应力和应变之间的非线性关系取代了方程<a href="#step_18.stress-strain">[stress-strain]</a>。塑性模型的编程通常相当复杂，因为应力-应变关系通常是不平滑的。可以认为材料只能承受一个最大的应力（屈服应力），之后它就开始&ldquo;流动&rdquo;。这方面的数学描述可以以变分不等式的形式给出，或者可以将其视为在应力约束@f[
+  f(\sigma(\mathbf{u})) \le 0
+@f]下的弹性能量最小化@f[
   E(\mathbf{u}) =
   (\varepsilon(\mathbf{u}), C\varepsilon(\mathbf{u}))_{\Omega}
-  - (\mathbf{f}, \mathbf{u})_{\Omega} - (\mathbf{b}, \mathbf{u})_{\Gamma_N},
-@f]
-subject to the constraint
-@f[
-  f(\sigma(\mathbf{u})) \le 0
-@f]
-on the stress. This extension makes the problem to be solved in each time step
-nonlinear, so we need another loop within each time step.
 
-Without going into further details of this model, we refer to the excellent
-book by Simo and Hughes on &ldquo;Computational Inelasticity&rdquo; for a
-comprehensive overview of computational strategies for solving plastic
-models. Alternatively, a brief but concise description of an algorithm for
-plasticity is given in an article by S. Commend, A. Truty, and Th. Zimmermann;
-@cite CTZ04.
+
+  - (\mathbf{f}, \mathbf{u})_{\Omega} - (\mathbf{b}, \mathbf{u})_{\Gamma_N},
+@f]。这种扩展使得在每个时间步长中要解决的问题是非线性的，所以我们需要在每个时间步长中的另一个循环。
+
+在不进一步了解这个模型的细节的情况下，我们可以参考Simo和Hughes关于&ldquo;计算非弹性&rdquo;的优秀书籍，以全面了解解决塑性模型的计算策略。另外，在S. Commend, A. Truty, and Th. Zimmermann的文章中，对塑性的算法做了简单而简洁的描述。Zimmermann;  @cite CTZ04  。
 
 
 <a name="Stabilizationissues"></a><h5>Stabilization issues</h5>
 
 
-The formulation we have chosen, i.e. using
-piecewise (bi-, tri-)linear elements for all components of the displacement
-vector, and treating the stress as a variable dependent on the displacement is
-appropriate for most materials. However, this so-called displacement-based
-formulation becomes unstable and exhibits spurious modes for incompressible or
-nearly-incompressible materials. While fluids are usually not elastic (in most
-cases, the stress depends on velocity gradients, not displacement gradients,
-although there are exceptions such as electro-rheologic fluids), there are a
-few solids that are nearly incompressible, for example rubber. Another case is
-that many plasticity models ultimately let the material become incompressible,
-although this is outside the scope of the present program.
+我们选择的公式，即对位移矢量的所有分量使用分片（双，三）线性元素，并将应力视为依赖于位移的变量，对于大多数材料是合适的。然而，对于不可压缩或几乎不可压缩的材料，这种所谓的基于位移的公式变得不稳定，并表现出虚假的模式。虽然流体通常不是弹性的（在大多数情况下，应力取决于速度梯度，而不是位移梯度，但也有例外，如电流变流体），但也有少数固体是几乎不可压缩的，如橡胶。另一种情况是，许多塑性模型最终让材料变得不可压缩，尽管这不在本方案的范围之内。
 
-Incompressibility is characterized by Poisson's ratio
-@f[
+不可压缩性的特点是泊松比@f[
   \nu = \frac{\lambda}{2(\lambda+\mu)},
-@f]
-where $\lambda,\mu$ are the Lam&eacute; constants of the material.
-Physical constraints indicate that $-1\le \nu\le \frac 12$ (the condition
-also follows from mathematical stability considerations). If $\nu$
-approaches $\frac 12$, then the material becomes incompressible. In that
-case, pure displacement-based formulations are no longer appropriate for the
-solution of such problems, and stabilization techniques have to be employed
-for a stable and accurate solution. The book and paper cited above give
-indications as to how to do this, but there is also a large volume of
-literature on this subject; a good start to get an overview of the topic can
-be found in the references of the paper by H.-Y. Duan and Q. Lin; @cite DL05.
+@f]，其中 $\lambda,\mu$ 是材料的Lam&eacute; 常数。物理约束表明 $-1\le \nu\le \frac 12$ （该条件也来自于数学稳定性考虑）。如果 $\nu$ 接近 $\frac 12$ ，那么材料变得不可压缩。在这种情况下，纯粹的基于位移的公式不再适合于解决这类问题，必须采用稳定化技术来获得稳定和准确的解决方案。上面引用的书和论文给出了如何做到这一点的指示，但在这个问题上也有大量的文献；在H.-Y. Duan和Q. Lin的论文的参考文献中可以找到一个获得该主题概述的良好开端。Duan和Q. Lin； @cite DL05  。
 
 
 <a name="Refinementduringtimesteps"></a><h5>Refinement during timesteps</h5>
 
 
-In the present form, the program
-only refines the initial mesh a number of times, but then never again. For any
-kind of realistic simulation, one would want to extend this so that the mesh
-is refined and coarsened every few time steps instead. This is not hard to do,
-in fact, but has been left for future tutorial programs or as an exercise, if
-you wish.
+在目前的形式下，程序只对初始网格进行若干次细化，但之后就不再细化了。对于任何一种现实的模拟，我们都希望将其扩展为每隔几步就对网格进行精化和粗化。事实上，这并不难做到，但如果你愿意的话，可以留待将来的教程或作为一个练习。
 
-The main complication one has to overcome is that one has to
-transfer the data that is stored in the quadrature points of the cells of the
-old mesh to the new mesh, preferably by some sort of projection scheme. The
-general approach to this would go like this:
+我们必须克服的主要复杂问题是，我们必须将存储在旧网格单元的正交点中的数据转移到新网格中，最好是通过某种投影方案。这方面的一般方法是这样的。
 
-- At the beginning, the data is only available in the quadrature points of
-  individual cells, not as a finite element field that is defined everywhere.
+- 在开始时，数据只存在于各个单元的正交点中，而不是作为一个到处定义的有限元场。
 
-- So let us find a finite element field that <i>is</i> defined everywhere so
-  that we can later interpolate it to the quadrature points of the new
-  mesh. In general, it will be difficult to find a continuous finite element
-  field that matches the values in the quadrature points exactly because the
-  number of degrees of freedom of these fields does not match the number of
-  quadrature points there are, and the nodal values of this global field will
-  either be over- or underdetermined. But it is usually not very difficult to
-  find a discontinuous field that matches the values in the quadrature points;
-  for example, if you have a QGauss(2) quadrature formula (i.e. 4 points per
-  cell in 2d, 8 points in 3d), then one would use a finite element of kind
-  FE_DGQ(1), i.e. bi-/tri-linear functions as these have 4 degrees of freedom
-  per cell in 2d and 8 in 3d.
+- 因此，让我们找到一个<i>is</i>随处定义的有限元场，这样我们以后就可以将其内插到新网格的正交点上。一般来说，要找到一个与正交点中的数值完全匹配的连续有限元场是很困难的，因为这些场的自由度数与正交点的数量不匹配，这个全局场的节点值要么是过定的，要么是不足定的。但是要找到一个与正交点的值相匹配的不连续场通常不是很困难；例如，如果你有一个QGauss(2)正交公式（即2d中每个单元4个点，3d中8个点），那么人们会使用FE_DGQ(1)类的有限元，即双/三线性函数，因为这些函数在2d中每个单元有4个自由度，在3d中有8个。
 
-- There are functions that can make this conversion from individual points to
-  a global field simpler. The following piece of pseudo-code should help if
-  you use a QGauss(2) quadrature formula. Note that the multiplication by the
-  projection matrix below takes a vector of scalar components, i.e., we can only
-  convert one set of scalars at a time from the quadrature points to the degrees
-  of freedom and vice versa. So we need to store each component of stress separately,
-  which requires <code>dim*dim</code> vectors. We'll store this set of vectors in a 2D array to
-  make it easier to read off components in the same way you would the stress tensor.
-  Thus, we'll loop over the components of stress on each cell and store
-  these values in the global history field. (The prefix <code>history_</code>
-  indicates that we work with quantities related to the history variables defined
-  in the quadrature points.)
-  @code
+- 有一些函数可以使这种从单个点到全局场的转换更简单。如果你使用QGauss(2)正交公式，下面这段伪代码应该有所帮助。请注意，下面的投影矩阵的乘法需要一个标量分量的向量，也就是说，我们一次只能将一组标量从正交点转换成自由度，反之亦然。所以我们需要分别存储每个应力分量，这需要 <code>dim*dim</code> 个向量。我们将把这组向量存储在一个二维数组中，以便于用读出应力张量的方式来读出分量。  因此，我们将对每个单元的应力分量进行循环，并将这些值存储在全局历史域中。(前缀 <code>history_</code> 表示我们的工作与正交点中定义的历史变量有关。)   @code
     FE_DGQ<dim>     history_fe (1);
     DoFHandler<dim> history_dof_handler (triangulation);
     history_dof_handler.distribute_dofs (history_fe);
+
 
     std::vector< std::vector< Vector<double> > >
                  history_field (dim, std::vector< Vector<double> >(dim)),
                  local_history_values_at_qpoints (dim, std::vector< Vector<double> >(dim)),
                  local_history_fe_values (dim, std::vector< Vector<double> >(dim));
+
 
     for (unsigned int i=0; i<dim; i++)
       for (unsigned int j=0; j<dim; j++)
@@ -3553,6 +2978,7 @@ general approach to this would go like this:
         local_history_fe_values[i][j].reinit(history_fe.n_dofs_per_cell());
       }
 
+
     FullMatrix<double> qpoint_to_dof_matrix (history_fe.dofs_per_cell,
                                              quadrature.size());
     FETools::compute_projection_from_quadrature_points_matrix
@@ -3560,20 +2986,25 @@ general approach to this would go like this:
                quadrature, quadrature,
                qpoint_to_dof_matrix);
 
+
     typename DoFHandler<dim>::active_cell_iterator cell = dof_handler.begin_active(),
                                                    endc = dof_handler.end(),
                                                    dg_cell = history_dof_handler.begin_active();
 
+
     for (; cell!=endc; ++cell, ++dg_cell)
       {
 
+
         PointHistory<dim> *local_quadrature_points_history
           = reinterpret_cast<PointHistory<dim> *>(cell->user_pointer());
+
 
         Assert (local_quadrature_points_history >= &quadrature_point_history.front(),
                 ExcInternalError());
         Assert (local_quadrature_points_history < &quadrature_point_history.back(),
                 ExcInternalError());
+
 
         for (unsigned int i=0; i<dim; i++)
           for (unsigned int j=0; j<dim; j++)
@@ -3582,23 +3013,22 @@ general approach to this would go like this:
               local_history_values_at_qpoints[i][j](q)
                 = local_quadrature_points_history[q].old_stress[i][j];
 
+
             qpoint_to_dof_matrix.vmult (local_history_fe_values[i][j],
                                         local_history_values_at_qpoints[i][j]);
+
 
             dg_cell->set_dof_values (local_history_fe_values[i][j],
                                      history_field[i][j]);
           }
       }
-  @endcode
+  @endcode 
 
-- Now that we have a global field, we can refine the mesh and transfer the
-  history_field vector as usual using the SolutionTransfer class. This will
-  interpolate everything from the old to the new mesh.
 
-- In a final step, we have to get the data back from the now interpolated
-  global field to the quadrature points on the new mesh. The following code
-  will do that:
-  @code
+
+- 现在我们有了一个全局场，我们可以细化网格并像往常一样使用SolutionTransfer类来转移history_field向量。这将把所有的东西从旧的网格插值到新的网格。
+
+- 在最后一步，我们必须将数据从现在插值的全局场返回到新网格上的正交点。下面的代码将做到这一点。  @code
     FullMatrix<double> dof_to_qpoint_matrix (quadrature.size(),
                                              history_fe.n_dofs_per_cell());
     FETools::compute_interpolation_to_quadrature_points_matrix
@@ -3606,19 +3036,23 @@ general approach to this would go like this:
                quadrature,
                dof_to_qpoint_matrix);
 
+
     typename DoFHandler<dim>::active_cell_iterator cell = dof_handler.begin_active(),
                                                    endc = dof_handler.end(),
                                                    dg_cell = history_dof_handler.begin_active();
+
 
     for (; cell != endc; ++cell, ++dg_cell)
     {
       PointHistory<dim> *local_quadrature_points_history
        = reinterpret_cast<PointHistory<dim> *>(cell->user_pointer());
 
+
       Assert (local_quadrature_points_history >= &quadrature_point_history.front(),
               ExcInternalError());
       Assert (local_quadrature_points_history < &quadrature_point_history.back(),
               ExcInternalError());
+
 
       for (unsigned int i=0; i<dim; i++)
         for (unsigned int j=0; j<dim; j++)
@@ -3626,39 +3060,25 @@ general approach to this would go like this:
           dg_cell->get_dof_values (history_field[i][j],
                                    local_history_fe_values[i][j]);
 
+
           dof_to_qpoint_matrix.vmult (local_history_values_at_qpoints[i][j],
                                       local_history_fe_values[i][j]);
+
 
           for (unsigned int q=0; q<quadrature.size(); ++q)
             local_quadrature_points_history[q].old_stress[i][j]
               = local_history_values_at_qpoints[i][j](q);
       }
-  @endcode
+  @endcode 
 
-It becomes a bit more complicated once we run the program in parallel, since
-then each process only stores this data for the cells it owned on the old
-mesh. That said, using a parallel vector for <code>history_field</code> will
-do the trick if you put a call to <code>compress</code> after the transfer
-from quadrature points into the global vector.
+
+
+一旦我们并行运行程序，就会变得有点复杂，因为那时每个进程只为它在旧网格上拥有的单元存储这些数据。也就是说，如果你在正交点转移到全局矢量后调用 <code>history_field</code> ，使用并行矢量就可以做到这一点。
 
 
 <a name="Ensuringmeshregularity"></a><h5>Ensuring mesh regularity</h5>
 
 
-At present, the program makes no attempt
-to make sure that a cell, after moving its vertices at the end of the time
-step, still has a valid geometry (i.e. that its Jacobian determinant is
-positive and bounded away from zero everywhere). It is, in fact, not very hard
-to set boundary values and forcing terms in such a way that one gets distorted
-and inverted cells rather quickly. Certainly, in some cases of large
-deformation, this is unavoidable with a mesh of finite mesh size, but in some
-other cases this should be preventable by appropriate mesh refinement and/or a
-reduction of the time step size. The program does not do that, but a more
-sophisticated version definitely should employ some sort of heuristic defining
-what amount of deformation of cells is acceptable, and what isn't.
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-18.cc"
-*/
+目前，程序没有尝试确保一个单元在时间步数结束时移动其顶点后，仍然具有有效的几何形状（即其雅各布决定数是正的，并且在任何地方都远离零的界限）。事实上，设置边界值和强迫项并不难，这样就可以很快得到扭曲和倒置的单元。当然，在某些大变形的情况下，这在有限网格的情况下是不可避免的，但在其他情况下，通过适当的网格细化和/或减少时间步长，这应该是可以避免的。这个程序并没有这样做，但是一个更复杂的版本肯定应该采用某种启发式方法来定义哪些单元的变形量是可以接受的，哪些是不可以的。<a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-18.cc"  。 
+
+  */  

@@ -90,10 +90,10 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>deal.II currently only requires a C++11-conforming compiler, but there are a number of functions and classes from the C++14 standard that are easy to provide also in case the compiler only supports C++11. These are collected in the current namespace.</p>
-<p>The most notable example is the <a href="https://en.cppreference.com/w/cpp/memory/unique_ptr/make_unique"><code>std::make_unique</code></a> function which is arguably an oversight for not having been included in C++11 (given that there is <a href="https://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared"><code>std::make_shared</code></a> in C++11).</p>
-<p>There are other small additions in this namespace that allow us to use C++14 features at this point already, even though we don't require a C++14-compliant compiler.</p>
-<dl class="section note"><dt>Note</dt><dd>If the compiler in use actually does support C++14, then the contents of this namespace are simply imported classes and functions from namespace <code>std</code>. That is, we fall back to what the compiler provides, rather than our own implementations. </dd></dl>
+<div class="textblock"><p>Del.II目前只需要一个C++ 11兼容编译器，但是有许多来自C++ 14标准的函数和类，在编译器只支持C++ 11的情况下，也很容易提供。这些是在当前命名空间中收集的。</p>
+<p>最为著名的例子是 <a href="https://en.cppreference.com/w/cpp/memory/unique_ptr/make_unique"><code>std::make_unique</code></a> 函数，它可以被忽略为没有包含在C++11中(因为在C++11中存在 <a href="https://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared"><code>std::make_shared</code></a>).</p>
+<p>在这个命名空间中还有其他的小的添加，允许我们在这一点上使用C++ 14的特性，即使我们不需要C++ 14兼容编译器。</p>
+<dl class="section note"><dt>Note</dt><dd>如果使用中的编译器实际上支持C++ 14，那么这个命名空间的内容就是从命名空间“STD”中简单导入的类和函数。也就是说，我们退回到编译器提供的内容，而不是我们自己的实现。 </dd></dl>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

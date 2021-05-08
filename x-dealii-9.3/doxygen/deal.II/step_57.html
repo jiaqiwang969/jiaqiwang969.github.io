@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-57 tutorial program</title>
+<title>The deal.II Library: The step-57 tutorial program  。</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,179 +86,181 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-57 tutorial program </div>  </div>
+<div class="title">The step-57 tutorial program 。 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_15.html">step-15</a>, <a class="el" href="step_22.html">step-22</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_15.html">step-15</a> , <a class="el" href="step_22.html">step-22</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#NavierStokesEquations"> Navier Stokes Equations </a>
-        <li><a href="#LinearizationofNavierStokesEquations"> Linearization of Navier-Stokes Equations </a>
-        <li><a href="#FindinganInitialGuess"> Finding an Initial Guess </a>
-        <li><a href="#TheSolverandPreconditioner">The Solver and Preconditioner </a>
-        <li><a href="#TestCase"> Test Case </a>
-        <li><a href="#References"> References </a>
+        <li><a href="#NavierStokesEquations"> Navier Stokes Equations </a><a href="#NavierStokesEquations"> Navier Stokes Equations </a>
+        <li><a href="#LinearizationofNavierStokesEquations"> Linearization of Navier-Stokes Equations </a><a href="#LinearizationofNavierStokesEquations"> Linearization of Navier-Stokes Equations </a>
+        <li><a href="#FindinganInitialGuess"> Finding an Initial Guess </a><a href="#FindinganInitialGuess"> Finding an Initial Guess </a>
+        <li><a href="#TheSolverandPreconditioner">The Solver and Preconditioner </a><a href="#TheSolverandPreconditioner">The Solver and Preconditioner </a>
+        <li><a href="#TestCase"> Test Case </a><a href="#TestCase"> Test Case </a>
+        <li><a href="#References"> References </a><a href="#References"> References </a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#ThecodeNavierStokesProblemcodeclasstemplate">The <code>NavierStokesProblem</code> class template</a>
-        <li><a href="#Boundaryvaluesandrighthandside">Boundary values and right hand side</a>
-        <li><a href="#BlockSchurPreconditionerforNavierStokesequations">BlockSchurPreconditioner for Navier Stokes equations</a>
-        <li><a href="#StationaryNavierStokesclassimplementation">StationaryNavierStokes class implementation</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#ThecodeNavierStokesProblemcodeclasstemplate">The <code>NavierStokesProblem</code> class template</a><a href="#ThecodeNavierStokesProblemcodeclasstemplate">The <code>NavierStokesProblem</code> class template</a>
+        <li><a href="#Boundaryvaluesandrighthandside">Boundary values and right hand side</a><a href="#Boundaryvaluesandrighthandside">Boundary values and right hand side</a>
+        <li><a href="#BlockSchurPreconditionerforNavierStokesequations">BlockSchurPreconditioner for Navier Stokes equations</a><a href="#BlockSchurPreconditionerforNavierStokesequations">BlockSchurPreconditioner for Navier Stokes equations</a>
+        <li><a href="#StationaryNavierStokesclassimplementation">StationaryNavierStokes class implementation</a><a href="#StationaryNavierStokesclassimplementation">StationaryNavierStokes class implementation</a>
       <ul>
-        <li><a href="#StationaryNavierStokesStationaryNavierStokes">StationaryNavierStokes::StationaryNavierStokes</a>
-        <li><a href="#StationaryNavierStokessetup_dofs">StationaryNavierStokes::setup_dofs</a>
-        <li><a href="#StationaryNavierStokesinitialize_system">StationaryNavierStokes::initialize_system</a>
-        <li><a href="#StationaryNavierStokesassemble">StationaryNavierStokes::assemble</a>
-        <li><a href="#StationaryNavierStokessolve">StationaryNavierStokes::solve</a>
-        <li><a href="#StationaryNavierStokesrefine_mesh">StationaryNavierStokes::refine_mesh</a>
-        <li><a href="#StationaryNavierStokesdimnewton_iteration">StationaryNavierStokes<dim>::newton_iteration</a>
-        <li><a href="#StationaryNavierStokescompute_initial_guess">StationaryNavierStokes::compute_initial_guess</a>
-        <li><a href="#StationaryNavierStokesoutput_results">StationaryNavierStokes::output_results</a>
-        <li><a href="#StationaryNavierStokesprocess_solution">StationaryNavierStokes::process_solution</a>
-        <li><a href="#StationaryNavierStokesrun">StationaryNavierStokes::run</a>
+        <li><a href="#StationaryNavierStokesStationaryNavierStokes">StationaryNavierStokes::StationaryNavierStokes</a><a href="#StationaryNavierStokesStationaryNavierStokes">StationaryNavierStokes::StationaryNavierStokes</a>
+        <li><a href="#StationaryNavierStokessetup_dofs">StationaryNavierStokes::setup_dofs</a><a href="#StationaryNavierStokessetup_dofs">StationaryNavierStokes::setup_dofs</a>
+        <li><a href="#StationaryNavierStokesinitialize_system">StationaryNavierStokes::initialize_system</a><a href="#StationaryNavierStokesinitialize_system">StationaryNavierStokes::initialize_system</a>
+        <li><a href="#StationaryNavierStokesassemble">StationaryNavierStokes::assemble</a> ]<a href="#StationaryNavierStokesassemble">StationaryNavierStokes::assemble</a>
+        <li><a href="#StationaryNavierStokessolve">StationaryNavierStokes::solve</a><a href="#StationaryNavierStokessolve">StationaryNavierStokes::solve</a>
+        <li><a href="#StationaryNavierStokesrefine_mesh">StationaryNavierStokes::refine_mesh</a><a href="#StationaryNavierStokesrefine_mesh">StationaryNavierStokes::refine_mesh</a>
+        <li><a href="#StationaryNavierStokesdimnewton_iteration">StationaryNavierStokes<dim>::newton_iteration</a><a href="#StationaryNavierStokesdimnewton_iteration">StationaryNavierStokes<dim>::newton_iteration</a>
+        <li><a href="#StationaryNavierStokescompute_initial_guess">StationaryNavierStokes::compute_initial_guess</a><a href="#StationaryNavierStokescompute_initial_guess">StationaryNavierStokes::compute_initial_guess</a>
+        <li><a href="#StationaryNavierStokesoutput_results">StationaryNavierStokes::output_results</a><a href="#StationaryNavierStokesoutput_results">StationaryNavierStokes::output_results</a>
+        <li><a href="#StationaryNavierStokesprocess_solution">StationaryNavierStokes::process_solution</a><a href="#StationaryNavierStokesprocess_solution">StationaryNavierStokes::process_solution</a>
+        <li><a href="#StationaryNavierStokesrun">StationaryNavierStokes::run</a><a href="#StationaryNavierStokesrun">StationaryNavierStokes::run</a>
       </ul>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Testcase1LowReynoldsNumber"> Test case 1: Low Reynolds Number </a>
-        <li><a href="#Testcase2HighReynoldsNumber"> Test case 2: High Reynolds Number </a>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Testcase1LowReynoldsNumber"> Test case 1: Low Reynolds Number </a><a href="#Testcase1LowReynoldsNumber"> Test case 1: Low Reynolds Number </a>
+        <li><a href="#Testcase2HighReynoldsNumber"> Test case 2: High Reynolds Number </a><a href="#Testcase2HighReynoldsNumber"> Test case 2: High Reynolds Number </a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
       <ul>
-        <li><a href="#Comparetoothersolvers">Compare to other solvers</a>
-        <li><a href="#3dcomputations">3d computations</a>
-        <li><a href="#Parallelization">Parallelization</a>
+        <li><a href="#Comparetoothersolvers">Compare to other solvers</a><a href="#Comparetoothersolvers">Compare to other solvers</a>
+        <li><a href="#3dcomputations">3d computations</a><a href="#3dcomputations">3d computations</a>
+        <li><a href="#Parallelization">Parallelization</a><a href="#Parallelization">Parallelization</a>
     </ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
+</p>
+<p><br  />
  <br  />
 </p>
 <p><em>This program was contributed by Liang Zhao and Timo Heister.</em></p>
 <p><em>This material is based upon work partially supported by National Science Foundation grant DMS1522191 and the Computational Infrastructure in Geodynamics initiative (CIG), through the National Science Foundation under Award No. EAR-0949446 and The University of California-Davis. </em></p>
-<dl class="section note"><dt>Note</dt><dd>If you use this program as a basis for your own work, please consider citing it in your list of references. The initial version of this work was contributed to the deal.II project by the authors listed in the following citation: <a href="https://doi.org/10.5281/zenodo.484156"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.484156.svg" alt="10.5281/zenodo.484156"/></a> </dd></dl>
-<p><a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
+<dl class="section note"><dt>Note</dt><dd>If you use this program as a basis for your own work, please consider citing it in your list of references. The initial version of this work was contributed to the deal.II project by the authors listed in the following citation: <a href="https://doi.org/10.5281/zenodo.484156"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.484156.svg" alt="10.5281/zenodo.484156"/></a>  <br  />
+</dd></dl>
+<p><a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a> </p><h1>Introduction</h1>
 <p><a class="anchor" id="NavierStokesEquations"></a></p><h3>Navier Stokes Equations </h3>
-<p>In this tutorial we show how to solve the incompressible Navier Stokes equations (NSE) with Newton's method. The flow we consider here is assumed to be steady. In a domain \(\Omega \subset \mathbb{R}^{d}\), \(d=2,3\), with a piecewise smooth boundary \(\partial \Omega\), and a given force field \(\textbf{f}\), we seek a velocity field \(\textbf{u}\) and a pressure field \(\textbf{p}\) satisfying </p><p class="formulaDsp">
+<p>在本教程中，我们展示了如何用牛顿方法解决不可压缩的Navier Stokes方程（NSE）。我们在这里考虑的流动被假定为是稳定的。在一个域 \(\Omega \subset \mathbb{R}^{d}\) ， \(d=2,3\) ，具有片状光滑边界 \(\partial \Omega\) ，和一个给定的力场 \(\textbf{f}\) ，我们寻求一个速度场 \(\textbf{u}\) 和压力场 \(\textbf{p}\) ，满足 </p><p class="formulaDsp">
 \begin{eqnarray*} - \nu \Delta\textbf{u} + (\textbf{u} \cdot \nabla)\textbf{u} + \nabla p &amp;=&amp; \textbf{f}\\ - \nabla \cdot \textbf{u} &amp;=&amp; 0. \end{eqnarray*}
 </p>
-<p>Unlike the Stokes equations as discussed in <a class="el" href="step_22.html">step-22</a>, the NSE are a nonlinear system of equations because of the convective term \((\textbf{u} \cdot \nabla)\textbf{u}\). The first step of computing a numerical solution is to linearize the system and this will be done using Newton's method. A time-dependent problem is discussed in <a class="el" href="step_35.html">step-35</a>, where the system is linearized using the solution from the last time step and no nonlinear solve is necessary.</p>
+<p>与 <a class="el" href="step_22.html">step-22</a> 中讨论的斯托克斯方程不同，由于对流项的存在，NSE是一个非线性方程组 \((\textbf{u} \cdot \nabla)\textbf{u}\) 。计算数值解的第一步是将系统线性化，这将用牛顿方法来完成。在 <a class="el" href="step_35.html">step-35</a> 中讨论了一个随时间变化的问题，在这里，系统使用最后一个时间步骤的解进行线性化，不需要进行非线性解。</p>
 <p><a class="anchor" id="LinearizationofNavierStokesEquations"></a></p><h3>Linearization of Navier-Stokes Equations </h3>
-<p>We define a nonlinear function whose root is a solution to the NSE by </p><p class="formulaDsp">
+<p>我们通过 </p><p class="formulaDsp">
 \begin{eqnarray*} F(\mathbf{u}, p) = \begin{pmatrix} - \nu \Delta\mathbf{u} + (\mathbf{u} \cdot \nabla)\mathbf{u} + \nabla p - \mathbf{f} \\ - \nabla \cdot \mathbf{u} \end{pmatrix}. \end{eqnarray*}
 </p>
-<p>Assuming the initial guess is good enough to guarantee the convergence of Newton's iteration and denoting \(\textbf{x} = (\textbf{u}, p)\), Newton's iteration on a vector function can be defined as </p><p class="formulaDsp">
+<p>定义一个非线性函数，其根是NSE的一个解。</p>
+<p>假设初始猜测足以保证牛顿迭代的收敛性，并表示 \(\textbf{x} = (\textbf{u}, p)\) ，牛顿对向量函数的迭代可以定义为 </p><p class="formulaDsp">
 \begin{eqnarray*} \textbf{x}^{k+1} = \textbf{x}^{k} - (\nabla F(\textbf{x}^{k}))^{-1} F(\textbf{x}^{k}), \end{eqnarray*}
 </p>
-<p>where \(\textbf{x}^{k+1}\) is the approximate solution in step \(k+1\), \(\textbf{x}^{k}\) represents the solution from the previous step, and \(\nabla F(\textbf{x}^{k})\) is the Jacobian matrix evaluated at \(\textbf{x}^{k}\). A similar iteration can be found in <a class="el" href="step_15.html">step-15</a>.</p>
-<p>The Newton iteration formula implies the new solution is obtained by adding an update term to the old solution. Instead of evaluating the Jacobian matrix and taking its inverse, we consider the update term as a whole, that is </p><p class="formulaDsp">
+<p>其中 \(\textbf{x}^{k+1}\) 是步骤 \(k+1\) 中的近似解， \(\textbf{x}^{k}\) 代表上一步的解， \(\nabla F(\textbf{x}^{k})\) 是在 \(\textbf{x}^{k}\) 处评价的雅各布矩阵。类似的迭代可以在 <a class="el" href="step_15.html">step-15</a> 中找到。</p>
+<p>牛顿迭代公式意味着新的解决方案是通过在旧的解决方案中加入更新项来获得的。我们不是评估雅各布矩阵并取其倒数，而是将更新项视为一个整体，即 </p><p class="formulaDsp">
 \begin{eqnarray*} \delta \textbf{x}^{k} = - (\nabla F(\textbf{x}^{k}))^{-1} F(\textbf{x}^{k}), \end{eqnarray*}
 </p>
-<p>where \(\textbf{x}^{k+1}=\textbf{x}^{k}+\delta \textbf{x}^{k}\).</p>
-<p>We can find the update term by solving the system </p><p class="formulaDsp">
+<p>其中 \(\textbf{x}^{k+1}=\textbf{x}^{k}+\delta \textbf{x}^{k}\) 。</p>
+<p>我们可以通过解决系统 </p><p class="formulaDsp">
 \begin{eqnarray*} \nabla F(\textbf{x}^{k}) \delta \textbf{x}^{k} = -F(\textbf{x}^{k}). \end{eqnarray*}
 </p>
-<p>Here, the left of the previous equation represents the directional gradient of \(F(\textbf{x})\) along \(\delta \textbf{x}^{k}\) at \(\textbf{x}^{k}\). By definition, the directional gradient is given by </p><p class="formulaDsp">
+<p>来找到更新项</p>
+<p>这里，前一个方程的左边代表 \(F(\textbf{x})\) 沿 \(\delta \textbf{x}^{k}\) 在 \(\textbf{x}^{k}\) 的方向梯度。根据定义，方向性梯度由 </p><p class="formulaDsp">
 \begin{eqnarray*} &amp; &amp;\nabla F(\mathbf{u}^{k}, p^{k}) (\delta \mathbf{u}^{k}, \delta p^{k}) \\ \\ &amp;=&amp; \lim_{\epsilon \to 0} \frac{1}{\epsilon} \left( F(\mathbf{u}^{k} + \epsilon \delta \mathbf{u}^{k}, p^{k} + \epsilon \nabla \delta p^{k}) - F(\mathbf{u}^{k}, p^{k}) \right)\\ \\ &amp;=&amp; \lim_{\epsilon \to 0} \frac{1}{\epsilon} \begin{pmatrix} - \epsilon \nu \Delta \delta \mathbf{u}^{k} + \epsilon \mathbf{u}^{k} \cdot \nabla \delta \mathbf{u}^{k} + \epsilon \delta \mathbf{u}^{k} \cdot \nabla \mathbf{u}^{k} + \epsilon^{2} \delta \mathbf{u}^{k} \cdot \nabla \delta \mathbf{u}^{k} + \epsilon \nabla \delta p^{k}\\ - \epsilon \nabla \cdot \delta \mathbf{u}^{k} \end{pmatrix} \\ \\ &amp;=&amp; \begin{pmatrix} - \nu \Delta \delta \mathbf{u}^{k} + \mathbf{u}^{k} \cdot \nabla \delta \mathbf{u}^{k} + \delta \mathbf{u}^{k} \cdot \nabla \mathbf{u}^{k} + \nabla \delta p^{k}\\ - \nabla \cdot \delta \mathbf{u}^{k} \end{pmatrix}. \end{eqnarray*}
 </p>
-<p>Therefore, we arrive at the linearized system: </p><p class="formulaDsp">
+<p>给出。</p>
+<p>因此，我们得出了线性化系统。 </p><p class="formulaDsp">
 \begin{eqnarray*} -\nu \Delta \delta \mathbf{u}^{k} + \mathbf{u}^{k} \cdot \nabla \delta \mathbf{u}^{k} + \delta \mathbf{u}^{k} \cdot \nabla \mathbf{u}^{k} + \nabla \delta p^{k} = -F(\mathbf{x}^k), \\ -\nabla \cdot\delta \mathbf{u}^{k} = \nabla \cdot \mathbf{u}^{k}, \end{eqnarray*}
 </p>
-<p>where \(\textbf{u}^k\) and \(p^k\) are the solutions from the previous iteration. Additionally, the right hand side of the second equation is not zero since the discrete solution is not exactly divergence free (divergence free for the continuous solution). The right hand side here acts as a correction which leads the discrete solution of the velocity to be divergence free along Newton's iteration. In this linear system, the only unknowns are the update terms \(\delta \textbf{u}^{k}\) and \(\delta p^{k}\), and we can use a similar strategy to the one used in <a class="el" href="step_22.html">step-22</a> (and derive the weak form in the same way).</p>
-<p>Now, Newton's iteration can be used to solve for the update terms:</p>
+<p>其中 \(\textbf{u}^k\) 和 \(p^k\) 是上一次迭代的解。此外，第二个方程的右边不是零，因为离散解不完全是无发散的（连续解是无发散的）。这里的右手边作为一个修正，导致速度的离散解沿着牛顿的迭代是无发散的。在这个线性系统中，唯一的未知数是更新项 \(\delta \textbf{u}^{k}\) 和 \(\delta p^{k}\) ，我们可以使用类似于 <a class="el" href="step_22.html">step-22</a> 中的策略（并以同样的方式推导出弱形式）。</p>
+<p>现在，可以用牛顿迭代法来解决更新项。</p>
 <ol>
 <li>
-Initialization: Initial guess \(u_0\) and \(p_0\), tolerance \(\tau\); </li>
+初始化。初始猜测 \(u_0\) 和 \(p_0\) ，公差 \(\tau\) ；  </li>
 <li>
-Linear solve to compute update term \(\delta\textbf{u}^{k}\) and \(\delta p^k\); </li>
+线性求解计算更新项 \(\delta\textbf{u}^{k}\) 和 \(\delta p^k\) ；  </li>
 <li>
-Update the approximation: \(\textbf{u}^{k+1} = \textbf{u}^{k} + \delta\textbf{u}^{k}\) and \(p^{k+1} = p^{k} + \delta p^{k}\); </li>
+更新近似。 \(\textbf{u}^{k+1} = \textbf{u}^{k} + \delta\textbf{u}^{k}\) 和 \(p^{k+1} = p^{k} + \delta p^{k}\) ;  </li>
 <li>
-Check residual norm: \(E^{k+1} = \|F(\mathbf{u}^{k+1}, p^{k+1})\|\): <ul>
+检查残差规范。 \(E^{k+1} = \|F(\mathbf{u}^{k+1}, p^{k+1})\|\) : <ul>
 <li>
-If \(E^{k+1} \leq \tau\), STOP. </li>
+如果 \(E^{k+1} \leq \tau\) , 停止。  </li>
 <li>
-If \(E^{k+1} &gt; \tau\), back to step 2. </li>
+如果 \(E^{k+1} &gt; \tau\) ，回到步骤2。  </li>
 </ul>
 </li>
 </ol>
+<p><br  />
+</p>
 <p><a class="anchor" id="FindinganInitialGuess"></a></p><h3>Finding an Initial Guess </h3>
-<p>The initial guess needs to be close enough to the solution for Newton's method to converge; hence, finding a good starting value is crucial to the nonlinear solver.</p>
-<p>When the viscosity \(\nu\) is large, a good initial guess can be obtained by solving the Stokes equation with viscosity \(\nu\). While problem dependent, this works for \(\nu \geq 1/400\) for the test problem considered here.</p>
-<p>However, the convective term \((\mathbf{u}\cdot\nabla)\mathbf{u}\) will be dominant if the viscosity is small, like \(1/7500\) in test case 2. In this situation, we use a continuation method to set up a series of auxiliary NSEs with viscosity approaching the one in the target NSE. Correspondingly, we create a sequence \(\{\nu_{i}\}\) with \(\nu_{n}= \nu\), and accept that the solutions to two NSE with viscosity \(\nu_{i}\) and \(\nu_{i+1}\) are close if \(|\nu_{i} - \nu_{i+1}|\) is small. Then we use the solution to the NSE with viscosity \(\nu_{i}\) as the initial guess of the NSE with \(\nu_{i+1}\). This can be thought of as a staircase from the Stokes equations to the NSE we want to solve.</p>
-<p>That is, we first solve a Stokes problem </p><p class="formulaDsp">
+<p>初始猜测需要足够接近解决方案，以使牛顿方法收敛；因此，找到一个好的起始值对非线性求解器至关重要。</p>
+<p>当粘度 \(\nu\) 较大时，可以通过解决带有粘度的斯托克斯方程 \(\nu\) 来获得一个好的初始猜测。虽然与问题有关，但对于这里考虑的测试问题来说，这对 \(\nu \geq 1/400\) 有效。</p>
+<p>然而，如果粘度较小，对流项 \((\mathbf{u}\cdot\nabla)\mathbf{u}\) 将占主导地位，如试验例2中的 \(1/7500\) 。 在这种情况下，我们使用延续法建立一系列的辅助NSE，其粘度接近于目标NSE中的粘度。相应地，我们建立一个 \(\{\nu_{i}\}\) 与 \(\nu_{n}= \nu\) 的序列 ，如果 \(|\nu_{i} - \nu_{i+1}|\) 较小，则接受两个具有粘度 \(\nu_{i}\) 和 \(\nu_{i+1}\) 的NSE的解接近。 然后，我们使用带有粘度的NSE的解决方案 \(\nu_{i}\) 作为带有 \(\nu_{i+1}\) 的NSE的初始猜测。这可以看作是一个从斯托克斯方程到我们要解决的NSE的阶梯。</p>
+<p>也就是说，我们首先解决一个斯托克斯问题 </p><p class="formulaDsp">
 \begin{eqnarray*} -\nu_{1} \Delta \textbf{u} + \nabla p &amp;=&amp; \textbf{f}\\ -\nabla \cdot \textbf{u} &amp;=&amp; 0 \end{eqnarray*}
 </p>
-<p>to get the initial guess for </p><p class="formulaDsp">
+<p>来得到 </p><p class="formulaDsp">
 \begin{eqnarray*} -\nu_{1} \Delta \textbf{u} + (\textbf{u} \cdot \nabla)\textbf{u} + \nabla p &amp;=&amp; \textbf{f},\\ -\nabla \cdot \textbf{u} &amp;=&amp; 0, \end{eqnarray*}
 </p>
-<p>which also acts as the initial guess of the continuation method. Here \(\nu_{1}\) is relatively large so that the solution to the Stokes problem with viscosity \(\nu_{1}\) can be used as an initial guess for the NSE in Newton's iteration.</p>
-<p>Then the solution to </p><p class="formulaDsp">
+<p>的初始猜测。</p>
+<p>这也是延续法的初始猜测。这里 \(\nu_{1}\) 相对较大，这样带粘度的斯托克斯问题的解 \(\nu_{1}\) 就可以作为牛顿迭代中NSE的初始猜测。</p>
+<p>然后， </p><p class="formulaDsp">
 \begin{eqnarray*} -\nu_{i} \Delta \textbf{u} + (\textbf{u} \cdot \nabla)\textbf{u} + \nabla p &amp;=&amp; \textbf{f},\\ -\nabla \cdot \textbf{u} &amp;=&amp; 0. \end{eqnarray*}
 </p>
-<p>acts as the initial guess for </p><p class="formulaDsp">
+<p>的解决方案</p>
+<p>的解作为 </p><p class="formulaDsp">
 \begin{eqnarray*} -\nu_{i+1} \Delta \textbf{u} + (\textbf{u} \cdot \nabla)\textbf{u} + \nabla p &amp;=&amp; \textbf{f},\\ -\nabla \cdot \textbf{u} &amp;=&amp; 0. \end{eqnarray*}
 </p>
-<p>This process is repeated with a sequence of viscosities \(\{\nu_i\}\) that is determined experimentally so that the final solution can used as a starting guess for the Newton iteration.</p>
+<p>的初始猜测。</p>
+<p>用实验确定的粘度序列 \(\{\nu_i\}\) 重复这个过程，这样最终的解可以作为牛顿迭代的初始猜测。</p>
 <p><a class="anchor" id="TheSolverandPreconditioner"></a></p><h3>The Solver and Preconditioner </h3>
-<p>At each step of Newton's iteration, the problem results in solving a saddle point systems of the form </p><p class="formulaDsp">
+<p>在牛顿迭代的每一步，问题的结果是解决一个形式为 </p><p class="formulaDsp">
 \begin{eqnarray*} \begin{pmatrix} A &amp; B^{T} \\ B &amp; 0 \end{pmatrix} \begin{pmatrix} U \\ P \end{pmatrix} = \begin{pmatrix} F \\ 0 \end{pmatrix}. \end{eqnarray*}
 </p>
-<p>This system matrix has the same block structure as the one in <a class="el" href="step_22.html">step-22</a>. However, the matrix \(A\) at the top left corner is not symmetric because of the nonlinear term. Instead of solving the above system, we can solve the equivalent system </p><p class="formulaDsp">
+<p>的鞍点系统。</p>
+<p>这个系统矩阵具有与 <a class="el" href="step_22.html">step-22</a> 中相同的块结构。然而，由于非线性项的存在，左上角的矩阵 \(A\) 并不是对称的。我们可以不求解上述系统，而求解等效系统 </p><p class="formulaDsp">
 \begin{eqnarray*} \begin{pmatrix} A + \gamma B^TW^{-1}B &amp; B^{T} \\ B &amp; 0 \end{pmatrix} \begin{pmatrix} U \\ P \end{pmatrix} = \begin{pmatrix} F \\ 0 \end{pmatrix} \end{eqnarray*}
 </p>
-<p>with a parameter \(\gamma\) and an invertible matrix \(W\). Here \(\gamma B^TW^{-1}B\) is the Augmented Lagrangian term; see [1] for details.</p>
-<p>Denoting the system matrix of the new system by \(G\) and the right-hand side by \(b\), we solve it iteratively with right preconditioning \(P^{-1}\) as \(GP^{-1}y = b\), where </p><p class="formulaDsp">
+<p>的参数 \(\gamma\) 和一个可逆矩阵 \(W\) 。这里 \(\gamma B^TW^{-1}B\) 是Augmented Lagrangian项，详见[1]。</p>
+<p>用 \(G\) 表示新系统的系统矩阵，用 \(b\) 表示右手边，我们用右预处理 \(P^{-1}\) 反复求解为 \(GP^{-1}y = b\) ，其中 </p><p class="formulaDsp">
 \begin{eqnarray*} P^{-1} = \begin{pmatrix} \tilde{A} &amp; B^T \\ 0 &amp; \tilde{S} \end{pmatrix}^{-1} \end{eqnarray*}
 </p>
-<p>with \(\tilde{A} = A + \gamma B^TW^{-1}B\) and \(\tilde{S}\) is the corresponding Schur complement \(\tilde{S} = B^T \tilde{A}^{-1} B\). We let \(W = M_p\) where \(M_p\) is the pressure mass matrix, then \(\tilde{S}^{-1}\) can be approximated by </p><p class="formulaDsp">
+<p>与 \(\tilde{A} = A + \gamma B^TW^{-1}B\) ， \(\tilde{S}\) 是相应的舒尔补码 \(\tilde{S} = B^T \tilde{A}^{-1} B\) 。我们让 \(W = M_p\) 其中 \(M_p\) 是压力质量矩阵，那么 \(\tilde{S}^{-1}\) 可以被 </p><p class="formulaDsp">
 \begin{eqnarray*} \tilde{S}^{-1} \approx -(\nu+\gamma)M_p^{-1}. \end{eqnarray*}
 </p>
-<p>See [1] for details.</p>
-<p>We decompose \(P^{-1}\) as </p><p class="formulaDsp">
+<p>近似。</p>
+<p>详见[1]。</p>
+<p>我们将 \(P^{-1}\) 分解为 </p><p class="formulaDsp">
 \begin{eqnarray*} P^{-1} = \begin{pmatrix} \tilde{A}^{-1} &amp; 0 \\ 0 &amp; I \end{pmatrix} \begin{pmatrix} I &amp; -B^T \\ 0 &amp; I \end{pmatrix} \begin{pmatrix} I &amp; 0 \\ 0 &amp; \tilde{S}^{-1} \end{pmatrix}. \end{eqnarray*}
 </p>
-<p>Here two inexact solvers will be needed for \(\tilde{A}^{-1}\) and \(\tilde{S}^{-1}\), respectively (see [1]). Since the pressure mass matrix is symmetric and positive definite, CG with ILU as a preconditioner is appropriate to use for \(\tilde{S}^{-1}\). For simplicity, we use the direct solver UMFPACK for \(\tilde{A}^{-1}\). The last ingredient is a sparse matrix-vector product with \(B^T\). Instead of computing the matrix product in the augmented Lagrangian term in \(\tilde{A}\), we assemble Grad-Div stabilization \((\nabla \cdot \phi _{i}, \nabla \cdot \phi _{j}) \approx (B^T M_p^{-1}B)_{ij}\), as explained in [2].</p>
+<p>这里将需要两个不精确的求解器，分别用于 \(\tilde{A}^{-1}\) 和 \(\tilde{S}^{-1}\) ，（见[1]）。由于压力质量矩阵是对称的和正定的，CG与ILU作为预处理程序适用于 \(\tilde{S}^{-1}\) 。为了简单起见，我们对 \(\tilde{A}^{-1}\) 使用直接求解器UMFPACK。最后一个成分是与 \(B^T\) 的稀疏矩阵-向量乘积。我们不计算 \(\tilde{A}\) 中增强拉格朗日项的矩阵乘积，而是组装Grad-Div稳定化 \((\nabla \cdot \phi _{i}, \nabla \cdot \phi _{j}) \approx (B^T M_p^{-1}B)_{ij}\) ，如[2]中所解释。</p>
 <p><a class="anchor" id="TestCase"></a></p><h3>Test Case </h3>
-<p>We use the lid driven cavity flow as our test case; see [3] for details. The computational domain is the unit square and the right-hand side is \(f=0\). The boundary condition is </p><p class="formulaDsp">
+<p>我们使用盖子驱动的空腔流作为我们的测试案例；详见[3]。计算域是单位平方，右手边是 \(f=0\) 。边界条件为 </p><p class="formulaDsp">
 \begin{eqnarray*} (u(x, y), v(x,y)) &amp;=&amp; (1,0) \qquad\qquad \textrm{if}\ y = 1 \\ (u(x, y), v(x,y)) &amp;=&amp; (0,0) \qquad\qquad \textrm{otherwise}. \end{eqnarray*}
 </p>
-<p>When solving this problem, the error consists of the nonlinear error (from Newton's iteration) and the discretization error (dependent on mesh size). The nonlinear part decreases with each Newton iteration and the discretization error reduces with mesh refinement. In this example, the solution from the coarse mesh is transferred to successively finer meshes and used as an initial guess. Therefore, the nonlinear error is always brought below the tolerance of Newton's iteration and the discretization error is reduced with each mesh refinement.</p>
-<p>Inside the loop, we involve three solvers: one for \(\tilde{A}^{-1}\), one for \(M_p^{-1}\) and one for \(Gx=b\). The first two solvers are invoked in the preconditioner and the outer solver gives us the update term. Overall convergence is controlled by the nonlinear residual; as Newton's method does not require an exact Jacobian, we employ FGMRES with a relative tolerance of only 1e-4 for the outer linear solver. In fact, we use the truncated Newton solve for this system. As described in <a class="el" href="step_22.html">step-22</a>, the inner linear solves are also not required to be done very accurately. Here we use CG with a relative tolerance of 1e-6 for the pressure mass matrix. As expected, we still see convergence of the nonlinear residual down to 1e-14. Also, we use a simple line search algorithm for globalization of the Newton method.</p>
-<p>The cavity reference values for \(\mathrm{Re}=400\) and \(\mathrm{Re}=7500\) are from [4] and [5], respectively, where \(\mathrm{Re}\) is the Reynolds number and can be located at [8]. Here the viscosity is defined by \(1/\mathrm{Re}\). Even though we can still find a solution for \(\mathrm{Re}=10000\) and the references contain results for comparison, we limit our discussion here to \(\mathrm{Re}=7500\). This is because the solution is no longer stationary starting around \(\mathrm{Re}=8000\) but instead becomes periodic, see [7] for details.</p>
+<p>当解决这个问题时，误差由非线性误差（来自牛顿迭代）和离散化误差（取决于网格大小）组成。非线性部分随着牛顿的每次迭代而减少，离散化误差随着网格的细化而减少。在这个例子中，粗网的解被转移到连续的细网中，并作为初始猜测使用。因此，非线性误差总是低于牛顿迭代的容忍度，而离散化误差则随着每次网格细化而减少。</p>
+<p>在这个循环中，我们涉及三个求解器：一个用于 \(\tilde{A}^{-1}\) ，一个用于 \(M_p^{-1}\) 和一个用于 \(Gx=b\) 。前两个求解器在预处理程序中被调用，外部求解器给我们提供了更新项。总体收敛性由非线性残差控制；由于牛顿方法不需要精确的雅各布，我们采用FGMRES，外侧线性求解器的相对公差仅为1e-4。事实上，我们对这个系统采用了截断的牛顿解法。正如 <a class="el" href="step_22.html">step-22</a> 中所述，内部线性求解也不需要做得非常精确。这里我们使用CG，压力质量矩阵的相对公差为1e-6。正如预期的那样，我们仍然看到非线性残差收敛到了1e-14。另外，我们使用一个简单的线搜索算法来实现牛顿方法的全球化。</p>
+<p>腔体参考值 \(\mathrm{Re}=400\) 和 \(\mathrm{Re}=7500\) 分别来自[4]和[5]，其中 \(\mathrm{Re}\) 是雷诺数，可以定位在[8]。这里的粘度是由 \(1/\mathrm{Re}\) 定义的。尽管我们仍然可以找到 \(\mathrm{Re}=10000\) 的解决方案，而且参考文献中也包含了用于比较的结果，但我们在这里的讨论仅限于 \(\mathrm{Re}=7500\) 。这是因为从 \(\mathrm{Re}=8000\) 附近开始，解不再是静止的，而是变成了周期性的，详见[7]。</p>
 <p><a class="anchor" id="References"></a></p><h3>References </h3>
 <ol>
 <li>
-An Augmented Lagrangian-Based Approach to the Oseen Problem, M. Benzi and M. Olshanskii, SIAM J. SCI. COMPUT. 2006 </li>
-<li>
-Efficient augmented Lagrangian-type preconditioning for the Oseen problem using Grad-Div stabilization, Timo Heister and Gerd Rapin </li>
-<li>
-<a href="http://www.cfd-online.com/Wiki/Lid-driven_cavity_problem">http://www.cfd-online.com/Wiki/Lid-driven_cavity_problem</a> </li>
-<li>
-High-Re solution for incompressible flow using the Navier-Stokes Equations and a <a class="el" href="classMultigrid.html">Multigrid</a> Method, U. Ghia, K. N. Ghia, and C. T. Shin </li>
-<li>
-Numerical solutions of 2-D steady incompressible driven cavity flow at high Reynolds numbers, E. Erturk, T.C. Corke and C. Gokcol </li>
-<li>
-Implicit Weighted ENO Schemes for the Three-Dimensional Incompressible Navier-Stokes Equations, Yang et al, 1998 </li>
-<li>
-The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
-<li>
-<a href="https://en.wikipedia.org/wiki/Reynolds_number">https://en.wikipedia.org/wiki/Reynolds_number</a> </li>
+</li>
 </ol>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
-<p>As usual, we start by including some well-known files:</p>
+<p><br  />
+</p>
+<p>An Augmented Lagrangian-Based Approach to the Oseen Problem, M. Benzi and M. Olshanskii, SIAM J. SCI. COMPUT. COMPUT. 2006  Efficient augmented Lagrangian-type preconditioning for the Oseen problem using Grad-Div stabilization, Timo Heister and Gerd Rapin  <a href="http://www.cfd-online.com/Wiki/Lid-driven_cavity_problem">http://www.cfd-online.com/Wiki/Lid-driven_cavity_problem</a>  High-Re solution for incompressible flow using the Navier-Stokes Equations and a <a class="el" href="classMultigrid.html">Multigrid</a> Method, U. Ghia, K. N. Ghia, and C. T. Shin  ] E. Erturk, T.C. Corke and C. Gokcol  三维不可压缩Navier-Stokes方程的隐式加权ENO方案，Yang等人，1998  ] 二维盖子驱动的空腔问题再探讨，C. Bruneau和M. Saad，2006  <a href="https://en.wikipedia.org/wiki/Reynolds_number">https://en.wikipedia.org/wiki/Reynolds_number</a>  <a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+<p><a class="anchor" id="Includefiles"></a></p><h3>Include files</h3>
+<p>像往常一样，我们首先包括一些著名的文件。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="quadrature__lib_8h.html">deal.II/base/quadrature_lib.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="function_8h.html">deal.II/base/function.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="include_2deal_8II_2base_2utilities_8h.html">deal.II/base/utilities.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="tensor_8h.html">deal.II/base/tensor.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="block__vector_8h.html">deal.II/lac/block_vector.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="full__matrix_8h.html">deal.II/lac/full_matrix.h</a>&gt;</span></div>
@@ -269,18 +271,22 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="precondition_8h.html">deal.II/lac/precondition.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="affine__constraints_8h.html">deal.II/lac/affine_constraints.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2tria_8h.html">deal.II/grid/tria.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__generator_8h.html">deal.II/grid/grid_generator.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2grid__refinement_8h.html">deal.II/grid/grid_refinement.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__tools_8h.html">deal.II/grid/grid_tools.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dofs_2dof__handler_8h.html">deal.II/dofs/dof_handler.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dof__renumbering_8h.html">deal.II/dofs/dof_renumbering.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dof__tools_8h.html">deal.II/dofs/dof_tools.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__q_8h.html">deal.II/fe/fe_q.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__system_8h.html">deal.II/fe/fe_system.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe_2fe__values_8h.html">deal.II/fe/fe_values.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector__tools_8h.html">deal.II/numerics/vector_tools.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="matrix__tools_8h.html">deal.II/numerics/matrix_tools.h</a>&gt;</span></div>
@@ -312,18 +318,20 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="ttc" id="asolver__gmres_8h_html"><div class="ttname"><a href="solver__gmres_8h.html">solver_gmres.h</a></div></div>
 <div class="ttc" id="atensor_8h_html"><div class="ttname"><a href="tensor_8h.html">tensor.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p>To transfer solutions between meshes, this file is included:</p>
+</div><!-- fragment --><p>为了在网格之间传输解决方案，包括了这个文件。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="numerics_2solution__transfer_8h.html">deal.II/numerics/solution_transfer.h</a>&gt;</span></div>
 <div class="ttc" id="anumerics_2solution__transfer_8h_html"><div class="ttname"><a href="numerics_2solution__transfer_8h.html">solution_transfer.h</a></div></div>
-</div><!-- fragment --><p>This file includes UMFPACK: the direct solver:</p>
+</div><!-- fragment --><p>这个文件包括UMFPACK：直接求解器。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sparse__direct_8h.html">deal.II/lac/sparse_direct.h</a>&gt;</span></div>
 <div class="ttc" id="asparse__direct_8h_html"><div class="ttname"><a href="sparse__direct_8h.html">sparse_direct.h</a></div></div>
-</div><!-- fragment --><p>And the one for ILU preconditioner:</p>
+</div><!-- fragment --><p>还有一个用于ILU预处理的文件。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sparse__ilu_8h.html">deal.II/lac/sparse_ilu.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span>Step57</div>
 <div class="line">{</div>
@@ -331,7 +339,7 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="namespace__dealii_8h_source.html#l00025">namespace_dealii.h:26</a></div></div>
 <div class="ttc" id="asparse__ilu_8h_html"><div class="ttname"><a href="sparse__ilu_8h.html">sparse_ilu.h</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="ThecodeNavierStokesProblemcodeclasstemplate"></a> </p><h3>The <code>NavierStokesProblem</code> class template</h3>
-<p>This class manages the matrices and vectors described in the introduction: in particular, we store a <a class="el" href="classBlockVector.html">BlockVector</a> for the current solution, current Newton update, and the line search update. We also store two <a class="el" href="classAffineConstraints.html">AffineConstraints</a> objects: one which enforces the Dirichlet boundary conditions and one that sets all boundary values to zero. The first constrains the solution vector while the second constraints the updates (i.e., we never update boundary values, so we force the relevant update vector values to be zero).</p>
+<p>这个类管理介绍中描述的矩阵和向量：特别是，我们为当前的解决方案、当前的牛顿更新和线搜索更新存储一个BlockVector。 我们还存储了两个AffineConstraints对象：一个是强制执行Dirichlet边界条件的对象，另一个是将所有边界值设为0的对象。第一个约束解向量，第二个约束更新（即，我们从不更新边界值，所以我们强制相关的更新向量值为零）。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>StationaryNavierStokes</div>
 <div class="line">{</div>
@@ -339,24 +347,34 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">  StationaryNavierStokes(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> degree);</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> refinement);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keywordtype">void</span> setup_dofs();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> initialize_system();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceinternal.html#a2b3d48efdf7c94da455dc6a3553bab79">assemble</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span> initial_step, <span class="keyword">const</span> <span class="keywordtype">bool</span> assemble_matrix);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> assemble_system(<span class="keyword">const</span> <span class="keywordtype">bool</span> initial_step);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> assemble_rhs(<span class="keyword">const</span> <span class="keywordtype">bool</span> initial_step);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> solve(<span class="keyword">const</span> <span class="keywordtype">bool</span> initial_step);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> refine_mesh();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> process_solution(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> refinement);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> refinement_cycle) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> newton_iteration(<span class="keyword">const</span> <span class="keywordtype">double</span>       tolerance,</div>
 <div class="line">                        <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> max_n_line_searches,</div>
@@ -364,23 +382,29 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">                        <span class="keyword">const</span> <span class="keywordtype">bool</span>         is_initial_step,</div>
 <div class="line">                        <span class="keyword">const</span> <span class="keywordtype">bool</span>         output_result);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> compute_initial_guess(<span class="keywordtype">double</span> step_size);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">double</span>                               viscosity;</div>
 <div class="line">  <span class="keywordtype">double</span>                               <a class="code" href="namespaceinternal_1_1QGaussLobatto.html#ac1aec52fdbb26c78e2d32fc0bed659c7">gamma</a>;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>                   degree;</div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; dofs_per_block;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classTriangulation.html">Triangulation&lt;dim&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
 <div class="line">  <a class="code" href="classFESystem.html">FESystem&lt;dim&gt;</a>      fe;</div>
 <div class="line">  <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a>    dof_handler;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> zero_constraints;</div>
 <div class="line">  <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> nonzero_constraints;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classBlockSparsityPattern.html">BlockSparsityPattern</a>      sparsity_pattern;</div>
 <div class="line">  <a class="code" href="classBlockSparseMatrix.html">BlockSparseMatrix&lt;double&gt;</a> system_matrix;</div>
 <div class="line">  <a class="code" href="classSparseMatrix.html">SparseMatrix&lt;double&gt;</a>      pressure_mass_matrix;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classBlockVector.html">BlockVector&lt;double&gt;</a> present_solution;</div>
 <div class="line">  <a class="code" href="classBlockVector.html">BlockVector&lt;double&gt;</a> newton_update;</div>
@@ -399,8 +423,8 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="ttc" id="anamespaceinternal_1_1QGaussLobatto_html_ac1aec52fdbb26c78e2d32fc0bed659c7"><div class="ttname"><a href="namespaceinternal_1_1QGaussLobatto.html#ac1aec52fdbb26c78e2d32fc0bed659c7">internal::QGaussLobatto::gamma</a></div><div class="ttdeci">long double gamma(const unsigned int n)</div><div class="ttdef"><b>Definition:</b> <a href="quadrature__lib_8cc_source.html#l00096">quadrature_lib.cc:96</a></div></div>
 <div class="ttc" id="anamespaceinternal_html_a2b3d48efdf7c94da455dc6a3553bab79"><div class="ttname"><a href="namespaceinternal.html#a2b3d48efdf7c94da455dc6a3553bab79">internal::assemble</a></div><div class="ttdeci">void assemble(const MeshWorker::DoFInfoBox&lt; dim, DOFINFO &gt; &amp;dinfo, A *assembler)</div><div class="ttdef"><b>Definition:</b> <a href="loop_8h_source.html#l00071">loop.h:71</a></div></div>
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="Boundaryvaluesandrighthandside"></a> </p><h3>Boundary values and right hand side</h3>
-<p>In this problem we set the velocity along the upper surface of the cavity to be one and zero on the other three walls. The right hand side function is zero so we do not need to set the right hand side function in this tutorial. The number of components of the boundary function is <code>dim+1</code>. We will ultimately use <a class="el" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a> to set boundary values, which requires the boundary value functions to have the same number of components as the solution, even if all are not used. Put another way: to make this function happy we define boundary values for the pressure even though we will never actually use them.</p>
+</div><!-- fragment --><p><a class="anchor" id="Boundaryvaluesandrighthandside"></a></p><h3>Boundary values and right hand side</h3>
+<p>在这个问题中，我们设定沿空腔上表面的速度为1，其他三面墙的速度为0。右边的函数为零，所以我们在本教程中不需要设置右边的函数。边界函数的分量数为 <code>dim+1</code> 。我们最终将使用 <a class="el" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a> 来设置边界值，这就要求边界值函数的分量数与解相同，即使没有全部使用。换句话说：为了让这个函数高兴，我们为压力定义边界值，即使我们永远不会实际使用它们。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>BoundaryValues : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
@@ -412,6 +436,7 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component) <span class="keyword">const override</span>;</div>
 <div class="line">};</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">double</span> BoundaryValues&lt;dim&gt;::value(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp; p,</div>
 <div class="line">                                  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
@@ -420,6 +445,7 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">         <a class="code" href="group__Exceptions.html#ga0d685aad996180f9851183ae3e29019a">ExcIndexRange</a>(component, 0, this-&gt;n_components));</div>
 <div class="line">  <span class="keywordflow">if</span> (component == 0 &amp;&amp; std::abs(p[dim - 1] - 1.0) &lt; 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-10)</div>
 <div class="line">    <span class="keywordflow">return</span> 1.0;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
@@ -430,7 +456,9 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="ttc" id="agroup__Exceptions_html_ga70a0bb353656e704acf927945277bbc6"><div class="ttname"><a href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a></div><div class="ttdeci">#define Assert(cond, exc)</div><div class="ttdef"><b>Definition:</b> <a href="include_2deal_8II_2base_2exceptions_8h_source.html#l01473">exceptions.h:1473</a></div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a9587d5229555daa5b1fa1ba2f8a40adb"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">Physics::Elasticity::Kinematics::e</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; e(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
 </div><!-- fragment --><p><a class="anchor" id="BlockSchurPreconditionerforNavierStokesequations"></a> </p><h3>BlockSchurPreconditioner for Navier Stokes equations</h3>
-<p>As discussed in the introduction, the preconditioner in Krylov iterative methods is implemented as a matrix-vector product operator. In practice, the Schur complement preconditioner is decomposed as a product of three matrices (as presented in the first section). The \(\tilde{A}^{-1}\) in the first factor involves a solve for the linear system \(\tilde{A}x=b\). Here we solve this system via a direct solver for simplicity. The computation involved in the second factor is a simple matrix-vector multiplication. The Schur complement \(\tilde{S}\) can be well approximated by the pressure mass matrix and its inverse can be obtained through an inexact solver. Because the pressure mass matrix is symmetric and positive definite, we can use CG to solve the corresponding linear system.</p>
+<p><br  />
+</p>
+<p>正如介绍中所讨论的，Krylov迭代方法中的预处理器是作为一个矩阵-向量乘积算子实现的。在实践中，舒尔补码预处理器被分解为三个矩阵的乘积（如第一节所述）。第一个因素中的 \(\tilde{A}^{-1}\) 涉及到对线性系统 \(\tilde{A}x=b\) 的求解。在这里，为了简单起见，我们通过一个直接求解器来解决这个系统。第二个因素中涉及的计算是一个简单的矩阵-向量乘法。舒尔补码 \(\tilde{S}\) 可以被压力质量矩阵很好地近似，其逆值可以通过不精确求解器得到。因为压力质量矩阵是对称和正定的，我们可以用CG来解决相应的线性系统。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> PreconditionerMp&gt;</div>
 <div class="line"><span class="keyword">class </span>BlockSchurPreconditioner : <span class="keyword">public</span> <a class="code" href="classSubscriptor.html">Subscriptor</a></div>
 <div class="line">{</div>
@@ -441,7 +469,9 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">                           <span class="keyword">const</span> <a class="code" href="classSparseMatrix.html">SparseMatrix&lt;double&gt;</a> &amp;     P,</div>
 <div class="line">                           <span class="keyword">const</span> PreconditionerMp &amp;         Mppreconditioner);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> vmult(<a class="code" href="classBlockVector.html">BlockVector&lt;double&gt;</a> &amp;dst, <span class="keyword">const</span> <a class="code" href="classBlockVector.html">BlockVector&lt;double&gt;</a> &amp;src) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span>                     <a class="code" href="namespaceinternal_1_1QGaussLobatto.html#ac1aec52fdbb26c78e2d32fc0bed659c7">gamma</a>;</div>
@@ -453,7 +483,7 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">};</div>
 <div class="ttc" id="aclassSparseDirectUMFPACK_html"><div class="ttname"><a href="classSparseDirectUMFPACK.html">SparseDirectUMFPACK</a></div><div class="ttdef"><b>Definition:</b> <a href="sparse__direct_8h_source.html#l00087">sparse_direct.h:88</a></div></div>
 <div class="ttc" id="aclassSubscriptor_html"><div class="ttname"><a href="classSubscriptor.html">Subscriptor</a></div><div class="ttdef"><b>Definition:</b> <a href="subscriptor_8h_source.html#l00061">subscriptor.h:62</a></div></div>
-</div><!-- fragment --><p>We can notice that the initialization of the inverse of the matrix at the top left corner is completed in the constructor. If so, every application of the preconditioner then no longer requires the computation of the matrix factors.</p>
+</div><!-- fragment --><p>我们可以注意到，左上角的矩阵逆的初始化是在构造函数中完成的。如果是这样，那么预处理程序的每一次应用就不再需要计算矩阵因子了。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> PreconditionerMp&gt;</div>
 <div class="line">BlockSchurPreconditioner&lt;PreconditionerMp&gt;::BlockSchurPreconditioner(</div>
 <div class="line">  <span class="keywordtype">double</span>                           <a class="code" href="namespaceinternal_1_1QGaussLobatto.html#ac1aec52fdbb26c78e2d32fc0bed659c7">gamma</a>,</div>
@@ -470,6 +500,7 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">  A_inverse.initialize(stokes_matrix.block(0, 0));</div>
 <div class="line">}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> PreconditionerMp&gt;</div>
 <div class="line"><span class="keywordtype">void</span> BlockSchurPreconditioner&lt;PreconditionerMp&gt;::vmult(</div>
 <div class="line">  <a class="code" href="classBlockVector.html">BlockVector&lt;double&gt;</a> &amp;      dst,</div>
@@ -477,9 +508,11 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> utmp(src.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(0));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  {</div>
 <div class="line">    <a class="code" href="classSolverControl.html">SolverControl</a> solver_control(1000, 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-6 * src.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(1).l2_norm());</div>
 <div class="line">    <a class="code" href="classSolverCG.html">SolverCG&lt;Vector&lt;double&gt;</a>&gt; cg(solver_control);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    dst.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(1) = 0.0;</div>
 <div class="line">    cg.solve(pressure_mass_matrix,</div>
@@ -489,11 +522,13 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">    dst.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(1) *= -(viscosity + <a class="code" href="namespaceinternal_1_1QGaussLobatto.html#ac1aec52fdbb26c78e2d32fc0bed659c7">gamma</a>);</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  {</div>
 <div class="line">    stokes_matrix.block(0, 1).vmult(utmp, dst.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(1));</div>
 <div class="line">    utmp *= -1.0;</div>
 <div class="line">    utmp += src.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(0);</div>
 <div class="line">  }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  A_inverse.vmult(dst.<a class="code" href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">block</a>(0), utmp);</div>
 <div class="line">}</div>
@@ -502,8 +537,10 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="ttc" id="aclassVector_html"><div class="ttname"><a href="classVector.html">Vector&lt; double &gt;</a></div></div>
 <div class="ttc" id="agroup__Exceptions_html_gae05a0e26814f032473ed2ef66da018bd"><div class="ttname"><a href="group__Exceptions.html#gae05a0e26814f032473ed2ef66da018bd">BlockVectorBase::block</a></div><div class="ttdeci">BlockType &amp; block(const unsigned int i)</div></div>
 </div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokesclassimplementation"></a> </p><h3>StationaryNavierStokes class implementation</h3>
-<p><a class="anchor" id="StationaryNavierStokesStationaryNavierStokes"></a> </p><h4>StationaryNavierStokes::StationaryNavierStokes</h4>
-<p>The constructor of this class looks very similar to the one in <a class="el" href="step_22.html">step-22</a>. The only difference is the viscosity and the Augmented Lagrangian coefficient <code>gamma</code>.</p>
+<p><a class="anchor" id="StationaryNavierStokesStationaryNavierStokes"></a></p><h4>StationaryNavierStokes::StationaryNavierStokes</h4>
+<p><br  />
+</p>
+<p>该类的构造函数看起来与 <a class="el" href="step_22.html">step-22</a> 中的构造函数非常相似。唯一的区别是粘度和增强的拉格朗日系数 <code>gamma</code> 。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">StationaryNavierStokes&lt;dim&gt;::StationaryNavierStokes(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> degree)</div>
 <div class="line">  : viscosity(1.0 / 7500.0)</div>
@@ -515,18 +552,21 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">{}</div>
 <div class="ttc" id="aclassFE__Q_html"><div class="ttname"><a href="classFE__Q.html">FE_Q</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__q_8h_source.html#l00548">fe_q.h:549</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokessetup_dofs"></a> </p><h4>StationaryNavierStokes::setup_dofs</h4>
-<p>This function initializes the <a class="el" href="classDoFHandler.html">DoFHandler</a> enumerating the degrees of freedom and constraints on the current mesh.</p>
+<p><br  />
+</p>
+<p>这个函数初始化DoFHandler，列举当前网格上的自由度和约束。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StationaryNavierStokes&lt;dim&gt;::setup_dofs()</div>
 <div class="line">{</div>
 <div class="line">  system_matrix.clear();</div>
 <div class="line">  pressure_mass_matrix.clear();</div>
-</div><!-- fragment --><p>The first step is to associate DoFs with a given mesh.</p>
+</div><!-- fragment --><p>第一步是将自由度与给定的网格相关联。</p>
 <div class="fragment"><div class="line">dof_handler.distribute_dofs(fe);</div>
-</div><!-- fragment --><p>We renumber the components to have all velocity DoFs come before the pressure DoFs to be able to split the solution vector in two blocks which are separately accessed in the block preconditioner.</p>
+</div><!-- fragment --><p>我们对组件进行重新编号，使所有的速度DoFs排在压力DoFs之前，以便能够将解向量分成两个块，在块预处理程序中分别访问。</p>
 <div class="fragment"><div class="line">std::vector&lt;unsigned int&gt; block_component(dim + 1, 0);</div>
 <div class="line">block_component[dim] = 1;</div>
 <div class="line"><a class="code" href="namespaceDoFRenumbering.html#a52c1941406d1ce2937e29a46edf111f4">DoFRenumbering::component_wise</a>(dof_handler, block_component);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">dofs_per_block =</div>
 <div class="line">  <a class="code" href="namespaceDoFTools.html#a796721b56b3a90e4e3973c7caae4c3d8">DoFTools::count_dofs_per_fe_block</a>(dof_handler, block_component);</div>
@@ -534,10 +574,11 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dof_p = dofs_per_block[1];</div>
 <div class="ttc" id="anamespaceDoFRenumbering_html_a52c1941406d1ce2937e29a46edf111f4"><div class="ttname"><a href="namespaceDoFRenumbering.html#a52c1941406d1ce2937e29a46edf111f4">DoFRenumbering::component_wise</a></div><div class="ttdeci">void component_wise(DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, const std::vector&lt; unsigned int &gt; &amp;target_component=std::vector&lt; unsigned int &gt;())</div><div class="ttdef"><b>Definition:</b> <a href="dof__renumbering_8cc_source.html#l00681">dof_renumbering.cc:681</a></div></div>
 <div class="ttc" id="anamespaceDoFTools_html_a796721b56b3a90e4e3973c7caae4c3d8"><div class="ttname"><a href="namespaceDoFTools.html#a796721b56b3a90e4e3973c7caae4c3d8">DoFTools::count_dofs_per_fe_block</a></div><div class="ttdeci">std::vector&lt; types::global_dof_index &gt; count_dofs_per_fe_block(const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const std::vector&lt; unsigned int &gt; &amp;target_block=std::vector&lt; unsigned int &gt;())</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools_8cc_source.html#l02047">dof_tools.cc:2047</a></div></div>
-</div><!-- fragment --><p>In Newton's scheme, we first apply the boundary condition on the solution obtained from the initial step. To make sure the boundary conditions remain satisfied during Newton's iteration, zero boundary conditions are used for the update \(\delta u^k\). Therefore we set up two different constraint objects.</p>
+</div><!-- fragment --><p>在牛顿方案中，我们首先将边界条件应用于从初始步骤得到的解。为了确保边界条件在牛顿迭代过程中保持满足，在更新时使用零边界条件 \(\delta u^k\) 。因此我们设置了两个不同的约束对象。</p>
 <div class="fragment"><div class="line">  <a class="code" href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a> velocities(0);</div>
 <div class="line">  {</div>
 <div class="line">    nonzero_constraints.clear();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, nonzero_constraints);</div>
 <div class="line">    <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(dof_handler,</div>
@@ -548,8 +589,10 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">  }</div>
 <div class="line">  nonzero_constraints.close();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  {</div>
 <div class="line">    zero_constraints.clear();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, zero_constraints);</div>
 <div class="line">    <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(dof_handler,</div>
@@ -561,6 +604,7 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">  }</div>
 <div class="line">  zero_constraints.close();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Number of active cells: &quot;</span> &lt;&lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells()</div>
 <div class="line">            &lt;&lt; std::endl</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;Number of degrees of freedom: &quot;</span> &lt;&lt; dof_handler.n_dofs()</div>
@@ -571,7 +615,9 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="ttc" id="anamespaceVectorTools_html_ab2562d41bb26f362043f9719a8cd9b87"><div class="ttname"><a href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a></div><div class="ttdeci">void interpolate_boundary_values(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const std::map&lt; types::boundary_id, const Function&lt; spacedim, number &gt; * &gt; &amp;function_map, std::map&lt; types::global_dof_index, number &gt; &amp;boundary_values, const ComponentMask &amp;component_mask=ComponentMask())</div></div>
 <div class="ttc" id="astructFEValuesExtractors_1_1Vector_html"><div class="ttname"><a href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__values__extractors_8h_source.html#l00150">fe_values_extractors.h:151</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokesinitialize_system"></a> </p><h4>StationaryNavierStokes::initialize_system</h4>
-<p>On each mesh the <a class="el" href="classSparsityPattern.html">SparsityPattern</a> and the size of the linear system are different. This function initializes them after mesh refinement.</p>
+<p><br  />
+</p>
+<p>在每个网格上，SparsityPattern和线性系统的大小都不同。这个函数在网格细化后初始化它们。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StationaryNavierStokes&lt;dim&gt;::initialize_system()</div>
 <div class="line">{</div>
@@ -581,7 +627,9 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">    sparsity_pattern.copy_from(dsp);</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  system_matrix.reinit(sparsity_pattern);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  present_solution.reinit(dofs_per_block);</div>
 <div class="line">  newton_update.reinit(dofs_per_block);</div>
@@ -590,7 +638,9 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="ttc" id="aclassBlockDynamicSparsityPattern_html"><div class="ttname"><a href="classBlockDynamicSparsityPattern.html">BlockDynamicSparsityPattern</a></div><div class="ttdef"><b>Definition:</b> <a href="block__sparsity__pattern_8h_source.html#l00524">block_sparsity_pattern.h:526</a></div></div>
 <div class="ttc" id="agroup__constraints_html_gaf78e864edbfba7e0a7477457bfb96b26"><div class="ttname"><a href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a></div><div class="ttdeci">void make_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, SparsityPatternType &amp;sparsity_pattern, const AffineConstraints&lt; number &gt; &amp;constraints=AffineConstraints&lt; number &gt;(), const bool keep_constrained_dofs=true, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__sparsity_8cc_source.html#l00064">dof_tools_sparsity.cc:64</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokesassemble"></a> </p><h4>StationaryNavierStokes::assemble</h4>
-<p>This function builds the system matrix and right hand side that we currently work on. The <code>initial_step</code> argument is used to determine which set of constraints we apply (nonzero for the initial step and zero for the others). The <code>assemble_matrix</code> argument determines whether to assemble the whole system or only the right hand side vector, respectively.</p>
+<p>构建线性系统矩阵。 <br  />
+</p>
+<p>这个函数建立了我们目前工作的系统矩阵和右手边。 <code>initial_step</code> 参数用于决定我们应用哪一组约束（初始步骤为非零，其他为零）。 <code>assemble_matrix</code> 参数分别决定了是组装整个系统还是只组装右手边的向量。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> <a class="code" href="namespaceinternal.html#a2b3d48efdf7c94da455dc6a3553bab79">StationaryNavierStokes&lt;dim&gt;::assemble</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span> initial_step,</div>
 <div class="line">                                           <span class="keyword">const</span> <span class="keywordtype">bool</span> assemble_matrix)</div>
@@ -598,23 +648,30 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">  <span class="keywordflow">if</span> (assemble_matrix)</div>
 <div class="line">    system_matrix = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  system_rhs = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a> quadrature_formula(degree + 2);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> fe_values(fe,</div>
 <div class="line">                          quadrature_formula,</div>
 <div class="line">                          <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> |</div>
 <div class="line">                            <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = fe.n_dofs_per_cell();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points    = quadrature_formula.size();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a> velocities(0);</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="structFEValuesExtractors_1_1Scalar.html">FEValuesExtractors::Scalar</a> pressure(dim);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> local_matrix(dofs_per_cell, dofs_per_cell);</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a>     local_rhs(dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices(dofs_per_cell);</div>
 <div class="ttc" id="aclassFEValues_html"><div class="ttname"><a href="classFEValues.html">FEValues</a></div><div class="ttdef"><b>Definition:</b> <a href="fe_2fe__values_8h_source.html#l03905">fe_values.h:3906</a></div></div>
@@ -625,32 +682,38 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a></div><div class="ttdeci">@ update_gradients</div><div class="ttdoc">Shape function gradients.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00084">fe_update_flags.h:84</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a></div><div class="ttdeci">@ update_quadrature_points</div><div class="ttdoc">Transformed quadrature points.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00122">fe_update_flags.h:122</a></div></div>
 <div class="ttc" id="astructFEValuesExtractors_1_1Scalar_html"><div class="ttname"><a href="structFEValuesExtractors_1_1Scalar.html">FEValuesExtractors::Scalar</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__values__extractors_8h_source.html#l00095">fe_values_extractors.h:96</a></div></div>
-</div><!-- fragment --><p>For the linearized system, we create temporary storage for present velocity and gradient, and present pressure. In practice, they are all obtained through their shape functions at quadrature points.</p>
+</div><!-- fragment --><p>对于线性化系统，我们为当前速度和梯度以及当前压力创建临时存储。在实践中，它们都是通过其在正交点的形状函数获得的。</p>
 <div class="fragment"><div class="line">std::vector&lt;Tensor&lt;1, dim&gt;&gt; present_velocity_values(n_q_points);</div>
 <div class="line">std::vector&lt;Tensor&lt;2, dim&gt;&gt; present_velocity_gradients(n_q_points);</div>
 <div class="line">std::vector&lt;double&gt;         present_pressure_values(n_q_points);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">std::vector&lt;double&gt;         div_phi_u(dofs_per_cell);</div>
 <div class="line">std::vector&lt;Tensor&lt;1, dim&gt;&gt; phi_u(dofs_per_cell);</div>
 <div class="line">std::vector&lt;Tensor&lt;2, dim&gt;&gt; grad_phi_u(dofs_per_cell);</div>
 <div class="line">std::vector&lt;double&gt;         phi_p(dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">  {</div>
 <div class="line">    fe_values.reinit(cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    local_matrix = 0;</div>
 <div class="line">    local_rhs    = 0;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    fe_values[velocities].get_function_values(evaluation_point,</div>
 <div class="line">                                              present_velocity_values);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    fe_values[velocities].get_function_gradients(</div>
 <div class="line">      evaluation_point, present_velocity_gradients);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    fe_values[pressure].get_function_values(evaluation_point,</div>
 <div class="line">                                            present_pressure_values);</div>
-</div><!-- fragment --><p>The assembly is similar to <a class="el" href="step_22.html">step-22</a>. An additional term with gamma as a coefficient is the Augmented Lagrangian (AL), which is assembled via grad-div stabilization. As we discussed in the introduction, the bottom right block of the system matrix should be zero. Since the pressure mass matrix is used while creating the preconditioner, we assemble it here and then move it into a separate <a class="el" href="classSparseMatrix.html">SparseMatrix</a> at the end (same as in <a class="el" href="step_22.html">step-22</a>).</p>
+</div><!-- fragment --><p>装配类似于 <a class="el" href="step_22.html">step-22</a> 。一个以gamma为系数的附加项是Augmented Lagrangian（AL），它是通过grad-div稳定化组装的。 正如我们在介绍中所讨论的，系统矩阵的右下块应该为零。由于压力质量矩阵是在创建预处理程序时使用的，所以我们在这里组装它，然后在最后把它移到一个单独的SparseMatrix中（与 <a class="el" href="step_22.html">step-22</a> 相同）。</p>
 <div class="fragment"><div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; ++q)</div>
 <div class="line">      {</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k = 0; k &lt; dofs_per_cell; ++k)</div>
@@ -660,6 +723,7 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">            phi_u[k]      = fe_values[velocities].value(k, q);</div>
 <div class="line">            phi_p[k]      = fe_values[pressure].value(k, q);</div>
 <div class="line">          }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">          {</div>
@@ -680,6 +744,7 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">                  }</div>
 <div class="line">              }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">            <span class="keywordtype">double</span> present_velocity_divergence =</div>
 <div class="line">              <a class="code" href="classSymmetricTensor.html#a9137b6052702150e8e5b1188d1971906">trace</a>(present_velocity_gradients[q]);</div>
 <div class="line">            local_rhs(i) +=</div>
@@ -694,10 +759,13 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">          }</div>
 <div class="line">      }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    cell-&gt;get_dof_indices(local_dof_indices);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> &amp;constraints_used =</div>
 <div class="line">      initial_step ? nonzero_constraints : zero_constraints;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (assemble_matrix)</div>
 <div class="line">      {</div>
@@ -715,18 +783,20 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">      }</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keywordflow">if</span> (assemble_matrix)</div>
 <div class="line">  {</div>
 <div class="ttc" id="aclassAffineConstraints_html_a373fbdacd8c486e675b8d2bff8943192"><div class="ttname"><a href="classAffineConstraints.html#a373fbdacd8c486e675b8d2bff8943192">AffineConstraints::distribute_local_to_global</a></div><div class="ttdeci">void distribute_local_to_global(const InVector &amp;local_vector, const std::vector&lt; size_type &gt; &amp;local_dof_indices, OutVector &amp;global_vector) const</div><div class="ttdef"><b>Definition:</b> <a href="affine__constraints_8h_source.html#l02259">affine_constraints.h:2259</a></div></div>
 <div class="ttc" id="aclassSymmetricTensor_html_a9137b6052702150e8e5b1188d1971906"><div class="ttname"><a href="classSymmetricTensor.html#a9137b6052702150e8e5b1188d1971906">SymmetricTensor::trace</a></div><div class="ttdeci">constexpr Number trace(const SymmetricTensor&lt; 2, dim, Number &gt; &amp;d)</div><div class="ttdef"><b>Definition:</b> <a href="symmetric__tensor_8h_source.html#l02680">symmetric_tensor.h:2680</a></div></div>
 <div class="ttc" id="aclassSymmetricTensor_html_ab14ac27fc9ab74d4de531698b492d8de"><div class="ttname"><a href="classSymmetricTensor.html#ab14ac27fc9ab74d4de531698b492d8de">SymmetricTensor::scalar_product</a></div><div class="ttdeci">constexpr ProductType&lt; Number, OtherNumber &gt;::type scalar_product(const SymmetricTensor&lt; 2, dim, Number &gt; &amp;t1, const SymmetricTensor&lt; 2, dim, OtherNumber &gt; &amp;t2)</div><div class="ttdef"><b>Definition:</b> <a href="symmetric__tensor_8h_source.html#l03693">symmetric_tensor.h:3693</a></div></div>
-</div><!-- fragment --><p>Finally we move pressure mass matrix into a separate matrix:</p>
+</div><!-- fragment --><p>最后我们将压力质量矩阵移到一个单独的矩阵中。</p>
 <div class="fragment"><div class="line">pressure_mass_matrix.reinit(sparsity_pattern.block(1, 1));</div>
 <div class="line">pressure_mass_matrix.copy_from(system_matrix.block(1, 1));</div>
-</div><!-- fragment --><p>Note that settings this pressure block to zero is not identical to not assembling anything in this block, because this operation here will (incorrectly) delete diagonal entries that come in from hanging node constraints for pressure DoFs. This means that our whole system matrix will have rows that are completely zero. Luckily, FGMRES handles these rows without any problem.</p>
+</div><!-- fragment --><p>注意，将这个压力块设置为零并不等同于不在这个块中装配任何东西，因为这里的操作将（错误地）删除从压力作用力的悬挂节点约束进来的对角线条目。这意味着，我们的整个系统矩阵将有完全为零的行。幸运的是，FGMRES处理这些行没有任何问题。</p>
 <div class="fragment"><div class="line">      system_matrix.block(1, 1) = 0;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StationaryNavierStokes&lt;dim&gt;::assemble_system(<span class="keyword">const</span> <span class="keywordtype">bool</span> initial_step)</div>
@@ -734,27 +804,33 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">  <a class="code" href="namespaceinternal.html#a2b3d48efdf7c94da455dc6a3553bab79">assemble</a>(initial_step, <span class="keyword">true</span>);</div>
 <div class="line">}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StationaryNavierStokes&lt;dim&gt;::assemble_rhs(<span class="keyword">const</span> <span class="keywordtype">bool</span> initial_step)</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="namespaceinternal.html#a2b3d48efdf7c94da455dc6a3553bab79">assemble</a>(initial_step, <span class="keyword">false</span>);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokessolve"></a> </p><h4>StationaryNavierStokes::solve</h4>
-<p>In this function, we use FGMRES together with the block preconditioner, which is defined at the beginning of the program, to solve the linear system. What we obtain at this step is the solution vector. If this is the initial step, the solution vector gives us an initial guess for the Navier Stokes equations. For the initial step, nonzero constraints are applied in order to make sure boundary conditions are satisfied. In the following steps, we will solve for the Newton update so zero constraints are used.</p>
+<p><br  />
+</p>
+<p>在这个函数中，我们将FGMRES与程序开始时定义的块状预处理程序一起使用，以解决线性系统。我们在这一步得到的是解向量。如果这是初始步骤，解向量为我们提供了纳维尔-斯托克斯方程的初始猜测。对于初始步骤，非零约束被应用，以确保边界条件得到满足。在接下来的步骤中，我们将求解牛顿更新，所以使用零约束。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StationaryNavierStokes&lt;dim&gt;::solve(<span class="keyword">const</span> <span class="keywordtype">bool</span> initial_step)</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> &amp;constraints_used =</div>
 <div class="line">    initial_step ? nonzero_constraints : zero_constraints;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classSolverControl.html">SolverControl</a> solver_control(system_matrix.m(),</div>
 <div class="line">                               1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-4 * system_rhs.l2_norm(),</div>
 <div class="line">                               <span class="keyword">true</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classSolverFGMRES.html">SolverFGMRES&lt;BlockVector&lt;double&gt;</a>&gt; gmres(solver_control);</div>
 <div class="line">  <a class="code" href="classSparseILU.html">SparseILU&lt;double&gt;</a>                 pmass_preconditioner;</div>
 <div class="line">  pmass_preconditioner.<a class="code" href="group__Preconditioners.html#gae4b56dfaab3fd8820faa1b21160b1acb">initialize</a>(pressure_mass_matrix,</div>
 <div class="line">                                  <a class="code" href="group__Preconditioners.html#gae21347f3202a1186060eac36dcb45817">SparseILU&lt;double&gt;::AdditionalData</a>());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> BlockSchurPreconditioner&lt;SparseILU&lt;double&gt;&gt; preconditioner(</div>
 <div class="line">    <a class="code" href="namespaceinternal_1_1QGaussLobatto.html#ac1aec52fdbb26c78e2d32fc0bed659c7">gamma</a>,</div>
@@ -763,8 +839,10 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">    pressure_mass_matrix,</div>
 <div class="line">    pmass_preconditioner);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  gmres.solve(system_matrix, newton_update, system_rhs, preconditioner);</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;FGMRES steps: &quot;</span> &lt;&lt; solver_control.last_step() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  constraints_used.<a class="code" href="classAffineConstraints.html#a7b3d3f295bb56d6cd6856bdc6cbe8a01">distribute</a>(newton_update);</div>
 <div class="line">}</div>
@@ -773,8 +851,10 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="ttc" id="aclassSparseILU_html"><div class="ttname"><a href="classSparseILU.html">SparseILU</a></div><div class="ttdef"><b>Definition:</b> <a href="sparse__ilu_8h_source.html#l00059">sparse_ilu.h:60</a></div></div>
 <div class="ttc" id="agroup__Preconditioners_html_gae21347f3202a1186060eac36dcb45817"><div class="ttname"><a href="group__Preconditioners.html#gae21347f3202a1186060eac36dcb45817">SparseILU::AdditionalData</a></div><div class="ttdeci">typename SparseLUDecomposition&lt; number &gt;::AdditionalData AdditionalData</div><div class="ttdef"><b>Definition:</b> <a href="sparse__ilu_8h_source.html#l00079">sparse_ilu.h:79</a></div></div>
 <div class="ttc" id="agroup__Preconditioners_html_gae4b56dfaab3fd8820faa1b21160b1acb"><div class="ttname"><a href="group__Preconditioners.html#gae4b56dfaab3fd8820faa1b21160b1acb">SparseILU::initialize</a></div><div class="ttdeci">void initialize(const SparseMatrix&lt; somenumber &gt; &amp;matrix, const AdditionalData &amp;parameters=AdditionalData())</div></div>
-</div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokesrefine_mesh"></a> </p><h4>StationaryNavierStokes::refine_mesh</h4>
-<p>After finding a good initial guess on the coarse mesh, we hope to decrease the error through refining the mesh. Here we do adaptive refinement similar to <a class="el" href="step_15.html">step-15</a> except that we use the Kelly estimator on the velocity only. We also need to transfer the current solution to the next mesh using the <a class="el" href="classSolutionTransfer.html">SolutionTransfer</a> class.</p>
+</div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokesrefine_mesh"></a></p><h4>StationaryNavierStokes::refine_mesh</h4>
+<p><br  />
+</p>
+<p>在粗略的网格上找到一个好的初始猜测后，我们希望通过细化网格来减少误差。这里我们做了类似于 <a class="el" href="step_15.html">step-15</a> 的自适应细化，只是我们只使用速度的Kelly估计器。我们还需要使用SolutionTransfer类将当前的解转移到下一个网格。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StationaryNavierStokes&lt;dim&gt;::refine_mesh()</div>
 <div class="line">{</div>
@@ -788,10 +868,12 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">    estimated_error_per_cell,</div>
 <div class="line">    fe.component_mask(velocity));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="namespaceGridRefinement.html#a48e5395381ed87155942a61a1edd134d">GridRefinement::refine_and_coarsen_fixed_number</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>,</div>
 <div class="line">                                                  estimated_error_per_cell,</div>
 <div class="line">                                                  0.3,</div>
 <div class="line">                                                  0.0);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.prepare_coarsening_and_refinement();</div>
 <div class="line">  <a class="code" href="classSolutionTransfer.html">SolutionTransfer&lt;dim, BlockVector&lt;double&gt;</a>&gt; solution_transfer(dof_handler);</div>
@@ -801,20 +883,24 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="ttc" id="aclassSolutionTransfer_html"><div class="ttname"><a href="classSolutionTransfer.html">SolutionTransfer</a></div><div class="ttdef"><b>Definition:</b> <a href="numerics_2solution__transfer_8h_source.html#l00338">solution_transfer.h:339</a></div></div>
 <div class="ttc" id="anamespaceGridRefinement_html_a48e5395381ed87155942a61a1edd134d"><div class="ttname"><a href="namespaceGridRefinement.html#a48e5395381ed87155942a61a1edd134d">GridRefinement::refine_and_coarsen_fixed_number</a></div><div class="ttdeci">void refine_and_coarsen_fixed_number(Triangulation&lt; dim, spacedim &gt; &amp;triangulation, const Vector&lt; Number &gt; &amp;criteria, const double top_fraction_of_cells, const double bottom_fraction_of_cells, const unsigned int max_n_cells=std::numeric_limits&lt; unsigned int &gt;::max())</div><div class="ttdef"><b>Definition:</b> <a href="grid_2grid__refinement_8cc_source.html#l00322">grid_refinement.cc:322</a></div></div>
 <div class="ttc" id="anamespacetypes_html_aed8813fee8c8a2edcc6005e6a48c321a"><div class="ttname"><a href="namespacetypes.html#aed8813fee8c8a2edcc6005e6a48c321a">types::boundary_id</a></div><div class="ttdeci">unsigned int boundary_id</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00129">types.h:129</a></div></div>
-</div><!-- fragment --><p>First the <a class="el" href="classDoFHandler.html">DoFHandler</a> is set up and constraints are generated. Then we create a temporary <a class="el" href="classBlockVector.html">BlockVector</a> <code>tmp</code>, whose size is according with the solution on the new mesh.</p>
+</div><!-- fragment --><p>首先，DoFHandler被设置，约束被生成。然后我们创建一个临时的BlockVector <code>tmp</code> ，其大小与新网格上的解决方案一致。</p>
 <div class="fragment"><div class="line">setup_dofs();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><a class="code" href="classBlockVector.html">BlockVector&lt;double&gt;</a> tmp(dofs_per_block);</div>
-</div><!-- fragment --><p>Transfer solution from coarse to fine mesh and apply boundary value constraints to the new transferred solution. Note that present_solution is still a vector corresponding to the old mesh.</p>
+</div><!-- fragment --><p>将解决方案从粗网格转移到细网格，并对新转移的解决方案应用边界值约束。注意，present_solution仍然是对应于旧网格的一个向量。</p>
 <div class="fragment"><div class="line">solution_transfer.interpolate(present_solution, tmp);</div>
 <div class="line">nonzero_constraints.distribute(tmp);</div>
-</div><!-- fragment --><p>Finally set up matrix and vectors and set the present_solution to the interpolated data.</p>
+</div><!-- fragment --><p>最后设置矩阵和向量，并将present_solution设置为内插的数据。</p>
 <div class="fragment"><div class="line">  initialize_system();</div>
 <div class="line">  present_solution = tmp;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokesdimnewton_iteration"></a> </p><h4>StationaryNavierStokes&lt;dim&gt;::newton_iteration</h4>
-<p>This function implements the Newton iteration with given tolerance, maximum number of iterations, and the number of mesh refinements to do.</p>
-<p>The argument <code>is_initial_step</code> tells us whether <code>setup_system</code> is necessary, and which part, system matrix or right hand side vector, should be assembled. If we do a line search, the right hand side is already assembled while checking the residual norm in the last iteration. Therefore, we just need to assemble the system matrix at the current iteration. The last argument <code>output_result</code> determines whether or not graphical output should be produced.</p>
+<p><br  />
+</p>
+<p>这个函数实现牛顿迭代，给定公差，最大迭代次数，以及要做的网格细化次数。 <br  />
+</p>
+<p>参数 <code>is_initial_step</code> 告诉我们是否需要 <code>setup_system</code> ，以及哪一部分，系统矩阵或右手边的向量，应该被装配。如果我们做直线搜索，在最后一次迭代中检查残差准则时，右手边已经被组装起来了。因此，我们只需要在当前迭代中装配系统矩阵。最后一个参数 <code>output_result</code> 决定了是否应该产生图形输出。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StationaryNavierStokes&lt;dim&gt;::newton_iteration(</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span>       tolerance,</div>
@@ -825,6 +911,7 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">{</div>
 <div class="line">  <span class="keywordtype">bool</span> first_step = is_initial_step;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> refinement_n = 0; refinement_n &lt; max_n_refinements + 1;</div>
 <div class="line">       ++refinement_n)</div>
 <div class="line">    {</div>
@@ -833,6 +920,7 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">      <span class="keywordtype">double</span>       current_res   = 1.0;</div>
 <div class="line">      std::cout &lt;&lt; <span class="stringliteral">&quot;grid refinements: &quot;</span> &lt;&lt; refinement_n &lt;&lt; std::endl</div>
 <div class="line">                &lt;&lt; <span class="stringliteral">&quot;viscosity: &quot;</span> &lt;&lt; viscosity &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">while</span> ((first_step || (current_res &gt; tolerance)) &amp;&amp;</div>
 <div class="line">             line_search_n &lt; max_n_line_searches)</div>
@@ -859,7 +947,7 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">              evaluation_point = present_solution;</div>
 <div class="line">              assemble_system(first_step);</div>
 <div class="line">              solve(first_step);</div>
-</div><!-- fragment --><p>To make sure our solution is getting close to the exact solution, we let the solution be updated with a weight <code>alpha</code> such that the new residual is smaller than the one of last step, which is done in the following loop. This is the same line search algorithm used in <a class="el" href="step_15.html">step-15</a>.</p>
+</div><!-- fragment --><p>为了确保我们的解决方案越来越接近精确的解决方案，我们让解决方案用一个权重 <code>alpha</code> 进行更新，使新的残差小于上一步的残差，这在下面的循环中完成。这与 <a class="el" href="step_15.html">step-15</a> 中使用的线搜索算法相同。</p>
 <div class="fragment"><div class="line">              <span class="keywordflow">for</span> (<span class="keywordtype">double</span> alpha = 1.0; alpha &gt; 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-5; alpha *= 0.5)</div>
 <div class="line">                {</div>
 <div class="line">                  evaluation_point = present_solution;</div>
@@ -882,15 +970,18 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">              ++line_search_n;</div>
 <div class="line">            }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          <span class="keywordflow">if</span> (output_result)</div>
 <div class="line">            {</div>
 <div class="line">              output_results(max_n_line_searches * refinement_n +</div>
 <div class="line">                             line_search_n);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">              <span class="keywordflow">if</span> (current_res &lt;= tolerance)</div>
 <div class="line">                process_solution(refinement_n);</div>
 <div class="line">            }</div>
 <div class="line">        }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">if</span> (refinement_n &lt; max_n_refinements)</div>
 <div class="line">        {</div>
@@ -899,13 +990,17 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokescompute_initial_guess"></a> </p><h4>StationaryNavierStokes::compute_initial_guess</h4>
-<p>This function will provide us with an initial guess by using a continuation method as we discussed in the introduction. The Reynolds number is increased step-by-step until we reach the target value. By experiment, the solution to Stokes is good enough to be the initial guess of NSE with Reynolds number 1000 so we start there. To make sure the solution from previous problem is close enough to the next one, the step size must be small enough.</p>
+<p><br  />
+</p>
+<p>这个函数将通过使用延续法为我们提供一个初始猜测，正如我们在介绍中讨论的那样。雷诺数被逐级增加 step- ，直到我们达到目标值。通过实验，斯托克斯的解足以成为雷诺数为1000的NSE的初始猜测，所以我们从这里开始。 为了确保前一个问题的解决方案与下一个问题足够接近，步长必须足够小。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StationaryNavierStokes&lt;dim&gt;::compute_initial_guess(<span class="keywordtype">double</span> step_size)</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> target_Re = 1.0 / viscosity;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">bool</span> is_initial_step = <span class="keyword">true</span>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">double</span> Re = 1000.0; Re &lt; target_Re;</div>
 <div class="line">       Re        = <a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffdaeb244a97c0c9e9e7ca4765e096f0badc">std::min</a>(Re + step_size, target_Re))</div>
@@ -918,14 +1013,17 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespaceVectorTools_1_1EvaluationFlags_html_ac6721740e24732d6afabcf28ddfc1ffdaeb244a97c0c9e9e7ca4765e096f0badc"><div class="ttname"><a href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffdaeb244a97c0c9e9e7ca4765e096f0badc">VectorTools::EvaluationFlags::min</a></div><div class="ttdeci">@ min</div><div class="ttdef"><b>Definition:</b> <a href="vector__tools__evaluate_8h_source.html#l00059">vector_tools_evaluate.h:59</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokesoutput_results"></a> </p><h4>StationaryNavierStokes::output_results</h4>
-<p>This function is the same as in <a class="el" href="step_22.html">step-22</a> except that we choose a name for the output file that also contains the Reynolds number (i.e., the inverse of the viscosity in the current context).</p>
+</div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokesoutput_results"></a></p><h4>StationaryNavierStokes::output_results</h4>
+<p><br  />
+</p>
+<p>这个函数与 <a class="el" href="step_22.html">step-22</a> 中的函数相同，只是我们为输出文件选择了一个也包含雷诺数（即当前背景下的粘度的倒数）的名称。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StationaryNavierStokes&lt;dim&gt;::output_results(</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> output_index)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  std::vector&lt;std::string&gt; solution_names(dim, <span class="stringliteral">&quot;velocity&quot;</span>);</div>
 <div class="line">  solution_names.emplace_back(<span class="stringliteral">&quot;pressure&quot;</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;DataComponentInterpretation::DataComponentInterpretation&gt;</div>
 <div class="line">    data_component_interpretation(</div>
@@ -940,6 +1038,7 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">                           data_component_interpretation);</div>
 <div class="line">  data_out.<a class="code" href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">build_patches</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::ofstream output(<a class="code" href="group__Exceptions.html#ga72743302dcb1a0fb1f2f8dc5122d299e">std::to_string</a>(1.0 / viscosity) + <span class="stringliteral">&quot;-solution-&quot;</span> +</div>
 <div class="line">                       <a class="code" href="namespaceUtilities.html#a6195c5f009ea8c7c536c6ffdf108c32f">Utilities::int_to_string</a>(output_index, 4) + <span class="stringliteral">&quot;.vtk&quot;</span>);</div>
 <div class="line">  data_out.<a class="code" href="group__Exceptions.html#gacad99726038e4fca7f605fdffb3317e4">write_vtk</a>(output);</div>
@@ -953,8 +1052,10 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="ttc" id="anamespaceDataComponentInterpretation_html_a0cd2da3afe902f9004c23a73dbcc8ab0a1f3cd50135818a6458f1d3ff7ea4bb51"><div class="ttname"><a href="namespaceDataComponentInterpretation.html#a0cd2da3afe902f9004c23a73dbcc8ab0a1f3cd50135818a6458f1d3ff7ea4bb51">DataComponentInterpretation::component_is_scalar</a></div><div class="ttdeci">@ component_is_scalar</div><div class="ttdef"><b>Definition:</b> <a href="data__component__interpretation_8h_source.html#l00053">data_component_interpretation.h:53</a></div></div>
 <div class="ttc" id="anamespaceDataComponentInterpretation_html_a0cd2da3afe902f9004c23a73dbcc8ab0aa783915dbc182d5a49e111815fd23fe0"><div class="ttname"><a href="namespaceDataComponentInterpretation.html#a0cd2da3afe902f9004c23a73dbcc8ab0aa783915dbc182d5a49e111815fd23fe0">DataComponentInterpretation::component_is_part_of_vector</a></div><div class="ttdeci">@ component_is_part_of_vector</div><div class="ttdef"><b>Definition:</b> <a href="data__component__interpretation_8h_source.html#l00059">data_component_interpretation.h:59</a></div></div>
 <div class="ttc" id="anamespaceUtilities_html_a6195c5f009ea8c7c536c6ffdf108c32f"><div class="ttname"><a href="namespaceUtilities.html#a6195c5f009ea8c7c536c6ffdf108c32f">Utilities::int_to_string</a></div><div class="ttdeci">std::string int_to_string(const unsigned int value, const unsigned int digits=numbers::invalid_unsigned_int)</div><div class="ttdef"><b>Definition:</b> <a href="base_2utilities_8cc_source.html#l00473">utilities.cc:473</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokesprocess_solution"></a> </p><h4>StationaryNavierStokes::process_solution</h4>
-<p>In our test case, we do not know the analytical solution. This function outputs the velocity components along \(x=0.5\) and \(0 \leq y \leq 1\) so they can be compared with data from the literature.</p>
+</div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokesprocess_solution"></a></p><h4>StationaryNavierStokes::process_solution</h4>
+<p><br  />
+</p>
+<p>在我们的测试案例中，我们不知道分析解。该函数输出沿 \(x=0.5\) 和 \(0 \leq y \leq 1\) 的速度分量，因此可以与文献中的数据进行比较。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StationaryNavierStokes&lt;dim&gt;::process_solution(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> refinement)</div>
 <div class="line">{</div>
@@ -962,19 +1063,24 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">                  <a class="code" href="group__Exceptions.html#ga72743302dcb1a0fb1f2f8dc5122d299e">std::to_string</a>(refinement) + <span class="stringliteral">&quot;.txt&quot;</span>);</div>
 <div class="line">  f &lt;&lt; <span class="stringliteral">&quot;# y u_x u_y&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> p;</div>
 <div class="line">  p(0) = 0.5;</div>
 <div class="line">  p(1) = 0.5;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  f &lt;&lt; std::scientific;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt;= 100; ++i)</div>
 <div class="line">    {</div>
 <div class="line">      p(dim - 1) = i / 100.0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <a class="code" href="classVector.html">Vector&lt;double&gt;</a> tmp_vector(dim + 1);</div>
 <div class="line">      <a class="code" href="namespaceVectorTools.html#acd358e9b110ccbf4a7f76796d206b9c7">VectorTools::point_value</a>(dof_handler, present_solution, p, tmp_vector);</div>
 <div class="line">      f &lt;&lt; p(dim - 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; dim; j++)</div>
 <div class="line">        f &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; tmp_vector(j);</div>
@@ -983,16 +1089,19 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">}</div>
 <div class="ttc" id="anamespaceVectorTools_html_acd358e9b110ccbf4a7f76796d206b9c7"><div class="ttname"><a href="namespaceVectorTools.html#acd358e9b110ccbf4a7f76796d206b9c7">VectorTools::point_value</a></div><div class="ttdeci">void point_value(const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const VectorType &amp;fe_function, const Point&lt; spacedim, double &gt; &amp;point, Vector&lt; typename VectorType::value_type &gt; &amp;value)</div></div>
 </div><!-- fragment --><p><a class="anchor" id="StationaryNavierStokesrun"></a> </p><h4>StationaryNavierStokes::run</h4>
-<p>This is the last step of this program. In this part, we generate the grid and run the other functions respectively. The max refinement can be set by the argument.</p>
+<p><br  />
+</p>
+<p>这是本程序的最后一步。在这一部分，我们分别生成网格和运行其他函数。最大细化值可以通过参数来设置。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">StationaryNavierStokes&lt;dim&gt;::run</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> refinement)</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>);</div>
 <div class="line">  <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.refine_global(5);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> Re = 1.0 / viscosity;</div>
 <div class="ttc" id="anamespaceGridGenerator_html_acea0cbcd68e52ce8113d1134b87de403"><div class="ttname"><a href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a></div><div class="ttdeci">void hyper_cube(Triangulation&lt; dim, spacedim &gt; &amp;tria, const double left=0., const double right=1., const bool colorize=false)</div></div>
-</div><!-- fragment --><p>If the viscosity is smaller than \(1/1000\), we have to first search for an initial guess via a continuation method. What we should notice is the search is always on the initial mesh, that is the \(8 \times 8\) mesh in this program. After that, we just do the same as we did when viscosity is larger than \(1/1000\): run Newton's iteration, refine the mesh, transfer solutions, and repeat.</p>
+</div><!-- fragment --><p>如果粘度小于 \(1/1000\) ，我们必须首先通过延续法搜索一个初始猜测。我们应该注意的是，搜索总是在初始网格上进行的，也就是这个程序中的 \(8 \times 8\) 网格。之后，我们只需做与粘度大于 \(1/1000\) 时相同的工作：运行牛顿迭代，细化网格，转移解决方案，并重复。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (Re &gt; 1000.0)</div>
 <div class="line">  {</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Searching for initial guess ...&quot;</span> &lt;&lt; std::endl;</div>
@@ -1005,17 +1114,19 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">  }</div>
 <div class="line"><span class="keywordflow">else</span></div>
 <div class="line">  {</div>
-</div><!-- fragment --><p>When the viscosity is larger than 1/1000, the solution to Stokes equations is good enough as an initial guess. If so, we do not need to search for the initial guess using a continuation method. Newton's iteration can be started directly.</p>
+</div><!-- fragment --><p>当粘度大于1/1000时，斯托克斯方程的解作为一个初始猜测已经足够好。如果是这样，我们就不需要用延续法来搜索初始猜测了。牛顿迭代可以直接开始。</p>
 <div class="fragment"><div class="line">        newton_iteration(1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-12, 50, refinement, <span class="keyword">true</span>, <span class="keyword">true</span>);</div>
 <div class="line">      }</div>
 <div class="line">  }</div>
 <div class="line">} <span class="comment">// namespace Step57</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">try</span></div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using namespace </span>Step57;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      StationaryNavierStokes&lt;2&gt; flow(<span class="comment">/* degree = */</span> 1);</div>
 <div class="line">      flow.run(4);</div>
@@ -1047,10 +1158,10 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">    }</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
-<p>Now we use the method we discussed above to solve Navier Stokes equations with viscosity \(1/400\) and \(1/7500\).</p>
-<p><a class="anchor" id="Testcase1LowReynoldsNumber"></a></p><h3>Test case 1: Low Reynolds Number </h3>
-<p>In the first test case the viscosity is set to be \(1/400\). As we discussed in the introduction, the initial guess is the solution to the corresponding Stokes problem. In the following table, the residuals at each Newton's iteration on every mesh is shown. The data in the table shows that Newton's iteration converges quadratically.</p>
+</div><!-- fragment --><p><a class="anchor" id="Results"></a></p><h1>Results</h1>
+<p>现在我们用上面讨论的方法来解决有粘度的Navier Stokes方程 \(1/400\) 和 \(1/7500\) 。</p>
+<p><a class="anchor" id="Testcase1LowReynoldsNumber"></a> </p><h3>Test case 1: Low Reynolds Number </h3>
+<p>在第一个测试案例中，粘度被设置为 \(1/400\) 。正如我们在介绍中所讨论的，初始猜测是相应的斯托克斯问题的解决方案。在下面的表格中，显示了每个网格上的牛顿迭代的残差。表中的数据表明，牛顿迭代的收敛性是四等的。</p>
 <table align="center" class="doxtable">
 <tr>
 <th>\(\mathrm{Re}=400\) </th><th colspan="2">Mesh0 </th><th colspan="2">Mesh1 </th><th colspan="2">Mesh2 </th><th colspan="2">Mesh3 </th><th colspan="2">Mesh4  </th></tr>
@@ -1069,22 +1180,30 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <tr>
 <td>6 </td><td></td><td></td><td>1.3998e-15 </td><td>8 </td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 </table>
-<p>The following figures show the sequence of generated grids. For the case of \(\mathrm{Re}=400\), the initial guess is obtained by solving Stokes on an \(8 \times 8\) mesh, and the mesh is refined adaptively. Between meshes, the solution from the coarse mesh is interpolated to the fine mesh to be used as an initial guess.</p>
+<p><br  />
+</p>
+<p>下面的数字显示了生成网格的顺序。对于 \(\mathrm{Re}=400\) 的情况，初始猜测是通过在 \(8 \times 8\) 网格上求解斯托克斯得到的，网格是自适应细化的。在网格之间，粗网格的解被内插到细网格上作为初始猜测使用。</p>
 <table align="center">
 <tr>
 <td align="center"><img src="https://www.dealii.org/images/steps/developer/step-57.Re400_Mesh0.png" alt="" width="232px" class="inline"/>  </td><td align="center"><img src="https://www.dealii.org/images/steps/developer/step-57.Re400_Mesh1.png" alt="" width="232px" class="inline"/>  </td><td align="center"><img src="https://www.dealii.org/images/steps/developer/step-57.Re400_Mesh2.png" alt="" width="232px" class="inline"/>   </td></tr>
 <tr>
 <td align="center"><img src="https://www.dealii.org/images/steps/developer/step-57.Re400_Mesh3.png" alt="" width="232px" class="inline"/>  </td><td align="center"><img src="https://www.dealii.org/images/steps/developer/step-57.Re400_Mesh4.png" alt="" width="232px" class="inline"/>   </td></tr>
 </table>
-<p>This picture is the graphical streamline result of lid-driven cavity with \(\mathrm{Re}=400\). <img src="https://www.dealii.org/images/steps/developer/step-57.Re400_Streamline.png" alt="" class="inline"/></p>
-<p>Then the solution is compared with a reference solution from [4] and the reference solution data can be found in the file "ref_2d_ghia_u.txt".</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-57.compare-Re400.svg" alt="" style="pointer-events: none; width:50%" class="inline"/></p>
+<p><br  />
+</p>
+<p>这张图是用 \(\mathrm{Re}=400\) 的盖子驱动空腔的图形流线结果。 <img src="https://www.dealii.org/images/steps/developer/step-57.Re400_Streamline.png" alt="" class="inline"/> <br  />
+</p>
+<p>然后将该解与来自[4]的参考解进行比较，参考解数据可以在文件 "ref_2d_ghia_u.txt "中找到。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-57.compare-Re400.svg" alt="" style="pointer-events: none; width:50%" class="inline"/> <br  />
+</p>
 <p><a class="anchor" id="Testcase2HighReynoldsNumber"></a></p><h3>Test case 2: High Reynolds Number </h3>
-<p>Newton's iteration requires a good initial guess. However, the nonlinear term dominates when the Reynolds number is large, so that the solution to the Stokes equations may be far away from the exact solution. If the Stokes solution acts as the initial guess, the convergence will be lost. The following picture shows that the nonlinear iteration gets stuck and the residual no longer decreases in further iterations.</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-57.Re7500_loss_convergence.svg" alt="" style="pointer-events: none; width:50%" class="inline"/></p>
-<p>The initial guess, therefore, has to be obtained via a continuation method which has been discussed in the introduction. Here the step size in the continuation method, that is \(|\nu_{i}-\nu_{i+1}|\), is 2000 and the initial mesh is of size \(32 \times 32\). After obtaining an initial guess, the mesh is refined as in the previous test case. The following picture shows that at each refinement Newton's iteration has quadratic convergence. 52 steps of Newton's iterations are executed for solving this test case.</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-57.Re7500_get_convergence.svg" alt="" style="pointer-events: none; width:50%" class="inline"/></p>
-<p>We also show the residual from each step of Newton's iteration on every mesh. The quadratic convergence is clearly visible in the table.</p>
+<p>牛顿迭代需要一个良好的初始猜测。然而，当雷诺数很大时，非线性项占主导地位，因此，斯托克斯方程的解可能与精确解相去甚远。如果斯托克斯方程的解作为初始猜测，收敛性就会丧失。下图显示了非线性迭代被卡住，残差在进一步迭代中不再减少。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-57.Re7500_loss_convergence.svg" alt="" style="pointer-events: none; width:50%" class="inline"/> <br  />
+</p>
+<p>因此，初始猜测必须通过延续法获得，这在导言中已经讨论过。这里延续法的步长，即 \(|\nu_{i}-\nu_{i+1}|\) ，为2000，初始网格大小为 \(32 \times 32\) 。在得到一个初始猜测后，如前一个测试案例一样，对网格进行细化。下图显示，在每次细化时，牛顿迭代都有二次收敛性。为了解决这个测试案例，共执行了52步牛顿迭代。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-57.Re7500_get_convergence.svg" alt="" style="pointer-events: none; width:50%" class="inline"/> <br  />
+</p>
+<p>我们还显示了每个网格上牛顿迭代的每一步的残差。二次收敛的情况在表中清晰可见。</p>
 <table align="center" class="doxtable">
 <tr>
 <th>\(\mathrm{Re}=7500\) </th><th colspan="2">Mesh0 </th><th colspan="2">Mesh1 </th><th colspan="2">Mesh2 </th><th colspan="2">Mesh3 </th><th colspan="2">Mesh4  </th></tr>
@@ -1105,20 +1224,24 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <tr>
 <td>7 </td><td></td><td></td><td>6.2863e-15 </td><td>9 </td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 </table>
-<p>The sequence of generated grids looks like this: </p><table align="center">
+<p><br  />
+</p>
+<p>生成的网格序列看起来是这样的。 </p><table align="center">
 <tr>
 <td align="center"><img src="https://www.dealii.org/images/steps/developer/step-57.Re7500_Mesh0.png" alt="" width="232px" class="inline"/>  </td><td align="center"><img src="https://www.dealii.org/images/steps/developer/step-57.Re7500_Mesh1.png" alt="" width="232px" class="inline"/>  </td><td align="center"><img src="https://www.dealii.org/images/steps/developer/step-57.Re7500_Mesh2.png" alt="" width="232px" class="inline"/>   </td></tr>
 <tr>
 <td align="center"><img src="https://www.dealii.org/images/steps/developer/step-57.Re7500_Mesh3.png" alt="" width="232px" class="inline"/>  </td><td align="center"><img src="https://www.dealii.org/images/steps/developer/step-57.Re7500_Mesh4.png" alt="" width="232px" class="inline"/>   </td></tr>
 </table>
-<p>We compare our solution with reference solution from [5]. <img src="https://www.dealii.org/images/steps/developer/step-57.compare-Re7500.svg" alt="" style="pointer-events: none; width:50%" class="inline"/> The following picture presents the graphical result. <img src="https://www.dealii.org/images/steps/developer/step-57.Re7500_Streamline.png" alt="" class="inline"/></p>
-<p>Furthermore, the error consists of the nonlinear error, which decreases as we perform Newton iterations, and the discretization error, which depends on the mesh size. That is why we have to refine the mesh and repeat Newton's iteration on the next finer mesh. From the table above, we can see that the residual (nonlinear error) is below 1e-12 on each mesh, but the following picture shows us the difference between solutions on subsequently finer meshes.</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-57.converge-Re7500.svg" alt="" style="pointer-events: none; width:50%" class="inline"/></p>
+<p>我们将我们的解决方案与[5]的参考解决方案进行比较。 <img src="https://www.dealii.org/images/steps/developer/step-57.compare-Re7500.svg" alt="" style="pointer-events: none; width:50%" class="inline"/> 下图显示了图形结果。 <img src="https://www.dealii.org/images/steps/developer/step-57.Re7500_Streamline.png" alt="" class="inline"/> <br  />
+</p>
+<p>此外，误差包括非线性误差（随着我们进行牛顿迭代而减少）和离散化误差（取决于网格大小）。这就是为什么我们必须细化网格并在下一个更细的网格上重复牛顿迭代。从上表中，我们可以看到在每个网格上的残差（非线性误差）都在1e-12以下，但是下图向我们展示了在随后的更细的网格上解的差异。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-57.converge-Re7500.svg" alt="" style="pointer-events: none; width:50%" class="inline"/> <br  />
+</p>
 <p><a class="anchor" id="extensions"></a></p>
 <p><a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions</h3>
 <p><a class="anchor" id="Comparetoothersolvers"></a></p><h4>Compare to other solvers</h4>
-<p>It is easy to compare the currently implemented linear solver to just using UMFPACK for the whole linear system. You need to remove the nullspace containing the constant pressures and it is done in <a class="el" href="step_56.html">step-56</a>. More interesting is the comparison to other state of the art preconditioners like PCD. It turns out that the preconditioner here is very competitive, as can be seen in the paper [2].</p>
-<p>The following table shows the timing results between our iterative approach (FGMRES) compared to a direct solver (UMFPACK) for the whole system with viscosity set to 1/400. Even though we use the same direct solver for the velocity block in the iterative solver, it is considerably faster and consumes less memory. This will be even more pronounced in 3d.</p>
+<p>很容易比较目前实现的线性求解器和仅仅使用UMFPACK来解决整个线性系统。你需要去除包含常数压力的空域，这在 <a class="el" href="step_56.html">step-56</a> 中已经完成。更有趣的是与其他先进的预处理程序如PCD的比较。事实证明，这里的预处理器非常有竞争力，在论文[2]中可以看到。</p>
+<p>下表显示了我们的迭代方法（FGMRES）与直接求解器（UMFPACK）之间的计时结果，整个系统的粘度设置为1/400。尽管我们在迭代求解器中的速度块使用了相同的直接求解器，但它的速度要快得多，消耗的内存也少。这在三维中会更加明显。</p>
 <table align="center" class="doxtable">
 <tr>
 <th>Refinement Cycle </th><th>DoFs </th><th>Iterative: Total/s (Setup/s) </th><th>Direct: Total/s (Setup/s)  </th></tr>
@@ -1131,11 +1254,12 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <tr>
 <td>8 </td><td>592387 </td><td>29.17 (24.94) </td><td>(&gt;4GB RAM)  </td></tr>
 </table>
+<p><br  />
+</p>
 <p><a class="anchor" id="3dcomputations"></a></p><h4>3d computations</h4>
-<p>The code is set up to also run in 3d. Of course the reference values are different, see [6] for example. High resolution computations are not doable with this example as is, because a direct solver for the velocity block does not work well in 3d. Rather, a parallel solver based on algebraic or geometric multigrid is needed. See below.</p>
+<p>这段代码的设置也是为了在3d中运行。当然，参考值是不同的，例如，见[6]。高分辨率的计算在这个例子中是不可行的，因为速度块的直接求解器在三维中不能很好地工作。相反，需要一个基于代数或几何多网格的并行求解器。见下文。</p>
 <p><a class="anchor" id="Parallelization"></a></p><h4>Parallelization</h4>
-<p>For larger computations, especially in 3d, it is necessary to implement MPI parallel solvers and preconditioners. A good starting point would be <a class="el" href="step_55.html">step-55</a>, which uses algebraic multigrid for the velocity block for the Stokes equations. Another option would be to take a look at the list of codes in the <a href="https://www.dealii.org/code-gallery.html">deal.II code gallery</a>, which already contains parallel Navier-Stokes solvers.</p>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+<p>对于较大的计算，特别是在三维中，有必要实现MPI并行求解器和预处理器。一个好的起点是 <a class="el" href="step_55.html">step-55</a> ，它使用代数多重网格来实现斯托克斯方程的速度块。另一个选择是看一下<a href="https://www.dealii.org/code-gallery.html">deal.II code gallery</a>中的代码列表，其中已经包含了并行的纳维-斯托克斯求解器。<a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2008 - 2020 by the deal.II authors</span></div>
@@ -1840,7 +1964,8 @@ The 2D lid-driven cavity problem revisited, C. Bruneau and M. Saad, 2006 </li>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespaceinternal_html_aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804"><div class="ttname"><a href="namespaceinternal.html#aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804">internal::EvaluatorQuantity::value</a></div><div class="ttdeci">@ value</div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> 。 </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

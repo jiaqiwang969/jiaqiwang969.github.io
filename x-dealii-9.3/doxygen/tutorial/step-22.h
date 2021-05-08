@@ -1,79 +1,80 @@
-/**
-@page step_22 The step-22 tutorial program
-This tutorial depends on step-6, step-21.
+  /**   @page step_22 The step-22 tutorial program 。 
+
+本教程取决于  step-6  ,  step-21  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Weakform">Weak form</a>
-        <li><a href="#Boundaryconditions">Boundary conditions</a>
-        <li><a href="#Discretization">Discretization</a>
-        <li><a href="#Linearsolverandpreconditioningissues">Linear solver and preconditioning issues</a>
+        <li><a href="#Weakform">Weak form</a><a href="#Weakform">Weak form</a>
+        <li><a href="#Boundaryconditions">Boundary conditions</a><a href="#Boundaryconditions">Boundary conditions</a>
+        <li><a href="#Discretization">Discretization</a><a href="#Discretization">Discretization</a>
+        <li><a href="#Linearsolverandpreconditioningissues">Linear solver and preconditioning issues</a><a href="#Linearsolverandpreconditioningissues">Linear solver and preconditioning issues</a>
       <ul>
-        <li><a href="#IsthishowoneshouldsolvetheStokesequations"> Is this how one should solve the Stokes equations? </a>
-        <li><a href="#Anoteonthestructureofthelinearsystem"> A note on the structure of the linear system </a>
+        <li><a href="#IsthishowoneshouldsolvetheStokesequations"> Is this how one should solve the Stokes equations? </a><a href="#IsthishowoneshouldsolvetheStokesequations"> Is this how one should solve the Stokes equations? </a>
+        <li><a href="#Anoteonthestructureofthelinearsystem"> A note on the structure of the linear system </a><a href="#Anoteonthestructureofthelinearsystem"> A note on the structure of the linear system </a>
       </ul>
-        <li><a href="#Thetestcase">The testcase</a>
-        <li><a href="#Implementation">Implementation</a>
+        <li><a href="#Thetestcase">The testcase</a><a href="#Thetestcase">The testcase</a>
+        <li><a href="#Implementation">Implementation</a><a href="#Implementation">Implementation</a>
       <ul>
-        <li><a href="#UsingimhomogeneousconstraintsforimplementingDirichletboundaryconditions">Using imhomogeneous constraints for implementing Dirichlet boundary conditions</a>
-        <li><a href="#UsingAffineConstraintsforincreasingperformance">Using AffineConstraints for increasing performance</a>
-        <li><a href="#Performanceoptimizations">Performance optimizations</a>
+        <li><a href="#UsingimhomogeneousconstraintsforimplementingDirichletboundaryconditions">Using imhomogeneous constraints for implementing Dirichlet boundary conditions</a><a href="#UsingimhomogeneousconstraintsforimplementingDirichletboundaryconditions">Using imhomogeneous constraints for implementing Dirichlet boundary conditions</a>
+        <li><a href="#UsingAffineConstraintsforincreasingperformance">Using AffineConstraints for increasing performance</a><a href="#UsingAffineConstraintsforincreasingperformance">Using AffineConstraints for increasing performance</a>
+        <li><a href="#Performanceoptimizations">Performance optimizations</a><a href="#Performanceoptimizations">Performance optimizations</a>
     </ul>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#Definingtheinnerpreconditionertype">Defining the inner preconditioner type</a>
-        <li><a href="#ThecodeStokesProblemcodeclasstemplate">The <code>StokesProblem</code> class template</a>
-        <li><a href="#Boundaryvaluesandrighthandside">Boundary values and right hand side</a>
-        <li><a href="#Linearsolversandpreconditioners">Linear solvers and preconditioners</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#Definingtheinnerpreconditionertype">Defining the inner preconditioner type</a><a href="#Definingtheinnerpreconditionertype">Defining the inner preconditioner type</a>
+        <li><a href="#ThecodeStokesProblemcodeclasstemplate">The <code>StokesProblem</code> class template</a><a href="#ThecodeStokesProblemcodeclasstemplate">The <code>StokesProblem</code> class template</a>
+        <li><a href="#Boundaryvaluesandrighthandside">Boundary values and right hand side</a><a href="#Boundaryvaluesandrighthandside">Boundary values and right hand side</a>
+        <li><a href="#Linearsolversandpreconditioners">Linear solvers and preconditioners</a><a href="#Linearsolversandpreconditioners">Linear solvers and preconditioners</a>
       <ul>
-        <li><a href="#ThecodeInverseMatrixcodeclasstemplate">The <code>InverseMatrix</code> class template</a>
-        <li><a href="#ThecodeSchurComplementcodeclasstemplate">The <code>SchurComplement</code> class template</a>
+        <li><a href="#ThecodeInverseMatrixcodeclasstemplate">The <code>InverseMatrix</code> class template</a><a href="#ThecodeInverseMatrixcodeclasstemplate">The <code>InverseMatrix</code> class template</a>
+        <li><a href="#ThecodeSchurComplementcodeclasstemplate">The <code>SchurComplement</code> class template</a><a href="#ThecodeSchurComplementcodeclasstemplate">The <code>SchurComplement</code> class template</a>
       </ul>
-        <li><a href="#StokesProblemclassimplementation">StokesProblem class implementation</a>
+        <li><a href="#StokesProblemclassimplementation">StokesProblem class implementation</a><a href="#StokesProblemclassimplementation">StokesProblem class implementation</a>
       <ul>
-        <li><a href="#StokesProblemStokesProblem">StokesProblem::StokesProblem</a>
-        <li><a href="#StokesProblemsetup_dofs">StokesProblem::setup_dofs</a>
-        <li><a href="#StokesProblemassemble_system">StokesProblem::assemble_system</a>
-        <li><a href="#StokesProblemsolve">StokesProblem::solve</a>
-        <li><a href="#StokesProblemoutput_results">StokesProblem::output_results</a>
-        <li><a href="#StokesProblemrefine_mesh">StokesProblem::refine_mesh</a>
-        <li><a href="#StokesProblemrun">StokesProblem::run</a>
+        <li><a href="#StokesProblemStokesProblem">StokesProblem::StokesProblem</a> ]<a href="#StokesProblemStokesProblem">StokesProblem::StokesProblem</a>
+        <li><a href="#StokesProblemsetup_dofs">StokesProblem::setup_dofs</a><a href="#StokesProblemsetup_dofs">StokesProblem::setup_dofs</a>
+        <li><a href="#StokesProblemassemble_system">StokesProblem::assemble_system</a><a href="#StokesProblemassemble_system">StokesProblem::assemble_system</a>
+        <li><a href="#StokesProblemsolve">StokesProblem::solve</a><a href="#StokesProblemsolve">StokesProblem::solve</a>
+        <li><a href="#StokesProblemoutput_results">StokesProblem::output_results</a><a href="#StokesProblemoutput_results">StokesProblem::output_results</a>
+        <li><a href="#StokesProblemrefine_mesh">StokesProblem::refine_mesh</a><a href="#StokesProblemrefine_mesh">StokesProblem::refine_mesh</a>
+        <li><a href="#StokesProblemrun">StokesProblem::run</a><a href="#StokesProblemrun">StokesProblem::run</a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Outputoftheprogramandgraphicalvisualization">Output of the program and graphical visualization</a>
+        <li><a href="#Outputoftheprogramandgraphicalvisualization">Output of the program and graphical visualization</a><a href="#Outputoftheprogramandgraphicalvisualization">Output of the program and graphical visualization</a>
       <ul>
-        <li><a href="#2Dcalculations">2D calculations</a>
-        <li><a href="#3Dcalculations">3D calculations</a>
+        <li><a href="#2Dcalculations">2D calculations</a><a href="#2Dcalculations">2D calculations</a>
+        <li><a href="#3Dcalculations">3D calculations</a><a href="#3Dcalculations">3D calculations</a>
       </ul>
-        <li><a href="#Sparsitypattern">Sparsity pattern</a>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Sparsitypattern">Sparsity pattern</a><a href="#Sparsitypattern">Sparsity pattern</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
       <ul>
-        <li><a href="#Improvedlinearsolverin3D">Improved linear solver in 3D</a>
+        <li><a href="#Improvedlinearsolverin3D">Improved linear solver in 3D</a><a href="#Improvedlinearsolverin3D">Improved linear solver in 3D</a>
       <ul>
-        <li><a href="#BetterILUdecompositionbysmartreordering">Better ILU decomposition by smart reordering</a>
-        <li><a href="#BetterpreconditionerfortheinnerCGsolver">Better preconditioner for the inner CG solver</a>
-        <li><a href="#BlockSchurcomplementpreconditioner">Block Schur complement preconditioner</a>
-        <li><a href="#Combiningtheblockpreconditionerandmultigrid">Combining the block preconditioner and multigrid</a>
-        <li><a href="#Noblockmatricesandvectors">No block matrices and vectors</a>
+        <li><a href="#BetterILUdecompositionbysmartreordering">Better ILU decomposition by smart reordering</a><a href="#BetterILUdecompositionbysmartreordering">Better ILU decomposition by smart reordering</a>
+        <li><a href="#BetterpreconditionerfortheinnerCGsolver">Better preconditioner for the inner CG solver</a><a href="#BetterpreconditionerfortheinnerCGsolver">Better preconditioner for the inner CG solver</a>
+        <li><a href="#BlockSchurcomplementpreconditioner">Block Schur complement preconditioner</a><a href="#BlockSchurcomplementpreconditioner">Block Schur complement preconditioner</a>
+        <li><a href="#Combiningtheblockpreconditionerandmultigrid">Combining the block preconditioner and multigrid</a><a href="#Combiningtheblockpreconditionerandmultigrid">Combining the block preconditioner and multigrid</a>
+        <li><a href="#Noblockmatricesandvectors">No block matrices and vectors</a><a href="#Noblockmatricesandvectors">No block matrices and vectors</a>
       </ul>
-        <li><a href="#Moreinterestingtestcases">More interesting testcases</a>
+        <li><a href="#Moreinterestingtestcases">More interesting testcases</a><a href="#Moreinterestingtestcases">More interesting testcases</a>
     </ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<br>
+@endhtmlonly 
+
+  <br>   
 
 <i>This program was contributed by Martin Kronbichler and Wolfgang
 Bangerth.
@@ -84,63 +85,46 @@ Technology. Any opinions, findings, and conclusions or recommendations
 expressed in this publication are those of the author and do not
 necessarily reflect the views of the National Science Foundation or of The
 California Institute of Technology.
-</i>
+</i> 
 
 
 
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+
+<a name="Intro"></a> <a name="Introduction"></a> <h1>Introduction</h1> 
 
 
-This program deals with the Stokes system of equations which reads as
-follows in non-dimensionalized form:
-@f{eqnarray*}
+这个程序处理斯托克斯方程组，其非维度形式如下。@f{eqnarray*}
+
+
   -2\; \textrm{div}\; \varepsilon(\textbf{u}) + \nabla p &=& \textbf{f},
   \\
+
+
   -\textrm{div}\; \textbf{u} &=& 0,
-@f}
-where $\textbf u$ denotes the velocity of a fluid, $p$ is its
-pressure, $\textbf f$ are external forces, and
-$\varepsilon(\textbf{u})= \nabla^s{\textbf{u}}= \frac 12 \left[
-(\nabla \textbf{u}) + (\nabla \textbf{u})^T\right]$  is the
-rank-2 tensor of symmetrized gradients; a component-wise definition
-of it is $\varepsilon(\textbf{u})_{ij}=\frac
-12\left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right)$.
+@f} 
 
-The Stokes equations describe the steady-state motion of a
-slow-moving, viscous fluid such as honey, rocks in the earth mantle,
-or other cases where inertia does not play a significant role. If a
-fluid is moving fast enough that inertia forces are significant
-compared to viscous friction, the Stokes equations are no longer
-valid; taking into account inertia effects then leads to the
-nonlinear Navier-Stokes equations. However, in this tutorial program,
-we will focus on the simpler Stokes system.
+其中 $\textbf u$ 表示流体的速度， $p$ 是其压力， $\textbf f$ 是外力， $\varepsilon(\textbf{u})= \nabla^s{\textbf{u}}= \frac 12 \left[
+(\nabla \textbf{u}) + (\nabla \textbf{u})^T\right]$ 是对称梯度的第2级张量；其成分定义为 $\varepsilon(\textbf{u})_{ij}=\frac
+12\left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right)$  。
 
-Note that when deriving the more general compressible Navier-Stokes equations,
-the diffusion is modeled as the divergence of the stress tensor
-@f{eqnarray*}
+斯托克斯方程描述了缓慢移动的粘性流体的稳态运动，如蜂蜜、地幔中的岩石，或其他惯性不起作用的情况。如果流体的运动速度足够快，与粘性摩擦力相比，惯性力很重要，那么斯托克斯方程就不再有效；考虑到惯性效应，就会产生非线性纳维-斯托克斯方程。然而，在这个教程程序中，我们将专注于更简单的斯托克斯系统。
+
+请注意，当推导出更一般的可压缩纳维-斯托克斯方程时，扩散被建模为应力张量的发散@f{eqnarray*}
   \tau = - \mu (2\varepsilon(\textbf{u}) - \frac{2}{3}\nabla \cdot \textbf{u} I),
 @f}
-where $\mu$ is the viscosity of the fluid. With the assumption of $\mu=1$
-(assume constant viscosity and non-dimensionalize the equation by dividing out
-$\mu$) and assuming incompressibility ($\textrm{div}\; \textbf{u}=0$), we
-arrive at the formulation from above:
-@f{eqnarray*}
+
+其中 $\mu$ 是流体的粘性。有了 $\mu=1$ 的假设（假设粘度不变，通过除以 $\mu$ 使方程非立体化），并假设不可压缩性（ $\textrm{div}\; \textbf{u}=0$ ），我们就可以得到上面的表述。@f{eqnarray*}
   \textrm{div}\; \tau = -2\textrm{div}\;\varepsilon(\textbf{u}).
-@f}
-A different formulation uses the Laplace operator ($-\triangle \textbf{u}$)
-instead of the symmetrized gradient. A big difference here is that the
-different components of the velocity do not couple. If you assume additional
-regularity of the solution $\textbf{u}$ (second partial derivatives exist and
-are continuous), the formulations are equivalent:
-@f{eqnarray*}
+@f} 
+
+一个不同的公式使用拉普拉斯算子（ $-\triangle \textbf{u}$ ）而不是对称梯度。这里一个很大的区别是，速度的不同分量并不耦合。如果你假定解的额外正则性 $\textbf{u}$ （第二偏导存在并且是连续的），这些公式是等价的。@f{eqnarray*}
   \textrm{div}\; \tau
   = -2\textrm{div}\;\varepsilon(\textbf{u})
   = -\triangle \textbf{u} + \nabla \cdot (\nabla\textbf{u})^T
   = -\triangle \textbf{u}.
-@f}
-This is because the $i$th entry of  $\nabla \cdot (\nabla\textbf{u})^T$ is given by:
-@f{eqnarray*}
+@f} 
+
+这是因为 $i$ 中 $\nabla \cdot (\nabla\textbf{u})^T$ 的第1项是由。@f{eqnarray*}
 [\nabla \cdot (\nabla\textbf{u})^T]_i
 = \sum_j \frac{\partial}{\partial x_j} [(\nabla\textbf{u})^T]_{i,j}
 = \sum_j \frac{\partial}{\partial x_j} [(\nabla\textbf{u})]_{j,i}
@@ -148,27 +132,20 @@ This is because the $i$th entry of  $\nabla \cdot (\nabla\textbf{u})^T$ is given
 = \sum_j \frac{\partial}{\partial x_i} \frac{\partial}{\partial x_j} \textbf{u}_j
 = \frac{\partial}{\partial x_i} \textrm{div}\; \textbf{u}
 = 0.
-@f}
-If you can not assume the above mentioned regularity, or if your viscosity is
-not a constant, the equivalence no longer holds. Therefore, we decided to
-stick with the more physically accurate symmetric tensor formulation in this
-tutorial.
+@f} 
+
+如果你不能假设上述的规律性，或者你的粘度不是常数，那么这个等价关系就不再成立。因此，我们决定在本教程中坚持使用物理上更精确的对称张量表述。
 
 
-To be well-posed, we will have to add boundary conditions to the
-equations. What boundary conditions are readily possible here will
-become clear once we discuss the weak form of the equations.
+为了得到良好的处理，我们将不得不在方程中加入边界条件。一旦我们讨论方程的微弱形式，哪些边界条件是容易做到的就会变得清晰。
 
-The equations covered here fall into the class of vector-valued problems. A
-toplevel overview of this topic can be found in the @ref vector_valued module.
+这里所涉及的方程属于矢量值问题的范畴。这个主题的顶层概述可以在 @ref vector_valued 模块中找到。
 
 
-<a name="Weakform"></a><h3>Weak form</h3>
+<a name="Weakform"></a><h3>Weak form</h3> 
 
 
-The weak form of the equations is obtained by writing it in vector
-form as
-@f{eqnarray*}
+方程的弱形式可以通过将其写成矢量形式得到@f{eqnarray*}
   \begin{pmatrix}
     {-2\; \textrm{div}\; \varepsilon(\textbf{u}) + \nabla p}
     \\
@@ -181,138 +158,146 @@ form as
   0
   \end{pmatrix},
 @f}
-forming the dot product from the left with a vector-valued test
-function $\phi = \begin{pmatrix}\textbf{v} \\ q\end{pmatrix}$ and integrating
-over the domain $\Omega$, yielding the following set of equations:
-@f{eqnarray*}
+
+从左边开始与一个矢量值测试函数 $\phi = \begin{pmatrix}\textbf{v} \\ q\end{pmatrix}$ 形成点积，并在域 $\Omega$ 上进行积分，得到以下方程组。@f{eqnarray*}
   (\mathrm v,
+
+
    -2\; \textrm{div}\; \varepsilon(\textbf{u}) + \nabla p)_{\Omega}
+
+
   -
   (q,\textrm{div}\; \textbf{u})_{\Omega}
   =
   (\textbf{v}, \textbf{f})_\Omega,
-@f}
-which has to hold for all test functions $\phi = \begin{pmatrix}\textbf{v}
-\\ q\end{pmatrix}$.
+@f} 
 
-A generally good rule of thumb is that if one <i>can</i> reduce how
-many derivatives are taken on any variable in the formulation, then
-one <i>should</i> in fact do that using integration by parts. (This is
-motivated by the theory of <a
+这对所有测试函数 $\phi = \begin{pmatrix}\textbf{v}
+\\ q\end{pmatrix}$ 都必须成立。
+
+一般来说，一个好的经验法则是，如果<i>can</i>减少公式中任何变量上的导数，那么<i>should</i>实际上是用部分积分来做。这是由<a
 href="https://en.wikipedia.org/wiki/Partial_differential_equation">partial
-differential equations</a>, and in particular the difference between
-strong and <a href="https://en.wikipedia.org/wiki/Weak_solution">weak
-solutions</a>.) We have already done that for the Laplace equation,
-where we have integrated the second derivative by parts to obtain the
-weak formulation that has only one derivative on both test and trial
-function.
+differential equations</a>的理论引起的，特别是强和<a href="https://en.wikipedia.org/wiki/Weak_solution">weak
+solutions</a>之间的区别）。我们已经为拉普拉斯方程做了这个工作，在那里我们对第二导数进行了分项积分，得到了在测试和试验函数上都只有一个导数的弱表述。
 
-In the current context, we integrate by parts the second term:
-@f{eqnarray*}
+在目前的情况下，我们对第二项进行分项积分。@f{eqnarray*}
   (\textbf{v}, -2\; \textrm{div}\; \varepsilon(\textbf{u}))_{\Omega}
+
+
   - (\textrm{div}\; \textbf{v}, p)_{\Omega}
   + (\textbf{n}\cdot\textbf{v}, p)_{\partial\Omega}
+
+
   -
   (q,\textrm{div}\; \textbf{u})_{\Omega}
   =
   (\textbf{v}, \textbf{f})_\Omega.
-@f}
-Likewise, we integrate by parts the first term to obtain
-@f{eqnarray*}
+@f} 
+
+同样地，我们对第一项进行分项积分，得到@f{eqnarray*}
   (\nabla \textbf{v}, 2\; \varepsilon(\textbf{u}))_{\Omega}
+
+
   -
   (\textbf{n} \otimes \textbf{v}, 2\; \varepsilon(\textbf{u}))_{\partial\Omega}
+
+
   - (\textrm{div}\; \textbf{v}, p)_{\Omega}
   + (\textbf{n}\cdot\textbf{v}, p)_{\partial\Omega}
+
+
   -
   (q,\textrm{div}\; \textbf{u})_{\Omega}
   =
   (\textbf{v}, \textbf{f})_\Omega,
-@f}
-where the scalar product between two tensor-valued quantities is here
-defined as
-@f{eqnarray*}
+@f} 
+
+其中两个张量之间的标量乘积在此定义为@f{eqnarray*}
   (\nabla \textbf{v}, 2\; \varepsilon(\textbf{u}))_{\Omega}
   =
   2 \int_\Omega \sum_{i,j=1}^d \frac{\partial v_j}{\partial x_i}
   \varepsilon(\textbf{u})_{ij} \ dx.
 @f}
-Using this, we have now reduced the requirements on our variables to
-first derivatives for $\mathbf u,\mathbf v$ and no derivatives at all
-for $p,q$.
 
-Because the scalar product between a general tensor like
-$\nabla\textbf{v}$ and a symmetric tensor like
-$\varepsilon(\textbf{u})$ equals the scalar product between the
-symmetrized forms of the two, we can also write the bilinear form
-above as follows:
-@f{eqnarray*}
+利用这一点，我们现在将对变量的要求降低到 $\mathbf u,\mathbf v$ 的一阶导数和 $p,q$ 完全没有导数。
+
+因为像 $\nabla\textbf{v}$ 这样的一般张量和 $\varepsilon(\textbf{u})$ 这样的对称张量之间的标量积等于两者的对称形式之间的标量积，我们也可以把上面的双线性形式写成如下。@f{eqnarray*}
   (\varepsilon(\textbf{v}), 2\; \varepsilon(\textbf{u}))_{\Omega}
+
+
   -
   (\textbf{n} \otimes \textbf{v}, 2\; \varepsilon(\textbf{u}))_{\partial\Omega}
+
+
   - (\textrm{div}\; \textbf{v}, p)_{\Omega}
   + (\textbf{n}\cdot\textbf{v}, p)_{\partial\Omega}
+
+
   -
   (q,\textrm{div}\; \textbf{u})_{\Omega}
   =
   (\textbf{v}, \textbf{f})_\Omega,
-@f}
-We will deal with the boundary terms in the next section, but it is already
-clear from the domain terms
-@f{eqnarray*}
+@f} 
+
+我们将在下一节处理边界项，但从双线性形式的域项@f{eqnarray*}
   (\varepsilon(\textbf{v}), 2\; \varepsilon(\textbf{u}))_{\Omega}
+
+
   - (\textrm{div}\; \textbf{v}, p)_{\Omega}
+
+
   -
   (q,\textrm{div}\; \textbf{u})_{\Omega}
-@f}
-of the bilinear form that the Stokes equations yield a symmetric bilinear
-form, and consequently a symmetric (if indefinite) system matrix.
+@f}中已经可以看出 
+
+我们将在下一节处理边界项，但从双线性形式的域项@f{eqnarray*}
+  (\varepsilon(\textbf{v}), 2\; \varepsilon(\textbf{u}))_{\Omega}
+
+
+  - (\textrm{div}\; \textbf{v}, p)_{\Omega}
+
+
+  -
+  (q,\textrm{div}\; \textbf{u})_{\Omega}
+@f}已经可以看出，斯托克斯方程产生了一个对称的双线性形式，因此也产生了一个对称的（如果是不确定的）系统矩阵。
 
 
 <a name="Boundaryconditions"></a><h3>Boundary conditions</h3>
 
 
-@dealiiVideoLecture{21.5}
-(@dealiiVideoLectureSeeAlso{21.55,21.6,21.65})
+  @dealiiVideoLecture{21.5}  (  @dealiiVideoLectureSeeAlso{21.55,21.6,21.65})  )  
 
-The weak form just derived immediately presents us with different
-possibilities for imposing boundary conditions:
-<ol>
-<li>Dirichlet velocity boundary conditions: On a part
-    $\Gamma_D\subset\partial\Omega$ we may impose Dirichlet conditions
-    on the velocity $\textbf u$:
+刚刚得出的弱形式立即为我们提供了施加边界条件的不同可能性。  <ol>   <li>  Dirichlet速度边界条件。在一个部分上 $\Gamma_D\subset\partial\Omega$ 我们可以对速度施加迪里希特条件 $\textbf u$  。
 
     @f{eqnarray*}
         \textbf u = \textbf g_D \qquad\qquad \textrm{on}\ \Gamma_D.
-    @f}
-    Because test functions $\textbf{v}$ come from the tangent space of
-    the solution variable, we have that $\textbf{v}=0$ on $\Gamma_D$
-    and consequently that
-    @f{eqnarray*}
+    @f} 
+
+    因为检验函数 $\textbf{v}$ 来自解变量的切线空间，我们有 $\textbf{v}=0$ 在 $\Gamma_D$ 上，因此有@f{eqnarray*}
+
+
       -(\textbf{n} \otimes \mathrm
         v, 2\; \varepsilon(\textbf{u}))_{\Gamma_D}
       +
       (\textbf{n}\cdot\textbf{v}, p)_{\Gamma_D}
       = 0.
     @f}
-    In other words, as usual, strongly imposed boundary values do not
-    appear in the weak form.
 
-    It is noteworthy that if we impose Dirichlet boundary values on the entire
-    boundary, then the pressure is only determined up to a constant. An
-    algorithmic realization of that would use similar tools as have been seen in
-    step-11.
+    换句话说，像往常一样，强加的边界值并没有出现在弱形式中。
 
-<li>Neumann-type or natural boundary conditions: On the rest of the boundary
-    $\Gamma_N=\partial\Omega\backslash\Gamma_D$, let us re-write the
-    boundary terms as follows:
-    @f{eqnarray*}
+    值得注意的是，如果我们在整个边界上施加Dirichlet边界值，那么压力只确定到一个常数。这方面的算法实现将使用类似的工具，正如在  step-11  中看到的那样。
+
+  <li>  诺伊曼型或自然边界条件。在边界的其余部分 $\Gamma_N=\partial\Omega\backslash\Gamma_D$ ，让我们把边界条款重新写成如下。    @f{eqnarray*}
+
+
       -(\textbf{n} \otimes \mathrm
         v, 2\; \varepsilon(\textbf{u}))_{\Gamma_N}
       +
       (\textbf{n}\cdot\textbf{v}, p)_{\Gamma_N}
       &=&
       \sum_{i,j=1}^d
+
+
       -(n_i v_j, 2\; \varepsilon(\textbf{u})_{ij})_{\Gamma_N}
       +
       \sum_{i=1}^d
@@ -320,6 +305,8 @@ possibilities for imposing boundary conditions:
       \\
       &=&
       \sum_{i,j=1}^d
+
+
       -(n_i v_j, 2\; \varepsilon(\textbf{u})_{ij})_{\Gamma_N}
       +
       \sum_{i,j=1}^d
@@ -336,39 +323,47 @@ possibilities for imposing boundary conditions:
       &=&
       (\textbf{v},
        \textbf{n}\cdot [p \textbf{I} - 2\; \varepsilon(\textbf{u})])_{\Gamma_N}.
-    @f}
-    In other words, on the Neumann part of the boundary we can
-    prescribe values for the total stress:
-    @f{eqnarray*}
+    @f} 
+
+    换句话说，在边界的诺伊曼部分，我们可以为总应力规定值。    @f{eqnarray*}
       \textbf{n}\cdot [p \textbf{I} - 2\; \varepsilon(\textbf{u})]
       =
       \textbf g_N \qquad\qquad \textrm{on}\ \Gamma_N.
-    @f}
-    If the boundary is subdivided into Dirichlet and Neumann parts
-    $\Gamma_D,\Gamma_N$, this then leads to the following weak form:
-    @f{eqnarray*}
+    @f} 
+
+    如果边界被细分为Dirichlet和Neumann部分 $\Gamma_D,\Gamma_N$ ，这就导致了以下弱形式。    @f{eqnarray*}
       (\varepsilon(\textbf{v}), 2\; \varepsilon(\textbf{u}))_{\Omega}
+
+
       - (\textrm{div}\; \textbf{v}, p)_{\Omega}
+
+
       -
       (q,\textrm{div}\; \textbf{u})_{\Omega}
       =
       (\textbf{v}, \textbf{f})_\Omega
+
+
       -
       (\textbf{v}, \textbf g_N)_{\Gamma_N}.
-    @f}
+    @f} 
 
 
-<li>Robin-type boundary conditions: Robin boundary conditions are a mixture of
-    Dirichlet and Neumann boundary conditions. They would read
-    @f{eqnarray*}
+
+
+  <li>  罗宾型边界条件。罗宾式边界条件是迪里切特和诺依曼边界条件的混合体。它们将读作@f{eqnarray*}
       \textbf{n}\cdot [p \textbf{I} - 2\; \varepsilon(\textbf{u})]
       =
       \textbf S \textbf u \qquad\qquad \textrm{on}\ \Gamma_R,
-    @f}
-    with a rank-2 tensor (matrix) $\textbf S$. The associated weak form is
-    @f{eqnarray*}
+    @f} 
+
+    有一个等级2的张量（矩阵）  $\textbf S$  。相关的弱形式是@f{eqnarray*}
       (\varepsilon(\textbf{v}), 2\; \varepsilon(\textbf{u}))_{\Omega}
+
+
       - (\textrm{div}\; \textbf{v}, p)_{\Omega}
+
+
       -
       (q,\textrm{div}\; \textbf{u})_{\Omega}
       +
@@ -377,36 +372,21 @@ possibilities for imposing boundary conditions:
       (\textbf{v}, \textbf{f})_\Omega.
     @f}
 
-<li>Partial boundary conditions: It is possible to combine Dirichlet and
-    Neumann boundary conditions by only enforcing each of them for certain
-    components of the velocity. For example, one way to impose artificial
-    boundary conditions is to require that the flow is perpendicular to the
-    boundary, i.e. the tangential component $\textbf u_{\textbf t}=(\textbf
-    1-\textbf n\otimes\textbf n)\textbf u$ be zero, thereby constraining
-    <code>dim</code>-1 components of the velocity. The remaining component can
-    be constrained by requiring that the normal component of the normal
-    stress be zero, yielding the following set of boundary conditions:
-    @f{eqnarray*}
+
+
+  <li>  局部边界条件。可以通过只对速度的某些分量强制执行Dirichlet和Neumann边界条件来结合它们中的每一个。例如，施加人工边界条件的一种方法是要求流动垂直于边界，即切向分量 $\textbf u_{\textbf t}=(\textbf
+    1-\textbf n\otimes\textbf n)\textbf u$ 为零，从而约束速度的 <code>dim</code> -1分量。剩下的分量可以通过要求法向应力的法向分量为零来约束，产生以下一组边界条件。    @f{eqnarray*}
       \textbf u_{\textbf t} &=& 0,
       \\
       \textbf n \cdot \left(\textbf{n}\cdot [p \textbf{I} - 2\;
       \varepsilon(\textbf{u})] \right)
       &=&
       0.
-    @f}
+    @f} 
 
-    An alternative to this is when one wants the flow to be <i>parallel</i>
-    rather than perpendicular to the boundary (in deal.II, the
-    VectorTools::compute_no_normal_flux_constraints function can do this for
-    you). This is frequently the case for problems with a free boundary
-    (e.g. at the surface of a river or lake if vertical forces of the flow are
-    not large enough to actually deform the surface), or if no significant
-    friction is exerted by the boundary on the fluid (e.g. at the interface
-    between earth mantle and earth core where two fluids meet that are
-    stratified by different densities but that both have small enough
-    viscosities to not introduce much tangential stress on each other).
-    In formulas, this means that
-    @f{eqnarray*}
+
+
+    另一种情况是希望水流是<i>parallel</i>而不是垂直于边界（在deal.II中， VectorTools::compute_no_normal_flux_constraints 函数可以帮你做到这一点）。这种情况经常发生在自由边界的问题上（例如，在河流或湖泊的表面，如果流动的垂直力不足以使表面实际变形），或者如果边界对流体没有施加明显的摩擦力（例如，在地幔和地核的界面上，两种流体因密度不同而相遇，但它们的粘度都很小，不会对彼此产生很大的切向应力）。    在公式中，这意味着@f{eqnarray*}
       \textbf{n}\cdot\textbf u &=& 0,
       \\
       (\textbf 1-\textbf n\otimes\textbf n)
@@ -414,80 +394,72 @@ possibilities for imposing boundary conditions:
       \varepsilon(\textbf{u})] \right)
       &=&
       0,
-    @f}
-    the first condition (which needs to be imposed strongly) fixing a single
-    component of the velocity, with the second (which would be enforced in the
-    weak form) fixing the remaining two components.
-</ol>
+    @f} 
 
-Despite this wealth of possibilities, we will only use Dirichlet and
-(homogeneous) Neumann boundary conditions in this tutorial program.
+    第一个条件（需要强加）固定速度的一个分量，第二个条件（将在弱形式下强制执行）固定其余两个分量。  </ol>   
+
+尽管有这么多的可能性，我们在本教程中只使用迪里希特和（同质的）诺伊曼边界条件。
 
 
-<a name="Discretization"></a><h3>Discretization</h3>
+<a name="Discretization"></a><h3>Discretization</h3> 
 
 
-As developed above, the weak form of the equations with Dirichlet and Neumann
-boundary conditions on $\Gamma_D$ and $\Gamma_N$ reads like this: find
-$\textbf u\in \textbf V_g = \{\varphi \in H^1(\Omega)^d: \varphi_{\Gamma_D}=\textbf
-g_D\}, p\in Q=L^2(\Omega)$ so that
-@f{eqnarray*}
+如上所述，在 $\Gamma_D$ 和 $\Gamma_N$ 上具有狄里奇和诺依曼边界条件的方程的弱形式是这样的：找到 $\textbf u\in \textbf V_g = \{\varphi \in H^1(\Omega)^d: \varphi_{\Gamma_D}=\textbf
+g_D\}, p\in Q=L^2(\Omega)$ ，以便@f{eqnarray*}
   (\varepsilon(\textbf{v}), 2\; \varepsilon(\textbf{u}))_{\Omega}
+
+
   - (\textrm{div}\; \textbf{v}, p)_{\Omega}
+
+
   -
   (q,\textrm{div}\; \textbf{u})_{\Omega}
   =
   (\textbf{v}, \textbf{f})_\Omega
+
+
   -
   (\textbf{v}, \textbf g_N)_{\Gamma_N}
-@f}
-for all test functions
-$\textbf{v}\in \textbf V_0 = \{\varphi \in H^1(\Omega)^d: \varphi_{\Gamma_D}=0\},q\in
-Q$.
+@f} 
 
-These equations represent a symmetric <a
+为所有测试函数  $\textbf{v}\in \textbf V_0 = \{\varphi \in H^1(\Omega)^d: \varphi_{\Gamma_D}=0\},q\in
+Q$  。
+
+这些方程代表一个对称的<a
 href="https://en.wikipedia.org/wiki/Ladyzhenskaya%E2%80%93Babu%C5%A1ka%E2%80%93Brezzi_condition">saddle
-point problem</a>. It is well known
-that then a solution only exists if the function spaces in which we search for
-a solution have to satisfy certain conditions, typically referred to as the
-Babuska-Brezzi or Ladyzhenskaya-Babuska-Brezzi (LBB) conditions. The continuous
-function spaces above satisfy these. However, when we discretize the equations by
-replacing the continuous variables and test functions by finite element
-functions in finite dimensional spaces $\textbf V_{g,h}\subset \textbf V_g,
-Q_h\subset Q$, we have to make sure that $\textbf V_h,Q_h$ also satisfy the LBB
-conditions. This is similar to what we had to do in step-20.
+point problem</a>。众所周知，那么只有当我们寻找解决方案的函数空间必须满足某些条件时，解决方案才存在，这些条件通常被称为Babuska-Brezzi或Ladyzhenskaya-Babuska-Brezzi（LBB）条件。上面的连续函数空间满足这些条件。然而，当我们将方程离散化，用有限维空间中的有限元函数取代连续变量和检验函数时 $\textbf V_{g,h}\subset \textbf V_g,
+Q_h\subset Q$ ，我们必须确保 $\textbf V_h,Q_h$ 也满足LBB条件。这与我们在  step-20  中必须做的事情类似。
 
-For the Stokes equations, there are a number of possible choices to ensure
-that the finite element spaces are compatible with the LBB condition. A simple
-and accurate choice that we will use here is $\textbf u_h\in Q_{p+1}^d,
-p_h\in Q_p$, i.e. use elements one order higher for the velocities than for the
-pressures.
+对于斯托克斯方程，有许多可能的选择来确保有限元空间与LBB条件兼容。我们在这里使用的一个简单而准确的选择是 $\textbf u_h\in Q_{p+1}^d,
+p_h\in Q_p$ ，即对速度使用比压力高一阶的元素。
 
-This then leads to the following discrete problem: find $\textbf u_h,p_h$ so
-that
-@f{eqnarray*}
+这就导致了以下的离散问题：找到 $\textbf u_h,p_h$ ，使@f{eqnarray*}
   (\varepsilon(\textbf{v}_h), 2\; \varepsilon(\textbf u_h))_{\Omega}
+
+
   - (\textrm{div}\; \textbf{v}_h, p_h)_{\Omega}
+
+
   -
   (q_h,\textrm{div}\; \textbf{u}_h)_{\Omega}
   =
   (\textbf{v}_h, \textbf{f})_\Omega
+
+
   -
   (\textbf{v}_h, \textbf g_N)_{\Gamma_N}
-@f}
-for all test functions $\textbf{v}_h, q_h$. Assembling the linear system
-associated with this problem follows the same lines used in @ref step_20
-"step-20", step-21, and explained in detail in the @ref
-vector_valued module.
+@f} 
+
+为所有测试函数  $\textbf{v}_h, q_h$  。组建与该问题相关的线性系统遵循 @ref step_20 " step-20 "、 step-21 中使用的相同路线，并在 @ref
+vector_valued 模块中详细解释。
+
 
 
 
 <a name="Linearsolverandpreconditioningissues"></a><h3>Linear solver and preconditioning issues</h3>
 
 
-The weak form of the discrete equations naturally leads to the following
-linear system for the nodal values of the velocity and pressure fields:
-@f{eqnarray*}
+离散方程的微弱形式自然导致了速度场和压力场的节点值的以下线性系统。@f{eqnarray*}
   \left(\begin{array}{cc}
     A & B^T \\ B & 0
   \end{array}\right)
@@ -498,155 +470,61 @@ linear system for the nodal values of the velocity and pressure fields:
   \left(\begin{array}{c}
     F \\ G
   \end{array}\right),
-@f}
-Like in step-20 and step-21, we will solve this
-system of equations by forming the Schur complement, i.e. we will first find
-the solution $P$ of
-@f{eqnarray*}
+@f} 
+
+与 step-20 和 step-21 一样，我们将通过形成舒尔补数来解决这个方程组，即我们将首先找到@f{eqnarray*}
   BA^{-1}B^T P &=& BA^{-1} F - G, \\
-@f}
-and then
-@f{eqnarray*}
+@f}的解 $P$ 。
+
+然后是@f{eqnarray*}
   AU &=& F - B^TP.
 @f}
-The way we do this is pretty much exactly like we did in these previous
-tutorial programs, i.e. we use the same classes <code>SchurComplement</code>
-and <code>InverseMatrix</code> again. There are two significant differences,
-however:
 
-<ol>
-<li>
-First, in the mixed Laplace equation we had to deal with the question of how
-to precondition the Schur complement $B^TM^{-1}B$, which was spectrally
-equivalent to the Laplace operator on the pressure space (because $B$
-represents the gradient operator, $B^T$ its adjoint $-\textrm{div}$, and $M$
-the identity (up to the material parameter $K^{-1}$), so $B^TM^{-1}B$ is
-something like $-\textrm{div} \mathbf 1 \nabla = -\Delta$). Consequently, the
-matrix is badly conditioned for small mesh sizes and we had to come up with an
-elaborate preconditioning scheme for the Schur complement.
+我们这样做的方式与我们在之前的这些教程程序中的做法几乎完全一样，即我们再次使用相同的类 <code>SchurComplement</code> 和 <code>InverseMatrix</code> 。然而，有两个显著的区别。
 
-<li>
-Second, every time we multiplied with $B^TM^{-1}B$ we had to solve with the
-mass matrix $M$. This wasn't particularly difficult, however, since the mass
-matrix is always well conditioned and so simple to invert using CG and a
-little bit of preconditioning.
-</ol>
-In other words, preconditioning the inner solver for $M$ was simple whereas
-preconditioning the outer solver for $B^TM^{-1}B$ was complicated.
+  <ol>   <li>  首先，在混合拉普拉斯方程中，我们必须处理如何对舒尔补数 $B^TM^{-1}B$ 进行预处理的问题，它在频谱上等同于压力空间上的拉普拉斯算子（因为 $B$  ]代表梯度算子， $B^T$ 代表其邻接算子 $-\textrm{div}$ ，而 $M$ 代表身份（直到材料参数 $K^{-1}$ 为止），因此 $B^TM^{-1}B$ 类似于 $-\textrm{div} \mathbf 1 \nabla = -\Delta$ ）。因此，对于小的网格尺寸来说，矩阵的条件很差，我们不得不为Schur补数想出一个精心设计的预处理方案。
 
-Here, the situation is pretty much exactly the opposite. The difference stems
-from the fact that the matrix at the heart of the Schur complement does not
-stem from the identity operator but from a variant of the Laplace operator,
-$-\textrm{div} \nabla^s$ (where $\nabla^s$ is the symmetric gradient)
-acting on a vector field. In the investigation of this issue
-we largely follow the paper D. Silvester and A. Wathen:
-"Fast iterative solution of stabilised Stokes systems part II. Using
-general block preconditioners." (SIAM J. Numer. Anal., 31 (1994),
-pp. 1352-1367), which is available online <a
-href="http://siamdl.aip.org/getabs/servlet/GetabsServlet?prog=normal&id=SJNAAM000031000005001352000001&idtype=cvips&gifs=Yes" target="_top">here</a>.
-Principally, the difference in the matrix at the heart of the Schur
-complement has two consequences:
+  <li>  其次，每次我们与 $B^TM^{-1}B$ 相乘时，我们必须用质量矩阵 $M$ 来解决。然而，这并不特别困难，因为质量矩阵总是有很好的条件的，所以使用CG和一点点预处理就能简单地反转。  </ol>  换句话说， $M$ 的内部求解器的预处理很简单，而 $B^TM^{-1}B$ 的外部求解器的预处理很复杂。
 
-<ol>
-<li>
-First, it makes the outer preconditioner simple: the Schur complement
-corresponds to the operator $-\textrm{div} (-\textrm{div} \nabla^s)^{-1}
-\nabla$ on the pressure space; forgetting about the fact that we deal with
-symmetric gradients instead of the regular one, the Schur complement is
-something like $-\textrm{div} (-\textrm{div} \nabla)^{-1} \nabla =
--\textrm{div} (-\Delta)^{-1} \nabla$, which, even if not mathematically
-entirely concise, is spectrally equivalent to the identity operator (a
-heuristic argument would be to commute the operators into
-$-\textrm{div}(-\Delta)^{-1} \nabla = -\textrm{div}\nabla(-\Delta)^{-1} =
--\Delta(-\Delta)^{-1} = \mathbf 1$). It turns out that it isn't easy to solve
-this Schur complement in a straightforward way with the CG method:
-using no preconditioner, the condition number of the Schur complement matrix
-depends on the size ratios of the largest to the smallest cells, and one still
-needs on the order of 50-100 CG iterations. However, there is a simple cure:
-precondition with the mass matrix on the pressure space and we get down to a
-number between 5-15 CG iterations, pretty much independently of the structure
-of the mesh (take a look at the <a href="#Results">results section</a> of this
-program to see that indeed the number of CG iterations does not change as we
-refine the mesh).
+在这里，情况几乎完全相反。差异源于这样一个事实，即舒尔补码的核心矩阵不是来自身份算子，而是来自拉普拉斯算子的变体， $-\textrm{div} \nabla^s$ （其中 $\nabla^s$ 是对称梯度），作用于一个矢量场。在对这个问题的研究中，我们主要遵循D. Silvester和A. Wathen的论文。"稳定的斯托克斯系统的快速迭代解第二部分。使用一般块状先决条件"。(SIAM J. Numer. Anal., 31 (1994), pp. 1352-1367)，可在线查阅<a
+href="http://siamdl.aip.org/getabs/servlet/GetabsServlet?prog=normal&id=SJNAAM000031000005001352000001&idtype=cvips&gifs=Yes" target="_top">here</a>。原则上，舒尔补码核心的矩阵的差异有两个后果。
 
-So all we need in addition to what we already have is the mass matrix on the
-pressure variables and we will store it in a separate object.
+  <ol>   <li>  首先，它使外部预处理变得简单：Schur补充对应于压力空间上的算子 $-\textrm{div} (-\textrm{div} \nabla^s)^{-1}
+\nabla$ ；忘记我们处理的是对称梯度而不是常规梯度的事实，Schur补充是类似于 $-\textrm{div} (-\textrm{div} \nabla)^{-1} \nabla =
+
+
+-\textrm{div} (-\Delta)^{-1} \nabla$ 的东西，即使在数学上不完全简洁，在谱上也等同于身份算子（一个启发式的论证是把算子换算成 $-\textrm{div}(-\Delta)^{-1} \nabla = -\textrm{div}\nabla(-\Delta)^{-1} =
+
+
+-\Delta(-\Delta)^{-1} = \mathbf 1$ ）。事实证明，用CG方法直接解决这个Schur补数并不容易：在没有预处理的情况下，Schur补数矩阵的条件数取决于最大和最小单元的大小比，而且仍然需要50-100次CG迭代。然而，有一个简单的解决办法：用压力空间上的质量矩阵进行预处理，我们就可以减少到5-15次CG迭代，几乎不受网格结构的影响（看看这个程序的<a href="#Results">results section</a>，可以看到CG迭代的数量确实不会随着我们细化网格而改变）。
+
+因此，除了我们已经有的东西之外，我们所需要的就是压力变量上的质量矩阵，我们将把它存储在一个单独的对象中。
 
 
 
-<li>
-While the outer preconditioner has become simpler compared to the
-mixed Laplace case discussed in step-20, the issue of
-the inner solver has become more complicated. In the mixed Laplace
-discretization, the Schur complement has the form $B^TM^{-1}B$. Thus,
-every time we multiplied with the Schur complement, we had to solve a
-linear system $M_uz=y$; this isn't too complicated there, however,
-since the mass matrix $M_u$ on the pressure space is well-conditioned.
+
+  <li> 与 step-20 中讨论的混合拉普拉斯情况相比，外部预调节器变得简单了，但内部求解器的问题却变得更加复杂。在混合拉普拉斯离散化中，Schur补码的形式为  $B^TM^{-1}B$  。因此，每当我们与Schur补码相乘时，我们必须解决一个线性系统 $M_uz=y$ ；然而，这并不太复杂，因为压力空间上的质量矩阵 $M_u$ 是有条件的。
 
 
-On the other hand, for the Stokes equation we consider here, the Schur
-complement is $BA^{-1}B^T$ where the matrix $A$ is related to the
-Laplace operator (it is, in fact, the matrix corresponding to the
-bilinear form $(\nabla^s \varphi_i, \nabla^s\varphi_j)$). Thus,
-solving with $A$ is a lot more complicated: the matrix is badly
-conditioned and we know that we need many iterations unless we have a
-very good preconditioner. What is worse, we have to solve with $A$
-every time we multiply with the Schur complement, which is 5-15 times
-using the preconditioner described above.
+另一方面，对于我们在这里考虑的斯托克斯方程，舒尔补码是 $BA^{-1}B^T$ ，其中矩阵 $A$ 与拉普拉斯算子有关（事实上，它是对应于双线性形式 $(\nabla^s \varphi_i, \nabla^s\varphi_j)$ 的矩阵）。因此，用 $A$ 求解要复杂得多：矩阵的条件很差，我们知道我们需要很多迭代，除非我们有一个非常好的预处理程序。更糟糕的是，我们每次与舒尔补码相乘时都要用 $A$ 求解，使用上述的预处理程序需要5-15次。
 
-Because we have to solve with $A$ several times, it pays off to spend
-a bit more time once to create a good preconditioner for this
-matrix. So here's what we're going to do: if in 2d, we use the
-ultimate preconditioner, namely a direct sparse LU decomposition of
-the matrix. This is implemented using the SparseDirectUMFPACK class
-that uses the UMFPACK direct solver to compute the decomposition. To
-use it, you will have to build deal.II with UMFPACK support (which is the
-default); see the <a href="../../readme.html#optional-software">ReadMe file</a>
-for instructions. With this, the inner solver converges in one iteration.
+因为我们必须多次用 $A$ 求解，所以多花一点时间为这个矩阵创建一个好的预处理程序是值得的。所以我们要做的是：如果在2d中，我们使用终极预处理程序，即直接对矩阵进行稀疏LU分解。这是用SparseDirectUMFPACK类实现的，它使用UMFPACK直接求解器来计算分解。要使用它，你必须建立支持UMFPACK的deal.II（这是默认的）；说明见<a href="../../readme.html#optional-software">ReadMe file</a>。有了它，内解器在一次迭代中就会收敛。
 
-In 2d, we can do this sort of thing because even reasonably large problems
-rarely have more than a few 100,000 unknowns with relatively few nonzero
-entries per row. Furthermore, the bandwidth of matrices in 2d is ${\cal
-O}(\sqrt{N})$ and therefore moderate. For such matrices, sparse factors can be
-computed in a matter of a few seconds. (As a point of reference, computing the
-sparse factors of a matrix of size $N$ and bandwidth $B$ takes ${\cal
-O}(NB^2)$ operations. In 2d, this is ${\cal O}(N^2)$; though this is a higher
-complexity than, for example, assembling the linear system which takes ${\cal
-O}(N)$, the constant for computing the decomposition is so small that it
-doesn't become the dominating factor in the entire program until we get to
-very large %numbers of unknowns in the high 100,000s or more.)
+在2D中，我们可以做这样的事情，因为即使是合理的大问题，也很少有超过100,000个未知数，每行的非零项相对较少。此外，2d中矩阵的带宽是 ${\cal
+O}(\sqrt{N})$ ，因此是适中的。对于这样的矩阵，稀疏因子可以在几秒钟内计算出来。作为参考，计算一个大小为 $N$ 、带宽为 $B$ 的矩阵的稀疏因子需要 ${\cal
+O}(NB^2)$ 次操作。在2D中，这是 ${\cal O}(N^2)$ ；尽管这比，例如，组装线性系统需要 ${\cal
+O}(N)$ 的复杂度要高，计算分解的常数是如此之小，以至于它不会成为整个程序中的主导因素，直到我们达到非常大的未知数的%，甚至更多）。) 
 
-The situation changes in 3d, because there we quickly have many more
-unknowns and the bandwidth of matrices (which determines the number of
-nonzero entries in sparse LU factors) is ${\cal O}(N^{2/3})$, and there
-are many more entries per row as well. This makes using a sparse
-direct solver such as UMFPACK inefficient: only for problem sizes of a
-few 10,000 to maybe 100,000 unknowns can a sparse decomposition be
-computed using reasonable time and memory resources.
+情况在3D中发生了变化，因为在那里我们很快就会有更多的未知数，而且矩阵的带宽（决定了稀疏LU因子中非零项的数量）是 ${\cal O}(N^{2/3})$ ，而且每行也有很多条目。这使得使用像UMFPACK这样的稀疏直接求解器的效率很低：只有在问题规模为10,000到100,000个未知数时，才能用合理的时间和内存资源计算稀疏分解。
 
-What we do in that case is to use an incomplete LU decomposition (ILU) as a
-preconditioner, rather than actually computing complete LU factors. As it so
-happens, deal.II has a class that does this: SparseILU. Computing the ILU
-takes a time that only depends on the number of nonzero entries in the sparse
-matrix (or that we are willing to fill in the LU factors, if these should be
-more than the ones in the matrix), but is independent of the bandwidth of the
-matrix. It is therefore an operation that can efficiently also be computed in
-3d. On the other hand, an incomplete LU decomposition, by definition, does not
-represent an exact inverse of the matrix $A$. Consequently, preconditioning
-with the ILU will still require more than one iteration, unlike
-preconditioning with the sparse direct solver. The inner solver will therefore
-take more time when multiplying with the Schur complement: an unavoidable
-trade-off.
-</ol>
+在这种情况下，我们所做的是使用一个不完整的LU分解（ILU）作为预处理，而不是实际计算完整的LU因子。恰好，deal.II有一个类可以做到这一点。SparseILU。计算ILU所需要的时间只取决于稀疏矩阵中的非零项的数量（或者说我们愿意填入LU因子，如果这些非零项应该多于矩阵中的非零项），但与矩阵的带宽无关。因此，这也是一个可以有效地在三维中计算的操作。另一方面，根据定义，一个不完整的LU分解并不代表矩阵的精确逆  $A$  。因此，与稀疏直接求解器的预处理不同，用ILU进行预处理仍然需要一次以上的迭代。因此，当与舒尔补码相乘时，内解器将花费更多时间：这是一个不可避免的权衡。  </ol>   
 
-In the program below, we will make use of the fact that the SparseILU and
-SparseDirectUMFPACK classes have a very similar interface and can be used
-interchangeably. All that we need is a switch class that, depending on the
-dimension, provides a type that is either of the two classes mentioned
-above. This is how we do that:
+在下面的程序中，我们将利用SparseILU和SparseDirectUMFPACK类具有非常相似的接口，可以互换使用的事实。我们所需要的是一个开关类，根据维度的不同，提供一个类型，即上述两个类中的任何一个。这就是我们如何做的。
+
 @code
 template <int dim>
 struct InnerPreconditioner;
+
 
 template <>
 struct InnerPreconditioner<2>
@@ -654,45 +532,32 @@ struct InnerPreconditioner<2>
   using type = SparseDirectUMFPACK;
 };
 
+
 template <>
 struct InnerPreconditioner<3>
 {
   using type = SparseILU<double>;
 };
-@endcode
-
-From here on, we can refer to the type <code>typename
-InnerPreconditioner@<dim@>::%type</code> and automatically get the correct
-preconditioner class. Because of the similarity of the interfaces of the two
-classes, we will be able to use them interchangeably using the same syntax in
-all places.
+@endcode 
 
 
-<a name="IsthishowoneshouldsolvetheStokesequations"></a><h4> Is this how one should solve the Stokes equations? </h4>
+
+从这里开始，我们可以参考类型<code>typename  InnerPreconditioner@<dim@>::%type</code> ，并自动得到正确的预处理类。由于这两个类的接口相似，我们将能够在所有地方使用相同的语法来互换使用它们。
 
 
-The discussions above showed *one* way in which the linear system that
-results from the Stokes equations can be solved, and because the
-tutorial programs are teaching tools that makes sense. But is this the
-way this system of equations *should* be solved?
+<a name="IsthishowoneshouldsolvetheStokesequations"></a><h4> Is this how one should solve the Stokes equations? </h4> 
 
-The answer to this is no. The primary bottleneck with the approach,
-already identified above, is that we have to repeatedly solve linear
-systems with $A$ inside the Schur complement, and because we don't
-have a good preconditioner for the Schur complement, these solves just
-have to happen too often. A better approach is to use a block
-decomposition, which is based on an observation of Silvester and
-Wathen @cite SW94 and explained in much greater detail in
-@cite elman2005 . An implementation of this alternative approach is
-discussed below, in the section on a <a href="#block-schur">block Schur
-complementation preconditioner</a> in the results section of this program.
+
+上面的讨论显示了解决由斯托克斯方程产生的线性系统的*种方式，由于教程程序是教学工具，这是有意义的。但这是解决这个方程组的**方式吗？
+
+这个问题的答案是否定的。这个方法的主要瓶颈已经在上面指出，我们必须反复求解舒尔补数内的 $A$ 线性系统，由于我们没有一个好的舒尔补数的预处理程序，这些求解就不得不经常发生。一个更好的方法是使用块分解，这是基于Silvester和Wathen  @cite SW94 的观察，并在 @cite elman2005 中做了更详细的解释。下面在本程序的结果部分的a <a href="#block-schur">block Schur
+complementation preconditioner</a>一节中讨论了这种替代方法的实施。
 
 
 <a name="Anoteonthestructureofthelinearsystem"></a><h4> A note on the structure of the linear system </h4>
 
 
-Above, we have claimed that the linear system has the form
-@f{eqnarray*}
+上面，我们已经声称线性系统具有@f{eqnarray*}
   \left(\begin{array}{cc}
     A & B^T \\ B & 0
   \end{array}\right)
@@ -703,30 +568,11 @@ Above, we have claimed that the linear system has the form
   \left(\begin{array}{cc}
     F \\ G
   \end{array}\right),
-@f}
-i.e., in particular that there is a zero block at the bottom right of the
-matrix. This then allowed us to write the Schur complement as
-$S=B A^{-1} B^T$. But this is not quite correct.
+@f}的形式 
 
-Think of what would happen if there are constraints on some
-pressure variables (see the
-@ref constraints "Constraints on degrees of freedom" documentation
-module), for example because we use adaptively
-refined meshes and continuous pressure finite elements so that there
-are hanging nodes. Another cause for such constraints are Dirichlet
-boundary conditions on the pressure. Then the AffineConstraints
-class, upon copying the local contributions to the matrix into the
-global linear system will zero out rows and columns corresponding
-to constrained degrees of freedom and put a positive entry on
-the diagonal. (You can think of this entry as being one for
-simplicity, though in reality it is a value of the same order
-of magnitude as the other matrix entries.) In other words,
-the bottom right block is really not empty at all: It has
-a few entries on the diagonal, one for each constrained
-pressure degree of freedom, and a correct description
-of the linear system we have to solve is that it has the
-form
-@f{eqnarray*}
+即，特别是在矩阵的右下方有一个零块。这样，我们就可以把舒尔补码写成 $S=B A^{-1} B^T$ 。但这并不完全正确。
+
+想一想，如果对某些压力变量有约束，会发生什么情况（见 @ref constraints "自由度的约束 "文件模块），例如，因为我们使用自适应细化网格和连续压力有限元，所以有悬挂节点。造成这种约束的另一个原因是压力的迪里希特边界条件。然后，AffineConstraints类，在将矩阵的局部贡献复制到全局线性系统中时，会将对应于受限自由度的行和列清零，并在对角线上放一个正条目。为了简单起见，你可以认为这个条目是1，尽管实际上它是一个与其他矩阵条目相同数量级的值）。换句话说，右下角区块其实根本不是空的：它在对角线上有几个条目，每个受限的压力自由度都有一个，对我们要解决的线性系统的正确描述是，它具有@f{eqnarray*}
   \left(\begin{array}{cc}
     A & B^T \\ B & D_c
   \end{array}\right)
@@ -737,89 +583,34 @@ form
   \left(\begin{array}{cc}
     F \\ G
   \end{array}\right),
-@f}
-where $D_c$ is the zero matrix with the exception of the
-positive diagonal entries for the constrained degrees of
-freedom. The correct Schur complement would then in fact
-be the matrix $S = B A^{-1} B^T - D_c $ instead of the one
-stated above.
+@f}的形式 
 
-Thinking about this makes us, first, realize that the
-resulting Schur complement is now indefinite because
-$B A^{-1} B^T$ is symmetric and positive definite whereas
-$D_c$ is a positive semidefinite, and subtracting the latter
-from the former may no longer be positive definite. This
-is annoying because we could no longer employ the Conjugate
-Gradient method on this true Schur complement. That said, we could
-fix the issue in AffineConstraints::distribute_local_to_global() by
-simply putting *negative* values onto the diagonal for the constrained
-pressure variables -- because we really only put something nonzero
-to ensure that the resulting matrix is not singular; we really didn't
-care whether that entry is positive or negative. So if the entries
-on the diagonal of $D_c$ were negative, then $S$ would again be a
-symmetric and positive definite matrix.
+其中 $D_c$ 是零矩阵，受限自由度的正对角线条目除外。那么，正确的舒尔补码实际上将是矩阵 $S = B A^{-1} B^T - D_c $ ，而不是上面说的那个。
 
-But, secondly, the code below doesn't actually do any of that: It
-happily solves the linear system with the wrong Schur complement
-$S = B A^{-1} B^T$ that just ignores the issue altogether. Why
-does this even work? To understand why this is so, recall that
-when writing local contributions into the global matrix,
-AffineConstraints::distribute_local_to_global() zeros out the
-rows and columns that correspond to constrained degrees of freedom.
-This means that $B$ has some zero rows, and $B^T$ zero columns.
-As a consequence, if one were to multiply out what the entries
-of $S$ are, one would realize that it has zero rows and columns
-for all constrained pressure degrees of freedom, including a
-zero on the diagonal. The nonzero entries of $D_c$ would fit
-into exactly those zero diagonal locations, and ensure that $S$
-is invertible. Not doing so, strictly speaking, means that $S$
-remains singular: It is symmetric and positive definite on the
-subset of non-constrained pressure degrees of freedom, and
-simply the zero matrix on the constrained pressures. Why
-does the Conjugate Gradient method work for this matrix?
-Because AffineConstraints::distribute_local_to_global()
-also makes sure that the right hand side entries that
-correspond to these zero rows of the matrix are *also*
-zero, i.e., the right hand side is compatible.
+思考这个问题使我们首先意识到，现在得到的舒尔补码是不确定的，因为 $B A^{-1} B^T$ 是对称的和正定的，而 $D_c$ 是正半定的，从前者减去后者可能不再是正定的。这很烦人，因为我们不能再对这个真正的舒尔补数采用共轭梯度法。也就是说，我们可以在 AffineConstraints::distribute_local_to_global() 中通过简单地将*负*值放在受限压力变量的对角线上来解决这个问题--因为我们实际上只是放了一些非零的东西来确保结果矩阵不是奇异的；我们真的不关心这个条目是正还是负。因此，如果 $D_c$ 的对角线上的条目是负的，那么 $S$ 将再次成为一个对称的正定矩阵。
 
-What this means is that whatever the values of the solution
-vector for these constrained pressure degrees of freedom,
-these rows will always have a zero residual and, if one
-were to consider what the CG algorithm does internally, just
-never produce any updates to the solution vector. In other
-words, the CG algorithm just *ignores* these rows, despite the
-fact that the matrix is singular. This only works because these
-degrees of freedom are entirely decoupled from the rest of the
-linear system (because the entire row and corresponding column
-are zero). At the end of the solution process, the constrained
-pressure values in the solution vector therefore remain exactly
-as they were when we started the call to the solver; they are
-finally overwritten with their correct values when we call
-AffineConstraints::distribute() after the CG solver is done.
+但是，其次，下面的代码实际上并没有做这些事情。它很高兴地用错误的舒尔补码 $S = B A^{-1} B^T$ 来解决线性系统，完全忽略了这个问题。为什么会这样呢？为了理解为什么会这样，回顾一下，当把局部贡献写入全局矩阵时， AffineConstraints::distribute_local_to_global() 把对应于受限自由度的行和列置零。这意味着 $B$ 有一些零行， $B^T$ 零列。因此，如果要乘出 $S$ 的条目是什么，就会发现它的所有受限压力自由度的行和列都是零，包括对角线上的一个零。 $D_c$ 的非零条目将正好适合于这些零对角线位置，并确保 $S$ 是可逆的。不这样做，严格来说，意味着 $S$ 仍然是单数。它在非约束压力自由度子集上是对称和正定的，而在约束压力上只是零矩阵。为什么共轭梯度法对这个矩阵有效？因为 AffineConstraints::distribute_local_to_global() 还确保对应于矩阵的这些零行的右手边条目也是**零，即右手边是兼容的。
 
-The upshot of this discussion is that the assumption that the
-bottom right block of the big matrix is zero is a bit
-simplified, but that just going with it does not actually lead
-to any practical problems worth addressing.
+这意味着无论这些受限压力自由度的解向量的值是多少，这些行的残差总是为零，如果考虑到CG算法的内部操作，就永远不会对解向量产生任何更新。换句话说，CG算法只是*忽略*这些行，尽管矩阵是单数。这只是因为这些自由度与线性系统的其他部分完全解耦（因为整个行和相应的列都是零）。在求解过程结束时，求解向量中的受限压力值仍然和我们开始调用求解器时一模一样；当我们在CG求解器完成后调用 AffineConstraints::distribute() 时，它们最终被正确的值所覆盖。
+
+这个讨论的结果是，大矩阵的右下角块为零的假设有点简化了，但是仅仅使用它实际上并不会导致任何值得解决的实际问题。
 
 
-<a name="Thetestcase"></a><h3>The testcase</h3>
+<a name="Thetestcase"></a><h3>The testcase</h3> 
 
 
-The domain, right hand side and boundary conditions we implement below relate
-to a problem in geophysics: there, one wants to compute the flow field of
-magma in the earth's interior under a mid-ocean rift. Rifts are places where
-two continental plates are very slowly drifting apart (a few centimeters per
-year at most), leaving a crack in the earth crust that is filled with magma
-from below. Without trying to be entirely realistic, we model this situation
-by solving the following set of equations and boundary conditions on the
-domain $\Omega=[-2,2]\times[0,1]\times[-1,0]$:
-@f{eqnarray*}
+我们下面实现的域、右手边和边界条件与地球物理学中的一个问题有关：在那里，人们想计算大洋中裂缝下地球内部岩浆的流动场。裂缝是两个大陆板块非常缓慢地漂移开来的地方（每年最多几厘米），在地壳上留下一个裂缝，被下面的岩浆填满。在不试图完全现实的情况下，我们通过在域 $\Omega=[-2,2]\times[0,1]\times[-1,0]$ 上解出以下一组方程和边界条件来模拟这种情况：@f{eqnarray*}
+
+
   -2\; \textrm{div}\; \varepsilon(\textbf{u}) + \nabla p &=& 0,
   \\
+
+
   -\textrm{div}\; \textbf{u} &=& 0,
   \\
   \mathbf u &=&   \left(\begin{array}{c}
+
+
     -1 \\ 0 \\0
   \end{array}\right)
   \qquad\qquad \textrm{at}\ z=0, x<0,
@@ -834,1553 +625,1362 @@ domain $\Omega=[-2,2]\times[0,1]\times[-1,0]$:
   \end{array}\right)
   \qquad\qquad \textrm{at}\ z=0, x=0,
 @f}
-and using natural boundary conditions $\textbf{n}\cdot [p \textbf{I} - 2
-\varepsilon(\textbf{u})] = 0$ everywhere else. In other words, at the
-left part of the top surface we prescribe that the fluid moves with the
-continental plate to the left at speed $-1$, that it moves to the right on the
-right part of the top surface, and impose natural flow conditions everywhere
-else. If we are in 2d, the description is essentially the same, with the
-exception that we omit the second component of all vectors stated above.
 
-As will become apparent in the <a href="#Results">results section</a>, the
-flow field will pull material from below and move it to the left and right
-ends of the domain, as expected. The discontinuity of velocity boundary
-conditions will produce a singularity in the pressure at the center of the top
-surface that sucks material all the way to the top surface to fill the gap
-left by the outward motion of material at this location.
+并在其他地方使用自然边界条件 $\textbf{n}\cdot [p \textbf{I} - 2
+\varepsilon(\textbf{u})] = 0$ 。换句话说，在顶面的左边部分，我们规定流体以速度 $-1$ 随大陆板向左移动，在顶面的右边部分向右移动，并在其他地方施加自然流动条件。如果我们在2d中，描述基本上是相同的，例外的是我们省略了上述所有矢量的第二部分。
+
+正如在<a href="#Results">results section</a>中会变得很明显的那样，流场会从下面拉动材料，并将其移动到域的左右两端，这是预期的。速度边界条件的不连续性将在顶面中心产生一个压力奇异点，将材料一直吸到顶面，以填补材料在此位置向外运动留下的空隙。
 
 
-<a name="Implementation"></a><h3>Implementation</h3>
+<a name="Implementation"></a><h3>Implementation</h3> 
 
 
 <a name="UsingimhomogeneousconstraintsforimplementingDirichletboundaryconditions"></a><h4>Using imhomogeneous constraints for implementing Dirichlet boundary conditions</h4>
 
 
-In all the previous tutorial programs, we used the AffineConstraints object merely
-for handling hanging node constraints (with exception of step-11). However,
-the class can also be used to implement Dirichlet boundary conditions, as we
-will show in this program, by fixing some node values $x_i = b_i$. Note that
-these are inhomogeneous constraints, and we have to pay some special
-attention to that. The way we are going to implement this is to first read
-in the boundary values into the AffineConstraints object by using the call
+在之前的所有教程程序中，我们仅仅使用AffineConstraints对象来处理悬挂节点约束（ step-11 除外）。然而，这个类也可以用来实现Dirichlet边界条件，正如我们将在这个程序中展示的那样，通过固定一些节点值 $x_i = b_i$  。注意，这些是不均匀约束，我们要特别注意一下。我们要实现的方式是，首先通过使用调用将边界值读入AffineConstraints对象中 
 
 @code
   VectorTools::interpolate_boundary_values (dof_handler,
                                             1,
                                             BoundaryValues<dim>(),
                                             constraints);
-@endcode
+@endcode 
 
-very similar to how we were making the list of boundary nodes
-before (note that we set Dirichlet conditions only on boundaries with
-boundary flag 1). The actual application of the boundary values is then
-handled by the AffineConstraints object directly, without any additional
-interference.
 
-We could then proceed as before, namely by filling the matrix, and then
-calling a condense function on the constraints object of the form
+
+非常类似于我们之前制作边界节点列表的方式（注意，我们只在边界标志为1的边界上设置Dirichlet条件）。然后边界值的实际应用由AffineConstraints对象直接处理，没有任何额外的干扰。
+
+然后我们可以像以前那样进行，即通过填充矩阵，然后在约束对象上调用一个凝结函数，其形式为 
+
 @code
   constraints.condense (system_matrix, system_rhs);
-@endcode
+@endcode 
 
-Note that we call this on the system matrix and system right hand side
-simultaneously, since resolving inhomogeneous constraints requires knowledge
-about both the matrix entries and the right hand side. For efficiency
-reasons, though, we choose another strategy: all the constraints collected
-in the AffineConstraints object can be resolved on the fly while writing local data
-into the global matrix, by using the call
+
+
+注意，我们在系统矩阵和系统右侧同时调用这个函数，因为解决非均质约束需要对矩阵条目和右侧的知识。但出于效率的考虑，我们选择了另一种策略：在AffineConstraints对象中收集的所有约束可以在将本地数据写入全局矩阵的同时，通过调用来实时解决 
+
 @code
   constraints.distribute_local_to_global (local_matrix, local_rhs,
                                           local_dof_indices,
                                           system_matrix, system_rhs);
-@endcode
+@endcode 
 
-This technique is further discussed in the step-27 tutorial
-program. All we need to know here is that this functions does three things
-at once: it writes the local data into the global matrix and right hand
-side, it distributes the hanging node constraints and additionally
-implements (inhomogeneous) Dirichlet boundary conditions. That's nice, isn't
-it?
 
-We can conclude that the AffineConstraints class provides an alternative to using
-MatrixTools::apply_boundary_values for implementing Dirichlet boundary
-conditions.
+
+这一技术在 step-27 教程程序中进一步讨论。我们在这里需要知道的是，这个函数同时做了三件事：它将本地数据写入全局矩阵和右手边，它分配了悬挂的节点约束，另外还实现了（不均匀的）迪里切特边界条件。这很好，不是吗？
+
+我们可以得出结论，AffineConstraints类提供了一个替代使用 MatrixTools::apply_boundary_values 来实现Dirichlet边界条件的方法。
 
 
 <a name="constraint-matrix">
-<a name="UsingAffineConstraintsforincreasingperformance"></a><h4>Using AffineConstraints for increasing performance</h4>
+<a name="UsingAffineConstraintsforincreasingperformance"></a><a name="UsingAffineConstraintsforincreasingperformance"></a><h4>Using AffineConstraints for increasing performance</h4><h4>Using AffineConstraints for increasing performance</h4>
 
-</a>
 
-Frequently, a sparse matrix contains a substantial amount of elements that
-actually are zero when we are about to start a linear solve. Such elements are
-introduced when we eliminate constraints or implement Dirichlet conditions,
-where we usually delete all entries in constrained rows and columns, i.e., we
-set them to zero. The fraction of elements that are present in the sparsity
-pattern, but do not really contain any information, can be up to one fourth
-of the total number of elements in the matrix for the 3D application
-considered in this tutorial program. Remember that matrix-vector products or
-preconditioners operate on all the elements of a sparse matrix (even those
-that are zero), which is an inefficiency we will avoid here.
+</a> 
 
-An advantage of directly resolving constrained degrees of freedom is that we
-can avoid having most of the entries that are going to be zero in our sparse
-matrix &mdash; we do not need constrained entries during matrix construction
-(as opposed to the traditional algorithms, which first fill the matrix, and
-only resolve constraints afterwards). This will save both memory and time
-when forming matrix-vector products. The way we are going to do that is to
-pass the information about constraints to the function that generates the
-sparsity pattern, and then set a <tt>false</tt> argument specifying that we
-do not intend to use constrained entries:
+通常，稀疏矩阵包含大量的元素，当我们要开始线性求解时，这些元素实际上是零。这样的元素是在我们消除约束条件或实现Dirichlet条件时引入的，我们通常会删除受约束行和列中的所有条目，即把它们设置为零。对于本教程程序中所考虑的三维应用，存在于稀疏模式中但并不真正包含任何信息的那部分元素，可以达到矩阵中元素总数的四分之一。请记住，矩阵-向量乘积或预处理程序对稀疏矩阵的所有元素（甚至那些为零的元素）进行操作，这是我们在这里要避免的低效率。
+
+直接解决约束自由度的一个好处是，我们可以避免在我们的稀疏矩阵中出现大部分要为零的条目&mdash；在矩阵构造过程中我们不需要约束条目（与传统算法相反，传统算法是先填充矩阵，之后才解决约束）。这将在形成矩阵-向量乘积时节省内存和时间。我们要做的是将约束信息传递给生成稀疏模式的函数，然后设置一个<tt>false</tt>参数，指定我们不打算使用约束条目。
+
 @code
   DoFTools::make_sparsity_pattern (dof_handler, sparsity_pattern,
                                    constraints, false);
-@endcode
-This functions obviates, by the way, also the call to the
-<tt>condense()</tt> function on the sparsity pattern.
+@endcode 
+
+顺便说一下，这个函数也避免了对稀疏模式的<tt>condense()</tt>函数的调用。
 
 
 <a name="Performanceoptimizations"></a><h4>Performance optimizations</h4>
 
 
-The program developed below has seen a lot of TLC. We have run it over and
-over under profiling tools (mainly <a
-href="http://www.valgrind.org/">valgrind</a>'s cachegrind and callgrind
-tools, as well as the KDE <a
-href="http://kcachegrind.sourceforge.net/">KCachegrind</a> program for
-visualization) to see where the bottlenecks are. This has paid off: through
-this effort, the program has become about four times as fast when
-considering the runtime of the refinement cycles zero through three,
-reducing the overall number of CPU instructions executed from
-869,574,060,348 to 199,853,005,625. For higher refinement levels, the gain
-is probably even larger since some algorithms that are not ${\cal O}(N)$
-have been eliminated.
+下面开发的程序已经看到了很多的TLC。我们在分析工具（主要是<a
+href="http://www.valgrind.org/">valgrind</a>的cachegrind和callgrind工具，以及用于可视化的KDE<a
+href="http://kcachegrind.sourceforge.net/">KCachegrind</a>程序）下一遍又一遍地运行它，看看瓶颈在哪里。这已经得到了回报：通过这种努力，当考虑到细化周期0到3的运行时间时，程序的速度已经提高了大约4倍，将CPU指令的总体执行数量从869,574,060,348减少到199,853,005,625。对于更高的细化水平，收益可能更大，因为一些不是 ${\cal O}(N)$ 的算法被取消了。
 
-Essentially, there are currently two algorithms in the program that do not
-scale linearly with the number of degrees of freedom: renumbering of degrees
-of freedom (which is ${\cal O}(N \log N)$, and the linear solver (which is
-${\cal O}(N^{4/3})$). As for the first, while reordering degrees of freedom
-may not scale linearly, it is an indispensable part of the overall algorithm
-as it greatly improves the quality of the sparse ILU, easily making up for
-the time spent on computing the renumbering; graphs and timings to
-demonstrate this are shown in the documentation of the DoFRenumbering
-namespace, also underlining the choice of the Cuthill-McKee reordering
-algorithm chosen below.
+基本上，目前程序中有两种算法不随自由度数量的增加而线性扩展：自由度的重新编号（这是 ${\cal O}(N \log N)$ ，和线性求解器（这是 ${\cal O}(N^{4/3})$ ）。至于第一个，虽然自由度的重新排序可能不是线性扩展，但它是整个算法中不可缺少的部分，因为它极大地提高了稀疏ILU的质量，很容易弥补计算重新编号的时间；证明这一点的图表和时间显示在DoFRenumbering命名空间的文档中，也强调了下面选择的Cuthill-McKee重新排序算法。
 
-As for the linear solver: as mentioned above, our implementation here uses a
-Schur complement formulation. This is not necessarily the very best choice
-but demonstrates various important techniques available in deal.II. The
-question of which solver is best is again discussed in the <a
-href="#improved-solver">section on improved solvers in the results part</a>
-of this program, along with code showing alternative solvers and a
-comparison of their results.
+至于线性求解器：如上所述，我们在这里的实现使用了Schur补码公式。这不一定是非常好的选择，但却展示了交易中可用的各种重要技术。关于哪种求解器最好的问题，在本程序的<a
+href="#improved-solver">section on improved solvers in the results part</a>中再次进行了讨论，并附有显示备选求解器的代码和对其结果的比较。
 
-Apart from this, many other algorithms have been tested and improved during
-the creation of this program. For example, in building the sparsity pattern,
-we originally used a (now no longer existing) BlockCompressedSparsityPattern
-object that added one element at a time; however, its data structures were poorly
-adapted for the large numbers of nonzero entries per row created by our
-discretization in 3d, leading to a quadratic behavior. Replacing the internal
-algorithms in deal.II to set many elements at a time, and using a
-BlockCompressedSimpleSparsityPattern (which has, as of early 2015, been in turn
-replaced by BlockDynamicSparsityPattern) as a better adapted data structure,
-removed this bottleneck at the price of a slightly higher memory
-consumption. Likewise, the implementation of the decomposition step in the
-SparseILU class was very inefficient and has been replaced by one that is
-about 10 times faster. Even the vmult function of the SparseILU has been
-improved to save about twenty percent of time. Small improvements were
-applied here and there. Moreover, the AffineConstraints object has been used
-to eliminate a lot of entries in the sparse matrix that are eventually going
-to be zero, see <a href="#constraint-matrix">the section on using advanced
-features of the AffineConstraints class</a>.
+除此以外，在这个程序的创建过程中，许多其他的算法也被测试和改进。例如，在建立稀疏性模式时，我们最初使用了一个BlockCompressedSparsityPattern对象（现在已经不存在了），该对象每次增加一个元素；然而，其数据结构对于我们在3D中离散化所产生的每行大量非零条目来说适应性很差，导致了二次方的行为。替换deal.II中的内部算法，一次设置许多元素，并使用BlockCompressedSimpleSparsityPattern（截至2015年初，它又被BlockDynamicSparsityPattern取代）作为一个更好的适应性数据结构，消除了这个瓶颈，代价是内存消耗略高。同样，SparseILU类中的分解步骤的实现也非常低效，已经被一个快10倍的步骤所取代。甚至SparseILU的vmult函数也得到了改进，节省了大约20%的时间。小的改进在这里和那里被应用。此外，AffineConstraints对象被用来消除稀疏矩阵中很多最终会为零的条目，见<a href="#constraint-matrix">the section on using advanced
+features of the AffineConstraints class</a>。
 
-A profile of how many CPU instructions are spent at the various
-different places in the program during refinement cycles
-zero through three in 3d is shown here:
+这里显示了在3d的细化周期0到3中，在程序的各个不同地方花费了多少CPU指令的概况。
 
-<img src="https://www.dealii.org/images/steps/developer/step-22.profile-3.png" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-22.profile-3.png" alt="">   
 
-As can be seen, at this refinement level approximately three quarters of the
-instruction count is spent on the actual solver (the SparseILU::vmult calls
-on the left, the SparseMatrix::vmult call in the middle for the Schur
-complement solve, and another box representing the multiplications with
-SparseILU and SparseMatrix in the solve for <i>U</i>). About one fifth of
-the instruction count is spent on matrix assembly and sparse ILU computation
-(box in the lower right corner) and the rest on other things. Since floating
-point operations such as in the SparseILU::vmult calls typically take much
-longer than many of the logical operations and table lookups in matrix
-assembly, the fraction of the run time taken up by matrix assembly is
-actually significantly less than the fraction of instructions, as will
-become apparent in the comparison we make in the results section.
+可以看出，在这个细化水平上，大约四分之三的指令数花在实际求解上（左边的 SparseILU::vmult 调用，中间的 SparseMatrix::vmult 调用用于舒尔补数求解，另一个方框代表<i>U</i>求解中与稀疏ILU和稀疏矩阵的乘法）。大约五分之一的指令数用于矩阵装配和稀疏ILU计算（右下角的方框），其余的用于其他方面。由于在 SparseILU::vmult 调用中的浮点运算通常比矩阵装配中的许多逻辑运算和查表要长得多，所以矩阵装配所占的运行时间的比例实际上大大低于指令的比例，这在我们在结果部分的比较中会变得很明显。
 
-For higher refinement levels, the boxes representing the solver as well as
-the blue box at the top right stemming from reordering algorithm are going
-to grow at the expense of the other parts of the program, since they don't
-scale linearly. The fact that at this moderate refinement level (3168 cells
-and 93176 degrees of freedom) the linear solver already makes up about three
-quarters of the instructions is a good sign that most of the algorithms used
-in this program are well-tuned and that major improvements in speeding up
-the program are most likely not to come from hand-optimizing individual
-aspects but by changing solver algorithms. We will address this point in the
-discussion of results below as well.
+对于更高的细化水平，代表求解器的方框以及右上方源于重排算法的蓝色方框将以牺牲程序的其他部分为代价而增长，因为它们不是线性扩展。在这个中等细化水平（3168个单元和93176个自由度），线性求解器已经占了大约四分之三的指令，这是一个很好的迹象，说明这个程序中使用的大多数算法都是经过良好调整的，加快程序速度的主要改进很可能不是来自手工优化的个别方面，而是通过改变求解器的算法。我们将在下面的结果讨论中也讨论这一点。
 
-As a final point, and as a point of reference, the following picture also
-shows how the profile looked at an early stage of optimizing this program:
+最后一点，作为参考，下图也显示了在优化这个程序的早期阶段，配置文件的样子。
 
-<img src="https://www.dealii.org/images/steps/developer/step-22.profile-3.original.png" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-22.profile-3.original.png" alt="">   
 
-As mentioned above, the runtime of this version was about four times as long as
-for the first profile, with the SparseILU decomposition taking up about 30% of
-the instruction count, and operations an early, inefficient version of
-DynamicSparsityPattern about 10%. Both these bottlenecks have since been
-completely removed.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * 
- * <a name="Includefiles"></a> 
- * <h3>Include files</h3>
- * 
+如上所述，这个版本的运行时间大约是第一个配置文件的四倍，其中SparseILU分解占用了大约30%的指令数，而操作早期低效版本的DynamicSparsityPattern大约占10%。这两个瓶颈后来都被完全消除了。<a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * As usual, we start by including some well-known files:
- * 
- * @code
- * #include <deal.II/base/quadrature_lib.h>
- * #include <deal.II/base/logstream.h>
- * #include <deal.II/base/function.h>
- * #include <deal.II/base/utilities.h>
- * 
- * #include <deal.II/lac/block_vector.h>
- * #include <deal.II/lac/full_matrix.h>
- * #include <deal.II/lac/block_sparse_matrix.h>
- * #include <deal.II/lac/solver_cg.h>
- * #include <deal.II/lac/precondition.h>
- * #include <deal.II/lac/affine_constraints.h>
- * 
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/grid_tools.h>
- * #include <deal.II/grid/grid_refinement.h>
- * 
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/dofs/dof_renumbering.h>
- * #include <deal.II/dofs/dof_tools.h>
- * 
- * #include <deal.II/fe/fe_q.h>
- * #include <deal.II/fe/fe_system.h>
- * #include <deal.II/fe/fe_values.h>
- * 
- * #include <deal.II/numerics/vector_tools.h>
- * #include <deal.II/numerics/matrix_tools.h>
- * #include <deal.II/numerics/data_out.h>
- * #include <deal.II/numerics/error_estimator.h>
- * 
- * @endcode
- * 
- * Then we need to include the header file for the sparse direct solver
- * UMFPACK:
- * 
- * @code
- * #include <deal.II/lac/sparse_direct.h>
- * 
- * @endcode
- * 
- * This includes the library for the incomplete LU factorization that will be
- * used as a preconditioner in 3D:
- * 
- * @code
- * #include <deal.II/lac/sparse_ilu.h>
- * 
- * @endcode
- * 
- * This is C++:
- * 
- * @code
- * #include <iostream>
- * #include <fstream>
- * #include <memory>
- * 
- * @endcode
- * 
- * As in all programs, the namespace dealii is included:
- * 
- * @code
- * namespace Step22
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * 
- * <a name="Definingtheinnerpreconditionertype"></a> 
- * <h3>Defining the inner preconditioner type</h3>
- * 
 
- * 
- * As explained in the introduction, we are going to use different
- * preconditioners for two and three space dimensions, respectively. We
- * distinguish between them by the use of the spatial dimension as a
- * template parameter. See step-4 for details on templates. We are not going
- * to create any preconditioner object here, all we do is to create class
- * that holds a local alias determining the preconditioner class so we can
- * write our program in a dimension-independent way.
- * 
- * @code
- *   template <int dim>
- *   struct InnerPreconditioner;
- * 
- * @endcode
- * 
- * In 2D, we are going to use a sparse direct solver as preconditioner:
- * 
- * @code
- *   template <>
- *   struct InnerPreconditioner<2>
- *   {
- *     using type = SparseDirectUMFPACK;
- *   };
- * 
- * @endcode
- * 
- * And the ILU preconditioning in 3D, called by SparseILU:
- * 
- * @code
- *   template <>
- *   struct InnerPreconditioner<3>
- *   {
- *     using type = SparseILU<double>;
- *   };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeStokesProblemcodeclasstemplate"></a> 
- * <h3>The <code>StokesProblem</code> class template</h3>
- * 
+<a name="Includefiles"></a> <h3>Include files</h3>
 
- * 
- * This is an adaptation of step-20, so the main class and the data types
- * are nearly the same as used there. The only difference is that we have an
- * additional member <code>preconditioner_matrix</code>, that is used for
- * preconditioning the Schur complement, and a corresponding sparsity
- * pattern <code>preconditioner_sparsity_pattern</code>. In addition,
- * instead of relying on LinearOperator, we implement our own InverseMatrix
- * class.
- *   
 
- * 
- * In this example we also use adaptive grid refinement, which is handled
- * in analogy to step-6. According to the discussion in the introduction,
- * we are also going to use the AffineConstraints object for implementing
- * Dirichlet boundary conditions. Hence, we change the name
- * <code>hanging_node_constraints</code> into <code>constraints</code>.
- * 
- * @code
- *   template <int dim>
- *   class StokesProblem
- *   {
- *   public:
- *     StokesProblem(const unsigned int degree);
- *     void run();
- * 
- *   private:
- *     void setup_dofs();
- *     void assemble_system();
- *     void solve();
- *     void output_results(const unsigned int refinement_cycle) const;
- *     void refine_mesh();
- * 
- *     const unsigned int degree;
- * 
- *     Triangulation<dim> triangulation;
- *     FESystem<dim>      fe;
- *     DoFHandler<dim>    dof_handler;
- * 
- *     AffineConstraints<double> constraints;
- * 
- *     BlockSparsityPattern      sparsity_pattern;
- *     BlockSparseMatrix<double> system_matrix;
- * 
- *     BlockSparsityPattern      preconditioner_sparsity_pattern;
- *     BlockSparseMatrix<double> preconditioner_matrix;
- * 
- *     BlockVector<double> solution;
- *     BlockVector<double> system_rhs;
- * 
- * @endcode
- * 
- * This one is new: We shall use a so-called shared pointer structure to
- * access the preconditioner. Shared pointers are essentially just a
- * convenient form of pointers. Several shared pointers can point to the
- * same object (just like regular pointers), but when the last shared
- * pointer object to point to a preconditioner object is deleted (for
- * example if a shared pointer object goes out of scope, if the class of
- * which it is a member is destroyed, or if the pointer is assigned a
- * different preconditioner object) then the preconditioner object pointed
- * to is also destroyed. This ensures that we don't have to manually track
- * in how many places a preconditioner object is still referenced, it can
- * never create a memory leak, and can never produce a dangling pointer to
- * an already destroyed object:
- * 
- * @code
- *     std::shared_ptr<typename InnerPreconditioner<dim>::type> A_preconditioner;
- *   };
- * 
- * @endcode
- * 
- * 
- * <a name="Boundaryvaluesandrighthandside"></a> 
- * <h3>Boundary values and right hand side</h3>
- * 
 
- * 
- * As in step-20 and most other example programs, the next task is to define
- * the data for the PDE: For the Stokes problem, we are going to use natural
- * boundary values on parts of the boundary (i.e. homogeneous Neumann-type)
- * for which we won't have to do anything special (the homogeneity implies
- * that the corresponding terms in the weak form are simply zero), and
- * boundary conditions on the velocity (Dirichlet-type) on the rest of the
- * boundary, as described in the introduction.
- *   
 
- * 
- * In order to enforce the Dirichlet boundary values on the velocity, we
- * will use the VectorTools::interpolate_boundary_values function as usual
- * which requires us to write a function object with as many components as
- * the finite element has. In other words, we have to define the function on
- * the $(u,p)$-space, but we are going to filter out the pressure component
- * when interpolating the boundary values.
- * 
+像往常一样，我们首先包括一些著名的文件。
 
- * 
- * The following function object is a representation of the boundary values
- * described in the introduction:
- * 
- * @code
- *   template <int dim>
- *   class BoundaryValues : public Function<dim>
- *   {
- *   public:
- *     BoundaryValues()
- *       : Function<dim>(dim + 1)
- *     {}
- * 
- *     virtual double value(const Point<dim> & p,
- *                          const unsigned int component = 0) const override;
- * 
- *     virtual void vector_value(const Point<dim> &p,
- *                               Vector<double> &  value) const override;
- *   };
- * 
- * 
- *   template <int dim>
- *   double BoundaryValues<dim>::value(const Point<dim> & p,
- *                                     const unsigned int component) const
- *   {
- *     Assert(component < this->n_components,
- *            ExcIndexRange(component, 0, this->n_components));
- * 
- *     if (component == 0)
- *       return (p[0] < 0 ? -1 : (p[0] > 0 ? 1 : 0));
- *     return 0;
- *   }
- * 
- * 
- *   template <int dim>
- *   void BoundaryValues<dim>::vector_value(const Point<dim> &p,
- *                                          Vector<double> &  values) const
- *   {
- *     for (unsigned int c = 0; c < this->n_components; ++c)
- *       values(c) = BoundaryValues<dim>::value(p, c);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * We implement similar functions for the right hand side which for the
- * current example is simply zero:
- * 
- * @code
- *   template <int dim>
- *   class RightHandSide : public Function<dim>
- *   {
- *   public:
- *     RightHandSide()
- *       : Function<dim>(dim + 1)
- *     {}
- * 
- *     virtual double value(const Point<dim> & p,
- *                          const unsigned int component = 0) const override;
- * 
- *     virtual void vector_value(const Point<dim> &p,
- *                               Vector<double> &  value) const override;
- *   };
- * 
- * 
- *   template <int dim>
- *   double RightHandSide<dim>::value(const Point<dim> & /*p*/,
- *                                    const unsigned int /*component*/) const
- *   {
- *     return 0;
- *   }
- * 
- * 
- *   template <int dim>
- *   void RightHandSide<dim>::vector_value(const Point<dim> &p,
- *                                         Vector<double> &  values) const
- *   {
- *     for (unsigned int c = 0; c < this->n_components; ++c)
- *       values(c) = RightHandSide<dim>::value(p, c);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Linearsolversandpreconditioners"></a> 
- * <h3>Linear solvers and preconditioners</h3>
- * 
+@code
+#include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/logstream.h>
+#include <deal.II/base/function.h>
+#include <deal.II/base/utilities.h>
 
- * 
- * The linear solvers and preconditioners are discussed extensively in the
- * introduction. Here, we create the respective objects that will be used.
- * 
 
- * 
- * 
- * <a name="ThecodeInverseMatrixcodeclasstemplate"></a> 
- * <h4>The <code>InverseMatrix</code> class template</h4>
- * The <code>InverseMatrix</code> class represents the data structure for an
- * inverse matrix. Unlike step-20, we implement this with a class instead of
- * the helper function inverse_linear_operator() we will apply this class to
- * different kinds of matrices that will require different preconditioners
- * (in step-20 we only used a non-identity preconditioner for the mass
- * matrix). The types of matrix and preconditioner are passed to this class
- * via template parameters, and matrix and preconditioner objects of these
- * types will then be passed to the constructor when an
- * <code>InverseMatrix</code> object is created. The member function
- * <code>vmult</code> is obtained by solving a linear system:
- * 
- * @code
- *   template <class MatrixType, class PreconditionerType>
- *   class InverseMatrix : public Subscriptor
- *   {
- *   public:
- *     InverseMatrix(const MatrixType &        m,
- *                   const PreconditionerType &preconditioner);
- * 
- *     void vmult(Vector<double> &dst, const Vector<double> &src) const;
- * 
- *   private:
- *     const SmartPointer<const MatrixType>         matrix;
- *     const SmartPointer<const PreconditionerType> preconditioner;
- *   };
- * 
- * 
- *   template <class MatrixType, class PreconditionerType>
- *   InverseMatrix<MatrixType, PreconditionerType>::InverseMatrix(
- *     const MatrixType &        m,
- *     const PreconditionerType &preconditioner)
- *     : matrix(&m)
- *     , preconditioner(&preconditioner)
- *   {}
- * 
- * 
- * @endcode
- * 
- * This is the implementation of the <code>vmult</code> function.
- * 
+#include <deal.II/lac/block_vector.h>
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/block_sparse_matrix.h>
+#include <deal.II/lac/solver_cg.h>
+#include <deal.II/lac/precondition.h>
+#include <deal.II/lac/affine_constraints.h>
 
- * 
- * In this class we use a rather large tolerance for the solver control. The
- * reason for this is that the function is used very frequently, and hence,
- * any additional effort to make the residual in the CG solve smaller makes
- * the solution more expensive. Note that we do not only use this class as a
- * preconditioner for the Schur complement, but also when forming the
- * inverse of the Laplace matrix &ndash; which is hence directly responsible
- * for the accuracy of the solution itself, so we can't choose a too large
- * tolerance, either.
- * 
- * @code
- *   template <class MatrixType, class PreconditionerType>
- *   void InverseMatrix<MatrixType, PreconditionerType>::vmult(
- *     Vector<double> &      dst,
- *     const Vector<double> &src) const
- *   {
- *     SolverControl            solver_control(src.size(), 1e-6 * src.l2_norm());
- *     SolverCG<Vector<double>> cg(solver_control);
- * 
- *     dst = 0;
- * 
- *     cg.solve(*matrix, dst, src, *preconditioner);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeSchurComplementcodeclasstemplate"></a> 
- * <h4>The <code>SchurComplement</code> class template</h4>
- * 
 
- * 
- * This class implements the Schur complement discussed in the introduction.
- * It is in analogy to step-20.  Though, we now call it with a template
- * parameter <code>PreconditionerType</code> in order to access that when
- * specifying the respective type of the inverse matrix class. As a
- * consequence of the definition above, the declaration
- * <code>InverseMatrix</code> now contains the second template parameter for
- * a preconditioner class as above, which affects the
- * <code>SmartPointer</code> object <code>m_inverse</code> as well.
- * 
- * @code
- *   template <class PreconditionerType>
- *   class SchurComplement : public Subscriptor
- *   {
- *   public:
- *     SchurComplement(
- *       const BlockSparseMatrix<double> &system_matrix,
- *       const InverseMatrix<SparseMatrix<double>, PreconditionerType> &A_inverse);
- * 
- *     void vmult(Vector<double> &dst, const Vector<double> &src) const;
- * 
- *   private:
- *     const SmartPointer<const BlockSparseMatrix<double>> system_matrix;
- *     const SmartPointer<
- *       const InverseMatrix<SparseMatrix<double>, PreconditionerType>>
- *       A_inverse;
- * 
- *     mutable Vector<double> tmp1, tmp2;
- *   };
- * 
- * 
- * 
- *   template <class PreconditionerType>
- *   SchurComplement<PreconditionerType>::SchurComplement(
- *     const BlockSparseMatrix<double> &system_matrix,
- *     const InverseMatrix<SparseMatrix<double>, PreconditionerType> &A_inverse)
- *     : system_matrix(&system_matrix)
- *     , A_inverse(&A_inverse)
- *     , tmp1(system_matrix.block(0, 0).m())
- *     , tmp2(system_matrix.block(0, 0).m())
- *   {}
- * 
- * 
- *   template <class PreconditionerType>
- *   void
- *   SchurComplement<PreconditionerType>::vmult(Vector<double> &      dst,
- *                                              const Vector<double> &src) const
- *   {
- *     system_matrix->block(0, 1).vmult(tmp1, src);
- *     A_inverse->vmult(tmp2, tmp1);
- *     system_matrix->block(1, 0).vmult(dst, tmp2);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="StokesProblemclassimplementation"></a> 
- * <h3>StokesProblem class implementation</h3>
- * 
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/grid_tools.h>
+#include <deal.II/grid/grid_refinement.h>
 
- * 
- * 
- * <a name="StokesProblemStokesProblem"></a> 
- * <h4>StokesProblem::StokesProblem</h4>
- * 
 
- * 
- * The constructor of this class looks very similar to the one of
- * step-20. The constructor initializes the variables for the polynomial
- * degree, triangulation, finite element system and the dof handler. The
- * underlying polynomial functions are of order <code>degree+1</code> for
- * the vector-valued velocity components and of order <code>degree</code>
- * for the pressure.  This gives the LBB-stable element pair
- * $Q_{degree+1}^d\times Q_{degree}$, often referred to as the Taylor-Hood
- * element.
- *   
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/dofs/dof_renumbering.h>
+#include <deal.II/dofs/dof_tools.h>
 
- * 
- * Note that we initialize the triangulation with a MeshSmoothing argument,
- * which ensures that the refinement of cells is done in a way that the
- * approximation of the PDE solution remains well-behaved (problems arise if
- * grids are too unstructured), see the documentation of
- * <code>Triangulation::MeshSmoothing</code> for details.
- * 
- * @code
- *   template <int dim>
- *   StokesProblem<dim>::StokesProblem(const unsigned int degree)
- *     : degree(degree)
- *     , triangulation(Triangulation<dim>::maximum_smoothing)
- *     , fe(FE_Q<dim>(degree + 1), dim, FE_Q<dim>(degree), 1)
- *     , dof_handler(triangulation)
- *   {}
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="StokesProblemsetup_dofs"></a> 
- * <h4>StokesProblem::setup_dofs</h4>
- * 
 
- * 
- * Given a mesh, this function associates the degrees of freedom with it and
- * creates the corresponding matrices and vectors. At the beginning it also
- * releases the pointer to the preconditioner object (if the shared pointer
- * pointed at anything at all at this point) since it will definitely not be
- * needed any more after this point and will have to be re-computed after
- * assembling the matrix, and unties the sparse matrices from their sparsity
- * pattern objects.
- *   
+#include <deal.II/fe/fe_q.h>
+#include <deal.II/fe/fe_system.h>
+#include <deal.II/fe/fe_values.h>
 
- * 
- * We then proceed with distributing degrees of freedom and renumbering
- * them: In order to make the ILU preconditioner (in 3D) work efficiently,
- * it is important to enumerate the degrees of freedom in such a way that it
- * reduces the bandwidth of the matrix, or maybe more importantly: in such a
- * way that the ILU is as close as possible to a real LU decomposition. On
- * the other hand, we need to preserve the block structure of velocity and
- * pressure already seen in step-20 and step-21. This is done in two
- * steps: First, all dofs are renumbered to improve the ILU and then we
- * renumber once again by components. Since
- * <code>DoFRenumbering::component_wise</code> does not touch the
- * renumbering within the individual blocks, the basic renumbering from the
- * first step remains. As for how the renumber degrees of freedom to improve
- * the ILU: deal.II has a number of algorithms that attempt to find
- * orderings to improve ILUs, or reduce the bandwidth of matrices, or
- * optimize some other aspect. The DoFRenumbering namespace shows a
- * comparison of the results we obtain with several of these algorithms
- * based on the testcase discussed here in this tutorial program. Here, we
- * will use the traditional Cuthill-McKee algorithm already used in some of
- * the previous tutorial programs.  In the <a href="#improved-ilu">section
- * on improved ILU</a> we're going to discuss this issue in more detail.
- * 
 
- * 
- * There is one more change compared to previous tutorial programs: There is
- * no reason in sorting the <code>dim</code> velocity components
- * individually. In fact, rather than first enumerating all $x$-velocities,
- * then all $y$-velocities, etc, we would like to keep all velocities at the
- * same location together and only separate between velocities (all
- * components) and pressures. By default, this is not what the
- * DoFRenumbering::component_wise function does: it treats each vector
- * component separately; what we have to do is group several components into
- * "blocks" and pass this block structure to that function. Consequently, we
- * allocate a vector <code>block_component</code> with as many elements as
- * there are components and describe all velocity components to correspond
- * to block 0, while the pressure component will form block 1:
- * 
- * @code
- *   template <int dim>
- *   void StokesProblem<dim>::setup_dofs()
- *   {
- *     A_preconditioner.reset();
- *     system_matrix.clear();
- *     preconditioner_matrix.clear();
- * 
- *     dof_handler.distribute_dofs(fe);
- *     DoFRenumbering::Cuthill_McKee(dof_handler);
- * 
- *     std::vector<unsigned int> block_component(dim + 1, 0);
- *     block_component[dim] = 1;
- *     DoFRenumbering::component_wise(dof_handler, block_component);
- * 
- * @endcode
- * 
- * Now comes the implementation of Dirichlet boundary conditions, which
- * should be evident after the discussion in the introduction. All that
- * changed is that the function already appears in the setup functions,
- * whereas we were used to see it in some assembly routine. Further down
- * below where we set up the mesh, we will associate the top boundary
- * where we impose Dirichlet boundary conditions with boundary indicator
- * 1.  We will have to pass this boundary indicator as second argument to
- * the function below interpolating boundary values.  There is one more
- * thing, though.  The function describing the Dirichlet conditions was
- * defined for all components, both velocity and pressure. However, the
- * Dirichlet conditions are to be set for the velocity only.  To this end,
- * we use a ComponentMask that only selects the velocity components. The
- * component mask is obtained from the finite element by specifying the
- * particular components we want. Since we use adaptively refined grids,
- * the affine constraints object needs to be first filled with hanging node
- * constraints generated from the DoF handler. Note the order of the two
- * functions &mdash; we first compute the hanging node constraints, and
- * then insert the boundary values into the constraints object. This makes
- * sure that we respect H<sup>1</sup> conformity on boundaries with
- * hanging nodes (in three space dimensions), where the hanging node needs
- * to dominate the Dirichlet boundary values.
- * 
- * @code
- *     {
- *       constraints.clear();
- * 
- *       FEValuesExtractors::Vector velocities(0);
- *       DoFTools::make_hanging_node_constraints(dof_handler, constraints);
- *       VectorTools::interpolate_boundary_values(dof_handler,
- *                                                1,
- *                                                BoundaryValues<dim>(),
- *                                                constraints,
- *                                                fe.component_mask(velocities));
- *     }
- * 
- *     constraints.close();
- * 
- * @endcode
- * 
- * In analogy to step-20, we count the dofs in the individual components.
- * We could do this in the same way as there, but we want to operate on
- * the block structure we used already for the renumbering: The function
- * <code>DoFTools::count_dofs_per_fe_block</code> does the same as
- * <code>DoFTools::count_dofs_per_fe_component</code>, but now grouped as
- * velocity and pressure block via <code>block_component</code>.
- * 
- * @code
- *     const std::vector<types::global_dof_index> dofs_per_block =
- *       DoFTools::count_dofs_per_fe_block(dof_handler, block_component);
- *     const unsigned int n_u = dofs_per_block[0];
- *     const unsigned int n_p = dofs_per_block[1];
- * 
- *     std::cout << "   Number of active cells: " << triangulation.n_active_cells()
- *               << std::endl
- *               << "   Number of degrees of freedom: " << dof_handler.n_dofs()
- *               << " (" << n_u << '+' << n_p << ')' << std::endl;
- * 
- * @endcode
- * 
- * The next task is to allocate a sparsity pattern for the system matrix we
- * will create and one for the preconditioner matrix. We could do this in
- * the same way as in step-20, i.e. directly build an object of type
- * SparsityPattern through DoFTools::make_sparsity_pattern. However, there
- * is a major reason not to do so:
- * In 3D, the function DoFTools::max_couplings_between_dofs yields a
- * conservative but rather large number for the coupling between the
- * individual dofs, so that the memory initially provided for the creation
- * of the sparsity pattern of the matrix is far too much -- so much actually
- * that the initial sparsity pattern won't even fit into the physical memory
- * of most systems already for moderately-sized 3D problems, see also the
- * discussion in step-18. Instead, we first build temporary objects that use
- * a different data structure that doesn't require allocating more memory
- * than necessary but isn't suitable for use as a basis of SparseMatrix or
- * BlockSparseMatrix objects; in a second step we then copy these objects
- * into objects of type BlockSparsityPattern. This is entirely analogous to
- * what we already did in step-11 and step-18. In particular, we make use of
- * the fact that we will never write into the $(1,1)$ block of the system
- * matrix and that this is the only block to be filled for the
- * preconditioner matrix.
- *     
+#include <deal.II/numerics/vector_tools.h>
+#include <deal.II/numerics/matrix_tools.h>
+#include <deal.II/numerics/data_out.h>
+#include <deal.II/numerics/error_estimator.h>
 
- * 
- * All this is done inside new scopes, which means that the memory of
- * <code>dsp</code> will be released once the information has been copied to
- * <code>sparsity_pattern</code>.
- * 
- * @code
- *     {
- *       BlockDynamicSparsityPattern dsp(2, 2);
- * 
- *       dsp.block(0, 0).reinit(n_u, n_u);
- *       dsp.block(1, 0).reinit(n_p, n_u);
- *       dsp.block(0, 1).reinit(n_u, n_p);
- *       dsp.block(1, 1).reinit(n_p, n_p);
- * 
- *       dsp.collect_sizes();
- * 
- *       Table<2, DoFTools::Coupling> coupling(dim + 1, dim + 1);
- * 
- *       for (unsigned int c = 0; c < dim + 1; ++c)
- *         for (unsigned int d = 0; d < dim + 1; ++d)
- *           if (!((c == dim) && (d == dim)))
- *             coupling[c][d] = DoFTools::always;
- *           else
- *             coupling[c][d] = DoFTools::none;
- * 
- *       DoFTools::make_sparsity_pattern(
- *         dof_handler, coupling, dsp, constraints, false);
- * 
- *       sparsity_pattern.copy_from(dsp);
- *     }
- * 
- *     {
- *       BlockDynamicSparsityPattern preconditioner_dsp(2, 2);
- * 
- *       preconditioner_dsp.block(0, 0).reinit(n_u, n_u);
- *       preconditioner_dsp.block(1, 0).reinit(n_p, n_u);
- *       preconditioner_dsp.block(0, 1).reinit(n_u, n_p);
- *       preconditioner_dsp.block(1, 1).reinit(n_p, n_p);
- * 
- *       preconditioner_dsp.collect_sizes();
- * 
- *       Table<2, DoFTools::Coupling> preconditioner_coupling(dim + 1, dim + 1);
- * 
- *       for (unsigned int c = 0; c < dim + 1; ++c)
- *         for (unsigned int d = 0; d < dim + 1; ++d)
- *           if (((c == dim) && (d == dim)))
- *             preconditioner_coupling[c][d] = DoFTools::always;
- *           else
- *             preconditioner_coupling[c][d] = DoFTools::none;
- * 
- *       DoFTools::make_sparsity_pattern(dof_handler,
- *                                       preconditioner_coupling,
- *                                       preconditioner_dsp,
- *                                       constraints,
- *                                       false);
- * 
- *       preconditioner_sparsity_pattern.copy_from(preconditioner_dsp);
- *     }
- * 
- * @endcode
- * 
- * Finally, the system matrix, the preconsitioner matrix, the solution and
- * the right hand side vector are created from the block structure similar
- * to the approach in step-20:
- * 
- * @code
- *     system_matrix.reinit(sparsity_pattern);
- *     preconditioner_matrix.reinit(preconditioner_sparsity_pattern);
- * 
- *     solution.reinit(2);
- *     solution.block(0).reinit(n_u);
- *     solution.block(1).reinit(n_p);
- *     solution.collect_sizes();
- * 
- *     system_rhs.reinit(2);
- *     system_rhs.block(0).reinit(n_u);
- *     system_rhs.block(1).reinit(n_p);
- *     system_rhs.collect_sizes();
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="StokesProblemassemble_system"></a> 
- * <h4>StokesProblem::assemble_system</h4>
- * 
 
- * 
- * The assembly process follows the discussion in step-20 and in the
- * introduction. We use the well-known abbreviations for the data structures
- * that hold the local matrices, right hand side, and global numbering of the
- * degrees of freedom for the present cell.
- * 
- * @code
- *   template <int dim>
- *   void StokesProblem<dim>::assemble_system()
- *   {
- *     system_matrix         = 0;
- *     system_rhs            = 0;
- *     preconditioner_matrix = 0;
- * 
- *     QGauss<dim> quadrature_formula(degree + 2);
- * 
- *     FEValues<dim> fe_values(fe,
- *                             quadrature_formula,
- *                             update_values | update_quadrature_points |
- *                               update_JxW_values | update_gradients);
- * 
- *     const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
- * 
- *     const unsigned int n_q_points = quadrature_formula.size();
- * 
- *     FullMatrix<double> local_matrix(dofs_per_cell, dofs_per_cell);
- *     FullMatrix<double> local_preconditioner_matrix(dofs_per_cell,
- *                                                    dofs_per_cell);
- *     Vector<double>     local_rhs(dofs_per_cell);
- * 
- *     std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
- * 
- *     const RightHandSide<dim>    right_hand_side;
- *     std::vector<Vector<double>> rhs_values(n_q_points, Vector<double>(dim + 1));
- * 
- * @endcode
- * 
- * Next, we need two objects that work as extractors for the FEValues
- * object. Their use is explained in detail in the report on @ref
- * vector_valued :
- * 
- * @code
- *     const FEValuesExtractors::Vector velocities(0);
- *     const FEValuesExtractors::Scalar pressure(dim);
- * 
- * @endcode
- * 
- * As an extension over step-20 and step-21, we include a few optimizations
- * that make assembly much faster for this particular problem. The
- * improvements are based on the observation that we do a few calculations
- * too many times when we do as in step-20: The symmetric gradient actually
- * has <code>dofs_per_cell</code> different values per quadrature point, but
- * we extract it <code>dofs_per_cell*dofs_per_cell</code> times from the
- * FEValues object - for both the loop over <code>i</code> and the inner
- * loop over <code>j</code>. In 3d, that means evaluating it $89^2=7921$
- * instead of $89$ times, a not insignificant difference.
- *     
+@endcode 
 
- * 
- * So what we're going to do here is to avoid such repeated calculations
- * by getting a vector of rank-2 tensors (and similarly for the divergence
- * and the basis function value on pressure) at the quadrature point prior
- * to starting the loop over the dofs on the cell. First, we create the
- * respective objects that will hold these values. Then, we start the loop
- * over all cells and the loop over the quadrature points, where we first
- * extract these values. There is one more optimization we implement here:
- * the local matrix (as well as the global one) is going to be symmetric,
- * since all the operations involved are symmetric with respect to $i$ and
- * $j$. This is implemented by simply running the inner loop not to
- * <code>dofs_per_cell</code>, but only up to <code>i</code>, the index of
- * the outer loop.
- * 
- * @code
- *     std::vector<SymmetricTensor<2, dim>> symgrad_phi_u(dofs_per_cell);
- *     std::vector<double>                  div_phi_u(dofs_per_cell);
- *     std::vector<double>                  phi_p(dofs_per_cell);
- * 
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       {
- *         fe_values.reinit(cell);
- *         local_matrix                = 0;
- *         local_preconditioner_matrix = 0;
- *         local_rhs                   = 0;
- * 
- *         right_hand_side.vector_value_list(fe_values.get_quadrature_points(),
- *                                           rhs_values);
- * 
- *         for (unsigned int q = 0; q < n_q_points; ++q)
- *           {
- *             for (unsigned int k = 0; k < dofs_per_cell; ++k)
- *               {
- *                 symgrad_phi_u[k] =
- *                   fe_values[velocities].symmetric_gradient(k, q);
- *                 div_phi_u[k] = fe_values[velocities].divergence(k, q);
- *                 phi_p[k]     = fe_values[pressure].value(k, q);
- *               }
- * 
- * @endcode
- * 
- * Now finally for the bilinear forms of both the system matrix and
- * the matrix we use for the preconditioner. Recall that the
- * formulas for these two are
- * @f{align*}{
- * A_{ij} &= a(\varphi_i,\varphi_j)
- * \\     &= \underbrace{2(\varepsilon(\varphi_{i,\textbf{u}}),
- * \varepsilon(\varphi_{j,\textbf{u}}))_{\Omega}}
- * _{(1)}
- * \;
- * \underbrace{- (\textrm{div}\; \varphi_{i,\textbf{u}},
- * \varphi_{j,p})_{\Omega}}
- * _{(2)}
- * \;
- * \underbrace{- (\varphi_{i,p},
- * \textrm{div}\;
- * \varphi_{j,\textbf{u}})_{\Omega}}
- * _{(3)}
- * @f}
- * and
- * @f{align*}{
- * M_{ij} &= \underbrace{(\varphi_{i,p},
- * \varphi_{j,p})_{\Omega}}
- * _{(4)},
- * @f}
- * respectively, where $\varphi_{i,\textbf{u}}$ and $\varphi_{i,p}$
- * are the velocity and pressure components of the $i$th shape
- * function. The various terms above are then easily recognized in
- * the following implementation:
- * 
- * @code
- *             for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *               {
- *                 for (unsigned int j = 0; j <= i; ++j)
- *                   {
- *                     local_matrix(i, j) +=
- *                       (2 * (symgrad_phi_u[i] * symgrad_phi_u[j]) // (1)
- *                        - div_phi_u[i] * phi_p[j]                 // (2)
- *                        - phi_p[i] * div_phi_u[j])                // (3)
- *                       * fe_values.JxW(q);                        // * dx
- * 
- *                     local_preconditioner_matrix(i, j) +=
- *                       (phi_p[i] * phi_p[j]) // (4)
- *                       * fe_values.JxW(q);   // * dx
- *                   }
- * @endcode
- * 
- * Note that in the implementation of (1) above, `operator*`
- * is overloaded for symmetric tensors, yielding the scalar
- * product between the two tensors.
- *                 
 
- * 
- * For the right-hand side we use the fact that the shape
- * functions are only non-zero in one component (because our
- * elements are primitive).  Instead of multiplying the tensor
- * representing the dim+1 values of shape function i with the
- * whole right-hand side vector, we only look at the only
- * non-zero component. The function
- * FiniteElement::system_to_component_index will return
- * which component this shape function lives in (0=x velocity,
- * 1=y velocity, 2=pressure in 2d), which we use to pick out
- * the correct component of the right-hand side vector to
- * multiply with.
- * 
- * @code
- *                 const unsigned int component_i =
- *                   fe.system_to_component_index(i).first;
- *                 local_rhs(i) += (fe_values.shape_value(i, q)   // (phi_u_i(x_q)
- *                                  * rhs_values[q](component_i)) // * f(x_q))
- *                                 * fe_values.JxW(q);            // * dx
- *               }
- *           }
- * 
- * @endcode
- * 
- * Before we can write the local data into the global matrix (and
- * simultaneously use the AffineConstraints object to apply
- * Dirichlet boundary conditions and eliminate hanging node constraints,
- * as we discussed in the introduction), we have to be careful about one
- * thing, though. We have only built half of the local matrices
- * because of symmetry, but we're going to save the full matrices
- * in order to use the standard functions for solving. This is done
- * by flipping the indices in case we are pointing into the empty part
- * of the local matrices.
- * 
- * @code
- *         for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *           for (unsigned int j = i + 1; j < dofs_per_cell; ++j)
- *             {
- *               local_matrix(i, j) = local_matrix(j, i);
- *               local_preconditioner_matrix(i, j) =
- *                 local_preconditioner_matrix(j, i);
- *             }
- * 
- *         cell->get_dof_indices(local_dof_indices);
- *         constraints.distribute_local_to_global(local_matrix,
- *                                                local_rhs,
- *                                                local_dof_indices,
- *                                                system_matrix,
- *                                                system_rhs);
- *         constraints.distribute_local_to_global(local_preconditioner_matrix,
- *                                                local_dof_indices,
- *                                                preconditioner_matrix);
- *       }
- * 
- * @endcode
- * 
- * Before we're going to solve this linear system, we generate a
- * preconditioner for the velocity-velocity matrix, i.e.,
- * <code>block(0,0)</code> in the system matrix. As mentioned above, this
- * depends on the spatial dimension. Since the two classes described by
- * the <code>InnerPreconditioner::type</code> alias have the same
- * interface, we do not have to do anything different whether we want to
- * use a sparse direct solver or an ILU:
- * 
- * @code
- *     std::cout << "   Computing preconditioner..." << std::endl << std::flush;
- * 
- *     A_preconditioner =
- *       std::make_shared<typename InnerPreconditioner<dim>::type>();
- *     A_preconditioner->initialize(
- *       system_matrix.block(0, 0),
- *       typename InnerPreconditioner<dim>::type::AdditionalData());
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="StokesProblemsolve"></a> 
- * <h4>StokesProblem::solve</h4>
- * 
 
- * 
- * After the discussion in the introduction and the definition of the
- * respective classes above, the implementation of the <code>solve</code>
- * function is rather straight-forward and done in a similar way as in
- * step-20. To start with, we need an object of the
- * <code>InverseMatrix</code> class that represents the inverse of the
- * matrix A. As described in the introduction, the inverse is generated with
- * the help of an inner preconditioner of type
- * <code>InnerPreconditioner::type</code>.
- * 
- * @code
- *   template <int dim>
- *   void StokesProblem<dim>::solve()
- *   {
- *     const InverseMatrix<SparseMatrix<double>,
- *                         typename InnerPreconditioner<dim>::type>
- *                    A_inverse(system_matrix.block(0, 0), *A_preconditioner);
- *     Vector<double> tmp(solution.block(0).size());
- * 
- * @endcode
- * 
- * This is as in step-20. We generate the right hand side $B A^{-1} F - G$
- * for the Schur complement and an object that represents the respective
- * linear operation $B A^{-1} B^T$, now with a template parameter
- * indicating the preconditioner - in accordance with the definition of
- * the class.
- * 
- * @code
- *     {
- *       Vector<double> schur_rhs(solution.block(1).size());
- *       A_inverse.vmult(tmp, system_rhs.block(0));
- *       system_matrix.block(1, 0).vmult(schur_rhs, tmp);
- *       schur_rhs -= system_rhs.block(1);
- * 
- *       SchurComplement<typename InnerPreconditioner<dim>::type> schur_complement(
- *         system_matrix, A_inverse);
- * 
- * @endcode
- * 
- * The usual control structures for the solver call are created...
- * 
- * @code
- *       SolverControl            solver_control(solution.block(1).size(),
- *                                    1e-6 * schur_rhs.l2_norm());
- *       SolverCG<Vector<double>> cg(solver_control);
- * 
- * @endcode
- * 
- * Now to the preconditioner to the Schur complement. As explained in
- * the introduction, the preconditioning is done by a mass matrix in the
- * pressure variable.
- *       
+然后我们需要包括稀疏直接求解器UMFPACK的头文件。
 
- * 
- * Actually, the solver needs to have the preconditioner in the form
- * $P^{-1}$, so we need to create an inverse operation. Once again, we
- * use an object of the class <code>InverseMatrix</code>, which
- * implements the <code>vmult</code> operation that is needed by the
- * solver.  In this case, we have to invert the pressure mass matrix. As
- * it already turned out in earlier tutorial programs, the inversion of
- * a mass matrix is a rather cheap and straight-forward operation
- * (compared to, e.g., a Laplace matrix). The CG method with ILU
- * preconditioning converges in 5-10 steps, independently on the mesh
- * size.  This is precisely what we do here: We choose another ILU
- * preconditioner and take it along to the InverseMatrix object via the
- * corresponding template parameter.  A CG solver is then called within
- * the vmult operation of the inverse matrix.
- *       
+@code
+#include <deal.II/lac/sparse_direct.h>
 
- * 
- * An alternative that is cheaper to build, but needs more iterations
- * afterwards, would be to choose a SSOR preconditioner with factor
- * 1.2. It needs about twice the number of iterations, but the costs for
- * its generation are almost negligible.
- * 
- * @code
- *       SparseILU<double> preconditioner;
- *       preconditioner.initialize(preconditioner_matrix.block(1, 1),
- *                                 SparseILU<double>::AdditionalData());
- * 
- *       InverseMatrix<SparseMatrix<double>, SparseILU<double>> m_inverse(
- *         preconditioner_matrix.block(1, 1), preconditioner);
- * 
- * @endcode
- * 
- * With the Schur complement and an efficient preconditioner at hand, we
- * can solve the respective equation for the pressure (i.e. block 0 in
- * the solution vector) in the usual way:
- * 
- * @code
- *       cg.solve(schur_complement, solution.block(1), schur_rhs, m_inverse);
- * 
- * @endcode
- * 
- * After this first solution step, the hanging node constraints have to
- * be distributed to the solution in order to achieve a consistent
- * pressure field.
- * 
- * @code
- *       constraints.distribute(solution);
- * 
- *       std::cout << "  " << solver_control.last_step()
- *                 << " outer CG Schur complement iterations for pressure"
- *                 << std::endl;
- *     }
- * 
- * @endcode
- * 
- * As in step-20, we finally need to solve for the velocity equation where
- * we plug in the solution to the pressure equation. This involves only
- * objects we already know - so we simply multiply $p$ by $B^T$, subtract
- * the right hand side and multiply by the inverse of $A$. At the end, we
- * need to distribute the constraints from hanging nodes in order to
- * obtain a consistent flow field:
- * 
- * @code
- *     {
- *       system_matrix.block(0, 1).vmult(tmp, solution.block(1));
- *       tmp *= -1;
- *       tmp += system_rhs.block(0);
- * 
- *       A_inverse.vmult(solution.block(0), tmp);
- * 
- *       constraints.distribute(solution);
- *     }
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="StokesProblemoutput_results"></a> 
- * <h4>StokesProblem::output_results</h4>
- * 
 
- * 
- * The next function generates graphical output. In this example, we are
- * going to use the VTK file format.  We attach names to the individual
- * variables in the problem: <code>velocity</code> to the <code>dim</code>
- * components of velocity and <code>pressure</code> to the pressure.
- *   
+@endcode 
 
- * 
- * Not all visualization programs have the ability to group individual
- * vector components into a vector to provide vector plots; in particular,
- * this holds for some VTK-based visualization programs. In this case, the
- * logical grouping of components into vectors should already be described
- * in the file containing the data. In other words, what we need to do is
- * provide our output writers with a way to know which of the components of
- * the finite element logically form a vector (with $d$ components in $d$
- * space dimensions) rather than letting them assume that we simply have a
- * bunch of scalar fields.  This is achieved using the members of the
- * <code>DataComponentInterpretation</code> namespace: as with the filename,
- * we create a vector in which the first <code>dim</code> components refer
- * to the velocities and are given the tag
- * DataComponentInterpretation::component_is_part_of_vector; we
- * finally push one tag
- * DataComponentInterpretation::component_is_scalar to describe
- * the grouping of the pressure variable.
- * 
 
- * 
- * The rest of the function is then the same as in step-20.
- * 
- * @code
- *   template <int dim>
- *   void
- *   StokesProblem<dim>::output_results(const unsigned int refinement_cycle) const
- *   {
- *     std::vector<std::string> solution_names(dim, "velocity");
- *     solution_names.emplace_back("pressure");
- * 
- *     std::vector<DataComponentInterpretation::DataComponentInterpretation>
- *       data_component_interpretation(
- *         dim, DataComponentInterpretation::component_is_part_of_vector);
- *     data_component_interpretation.push_back(
- *       DataComponentInterpretation::component_is_scalar);
- * 
- *     DataOut<dim> data_out;
- *     data_out.attach_dof_handler(dof_handler);
- *     data_out.add_data_vector(solution,
- *                              solution_names,
- *                              DataOut<dim>::type_dof_data,
- *                              data_component_interpretation);
- *     data_out.build_patches();
- * 
- *     std::ofstream output(
- *       "solution-" + Utilities::int_to_string(refinement_cycle, 2) + ".vtk");
- *     data_out.write_vtk(output);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="StokesProblemrefine_mesh"></a> 
- * <h4>StokesProblem::refine_mesh</h4>
- * 
 
- * 
- * This is the last interesting function of the <code>StokesProblem</code>
- * class.  As indicated by its name, it takes the solution to the problem
- * and refines the mesh where this is needed. The procedure is the same as
- * in the respective step in step-6, with the exception that we base the
- * refinement only on the change in pressure, i.e., we call the Kelly error
- * estimator with a mask object of type ComponentMask that selects the
- * single scalar component for the pressure that we are interested in (we
- * get such a mask from the finite element class by specifying the component
- * we want). Additionally, we do not coarsen the grid again:
- * 
- * @code
- *   template <int dim>
- *   void StokesProblem<dim>::refine_mesh()
- *   {
- *     Vector<float> estimated_error_per_cell(triangulation.n_active_cells());
- * 
- *     FEValuesExtractors::Scalar pressure(dim);
- *     KellyErrorEstimator<dim>::estimate(
- *       dof_handler,
- *       QGauss<dim - 1>(degree + 1),
- *       std::map<types::boundary_id, const Function<dim> *>(),
- *       solution,
- *       estimated_error_per_cell,
- *       fe.component_mask(pressure));
- * 
- *     GridRefinement::refine_and_coarsen_fixed_number(triangulation,
- *                                                     estimated_error_per_cell,
- *                                                     0.3,
- *                                                     0.0);
- *     triangulation.execute_coarsening_and_refinement();
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="StokesProblemrun"></a> 
- * <h4>StokesProblem::run</h4>
- * 
+这包括用于不完全LU因子化的库，它将被用作3D的预处理程序。
 
- * 
- * The last step in the Stokes class is, as usual, the function that
- * generates the initial grid and calls the other functions in the
- * respective order.
- *   
+@code
+#include <deal.II/lac/sparse_ilu.h>
 
- * 
- * We start off with a rectangle of size $4 \times 1$ (in 2d) or $4 \times 1
- * \times 1$ (in 3d), placed in $R^2/R^3$ as $(-2,2)\times(-1,0)$ or
- * $(-2,2)\times(0,1)\times(-1,0)$, respectively. It is natural to start
- * with equal mesh size in each direction, so we subdivide the initial
- * rectangle four times in the first coordinate direction. To limit the
- * scope of the variables involved in the creation of the mesh to the range
- * where we actually need them, we put the entire block between a pair of
- * braces:
- * 
- * @code
- *   template <int dim>
- *   void StokesProblem<dim>::run()
- *   {
- *     {
- *       std::vector<unsigned int> subdivisions(dim, 1);
- *       subdivisions[0] = 4;
- * 
- *       const Point<dim> bottom_left = (dim == 2 ?                
- *                                         Point<dim>(-2, -1) :    // 2d case
- *                                         Point<dim>(-2, 0, -1)); // 3d case
- * 
- *       const Point<dim> top_right = (dim == 2 ?              
- *                                       Point<dim>(2, 0) :    // 2d case
- *                                       Point<dim>(2, 1, 0)); // 3d case
- * 
- *       GridGenerator::subdivided_hyper_rectangle(triangulation,
- *                                                 subdivisions,
- *                                                 bottom_left,
- *                                                 top_right);
- *     }
- * 
- * @endcode
- * 
- * A boundary indicator of 1 is set to all boundaries that are subject to
- * Dirichlet boundary conditions, i.e.  to faces that are located at 0 in
- * the last coordinate direction. See the example description above for
- * details.
- * 
- * @code
- *     for (const auto &cell : triangulation.active_cell_iterators())
- *       for (const auto &face : cell->face_iterators())
- *         if (face->center()[dim - 1] == 0)
- *           face->set_all_boundary_ids(1);
- * 
- * 
- * @endcode
- * 
- * We then apply an initial refinement before solving for the first
- * time. In 3D, there are going to be more degrees of freedom, so we
- * refine less there:
- * 
- * @code
- *     triangulation.refine_global(4 - dim);
- * 
- * @endcode
- * 
- * As first seen in step-6, we cycle over the different refinement levels
- * and refine (except for the first cycle), setup the degrees of freedom
- * and matrices, assemble, solve and create output:
- * 
- * @code
- *     for (unsigned int refinement_cycle = 0; refinement_cycle < 6;
- *          ++refinement_cycle)
- *       {
- *         std::cout << "Refinement cycle " << refinement_cycle << std::endl;
- * 
- *         if (refinement_cycle > 0)
- *           refine_mesh();
- * 
- *         setup_dofs();
- * 
- *         std::cout << "   Assembling..." << std::endl << std::flush;
- *         assemble_system();
- * 
- *         std::cout << "   Solving..." << std::flush;
- *         solve();
- * 
- *         output_results(refinement_cycle);
- * 
- *         std::cout << std::endl;
- *       }
- *   }
- * } // namespace Step22
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Thecodemaincodefunction"></a> 
- * <h3>The <code>main</code> function</h3>
- * 
 
- * 
- * The main function is the same as in step-20. We pass the element degree as
- * a parameter and choose the space dimension at the well-known template slot.
- * 
- * @code
- * int main()
- * {
- *   try
- *     {
- *       using namespace Step22;
- * 
- *       StokesProblem<2> flow_problem(1);
- *       flow_problem.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- * 
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
-<a name="Results"></a>
-<a name="Results"></a><h1>Results</h1>
+@endcode 
+
+
+
+这就是C++。
+
+@code
+#include <iostream>
+#include <fstream>
+#include <memory>
+
+
+@endcode 
+
+
+
+如同在所有的程序中一样，包括了命名空间dealii。
+
+@code
+namespace Step22
+{
+  using namespace dealii;
+
+
+@endcode 
+
+
+
+
+<a name="Definingtheinnerpreconditionertype"></a> <h3>Defining the inner preconditioner type</h3> 
+
+
+
+
+正如介绍中所解释的，我们将分别对二维和三维空间使用不同的预处理程序。我们通过使用空间维度作为模板参数来区分它们。关于模板的细节见 step-4 。我们不打算在这里创建任何预处理对象，我们所做的只是创建一个持有确定预处理类的本地别名的类，这样我们就可以以独立于维度的方式来编写我们的程序。
+
+@code
+  template <int dim>
+  struct InnerPreconditioner;
+
+
+@endcode 
+
+
+
+在二维中，我们将使用一个稀疏的直接求解器作为预处理。
+
+@code
+  template <>
+  struct InnerPreconditioner<2>
+  {
+    using type = SparseDirectUMFPACK;
+  };
+
+
+@endcode 
+
+
+
+而三维中的ILU预处理，由SparseILU调用。
+
+@code
+  template <>
+  struct InnerPreconditioner<3>
+  {
+    using type = SparseILU<double>;
+  };
+
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeStokesProblemcodeclasstemplate"></a> <h3>The <code>StokesProblem</code> class template</h3>
+
+
+
+
+这是对 step-20 的改编，所以主类和数据类型与那里使用的几乎相同。唯一不同的是，我们有一个额外的成员  <code>preconditioner_matrix</code>  ，用于预处理Schur补码，以及相应的稀疏模式  <code>preconditioner_sparsity_pattern</code>  。此外，我们没有依赖LinearOperator，而是实现了我们自己的InverseMatrix类。   
+
+
+在这个例子中，我们还使用了自适应网格细化，其处理方式与  step-6  类似。根据介绍中的讨论，我们也将使用AffineConstraints对象来实现Dirichlet边界条件。因此，我们改变了  <code>hanging_node_constraints</code> into <code>constraints</code>  的名称。
+
+@code
+  template <int dim>
+  class StokesProblem
+  {
+  public:
+    StokesProblem(const unsigned int degree);
+    void run();
+
+
+  private:
+    void setup_dofs();
+    void assemble_system();
+    void solve();
+    void output_results(const unsigned int refinement_cycle) const;
+    void refine_mesh();
+
+
+    const unsigned int degree;
+
+
+    Triangulation<dim> triangulation;
+    FESystem<dim>      fe;
+    DoFHandler<dim>    dof_handler;
+
+
+    AffineConstraints<double> constraints;
+
+
+    BlockSparsityPattern      sparsity_pattern;
+    BlockSparseMatrix<double> system_matrix;
+
+
+    BlockSparsityPattern      preconditioner_sparsity_pattern;
+    BlockSparseMatrix<double> preconditioner_matrix;
+
+
+    BlockVector<double> solution;
+    BlockVector<double> system_rhs;
+
+
+@endcode 
+
+
+
+这一条是新的：我们将使用一个所谓的共享指针结构来访问预处理程序。共享指针本质上只是指针的一种方便形式。几个共享指针可以指向同一个对象（就像普通的指针一样），但是当最后一个指向前提器对象的共享指针对象被删除时（例如共享指针对象超出范围，它所在的类被销毁，或者指针被分配给不同的前提器对象），那么指向的前提器对象也被销毁。这确保了我们不必手动跟踪一个预设条件器对象在多少地方仍被引用，它永远不会产生内存泄漏，也不会产生一个指向已被销毁对象的悬空指针。
+
+@code
+    std::shared_ptr<typename InnerPreconditioner<dim>::type> A_preconditioner;
+  };
+
+
+@endcode 
+
+
+
+
+<a name="Boundaryvaluesandrighthandside"></a> <h3>Boundary values and right hand side</h3>
+
+
+
+
+正如在 step-20 和其他大多数例子程序中一样，下一个任务是定义PDE的数据：对于斯托克斯问题，我们将在边界的一部分使用自然边界值（即同质诺伊曼型），对此我们不必做任何特殊处理（同质性意味着弱形式中的相应项只是零），而在边界的其余部分使用速度的边界条件（狄里克型），如介绍中所述。   
+
+
+为了强制执行速度上的Dirichlet边界值，我们将像往常一样使用 VectorTools::interpolate_boundary_values 函数，这要求我们写一个具有与有限元一样多分量的函数对象。换句话说，我们必须在 $(u,p)$ -空间上定义函数，但我们在插值边界值时要过滤掉压力分量。
+
+
+
+
+下面的函数对象是介绍中描述的边界值的表示。
+
+@code
+  template <int dim>
+  class BoundaryValues : public Function<dim>
+  {
+  public:
+    BoundaryValues()
+      : Function<dim>(dim + 1)
+    {}
+
+
+    virtual double value(const Point<dim> & p,
+                         const unsigned int component = 0) const override;
+
+
+    virtual void vector_value(const Point<dim> &p,
+                              Vector<double> &  value) const override;
+  };
+
+
+
+  template <int dim>
+  double BoundaryValues<dim>::value(const Point<dim> & p,
+                                    const unsigned int component) const
+  {
+    Assert(component < this->n_components,
+           ExcIndexRange(component, 0, this->n_components));
+
+
+    if (component == 0)
+      return (p[0] < 0 ? -1 : (p[0] > 0 ? 1 : 0));
+    return 0;
+  }
+
+
+
+  template <int dim>
+  void BoundaryValues<dim>::vector_value(const Point<dim> &p,
+                                         Vector<double> &  values) const
+  {
+    for (unsigned int c = 0; c < this->n_components; ++c)
+      values(c) = BoundaryValues<dim>::value(p, c);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+我们为右手边实现类似的函数，对于目前的例子来说，右手边只是简单的零。
+
+@code
+  template <int dim>
+  class RightHandSide : public Function<dim>
+  {
+  public:
+    RightHandSide()
+      : Function<dim>(dim + 1)
+    {}
+
+
+    virtual double value(const Point<dim> & p,
+                         const unsigned int component = 0) const override;
+
+
+    virtual void vector_value(const Point<dim> &p,
+                              Vector<double> &  value) const override;
+  };
+
+
+
+  template <int dim>
+  double RightHandSide<dim>::value(const Point<dim> & /*p*/,
+                                   const unsigned int /*component*/) const
+  {
+    return 0;
+  }
+
+
+
+  template <int dim>
+  void RightHandSide<dim>::vector_value(const Point<dim> &p,
+                                        Vector<double> &  values) const
+  {
+    for (unsigned int c = 0; c < this->n_components; ++c)
+      values(c) = RightHandSide<dim>::value(p, c);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="Linearsolversandpreconditioners"></a> <h3>Linear solvers and preconditioners</h3>
+
+
+
+
+介绍中对线性求解器和预处理器进行了广泛的讨论。在这里，我们创建将被使用的各自对象。
+
+
+
+
+
+<a name="ThecodeInverseMatrixcodeclasstemplate"></a> <h4>The <code>InverseMatrix</code> class template</h4>  <code>InverseMatrix</code> 类表示逆矩阵的数据结构。与 step-20 不同，我们用一个类来实现，而不是用辅助函数inverse_linear_operator()，我们将把这个类应用于不同种类的矩阵，这些矩阵需要不同的预处理（在 step-20 中，我们只对质量矩阵使用非同一性预处理）。矩阵和预处理器的类型通过模板参数传递给这个类，当创建 <code>InverseMatrix</code> 对象时，这些类型的矩阵和预处理器对象将被传递给构造函数。成员函数 <code>vmult</code> 是通过解决一个线性系统得到的。
+
+@code
+  template <class MatrixType, class PreconditionerType>
+  class InverseMatrix : public Subscriptor
+  {
+  public:
+    InverseMatrix(const MatrixType &        m,
+                  const PreconditionerType &preconditioner);
+
+
+    void vmult(Vector<double> &dst, const Vector<double> &src) const;
+
+
+  private:
+    const SmartPointer<const MatrixType>         matrix;
+    const SmartPointer<const PreconditionerType> preconditioner;
+  };
+
+
+
+  template <class MatrixType, class PreconditionerType>
+  InverseMatrix<MatrixType, PreconditionerType>::InverseMatrix(
+    const MatrixType &        m,
+    const PreconditionerType &preconditioner)
+    : matrix(&m)
+    , preconditioner(&preconditioner)
+  {}
+
+
+
+@endcode 
+
+
+
+这就是 <code>vmult</code> 函数的实现。
+
+
+
+
+在这个类中，我们对解算器控制使用了一个相当大的公差。这样做的原因是，该函数的使用非常频繁，因此，任何使CG求解中的残差变小的额外努力都会使求解更加昂贵。请注意，我们不仅将这个类作为Schur补数的预处理程序，而且在形成拉普拉斯矩阵的逆时也使用这个类；因此，它直接对解本身的精度负责，所以我们也不能选择太大的公差。
+
+@code
+  template <class MatrixType, class PreconditionerType>
+  void InverseMatrix<MatrixType, PreconditionerType>::vmult(
+    Vector<double> &      dst,
+    const Vector<double> &src) const
+  {
+    SolverControl            solver_control(src.size(), 1e-6 * src.l2_norm());
+    SolverCG<Vector<double>> cg(solver_control);
+
+
+    dst = 0;
+
+
+    cg.solve(*matrix, dst, src, *preconditioner);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeSchurComplementcodeclasstemplate"></a><h4>The <code>SchurComplement</code> class template</h4>
+
+
+
+
+这个类实现了介绍中讨论的Schur补码。它与  step-20  相类似。 不过，我们现在用一个模板参数 <code>PreconditionerType</code> 来调用它，以便在指定逆矩阵类的各自类型时访问它。作为上述定义的结果，声明 <code>InverseMatrix</code> 现在包含上述预处理类的第二个模板参数，这也影响到 <code>SmartPointer</code> object <code>m_inverse</code> 。
+
+@code
+  template <class PreconditionerType>
+  class SchurComplement : public Subscriptor
+  {
+  public:
+    SchurComplement(
+      const BlockSparseMatrix<double> &system_matrix,
+      const InverseMatrix<SparseMatrix<double>, PreconditionerType> &A_inverse);
+
+
+    void vmult(Vector<double> &dst, const Vector<double> &src) const;
+
+
+  private:
+    const SmartPointer<const BlockSparseMatrix<double>> system_matrix;
+    const SmartPointer<
+      const InverseMatrix<SparseMatrix<double>, PreconditionerType>>
+      A_inverse;
+
+
+    mutable Vector<double> tmp1, tmp2;
+  };
+
+
+
+
+
+  template <class PreconditionerType>
+  SchurComplement<PreconditionerType>::SchurComplement(
+    const BlockSparseMatrix<double> &system_matrix,
+    const InverseMatrix<SparseMatrix<double>, PreconditionerType> &A_inverse)
+    : system_matrix(&system_matrix)
+    , A_inverse(&A_inverse)
+    , tmp1(system_matrix.block(0, 0).m())
+    , tmp2(system_matrix.block(0, 0).m())
+  {}
+
+
+
+  template <class PreconditionerType>
+  void
+  SchurComplement<PreconditionerType>::vmult(Vector<double> &      dst,
+                                             const Vector<double> &src) const
+  {
+    system_matrix->block(0, 1).vmult(tmp1, src);
+    A_inverse->vmult(tmp2, tmp1);
+    system_matrix->block(1, 0).vmult(dst, tmp2);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="StokesProblemclassimplementation"></a> <h3>StokesProblem class implementation</h3>
+
+
+
+
+
+<a name="StokesProblemStokesProblem"></a> <h4>StokesProblem::StokesProblem</h4>
+
+
+
+
+这个类的构造函数看起来与  step-20  的构造函数非常相似。构造函数初始化了多项式程度、三角形、有限元系统和dof处理器的变量。矢量速度分量的基础多项式函数的阶数为 <code>degree+1</code> ，压力的阶数为 <code>degree</code> 。 这就得到了LBB稳定元素对 $Q_{degree+1}^d\times Q_{degree}$ ，通常被称为Taylor-Hood元素。   
+
+
+请注意，我们用MeshSmoothing参数初始化三角形，这可以确保单元的细化是以PDE解的近似保持良好的方式进行的（如果网格过于非结构化就会出现问题），详情请参见 <code>Triangulation::MeshSmoothing</code> 的文档。
+
+@code
+  template <int dim>
+  StokesProblem<dim>::StokesProblem(const unsigned int degree)
+    : degree(degree)
+    , triangulation(Triangulation<dim>::maximum_smoothing)
+    , fe(FE_Q<dim>(degree + 1), dim, FE_Q<dim>(degree), 1)
+    , dof_handler(triangulation)
+  {}
+
+
+
+@endcode 
+
+
+
+
+<a name="StokesProblemsetup_dofs"></a><h4>StokesProblem::setup_dofs</h4>
+
+
+
+
+给定一个网格，该函数将自由度与之关联，并创建相应的矩阵和向量。在开始的时候，它还释放了指向预处理对象的指针（如果共享指针在这时指向任何东西的话），因为在这之后肯定不再需要它了，在组装矩阵后必须重新计算，并将稀疏矩阵从其稀疏模式对象中解开。   
+
+
+然后，我们继续分配自由度，并对其重新编号。为了使ILU预处理程序（三维）有效地工作，重要的是以减少矩阵带宽的方式列举自由度，或者也许更重要的是：以使ILU尽可能地接近于真正的LU分解的方式。另一方面，我们需要保留在 step-20 和 step-21 中已经看到的速度和压力的块结构。这要分两步完成。首先，对所有的道夫进行重新编号，以提高ILU，然后我们再一次按组件重新编号。由于 <code>DoFRenumbering::component_wise</code> 没有触及单个块内的重新编号，所以第一步的基本重新编号仍然存在。至于如何对自由度进行重新编号以改善ILU：deal.II有许多算法试图找到排序以改善ILU，或减少矩阵的带宽，或优化其他方面。DoFRenumbering命名空间显示了我们在本教程程序中基于这里讨论的测试案例而获得的几种算法的结果比较。在这里，我们将使用传统的Cuthill-McKee算法，该算法已经在之前的一些教程程序中使用。 在<a href="#improved-ilu">section
+on improved ILU</a>中我们将更详细地讨论这个问题。
+
+
+
+
+与以前的教程程序相比，还有一个变化。没有理由对 <code>dim</code> 的速度成分进行单独排序。事实上，与其先列举所有 $x$ -velocities，再列举所有 $y$ -velocities，等等，我们希望把所有速度放在一起，只在速度（所有分量）和压力之间分开。默认情况下， DoFRenumbering::component_wise 函数不是这样做的：它把每个矢量分量分开处理；我们要做的是把几个分量分成 "块"，并把这个块结构传递给该函数。因此，我们分配一个有多少个元素的向量 <code>block_component</code> ，描述所有的速度分量对应于块0，而压力分量将形成块1。
+
+@code
+  template <int dim>
+  void StokesProblem<dim>::setup_dofs()
+  {
+    A_preconditioner.reset();
+    system_matrix.clear();
+    preconditioner_matrix.clear();
+
+
+    dof_handler.distribute_dofs(fe);
+    DoFRenumbering::Cuthill_McKee(dof_handler);
+
+
+    std::vector<unsigned int> block_component(dim + 1, 0);
+    block_component[dim] = 1;
+    DoFRenumbering::component_wise(dof_handler, block_component);
+
+
+@endcode 
+
+
+
+现在是迪里希特边界条件的实现，这在介绍中的讨论后应该是很明显的。所有改变的是，这个函数已经出现在设置函数中，而我们习惯于在一些装配程序中看到它。在我们设置网格的下面，我们将把施加Dirichlet边界条件的顶部边界与边界指标1联系起来。 我们必须将这个边界指标作为第二个参数传递给下面的插值函数。 不过，还有一件事。 描述Dirichlet条件的函数是为所有分量定义的，包括速度和压力。然而，Dirichlet条件只为速度而设置。 为此，我们使用一个只选择速度分量的ComponentMask。通过指定我们想要的特定分量，从有限元中获得该分量掩码。由于我们使用自适应细化网格，仿生约束对象需要首先填充由DoF处理程序生成的悬挂节点约束。注意这两个函数的顺序；我们首先计算悬挂节点约束，然后将边界值插入约束对象。这确保了我们在有悬挂节点的边界上尊重H<sup>1</sup>符合性（在三个空间维度上），其中悬挂节点需要支配Dirichlet边界值。
+
+@code
+    {
+      constraints.clear();
+
+
+      FEValuesExtractors::Vector velocities(0);
+      DoFTools::make_hanging_node_constraints(dof_handler, constraints);
+      VectorTools::interpolate_boundary_values(dof_handler,
+                                               1,
+                                               BoundaryValues<dim>(),
+                                               constraints,
+                                               fe.component_mask(velocities));
+    }
+
+
+    constraints.close();
+
+
+@endcode 
+
+
+
+与 step-20 相类似，我们计算各个组成部分中的道夫。我们可以用与那里相同的方式来做，但我们想在我们已经用于重新编号的块状结构上进行操作。函数 <code>DoFTools::count_dofs_per_fe_block</code> 的作用与 <code>DoFTools::count_dofs_per_fe_component</code> 相同，但现在通过 <code>block_component</code> 分组为速度和压力块。
+
+@code
+    const std::vector<types::global_dof_index> dofs_per_block =
+      DoFTools::count_dofs_per_fe_block(dof_handler, block_component);
+    const unsigned int n_u = dofs_per_block[0];
+    const unsigned int n_p = dofs_per_block[1];
+
+
+    std::cout << "   Number of active cells: " << triangulation.n_active_cells()
+              << std::endl
+              << "   Number of degrees of freedom: " << dof_handler.n_dofs()
+              << " (" << n_u << '+' << n_p << ')' << std::endl;
+
+
+@endcode 
+
+
+
+下一个任务是为我们将创建的系统矩阵分配一个稀疏模式，为预处理矩阵分配一个稀疏模式。我们可以用与 step-20 相同的方式来做，即通过 DoFTools::make_sparsity_pattern. 直接建立一个SparsityPattern类型的对象，但是，有一个重要的理由不这样做。在3D中，函数 DoFTools::max_couplings_between_dofs 对各个道夫之间的耦合产生了一个保守但相当大的数字，因此，最初为创建矩阵的稀疏模式提供的内存太多--实际上，对于中等大小的3D问题，初始稀疏模式甚至无法放入大多数系统的物理内存中，也请参见 step-18  中的讨论。相反，我们首先建立临时对象，使用不同的数据结构，不需要分配更多的内存，但不适合作为SparseMatrix或BlockSparseMatrix对象的基础；在第二步，我们将这些对象复制到BlockSparsityPattern类型的对象中。这与我们在  step-11  和  step-18  中所做的完全相似。特别是，我们利用了这样一个事实，即我们永远不会写入系统矩阵的 $(1,1)$ 块，而这是唯一需要为预处理矩阵填充的块。     
+
+
+所有这些都是在新范围内完成的，这意味着一旦信息被复制到 <code>sparsity_pattern</code> ， <code>dsp</code> 的内存将被释放。
+
+@code
+    {
+      BlockDynamicSparsityPattern dsp(2, 2);
+
+
+      dsp.block(0, 0).reinit(n_u, n_u);
+      dsp.block(1, 0).reinit(n_p, n_u);
+      dsp.block(0, 1).reinit(n_u, n_p);
+      dsp.block(1, 1).reinit(n_p, n_p);
+
+
+      dsp.collect_sizes();
+
+
+      Table<2, DoFTools::Coupling> coupling(dim + 1, dim + 1);
+
+
+      for (unsigned int c = 0; c < dim + 1; ++c)
+        for (unsigned int d = 0; d < dim + 1; ++d)
+          if (!((c == dim) && (d == dim)))
+            coupling[c][d] = DoFTools::always;
+          else
+            coupling[c][d] = DoFTools::none;
+
+
+      DoFTools::make_sparsity_pattern(
+        dof_handler, coupling, dsp, constraints, false);
+
+
+      sparsity_pattern.copy_from(dsp);
+    }
+
+
+    {
+      BlockDynamicSparsityPattern preconditioner_dsp(2, 2);
+
+
+      preconditioner_dsp.block(0, 0).reinit(n_u, n_u);
+      preconditioner_dsp.block(1, 0).reinit(n_p, n_u);
+      preconditioner_dsp.block(0, 1).reinit(n_u, n_p);
+      preconditioner_dsp.block(1, 1).reinit(n_p, n_p);
+
+
+      preconditioner_dsp.collect_sizes();
+
+
+      Table<2, DoFTools::Coupling> preconditioner_coupling(dim + 1, dim + 1);
+
+
+      for (unsigned int c = 0; c < dim + 1; ++c)
+        for (unsigned int d = 0; d < dim + 1; ++d)
+          if (((c == dim) && (d == dim)))
+            preconditioner_coupling[c][d] = DoFTools::always;
+          else
+            preconditioner_coupling[c][d] = DoFTools::none;
+
+
+      DoFTools::make_sparsity_pattern(dof_handler,
+                                      preconditioner_coupling,
+                                      preconditioner_dsp,
+                                      constraints,
+                                      false);
+
+
+      preconditioner_sparsity_pattern.copy_from(preconditioner_dsp);
+    }
+
+
+@endcode 
+
+
+
+最后，与  step-20  中的方法类似，从块结构中创建了系统矩阵、前导矩阵、解决方案和右侧向量。
+
+@code
+    system_matrix.reinit(sparsity_pattern);
+    preconditioner_matrix.reinit(preconditioner_sparsity_pattern);
+
+
+    solution.reinit(2);
+    solution.block(0).reinit(n_u);
+    solution.block(1).reinit(n_p);
+    solution.collect_sizes();
+
+
+    system_rhs.reinit(2);
+    system_rhs.block(0).reinit(n_u);
+    system_rhs.block(1).reinit(n_p);
+    system_rhs.collect_sizes();
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="StokesProblemassemble_system"></a> <h4>StokesProblem::assemble_system</h4>
+
+
+
+
+组装过程遵循 step-20 和介绍中的讨论。我们使用众所周知的缩写来表示持有本单元的局部矩阵、右手和自由度的全局编号的数据结构。
+
+@code
+  template <int dim>
+  void StokesProblem<dim>::assemble_system()
+  {
+    system_matrix         = 0;
+    system_rhs            = 0;
+    preconditioner_matrix = 0;
+
+
+    QGauss<dim> quadrature_formula(degree + 2);
+
+
+    FEValues<dim> fe_values(fe,
+                            quadrature_formula,
+                            update_values | update_quadrature_points |
+                              update_JxW_values | update_gradients);
+
+
+    const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
+
+
+    const unsigned int n_q_points = quadrature_formula.size();
+
+
+    FullMatrix<double> local_matrix(dofs_per_cell, dofs_per_cell);
+    FullMatrix<double> local_preconditioner_matrix(dofs_per_cell,
+                                                   dofs_per_cell);
+    Vector<double>     local_rhs(dofs_per_cell);
+
+
+    std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
+
+
+    const RightHandSide<dim>    right_hand_side;
+    std::vector<Vector<double>> rhs_values(n_q_points, Vector<double>(dim + 1));
+
+
+@endcode 
+
+
+
+接下来，我们需要两个对象，作为FEValues对象的提取器。它们的使用在关于  @ref
+vector_valued  的报告中详细解释。
+
+@code
+    const FEValuesExtractors::Vector velocities(0);
+    const FEValuesExtractors::Scalar pressure(dim);
+
+
+@endcode 
+
+
+
+作为对 step-20 和 step-21 的扩展，我们包括了一些优化，这些优化使这个特定问题的装配速度大大加快。这些改进是基于这样的观察：当我们像 step-20 那样做时，我们做了太多次的计算：对称梯度实际上在每个正交点有 <code>dofs_per_cell</code> 个不同的值，但我们从FEValues对象中提取了 <code>dofs_per_cell*dofs_per_cell</code> 次--在 <code>i</code> 的循环和 <code>j</code> 的内循环中。在3D中，这意味着评估 $89^2=7921$ 而不是 $89$ 次，这是一个不小的差异。     
+
+
+所以我们在这里要做的是，在开始对单元上的道夫进行循环之前，在正交点得到一个秩-2张量的向量（类似的还有压力上的发散和基函数值）来避免这种重复计算。首先，我们创建各自的对象来保存这些值。然后，我们开始在所有单元上进行循环，并在正交点上进行循环，在那里我们首先提取这些值。我们在这里还实现了一个优化：本地矩阵（以及全局矩阵）将是对称的，因为所有涉及的操作都是相对于 $i$ 和 $j$ 对称的。这可以通过简单地运行内循环而不是 <code>dofs_per_cell</code>, but only up to <code>i</code> 来实现，外循环的索引。
+
+@code
+    std::vector<SymmetricTensor<2, dim>> symgrad_phi_u(dofs_per_cell);
+    std::vector<double>                  div_phi_u(dofs_per_cell);
+    std::vector<double>                  phi_p(dofs_per_cell);
+
+
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      {
+        fe_values.reinit(cell);
+        local_matrix                = 0;
+        local_preconditioner_matrix = 0;
+        local_rhs                   = 0;
+
+
+        right_hand_side.vector_value_list(fe_values.get_quadrature_points(),
+                                          rhs_values);
+
+
+        for (unsigned int q = 0; q < n_q_points; ++q)
+          {
+            for (unsigned int k = 0; k < dofs_per_cell; ++k)
+              {
+                symgrad_phi_u[k] =
+                  fe_values[velocities].symmetric_gradient(k, q);
+                div_phi_u[k] = fe_values[velocities].divergence(k, q);
+                phi_p[k]     = fe_values[pressure].value(k, q);
+              }
+
+
+@endcode 
+
+
+
+现在最后是系统矩阵和我们用于预处理程序的矩阵的双线性形式。回顾一下，这两个的公式是 
+
+@f{align*}{
+A_{ij} &= a(\varphi_i,\varphi_j)
+\\     &= \underbrace{2(\varepsilon(\varphi_{i,\textbf{u}}),
+\varepsilon(\varphi_{j,\textbf{u}}))_{\Omega}}
+_{(1)}
+\;
+\underbrace{- (\textrm{div}\; \varphi_{i,\textbf{u}},
+\varphi_{j,p})_{\Omega}}
+_{(2)}
+\;
+\underbrace{- (\varphi_{i,p},
+\textrm{div}\;
+\varphi_{j,\textbf{u}})_{\Omega}}
+_{(3)}
+@f} 
+
+和 
+
+@f{align*}{
+M_{ij} &= \underbrace{(\varphi_{i,p},
+\varphi_{j,p})_{\Omega}}
+_{(4)},
+@f} 
+
+其中 $\varphi_{i,\textbf{u}}$ 和 $\varphi_{i,p}$ 是 $i$ th形状函数的速度和压力成分。然后，上述各种条款在以下实施中很容易识别。
+
+@code
+            for (unsigned int i = 0; i < dofs_per_cell; ++i)
+              {
+                for (unsigned int j = 0; j <= i; ++j)
+                  {
+                    local_matrix(i, j) +=
+                      (2 * (symgrad_phi_u[i] * symgrad_phi_u[j]) // (1)
+
+
+                       - div_phi_u[i] * phi_p[j]                 // (2)
+
+
+                       - phi_p[i] * div_phi_u[j])                // (3)
+                      * fe_values.JxW(q);                        // * dx
+
+
+                    local_preconditioner_matrix(i, j) +=
+                      (phi_p[i] * phi_p[j]) // (4)
+                      * fe_values.JxW(q);   // * dx
+                  }
+@endcode 
+
+
+
+注意，在上述（1）的实现中，`operator*`被重载用于对称张量，产生两个张量之间的标量乘积。                 
+
+
+对于右手边，我们利用形状函数只在一个分量中不为零的事实（因为我们的元素是原始的）。 我们不把代表形状函数i的dim+1值的张量与整个右手边的向量相乘，而只看唯一的非零分量。函数 FiniteElement::system_to_component_index 将返回这个形状函数所处的分量（0=x速度，1=y速度，2=2d中的压力），我们用它来挑选出右手边向量的正确分量来相乘。
+
+@code
+                const unsigned int component_i =
+                  fe.system_to_component_index(i).first;
+                local_rhs(i) += (fe_values.shape_value(i, q)   // (phi_u_i(x_q)
+                                 * rhs_values[q](component_i)) // * f(x_q))
+                                * fe_values.JxW(q);            // * dx
+              }
+          }
+
+
+@endcode 
+
+
+
+在我们将局部数据写入全局矩阵之前（同时使用AffineConstraints对象来应用Dirichlet边界条件并消除悬挂的节点约束，正如我们在介绍中讨论的那样），我们必须注意一件事。由于对称性，我们只建立了一半的局部矩阵，但我们要保存完整的矩阵，以便使用标准函数进行解算。这是通过翻转指数来实现的，以防我们指向局部矩阵的空部分。
+
+@code
+        for (unsigned int i = 0; i < dofs_per_cell; ++i)
+          for (unsigned int j = i + 1; j < dofs_per_cell; ++j)
+            {
+              local_matrix(i, j) = local_matrix(j, i);
+              local_preconditioner_matrix(i, j) =
+                local_preconditioner_matrix(j, i);
+            }
+
+
+        cell->get_dof_indices(local_dof_indices);
+        constraints.distribute_local_to_global(local_matrix,
+                                               local_rhs,
+                                               local_dof_indices,
+                                               system_matrix,
+                                               system_rhs);
+        constraints.distribute_local_to_global(local_preconditioner_matrix,
+                                               local_dof_indices,
+                                               preconditioner_matrix);
+      }
+
+
+@endcode 
+
+
+
+在我们要解决这个线性系统之前，我们为速度-速度矩阵生成一个预处理程序，即系统矩阵中的 <code>block(0,0)</code> 。如上所述，这取决于空间维度。由于 <code>InnerPreconditioner::type</code> 别名所描述的两个类具有相同的接口，因此无论我们想使用稀疏直接求解器还是ILU，都不需要做任何不同的事情。
+
+@code
+    std::cout << "   Computing preconditioner..." << std::endl << std::flush;
+
+
+    A_preconditioner =
+      std::make_shared<typename InnerPreconditioner<dim>::type>();
+    A_preconditioner->initialize(
+      system_matrix.block(0, 0),
+      typename InnerPreconditioner<dim>::type::AdditionalData());
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="StokesProblemsolve"></a> <h4>StokesProblem::solve</h4>
+
+
+
+
+经过前面介绍中的讨论和各自类的定义， <code>solve</code> 函数的实现是相当直接的，其方式与 step-20 类似。首先，我们需要一个 <code>InverseMatrix</code> 类的对象，代表矩阵A的逆。正如在介绍中所描述的那样，在 <code>InnerPreconditioner::type</code> 类型的内部预处理器的帮助下，生成了逆。
+
+@code
+  template <int dim>
+  void StokesProblem<dim>::solve()
+  {
+    const InverseMatrix<SparseMatrix<double>,
+                        typename InnerPreconditioner<dim>::type>
+                   A_inverse(system_matrix.block(0, 0), *A_preconditioner);
+    Vector<double> tmp(solution.block(0).size());
+
+
+@endcode 
+
+
+
+这与 step-20 中一样。我们生成舒尔补数的右手边 $B A^{-1} F - G$ 和一个代表各自线性运算的对象 $B A^{-1} B^T$ ，现在有一个模板参数表示预处理器--根据类的定义。
+
+@code
+    {
+      Vector<double> schur_rhs(solution.block(1).size());
+      A_inverse.vmult(tmp, system_rhs.block(0));
+      system_matrix.block(1, 0).vmult(schur_rhs, tmp);
+      schur_rhs -= system_rhs.block(1);
+
+
+      SchurComplement<typename InnerPreconditioner<dim>::type> schur_complement(
+        system_matrix, A_inverse);
+
+
+@endcode 
+
+
+
+解算器调用的常规控制结构被创建... 
+
+@code
+      SolverControl            solver_control(solution.block(1).size(),
+                                   1e-6 * schur_rhs.l2_norm());
+      SolverCG<Vector<double>> cg(solver_control);
+
+
+@endcode 
+
+
+
+现在是舒尔补码的预处理程序。正如介绍中所解释的，预处理是由压力变量的质量矩阵完成的。       
+
+
+实际上，求解器需要有预处理的形式  $P^{-1}$  ，所以我们需要创建一个逆运算。我们再次使用 <code>InverseMatrix</code> 类的对象，它实现了求解器需要的 <code>vmult</code> 操作。 在这种情况下，我们必须对压力质量矩阵进行反转。正如在早期的教程程序中已经证明的那样，质量矩阵的反转是一个相当便宜和简单的操作（与拉普拉斯矩阵等相比）。带有ILU预处理的CG方法在5-10步内收敛，与网格大小无关。 这正是我们在这里所做的。我们选择另一个ILU预处理，并通过相应的模板参数将其带入InverseMatrix对象。 然后在逆矩阵的vmult操作中调用一个CG求解器。       
+
+
+另一种方法是选择因子为1.2的SSOR预处理器，这种方法构建成本较低，但之后需要更多的迭代。它需要大约两倍的迭代次数，但其生成的成本几乎可以忽略不计。
+
+@code
+      SparseILU<double> preconditioner;
+      preconditioner.initialize(preconditioner_matrix.block(1, 1),
+                                SparseILU<double>::AdditionalData());
+
+
+      InverseMatrix<SparseMatrix<double>, SparseILU<double>> m_inverse(
+        preconditioner_matrix.block(1, 1), preconditioner);
+
+
+@endcode 
+
+
+
+有了舒尔补码和高效的预处理程序，我们可以用通常的方法解决压力的相应方程（即解向量中的块0）。
+
+@code
+      cg.solve(schur_complement, solution.block(1), schur_rhs, m_inverse);
+
+
+@endcode 
+
+
+
+在这第一个求解步骤之后，为了实现一致的压力场，必须将悬挂的节点约束分布到求解中。
+
+@code
+      constraints.distribute(solution);
+
+
+      std::cout << "  " << solver_control.last_step()
+                << " outer CG Schur complement iterations for pressure"
+                << std::endl;
+    }
+
+
+@endcode 
+
+
+
+如同在 step-20 中，我们最后需要求解速度方程，在这里我们插入压力方程的解。这只涉及到我们已经知道的对象--所以我们只需将 $p$ 乘以 $B^T$ ，减去右边的部分，再乘以 $A$ 的逆数。最后，我们需要分配悬挂节点的约束，以获得一个一致的流场。
+
+@code
+    {
+      system_matrix.block(0, 1).vmult(tmp, solution.block(1));
+      tmp *= -1;
+      tmp += system_rhs.block(0);
+
+
+      A_inverse.vmult(solution.block(0), tmp);
+
+
+      constraints.distribute(solution);
+    }
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="StokesProblemoutput_results"></a> <h4>StokesProblem::output_results</h4>
+
+
+
+
+下一个函数生成图形输出。在这个例子中，我们将使用VTK文件格式。 我们给问题中的各个变量附上名字： <code>velocity</code> to the <code>dim</code> 速度的组成部分和 <code>pressure</code> 压力。   
+
+
+并非所有的可视化程序都有能力将各个矢量分量组合成一个矢量，以提供矢量图；特别是对于一些基于VTK的可视化程序，这一点是成立的。在这种情况下，在包含数据的文件中应该已经描述了组件的逻辑分组为矢量的情况。换句话说，我们需要做的是为我们的输出编写者提供一种方法，让他们知道有限元的哪些分量在逻辑上形成一个矢量（在 $d$ 空间维度上有 $d$ 分量），而不是让他们假设我们只是有一堆标量场。 这是用 <code>DataComponentInterpretation</code> 命名空间的成员实现的：和文件名一样，我们创建一个向量，其中第一个 <code>dim</code> 分量指的是速度，并被赋予标签 DataComponentInterpretation::component_is_part_of_vector; 我们最后推一个标签 DataComponentInterpretation::component_is_scalar 来描述压力变量的分组情况。
+
+
+
+
+然后，函数的其余部分与  step-20  中的相同。
+
+@code
+  template <int dim>
+  void
+  StokesProblem<dim>::output_results(const unsigned int refinement_cycle) const
+  {
+    std::vector<std::string> solution_names(dim, "velocity");
+    solution_names.emplace_back("pressure");
+
+
+    std::vector<DataComponentInterpretation::DataComponentInterpretation>
+      data_component_interpretation(
+        dim, DataComponentInterpretation::component_is_part_of_vector);
+    data_component_interpretation.push_back(
+      DataComponentInterpretation::component_is_scalar);
+
+
+    DataOut<dim> data_out;
+    data_out.attach_dof_handler(dof_handler);
+    data_out.add_data_vector(solution,
+                             solution_names,
+                             DataOut<dim>::type_dof_data,
+                             data_component_interpretation);
+    data_out.build_patches();
+
+
+    std::ofstream output(
+      "solution-" + Utilities::int_to_string(refinement_cycle, 2) + ".vtk");
+    data_out.write_vtk(output);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="StokesProblemrefine_mesh"></a> <h4>StokesProblem::refine_mesh</h4>
+
+
+
+
+这是 <code>StokesProblem</code> 类中最后一个有趣的函数。 正如它的名字所示，它获取问题的解决方案并在需要的地方细化网格。其过程与 step-6 中的相应步骤相同，不同的是我们只根据压力的变化进行细化，也就是说，我们用ComponentMask类型的掩码对象调用Kelly误差估计器，选择我们感兴趣的压力的单一标量分量（我们通过指定我们想要的分量从有限元类得到这样一个掩码）。此外，我们没有再次粗化网格。
+
+@code
+  template <int dim>
+  void StokesProblem<dim>::refine_mesh()
+  {
+    Vector<float> estimated_error_per_cell(triangulation.n_active_cells());
+
+
+    FEValuesExtractors::Scalar pressure(dim);
+    KellyErrorEstimator<dim>::estimate(
+      dof_handler,
+      QGauss<dim - 1>(degree + 1),
+      std::map<types::boundary_id, const Function<dim> *>(),
+      solution,
+      estimated_error_per_cell,
+      fe.component_mask(pressure));
+
+
+    GridRefinement::refine_and_coarsen_fixed_number(triangulation,
+                                                    estimated_error_per_cell,
+                                                    0.3,
+                                                    0.0);
+    triangulation.execute_coarsening_and_refinement();
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="StokesProblemrun"></a> <h4>StokesProblem::run</h4>
+
+
+
+
+斯托克斯类的最后一步和往常一样，是生成初始网格的函数，并按各自的顺序调用其他函数。   
+
+
+我们从一个大小为 $4 \times 1$ （2D）或 $4 \times 1
+\times 1$ （3D）的矩形开始，在 $R^2/R^3$ 中分别放置为 $(-2,2)\times(-1,0)$ 或 $(-2,2)\times(0,1)\times(-1,0)$ 。在每个方向上以相等的网格大小开始是很自然的，所以我们在第一个坐标方向上将初始矩形细分四次。为了将创建网格所涉及的变量的范围限制在我们实际需要的范围内，我们将整个块放在一对大括号之间。
+
+@code
+  template <int dim>
+  void StokesProblem<dim>::run()
+  {
+    {
+      std::vector<unsigned int> subdivisions(dim, 1);
+      subdivisions[0] = 4;
+
+
+      const Point<dim> bottom_left = (dim == 2 ?                
+                                        Point<dim>(-2, -1) :    // 2d case
+                                        Point<dim>(-2, 0, -1)); // 3d case
+
+
+      const Point<dim> top_right = (dim == 2 ?              
+                                      Point<dim>(2, 0) :    // 2d case
+                                      Point<dim>(2, 1, 0)); // 3d case
+
+
+      GridGenerator::subdivided_hyper_rectangle(triangulation,
+                                                subdivisions,
+                                                bottom_left,
+                                                top_right);
+    }
+
+
+@endcode 
+
+
+
+边界指标1被设置为所有受Dirichlet边界条件约束的边界，即位于最后一个坐标方向上的0的面。详见上面的例子描述。
+
+@code
+    for (const auto &cell : triangulation.active_cell_iterators())
+      for (const auto &face : cell->face_iterators())
+        if (face->center()[dim - 1] == 0)
+          face->set_all_boundary_ids(1);
+
+
+
+@endcode 
+
+
+
+然后我们在第一次求解前应用初始细化。在三维中，会有更多的自由度，所以我们在那里细化得更少。
+
+@code
+    triangulation.refine_global(4 - dim);
+
+
+@endcode 
+
+
+
+正如在 step-6 中首次看到的那样，我们在不同的细化级别上循环细化（除了第一个循环），设置自由度和矩阵，组装，求解和创建输出。
+
+@code
+    for (unsigned int refinement_cycle = 0; refinement_cycle < 6;
+         ++refinement_cycle)
+      {
+        std::cout << "Refinement cycle " << refinement_cycle << std::endl;
+
+
+        if (refinement_cycle > 0)
+          refine_mesh();
+
+
+        setup_dofs();
+
+
+        std::cout << "   Assembling..." << std::endl << std::flush;
+        assemble_system();
+
+
+        std::cout << "   Solving..." << std::flush;
+        solve();
+
+
+        output_results(refinement_cycle);
+
+
+        std::cout << std::endl;
+      }
+  }
+} // namespace Step22
+
+
+
+@endcode 
+
+
+
+
+<a name="Thecodemaincodefunction"></a> <h3>The <code>main</code> function</h3> 
+
+
+
+
+主函数与  step-20  中相同。我们将元素度数作为参数传递，并在众所周知的模板槽中选择空间尺寸。
+
+@code
+int main()
+{
+  try
+    {
+      using namespace Step22;
+
+
+      StokesProblem<2> flow_problem(1);
+      flow_problem.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+
+
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
+<a name="Results"></a> <a name="Results"></a><h1>Results</h1>
 
 
 <a name="Outputoftheprogramandgraphicalvisualization"></a><h3>Output of the program and graphical visualization</h3>
@@ -2389,9 +1989,8 @@ completely removed.
 <a name="2Dcalculations"></a><h4>2D calculations</h4>
 
 
-Running the program with the space dimension set to 2 in the <code>main</code>
-function yields the following output (in "release mode",
-@dealiiVideoLectureSeeAlso{18}):
+在 <code>main</code> 函数中空间维度设置为2的情况下运行程序，会产生以下输出（在 "释放模式 "下， @dealiiVideoLectureSeeAlso{18}):  ）。 
+
 @code
 examples/\step-22> make run
 Refinement cycle 0
@@ -2401,12 +2000,14 @@ Refinement cycle 0
    Computing preconditioner...
    Solving...  11 outer CG Schur complement iterations for pressure
 
+
 Refinement cycle 1
    Number of active cells: 160
    Number of degrees of freedom: 1683 (1482+201)
    Assembling...
    Computing preconditioner...
    Solving...  11 outer CG Schur complement iterations for pressure
+
 
 Refinement cycle 2
    Number of active cells: 376
@@ -2415,12 +2016,14 @@ Refinement cycle 2
    Computing preconditioner...
    Solving...  11 outer CG Schur complement iterations for pressure
 
+
 Refinement cycle 3
    Number of active cells: 880
    Number of degrees of freedom: 8723 (7722+1001)
    Assembling...
    Computing preconditioner...
    Solving...  11 outer CG Schur complement iterations for pressure
+
 
 Refinement cycle 4
    Number of active cells: 2008
@@ -2429,35 +2032,24 @@ Refinement cycle 4
    Computing preconditioner...
    Solving...  11 outer CG Schur complement iterations for pressure
 
+
 Refinement cycle 5
    Number of active cells: 4288
    Number of degrees of freedom: 40855 (36250+4605)
    Assembling...
    Computing preconditioner...
    Solving...  11 outer CG Schur complement iterations for pressure
-@endcode
+@endcode 
 
-The entire computation above takes about 2 seconds on a reasonably
-quick (for 2015 standards) machine.
 
-What we see immediately from this is that the number of (outer)
-iterations does not increase as we refine the mesh. This confirms the
-statement in the introduction that preconditioning the Schur
-complement with the mass matrix indeed yields a matrix spectrally
-equivalent to the identity matrix (i.e. with eigenvalues bounded above
-and below independently of the mesh size or the relative sizes of
-cells). In other words, the mass matrix and the Schur complement are
-spectrally equivalent.
 
-In the images below, we show the grids for the first six refinement
-steps in the program.  Observe how the grid is refined in regions
-where the solution rapidly changes: On the upper boundary, we have
-Dirichlet boundary conditions that are -1 in the left half of the line
-and 1 in the right one, so there is an abrupt change at $x=0$. Likewise,
-there are changes from Dirichlet to Neumann data in the two upper
-corners, so there is need for refinement there as well:
+上述整个计算在一台相当快的（以2015年的标准）机器上需要大约2秒。
 
-<table width="60%" align="center">
+我们从中立即看到的是，（外部）迭代的数量并没有随着我们细化网格而增加。这证实了介绍中的说法，即用质量矩阵对Schur补码进行预处理，确实可以得到一个与身份矩阵频谱等价的矩阵（即特征值上下有界，与网格大小或单元的相对大小无关）。换句话说，质量矩阵和Schur补码在光谱上是等价的。
+
+在下面的图片中，我们展示了程序中前六个细化步骤的网格。 观察一下网格是如何在解决方案快速变化的区域进行细化的。在上边界，我们有迪里希特的边界条件，在左半边是-1，右半边是1，所以在 $x=0$ 有一个突然的变化。同样地，在两个上角也有从Dirichlet到Neumann数据的变化，所以那里也需要细化。
+
+  <table width="60%" align="center">
   <tr>
     <td align="center">
       <img src="https://www.dealii.org/images/steps/developer/step-22.2d.mesh-0.png" alt="">
@@ -2482,27 +2074,21 @@ corners, so there is need for refinement there as well:
       <img src="https://www.dealii.org/images/steps/developer/step-22.2d.mesh-5.png" alt="">
     </td>
   </tr>
-</table>
+</table>   
 
-Finally, following is a plot of the flow field. It shows fluid
-transported along with the moving upper boundary and being replaced by
-material coming from below:
+最后，下面是一个流场的图。它显示了流体随着上边界的移动而被来自下方的物质所取代。
 
-<img src="https://www.dealii.org/images/steps/developer/step-22.2d.solution.png" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-22.2d.solution.png" alt="">   
 
-This plot uses the capability of VTK-based visualization programs (in
-this case of VisIt) to show vector data; this is the result of us
-declaring the velocity components of the finite element in use to be a
-set of vector components, rather than independent scalar components in
-the <code>StokesProblem@<dim@>::%output_results</code> function of this
-tutorial program.
+该图使用了基于VTK的可视化程序（本例中为VisIt）的能力来显示矢量数据；这是我们将使用中的有限元的速度分量声明为一组矢量分量的结果，而不是本教程程序的 <code>StokesProblem@<dim@>::%output_results</code> 功能中的独立标量分量。
+
 
 
 
 <a name="3Dcalculations"></a><h4>3D calculations</h4>
 
 
-In 3d, the screen output of the program looks like this:
+在3D中，程序的屏幕输出看起来是这样的。
 
 @code
 Refinement cycle 0
@@ -2512,12 +2098,14 @@ Refinement cycle 0
    Computing preconditioner...
    Solving...  13 outer CG Schur complement iterations for pressure.
 
+
 Refinement cycle 1
    Number of active cells: 144
    Number of degrees of freedom: 5088 (4827+261)
    Assembling...
    Computing preconditioner...
    Solving...  14 outer CG Schur complement iterations for pressure.
+
 
 Refinement cycle 2
    Number of active cells: 704
@@ -2526,12 +2114,14 @@ Refinement cycle 2
    Computing preconditioner...
    Solving...  14 outer CG Schur complement iterations for pressure.
 
+
 Refinement cycle 3
    Number of active cells: 3168
    Number of degrees of freedom: 93176 (89043+4133)
    Assembling...
    Computing preconditioner...
    Solving...  15 outer CG Schur complement iterations for pressure.
+
 
 Refinement cycle 4
    Number of active cells: 11456
@@ -2540,31 +2130,25 @@ Refinement cycle 4
    Computing preconditioner...
    Solving...  15 outer CG Schur complement iterations for pressure.
 
+
 Refinement cycle 5
    Number of active cells: 45056
    Number of degrees of freedom: 1254464 (1201371+53093)
    Assembling...
    Computing preconditioner...
    Solving...  14 outer CG Schur complement iterations for pressure.
-@endcode
+@endcode 
 
-Again, we see that the number of outer iterations does not increase as
-we refine the mesh. Nevertheless, the compute time increases
-significantly: for each of the iterations above separately, it takes about
-0.14 seconds, 0.63 seconds, 4.8 seconds, 35 seconds, 2 minutes and 33 seconds,
-and 13 minutes and 12 seconds. This overall superlinear (in the number of
-unknowns) increase in runtime is due to the fact that our inner solver is not
-${\cal O}(N)$: a simple experiment shows that as we keep refining the mesh, the
-average number of ILU-preconditioned CG iterations to invert the
-velocity-velocity block $A$ increases.
 
-We will address the question of how possibly to improve our solver <a
-href="#improved-solver">below</a>.
 
-As for the graphical output, the grids generated during the solution
-look as follow:
+我们再次看到，随着我们对网格的细化，外部迭代的次数并没有增加。然而，计算时间明显增加：对于上述每一次迭代分别需要大约0.14秒、0.63秒、4.8秒、35秒、2分33秒和13分12秒。这种运行时间的整体超线性（未知数的数量）增加是由于我们的内部求解器不是 ${\cal O}(N)$ ：一个简单的实验表明，随着我们不断细化网格，反演速度-速度块 $A$ 的平均ILU预处理的CG迭代次数会增加。
 
-<table width="60%" align="center">
+我们将解决如何改进我们的求解器<a
+href="#improved-solver">below</a>的问题。
+
+至于图形输出，在求解过程中产生的网格看起来如下。
+
+  <table width="60%" align="center">
   <tr>
     <td align="center">
       <img src="https://www.dealii.org/images/steps/developer/step-22.3d.mesh-0.png" alt="">
@@ -2589,78 +2173,49 @@ look as follow:
       <img src="https://www.dealii.org/images/steps/developer/step-22.3d.mesh-5.png" alt="">
     </td>
   </tr>
-</table>
+</table>   
 
-Again, they show essentially the location of singularities introduced
-by boundary conditions. The vector field computed makes for an
-interesting graph:
+同样，它们基本上显示了由边界条件引入的奇异点的位置。计算出的矢量场构成了一个有趣的图形。
 
-<img src="https://www.dealii.org/images/steps/developer/step-22.3d.solution.png" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-22.3d.solution.png" alt="">   
 
-The isocontours shown here as well are those of the pressure
-variable, showing the singularity at the point of discontinuous
-velocity boundary conditions.
+这里显示的等值线也是压力变量的等值线，显示了在不连续的速度边界条件点的奇异性。
 
 
 
-<a name="Sparsitypattern"></a><h3>Sparsity pattern</h3>
+
+<a name="Sparsitypattern"></a><h3>Sparsity pattern</h3> 
 
 
-As explained during the generation of the sparsity pattern, it is
-important to have the numbering of degrees of freedom in mind when
-using preconditioners like incomplete LU decompositions. This is most
-conveniently visualized using the distribution of nonzero elements in
-the stiffness matrix.
+正如在生成稀疏模式时解释的那样，在使用不完全LU分解等前置条件时，必须记住自由度的编号。使用刚度矩阵中的非零元素的分布，这是最方便的可视化。
 
-If we don't do anything special to renumber degrees of freedom (i.e.,
-without using DoFRenumbering::Cuthill_McKee, but with using
-DoFRenumbering::component_wise to ensure that degrees of freedom are
-appropriately sorted into their corresponding blocks of the matrix and
-vector), then we get the following image after the first adaptive
-refinement in two dimensions:
+如果我们不对自由度进行特别的重新编号（即不使用 DoFRenumbering::Cuthill_McKee, ，而是使用 DoFRenumbering::component_wise 来确保自由度被适当地排序到矩阵和向量的相应块中），那么在二维的第一次自适应细化后，我们会得到以下的图像。
 
-<img src="https://www.dealii.org/images/steps/developer/step-22.2d.sparsity-nor.png" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-22.2d.sparsity-nor.png" alt="">   
 
-In order to generate such a graph, you have to insert a piece of
-code like the following to the end of the setup step.
+为了生成这样的图，你必须在设置步骤的末尾插入一段类似以下的代码。
+
 @code
   {
     std::ofstream out ("sparsity_pattern.gpl");
     sparsity_pattern.print_gnuplot(out);
   }
-@endcode
+@endcode 
 
-It is clearly visible that the nonzero entries are spread over almost the
-whole matrix.  This makes preconditioning by ILU inefficient: ILU generates a
-Gaussian elimination (LU decomposition) without fill-in elements, which means
-that more tentative fill-ins left out will result in a worse approximation of
-the complete decomposition.
 
-In this program, we have thus chosen a more advanced renumbering of
-components.  The renumbering with DoFRenumbering::Cuthill_McKee and grouping
-the components into velocity and pressure yields the following output:
 
-<img src="https://www.dealii.org/images/steps/developer/step-22.2d.sparsity-ren.png" alt="">
+可以清楚地看到，非零项几乎分布在整个矩阵中。 这使得用ILU进行预处理的效率很低。ILU生成的高斯消除（LU分解）没有填充元素，这意味着更多的暂定填充元素的遗漏会导致完整分解的近似度更差。
 
-It is apparent that the situation has improved a lot. Most of the elements are
-now concentrated around the diagonal in the (0,0) block in the matrix. Similar
-effects are also visible for the other blocks. In this case, the ILU
-decomposition will be much closer to the full LU decomposition, which improves
-the quality of the preconditioner. (It may be interesting to note that the
-sparse direct solver UMFPACK does some %internal renumbering of the equations
-before actually generating a sparse LU decomposition; that procedure leads to
-a very similar pattern to the one we got from the Cuthill-McKee algorithm.)
+因此，在这个方案中，我们选择了一种更先进的成分重编号。 用 DoFRenumbering::Cuthill_McKee 进行重新编号，并将分量分组为速度和压力，得到的输出结果如下。
 
-Finally, we want to have a closer
-look at a sparsity pattern in 3D. We show only the (0,0) block of the
-matrix, again after one adaptive refinement. Apart from the fact that the matrix
-size has increased, it is also visible that there are many more entries
-in the matrix. Moreover, even for the optimized renumbering, there will be a
-considerable amount of tentative fill-in elements. This illustrates why UMFPACK
-is not a good choice in 3D - a full decomposition needs many new entries that
- eventually won't fit into the physical memory (RAM):
+  <img src="https://www.dealii.org/images/steps/developer/step-22.2d.sparsity-ren.png" alt="">   
 
-<img src="https://www.dealii.org/images/steps/developer/step-22.3d.sparsity_uu-ren.png" alt="">
+很明显，情况有了很大的改善。大多数元素现在都集中在矩阵中（0,0）块的对角线周围。其他区块也可以看到类似的效果。在这种情况下，ILU分解将更接近于完全的LU分解，这就提高了预处理程序的质量。值得注意的是，稀疏直接求解器UMFPACK在实际生成稀疏LU分解之前会对方程进行一些内部重新编号；该过程导致了与我们从Cuthill-McKee算法中得到的模式非常相似）。
+
+最后，我们想仔细看看三维的稀疏模式。我们只显示了矩阵的(0,0)块，也是在一次自适应细化之后。除了矩阵大小增加的事实之外，还可以看到矩阵中多了很多条目。此外，即使是优化后的重新编号，也会有相当数量的暂定填充元素。这说明了为什么UMFPACK在三维中不是一个好的选择--完整的分解需要很多新的条目，最终无法装入物理内存（RAM）。
+
+  <img src="https://www.dealii.org/images/steps/developer/step-22.3d.sparsity_uu-ren.png" alt="">   
+
 
 
 
@@ -2668,102 +2223,44 @@ is not a good choice in 3D - a full decomposition needs many new entries that
 
 
 <a name="improved-solver">
-<a name="Improvedlinearsolverin3D"></a><h4>Improved linear solver in 3D</h4>
+<a name="Improvedlinearsolverin3D"></a><a name="Improvedlinearsolverin3D"></a><h4>Improved linear solver in 3D</h4><h4>Improved linear solver in 3D</h4>
 
-</a>
 
-We have seen in the section of computational results that the number of outer
-iterations does not depend on the mesh size, which is optimal in a sense of
-scalability. This does, however, not apply to the solver as a whole, as
-mentioned above:
-We did not look at the number of inner iterations when generating the inverse of
-the matrix $A$ and the mass matrix $M_p$. Of course, this is unproblematic in
-the 2D case where we precondition $A$ with a direct solver and the
-<code>vmult</code> operation of the inverse matrix structure will converge in
-one single CG step, but this changes in 3D where we only use an ILU
-preconditioner.  There, the number of required preconditioned CG steps to
-invert $A$ increases as the mesh is refined, and each <code>vmult</code>
-operation involves on average approximately 14, 23, 36, 59, 75 and 101 inner
-CG iterations in the refinement steps shown above. (On the other hand,
-the number of iterations for applying the inverse pressure mass matrix is
-always around five, both in two and three dimensions.)  To summarize, most work
-is spent on solving linear systems with the same matrix $A$ over and over again.
-What makes this look even worse is the fact that we
-actually invert a matrix that is about 95 percent the size of the total system
-matrix and stands for 85 percent of the non-zero entries in the sparsity
-pattern. Hence, the natural question is whether it is reasonable to solve a
-linear system with matrix $A$ for about 15 times when calculating the solution
-to the block system.
+</a> 
 
-The answer is, of course, that we can do that in a few other (most of the time
-better) ways.
-Nevertheless, it has to be remarked that an indefinite system as the one
-at hand puts indeed much higher
-demands on the linear algebra than standard elliptic problems as we have seen
-in the early tutorial programs. The improvements are still rather
-unsatisfactory, if one compares with an elliptic problem of similar
-size. Either way, we will introduce below a number of improvements to the
-linear solver, a discussion that we will re-consider again with additional
-options in the step-31 program.
+我们在计算结果一节中看到，外迭代次数不取决于网格大小，这在可扩展性意义上是最佳的。然而，如上所述，这并不适用于整个求解器。在生成矩阵 $A$ 和质量矩阵 $M_p$ 的逆时，我们没有研究内迭代的数量。当然，这在二维情况下是没有问题的，我们用直接求解器对 $A$ 进行预处理，逆矩阵结构的 <code>vmult</code> 操作将在一个单一的CG步骤中收敛，但这在三维情况下发生变化，我们只使用ILU预处理器。 在那里，反演 $A$ 所需的预处理CG步骤的数量随着网格的细化而增加，每个 <code>vmult</code> 操作平均涉及上述细化步骤中的大约14、23、36、59、75和101次内部CG迭代。另一方面，在二维和三维中，应用反压力质量矩阵的迭代次数总是在5次左右）。 总而言之，大部分工作都花在了用同一矩阵 $A$ 反复解决线性系统上。让这看起来更糟糕的是，我们实际上反转了一个矩阵，其大小约为整个系统矩阵的95%，并代表了稀疏模式中85%的非零条目。因此，自然的问题是，在计算块状系统的解时，用矩阵 $A$ 解约15次的线性系统是否合理。
+
+当然，答案是，我们可以用其他一些（大多数时候是更好的）方法来做。然而，必须指出的是，正如我们在早期的教程中所看到的那样，眼前的这个不确定系统对线性代数的要求确实比标准椭圆问题高得多。如果与类似规模的椭圆问题相比，其改进仍然相当不令人满意。无论如何，我们将在下面介绍一些对线性求解器的改进，这个讨论我们将在 step-31 程序中用额外的选项再次重新考虑。
 
 <a name="improved-ilu">
-<a name="BetterILUdecompositionbysmartreordering"></a><h5>Better ILU decomposition by smart reordering</h5>
+<a name="BetterILUdecompositionbysmartreordering"></a><a name="BetterILUdecompositionbysmartreordering"></a><h5>Better ILU decomposition by smart reordering</h5><h5>Better ILU decomposition by smart reordering</h5>
 
-</a>
-A first attempt to improve the speed of the linear solution process is to choose
-a dof reordering that makes the ILU being closer to a full LU decomposition, as
-already mentioned in the in-code comments. The DoFRenumbering namespace compares
-several choices for the renumbering of dofs for the Stokes equations. The best
-result regarding the computing time was found for the King ordering, which is
-accessed through the call DoFRenumbering::boost::king_ordering. With that
-program, the inner solver needs considerably less operations, e.g. about 62
-inner CG iterations for the inversion of $A$ at cycle 4 compared to about 75
-iterations with the standard Cuthill-McKee-algorithm. Also, the computing time
-at cycle 4 decreased from about 17 to 11 minutes for the <code>solve()</code>
-call. However, the King ordering (and the orderings provided by the
-DoFRenumbering::boost namespace in general) has a serious drawback - it uses
-much more memory than the in-build deal versions, since it acts on abstract
-graphs rather than the geometry provided by the triangulation. In the present
-case, the renumbering takes about 5 times as much memory, which yields an
-infeasible algorithm for the last cycle in 3D with 1.2 million
-unknowns.
 
-<a name="BetterpreconditionerfortheinnerCGsolver"></a><h5>Better preconditioner for the inner CG solver</h5>
+</a> 改善线性求解过程速度的第一个尝试是选择一个dof重排序，使ILU被更接近于全LU分解，这在代码内的注释中已经提到。DoFRenumbering命名空间比较了几种对斯托克斯方程的道夫重新编号的选择。关于计算时间的最佳结果是通过调用 DoFRenumbering::boost::king_ordering. 找到的，有了这个程序，内部求解器需要的操作大大减少，例如，在第4周期对 $A$ 进行反演的内部CG迭代约为62次，而标准Cuthill-McKee-算法的迭代约为75次。另外，在第4周期，对于 <code>solve()</code> 的调用，计算时间从大约17分钟减少到11分钟。然而，King排序（以及一般由 DoFRenumbering::boost 命名空间提供的排序）有一个严重的缺点--它比构建中的交易版本使用更多的内存，因为它作用于抽象图而不是由三角化提供的几何图形。在目前的情况下，重新编号需要大约5倍的内存，这就产生了一个不可行的算法，在3D的最后一个周期有120万未知数。
 
-Another idea to improve the situation even more would be to choose a
-preconditioner that makes CG for the (0,0) matrix $A$ converge in a
-mesh-independent number of iterations, say 10 to 30. We have seen such a
-candidate in step-16: multigrid.
+<a name="BetterpreconditionerfortheinnerCGsolver"></a><h5>Better preconditioner for the inner CG solver</h5> 
+
+另一个改善情况的想法是选择一个预处理程序，使(0,0)矩阵 $A$ 的CG在一个与网格无关的迭代次数中收敛，比如10到30。我们已经在 step-16 中看到了这样的候选方案：多网格。
 
 <a name="BlockSchurcomplementpreconditioner"></a><h5>Block Schur complement preconditioner</h5>
 
-<a name="block-schur"></a>
-Even with a good preconditioner for $A$, we still
-need to solve of the same linear system repeatedly (with different
-right hand sides, though) in order to make the Schur complement solve
-converge. The approach we are going to discuss here is how inner iteration
-and outer iteration can be combined. If we persist in calculating the Schur
-complement, there is no other possibility.
+<a name="block-schur"></a> 即使在 $A$ 中有一个好的预处理程序，我们仍然需要反复求解同一个线性系统（虽然右手边不同），以使舒尔补码的求解收敛。我们这里要讨论的方法是如何将内部迭代和外部迭代结合起来。如果我们坚持计算舒尔补码，就没有其他的可能性了。
 
-The alternative is to attack the block system at once and use an approximate
-Schur complement as efficient preconditioner. The idea is as
-follows: If we find a block preconditioner $P$ such that the matrix
-@f{eqnarray*}
+另一种方法是一次性攻击块状系统，并使用近似的Schur补数作为有效的预处理程序。这个想法是这样的。如果我们找到一个块状预处理 $P$ ，使矩阵@f{eqnarray*}
   P^{-1}\left(\begin{array}{cc}
     A & B^T \\ B & 0
   \end{array}\right)
-@f}
-is simple, then an iterative solver with that preconditioner will converge in a
-few iterations. Using the Schur complement $S = B A^{-1} B^T$, one finds that
-@f{eqnarray*}
+@f} 
+
+是简单的，那么使用该预处理程序的迭代求解器将在几次迭代中收敛。使用舒尔补码 $S = B A^{-1} B^T$ ，我们发现@f{eqnarray*}
   P^{-1}
   =
   \left(\begin{array}{cc}
     A^{-1} & 0 \\ S^{-1} B A^{-1} & -S^{-1}
   \end{array}\right)
-@f}
-would appear to be a good choice since
-@f{eqnarray*}
+@f}似乎是一个很好的选择，因为它是一个很简单的矩阵。
+
+似乎是一个很好的选择，因为@f{eqnarray*}
   P^{-1}\left(\begin{array}{cc}
     A & B^T \\ B & 0
   \end{array}\right)
@@ -2778,25 +2275,13 @@ would appear to be a good choice since
     I & A^{-1} B^T \\ 0 & I
   \end{array}\right).
 @f}
-This is the approach taken by the paper by Silvester and Wathen referenced
-to in the introduction (with the exception that Silvester and Wathen use
-right preconditioning). In this case, a Krylov-based iterative method would
-converge in one step only if exact inverses of $A$ and $S$ were applied,
-since all the eigenvalues are one (and the number of iterations in such a
-method is bounded by the number of distinct eigenvalues). Below, we will
-discuss the choice of an adequate solver for this problem. First, we are
-going to have a closer look at the implementation of the preconditioner.
 
-Since $P$ is aimed to be a preconditioner only, we shall use approximations to
-the inverse of the Schur complement $S$ and the matrix $A$. Hence, the Schur
-complement will be approximated by the pressure mass matrix $M_p$, and we use
-a preconditioner to $A$ (without an InverseMatrix class around it) for
-approximating $A^{-1}$.
+这就是引言中提到的Silvester和Wathen的论文所采取的方法（不同的是Silvester和Wathen使用了右预处理）。在这种情况下，基于Krylov的迭代方法只有在应用 $A$ 和 $S$ 的精确求逆器时才会一步收敛，因为所有的特征值都是1（而这种方法的迭代次数是由不同特征值的数量所决定的）。下面，我们将讨论为这个问题选择一个适当的求解器。首先，我们要仔细研究一下预处理程序的实现。
 
-Here comes the class that implements the block Schur
-complement preconditioner. The <code>vmult</code> operation for block vectors
-according to the derivation above can be specified by three successive
-operations:
+由于 $P$ 旨在成为一个预处理程序，我们将使用舒尔补码 $S$ 和矩阵 $A$ 的逆的近似值。因此，舒尔补集将由压力质量矩阵 $M_p$ 近似，我们使用 $A$ 的预处理器（周围没有反矩阵类）来近似 $A^{-1}$ 。
+
+这里有一个实现块状Schur补码预处理的类。根据上面的推导，对块向量的 <code>vmult</code> 操作可以通过三个连续的操作来指定。
+
 @code
 template <class PreconditionerA, class PreconditionerMp>
 class BlockSchurPreconditioner : public Subscriptor
@@ -2806,8 +2291,10 @@ class BlockSchurPreconditioner : public Subscriptor
           const InverseMatrix<SparseMatrix<double>,PreconditionerMp>  &Mpinv,
           const PreconditionerA &Apreconditioner);
 
+
   void vmult (BlockVector<double>       &dst,
               const BlockVector<double> &src) const;
+
 
   private:
     const SmartPointer<const BlockSparseMatrix<double> > system_matrix;
@@ -2815,9 +2302,12 @@ class BlockSchurPreconditioner : public Subscriptor
                        PreconditionerMp > > m_inverse;
     const PreconditionerA &a_preconditioner;
 
+
     mutable Vector<double> tmp;
 
+
 };
+
 
 template <class PreconditionerA, class PreconditionerMp>
 BlockSchurPreconditioner<PreconditionerA, PreconditionerMp>::BlockSchurPreconditioner(
@@ -2831,6 +2321,7 @@ BlockSchurPreconditioner<PreconditionerA, PreconditionerMp>::BlockSchurPrecondit
                 a_preconditioner        (Apreconditioner),
                 tmp                     (S.block(1,1).m())
 {}
+
 
         // Now the interesting function, the multiplication of
         // the preconditioner with a BlockVector.
@@ -2851,72 +2342,25 @@ void BlockSchurPreconditioner<PreconditionerA, PreconditionerMp>::vmult (
         // (i.e. a pressure mass matrix)
   m_inverse->vmult (dst.block(1), tmp);
 }
-@endcode
+@endcode 
 
-Since we act on the whole block system now, we have to live with one
-disadvantage: we need to perform the solver iterations on
-the full block system instead of the smaller pressure space.
 
-Now we turn to the question which solver we should use for the block
-system. The first observation is that the resulting preconditioned matrix cannot
-be solved with CG since it is neither positive definite nor symmetric.
 
-The deal.II libraries implement several solvers that are appropriate for the
-problem at hand. One choice is the solver @ref SolverBicgstab "BiCGStab", which
-was used for the solution of the unsymmetric advection problem in step-9. The
-second option, the one we are going to choose, is @ref SolverGMRES "GMRES"
-(generalized minimum residual). Both methods have their pros and cons - there
-are problems where one of the two candidates clearly outperforms the other, and
-vice versa.
-<a href="http://en.wikipedia.org/wiki/GMRES#Comparison_with_other_solvers">Wikipedia</a>'s
-article on the GMRES method gives a comparative presentation.
-A more comprehensive and well-founded comparison can be read e.g. in the book by
-J.W. Demmel (Applied Numerical Linear Algebra, SIAM, 1997, section 6.6.6).
+由于我们现在在整个块系统上行动，我们必须忍受一个缺点：我们需要在整个块系统上执行求解器迭代，而不是较小的压力空间。
 
-For our specific problem with the ILU preconditioner for $A$, we certainly need
-to perform hundreds of iterations on the block system for large problem sizes
-(we won't beat CG!). Actually, this disfavors GMRES: During the GMRES
-iterations, a basis of Krylov vectors is successively built up and some
-operations are performed on these vectors. The more vectors are in this basis,
-the more operations and memory will be needed. The number of operations scales
-as ${\cal O}(n + k^2)$ and memory as ${\cal O}(kn)$, where $k$ is the number of
-vectors in the Krylov basis and $n$ the size of the (block) matrix.
-To not let these demands grow excessively, deal.II limits the size $k$ of the
-basis to 30 vectors by default.
-Then, the basis is rebuilt. This implementation of the GMRES method is called
-GMRES(k), with default $k=30$. What we have gained by this restriction,
-namely a bound on operations and memory requirements, will be compensated by
-the fact that we use an incomplete basis - this will increase the number of
-required iterations.
+现在我们转向我们应该对块系统使用哪种求解器的问题。第一个观察结果是，所产生的预设条件矩阵不能用CG求解，因为它既不是正定也不是对称的。
 
-BiCGStab, on the other hand, won't get slower when many iterations are needed
-(one iteration uses only results from one preceding step and
-not all the steps as GMRES). Besides the fact the BiCGStab is more expensive per
-step since two matrix-vector products are needed (compared to one for
-CG or GMRES), there is one main reason which makes BiCGStab not appropriate for
-this problem: The preconditioner applies the inverse of the pressure
-mass matrix by using the InverseMatrix class. Since the application of the
-inverse matrix to a vector is done only in approximative way (an exact inverse
-is too expensive), this will also affect the solver. In the case of BiCGStab,
-the Krylov vectors will not be orthogonal due to that perturbation. While
-this is uncritical for a small number of steps (up to about 50), it ruins the
-performance of the solver when these perturbations have grown to a significant
-magnitude in the coarse of iterations.
+deal.II库实现了几个适合手头问题的求解器。一种选择是解算器  @ref SolverBicgstab  "BiCGStab"，它被用于解决  step-9  中的非对称平流问题。第二个选择，也就是我们要选择的，是 @ref SolverGMRES  "GMRES"（广义最小残差）。这两种方法都有其优点和缺点--在有些问题上，两种候选方法中的一种明显优于另一种，反之亦然。<a href="http://en.wikipedia.org/wiki/GMRES#Comparison_with_other_solvers">Wikipedia</a>关于GMRES方法的文章给出了一个比较的介绍。更全面和有根据的比较可以在J.W. Demmel的书中读到（Applied Numerical Linear Algebra, SIAM, 1997, 6.6.6节）。
 
-We did some experiments with BiCGStab and found it to
-be faster than GMRES up to refinement cycle 3 (in 3D), but it became very slow
-for cycles 4 and 5 (even slower than the original Schur complement), so the
-solver is useless in this situation. Choosing a sharper tolerance for the
-inverse matrix class (<code>1e-10*src.l2_norm()</code> instead of
-<code>1e-6*src.l2_norm()</code>) made BiCGStab perform well also for cycle 4,
-but did not change the failure on the very large problems.
+对于我们用ILU预处理 $A$ 的具体问题，对于大的问题规模，我们当然需要对块系统进行数百次迭代（我们不会打败CG！）。实际上，这不利于GMRES。在GMRES迭代过程中，Krylov向量的基础被陆续建立起来，并对这些向量进行一些操作。这个基础上的向量越多，需要的操作和内存就越多。操作的数量以 ${\cal O}(n + k^2)$ 的形式扩展，内存以 ${\cal O}(kn)$ 的形式扩展，其中 $k$ 是Krylov基中的向量数量， $n$ 是（块）矩阵的大小。为了不让这些需求过度增长，deal.II将基的大小 $k$ 默认限制为30个向量。然后，重新建立基。这种GMRES方法的实现被称为GMRES(k)，默认为  $k=30$  。我们通过这一限制所获得的东西，即对操作和内存需求的约束，将被我们使用不完整的基础这一事实所补偿--这将增加所需的迭代次数。
 
-GMRES is of course also effected by the approximate inverses, but it is not as
-sensitive to orthogonality and retains a relatively good performance also for
-large sizes, see the results below.
+另一方面，当需要多次迭代时，BiCGStab不会变慢（一次迭代只使用前面一个步骤的结果，而不是像GMRES那样使用所有的步骤）。除了BiCGStab由于需要两个矩阵-向量乘积（相比之下，CG或GMRES只需要一个），所以每一步的成本更高之外，还有一个主要原因使得BiCGStab不适合这个问题：预处理程序通过使用InverseMatrix类应用压力质量矩阵的逆。由于向量的逆矩阵应用只是以近似的方式进行（精确的逆太昂贵了），这也会影响求解器。在BiCGStab的情况下，由于这种扰动，Krylov向量将不会是正交的。虽然这对于少量的步骤（最多50步）来说是无所谓的，但当这些扰动在迭代的粗放中增长到相当大的程度时，它就会破坏求解器的性能。
 
-With this said, we turn to the realization of the solver call with GMRES with
-$k=100$ temporary vectors:
+我们用BiCGStab做了一些实验，发现它在细化周期3之前比GMRES快（在3D中），但在周期4和5时变得非常慢（甚至比原来的Schur补码还慢），所以求解器在这种情况下是无用的。为逆矩阵类选择一个更尖锐的公差（ <code>1e-10*src.l2_norm()</code> 而不是 <code>1e-6*src.l2_norm()</code> ）使BiCGStab在第4周期也表现良好，但没有改变在非常大的问题上的失败。
+
+GMRES当然也会受到近似求逆的影响，但它对正交性不那么敏感，而且在大问题上也保持了相对较好的性能，见下面的结果。
+
+说到这里，我们转向用 $k=100$ 临时向量实现GMRES的求解器调用。
 
 @code
       const SparseMatrix<double> &pressure_mass_matrix
@@ -2925,12 +2369,15 @@ $k=100$ temporary vectors:
       pmass_preconditioner.initialize (pressure_mass_matrix,
         SparseILU<double>::AdditionalData());
 
+
       InverseMatrix<SparseMatrix<double>,SparseILU<double> >
         m_inverse (pressure_mass_matrix, pmass_preconditioner);
+
 
       BlockSchurPreconditioner<typename InnerPreconditioner<dim>::type,
                                SparseILU<double> >
         preconditioner (system_matrix, m_inverse, *A_preconditioner);
+
 
       SolverControl solver_control (system_matrix.m(),
                                     1e-6*system_rhs.l2_norm());
@@ -2938,35 +2385,31 @@ $k=100$ temporary vectors:
       SolverGMRES<BlockVector<double> >::AdditionalData gmres_data;
       gmres_data.max_n_tmp_vectors = 100;
 
+
       SolverGMRES<BlockVector<double> > gmres(solver_control, vector_memory,
                                               gmres_data);
+
 
       gmres.solve(system_matrix, solution, system_rhs,
                   preconditioner);
 
+
       constraints.distribute (solution);
+
 
       std::cout << " "
                 << solver_control.last_step()
                 << " block GMRES iterations";
-@endcode
+@endcode 
 
-Obviously, one needs to add the include file @ref SolverGMRES
-"<lac/solver_gmres.h>" in order to make this run.
-We call the solver with a BlockVector template in order to enable
-GMRES to operate on block vectors and matrices.
-Note also that we need to set the (1,1) block in the system
-matrix to zero (we saved the pressure mass matrix there which is not part of the
-problem) after we copied the information to another matrix.
 
-Using the Timer class, we collect some statistics that compare the runtime
-of the block solver with the one from the problem implementation above.
-Besides the solution with the two options we also check if the solutions
-of the two variants are close to each other (i.e. this solver gives indeed the
-same solution as we had before) and calculate the infinity
-norm of the vector difference.
 
-Let's first see the results in 2D:
+显然，需要添加include文件 @ref SolverGMRES "<lac/solver_gmres.h>"，以使其运行。我们用BlockVector模板来调用求解器，以便使GMRES能够对块状向量和矩阵进行操作。还要注意的是，在我们将信息复制到另一个矩阵之后，我们需要将系统矩阵中的（1,1）块设置为零（我们将压力质量矩阵保存在那里，这不是问题的一部分）。
+
+使用定时器类，我们收集了一些统计数据，将块解算器的运行时间与上述问题实现的运行时间进行比较。除了两个选项的解法，我们还检查了两个变体的解法是否接近（即这个解法给出的解法确实和我们之前的解法一样），并计算了向量差的无穷大准则。
+
+我们先来看看二维的结果。
+
 @code
 Refinement cycle 0
    Number of active cells: 64
@@ -2978,6 +2421,7 @@ Refinement cycle 0
       Block Schur preconditioner: 12 GMRES iterations [0.00441718 s]
    l_infinity difference between solution vectors: 5.38258e-07
 
+
 Refinement cycle 1
    Number of active cells: 160
    Number of degrees of freedom: 1683 (1482+201) [0.00345707 s]
@@ -2987,6 +2431,7 @@ Refinement cycle 1
       Schur complement: 11 outer CG iterations for p  [0.0123992s ]
       Block Schur preconditioner: 12 GMRES iterations [0.011909 s]
    l_infinity difference between solution vectors: 1.74658e-05
+
 
 Refinement cycle 2
    Number of active cells: 376
@@ -2998,6 +2443,7 @@ Refinement cycle 2
       Block Schur preconditioner: 12 GMRES iterations [0.029232 s]
    l_infinity difference between solution vectors: 7.81569e-06
 
+
 Refinement cycle 3
    Number of active cells: 880
    Number of degrees of freedom: 8723 (7722+1001) [0.017709 s]
@@ -3007,6 +2453,7 @@ Refinement cycle 3
       Schur complement: 11 outer CG iterations for p  [0.0971651s ]
       Block Schur preconditioner: 12 GMRES iterations [0.0992041 s]
    l_infinity difference between solution vectors: 1.87249e-05
+
 
 Refinement cycle 4
    Number of active cells: 2008
@@ -3018,6 +2465,7 @@ Refinement cycle 4
       Block Schur preconditioner: 13 GMRES iterations [0.269125 s]
    l_infinity difference between solution vectors: 6.38657e-05
 
+
 Refinement cycle 5
    Number of active cells: 4288
    Number of degrees of freedom: 40855 (36250+4605) [0.0880702 s]
@@ -3027,16 +2475,13 @@ Refinement cycle 5
       Schur complement: 11 outer CG iterations for p  [0.53846s ]
       Block Schur preconditioner: 13 GMRES iterations [0.578667 s]
    l_infinity difference between solution vectors: 0.000173363
-@endcode
+@endcode 
 
-We see that there is no huge difference in the solution time between the
-block Schur complement preconditioner solver and the Schur complement
-itself. The reason is simple: we used a direct solve as preconditioner for
-$A$ - so we cannot expect any gain by avoiding the inner iterations. We see
-that the number of iterations has slightly increased for GMRES, but all in
-all the two choices are fairly similar.
 
-The picture of course changes in 3D:
+
+我们看到，块状舒尔补码预处理求解器和舒尔补码本身在求解时间上没有巨大的差别。原因很简单：我们用直接求解作为 $A$ 的前置条件--所以我们不能指望通过避免内部迭代获得任何收益。我们看到，GMRES的迭代次数略有增加，但总的来说，这两种选择相当相似。
+
+当然，情况在三维中发生了变化。
 
 @code
 Refinement cycle 0
@@ -3049,6 +2494,7 @@ Refinement cycle 0
       Block Schur preconditioner: 22 GMRES iterations [0.0048759 s]
    l_infinity difference between solution vectors: 2.15942e-05
 
+
 Refinement cycle 1
    Number of active cells: 144
    Number of degrees of freedom: 5088 (4827+261) [0.0346942 s]
@@ -3058,6 +2504,7 @@ Refinement cycle 1
       Schur complement: 14 outer CG iterations for p  [0.349258s ]
       Block Schur preconditioner: 35 GMRES iterations [0.048759 s]
    l_infinity difference between solution vectors: 1.77657e-05
+
 
 Refinement cycle 2
    Number of active cells: 704
@@ -3069,6 +2516,7 @@ Refinement cycle 2
       Block Schur preconditioner: 63 GMRES iterations [0.497787 s]
    l_infinity difference between solution vectors: 5.08078e-05
 
+
 Refinement cycle 3
    Number of active cells: 3168
    Number of degrees of freedom: 93176 (89043+4133) [0.790985 s]
@@ -3078,6 +2526,7 @@ Refinement cycle 3
       Schur complement: 15 outer CG iterations for p  [29.9666s ]
       Block Schur preconditioner: 128 GMRES iterations [5.02645 s]
    l_infinity difference between solution vectors: 0.000119671
+
 
 Refinement cycle 4
    Number of active cells: 11456
@@ -3089,6 +2538,7 @@ Refinement cycle 4
       Block Schur preconditioner: 255 GMRES iterations [38.0946 s]
    l_infinity difference between solution vectors: 0.00020793
 
+
 Refinement cycle 5
    Number of active cells: 45056
    Number of degrees of freedom: 1254464 (1201371+53093) [19.6795 s]
@@ -3098,47 +2548,32 @@ Refinement cycle 5
       Schur complement: 14 outer CG iterations for p  [796.767s ]
       Block Schur preconditioner: 524 GMRES iterations [355.597 s]
    l_infinity difference between solution vectors: 0.000501219
-@endcode
+@endcode 
 
-Here, the block preconditioned solver is clearly superior to the Schur
-complement, but the advantage gets less for more mesh points. This is
-because GMRES(k) scales worse with the problem size than CG, as we discussed
-above.  Nonetheless, the improvement by a factor of 3-6 for moderate problem
-sizes is quite impressive.
+
+
+在这里，块状预处理求解器明显优于Schur补数，但网格点越多，优势就越小。这是因为GMRES(k)随着问题规模的扩大比CG更差，正如我们上面所讨论的。 尽管如此，对于中等规模的问题，3-6倍的改进是相当令人印象深刻的。
 
 
 <a name="Combiningtheblockpreconditionerandmultigrid"></a><h5>Combining the block preconditioner and multigrid</h5>
 
-An ultimate linear solver for this problem could be imagined as a
-combination of an optimal
-preconditioner for $A$ (e.g. multigrid) and the block preconditioner
-described above, which is the approach taken in the step-31
-and step-32 tutorial programs (where we use an algebraic multigrid
-method) and step-56 (where we use a geometric multigrid method).
+这个问题的终极线性求解器可以想象为 $A$ 的最佳预处理器（例如多网格）和上述的块状预处理器的组合，这是 step-31 和 step-32 教程程序（我们使用代数多网格方法）和 step-56 （我们使用几何多网格方法）中采取的方法。
 
 
-<a name="Noblockmatricesandvectors"></a><h5>No block matrices and vectors</h5>
+<a name="Noblockmatricesandvectors"></a><h5>No block matrices and vectors</h5> 
 
-Another possibility that can be taken into account is to not set up a block
-system, but rather solve the system of velocity and pressure all at once. The
-options are direct solve with UMFPACK (2D) or GMRES with ILU
-preconditioning (3D). It should be straightforward to try that.
+另一种可以考虑的可能性是不设置块状系统，而是一次性解决速度和压力的系统。可以选择用UMFPACK直接求解（2D）或用ILU预处理的GMRES（3D）。这应该是很直接的尝试。
+
 
 
 
 <a name="Moreinterestingtestcases"></a><h4>More interesting testcases</h4>
 
 
-The program can of course also serve as a basis to compute the flow in more
-interesting cases. The original motivation to write this program was for it to
-be a starting point for some geophysical flow problems, such as the
-movement of magma under places where continental plates drift apart (for
-example mid-ocean ridges). Of course, in such places, the geometry is more
-complicated than the examples shown above, but it is not hard to accommodate
-for that.
+当然，这个程序也可以作为在更有趣的情况下计算流量的基础。编写这个程序的最初动机是希望它能成为一些地球物理流动问题的起点，例如在大陆板块漂移分开的地方（例如大洋中脊）岩浆的运动。当然，在这种地方，几何形状比上面的例子更复杂，但要适应这种情况并不难。
 
-For example, by using the following modification of the boundary values
-function
+例如，通过使用以下对边界值函数的修改 
+
 @code
 template <int dim>
 double
@@ -3148,20 +2583,24 @@ BoundaryValues<dim>::value (const Point<dim>  &p,
   Assert (component < this->n_components,
           ExcIndexRange (component, 0, this->n_components));
 
+
   const double x_offset = std::atan(p[1]*4)/3;
+
 
   if (component == 0)
     return (p[0] < x_offset ? -1 : (p[0] > x_offset ? 1 : 0));
   return 0;
 }
-@endcode
-and the following way to generate the mesh as the domain
-$[-2,2]\times[-2,2]\times[-1,0]$
+@endcode 
+
+和以下方式生成网格作为域 $[-2,2]\times[-2,2]\times[-1,0]$ 。 
+
 @code
     std::vector<unsigned int> subdivisions (dim, 1);
     subdivisions[0] = 4;
     if (dim>2)
       subdivisions[1] = 4;
+
 
     const Point<dim> bottom_left = (dim == 2 ?
                                     Point<dim>(-2,-1) :
@@ -3170,13 +2609,14 @@ $[-2,2]\times[-2,2]\times[-1,0]$
                                     Point<dim>(2,0) :
                                     Point<dim>(2,2,0));
 
+
     GridGenerator::subdivided_hyper_rectangle (triangulation,
                                                subdivisions,
                                                bottom_left,
                                                top_right);
-@endcode
-then we get images where the fault line is curved:
-<table width="60%" align="center">
+@endcode 
+
+然后我们得到断层线是弯曲的图像。  <table width="60%" align="center">
   <tr>
     <td align="center">
       <img src="https://www.dealii.org/images/steps/developer/step-22.3d-extension.png" alt="">
@@ -3185,10 +2625,6 @@ then we get images where the fault line is curved:
       <img src="https://www.dealii.org/images/steps/developer/step-22.3d-grid-extension.png" alt="">
     </td>
   </tr>
-</table>
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-22.cc"
-*/
+</table>  <a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-22.cc"  。 
+
+  */  

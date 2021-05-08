@@ -17,16 +17,9 @@
 /**
  * @defgroup CPP11 deal.II and the C++11 standard
  *
- * Since version 9.0, deal.II requires a compiler that supports at
- * least <a href="http://en.wikipedia.org/wiki/C%2B%2B11">C++11</a>.
- * As part of this, many places in the internal implementation of
- * deal.II are now using features that were only introduced in C++11.
- * That said, deal.II also has functions and classes that make using
- * it with C++11 features easier.
+ *从版本9起，Del.II需要至少支持 <a href="http://en.wikipedia.org/wiki/C%2B%2B11">C++11</a> 的编译器。作为这一部分的一部分，Del.II内部实现的许多地方现在使用的是仅在C++ 11中引入的特性。也就是说，Del.II还具有使C++与C++ 11更容易使用的功能和类。
  *
- * One example is support for C++11
- * <a href="http://en.wikipedia.org/wiki/C++11#Range-based_for_loop">range-based
- * for loops</a>. deal.II-based codes often have many loops of the kind
+ *一个例子是支持基于C++的11范围的循环<a href="http://en.wikipedia.org/wiki/C++11#Range-based_for_loop">range-based for loops</a>。基于deal.II的代码通常有许多这样的循环
  * @code
  *   Triangulation<dim> triangulation;
  *   ...
@@ -36,95 +29,54 @@
  *   for (; cell!=endc; ++cell)
  *     cell->set_refine_flag();
  * @endcode
- * Using C++11's range-based for loops, you can now write this as follows:
+ *使用C++ 11的基于循环的范围，现在可以将其写入如下：
  * @code
  *   Triangulation<dim> triangulation;
  *   ...
  *   for (auto &cell : triangulation.active_cell_iterators())
  *     cell->set_refine_flag();
  * @endcode
- * This relies on functions such as Triangulation::active_cell_iterators(),
- * and equivalents in the DoF handler classes,
- * DoFHandler::active_cell_iterators(), hp::DoFHandler::active_cell_iterators().
- * There are variants of these functions that provide iterator ranges
- * for all cells (not just the active ones) and for cells on individual
- * levels.
+ *这依赖于如下函数 Triangulation::active_cell_iterators(),类似的还有DoFHandler类中的
+ DoFHandler::active_cell_iterators(), hp::DoFHandler::active_cell_iterators().这些函数的一些变体为所有单元格（不仅仅是活动单元格）和各个级别的单元格提供迭代器范围。
  *
- * There are numerous other functions in the library that allow for
- * the idiomatic use of range-based for loops. Examples are
- * GeometryInfo::face_indices(), GeometryInfo::vertex_indices(),
- * FEValuesBase::quadrature_point_indices(), among many others.
+ *库中还有许多其他函数允许习惯性地使用基于范围的for循环。例如，GeometryInfo::face_indices(), GeometryInfo::vertex_indices(), FEValuesBase::quadrature_point_indices(), 等等.
  *
- * C++11 also introduces the concept of
- * [constexpr](https://en.cppreference.com/w/cpp/language/constexpr)
- * variables and function. The variables defined as `constexpr` are constant
- * values that are computed during the compilation of the program and therefore
- * have zero runtime cost associated with their initialization. Additionally,
- * `constexpr` constants have properly defined lifetimes which prevent the
- * so-called "static initialization order fiasco" completely. %Functions can be
- * marked as `constexpr`, indicating that they can produce compile-time
- * constant return values if their input arguments are constant expressions.
- * Additionally, classes with at least one `constexpr` constructor can be
- * initialized as `constexpr`.
- *
- * As an example, since the constructor Tensor::Tensor(const array_type &) is
- * `constexpr`, we can initialize a tensor with an array during compile time
- * as:
- * @code
+ *C++ 11还介绍了[constexpr](https://en.cppreference.com/w/cpp/language/constexpr)和函数的概念。定义为constexpr的变量是在程序编译期间计算的常量值，因此与初始化相关的运行时成本为零。此外，constexpr常量还正确定义了生存期，从而完全防止了所谓的“静态初始化顺序失败”。函数可以标记为constexpr，表示如果它们的输入参数是常量表达式，则可以生成编译时常量返回值。此外，至少有一个constexpr构造函数的类可以初始化为`constexpr`。
+ * 
+ *例如，由于构造函数 Tensor::Tensor(const array_type &) 是`constexpr`，我们可以在编译时用数组初始化一个张量，如下所示：
+* @code
  * constexpr double[2][2] entries = {{1., 0.}, {0., 1.}};
  * constexpr Tensor<2, 2> A(entries);
  * @endcode
- * Here, the contents of A are not stored on the stack. Rather, they are
- * initialized during compile time and inserted into the `.data` portion
- * of the executable program. The program can use these values at runtime
- * without spending time for initialization. Initializing tensors can be
- * simplified in one line.
- * @code
+ *这里，A的内容不存储在堆栈上。相反，它们在编译时初始化并插入到可执行程序的.data部分。程序可以在运行时使用这些值，而无需花费时间进行初始化。初始化张量可以简化为一行。
+* @code
  * constexpr Tensor<2, 2> A({{1., 0.}, {0., 1.}});
  * @endcode
- * Some functions such as determinant() are specified as `constexpr` but they
- * require a compiler with C++14 capability. As such, this function is
- * internally declared as:
- * @code
+ *某些函数，如 determinant()被指定为CONTXPR，但它们需要具有C++ 14能力的编译器。因此，该函数在内部声明为：
+* @code
  * template <int dim, typename Number>
  * DEAL_II_CONSTEXPR Number determinant(const Tensor<2, dim, Number> &t);
  * @endcode
- * The macro @ref DEAL_II_CONSTEXPR simplifies to `constexpr` if a C++14-capable
- * compiler is available. Otherwise, for old compilers, it ignores
- * DEAL_II_CONSTEXPR altogether.
- * Therefore, with newer compilers, the user can write
+ *如果编译器支持C++14，那么宏macro @ref DEAL_II_CONSTEXPR 将被简化为 `constexpr` 。不然, 会被忽略。因此，使用较新的编译器，用户可以编写
  * @code
  * constexpr double det_A = determinant(A);
  * @endcode
- * assuming `A` is declared with the `constexpr` specifier. This example shows
- * the performance gains of using `constexpr` because here we performed an
- * operation with $O(\text{dim}^3)$ complexity during compile time, avoiding
- * any runtime cost.
+ *假设`A`用 `constexpr`说明符声明了。这个例子展示了使用constexpr的性能提升，因为在这里我们在编译时执行了一个复杂度为 $O(\text{dim}^3)$ 的操作，避免了任何运行时开销。
  */
 
 
 
 /**
- * deal.II currently only requires a C++11-conforming compiler, but there are a
- * number of functions and classes from the C++14 standard that are easy to
- * provide also in case the compiler only supports C++11. These are collected
- * in the current namespace.
+ *Del.II目前只需要一个C++ 11兼容编译器，但是有许多来自C++ 14标准的函数和类，在编译器只支持C++ 11的情况下，也很容易提供。这些是在当前命名空间中收集的。
  *
- * The most notable example is the <a
- * href="https://en.cppreference.com/w/cpp/memory/unique_ptr/make_unique">`std::make_unique`</a>
- * function which is arguably an oversight for not having been
- * included in C++11 (given that there is <a
- * href="https://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared">`std::make_shared`</a>
- * in C++11).
+ *最为著名的例子是 <a
+ *href="https://en.cppreference.com/w/cpp/memory/unique_ptr/make_unique">`std::make_unique`</a>
+ *函数，它可以被忽略为没有包含在C++11中(因为在C++11中存在 <a
+ * href="https://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared">`std::make_shared`</a>).
  *
- * There are other small additions in this namespace that allow us to
- * use C++14 features at this point already, even though we don't
- * require a C++14-compliant compiler.
+ *在这个命名空间中还有其他的小的添加，允许我们在这一点上使用C++ 14的特性，即使我们不需要C++ 14兼容编译器。
  *
- * @note If the compiler in use actually does support C++14, then the
- *   contents of this namespace are simply imported classes and
- *   functions from namespace `std`. That is, we fall back to what the
- *   compiler provides, rather than our own implementations.
+ * @note 如果使用中的编译器实际上支持C++ 14，那么这个命名空间的内容就是从命名空间“STD”中简单导入的类和函数。也就是说，我们退回到编译器提供的内容，而不是我们自己的实现。
  */
 namespace std_cxx14
 {}
@@ -132,23 +84,14 @@ namespace std_cxx14
 
 
 /**
- * deal.II currently only requires a C++11-conforming compiler, but there are a
- * number of functions and classes from the C++17 standard that are easy to
- * provide also in case the compiler only supports C++11. These are collected
- * in the current namespace.
+ *Del.II目前只需要一个C++ 11兼容编译器，但是有许多来自C++ 17标准的函数和类，在编译器只支持C++ 11的情况下，也很容易提供。这些是在当前命名空间中收集的。
  *
- * The most notable example is the <a
- * href="https://en.cppreference.com/w/cpp/utility/optional">`std::optional`</a> class
- * that was introduced to C++ starting with the C++17 standard.
+ *最显著的例子是<a
+ * href="https://en.cppreference.com/w/cpp/utility/optional">`std::optional`</a>从C++ 17标准开始的C++类的可选类。
  *
- * There are other small additions in this namespace that allow us to
- * use C++17 features at this point already, even though we don't
- * require a C++17-compliant compiler.
+ *在这个命名空间中还有其他的小的添加，允许我们在这一点上使用C++ 17的特性，即使我们不需要C++ 17兼容编译器。
  *
- * @note If the compiler in use actually does support C++17, then the
- *   contents of this namespace are simply imported classes and
- *   functions from namespace `std`. That is, we fall back to what the
- *   compiler provides, rather than our own implementations.
+ * @note 如果使用中的编译器实际上支持C++ 17，那么这个命名空间的内容只是从命名空间STD导入的类和函数，也就是说，我们回到编译器所提供的，而不是我们自己的实现。
  */
 namespace std_cxx17
 {}
@@ -156,29 +99,15 @@ namespace std_cxx17
 
 
 /**
- * deal.II currently only requires a C++11-conforming compiler, but there are a
- * number of functions and classes from the C++20 standard that are easy to
- * provide also in case the compiler only supports C++11. These are collected
- * in the current namespace.
+ *Del.II目前只需要一个C++ 11兼容编译器，但是有许多来自C++ 20标准的函数和类，在编译器只支持C++ 11的情况下，也很容易提供。这些是在当前命名空间中收集的。
  *
- * One example is the <a
+ *其中的一个例子是 <a
  * href="https://en.cppreference.com/w/cpp/ranges/iota_view">`std::ranges::iota_view`</a>
- * class that was introduced to C++ starting with the C++20
- * standard. It is used as the return type for the
- * GeometryInfo::face_indices(), GeometryInfo::vertex_indices(), and
- * FEValuesBase::quadrature_point_indices() functions, among others,
- * to support range-based for loops (see @ref CPP11 for examples of
- * range-based for loops, as well as the documentation of the
- * functions mentioned above).
+ *这个类从C++ 20标准开始，将其引入到C++中。它用作 GeometryInfo::face_indices(), GeometryInfo::vertex_indices(), 和 FEValuesBase::quadrature_point_indices() functions, 支持基于范围的for循环。(参考 @ref CPP11 的介绍）
  *
- * There are other small additions in this namespace that allow us to
- * use C++20 features at this point already, even though we don't
- * require a C++20-compliant compiler.
+ *在这个命名空间中还有其他的小的添加，允许我们在这一点上使用C++ 20的特性，即使我们不需要C++ 20兼容编译器。
  *
- * @note If the compiler in use actually does support C++20, then the
- *   contents of this namespace are simply imported classes and
- *   functions from namespace `std`. That is, we fall back to what the
- *   compiler provides, rather than our own implementations.
+ * @note 如果使用中的编译器实际上支持C++ 20，那么这个命名空间的内容只是从命名空间STD导入的类和函数，也就是说，我们回到编译器所提供的，而不是我们自己的实现。
  */
 namespace std_cxx20
 {}

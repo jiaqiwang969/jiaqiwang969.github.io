@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-36 tutorial program</title>
+<title>The deal.II Library: The step-36 tutorial program 。</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,117 +86,116 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-36 tutorial program </div>  </div>
+<div class="title">The step-36 tutorial program 。 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_4.html">step-4</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_4.html">step-4</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#EigenvaluesandDirichletboundaryconditions">Eigenvalues and Dirichlet boundary conditions</a>
-        <li><a href="#Implementationdetails">Implementation details</a>
+        <li><a href="#EigenvaluesandDirichletboundaryconditions">Eigenvalues and Dirichlet boundary conditions</a><a href="#EigenvaluesandDirichletboundaryconditions">Eigenvalues and Dirichlet boundary conditions</a>
+        <li><a href="#Implementationdetails">Implementation details</a><a href="#Implementationdetails">Implementation details</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#ThecodeEigenvalueProblemcodeclasstemplate">The <code>EigenvalueProblem</code> class template</a>
-        <li><a href="#ImplementationofthecodeEigenvalueProblemcodeclass">Implementation of the <code>EigenvalueProblem</code> class</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#ThecodeEigenvalueProblemcodeclasstemplate">The <code>EigenvalueProblem</code> class template</a><a href="#ThecodeEigenvalueProblemcodeclasstemplate">The <code>EigenvalueProblem</code> class template</a>
+        <li><a href="#ImplementationofthecodeEigenvalueProblemcodeclass">Implementation of the <code>EigenvalueProblem</code> class</a><a href="#ImplementationofthecodeEigenvalueProblemcodeclass">Implementation of the <code>EigenvalueProblem</code> class</a>
       <ul>
-        <li><a href="#EigenvalueProblemEigenvalueProblem">EigenvalueProblem::EigenvalueProblem</a>
-        <li><a href="#EigenvalueProblemmake_grid_and_dofs">EigenvalueProblem::make_grid_and_dofs</a>
-        <li><a href="#EigenvalueProblemassemble_system">EigenvalueProblem::assemble_system</a>
-        <li><a href="#EigenvalueProblemsolve">EigenvalueProblem::solve</a>
-        <li><a href="#EigenvalueProblemoutput_results">EigenvalueProblem::output_results</a>
-        <li><a href="#EigenvalueProblemrun">EigenvalueProblem::run</a>
+        <li><a href="#EigenvalueProblemEigenvalueProblem">EigenvalueProblem::EigenvalueProblem</a><a href="#EigenvalueProblemEigenvalueProblem">EigenvalueProblem::EigenvalueProblem</a>
+        <li><a href="#EigenvalueProblemmake_grid_and_dofs">EigenvalueProblem::make_grid_and_dofs</a><a href="#EigenvalueProblemmake_grid_and_dofs">EigenvalueProblem::make_grid_and_dofs</a>
+        <li><a href="#EigenvalueProblemassemble_system">EigenvalueProblem::assemble_system</a><a href="#EigenvalueProblemassemble_system">EigenvalueProblem::assemble_system</a>
+        <li><a href="#EigenvalueProblemsolve">EigenvalueProblem::solve</a><a href="#EigenvalueProblemsolve">EigenvalueProblem::solve</a>
+        <li><a href="#EigenvalueProblemoutput_results">EigenvalueProblem::output_results</a><a href="#EigenvalueProblemoutput_results">EigenvalueProblem::output_results</a>
+        <li><a href="#EigenvalueProblemrun">EigenvalueProblem::run</a><a href="#EigenvalueProblemrun">EigenvalueProblem::run</a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Runningtheproblem">Running the problem</a>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Runningtheproblem">Running the problem</a><a href="#Runningtheproblem">Running the problem</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
+</p>
+<p><br  />
  <br  />
 </p>
 <p><em>This program was contributed by Toby D. Young and Wolfgang Bangerth. </em></p>
-<p><a class="anchor" id="Preamble"></a> <a class="anchor" id="Preamble"></a></p><h1>Preamble</h1>
-<p>The problem we want to solve in this example is an eigenspectrum problem. Eigenvalue problems appear in a wide context of problems, for example in the computation of electromagnetic standing waves in cavities, vibration modes of drum membranes, or oscillations of lakes and estuaries. One of the most enigmatic applications is probably the computation of stationary or quasi-static wave functions in quantum mechanics. The latter application is what we would like to investigate here, though the general techniques outlined in this program are of course equally applicable to the other applications above.</p>
-<p>Eigenspectrum problems have the general form </p><p class="formulaDsp">
+<p><a class="anchor" id="Preamble"></a><a class="anchor" id="Preamble"></a></p><h1>Preamble</h1>
+<p>在这个例子中，我们要解决的问题是一个特征谱问题。特征值问题出现在广泛的问题背景中，例如，在计算腔体中的电磁驻波、鼓膜的振动模式或湖泊和河口的振荡中。最神秘的应用之一可能是量子力学中静止或准静止波函数的计算。后一种应用是我们在此想研究的，尽管本方案中概述的一般技术当然同样适用于上述其他应用。</p>
+<p>Eigenspectrum问题的一般形式是</p>
+<p class="formulaDsp">
 \begin{align*} L \Psi &amp;= \varepsilon \Psi \qquad &amp;&amp;\text{in}\ \Omega\quad, \\ \Psi &amp;= 0 &amp;&amp;\text{on}\ \partial\Omega\quad, \end{align*}
 </p>
-<p> where the Dirichlet boundary condition on \(\Psi=\Psi(\mathbf x)\) could also be replaced by Neumann or Robin conditions; \(L\) is an operator that generally also contains differential operators.</p>
-<p>Under suitable conditions, the above equations have a set of solutions \(\Psi_\ell,\varepsilon_\ell\), \(\ell\in {\cal I}\), where \(\cal I\) can be a finite or infinite set (and in the latter case it may be a discrete or sometimes at least in part a continuous set). In either case, let us note that there is no longer just a single solution, but a set of solutions (the various eigenfunctions and corresponding eigenvalues) that we want to compute. The problem of numerically finding all eigenvalues (eigenfunctions) of such eigenvalue problems is a formidable challenge. In fact, if the set \(\cal I\) is infinite, the challenge is of course intractable. Most of the time however we are really only interested in a small subset of these values (functions); and fortunately, the interface to the SLEPc library that we will use for this tutorial program allows us to select which portion of the eigenspectrum and how many solutions we want to solve for.</p>
-<p>In this program, the eigenspectrum solvers we use are classes provided by deal.II that wrap around the linear algebra implementation of the <a href="http://www.grycap.upv.es/slepc/" target="_top">SLEPc</a> library; SLEPc itself builds on the <a href="http://www.mcs.anl.gov/petsc/" target="_top">PETSc</a> library for linear algebra contents.</p>
+<p>其中 \(\Psi=\Psi(\mathbf x)\) 上的Dirichlet边界条件也可以用Neumann或Robin条件代替； \(L\) 是一个算子，一般也包含微分算子。</p>
+<p>在合适的条件下，上述方程有一组解 \(\Psi_\ell,\varepsilon_\ell\) , \(\ell\in {\cal I}\) ，其中 \(\cal I\) 可以是一个有限或无限的集合（在后一种情况下，它可能是一个离散的或有时至少部分是一个连续的集合）。在这两种情况下，让我们注意到，我们要计算的不再只是一个单一的解，而是一组解（各种特征函数和相应的特征值）。从数字上寻找这类特征值问题的所有特征值（特征函数）的问题是一个艰巨的挑战。事实上，如果集合 \(\cal I\) 是无限的，这个挑战当然是难以解决的。 然而，大多数时候，我们实际上只对这些值（函数）的一小部分感兴趣；幸运的是，我们在这个教程程序中使用的SLEPc库的接口允许我们选择特征谱的哪一部分和我们想要解决的多少个解决方案。</p>
+<p>在这个程序中，我们使用的eigenspectrum求解器是由deal.II提供的类，这些类包裹着<a href="http://www.grycap.upv.es/slepc/" target="_top">SLEPc</a>库的线性代数实现；SLEPc本身建立在<a href="http://www.mcs.anl.gov/petsc/" target="_top">PETSc</a>库的线性代数内容上。</p>
 <p><a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
-<p>The basic equation of stationary quantum mechanics is the Schrödinger equation which models the motion of particles in an external potential \(V(\mathbf x)\). The particle is described by a wave function \(\Psi(\mathbf x)\) that satisfies a relation of the (nondimensionalized) form </p><p class="formulaDsp">
+<p>静态量子力学的基本方程是薛定谔方程，它模拟了粒子在外部势中的运动 \(V(\mathbf x)\) 。粒子由一个波函数 \(\Psi(\mathbf x)\) 描述，该波函数满足（非维度化）形式的关系</p>
+<p class="formulaDsp">
 \begin{align*} [-\Delta + V(\mathbf x)] \Psi(\mathbf x) &amp;= \varepsilon \Psi(\mathbf x) \qquad &amp;&amp;\text{in}\ \Omega\quad, \\ \Psi &amp;= 0 &amp;&amp;\text{on}\ \partial\Omega\quad. \end{align*}
 </p>
-<p> As a consequence, this particle can only exist in a certain number of eigenstates that correspond to the energy eigenvalues \(\varepsilon_\ell\) admitted as solutions of this equation. The orthodox (Copenhagen) interpretation of quantum mechanics posits that, if a particle has energy \(\varepsilon_\ell\) then the probability of finding it at location \(\mathbf x\) is proportional to \(|\Psi_\ell(\mathbf x)|^2\) where \(\Psi_\ell\) is the eigenfunction that corresponds to this eigenvalue.</p>
-<p>In order to numerically find solutions to this equation, i.e. a set of pairs of eigenvalues/eigenfunctions, we use the usual finite element approach of multiplying the equation from the left with test functions, integrating by parts, and searching for solutions in finite dimensional spaces by approximating \(\Psi(\mathbf x)\approx\Psi_h(\mathbf x)=\sum_{j}\phi_j(\mathbf x)\tilde\psi_j\), where \(\tilde\psi\) is a vector of expansion coefficients. We then immediately arrive at the following equation that discretizes the continuous eigenvalue problem: </p><p class="formulaDsp">
+<p>因此，这个粒子只能存在于一定数量的特征态中，这些特征态对应于作为该方程解的能量特征值 \(\varepsilon_\ell\) 。量子力学的正统（哥本哈根）解释认为，如果一个粒子具有能量 \(\varepsilon_\ell\) ，那么在位置 \(\mathbf x\) 发现它的概率与 \(|\Psi_\ell(\mathbf x)|^2\) 成正比，其中 \(\Psi_\ell\) 是对应于这个特征值的特征函数。</p>
+<p>为了在数值上找到这个方程的解，即一组成对的特征值/特征函数，我们使用通常的有限元方法，将左边的方程与测试函数相乘，通过部分积分，在有限维空间中通过近似 \(\Psi(\mathbf x)\approx\Psi_h(\mathbf x)=\sum_{j}\phi_j(\mathbf x)\tilde\psi_j\) 寻找解，其中 \(\tilde\psi\) 是膨胀系数的向量。然后我们立即得出以下方程，该方程将连续特征值问题离散化： </p><p class="formulaDsp">
 \[ \sum_j [(\nabla\phi_i, \nabla\phi_j)+(V(\mathbf x)\phi_i,\phi_j)] \tilde{\psi}_j = \varepsilon_h \sum_j (\phi_i, \phi_j) \tilde{\psi}_j\quad. \]
 </p>
-<p> In matrix and vector notation, this equation then reads: </p><p class="formulaDsp">
+<p> 用矩阵和矢量符号表示，该方程为。 </p><p class="formulaDsp">
 \[ A \tilde{\Psi} = \varepsilon_h M \tilde{\Psi} \quad, \]
 </p>
-<p> where \(A\) is the stiffness matrix arising from the differential operator \(L\), and \(M\) is the mass matrix. The solution to the eigenvalue problem is an eigenspectrum \(\varepsilon_{h,\ell}\), with associated eigenfunctions \(\Psi_\ell=\sum_j \phi_j\tilde{\psi}_j\).</p>
+<p> 其中 \(A\) 是由微分算子 \(L\) 产生的刚度矩阵，而 \(M\) 是质量矩阵。特征值问题的解决方案是一个特征谱 \(\varepsilon_{h,\ell}\) ，以及相关的特征函数 \(\Psi_\ell=\sum_j \phi_j\tilde{\psi}_j\) 。</p>
 <p><a class="anchor" id="EigenvaluesandDirichletboundaryconditions"></a></p><h3>Eigenvalues and Dirichlet boundary conditions</h3>
-<p>In this program, we use Dirichlet boundary conditions for the wave function \(\Psi\). What this means, from the perspective of a finite element code, is that only the interior degrees of freedom are real degrees of <em>freedom</em>: the ones on the boundary are not free but are forced to have a zero value, after all. On the other hand, the finite element method gains much of its power and simplicity from the fact that we just do the same thing on every cell, without having to think too much about where a cell is, whether it bounds on a less refined cell and consequently has a hanging node, or is adjacent to the boundary. All such checks would make the assembly of finite element linear systems unbearably difficult to write and even more so to read.</p>
-<p>Consequently, of course, when you distribute degrees of freedom with your <a class="el" href="classDoFHandler.html">DoFHandler</a> object, you don't care whether some of the degrees of freedom you enumerate are at a Dirichlet boundary. They all get numbers. We just have to take care of these degrees of freedom at a later time when we apply boundary values. There are two basic ways of doing this (either using <a class="el" href="namespaceMatrixTools.html#a9ad0eb7a8662628534586716748d62fb">MatrixTools::apply_boundary_values()</a> <em>after</em> assembling the linear system, or using <a class="el" href="classAffineConstraints.html#a373fbdacd8c486e675b8d2bff8943192">AffineConstraints::distribute_local_to_global()</a> <em>during</em> assembly; see the <a class="el" href="group__constraints.html">constraints module</a> for more information), but both result in the same: a linear system that has a total number of rows equal to the number of <em>all</em> degrees of freedom, including those that lie on the boundary. However, degrees of freedom that are constrained by Dirichlet conditions are separated from the rest of the linear system by zeroing out the corresponding row and column, putting a single positive entry on the diagonal, and the corresponding Dirichlet value on the right hand side.</p>
-<p>If you assume for a moment that we had renumbered degrees of freedom in such a way that all of those on the Dirichlet boundary come last, then the linear system we would get when solving a regular PDE with a right hand side would look like this: </p><p class="formulaDsp">
+<p>在这个程序中，我们对波函数 \(\Psi\) 使用了Dirichlet边界条件。从有限元代码的角度来看，这意味着只有内部的自由度是<em>freedom</em>的实数度：边界上的自由度不是自由的，但毕竟是被迫有一个零值。另一方面，有限元方法从以下事实中获得了许多力量和简单性：我们只是在每个单元上做同样的事情，而不必过多地考虑一个单元在哪里，它是否与一个不太精细的单元相接，因而有一个悬挂的节点，或者与边界相邻。所有这些检查都会使有限元线性系统的装配难以编写，甚至更难阅读。</p>
+<p>因此，当然，当你用DoFHandler对象分配自由度时，你并不关心你列举的一些自由度是否在迪里切特边界。他们都会得到数字。我们只需要在以后应用边界值的时候照顾到这些自由度。有两种基本的方法（要么使用 <a class="el" href="namespaceMatrixTools.html#a9ad0eb7a8662628534586716748d62fb">MatrixTools::apply_boundary_values()</a> <em>after</em>装配线性系统，要么使用 <a class="el" href="classAffineConstraints.html#a373fbdacd8c486e675b8d2bff8943192">AffineConstraints::distribute_local_to_global()</a> <em>during</em>装配；详见 <a class="el" href="group__constraints.html">约束模块</a>），但两者的结果是一样的：一个线性系统的总行数等于<em>all</em>自由度的数目，包括那些位于边界的自由度。然而，受迪里希特条件约束的自由度与线性系统的其他部分分开，方法是将相应的行和列清零，在对角线上放一个正条目，并在右手边放相应的迪里希特值。</p>
+<p>如果你暂时假设我们对自由度进行了重新编号，使迪里切特边界上的所有自由度都排在最后，那么在解决一个有右手边的常规PDE时，我们得到的线性系统会是这样的。</p>
+<p class="formulaDsp">
 \begin{align*} \begin{pmatrix} A_i &amp; 0 \\ 0 &amp; D_b \end{pmatrix} \begin{pmatrix} U_i \\ U_b \end{pmatrix} = \begin{pmatrix} F_i \\ F_b \end{pmatrix}. \end{align*}
 </p>
-<p> Here, subscripts \(i\) and \(b\) correspond to interior and boundary degrees of freedom, respectively. The interior degrees of freedom satisfy the linear system \(A_i U_i=F_i\) which yields the correct solution in the interior, and boundary values are determined by \(U_b = D_b^{-1} F_b\) where \(D_b\) is a diagonal matrix that results from the process of eliminating boundary degrees of freedom, and \(F_b\) is chosen in such a way that \(U_{b,j}=D_{b,jj}^{-1} F_{b,j}\) has the correct boundary values for every boundary degree of freedom \(j\). (For the curious, the entries of the matrix \(D_b\) result from adding modified local contributions to the global matrix where for the local matrices the diagonal elements, if non-zero, are set to their absolute value; otherwise, they are set to the average of absolute values of the diagonal. This process guarantees that the entries of \(D_b\) are positive and of a size comparable to the rest of the diagonal entries, ensuring that the resulting matrix does not incur unreasonable losses of accuracy due to roundoff involving matrix entries of drastically different size. The actual values that end up on the diagonal are difficult to predict and you should treat them as arbitrary and unpredictable, but positive.)</p>
-<p>For "regular" linear systems, this all leads to the correct solution. On the other hand, for eigenvalue problems, this is not so trivial. There, eliminating boundary values affects both matrices \(A\) and \(M\) that we will solve with in the current tutorial program. After elimination of boundary values, we then receive an eigenvalue problem that can be partitioned like this: </p><p class="formulaDsp">
+<p>这里，下标 \(i\) 和 \(b\) 分别对应于内部和边界自由度。内部自由度满足线性系统 \(A_i U_i=F_i\) ，在内部产生正确的解，边界值由 \(U_b = D_b^{-1} F_b\) 决定，其中 \(D_b\) 是一个对角矩阵，由消除边界自由度的过程产生，而 \(F_b\) 的选择方式是 \(U_{b,j}=D_{b,jj}^{-1} F_{b,j}\) ]对每个边界自由度都有正确的边界值 \(j\) 。 对于好奇的人来说，矩阵 \(D_b\) 的条目是将修改后的局部贡献加入全局矩阵的结果，对于局部矩阵，如果非零，对角线元素被设置为其绝对值；否则，它们被设置为对角线绝对值的平均值。这个过程保证了 \(D_b\) 的条目是正的，并且大小与对角线的其他条目相当，确保所产生的矩阵不会因为涉及到大小迥异的矩阵条目的舍入而产生不合理的精度损失。最终出现在对角线上的实际数值是很难预测的，你应该把它们当作任意的、不可预测的，但却是正的。)</p>
+<p>对于 "常规 "线性系统，这一切都导致了正确的解决方案。另一方面，对于特征值问题，这就不那么简单了。在那里，消除边界值会影响到我们在当前教程程序中要解决的两个矩阵 \(A\) 和 \(M\) 。消除边界值后，我们就会得到一个可以这样划分的特征值问题。</p>
+<p class="formulaDsp">
 \begin{align*} \begin{pmatrix} A_i &amp; 0 \\ 0 &amp; D_A \end{pmatrix} \begin{pmatrix} \tilde\Psi_i \\ \tilde\Psi_b \end{pmatrix} = \epsilon_h \begin{pmatrix} M_i &amp; 0 \\ 0 &amp; D_M \end{pmatrix} \begin{pmatrix} \tilde\Psi_i \\ \tilde\Psi_b \end{pmatrix}. \end{align*}
 </p>
-<p> This form makes it clear that there are two sets of eigenvalues: the ones we care about, and spurious eigenvalues from the separated problem </p><p class="formulaDsp">
+<p>这种形式清楚地表明，有两组特征值：我们关心的那些，以及来自分离问题的虚假特征值 </p><p class="formulaDsp">
 \[ D_A \tilde \Psi_b = \epsilon_h D_M \Psi_b. \]
 </p>
-<p> These eigenvalues are spurious since they result from an eigenvalue system that operates only on boundary nodes &ndash; nodes that are not real degrees of <em>freedom</em>. Of course, since the two matrices \(D_A,D_M\) are diagonal, we can exactly quantify these spurious eigenvalues: they are \(\varepsilon_{h,j}=D_{A,jj}/D_{M,jj}\) (where the indices \(j\) corresponds exactly to the degrees of freedom that are constrained by Dirichlet boundary values).</p>
-<p>So how does one deal with them? The fist part is to recognize when our eigenvalue solver finds one of them. To this end, the program computes and prints an interval within which these eigenvalues lie, by computing the minimum and maximum of the expression \(\varepsilon_{h,j}=D_{A,jj}/D_{M,jj}\) over all constrained degrees of freedom. In the program below, this already suffices: we find that this interval lies outside the set of smallest eigenvalues and corresponding eigenfunctions we are interested in and compute, so there is nothing we need to do here.</p>
-<p>On the other hand, it may happen that we find that one of the eigenvalues we compute in this program happens to be in this interval, and in that case we would not know immediately whether it is a spurious or a true eigenvalue. In that case, one could simply scale the diagonal elements of either matrix after computing the two matrices, thus shifting them away from the frequency of interest in the eigen-spectrum. This can be done by using the following code, making sure that all spurious eigenvalues are exactly equal to \(1.234\cdot 10^5\): </p><div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dof_handler.n_dofs(); ++i)</div>
+<p>这些特征值是虚假的，因为它们是由一个只在边界节点上操作的特征值系统产生的&ndash;这些节点不是<em>freedom</em>的实数度。当然，由于两个矩阵 \(D_A,D_M\) 是对角线，我们可以准确地量化这些虚假的特征值：它们是 \(\varepsilon_{h,j}=D_{A,jj}/D_{M,jj}\) （其中指数 \(j\) 正好对应于受迪里切特边界值约束的自由度）。</p>
+<p>那么，如何处理这些问题呢？第一部分是识别我们的特征值求解器何时发现其中的一个。为此，程序通过计算所有受限自由度上表达式 \(\varepsilon_{h,j}=D_{A,jj}/D_{M,jj}\) 的最小和最大，计算并打印出这些特征值所在的区间。在下面的程序中，这已经足够了：我们发现这个区间位于我们感兴趣并计算的最小特征值和相应的特征函数的集合之外，所以这里我们不需要做什么。</p>
+<p>另一方面，我们可能会发现我们在这个程序中计算的一个特征值恰好在这个区间内，在这种情况下，我们不会立即知道它是一个虚假的还是一个真正的特征值。在这种情况下，我们可以在计算完两个矩阵后简单地缩放其中一个矩阵的对角线元素，从而将它们从特征谱的感兴趣的频率上移开。这可以通过使用以下代码来完成，确保所有假的特征值正好等于 \(1.234\cdot 10^5\) 。</p>
+<div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dof_handler.n_dofs(); ++i)</div>
 <div class="line">  <span class="keywordflow">if</span> (constraints.is_constrained(i))</div>
 <div class="line">    {</div>
 <div class="line">      stiffness_matrix.set(i, i, 1.234e5);</div>
 <div class="line">      <a class="code" href="namespaceLocalIntegrators_1_1L2.html#a1c15243765304a803037988b5561627d">mass_matrix</a>.set(i, i, 1);</div>
 <div class="line">    }</div>
 <div class="ttc" id="anamespaceLocalIntegrators_1_1L2_html_a1c15243765304a803037988b5561627d"><div class="ttname"><a href="namespaceLocalIntegrators_1_1L2.html#a1c15243765304a803037988b5561627d">LocalIntegrators::L2::mass_matrix</a></div><div class="ttdeci">void mass_matrix(FullMatrix&lt; double &gt; &amp;M, const FEValuesBase&lt; dim &gt; &amp;fe, const double factor=1.)</div><div class="ttdef"><b>Definition:</b> <a href="l2_8h_source.html#l00058">l2.h:58</a></div></div>
-</div><!-- fragment --><p> However, this strategy is not pursued here as the spurious eigenvalues we get from our program as-is happen to be greater than the lowest five that we will calculate and are interested in.</p>
+</div><!-- fragment --><p>然而，这里没有采用这种策略，因为我们从程序中得到的假性特征值恰好大于我们要计算和感兴趣的最低的五个。</p>
 <p><a class="anchor" id="Implementationdetails"></a></p><h3>Implementation details</h3>
-<p>The program below is essentially just a slightly modified version of <a class="el" href="step_4.html">step-4</a>. The things that are different are the following:</p>
+<p>下面的程序本质上只是 <a class="el" href="step_4.html">step-4</a> 的一个稍加修改的版本。不同的地方有以下几点。</p>
 <ul>
 <li>
-<p class="startli">The main class (named <code>EigenvalueProblem</code>) now no longer has a single solution vector, but a whole set of vectors for the various eigenfunctions we want to compute. Moreover, the <code>main</code> function, which has the top-level control over everything here, initializes and finalizes the interface to SLEPc and PETSc simultaneously via <code>SlepcInitialize</code> and <code>SlepFinalize</code>.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">We use PETSc matrices and vectors as in <a class="el" href="step_17.html">step-17</a> and <a class="el" href="step_18.html">step-18</a> since that is what the SLEPc eigenvalue solvers require.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">The function <code>EigenvalueProblem::solve</code> is entirely different from anything seen so far in the tutorial, as it does not just solve a linear system but actually solves the eigenvalue problem. It is built on the SLEPc library, and more immediately on the deal.II SLEPc wrappers in the class <a class="el" href="classSLEPcWrappers_1_1SolverKrylovSchur.html">SLEPcWrappers::SolverKrylovSchur</a>.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">We use the <a class="el" href="classParameterHandler.html">ParameterHandler</a> class to describe a few input parameters, such as the exact form of the potential \(V({\mathbf x})\), the number of global refinement steps of the mesh, or the number of eigenvalues we want to solve for. We could go much further with this but stop at making only a few of the things that one could select at run time actual input file parameters. In order to see what could be done in this regard, take a look at <a class="el" href="step_29.html">step-29</a> and <a class="el" href="step_33.html">step-33</a>.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">We use the <a class="el" href="classFunctionParser.html">FunctionParser</a> class to make the potential \(V(\mathbf x)\) a run-time parameter that can be specified in the input file as a formula.</p>
-<p class="endli"></p>
 </li>
 </ul>
-<p>The rest of the program follows in a pretty straightforward way from <a class="el" href="step_4.html">step-4</a>.</p>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+<p><br  />
+</p>
+<p>主类（名为 <code>EigenvalueProblem</code> ）现在不再有单一的解向量，而是有一整套我们要计算的各种特征函数的向量。此外， <code>main</code> 函数对这里的一切都有顶层控制，它通过 <code>SlepcInitialize</code> 和 <code>SlepFinalize</code> 同时初始化和最终确定与SLEPc和PETSc的接口。  <br  />
+</p>
+<p>我们使用PETSc的矩阵和向量，如 <a class="el" href="step_17.html">step-17</a> 和 <a class="el" href="step_18.html">step-18</a> ，因为这是SLEPc特征值求解器的要求。  <br  />
+</p>
+<p>函数 <code>EigenvalueProblem::solve</code> 与本教程中迄今所见的任何函数都完全不同，因为它不只是求解一个线性系统，而是实际求解特征值问题。它建立在SLEPc库上，更直接的是建立在类 <a class="el" href="classSLEPcWrappers_1_1SolverKrylovSchur.html">SLEPcWrappers::SolverKrylovSchur</a>. 的deal.II SLEPc包装器上。</p>
+<p>我们使用ParameterHandler类来描述一些输入参数，如势的确切形式 \(V({\mathbf x})\) ，网格的全局细化步数，或我们要解决的特征值数量。我们可以在这方面做得更多，但只限于在运行时选择一些实际的输入文件参数。为了看看在这方面可以做什么，看看 <a class="el" href="step_29.html">@ref step_29 </a>step-29"  " 和 <a class="el" href="step_33.html">step-33</a> 。 </p>
+<p>我们使用FunctionParser类，使潜在的 \(V(\mathbf x)\) 成为运行时参数，可以在输入文件中指定为一个公式。 </p>
+<p><br  />
+</p>
+<p>程序的其余部分以一种相当直接的方式从 step-4 开始。<a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
 <p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
-<p>As mentioned in the introduction, this program is essentially only a slightly revised version of <a class="el" href="step_4.html">step-4</a>. As a consequence, most of the following include files are as used there, or at least as used already in previous tutorial programs:</p>
+<p>正如在介绍中提到的，这个程序本质上只是 <a class="el" href="step_4.html">step-4</a> 的一个稍作修改的版本。因此，以下大部分的include文件都是在那里使用的，或者至少是在以前的教程程序中已经使用过的。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logstream_8h.html">deal.II/base/logstream.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="quadrature__lib_8h.html">deal.II/base/quadrature_lib.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="function_8h.html">deal.II/base/function.h</a>&gt;</span></div>
@@ -231,27 +230,27 @@ $(function() {
 <div class="ttc" id="aparameter__handler_8h_html"><div class="ttname"><a href="parameter__handler_8h.html">parameter_handler.h</a></div></div>
 <div class="ttc" id="aquadrature__lib_8h_html"><div class="ttname"><a href="quadrature__lib_8h.html">quadrature_lib.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p><a class="el" href="classIndexSet.html">IndexSet</a> is used to set the size of each <a class="el" href="classPETScWrappers_1_1MPI_1_1Vector.html">PETScWrappers::MPI::Vector</a>:</p>
+</div><!-- fragment --><p>IndexSet用于设置每个 <a class="el" href="classPETScWrappers_1_1MPI_1_1Vector.html">PETScWrappers::MPI::Vector</a>: 的大小。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="index__set_8h.html">deal.II/base/index_set.h</a>&gt;</span></div>
 <div class="ttc" id="aindex__set_8h_html"><div class="ttname"><a href="index__set_8h.html">index_set.h</a></div></div>
-</div><!-- fragment --><p>PETSc appears here because SLEPc depends on this library:</p>
+</div><!-- fragment --><p>PETSc出现在这里是因为SLEPc依赖于这个库。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="petsc__sparse__matrix_8h.html">deal.II/lac/petsc_sparse_matrix.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="petsc__vector_8h.html">deal.II/lac/petsc_vector.h</a>&gt;</span></div>
 <div class="ttc" id="apetsc__sparse__matrix_8h_html"><div class="ttname"><a href="petsc__sparse__matrix_8h.html">petsc_sparse_matrix.h</a></div></div>
 <div class="ttc" id="apetsc__vector_8h_html"><div class="ttname"><a href="petsc__vector_8h.html">petsc_vector.h</a></div></div>
-</div><!-- fragment --><p>And then we need to actually import the interfaces for solvers that SLEPc provides:</p>
+</div><!-- fragment --><p>然后我们需要实际导入SLEPc所提供的求解器的接口。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="slepc__solver_8h.html">deal.II/lac/slepc_solver.h</a>&gt;</span></div>
 <div class="ttc" id="aslepc__solver_8h_html"><div class="ttname"><a href="slepc__solver_8h.html">slepc_solver.h</a></div></div>
-</div><!-- fragment --><p>We also need some standard C++:</p>
+</div><!-- fragment --><p>我们还需要一些标准的C++。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-</div><!-- fragment --><p>Finally, as in previous programs, we import all the deal.II class and function names into the namespace into which everything in this program will go:</p>
+</div><!-- fragment --><p>最后，和以前的程序一样，我们将所有deal.II的类和函数名导入本程序中的所有内容都将进入的命名空间。</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>Step36</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="namespace__dealii_8h_source.html#l00025">namespace_dealii.h:26</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="ThecodeEigenvalueProblemcodeclasstemplate"></a> </p><h3>The <code>EigenvalueProblem</code> class template</h3>
-<p>Following is the class declaration for the main class template. It looks pretty much exactly like what has already been shown in <a class="el" href="step_4.html">step-4</a>:</p>
+<p>下面是主类模板的类声明。它看起来和在 <a class="el" href="step_4.html">step-4</a> 中已经展示过的差不多。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>EigenvalueProblem</div>
 <div class="line">{</div>
@@ -259,11 +258,13 @@ $(function() {
 <div class="line">  EigenvalueProblem(<span class="keyword">const</span> std::string &amp;prm_file);</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keywordtype">void</span>         make_grid_and_dofs();</div>
 <div class="line">  <span class="keywordtype">void</span>         assemble_system();</div>
 <div class="line">  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> solve();</div>
 <div class="line">  <span class="keywordtype">void</span>         output_results() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classTriangulation.html">Triangulation&lt;dim&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
 <div class="line">  <a class="code" href="classFE__Q.html">FE_Q&lt;dim&gt;</a>          fe;</div>
@@ -273,28 +274,28 @@ $(function() {
 <div class="ttc" id="aclassTriangulation_html"><div class="ttname"><a href="classTriangulation.html">Triangulation</a></div><div class="ttdef"><b>Definition:</b> <a href="grid_2tria_8h_source.html#l01127">tria.h:1128</a></div></div>
 <div class="ttc" id="anamespaceWorkStream_1_1internal_1_1tbb__no__coloring_html_a8673698a405bf47aa24002aeb6d76d70"><div class="ttname"><a href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">WorkStream::internal::tbb_no_coloring::run</a></div><div class="ttdeci">void run(const Iterator &amp;begin, const typename identity&lt; Iterator &gt;::type &amp;end, Worker worker, Copier copier, const ScratchData &amp;sample_scratch_data, const CopyData &amp;sample_copy_data, const unsigned int queue_length, const unsigned int chunk_size)</div><div class="ttdef"><b>Definition:</b> <a href="work__stream_8h_source.html#l00691">work_stream.h:691</a></div></div>
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
-</div><!-- fragment --><p>With these exceptions: For our eigenvalue problem, we need both a stiffness matrix for the left hand side as well as a mass matrix for the right hand side. We also need not just one solution function, but a whole set of these for the eigenfunctions we want to compute, along with the corresponding eigenvalues:</p>
+</div><!-- fragment --><p>除了这些例外情况。对于我们的特征值问题，我们既需要左手边的刚度矩阵，也需要右手边的质量矩阵。我们还需要的不仅仅是一个解函数，而是一整套用于我们要计算的特征函数的解函数，以及相应的特征值。</p>
 <div class="fragment"><div class="line"><a class="code" href="classPETScWrappers_1_1SparseMatrix.html">PETScWrappers::SparseMatrix</a>             stiffness_matrix, <a class="code" href="namespaceLocalIntegrators_1_1L2.html#a1c15243765304a803037988b5561627d">mass_matrix</a>;</div>
 <div class="line">std::vector&lt;PETScWrappers::MPI::Vector&gt; eigenfunctions;</div>
 <div class="line">std::vector&lt;double&gt;                     <a class="code" href="classSymmetricTensor.html#a45c9cd0a3fecbd58ae133dfdd104f9f9">eigenvalues</a>;</div>
 <div class="ttc" id="aclassPETScWrappers_1_1SparseMatrix_html"><div class="ttname"><a href="classPETScWrappers_1_1SparseMatrix.html">PETScWrappers::SparseMatrix</a></div><div class="ttdef"><b>Definition:</b> <a href="petsc__sparse__matrix_8h_source.html#l00051">petsc_sparse_matrix.h:52</a></div></div>
 <div class="ttc" id="aclassSymmetricTensor_html_a45c9cd0a3fecbd58ae133dfdd104f9f9"><div class="ttname"><a href="classSymmetricTensor.html#a45c9cd0a3fecbd58ae133dfdd104f9f9">SymmetricTensor::eigenvalues</a></div><div class="ttdeci">std::array&lt; Number, 1 &gt; eigenvalues(const SymmetricTensor&lt; 2, 1, Number &gt; &amp;T)</div></div>
-</div><!-- fragment --><p>And then we need an object that will store several run-time parameters that we will specify in an input file :</p>
+</div><!-- fragment --><p>然后我们需要一个对象来存储我们将在输入文件中指定的几个运行时参数。</p>
 <div class="fragment"><div class="line"><a class="code" href="classParameterHandler.html">ParameterHandler</a> parameters;</div>
 <div class="ttc" id="aclassParameterHandler_html"><div class="ttname"><a href="classParameterHandler.html">ParameterHandler</a></div><div class="ttdef"><b>Definition:</b> <a href="parameter__handler_8h_source.html#l00840">parameter_handler.h:841</a></div></div>
-</div><!-- fragment --><p>Finally, we will have an object that contains "constraints" on our degrees of freedom. This could include hanging node constraints if we had adaptively refined meshes (which we don't have in the current program). Here, we will store the constraints for boundary nodes \(U_i=0\).</p>
+</div><!-- fragment --><p>最后，我们将有一个对象，包含对我们自由度的 "约束"。如果我们有自适应细化的网格（目前的程序中没有），这可能包括悬挂节点约束。在这里，我们将存储边界节点的约束 \(U_i=0\) 。</p>
 <div class="fragment"><div class="line">  <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> constraints;</div>
 <div class="line">};</div>
 <div class="ttc" id="aclassAffineConstraints_html"><div class="ttname"><a href="classAffineConstraints.html">AffineConstraints&lt; double &gt;</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="ImplementationofthecodeEigenvalueProblemcodeclass"></a> </p><h3>Implementation of the <code>EigenvalueProblem</code> class</h3>
 <p><a class="anchor" id="EigenvalueProblemEigenvalueProblem"></a> </p><h4>EigenvalueProblem::EigenvalueProblem</h4>
-<p>First up, the constructor. The main new part is handling the run-time input parameters. We need to declare their existence first, and then read their values from the input file whose name is specified as an argument to this function:</p>
+<p>首先是构造函数。主要的新部分是处理运行时的输入参数。我们需要首先声明它们的存在，然后从输入文件中读取它们的值，该文件的名称被指定为该函数的参数。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">EigenvalueProblem&lt;dim&gt;::EigenvalueProblem(<span class="keyword">const</span> std::string &amp;prm_file)</div>
 <div class="line">  : fe(1)</div>
 <div class="line">  , dof_handler(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>)</div>
 <div class="line">{</div>
-</div><!-- fragment --><p>TODO investigate why the minimum number of refinement steps required to obtain the correct eigenvalue degeneracies is 6</p>
+</div><!-- fragment --><p>TODO研究为什么获得正确的特征值退化所需的最小细化步骤数是6。</p>
 <div class="fragment"><div class="line">  parameters.declare_entry(</div>
 <div class="line">    <span class="stringliteral">&quot;Global mesh refinement steps&quot;</span>,</div>
 <div class="line">    <span class="stringliteral">&quot;5&quot;</span>,</div>
@@ -311,24 +312,19 @@ $(function() {
 <div class="line">                           <a class="code" href="classPatterns_1_1Anything.html">Patterns::Anything</a>(),</div>
 <div class="line">                           <span class="stringliteral">&quot;A functional description of the potential.&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  parameters.parse_input(prm_file);</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassPatterns_1_1Anything_html"><div class="ttname"><a href="classPatterns_1_1Anything.html">Patterns::Anything</a></div><div class="ttdef"><b>Definition:</b> <a href="patterns_8h_source.html#l01022">patterns.h:1023</a></div></div>
 <div class="ttc" id="aclassPatterns_1_1Integer_html"><div class="ttname"><a href="classPatterns_1_1Integer.html">Patterns::Integer</a></div><div class="ttdef"><b>Definition:</b> <a href="patterns_8h_source.html#l00189">patterns.h:190</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="EigenvalueProblemmake_grid_and_dofs"></a> </p><h4>EigenvalueProblem::make_grid_and_dofs</h4>
-<p>The next function creates a mesh on the domain \([-1,1]^d\), refines it as many times as the input file calls for, and then attaches a <a class="el" href="classDoFHandler.html">DoFHandler</a> to it and initializes the matrices and vectors to their correct sizes. We also build the constraints that correspond to the boundary values \(u|_{\partial\Omega}=0\).</p>
-<p>For the matrices, we use the PETSc wrappers. These have the ability to allocate memory as necessary as non-zero entries are added. This seems inefficient: we could as well first compute the sparsity pattern, initialize the matrices with it, and as we then insert entries we can be sure that we do not need to re-allocate memory and free the one used previously. One way to do that would be to use code like this: </p><div class="CodeFragmentInTutorialComment"> <div class="fragment"><div class="line"><a class="code" href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a></div>
-<div class="line">   dsp (dof_handler.n_dofs(),</div>
-<div class="line">        dof_handler.n_dofs());</div>
-<div class="line"><a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a> (dof_handler, dsp);</div>
-<div class="line">dsp.compress ();</div>
-<div class="line">stiffness_matrix.reinit (dsp);</div>
-<div class="line"><a class="code" href="namespaceLocalIntegrators_1_1L2.html#a1c15243765304a803037988b5561627d">mass_matrix</a>.reinit (dsp);</div>
-<div class="ttc" id="aclassDynamicSparsityPattern_html"><div class="ttname"><a href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a></div><div class="ttdef"><b>Definition:</b> <a href="dynamic__sparsity__pattern_8h_source.html#l00318">dynamic_sparsity_pattern.h:319</a></div></div>
-<div class="ttc" id="agroup__constraints_html_gaf78e864edbfba7e0a7477457bfb96b26"><div class="ttname"><a href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a></div><div class="ttdeci">void make_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, SparsityPatternType &amp;sparsity_pattern, const AffineConstraints&lt; number &gt; &amp;constraints=AffineConstraints&lt; number &gt;(), const bool keep_constrained_dofs=true, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__sparsity_8cc_source.html#l00064">dof_tools_sparsity.cc:64</a></div></div>
-</div><!-- fragment --> </div><p> instead of the two <code><a class="el" href="namespaceinternal.html#a38181f4582ff69679bda7d8e31c37291">reinit()</a></code> calls for the stiffness and mass matrices below.</p>
-<p>This doesn't quite work, unfortunately. The code above may lead to a few entries in the non-zero pattern to which we only ever write zero entries; most notably, this holds true for off-diagonal entries for those rows and columns that belong to boundary nodes. This shouldn't be a problem, but for whatever reason, PETSc's ILU preconditioner, which we use to solve linear systems in the eigenvalue solver, doesn't like these extra entries and aborts with an error message.</p>
-<p>In the absence of any obvious way to avoid this, we simply settle for the second best option, which is have PETSc allocate memory as necessary. That said, since this is not a time critical part, this whole affair is of no further importance.</p>
+<p>下一个函数在域 \([-1,1]^d\) 上创建一个网格，根据输入文件的要求对其进行多次细化，然后将DoFHandler附加到其上，并将矩阵和向量初始化为正确的大小。我们还建立了对应于边界值的约束条件 \(u|_{\partial\Omega}=0\) 。 <br  />
+</p>
+<p>对于矩阵，我们使用PETSc包装器。这些包装器能够在非零项被添加时根据需要分配内存。这似乎是低效的：我们可以先计算稀疏模式，用它来初始化矩阵，然后在我们插入条目时，我们可以确定我们不需要重新分配内存和释放之前使用的内存。一种方法是使用这样的代码。 </p><div class="CodeFragmentInTutorialComment"></div><div class="CodeFragmentInTutorialComment">[1.x.70]</div><div class="CodeFragmentInTutorialComment"></div><p> 代替下面两个 <code><a class="el" href="namespaceinternal.html#a38181f4582ff69679bda7d8e31c37291">reinit()</a></code> 对刚度和质量矩阵的调用。 <br  />
+</p>
+<p>不幸的是，这并不完全可行。上面的代码可能会导致在非零模式下的一些条目，我们只写零条目；最值得注意的是，对于那些属于边界节点的行和列的非对角线条目，这一点是成立的。这不应该是一个问题，但是不管什么原因，PETSc的ILU预处理程序（我们用来解决特征值求解器中的线性系统）不喜欢这些额外的条目，并以错误信息终止。 <br  />
+</p>
+<p>在没有任何明显的方法来避免这种情况的情况下，我们干脆选择了第二种最佳方案，即让PETSc在必要时分配内存。也就是说，由于这不是一个时间关键的部分，这整个事件没有进一步的重要性了。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> EigenvalueProblem&lt;dim&gt;::make_grid_and_dofs()</div>
 <div class="line">{</div>
@@ -337,8 +333,10 @@ $(function() {
 <div class="line">    parameters.get_integer(<span class="stringliteral">&quot;Global mesh refinement steps&quot;</span>));</div>
 <div class="line">  dof_handler.distribute_dofs(fe);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="group__constraints.html#ga06c0301bc74dd4c67a3d1db1000647f3">DoFTools::make_zero_boundary_constraints</a>(dof_handler, constraints);</div>
 <div class="line">  constraints.close();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  stiffness_matrix.reinit(dof_handler.n_dofs(),</div>
 <div class="line">                          dof_handler.n_dofs(),</div>
@@ -348,41 +346,48 @@ $(function() {
 <div class="line">                     dof_handler.max_couplings_between_dofs());</div>
 <div class="ttc" id="agroup__constraints_html_ga06c0301bc74dd4c67a3d1db1000647f3"><div class="ttname"><a href="group__constraints.html#ga06c0301bc74dd4c67a3d1db1000647f3">DoFTools::make_zero_boundary_constraints</a></div><div class="ttdeci">void make_zero_boundary_constraints(const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const types::boundary_id boundary_id, AffineConstraints&lt; number &gt; &amp;zero_boundary_constraints, const ComponentMask &amp;component_mask=ComponentMask())</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__constraints_8cc_source.html#l03450">dof_tools_constraints.cc:3450</a></div></div>
 <div class="ttc" id="anamespaceGridGenerator_html_acea0cbcd68e52ce8113d1134b87de403"><div class="ttname"><a href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a></div><div class="ttdeci">void hyper_cube(Triangulation&lt; dim, spacedim &gt; &amp;tria, const double left=0., const double right=1., const bool colorize=false)</div></div>
-</div><!-- fragment --><p>The next step is to take care of the eigenspectrum. In this case, the outputs are eigenvalues and eigenfunctions, so we set the size of the list of eigenfunctions and eigenvalues to be as large as we asked for in the input file. When using a <a class="el" href="classPETScWrappers_1_1MPI_1_1Vector.html">PETScWrappers::MPI::Vector</a>, the <a class="el" href="classVector.html">Vector</a> is initialized using an <a class="el" href="classIndexSet.html">IndexSet</a>. <a class="el" href="classIndexSet.html">IndexSet</a> is used not only to resize the <a class="el" href="classPETScWrappers_1_1MPI_1_1Vector.html">PETScWrappers::MPI::Vector</a> but it also associates an index in the <a class="el" href="classPETScWrappers_1_1MPI_1_1Vector.html">PETScWrappers::MPI::Vector</a> with a degree of freedom (see <a class="el" href="step_40.html">step-40</a> for a more detailed explanation). The function <a class="el" href="classIndexSet.html#ad28b2e725afda38ffdef1bf61d5cadd4">complete_index_set()</a> creates an <a class="el" href="classIndexSet.html">IndexSet</a> where every valid index is part of the set. Note that this program can only be run sequentially and will throw an exception if used in parallel.</p>
+</div><!-- fragment --><p>下一步是处理eigenspectrum的问题。在这种情况下，输出是特征值和特征函数，所以我们将特征函数和特征值列表的大小设置为与我们在输入文件中要求的一样大。当使用 <a class="el" href="classPETScWrappers_1_1MPI_1_1Vector.html">PETScWrappers::MPI::Vector</a>, 时，Vector是使用IndexSet初始化的。IndexSet不仅用于调整 <a class="el" href="classPETScWrappers_1_1MPI_1_1Vector.html">PETScWrappers::MPI::Vector</a> 的大小，而且还将 <a class="el" href="classPETScWrappers_1_1MPI_1_1Vector.html">PETScWrappers::MPI::Vector</a> 中的一个索引与一个自由度联系起来（更详细的解释见 <a class="el" href="step_40.html">step-40</a> ）。函数complete_index_set()创建了一个IndexSet，每个有效的索引都是这个集合的一部分。请注意，这个程序只能按顺序运行，如果并行使用，将抛出一个异常。</p>
 <div class="fragment"><div class="line">  <a class="code" href="classIndexSet.html">IndexSet</a> eigenfunction_index_set = dof_handler.locally_owned_dofs();</div>
 <div class="line">  eigenfunctions.resize(</div>
 <div class="line">    parameters.get_integer(<span class="stringliteral">&quot;Number of eigenvalues/eigenfunctions&quot;</span>));</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; eigenfunctions.size(); ++i)</div>
 <div class="line">    eigenfunctions[i].<a class="code" href="namespaceinternal.html#a38181f4582ff69679bda7d8e31c37291">reinit</a>(eigenfunction_index_set, MPI_COMM_WORLD);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classSymmetricTensor.html#a45c9cd0a3fecbd58ae133dfdd104f9f9">eigenvalues</a>.resize(eigenfunctions.size());</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassIndexSet_html"><div class="ttname"><a href="classIndexSet.html">IndexSet</a></div><div class="ttdef"><b>Definition:</b> <a href="index__set_8h_source.html#l00072">index_set.h:73</a></div></div>
 <div class="ttc" id="anamespaceinternal_html_a38181f4582ff69679bda7d8e31c37291"><div class="ttname"><a href="namespaceinternal.html#a38181f4582ff69679bda7d8e31c37291">internal::reinit</a></div><div class="ttdeci">void reinit(MatrixBlock&lt; MatrixType &gt; &amp;v, const BlockSparsityPattern &amp;p)</div><div class="ttdef"><b>Definition:</b> <a href="matrix__block_8h_source.html#l00618">matrix_block.h:618</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="EigenvalueProblemassemble_system"></a> </p><h4>EigenvalueProblem::assemble_system</h4>
-<p>Here, we assemble the global stiffness and mass matrices from local contributions \(A^K_{ij} = \int_K \nabla\varphi_i(\mathbf x) \cdot \nabla\varphi_j(\mathbf x) + V(\mathbf x)\varphi_i(\mathbf x)\varphi_j(\mathbf x)\) and \(M^K_{ij} = \int_K \varphi_i(\mathbf x)\varphi_j(\mathbf x)\) respectively. This function should be immediately familiar if you've seen previous tutorial programs. The only thing new would be setting up an object that described the potential \(V(\mathbf x)\) using the expression that we got from the input file. We then need to evaluate this object at the quadrature points on each cell. If you've seen how to evaluate function objects (see, for example the coefficient in <a class="el" href="step_5.html">step-5</a>), the code here will also look rather familiar.</p>
+<p>在这里，我们分别从局部贡献 \(A^K_{ij} = \int_K \nabla\varphi_i(\mathbf x) \cdot \nabla\varphi_j(\mathbf x) + V(\mathbf x)\varphi_i(\mathbf x)\varphi_j(\mathbf x)\) 和 \(M^K_{ij} = \int_K \varphi_i(\mathbf x)\varphi_j(\mathbf x)\) 组装全局刚度和质量矩阵。如果你看过以前的教程程序，这个函数应该会很熟悉。唯一新的东西是使用我们从输入文件得到的表达式设置一个描述势 \(V(\mathbf x)\) 的对象。然后我们需要在每个单元的正交点上评估这个对象。如果你见过如何评估函数对象（例如，见 <a class="el" href="step_5.html">step-5</a> 中的系数），这里的代码也会显得相当熟悉。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> EigenvalueProblem&lt;dim&gt;::assemble_system()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a> quadrature_formula(fe.degree + 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> fe_values(fe,</div>
 <div class="line">                          quadrature_formula,</div>
 <div class="line">                          <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a> |</div>
 <div class="line">                            <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = fe.n_dofs_per_cell();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points    = quadrature_formula.size();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> cell_stiffness_matrix(dofs_per_cell, dofs_per_cell);</div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> cell_mass_matrix(dofs_per_cell, dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices(dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFunctionParser.html">FunctionParser&lt;dim&gt;</a> potential;</div>
 <div class="line">  potential.<a class="code" href="classFunctionParser.html#aac973d1e4fc6912ccf833c108894e414">initialize</a>(<a class="code" href="classFunctionParser.html">FunctionParser&lt;dim&gt;::default_variable_names</a>(),</div>
 <div class="line">                       parameters.get(<span class="stringliteral">&quot;Potential&quot;</span>),</div>
 <div class="line">                       <span class="keyword">typename</span> <a class="code" href="classFunctionParser.html#a2426bdaf98de531415477667097235b8">FunctionParser&lt;dim&gt;::ConstMap</a>());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;double&gt; potential_values(n_q_points);</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
@@ -391,8 +396,10 @@ $(function() {
 <div class="line">      cell_stiffness_matrix = 0;</div>
 <div class="line">      cell_mass_matrix      = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      potential.<a class="code" href="classFunction.html#a562fc1114e95e702e6696721f71528db">value_list</a>(fe_values.get_quadrature_points(),</div>
 <div class="line">                           potential_values);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q_point = 0; q_point &lt; n_q_points; ++q_point)</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
@@ -407,6 +414,7 @@ $(function() {
 <div class="line">                   fe_values.shape_value(j, q_point)   </div>
 <div class="line">                 ) *                                   </div>
 <div class="line">                fe_values.JxW(q_point);                </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">              cell_mass_matrix(i, j) +=              </div>
 <div class="line">                (fe_values.shape_value(i, q_point) * </div>
@@ -425,8 +433,9 @@ $(function() {
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a></div><div class="ttdeci">@ update_JxW_values</div><div class="ttdoc">Transformed quadrature weights.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00129">fe_update_flags.h:129</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a></div><div class="ttdeci">@ update_gradients</div><div class="ttdoc">Shape function gradients.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00084">fe_update_flags.h:84</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a></div><div class="ttdeci">@ update_quadrature_points</div><div class="ttdoc">Transformed quadrature points.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00122">fe_update_flags.h:122</a></div></div>
-</div><!-- fragment --><p>Now that we have the local matrix contributions, we transfer them into the global objects and take care of zero boundary constraints:</p>
+</div><!-- fragment --><p>现在我们有了局部矩阵的贡献，我们把它们转移到全局对象中，并处理好零边界约束。</p>
 <div class="fragment"><div class="line">  cell-&gt;get_dof_indices(local_dof_indices);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  constraints.distribute_local_to_global(cell_stiffness_matrix,</div>
 <div class="line">                                         local_dof_indices,</div>
@@ -435,13 +444,14 @@ $(function() {
 <div class="line">                                         local_dof_indices,</div>
 <div class="line">                                         <a class="code" href="namespaceLocalIntegrators_1_1L2.html#a1c15243765304a803037988b5561627d">mass_matrix</a>);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>At the end of the function, we tell PETSc that the matrices have now been fully assembled and that the sparse matrix representation can now be compressed as no more entries will be added:</p>
+</div><!-- fragment --><p>在函数的最后，我们告诉PETSc，矩阵现在已经完全组装好了，稀疏矩阵表示法现在可以被压缩了，因为不会再添加任何条目。</p>
 <div class="fragment"><div class="line">stiffness_matrix.compress(<a class="code" href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a>);</div>
 <div class="line"><a class="code" href="namespaceLocalIntegrators_1_1L2.html#a1c15243765304a803037988b5561627d">mass_matrix</a>.compress(<a class="code" href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a>);</div>
 <div class="ttc" id="agroup__Vectors_html_gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708"><div class="ttname"><a href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a></div><div class="ttdeci">@ add</div><div class="ttdef"><b>Definition:</b> <a href="vector__operation_8h_source.html#l00053">vector_operation.h:53</a></div></div>
-</div><!-- fragment --><p>Before leaving the function, we calculate spurious eigenvalues, introduced to the system by zero Dirichlet constraints. As discussed in the introduction, the use of Dirichlet boundary conditions coupled with the fact that the degrees of freedom located at the boundary of the domain remain part of the linear system we solve, introduces a number of spurious eigenvalues. Below, we output the interval within which they all lie to ensure that we can ignore them should they show up in our computations.</p>
+</div><!-- fragment --><p>在离开函数之前，我们要计算虚假的特征值，这是由零Dirichlet约束引入到系统中的。正如在介绍中所讨论的，使用Dirichlet边界条件，加上位于域的边界的自由度仍然是我们所求解的线性系统的一部分，引入了一些虚假的特征值。下面，我们输出它们所处的区间，以确保我们在计算中出现时可以忽略它们。</p>
 <div class="fragment"><div class="line">  <span class="keywordtype">double</span> min_spurious_eigenvalue = <a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">std::numeric_limits&lt;double&gt;::max</a>(),</div>
 <div class="line">         max_spurious_eigenvalue = -<a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">std::numeric_limits&lt;double&gt;::max</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dof_handler.n_dofs(); ++i)</div>
 <div class="line">    <span class="keywordflow">if</span> (constraints.is_constrained(i))</div>
@@ -451,6 +461,7 @@ $(function() {
 <div class="line">        max_spurious_eigenvalue = <a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">std::max</a>(max_spurious_eigenvalue, ev);</div>
 <div class="line">      }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;   Spurious eigenvalues are all in the interval &quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;[&quot;</span> &lt;&lt; min_spurious_eigenvalue &lt;&lt; <span class="stringliteral">&quot;,&quot;</span></div>
 <div class="line">            &lt;&lt; max_spurious_eigenvalue &lt;&lt; <span class="stringliteral">&quot;]&quot;</span> &lt;&lt; std::endl;</div>
@@ -458,43 +469,49 @@ $(function() {
 <div class="ttc" id="anamespaceVectorTools_1_1EvaluationFlags_html_ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420"><div class="ttname"><a href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">VectorTools::EvaluationFlags::max</a></div><div class="ttdeci">@ max</div><div class="ttdef"><b>Definition:</b> <a href="vector__tools__evaluate_8h_source.html#l00053">vector_tools_evaluate.h:53</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_1_1EvaluationFlags_html_ac6721740e24732d6afabcf28ddfc1ffdaeb244a97c0c9e9e7ca4765e096f0badc"><div class="ttname"><a href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffdaeb244a97c0c9e9e7ca4765e096f0badc">VectorTools::EvaluationFlags::min</a></div><div class="ttdeci">@ min</div><div class="ttdef"><b>Definition:</b> <a href="vector__tools__evaluate_8h_source.html#l00059">vector_tools_evaluate.h:59</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="EigenvalueProblemsolve"></a> </p><h4>EigenvalueProblem::solve</h4>
-<p>This is the key new functionality of the program. Now that the system is set up, here is a good time to actually solve the problem: As with other examples this is done using a "solve" routine. Essentially, it works as in other programs: you set up a <a class="el" href="classSolverControl.html">SolverControl</a> object that describes the accuracy to which we want to solve the linear systems, and then we select the kind of solver we want. Here we choose the Krylov-Schur solver of SLEPc, a pretty fast and robust choice for this kind of problem:</p>
+<p>这是该程序的关键新功能。现在系统已经设置好了，现在是实际解决问题的好时机：和其他例子一样，这是用 "解决 "程序来完成的。从本质上讲，它的工作原理与其他程序一样：你设置一个SolverControl对象，描述我们要解决的线性系统的精度，然后我们选择我们想要的解算器类型。在这里，我们选择SLEPc的Krylov-Schur求解器，对于这种问题来说，这是一个相当快速和强大的选择。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> EigenvalueProblem&lt;dim&gt;::solve()</div>
 <div class="line">{</div>
-</div><!-- fragment --><p>We start here, as we normally do, by assigning convergence control we want:</p>
+</div><!-- fragment --><p>我们从这里开始，就像我们通常做的那样，指定我们想要的收敛控制。</p>
 <div class="fragment"><div class="line"><a class="code" href="classSolverControl.html">SolverControl</a>                    solver_control(dof_handler.n_dofs(), 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-9);</div>
 <div class="line"><a class="code" href="classSLEPcWrappers_1_1SolverKrylovSchur.html">SLEPcWrappers::SolverKrylovSchur</a> eigensolver(solver_control);</div>
 <div class="ttc" id="aclassSLEPcWrappers_1_1SolverKrylovSchur_html"><div class="ttname"><a href="classSLEPcWrappers_1_1SolverKrylovSchur.html">SLEPcWrappers::SolverKrylovSchur</a></div><div class="ttdef"><b>Definition:</b> <a href="slepc__solver_8h_source.html#l00392">slepc_solver.h:393</a></div></div>
 <div class="ttc" id="aclassSolverControl_html"><div class="ttname"><a href="classSolverControl.html">SolverControl</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__control_8h_source.html#l00065">solver_control.h:66</a></div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a9587d5229555daa5b1fa1ba2f8a40adb"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">Physics::Elasticity::Kinematics::e</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; e(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
-</div><!-- fragment --><p>Before we actually solve for the eigenfunctions and -values, we have to also select which set of eigenvalues to solve for. Lets select those eigenvalues and corresponding eigenfunctions with the smallest real part (in fact, the problem we solve here is symmetric and so the eigenvalues are purely real). After that, we can actually let SLEPc do its work:</p>
+</div><!-- fragment --><p>在我们实际求解特征函数和-值之前，我们还必须选择哪一组特征值来求解。让我们选择那些实部最小的特征值和相应的特征函数（事实上，我们在这里解决的问题是对称的，所以特征值是纯实部的）。之后，我们就可以真正让SLEPc做它的工作了。</p>
 <div class="fragment"><div class="line">eigensolver.set_which_eigenpairs(EPS_SMALLEST_REAL);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">eigensolver.set_problem_type(EPS_GHEP);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">eigensolver.solve(stiffness_matrix,</div>
 <div class="line">                  <a class="code" href="namespaceLocalIntegrators_1_1L2.html#a1c15243765304a803037988b5561627d">mass_matrix</a>,</div>
 <div class="line">                  <a class="code" href="classSymmetricTensor.html#a45c9cd0a3fecbd58ae133dfdd104f9f9">eigenvalues</a>,</div>
 <div class="line">                  eigenfunctions,</div>
 <div class="line">                  eigenfunctions.size());</div>
-</div><!-- fragment --><p>The output of the call above is a set of vectors and values. In eigenvalue problems, the eigenfunctions are only determined up to a constant that can be fixed pretty arbitrarily. Knowing nothing about the origin of the eigenvalue problem, SLEPc has no other choice than to normalize the eigenvectors to one in the \(l_2\) (vector) norm. Unfortunately this norm has little to do with any norm we may be interested from a eigenfunction perspective: the \(L_2(\Omega)\) norm, or maybe the \(L_\infty(\Omega)\) norm.</p>
-<p>Let us choose the latter and rescale eigenfunctions so that they have \(\|\phi_i(\mathbf x)\|_{L^\infty(\Omega)}=1\) instead of \(\|\Phi\|_{l_2}=1\) (where \(\phi_i\) is the \(i\)th eigen<em>function</em> and \(\Phi_i\) the corresponding vector of nodal values). For the \(Q_1\) elements chosen here, we know that the maximum of the function \(\phi_i(\mathbf x)\) is attained at one of the nodes, so \(\max_{\mathbf x}\phi_i(\mathbf x)=\max_j (\Phi_i)_j\), making the normalization in the \(L_\infty\) norm trivial. Note that this doesn't work as easily if we had chosen \(Q_k\) elements with \(k&gt;1\): there, the maximum of a function does not necessarily have to be attained at a node, and so \(\max_{\mathbf x}\phi_i(\mathbf x)\ge\max_j (\Phi_i)_j\) (although the equality is usually nearly true).</p>
+</div><!-- fragment --><p>上述调用的输出是一组向量和数值。在特征值问题中，特征函数只确定到一个可以任意固定的常数。由于对特征值问题的原点一无所知，SLEPc除了将特征向量归一到 \(l_2\) （向量）准则外，没有其他选择。不幸的是，这个规范与我们从特征函数角度可能感兴趣的任何规范没有什么关系： \(L_2(\Omega)\) 规范，或者也许是 \(L_\infty(\Omega)\) 规范。 <br  />
+</p>
+<p>让我们选择后者，并重新调整特征函数的尺度，使其具有 \(\|\phi_i(\mathbf x)\|_{L^\infty(\Omega)}=1\) 而不是 \(\|\Phi\|_{l_2}=1\) （其中 \(\phi_i\) 是 \(i\) 第三个特征<em>function</em>， \(\Phi_i\) 是相应的结点值矢量）。对于这里选择的 \(Q_1\) 元素，我们知道函数 \(\phi_i(\mathbf x)\) 的最大值是在其中一个节点上达到的，所以 \(\max_{\mathbf x}\phi_i(\mathbf x)=\max_j (\Phi_i)_j\) ，使得在 \(L_\infty\) 准则下的归一化是很简单的。请注意，如果我们选择 \(Q_k\) 元素与 \(k&gt;1\) ，这就不那么容易了：在那里，一个函数的最大值不一定要在一个节点上达到，所以 \(\max_{\mathbf x}\phi_i(\mathbf x)\ge\max_j (\Phi_i)_j\) （尽管平等通常几乎是真的）。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; eigenfunctions.size(); ++i)</div>
 <div class="line">  eigenfunctions[i] /= eigenfunctions[i].<a class="code" href="classTensor.html#a858195ddbd94c49d6a2cdd447fc5ee63">linfty_norm</a>();</div>
 <div class="ttc" id="aclassTensor_html_a858195ddbd94c49d6a2cdd447fc5ee63"><div class="ttname"><a href="classTensor.html#a858195ddbd94c49d6a2cdd447fc5ee63">Tensor::linfty_norm</a></div><div class="ttdeci">Number linfty_norm(const Tensor&lt; 2, dim, Number &gt; &amp;t)</div><div class="ttdef"><b>Definition:</b> <a href="tensor_8h_source.html#l02817">tensor.h:2817</a></div></div>
-</div><!-- fragment --><p>Finally return the number of iterations it took to converge:</p>
+</div><!-- fragment --><p>最后返回收敛所需的迭代次数。</p>
 <div class="fragment"><div class="line">  <span class="keywordflow">return</span> solver_control.last_step();</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="EigenvalueProblemoutput_results"></a> </p><h4>EigenvalueProblem::output_results</h4>
-<p>This is the last significant function of this program. It uses the <a class="el" href="classDataOut.html">DataOut</a> class to generate graphical output from the eigenfunctions for later visualization. It works as in many of the other tutorial programs.</p>
-<p>The whole collection of functions is then output as a single VTK file.</p>
+<p>这是本程序的最后一个重要功能。它使用DataOut类来生成特征函数的图形输出，以便以后进行可视化。它的工作原理与其他许多教程程序一样。 <br  />
+</p>
+<p>然后整个函数集合被输出为一个单一的VTK文件。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> EigenvalueProblem&lt;dim&gt;::output_results()<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <a class="code" href="classDataOut.html">DataOut&lt;dim&gt;</a> data_out;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ac1eb26168177faa30ffbcf9cbb9c3cd5">attach_dof_handler</a>(dof_handler);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; eigenfunctions.size(); ++i)</div>
 <div class="line">    data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(eigenfunctions[i],</div>
@@ -504,7 +521,7 @@ $(function() {
 <div class="ttc" id="aclassDataOut__DoFData_html_ace4b76e565ba0701c4d32c26075ed3b9"><div class="ttname"><a href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">DataOut_DoFData::add_data_vector</a></div><div class="ttdeci">void add_data_vector(const VectorType &amp;data, const std::vector&lt; std::string &gt; &amp;names, const DataVectorType type=type_automatic, const std::vector&lt; DataComponentInterpretation::DataComponentInterpretation &gt; &amp;data_component_interpretation=std::vector&lt; DataComponentInterpretation::DataComponentInterpretation &gt;())</div><div class="ttdef"><b>Definition:</b> <a href="data__out__dof__data_8h_source.html#l01087">data_out_dof_data.h:1087</a></div></div>
 <div class="ttc" id="aclassDataOut_html"><div class="ttname"><a href="classDataOut.html">DataOut</a></div><div class="ttdef"><b>Definition:</b> <a href="numerics_2data__out_8h_source.html#l00147">data_out.h:150</a></div></div>
 <div class="ttc" id="anamespaceUtilities_html_a6195c5f009ea8c7c536c6ffdf108c32f"><div class="ttname"><a href="namespaceUtilities.html#a6195c5f009ea8c7c536c6ffdf108c32f">Utilities::int_to_string</a></div><div class="ttdeci">std::string int_to_string(const unsigned int value, const unsigned int digits=numbers::invalid_unsigned_int)</div><div class="ttdef"><b>Definition:</b> <a href="base_2utilities_8cc_source.html#l00473">utilities.cc:473</a></div></div>
-</div><!-- fragment --><p>The only thing worth discussing may be that because the potential is specified as a function expression in the input file, it would be nice to also have it as a graphical representation along with the eigenfunctions. The process to achieve this is relatively straightforward: we build an object that represents \(V(\mathbf x)\) and then we interpolate this continuous function onto the finite element space. The result we also attach to the <a class="el" href="classDataOut.html">DataOut</a> object for visualization.</p>
+</div><!-- fragment --><p>唯一值得讨论的是，由于潜能在输入文件中被指定为一个函数表达式，如果能将其与特征函数一起以图形形式表示出来就更好了。实现这一目标的过程相对简单：我们建立一个代表 \(V(\mathbf x)\) 的对象，然后将这个连续函数插值到有限元空间。其结果我们也附加到DataOut对象上，以便进行可视化。</p>
 <div class="fragment"><div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> projected_potential(dof_handler.n_dofs());</div>
 <div class="line">  {</div>
 <div class="line">    <a class="code" href="classFunctionParser.html">FunctionParser&lt;dim&gt;</a> potential;</div>
@@ -515,7 +532,9 @@ $(function() {
 <div class="line">  }</div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(projected_potential, <span class="stringliteral">&quot;interpolated_potential&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  data_out.<a class="code" href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">build_patches</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::ofstream output(<span class="stringliteral">&quot;eigenvectors.vtk&quot;</span>);</div>
 <div class="line">  data_out.<a class="code" href="group__Exceptions.html#gacad99726038e4fca7f605fdffb3317e4">write_vtk</a>(output);</div>
@@ -524,25 +543,30 @@ $(function() {
 <div class="ttc" id="aclassVector_html"><div class="ttname"><a href="classVector.html">Vector&lt; double &gt;</a></div></div>
 <div class="ttc" id="agroup__Exceptions_html_gacad99726038e4fca7f605fdffb3317e4"><div class="ttname"><a href="group__Exceptions.html#gacad99726038e4fca7f605fdffb3317e4">DataOutInterface::write_vtk</a></div><div class="ttdeci">void write_vtk(std::ostream &amp;out) const</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l07177">data_out_base.cc:7177</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_html_a761f008bdeb7d94a69205ae824deefad"><div class="ttname"><a href="namespaceVectorTools.html#a761f008bdeb7d94a69205ae824deefad">VectorTools::interpolate</a></div><div class="ttdeci">void interpolate(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const Function&lt; spacedim, typename VectorType::value_type &gt; &amp;function, VectorType &amp;vec, const ComponentMask &amp;component_mask=ComponentMask())</div></div>
-</div><!-- fragment --><p><a class="anchor" id="EigenvalueProblemrun"></a> </p><h4>EigenvalueProblem::run</h4>
-<p>This is the function which has the top-level control over everything. It is almost exactly the same as in <a class="el" href="step_4.html">step-4</a>:</p>
+</div><!-- fragment --><p><a class="anchor" id="EigenvalueProblemrun"></a></p><h4>EigenvalueProblem::run</h4>
+<p>这是一个对一切都有顶层控制的函数。它几乎与 <a class="el" href="step_4.html">step-4</a> 中的内容完全相同。</p>
 <div class="fragment"><div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">EigenvalueProblem&lt;dim&gt;::run</a>()</div>
 <div class="line">  {</div>
 <div class="line">    make_grid_and_dofs();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;   Number of active cells:       &quot;</span></div>
 <div class="line">              &lt;&lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells() &lt;&lt; std::endl</div>
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot;   Number of degrees of freedom: &quot;</span> &lt;&lt; dof_handler.n_dofs()</div>
 <div class="line">              &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    assemble_system();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_iterations = solve();</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;   Solver converged in &quot;</span> &lt;&lt; n_iterations &lt;&lt; <span class="stringliteral">&quot; iterations.&quot;</span></div>
 <div class="line">              &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    output_results();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; std::endl;</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="classSymmetricTensor.html#a45c9cd0a3fecbd58ae133dfdd104f9f9">eigenvalues</a>.size(); ++i)</div>
@@ -558,12 +582,14 @@ $(function() {
 <div class="line">      <span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
 <div class="line">      <span class="keyword">using namespace </span>Step36;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <a class="code" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a> mpi_initialization(argc, argv, 1);</div>
 <div class="ttc" id="aclassUtilities_1_1MPI_1_1MPI__InitFinalize_html"><div class="ttname"><a href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a></div><div class="ttdef"><b>Definition:</b> <a href="mpi_8h_source.html#l00902">mpi.h:903</a></div></div>
-</div><!-- fragment --><p>This program can only be run in serial. Otherwise, throw an exception.</p>
+</div><!-- fragment --><p>这个程序只能在串行中运行。否则，抛出一个异常。</p>
 <div class="fragment"><div class="line">  <a class="code" href="group__Exceptions.html#gafc0ca7ad85b3ebd64e8e51689ac85caf">AssertThrow</a>(<a class="code" href="namespaceUtilities_1_1MPI.html#ac26de0c059200523177bb1d92cc25d00">Utilities::MPI::n_mpi_processes</a>(MPI_COMM_WORLD) == 1,</div>
 <div class="line">              <a class="code" href="group__Exceptions.html#gae9a45f517af1401c50811a11083f9114">ExcMessage</a>(</div>
 <div class="line">                <span class="stringliteral">&quot;This program can only be run in serial, use ./step-36&quot;</span>));</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  EigenvalueProblem&lt;2&gt; problem(<span class="stringliteral">&quot;step-36.prm&quot;</span>);</div>
 <div class="line">  problem.run();</div>
@@ -571,7 +597,7 @@ $(function() {
 <div class="ttc" id="agroup__Exceptions_html_gae9a45f517af1401c50811a11083f9114"><div class="ttname"><a href="group__Exceptions.html#gae9a45f517af1401c50811a11083f9114">StandardExceptions::ExcMessage</a></div><div class="ttdeci">static ::ExceptionBase &amp; ExcMessage(std::string arg1)</div></div>
 <div class="ttc" id="agroup__Exceptions_html_gafc0ca7ad85b3ebd64e8e51689ac85caf"><div class="ttname"><a href="group__Exceptions.html#gafc0ca7ad85b3ebd64e8e51689ac85caf">AssertThrow</a></div><div class="ttdeci">#define AssertThrow(cond, exc)</div><div class="ttdef"><b>Definition:</b> <a href="include_2deal_8II_2base_2exceptions_8h_source.html#l01583">exceptions.h:1583</a></div></div>
 <div class="ttc" id="anamespaceUtilities_1_1MPI_html_ac26de0c059200523177bb1d92cc25d00"><div class="ttname"><a href="namespaceUtilities_1_1MPI.html#ac26de0c059200523177bb1d92cc25d00">Utilities::MPI::n_mpi_processes</a></div><div class="ttdeci">unsigned int n_mpi_processes(const MPI_Comm &amp;mpi_communicator)</div><div class="ttdef"><b>Definition:</b> <a href="mpi_8cc_source.html#l00117">mpi.cc:117</a></div></div>
-</div><!-- fragment --><p>All the while, we are watching out if any exceptions should have been generated. If that is so, we panic...</p>
+</div><!-- fragment --><p>在这期间，我们一直在注意是否有任何异常应该被产生。如果是这样的话，我们就会惊慌失措...</p>
 <div class="fragment"><div class="line"><span class="keywordflow">catch</span> (std::exception &amp;exc)</div>
 <div class="line">  {</div>
 <div class="line">    std::cerr &lt;&lt; std::endl</div>
@@ -583,6 +609,7 @@ $(function() {
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot;Aborting!&quot;</span> &lt;&lt; std::endl</div>
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot;----------------------------------------------------&quot;</span></div>
 <div class="line">              &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> 1;</div>
 <div class="line">  }</div>
@@ -598,23 +625,26 @@ $(function() {
 <div class="line">              &lt;&lt; std::endl;</div>
 <div class="line">    <span class="keywordflow">return</span> 1;</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>If no exceptions are thrown, then we tell the program to stop monkeying around and exit nicely:</p>
+</div><!-- fragment --><p>如果没有抛出异常，那么我们就告诉程序不要再胡闹了，乖乖地退出。</p>
 <div class="fragment"><div class="line">  std::cout &lt;&lt; std::endl &lt;&lt; <span class="stringliteral">&quot;   Job done.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
+</div><!-- fragment --><p><a class="anchor" id="Results"></a></p><h1>Results</h1>
 <p><a class="anchor" id="Runningtheproblem"></a></p><h3>Running the problem</h3>
-<p>The problem's input is parameterized by an input file <code>step-36.prm</code> which could, for example, contain the following text:</p>
+<p>该问题的输入由一个输入文件 <code>step-36.prm</code> 作为参数，例如，该文件可以包含以下文本。</p>
 <div class="fragment"><div class="line"><a class="code" href="group__CUDAWrappers.html#gabb7130e2cea54654455ca41ef304f939">set</a> Global mesh refinement steps         = 5</div>
 <div class="line"><a class="code" href="group__CUDAWrappers.html#gabb7130e2cea54654455ca41ef304f939">set</a> Number of <a class="code" href="classSymmetricTensor.html#a45c9cd0a3fecbd58ae133dfdd104f9f9">eigenvalues</a>/eigenfunctions = 5</div>
 <div class="line"><a class="code" href="group__CUDAWrappers.html#gabb7130e2cea54654455ca41ef304f939">set</a> Potential                            = 0</div>
 <div class="ttc" id="agroup__CUDAWrappers_html_gabb7130e2cea54654455ca41ef304f939"><div class="ttname"><a href="group__CUDAWrappers.html#gabb7130e2cea54654455ca41ef304f939">LinearAlgebra::CUDAWrappers::kernel::set</a></div><div class="ttdeci">__global__ void set(Number *val, const Number s, const size_type N)</div></div>
-</div><!-- fragment --><p>Here, the potential is zero inside the domain, and we know that the eigenvalues are given by \(\lambda_{(mn)}=\frac{\pi^2}{4}(m^2+n^2)\) where \(m,n\in{\mathbb N^+}\). Eigenfunctions are sines and cosines with \(m\) and \(n\) periods in \(x\) and \(y\) directions. This matches the output our program generates: </p><div class="fragment"><div class="line">examples/step-36&gt; make <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a></div>
+</div><!-- fragment --><p>这里，域内电势为零，我们知道特征值由 \(\lambda_{(mn)}=\frac{\pi^2}{4}(m^2+n^2)\) 给出，其中 \(m,n\in{\mathbb N^+}\) 。特征函数是正弦和余弦，在 \(m\) 和 \(n\) 方向有 \(x\) 和 \(y\) 个周期。这与我们的程序产生的输出相匹配。</p>
+<div class="fragment"><div class="line">examples/step-36&gt; make <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a></div>
 <div class="line">============================ Running step-36</div>
 <div class="line">   Number of active cells:       1024</div>
 <div class="line">   Number of degrees of freedom: 1089</div>
 <div class="line">   Solver converged in 67 iterations.</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      Eigenvalue 0 : 4.93877</div>
 <div class="line">      Eigenvalue 1 : 12.3707</div>
@@ -622,105 +652,112 @@ $(function() {
 <div class="line">      Eigenvalue 3 : 19.8027</div>
 <div class="line">      Eigenvalue 4 : 24.837</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">   Job done.  </div>
-</div><!-- fragment --><p> These eigenvalues are exactly the ones that correspond to pairs \((m,n)=(1,1)\), \((1,2)\) and \((2,1)\), \((2,2)\), and \((3,1)\). A visualization of the corresponding eigenfunctions would look like this:</p>
+</div><!-- fragment --><p> 这些特征值正是对应于 \((m,n)=(1,1)\) 、 \((1,2)\) 和 \((2,1)\) 、 \((2,2)\) 和 \((3,1)\) 等对。相应的特征函数的可视化将看起来像这样。</p>
 <table width="80%">
 <tr>
 <td><img src="https://www.dealii.org/images/steps/developer/step-36.default.eigenfunction.0.png" alt="" class="inline"/> </td><td><img src="https://www.dealii.org/images/steps/developer/step-36.default.eigenfunction.1.png" alt="" class="inline"/> </td><td><img src="https://www.dealii.org/images/steps/developer/step-36.default.eigenfunction.2.png" alt="" class="inline"/>  </td></tr>
 <tr>
 <td><img src="https://www.dealii.org/images/steps/developer/step-36.default.eigenfunction.3.png" alt="" class="inline"/> </td><td><img src="https://www.dealii.org/images/steps/developer/step-36.default.eigenfunction.4.png" alt="" class="inline"/> </td><td></td></tr>
 </table>
+<p><br  />
+</p>
 <p><a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions</h3>
-<p>It is always worth playing a few games in the playground! So here goes with a few suggestions:</p>
+<p>在操场上玩一些游戏总是值得的! 所以这里有几个建议。</p>
 <ul>
 <li>
-<p class="startli">The potential used above (called the <em>infinite well</em> because it is a flat potential surrounded by infinitely high walls) is interesting because it allows for analytically known solutions. Apart from that, it is rather boring, however. That said, it is trivial to play around with the potential by just setting it to something different in the input file. For example, let us assume that we wanted to work with the following potential in 2d: </p><p class="formulaDsp">
+</li>
+</ul>
+<p><br  />
+</p>
+<p>上面使用的势（称为<em>infinite well</em>，因为它是一个由无限高的墙包围的平坦势）很有趣，因为它允许有分析上已知的解决方案。然而，除此之外，它是相当无聊的。也就是说，通过在输入文件中设置不同的势来玩弄这个势是很容易的。例如，让我们假设我们想在2d中使用以下势。 </p><p class="formulaDsp">
 \[ V(x,y) = \left\{ \begin{array}{ll} -100 &amp; \text{if}\ \sqrt{x^2+y^2}&lt;\frac 34 \ \text{and} \ xy&gt;0 \\ -5 &amp; \text{if}\ \sqrt{x^2+y^2}&lt;\frac 34 \ \text{and} \ xy\le 0 \\ 0 &amp; \text{otherwise} \end{array} \right.\quad. \]
 </p>
-<p> In other words, the potential is -100 in two sectors of a circle of radius 0.75, -5 in the other two sectors, and zero outside the circle. We can achieve this by using the following in the input file : </p><div class="fragment"><div class="line"><a class="code" href="group__CUDAWrappers.html#gabb7130e2cea54654455ca41ef304f939">set</a> Potential = <span class="keywordflow">if</span> (x^2 + y^2 &lt; 0.75^2, <span class="keywordflow">if</span> (x*y &gt; 0, -100, -5), 0)</div>
-</div><!-- fragment --><p> If in addition we also increase the mesh refinement by one level, we get the following results: </p><div class="fragment"><div class="line">examples/step-36&gt; make <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a></div>
+<p> 换句话说，在半径为0.75的圆的两个扇面中，电势是-100，在另外两个扇面中是-5，而在圆外是零。我们可以通过在输入文件中使用以下内容来实现这一点。</p>
+<div class="fragment"><div class="line"><a class="code" href="group__CUDAWrappers.html#gabb7130e2cea54654455ca41ef304f939">set</a> Potential = <span class="keywordflow">if</span> (x^2 + y^2 &lt; 0.75^2, <span class="keywordflow">if</span> (x*y &gt; 0, -100, -5), 0)</div>
+</div><!-- fragment --><p>此外，如果我们还将网格细化程度提高一级，我们会得到以下结果。</p>
+<div class="fragment"><div class="line">examples/step-36&gt; make <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a></div>
 <div class="line">============================ Running step-36</div>
 <div class="line">   Number of active cells:       4096</div>
 <div class="line">   Number of degrees of freedom: 4225</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">   Eigenvalue 0 : -74.2562</div>
 <div class="line">   Eigenvalue 1 : -72.7322</div>
 <div class="line">   Eigenvalue 2 : -42.7406</div>
 <div class="line">   Eigenvalue 3 : -42.2232</div>
 <div class="line">   Eigenvalue 4 : -37.0744</div>
-</div><!-- fragment --><p class="interli">The output file also contains an interpolated version of the potential, which looks like this (note that as expected the lowest few eigenmodes have probability densities \(|\Psi(\mathbf x)|^2\) that are significant only where the potential is the lowest, i.e. in the top right and bottom left sector of inner circle of the potential):</p>
-<p class="interli"><img src="https://www.dealii.org/images/steps/developer/step-36.mod.potential.png" alt="" class="inline"/></p>
-<p class="interli">The first five eigenfunctions are now like this:</p>
+</div><!-- fragment --><p>输出文件还包含一个内插的势的版本，看起来像这样（注意，正如预期的那样，最低的几个特征模式的概率密度 \(|\Psi(\mathbf x)|^2\) 只有在势最低的地方，即在势的内圈的右上角和左下角的部分才是重要的）。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-36.mod.potential.png" alt="" class="inline"/> <br  />
+</p>
+<p>前五个特征函数现在是这样的。</p>
 <table width="80%">
 <tr>
 <td><img src="https://www.dealii.org/images/steps/developer/step-36.mod.eigenfunction.0.png" alt="" class="inline"/> </td><td><img src="https://www.dealii.org/images/steps/developer/step-36.mod.eigenfunction.1.png" alt="" class="inline"/> </td><td><img src="https://www.dealii.org/images/steps/developer/step-36.mod.eigenfunction.2.png" alt="" class="inline"/>  </td></tr>
 <tr>
 <td><img src="https://www.dealii.org/images/steps/developer/step-36.mod.eigenfunction.3.png" alt="" class="inline"/> </td><td><img src="https://www.dealii.org/images/steps/developer/step-36.mod.eigenfunction.4.png" alt="" class="inline"/> </td><td></td></tr>
 </table>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">In our derivation of the problem we have assumed that the particle is confined to a domain \(\Omega\) and that at the boundary of this domain its probability \(|\Psi|^2\) of being is zero. This is equivalent to solving the eigenvalue problem on all of \({\mathbb R}^d\) and assuming that the energy potential is finite only inside a region \(\Omega\) and infinite outside. It is relatively easy to show that \(|\Psi(\mathbf x)|^2\) at all locations \(\mathbf x\) where \(V(\mathbf x)=\infty\). So the question is what happens if our potential is not of this form, i.e. there is no bounded domain outside of which the potential is infinite? In that case, it may be worth to just consider a very large domain at the boundary of which \(V(\mathbf x)\) is at least very large, if not infinite. Play around with a few cases like this and explore how the spectrum and eigenfunctions change as we make the computational region larger and larger.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">What happens if we investigate the simple harmonic oscillator problem \(V(\mathbf x)=c|\mathbf x|^2\)? This potential is exactly of the form discussed in the previous paragraph and has hyper spherical symmetry. One may want to use a large spherical domain with a large outer radius, to approximate the whole-space problem (say, by invoking <a class="el" href="namespaceGridGenerator.html#a533c4778cbc9bcbed365dcab42ca4418">GridGenerator::hyper_ball</a>).</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">The plots above show the wave function \(\Psi(\mathbf x)\), but the physical quantity of interest is actually the probability density \(|\Psi(\mathbf x)|^2\) for the particle to be at location \(\mathbf x\). Some visualization programs can compute derived quantities from the data in an input file, but we can also do so right away when creating the output file. The facility to do that is the <a class="el" href="classDataPostprocessor.html">DataPostprocessor</a> class that can be used in conjunction with the <a class="el" href="classDataOut.html">DataOut</a> class. Examples of how this can be done can be found in <a class="el" href="step_29.html">step-29</a> and <a class="el" href="step_33.html">step-33</a>.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">What happens if the particle in the box has internal degrees of freedom? For example, if the particle were a spin- \(1/2\) particle? In that case, we may want to start solving a vector-valued problem instead.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">Our implementation of the deal.II library here uses the <a class="el" href="namespacePETScWrappers.html">PETScWrappers</a> and <a class="el" href="namespaceSLEPcWrappers.html">SLEPcWrappers</a> and is suitable for running on serial machine architecture. However, for larger grids and with a larger number of degrees-of-freedom, we may want to run our application on parallel architectures. A parallel implementation of the above code can be particularly useful here since the generalized eigenspectrum problem is somewhat more expensive to solve than the standard problems considered in most of the earlier tutorials. Fortunately, modifying the above program to be MPI compliant is a relatively straightforward procedure. A sketch of how this can be done can be found in <a class="el" href="step_17.html">step-17</a>.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">Finally, there are alternatives to using the SLEPc eigenvalue solvers. deal.II has interfaces to one of them, ARPACK (see <a href="../../external-libs/arpack.html">the ARPACK configuration page</a> for setup instructions), implemented in the <a class="el" href="classArpackSolver.html">ArpackSolver</a> class. Here is a short and quick overview of what one would need to change to use it, provided you have a working installation of ARPACK and deal.II has been configured properly for it (see the deal.II <a href="../../readme.html" target="body">README</a> file):</p>
-<p class="interli">First, in order to use the ARPACK interfaces, we can go back to using standard deal.II matrices and vectors, so we start by replacing the PETSc and SLEPc headers </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="petsc__sparse__matrix_8h.html">deal.II/lac/petsc_sparse_matrix.h</a>&gt;</span></div>
+<p><br  />
+</p>
+<p>在我们对问题的推导中，我们假设粒子被限制在一个域中 \(\Omega\) ，并且在这个域的边界，其存在的概率 \(|\Psi|^2\) 为零。这相当于解决所有 \({\mathbb R}^d\) 上的特征值问题，并假设能量势只在 \(\Omega\) 区域内是有限的，而在区域外是无限的。相对来说，可以证明 \(|\Psi(\mathbf x)|^2\) 在 \(\mathbf x\) 的所有位置上， \(V(\mathbf x)=\infty\) 。那么问题来了，如果我们的势不是这种形式，也就是说，没有一个势是无限的有界域，会发生什么？在这种情况下，可能值得只考虑一个非常大的边界域，其中 \(V(\mathbf x)\) 即使不是无限的，也至少是非常大的。像这样玩一玩，探索一下当我们使计算区域越来越大时，频谱和特征函数如何变化。</p>
+<p>如果我们研究简单的谐波振荡器问题 \(V(\mathbf x)=c|\mathbf x|^2\) 会怎样？这个势正是上一段讨论的形式，具有超球面对称性。人们可能想用一个大的外半径的球面域，来近似于全空间问题（例如，通过调用 <a class="el" href="namespaceGridGenerator.html#a533c4778cbc9bcbed365dcab42ca4418">GridGenerator::hyper_ball</a>). ）。</p>
+<p>上面的图显示了波函数 \(\Psi(\mathbf x)\) ，但感兴趣的物理量实际上是粒子在位置 \(\mathbf x\) 的概率密度 \(|\Psi(\mathbf x)|^2\) 。一些可视化程序可以从输入文件中的数据计算出派生量，但我们也可以在创建输出文件时立即这样做。这样做的工具是DataPostprocessor类，可以和DataOut类一起使用。如何做到这一点的例子可以在 <a class="el" href="step_29.html">step-29</a> 和 <a class="el" href="step_33.html">step-33</a> 中找到。</p>
+<p>如果盒子里的粒子有的内部自由度会怎样？例如，如果该粒子是一个自旋- \(1/2\) 粒子？在这种情况下，我们可能要开始解决一个矢量值的问题，而不是。</p>
+<p>我们这里的deal.II库的实现使用了PETScWrappers和SLEPcWrappers，适合在串行机器结构上运行。然而，对于更大的网格和更多的自由度，我们可能希望在并行架构上运行我们的应用程序。上述代码的并行实现在这里可能特别有用，因为广义的特征谱问题比前面大多数教程中考虑的标准问题的解决成本更高。幸运的是，将上述程序修改为与MPI兼容是一个相对简单的过程。关于如何做到这一点的简述可以在 <a class="el" href="step_17.html">@ref step_17 </a>step-17"  " 中找到。</p>
+<p>deal.II有与其中之一ARPACK（见<a href="../../external-libs/arpack.html">the ARPACK configuration page</a>的设置说明）的接口，在ArpackSolver类中实现。下面是一个简短的、快速的概述，说明使用它需要改变什么，前提是你有一个工作的ARPACK安装，并且deal.II已经为它正确配置了（见deal.II <a href="../../readme.html" target="body">README</a>文件）。</p>
+<p>首先，为了使用ARPACK接口，我们可以回到使用标准的deal.II矩阵和向量，所以我们开始替换PETSc和SLEPc头文件</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="petsc__sparse__matrix_8h.html">deal.II/lac/petsc_sparse_matrix.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="petsc__vector_8h.html">deal.II/lac/petsc_vector.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="slepc__solver_8h.html">deal.II/lac/slepc_solver.h</a>&gt;</span></div>
-</div><!-- fragment --><p> with these: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="arpack__solver_8h.html">deal.II/lac/arpack_solver.h</a>&gt;</span></div>
+</div><!-- fragment --><p>替换成这些。</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="arpack__solver_8h.html">deal.II/lac/arpack_solver.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sparse__direct_8h.html">deal.II/lac/sparse_direct.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sparse__matrix_8h.html">deal.II/lac/sparse_matrix.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;deal.II/lac/compressed_sparsity_pattern.h&gt;</span></div>
 <div class="ttc" id="aarpack__solver_8h_html"><div class="ttname"><a href="arpack__solver_8h.html">arpack_solver.h</a></div></div>
 <div class="ttc" id="asparse__direct_8h_html"><div class="ttname"><a href="sparse__direct_8h.html">sparse_direct.h</a></div></div>
 <div class="ttc" id="asparse__matrix_8h_html"><div class="ttname"><a href="sparse__matrix_8h.html">sparse_matrix.h</a></div></div>
-</div><!-- fragment --><p> ARPACK allows complex eigenvalues, so we will also need </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;complex&gt;</span></div>
-</div><!-- fragment --><p class="interli">Secondly, we switch back to the deal.II matrix and vector definitions in the main class: </p><div class="fragment"><div class="line"><a class="code" href="classSparsityPattern.html">SparsityPattern</a>                     sparsity_pattern;</div>
+</div><!-- fragment --><p>ARPACK允许复杂的特征值，所以我们还需要</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;complex&gt;</span></div>
+</div><!-- fragment --><p>其次，我们换回主类中的deal.II矩阵和向量定义。</p>
+<div class="fragment"><div class="line"><a class="code" href="classSparsityPattern.html">SparsityPattern</a>                     sparsity_pattern;</div>
 <div class="line"><a class="code" href="classSparseMatrix.html">SparseMatrix&lt;double&gt;</a>                stiffness_matrix, <a class="code" href="namespaceLocalIntegrators_1_1L2.html#a1c15243765304a803037988b5561627d">mass_matrix</a>;</div>
 <div class="line">std::vector&lt;Vector&lt;double&gt; &gt;        eigenfunctions;</div>
 <div class="line">std::vector&lt;std::complex&lt;double&gt;&gt;   <a class="code" href="classSymmetricTensor.html#a45c9cd0a3fecbd58ae133dfdd104f9f9">eigenvalues</a>;</div>
 <div class="ttc" id="aclassSparseMatrix_html"><div class="ttname"><a href="classSparseMatrix.html">SparseMatrix&lt; double &gt;</a></div></div>
 <div class="ttc" id="aclassSparsityPattern_html"><div class="ttname"><a href="classSparsityPattern.html">SparsityPattern</a></div><div class="ttdef"><b>Definition:</b> <a href="sparsity__pattern_8h_source.html#l00868">sparsity_pattern.h:869</a></div></div>
-</div><!-- fragment --><p> and initialize them as usual in <code>make_grid_and_dofs()</code>: </p><div class="fragment"><div class="line">sparsity_pattern.<a class="code" href="group__Exceptions.html#gae5dbc8f57d46b8d15170f753613436e1">reinit</a> (dof_handler.n_dofs(),</div>
+</div><!-- fragment --><p>并像往常一样在 <code>make_grid_and_dofs()</code> 中初始化它们。</p>
+<div class="fragment"><div class="line">sparsity_pattern.<a class="code" href="group__Exceptions.html#gae5dbc8f57d46b8d15170f753613436e1">reinit</a> (dof_handler.n_dofs(),</div>
 <div class="line">                         dof_handler.n_dofs(),</div>
 <div class="line">                         dof_handler.max_couplings_between_dofs());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a> (dof_handler, sparsity_pattern);</div>
 <div class="line">constraints.condense (sparsity_pattern);</div>
 <div class="line">sparsity_pattern.<a class="code" href="group__Exceptions.html#gad15d36e4bfe7c97b55d155541e723284">compress</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">stiffness_matrix.<a class="code" href="classSparseMatrix.html#afa7ae4d32bda6035661c9cccfe185597">reinit</a> (sparsity_pattern);</div>
 <div class="line"><a class="code" href="namespaceLocalIntegrators_1_1L2.html#a1c15243765304a803037988b5561627d">mass_matrix</a>.reinit (sparsity_pattern);</div>
 <div class="ttc" id="aclassSparseMatrix_html_afa7ae4d32bda6035661c9cccfe185597"><div class="ttname"><a href="classSparseMatrix.html#afa7ae4d32bda6035661c9cccfe185597">SparseMatrix::reinit</a></div><div class="ttdeci">virtual void reinit(const SparsityPattern &amp;sparsity)</div></div>
 <div class="ttc" id="agroup__Exceptions_html_gad15d36e4bfe7c97b55d155541e723284"><div class="ttname"><a href="group__Exceptions.html#gad15d36e4bfe7c97b55d155541e723284">SparsityPattern::compress</a></div><div class="ttdeci">void compress()</div><div class="ttdef"><b>Definition:</b> <a href="sparsity__pattern_8cc_source.html#l00338">sparsity_pattern.cc:338</a></div></div>
 <div class="ttc" id="agroup__Exceptions_html_gae5dbc8f57d46b8d15170f753613436e1"><div class="ttname"><a href="group__Exceptions.html#gae5dbc8f57d46b8d15170f753613436e1">SparsityPattern::reinit</a></div><div class="ttdeci">virtual void reinit(const size_type m, const size_type n, const ArrayView&lt; const unsigned int &gt; &amp;row_lengths) override</div><div class="ttdef"><b>Definition:</b> <a href="sparsity__pattern_8cc_source.html#l00229">sparsity_pattern.cc:229</a></div></div>
-</div><!-- fragment --><p class="endli">For solving the eigenvalue problem with ARPACK, we finally need to modify <code>solve()</code>: </p><div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
+<div class="ttc" id="agroup__constraints_html_gaf78e864edbfba7e0a7477457bfb96b26"><div class="ttname"><a href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a></div><div class="ttdeci">void make_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, SparsityPatternType &amp;sparsity_pattern, const AffineConstraints&lt; number &gt; &amp;constraints=AffineConstraints&lt; number &gt;(), const bool keep_constrained_dofs=true, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__sparsity_8cc_source.html#l00064">dof_tools_sparsity.cc:64</a></div></div>
+</div><!-- fragment --><p>为了用ARPACK解决特征值问题，我们最后需要修改 <code>solve()</code> 。</p>
+<div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> EigenvalueProblem&lt;dim&gt;::solve ()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classSolverControl.html">SolverControl</a> solver_control (dof_handler.n_dofs(), 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-9);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classSparseDirectUMFPACK.html">SparseDirectUMFPACK</a> inverse;</div>
 <div class="line">  inverse.<a class="code" href="classSparseDirectUMFPACK.html#a25b1d3c7dbb88158a76165a4a56a16d6">initialize</a> (stiffness_matrix);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> num_arnoldi_vectors = 2*<a class="code" href="classSymmetricTensor.html#a45c9cd0a3fecbd58ae133dfdd104f9f9">eigenvalues</a>.size() + 2;</div>
 <div class="line">  <a class="code" href="structArpackSolver_1_1AdditionalData.html">ArpackSolver::AdditionalData</a> additional_data(num_arnoldi_vectors);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classArpackSolver.html">ArpackSolver</a> eigensolver (solver_control, additional_data);</div>
 <div class="line">  eigensolver.solve (stiffness_matrix,</div>
@@ -730,8 +767,10 @@ $(function() {
 <div class="line">                     eigenfunctions,</div>
 <div class="line">                     <a class="code" href="classSymmetricTensor.html#a45c9cd0a3fecbd58ae133dfdd104f9f9">eigenvalues</a>.size());</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0; i&lt;eigenfunctions.size(); ++i)</div>
 <div class="line">    eigenfunctions[i] /= eigenfunctions[i].<a class="code" href="classTensor.html#a858195ddbd94c49d6a2cdd447fc5ee63">linfty_norm</a> ();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> solver_control.last_step ();</div>
 <div class="line">}</div>
@@ -739,10 +778,7 @@ $(function() {
 <div class="ttc" id="aclassSparseDirectUMFPACK_html"><div class="ttname"><a href="classSparseDirectUMFPACK.html">SparseDirectUMFPACK</a></div><div class="ttdef"><b>Definition:</b> <a href="sparse__direct_8h_source.html#l00087">sparse_direct.h:88</a></div></div>
 <div class="ttc" id="aclassSparseDirectUMFPACK_html_a25b1d3c7dbb88158a76165a4a56a16d6"><div class="ttname"><a href="classSparseDirectUMFPACK.html#a25b1d3c7dbb88158a76165a4a56a16d6">SparseDirectUMFPACK::initialize</a></div><div class="ttdeci">void initialize(const SparsityPattern &amp;sparsity_pattern)</div><div class="ttdef"><b>Definition:</b> <a href="sparse__direct_8cc_source.html#l00049">sparse_direct.cc:49</a></div></div>
 <div class="ttc" id="astructArpackSolver_1_1AdditionalData_html"><div class="ttname"><a href="structArpackSolver_1_1AdditionalData.html">ArpackSolver::AdditionalData</a></div><div class="ttdef"><b>Definition:</b> <a href="arpack__solver_8h_source.html#l00226">arpack_solver.h:227</a></div></div>
-</div><!-- fragment --><p> Note how we have used an exact decomposition (using <a class="el" href="classSparseDirectUMFPACK.html">SparseDirectUMFPACK</a>) as a preconditioner to ARPACK. </p>
-</li>
-</ul>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+</div><!-- fragment --><p>注意我们是如何使用精确分解（使用SparseDirectUMFPACK）作为ARPACK的前置条件的。  <a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2009 - 2019 by the deal.II authors</span></div>
@@ -1095,7 +1131,8 @@ $(function() {
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespaceLAPACKSupport_html_a1a9009db0d9a77923a7031b549b9b638ad91ede5cc912c10676843bf58fa60636"><div class="ttname"><a href="namespaceLAPACKSupport.html#a1a9009db0d9a77923a7031b549b9b638ad91ede5cc912c10676843bf58fa60636">LAPACKSupport::eigenvalues</a></div><div class="ttdeci">@ eigenvalues</div><div class="ttdoc">Eigenvalue vector is filled.</div><div class="ttdef"><b>Definition:</b> <a href="lapack__support_8h_source.html#l00066">lapack_support.h:66</a></div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> 。 </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

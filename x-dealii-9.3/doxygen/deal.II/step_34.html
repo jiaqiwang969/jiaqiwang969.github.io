@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-34 tutorial program</title>
+<title>The deal.II Library: The step-34 tutorial program 。</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,219 +86,230 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-34 tutorial program </div>  </div>
+<div class="title">The step-34 tutorial program 。 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_4.html">step-4</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_4.html">step-4</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Irrotationalflow"> Irrotational flow </a>
-        <li><a href="#Thenumericalapproximation">The numerical approximation</a>
-        <li><a href="#Collocationboundaryelementmethod"> Collocation boundary element method </a>
-        <li><a href="#Treatingthesingularintegrals"> Treating the singular integrals. </a>
-        <li><a href="#Implementation">Implementation</a>
-        <li><a href="#Testcase">Testcase</a>
+        <li><a href="#Irrotationalflow"> Irrotational flow </a><a href="#Irrotationalflow"> Irrotational flow </a>
+        <li><a href="#Thenumericalapproximation">The numerical approximation</a><a href="#Thenumericalapproximation">The numerical approximation</a>
+        <li><a href="#Collocationboundaryelementmethod"> Collocation boundary element method </a><a href="#Collocationboundaryelementmethod"> Collocation boundary element method </a>
+        <li><a href="#Treatingthesingularintegrals"> Treating the singular integrals. </a><a href="#Treatingthesingularintegrals"> Treating the singular integrals. </a>
+        <li><a href="#Implementation">Implementation</a><a href="#Implementation">Implementation</a>
+        <li><a href="#Testcase">Testcase</a><a href="#Testcase">Testcase</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#Singleanddoublelayeroperatorkernels">Single and double layer operator kernels</a>
-        <li><a href="#TheBEMProblemclass">The BEMProblem class</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#Singleanddoublelayeroperatorkernels">Single and double layer operator kernels</a><a href="#Singleanddoublelayeroperatorkernels">Single and double layer operator kernels</a>
+        <li><a href="#TheBEMProblemclass">The BEMProblem class</a><a href="#TheBEMProblemclass">The BEMProblem class</a>
       <ul>
-        <li><a href="#BEMProblemBEMProblemandBEMProblemread_parameters">BEMProblem::BEMProblem and BEMProblem::read_parameters</a>
-        <li><a href="#BEMProblemread_domain">BEMProblem::read_domain</a>
-        <li><a href="#BEMProblemrefine_and_resize">BEMProblem::refine_and_resize</a>
-        <li><a href="#BEMProblemassemble_system">BEMProblem::assemble_system</a>
-        <li><a href="#BEMProblemsolve_system">BEMProblem::solve_system</a>
-        <li><a href="#BEMProblemcompute_errors">BEMProblem::compute_errors</a>
-        <li><a href="#BEMProblemcompute_exterior_solution">BEMProblem::compute_exterior_solution</a>
-        <li><a href="#BEMProblemoutput_results">BEMProblem::output_results</a>
-        <li><a href="#BEMProblemrun">BEMProblem::run</a>
+        <li><a href="#BEMProblemBEMProblemandBEMProblemread_parameters">BEMProblem::BEMProblem and BEMProblem::read_parameters</a><a href="#BEMProblemBEMProblemandBEMProblemread_parameters">BEMProblem::BEMProblem and BEMProblem::read_parameters</a>
+        <li><a href="#BEMProblemread_domain">BEMProblem::read_domain</a><a href="#BEMProblemread_domain">BEMProblem::read_domain</a>
+        <li><a href="#BEMProblemrefine_and_resize">BEMProblem::refine_and_resize</a><a href="#BEMProblemrefine_and_resize">BEMProblem::refine_and_resize</a>
+        <li><a href="#BEMProblemassemble_system">BEMProblem::assemble_system</a><a href="#BEMProblemassemble_system">BEMProblem::assemble_system</a>
+        <li><a href="#BEMProblemsolve_system">BEMProblem::solve_system</a><a href="#BEMProblemsolve_system">BEMProblem::solve_system</a>
+        <li><a href="#BEMProblemcompute_errors">BEMProblem::compute_errors</a><a href="#BEMProblemcompute_errors">BEMProblem::compute_errors</a>
+        <li><a href="#BEMProblemcompute_exterior_solution">BEMProblem::compute_exterior_solution</a><a href="#BEMProblemcompute_exterior_solution">BEMProblem::compute_exterior_solution</a>
+        <li><a href="#BEMProblemoutput_results">BEMProblem::output_results</a><a href="#BEMProblemoutput_results">BEMProblem::output_results</a>
+        <li><a href="#BEMProblemrun">BEMProblem::run</a><a href="#BEMProblemrun">BEMProblem::run</a>
       </ul>
-        <li><a href="#Themainfunction">The main() function</a>
+        <li><a href="#Themainfunction">The main() function</a><a href="#Themainfunction">The main() function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
+</p>
+<p><br  />
  <br  />
 </p>
 <p><em>This program was contributed by Luca Heltai (thanks to Michael Gratton for pointing out what the exact solution should have been in the three dimensional case). </em></p>
-<dl class="section note"><dt>Note</dt><dd>If you use this program as a basis for your own work, please consider citing it in your list of references. The initial version of this work was contributed to the deal.II project by the authors listed in the following citation: <a href="https://doi.org/10.5281/zenodo.495473"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.495473.svg" alt="10.5281/zenodo.495473"/></a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If you use this program as a basis for your own work, please consider citing it in your list of references. The initial version of this work was contributed to the deal.II project by the authors listed in the following citation: <a href="https://doi.org/10.5281/zenodo.495473"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.495473.svg" alt="10.5281/zenodo.495473"/></a>  <br  />
+</dd></dl>
 <p><a class="anchor" id="Intro"></a></p>
 <p><a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
 <p><a class="anchor" id="Irrotationalflow"></a></p><h3>Irrotational flow </h3>
-<p>The incompressible motion of an inviscid fluid past a body (for example air past an airplane wing, or air or water past a propeller) is usually modeled by the Euler equations of fluid dynamics:</p>
+<p>无粘性流体经过一个物体（例如空气经过飞机机翼，或空气或水经过螺旋桨）的不可压缩运动，通常用流体力学的欧拉方程来模拟。</p>
 <p class="formulaDsp">
 \begin{align*} \frac{\partial }{\partial t}\mathbf{v} + (\mathbf{v}\cdot\nabla)\mathbf{v} &amp;= -\frac{1}{\rho}\nabla p + \mathbf{g} \qquad &amp;\text{in } \mathbb{R}^n \backslash \Omega \\ \nabla \cdot \mathbf{v}&amp;=0 &amp;\text{in } \mathbb{R}^n\backslash\Omega \end{align*}
 </p>
-<p> where the fluid density \(\rho\) and the acceleration \(\mathbf{g}\) due to external forces are given and the velocity \(\mathbf{v}\) and the pressure \(p\) are the unknowns. Here \(\Omega\) is a closed bounded region representing the body around which the fluid moves.</p>
-<p>The above equations can be derived from Navier-Stokes equations assuming that the effects due to viscosity are negligible compared to those due to the pressure gradient, inertial forces and the external forces. This is the opposite case of the Stokes equations discussed in <a class="el" href="step_22.html">step-22</a> which are the limit case of dominant viscosity, i.e. where the velocity is so small that inertia forces can be neglected. On the other hand, owing to the assumed incompressibility, the equations are not suited for very high speed gas flows where compressibility and the equation of state of the gas have to be taken into account, leading to the Euler equations of gas dynamics, a hyperbolic system.</p>
-<p>For the purpose of this tutorial program, we will consider only stationary flow without external forces: </p><p class="formulaDsp">
+<p>其中流体密度 \(\rho\) 和由外力引起的加速度 \(\mathbf{g}\) 已经给出，速度 \(\mathbf{v}\) 和压力 \(p\) 是未知数。这里 \(\Omega\) 是一个封闭的有界区域，代表流体围绕其运动的体。</p>
+<p>上述方程可以从纳维-斯托克斯方程推导出来，假设与压力梯度、惯性力和外力的影响相比，粘度引起的影响可以忽略不计。这与 <a class="el" href="step_22.html">step-22</a> 中讨论的斯托克斯方程的情况相反，斯托克斯方程是主导粘度的极限情况，即速度非常小，惯性力可以被忽略。另一方面，由于假定的不可压缩性，该方程不适合于非常高速的气体流动，在这种情况下，必须考虑到压缩性和气体的状态方程，从而导致气体动力学的欧拉方程，这是一个双曲系统。</p>
+<p>为了本教程程序的目的，我们将只考虑没有外力的静止流动。 </p><p class="formulaDsp">
 \begin{align*} (\mathbf{v}\cdot\nabla)\mathbf{v} &amp;= -\frac{1}{\rho}\nabla p \qquad &amp;\text{in } \mathbb{R}^n \backslash \Omega \\ \nabla \cdot \mathbf{v}&amp;=0 &amp;\text{in } \mathbb{R}^n\backslash\Omega \end{align*}
 </p>
-<p>Uniqueness of the solution of the Euler equations is ensured by adding the boundary conditions </p><p class="formulaDsp">
+<p>欧拉方程的解的唯一性是通过添加边界条件 </p><p class="formulaDsp">
 \[ \label{eq:boundary-conditions} \begin{aligned} \mathbf{n}\cdot\mathbf{v}&amp; = 0 \qquad &amp;&amp; \text{ on } \partial\Omega \\ \mathbf{v}&amp; = \mathbf{v}_\infty &amp;&amp; \text{ when } |\mathbf{x}| \to \infty, \end{aligned} \]
 </p>
-<p>which is to say that the body is at rest in our coordinate systems and is not permeable, and that the fluid has (constant) velocity \(\mathbf{v}_\infty\) at infinity. An alternative viewpoint is that our coordinate system moves along with the body whereas the background fluid is at rest at infinity. Notice that we define the normal \(\mathbf{n}\) as the <em>outer</em> normal to the domain \(\Omega\), which is the opposite of the outer normal to the integration domain.</p>
-<p>For both stationary and non stationary flow, the solution process starts by solving for the velocity in the second equation and substituting in the first equation in order to find the pressure. The solution of the stationary Euler equations is typically performed in order to understand the behavior of the given (possibly complex) geometry when a prescribed motion is enforced on the system.</p>
-<p>The first step in this process is to change the frame of reference from a coordinate system moving along with the body to one in which the body moves through a fluid that is at rest at infinity. This can be expressed by introducing a new velocity \(\mathbf{\tilde{v}}=\mathbf{v}-\mathbf{v}_\infty\) for which we find that the same equations hold (because \(\nabla\cdot \mathbf{v}_\infty=0\)) and we have boundary conditions </p><p class="formulaDsp">
+<p>来保证的。</p>
+<p>也就是说，在我们的坐标系中，物体处于静止状态，不具有渗透性，并且流体在无限远处具有（恒定）速度 \(\mathbf{v}_\infty\) 。另一种观点是，我们的坐标系随着身体移动，而背景流体在无限远处处于静止状态。注意，我们将法线 \(\mathbf{n}\) 定义为域 \(\Omega\) 的<em>outer</em>法线，它与积分域的外法线相反。</p>
+<p>对于静止和非静止的流动，求解过程从求解第二个方程中的速度开始，然后代入第一个方程，以求得压力。静止欧拉方程的求解通常是为了了解给定的（可能是复杂的）几何形状在系统上强制执行规定运动时的行为。</p>
+<p>这个过程的第一步是将参照系从一个与身体一起运动的坐标系改变为一个身体在一个无限大的静止流体中运动的坐标系。这可以通过引入一个新的速度 \(\mathbf{\tilde{v}}=\mathbf{v}-\mathbf{v}_\infty\) 来表示，对于这个速度，我们发现同样的方程是成立的（因为 \(\nabla\cdot \mathbf{v}_\infty=0\) ），我们有边界条件 </p><p class="formulaDsp">
 \[ \label{eq:boundary-conditions-tilde} \begin{aligned} \mathbf{n}\cdot\mathbf{\tilde{v}}&amp; = -\mathbf{n}\cdot\mathbf{v}_\infty \qquad &amp;&amp; \text{ on } \partial\Omega \\ \mathbf{\tilde{v}}&amp; = 0 &amp;&amp; \text{ when } |\mathbf{x}| \to \infty, \end{aligned} \]
 </p>
-<p>If we assume that the fluid is irrotational, i.e., \(\nabla \times \mathbf{v}=0\) in \(\mathbb{R}^n\backslash\Omega\), we can represent the velocity, and consequently also the perturbation velocity, as the gradient of a scalar function: </p><p class="formulaDsp">
+<p>如果我们假设流体是无旋转的，即 \(\nabla \times \mathbf{v}=0\) 中的 \(\mathbb{R}^n\backslash\Omega\) ，我们可以用标量函数的梯度来表示速度，从而也可以表示扰动速度。 </p><p class="formulaDsp">
 \[ \mathbf{\tilde{v}}=\nabla\phi, \]
 </p>
-<p> and so the second part of Euler equations above can be rewritten as the homogeneous Laplace equation for the unknown \(\phi\): </p><p class="formulaDsp">
+<p>因此，上述欧拉方程的第二部分可以改写为未知数 \(\phi\) 的同质拉普拉斯方程： </p><p class="formulaDsp">
 \begin{align*} \label{laplace} \Delta\phi &amp;= 0 \qquad &amp;&amp;\text{in}\ \mathbb{R}^n\backslash\Omega, \\ \mathbf{n}\cdot\nabla\phi &amp;= -\mathbf{n}\cdot\mathbf{v}_\infty &amp;&amp; \text{on}\ \partial\Omega \end{align*}
 </p>
-<p> while the momentum equation reduces to Bernoulli's equation that expresses the pressure \(p\) as a function of the potential \(\phi\): </p><p class="formulaDsp">
+<p>，而动量方程则简化为伯努利方程，将压力 \(p\) 表示为势的函数 \(\phi\) ： </p><p class="formulaDsp">
 \[ \frac{p}{\rho} +\frac{1}{2} | \nabla \phi |^2 = 0 \in \Omega. \]
 </p>
-<p>So we can solve the problem by solving the Laplace equation for the potential. We recall that the following functions, called fundamental solutions of the Laplace equation,</p>
+<p>因此，我们可以通过解决电势的拉普拉斯方程来解决这个问题。 我们回顾一下，下列函数，称为拉普拉斯方程的基本解。</p>
 <p class="formulaDsp">
 \[ \begin{aligned} \label{eq:3} G(\mathbf{y}-\mathbf{x}) = &amp; -\frac{1}{2\pi}\ln|\mathbf{y}-\mathbf{x}| \qquad &amp;&amp; \text{for } n=2 \\ G(\mathbf{y}-\mathbf{x}) = &amp; \frac{1}{4\pi}\frac{1}{|\mathbf{y}-\mathbf{x}|}&amp;&amp; \text{for } n=3, \end{aligned} \]
 </p>
-<p>satisfy in a distributional sense the equation:</p>
+<p>在分布意义上满足该方程。</p>
 <p class="formulaDsp">
 \[ -\Delta_y G(\mathbf{y}-\mathbf{x}) = \delta(\mathbf{y}-\mathbf{x}), \]
 </p>
-<p>where the derivative is done in the variable \(\mathbf{y}\). By using the usual Green identities, our problem can be written on the boundary \(\partial\Omega = \Gamma\) only. We recall the general definition of the second Green identity:</p>
+<p>其中导数是在变量 \(\mathbf{y}\) 中完成的。通过使用通常的格林定理，我们的问题可以只写在边界 \(\partial\Omega = \Gamma\) 上。我们回顾一下第二个格林同位数的一般定义。</p>
 <p class="formulaDsp">
 \[\label{green} \int_{\omega} (-\Delta u)v\,dx + \int_{\partial\omega} \frac{\partial u}{\partial \tilde{\mathbf{n}} }v \,ds = \int_{\omega} (-\Delta v)u\,dx + \int_{\partial\omega} u\frac{\partial v}{\partial \tilde{\mathbf{n}}} \,ds, \]
 </p>
-<p>where \(\tilde{\mathbf{n}}\) is the normal to the surface of \(\omega\) pointing outwards from the domain of integration \(\omega\).</p>
-<p>In our case the domain of integration is the domain \(\mathbb{R}^n\backslash\Omega\), whose boundary is \( \Gamma_\infty \cup \Gamma\), where the "boundary" at infinity is defined as</p>
+<p>其中 \(\tilde{\mathbf{n}}\) 是 \(\omega\) 表面的法线，从积分域 \(\omega\) 向外指向。</p>
+<p>在我们的例子中，积分域是域 \(\mathbb{R}^n\backslash\Omega\) ，其边界是 \( \Gamma_\infty \cup \Gamma\) ，其中无穷大的 "边界 "被定义为</p>
 <p class="formulaDsp">
 \[ \Gamma_\infty \dealcoloneq \lim_{r\to\infty} \partial B_r(0). \]
 </p>
-<p>In our program the normals are defined as <em>outer</em> to the domain \(\Omega\), that is, they are in fact <em>inner</em> to the integration domain, and some care is required in defining the various integrals with the correct signs for the normals, i.e. replacing \(\tilde{\mathbf{n}}\) by \(-\mathbf{n}\).</p>
-<p>If we substitute \(u\) and \(v\) in the Green identity with the solution \(\phi\) and with the fundamental solution of the Laplace equation respectively, as long as \(\mathbf{x}\) is chosen in the region \(\mathbb{R}^n\backslash\Omega\), we obtain: </p><p class="formulaDsp">
+<p>在我们的程序中，法线被定义为域 \(\Omega\) 的<em>outer</em>，也就是说，它们实际上是积分域的<em>inner</em>，在定义各种积分时需要注意法线的正确符号，即用 \(-\mathbf{n}\) 取代 \(\tilde{\mathbf{n}}\) 。</p>
+<p>如果我们将 \(u\) 和 \(v\) 分别替换为格林同位素的解 \(\phi\) 和拉普拉斯方程的基本解，只要 \(\mathbf{x}\) 被选在 \(\mathbb{R}^n\backslash\Omega\) 区域内，就可以得到。 </p><p class="formulaDsp">
 \[ \phi(\mathbf{x}) - \int_{\Gamma\cup\Gamma_\infty}\frac{\partial G(\mathbf{y}-\mathbf{x})}{\partial \mathbf{n}_y}\phi(\mathbf{y})\,ds_y = -\int_{\Gamma\cup\Gamma_\infty}G(\mathbf{y}-\mathbf{x})\frac{\partial \phi}{\partial \mathbf{n}_y}(\mathbf{y})\,ds_y \qquad \forall\mathbf{x}\in \mathbb{R}^n\backslash\Omega \]
 </p>
-<p>where the normals are now pointing <em>inward</em> the domain of integration.</p>
-<p>Notice that in the above equation, we also have the integrals on the portion of the boundary at \(\Gamma_\infty\). Using the boundary conditions of our problem, we have that \(\nabla \phi\) is zero at infinity (which simplifies the integral on \(\Gamma_\infty\) on the right hand side).</p>
-<p>The integral on \(\Gamma_\infty\) that appears on the left hand side can be treated by observing that \(\nabla\phi=0\) implies that \(\phi\) at infinity is necessarily constant. We define its value to be \(\phi_\infty\). It is an easy exercise to prove that</p>
+<p>其中法线现在指向<em>inward</em>这个积分域。</p>
+<p>请注意，在上述方程中，我们也有在 \(\Gamma_\infty\) 处的边界部分的积分。利用我们问题的边界条件，我们有 \(\nabla \phi\) 在无限远处为零（这简化了右侧 \(\Gamma_\infty\) 上的积分）。</p>
+<p>左手边出现的 \(\Gamma_\infty\) 上的积分可以通过观察 \(\nabla\phi=0\) 来处理，这意味着 \(\phi\) 在无限远处必然是常数。我们把它的值定义为 \(\phi_\infty\) 。 要证明这一点是很容易的</p>
 <p class="formulaDsp">
 \[ -\int_{\Gamma_\infty} \frac{\partial G(\mathbf{y}-\mathbf{x})} {\partial \mathbf{n}_y}\phi_\infty \,ds_y = \lim_{r\to\infty} \int_{\partial B_r(0)} \frac{\mathbf{r}}{r} \cdot \nabla G(\mathbf{y}-\mathbf{x}) \phi_\infty \,ds_y = -\phi_\infty. \]
 </p>
-<p>Using this result, we can reduce the above equation only on the boundary \(\Gamma\) using the so-called Single and Double Layer Potential operators:</p>
+<p>利用这一结果，我们可以利用所谓的单层和双层势能算子，只在边界 \(\Gamma\) 上还原上述方程。</p>
 <p class="formulaDsp">
 \[\label{integral} \phi(\mathbf{x}) - (D\phi)(\mathbf{x}) = \phi_\infty -\left(S \frac{\partial \phi}{\partial n_y}\right)(\mathbf{x}) \qquad \forall\mathbf{x}\in \mathbb{R}^n\backslash\Omega. \]
 </p>
-<p>(The name of these operators comes from the fact that they describe the electric potential in \(\mathbb{R}^n\) due to a single thin sheet of charges along a surface, and due to a double sheet of charges and anti-charges along the surface, respectively.)</p>
-<p>In our case, we know the Neumann values of \(\phi\) on the boundary: \(\mathbf{n}\cdot\nabla\phi = -\mathbf{n}\cdot\mathbf{v}_\infty\). Consequently, </p><p class="formulaDsp">
+<p>(这些算子的名字来自于它们分别描述了 \(\mathbb{R}^n\) 中沿表面的单层薄电荷和沿表面的双层电荷和反电荷所产生的电动势。)</p>
+<p>在我们的例子中，我们知道边界上 \(\phi\) 的纽曼值： \(\mathbf{n}\cdot\nabla\phi = -\mathbf{n}\cdot\mathbf{v}_\infty\) 。因此， </p><p class="formulaDsp">
 \[ \phi(\mathbf{x}) - (D\phi)(\mathbf{x}) = \phi_\infty + \left(S[\mathbf{n}\cdot\mathbf{v}_\infty]\right)(\mathbf{x}) \qquad \forall\mathbf{x} \in \mathbb{R}^n\backslash\Omega. \]
 </p>
-<p> If we take the limit for \(\mathbf{x}\) tending to \(\Gamma\) of the above equation, using well known properties of the single and double layer operators, we obtain an equation for \(\phi\) just on the boundary \(\Gamma\) of \(\Omega\):</p>
+<p> 如果我们对上述方程的 \(\mathbf{x}\) 采取趋向于 \(\Gamma\) 的极限，利用众所周知的单层和双层算子的特性，我们得到一个 \(\phi\) 的方程，就在 \(\Gamma\) 的边界上。</p>
 <p class="formulaDsp">
 \[\label{SD} \alpha(\mathbf{x})\phi(\mathbf{x}) - (D\phi)(\mathbf{x}) = \phi_\infty + \left(S [\mathbf{n}\cdot\mathbf{v}_\infty]\right)(\mathbf{x}) \quad \mathbf{x}\in \partial\Omega, \]
 </p>
-<p>which is the Boundary Integral Equation (BIE) we were looking for, where the quantity \(\alpha(\mathbf{x})\) is the fraction of angle or solid angle by which the point \(\mathbf{x}\) sees the domain of integration \(\mathbb{R}^n\backslash\Omega\).</p>
-<p>In particular, at points \(\mathbf{x}\) where the boundary \(\partial\Omega\) is differentiable (i.e. smooth) we have \(\alpha(\mathbf{x})=\frac 12\), but the value may be smaller or larger at points where the boundary has a corner or an edge.</p>
-<p>Substituting the single and double layer operators we get: </p><p class="formulaDsp">
+<p>这就是我们要找的边界积分方程（BIE），其中量 \(\alpha(\mathbf{x})\) 是点 \(\mathbf{x}\) 看到积分域 \(\mathbb{R}^n\backslash\Omega\) 的角度或实体角的分数。</p>
+<p>特别是在边界 \(\partial\Omega\) 可微的点 \(\mathbf{x}\) （即光滑），我们有 \(\alpha(\mathbf{x})=\frac 12\) ，但在边界有角落或边缘的点，该值可能较小或较大。</p>
+<p>代入单层和双层算子，我们得到。二维流动的 </p><p class="formulaDsp">
 \[ \alpha(\mathbf{x}) \phi(\mathbf{x}) + \frac{1}{2\pi}\int_{\partial \Omega} \frac{ (\mathbf{y}-\mathbf{x})\cdot\mathbf{n}_y }{ |\mathbf{y}-\mathbf{x}|^2 } \phi(\mathbf{y}) \,ds_y = \phi_\infty -\frac{1}{2\pi}\int_{\partial \Omega} \ln|\mathbf{y}-\mathbf{x}| \, \mathbf{n}\cdot\mathbf{v_\infty}\,ds_y \]
 </p>
-<p> for two dimensional flows and </p><p class="formulaDsp">
+<p>和三维流动的 </p><p class="formulaDsp">
 \[ \alpha(\mathbf{x}) \phi(\mathbf{x}) + \frac{1}{4\pi}\int_{\partial \Omega} \frac{ (\mathbf{y}-\mathbf{x})\cdot\mathbf{n}_y }{ |\mathbf{y}-\mathbf{x}|^3 }\phi(\mathbf{y})\,ds_y = \phi_\infty + \frac{1}{4\pi}\int_{\partial \Omega} \frac{1}{|\mathbf{y}-\mathbf{x}|} \, \mathbf{n}\cdot\mathbf{v_\infty}\,ds_y \]
 </p>
-<p> for three dimensional flows, where the normal derivatives of the fundamental solutions have been written in a form that makes computation easier. In either case, \(\phi\) is the solution of an integral equation posed entirely on the boundary since both \(\mathbf{x},\mathbf{y}\in\partial\Omega\).</p>
-<p>Notice that the fraction of angle (in 2d) or solid angle (in 3d) \(\alpha(\mathbf{x})\) by which the point \(\mathbf{x}\) sees the domain \(\Omega\) can be defined using the double layer potential itself: </p><p class="formulaDsp">
+<p>，其中基本解的法向导数已被写成一种形式，使计算更容易。在这两种情况下， \(\phi\) 都是完全在边界上提出的积分方程的解，因为 \(\mathbf{x},\mathbf{y}\in\partial\Omega\) .</p>
+<p>注意，点 \(\mathbf{x}\) 看到域 \(\Omega\) 的角度（2D）或实体角（3D） \(\alpha(\mathbf{x})\) 的分数可以用双层势本身定义。 </p><p class="formulaDsp">
 \[ \alpha(\mathbf{x}) \dealcoloneq 1 - \frac{1}{2(n-1)\pi}\int_{\partial \Omega} \frac{ (\mathbf{y}-\mathbf{x})\cdot\mathbf{n}_y } { |\mathbf{y}-\mathbf{x}|^{n} }\phi(\mathbf{y})\,ds_y = 1+ \int_{\partial \Omega} \frac{ \partial G(\mathbf{y}-\mathbf{x}) }{\partial \mathbf{n}_y} \, ds_y. \]
 </p>
-<p>The reason why this is possible can be understood if we consider the fact that the solution of a pure Neumann problem is known up to an arbitrary constant \(c\), which means that, if we set the Neumann data to be zero, then any constant \(\phi = \phi_\infty\) will be a solution. Inserting the constant solution and the Neumann boundary condition in the boundary integral equation, we have </p><p class="formulaDsp">
+<p>如果我们考虑纯诺伊曼问题的解是已知的，直到一个任意的常数 \(c\) ，这意味着，如果我们设置诺伊曼数据为零，那么任何常数 \(\phi = \phi_\infty\) 都将是一个解，就可以理解这一点的原因。在边界积分方程中插入常数解和诺伊曼边界条件，我们有</p>
+<p class="formulaDsp">
 \begin{align*} \alpha\left(\mathbf{x}\right)\phi\left(\mathbf{x}\right) &amp;=\int_{\Omega}\phi\left(\mathbf{y}\right)\delta\left(\mathbf{y}-\mathbf{x}\right)\, dy\\ \Rightarrow \alpha\left(\mathbf{x}\right)\phi_\infty &amp;=\phi_\infty\int_{\Gamma\cup\Gamma_\infty}\frac{ \partial G(\mathbf{y}-\mathbf{x}) }{\partial \mathbf{n}_y} \, ds_y =\phi_\infty\left[\int_{\Gamma_\infty}\frac{ \partial G(\mathbf{y}-\mathbf{x}) }{\partial \mathbf{n}_y} \, ds_y +\int_{\Gamma}\frac{ \partial G(\mathbf{y}-\mathbf{x}) }{\partial \mathbf{n}_y} \, ds_y \right] \end{align*}
 </p>
-<p> The integral on \(\Gamma_\infty\) is unity, see above, so division by the constant \(\phi_\infty\) gives us the explicit expression above for \(\alpha(\mathbf{x})\).</p>
-<p>While this example program is really only focused on the solution of the boundary integral equation, in a realistic setup one would still need to solve for the velocities. To this end, note that we have just computed \(\phi(\mathbf{x})\) for all \(\mathbf{x}\in\partial\Omega\). In the next step, we can compute (analytically, if we want) the solution \(\phi(\mathbf{x})\) in all of \(\mathbb{R}^n\backslash\Omega\). To this end, recall that we had </p><p class="formulaDsp">
+<p>在 \(\Gamma_\infty\) 上的积分是统一的，见上文，所以除以常数 \(\phi_\infty\) 就可以得到上面的 \(\alpha(\mathbf{x})\) 的明确表达式。</p>
+<p>虽然本例程序实际上只关注边界积分方程的求解，但在现实的设置中，仍然需要求解速度。为此，请注意，我们刚刚计算了所有 \(\mathbf{x}\in\partial\Omega\) 的 \(\phi(\mathbf{x})\) 。在下一步，我们可以在所有的 \(\mathbb{R}^n\backslash\Omega\) 中计算（如果我们愿意的话，可以用分析方法）解 \(\phi(\mathbf{x})\) 。为此，回顾一下我们曾有过 </p><p class="formulaDsp">
 \[ \phi(\mathbf{x}) = \phi_\infty + (D\phi)(\mathbf{x}) + \left(S[\mathbf{n}\cdot\mathbf{v}_\infty]\right)(\mathbf{x}) \qquad \forall\mathbf{x}\in \mathbb{R}^n\backslash\Omega. \]
 </p>
-<p> where now we have everything that is on the right hand side ( \(S\) and \(D\) are integrals we can evaluate, the normal velocity on the boundary is given, and \(\phi\) on the boundary we have just computed). Finally, we can then recover the velocity as \(\mathbf{\tilde v}=\nabla \phi\).</p>
-<p>Notice that the evaluation of the above formula for \(\mathbf{x} \in \Omega\) should yield zero as a result, since the integration of the Dirac delta \(\delta(\mathbf{x})\) in the domain \(\mathbb{R}^n\backslash\Omega\) is always zero by definition.</p>
-<p>As a final test, let us verify that this velocity indeed satisfies the momentum balance equation for a stationary flow field, i.e., whether \(\mathbf{v}\cdot\nabla\mathbf{v} = -\frac 1\rho \nabla p\) where \(\mathbf{v}=\mathbf{\tilde v}+\mathbf{v}_\infty=\nabla\phi+\mathbf{v}_\infty\) for some (unknown) pressure \(p\) and a given constant \(\rho\). In other words, we would like to verify that Bernoulli's law as stated above indeed holds. To show this, we use that the left hand side of this equation equates to </p><p class="formulaDsp">
+<p>，现在我们有了右手边的所有东西（ \(S\) 和 \(D\) 是我们可以评估的积分，边界上的法线速度是给定的，边界上的 \(\phi\) 我们刚刚计算出来）。最后，我们就可以恢复速度为 \(\mathbf{\tilde v}=\nabla \phi\) 。</p>
+<p>注意，对 \(\mathbf{x} \in \Omega\) 的上述公式的评估结果应该是零，因为狄拉克三角 \(\delta(\mathbf{x})\) 在域 \(\mathbb{R}^n\backslash\Omega\) 的积分根据定义总是零。</p>
+<p>作为最后的测试，让我们验证这个速度是否确实满足静止流场的动量平衡方程，也就是说，对于某个（未知的）压力 \(p\) 和一个给定的常数 \(\rho\) ， \(\mathbf{v}\cdot\nabla\mathbf{v} = -\frac 1\rho \nabla p\) 中是否有 \(\mathbf{v}=\mathbf{\tilde v}+\mathbf{v}_\infty=\nabla\phi+\mathbf{v}_\infty\) 。换句话说，我们想验证上面所说的伯努利定律是否确实成立。为了证明这一点，我们用这个方程的左手边等价于</p>
+<p class="formulaDsp">
 \begin{align*} \mathbf{v}\cdot\nabla\mathbf{v} &amp;= [(\nabla\phi+\mathbf{v}_\infty)\cdot\nabla] (\nabla\phi+\mathbf{v}_\infty) \\ &amp;= [(\nabla\phi+\mathbf{v}_\infty)\cdot\nabla] (\nabla\phi) \end{align*}
 </p>
-<p> where we have used that \(\mathbf{v}_\infty\) is constant. We would like to write this expression as the gradient of something (remember that \(\rho\) is a constant). The next step is more convenient if we consider the components of the equation individually (summation over indices that appear twice is implied): </p><p class="formulaDsp">
+<p>其中我们使用了 \(\mathbf{v}_\infty\) 是常数。我们想把这个表达式写成某个东西的梯度（记住 \(\rho\) 是一个常数）。如果我们单独考虑方程的组成部分，下一步会更方便（对出现两次的指数求和是隐含的）。</p>
+<p class="formulaDsp">
 \begin{align*} [\mathbf{v}\cdot\nabla\mathbf{v}]_i &amp;= (\partial_j\phi+v_{\infty,j}) \partial_j \partial_i\phi \\ &amp;= \partial_j [(\partial_j\phi+v_{\infty,j}) \partial_i\phi] - \partial_j [(\partial_j\phi+v_{\infty,j})] \partial_i\phi \\ &amp;= \partial_j [(\partial_j\phi+v_{\infty,j}) \partial_i\phi] \end{align*}
 </p>
-<p> because \(\partial_j \partial_j\phi = \Delta \phi = 0\) and \(\textrm{div} \ \mathbf{v}_\infty=0\). Next, </p><p class="formulaDsp">
+<p>因为 \(\partial_j \partial_j\phi = \Delta \phi = 0\) 和 \(\textrm{div} \ \mathbf{v}_\infty=0\) 。接下来。</p>
+<p class="formulaDsp">
 \begin{align*} [\mathbf{v}\cdot\nabla\mathbf{v}]_i &amp;= \partial_j [(\partial_j\phi+v_{\infty,j}) \partial_i\phi] \\ &amp;= \partial_j [(\partial_j\phi) (\partial_i\phi)] + \partial_j [v_{\infty,j} \partial_i\phi] \\ &amp;= \partial_j [(\partial_j\phi) (\partial_i\phi)] + \partial_j [v_{\infty,j}] \partial_i\phi + v_{\infty,j} \partial_j \partial_i\phi \\ &amp;= \partial_j [(\partial_j\phi) (\partial_i\phi)] + v_{\infty,j} \partial_j \partial_i\phi \\ &amp;= \partial_i \partial_j [(\partial_j\phi) \phi] - \partial_j [\partial_i (\partial_j\phi) \phi] + \partial_i [v_{\infty,j} \partial_j \phi] - \partial_i [v_{\infty,j}] \partial_j \phi \end{align*}
 </p>
-<p> Again, the last term disappears because \(\mathbf{v}_\infty\) is constant and we can merge the first and third term into one: </p><p class="formulaDsp">
+<p>同样，最后一项消失了，因为 \(\mathbf{v}_\infty\) 是常数，我们可以将第一项和第三项合并为一项。</p>
+<p class="formulaDsp">
 \begin{align*} [\mathbf{v}\cdot\nabla\mathbf{v}]_i &amp;= \partial_i (\partial_j [(\partial_j\phi) \phi + v_{\infty,j} \partial_j \phi]) - \partial_j [\partial_i (\partial_j\phi) \phi] \\ &amp;= \partial_i [(\partial_j\phi)(\partial_j \phi) + v_{\infty,j} \partial_j \phi] - \partial_j [\partial_i (\partial_j\phi) \phi] \end{align*}
 </p>
-<p>We now only need to massage that last term a bit more. Using the product rule, we get </p><p class="formulaDsp">
+<p>我们现在只需要对最后一项再做一下按摩。使用乘积规则，我们可以得到</p>
+<p class="formulaDsp">
 \begin{align*} \partial_j [\partial_i (\partial_j\phi) \phi] &amp;= \partial_i [\partial_j \partial_j\phi] \phi + \partial_i [\partial_j \phi] (\partial_j \phi). \end{align*}
 </p>
-<p> The first of these terms is zero (because, again, the summation over \(j\) gives \(\Delta\phi\), which is zero). The last term can be written as \(\frac 12 \partial_i [(\partial_j\phi)(\partial_j\phi)]\) which is in the desired gradient form. As a consequence, we can now finally state that </p><p class="formulaDsp">
+<p>其中第一项是零（因为，同样，对 \(j\) 的求和得到 \(\Delta\phi\) ，它是零）。最后一项可以写成 \(\frac 12 \partial_i [(\partial_j\phi)(\partial_j\phi)]\) ，它是理想的梯度形式。因此，我们现在可以最终说明</p>
+<p class="formulaDsp">
 \begin{align*} [\mathbf{v}\cdot\nabla\mathbf{v}]_i &amp;= \partial_i (\partial_j [(\partial_j\phi) \phi + v_{\infty,j} \partial_j \phi]) - \partial_j [\partial_i (\partial_j\phi) \phi] \\ &amp;= \partial_i \left[ (\partial_j\phi)(\partial_j \phi) + v_{\infty,j} \partial_j \phi - \frac 12 (\partial_j\phi)(\partial_j\phi) \right], \\ &amp;= \partial_i \left[ \frac 12 (\partial_j\phi)(\partial_j \phi) + v_{\infty,j} \partial_j \phi \right], \end{align*}
 </p>
-<p> or in vector form: </p><p class="formulaDsp">
+<p>或以矢量形式。 </p><p class="formulaDsp">
 \[ \mathbf{v}\cdot\nabla\mathbf{v} = \nabla \left[ \frac 12 \mathbf{\tilde v}^2 + \mathbf{v}_{\infty} \cdot \mathbf{\tilde v} \right], \]
 </p>
-<p> or in other words: </p><p class="formulaDsp">
+<p>或者换句话说。 </p><p class="formulaDsp">
 \[ p = -\rho \left[ \frac 12 \mathbf{\tilde v}^2 + \mathbf{v}_{\infty} \cdot \mathbf{\tilde v} \right] = -\rho \left[ \frac 12 \mathbf{v}^2 - \frac 12 \mathbf{v}_{\infty}^2 \right] . \]
 </p>
-<p> Because the pressure is only determined up to a constant (it appears only with a gradient in the equations), an equally valid definition is </p><p class="formulaDsp">
+<p> 因为压力只确定到一个常数（它在方程中只以梯度形式出现），同样有效的定义是 </p><p class="formulaDsp">
 \[ p = -\frac 12 \rho \mathbf{v}^2 . \]
 </p>
-<p> This is exactly Bernoulli's law mentioned above.</p>
+<p> 这正是上面提到的伯努利定律。</p>
 <p><a class="anchor" id="Thenumericalapproximation"></a></p><h3>The numerical approximation</h3>
-<p>Numerical approximations of Boundary Integral Equations (BIE) are commonly referred to as the boundary element method or panel method (the latter expression being used mostly in the computational fluid dynamics community). The goal of the following test problem is to solve the integral formulation of the Laplace equation with Neumann boundary conditions, using a circle and a sphere respectively in two and three space dimensions, illustrating along the way the features that allow one to treat boundary element problems almost as easily as finite element problems using the deal.II library.</p>
-<p>To this end, let \(\mathcal{T}_h = \bigcup_i K_i\) be a subdivision of the manifold \(\Gamma = \partial \Omega\) into \(M\) line segments if \(n=2\), or \(M\) quadrilaterals if \(n=3\). We will call each individual segment or quadrilateral an <em>element</em> or <em>cell</em>, independently of the dimension \(n\) of the surrounding space \(\mathbb{R}^n\). We define the finite dimensional space \(V_h\) as </p><p class="formulaDsp">
+<p>边界积分方程（BIE）的数值近似通常被称为边界元素法或面板法（后者的表达方式多用于计算流体力学界）。以下测试问题的目的是解决具有Neumann边界条件的拉普拉斯方程的积分表述，分别使用二维和三维空间的圆和球体，沿途说明允许人们使用deal.II库处理边界元素问题几乎与有限元问题一样容易的特点。</p>
+<p>为此，让 \(\mathcal{T}_h = \bigcup_i K_i\) 成为流形 \(\Gamma = \partial \Omega\) 的细分，如果 \(n=2\) ，则为 \(M\) 四边形，如果 \(n=3\) ，则为 \(M\) 线段。我们将每个单独的线段或四边形称为<em>element</em>或<em>cell</em>，与周围空间的维度 \(n\) 无关。我们将有限维空间 \(V_h\) 定义为具有基函数 \(\psi_i(\mathbf{x})\) 的 </p><p class="formulaDsp">
 \[ \label{eq:definition-Vh} V_h \dealcoloneq \{ v \in C^0(\Gamma) \text{ s.t. } v|_{K_i} \in \mathcal{Q}^1(K_i), \forall i\}, \]
 </p>
-<p> with basis functions \(\psi_i(\mathbf{x})\) for which we will use the usual <a class="el" href="classFE__Q.html">FE_Q</a> finite element, with the catch that this time it is defined on a manifold of codimension one (which we do by using the second template argument that is usually defaulted to equal the first; here, we will create objects <code><a class="el" href="classFE__Q.html">FE_Q</a>&lt;dim-1,dim&gt;</code> to indicate that we have <code>dim-1</code> dimensional cells in a <code>dim</code> dimensional space). An element \(\phi_h\) of \(V_h\) is uniquely identified by the vector \(\boldsymbol{\phi}\) of its coefficients \(\phi_i\), that is: </p><p class="formulaDsp">
+<p>，我们将使用通常的FE_Q有限元，但需要注意的是这次它是定义在一个一维的流形上（我们通过使用第二个模板参数来实现，通常默认为等于第一个；这里，我们将在一个 <code>dim</code> 维空间中创建对象 <code><a class="el" href="classFE__Q.html">FE_Q</a>&lt;dim-1,dim&gt;</code> to indicate that we have <code>dim-1</code> 维单元）。 \(V_h\) 的一个元素 \(\phi_h\) 是由其系数的向量 \(\boldsymbol{\phi}\) 唯一识别的，也就是。 </p><p class="formulaDsp">
 \[ \label{eq:definition-of-element} \phi_h(\mathbf{x}) \dealcoloneq \phi_i \psi_i(\mathbf{x}), \qquad \boldsymbol{\phi} \dealcoloneq \{ \phi_i \}, \]
 </p>
-<p> where summation is implied over repeated indexes. Note that we could use discontinuous elements here &mdash; in fact, there is no real reason to use continuous ones since the integral formulation does not imply any derivatives on our trial functions so continuity is unnecessary, and often in the literature only piecewise constant elements are used.</p>
+<p>，这里的求和是指对重复索引的求和。请注意，我们可以在这里使用不连续的元素&amp;mdash；事实上，没有真正的理由使用连续的元素，因为积分表述并不意味着我们的试验函数的任何导数，所以连续性是不必要的，而且在文献中通常只使用片状常数元素。</p>
 <p><a class="anchor" id="Collocationboundaryelementmethod"></a></p><h3>Collocation boundary element method </h3>
-<p>By far, the most common approximation of boundary integral equations is by use of the collocation based boundary element method.</p>
-<p>This method requires the evaluation of the boundary integral equation at a number of collocation points which is equal to the number of unknowns of the system. The choice of these points is a delicate matter, that requires a careful study. Assume that these points are known for the moment, and call them \(\mathbf x_i\) with \(i=0...n\_dofs\).</p>
-<p>The problem then becomes: Given the datum \(\mathbf{v}_\infty\), find a function \(\phi_h\) in \(V_h\) such that the following \(n\_dofs\) equations are satisfied:</p>
+<p>到目前为止，最常见的边界积分方程的近似方法是使用基于碰撞的边界元素方法。</p>
+<p>这种方法要求在一些与系统未知数数量相等的坐标点上对边界积分方程进行评估。这些点的选择是一个微妙的问题，需要仔细研究。假设这些点暂时是已知的，并称它们为 \(\mathbf x_i\) 和 \(i=0...n\_dofs\) 。</p>
+<p>那么问题就变成了。给定基准点 \(\mathbf{v}_\infty\) ，在 \(V_h\) 中找到一个函数 \(\phi_h\) ，使以下 \(n\_dofs\) 方程得到满足。</p>
 <p class="formulaDsp">
 \begin{align*} \alpha(\mathbf{x}_i) \phi_h(\mathbf{x}_i) - \int_{\Gamma_y} \frac{ \partial G(\mathbf{y}-\mathbf{x}_i)}{\partial\mathbf{n}_y } \phi_h(\mathbf{y}) \,ds_y = \int_{\Gamma_y} G(\mathbf{y}-\mathbf{x}_i) \, \mathbf{n}_y\cdot\mathbf{v_\infty} \,ds_y , \end{align*}
 </p>
-<p>where the quantity \(\alpha(\mathbf{x}_i)\) is the fraction of (solid) angle by which the point \(\mathbf{x}_i\) sees the domain \(\Omega\), as explained above, and we set \(\phi_\infty\) to be zero. If the support points \(\mathbf{x}_i\) are chosen appropriately, then the problem can be written as the following linear system:</p>
+<p>其中数量 \(\alpha(\mathbf{x}_i)\) 是点 \(\mathbf{x}_i\) 看到域 \(\Omega\) 的（实体）角度的分数，如上所述，我们设置 \(\phi_\infty\) 为零。 如果适当地选择支持点 \(\mathbf{x}_i\) ，那么问题可以写成以下线性系统。</p>
 <p class="formulaDsp">
 \[ \label{eq:linear-system} (\mathbf{A}+\mathbf{N})\boldsymbol\phi = \mathbf{b}, \]
 </p>
-<p>where</p>
+<p>其中</p>
 <p class="formulaDsp">
 \[ \begin{aligned} \mathbf{A}_{ij}&amp;= \alpha(\mathbf{x}_i) \psi_j(\mathbf{x}_i) = 1+\int_\Gamma \frac{\partial G(\mathbf{y}-\mathbf{x}_i)}{\partial \mathbf{n}_y}\,ds_y \psi_j(\mathbf{x}_i) \\ \mathbf{N}_{ij}&amp;= - \int_\Gamma \frac{\partial G(\mathbf{y}-\mathbf{x}_i)}{\partial \mathbf{n}_y} \psi_j(\mathbf{y}) \,ds_y \\ \mathbf{b}_i&amp;= \int_\Gamma G(\mathbf{y}-\mathbf{x}_i) \, \mathbf{n}_y\cdot\mathbf{v_\infty} ds_y. \end{aligned} \]
 </p>
-<p>From a linear algebra point of view, the best possible choice of the collocation points is the one that renders the matrix \(\mathbf{A}+\mathbf{N}\) the most diagonally dominant. A natural choice is then to select the \(\mathbf{x}_i\) collocation points to be the support points of the nodal basis functions \(\psi_i(\mathbf{x})\). In that case, \(\psi_j(\mathbf{x}_i)=\delta_{ij}\), and as a consequence the matrix \(\mathbf{A}\) is diagonal with entries </p><p class="formulaDsp">
+<p>从线性代数的角度来看，可能的最佳匹配点选择是使矩阵 \(\mathbf{A}+\mathbf{N}\) 成为最对角线的主导。一个自然的选择是选择 \(\mathbf{x}_i\) 搭配点作为节点基函数 \(\psi_i(\mathbf{x})\) 的支持点。在这种情况下， \(\psi_j(\mathbf{x}_i)=\delta_{ij}\) ，因此矩阵 \(\mathbf{A}\) 是对角线，其条目 </p><p class="formulaDsp">
 \[ \mathbf{A}_{ii} = 1+\int_\Gamma \frac{\partial G(\mathbf{y}-\mathbf{x}_i)}{\partial \mathbf{n}_y}\,ds_y = 1-\sum_j N_{ij}, \]
 </p>
-<p> where we have used that \(\sum_j \psi_j(\mathbf{y})=1\) for the usual Lagrange elements. With this choice of collocation points, the computation of the entries of the matrices \(\mathbf{A}\), \(\mathbf{N}\) and of the right hand side \(\mathbf{b}\) requires the evaluation of singular integrals on the elements \(K_i\) of the triangulation \(\mathcal{T}_h\). As usual in these cases, all integrations are performed on a reference simple domain, i.e., we assume that each element \(K_i\) of \(\mathcal{T}_h\) can be expressed as a linear (in two dimensions) or bi-linear (in three dimensions) transformation of the reference boundary element \(\hat K \dealcoloneq [0,1]^{n-1}\), and we perform the integrations after a change of variables from the real element \(K_i\) to the reference element \(\hat K\).</p>
+<p>，我们用 \(\sum_j \psi_j(\mathbf{y})=1\) 作为通常的拉格朗日元素。在这样的选择下，矩阵 \(\mathbf{A}\) 、 \(\mathbf{N}\) 和右手边 \(\mathbf{b}\) 的条目的计算需要对三角形 \(\mathcal{T}_h\) 的元素 \(K_i\) 进行奇异积分评估。在这些情况下，通常所有的积分都是在参考简单域上进行的，也就是说，我们假设 \(\mathcal{T}_h\) 的每个元素 \(K_i\) 可以表示为参考边界元素 \(\hat K \dealcoloneq [0,1]^{n-1}\) 的线性（二维）或双线性（三维）变换，并且我们在从实数元素 \(K_i\) 到参考元素 \(\hat K\) 的变量改变后进行积分。</p>
 <p><a class="anchor" id="Treatingthesingularintegrals"></a></p><h3>Treating the singular integrals. </h3>
-<p>In two dimensions it is not necessary to compute the diagonal elements \(\mathbf{N}_{ii}\) of the system matrix, since, even if the denominator goes to zero when \(\mathbf{x}=\mathbf{y}\), the numerator is always zero because \(\mathbf{n}_y\) and \((\mathbf{y}-\mathbf{x})\) are orthogonal (on our polygonal approximation of the boundary of \(\Omega\)), and the only singular integral arises in the computation of \(\mathbf{b}_i\) on the i-th element of \(\mathcal{T}_h\): </p><p class="formulaDsp">
+<p>在二维中，没有必要计算系统矩阵的对角线元素 \(\mathbf{N}_{ii}\) ，因为即使分母在 \(\mathbf{x}=\mathbf{y}\) 时归零，分子也总是零，因为 \(\mathbf{n}_y\) ]和 \((\mathbf{y}-\mathbf{x})\) 是正交的（在我们对 \(\Omega\) 边界的多边形近似上），唯一的奇异积分出现在对 \(\mathbf{b}_i\) 的第i个元素的计算上： </p><p class="formulaDsp">
 \[ \frac{1}{\pi} \int_{K_i} \ln|\mathbf{y}-\mathbf{x}_i| \, \mathbf{n}_y\cdot\mathbf{v_\infty} \,ds_y. \]
 </p>
-<p>This can be easily treated by the <a class="el" href="classQGaussLogR.html">QGaussLogR</a> quadrature formula.</p>
-<p>Similarly, it is possible to use the <a class="el" href="classQGaussOneOverR.html">QGaussOneOverR</a> quadrature formula to perform the singular integrations in three dimensions. The interested reader will find detailed explanations on how these quadrature rules work in their documentation.</p>
-<p>The resulting matrix \(\mathbf{A}+\mathbf{N}\) is full. Depending on its size, it might be convenient to use a direct solver or an iterative one. For the purpose of this example code, we chose to use only an iterative solver, without providing any preconditioner.</p>
-<p>If this were a production code rather than a demonstration of principles, there are techniques that are available to not store full matrices but instead store only those entries that are large and/or relevant. In the literature on boundary element methods, a plethora of methods is available that allows to determine which elements are important and which are not, leading to a significantly sparser representation of these matrices that also facilitates rapid evaluations of the scalar product between vectors and matrices. This not being the goal of this program, we leave this for more sophisticated implementations.</p>
+<p>这可以通过QGaussLogR正交公式轻松处理。</p>
+<p>同样，也可以用QGaussOneOverR正交公式来进行三维空间的奇异积分。有兴趣的读者可以在其文档中找到关于这些正交规则如何工作的详细解释。</p>
+<p>得到的矩阵 \(\mathbf{A}+\mathbf{N}\) 是完整的。根据其大小，使用直接求解器或迭代求解器可能比较方便。为了这个例子代码的目的，我们选择只使用迭代求解器，不提供任何预处理。</p>
+<p>如果这是一个生产代码，而不是一个原理演示，有一些技术可以用来不存储完整的矩阵，而只存储那些大的和/或相关的条目。在边界元素方法的文献中，有大量的方法可以确定哪些元素是重要的，哪些是不重要的，从而使这些矩阵的表示明显稀疏，也有利于快速评估向量和矩阵之间的标量积。这不是本程序的目标，我们把它留给更复杂的实现。</p>
 <p><a class="anchor" id="Implementation"></a></p><h3>Implementation</h3>
-<p>The implementation is rather straight forward. The main point that hasn't been used in any of the previous tutorial programs is that most classes in deal.II are not only templated on the dimension, but in fact on the dimension of the manifold on which we pose the differential equation as well as the dimension of the space into which this manifold is embedded. By default, the second template argument equals the first, meaning for example that we want to solve on a two-dimensional region of two-dimensional space. The triangulation class to use in this case would be <code><a class="el" href="classTriangulation.html">Triangulation</a>&lt;2&gt;</code>, which is an equivalent way of writing <code><a class="el" href="classTriangulation.html">Triangulation</a>&lt;2,2&gt;</code>.</p>
-<p>However, this doesn't have to be so: in the current example, we will for example want to solve on the surface of a sphere, which is a two-dimensional manifold embedded in a three-dimensional space. Consequently, the right class will be <code><a class="el" href="classTriangulation.html">Triangulation</a>&lt;2,3&gt;</code>, and correspondingly we will use <code><a class="el" href="classDoFHandler.html">DoFHandler</a>&lt;2,3&gt;</code> as the DoF handler class and <code><a class="el" href="classFE__Q.html">FE_Q</a>&lt;2,3&gt;</code> for finite elements.</p>
-<p>Some further details on what one can do with things that live on curved manifolds can be found in the report <a href="http://www.dealii.org/reports/codimension-one/desimone-heltai-manigrasso.pdf" target="_top"><em>Tools for the Solution of PDEs Defined on Curved Manifolds with the deal.II Library</em> by A. DeSimone, L. Heltai, C. Manigrasso</a>. In addition, the <a class="el" href="step_38.html">step-38</a> tutorial program extends what we show here to cases where the equation posed on the manifold is not an integral operator but in fact involves derivatives.</p>
+<p>这个实现是相当直接的。在以前的教程程序中没有使用过的主要一点是，deal.II中的大多数类不仅在维度上有模板，而且实际上在我们提出微分方程的流形的维度以及这个流形嵌入的空间的维度上也有模板。默认情况下，第二个模板参数等于第一个，这意味着我们要在二维空间的一个二维区域上求解。在这种情况下，要使用的三角化类是 <code><a class="el" href="classTriangulation.html">Triangulation</a>&lt;2&gt;</code> ，这相当于写成 <code><a class="el" href="classTriangulation.html">Triangulation</a>&lt;2,2&gt;</code> 。</p>
+<p>然而，情况并非如此：在目前的例子中，我们想在一个球体的表面上求解，这是一个嵌入三维空间的二维流形。因此，正确的类将是 <code><a class="el" href="classTriangulation.html">Triangulation</a>&lt;2,3&gt;</code> ，相应地，我们将使用 <code><a class="el" href="classDoFHandler.html">DoFHandler</a>&lt;2,3&gt;</code> 作为DoF处理类， <code><a class="el" href="classFE__Q.html">FE_Q</a>&lt;2,3&gt;</code> 作为有限元。</p>
+<p>关于如何处理生活在弯曲流形上的事物的一些进一步细节，可以在报告<a href="http://www.dealii.org/reports/codimension-one/desimone-heltai-manigrasso.pdf" target="_top"><em>Tools for the Solution of PDEs Defined on Curved Manifolds with the deal.II Library</em><em>Tools for the Solution of PDEs Defined on Curved Manifolds with the deal.II Library</em> by A. DeSimone, L. Heltai, C. Manigrasso</a>中找到。此外， <a class="el" href="step_38.html">step-38</a> 教程程序将我们在这里展示的内容扩展到流形上提出的方程不是积分算子而实际上涉及导数的情况。</p>
 <p><a class="anchor" id="Testcase"></a></p><h3>Testcase</h3>
-<p>The testcase we will be solving is for a circular (in 2d) or spherical (in 3d) obstacle. Meshes for these geometries will be read in from files in the current directory and an object of type <a class="el" href="classSphericalManifold.html">SphericalManifold</a> will then be attached to the triangulation to allow mesh refinement that respects the continuous geometry behind the discrete initial mesh.</p>
-<p>For a sphere of radius \(a\) translating at a velocity of \(U\) in the \(x\) direction, the potential reads </p><p class="formulaDsp">
+<p>我们要解决的测试案例是一个圆形（2D）或球形（3D）的障碍物。这些几何体的网格将从当前目录下的文件中读入，然后一个SphericalManifold类型的对象将被附加到三角形上，以允许网格细化，尊重离散初始网格背后的连续几何体。</p>
+<p>对于一个半径为 \(a\) 的球体，以 \(U\) 的速度向 \(x\) 方向平移，其势为</p>
+<p class="formulaDsp">
 \begin{align*} \phi = -\frac{1}{2}U \left(\frac{a}{r}\right)3 r \cos\theta \end{align*}
 </p>
-<p> see, e.g. J. N. Newman, <em>Marine Hydrodynamics</em>, 1977, pp. 127. For unit speed and radius, and restricting \((x,y,z)\) to lie on the surface of the sphere, \(\phi = -x/2\). In the test problem, the flow is \((1,1,1)\), so the appropriate exact solution on the surface of the sphere is the superposition of the above solution with the analogous solution along the \(y\) and \(z\) axes, or \(\phi = \frac{1}{2}(x + y + z)\).</p>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+<p>例如，见J.N.纽曼，&lt;i&gt;Marine Hydrodynamics，1977，第127页。对于单位速度和半径，并限制 \((x,y,z)\) 位于球体表面， \(\phi = -x/2\) 。在试验问题中，流向是 \((1,1,1)\) ，所以在球面上适当的精确解是上述解与沿 \(y\) 和 \(z\) 轴的类似解的叠加，即 \(\phi = \frac{1}{2}(x + y + z)\) 。<a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
 <p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
-<p>The program starts with including a bunch of include files that we will use in the various parts of the program. Most of them have been discussed in previous tutorials already:</p>
+<p>程序一开始就包括了一堆include文件，我们将在程序的各个部分使用这些文件。它们中的大多数已经在以前的教程中讨论过了。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="smartpointer_8h.html">deal.II/base/smartpointer.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="convergence__table_8h.html">deal.II/base/convergence_table.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="quadrature__lib_8h.html">deal.II/base/quadrature_lib.h</a>&gt;</span></div>
@@ -306,11 +317,13 @@ $(function() {
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="parsed__function_8h.html">deal.II/base/parsed_function.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="include_2deal_8II_2base_2utilities_8h.html">deal.II/base/utilities.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="full__matrix_8h.html">deal.II/lac/full_matrix.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector_8h.html">deal.II/lac/vector.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="solver__control_8h.html">deal.II/lac/solver_control.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="solver__gmres_8h.html">deal.II/lac/solver_gmres.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="precondition_8h.html">deal.II/lac/precondition.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2tria_8h.html">deal.II/grid/tria.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__generator_8h.html">deal.II/grid/grid_generator.h</a>&gt;</span></div>
@@ -318,12 +331,15 @@ $(function() {
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__out_8h.html">deal.II/grid/grid_out.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2manifold__lib_8h.html">deal.II/grid/manifold_lib.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dofs_2dof__handler_8h.html">deal.II/dofs/dof_handler.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dof__tools_8h.html">deal.II/dofs/dof_tools.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__q_8h.html">deal.II/fe/fe_q.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe_2fe__values_8h.html">deal.II/fe/fe_values.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="mapping__q_8h.html">deal.II/fe/mapping_q.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="numerics_2data__out_8h.html">deal.II/numerics/data_out.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector__tools_8h.html">deal.II/numerics/vector_tools.h</a>&gt;</span></div>
@@ -350,19 +366,19 @@ $(function() {
 <div class="ttc" id="asolver__gmres_8h_html"><div class="ttname"><a href="solver__gmres_8h.html">solver_gmres.h</a></div></div>
 <div class="ttc" id="avector_8h_html"><div class="ttname"><a href="vector_8h.html">vector.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p>And here are a few C++ standard header files that we will need:</p>
+</div><!-- fragment --><p>而这里有一些我们将需要的C++标准头文件。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
-</div><!-- fragment --><p>The last part of this preamble is to import everything in the dealii namespace into the one into which everything in this program will go:</p>
+</div><!-- fragment --><p>本序言的最后一部分是将dealii命名空间中的所有内容导入本程序中的所有内容。</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>Step34</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="namespace__dealii_8h_source.html#l00025">namespace_dealii.h:26</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="Singleanddoublelayeroperatorkernels"></a> </p><h3>Single and double layer operator kernels</h3>
-<p>First, let us define a bit of the boundary integral equation machinery.</p>
-<p>The following two functions are the actual calculations of the single and double layer potential kernels, that is \(G\) and \(\nabla G\). They are well defined only if the vector \(R = \mathbf{y}-\mathbf{x}\) is different from zero.</p>
+</div><!-- fragment --><p><a class="anchor" id="Singleanddoublelayeroperatorkernels"></a></p><h3>Single and double layer operator kernels</h3>
+<p>首先，让我们定义一下边界积分方程的机制。</p>
+<p>下面两个函数是单层和双层势能核的实际计算，即 \(G\) 和 \(\nabla G\) 。只有当矢量 \(R = \mathbf{y}-\mathbf{x}\) 不同于零时，它们才是定义良好的。</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>LaplaceKernel</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
@@ -373,14 +389,18 @@ $(function() {
 <div class="line">        <span class="keywordflow">case</span> 2:</div>
 <div class="line">          <span class="keywordflow">return</span> (-std::log(R.<a class="code" href="classTensor.html#afd0934b4edd71063f66a9c67540e79fc">norm</a>()) / (2 * <a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a>));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        <span class="keywordflow">case</span> 3:</div>
 <div class="line">          <span class="keywordflow">return</span> (1. / (R.<a class="code" href="classTensor.html#afd0934b4edd71063f66a9c67540e79fc">norm</a>() * 4 * <a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a>));</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">default</span>:</div>
 <div class="line">          <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(<span class="keyword">false</span>, <a class="code" href="group__Exceptions.html#ga31978c026b8b6b5116df30b8e748f6b7">ExcInternalError</a>());</div>
 <div class="line">          <span class="keywordflow">return</span> 0.;</div>
 <div class="line">      }</div>
 <div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -394,6 +414,7 @@ $(function() {
 <div class="line">        <span class="keywordflow">case</span> 3:</div>
 <div class="line">          <span class="keywordflow">return</span> R / (-4 * <a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a> * R.<a class="code" href="classTensor.html#a7a3169a68a27cc04f2ad1fd9790b874c">norm_square</a>() * R.<a class="code" href="classTensor.html#afd0934b4edd71063f66a9c67540e79fc">norm</a>());</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        <span class="keywordflow">default</span>:</div>
 <div class="line">          <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(<span class="keyword">false</span>, <a class="code" href="group__Exceptions.html#ga31978c026b8b6b5116df30b8e748f6b7">ExcInternalError</a>());</div>
 <div class="line">          <span class="keywordflow">return</span> <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a>();</div>
@@ -406,8 +427,8 @@ $(function() {
 <div class="ttc" id="agroup__Exceptions_html_ga31978c026b8b6b5116df30b8e748f6b7"><div class="ttname"><a href="group__Exceptions.html#ga31978c026b8b6b5116df30b8e748f6b7">StandardExceptions::ExcInternalError</a></div><div class="ttdeci">static ::ExceptionBase &amp; ExcInternalError()</div></div>
 <div class="ttc" id="agroup__Exceptions_html_ga70a0bb353656e704acf927945277bbc6"><div class="ttname"><a href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a></div><div class="ttdeci">#define Assert(cond, exc)</div><div class="ttdef"><b>Definition:</b> <a href="include_2deal_8II_2base_2exceptions_8h_source.html#l01473">exceptions.h:1473</a></div></div>
 <div class="ttc" id="anamespacenumbers_html_a3e24f194a9cb9b6ff4442b8a7a877d4a"><div class="ttname"><a href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a></div><div class="ttdeci">static constexpr double PI</div><div class="ttdef"><b>Definition:</b> <a href="numbers_8h_source.html#l00231">numbers.h:231</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="TheBEMProblemclass"></a> </p><h3>The BEMProblem class</h3>
-<p>The structure of a boundary element method code is very similar to the structure of a finite element code, and so the member functions of this class are like those of most of the other tutorial programs. In particular, by now you should be familiar with reading parameters from an external file, and with the splitting of the different tasks into different modules. The same applies to boundary element methods, and we won't comment too much on them, except on the differences.</p>
+</div><!-- fragment --><p><a class="anchor" id="TheBEMProblemclass"></a></p><h3>The BEMProblem class</h3>
+<p>边界元素方法代码的结构与有限元素代码的结构非常相似，因此这个类的成员函数与其他大多数教程程序的成员函数一样。特别是，现在你应该熟悉从外部文件读取参数，以及将不同的任务分割成不同的模块。这同样适用于边界元素方法，除了区别之外，我们不会对其进行过多的评论。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>BEMProblem</div>
 <div class="line">{</div>
@@ -415,40 +436,53 @@ $(function() {
 <div class="line">  BEMProblem(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fe_degree      = 1,</div>
 <div class="line">             <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mapping_degree = 1);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keywordtype">void</span> read_parameters(<span class="keyword">const</span> std::string &amp;filename);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> read_domain();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> refine_and_resize();</div>
 <div class="ttc" id="anamespaceWorkStream_1_1internal_1_1tbb__no__coloring_html_a8673698a405bf47aa24002aeb6d76d70"><div class="ttname"><a href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">WorkStream::internal::tbb_no_coloring::run</a></div><div class="ttdeci">void run(const Iterator &amp;begin, const typename identity&lt; Iterator &gt;::type &amp;end, Worker worker, Copier copier, const ScratchData &amp;sample_scratch_data, const CopyData &amp;sample_copy_data, const unsigned int queue_length, const unsigned int chunk_size)</div><div class="ttdef"><b>Definition:</b> <a href="work__stream_8h_source.html#l00691">work_stream.h:691</a></div></div>
-</div><!-- fragment --><p>The only really different function that we find here is the assembly routine. We wrote this function in the most possible general way, in order to allow for easy generalization to higher order methods and to different fundamental solutions (e.g., Stokes or Maxwell).</p>
-<p>The most noticeable difference is the fact that the final matrix is full, and that we have a nested loop inside the usual loop on cells that visits all support points of the degrees of freedom. Moreover, when the support point lies inside the cell which we are visiting, then the integral we perform becomes singular.</p>
-<p>The practical consequence is that we have two sets of quadrature formulas, finite element values and temporary storage, one for standard integration and one for the singular integration, which are used where necessary.</p>
+</div><!-- fragment --><p>在这里，我们发现唯一真正不同的函数是装配例程。我们以尽可能通用的方式编写了这个函数，以便能够方便地推广到高阶方法和不同的基本解（例如，斯托克斯或麦克斯韦）。 <br  />
+</p>
+<p>最明显的区别是，最终的矩阵是完整的，而且我们在通常的单元格循环内有一个嵌套循环，访问所有自由度的支持点。 此外，当支持点位于我们所访问的单元内时，我们所执行的积分就会变成单数。 <br  />
+</p>
+<p>实际结果是，我们有两套正交公式、有限元值和临时存储，一套用于标准积分，另一套用于奇异积分，在必要时使用。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> assemble_system();</div>
-</div><!-- fragment --><p>There are two options for the solution of this problem. The first is to use a direct solver, and the second is to use an iterative solver. We opt for the second option.</p>
-<p>The matrix that we assemble is not symmetric, and we opt to use the GMRES method; however the construction of an efficient preconditioner for boundary element methods is not a trivial issue. Here we use a non preconditioned GMRES solver. The options for the iterative solver, such as the tolerance, the maximum number of iterations, are selected through the parameter file.</p>
+</div><!-- fragment --><p>这个问题的解决有两种选择。第一个是使用直接求解器，第二个是使用迭代求解器。我们选择了第二种方案。 <br  />
+</p>
+<p>我们收集的矩阵不是对称的，我们选择使用GMRES方法；然而，为边界元素方法构建一个有效的预处理程序不是一个简单的问题。这里我们使用了一个非预处理的GMRES求解器。迭代求解器的选项，如公差、最大迭代次数等，都是通过参数文件选择的。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> solve_system();</div>
-</div><!-- fragment --><p>Once we obtained the solution, we compute the \(L^2\) error of the computed potential as well as the \(L^\infty\) error of the approximation of the solid angle. The mesh we are using is an approximation of a smooth curve, therefore the computed diagonal matrix of fraction of angles or solid angles \(\alpha(\mathbf{x})\) should be constantly equal to \(\frac 12\). In this routine we output the error on the potential and the error in the approximation of the computed angle. Notice that the latter error is actually not the error in the computation of the angle, but a measure of how well we are approximating the sphere and the circle.</p>
-<p>Experimenting a little with the computation of the angles gives very accurate results for simpler geometries. To verify this you can comment out, in the read_domain() method, the tria.set_manifold(1, manifold) line, and check the alpha that is generated by the program. By removing this call, whenever the mesh is refined new nodes will be placed along the straight lines that made up the coarse mesh, rather than be pulled onto the surface that we really want to approximate. In the three dimensional case, the coarse grid of the sphere is obtained starting from a cube, and the obtained values of alphas are exactly \(\frac 12\) on the nodes of the faces, \(\frac 34\) on the nodes of the edges and \(\frac 78\) on the 8 nodes of the vertices.</p>
+</div><!-- fragment --><p>一旦我们得到了解决方案，我们就计算出计算出的势的 \(L^2\) 误差以及实体角的近似值的 \(L^\infty\) 误差。我们使用的网格是平滑曲线的近似值，因此计算出的角的分量或实体角的对角线矩阵 \(\alpha(\mathbf{x})\) 应该一直等于 \(\frac 12\) 。在这个例程中，我们输出势的误差和计算角度的近似值的误差。注意，后者的误差实际上不是计算角度的误差，而是衡量我们对球体和圆的近似程度。 <br  />
+</p>
+<p>对角度的计算做一些实验，对于较简单的几何形状，可以得到非常准确的结果。为了验证这一点，你可以在read_domain()方法中注释掉tria.set_manifold(1, manifold)一行，并检查程序生成的alpha。通过删除这个调用，每当细化网格时，新的节点将沿着构成粗略网格的直线放置，而不是被拉到我们真正想要近似的表面。在三维案例中，球体的粗网格是从一个立方体开始得到的，得到的字母值在面的节点上正好是 \(\frac 12\) ，在边的节点上是 \(\frac 34\) ，在顶点的八个节点上是 \(\frac 78\) 。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> compute_errors(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle);</div>
-</div><!-- fragment --><p>Once we obtained a solution on the codimension one domain, we want to interpolate it to the rest of the space. This is done by performing again the convolution of the solution with the kernel in the compute_exterior_solution() function.</p>
-<p>We would like to plot the velocity variable which is the gradient of the potential solution. The potential solution is only known on the boundary, but we use the convolution with the fundamental solution to interpolate it on a standard dim dimensional continuous finite element space. The plot of the gradient of the extrapolated solution will give us the velocity we want.</p>
-<p>In addition to the solution on the exterior domain, we also output the solution on the domain's boundary in the output_results() function, of course.</p>
+</div><!-- fragment --><p>一旦我们在一维域上得到一个解决方案，我们就想把它插值到空间的其他部分。这可以通过在compute_exterior_solution()函数中再次进行解与核的卷积来实现。 <br  />
+</p>
+<p>我们想绘制速度变量，也就是势解的梯度。势解只在边界上是已知的，但我们使用与基本解的卷积在标准的二维连续有限元空间上进行内插。外推解的梯度图将给我们提供我们想要的速度。 <br  />
+</p>
+<p>当然，除了外域上的解之外，我们还在output_results()函数中输出域的边界上的解。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> compute_exterior_solution();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle);</div>
-</div><!-- fragment --><p>To allow for dimension independent programming, we specialize this single function to extract the singular quadrature formula needed to integrate the singular kernels in the interior of the cells.</p>
+</div><!-- fragment --><p>为了允许不受维度限制的编程，我们对这个单一的函数进行了专业化处理，以提取整合单元内部的奇异核所需的奇异正交公式。</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code" href="classQuadrature.html">Quadrature</a>&lt;dim - 1&gt; &amp;get_singular_quadrature(</div>
 <div class="line">  <span class="keyword">const</span> <span class="keyword">typename</span> <a class="code" href="group__Iterators.html#ga6b8bbcafed8847f3030ea30c6990eb2d">DoFHandler&lt;dim - 1, dim&gt;::active_cell_iterator</a> &amp;cell,</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span>;</div>
 <div class="ttc" id="aclassQuadrature_html"><div class="ttname"><a href="classQuadrature.html">Quadrature</a></div><div class="ttdef"><b>Definition:</b> <a href="include_2deal_8II_2base_2quadrature_8h_source.html#l00083">quadrature.h:84</a></div></div>
 <div class="ttc" id="agroup__Iterators_html_ga6b8bbcafed8847f3030ea30c6990eb2d"><div class="ttname"><a href="group__Iterators.html#ga6b8bbcafed8847f3030ea30c6990eb2d">DoFHandler::active_cell_iterator</a></div><div class="ttdeci">typename ActiveSelector::active_cell_iterator active_cell_iterator</div><div class="ttdef"><b>Definition:</b> <a href="dofs_2dof__handler_8h_source.html#l00438">dof_handler.h:438</a></div></div>
-</div><!-- fragment --><p>The usual deal.II classes can be used for boundary element methods by specifying the "codimension" of the problem. This is done by setting the optional second template arguments to <a class="el" href="classTriangulation.html">Triangulation</a>, <a class="el" href="classFiniteElement.html">FiniteElement</a> and <a class="el" href="classDoFHandler.html">DoFHandler</a> to the dimension of the embedding space. In our case we generate either 1 or 2 dimensional meshes embedded in 2 or 3 dimensional spaces.</p>
-<p>The optional argument by default is equal to the first argument, and produces the usual finite element classes that we saw in all previous examples.</p>
-<p>The class is constructed in a way to allow for arbitrary order of approximation of both the domain (through high order mapping) and the finite element space. The order of the finite element space and of the mapping can be selected in the constructor of the class.</p>
+</div><!-- fragment --><p>通常的deal.II类可以通过指定问题的 "二维 "来用于边界元素方法。这是通过将Triangulation, FiniteElement和DoFHandler的可选第二模板参数设置为嵌入空间的维度来实现的。在我们的例子中，我们生成的是嵌入在2或3维空间的1或2维网格。 <br  />
+</p>
+<p>默认情况下，可选参数等于第一个参数，并产生我们在之前所有例子中看到的通常的有限元类。 <br  />
+</p>
+<p>该类的构造方式是允许任意的域（通过高阶映射）和有限元空间的逼近顺序。有限元空间和映射的顺序可以在该类的构造函数中选择。</p>
 <div class="fragment"><div class="line"><a class="code" href="classTriangulation.html">Triangulation</a>&lt;dim - 1, dim&gt; tria;</div>
 <div class="line"><a class="code" href="classFE__Q.html">FE_Q</a>&lt;dim - 1, dim&gt;          fe;</div>
 <div class="line"><a class="code" href="classDoFHandler.html">DoFHandler</a>&lt;dim - 1, dim&gt;    dof_handler;</div>
@@ -457,31 +491,38 @@ $(function() {
 <div class="ttc" id="aclassFE__Q_html"><div class="ttname"><a href="classFE__Q.html">FE_Q</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__q_8h_source.html#l00548">fe_q.h:549</a></div></div>
 <div class="ttc" id="aclassMappingQ_html"><div class="ttname"><a href="classMappingQ.html">MappingQ</a></div><div class="ttdef"><b>Definition:</b> <a href="mapping__q_8h_source.html#l00080">mapping_q.h:81</a></div></div>
 <div class="ttc" id="aclassTriangulation_html"><div class="ttname"><a href="classTriangulation.html">Triangulation</a></div><div class="ttdef"><b>Definition:</b> <a href="grid_2tria_8h_source.html#l01127">tria.h:1128</a></div></div>
-</div><!-- fragment --><p>In BEM methods, the matrix that is generated is dense. Depending on the size of the problem, the final system might be solved by direct LU decomposition, or by iterative methods. In this example we use an unpreconditioned GMRES method. Building a preconditioner for BEM method is non trivial, and we don't treat this subject here.</p>
+</div><!-- fragment --><p>在BEM方法中，生成的矩阵是密集的。根据问题的大小，最终的系统可能通过直接的LU分解来解决，或者通过迭代方法来解决。在这个例子中，我们使用了一个无条件的GMRES方法。为BEM方法建立一个预处理程序是不容易的，我们在此不作处理。</p>
 <div class="fragment"><div class="line"><a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> system_matrix;</div>
 <div class="line"><a class="code" href="classVector.html">Vector&lt;double&gt;</a>     system_rhs;</div>
 <div class="ttc" id="aclassFullMatrix_html"><div class="ttname"><a href="classFullMatrix.html">FullMatrix&lt; double &gt;</a></div></div>
 <div class="ttc" id="aclassVector_html"><div class="ttname"><a href="classVector.html">Vector&lt; double &gt;</a></div></div>
-</div><!-- fragment --><p>The next two variables will denote the solution \(\phi\) as well as a vector that will hold the values of \(\alpha(\mathbf x)\) (the fraction of \(\Omega\) visible from a point \(\mathbf x\)) at the support points of our shape functions.</p>
+</div><!-- fragment --><p>接下来的两个变量将表示解决方案 \(\phi\) 以及一个向量，它将保持 \(\alpha(\mathbf x)\) 的值（从一个点 \(\mathbf x\) 可见的 \(\Omega\) 的部分）在我们形状函数的支持点。</p>
 <div class="fragment"><div class="line"><a class="code" href="classVector.html">Vector&lt;double&gt;</a> phi;</div>
 <div class="line"><a class="code" href="classVector.html">Vector&lt;double&gt;</a> alpha;</div>
-</div><!-- fragment --><p>The convergence table is used to output errors in the exact solution and in the computed alphas.</p>
+</div><!-- fragment --><p>收敛表用于输出精确解和计算的字母的误差。</p>
 <div class="fragment"><div class="line"><a class="code" href="classConvergenceTable.html">ConvergenceTable</a> convergence_table;</div>
 <div class="ttc" id="aclassConvergenceTable_html"><div class="ttname"><a href="classConvergenceTable.html">ConvergenceTable</a></div><div class="ttdef"><b>Definition:</b> <a href="convergence__table_8h_source.html#l00064">convergence_table.h:65</a></div></div>
-</div><!-- fragment --><p>The following variables are the ones that we fill through a parameter file. The new objects that we use in this example are the <a class="el" href="classFunctions_1_1ParsedFunction.html">Functions::ParsedFunction</a> object and the <a class="el" href="classQuadratureSelector.html">QuadratureSelector</a> object.</p>
-<p>The <a class="el" href="classFunctions_1_1ParsedFunction.html">Functions::ParsedFunction</a> class allows us to easily and quickly define new function objects via parameter files, with custom definitions which can be very complex (see the documentation of that class for all the available options).</p>
-<p>We will allocate the quadrature object using the <a class="el" href="classQuadratureSelector.html">QuadratureSelector</a> class that allows us to generate quadrature formulas based on an identifying string and on the possible degree of the formula itself. We used this to allow custom selection of the quadrature formulas for the standard integration, and to define the order of the singular quadrature rule.</p>
-<p>We also define a couple of parameters which are used in case we wanted to extend the solution to the entire domain.</p>
+</div><!-- fragment --><p>下面的变量是我们通过参数文件来填充的。 本例中我们使用的新对象是 <a class="el" href="classFunctions_1_1ParsedFunction.html">Functions::ParsedFunction</a> 对象和QuadratureSelector对象。 <br  />
+</p>
+<p><a class="el" href="classFunctions_1_1ParsedFunction.html">Functions::ParsedFunction</a> 类允许我们通过参数文件轻松快速地定义新的函数对象，自定义的定义可以非常复杂（所有可用的选项请参见该类的文档）。 <br  />
+</p>
+<p>我们将使用QuadratureSelector类来分配正交对象，该类允许我们根据一个识别字符串和公式本身的可能程度来生成正交公式。我们用它来允许自定义选择标准积分的正交公式，并定义奇异正交规则的顺序。 <br  />
+</p>
+<p>我们还定义了几个参数，这些参数是在我们想把解决方案扩展到整个领域的情况下使用的。</p>
 <div class="fragment"><div class="line">  <a class="code" href="classFunctions_1_1ParsedFunction.html">Functions::ParsedFunction&lt;dim&gt;</a> wind;</div>
 <div class="line">  <a class="code" href="classFunctions_1_1ParsedFunction.html">Functions::ParsedFunction&lt;dim&gt;</a> exact_solution;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>                         singular_quadrature_order;</div>
 <div class="line">  std::shared_ptr&lt;<a class="code" href="classQuadrature.html">Quadrature</a>&lt;dim - 1&gt;&gt; quadrature;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classSolverControl.html">SolverControl</a> solver_control;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_cycles;</div>
 <div class="line">  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> external_refinement;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">bool</span> run_in_this_dimension;</div>
 <div class="line">  <span class="keywordtype">bool</span> extend_solution;</div>
@@ -489,8 +530,9 @@ $(function() {
 <div class="ttc" id="aclassFunctions_1_1ParsedFunction_html"><div class="ttname"><a href="classFunctions_1_1ParsedFunction.html">Functions::ParsedFunction</a></div><div class="ttdef"><b>Definition:</b> <a href="parsed__function_8h_source.html#l00080">parsed_function.h:81</a></div></div>
 <div class="ttc" id="aclassSolverControl_html"><div class="ttname"><a href="classSolverControl.html">SolverControl</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__control_8h_source.html#l00065">solver_control.h:66</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="BEMProblemBEMProblemandBEMProblemread_parameters"></a> </p><h4>BEMProblem::BEMProblem and BEMProblem::read_parameters</h4>
-<p>The constructor initializes the various object in much the same way as done in the finite element programs such as <a class="el" href="step_4.html">step-4</a> or <a class="el" href="step_6.html">step-6</a>. The only new ingredient here is the ParsedFunction object, which needs, at construction time, the specification of the number of components.</p>
-<p>For the exact solution the number of vector components is one, and no action is required since one is the default value for a ParsedFunction object. The wind, however, requires dim components to be specified. Notice that when declaring entries in a parameter file for the expression of the <a class="el" href="classFunctions_1_1ParsedFunction.html">Functions::ParsedFunction</a>, we need to specify the number of components explicitly, since the function <a class="el" href="classFunctions_1_1ParsedFunction.html#a57fd4a680441ae940812431a421c9c40">Functions::ParsedFunction::declare_parameters</a> is static, and has no knowledge of the number of components.</p>
+<p>构造器初始化各种对象的方式与有限元程序（如 <a class="el" href="step_4.html">step-4</a> 或 <a class="el" href="step_6.html">step-6</a> ）中的方式大致相同。这里唯一的新成分是ParsedFunction对象，它在构造时需要指定组件的数量。 <br  />
+</p>
+<p>对于精确解来说，向量分量的数量是1，而且不需要任何操作，因为1是ParsedFunction对象的默认值。然而，风需要指定dim组件。注意，在为 <a class="el" href="classFunctions_1_1ParsedFunction.html">Functions::ParsedFunction</a>, 的表达式声明参数文件中的条目时，我们需要明确指定分量的数量，因为函数 <a class="el" href="classFunctions_1_1ParsedFunction.html#a57fd4a680441ae940812431a421c9c40">Functions::ParsedFunction::declare_parameters</a> 是静态的，对分量的数量没有了解。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">BEMProblem&lt;dim&gt;::BEMProblem(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fe_degree,</div>
 <div class="line">                            <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mapping_degree)</div>
@@ -506,6 +548,7 @@ $(function() {
 <div class="line">{}</div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> BEMProblem&lt;dim&gt;::read_parameters(<span class="keyword">const</span> std::string &amp;filename)</div>
 <div class="line">{</div>
@@ -513,7 +556,9 @@ $(function() {
 <div class="line">          &lt;&lt; <span class="stringliteral">&quot;Parsing parameter file &quot;</span> &lt;&lt; filename &lt;&lt; std::endl</div>
 <div class="line">          &lt;&lt; <span class="stringliteral">&quot;for a &quot;</span> &lt;&lt; dim &lt;&lt; <span class="stringliteral">&quot; dimensional simulation. &quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classParameterHandler.html">ParameterHandler</a> prm;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  prm.<a class="code" href="classParameterHandler.html#a6d65f458be69e23a348221cb67fc411d">declare_entry</a>(<span class="stringliteral">&quot;Number of cycles&quot;</span>, <span class="stringliteral">&quot;4&quot;</span>, <a class="code" href="classPatterns_1_1Integer.html">Patterns::Integer</a>());</div>
 <div class="line">  prm.<a class="code" href="classParameterHandler.html#a6d65f458be69e23a348221cb67fc411d">declare_entry</a>(<span class="stringliteral">&quot;External refinement&quot;</span>, <span class="stringliteral">&quot;5&quot;</span>, <a class="code" href="classPatterns_1_1Integer.html">Patterns::Integer</a>());</div>
@@ -522,6 +567,7 @@ $(function() {
 <div class="line">                    <a class="code" href="classPatterns_1_1Bool.html">Patterns::Bool</a>());</div>
 <div class="line">  prm.<a class="code" href="classParameterHandler.html#a6d65f458be69e23a348221cb67fc411d">declare_entry</a>(<span class="stringliteral">&quot;Run 2d simulation&quot;</span>, <span class="stringliteral">&quot;true&quot;</span>, <a class="code" href="classPatterns_1_1Bool.html">Patterns::Bool</a>());</div>
 <div class="line">  prm.<a class="code" href="classParameterHandler.html#a6d65f458be69e23a348221cb67fc411d">declare_entry</a>(<span class="stringliteral">&quot;Run 3d simulation&quot;</span>, <span class="stringliteral">&quot;true&quot;</span>, <a class="code" href="classPatterns_1_1Bool.html">Patterns::Bool</a>());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  prm.<a class="code" href="classParameterHandler.html#af29c20cde6d44186806d559beb468696">enter_subsection</a>(<span class="stringliteral">&quot;Quadrature rules&quot;</span>);</div>
 <div class="line">  {</div>
@@ -543,16 +589,20 @@ $(function() {
 <div class="ttc" id="aclassPatterns_1_1Selection_html"><div class="ttname"><a href="classPatterns_1_1Selection.html">Patterns::Selection</a></div><div class="ttdef"><b>Definition:</b> <a href="patterns_8h_source.html#l00382">patterns.h:383</a></div></div>
 <div class="ttc" id="aclassQuadratureSelector_html"><div class="ttname"><a href="classQuadratureSelector.html">QuadratureSelector</a></div><div class="ttdef"><b>Definition:</b> <a href="quadrature__selector_8h_source.html#l00041">quadrature_selector.h:42</a></div></div>
 <div class="ttc" id="alogstream_8h_html_ac643e79bd992f1a9bd0dca5b9f2859fb"><div class="ttname"><a href="logstream_8h.html#ac643e79bd992f1a9bd0dca5b9f2859fb">deallog</a></div><div class="ttdeci">LogStream deallog</div><div class="ttdef"><b>Definition:</b> <a href="logstream_8cc_source.html#l00037">logstream.cc:37</a></div></div>
-</div><!-- fragment --><p>For both two and three dimensions, we set the default input data to be such that the solution is \(x+y\) or \(x+y+z\). The actually computed solution will have value zero at infinity. In this case, this coincide with the exact solution, and no additional corrections are needed, but you should be aware of the fact that we arbitrarily set \(\phi_\infty\), and the exact solution we pass to the program needs to have the same value at infinity for the error to be computed correctly.</p>
-<p>The use of the <a class="el" href="classFunctions_1_1ParsedFunction.html">Functions::ParsedFunction</a> object is pretty straight forward. The <a class="el" href="classFunctions_1_1ParsedFunction.html#a57fd4a680441ae940812431a421c9c40">Functions::ParsedFunction::declare_parameters</a> function takes an additional integer argument that specifies the number of components of the given function. Its default value is one. When the corresponding <a class="el" href="classFunctions_1_1ParsedFunction.html#ad63dc7cf2f447d3acfec839f28416914">Functions::ParsedFunction::parse_parameters</a> method is called, the calling object has to have the same number of components defined here, otherwise an exception is thrown.</p>
-<p>When declaring entries, we declare both 2 and three dimensional functions. However only the dim-dimensional one is ultimately parsed. This allows us to have only one parameter file for both 2 and 3 dimensional problems.</p>
-<p>Notice that from a mathematical point of view, the wind function on the boundary should satisfy the condition \(\int_{\partial\Omega} \mathbf{v}\cdot \mathbf{n} d \Gamma = 0\), for the problem to have a solution. If this condition is not satisfied, then no solution can be found, and the solver will not converge.</p>
+</div><!-- fragment --><p>对于二维和三维，我们将默认的输入数据设置为，解是 \(x+y\) 或 \(x+y+z\) 。实际计算出的解在无穷大时的值为零。在这种情况下，这与精确解相吻合，不需要额外的修正，但你应该注意的是，我们任意设置 \(\phi_\infty\) ，而我们传递给程序的精确解需要在无穷远处有相同的值才能正确计算出误差。 <br  />
+</p>
+<p><a class="el" href="classFunctions_1_1ParsedFunction.html">Functions::ParsedFunction</a> 对象的使用是非常直接的。 <a class="el" href="classFunctions_1_1ParsedFunction.html#a57fd4a680441ae940812431a421c9c40">Functions::ParsedFunction::declare_parameters</a> 函数需要一个额外的整数参数，指定给定函数的分量数量。它的默认值是1。当相应的 <a class="el" href="classFunctions_1_1ParsedFunction.html#ad63dc7cf2f447d3acfec839f28416914">Functions::ParsedFunction::parse_parameters</a> 方法被调用时，调用对象必须有与这里定义的相同数量的组件，否则就会抛出一个异常。 <br  />
+</p>
+<p>在声明条目时，我们同时声明二维和三维的函数。然而，最终只有二维的那个被解析。这样我们就可以对二维和三维的问题都只有一个参数文件。 <br  />
+</p>
+<p>注意，从数学的角度来看，边界上的风函数应该满足条件 \(\int_{\partial\Omega} \mathbf{v}\cdot \mathbf{n} d \Gamma = 0\) ，这样问题才有解。如果不满足这个条件，那么就找不到解，求解器也就不会收敛。</p>
 <div class="fragment"><div class="line">prm.<a class="code" href="classParameterHandler.html#af29c20cde6d44186806d559beb468696">enter_subsection</a>(<span class="stringliteral">&quot;Wind function 2d&quot;</span>);</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classFunctions_1_1ParsedFunction.html#a57fd4a680441ae940812431a421c9c40">Functions::ParsedFunction&lt;2&gt;::declare_parameters</a>(prm, 2);</div>
 <div class="line">  prm.<a class="code" href="classParameterHandler.html#aa6418ea655b1b550b9dcf63513030196">set</a>(<span class="stringliteral">&quot;Function expression&quot;</span>, <span class="stringliteral">&quot;1; 1&quot;</span>);</div>
 <div class="line">}</div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#a599462cacd492e2f712bf7369507dcff">leave_subsection</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#af29c20cde6d44186806d559beb468696">enter_subsection</a>(<span class="stringliteral">&quot;Wind function 3d&quot;</span>);</div>
 <div class="line">{</div>
@@ -561,12 +611,14 @@ $(function() {
 <div class="line">}</div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#a599462cacd492e2f712bf7369507dcff">leave_subsection</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#af29c20cde6d44186806d559beb468696">enter_subsection</a>(<span class="stringliteral">&quot;Exact solution 2d&quot;</span>);</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classFunctions_1_1ParsedFunction.html#a57fd4a680441ae940812431a421c9c40">Functions::ParsedFunction&lt;2&gt;::declare_parameters</a>(prm);</div>
 <div class="line">  prm.<a class="code" href="classParameterHandler.html#aa6418ea655b1b550b9dcf63513030196">set</a>(<span class="stringliteral">&quot;Function expression&quot;</span>, <span class="stringliteral">&quot;x+y&quot;</span>);</div>
 <div class="line">}</div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#a599462cacd492e2f712bf7369507dcff">leave_subsection</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#af29c20cde6d44186806d559beb468696">enter_subsection</a>(<span class="stringliteral">&quot;Exact solution 3d&quot;</span>);</div>
 <div class="line">{</div>
@@ -576,17 +628,19 @@ $(function() {
 <div class="line">prm.<a class="code" href="classParameterHandler.html#a599462cacd492e2f712bf7369507dcff">leave_subsection</a>();</div>
 <div class="ttc" id="aclassFunctions_1_1ParsedFunction_html_a57fd4a680441ae940812431a421c9c40"><div class="ttname"><a href="classFunctions_1_1ParsedFunction.html#a57fd4a680441ae940812431a421c9c40">Functions::ParsedFunction::declare_parameters</a></div><div class="ttdeci">static void declare_parameters(ParameterHandler &amp;prm, const unsigned int n_components=1)</div><div class="ttdef"><b>Definition:</b> <a href="parsed__function_8cc_source.html#l00036">parsed_function.cc:36</a></div></div>
 <div class="ttc" id="aclassParameterHandler_html_aa6418ea655b1b550b9dcf63513030196"><div class="ttname"><a href="classParameterHandler.html#aa6418ea655b1b550b9dcf63513030196">ParameterHandler::set</a></div><div class="ttdeci">void set(const std::string &amp;entry_name, const std::string &amp;new_value)</div><div class="ttdef"><b>Definition:</b> <a href="parameter__handler_8cc_source.html#l01152">parameter_handler.cc:1152</a></div></div>
-</div><!-- fragment --><p>In the solver section, we set all <a class="el" href="classSolverControl.html">SolverControl</a> parameters. The object will then be fed to the GMRES solver in the solve_system() function.</p>
+</div><!-- fragment --><p>在求解器部分，我们设置所有的SolverControl参数。然后，该对象将被送入GMRES求解器的solve_system()函数中。</p>
 <div class="fragment"><div class="line">prm.<a class="code" href="classParameterHandler.html#af29c20cde6d44186806d559beb468696">enter_subsection</a>(<span class="stringliteral">&quot;Solver&quot;</span>);</div>
 <div class="line"><a class="code" href="classSolverControl.html#a0bb6dc567e07e9f7b0a9d09f801bf149">SolverControl::declare_parameters</a>(prm);</div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#a599462cacd492e2f712bf7369507dcff">leave_subsection</a>();</div>
 <div class="ttc" id="aclassSolverControl_html_a0bb6dc567e07e9f7b0a9d09f801bf149"><div class="ttname"><a href="classSolverControl.html#a0bb6dc567e07e9f7b0a9d09f801bf149">SolverControl::declare_parameters</a></div><div class="ttdeci">static void declare_parameters(ParameterHandler &amp;param)</div><div class="ttdef"><b>Definition:</b> <a href="solver__control_8cc_source.html#l00204">solver_control.cc:204</a></div></div>
-</div><!-- fragment --><p>After declaring all these parameters to the <a class="el" href="classParameterHandler.html">ParameterHandler</a> object, let's read an input file that will give the parameters their values. We then proceed to extract these values from the <a class="el" href="classParameterHandler.html">ParameterHandler</a> object:</p>
+</div><!-- fragment --><p>在向ParameterHandler对象声明了所有这些参数后，让我们读取一个输入文件，该文件将给这些参数提供值。然后我们继续从ParameterHandler对象中提取这些值。</p>
 <div class="fragment"><div class="line">prm.<a class="code" href="classParameterHandler.html#a0ddaa05c5463c6c0b7701e18005717a9">parse_input</a>(filename);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">n_cycles            = prm.<a class="code" href="classParameterHandler.html#a61fa98fdc0c52980a5b1de0ee1fc5bb2">get_integer</a>(<span class="stringliteral">&quot;Number of cycles&quot;</span>);</div>
 <div class="line">external_refinement = prm.<a class="code" href="classParameterHandler.html#a61fa98fdc0c52980a5b1de0ee1fc5bb2">get_integer</a>(<span class="stringliteral">&quot;External refinement&quot;</span>);</div>
 <div class="line">extend_solution     = prm.<a class="code" href="classParameterHandler.html#a6bb45dc67787e3fab7882461929b5fbe">get_bool</a>(<span class="stringliteral">&quot;Extend solution on the -2,2 box&quot;</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#af29c20cde6d44186806d559beb468696">enter_subsection</a>(<span class="stringliteral">&quot;Quadrature rules&quot;</span>);</div>
 <div class="line">{</div>
@@ -597,17 +651,20 @@ $(function() {
 <div class="line">}</div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#a599462cacd492e2f712bf7369507dcff">leave_subsection</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#af29c20cde6d44186806d559beb468696">enter_subsection</a>(<span class="stringliteral">&quot;Wind function &quot;</span> + <a class="code" href="group__Exceptions.html#ga72743302dcb1a0fb1f2f8dc5122d299e">std::to_string</a>(dim) + <span class="stringliteral">&quot;d&quot;</span>);</div>
 <div class="line">{</div>
 <div class="line">  wind.parse_parameters(prm);</div>
 <div class="line">}</div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#a599462cacd492e2f712bf7369507dcff">leave_subsection</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#af29c20cde6d44186806d559beb468696">enter_subsection</a>(<span class="stringliteral">&quot;Exact solution &quot;</span> + <a class="code" href="group__Exceptions.html#ga72743302dcb1a0fb1f2f8dc5122d299e">std::to_string</a>(dim) + <span class="stringliteral">&quot;d&quot;</span>);</div>
 <div class="line">{</div>
 <div class="line">  exact_solution.parse_parameters(prm);</div>
 <div class="line">}</div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#a599462cacd492e2f712bf7369507dcff">leave_subsection</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">prm.<a class="code" href="classParameterHandler.html#af29c20cde6d44186806d559beb468696">enter_subsection</a>(<span class="stringliteral">&quot;Solver&quot;</span>);</div>
 <div class="line">solver_control.parse_parameters(prm);</div>
@@ -617,20 +674,22 @@ $(function() {
 <div class="ttc" id="aclassParameterHandler_html_a6bb45dc67787e3fab7882461929b5fbe"><div class="ttname"><a href="classParameterHandler.html#a6bb45dc67787e3fab7882461929b5fbe">ParameterHandler::get_bool</a></div><div class="ttdeci">bool get_bool(const std::string &amp;entry_name) const</div><div class="ttdef"><b>Definition:</b> <a href="parameter__handler_8cc_source.html#l01113">parameter_handler.cc:1113</a></div></div>
 <div class="ttc" id="aclassParameterHandler_html_a91cfbaca954f444047302446a4e87125"><div class="ttname"><a href="classParameterHandler.html#a91cfbaca954f444047302446a4e87125">ParameterHandler::get</a></div><div class="ttdeci">std::string get(const std::string &amp;entry_string) const</div><div class="ttdef"><b>Definition:</b> <a href="parameter__handler_8cc_source.html#l00987">parameter_handler.cc:987</a></div></div>
 <div class="ttc" id="agroup__Exceptions_html_ga72743302dcb1a0fb1f2f8dc5122d299e"><div class="ttname"><a href="group__Exceptions.html#ga72743302dcb1a0fb1f2f8dc5122d299e">Patterns::Tools::to_string</a></div><div class="ttdeci">std::string to_string(const T &amp;t)</div><div class="ttdef"><b>Definition:</b> <a href="patterns_8h_source.html#l02329">patterns.h:2329</a></div></div>
-</div><!-- fragment --><p>Finally, here's another example of how to use parameter files in dimension independent programming. If we wanted to switch off one of the two simulations, we could do this by setting the corresponding "Run
-   2d simulation" or "Run 3d simulation" flag to false:</p>
+</div><!-- fragment --><p>最后，这里有另一个例子说明如何在独立维度编程中使用参数文件。 如果我们想关闭两个模拟中的一个，我们可以通过设置相应的 "运行2D模拟 "或 "运行3D模拟 "标志为假来实现。</p>
 <div class="fragment"><div class="line">  run_in_this_dimension =</div>
 <div class="line">    prm.<a class="code" href="classParameterHandler.html#a6bb45dc67787e3fab7882461929b5fbe">get_bool</a>(<span class="stringliteral">&quot;Run &quot;</span> + <a class="code" href="group__Exceptions.html#ga72743302dcb1a0fb1f2f8dc5122d299e">std::to_string</a>(dim) + <span class="stringliteral">&quot;d simulation&quot;</span>);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="BEMProblemread_domain"></a> </p><h4>BEMProblem::read_domain</h4>
-<p>A boundary element method triangulation is basically the same as a (dim-1) dimensional triangulation, with the difference that the vertices belong to a (dim) dimensional space.</p>
-<p>Some of the mesh formats supported in deal.II use by default three dimensional points to describe meshes. These are the formats which are compatible with the boundary element method capabilities of deal.II. In particular we can use either UCD or GMSH formats. In both cases, we have to be particularly careful with the orientation of the mesh, because, unlike in the standard finite element case, no reordering or compatibility check is performed here. All meshes are considered as oriented, because they are embedded in a higher dimensional space. (See the documentation of the <a class="el" href="classGridIn.html">GridIn</a> and of the <a class="el" href="classTriangulation.html">Triangulation</a> for further details on orientation of cells in a triangulation.) In our case, the normals to the mesh are external to both the circle in 2d or the sphere in 3d.</p>
-<p>The other detail that is required for appropriate refinement of the boundary element mesh is an accurate description of the manifold that the mesh approximates. We already saw this several times for the boundary of standard finite element meshes (for example in <a class="el" href="step_5.html">step-5</a> and <a class="el" href="step_6.html">step-6</a>), and here the principle and usage is the same, except that the <a class="el" href="classSphericalManifold.html">SphericalManifold</a> class takes an additional template parameter that specifies the embedding space dimension.</p>
+</div><!-- fragment --><p><a class="anchor" id="BEMProblemread_domain"></a></p><h4>BEMProblem::read_domain</h4>
+<p>边界元素法三角剖分与(dim-1)维三角剖分基本相同，不同之处在于顶点属于(dim)维空间。 <br  />
+</p>
+<p>deal.II中支持的一些网格格式默认使用三维点来描述网格。这些格式与deal.II的边界元素方法功能兼容。特别是我们可以使用UCD或GMSH格式。在这两种情况下，我们必须特别注意网格的方向，因为与标准有限元的情况不同，这里没有进行重新排序或兼容性检查。 所有的网格都被认为是有方向性的，因为它们被嵌入到一个高维空间中。参见GridIn和Triangulation的文档，以进一步了解三角结构中单元的方向。在我们的例子中，网格的法线是外在于2D的圆或3D的球体。 <br  />
+</p>
+<p>对边界元素网格进行适当细化的另一个细节是对网格近似的流形的准确描述。对于标准有限元网格的边界，我们已经多次看到了这一点（例如在 <a class="el" href="step_5.html">step-5</a> 和 <a class="el" href="step_6.html">step-6</a> 中），这里的原理和用法是一样的，只是SphericalManifold类需要一个额外的模板参数来指定嵌入空间维度。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> BEMProblem&lt;dim&gt;::read_domain()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a>                      <a class="code" href="data__out__base_8cc.html#a8188ef4709fc9a4cc076d37447783ba1">center</a> = <a class="code" href="classPoint.html">Point&lt;dim&gt;</a>();</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classSphericalManifold.html">SphericalManifold</a>&lt;dim - 1, dim&gt; manifold(<a class="code" href="data__out__base_8cc.html#a8188ef4709fc9a4cc076d37447783ba1">center</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::ifstream in;</div>
 <div class="line">  <span class="keywordflow">switch</span> (dim)</div>
@@ -639,17 +698,21 @@ $(function() {
 <div class="line">        in.open(<span class="stringliteral">&quot;coarse_circle.inp&quot;</span>);</div>
 <div class="line">        <span class="keywordflow">break</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">case</span> 3:</div>
 <div class="line">        in.open(<span class="stringliteral">&quot;coarse_sphere.inp&quot;</span>);</div>
 <div class="line">        <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">default</span>:</div>
 <div class="line">        <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(<span class="keyword">false</span>, <a class="code" href="group__Exceptions.html#ga7b52b286796c23ef9ff178faf7a4b68f">ExcNotImplemented</a>());</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classGridIn.html">GridIn</a>&lt;dim - 1, dim&gt; gi;</div>
 <div class="line">  gi.<a class="code" href="classGridIn.html#a82ac1c03b0efe87204ad45d2f1d87f7e">attach_triangulation</a>(tria);</div>
 <div class="line">  gi.read_ucd(in);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  tria.set_all_manifold_ids(1);</div>
 <div class="ttc" id="aclassGridIn_html"><div class="ttname"><a href="classGridIn.html">GridIn</a></div><div class="ttdef"><b>Definition:</b> <a href="grid__in_8h_source.html#l00306">grid_in.h:307</a></div></div>
@@ -658,42 +721,49 @@ $(function() {
 <div class="ttc" id="aclassSphericalManifold_html"><div class="ttname"><a href="classSphericalManifold.html">SphericalManifold</a></div><div class="ttdef"><b>Definition:</b> <a href="grid_2manifold__lib_8h_source.html#l00236">manifold_lib.h:237</a></div></div>
 <div class="ttc" id="adata__out__base_8cc_html_a8188ef4709fc9a4cc076d37447783ba1"><div class="ttname"><a href="data__out__base_8cc.html#a8188ef4709fc9a4cc076d37447783ba1">center</a></div><div class="ttdeci">Point&lt; 3 &gt; center</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l00170">data_out_base.cc:170</a></div></div>
 <div class="ttc" id="agroup__Exceptions_html_ga7b52b286796c23ef9ff178faf7a4b68f"><div class="ttname"><a href="group__Exceptions.html#ga7b52b286796c23ef9ff178faf7a4b68f">StandardExceptions::ExcNotImplemented</a></div><div class="ttdeci">static ::ExceptionBase &amp; ExcNotImplemented()</div></div>
-</div><!-- fragment --><p>The call to <a class="el" href="group__manifold.html#ga9f9d720f5fbdcdf3dcbb445feefbdb9f">Triangulation::set_manifold</a> copies the manifold (via <a class="el" href="classManifold.html#a140e1b7c7334d16f99aa7ad0dbabb44a">Manifold::clone()</a>), so we do not need to worry about invalid pointers to <code>manifold</code>:</p>
+</div><!-- fragment --><p>对 <a class="el" href="group__manifold.html#ga9f9d720f5fbdcdf3dcbb445feefbdb9f">Triangulation::set_manifold</a> 的调用复制了流形（通过 <a class="el" href="classManifold.html#a140e1b7c7334d16f99aa7ad0dbabb44a">Manifold::clone()</a>), ，所以我们不需要担心对 <code>manifold</code> 的无效指针。</p>
 <div class="fragment"><div class="line">  tria.set_manifold(1, manifold);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="BEMProblemrefine_and_resize"></a> </p><h4>BEMProblem::refine_and_resize</h4>
-<p>This function globally refines the mesh, distributes degrees of freedom, and resizes matrices and vectors.</p>
+<p>这个函数全局地细化网格，分配自由度，并调整矩阵和向量的大小。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> BEMProblem&lt;dim&gt;::refine_and_resize()</div>
 <div class="line">{</div>
 <div class="line">  tria.refine_global(1);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  dof_handler.distribute_dofs(fe);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_dofs = dof_handler.n_dofs();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  system_matrix.reinit(n_dofs, n_dofs);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  system_rhs.reinit(n_dofs);</div>
 <div class="line">  phi.reinit(n_dofs);</div>
 <div class="line">  alpha.reinit(n_dofs);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="BEMProblemassemble_system"></a> </p><h4>BEMProblem::assemble_system</h4>
-<p>The following is the main function of this program, assembling the matrix that corresponds to the boundary integral equation.</p>
+</div><!-- fragment --><p>［<a class="anchor" id="BEMProblemassemble_system"></a>］ ［&lt;h4&gt;BEMProblem::assemble_system</p>
+<p>下面是这个程序的主要功能，组装与边界积分方程相对应的矩阵。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> BEMProblem&lt;dim&gt;::assemble_system()</div>
 <div class="line">{</div>
-</div><!-- fragment --><p>First we initialize an <a class="el" href="classFEValues.html">FEValues</a> object with the quadrature formula for the integration of the kernel in non singular cells. This quadrature is selected with the parameter file, and needs to be quite precise, since the functions we are integrating are not polynomial functions.</p>
+</div><!-- fragment --><p>首先，我们用正交公式初始化一个FEValues对象，用于在非奇异单元中进行内核积分。这个正交公式是通过参数文件选择的，而且需要相当精确，因为我们要积分的函数不是多项式函数。</p>
 <div class="fragment"><div class="line"><a class="code" href="classFEValues.html">FEValues</a>&lt;dim - 1, dim&gt; fe_v(mapping,</div>
 <div class="line">                            fe,</div>
 <div class="line">                            *quadrature,</div>
 <div class="line">                            <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa5e7366a91c84a50ca4e7dbd43ca6369f">update_normal_vectors</a> |</div>
 <div class="line">                              <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points = fe_v.n_quadrature_points;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">std::vector&lt;types::global_dof_index&gt; local_dof_indices(</div>
 <div class="line">  fe.n_dofs_per_cell());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">std::vector&lt;Vector&lt;double&gt;&gt; cell_wind(n_q_points, <a class="code" href="classVector.html">Vector&lt;double&gt;</a>(dim));</div>
 <div class="line"><span class="keywordtype">double</span>                      normal_wind;</div>
@@ -702,31 +772,34 @@ $(function() {
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fa5e7366a91c84a50ca4e7dbd43ca6369f"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa5e7366a91c84a50ca4e7dbd43ca6369f">update_normal_vectors</a></div><div class="ttdeci">@ update_normal_vectors</div><div class="ttdoc">Normal vectors.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00136">fe_update_flags.h:136</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a></div><div class="ttdeci">@ update_JxW_values</div><div class="ttdoc">Transformed quadrature weights.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00129">fe_update_flags.h:129</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a></div><div class="ttdeci">@ update_quadrature_points</div><div class="ttdoc">Transformed quadrature points.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00122">fe_update_flags.h:122</a></div></div>
-</div><!-- fragment --><p>Unlike in finite element methods, if we use a collocation boundary element method, then in each assembly loop we only assemble the information that refers to the coupling between one degree of freedom (the degree associated with support point \(i\)) and the current cell. This is done using a vector of fe.dofs_per_cell elements, which will then be distributed to the matrix in the global row \(i\). The following object will hold this information:</p>
+</div><!-- fragment --><p>与有限元方法不同的是，如果我们使用拼合边界元方法，那么在每个装配循环中，我们只装配与一个自由度（与支持点 \(i\) 相关的自由度）和当前单元之间的耦合信息。这是用fe.dofs_per_cell元素的向量完成的，然后将其分配到全局行的矩阵中 \(i\) 。以下对象将持有这一信息。</p>
 <div class="fragment"><div class="line"><a class="code" href="classVector.html">Vector&lt;double&gt;</a> local_matrix_row_i(fe.n_dofs_per_cell());</div>
-</div><!-- fragment --><p>The index \(i\) runs on the collocation points, which are the support points of the \(i\)th basis function, while \(j\) runs on inner integration points.</p>
-<p>We construct a vector of support points which will be used in the local integrations:</p>
+</div><!-- fragment --><p>索引 \(i\) 在拼合点上运行，这些拼合点是 \(i\) 第三个基函数的支持点，而 \(j\) 在内部积分点上运行。</p>
+<p>我们构建了一个支持点的向量，将用于局部积分。</p>
 <div class="fragment"><div class="line">std::vector&lt;Point&lt;dim&gt;&gt; support_points(dof_handler.n_dofs());</div>
 <div class="line"><a class="code" href="namespaceDoFTools.html#a5514e4f59ea659f63953d62ca429eaff">DoFTools::map_dofs_to_support_points</a>&lt;dim - 1, dim&gt;(mapping,</div>
 <div class="line">                                                   dof_handler,</div>
 <div class="line">                                                   support_points);</div>
 <div class="ttc" id="anamespaceDoFTools_html_a5514e4f59ea659f63953d62ca429eaff"><div class="ttname"><a href="namespaceDoFTools.html#a5514e4f59ea659f63953d62ca429eaff">DoFTools::map_dofs_to_support_points</a></div><div class="ttdeci">void map_dofs_to_support_points(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, std::vector&lt; Point&lt; spacedim &gt;&gt; &amp;support_points, const ComponentMask &amp;mask=ComponentMask())</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools_8cc_source.html#l02326">dof_tools.cc:2326</a></div></div>
-</div><!-- fragment --><p>After doing so, we can start the integration loop over all cells, where we first initialize the <a class="el" href="classFEValues.html">FEValues</a> object and get the values of \(\mathbf{\tilde v}\) at the quadrature points (this vector field should be constant, but it doesn't hurt to be more general):</p>
+</div><!-- fragment --><p>这样做之后，我们就可以开始对所有单元进行积分循环，首先初始化FEValues对象，并在正交点获得 \(\mathbf{\tilde v}\) 的值（这个向量场应该是常数，但更通用也无妨）。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">  {</div>
 <div class="line">    fe_v.reinit(cell);</div>
 <div class="line">    cell-&gt;get_dof_indices(local_dof_indices);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;q_points = fe_v.get_quadrature_points();</div>
 <div class="line">    <span class="keyword">const</span> std::vector&lt;Tensor&lt;1, dim&gt;&gt; &amp;normals = fe_v.get_normal_vectors();</div>
 <div class="line">    wind.vector_value_list(q_points, cell_wind);</div>
-</div><!-- fragment --><p>We then form the integral over the current cell for all degrees of freedom (note that this includes degrees of freedom not located on the current cell, a deviation from the usual finite element integrals). The integral that we need to perform is singular if one of the local degrees of freedom is the same as the support point \(i\). A the beginning of the loop we therefore check whether this is the case, and we store which one is the singular index:</p>
+</div><!-- fragment --><p>然后我们对当前单元的所有自由度形成积分（注意这包括不在当前单元上的自由度，这与通常的有限元积分不同）。如果其中一个局部自由度与支持点 \(i\) 相同，我们需要执行的积分是单数。因此，在循环的开始，我们检查是否是这种情况，并存储哪一个是奇异指数。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dof_handler.n_dofs(); ++i)</div>
 <div class="line">  {</div>
 <div class="line">    local_matrix_row_i = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keywordtype">bool</span>         is_singular    = <span class="keyword">false</span>;</div>
 <div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> singular_index = <a class="code" href="namespacenumbers.html#a8ae36952c7e0cc778b47b5371b3aeff1">numbers::invalid_unsigned_int</a>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; fe.n_dofs_per_cell(); ++j)</div>
 <div class="line">      <span class="keywordflow">if</span> (local_dof_indices[j] == i)</div>
@@ -736,7 +809,7 @@ $(function() {
 <div class="line">          <span class="keywordflow">break</span>;</div>
 <div class="line">        }</div>
 <div class="ttc" id="anamespacenumbers_html_a8ae36952c7e0cc778b47b5371b3aeff1"><div class="ttname"><a href="namespacenumbers.html#a8ae36952c7e0cc778b47b5371b3aeff1">numbers::invalid_unsigned_int</a></div><div class="ttdeci">static const unsigned int invalid_unsigned_int</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00196">types.h:196</a></div></div>
-</div><!-- fragment --><p>We then perform the integral. If the index \(i\) is not one of the local degrees of freedom, we simply have to add the single layer terms to the right hand side, and the double layer terms to the matrix:</p>
+</div><!-- fragment --><p>然后我们进行积分。如果索引 \(i\) 不是局部自由度之一，我们只需将单层项加到右手边，将双层项加到矩阵中。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (is_singular == <span class="keyword">false</span>)</div>
 <div class="line">  {</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; ++q)</div>
@@ -745,12 +818,16 @@ $(function() {
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> = 0; <a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a> &lt; dim; ++<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>)</div>
 <div class="line">          normal_wind += normals[q][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] * cell_wind[q](<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        <span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> R = q_points[q] - support_points[i];</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        system_rhs(i) += (LaplaceKernel::single_layer(R) *</div>
 <div class="line">                          normal_wind * fe_v.JxW(q));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; fe.n_dofs_per_cell(); ++j)</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          local_matrix_row_i(j) -=</div>
 <div class="line">            ((LaplaceKernel::double_layer(R) * normals[q]) *</div>
@@ -760,14 +837,18 @@ $(function() {
 <div class="line"><span class="keywordflow">else</span></div>
 <div class="line">  {</div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a15728437b942dab0b0042eb06a407d2c"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">Physics::Elasticity::Kinematics::d</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; d(const Tensor&lt; 2, dim, Number &gt; &amp;F, const Tensor&lt; 2, dim, Number &gt; &amp;dF_dt)</div></div>
-</div><!-- fragment --><p>Now we treat the more delicate case. If we are here, this means that the cell that runs on the \(j\) index contains support_point[i]. In this case both the single and the double layer potential are singular, and they require special treatment.</p>
-<p>Whenever the integration is performed with the singularity inside the given cell, then a special quadrature formula is used that allows one to integrate arbitrary functions against a singular weight on the reference cell.</p>
-<p>The correct quadrature formula is selected by the get_singular_quadrature function, which is explained in detail below.</p>
+</div><!-- fragment --><p>现在我们处理更微妙的情况。如果我们在这里，这意味着在 \(j\) 索引上运行的单元包含support_point[i]。在这种情况下，单层和双层势都是奇异的，它们需要特殊处理。 <br  />
+</p>
+<p>每当在给定单元内进行积分时，就会使用一个特殊的正交公式，允许人们对参考单元上的奇异权重进行任意函数的积分。 <br  />
+</p>
+<p>正确的正交公式由get_singular_quadrature函数选择，下面有详细说明。</p>
 <div class="fragment"><div class="line">  <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(singular_index != <a class="code" href="namespacenumbers.html#a8ae36952c7e0cc778b47b5371b3aeff1">numbers::invalid_unsigned_int</a>,</div>
 <div class="line">         <a class="code" href="group__Exceptions.html#ga31978c026b8b6b5116df30b8e748f6b7">ExcInternalError</a>());</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classQuadrature.html">Quadrature</a>&lt;dim - 1&gt; &amp;singular_quadrature =</div>
 <div class="line">    get_singular_quadrature(cell, singular_index);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues</a>&lt;dim - 1, dim&gt; fe_v_singular(</div>
 <div class="line">    mapping,</div>
@@ -776,17 +857,22 @@ $(function() {
 <div class="line">    <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa9e3f2944ebdadf4409dc11f8fc0afe14">update_jacobians</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa5e7366a91c84a50ca4e7dbd43ca6369f">update_normal_vectors</a> |</div>
 <div class="line">      <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  fe_v_singular.reinit(cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;Vector&lt;double&gt;&gt; singular_cell_wind(</div>
 <div class="line">    singular_quadrature.size(), <a class="code" href="classVector.html">Vector&lt;double&gt;</a>(dim));</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> std::vector&lt;Tensor&lt;1, dim&gt;&gt; &amp;singular_normals =</div>
 <div class="line">    fe_v_singular.get_normal_vectors();</div>
 <div class="line">  <span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;singular_q_points =</div>
 <div class="line">    fe_v_singular.get_quadrature_points();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  wind.vector_value_list(singular_q_points, singular_cell_wind);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; singular_quadrature.size(); ++q)</div>
 <div class="line">    {</div>
@@ -797,8 +883,10 @@ $(function() {
 <div class="line">        normal_wind +=</div>
 <div class="line">          (singular_cell_wind[q](<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>) * singular_normals[q][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>]);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      system_rhs(i) += (LaplaceKernel::single_layer(R) *</div>
 <div class="line">                        normal_wind * fe_v_singular.JxW(q));</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; fe.n_dofs_per_cell(); ++j)</div>
 <div class="line">        {</div>
@@ -811,15 +899,16 @@ $(function() {
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fa9e3f2944ebdadf4409dc11f8fc0afe14"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa9e3f2944ebdadf4409dc11f8fc0afe14">update_jacobians</a></div><div class="ttdeci">@ update_jacobians</div><div class="ttdoc">Volume element.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00142">fe_update_flags.h:142</a></div></div>
-</div><!-- fragment --><p>Finally, we need to add the contributions of the current cell to the global matrix.</p>
+</div><!-- fragment --><p>最后，我们需要将当前单元的贡献添加到全局矩阵中。</p>
 <div class="fragment"><div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; fe.n_dofs_per_cell(); ++j)</div>
 <div class="line">        system_matrix(i, local_dof_indices[j]) += local_matrix_row_i(j);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>The second part of the integral operator is the term \(\alpha(\mathbf{x}_i) \phi_j(\mathbf{x}_i)\). Since we use a collocation scheme, \(\phi_j(\mathbf{x}_i)=\delta_{ij}\) and the corresponding matrix is a diagonal one with entries equal to \(\alpha(\mathbf{x}_i)\).</p>
-<p>One quick way to compute this diagonal matrix of the solid angles, is to use the Neumann matrix itself. It is enough to multiply the matrix with a vector of elements all equal to -1, to get the diagonal matrix of the alpha angles, or solid angles (see the formula in the introduction for this). The result is then added back onto the system matrix object to yield the final form of the matrix:</p>
+</div><!-- fragment --><p>积分算子的第二部分是术语 \(\alpha(\mathbf{x}_i) \phi_j(\mathbf{x}_i)\) 。由于我们使用的是配位方案， \(\phi_j(\mathbf{x}_i)=\delta_{ij}\) 和相应的矩阵是一个对角线，其条目等于 \(\alpha(\mathbf{x}_i)\) 。</p>
+<p>计算这个实体角的对角矩阵的一个快速方法是使用诺伊曼矩阵本身。只需将该矩阵与一个元素都等于-1的向量相乘，就可以得到阿尔法角的对角线矩阵，或者说是实心角（见介绍中的公式）。然后将这个结果加回系统矩阵对象上，得到矩阵的最终形式。</p>
 <div class="fragment"><div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> ones(dof_handler.n_dofs());</div>
 <div class="line">  ones.add(-1.);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  system_matrix.vmult(alpha, ones);</div>
 <div class="line">  alpha.add(1);</div>
@@ -827,7 +916,7 @@ $(function() {
 <div class="line">    system_matrix(i, i) += alpha(i);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="BEMProblemsolve_system"></a> </p><h4>BEMProblem::solve_system</h4>
-<p>The next function simply solves the linear system.</p>
+<p>下一个函数简单地解决了线性系统。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> BEMProblem&lt;dim&gt;::solve_system()</div>
 <div class="line">{</div>
@@ -836,8 +925,8 @@ $(function() {
 <div class="line">}</div>
 <div class="ttc" id="aclassPreconditionIdentity_html"><div class="ttname"><a href="classPreconditionIdentity.html">PreconditionIdentity</a></div><div class="ttdef"><b>Definition:</b> <a href="precondition_8h_source.html#l00079">precondition.h:80</a></div></div>
 <div class="ttc" id="aclassSolverGMRES_html"><div class="ttname"><a href="classSolverGMRES.html">SolverGMRES</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__gmres_8h_source.html#l00175">solver_gmres.h:176</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="BEMProblemcompute_errors"></a> </p><h4>BEMProblem::compute_errors</h4>
-<p>The computation of the errors is exactly the same in all other example programs, and we won't comment too much. Notice how the same methods that are used in the finite element methods can be used here.</p>
+</div><!-- fragment --><p><a class="anchor" id="BEMProblemcompute_errors"></a></p><h4>BEMProblem::compute_errors</h4>
+<p>误差的计算在其他所有的例子程序中都是完全一样的，我们就不做过多的评论。请注意，这里可以使用有限元方法中的相同方法。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> BEMProblem&lt;dim&gt;::compute_errors(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle)</div>
 <div class="line">{</div>
@@ -857,18 +946,21 @@ $(function() {
 <div class="ttc" id="anamespaceVectorTools_html_a21eb62d70953182dcc2b15c4e14dd533"><div class="ttname"><a href="namespaceVectorTools.html#a21eb62d70953182dcc2b15c4e14dd533">VectorTools::compute_global_error</a></div><div class="ttdeci">double compute_global_error(const Triangulation&lt; dim, spacedim &gt; &amp;tria, const InVector &amp;cellwise_error, const NormType &amp;norm, const double exponent=2.)</div></div>
 <div class="ttc" id="anamespaceVectorTools_html_a676190d2c897ac5da68a9c460fa95832"><div class="ttname"><a href="namespaceVectorTools.html#a676190d2c897ac5da68a9c460fa95832">VectorTools::integrate_difference</a></div><div class="ttdeci">void integrate_difference(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const InVector &amp;fe_function, const Function&lt; spacedim, typename InVector::value_type &gt; &amp;exact_solution, OutVector &amp;difference, const Quadrature&lt; dim &gt; &amp;q, const NormType &amp;norm, const Function&lt; spacedim, double &gt; *weight=nullptr, const double exponent=2.)</div></div>
 <div class="ttc" id="anamespaceVectorTools_html_a69967cb7a148a7169963126249213db1aa3903caf348e2d5dc54d1b49e15c1e8e"><div class="ttname"><a href="namespaceVectorTools.html#a69967cb7a148a7169963126249213db1aa3903caf348e2d5dc54d1b49e15c1e8e">VectorTools::L2_norm</a></div><div class="ttdeci">@ L2_norm</div><div class="ttdef"><b>Definition:</b> <a href="vector__tools__common_8h_source.html#l00113">vector_tools_common.h:113</a></div></div>
-</div><!-- fragment --><p>The error in the alpha vector can be computed directly using the <a class="el" href="group__Vectors.html#ga9f6b7f7afb05aaff7e1ab8f9942b6dae">Vector::linfty_norm()</a> function, since on each node, the value should be \(\frac 12\). All errors are then output and appended to our <a class="el" href="classConvergenceTable.html">ConvergenceTable</a> object for later computation of convergence rates:</p>
+</div><!-- fragment --><p>α向量的误差可以直接使用 <a class="el" href="group__Vectors.html#ga9f6b7f7afb05aaff7e1ab8f9942b6dae">Vector::linfty_norm()</a> 函数来计算，因为在每个节点上，其数值应该是 \(\frac 12\) 。然后，所有的误差都被输出并附加到我们的ConvergenceTable对象中，以便以后计算收敛率。</p>
 <div class="fragment"><div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> difference_per_node(alpha);</div>
 <div class="line">  difference_per_node.add(-.5);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span>       alpha_error    = difference_per_node.linfty_norm();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespaceinternal_1_1TriangulationImplementation.html#a3344398031a9e10cb9eef0784f8da1be">n_active_cells</a> = tria.n_active_cells();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_dofs         = dof_handler.n_dofs();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="logstream_8h.html#ac643e79bd992f1a9bd0dca5b9f2859fb">deallog</a> &lt;&lt; <span class="stringliteral">&quot;Cycle &quot;</span> &lt;&lt; cycle &lt;&lt; <span class="charliteral">&#39;:&#39;</span> &lt;&lt; std::endl</div>
 <div class="line">          &lt;&lt; <span class="stringliteral">&quot;   Number of active cells:       &quot;</span> &lt;&lt; <a class="code" href="namespaceinternal_1_1TriangulationImplementation.html#a3344398031a9e10cb9eef0784f8da1be">n_active_cells</a></div>
 <div class="line">          &lt;&lt; std::endl</div>
 <div class="line">          &lt;&lt; <span class="stringliteral">&quot;   Number of degrees of freedom: &quot;</span> &lt;&lt; n_dofs &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  convergence_table.add_value(<span class="stringliteral">&quot;cycle&quot;</span>, cycle);</div>
 <div class="line">  convergence_table.add_value(<span class="stringliteral">&quot;cells&quot;</span>, <a class="code" href="namespaceinternal_1_1TriangulationImplementation.html#a3344398031a9e10cb9eef0784f8da1be">n_active_cells</a>);</div>
@@ -877,26 +969,38 @@ $(function() {
 <div class="line">  convergence_table.add_value(<span class="stringliteral">&quot;Linfty(alpha)&quot;</span>, alpha_error);</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespaceinternal_1_1TriangulationImplementation_html_a3344398031a9e10cb9eef0784f8da1be"><div class="ttname"><a href="namespaceinternal_1_1TriangulationImplementation.html#a3344398031a9e10cb9eef0784f8da1be">internal::TriangulationImplementation::n_active_cells</a></div><div class="ttdeci">unsigned int n_active_cells(const internal::TriangulationImplementation::NumberCache&lt; 1 &gt; &amp;c)</div><div class="ttdef"><b>Definition:</b> <a href="grid_2tria_8cc_source.html#l12658">tria.cc:12658</a></div></div>
-</div><!-- fragment --><p>Singular integration requires a careful selection of the quadrature rules. In particular the deal.II library provides quadrature rules which are tailored for logarithmic singularities (<a class="el" href="classQGaussLog.html">QGaussLog</a>, <a class="el" href="classQGaussLogR.html">QGaussLogR</a>), as well as for 1/R singularities (<a class="el" href="classQGaussOneOverR.html">QGaussOneOverR</a>).</p>
-<p>Singular integration is typically obtained by constructing weighted quadrature formulas with singular weights, so that it is possible to write</p>
+</div><!-- fragment --><p>奇异积分需要仔细选择正交规则。特别是deal.II库提供了专为对数奇异性（QGaussLog、QGaussLogR）以及1/R奇异性（QGaussOneOverR）定制的正交规则。 <br  />
+</p>
+<p>奇异积分通常是通过构建具有奇异权重的加权正交公式得到的，因此可以写成 <br  />
+</p>
 <p class="formulaDsp">
 \[ \int_K f(x) s(x) dx = \sum_{i=1}^N w_i f(q_i) \]
 </p>
-<p>where \(s(x)\) is a given singularity, and the weights and quadrature points \(w_i,q_i\) are carefully selected to make the formula above an equality for a certain class of functions \(f(x)\).</p>
-<p>In all the finite element examples we have seen so far, the weight of the quadrature itself (namely, the function \(s(x)\)), was always constantly equal to 1. For singular integration, we have two choices: we can use the definition above, factoring out the singularity from the integrand (i.e., integrating \(f(x)\) with the special quadrature rule), or we can ask the quadrature rule to "normalize" the weights \(w_i\) with \(s(q_i)\):</p>
+<p> <br  />
+</p>
+<p>其中 \(s(x)\) 是一个给定的奇点，权重和正交点 \(w_i,q_i\) 是精心选择的，以使上述公式对某类函数 \(f(x)\) 是一个等式。 <br  />
+</p>
+<p>在我们迄今为止看到的所有有限元例子中，正交点本身的权重（即函数 \(s(x)\) ），总是不断等于1。 对于奇异积分，我们有两个选择：我们可以使用上面的定义，从积分中剔除奇异性（即用特殊的正交规则对 \(f(x)\) 进行积分），或者我们可以要求正交规则用 \(s(q_i)\) 对权重 \(w_i\) 进行 "标准化"。 <br  />
+</p>
 <p class="formulaDsp">
 \[ \int_K f(x) s(x) dx = \int_K g(x) dx = \sum_{i=1}^N \frac{w_i}{s(q_i)} g(q_i) \]
 </p>
-<p>We use this second option, through the <code>factor_out_singularity</code> parameter of both <a class="el" href="classQGaussLogR.html">QGaussLogR</a> and <a class="el" href="classQGaussOneOverR.html">QGaussOneOverR</a>.</p>
-<p>These integrals are somewhat delicate, especially in two dimensions, due to the transformation from the real to the reference cell, where the variable of integration is scaled with the determinant of the transformation.</p>
-<p>In two dimensions this process does not result only in a factor appearing as a constant factor on the entire integral, but also on an additional integral altogether that needs to be evaluated:</p>
+<p>我们通过QGaussLogR和QGaussOneOverR的 <code>factor_out_singularity</code> 参数来使用这第二个选项。 <br  />
+</p>
+<p>这些积分有些微妙，特别是在二维空间，由于从实数到参考单元的转换，积分的变量会随着转换的行列式而缩放。 <br  />
+</p>
+<p>在二维中，这个过程不仅导致一个因素作为常数出现在整个积分上，而且还导致一个需要评估的额外积分。 <br  />
+</p>
 <p class="formulaDsp">
 \[ \int_0^1 f(x)\ln(x/\alpha) dx = \int_0^1 f(x)\ln(x) dx - \int_0^1 f(x) \ln(\alpha) dx. \]
 </p>
-<p>This process is taken care of by the constructor of the <a class="el" href="classQGaussLogR.html">QGaussLogR</a> class, which adds additional quadrature points and weights to take into consideration also the second part of the integral.</p>
-<p>A similar reasoning should be done in the three dimensional case, since the singular quadrature is tailored on the inverse of the radius \(r\) in the reference cell, while our singular function lives in real space, however in the three dimensional case everything is simpler because the singularity scales linearly with the determinant of the transformation. This allows us to build the singular two dimensional quadrature rules only once and, reuse them over all cells.</p>
-<p>In the one dimensional singular integration this is not possible, since we need to know the scaling parameter for the quadrature, which is not known a priori. Here, the quadrature rule itself depends also on the size of the current cell. For this reason, it is necessary to create a new quadrature for each singular integration.</p>
-<p>The different quadrature rules are built inside the get_singular_quadrature, which is specialized for dim=2 and dim=3, and they are retrieved inside the assemble_system function. The index given as an argument is the index of the unit support point where the singularity is located.</p>
+<p>这个过程由QGaussLogR类的构造函数来处理，它增加了额外的正交点和权重，以考虑到积分的第二部分。 <br  />
+</p>
+<p>类似的推理应该在三维情况下进行，因为奇异正交是在参考单元的半径 \(r\) 的逆上定制的，而我们的奇异函数生活在实空间，然而在三维情况下一切都更简单，因为奇异性与变换的行列式呈线性比例。这使我们可以只建立一次奇异的二维正交规则，并在所有单元中重复使用它们。 <br  />
+</p>
+<p>在一维的奇异积分中，这是不可能的，因为我们需要知道正交的缩放参数，而这个参数并不是先验的。这里，正交规则本身也取决于当前单元的大小。由于这个原因，有必要为每个单数积分创建一个新的正交规则。 <br  />
+</p>
+<p>不同的正交规则是在get_singular_quadrature中建立的，它专门用于dim=2和dim=3，它们在assemble_system函数中被检索。作为参数给出的索引是奇点所在的单位支持点的索引。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;&gt;</div>
 <div class="line"><span class="keyword">const</span> <a class="code" href="classQuadrature.html">Quadrature&lt;2&gt;</a> &amp;BEMProblem&lt;3&gt;::get_singular_quadrature(</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="group__Iterators.html#ga6b8bbcafed8847f3030ea30c6990eb2d">DoFHandler&lt;2, 3&gt;::active_cell_iterator</a> &amp;,</div>
@@ -904,6 +1008,7 @@ $(function() {
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(index &lt; fe.n_dofs_per_cell(),</div>
 <div class="line">         <a class="code" href="group__Exceptions.html#ga0d685aad996180f9851183ae3e29019a">ExcIndexRange</a>(0, fe.n_dofs_per_cell(), index));</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">static</span> std::vector&lt;QGaussOneOverR&lt;2&gt;&gt; quadratures;</div>
 <div class="line">  <span class="keywordflow">if</span> (quadratures.size() == 0)</div>
@@ -915,6 +1020,7 @@ $(function() {
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;&gt;</div>
 <div class="line"><span class="keyword">const</span> <a class="code" href="classQuadrature.html">Quadrature&lt;1&gt;</a> &amp;BEMProblem&lt;2&gt;::get_singular_quadrature(</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="group__Iterators.html#ga6b8bbcafed8847f3030ea30c6990eb2d">DoFHandler&lt;1, 2&gt;::active_cell_iterator</a> &amp;cell,</div>
@@ -923,9 +1029,11 @@ $(function() {
 <div class="line">  <a class="code" href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a>(index &lt; fe.n_dofs_per_cell(),</div>
 <div class="line">         <a class="code" href="group__Exceptions.html#ga0d685aad996180f9851183ae3e29019a">ExcIndexRange</a>(0, fe.n_dofs_per_cell(), index));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">static</span> <a class="code" href="classQuadrature.html">Quadrature&lt;1&gt;</a> *q_pointer = <span class="keyword">nullptr</span>;</div>
 <div class="line">  <span class="keywordflow">if</span> (q_pointer)</div>
 <div class="line">    <span class="keyword">delete</span> q_pointer;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  q_pointer = <span class="keyword">new</span> <a class="code" href="classQGaussLogR.html">QGaussLogR&lt;1&gt;</a>(singular_quadrature_order,</div>
 <div class="line">                                fe.get_unit_support_points()[index],</div>
@@ -935,23 +1043,28 @@ $(function() {
 <div class="line">}</div>
 <div class="ttc" id="aclassQGaussLogR_html"><div class="ttname"><a href="classQGaussLogR.html">QGaussLogR</a></div><div class="ttdef"><b>Definition:</b> <a href="quadrature__lib_8h_source.html#l00245">quadrature_lib.h:246</a></div></div>
 <div class="ttc" id="agroup__Exceptions_html_ga0d685aad996180f9851183ae3e29019a"><div class="ttname"><a href="group__Exceptions.html#ga0d685aad996180f9851183ae3e29019a">StandardExceptions::ExcIndexRange</a></div><div class="ttdeci">static ::ExceptionBase &amp; ExcIndexRange(int arg1, int arg2, int arg3)</div></div>
-</div><!-- fragment --><p><a class="anchor" id="BEMProblemcompute_exterior_solution"></a> </p><h4>BEMProblem::compute_exterior_solution</h4>
-<p>We'd like to also know something about the value of the potential \(\phi\) in the exterior domain: after all our motivation to consider the boundary integral problem was that we wanted to know the velocity in the exterior domain!</p>
-<p>To this end, let us assume here that the boundary element domain is contained in the box \([-2,2]^{\text{dim}}\), and we extrapolate the actual solution inside this box using the convolution with the fundamental solution. The formula for this is given in the introduction.</p>
-<p>The reconstruction of the solution in the entire space is done on a continuous finite element grid of dimension dim. These are the usual ones, and we don't comment any further on them. At the end of the function, we output this exterior solution in, again, much the usual way.</p>
+</div><!-- fragment --><p><a class="anchor" id="BEMProblemcompute_exterior_solution"></a></p><h4>BEMProblem::compute_exterior_solution</h4>
+<p>我们还想知道一些关于外域中电势 \(\phi\) 的值：毕竟我们考虑边界积分问题的动机是我们想知道外域中的速度! <br  />
+</p>
+<p>为此，我们在此假设边界元域包含在盒子 \([-2,2]^{\text{dim}}\) 中，我们用与基本解的卷积来推算这个盒子内的实际解。这方面的公式在引言中已经给出。 <br  />
+</p>
+<p>整个空间中的解的重构是在一个维度为dim的连续有限元网格上完成的。这些都是常用的，我们不做进一步评论。在函数的最后，我们再次以通常的方式输出这个外部解。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> BEMProblem&lt;dim&gt;::compute_exterior_solution()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTriangulation.html">Triangulation&lt;dim&gt;</a> external_tria;</div>
 <div class="line">  <a class="code" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a>(external_tria, -2, 2);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classFE__Q.html">FE_Q&lt;dim&gt;</a>       external_fe(1);</div>
 <div class="line">  <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a> external_dh(external_tria);</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a>  external_phi;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  external_tria.<a class="code" href="classTriangulation.html#a6ad0b3fb24aae17f4668427a433dea19">refine_global</a>(external_refinement);</div>
 <div class="line">  external_dh.distribute_dofs(external_fe);</div>
 <div class="line">  external_phi.<a class="code" href="group__Vectors.html#gac4a4dbef7dd65ef8ad35ae56b57d7c05">reinit</a>(external_dh.n_dofs());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues</a>&lt;dim - 1, dim&gt; fe_v(mapping,</div>
 <div class="line">                              fe,</div>
@@ -959,30 +1072,39 @@ $(function() {
 <div class="line">                              <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa5e7366a91c84a50ca4e7dbd43ca6369f">update_normal_vectors</a> |</div>
 <div class="line">                                <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points = fe_v.n_quadrature_points;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; dofs(fe.n_dofs_per_cell());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;double&gt;         local_phi(n_q_points);</div>
 <div class="line">  std::vector&lt;double&gt;         normal_wind(n_q_points);</div>
 <div class="line">  std::vector&lt;Vector&lt;double&gt;&gt; local_wind(n_q_points, <a class="code" href="classVector.html">Vector&lt;double&gt;</a>(dim));</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;Point&lt;dim&gt;&gt; external_support_points(external_dh.n_dofs());</div>
 <div class="line">  DoFTools::map_dofs_to_support_points&lt;dim&gt;(<a class="code" href="structStaticMappingQ1.html">StaticMappingQ1&lt;dim&gt;::mapping</a>,</div>
 <div class="line">                                            external_dh,</div>
 <div class="line">                                            external_support_points);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">    {</div>
 <div class="line">      fe_v.reinit(cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;q_points = fe_v.get_quadrature_points();</div>
 <div class="line">      <span class="keyword">const</span> std::vector&lt;Tensor&lt;1, dim&gt;&gt; &amp;normals = fe_v.get_normal_vectors();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      cell-&gt;get_dof_indices(dofs);</div>
 <div class="line">      fe_v.get_function_values(phi, local_phi);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      wind.vector_value_list(q_points, local_wind);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; ++q)</div>
 <div class="line">        {</div>
@@ -991,10 +1113,12 @@ $(function() {
 <div class="line">            normal_wind[q] += normals[q][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] * local_wind[q](<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>);</div>
 <div class="line">        }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; external_dh.n_dofs(); ++i)</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; ++q)</div>
 <div class="line">          {</div>
 <div class="line">            <span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> R = q_points[q] - external_support_points[i];</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">            external_phi(i) +=</div>
 <div class="line">              ((LaplaceKernel::single_layer(R) * normal_wind[q] +</div>
@@ -1004,14 +1128,18 @@ $(function() {
 <div class="line">          }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classDataOut.html">DataOut&lt;dim&gt;</a> data_out;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ac1eb26168177faa30ffbcf9cbb9c3cd5">attach_dof_handler</a>(external_dh);</div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(external_phi, <span class="stringliteral">&quot;external_phi&quot;</span>);</div>
 <div class="line">  data_out.<a class="code" href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">build_patches</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> std::string filename = <a class="code" href="group__Exceptions.html#ga72743302dcb1a0fb1f2f8dc5122d299e">std::to_string</a>(dim) + <span class="stringliteral">&quot;d_external.vtk&quot;</span>;</div>
 <div class="line">  std::ofstream     file(filename);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  data_out.<a class="code" href="group__Exceptions.html#gacad99726038e4fca7f605fdffb3317e4">write_vtk</a>(file);</div>
 <div class="line">}</div>
@@ -1024,12 +1152,13 @@ $(function() {
 <div class="ttc" id="agroup__Vectors_html_gac4a4dbef7dd65ef8ad35ae56b57d7c05"><div class="ttname"><a href="group__Vectors.html#gac4a4dbef7dd65ef8ad35ae56b57d7c05">Vector::reinit</a></div><div class="ttdeci">virtual void reinit(const size_type N, const bool omit_zeroing_entries=false)</div></div>
 <div class="ttc" id="anamespaceGridGenerator_html_acea0cbcd68e52ce8113d1134b87de403"><div class="ttname"><a href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a></div><div class="ttdeci">void hyper_cube(Triangulation&lt; dim, spacedim &gt; &amp;tria, const double left=0., const double right=1., const bool colorize=false)</div></div>
 <div class="ttc" id="astructStaticMappingQ1_html"><div class="ttname"><a href="structStaticMappingQ1.html">StaticMappingQ1</a></div><div class="ttdef"><b>Definition:</b> <a href="mapping__q1_8h_source.html#l00091">mapping_q1.h:92</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="BEMProblemoutput_results"></a> </p><h4>BEMProblem::output_results</h4>
-<p>Outputting the results of our computations is a rather mechanical tasks. All the components of this function have been discussed before.</p>
+</div><!-- fragment --><p><a class="anchor" id="BEMProblemoutput_results"></a></p><h4>BEMProblem::output_results</h4>
+<p>输出我们的计算结果是一个相当机械的任务。这个函数的所有组成部分在前面已经讨论过了。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> BEMProblem&lt;dim&gt;::output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle)</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classDataOut.html">DataOut</a>&lt;dim - 1, <a class="code" href="classDoFHandler.html">DoFHandler</a>&lt;dim - 1, dim&gt;&gt; dataout;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  dataout.<a class="code" href="classDataOut__DoFData.html#ac1eb26168177faa30ffbcf9cbb9c3cd5">attach_dof_handler</a>(dof_handler);</div>
 <div class="line">  dataout.add_data_vector(</div>
@@ -1043,19 +1172,24 @@ $(function() {
 <div class="line">    mapping.get_degree(),</div>
 <div class="line">    <a class="code" href="classDataOut.html">DataOut</a>&lt;dim - 1, <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim - 1, dim&gt;</a>&gt;::curved_inner_cells);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> std::string filename = <a class="code" href="group__Exceptions.html#ga72743302dcb1a0fb1f2f8dc5122d299e">std::to_string</a>(dim) + <span class="stringliteral">&quot;d_boundary_solution_&quot;</span> +</div>
 <div class="line">                               <a class="code" href="group__Exceptions.html#ga72743302dcb1a0fb1f2f8dc5122d299e">std::to_string</a>(cycle) + <span class="stringliteral">&quot;.vtk&quot;</span>;</div>
 <div class="line">  std::ofstream file(filename);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  dataout.write_vtk(file);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">if</span> (cycle == n_cycles - 1)</div>
 <div class="line">    {</div>
 <div class="line">      convergence_table.set_precision(<span class="stringliteral">&quot;L2(phi)&quot;</span>, 3);</div>
 <div class="line">      convergence_table.set_precision(<span class="stringliteral">&quot;Linfty(alpha)&quot;</span>, 3);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      convergence_table.set_scientific(<span class="stringliteral">&quot;L2(phi)&quot;</span>, <span class="keyword">true</span>);</div>
 <div class="line">      convergence_table.set_scientific(<span class="stringliteral">&quot;Linfty(alpha)&quot;</span>, <span class="keyword">true</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      convergence_table.evaluate_convergence_rates(</div>
 <div class="line">        <span class="stringliteral">&quot;L2(phi)&quot;</span>, <a class="code" href="group__Exceptions.html#gae1ef1c23deebd739950f52b0740ecaaba322af8094a35219c384ae2d343905e9c">ConvergenceTable::reduction_rate_log2</a>);</div>
@@ -1067,11 +1201,12 @@ $(function() {
 <div class="line">}</div>
 <div class="ttc" id="agroup__Exceptions_html_gae1ef1c23deebd739950f52b0740ecaaba322af8094a35219c384ae2d343905e9c"><div class="ttname"><a href="group__Exceptions.html#gae1ef1c23deebd739950f52b0740ecaaba322af8094a35219c384ae2d343905e9c">ConvergenceTable::reduction_rate_log2</a></div><div class="ttdeci">@ reduction_rate_log2</div><div class="ttdef"><b>Definition:</b> <a href="convergence__table_8h_source.html#l00090">convergence_table.h:89</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="BEMProblemrun"></a> </p><h4>BEMProblem::run</h4>
-<p>This is the main function. It should be self explanatory in its briefness:</p>
+<p>这是最主要的功能。它应该是不言自明的简短。</p>
 <div class="fragment"><div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">BEMProblem&lt;dim&gt;::run</a>()</div>
 <div class="line">  {</div>
 <div class="line">    read_parameters(<span class="stringliteral">&quot;parameters.prm&quot;</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (run_in_this_dimension == <span class="keyword">false</span>)</div>
 <div class="line">      {</div>
@@ -1080,7 +1215,9 @@ $(function() {
 <div class="line">        <span class="keywordflow">return</span>;</div>
 <div class="line">      }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    read_domain();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle = 0; cycle &lt; n_cycles; ++cycle)</div>
 <div class="line">      {</div>
@@ -1091,24 +1228,28 @@ $(function() {
 <div class="line">        output_results(cycle);</div>
 <div class="line">      }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (extend_solution == <span class="keyword">true</span>)</div>
 <div class="line">      compute_exterior_solution();</div>
 <div class="line">  }</div>
 <div class="line">} <span class="comment">// namespace Step34</span></div>
 </div><!-- fragment --><p><a class="anchor" id="Themainfunction"></a> </p><h3>The main() function</h3>
-<p>This is the main function of this program. It is exactly like all previous tutorial programs:</p>
+<p>这是本程序的主要功能。它与以前所有的教程程序完全一样。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">try</span></div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using namespace </span>Step34;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> degree         = 1;</div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mapping_degree = 1;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <a class="code" href="logstream_8h.html#ac643e79bd992f1a9bd0dca5b9f2859fb">deallog</a>.<a class="code" href="classLogStream.html#a8028e970ad8388596d625ed463894e98">depth_console</a>(3);</div>
 <div class="line">      BEMProblem&lt;2&gt; laplace_problem_2d(degree, mapping_degree);</div>
 <div class="line">      laplace_problem_2d.run();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      BEMProblem&lt;3&gt; laplace_problem_3d(degree, mapping_degree);</div>
 <div class="line">      laplace_problem_3d.run();</div>
@@ -1125,6 +1266,7 @@ $(function() {
 <div class="line">                &lt;&lt; <span class="stringliteral">&quot;----------------------------------------------------&quot;</span></div>
 <div class="line">                &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line">  <span class="keywordflow">catch</span> (...)</div>
@@ -1140,11 +1282,13 @@ $(function() {
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassLogStream_html_a8028e970ad8388596d625ed463894e98"><div class="ttname"><a href="classLogStream.html#a8028e970ad8388596d625ed463894e98">LogStream::depth_console</a></div><div class="ttdeci">unsigned int depth_console(const unsigned int n)</div><div class="ttdef"><b>Definition:</b> <a href="logstream_8cc_source.html#l00350">logstream.cc:350</a></div></div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
-<p>We ran the program using the following <code>parameters.prm</code> file (which can also be found in the directory in which all the other source files are): </p><pre class="fragment"># Listing of Parameters
+</div><!-- fragment --><p><a class="anchor" id="Results"></a></p><h1>Results</h1>
+<p>我们使用以下 <code>parameters.prm</code> 文件（也可以在所有其他源文件所在的目录中找到）运行该程序。</p>
+<pre class="fragment"># Listing of Parameters
 # ---------------------
 set Extend solution on the -2,2 box = true
 set External refinement             = 5
@@ -1153,13 +1297,16 @@ set Run 2d simulation               = true
 set Run 3d simulation               = true
 
 
+
 subsection Exact solution 2d
   # Any constant used inside the function which is not a variable name.
   set Function constants  =
 
+
   # Separate vector valued expressions by ';' as ',' is used internally by the
   # function parser.
   set Function expression = x+y   # default: 0
+
 
   # The name of the variables as they will be used in the function, separated
   # by ','.
@@ -1167,13 +1314,16 @@ subsection Exact solution 2d
 end
 
 
+
 subsection Exact solution 3d
   # Any constant used inside the function which is not a variable name.
   set Function constants  =
 
+
   # Separate vector valued expressions by ';' as ',' is used internally by the
   # function parser.
   set Function expression = .5*(x+y+z)   # default: 0
+
 
   # The name of the variables as they will be used in the function, separated
   # by ','.
@@ -1181,11 +1331,13 @@ subsection Exact solution 3d
 end
 
 
+
 subsection Quadrature rules
   set Quadrature order          = 4
   set Quadrature type           = gauss
   set Singular quadrature order = 5
 end
+
 
 
 subsection Solver
@@ -1197,13 +1349,16 @@ subsection Solver
 end
 
 
+
 subsection Wind function 2d
   # Any constant used inside the function which is not a variable name.
   set Function constants  =
 
+
   # Separate vector valued expressions by ';' as ',' is used internally by the
   # function parser.
   set Function expression = 1; 1  # default: 0; 0
+
 
   # The name of the variables as they will be used in the function, separated
   # by ','.
@@ -1211,19 +1366,23 @@ subsection Wind function 2d
 end
 
 
+
 subsection Wind function 3d
   # Any constant used inside the function which is not a variable name.
   set Function constants  =
+
 
   # Separate vector valued expressions by ';' as ',' is used internally by the
   # function parser.
   set Function expression = 1; 1; 1 # default: 0; 0; 0
 
+
   # The name of the variables as they will be used in the function, separated
   # by ','.
   set Variable names      = x,y,z,t
 end
-</pre><p>When we run the program, the following is printed on screen: </p><pre class="fragment">DEAL::
+</pre><p>当我们运行该程序时，屏幕上打印出以下内容。</p>
+<pre class="fragment">DEAL::
 DEAL::Parsing parameter file parameters.prm
 DEAL::for a 2 dimensional simulation.
 DEAL:GMRES::Starting value 2.21576
@@ -1281,41 +1440,45 @@ cycle cells dofs    L2(phi)     Linfty(alpha)
     1    96   98 9.794e-02 1.81 1.239e-01 0.91
     2   384  386 2.417e-02 2.02 6.319e-02 0.97
     3  1536 1538 5.876e-03 2.04 3.176e-02 0.99
-</pre><p>As we can see from the convergence table in 2d, if we choose quadrature formulas which are accurate enough, then the error we obtain for \(\alpha(\mathbf{x})\) should be exactly the inverse of the number of elements. The approximation of the circle with N segments of equal size generates a regular polygon with N faces, whose angles are exactly \(\pi-\frac {2\pi}{N}\), therefore the error we commit should be exactly \(\frac 12 - (\frac 12 -\frac 1N) = \frac 1N\). In fact this is a very good indicator that we are performing the singular integrals in an appropriate manner.</p>
-<p>The error in the approximation of the potential \(\phi\) is largely due to approximation of the domain. A much better approximation could be obtained by using higher order mappings.</p>
-<p>If we modify the main() function, setting fe_degree and mapping_degree to two, and raise the order of the quadrature formulas in the parameter file, we obtain the following convergence table for the two dimensional simulation</p>
+</pre><p>从2d中的收敛表可以看出，如果我们选择足够精确的正交公式，那么我们得到的 \(\alpha(\mathbf{x})\) 的误差应该正好是元素数的倒数。用N段大小相等的圆近似产生一个有N个面的正多边形，其角度正好是 \(\pi-\frac {2\pi}{N}\) ，因此我们的误差应该正好是 \(\frac 12 - (\frac 12 -\frac 1N) = \frac 1N\) 。事实上，这是一个很好的指标，表明我们正在以适当的方式进行奇异积分。</p>
+<p>势的近似 \(\phi\) 的误差主要是由于域的近似。通过使用高阶映射可以得到更好的近似值。</p>
+<p>如果我们修改main()函数，将fe_degree和mapping_degree设置为2，并提高参数文件中正交公式的阶数，我们可以得到以下二维模拟的收敛表</p>
 <pre class="fragment">cycle cells dofs    L2(phi)     Linfty(alpha)
     0    20   40 5.414e-05    - 2.306e-04    -
     1    40   80 3.623e-06 3.90 1.737e-05 3.73
     2    80  160 2.690e-07 3.75 1.253e-05 0.47
     3   160  320 2.916e-08 3.21 7.670e-06 0.71
-</pre><p>and</p>
+</pre><p>和</p>
 <pre class="fragment">cycle cells dofs    L2(phi)     Linfty(alpha)
     0    24   98 3.770e-03    - 8.956e-03    -
     1    96  386 1.804e-04 4.39 1.182e-03 2.92
     2   384 1538 9.557e-06 4.24 1.499e-04 2.98
     3  1536 6146 6.617e-07 3.85 1.892e-05 2.99
-</pre><p>for the three dimensional case. As we can see, convergence results are much better with higher order mapping, mainly due to a better resolution of the curved geometry. Notice that, given the same number of degrees of freedom, for example in step 3 of the Q1 case and step 2 of Q2 case in the three dimensional simulation, the error is roughly three orders of magnitude lower.</p>
-<p>The result of running these computations is a bunch of output files that we can pass to our visualization program of choice. The output files are of two kind: the potential on the boundary element surface, and the potential extended to the outer and inner domain. The combination of the two for the two dimensional case looks like</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-34_2d.png" alt="" class="inline"/></p>
-<p>while in three dimensions we show first the potential on the surface, together with a contour plot,</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-34_3d.png" alt="" class="inline"/></p>
-<p>and then the external contour plot of the potential, with opacity set to 25%:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-34_3d-2.png" alt="" class="inline"/></p>
+</pre><p>为三维案例。我们可以看到，高阶映射的收敛结果要好得多，这主要是由于曲面几何的分辨率更高。请注意，在自由度相同的情况下，例如在三维模拟中Q1情况的第3步和Q2情况的第2步，误差大约要低三个数量级。</p>
+<p>运行这些计算的结果是一堆输出文件，我们可以将其传递给我们选择的可视化程序。这些输出文件有两种：边界元素表面的势，以及扩展到外域和内域的势。在二维的情况下，这两个文件的组合看起来像</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-34_2d.png" alt="" class="inline"/> <br  />
+</p>
+<p>而在三维情况下，我们首先显示的是表面上的势，同时还有一个等高线图。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-34_3d.png" alt="" class="inline"/> <br  />
+</p>
+<p>然后是电位的外部等高线图，不透明度设置为25。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-34_3d-2.png" alt="" class="inline"/> <br  />
+</p>
 <p><a class="anchor" id="extensions"></a> <a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions</h3>
-<p>This is the first tutorial program that considers solving equations defined on surfaces embedded in higher dimensional spaces. But the equation discussed here was relatively simple because it only involved an integral operator, not derivatives which are more difficult to define on the surface. The <a class="el" href="step_38.html">step-38</a> tutorial program considers such problems and provides the necessary tools.</p>
-<p>From a practical perspective, the Boundary Element Method (BEM) used here suffers from two bottlenecks. The first is that assembling the matrix has a cost that is <em>quadratic</em> in the number of unknowns, that is \({\cal O}(N^2)\) where \(N\) is the total number of unknowns. This can be seen by looking at the <code>assemble_system()</code> function, which has this structure: </p><div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
+<p>这是第一个考虑解决定义在嵌入高维空间的曲面上的方程的教程程序。但这里讨论的方程相对简单，因为它只涉及一个积分算子，而不涉及在曲面上更难定义的导数。 <a class="el" href="step_38.html">step-38</a> 教程程序考虑了这类问题并提供了必要的工具。</p>
+<p>从实际的角度来看，这里使用的边界元素法（BEM）受到两个瓶颈的影响。首先是组装矩阵的成本是*二次方的未知数，即 \({\cal O}(N^2)\) ，其中 \(N\) 是未知数的总数。这可以通过查看<code>assemble_system()</code>函数来了解，它有这样的结构。</p>
+<div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">  {</div>
 <div class="line">    ...</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dof_handler.n_dofs(); ++i)</div>
 <div class="line">      ...</div>
-</div><!-- fragment --><p> Here, the first loop walks over all cells (one factor of \(N\)) whereas the inner loop contributes another factor of \(N\).</p>
-<p>This has to be contrasted with the finite element method for <em>local</em> differential operators: There, we loop over all cells (one factor of \(N\)) and on each cell do an amount of work that is independent of how many cells or unknowns there are. This clearly presents a bottleneck.</p>
-<p>The second bottleneck is that the system matrix is dense (i.e., is of type <a class="el" href="classFullMatrix.html">FullMatrix</a>) because every degree of freedom couples with every other degree of freedom. As pointed out above, just <em>computing</em> this matrix with its \(N^2\) nonzero entries necessarily requires at least \({\cal O}(N^2)\) operations, but it's worth pointing out that it also costs this many operations to just do one matrix-vector product. If the GMRES method used to solve the linear system requires a number of iterations that grows with the size of the problem, as is typically the case, then solving the linear system will require a number of operations that grows even faster than just \({\cal O}(N^2)\).</p>
-<p>"Real" boundary element methods address these issues by strategies that determine which entries of the matrix will be small and can consequently be neglected (at the cost of introducing an additional error, of course). This is possible by recognizing that the matrix entries decay with the (physical) distance between the locations where degrees of freedom \(i\) and \(j\) are defined. This can be exploited in methods such as the Fast Multipole Method (FMM) that control which matrix entries must be stored and computed to achieve a certain accuracy, and &ndash; if done right &ndash; result in methods in which both assembly and solution of the linear system requires less than \({\cal O}(N^2)\) operations.</p>
-<p>Implementing these methods clearly presents opportunities to extend the current program.</p>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+</div><!-- fragment --><p>在这里，第一个循环遍历了所有的单元（ \(N\) 的一个因子），而内循环则贡献了 \(N\) 的另一个因子。</p>
+<p>这必须与*本地*微分算子的有限元方法进行对比。在那里，我们在所有单元上循环（一个 \(N\) 的因子），在每个单元上做的工作与有多少个单元或未知数无关。这显然是一个瓶颈。</p>
+<p>第二个瓶颈是系统矩阵是密集的（即是FullMatrix类型），因为每个自由度都与其他自由度相耦合。如上所述，仅仅*计算*这个带有 \(N^2\) 非零项的矩阵必然需要至少 \({\cal O}(N^2)\) 次操作，但值得指出的是，仅仅做一个矩阵-向量乘积也需要这么多操作。如果用于求解线性系统的GMRES方法需要的迭代次数随着问题的大小而增长，这就是典型的情况，那么求解线性系统需要的运算次数甚至比 \({\cal O}(N^2)\) 还要快。</p>
+<p>真正的 "边界元素方法 "通过确定矩阵的哪些条目会很小，因此可以忽略的策略来解决这些问题（当然是以引入额外的误差为代价）。这可以通过认识到矩阵项随着自由度 \(i\) 和 \(j\) 定义的位置之间的（物理）距离衰减而实现。这可以在快速多极法（FMM）等方法中得到利用，这些方法可以控制哪些矩阵项必须被存储和计算以达到一定的精度，并且&ndash;如果做得好的话&ndash;导致线性系统的组装和求解都需要少于 \({\cal O}(N^2)\) 的操作。</p>
+<p>实现这些方法显然提供了扩展当前程序的机会。<a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2009 - 2020 by the deal.II authors</span></div>
@@ -2070,7 +2233,8 @@ cycle cells dofs    L2(phi)     Linfty(alpha)
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassFEValues_html_a21f914e63d588e2652a9514620653d77"><div class="ttname"><a href="classFEValues.html#a21f914e63d588e2652a9514620653d77">FEValues::reinit</a></div><div class="ttdeci">void reinit(const TriaIterator&lt; DoFCellAccessor&lt; dim, spacedim, level_dof_access &gt;&gt; &amp;cell)</div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> 。 </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

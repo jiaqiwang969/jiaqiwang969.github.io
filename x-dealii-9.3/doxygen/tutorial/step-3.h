@@ -1,146 +1,121 @@
-/**
-@page step_3 The step-3 tutorial program
-This tutorial depends on step-2.
+  /**   @page step_3 The step-3 tutorial program 。 
+
+本教程取决于  step-2  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Thebasicsetupoffiniteelementmethods">The basic set up of finite element methods</a>
-        <li><a href="#Shouldwemultiplybyatestfunctionfromtheleftorfromtheright"> Should we multiply by a test function from the left or from the right? </a>
-        <li><a href="#Computingthematrixandrighthandsidevector"> Computing the matrix and right hand side vector </a>
-        <li><a href="#Abouttheimplementation">About the implementation</a>
-        <li><a href="#Anoteontypes"> A note on types </a>
+        <li><a href="#Thebasicsetupoffiniteelementmethods">The basic set up of finite element methods</a><a href="#Thebasicsetupoffiniteelementmethods">The basic set up of finite element methods</a>
+        <li><a href="#Shouldwemultiplybyatestfunctionfromtheleftorfromtheright"> Should we multiply by a test function from the left or from the right? </a><a href="#Shouldwemultiplybyatestfunctionfromtheleftorfromtheright"> Should we multiply by a test function from the left or from the right? </a>
+        <li><a href="#Computingthematrixandrighthandsidevector"> Computing the matrix and right hand side vector </a><a href="#Computingthematrixandrighthandsidevector"> Computing the matrix and right hand side vector </a>
+        <li><a href="#Abouttheimplementation">About the implementation</a><a href="#Abouttheimplementation">About the implementation</a>
+        <li><a href="#Anoteontypes"> A note on types </a><a href="#Anoteontypes"> A note on types </a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Manynewincludefiles">Many new include files</a>
-        <li><a href="#ThecodeStep3codeclass">The <code>Step3</code> class</a>
+        <li><a href="#Manynewincludefiles">Many new include files</a><a href="#Manynewincludefiles">Many new include files</a>
+        <li><a href="#ThecodeStep3codeclass">The <code>Step3</code> class</a><a href="#ThecodeStep3codeclass">The <code>Step3</code> class</a>
       <ul>
-        <li><a href="#Step3Step3">Step3::Step3</a>
-        <li><a href="#Step3make_grid">Step3::make_grid</a>
-        <li><a href="#Step3setup_system">Step3::setup_system</a>
-        <li><a href="#Step3assemble_system">Step3::assemble_system</a>
-        <li><a href="#Step3solve">Step3::solve</a>
-        <li><a href="#Step3output_results">Step3::output_results</a>
-        <li><a href="#Step3run">Step3::run</a>
+        <li><a href="#Step3Step3">Step3::Step3</a><a href="#Step3Step3">Step3::Step3</a>
+        <li><a href="#Step3make_grid">Step3::make_grid</a><a href="#Step3make_grid">Step3::make_grid</a>
+        <li><a href="#Step3setup_system">Step3::setup_system</a><a href="#Step3setup_system">Step3::setup_system</a>
+        <li><a href="#Step3assemble_system">Step3::assemble_system</a><a href="#Step3assemble_system">Step3::assemble_system</a>
+        <li><a href="#Step3solve">Step3::solve</a><a href="#Step3solve">Step3::solve</a>
+        <li><a href="#Step3output_results">Step3::output_results</a><a href="#Step3output_results">Step3::output_results</a>
+        <li><a href="#Step3run">Step3::run</a><a href="#Step3run">Step3::run</a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
-        <li><a href="#UsingHDF5tooutputthesolutionandadditionaldata">Using HDF5 to output the solution and additional data</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#UsingHDF5tooutputthesolutionandadditionaldata">Using HDF5 to output the solution and additional data</a><a href="#UsingHDF5tooutputthesolutionandadditionaldata">Using HDF5 to output the solution and additional data</a>
       <ul>
-        <li><a href="#Changingtheoutputtoh5"> Changing the output to .h5</a>
-        <li><a href="#Addingthepointvalueandthemeanseeextensionaboveintotheh5file"> Adding the point value and the mean (see extension above) into the .h5 file</a>
+        <li><a href="#Changingtheoutputtoh5"> Changing the output to .h5</a><a href="#Changingtheoutputtoh5"> Changing the output to .h5</a>
+        <li><a href="#Addingthepointvalueandthemeanseeextensionaboveintotheh5file"> Adding the point value and the mean (see extension above) into the .h5 file</a><a href="#Addingthepointvalueandthemeanseeextensionaboveintotheh5file"> Adding the point value and the mean (see extension above) into the .h5 file</a>
       </ul>
-        <li><a href="#UsingRandggplot2togenerateplots"> Using R and ggplot2 to generate plots</a>
+        <li><a href="#UsingRandggplot2togenerateplots"> Using R and ggplot2 to generate plots</a><a href="#UsingRandggplot2togenerateplots"> Using R and ggplot2 to generate plots</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+@endhtmlonly 
+
+<a name="Intro"></a> <a name="Introduction"></a> <h1>Introduction</h1> 
 
 
-@dealiiVideoLecture{10}
+  @dealiiVideoLecture{10}   
 
 <a name="Thebasicsetupoffiniteelementmethods"></a><h3>The basic set up of finite element methods</h3>
 
 
-This is the first example where we actually use finite elements to compute
-something. We
-will solve a simple version of Poisson's equation with zero boundary
-values, but a nonzero right hand side:
+这是第一个我们真正使用有限元来计算的例子。我们将求解一个简单的泊松方程，其边界值为零，但右手边非零。
+
 @f{align*}
+
+
   -\Delta u &= f \qquad\qquad & \text{in}\ \Omega,
   \\
   u &= 0 \qquad\qquad & \text{on}\ \partial\Omega.
-@f}
-We will solve this equation on the square, $\Omega=[-1,1]^2$, for which
-you've already learned how to generate a mesh in step-1 and step-2. In
-this program, we will also only consider the particular case
-$f(\mathbf x)=1$ and come back to how to implement the more general
-case in the next tutorial program, step-4.
+@f} 
 
-If you've learned about the basics of the finite element method, you will
-remember the steps we need to take to approximate the solution $u$ by a finite
-dimensional approximation. Specifically, we first need to derive the weak form
-of the equation above, which we obtain by multiplying the equation by a test
-function $\varphi$ <i>from the left</i> (we will come back to the reason for
-multiplying from the left and not from the right below) and integrating over
-the domain $\Omega$:
+我们将在正方形 $\Omega=[-1,1]^2$ 上求解这个方程，你已经在 step-1 和 step-2 中学过如何生成网格。在这个程序中，我们也将只考虑特殊情况  $f(\mathbf x)=1$  ，并在下一个教程程序  step-4  中再来讨论如何实现更普遍的情况。
+
+如果你已经了解了有限元方法的基本知识，你会记得我们需要采取的步骤，通过有限维度的近似方法来近似解 $u$ 。具体来说，我们首先需要推导出上述方程的弱形式，通过将方程乘以测试函数 $\varphi$  <i>from the left</i>（下面我们将回到从左而非从右的乘法的原因）并在域 $\Omega$ 上积分来获得。
+
 @f{align*}
+
+
   -\int_\Omega \varphi \Delta u = \int_\Omega \varphi f.
-@f}
-This can be integrated by parts:
+@f} 
+
+这可以通过部分整合。
+
 @f{align*}
   \int_\Omega \nabla\varphi \cdot \nabla u
+
+
   -
   \int_{\partial\Omega} \varphi \mathbf{n}\cdot \nabla u
    = \int_\Omega \varphi f.
-@f}
-The test function $\varphi$ has to satisfy the same kind of boundary
-conditions (in mathematical terms: it needs to come from the tangent space of
-the set in which we seek the solution), so on the boundary $\varphi=0$ and
-consequently the weak form we are looking for reads
+@f} 
+
+测试函数 $\varphi$ 必须满足同样的边界条件（用数学术语来说：它需要来自我们寻求解决方案的集合的切线空间），因此在边界上 $\varphi=0$ ，因此我们正在寻找的弱形式为 
+
 @f{align*}
   (\nabla\varphi, \nabla u)
    = (\varphi, f),
-@f}
-where we have used the common notation $(a,b)=\int_\Omega a\; b$. The problem
-then asks for a function $u$ for which this statement is true for all test
-functions $\varphi$ from the appropriate space (which here is the space
-$H^1$).
+@f} 
 
-Of course we can't find such a function on a computer in the general case, and
-instead we seek an approximation $u_h(\mathbf x)=\sum_j U_j \varphi_j(\mathbf
-x)$, where the $U_j$ are unknown expansion coefficients we need to determine
-(the "degrees of freedom" of this problem), and $\varphi_i(\mathbf x)$ are the
-finite element shape functions we will use. To define these shape functions,
-we need the following:
+其中我们使用了常用的符号 $(a,b)=\int_\Omega a\; b$  。然后问题要求找到一个函数 $u$ ，对于这个函数来说，这句话对于来自适当空间（这里是空间 $H^1$ ）的所有测试函数 $\varphi$ 都是真的。
 
-- A mesh on which to define shape functions. You have already seen how to
-  generate and manipulate the objects that describe meshes in step-1 and
-  step-2.
-- A finite element that describes the shape functions we want to use on the
-  reference cell (which in deal.II is always the unit interval $[0,1]$, the
-  unit square $[0,1]^2$ or the unit cube $[0,1]^3$, depending on which space
-  dimension you work in). In step-2, we had already used an object of type
-  FE_Q<2>, which denotes the usual Lagrange elements that define shape
-  functions by interpolation on support points. The simplest one is
-  FE_Q<2>(1), which uses polynomial degree 1. In 2d, these are often referred
-  to as <i>bilinear</i>, since they are linear in each of the two coordinates
-  of the reference cell. (In 1d, they would be <i>linear</i> and in 3d
-  <i>tri-linear</i>; however, in the deal.II documentation, we will frequently
-  not make this distinction and simply always call these functions "linear".)
-- A DoFHandler object that enumerates all the degrees of freedom on the mesh,
-  taking the reference cell description the finite element object provides as
-  the basis. You've also already seen how to do this in step-2.
-- A mapping that tells how the shape functions on the real cell are obtained
-  from the shape functions defined by the finite element class on the
-  reference cell. By default, unless you explicitly say otherwise, deal.II
-  will use a (bi-, tri-)linear mapping for this, so in most cases you don't
-  have to worry about this step.
+当然，在一般情况下，我们无法在计算机上找到这样的函数，而是寻求一个近似值 $u_h(\mathbf x)=\sum_j U_j \varphi_j(\mathbf
+x)$  ，其中 $U_j$ 是我们需要确定的未知膨胀系数（这个问题的 "自由度"），而 $\varphi_i(\mathbf x)$ 是我们将使用的有限元形状函数。为了定义这些形状函数，我们需要以下条件。
 
-Through these steps, we now have a set of functions $\varphi_i$, and we can
-define the weak form of the discrete problem: Find a function $u_h$, i.e., find
-the expansion coefficients $U_j$ mentioned above, so that
+- 一个用于定义形状函数的网格。你已经在  step-1  和  step-2  中看到如何生成和操作描述网格的对象。
+
+- 一个描述我们想在参考单元上使用的形状函数的有限元（在deal.II中，它总是单位间隔 $[0,1]$ 、单位正方形 $[0,1]^2$ 或单位立方体 $[0,1]^3$ ，取决于你在哪个空间维度工作）。在 step-2 中，我们已经使用了一个FE_Q<2>类型的对象，它表示通常的拉格朗日元素，通过对支持点的插值来定义形状函数。最简单的是FE_Q<2>(1)，它使用1度的多项式。在2d中，这些通常被称为<i>bilinear</i>，因为它们在参考单元的两个坐标中都是线性的。(在1d中，它们是<i>linear</i>，在3d中是<i>tri-linear</i>；然而，在deal.II文档中，我们经常不做这种区分，而总是简单地称这些函数为 "线性"。) 
+
+- 一个DoFHandler对象可以枚举网格上的所有自由度，以有限元对象提供的参考单元描述为基础。你也已经在  step-2  中看到如何做到这一点。
+
+- 一个映射，告诉我们如何从参考单元上的有限元类定义的形状函数中获得实数单元上的形状函数。默认情况下，除非你明确说明，否则deal.II将使用一个（双，三）线性映射，所以在大多数情况下，你不必担心这个步骤。
+
+通过这些步骤，我们现在有一组函数 $\varphi_i$ ，我们可以定义离散问题的弱形式：找到一个函数 $u_h$ ，即找到上面提到的扩展系数 $U_j$ ，以便 
+
 @f{align*}
   (\nabla\varphi_i, \nabla u_h)
    = (\varphi_i, f),
    \qquad\qquad
    i=0\ldots N-1.
-@f}
-Note that we here follow the convention that everything is counted starting at
-zero, as common in C and C++. This equation can be rewritten as a linear
-system if you insert the representation $u_h(\mathbf x)=\sum_j U_j
-\varphi_j(\mathbf x)$ and then observe that
+@f} 
+
+请注意，我们在此遵循惯例，即一切从零开始计算，这在C和C++中很常见。如果插入表示法 $u_h(\mathbf x)=\sum_j U_j
+\varphi_j(\mathbf x)$ ，这个方程可以重写为一个线性系统，然后观察到 
+
 @f{align*}{
   (\nabla\varphi_i, \nabla u_h)
   &= \left(\nabla\varphi_i, \nabla \Bigl[\sum_j U_j \varphi_j\Bigr]\right)
@@ -148,68 +123,59 @@ system if you insert the representation $u_h(\mathbf x)=\sum_j U_j
   &= \sum_j \left(\nabla\varphi_i, \nabla \left[U_j \varphi_j\right]\right)
 \\
   &= \sum_j \left(\nabla\varphi_i, \nabla \varphi_j \right) U_j.
-@f}
-With this, the problem reads: Find a vector $U$ so that
+@f} 
+
+有了这个，问题就变成了。找到一个向量 $U$ ，以便 
+
 @f{align*}{
   A U = F,
-@f}
-where the matrix $A$ and the right hand side $F$ are defined as
+@f} 
+
+其中矩阵 $A$ 和右边 $F$ 定义为 
+
 @f{align*}
   A_{ij} &= (\nabla\varphi_i, \nabla \varphi_j),
   \\
   F_i &= (\varphi_i, f).
-@f}
+@f} 
+
+
 
 
 <a name="Shouldwemultiplybyatestfunctionfromtheleftorfromtheright"></a><h3> Should we multiply by a test function from the left or from the right? </h3>
 
 
-Before we move on with describing how these quantities can be computed, note
-that if we had multiplied the original equation from the <i>right</i> by a
-test function rather than from the left, then we would have obtained a linear
-system of the form
+在我们继续描述如何计算这些数量之前，请注意，如果我们从<i>right</i>乘以测试函数而不是从左边乘以原方程，那么我们将得到一个线性系统，其形式为 
+
 @f{align*}
   U^T A = F^T
-@f}
-with a row vector $F^T$. By transposing this system, this is of course
-equivalent to solving
+@f} 
+
+与行向量 $F^T$ 。通过转置这个系统，这当然等同于解决了 
+
 @f{align*}
   A^T U = F
-@f}
-which here is the same as above since $A=A^T$. But in general is not,
-and in order to avoid
-any sort of confusion, experience has shown that simply getting into the habit
-of multiplying the equation from the left rather than from the right (as is
-often done in the mathematical literature) avoids a common class of errors as
-the matrix is automatically correct and does not need to be transposed when
-comparing theory and implementation. See step-9 for the first example in this
-tutorial where we have a non-symmetric bilinear form for which it makes a
-difference whether we multiply from the right or from the left.
+@f} 
+
+这里和上面一样，因为 $A=A^T$  。但一般来说不是，为了避免任何形式的混淆，经验表明，只要养成从左边而不是从右边乘方程的习惯（正如数学文献中经常做的那样），就可以避免一类常见的错误，因为在比较理论和实现时，矩阵会自动正确，不需要转置。本教程的第一个例子见 step-9 ，我们有一个非对称的双线性形式，对于这个形式，我们从右面还是从左面相乘是有区别的。
 
 
 <a name="Computingthematrixandrighthandsidevector"></a><h3> Computing the matrix and right hand side vector </h3>
 
 
-Now we know what we need (namely: objects that hold the matrix and
-vectors, as well as ways to compute $A_{ij},F_i$), and we can look at what it
-takes to make that happen:
+现在我们知道我们需要什么了（即：持有矩阵和向量的对象，以及计算 $A_{ij},F_i$ 的方法），我们可以看看需要什么来实现这一点。
 
-- The object for $A$ is of type SparseMatrix while those for $U$ and $F$ are of
-  type Vector. We will see in the program below what classes are used to solve
-  linear systems.
-- We need a way to form the integrals. In the finite element method, this is
-  most commonly done using quadrature, i.e. the integrals are replaced by a
-  weighted sum over a set of points on each cell. That is, we first split the
-  integral over $\Omega$ into integrals over all cells,
-  @f{align*}
+-  $A$ 的对象是SparseMatrix类型，而 $U$ 和 $F$ 的对象是Vector类型。我们将在下面的程序中看到哪些类是用来解决线性系统的。
+
+- 我们需要一种方法来形成积分。在有限元方法中，最常见的是使用正交法，也就是说，积分被每个单元上的一组点的加权和所取代。也就是说，我们首先将 $\Omega$ 的积分分割成所有单元的积分，@f{align*}
     A_{ij} &= (\nabla\varphi_i, \nabla \varphi_j)
     = \sum_{K \in {\mathbb T}} \int_K \nabla\varphi_i \cdot \nabla \varphi_j,
     \\
     F_i &= (\varphi_i, f)
     = \sum_{K \in {\mathbb T}} \int_K \varphi_i f,
   @f}
-  and then approximate each cell's contribution by quadrature:
-  @f{align*}
+
+  然后用正交法近似计算每个单元的贡献。  @f{align*}
     A^K_{ij} &=
     \int_K \nabla\varphi_i \cdot \nabla \varphi_j
     \approx
@@ -220,80 +186,35 @@ takes to make that happen:
     \int_K \varphi_i f
     \approx
     \sum_q \varphi_i(\mathbf x^K_q) f(\mathbf x^K_q) w^K_q,
-  @f}
-  where $\mathbf x^K_q$ is the $q$th quadrature point on cell $K$, and $w^K_q$
-  the $q$th quadrature weight. There are different parts to what is needed in
-  doing this, and we will discuss them in turn next.
-- First, we need a way to describe the location $\mathbf x_q^K$ of quadrature
-  points and their weights $w^K_q$. They are usually mapped from the reference
-  cell in the same way as shape functions, i.e., implicitly using the
-  MappingQ1 class or, if you explicitly say so, through one of the other
-  classes derived from Mapping. The locations and weights on the reference
-  cell are described by objects derived from the Quadrature base
-  class. Typically, one chooses a quadrature formula (i.e. a set of points and
-  weights) so that the quadrature exactly equals the integral in the matrix;
-  this can be achieved because all factors in the integral are polynomial, and
-  is done by Gaussian quadrature formulas, implemented in the QGauss class.
-- We then need something that can help us evaluate $\varphi_i(\mathbf x^K_q)$
-  on cell $K$. This is what the FEValues class does: it takes a finite element
-  objects to describe $\varphi$ on the reference cell, a quadrature object to
-  describe the quadrature points and weights, and a mapping object (or
-  implicitly takes the MappingQ1 class) and provides values and derivatives of
-  the shape functions on the real cell $K$ as well as all sorts of other
-  information needed for integration, at the quadrature points located on $K$.
+  @f} 
 
-FEValues really is the central class in the assembly process. One way you can
-view it is as follows: The FiniteElement and derived classes describe shape
-<i>functions</i>, i.e., infinite dimensional objects: functions have values at
-every point. We need this for theoretical reasons because we want to perform
-our analysis with integrals over functions. However, for a computer, this is a
-very difficult concept, since they can in general only deal with a finite
-amount of information, and so we replace integrals by sums over quadrature
-points that we obtain by mapping (the Mapping object) using  points defined on
-a reference cell (the Quadrature object) onto points on the real cell. In
-essence, we reduce the problem to one where we only need a finite amount of
-information, namely shape function values and derivatives, quadrature weights,
-normal vectors, etc, exclusively at a finite set of points. The FEValues class
-is the one that brings the three components together and provides this finite
-set of information on a particular cell $K$. You will see it in action when we
-assemble the linear system below.
+  其中 $\mathbf x^K_q$ 是 $q$ 单元上的第三个正交点 $K$ ， $w^K_q$ 是 $q$ 第三个正交权重。这样做需要有不同的部分，接下来我们将依次讨论它们。
 
-It is noteworthy that all of this could also be achieved if you simply created
-these three objects yourself in an application program, and juggled the
-information yourself. However, this would neither be simpler (the FEValues
-class provides exactly the kind of information you actually need) nor faster:
-the FEValues class is highly optimized to only compute on each cell the
-particular information you need; if anything can be re-used from the previous
-cell, then it will do so, and there is a lot of code in that class to make
-sure things are cached wherever this is advantageous.
+- 首先，我们需要一种方法来描述正交点的位置  $\mathbf x_q^K$  和它们的权重  $w^K_q$  。它们通常以与形状函数相同的方式从参考单元映射出来，即隐含地使用MappingQ1类，或者，如果你明确地说，通过从Mapping派生的其他类之一。参考单元上的位置和权重由派生自正交基类的对象来描述。通常，人们选择一个正交公式（即一组点和权重），使正交正好等于矩阵中的积分；这可以实现，因为积分中的所有因子都是多项式，由高斯正交公式完成，在QGauss类中实现。
 
-The final piece of this introduction is to mention that after a linear
-system is obtained, it is solved using an iterative solver and then
-postprocessed: we create an output file using the DataOut class that can then
-be visualized using one of the common visualization programs.
+- 然后我们需要一些东西来帮助我们评估 $\varphi_i(\mathbf x^K_q)$ 的单元格 $K$ 。这就是FEValues类的作用：它需要一个有限元对象来描述参考单元上的 $\varphi$ ，一个正交对象来描述正交点和权重，以及一个映射对象（或隐含地采用MappingQ1类），并在位于 $K$ 的正交点上提供形状函数的值和导数，以及积分所需的各种其他信息。
 
-@note The preceding overview of all the important steps of any finite element
-implementation has its counterpart in deal.II: The library can naturally be
-grouped into a number of "modules" that cover the basic concepts just
-outlined. You can access these modules through the tab at the top of this
-page. An overview of the most fundamental groups of concepts is also available
-on the <a href="index.html">front page of the deal.II manual</a>.
+FEValues确实是装配过程中的核心类。你可以用以下方式来看待它。FiniteElement和派生类描述了形状<i>functions</i>，即无限维度的对象：函数在每一个点都有值。由于理论上的原因，我们需要这样做，因为我们想用函数上的积分进行分析。然而，对于计算机来说，这是一个非常困难的概念，因为它们一般只能处理有限的信息量，所以我们用正交点上的和来代替积分，我们通过使用定义在参考单元（正交对象）上的点映射（映射对象）到实数单元上的点来获得。实质上，我们将问题简化为我们只需要有限的信息，即形状函数值和导数、正交权重、法向量等，只需要在有限的点集合上。FEValues类是将这三个部分结合在一起的，并在一个特定的单元上提供这个有限的信息集  $K$  。当我们组装下面的线性系统时，你会看到它的作用。
+
+值得注意的是，如果你只是在一个应用程序中自己创建这三个对象，并自己玩弄这些信息，所有这些也都可以实现。然而，这样做既不简单（FEValues类提供的正是你实际需要的信息），也不快：FEValues类经过高度优化，只在每个单元中计算你需要的特定信息；如果有任何东西可以从上一个单元中重复使用，那么它就会这样做，而且该类中有很多代码可以确保在任何有利的地方进行缓存。
+
+这个介绍的最后一块是要提到，在得到一个线性系统后，要用一个迭代求解器进行求解，然后进行后处理：我们用DataOut类创建一个输出文件，然后可以用一个常见的可视化程序进行可视化。
+
+  @note  前面对任何有限元实现的所有重要步骤的概述在deal.II中也有对应的内容：该库可以自然地归纳为一些 "模块"，涵盖刚才概述的基本概念。你可以通过本页面顶部的标签访问这些模块。在<a href="index.html">front page of the deal.II manual</a>上也有对最基本的概念组的概述。
 
 
 <a name="Abouttheimplementation"></a><h3>About the implementation</h3>
 
 
-Although this is the simplest possible equation you can solve using the finite
-element method, this program shows the basic structure of most finite
-element programs and also serves as the template that almost all of the
-following programs will essentially follow. Specifically, the main class of
-this program looks like this:
+虽然这是你能用有限元方法解决的最简单的方程，但这个程序显示了大多数有限元程序的基本结构，也是几乎所有下面的程序基本上都会遵循的模板。具体来说，这个程序的主类看起来像这样。
+
 @code
 class Step3
 {
   public:
     Step3 ();
     void run ();
+
 
   private:
     void make_grid ();
@@ -302,1280 +223,867 @@ class Step3
     void solve ();
     void output_results () const;
 
+
     Triangulation<2>     triangulation;
     FE_Q<2>              fe;
     DoFHandler<2>        dof_handler;
+
 
     SparsityPattern      sparsity_pattern;
     SparseMatrix<double> system_matrix;
     Vector<double>       solution;
     Vector<double>       system_rhs;
 };
-@endcode
+@endcode 
 
-This follows the object oriented programming mantra of <a
+
+
+这遵循了<a
 href="http://en.wikipedia.org/wiki/Encapsulation_(object-oriented_programming)">data
-encapsulation</a>, i.e. we do our best to hide almost all internal details of
-this class in private members that are not accessible to the outside.
+encapsulation</a>的面向对象编程口号，也就是说，我们尽力将这个类的几乎所有内部细节隐藏在外部无法访问的私有成员中。
 
-Let's start with the member variables: These follow the building blocks we
-have outlined above in the bullet points, namely we need a Triangulation and a
-DoFHandler object, and a finite element object that describes the kinds of
-shape functions we want to use. The second group of objects relate to the
-linear algebra: the system matrix and right hand side as well as the solution
-vector, and an object that describes the sparsity pattern of the matrix. This
-is all this class needs (and the essentials that any solver for a stationary
-PDE requires) and that needs to survive throughout the entire program. In
-contrast to this, the FEValues object we need for assembly is only required
-throughout assembly, and so we create it as a local object in the function
-that does that and destroy it again at its end.
+让我们从成员变量开始。这些遵循我们在上面的要点中所概述的构件，即我们需要一个三角形（Triangulation）和一个DoFHandler对象，以及一个描述我们要使用的各种形状函数的有限元对象。第二组对象与线性代数有关：系统矩阵和右手边以及解向量，还有一个描述矩阵稀疏模式的对象。这就是这个类所需要的全部内容（也是任何静止PDE的求解器所需要的基本内容），并且需要在整个程序中存活。与此相反，我们在装配时需要的FEValues对象只在整个装配过程中需要，因此我们在进行装配的函数中把它作为一个局部对象来创建，并在结束时再次销毁它。
 
-Secondly, let's look at the member functions. These, as well, already form the
-common structure that almost all following tutorial programs will use:
-<ul>
-  <li> <code>make_grid()</code>: This is what one could call a
-       <i>preprocessing function</i>. As its name suggests, it sets up the
-       object that stores the triangulation. In later examples, it could also
-       deal with boundary conditions, geometries, etc.
-  <li> <code>setup_system()</code>: This then is the function in which all the
-       other data structures are set up that are needed to solve the
-       problem. In particular, it will initialize the DoFHandler object and
-       correctly size the various objects that have to do with the linear
-       algebra. This function is often separated from the preprocessing
-       function above because, in a time dependent program, it may be called
-       at least every few time steps whenever the mesh
-       is adaptively refined (something we will see how to do in step-6). On
-       the other hand, setting up the mesh itself in the preprocessing
-       function above is done only once at the beginning of the program and
-       is, therefore, separated into its own function.
-  <li> <code>assemble_system()</code>: This, then is where the contents of the
-       matrix and right hand side are computed, as discussed at length in the
-       introduction above. Since doing something with this linear system is
-       conceptually very different from computing its entries, we separate it
-       from the following function.
-  <li> <code>solve()</code>: This then is the function in which we compute the
-       solution $U$ of the linear system $AU=F$. In the current program, this
-       is a simple task since the matrix is so simple, but it will become a
-       significant part of a program's size whenever the problem is not so
-       trivial any more (see, for example, step-20, step-22, or step-31 once
-       you've learned a bit more about the library).
-  <li> <code>output_results()</code>: Finally, when you have computed a
-       solution, you probably want to do something with it. For example, you
-       may want to output it in a format that can be visualized, or you may
-       want to compute quantities you are interested in: say, heat fluxes in a
-       heat exchanger, air friction coefficients of a wing, maximum bridge
-       loads, or simply the value of the numerical solution at a point. This
-       function is therefore the place for postprocessing your solution.
-</ul>
-All of this is held together by the single public function (other than the
-constructor), namely the <code>run()</code> function. It is the one that is
-called from the place where an object of this type is created, and it is the
-one that calls all the other functions in their proper order. Encapsulating
-this operation into the <code>run()</code> function, rather than calling all
-the other functions from <code>main()</code> makes sure that you
-can change how the separation of concerns within this class is
-implemented. For example, if one of the functions becomes too big, you can
-split it up into two, and the only places you have to be concerned about
-changing as a consequence are within this very same class, and not anywhere
-else.
+其次，让我们来看看成员函数。这些，也已经构成了几乎所有下面的教程程序都会使用的共同结构。  <ul>   <li>   <code>make_grid()</code>  : 这就是人们所说的<i>preprocessing function</i>。顾名思义，它设置了存储三角图的对象。在以后的例子中，它还可以处理边界条件、几何形状等。    <li>   <code>setup_system()</code>  ：这是一个函数，其中设置了解决问题所需的所有其他数据结构。特别是，它将初始化DoFHandler对象并正确确定与线性代数有关的各种对象的大小。这个函数通常与上面的预处理函数分开，因为在一个与时间相关的程序中，每当网格被自适应细化时，它可能至少每隔几个时间步就被调用一次（我们将在 step-6 中看到如何做到这一点）。另一方面，在上面的预处理函数中，设置网格本身只在程序开始时进行一次，因此，它被分离成自己的函数。    <li>   <code>assemble_system()</code>  : 这就是计算矩阵和右手边内容的地方，在上面的介绍中已经详细讨论过。由于对这个线性系统进行处理在概念上与计算其条目有很大不同，我们将其与以下函数分开。    <li>   <code>solve()</code>  : 这就是我们计算线性系统 $U$ 的解的函数  $AU=F$  。在当前的程序中，这是一个简单的任务，因为矩阵是如此简单，但只要问题不再那么微不足道，它就会成为程序大小的一个重要部分（例如，在你对库有了更多的了解之后，请看  step-20  ，  step-22  ，或  step-31  ）。    <li>   <code>output_results()</code>  : 最后，当你计算出一个解决方案后，你可能想用它做一些事情。例如，你可能想以可视化的格式输出它，或者你可能想计算你感兴趣的量：例如，热交换器中的热通量、机翼的空气摩擦系数、最大桥梁载荷，或者仅仅是某一点上的数值解的值。因此，这个函数是对你的解进行后处理的地方。  </ul> 所有这些都是由唯一的公共函数（除构造函数外），即 <code>run()</code> 函数来支撑的。它是在创建这种类型的对象的地方被调用的，它是按适当顺序调用所有其他函数的函数。把这个操作封装到 <code>run()</code> 函数中，而不是从 <code>main()</code> 中调用所有其他的函数，确保你可以改变这个类中关注点分离的实现方式。例如，如果其中一个函数变得太大，你可以把它拆成两个，而你唯一需要关注的地方就是在这个类中的变化，而不是其他地方。
 
-As mentioned above, you will see this general structure &mdash; sometimes with
-variants in spelling of the functions' names, but in essentially this order of
-separation of functionality &mdash; again in many of the
-following tutorial programs.
+如上所述，你会看到这种一般的结构&mdash；有时在函数名称的拼写上会有变化，但基本上是按照这种功能分离的顺序&mdash；在下面的许多教程程序中也是如此。
 
 
-<a name="Anoteontypes"></a><h3> A note on types </h3>
+<a name="Anoteontypes"></a><h3> A note on types </h3> 
 
 
-deal.II defines a number of integral %types via alias in namespace dealii::types.
-(In the previous sentence, the word "integral" is used as the <i>adjective</i>
-that corresponds to the noun "integer". It shouldn't be confused with the
-<i>noun</i> "integral" that represents the area or volume under a curve
-or surface. The adjective "integral" is widely used in the C++ world in
-contexts such as "integral type", "integral constant", etc.)
-In particular, in this program you will see types::global_dof_index in a couple of
-places: an integer type that is used to denote the <i>global</i> index of a
-degree of freedom, i.e., the index of a particular degree of freedom within the
-DoFHandler object that is defined on top of a triangulation (as opposed to the
-index of a particular degree of freedom within a particular cell). For the
-current program (as well as almost all of the tutorial programs), you will have
-a few thousand to maybe a few million unknowns globally (and, for $Q_1$
-elements, you will have 4 <i>locally on each cell</i> in 2d and 8 in 3d).
-Consequently, a data type that allows to store sufficiently large numbers for
-global DoF indices is <code>unsigned int</code> given that it allows to store
-numbers between 0 and slightly more than 4 billion (on most systems, where
-integers are 32-bit). In fact, this is what types::global_dof_index is.
+deal.II通过名字空间 dealii::types. 中的别名定义了一些积分%类型（在前一句中，"积分 "一词被用作与名词 "整数 "相对应的<i>adjective</i>。它不应该与表示曲线或曲面下的面积或体积的<i>noun</i>"积分 "混淆起来。形容词 "积分 "在C++世界中被广泛使用，如 "积分类型"、"积分常数 "等。）特别是，在这个程序中，你会在几个地方看到 types::global_dof_index ：一个整数类型，用来表示自由度的<i>global</i>索引，即定义在三角结构之上的DoFHandler对象中特定自由度的索引（而不是特定单元中特定自由度的索引）。对于当前的程序（以及几乎所有的教程程序），你将有几千个到几百万个全局未知数（而且，对于 $Q_1$ 元素，你将有4个<i>locally on each cell</i>在2D中，8个在3D中）。因此，允许为全局DoF指数存储足够大的数字的数据类型是 <code>unsigned int</code> ，因为它允许存储0到略高于40亿的数字（在大多数系统中，整数是32位的）。事实上，这就是 types::global_dof_index 的内容。
 
-So, why not just use <code>unsigned int</code> right away? deal.II used to do
-this until version 7.3. However, deal.II supports very large computations (via
-the framework discussed in step-40) that may have more than 4 billion unknowns
-when spread across a few thousand processors. Consequently, there are
-situations where <code>unsigned int</code> is not sufficiently large and we
-need a 64-bit unsigned integral type. To make this possible, we introduced
-types::global_dof_index which by default is defined as simply <code>unsigned
-int</code> whereas it is possible to define it as <code>unsigned long long
-int</code> if necessary, by passing a particular flag during configuration
-(see the ReadMe file).
+那么，为什么不马上使用 <code>unsigned int</code> 呢？deal.II在7.3版本之前一直是这样做的。然而，deal.II支持非常大的计算（通过 step-40 中讨论的框架），当分布在几千个处理器上时，可能有超过40亿的未知数。因此，有些情况下， <code>unsigned int</code> 不够大，我们需要一个64位的无符号积分类型。为了使之成为可能，我们引入了 types::global_dof_index ，其默认定义为简单的<code>unsigned int</code>，而如果有必要，可以通过在配置过程中传递一个特定的标志，将其定义为<code>unsigned long long int</code>（见ReadMe文件）。
 
-This covers the technical aspect. But there is also a documentation purpose:
-everywhere in the library and codes that are built on it, if you see a place
-using the data type types::global_dof_index, you immediately know that the
-quantity that is being referenced is, in fact, a global dof index. No such
-meaning would be apparent if we had just used <code>unsigned int</code> (which
-may also be a local index, a boundary indicator, a material id,
-etc.). Immediately knowing what a variable refers to also helps avoid errors:
-it's quite clear that there must be a bug if you see an object of type
-types::global_dof_index being assigned to variable of type
-types::subdomain_id, even though they are both represented by unsigned
-integers and the compiler will, consequently, not complain.
+这涵盖了技术方面。但是还有一个文档的目的：在库和建立在它上面的代码中，如果你看到一个使用数据类型 types::global_dof_index, 的地方，你就会立即知道被引用的数量实际上是一个全局dof索引。如果我们只是使用 <code>unsigned int</code> （它也可能是一个局部索引、一个边界指示器、一个材料ID等等），就不会有这样的意义。立即知道一个变量指的是什么也有助于避免错误：如果你看到一个 types::global_dof_index 类型的对象被分配给 types::subdomain_id, 类型的变量，这很明显肯定有一个错误，尽管它们都是用无符号整数表示的，因此，编译器不会抱怨。
 
-In more practical terms what the presence of this type means is that during
-assembly, we create a $4\times 4$ matrix (in 2d, using a $Q_1$ element) of the
-contributions of the cell we are currently sitting on, and then we need to add
-the elements of this matrix to the appropriate elements of the global (system)
-matrix. For this, we need to get at the global indices of the degrees of
-freedom that are local to the current cell, for which we will always use the
-following piece of the code:
+在更实际的情况下，这种类型的存在意味着在汇编过程中，我们创建一个 $4\times 4$ 矩阵（在2d中，使用 $Q_1$ 元素），即我们当前所在单元的贡献，然后我们需要将这个矩阵的元素添加到全局（系统）矩阵的相应元素中。为此，我们需要获得当前单元的局部自由度的全局指数，为此我们将始终使用下面这段代码。
+
 @code
   cell->get_dof_indices (local_dof_indices);
-@endcode
-where <code>local_dof_indices</code> is declared as
+@endcode 
+
+其中 <code>local_dof_indices</code> 被声明为 
+
 @code
   std::vector<types::global_dof_index> local_dof_indices (fe.n_dofs_per_cell());
-@endcode
-The name of this variable might be a bit of a misnomer -- it stands for "the
-global indices of those degrees of freedom locally defined on the current
-cell" -- but variables that hold this information are universally named this
-way throughout the library.
+@endcode 
 
-@note types::global_dof_index is not the only type defined in this namespace.
-Rather, there is a whole family, including types::subdomain_id,
-types::boundary_id, and types::material_id. All of these are alias for integer
-data types but, as explained above, they are used throughout the library so that
-(i) the intent of a variable becomes more easily discerned, and (ii) so that it
-becomes possible to change the actual type to a larger one if necessary without
-having to go through the entire library and figure out whether a particular use
-of <code>unsigned int</code> corresponds to, say, a material indicator.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * 
- * <a name="Manynewincludefiles"></a> 
- * <h3>Many new include files</h3>
- * 
+这个变量的名字可能有点名不副实--它代表着 "在当前单元上局部定义的那些自由度的全局指数"--但持有这种信息的变量在整个库中都是这样命名的。
 
- * 
- * These include files are already known to you. They declare the classes
- * which handle triangulations and enumeration of degrees of freedom:
- * 
- * @code
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/dofs/dof_handler.h>
- * @endcode
- * 
- * And this is the file in which the functions are declared that create grids:
- * 
- * @code
- * #include <deal.II/grid/grid_generator.h>
- * 
- * @endcode
- * 
- * This file contains the description of the Lagrange interpolation finite
- * element:
- * 
- * @code
- * #include <deal.II/fe/fe_q.h>
- * 
- * @endcode
- * 
- * And this file is needed for the creation of sparsity patterns of sparse
- * matrices, as shown in previous examples:
- * 
- * @code
- * #include <deal.II/dofs/dof_tools.h>
- * 
- * @endcode
- * 
- * The next two files are needed for assembling the matrix using quadrature on
- * each cell. The classes declared in them will be explained below:
- * 
- * @code
- * #include <deal.II/fe/fe_values.h>
- * #include <deal.II/base/quadrature_lib.h>
- * 
- * @endcode
- * 
- * The following three include files we need for the treatment of boundary
- * values:
- * 
- * @code
- * #include <deal.II/base/function.h>
- * #include <deal.II/numerics/vector_tools.h>
- * #include <deal.II/numerics/matrix_tools.h>
- * 
- * @endcode
- * 
- * We're now almost to the end. The second to last group of include files is
- * for the linear algebra which we employ to solve the system of equations
- * arising from the finite element discretization of the Laplace equation. We
- * will use vectors and full matrices for assembling the system of equations
- * locally on each cell, and transfer the results into a sparse matrix. We
- * will then use a Conjugate Gradient solver to solve the problem, for which
- * we need a preconditioner (in this program, we use the identity
- * preconditioner which does nothing, but we need to include the file anyway):
- * 
- * @code
- * #include <deal.II/lac/vector.h>
- * #include <deal.II/lac/full_matrix.h>
- * #include <deal.II/lac/sparse_matrix.h>
- * #include <deal.II/lac/dynamic_sparsity_pattern.h>
- * #include <deal.II/lac/solver_cg.h>
- * #include <deal.II/lac/precondition.h>
- * 
- * @endcode
- * 
- * Finally, this is for output to a file and to the console:
- * 
- * @code
- * #include <deal.II/numerics/data_out.h>
- * #include <fstream>
- * #include <iostream>
- * 
- * @endcode
- * 
- * ...and this is to import the deal.II namespace into the global scope:
- * 
- * @code
- * using namespace dealii;
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeStep3codeclass"></a> 
- * <h3>The <code>Step3</code> class</h3>
- * 
+  @note   types::global_dof_index 不是这个命名空间中定义的唯一类型。相反，有一个完整的系列，包括 types::subdomain_id,   types::boundary_id, 和 types::material_id.  所有这些都是整数数据类型的别名，但正如上面所解释的，它们被用于整个库，以便（i）变量的意图变得更容易辨别，以及（ii）如果有必要，可以将实际类型改为一个更大的类型，而不必翻阅整个库，找出 <code>unsigned int</code>  的特定使用是否对应于，比如，一个材料指标。<a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * Instead of the procedural programming of previous examples, we encapsulate
- * everything into a class for this program. The class consists of functions
- * which each perform certain aspects of a finite element program, a `main`
- * function which controls what is done first and what is done next, and a
- * list of member variables.
- * 
 
- * 
- * The public part of the class is rather short: it has a constructor and a
- * function `run` that is called from the outside and acts as something like
- * the `main` function: it coordinates which operations of this class shall be
- * run in which order. Everything else in the class, i.e. all the functions
- * that actually do anything, are in the private section of the class:
- * 
- * @code
- * class Step3
- * {
- * public:
- *   Step3();
- * 
- *   void run();
- * 
- * @endcode
- * 
- * Then there are the member functions that mostly do what their names
- * suggest and whose have been discussed in the introduction already. Since
- * they do not need to be called from outside, they are made private to this
- * class.
- * 
+<a name="Manynewincludefiles"></a> <h3>Many new include files</h3>
 
- * 
- * 
- * @code
- * private:
- *   void make_grid();
- *   void setup_system();
- *   void assemble_system();
- *   void solve();
- *   void output_results() const;
- * 
- * @endcode
- * 
- * And finally we have some member variables. There are variables describing
- * the triangulation and the global numbering of the degrees of freedom (we
- * will specify the exact polynomial degree of the finite element in the
- * constructor of this class)...
- * 
- * @code
- *   Triangulation<2> triangulation;
- *   FE_Q<2>          fe;
- *   DoFHandler<2>    dof_handler;
- * 
- * @endcode
- * 
- * ...variables for the sparsity pattern and values of the system matrix
- * resulting from the discretization of the Laplace equation...
- * 
- * @code
- *   SparsityPattern      sparsity_pattern;
- *   SparseMatrix<double> system_matrix;
- * 
- * @endcode
- * 
- * ...and variables which will hold the right hand side and solution
- * vectors.
- * 
- * @code
- *   Vector<double> solution;
- *   Vector<double> system_rhs;
- * };
- * 
- * @endcode
- * 
- * 
- * <a name="Step3Step3"></a> 
- * <h4>Step3::Step3</h4>
- * 
 
- * 
- * Here comes the constructor. It does not much more than first to specify
- * that we want bi-linear elements (denoted by the parameter to the finite
- * element object, which indicates the polynomial degree), and to associate
- * the dof_handler variable to the triangulation we use. (Note that the
- * triangulation isn't set up with a mesh at all at the present time, but the
- * DoFHandler doesn't care: it only wants to know which triangulation it will
- * be associated with, and it only starts to care about an actual mesh once
- * you try to distribute degree of freedom on the mesh using the
- * distribute_dofs() function.) All the other member variables of the Step3
- * class have a default constructor which does all we want.
- * 
- * @code
- * Step3::Step3()
- *   : fe(1)
- *   , dof_handler(triangulation)
- * {}
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Step3make_grid"></a> 
- * <h4>Step3::make_grid</h4>
- * 
 
- * 
- * Now, the first thing we've got to do is to generate the triangulation on
- * which we would like to do our computation and number each vertex with a
- * degree of freedom. We have seen these two steps in step-1 and step-2
- * before, respectively.
- * 
 
- * 
- * This function does the first part, creating the mesh.  We create the grid
- * and refine all cells five times. Since the initial grid (which is the
- * square $[-1,1] \times [-1,1]$) consists of only one cell, the final grid
- * has 32 times 32 cells, for a total of 1024.
- * 
+这些包含文件已经为你所知。它们声明了处理三角形和自由度枚举的类。
 
- * 
- * Unsure that 1024 is the correct number? We can check that by outputting the
- * number of cells using the <code>n_active_cells()</code> function on the
- * triangulation.
- * 
- * @code
- * void Step3::make_grid()
- * {
- *   GridGenerator::hyper_cube(triangulation, -1, 1);
- *   triangulation.refine_global(5);
- * 
- *   std::cout << "Number of active cells: " << triangulation.n_active_cells()
- *             << std::endl;
- * }
- * 
- * @endcode
- * 
- * @note We call the Triangulation::n_active_cells() function, rather than
- * Triangulation::n_cells(). Here, <i>active</i> means the cells that aren't
- * refined any further. We stress the adjective "active" since there are more
- * cells, namely the parent cells of the finest cells, their parents, etc, up
- * to the one cell which made up the initial grid. Of course, on the next
- * coarser level, the number of cells is one quarter that of the cells on the
- * finest level, i.e. 256, then 64, 16, 4, and 1. If you called
- * <code>triangulation.n_cells()</code> instead in the code above, you would
- * consequently get a value of 1365 instead. On the other hand, the number of
- * cells (as opposed to the number of active cells) is not typically of much
- * interest, so there is no good reason to print it.
- * 
+@code
+#include <deal.II/grid/tria.h>
+#include <deal.II/dofs/dof_handler.h>
+@endcode 
 
- * 
- * 
 
- * 
- * 
- * <a name="Step3setup_system"></a> 
- * <h4>Step3::setup_system</h4>
- * 
 
- * 
- * Next we enumerate all the degrees of freedom and set up matrix and vector
- * objects to hold the system data. Enumerating is done by using
- * DoFHandler::distribute_dofs(), as we have seen in the step-2 example. Since
- * we use the FE_Q class and have set the polynomial degree to 1 in the
- * constructor, i.e. bilinear elements, this associates one degree of freedom
- * with each vertex. While we're at generating output, let us also take a look
- * at how many degrees of freedom are generated:
- * 
- * @code
- * void Step3::setup_system()
- * {
- *   dof_handler.distribute_dofs(fe);
- *   std::cout << "Number of degrees of freedom: " << dof_handler.n_dofs()
- *             << std::endl;
- * @endcode
- * 
- * There should be one DoF for each vertex. Since we have a 32 times 32
- * grid, the number of DoFs should be 33 times 33, or 1089.
- * 
+这是声明创建网格的函数的文件。
 
- * 
- * As we have seen in the previous example, we set up a sparsity pattern by
- * first creating a temporary structure, tagging those entries that might be
- * nonzero, and then copying the data over to the SparsityPattern object
- * that can then be used by the system matrix.
- * 
- * @code
- *   DynamicSparsityPattern dsp(dof_handler.n_dofs());
- *   DoFTools::make_sparsity_pattern(dof_handler, dsp);
- *   sparsity_pattern.copy_from(dsp);
- * 
- * @endcode
- * 
- * Note that the SparsityPattern object does not hold the values of the
- * matrix, it only stores the places where entries are. The entries
- * themselves are stored in objects of type SparseMatrix, of which our
- * variable system_matrix is one.
- *   
+@code
+#include <deal.II/grid/grid_generator.h>
 
- * 
- * The distinction between sparsity pattern and matrix was made to allow
- * several matrices to use the same sparsity pattern. This may not seem
- * relevant here, but when you consider the size which matrices can have,
- * and that it may take some time to build the sparsity pattern, this
- * becomes important in large-scale problems if you have to store several
- * matrices in your program.
- * 
- * @code
- *   system_matrix.reinit(sparsity_pattern);
- * 
- * @endcode
- * 
- * The last thing to do in this function is to set the sizes of the right
- * hand side vector and the solution vector to the right values:
- * 
- * @code
- *   solution.reinit(dof_handler.n_dofs());
- *   system_rhs.reinit(dof_handler.n_dofs());
- * }
- * 
- * @endcode
- * 
- * 
- * <a name="Step3assemble_system"></a> 
- * <h4>Step3::assemble_system</h4>
- * 
 
- * 
- * 
+@endcode 
 
- * 
- * The next step is to compute the entries of the matrix and right hand side
- * that form the linear system from which we compute the solution. This is the
- * central function of each finite element program and we have discussed the
- * primary steps in the introduction already.
- * 
 
- * 
- * The general approach to assemble matrices and vectors is to loop over all
- * cells, and on each cell compute the contribution of that cell to the global
- * matrix and right hand side by quadrature. The point to realize now is that
- * we need the values of the shape functions at the locations of quadrature
- * points on the real cell. However, both the finite element shape functions
- * as well as the quadrature points are only defined on the reference
- * cell. They are therefore of little help to us, and we will in fact hardly
- * ever query information about finite element shape functions or quadrature
- * points from these objects directly.
- * 
 
- * 
- * Rather, what is required is a way to map this data from the reference cell
- * to the real cell. Classes that can do that are derived from the Mapping
- * class, though one again often does not have to deal with them directly:
- * many functions in the library can take a mapping object as argument, but
- * when it is omitted they simply resort to the standard bilinear Q1
- * mapping. We will go this route, and not bother with it for the moment (we
- * come back to this in step-10, step-11, and step-12).
- * 
+这个文件包含了对拉格朗日插值有限元的描述。
 
- * 
- * So what we now have is a collection of three classes to deal with: finite
- * element, quadrature, and mapping objects. That's too much, so there is one
- * type of class that orchestrates information exchange between these three:
- * the FEValues class. If given one instance of each three of these objects
- * (or two, and an implicit linear mapping), it will be able to provide you
- * with information about values and gradients of shape functions at
- * quadrature points on a real cell.
- * 
+@code
+#include <deal.II/fe/fe_q.h>
 
- * 
- * Using all this, we will assemble the linear system for this problem in the
- * following function:
- * 
- * @code
- * void Step3::assemble_system()
- * {
- * @endcode
- * 
- * Ok, let's start: we need a quadrature formula for the evaluation of the
- * integrals on each cell. Let's take a Gauss formula with two quadrature
- * points in each direction, i.e. a total of four points since we are in
- * 2D. This quadrature formula integrates polynomials of degrees up to three
- * exactly (in 1D). It is easy to check that this is sufficient for the
- * present problem:
- * 
- * @code
- *   QGauss<2> quadrature_formula(fe.degree + 1);
- * @endcode
- * 
- * And we initialize the object which we have briefly talked about above. It
- * needs to be told which finite element we want to use, and the quadrature
- * points and their weights (jointly described by a Quadrature object). As
- * mentioned, we use the implied Q1 mapping, rather than specifying one
- * ourselves explicitly. Finally, we have to tell it what we want it to
- * compute on each cell: we need the values of the shape functions at the
- * quadrature points (for the right hand side $(\varphi_i,f)$), their
- * gradients (for the matrix entries $(\nabla \varphi_i, \nabla
- * \varphi_j)$), and also the weights of the quadrature points and the
- * determinants of the Jacobian transformations from the reference cell to
- * the real cells.
- *   
 
- * 
- * This list of what kind of information we actually need is given as a
- * collection of flags as the third argument to the constructor of
- * FEValues. Since these values have to be recomputed, or updated, every
- * time we go to a new cell, all of these flags start with the prefix
- * <code>update_</code> and then indicate what it actually is that we want
- * updated. The flag to give if we want the values of the shape functions
- * computed is #update_values; for the gradients it is
- * #update_gradients. The determinants of the Jacobians and the quadrature
- * weights are always used together, so only the products (Jacobians times
- * weights, or short <code>JxW</code>) are computed; since we need them, we
- * have to list #update_JxW_values as well:
- * 
- * @code
- *   FEValues<2> fe_values(fe,
- *                         quadrature_formula,
- *                         update_values | update_gradients | update_JxW_values);
- * @endcode
- * 
- * The advantage of this approach is that we can specify what kind of
- * information we actually need on each cell. It is easily understandable
- * that this approach can significantly speed up finite element computations,
- * compared to approaches where everything, including second derivatives,
- * normal vectors to cells, etc are computed on each cell, regardless of
- * whether they are needed or not.
- *   
+@endcode 
 
- * 
- * @note The syntax <code>update_values | update_gradients |
- * update_JxW_values</code> is not immediately obvious to anyone not
- * used to programming bit operations in C for years already. First,
- * <code>operator|</code> is the <i>bitwise or operator</i>, i.e.,
- * it takes two integer arguments that are interpreted as bit
- * patterns and returns an integer in which every bit is set for
- * which the corresponding bit is set in at least one of the two
- * arguments. For example, consider the operation
- * <code>9|10</code>. In binary, <code>9=0b1001</code> (where the
- * prefix <code>0b</code> indicates that the number is to be
- * interpreted as a binary number) and <code>10=0b1010</code>. Going
- * through each bit and seeing whether it is set in one of the
- * argument, we arrive at <code>0b1001|0b1010=0b1011</code> or, in
- * decimal notation, <code>9|10=11</code>. The second piece of
- * information you need to know is that the various
- * <code>update_*</code> flags are all integers that have <i>exactly
- * one bit set</i>. For example, assume that
- * <code>update_values=0b00001=1</code>,
- * <code>update_gradients=0b00010=2</code>,
- * <code>update_JxW_values=0b10000=16</code>. Then
- * <code>update_values | update_gradients | update_JxW_values =
- * 0b10011 = 19</code>. In other words, we obtain a number that
- * <i>encodes a binary mask representing all of the operations you
- * want to happen</i>, where each operation corresponds to exactly
- * one bit in the integer that, if equal to one, means that a
- * particular piece should be updated on each cell and, if it is
- * zero, means that we need not compute it. In other words, even
- * though <code>operator|</code> is the <i>bitwise OR operation</i>,
- * what it really represents is <i>I want this AND that AND the
- * other</i>. Such binary masks are quite common in C programming,
- * but maybe not so in higher level languages like C++, but serve
- * the current purpose quite well.
- * 
 
- * 
- * For use further down below, we define a shortcut for a value that will
- * be used very frequently. Namely, an abbreviation for the number of degrees
- * of freedom on each cell (since we are in 2D and degrees of freedom are
- * associated with vertices only, this number is four, but we rather want to
- * write the definition of this variable in a way that does not preclude us
- * from later choosing a different finite element that has a different
- * number of degrees of freedom per cell, or work in a different space
- * dimension).
- *   
 
- * 
- * In general, it is a good idea to use a symbolic name instead of
- * hard-coding these numbers even if you know them, since for example,
- * you may want to change the finite element at some time. Changing the
- * element would have to be done in a different function and it is easy
- * to forget to make a corresponding change in another part of the program.
- * It is better to not rely on your own calculations, but instead ask
- * the right object for the information: Here, we ask the finite element
- * to tell us about the number of degrees of freedom per cell and we
- * will get the correct number regardless of the space dimension or
- * polynomial degree we may have chosen elsewhere in the program.
- *   
+而这个文件是创建稀疏矩阵的稀疏模式所需要的，如前面的例子中所示。
 
- * 
- * The shortcut here, defined primarily to discuss the basic concept
- * and not because it saves a lot of typing, will then make the following
- * loops a bit more readable. You will see such shortcuts in many places in
- * larger programs, and `dofs_per_cell` is one that is more or less the
- * conventional name for this kind of object.
- * 
- * @code
- *   const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
- * 
- * @endcode
- * 
- * Now, we said that we wanted to assemble the global matrix and vector
- * cell-by-cell. We could write the results directly into the global matrix,
- * but this is not very efficient since access to the elements of a sparse
- * matrix is slow. Rather, we first compute the contribution of each cell in
- * a small matrix with the degrees of freedom on the present cell, and only
- * transfer them to the global matrix when the computations are finished for
- * this cell. We do the same for the right hand side vector. So let's first
- * allocate these objects (these being local objects, all degrees of freedom
- * are coupling with all others, and we should use a full matrix object
- * rather than a sparse one for the local operations; everything will be
- * transferred to a global sparse matrix later on):
- * 
- * @code
- *   FullMatrix<double> cell_matrix(dofs_per_cell, dofs_per_cell);
- *   Vector<double>     cell_rhs(dofs_per_cell);
- * 
- * @endcode
- * 
- * When assembling the contributions of each cell, we do this with the local
- * numbering of the degrees of freedom (i.e. the number running from zero
- * through dofs_per_cell-1). However, when we transfer the result into the
- * global matrix, we have to know the global numbers of the degrees of
- * freedom. When we query them, we need a scratch (temporary) array for
- * these numbers (see the discussion at the end of the introduction for
- * the type, types::global_dof_index, used here):
- * 
- * @code
- *   std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
- * 
- * @endcode
- * 
- * Now for the loop over all cells. We have seen before how this works for a
- * triangulation. A DoFHandler has cell iterators that are exactly analogous
- * to those of a Triangulation, but with extra information about the degrees
- * of freedom for the finite element you're using. Looping over the active
- * cells of a degree-of-freedom handler works the same as for a triangulation.
- *   
+@code
+#include <deal.II/dofs/dof_tools.h>
 
- * 
- * Note that we declare the type of the cell as `const auto &` instead of
- * `auto` this time around. In step 1, we were modifying the cells of the
- * triangulation by flagging them with refinement indicators. Here we're only
- * examining the cells without modifying them, so it's good practice to
- * declare `cell` as `const` in order to enforce this invariant.
- * 
- * @code
- *   for (const auto &cell : dof_handler.active_cell_iterators())
- *     {
- * @endcode
- * 
- * We are now sitting on one cell, and we would like the values and
- * gradients of the shape functions be computed, as well as the
- * determinants of the Jacobian matrices of the mapping between
- * reference cell and true cell, at the quadrature points. Since all
- * these values depend on the geometry of the cell, we have to have the
- * FEValues object re-compute them on each cell:
- * 
- * @code
- *       fe_values.reinit(cell);
- * 
- * @endcode
- * 
- * Next, reset the local cell's contributions to global matrix and
- * global right hand side to zero, before we fill them:
- * 
- * @code
- *       cell_matrix = 0;
- *       cell_rhs    = 0;
- * 
- * @endcode
- * 
- * Now it is time to start integration over the cell, which we
- * do by looping over all quadrature points, which we will
- * number by q_index.
- * 
- * @code
- *       for (const unsigned int q_index : fe_values.quadrature_point_indices())
- *         {
- * @endcode
- * 
- * First assemble the matrix: For the Laplace problem, the
- * matrix on each cell is the integral over the gradients of
- * shape function i and j. Since we do not integrate, but
- * rather use quadrature, this is the sum over all
- * quadrature points of the integrands times the determinant
- * of the Jacobian matrix at the quadrature point times the
- * weight of this quadrature point. You can get the gradient
- * of shape function $i$ at quadrature point with number q_index by
- * using <code>fe_values.shape_grad(i,q_index)</code>; this
- * gradient is a 2-dimensional vector (in fact it is of type
- * Tensor@<1,dim@>, with here dim=2) and the product of two
- * such vectors is the scalar product, i.e. the product of
- * the two shape_grad function calls is the dot
- * product. This is in turn multiplied by the Jacobian
- * determinant and the quadrature point weight (that one
- * gets together by the call to FEValues::JxW() ). Finally,
- * this is repeated for all shape functions $i$ and $j$:
- * 
- * @code
- *           for (const unsigned int i : fe_values.dof_indices())
- *             for (const unsigned int j : fe_values.dof_indices())
- *               cell_matrix(i, j) +=
- *                 (fe_values.shape_grad(i, q_index) * // grad phi_i(x_q)
- *                  fe_values.shape_grad(j, q_index) * // grad phi_j(x_q)
- *                  fe_values.JxW(q_index));           // dx
- * 
- * @endcode
- * 
- * We then do the same thing for the right hand side. Here,
- * the integral is over the shape function i times the right
- * hand side function, which we choose to be the function
- * with constant value one (more interesting examples will
- * be considered in the following programs).
- * 
- * @code
- *           for (const unsigned int i : fe_values.dof_indices())
- *             cell_rhs(i) += (fe_values.shape_value(i, q_index) * // phi_i(x_q)
- *                             1. *                                // f(x_q)
- *                             fe_values.JxW(q_index));            // dx
- *         }
- * @endcode
- * 
- * Now that we have the contribution of this cell, we have to transfer
- * it to the global matrix and right hand side. To this end, we first
- * have to find out which global numbers the degrees of freedom on this
- * cell have. Let's simply ask the cell for that information:
- * 
- * @code
- *       cell->get_dof_indices(local_dof_indices);
- * 
- * @endcode
- * 
- * Then again loop over all shape functions i and j and transfer the
- * local elements to the global matrix. The global numbers can be
- * obtained using local_dof_indices[i]:
- * 
- * @code
- *       for (const unsigned int i : fe_values.dof_indices())
- *         for (const unsigned int j : fe_values.dof_indices())
- *           system_matrix.add(local_dof_indices[i],
- *                             local_dof_indices[j],
- *                             cell_matrix(i, j));
- * 
- * @endcode
- * 
- * And again, we do the same thing for the right hand side vector.
- * 
- * @code
- *       for (const unsigned int i : fe_values.dof_indices())
- *         system_rhs(local_dof_indices[i]) += cell_rhs(i);
- *     }
- * 
- * 
- * @endcode
- * 
- * Now almost everything is set up for the solution of the discrete
- * system. However, we have not yet taken care of boundary values (in fact,
- * Laplace's equation without Dirichlet boundary values is not even uniquely
- * solvable, since you can add an arbitrary constant to the discrete
- * solution). We therefore have to do something about the situation.
- *   
 
- * 
- * For this, we first obtain a list of the degrees of freedom on the
- * boundary and the value the shape function shall have there. For
- * simplicity, we only interpolate the boundary value function, rather than
- * projecting it onto the boundary. There is a function in the library which
- * does exactly this: VectorTools::interpolate_boundary_values(). Its
- * parameters are (omitting parameters for which default values exist and
- * that we don't care about): the DoFHandler object to get the global
- * numbers of the degrees of freedom on the boundary; the component of the
- * boundary where the boundary values shall be interpolated; the boundary
- * value function itself; and the output object.
- *   
+@endcode 
 
- * 
- * The component of the boundary is meant as follows: in many cases, you may
- * want to impose certain boundary values only on parts of the boundary. For
- * example, you may have inflow and outflow boundaries in fluid dynamics, or
- * clamped and free parts of bodies in deformation computations of
- * bodies. Then you will want to denote these different parts of the
- * boundary by indicators, and tell the interpolate_boundary_values
- * function to only compute the boundary values on a certain part of the
- * boundary (e.g. the clamped part, or the inflow boundary). By default,
- * all boundaries have a 0 boundary indicator, unless otherwise specified. If
- * sections of the boundary have different boundary conditions, you have to
- * number those parts with different boundary indicators. The function call
- * below will then only determine boundary values for those parts of the
- * boundary for which the boundary indicator is in fact the zero specified as
- * the second argument.
- *   
 
- * 
- * The function describing the boundary values is an object of type Function
- * or of a derived class. One of the derived classes is
- * Functions::ZeroFunction, which describes (not unexpectedly) a function
- * which is zero everywhere. We create such an object in-place and pass it to
- * the VectorTools::interpolate_boundary_values() function.
- *   
 
- * 
- * Finally, the output object is a list of pairs of global degree of freedom
- * numbers (i.e. the number of the degrees of freedom on the boundary) and
- * their boundary values (which are zero here for all entries). This mapping
- * of DoF numbers to boundary values is done by the <code>std::map</code>
- * class.
- * 
- * @code
- *   std::map<types::global_dof_index, double> boundary_values;
- *   VectorTools::interpolate_boundary_values(dof_handler,
- *                                            0,
- *                                            Functions::ZeroFunction<2>(),
- *                                            boundary_values);
- * @endcode
- * 
- * Now that we got the list of boundary DoFs and their respective boundary
- * values, let's use them to modify the system of equations
- * accordingly. This is done by the following function call:
- * 
- * @code
- *   MatrixTools::apply_boundary_values(boundary_values,
- *                                      system_matrix,
- *                                      solution,
- *                                      system_rhs);
- * }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Step3solve"></a> 
- * <h4>Step3::solve</h4>
- * 
+接下来的两个文件是在每个单元上使用正交法组装矩阵所需要的。下面将对其中声明的类进行解释。
 
- * 
- * The following function simply solves the discretized equation. As the
- * system is quite a large one for direct solvers such as Gauss elimination or
- * LU decomposition, we use a Conjugate Gradient algorithm. You should
- * remember that the number of variables here (only 1089) is a very small
- * number for finite element computations, where 100.000 is a more usual
- * number.  For this number of variables, direct methods are no longer usable
- * and you are forced to use methods like CG.
- * 
- * @code
- * void Step3::solve()
- * {
- * @endcode
- * 
- * First, we need to have an object that knows how to tell the CG algorithm
- * when to stop. This is done by using a SolverControl object, and as
- * stopping criterion we say: stop after a maximum of 1000 iterations (which
- * is far more than is needed for 1089 variables; see the results section to
- * find out how many were really used), and stop if the norm of the residual
- * is below $10^{-12}$. In practice, the latter criterion will be the one
- * which stops the iteration:
- * 
- * @code
- *   SolverControl solver_control(1000, 1e-12);
- * @endcode
- * 
- * Then we need the solver itself. The template parameter to the SolverCG
- * class is the type of the vectors, and leaving the empty angle brackets
- * would indicate that we are taking the default argument (which is
- * <code>Vector@<double@></code>). However, we explicitly mention the template
- * argument:
- * 
- * @code
- *   SolverCG<Vector<double>> solver(solver_control);
- * 
- * @endcode
- * 
- * Now solve the system of equations. The CG solver takes a preconditioner
- * as its fourth argument. We don't feel ready to delve into this yet, so we
- * tell it to use the identity operation as preconditioner:
- * 
- * @code
- *   solver.solve(system_matrix, solution, system_rhs, PreconditionIdentity());
- * @endcode
- * 
- * Now that the solver has done its job, the solution variable contains the
- * nodal values of the solution function.
- * 
- * @code
- * }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Step3output_results"></a> 
- * <h4>Step3::output_results</h4>
- * 
+@code
+#include <deal.II/fe/fe_values.h>
+#include <deal.II/base/quadrature_lib.h>
 
- * 
- * The last part of a typical finite element program is to output the results
- * and maybe do some postprocessing (for example compute the maximal stress
- * values at the boundary, or the average flux across the outflow, etc). We
- * have no such postprocessing here, but we would like to write the solution
- * to a file.
- * 
- * @code
- * void Step3::output_results() const
- * {
- * @endcode
- * 
- * To write the output to a file, we need an object which knows about output
- * formats and the like. This is the DataOut class, and we need an object of
- * that type:
- * 
- * @code
- *   DataOut<2> data_out;
- * @endcode
- * 
- * Now we have to tell it where to take the values from which it shall
- * write. We tell it which DoFHandler object to use, and the solution vector
- * (and the name by which the solution variable shall appear in the output
- * file). If we had more than one vector which we would like to look at in
- * the output (for example right hand sides, errors per cell, etc) we would
- * add them as well:
- * 
- * @code
- *   data_out.attach_dof_handler(dof_handler);
- *   data_out.add_data_vector(solution, "solution");
- * @endcode
- * 
- * After the DataOut object knows which data it is to work on, we have to
- * tell it to process them into something the back ends can handle. The
- * reason is that we have separated the frontend (which knows about how to
- * treat DoFHandler objects and data vectors) from the back end (which knows
- * many different output formats) and use an intermediate data format to
- * transfer data from the front- to the backend. The data is transformed
- * into this intermediate format by the following function:
- * 
- * @code
- *   data_out.build_patches();
- * 
- * @endcode
- * 
- * Now we have everything in place for the actual output. Just open a file
- * and write the data into it, using VTK format (there are many other
- * functions in the DataOut class we are using here that can write the
- * data in postscript, AVS, GMV, Gnuplot, or some other file
- * formats):
- * 
- * @code
- *   std::ofstream output("solution.vtk");
- *   data_out.write_vtk(output);
- * }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Step3run"></a> 
- * <h4>Step3::run</h4>
- * 
 
- * 
- * Finally, the last function of this class is the main function which calls
- * all the other functions of the <code>Step3</code> class. The order in which
- * this is done resembles the order in which most finite element programs
- * work. Since the names are mostly self-explanatory, there is not much to
- * comment about:
- * 
- * @code
- * void Step3::run()
- * {
- *   make_grid();
- *   setup_system();
- *   assemble_system();
- *   solve();
- *   output_results();
- * }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Thecodemaincodefunction"></a> 
- * <h3>The <code>main</code> function</h3>
- * 
+@endcode 
 
- * 
- * This is the main function of the program. Since the concept of a
- * main function is mostly a remnant from the pre-object oriented era
- * before C++ programming, it often does not do much more than
- * creating an object of the top-level class and calling its principle
- * function.
- * 
 
- * 
- * Finally, the first line of the function is used to enable output of
- * some diagnostics that deal.II can generate.  The @p deallog
- * variable (which stands for deal-log, not de-allog) represents a
- * stream to which some parts of the library write output. For
- * example, iterative solvers will generate diagnostics (starting
- * residual, number of solver steps, final residual) as can be seen
- * when running this tutorial program.
- * 
 
- * 
- * The output of @p deallog can be written to the console, to a file,
- * or both. Both are disabled by default since over the years we have
- * learned that a program should only generate output when a user
- * explicitly asks for it. But this can be changed, and to explain how
- * this can be done, we need to explain how @p deallog works: When
- * individual parts of the library want to log output, they open a
- * "context" or "section" into which this output will be placed. At
- * the end of the part that wants to write output, one exits this
- * section again. Since a function may call another one from within
- * the scope where this output section is open, output may in fact be
- * nested hierarchically into these sections. The LogStream class of
- * which @p deallog is a variable calls each of these sections a
- * "prefix" because all output is printed with this prefix at the left
- * end of the line, with prefixes separated by colons. There is always
- * a default prefix called "DEAL" (a hint at deal.II's history as the
- * successor of a previous library called "DEAL" and from which the
- * LogStream class is one of the few pieces of code that were taken
- * into deal.II).
- * 
+以下三个文件是我们处理边界值所需的。
 
- * 
- * By default, @p logstream only outputs lines with zero prefixes --
- * i.e., all output is disabled because the default "DEAL" prefix is
- * always there. But one can set a different maximal number of
- * prefixes for lines that should be output to something larger, and
- * indeed here we set it to two by calling
- * LogStream::depth_console(). This means that for all screen output,
- * a context that has pushed one additional prefix beyond the default
- * "DEAL" is allowed to print its output to the screen ("console"),
- * whereas all further nested sections that would have three or more
- * prefixes active would write to @p deallog, but @p deallog does not
- * forward this output to the screen. Thus, running this example (or
- * looking at the "Results" section), you will see the solver
- * statistics prefixed with "DEAL:CG", which is two prefixes. This is
- * sufficient for the context of the current program, but you will see
- * examples later on (e.g., in step-22) where solvers are nested more
- * deeply and where you may get useful information by setting the
- * depth even higher.
- * 
- * @code
- * int main()
- * {
- *   deallog.depth_console(2);
- * 
- *   Step3 laplace_problem;
- *   laplace_problem.run();
- * 
- *   return 0;
- * }
- * @endcode
+@code
+#include <deal.II/base/function.h>
+#include <deal.II/numerics/vector_tools.h>
+#include <deal.II/numerics/matrix_tools.h>
+
+
+@endcode 
+
+
+
+我们现在几乎到了终点。第二组到最后一组include文件是用于线性代数的，我们用它来解决拉普拉斯方程的有限元离散化所产生的方程组。我们将使用向量和全矩阵在每个单元中组装方程组，并将结果转移到稀疏矩阵中。然后我们将使用共轭梯度求解器来解决这个问题，为此我们需要一个预处理程序（在这个程序中，我们使用身份预处理程序，它没有任何作用，但我们还是需要包含这个文件）。
+
+@code
+#include <deal.II/lac/vector.h>
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/sparse_matrix.h>
+#include <deal.II/lac/dynamic_sparsity_pattern.h>
+#include <deal.II/lac/solver_cg.h>
+#include <deal.II/lac/precondition.h>
+
+
+@endcode 
+
+
+
+最后，这是为了输出到文件和控制台。
+
+@code
+#include <deal.II/numerics/data_out.h>
+#include <fstream>
+#include <iostream>
+
+
+@endcode 
+
+
+
+...这是为了将deal.II命名空间导入到全局范围。
+
+@code
+using namespace dealii;
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeStep3codeclass"></a> <h3>The <code>Step3</code> class</h3>
+
+
+
+
+在这个程序中，我们没有采用以前例子中的程序化编程，而是将所有的东西都封装在一个类中。这个类由函数组成，每个函数都执行有限元程序的某些方面，一个`main`函数控制先做什么和后做什么，还有一个成员变量列表。
+
+
+
+
+该类的公共部分相当短：它有一个构造函数和一个从外部调用的函数`run`，其作用类似于`main`函数：它协调该类的哪些操作应以何种顺序运行。类中的其他东西，也就是所有真正做事情的函数，都在类的私有部分。
+
+@code
+class Step3
+{
+public:
+  Step3();
+
+
+  void run();
+
+
+@endcode 
+
+
+
+然后是成员函数，它们主要做它们名字所暗示的事情，在介绍中已经讨论过了。因为它们不需要从外部调用，所以它们被列为这个类的私有部分。
+
+
+
+
+
+
+
+@code
+private:
+  void make_grid();
+  void setup_system();
+  void assemble_system();
+  void solve();
+  void output_results() const;
+
+
+@endcode 
+
+
+
+最后，我们有一些成员变量。有一些变量描述了三角形和自由度的全局编号（我们将在这个类的构造函数中指定有限元的确切多项式程度）...... 
+
+@code
+  Triangulation<2> triangulation;
+  FE_Q<2>          fe;
+  DoFHandler<2>    dof_handler;
+
+
+@endcode 
+
+
+
+...拉普拉斯方程离散化产生的系统矩阵的稀疏模式和数值的变量... 
+
+@code
+  SparsityPattern      sparsity_pattern;
+  SparseMatrix<double> system_matrix;
+
+
+@endcode 
+
+
+
+......以及将持有右手边和解决方案向量的变量。
+
+@code
+  Vector<double> solution;
+  Vector<double> system_rhs;
+};
+
+
+@endcode 
+
+
+
+
+<a name="Step3Step3"></a> <h4>Step3::Step3</h4>
+
+
+
+
+这里有一个构造函数。它除了首先指定我们想要双线性元素（由有限元对象的参数表示，它表示多项式的程度），并将dof_handler变量与我们使用的三角形相关联之外，没有做更多的工作。(注意，目前三角结构并没有设置网格，但是DoFHandler并不关心：它只想知道它将与哪个三角结构相关联，只有当你使用distribution_dofs()函数试图在网格上分布自由度时，它才开始关心实际的网格。) Step3类的所有其他成员变量都有一个默认的构造函数，可以完成我们想要的所有工作。
+
+@code
+Step3::Step3()
+  : fe(1)
+  , dof_handler(triangulation)
+{}
+
+
+
+@endcode 
+
+
+
+
+<a name="Step3make_grid"></a> <h4>Step3::make_grid</h4> 
+
+
+
+
+现在，我们要做的第一件事是生成我们想要进行计算的三角形，并对每个顶点进行自由度编号。我们之前在 step-1 和 step-2 中分别看到过这两个步骤。
+
+
+
+
+这个函数做的是第一部分，创建网格。 我们创建网格并对所有单元进行五次细化。由于初始网格（也就是正方形 $[-1,1] \times [-1,1]$ ）只由一个单元组成，所以最终的网格有32乘以32个单元，总共是1024个。
+
+
+
+
+不确定1024是否是正确的数字？我们可以通过使用三角形上的 <code>n_active_cells()</code> 函数输出单元格的数量来检查。
+
+@code
+void Step3::make_grid()
+{
+  GridGenerator::hyper_cube(triangulation, -1, 1);
+  triangulation.refine_global(5);
+
+
+  std::cout << "Number of active cells: " << triangulation.n_active_cells()
+            << std::endl;
+}
+
+
+@endcode 
+
+
+
+  @note  我们调用 Triangulation::n_active_cells() 函数，而不是 Triangulation::n_cells(). 这里，<i>active</i>是指没有进一步细化的单元。我们强调 "活跃 "这个形容词，因为还有更多的单元，即最细的单元的父单元，它们的父单元等等，直到构成初始网格的一个单元为止。当然，在下一个更粗的层次上，单元格的数量是最细层次上的单元格的四分之一，即256，然后是64、16、4和1。如果你在上面的代码中调用 <code>triangulation.n_cells()</code> ，你会因此得到一个1365的值。另一方面，单元格的数量（相对于活动单元格的数量）通常没有什么意义，所以没有很好的理由去打印它。
+
+
+
+
+
+
+
+
+
+
+<a name="Step3setup_system"></a> <h4>Step3::setup_system</h4> 
+
+
+
+
+接下来我们列举所有的自由度，并建立矩阵和向量对象来保存系统数据。枚举是通过使用 DoFHandler::distribute_dofs(), 来完成的，正如我们在 step-2 的例子中看到的那样。由于我们使用了FE_Q类，并且在构造函数中设置了多项式的度数为1，即双线性元素，这就将一个自由度与每个顶点联系起来。当我们在生成输出时，让我们也看看有多少自由度被生成。
+
+@code
+void Step3::setup_system()
+{
+  dof_handler.distribute_dofs(fe);
+  std::cout << "Number of degrees of freedom: " << dof_handler.n_dofs()
+            << std::endl;
+@endcode 
+
+
+
+每个顶点应该有一个自由度。因为我们有一个32乘以32的网格，所以自由度的数量应该是33乘以33，即1089。
+
+
+
+
+正如我们在前面的例子中所看到的，我们通过首先创建一个临时结构，标记那些可能为非零的条目，然后将数据复制到SparsityPattern对象中，然后可以被系统矩阵使用，来设置一个稀疏模式。
+
+@code
+  DynamicSparsityPattern dsp(dof_handler.n_dofs());
+  DoFTools::make_sparsity_pattern(dof_handler, dsp);
+  sparsity_pattern.copy_from(dsp);
+
+
+@endcode 
+
+
+
+请注意，SparsityPattern对象并不持有矩阵的值，它只存储条目所在的位置。条目本身被存储在SparseMatrix类型的对象中，我们的变量system_matrix就是其中之一。   
+
+
+区分稀疏模式和矩阵是为了让几个矩阵使用相同的稀疏模式。这在这里似乎无关紧要，但是当你考虑到矩阵的大小，以及建立稀疏模式可能需要一些时间时，如果你必须在程序中存储几个矩阵，这在大规模问题中就变得很重要。
+
+@code
+  system_matrix.reinit(sparsity_pattern);
+
+
+@endcode 
+
+
+
+在这个函数中要做的最后一件事是将右侧向量和解向量的大小设置为正确的值。
+
+@code
+  solution.reinit(dof_handler.n_dofs());
+  system_rhs.reinit(dof_handler.n_dofs());
+}
+
+
+@endcode 
+
+
+
+
+<a name="Step3assemble_system"></a> <h4>Step3::assemble_system</h4>
+
+
+
+
+
+
+
+
+下一步是计算形成线性系统的矩阵和右手边的条目，我们从中计算出解。这是每一个有限元程序的核心功能，我们在介绍中已经讨论了主要步骤。
+
+
+
+
+组装矩阵和向量的一般方法是在所有单元上循环，并在每个单元上通过正交计算该单元对全局矩阵和右侧的贡献。现在要认识到的一点是，我们需要实心单元上正交点位置的形状函数值。然而，有限元形状函数和正交点都只定义在参考单元上。因此，它们对我们帮助不大，事实上，我们几乎不会直接从这些对象中查询有关有限元形状函数或正交点的信息。
+
+
+
+
+相反，我们需要的是一种将这些数据从参考单元映射到实际单元的方法。可以做到这一点的类是由Mapping类派生出来的，尽管人们常常不必直接与它们打交道：库中的许多函数可以将映射对象作为参数，但当它被省略时，它们只是求助于标准的双线性Q1映射。我们将走这条路，暂时不去管它（我们将在 step-10 、 step-11 和 step-12 中再讨论这个问题）。
+
+
+
+
+所以我们现在有三个类的集合来处理：有限元、正交、和映射对象。这就太多了，所以有一种类型的类可以协调这三者之间的信息交流：FEValues类。如果给这三个对象各一个实例（或两个，以及一个隐式线性映射），它就能为你提供实心单元上正交点的形状函数的值和梯度的信息。
+
+
+
+
+利用所有这些，我们将把这个问题的线性系统组装在以下函数中。
+
+@code
+void Step3::assemble_system()
+{
+@endcode 
+
+
+
+好的，让我们开始：我们需要一个正交公式来评估每个单元上的积分。让我们采用一个高斯公式，每个方向有两个正交点，即总共有四个点，因为我们是在二维空间。这个正交公式可以精确地积分三度以下的多项式（在一维）。很容易检查出这对本问题来说是足够的。
+
+@code
+  QGauss<2> quadrature_formula(fe.degree + 1);
+@endcode 
+
+
+
+然后我们初始化我们在上面简单谈及的对象。它需要被告知我们要使用哪个有限元，以及正交点和它们的权重（由正交对象共同描述）。如前所述，我们使用隐含的Q1映射，而不是自己明确指定一个。最后，我们必须告诉它我们希望它在每个单元上计算什么：我们需要正交点的形状函数值（对于右手边 $(\varphi_i,f)$ ），它们的梯度（对于矩阵条目 $(\nabla \varphi_i, \nabla
+\varphi_j)$ ），还有正交点的权重和从参考单元到实际单元的雅各布变换的行列式。   
+
+
+我们实际需要的信息清单是作为FEValues构造函数的第三个参数，以标志集合的形式给出的。由于这些值必须重新计算，或更新，每次我们去一个新的单元，所有这些标志都以前缀 <code>update_</code> 开始，然后指出我们想要更新的实际内容。如果我们想要计算形状函数的值，那么给出的标志是#update_values；对于梯度，则是#update_gradients。雅各布的行列式和正交权重总是一起使用的，所以只计算乘积(雅各布乘以权重，或简称 <code>JxW</code> )；由于我们需要它们，我们必须同时列出#update_JxW_values。
+
+@code
+  FEValues<2> fe_values(fe,
+                        quadrature_formula,
+                        update_values | update_gradients | update_JxW_values);
+@endcode 
+
+
+
+这种方法的好处是，我们可以在每个单元格上指定我们实际上需要什么样的信息。很容易理解的是，与包括二阶导数、单元的法向量等在内的一切都在每个单元上计算的方法相比，这种方法可以大大加快有限元计算的速度，而不管是否需要。   
+
+
+
+
+  @note  <code>update_values | update_gradients | update_JxW_values</code>的语法对于那些不习惯用C语言编程多年的位操作的人来说并不明显。首先， <code>operator|</code> 是<i>bitwise or operator</i>，也就是说，它接受两个整数参数，这些参数被解释为比特模式，并返回一个整数，其中每个比特都被设置，因为在两个参数中至少有一个对应的比特被设置。例如，考虑操作 <code>9|10</code>. In binary, <code>9=0b1001</code> （其中前缀 <code>0b</code> 表示该数字将被解释为二进制数字）和 <code>10=0b1010</code>  。通过每个比特，看它是否在其中一个参数中被设置，我们得出 <code>0b1001|0b1010=0b1011</code> ，或者用十进制符号表示， <code>9|10=11</code>  。你需要知道的第二个信息是，各种 <code>update_*</code> 标志都是有<i>exactly
+one bit set</i>的整数。例如，假设  <code>update_values=0b00001=1</code>  ,  <code>update_gradients=0b00010=2</code>  ,  <code>update_JxW_values=0b10000=16</code>  。那么<code>update_values | update_gradients | update_JxW_values = 0b10011 = 19</code>。换句话说，我们得到一个数字，即<i>encodes a binary mask representing all of the operations you
+want to happen</i>，其中每个操作正好对应于整数中的一个位，如果等于1，意味着每个单元格上应该更新一个特定的片断，如果是0，意味着我们不需要计算它。换句话说，即使 <code>operator|</code> 是<i>bitwise OR operation</i>，它真正代表的是<i>I want this AND that AND the
+other</i>。这样的二进制掩码在C语言编程中很常见，但在像C++这样的高级语言中可能就不那么常见了，但能很好地满足当前的目的。
+
+
+
+
+为了在下文中进一步使用，我们为一个将被频繁使用的值定义了一个快捷方式。也就是每个单元的自由度数量的缩写（因为我们是在二维，自由度只与顶点相关，所以这个数字是四，但是我们更希望在写这个变量的定义时，不妨碍我们以后选择不同的有限元，每个单元有不同的自由度数量，或者在不同的空间维度工作）。   
+
+
+一般来说，使用符号名称而不是硬编码这些数字是个好主意，即使你知道它们，因为例如，你可能想在某个时候改变有限元。改变元素就必须在不同的函数中进行，而且很容易忘记在程序的另一部分做相应的改变。最好不要依赖自己的计算，而是向正确的对象索取信息。在这里，我们要求有限元告诉我们每个单元的自由度数，不管我们在程序的其他地方选择的空间维度或多项式程度如何，我们都会得到正确的数字。   
+
+
+这里定义的快捷方式主要是为了讨论基本概念，而不是因为它可以节省大量的打字量，那么下面的循环就会变得更容易阅读。在大型程序中，你会在很多地方看到这样的快捷方式，`dofs_per_cell`就是一个或多或少是这类对象的常规名称。
+
+@code
+  const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
+
+
+@endcode 
+
+
+
+现在，我们说我们想逐个单元地组装全局矩阵和向量。我们可以将结果直接写入全局矩阵，但这不是很有效，因为访问稀疏矩阵的元素很慢。相反，我们首先在一个小矩阵中计算每个单元的贡献，并在这个单元的计算结束后将其转移到全局矩阵中。我们对右手边的向量也是这样做的。因此，让我们首先分配这些对象（这些是局部对象，所有自由度都与所有其他对象耦合，我们应该使用一个完整的矩阵对象，而不是一个用于局部操作的稀疏矩阵；以后所有东西都将转移到全局稀疏矩阵中）。
+
+@code
+  FullMatrix<double> cell_matrix(dofs_per_cell, dofs_per_cell);
+  Vector<double>     cell_rhs(dofs_per_cell);
+
+
+@endcode 
+
+
+
+当集合每个单元的贡献时，我们用自由度的局部编号（即从零到dofs_per_cell-1的编号）来进行。然而，当我们将结果转移到全局矩阵时，我们必须知道自由度的全局编号。当我们查询它们的时候，我们需要一个抓取（临时）数组来存放这些数字（关于这里使用的类型， types::global_dof_index, ，见介绍末尾的讨论）。
+
+@code
+  std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
+
+
+@endcode 
+
+
+
+现在是所有单元格的循环。我们之前已经看到这对一个三角形是如何工作的。DoFHandler的单元格迭代器与Triangulation的迭代器完全类似，但有关于你所使用的有限元的自由度的额外信息。在自由度处理程序的活动单元上进行循环，其作用与三角法相同。   
+
+
+注意，这次我们将单元格的类型声明为`const auto &`，而不是`auto`。在第1步中，我们通过标记细化指标来修改三角形的单元。在这里，我们只检查单元格而不修改它们，所以声明`cell`为`const`是很好的做法，以便执行这个不变性。
+
+@code
+  for (const auto &cell : dof_handler.active_cell_iterators())
+    {
+@endcode 
+
+
+
+我们现在坐在一个单元上，我们希望计算形状函数的值和梯度，以及参考单元和真实单元之间映射的雅各布矩阵的行列式，在正交点上。由于所有这些值都取决于单元的几何形状，我们必须让FEValues对象在每个单元上重新计算它们。
+
+@code
+      fe_values.reinit(cell);
+
+
+@endcode 
+
+
+
+接下来，在我们填充它们之前，将本地单元对全局矩阵和全局右手边的贡献重置为零。
+
+@code
+      cell_matrix = 0;
+      cell_rhs    = 0;
+
+
+@endcode 
+
+
+
+现在是时候开始对单元进行积分了，我们通过对所有正交点进行循环操作来实现，我们将用q_index对其进行编号。
+
+@code
+      for (const unsigned int q_index : fe_values.quadrature_point_indices())
+        {
+@endcode 
+
+
+
+首先组装矩阵。对于拉普拉斯问题，每个单元上的矩阵是对形状函数i和j的梯度的积分。由于我们不进行积分，而是使用正交，这就是所有正交点的积分之和乘以正交点的雅各布矩阵的行列式乘以该正交点的权重。你可以通过使用 <code>fe_values.shape_grad(i,q_index)</code> 得到形状函数 $i$ 在编号为q_index的正交点的梯度；这个梯度是一个二维向量（事实上它是Tensor@<1,dim@>类型，这里dim=2），两个这样的向量的乘积是标量乘积，即两个shape_grad函数调用的乘积是点乘。这又要乘以雅各布行列式和正交点权重（通过调用 FEValues::JxW() 得到）。最后，对所有形状函数 $i$ 和 $j$ 重复这一过程。
+
+@code
+          for (const unsigned int i : fe_values.dof_indices())
+            for (const unsigned int j : fe_values.dof_indices())
+              cell_matrix(i, j) +=
+                (fe_values.shape_grad(i, q_index) * // grad phi_i(x_q)
+                 fe_values.shape_grad(j, q_index) * // grad phi_j(x_q)
+                 fe_values.JxW(q_index));           // dx
+
+
+@endcode 
+
+
+
+然后我们对右手边做同样的事情。这里，积分是对形状函数i乘以右手边的函数，我们选择的是常值为1的函数（更有趣的例子将在下面的程序中考虑）。
+
+@code
+          for (const unsigned int i : fe_values.dof_indices())
+            cell_rhs(i) += (fe_values.shape_value(i, q_index) * // phi_i(x_q)
+                            1. *                                // f(x_q)
+                            fe_values.JxW(q_index));            // dx
+        }
+@endcode 
+
+
+
+现在我们有了这个单元的贡献，我们必须把它转移到全局矩阵和右手边。为此，我们首先要找出这个单元上的自由度有哪些全局数字。让我们简单地询问该单元的信息。
+
+@code
+      cell->get_dof_indices(local_dof_indices);
+
+
+@endcode 
+
+
+
+然后再次循环所有形状函数i和j，将局部元素转移到全局矩阵中。全局数可以用local_dof_indices[i]得到。
+
+@code
+      for (const unsigned int i : fe_values.dof_indices())
+        for (const unsigned int j : fe_values.dof_indices())
+          system_matrix.add(local_dof_indices[i],
+                            local_dof_indices[j],
+                            cell_matrix(i, j));
+
+
+@endcode 
+
+
+
+同样，我们对右手边的向量也做同样的事情。
+
+@code
+      for (const unsigned int i : fe_values.dof_indices())
+        system_rhs(local_dof_indices[i]) += cell_rhs(i);
+    }
+
+
+
+@endcode 
+
+
+
+现在，几乎所有的东西都为离散系统的求解做好了准备。然而，我们还没有照顾到边界值（事实上，没有迪里切特边界值的拉普拉斯方程甚至不是唯一可解的，因为你可以在离散解中加入一个任意的常数）。因此，我们必须对这种情况做一些处理。   
+
+
+为此，我们首先得到边界上的自由度列表，以及形状函数在那里的值。为了简单起见，我们只对边界值函数进行插值，而不是将其投影到边界上。库中有一个函数正是这样做的。  VectorTools::interpolate_boundary_values(). 它的参数是（省略存在默认值而我们不关心的参数）：DoFHandler对象，以获得边界上自由度的全局数字；边界的组成部分，其中边界值应被内插；边界值函数本身；和输出对象。   
+
+
+边界分量的含义如下：在许多情况下，你可能只想在边界的一部分施加某些边界值。例如，在流体力学中，你可能有流入和流出的边界，或者在身体变形计算中，身体的夹紧和自由部分。那么你就想用指标来表示边界的这些不同部分，并告诉interpolate_boundary_values函数只计算边界的某一部分（例如夹住的部分，或流入的边界）的边界值。默认情况下，所有的边界都有一个0的边界指标，除非另有规定。如果边界的部分有不同的边界条件，你必须用不同的边界指示器为这些部分编号。然后，下面的函数调用将只确定边界的那些部分的边界值，这些部分的边界指标实际上是作为第二个参数指定的0。   
+
+
+描述边界值的函数是一个类型为Function或派生类的对象。其中一个派生类是 Functions::ZeroFunction, ，它描述了一个到处为零的函数（并不意外）。我们就地创建这样一个对象，并将其传递给  VectorTools::interpolate_boundary_values()  函数。   
+
+
+最后，输出对象是一对全局自由度数（即边界上的自由度数）和它们的边界值（这里所有条目都是零）的列表。这种自由度数到边界值的映射是由 <code>std::map</code> 类完成的。
+
+@code
+  std::map<types::global_dof_index, double> boundary_values;
+  VectorTools::interpolate_boundary_values(dof_handler,
+                                           0,
+                                           Functions::ZeroFunction<2>(),
+                                           boundary_values);
+@endcode 
+
+
+
+现在我们得到了边界DoF的列表和它们各自的边界值，让我们用它们来相应地修改方程组。这是由以下函数调用完成的。
+
+@code
+  MatrixTools::apply_boundary_values(boundary_values,
+                                     system_matrix,
+                                     solution,
+                                     system_rhs);
+}
+
+
+
+@endcode 
+
+
+
+
+<a name="Step3solve"></a> <h4>Step3::solve</h4>
+
+
+
+
+下面的函数简单地解决了离散方程。由于该系统对于高斯消除或LU分解等直接求解器来说是一个相当大的系统，我们使用共轭梯度算法。你应该记住，这里的变量数量（只有1089个）对于有限元计算来说是一个非常小的数字，而100.000是一个比较常见的数字。 对于这个变量数，直接方法已经无法使用，你不得不使用CG这样的方法。
+
+@code
+void Step3::solve()
+{
+@endcode 
+
+
+
+首先，我们需要有一个对象，知道如何告诉CG算法何时停止。这是通过使用SolverControl对象来实现的，作为停止标准，我们说：在最多1000次迭代后停止（这远远超过1089个变量的需要；见结果部分以了解真正使用了多少次），如果残差的规范值低于 $10^{-12}$  就停止。在实践中，后一个标准将是停止迭代的一个标准。
+
+@code
+  SolverControl solver_control(1000, 1e-12);
+@endcode 
+
+
+
+然后我们需要解算器本身。SolverCG类的模板参数是向量的类型，留下空的角括号将表明我们采取的是默认参数（即 <code>Vector@<double@></code>  ）。然而，我们明确地提到了模板参数。
+
+@code
+  SolverCG<Vector<double>> solver(solver_control);
+
+
+@endcode 
+
+
+
+现在求解方程组。CG求解器的第四个参数是预处理程序。我们觉得还没有准备好深入研究这个问题，所以我们告诉它使用身份运算作为预处理程序。
+
+@code
+  solver.solve(system_matrix, solution, system_rhs, PreconditionIdentity());
+@endcode 
+
+
+
+现在求解器已经完成了它的工作，求解变量包含求解函数的结点值。
+
+@code
+}
+
+
+
+@endcode 
+
+
+
+
+<a name="Step3output_results"></a> <h4>Step3::output_results</h4>
+
+
+
+
+典型的有限元程序的最后一部分是输出结果，也许会做一些后处理（例如计算边界处的最大应力值，或者计算整个流出物的平均通量，等等）。我们这里没有这样的后处理，但我们想把解写到一个文件中。
+
+@code
+void Step3::output_results() const
+{
+@endcode 
+
+
+
+为了将输出写入文件，我们需要一个知道输出格式等的对象。这就是DataOut类，我们需要一个该类型的对象。
+
+@code
+  DataOut<2> data_out;
+@endcode 
+
+
+
+现在我们必须告诉它从哪里获取它要写的值。我们告诉它使用哪个DoFHandler对象，以及求解向量（以及求解变量在输出文件中的名称）。如果我们有不止一个我们想在输出中查看的向量（例如右手边，每个单元格的错误，等等），我们也要添加它们。
+
+@code
+  data_out.attach_dof_handler(dof_handler);
+  data_out.add_data_vector(solution, "solution");
+@endcode 
+
+
+
+在DataOut对象知道它要处理哪些数据后，我们必须告诉它把它们处理成后端可以处理的东西。原因是我们将前端（知道如何处理DoFHandler对象和数据向量）与后端（知道许多不同的输出格式）分开，使用一种中间数据格式将数据从前端传输到后端。数据通过以下函数转换为这种中间格式。
+
+@code
+  data_out.build_patches();
+
+
+@endcode 
+
+
+
+现在我们已经为实际输出做好了一切准备。只要打开一个文件，用VTK格式将数据写入其中（在我们这里使用的DataOut类中还有许多其他函数，可以将数据写成postscript、AVS、GMV、Gnuplot或其他一些文件格式）。
+
+@code
+  std::ofstream output("solution.vtk");
+  data_out.write_vtk(output);
+}
+
+
+
+@endcode 
+
+
+
+
+<a name="Step3run"></a> <h4>Step3::run</h4> 
+
+
+
+
+最后，这个类的最后一个函数是主函数，调用 <code>Step3</code> 类的所有其他函数。这样做的顺序类似于大多数有限元程序的工作顺序。由于这些名字大多是不言自明的，所以没有什么可评论的。
+
+@code
+void Step3::run()
+{
+  make_grid();
+  setup_system();
+  assemble_system();
+  solve();
+  output_results();
+}
+
+
+
+@endcode 
+
+
+
+
+<a name="Thecodemaincodefunction"></a> <h3>The <code>main</code> function</h3>
+
+
+
+
+这是该程序的主函数。由于主函数的概念大多是C++编程之前的面向对象时代的遗留物，所以它通常不会做更多的事情，只是创建一个顶层类的对象并调用其原理函数。
+
+
+
+
+最后，函数的第一行是用来启用deal.II可以生成的一些诊断程序的输出。  @p deallog 变量（代表deal-log，而不是de-allog）代表一个流，库的某些部分将输出写入其中。例如，迭代求解器会产生诊断信息（起始残差、求解器步骤数、最终残差），在运行这个教程程序时可以看到。
+
+
+
+
+ @p deallog 的输出可以写到控制台，也可以写到文件，或者两者都写。两者在默认情况下都是禁用的，因为多年来我们已经知道，一个程序只应该在用户明确要求的情况下产生输出。但这是可以改变的，为了解释如何做到这一点，我们需要解释 @p deallog 是如何工作的。当图书馆的个别部分想要记录输出时，它们会打开一个 "上下文 "或 "部分"，这个输出将被放入其中。在想要写输出的部分结束时，人们再次退出这个部分。由于一个函数可以在这个输出部分打开的范围内调用另一个函数，所以输出实际上可以分层嵌套到这些部分。LogStream类 @p deallog 是一个变量，它把这些部分中的每一个称为 "前缀"，因为所有的输出都以这个前缀打印在行的左端，前缀用冒号分开。总是有一个默认的前缀叫做 "DEAL"（暗示了deal.II的历史，它是以前一个叫做 "DEAL "的库的继承者，而LogStream类是被带入deal.II的少数代码之一）。
+
+
+
+
+默认情况下， @p logstream 只输出前缀为零的行--也就是说，所有的输出都是禁用的，因为默认的 "DEAL "前缀总是存在的。但人们可以为应该输出的行设置不同的最大前缀数，以达到更大的效果，事实上在这里我们通过调用 LogStream::depth_console(). 将其设置为两个。这意味着对于所有的屏幕输出，在默认的 "DEAL "之外再推一个前缀的上下文被允许将其输出打印到屏幕上（"控制台"），而所有进一步嵌套的部分将有三个或更多的前缀被激活，将写入 @p deallog, ，但 @p deallog 并不转发这个输出到屏幕。因此，运行这个例子（或者看 "结果 "部分），你会看到解算器的统计数据前缀为 "DEAL:CG"，这是两个前缀。这对于当前程序的上下文来说已经足够了，但是你会在后面看到一些例子（例如，在 step-22 中），其中求解器的嵌套更深，你可能会通过设置更高的深度来获得有用的信息。
+
+@code
+int main()
+{
+  deallog.depth_console(2);
+
+
+  Step3 laplace_problem;
+  laplace_problem.run();
+
+
+  return 0;
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
-The output of the program looks as follows:
+该程序的输出看起来如下。
+
 @code
 Number of active cells: 1024
 Number of degrees of freedom: 1089
 DEAL:cg::Starting value 0.121094
 DEAL:cg::Convergence step 48 value 5.33692e-13
-@endcode
+@endcode 
 
-The first two lines is what we wrote to <code>cout</code>. The last
-two lines were generated without our intervention by the CG
-solver. The first two lines state the residual at the start of the
-iteration, while the last line tells us that the solver needed 47
-iterations to bring the norm of the residual to 5.3e-13, i.e. below
-the threshold 1e-12 which we have set in the `solve' function. We will
-show in the next program how to suppress this output, which is
-sometimes useful for debugging purposes, but often clutters up the
-screen display.
 
-Apart from the output shown above, the program generated the file
-<code>solution.vtk</code>, which is in the VTK format that is widely
-used by many visualization programs today -- including the two
-heavy-weights <a href="https://www.llnl.gov/visit">VisIt</a> and
-<a href="https://www.paraview.org">Paraview</a> that are the most
-commonly used programs for this purpose today.
 
-Using VisIt, it is not very difficult to generate a picture of the
-solution like this:
-<table width="60%" align="center">
+前两行是我们写给  <code>cout</code>  的内容。最后两行是在没有我们干预的情况下由CG求解器生成的。前两行说明了迭代开始时的残差，而最后一行告诉我们求解器需要47次迭代才能使残差的规范值达到5.3e-13，即低于我们在 "solve "函数中设置的阈值1e-12。我们将在下一个程序中展示如何抑制这种输出，这种输出有时对调试很有用，但往往会使屏幕显示变得混乱。
+
+除了上面显示的输出外，该程序还生成了文件 <code>solution.vtk</code> ，该文件为VTK格式，被当今许多可视化程序广泛使用--包括两个重量级的<a href="https://www.llnl.gov/visit">VisIt</a>和<a href="https://www.paraview.org">Paraview</a>，它们是当今最常被用于此目的的程序。
+
+使用VisIt，生成一张这样的解决方案的图片并不十分困难。  <table width="60%" align="center">
   <tr>
     <td align="center">
       <img src="https://www.dealii.org/images/steps/developer/step-3.solution-3.png" alt="Visualization of the solution of step-3">
     </td>
   </tr>
-</table>
-It shows both the solution and the mesh, elevated above the $x$-$y$ plane
-based on the value of the solution at each point. Of course the solution
-here is not particularly exciting, but that is a result of both what the
-Laplace equation represents and the right hand side $f(\mathbf x)=1$ we
-have chosen for this program: The Laplace equation describes (among many
-other uses) the vertical deformation of a membrane subject to an external
-(also vertical) force. In the current example, the membrane's borders
-are clamped to a square frame with no vertical variation; a constant
-force density will therefore intuitively lead to a membrane that
-simply bulges upward -- like the one shown above.
+</table>  它同时显示了解决方案和网格，根据各点的解决方案的值，将其提升到 $x$  -  $y$ 平面之上。当然，这里的解并不特别令人兴奋，但这是拉普拉斯方程所代表的内容和我们为这个程序选择的右手边 $f(\mathbf x)=1$ 的结果。拉普拉斯方程描述了（在许多其他用途中）受外部（也是垂直）力作用的膜的垂直变形。在目前的例子中，膜的边界被夹在一个没有垂直变化的方形框架上；因此，一个恒定的力密度将直观地导致一个简单地向上凸起的膜--如上图所示。
 
-VisIt and Paraview both allow playing with various kinds of visualizations
-of the solution. Several video lectures show how to use these programs.
-@dealiiVideoLectureSeeAlso{11,32}
+VisIt和Paraview都允许对解决方案进行各种类型的可视化处理。一些视频讲座展示了如何使用这些程序。  @dealiiVideoLectureSeeAlso{11,32}   
 
 
 
-<a name="extensions"></a>
-<a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
+
+<a name="extensions"></a> <a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
 
 
-If you want to play around a little bit with this program, here are a few
-suggestions:
-</p>
+如果你想用这个程序玩一玩，这里有几个建议。</p> 
 
-<ul>
-  <li>
-  Change the geometry and mesh: In the program, we have generated a square
-  domain and mesh by using the <code>GridGenerator::hyper_cube</code>
-  function. However, the <code>GridGenerator</code> has a good number of other
-  functions as well. Try an L-shaped domain, a ring, or other domains you find
-  there.
-  </li>
+  <ul>   <li>  改变几何形状和网格。在程序中，我们通过使用 <code>GridGenerator::hyper_cube</code> 函数生成了一个方形域和网格。然而， <code>GridGenerator</code> 也有大量的其他函数。试试L形域，环形域，或其他你在那里找到的域。    </li>   
 
-  <li>
-  Change the boundary condition: The code uses the Functions::ZeroFunction
-  function to generate zero boundary conditions. However, you may want to try
-  non-zero constant boundary values using
-  <code>ConstantFunction&lt;2&gt;(1)</code> instead of
-  <code>ZeroFunction&lt;2&gt;()</code> to have unit Dirichlet boundary
-  values. More exotic functions are described in the documentation of the
-  Functions namespace, and you may pick one to describe your particular boundary
-  values.
-  </li>
+    <li>  改变边界条件。代码使用 Functions::ZeroFunction 函数来生成零边界条件。然而，你可能想用 <code>ConstantFunction&lt;2&gt;(1)</code> 而不是 <code>ZeroFunction&lt;2&gt;()</code> 尝试非零常数边界值，以获得单位Dirichlet边界值。在函数命名空间的文档中描述了更多的奇异函数，你可以挑选一个来描述你的特定边界值。    </li>   
 
-  <li> Modify the type of boundary condition: Presently, what happens
-  is that we use Dirichlet boundary values all around, since the
-  default is that all boundary parts have boundary indicator zero, and
-  then we tell the
-  VectorTools::interpolate_boundary_values() function to
-  interpolate boundary values to zero on all boundary components with
-  indicator zero.  <p> We can change this behavior if we assign parts
-  of the boundary different indicators. For example, try this
-  immediately after calling GridGenerator::hyper_cube():
-  @code
+    <li>  修改边界条件的类型。目前，所发生的情况是，我们在周围使用Dirichlet边界值，因为默认情况是所有边界部分的边界指标为零，然后我们告诉 VectorTools::interpolate_boundary_values() 函数，在所有指标为零的边界部分上将边界值插值为零。 <p>如果我们给边界的部分分配不同的指标，我们可以改变这种行为。例如，在调用 GridGenerator::hyper_cube(): @code
   triangulation.begin_active()->face(0)->set_boundary_id(1);
-  @endcode
+  @endcode后立即尝试这样做。
 
-  What this does is it first asks the triangulation to
-  return an iterator that points to the first active cell. Of course,
-  this being the coarse mesh for the triangulation of a square, the
-  triangulation has only a single cell at this moment, and it is
-  active. Next, we ask the cell to return an iterator to its first
-  face, and then we ask the face to reset the boundary indicator of
-  that face to 1. What then follows is this: When the mesh is refined,
-  faces of child cells inherit the boundary indicator of their
-  parents, i.e. even on the finest mesh, the faces on one side of the
-  square have boundary indicator 1. Later, when we get to
-  interpolating boundary conditions, the
-  VectorTools::interpolate_boundary_values() call will only produce boundary
-  values for those faces that have zero boundary indicator, and leave
-  those faces alone that have a different boundary indicator. What
-  this then does is to impose Dirichlet boundary conditions on the
-  former, and homogeneous Neumann conditions on the latter (i.e. zero
-  normal derivative of the solution, unless one adds additional terms
-  to the right hand side of the variational equality that deal with
-  potentially non-zero Neumann conditions). You will see this if you
-  run the program.
 
-  An alternative way to change the boundary indicator is to label
-  the boundaries based on the Cartesian coordinates of the face centers.
-  For example, we can label all of the cells along the top and
-  bottom boundaries with a boundary indicator 1 by checking to
-  see if the cell centers' y-coordinates are within a tolerance
-  (here 1e-12) of -1 and 1. Try this immediately after calling
-  GridGenerator::hyper_cube(), as before:
-  @code
+
+  这样做的目的是，它首先要求三角计算返回一个迭代器，指向第一个活动单元。当然，作为一个正方形的三角测量的粗略网格，此刻三角测量只有一个单元，而且是活动的。接下来，我们要求单元格返回它的第一个面的迭代器，然后我们要求面将该面的边界指标重置为1。接下来的事情就是这样。当网格被细化时，子单元的面会继承其父母的边界指示器，也就是说，即使在最细的网格上，广场一侧的面的边界指示器为1。稍后，当我们要插值边界条件时， VectorTools::interpolate_boundary_values() 调用将只为那些边界指标为零的面产生边界值，而对那些具有不同边界指标的面则不予理会。这样做的目的是对前者施加Dirichlet边界条件，而对后者施加同质的Neumann条件（即解的法向导数为零，除非在变分等式的右边增加额外的条款来处理潜在的非零Neumann条件）。如果你运行该程序，你会看到这一点。
+
+  另一种改变边界指标的方法是根据面中心的笛卡尔坐标来标记边界。  例如，我们可以通过检查单元格中心的y坐标是否在-1和1的公差范围内（这里是1e-12），将沿顶部和底部边界的所有单元格标记为边界指标1。  @code
   for (auto &face : triangulation.active_face_iterators())
     if (std::fabs(face->center()(1) - (-1.0)) < 1e-12 ||
         std::fabs(face->center()(1) - (1.0)) < 1e-12)
       face->set_boundary_id(1);
-  @endcode
-  Although this code is a bit longer than before, it is useful for
-  complex geometries, as it does not require knowledge of face labels.
+  @endcode 
 
-  <li>
-  A slight variation of the last point would be to set different boundary
-  values as above, but then use a different boundary value function for
-  boundary indicator one. In practice, what you have to do is to add a second
-  call to <code>interpolate_boundary_values</code> for boundary indicator one:
-  @code
+  虽然这段代码比之前的要长一些，但它对复杂的几何形状很有用，因为它不需要脸部标签的知识。
+
+    <li>  最后一点的一个小变化是像上面那样设置不同的边界值，但随后对边界指标一使用不同的边界值函数。在实践中，你要做的是为边界指标一增加对 <code>interpolate_boundary_values</code> 的第二次调用。  @code
   VectorTools::interpolate_boundary_values(dof_handler,
 					   1,
 					   ConstantFunction<2>(1.),
 					   boundary_values);
-  @endcode
-  If you have this call immediately after the first one to this function, then
-  it will interpolate boundary values on faces with boundary indicator 1 to the
-  unit value, and merge these interpolated values with those previously
-  computed for boundary indicator 0. The result will be that we will get
-  discontinuous boundary values, zero on three sides of the square, and one on
-  the fourth.
+  @endcode 
 
-  <li>
-  Observe convergence: We will only discuss computing errors in norms in
-  step-7, but it is easy to check that computations converge
-  already here. For example, we could evaluate the value of the solution in a
-  single point and compare the value for different %numbers of global
-  refinement (the number of global refinement steps is set in
-  <code>LaplaceProblem::make_grid</code> above). To evaluate the
-  solution at a point, say at $(\frac 13, \frac 13)$, we could add the
-  following code to the <code>LaplaceProblem::output_results</code> function:
-  @code
+  如果你在这个函数的第一个调用之后立即进行这个调用，那么它将把边界指标为1的面的边界值内插到单位值，并将这些内插值与先前为边界指标为0的计算值合并。
+
+    <li>  观察收敛性。我们将只在 step-7 中讨论规范的计算误差，但在这里已经很容易检查计算是否收敛。例如，我们可以在一个点上评估解的值，并比较不同%的全局细化的值（全局细化的步骤数在上面的 <code>LaplaceProblem::make_grid</code> 中设定）。为了评估某一点的解决方案，例如在 $(\frac 13, \frac 13)$ ，我们可以在 <code>LaplaceProblem::output_results</code> 函数中添加以下代码。  @code
     std::cout << "Solution at (1/3,1/3): "
               << VectorTools::point_value(dof_handler, solution,
                                           Point<2>(1./3, 1./3))
               << std::endl;
-  @endcode
-  For 1 through 9 global refinement steps, we then get the following sequence
-  of point values:
-  <table align="center" class="doxtable">
+  @endcode 
+
+  对于1到9个全局细化步骤，我们就会得到以下的点值序列。    <table align="center" class="doxtable">
     <tr> <th># of refinements</th> <th>$u_h(\frac 13,\frac13)$</th> </tr>
     <tr> <td>1</td> <td>0.166667</td> </tr>
     <tr> <td>2</td> <td>0.227381</td> </tr>
@@ -1586,37 +1094,21 @@ suggestions:
     <tr> <td>7</td> <td>0.241369</td> </tr>
     <tr> <td>8</td> <td>0.241380</td> </tr>
     <tr> <td>9</td> <td>0.241383</td> </tr>
-  </table>
-  By noticing that the difference between each two consecutive values reduces
-  by about a factor of 4, we can conjecture that the "correct" value may be
-  $u(\frac 13, \frac 13)\approx 0.241384$. In fact, if we assumed this to be
-  the correct value, we could show that the sequence above indeed shows ${\cal
-  O}(h^2)$ convergence &mdash; theoretically, the convergence order should be
-  ${\cal O}(h^2 |\log h|)$ but the symmetry of the domain and the mesh may lead
-  to the better convergence order observed.
+  </table>  注意到每两个连续的值之间的差异减少了大约4倍，我们可以猜测 "正确 "的值可能是 $u(\frac 13, \frac 13)\approx 0.241384$  。事实上，如果我们假设这是正确的值，我们可以证明上面的序列确实显示了 ${\cal
+  O}(h^2)$ 的收敛&mdash；理论上，收敛顺序应该是 ${\cal O}(h^2 |\log h|)$ ，但是领域和网格的对称性可能导致观察到的更好的收敛顺序。
 
-  A slight variant of this would be to repeat the test with quadratic
-  elements. All you need to do is to set the polynomial degree of the finite
-  element to two in the constructor
-  <code>LaplaceProblem::LaplaceProblem</code>.
+  这方面的一个小变化是用二次元重复测试。你所需要做的就是在构造函数中把有限元的多项式程度设置为2  <code>LaplaceProblem::LaplaceProblem</code>  。
 
-  <li>Convergence of the mean: A different way to see that the solution
-  actually converges (to something &mdash; we can't tell whether it's really
-  the correct value!) is to compute the mean of the solution. To this end, add
-  the following code to <code>LaplaceProblem::output_results</code>:
-  @code
+    <li>  平均值的收敛性。一个不同的方法是计算解的平均数，以观察解是否真的收敛了（收敛到某处&mdash; 我们无法判断它是否真的是正确的值！）。为此，在 <code>LaplaceProblem::output_results</code> 中添加以下代码：@code
     std::cout << "Mean value: "
               << VectorTools::compute_mean_value (dof_handler,
 						  QGauss<2>(fe.degree + 1),
 						  solution,
 						  0)
               << std::endl;
-  @endcode
-  The documentation of the function explains what the second and fourth
-  parameters mean, while the first and third should be obvious. Doing the same
-  study again where we change the number of global refinement steps, we get
-  the following result:
-  <table align="center" class="doxtable">
+  @endcode 
+
+  该函数的文档解释了第二和第四个参数的含义，而第一和第三个参数应该是很明显的。再做一次同样的研究，我们改变全局细化步骤的数量，我们得到以下结果。    <table align="center" class="doxtable">
     <tr> <th># of refinements</th> <th>$\int_\Omega u_h(x)\; dx$</th> </tr>
     <tr> <td>0</td> <td>0.09375000</td> </tr>
     <tr> <td>1</td> <td>0.12790179</td> </tr>
@@ -1627,81 +1119,63 @@ suggestions:
     <tr> <td>6</td> <td>0.14056422</td> </tr>
     <tr> <td>7</td> <td>0.14057382</td> </tr>
     <tr> <td>8</td> <td>0.14057622</td> </tr>
-  </table>
-  Again, the difference between two adjacent values goes down by about a
-  factor of four, indicating convergence as ${\cal O}(h^2)$.
-</ul>
+  </table>  同样，两个相邻值之间的差异下降了约四倍，表明收敛为  ${\cal O}(h^2)$  。  </ul>   
+
 
 
 
 <a name="UsingHDF5tooutputthesolutionandadditionaldata"></a><h3>Using %HDF5 to output the solution and additional data</h3>
 
 
-%HDF5 is a commonly used format that can be read by many scripting
-languages (e.g. R or Python). It is not difficult to get deal.II to
-produce some %HDF5 files that can then be used in external scripts to
-postprocess some of the data generated by this program. Here are some
-ideas on what is possible.
+%HDF5是一种常用的格式，可以被许多脚本语言（如R或Python）读取。让deal.II产生一些%HDF5文件并不困难，然后可以在外部脚本中使用，对该程序产生的一些数据进行后处理。这里有一些关于可能的想法。
 
 
-<a name="Changingtheoutputtoh5"></a><h4> Changing the output to .h5</h4>
+<a name="Changingtheoutputtoh5"></a><h4> Changing the output to .h5</h4> 
 
 
-To fully make use of the automation we first need to introduce a private variable for the number of
-global refinement steps <code>unsigned int n_refinement_steps </code>, which will be used for the output filename.
-In <code>make_grid()</code> we then replace <code>triangulation.refine_global(5);</code> with
+为了充分利用自动化，我们首先需要引入一个全局细化步骤数的私有变量 <code>unsigned int n_refinement_steps </code>  ，它将被用于输出文件名。在 <code>make_grid()</code> we then replace <code>triangulation.refine_global(5);</code> 与 
+
 @code
 n_refinement_steps = 5;
 triangulation.refine_global(n_refinement_steps);
-@endcode
-The deal.II library has two different %HDF5 bindings, one in the HDF5
-namespace (for interfacing to general-purpose data files)
-and another one in DataOut (specifically for writing files for the
-visualization of solutions).
-Although the HDF5 deal.II binding supports both serial and MPI, the %HDF5 DataOut binding
-only supports parallel output.
-For this reason we need to initialize an MPI
-communicator with only one processor. This is done by adding the following code.
+@endcode 
+
+deal.II库有两个不同的%HDF5绑定，一个在HDF5命名空间（用于对接通用数据文件），另一个在DataOut（专门用于编写可视化解决方案的文件）。尽管HDF5 deal.II绑定支持串行和MPI，但%HDF5 DataOut绑定只支持并行输出。由于这个原因，我们需要初始化一个只有一个处理器的MPI通信器。这可以通过添加以下代码来实现。
+
 @code
 int main(int argc, char* argv[])
 {
   Utilities::MPI::MPI_InitFinalize mpi_initialization(argc, argv, 1);
   ...
 }
-@endcode
-Next we change the `Step3::output_results()` output routine as
-described in the DataOutBase namespace documentation:
+@endcode 
+
+接下来我们改变 `Step3::output_results()` 的输出例程，如DataOutBase命名空间文档中所述。
+
 @code
 const std::string filename_h5 = "solution_" + std::to_string(n_refinement_steps) + ".h5";
 DataOutBase::DataOutFilterFlags flags(true, true);
 DataOutBase::DataOutFilter data_filter(flags);
 data_out.write_filtered_data(data_filter);
 data_out.write_hdf5_parallel(data_filter, filename_h5, MPI_COMM_WORLD);
-@endcode
-The resulting file can then be visualized just like the VTK file that
-the original version of the tutorial produces; but, since %HDF5 is a
-more general file format, it can also easily be processed in scripting
-languages for other purposes.
+@endcode 
+
+这样得到的文件就可以像教程原始版本产生的VTK文件一样被可视化；但是，由于%HDF5是一种更通用的文件格式，它也可以很容易地被脚本语言处理，用于其他目的。
 
 
-<a name="Addingthepointvalueandthemeanseeextensionaboveintotheh5file"></a><h4> Adding the point value and the mean (see extension above) into the .h5 file</h4>
+<a name="Addingthepointvalueandthemeanseeextensionaboveintotheh5file"></a><h4> Adding the point value and the mean (see extension above) into the .h5 file</h4> 
 
 
-After outputting the solution, the file can be opened again to include
-more datasets.  This allows us to keep all the necessary information
-of our experiment in a single result file, which can then be read and
-processed by some postprocessing script.
-(Have a look at HDF5::Group::write_dataset() for further
-information on the possible output options.)
+在输出解决方案后，可以再次打开该文件以包括更多的数据集。 这使得我们可以将实验的所有必要信息保存在一个结果文件中，然后可以由一些后处理脚本来读取和处理。请看 HDF5::Group::write_dataset() 中关于可能的输出选项的进一步信息）。
 
-To make this happen, we first include the necessary header into our file:
+为了实现这一点，我们首先将必要的头文件纳入我们的文件。
+
 @code
 #include <deal.II/base/hdf5.h>
-@endcode
-Adding the following lines to the end
-of our output routine adds the information about the value of the
-solution at a particular point, as well as the mean value of the
-solution, to our %HDF5 file:
+@endcode 
+
+在我们的输出例程的末尾添加以下几行，将关于某个特定点的解的值以及解的平均值的信息添加到我们的%HDF5文件中。
+
 @code
 HDF5::File data_file(filename_h5, HDF5::File::FileAccessMode::open, MPI_COMM_WORLD);
 Vector<double> point_value(1);
@@ -1713,46 +1187,43 @@ mean_value[0] = VectorTools::compute_mean_value(dof_handler,
                                                 QGauss<2>(fe.degree + 1),
                                                 solution, 0);
 data_file.write_dataset("mean_value",mean_value);
-@endcode
+@endcode 
+
+
+
 
 
 
 <a name="UsingRandggplot2togenerateplots"></a><h3> Using R and ggplot2 to generate plots</h3>
 
 
-The data put into %HDF5 files above can then be used from scripting
-languages for further postprocessing. In the following, let us show
-how this can, in particular, be done with the
-<a href="https://en.wikipedia.org/wiki/R_(programming_language)">R
-programming language</a>, a widely used language in statistical data
-analysis. (Similar things can also be done in Python, for example.)
-If you are unfamiliar with R and ggplot2 you could check out the data carpentry course on R
-<a href="https://datacarpentry.org/R-ecology-lesson/index.html">here</a>.
-Furthermore, since most search engines struggle with searches of the form "R + topic",
-we recommend using the specializes service <a
-href="http://rseek.org">RSeek </a> instead.
+上述放入%HDF5文件的数据，然后可以从脚本语言中使用，进行进一步的后处理。在下文中，让我们展示一下，特别是如何用<a href="https://en.wikipedia.org/wiki/R_(programming_language)">R
+programming language</a>这个在统计数据分析中广泛使用的语言来完成。(例如，类似的事情也可以在Python中完成。)如果你不熟悉R和ggplot2，你可以看看R的数据木工课程<a href="https://datacarpentry.org/R-ecology-lesson/index.html">here</a>。此外，由于大多数搜索引擎对 "R+主题 "这种形式的搜索很吃力，我们建议使用专门的服务<a
+href="http://rseek.org">RSeek </a>来代替。
 
-The most prominent difference between R and other languages is that
-the assignment operator (`a = 5`) is typically written as
-`a <- 5`. As the latter is considered standard we will use it in our examples as well.
-To open the `.h5` file in R you have to install the <a href="https://bioconductor.org/packages/release/bioc/html/rhdf5.html">rhdf5</a> package, which is a part of the Bioconductor package.
+R和其他语言之间最突出的区别是，赋值运算符（`a = 5`）通常写成`a <- 5`。由于后者被认为是标准的，我们将在我们的例子中也使用它。为了在R中打开`.h5`文件，你必须安装<a href="https://bioconductor.org/packages/release/bioc/html/rhdf5.html">rhdf5</a>包，它是Bioconductor包的一部分。
 
-First we will include all necessary packages and have a look at how the data is structured in our file.
+首先，我们将包括所有必要的包，并看看我们的文件中的数据是如何结构化的。
+
 @code{.r}
 library(rhdf5)     # library for handling HDF5 files
 library(ggplot2)   # main plotting library
 library(grDevices) # needed for output to PDF
 library(viridis)   # contains good colormaps for sequential data
 
+
 refinement <- 5
 h5f <- H5Fopen(paste("solution_",refinement,".h5",sep=""))
 print(h5f)
-@endcode
-This gives the following output
+@endcode 
+
+这给出了以下输出 
+
 @code{.unparsed}
 HDF5 FILE
    name /
 filename
+
 
     name       otype  dclass     dim
 0 cells       H5I_DATASET INTEGER  x 1024
@@ -1760,70 +1231,63 @@ filename
 2 nodes       H5I_DATASET FLOAT    x 1089
 3 point_value H5I_DATASET FLOAT   1
 4 solution    H5I_DATASET FLOAT    x 1089
-@endcode
-The datasets can be accessed by <code>h5f\$name</code>. The function
-<code>dim(h5f\$cells)</code> gives us the dimensions of the matrix
-that is used to store our cells.
-We can see the following three matrices, as well as the two
-additional data points we added.
-<ul>
-<li> <code>cells</code>: a 4x1024 matrix that stores the  (C++) vertex indices for each cell
-<li> <code>nodes</code>: a 2x1089 matrix storing the position values (x,y) for our cell vertices
-<li> <code>solution</code>: a 1x1089 matrix storing the values of our solution at each vertex
-</ul>
-Now we can use this data to generate various plots. Plotting with ggplot2 usually splits into two steps.
-At first the data needs to be manipulated and added to a <code>data.frame</code>.
-After that, a <code>ggplot</code> object is constructed and manipulated by adding plot elements to it.
+@endcode 
 
-<code>nodes</code> and <code>cells</code> contain all the information we need to plot our grid.
-The following code wraps all the data into one dataframe for plotting our grid:
+数据集可以通过  <code>h5f\$name</code>  访问。函数  <code>dim(h5f\$cells)</code>  给我们提供了用于存储我们单元格的矩阵的尺寸。我们可以看到以下三个矩阵，以及我们添加的两个额外数据点。  <ul>   <li>   <code>cells</code>  ：一个4x1024的矩阵，存储每个单元的（C++）顶点指数  <li>   <code>nodes</code>  ：一个2x1089的矩阵，存储单元顶点的位置值（x，y）  <li>   <code>solution</code>  ：一个1x1089的矩阵，存储每个顶点的解决方案的值  </ul>  现在我们可以使用这些数据来生成各种图。用ggplot2作图通常分为两步。首先，数据需要被处理并添加到一个  <code>data.frame</code>  。之后，构建一个 <code>ggplot</code> 对象，并通过向其添加绘图元素进行操作。
+
+  <code>nodes</code> and <code>cells</code> 包含所有我们需要绘制网格的信息。下面的代码将所有的数据打包成一个数据框架，用于绘制我们的网格。
+
 @code{.r}
 # Counting in R starts at 1 instead of 0, so we need to increment all
 # vertex indices by one:
 cell_ids <- h5f$cells+1
+
 
 # Store the x and y positions of each vertex in one big vector in a
 # cell by cell fashion (every 4 entries belong to one cell):
 cells_x <- h5f$nodes[1,][cell_ids]
 cells_y <- h5f$nodes[2,][cell_ids]
 
+
 # Construct a vector that stores the matching cell by cell grouping
 # (1,1,1,1,2,2,2,2,...):
 groups <- rep(1:ncol(cell_ids),each=4)
 
+
 # Finally put everything into one dataframe:
 meshdata <- data.frame(x = cells_x, y = cells_y, id = groups)
-@endcode
+@endcode 
 
-With the finished dataframe we have everything we need to plot our grid:
+
+
+有了这个完成的数据框架，我们就有了绘制网格所需的一切。
+
 @code{.r}
 pdf (paste("grid_",refinement,".pdf",sep=""),width = 5,height = 5) # Open new PDF file
 plt <- ggplot(meshdata,aes(x=x,y=y,group=id))                      # Construction of our plot
                                                                    # object, at first only data
 
+
 plt <- plt + geom_polygon(fill="white",colour="black")             # Actual plotting of the grid as polygons
 plt <- plt + ggtitle(paste("grid at refinement level #",refinement))
 
+
 print(plt)                                                         # Show the current state of the plot/add it to the pdf
 dev.off()                                                          # Close PDF file
-@endcode
+@endcode 
 
-The contents of this file then look as follows (not very exciting, but
-you get the idea):
-<table width="60%" align="center">
+
+
+这个文件的内容如下（不是很令人兴奋，但你会明白的）。  <table width="60%" align="center">
   <tr>
    <td align="center">
      <img src="https://www.dealii.org/images/steps/developer/step-3.extensions.grid_5.png" alt="Grid after 5 refinement steps of step-3">
    </td>
   </tr>
-</table>
+</table>   
 
-We can also visualize the solution itself, and this is going to look
-more interesting.
-To make a 2D pseudocolor plot of our solution we will use <code>geom_raster</code>.
-This function needs a structured grid, i.e. uniform in x and y directions.
-Luckily our data at this point is structured in the right way.
-The following code plots a pseudocolor representation of our surface into a new PDF:
+我们还可以将解决方案本身可视化，这看起来会更有趣。为了给我们的解决方案做一个二维伪色图，我们将使用  <code>geom_raster</code>  。这个函数需要一个结构化的网格，即在x和y方向上是均匀的。幸运的是，我们在这一点上的数据是以正确的方式结构化的。下面的代码将我们的曲面的伪色表示法绘制成一个新的PDF。
+
 @code{.r}
 pdf (paste("pseudocolor_",refinement,".pdf",sep=""),width = 5,height = 4.2) # Open new PDF file
 colordata <- data.frame(x = h5f$nodes[1,],y = h5f$nodes[2,] , solution = h5f$solution[1,])
@@ -1832,24 +1296,25 @@ plt <- plt + geom_raster(interpolate=TRUE)
 plt <- plt + scale_fill_viridis()
 plt <- plt + ggtitle(paste("solution at refinement level #",refinement))
 
+
 print(plt)
 dev.off()
 H5Fclose(h5f) # Close the HDF5 file
-@endcode
-This is now going to look as follows:
-<table width="60%" align="center">
+@endcode 
+
+现在的情况是这样的。  <table width="60%" align="center">
  <tr>
    <td align="center">
      <img src="https://www.dealii.org/images/steps/developer/step-3.extensions.pseudocolor_5.png" alt="Solution after 5 refinement steps of step-3">
    </td>
  </tr>
-</table>
+</table>   
 
-For plotting the converge curves we need to re-run the C++ code multiple times with different values for <code>n_refinement_steps</code>
-starting from 1.
-Since every file only contains a single data point we need to loop over them and concatenate the results into a single vector.
+为了绘制收敛曲线，我们需要从1开始，用不同的 <code>n_refinement_steps</code> 值多次重新运行C++代码。由于每个文件只包含一个数据点，我们需要对它们进行循环，并将结果串联成一个向量。
+
 @code{.r}
 n_ref <- 8   # Maximum refinement level for which results are existing
+
 
 # First we initiate all vectors with the results of the first level
 h5f   <- H5Fopen("solution_1.h5")
@@ -1857,6 +1322,7 @@ dofs  <- dim(h5f$solution)[2]
 mean  <- h5f$mean_value
 point <- h5f$point_value
 H5Fclose(h5f)
+
 
 for (reflevel in 2:n_ref)
 {
@@ -1866,21 +1332,23 @@ for (reflevel in 2:n_ref)
    point <- c(point,h5f\$point_value)
    H5Fclose(h5f)
 }
-@endcode
-As we are not interested in the values themselves but rather in the error compared to a "exact" solution we will
-assume our highest refinement level to be that solution and omit it from the data.
+@endcode 
+
+由于我们对数值本身不感兴趣，而是对与 "精确 "解决方案相比的误差感兴趣，我们将假设我们的最高细化水平是该解决方案，并从数据中省略它。
+
 @code{.r}
 # Calculate the error w.r.t. our maximum refinement step
 mean_error  <- abs(mean[1:n_ref-1]-mean[n_ref])
 point_error <- abs(point[1:n_ref-1]-point[n_ref])
 
+
 # Remove the highest value from our DoF data
 dofs     <- dofs[1:n_ref-1]
 convdata <- data.frame(dofs = dofs, mean_value= mean_error, point_value = point_error)
-@endcode
-Now we have all the data available to generate our plots.
-It is often useful to plot errors on a log-log scale, which is
-accomplished in the following code:
+@endcode 
+
+现在我们有了所有可用的数据来生成我们的图。在对数尺度上绘制误差图通常是有用的，这在下面的代码中可以实现。
+
 @code
 pdf (paste("convergence.pdf",sep=""),width = 5,height = 4.2)
 plt <- ggplot(convdata,mapping=aes(x = dofs, y = mean_value))
@@ -1889,26 +1357,22 @@ plt <- plt+labs(x="#DoFs",y = "mean value error")
 plt <- plt+scale_x_log10()+scale_y_log10()
 print(plt)
 
+
 plt <- ggplot(convdata,mapping=aes(x = dofs, y = point_value))
 plt <- plt+geom_line()
 plt <- plt+labs(x="#DoFs",y = "point value error")
 plt <- plt+scale_x_log10()+scale_y_log10()
 print(plt)
 
+
 dev.off()
-@endcode
-This results in the following plot that shows how the errors in the
-mean value and the solution value at the chosen point nicely converge
-to zero:
-<table style="width:50%" align="center">
+@endcode 
+
+这就产生了下面的图，显示了均值和所选点的解值的误差如何很好地收敛到零。  <table style="width:50%" align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-3.extensions.convergence_mean.png" alt=""></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-3.extensions.convergence_point.png" alt=""></td>
   </tr>
-</table>
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-3.cc"
-*/
+</table>  <a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-3.cc" 。 
+
+  */  

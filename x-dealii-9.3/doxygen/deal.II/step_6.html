@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-6 tutorial program</title>
+<title>The deal.II Library: The step-6 tutorial program  。</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,96 +86,103 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-6 tutorial program </div>  </div>
+<div class="title">The step-6 tutorial program 。 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_5.html">step-5</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_5.html">step-5</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Whatadaptivelyrefinedmesheslooklike"> What adaptively refined meshes look like </a>
-        <li><a href="#Whyadapativelyrefinedmeshes"> Why adapatively refined meshes? </a>
-        <li><a href="#Howtodealwithhangingnodesintheory"> How to deal with hanging nodes in theory </a>
-        <li><a href="#Howtodealwithhangingnodesinpractice"> How to deal with hanging nodes in practice </a>
-        <li><a href="#Howweobtainlocallyrefinedmeshes"> How we obtain locally refined meshes </a>
-        <li><a href="#Boundaryconditions"> Boundary conditions </a>
-        <li><a href="#Otherthingsthisprogramshows"> Other things this program shows </a>
+        <li><a href="#Whatadaptivelyrefinedmesheslooklike"> What adaptively refined meshes look like </a><a href="#Whatadaptivelyrefinedmesheslooklike"> What adaptively refined meshes look like </a>
+        <li><a href="#Whyadapativelyrefinedmeshes"> Why adapatively refined meshes? </a><a href="#Whyadapativelyrefinedmeshes"> Why adapatively refined meshes? </a>
+        <li><a href="#Howtodealwithhangingnodesintheory"> How to deal with hanging nodes in theory </a><a href="#Howtodealwithhangingnodesintheory"> How to deal with hanging nodes in theory </a>
+        <li><a href="#Howtodealwithhangingnodesinpractice"> How to deal with hanging nodes in practice </a><a href="#Howtodealwithhangingnodesinpractice"> How to deal with hanging nodes in practice </a>
+        <li><a href="#Howweobtainlocallyrefinedmeshes"> How we obtain locally refined meshes </a><a href="#Howweobtainlocallyrefinedmeshes"> How we obtain locally refined meshes </a>
+        <li><a href="#Boundaryconditions"> Boundary conditions </a><a href="#Boundaryconditions"> Boundary conditions </a>
+        <li><a href="#Otherthingsthisprogramshows"> Other things this program shows </a><a href="#Otherthingsthisprogramshows"> Other things this program shows </a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#ThecodeStep6codeclasstemplate">The <code>Step6</code> class template</a>
-        <li><a href="#Nonconstantcoefficients">Nonconstant coefficients</a>
-        <li><a href="#ThecodeStep6codeclassimplementation">The <code>Step6</code> class implementation</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#ThecodeStep6codeclasstemplate">The <code>Step6</code> class template</a><a href="#ThecodeStep6codeclasstemplate">The <code>Step6</code> class template</a>
+        <li><a href="#Nonconstantcoefficients">Nonconstant coefficients</a><a href="#Nonconstantcoefficients">Nonconstant coefficients</a>
+        <li><a href="#ThecodeStep6codeclassimplementation">The <code>Step6</code> class implementation</a><a href="#ThecodeStep6codeclassimplementation">The <code>Step6</code> class implementation</a>
       <ul>
-        <li><a href="#Step6Step6">Step6::Step6</a>
-        <li><a href="#Step6setup_system">Step6::setup_system</a>
-        <li><a href="#Step6assemble_system">Step6::assemble_system</a>
-        <li><a href="#Step6solve">Step6::solve</a>
-        <li><a href="#Step6refine_grid">Step6::refine_grid</a>
-        <li><a href="#Step6output_results">Step6::output_results</a>
-        <li><a href="#Step6run">Step6::run</a>
+        <li><a href="#Step6Step6">Step6::Step6</a> ]<a href="#Step6Step6">Step6::Step6</a>
+        <li><a href="#Step6setup_system">Step6::setup_system</a><a href="#Step6setup_system">Step6::setup_system</a>
+        <li><a href="#Step6assemble_system">Step6::assemble_system</a><a href="#Step6assemble_system">Step6::assemble_system</a>
+        <li><a href="#Step6solve">Step6::solve</a><a href="#Step6solve">Step6::solve</a>
+        <li><a href="#Step6refine_grid">Step6::refine_grid</a><a href="#Step6refine_grid">Step6::refine_grid</a>
+        <li><a href="#Step6output_results">Step6::output_results</a><a href="#Step6output_results">Step6::output_results</a>
+        <li><a href="#Step6run">Step6::run</a><a href="#Step6run">Step6::run</a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
       <ul>
-        <li><a href="#Solversandpreconditioners">Solvers and preconditioners</a>
-        <li><a href="#Abettermesh">A better mesh</a>
-        <li><a href="#Playingwiththeregularityofthesolution">Playing with the regularity of the solution</a>
+        <li><a href="#Solversandpreconditioners">Solvers and preconditioners</a><a href="#Solversandpreconditioners">Solvers and preconditioners</a>
+        <li><a href="#Abettermesh">A better mesh</a><a href="#Abettermesh">A better mesh</a>
+        <li><a href="#Playingwiththeregularityofthesolution">Playing with the regularity of the solution</a><a href="#Playingwiththeregularityofthesolution">Playing with the regularity of the solution</a>
     </ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
- <a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
-<dl class="section note"><dt>Note</dt><dd>The material presented here is also discussed in <a href="http://www.math.colostate.edu/~bangerth/videos.676.15.html">video lecture 15</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.16.html">video lecture 16</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.17.html">video lecture 17</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.17.25.html">video lecture 17.25</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.17.5.html">video lecture 17.5</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.17.75.html">video lecture 17.75</a>. (All video lectures are also available <a href="http://www.math.colostate.edu/~bangerth/videos.html">here</a>.)</dd></dl>
-<p>This program is finally about one of the main features of deal.II: the use of adaptively (locally) refined meshes. The program is still based on <a class="el" href="step_4.html">step-4</a> and <a class="el" href="step_5.html">step-5</a>, and, as you will see, it does not actually take very much code to enable adaptivity. Indeed, while we do a great deal of explaining, adaptive meshes can be added to an existing program with barely a dozen lines of additional code. The program shows what these lines are, as well as another important ingredient of adaptive mesh refinement (AMR): a criterion that can be used to determine whether it is necessary to refine a cell because the error is large on it, whether the cell can be coarsened because the error is particularly small on it, or whether we should just leave the cell as it is. We will discuss all of these issues in the following.</p>
+</p>
+<p><a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
+<dl class="section note"><dt>Note</dt><dd>The material presented here is also discussed in <a href="http://www.math.colostate.edu/~bangerth/videos.676.15.html">video lecture 15</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.16.html">video lecture 16</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.17.html">video lecture 17</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.17.25.html">video lecture 17.25</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.17.5.html">video lecture 17.5</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.17.75.html">video lecture 17.75</a>. (All video lectures are also available <a href="http://www.math.colostate.edu/~bangerth/videos.html">here</a>.) <br  />
+</dd></dl>
+<p>这个程序最后是关于deal.II的主要特征之一：使用自适应（局部）细化网格。这个程序仍然基于 <a class="el" href="step_4.html">step-4</a> 和 <a class="el" href="step_5.html">step-5</a> ，正如你将看到的，实际上不需要太多的代码就可以实现自适应性。事实上，虽然我们做了大量的解释，但自适应网格可以被添加到一个现有的程序中，几乎不需要十几行的额外代码。该程序显示了这些行是什么，以及自适应网格细化（AMR）的另一个重要成分：一个标准，可以用来确定是否有必要细化一个单元，因为它上面的误差很大，是否可以粗化这个单元，因为它上面的误差特别小，或者我们是否应该让这个单元保持原样。我们将在下文中讨论所有这些问题。</p>
 <p><a class="anchor" id="Whatadaptivelyrefinedmesheslooklike"></a></p><h3>What adaptively refined meshes look like </h3>
-<p>There are a number of ways how one can adaptively refine meshes. The basic structure of the overall algorithm is always the same and consists of a loop over the following steps:</p><ul>
-<li>Solve the PDE on the current mesh;</li>
-<li>Estimate the error on each cell using some criterion that is indicative of the error;</li>
-<li>Mark those cells that have large errors for refinement, mark those that have particularly small errors for coarsening, and leave the rest alone;</li>
-<li>Refine and coarsen the cells so marked to obtain a new mesh;</li>
-<li>Repeat the steps above on the new mesh until the overall error is sufficiently small.</li>
+<p>有许多方法可以自适应地细化网格。整个算法的基本结构总是相同的，由以下步骤的循环组成。</p>
+<ul>
+<li>解决当前网格上的PDE。</li>
+<li>使用一些指示误差的标准来估计每个单元的误差。</li>
+<li>标记那些有大误差的单元进行细化，标记那些有特别小误差的单元进行粗化，其余的不做处理。</li>
+<li>细化和粗化被标记的单元，以获得一个新的网格。</li>
+<li>在新的网格上重复上述步骤，直到整体误差足够小。</li>
 </ul>
-<p>For reasons that are probably lost to history (maybe that these functions used to be implemented in FORTRAN, a language that does not care about whether something is spelled in lower or UPPER case letters, with programmers often choosing upper case letters habitually), the loop above is often referenced in publications about mesh adaptivity as the SOLVE-ESTIMATE-MARK-REFINE loop (with this spelling).</p>
-<p>Beyond this structure, however, there are a variety of ways to achieve this. Fundamentally, they differ in how exactly one generates one mesh from the previous one.</p>
-<p>If one were to use triangles (which deal.II does not do), then there are two essential possibilities:</p><ul>
-<li>Longest-edge refinement: In this strategy, a triangle marked for refinement is cut into two by introducing one new edge from the midpoint of the longest edge to the opposite vertex. Of course, the midpoint from the longest edge has to somehow be balanced by <em>also</em> refining the cell on the other side of that edge (if there is one). If the edge in question is also the longest edge of the neighboring cell, then we can just run a new edge through the neighbor to the opposite vertex; otherwise a slightly more involved construction is necessary that adds more new vertices on at least one other edge of the neighboring cell, and then may propagate to the neighbors of the neighbor until the algorithm terminates. This is hard to describe in words, and because deal.II does not use triangles not worth the time here. But if you're curious, you can always watch video lecture 15 at the link shown at the top of this introduction.</li>
-<li>Red-green refinement: An alternative is what is called "red-green refinement". This strategy is even more difficult to describe (but also discussed in the video lecture) and has the advantage that the refinement does not propagate beyond the immediate neighbors of the cell that we want to refine. It is, however, substantially more difficult to implement.</li>
+<p>由于一些可能被历史遗忘的原因(可能是这些函数过去是用FORTRAN语言实现的，这种语言并不关心某些东西是用小写字母还是大写字母，程序员往往习惯性地选择大写字母)，上述循环在关于网格适应性的出版物中经常被称为SOLVE-ESTIMATE-MARK-REFINE循环(用这种拼写)。</p>
+<p>然而，除了这个结构之外，还有各种方法来实现这个目标。从根本上说，它们的不同之处在于如何从前一个网格中准确地生成一个网格。</p>
+<p>如果要使用三角形（deal.II不做），那么有两种基本的可能性。</p>
+<ul>
+<li>最长边细化。在这个策略中，通过从最长边的中点到对面的顶点引入一条新的边，将一个标记为细化的三角形切割成两个。当然，来自最长边的中点必须以某种方式通过*也*完善该边另一侧的单元格（如果有的话）来平衡。如果有问题的边也是相邻单元的最长边，那么我们可以直接运行一条新的边穿过相邻单元到对面的顶点；否则就需要一个稍微复杂的结构，在相邻单元的至少一条其他边上增加更多的新顶点，然后可能传播到相邻单元的邻居，直到算法终止。这很难用语言描述，而且因为deal.II不使用三角形，不值得在这里花时间。 但如果你感到好奇，你可以在本介绍顶部显示的链接中观看视频讲座15。</li>
+<li>红绿细化。另一个选择是所谓的 "红绿细化"。 这种策略甚至更难描述（但也在视频讲座中讨论过），其优点是细化不会传播到我们想要细化的单元的近邻之外。然而，它的实施难度大大增加。</li>
 </ul>
-<p>There are other variations of these approaches, but the important point is that they always generate a mesh where the lines where two cells touch are entire edges of both adjacent cells. With a bit of work, this strategy is readily adapted to three-dimensional meshes made from tetrahedra.</p>
-<p>Neither of these methods works for quadrilaterals in 2d and hexahedra in 3d, or at least not easily. The reason is that the transition elements created out of the quadrilateral neighbors of a quadrilateral cell that is to be refined would be triangles, and we don't want this. Consequently, the approach to adaptivity chosen in deal.II is to use grids in which neighboring cells may differ in refinement level by one. This then results in nodes on the interfaces of cells which belong to one side, but are unbalanced on the other. The common term for these is &ldquo;hanging nodes&rdquo;, and these meshes then look like this in a very simple situation:</p>
+<p>这些方法还有其他的变化，但重要的一点是，它们总是产生一个网格，其中两个单元的接触线是两个相邻单元的整个边缘。只要稍加努力，这种策略就可以很容易地适用于由四面体构成的三维网格。</p>
+<p>这两种方法对二维的四边形和三维的六面体都不起作用，或者至少不容易。原因是要精化的四边形单元的四边形邻居所创建的过渡元素将是三角形，而我们并不希望这样。因此，在deal.II中选择的适应性方法是使用网格，其中相邻的单元在细化水平上可能相差一个。这就导致在单元的界面上出现属于一方的节点，但在另一方是不平衡的。这些节点的常用术语是&ldquo;悬挂节点&rdquo;，这些网格在非常简单的情况下看起来是这样的。</p>
 <div class="image">
 <img src="hanging_nodes.png" alt=""/>
 <div class="caption">
 A simple mesh with hanging nodes</div></div>
-<p>A more complicated two-dimensional mesh would look like this (and is discussed in the "Results" section below):</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step_6_grid_5_ladutenko.svg" alt="Fifth adaptively refined Ladutenko grid: the cells are clustered
-          along the inner circle." style="pointer-events: none;" width="300" height="300" class="inline"/></p>
-<p>Finally, a three-dimensional mesh (from <a class="el" href="step_43.html">step-43</a>) with such hanging nodes is shown here:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-43.3d.mesh.png" alt="" width="300" height="300" class="inline"/></p>
-<p>The first and third mesh are of course based on a square and a cube, but as the second mesh shows, this is not necessary. The important point is simply that we can refine a mesh independently of its neighbors (subject to the constraint that a cell can be only refined once more than its neighbors), but that we end up with these &ldquo;hanging nodes&rdquo; if we do this.</p>
+<p> <br  />
+</p>
+<p>一个更复杂的二维网格会是这样的（并在下面的 "结果 "部分讨论）。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step_6_grid_5_ladutenko.svg" alt="第五个自适应细化的Ladutenko网格：细胞沿着内圈聚集。" style="pointer-events: none;" width="300" height="300" class="inline"/>。</p>
+<p>最后，一个具有这种悬挂节点的三维网格（来自 <a class="el" href="step_43.html">step-43</a> ）显示在这里。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/  step-43  .3d.mesh.png" alt="" width="300" height="300" class="inline"/>。</p>
+<p>第一个和第三个网格当然是基于一个正方形和一个立方体，但正如第二个网格所示，这不是必须的。重要的一点是，我们可以独立于其邻居来细化一个网格（受制于一个单元只能比其邻居多细化一次的约束），但如果我们这样做，最终会出现这些&ldquo;悬空节点&rdquo;。</p>
 <p><a class="anchor" id="Whyadapativelyrefinedmeshes"></a></p><h3>Why adapatively refined meshes? </h3>
-<p>Now that you have seen what these adaptively refined meshes look like, you should ask <em>why</em> we would want to do this. After all, we know from theory that if we refine the mesh globally, the error will go down to zero as </p><p class="formulaDsp">
+<p>现在你已经看到了这些自适应细化网格的样子，你应该问<em>why</em>我们会想这样做吗？毕竟，我们从理论上知道，如果我们对网格进行全局细化，误差会下降到零，因为</p>
+<p class="formulaDsp">
 \begin{align*} \|\nabla(u-u_h)\|_{\Omega} \le C h_\text{max}^p \| \nabla^{p+1} u \|_{\Omega}, \end{align*}
 </p>
-<p> where \(C\) is some constant independent of \(h\) and \(u\), \(p\) is the polynomial degree of the finite element in use, and \(h_\text{max}\) is the diameter of the largest cell. So if the <em>largest</em> cell is important, then why would we want to make the mesh fine in some parts of the domain but not all?</p>
-<p>The answer lies in the observation that the formula above is not optimal. In fact, some more work shows that the following is a better estimate (which you should compare to the square of the estimate above): </p><p class="formulaDsp">
+<p>其中 \(C\) 是独立于 \(h\) 和 \(u\) 的某个常数， \(p\) 是使用中的有限元的多项式程度， \(h_\text{max}\) 是最大单元的直径。那么，如果<em>largest</em>单元很重要，为什么我们要在域的某些部分而不是所有部分将网格做细呢？</p>
+<p>答案在于观察到上面的公式并不是最优的。事实上，一些更多的工作表明，以下是一个更好的估计（你应该与上面的估计的平方进行比较）。</p>
+<p class="formulaDsp">
 \begin{align*} \|\nabla(u-u_h)\|_{\Omega}^2 \le C \sum_K h_K^{2p} \| \nabla^{p+1} u \|^2_K. \end{align*}
 </p>
-<p> (Because \(h_K\le h_\text{max}\), this formula immediately implies the previous one if you just pull the mesh size out of the sum.) What this formula suggests is that it is not necessary to make the <em>largest</em> cell small, but that the cells really only need to be small <em>where \(\| \nabla^{p+1} u \|_K\) is large</em>! In other words: The mesh really only has to be fine where the solution has large variations, as indicated by the \(p+1\)st derivative. This makes intuitive sense: if, for example, we use a linear element \(p=1\), then places where the solution is nearly linear (as indicated by \(\nabla^2 u\) being small) will be well resolved even if the mesh is coarse. Only those places where the second derivative is large will be poorly resolved by large elements, and consequently that's where we should make the mesh small.</p>
-<p>Of course, this <em>a priori estimate</em> is not very useful in practice since we don't know the exact solution \(u\) of the problem, and consequently, we cannot compute \(\nabla^{p+1}u\). But, and that is the approach commonly taken, we can compute numerical approximations of \(\nabla^{p+1}u\) based only on the discrete solution \(u_h\) that we have computed before. We will discuss this in slightly more detail below. This will then help us determine which cells have a large \(p+1\)st derivative, and these are then candidates for refining the mesh.</p>
+<p>(因为 \(h_K\le h_\text{max}\) ，如果你只是把网格大小从总和中拉出来，这个公式立即暗示了前一个公式)。这个公式所暗示的是，没有必要把<em>largest</em>单元格做得很小，而单元格真正只需要做得很小<em>where \(\| \nabla^{p+1} u \|_K\) is large</em>! 换句话说。网格实际上只需要在解有较大变化的地方做得很细，正如 \(p+1\) st导数所表明的那样。这是有直观意义的：例如，如果我们使用一个线性元素 \(p=1\) ，那么即使网格很粗，那些解几乎是线性的地方（如 \(\nabla^2 u\) 所示的小）也会得到很好的解决。只有那些二阶导数大的地方才会被大元素解决得很差，因此我们应该把网格做小。</p>
+<p>当然，这个<em>a priori estimate</em>在实践中不是很有用，因为我们不知道问题的精确解 \(u\) ，因此，我们无法计算 \(\nabla^{p+1}u\) 。但是，这也是通常采取的方法，我们可以只根据之前计算的离散解 \(u_h\) 来计算 \(\nabla^{p+1}u\) 的数值近似值。我们将在下面稍微详细地讨论这个问题。这将有助于我们确定哪些单元具有较大的 \(p+1\) st导数，然后这些单元将成为细化网格的候选单元。</p>
 <p><a class="anchor" id="Howtodealwithhangingnodesintheory"></a></p><h3>How to deal with hanging nodes in theory </h3>
-<p>The methods using triangular meshes mentioned above go to great lengths to make sure that each vertex is a vertex of all adjacent cells &ndash; i.e., that there are no hanging nodes. This then automatically makes sure that we can define shape functions in such a way that they are globally continuous (if we use the common \(Q_p\) Lagrange finite element methods we have been using so far in the tutorial programs, as represented by the <a class="el" href="classFE__Q.html">FE_Q</a> class).</p>
-<p>On the other hand, if we define shape functions on meshes with hanging nodes, we may end up with shape functions that are not continuous. To see this, think about the situation above where the top right cell is not refined, and consider for a moment the use of a bilinear finite element. In that case, the shape functions associated with the hanging nodes are defined in the obvious way on the two small cells adjacent to each of the hanging nodes. But how do we extend them to the big adjacent cells? Clearly, the function's extension to the big cell cannot be bilinear because then it needs to be linear along each edge of the large cell, and that means that it needs to be zero on the entire edge because it needs to be zero on the two vertices of the large cell on that edge. But it is not zero at the hanging node itself when seen from the small cells' side &ndash; so it is not continuous. The following three figures show three of the shape functions along the edges in question that turn out to not be continuous when defined in the usual way simply based on the cells they are adjacent to:</p>
+<p>上面提到的使用三角形网格的方法，都是为了确保每个顶点都是所有相邻单元的顶点&ndash;也就是说，没有悬空节点。这就自动确保了我们能够以这样的方式定义形状函数，即它们是全局连续的（如果我们使用迄今为止在教程程序中一直使用的常见的 \(Q_p\) Lagrange有限元方法，如FE_Q类所代表的）。</p>
+<p>另一方面，如果我们在有悬挂节点的网格上定义形状函数，我们最终可能得到不连续的形状函数。要看到这一点，想想上面的情况，即右上角的单元没有被细化，暂时考虑使用双线性有限元。在这种情况下，与悬挂节点相关的形状函数是以明显的方式定义在与每个悬挂节点相邻的两个小单元上。但我们如何将它们扩展到相邻的大单元呢？显然，函数对大单元格的扩展不能是双线性的，因为那样的话，它需要沿着大单元格的每条边线性化，这意味着它在整条边上需要为零，因为它需要在该边上的大单元格的两个顶点为零。但从小单元一侧看，它在悬挂节点本身并不是零&ndash;所以它不是连续的。下面三幅图显示了沿着有关边缘的三个形状函数，当以通常的方式简单地根据它们相邻的单元格来定义时，这些形状函数被证明是不连续的。</p>
 <div class="threecolumn" style="width: 80%"> <div class="parent"> <div class="img" align="center"> <div class="image">
 <img src="hanging_nodes_shape_functions_1.png" alt=""/>
 <div class="caption">
@@ -188,40 +195,46 @@ A discontinuous shape function at a hanging node</div></div>
 <img src="hanging_nodes_shape_functions_3.png" alt=""/>
 <div class="caption">
 A discontinuous shape function adjacent to a hanging node</div></div>
- </div> </div> </div><p>But we do want the finite element solution to be continuous so that we have a &ldquo;conforming finite element method&rdquo; where the discrete finite element space is a proper subset of the \(H^1\) function space in which we seek the solution of the Laplace equation. To guarantee that the global solution is continuous at these nodes as well, we have to state some additional constraints on the values of the solution at these nodes. The trick is to realize that while the shape functions shown above are discontinuous (and consequently an <em>arbitrary</em> linear combination of them is also discontinuous), that linear combinations in which the shape functions are added up as \(u_h(\mathbf x)=\sum_j U_j \varphi_j(\mathbf x)\) can be continuous <em>if the coefficients \(U_j\) satisfy certain relationships</em>. In other words, the coefficients \(U_j\) can not be chosen arbitrarily but have to satisfy certain constraints so that the function \(u_h\) is in fact continuous. What these constraints have to look is relatively easy to understand conceptually, but the implementation in software is complicated and takes several thousand lines of code. On the other hand, in user code, it is only about half a dozen lines you have to add when dealing with hanging nodes.</p>
-<p>In the program below, we will show how we can get these constraints from deal.II, and how to use them in the solution of the linear system of equations. Before going over the details of the program below, you may want to take a look at the <a class="el" href="group__constraints.html">Constraints on degrees of freedom</a> documentation module that explains how these constraints can be computed and what classes in deal.II work on them.</p>
+ </div> </div> </div><p> <br  />
+</p>
+<p>但我们确实希望有限元解是连续的，因此我们有一个&ldquo;符合要求的有限元方法&rdquo;，其中离散的有限元空间是 \(H^1\) 函数空间的一个适当子集，我们在其中寻求拉普拉斯方程的解。为了保证全局解在这些节点上也是连续的，我们必须对这些节点上的解的值提出一些额外的约束。诀窍是要认识到，虽然上面显示的形状函数是不连续的（因此它们的<em>arbitrary</em>线性组合也是不连续的），但形状函数加起来为 \(u_h(\mathbf x)=\sum_j U_j \varphi_j(\mathbf x)\) 的线性组合可以是连续的<em>if the coefficients \(U_j\) satisfy certain relationships</em>。换句话说，系数 \(U_j\) 不能任意选择，而必须满足某些约束条件，这样，函数 \(u_h\) 实际上是连续的。这些约束条件在概念上相对容易理解，但在软件中的实现却很复杂，需要几千行的代码。另一方面，在用户代码中，在处理挂起的节点时，你只需要增加大约半打的行数。</p>
+<p>在下面的程序中，我们将展示如何从deal.II中获得这些约束，以及如何在线性方程组的求解中使用它们。在了解下面程序的细节之前，你可能想看一下 <a class="el" href="group__constraints.html">Constraints on degrees of freedom</a> 文件模块，它解释了这些约束如何计算，以及deal.II中的哪些类对它们起作用。</p>
 <p><a class="anchor" id="Howtodealwithhangingnodesinpractice"></a></p><h3>How to deal with hanging nodes in practice </h3>
-<p>The practice of hanging node constraints is rather simpler than the theory we have outlined above. In reality, you will really only have to add about half a dozen lines of additional code to a program like <a class="el" href="step_4.html">step-4</a> to make it work with adaptive meshes that have hanging nodes. The interesting part about this is that it is entirely independent of the equation you are solving: The algebraic nature of these constraints has nothing to do with the equation and only depends on the choice of finite element. As a consequence, the code to deal with these constraints is entirely contained in the deal.II library itself, and you do not need to worry about the details.</p>
-<p>The steps you need to make this work are essentially like this:</p><ul>
-<li>You have to create an <a class="el" href="classAffineConstraints.html">AffineConstraints</a> object, which (as the name suggests) will store all constraints on the finite element space. In the current context, these are the constraints due to our desire to keep the solution space continuous even in the presence of hanging nodes. (Below we will also briefly mention that we will also put boundary values into this same object, but that is a separate matter.)</li>
-<li>You have to fill this object using the function <a class="el" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints()</a> to ensure continuity of the elements of the finite element space.</li>
-<li>You have to use this object when you copy the local contributions to the matrix and right hand side into the global objects, by using <a class="el" href="classAffineConstraints.html#a373fbdacd8c486e675b8d2bff8943192">AffineConstraints::distribute_local_to_global()</a>. Up until now, we have done this ourselves, but now with constraints, this is where the magic happens and we apply the constraints to the linear system. What this function does is make sure that the degrees of freedom located at hanging nodes are not, in fact, really free. Rather, they are factually eliminated from the linear system by setting their rows and columns to zero and putting something on the diagonal to ensure the matrix remains invertible. The matrix resulting from this process remains symmetric and positive definite for the Laplace equation we solve here, so we can continue to use the Conjugate Gradient method for it.</li>
-<li>You then solve the linear system as usual, but at the end of this step, you need to make sure that the degrees of "freedom" located on hanging nodes get their correct (constrained) value so that the solution you then visualize or evaluate in other ways is in fact continuous. This is done by calling <a class="el" href="classAffineConstraints.html#a7b3d3f295bb56d6cd6856bdc6cbe8a01">AffineConstraints::distribute()</a> immediately after solving.</li>
+<p>悬挂节点约束的实践比我们上面概述的理论要简单得多。在现实中，你真的只需要在像 <a class="el" href="step_4.html">step-4</a> 这样的程序中添加半打额外的代码，就可以使其与具有悬挂节点的自适应网格一起工作。有趣的是，这与你要解决的方程完全无关。这些约束的代数性质与方程无关，只取决于对有限元的选择。因此，处理这些约束的代码完全包含在deal.II库本身，你不需要担心细节问题。</p>
+<p>你需要使之工作的步骤基本上是这样的。</p>
+<ul>
+<li>你必须创建一个AffineConstraints对象，（顾名思义）它将存储有限元空间的所有约束。在目前的情况下，这些约束是由于我们希望保持解空间的连续，甚至在有悬空节点的情况下。(下面我们还将简要地提到，我们还将把边界值放入这个相同的对象中，但这是一个单独的问题)。</li>
+<li>你必须使用函数 <a class="el" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints()</a> 来填充这个对象，以确保有限元空间的元素的连续性。</li>
+<li>当你把对矩阵和右手边的局部贡献复制到全局对象时，你必须使用这个对象，通过使用 <a class="el" href="classAffineConstraints.html#a373fbdacd8c486e675b8d2bff8943192">AffineConstraints::distribute_local_to_global()</a>. 直到现在，我们都是自己完成的，但现在有了约束，这就是神奇的地方，我们把约束应用到线性系统中。这个函数所做的是确保位于悬空节点的自由度事实上不是真正的自由。相反，通过将它们的行和列设置为零，并在对角线上放置一些东西以确保矩阵保持可反转，它们实际上被从线性系统中消除了。 对于我们在这里解决的拉普拉斯方程来说，这个过程产生的矩阵仍然是对称和正定的，所以我们可以继续使用共轭梯度法来解决。</li>
+<li>然后你像往常一样求解线性系统，但在这一步结束时，你需要确保位于悬挂节点上的 "自由度 "得到正确的（约束的）值，这样你随后可视化的或以其他方式评估的解决方案实际上是连续的。这可以通过在求解后立即调用 <a class="el" href="classAffineConstraints.html#a7b3d3f295bb56d6cd6856bdc6cbe8a01">AffineConstraints::distribute()</a> 来实现。</li>
 </ul>
-<p>These four steps are really all that is necessary &ndash; it's that simple from a user perspective. The fact that, in the function calls mentioned above, you will run through several thousand lines of not-so-trivial code is entirely immaterial to this: In user code, there are really only four additional steps.</p>
+<p>这四个步骤实际上是所有必要的&ndash;从用户的角度来看就是这么简单。事实上，在上面提到的函数调用中，你将运行几千行不太重要的代码，这一点完全不重要。在用户代码中，实际上只有四个额外的步骤。</p>
 <p><a class="anchor" id="Howweobtainlocallyrefinedmeshes"></a></p><h3>How we obtain locally refined meshes </h3>
-<p>The next question, now that we know how to <em>deal</em> with meshes that have these hanging nodes is how we <em>obtain</em> them.</p>
-<p>A simple way has already been shown in <a class="el" href="step_1.html">step-1</a>: If you <em>know</em> where it is necessary to refine the mesh, then you can create one by hand. But in reality, we don't know this: We don't know the solution of the PDE up front (because, if we did, we wouldn't have to use the finite element method), and consequently we do not know where it is necessary to add local mesh refinement to better resolve areas where the solution has strong variations. But the discussion above shows that maybe we can get away with using the discrete solution \(u_h\) on one mesh to estimate the derivatives \(\nabla^{p+1} u\), and then use this to determine which cells are too large and which already small enough. We can then generate a new mesh from the current one using local mesh refinement. If necessary, this step is then repeated until we are happy with our numerical solution &ndash; or, more commonly, until we run out of computational resources or patience.</p>
-<p>So that's exactly what we will do. The locally refined grids are produced using an <em>error estimator</em> which estimates the energy error for numerical solutions of the Laplace operator. Since it was developed by Kelly and co-workers, we often refer to it as the &ldquo;Kelly refinement indicator&rdquo; in the library, documentation, and mailing list. The class that implements it is called <a class="el" href="classKellyErrorEstimator.html">KellyErrorEstimator</a>, and there is a great deal of information to be found in the documentation of that class that need not be repeated here. The summary, however, is that the class computes a vector with as many entries as there are <a class="el" href="DEALGlossary.html#GlossActive">active cells</a>, and where each entry contains an estimate of the error on that cell. This estimate is then used to refine the cells of the mesh: those cells that have a large error will be marked for refinement, those that have a particularly small estimate will be marked for coarsening. We don't have to do this by hand: The functions in namespace <a class="el" href="namespaceGridRefinement.html">GridRefinement</a> will do all of this for us once we have obtained the vector of error estimates.</p>
-<p>It is worth noting that while the Kelly error estimator was developed for Laplace's equation, it has proven to be a suitable tool to generate locally refined meshes for a wide range of equations, not even restricted to elliptic only problems. Although it will create non-optimal meshes for other equations, it is often a good way to quickly produce meshes that are well adapted to the features of solutions, such as regions of great variation or discontinuities.</p>
+<p>现在我们知道如何<em>deal</em>处理有这些悬空节点的网格，下一个问题是我们如何<em>obtain</em>它们。</p>
+<p>一个简单的方法已经在 <a class="el" href="step_1.html">step-1</a> 中展示过了：如果你<em>know</em>有必要细化网格，那么你可以手工创建一个。但是在现实中，我们不知道这些。我们不知道PDE的解在前面（因为，如果我们知道，我们就不必使用有限元方法），因此，我们不知道哪里需要增加局部网格细化来更好地解决解有强烈变化的区域。但是上面的讨论表明，也许我们可以用一个网格上的离散解 \(u_h\) 来估计导数 \(\nabla^{p+1} u\) ，然后用它来确定哪些单元太大，哪些已经足够小。然后我们可以使用局部网格细化法从当前的网格中生成一个新的网格。如果有必要，这个步骤可以重复进行，直到我们对我们的数值解决方案感到满意&ndash;或者，更常见的是，直到我们耗尽计算资源或耐心。</p>
+<p>所以这正是我们要做的。局部细化网格是用一个<em>error estimator</em>产生的，它估计了拉普拉斯算子的数值解的能量误差。由于它是由Kelly和他的同事开发的，我们经常在库、文档和邮件列表中把它称为&ldquo;Kelly细化指标&rdquo;。实现它的类被称为KellyErrorEstimator，在该类的文档中可以找到大量的信息，这里不需要重复。然而，总结起来就是，该类计算出一个具有与 <a class="el" href="DEALGlossary.html#GlossActive">活动单元 </a>一样多的条目的向量，其中每个条目包含对该单元的误差估计。这个估计值然后被用来细化网格的单元：那些有大误差的单元将被标记为细化，那些有特别小估计值的单元将被标记为粗化。我们不需要用手去做这些。一旦我们获得了误差估计矢量，命名空间GridRefinement中的函数将为我们完成这一切。</p>
+<p>值得注意的是，虽然Kelly误差估计器是为拉普拉斯方程开发的，但它已被证明是一个合适的工具，可以为广泛的方程生成局部细化网格，甚至不限于椭圆问题。尽管它对其他方程会产生非最优网格，但它往往是快速产生网格的好方法，能很好地适应解的特征，如大变化区域或不连续性。</p>
 <p><a class="anchor" id="Boundaryconditions"></a></p><h3>Boundary conditions </h3>
-<p>It turns out that one can see Dirichlet boundary conditions as just another constraint on the degrees of freedom. It's a particularly simple one, indeed: If \(j\) is a degree of freedom on the boundary, with position \(\mathbf x_j\), then imposing the boundary condition \(u=g\) on \(\partial\Omega\) simply yields the constraint \(U_j=g({\mathbf x}_j)\).</p>
-<p>The <a class="el" href="classAffineConstraints.html">AffineConstraints</a> class can handle such constraints as well, which makes it convenient to let the same object we use for hanging node constraints also deal with these Dirichlet boundary conditions. This way, we don't need to apply the boundary conditions after assembly (like we did in the earlier steps). All that is necessary is that we call the variant of <a class="el" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values()</a> that returns its information in an <a class="el" href="classAffineConstraints.html">AffineConstraints</a> object, rather than the <code>std::map</code> we have used in previous tutorial programs.</p>
+<p>事实证明，人们可以把迪里希特边界条件看作是对自由度的另一种约束。这的确是一个特别简单的约束。如果 \(j\) 是边界上的一个自由度，位置为 \(\mathbf x_j\) ，那么在 \(\partial\Omega\) 上施加边界条件 \(u=g\) 就会产生约束 \(U_j=g({\mathbf x}_j)\) 。</p>
+<p>AffineConstraints类也可以处理这样的约束，这使得我们可以方便地让我们用于悬挂节点约束的同一个对象也处理这些Dirichlet边界条件。这样，我们就不需要在装配后应用边界条件（就像我们在前面的步骤中做的那样）。所需要的是我们调用 <a class="el" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values()</a> 的变体，在AffineConstraints对象中返回其信息，而不是我们在以前的教程程序中使用的 <code>std::map</code> 。</p>
 <p><a class="anchor" id="Otherthingsthisprogramshows"></a> </p><h3>Other things this program shows </h3>
-<p>Since the concepts used for locally refined grids are so important, we do not show much other material in this example. The most important exception is that we show how to use biquadratic elements instead of the bilinear ones which we have used in all previous examples. In fact, the use of higher order elements is accomplished by only replacing three lines of the program, namely the initialization of the <code>fe</code> member variable in the constructor of the main class of this program, and the use of an appropriate quadrature formula in two places. The rest of the program is unchanged.</p>
-<p>The only other new thing is a method to catch exceptions in the <code>main</code> function in order to output some information in case the program crashes for some reason. This is discussed below in more detail.</p>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+<p>由于用于局部细化网格的概念非常重要，我们在这个例子中没有展示很多其他材料。最重要的例外是，我们展示了如何使用双二次元，而不是之前所有例子中使用的双线性元素。事实上，使用高阶元素只需替换程序中的三行，即在这个程序的主类的构造器中初始化 <code>fe</code> 成员变量，以及在两个地方使用适当的正交公式。程序的其他部分没有变化。</p>
+<p>其他唯一的新东西是在 <code>main</code> 函数中捕捉异常的方法，以便在程序因某种原因崩溃时输出一些信息。下面将详细讨论这个问题。<a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
 <p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
-<p>The first few files have already been covered in previous examples and will thus not be further commented on.</p>
+<p>前面几个文件已经在前面的例子中讲过了，因此不再进一步评论。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="quadrature__lib_8h.html">deal.II/base/quadrature_lib.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dofs_2dof__handler_8h.html">deal.II/dofs/dof_handler.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dof__tools_8h.html">deal.II/dofs/dof_tools.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe_2fe__values_8h.html">deal.II/fe/fe_values.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2tria_8h.html">deal.II/grid/tria.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__generator_8h.html">deal.II/grid/grid_generator.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dynamic__sparsity__pattern_8h.html">deal.II/lac/dynamic_sparsity_pattern.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="full__matrix_8h.html">deal.II/lac/full_matrix.h</a>&gt;</span></div>
@@ -230,8 +243,10 @@ A discontinuous shape function adjacent to a hanging node</div></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sparse__matrix_8h.html">deal.II/lac/sparse_matrix.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector_8h.html">deal.II/lac/vector.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="numerics_2data__out_8h.html">deal.II/numerics/data_out.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector__tools_8h.html">deal.II/numerics/vector_tools.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="ttc" id="adof__tools_8h_html"><div class="ttname"><a href="dof__tools_8h.html">dof_tools.h</a></div></div>
@@ -248,33 +263,35 @@ A discontinuous shape function adjacent to a hanging node</div></div>
 <div class="ttc" id="asparse__matrix_8h_html"><div class="ttname"><a href="sparse__matrix_8h.html">sparse_matrix.h</a></div></div>
 <div class="ttc" id="avector_8h_html"><div class="ttname"><a href="vector_8h.html">vector.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p>From the following include file we will import the declaration of H1-conforming finite element shape functions. This family of finite elements is called <code><a class="el" href="classFE__Q.html">FE_Q</a></code>, and was used in all examples before already to define the usual bi- or tri-linear elements, but we will now use it for bi-quadratic elements:</p>
+</div><!-- fragment --><p>从下面的include文件中，我们将导入H1-conforming有限元形状函数的声明。这个系列的有限元被称为 <code><a class="el" href="classFE__Q.html">FE_Q</a></code> ，在之前的所有例子中已经用于定义通常的双线性或三线性元素，但我们现在将把它用于双二次元元素。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__q_8h.html">deal.II/fe/fe_q.h</a>&gt;</span></div>
 <div class="ttc" id="afe__q_8h_html"><div class="ttname"><a href="fe__q_8h.html">fe_q.h</a></div></div>
-</div><!-- fragment --><p>We will not read the grid from a file as in the previous example, but generate it using a function of the library. However, we will want to write out the locally refined grids (just the grid, not the solution) in each step, so we need the following include file instead of <code><a class="el" href="grid__in_8h.html">grid_in.h</a></code>:</p>
+</div><!-- fragment --><p>我们不会像前面的例子那样从文件中读取网格，而是使用库的一个函数来生成网格。然而，我们要在每一步中写出局部细化的网格（只是网格，而不是解），所以我们需要下面的include文件，而不是 <code><a class="el" href="grid__in_8h.html">grid_in.h</a></code> 。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__out_8h.html">deal.II/grid/grid_out.h</a>&gt;</span></div>
 <div class="ttc" id="agrid__out_8h_html"><div class="ttname"><a href="grid__out_8h.html">grid_out.h</a></div></div>
-</div><!-- fragment --><p>When using locally refined grids, we will get so-called <code>hanging nodes</code>. However, the standard finite element methods assumes that the discrete solution spaces be continuous, so we need to make sure that the degrees of freedom on hanging nodes conform to some constraints such that the global solution is continuous. We are also going to store the boundary conditions in this object. The following file contains a class which is used to handle these constraints:</p>
+</div><!-- fragment --><p>当使用局部细化网格时，我们会得到所谓的<code>悬空节点</code>。然而，标准的有限元方法假定离散的解空间是连续的，所以我们需要确保悬挂节点上的自由度符合一些约束条件，从而使全局解是连续的。我们也要在这个对象中存储边界条件。下面的文件包含了一个用于处理这些约束的类。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="affine__constraints_8h.html">deal.II/lac/affine_constraints.h</a>&gt;</span></div>
 <div class="ttc" id="aaffine__constraints_8h_html"><div class="ttname"><a href="affine__constraints_8h.html">affine_constraints.h</a></div></div>
-</div><!-- fragment --><p>In order to refine our grids locally, we need a function from the library that decides which cells to flag for refinement or coarsening based on the error indicators we have computed. This function is defined here:</p>
+</div><!-- fragment --><p>为了对我们的网格进行局部细化，我们需要一个库中的函数，根据我们计算出的误差指标来决定哪些单元需要细化或粗化。这个函数在这里定义。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2grid__refinement_8h.html">deal.II/grid/grid_refinement.h</a>&gt;</span></div>
 <div class="ttc" id="agrid_2grid__refinement_8h_html"><div class="ttname"><a href="grid_2grid__refinement_8h.html">grid_refinement.h</a></div></div>
-</div><!-- fragment --><p>Finally, we need a simple way to actually compute the refinement indicators based on some error estimate. While in general, adaptivity is very problem-specific, the error indicator in the following file often yields quite nicely adapted grids for a wide class of problems.</p>
+</div><!-- fragment --><p>最后，我们需要一个简单的方法来实际计算基于某种误差估计的细化指标。虽然在一般情况下，适应性是非常具体的问题，但以下文件中的误差指标通常会对一大类问题产生相当好的适应网格。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="error__estimator_8h.html">deal.II/numerics/error_estimator.h</a>&gt;</span></div>
 <div class="ttc" id="aerror__estimator_8h_html"><div class="ttname"><a href="error__estimator_8h.html">error_estimator.h</a></div></div>
-</div><!-- fragment --><p>Finally, this is as in previous programs:</p>
+</div><!-- fragment --><p>最后，这和以前的程序一样。</p>
 <div class="fragment"><div class="line"><span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="namespace__dealii_8h_source.html#l00025">namespace_dealii.h:26</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="ThecodeStep6codeclasstemplate"></a> </p><h3>The <code>Step6</code> class template</h3>
-<p>The main class is again almost unchanged. Two additions, however, are made: we have added the <code>refine_grid</code> function, which is used to adaptively refine the grid (instead of the global refinement in the previous examples), and a variable which will hold the constraints.</p>
+</div><!-- fragment --><p><a class="anchor" id="ThecodeStep6codeclasstemplate"></a></p><h3>The <code>Step6</code> class template</h3>
+<p>主类又是几乎没有变化的。然而，我们增加了两项内容：我们增加了 <code>refine_grid</code> 函数，用于自适应地细化网格（而不是之前例子中的全局细化），以及一个保存约束的变量。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>Step6</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  Step6();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keywordtype">void</span> setup_system();</div>
@@ -283,7 +300,9 @@ A discontinuous shape function adjacent to a hanging node</div></div>
 <div class="line">  <span class="keywordtype">void</span> refine_grid();</div>
 <div class="line">  <span class="keywordtype">void</span> output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classTriangulation.html">Triangulation&lt;dim&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFE__Q.html">FE_Q&lt;dim&gt;</a>       fe;</div>
 <div class="line">  <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a> dof_handler;</div>
@@ -292,11 +311,13 @@ A discontinuous shape function adjacent to a hanging node</div></div>
 <div class="ttc" id="aclassTriangulation_html"><div class="ttname"><a href="classTriangulation.html">Triangulation</a></div><div class="ttdef"><b>Definition:</b> <a href="grid_2tria_8h_source.html#l01127">tria.h:1128</a></div></div>
 <div class="ttc" id="anamespaceWorkStream_1_1internal_1_1tbb__no__coloring_html_a8673698a405bf47aa24002aeb6d76d70"><div class="ttname"><a href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">WorkStream::internal::tbb_no_coloring::run</a></div><div class="ttdeci">void run(const Iterator &amp;begin, const typename identity&lt; Iterator &gt;::type &amp;end, Worker worker, Copier copier, const ScratchData &amp;sample_scratch_data, const CopyData &amp;sample_copy_data, const unsigned int queue_length, const unsigned int chunk_size)</div><div class="ttdef"><b>Definition:</b> <a href="work__stream_8h_source.html#l00691">work_stream.h:691</a></div></div>
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
-</div><!-- fragment --><p>This is the new variable in the main class. We need an object which holds a list of constraints to hold the hanging nodes and the boundary conditions.</p>
+</div><!-- fragment --><p>这是主类中的新变量。我们需要一个持有约束条件列表的对象，以保持悬挂节点和边界条件。</p>
 <div class="fragment"><div class="line">  <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> constraints;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classSparseMatrix.html">SparseMatrix&lt;double&gt;</a> system_matrix;</div>
 <div class="line">  <a class="code" href="classSparsityPattern.html">SparsityPattern</a>      sparsity_pattern;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> solution;</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> system_rhs;</div>
@@ -305,8 +326,8 @@ A discontinuous shape function adjacent to a hanging node</div></div>
 <div class="ttc" id="aclassSparseMatrix_html"><div class="ttname"><a href="classSparseMatrix.html">SparseMatrix&lt; double &gt;</a></div></div>
 <div class="ttc" id="aclassSparsityPattern_html"><div class="ttname"><a href="classSparsityPattern.html">SparsityPattern</a></div><div class="ttdef"><b>Definition:</b> <a href="sparsity__pattern_8h_source.html#l00868">sparsity_pattern.h:869</a></div></div>
 <div class="ttc" id="aclassVector_html"><div class="ttname"><a href="classVector.html">Vector&lt; double &gt;</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="Nonconstantcoefficients"></a> </p><h3>Nonconstant coefficients</h3>
-<p>The implementation of nonconstant coefficients is copied verbatim from <a class="el" href="step_5.html">step-5</a>:</p>
+</div><!-- fragment --><p><a class="anchor" id="Nonconstantcoefficients"></a></p><h3>Nonconstant coefficients</h3>
+<p>非恒定系数的实现是逐字复制自 <a class="el" href="step_5.html">step-5</a> 。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">double</span> coefficient(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp;p)</div>
 <div class="line">{</div>
@@ -319,36 +340,37 @@ A discontinuous shape function adjacent to a hanging node</div></div>
 <div class="ttc" id="aclassPoint_html_a859ea7f3bf3e64be2e0f5ed1bfcc8550"><div class="ttname"><a href="classPoint.html#a859ea7f3bf3e64be2e0f5ed1bfcc8550">Point::square</a></div><div class="ttdeci">numbers::NumberTraits&lt; Number &gt;::real_type square() const</div></div>
 </div><!-- fragment --><p><a class="anchor" id="ThecodeStep6codeclassimplementation"></a> </p><h3>The <code>Step6</code> class implementation</h3>
 <p><a class="anchor" id="Step6Step6"></a> </p><h4>Step6::Step6</h4>
-<p>The constructor of this class is mostly the same as before, but this time we want to use the quadratic element. To do so, we only have to replace the constructor argument (which was <code>1</code> in all previous examples) by the desired polynomial degree (here <code>2</code>):</p>
+<p>这个类的构造函数与之前的基本相同，但这一次我们要使用二次元。为此，我们只需用所需的多项式度数（这里是 <code>2</code> ）替换构造函数的参数（在之前的所有例子中是 <code>1</code> ）。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">Step6&lt;dim&gt;::Step6()</div>
 <div class="line">  : fe(2)</div>
 <div class="line">  , dof_handler(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>)</div>
 <div class="line">{}</div>
 </div><!-- fragment --><p><a class="anchor" id="Step6setup_system"></a> </p><h4>Step6::setup_system</h4>
-<p>The next function sets up all the variables that describe the linear finite element problem, such as the <a class="el" href="classDoFHandler.html">DoFHandler</a>, matrices, and vectors. The difference to what we did in <a class="el" href="step_5.html">step-5</a> is only that we now also have to take care of hanging node constraints. These constraints are handled almost exclusively by the library, i.e. you only need to know that they exist and how to get them, but you do not have to know how they are formed or what exactly is done with them.</p>
-<p>At the beginning of the function, you find all the things that are the same as in <a class="el" href="step_5.html">step-5</a>: setting up the degrees of freedom (this time we have quadratic elements, but there is no difference from a user code perspective to the linear &ndash; or any other degree, for that matter &ndash; case), generating the sparsity pattern, and initializing the solution and right hand side vectors. Note that the sparsity pattern will have significantly more entries per row now, since there are now 9 degrees of freedom per cell (rather than only four), that can couple with each other.</p>
+<p>下一个函数设置了所有描述线性有限元问题的变量，如DoFHandler、矩阵和向量。与我们在 <a class="el" href="step_5.html">step-5</a> 中所做的不同的是，我们现在还必须处理悬挂节点约束。这些约束几乎完全由库来处理，也就是说，你只需要知道它们的存在以及如何获得它们，但你不必知道它们是如何形成的，也不必知道对它们到底做了什么。</p>
+<p>在函数的开头，你会发现所有与 <a class="el" href="step_5.html">step-5</a> 中相同的东西：设置自由度（这次我们有二次元，但从用户代码的角度看与线性&ndash;或任何其他程度的情况没有区别），生成稀疏模式，以及初始化解和右手向量。请注意，现在每行的稀疏性模式将有更多的条目，因为现在每个单元有9个自由度（而不是只有4个），它们可以相互耦合。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> Step6&lt;dim&gt;::setup_system()</div>
 <div class="line">{</div>
 <div class="line">  dof_handler.distribute_dofs(fe);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  solution.reinit(dof_handler.n_dofs());</div>
 <div class="line">  system_rhs.reinit(dof_handler.n_dofs());</div>
-</div><!-- fragment --><p>We may now populate the <a class="el" href="classAffineConstraints.html">AffineConstraints</a> object with the hanging node constraints. Since we will call this function in a loop we first clear the current set of constraints from the last system and then compute new ones:</p>
+</div><!-- fragment --><p>我们现在可以用悬挂节点的约束来填充AffineConstraints对象。由于我们将在一个循环中调用这个函数，我们首先清除上一个系统中的当前约束集，然后计算新的约束。</p>
 <div class="fragment"><div class="line">constraints.clear();</div>
 <div class="line"><a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, constraints);</div>
 <div class="ttc" id="agroup__constraints_html_ga3b4ea7dfd313e388d868c4e4aa685799"><div class="ttname"><a href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a></div><div class="ttdeci">void make_hanging_node_constraints(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, AffineConstraints&lt; number &gt; &amp;constraints)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__constraints_8cc_source.html#l01787">dof_tools_constraints.cc:1787</a></div></div>
-</div><!-- fragment --><p>Now we are ready to interpolate the boundary values with indicator 0 (the whole boundary) and store the resulting constraints in our <code>constraints</code> object. Note that we do not to apply the boundary conditions after assembly, like we did in earlier steps: instead we put all constraints on our function space in the <a class="el" href="classAffineConstraints.html">AffineConstraints</a> object. We can add constraints to the <a class="el" href="classAffineConstraints.html">AffineConstraints</a> object in either order: if two constraints conflict then the constraint matrix either abort or throw an exception via the Assert macro.</p>
+</div><!-- fragment --><p>现在我们已经准备好用指标0（整个边界）插值边界值，并将结果约束存储在我们的 <code>constraints</code> 对象中。请注意，我们并不像在前面的步骤中那样，在装配后应用边界条件：相反，我们将所有的约束条件放在AffineConstraints对象中的我们的函数空间。我们可以以任何顺序向AffineConstraints对象添加约束：如果两个约束发生冲突，那么约束矩阵要么中止，要么通过Assert宏抛出一个异常。</p>
 <div class="fragment"><div class="line"><a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(dof_handler,</div>
 <div class="line">                                         0,</div>
 <div class="line">                                         <a class="code" href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction&lt;dim&gt;</a>(),</div>
 <div class="line">                                         constraints);</div>
 <div class="ttc" id="aclassFunctions_1_1ZeroFunction_html"><div class="ttname"><a href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction</a></div><div class="ttdef"><b>Definition:</b> <a href="function_8h_source.html#l00510">function.h:511</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_html_ab2562d41bb26f362043f9719a8cd9b87"><div class="ttname"><a href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a></div><div class="ttdeci">void interpolate_boundary_values(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const std::map&lt; types::boundary_id, const Function&lt; spacedim, number &gt; * &gt; &amp;function_map, std::map&lt; types::global_dof_index, number &gt; &amp;boundary_values, const ComponentMask &amp;component_mask=ComponentMask())</div></div>
-</div><!-- fragment --><p>After all constraints have been added, they need to be sorted and rearranged to perform some actions more efficiently. This postprocessing is done using the <code>close()</code> function, after which no further constraints may be added any more:</p>
+</div><!-- fragment --><p>在所有的约束被添加之后，它们需要被排序和重新排列，以更有效地执行一些动作。这种后处理是通过 <code>close()</code> 函数完成的，之后就不能再添加任何约束。</p>
 <div class="fragment"><div class="line">constraints.close();</div>
-</div><!-- fragment --><p>Now we first build our compressed sparsity pattern like we did in the previous examples. Nevertheless, we do not copy it to the final sparsity pattern immediately. Note that we call a variant of make_sparsity_pattern that takes the <a class="el" href="classAffineConstraints.html">AffineConstraints</a> object as the third argument. We are letting the routine know that we will never write into the locations given by <code>constraints</code> by setting the argument <code>keep_constrained_dofs</code> to false (in other words, that we will never write into entries of the matrix that correspond to constrained degrees of freedom). If we were to condense the constraints after assembling, we would have to pass <code>true</code> instead because then we would first write into these locations only to later set them to zero again during condensation.</p>
+</div><!-- fragment --><p>现在我们首先建立我们的压缩稀疏模式，就像我们在前面的例子中做的那样。然而，我们并没有立即将其复制到最终的稀疏度模式中。 请注意，我们调用了make_sparsity_pattern的一个变体，它把AffineConstraints对象作为第三个参数。我们通过将参数 <code>keep_constrained_dofs</code> 设置为false（换句话说，我们永远不会写入对应于受限自由度的矩阵条目），让该例程知道我们永远不会写入 <code>constraints</code> 所给的位置。如果我们要在装配后浓缩约束，我们就必须通过 <code>true</code> 来代替，因为这样我们就会先写进这些位置，然后在浓缩过程中再次将它们设置为零。</p>
 <div class="fragment"><div class="line"><a class="code" href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a> dsp(dof_handler.n_dofs());</div>
 <div class="line"><a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler,</div>
 <div class="line">                                dsp,</div>
@@ -356,37 +378,44 @@ A discontinuous shape function adjacent to a hanging node</div></div>
 <div class="line">                                <span class="comment">/*keep_constrained_dofs = */</span> <span class="keyword">false</span>);</div>
 <div class="ttc" id="aclassDynamicSparsityPattern_html"><div class="ttname"><a href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a></div><div class="ttdef"><b>Definition:</b> <a href="dynamic__sparsity__pattern_8h_source.html#l00318">dynamic_sparsity_pattern.h:319</a></div></div>
 <div class="ttc" id="agroup__constraints_html_gaf78e864edbfba7e0a7477457bfb96b26"><div class="ttname"><a href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a></div><div class="ttdeci">void make_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, SparsityPatternType &amp;sparsity_pattern, const AffineConstraints&lt; number &gt; &amp;constraints=AffineConstraints&lt; number &gt;(), const bool keep_constrained_dofs=true, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__sparsity_8cc_source.html#l00064">dof_tools_sparsity.cc:64</a></div></div>
-</div><!-- fragment --><p>Now all non-zero entries of the matrix are known (i.e. those from regularly assembling the matrix and those that were introduced by eliminating constraints). We may copy our intermediate object to the sparsity pattern:</p>
+</div><!-- fragment --><p>现在，矩阵的所有非零条目都是已知的（即那些来自定期组装矩阵的条目和那些通过消除约束引入的条目）。我们可以将我们的中间对象复制到稀疏模式。</p>
 <div class="fragment"><div class="line">sparsity_pattern.copy_from(dsp);</div>
-</div><!-- fragment --><p>We may now, finally, initialize the sparse matrix:</p>
+</div><!-- fragment --><p>我们现在可以，最后，初始化稀疏矩阵。</p>
 <div class="fragment"><div class="line">  system_matrix.reinit(sparsity_pattern);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="Step6assemble_system"></a> </p><h4>Step6::assemble_system</h4>
-<p>Next, we have to assemble the matrix. However, to copy the local matrix and vector on each cell into the global system, we are no longer using a hand-written loop. Instead, we use <a class="el" href="classAffineConstraints.html#a373fbdacd8c486e675b8d2bff8943192">AffineConstraints::distribute_local_to_global()</a> that internally executes this loop while performing Gaussian elimination on rows and columns corresponding to constrained degrees on freedom.</p>
-<p>The rest of the code that forms the local contributions remains unchanged. It is worth noting, however, that under the hood several things are different than before. First, the variable <code>dofs_per_cell</code> and return value of <code>quadrature_formula.size()</code> now are 9 each, where they were 4 before. Introducing such variables as abbreviations is a good strategy to make code work with different elements without having to change too much code. Secondly, the <code>fe_values</code> object of course needs to do other things as well, since the shape functions are now quadratic, rather than linear, in each coordinate variable. Again, however, this is something that is completely handled by the library.</p>
+<p>接下来，我们要对矩阵进行组装。然而，为了将每个单元上的本地矩阵和向量复制到全局系统中，我们不再使用手写的循环。相反，我们使用 <a class="el" href="classAffineConstraints.html#a373fbdacd8c486e675b8d2bff8943192">AffineConstraints::distribute_local_to_global()</a> ，在内部执行这个循环，同时对对应于受限自由度的行和列进行高斯消除。</p>
+<p>形成局部贡献的其余代码保持不变。然而，值得注意的是，在引擎盖下，有几件事与以前不同。首先，变量 <code>dofs_per_cell</code> 和 <code>quadrature_formula.size()</code> 的返回值现在各为9，以前是4。引入这样的变量作为缩写是一个很好的策略，可以使代码在不同的元素下工作，而不需要改变太多的代码。其次， <code>fe_values</code> 对象当然也需要做其他事情，因为现在的形状函数是二次的，而不是线性的，在每个坐标变量中。不过，这也是完全由库来处理的事情。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> Step6&lt;dim&gt;::assemble_system()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a> quadrature_formula(fe.degree + 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> fe_values(fe,</div>
 <div class="line">                          quadrature_formula,</div>
 <div class="line">                          <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a> |</div>
 <div class="line">                            <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = fe.n_dofs_per_cell();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>(dofs_per_cell, dofs_per_cell);</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a>     cell_rhs(dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices(dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">    {</div>
 <div class="line">      <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a> = 0;</div>
 <div class="line">      cell_rhs    = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      fe_values.reinit(cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q_index : fe_values.quadrature_point_indices())</div>
 <div class="line">        {</div>
@@ -401,6 +430,7 @@ A discontinuous shape function adjacent to a hanging node</div></div>
 <div class="line">                   fe_values.shape_grad(j, q_index) * <span class="comment">// grad phi_j(x_q)</span></div>
 <div class="line">                   fe_values.JxW(q_index));           <span class="comment">// dx</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">              cell_rhs(i) += (1.0 *                               <span class="comment">// f(x)</span></div>
 <div class="line">                              fe_values.shape_value(i, q_index) * <span class="comment">// phi_i(x_q)</span></div>
 <div class="line">                              fe_values.JxW(q_index));            <span class="comment">// dx</span></div>
@@ -414,25 +444,28 @@ A discontinuous shape function adjacent to a hanging node</div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a></div><div class="ttdeci">@ update_gradients</div><div class="ttdoc">Shape function gradients.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00084">fe_update_flags.h:84</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a></div><div class="ttdeci">@ update_quadrature_points</div><div class="ttdoc">Transformed quadrature points.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00122">fe_update_flags.h:122</a></div></div>
 <div class="ttc" id="anamespaceLocalIntegrators_1_1Advection_html_a8bc7b8136646134f73a4193adefe15f8"><div class="ttname"><a href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">LocalIntegrators::Advection::cell_matrix</a></div><div class="ttdeci">void cell_matrix(FullMatrix&lt; double &gt; &amp;M, const FEValuesBase&lt; dim &gt; &amp;fe, const FEValuesBase&lt; dim &gt; &amp;fetest, const ArrayView&lt; const std::vector&lt; double &gt;&gt; &amp;velocity, const double factor=1.)</div><div class="ttdef"><b>Definition:</b> <a href="advection_8h_source.html#l00075">advection.h:75</a></div></div>
-</div><!-- fragment --><p>Finally, transfer the contributions from <code>cell_matrix</code> and <code>cell_rhs</code> into the global objects.</p>
+</div><!-- fragment --><p>最后，将 <code>cell_matrix</code> 和 <code>cell_rhs</code> 中的贡献转移到全局对象中。</p>
 <div class="fragment"><div class="line">  cell-&gt;get_dof_indices(local_dof_indices);</div>
 <div class="line">  constraints.distribute_local_to_global(</div>
 <div class="line">    <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>, cell_rhs, local_dof_indices, system_matrix, system_rhs);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Now we are done assembling the linear system. The constraint matrix took care of applying the boundary conditions and also eliminated hanging node constraints. The constrained nodes are still in the linear system (there is a nonzero entry, chosen in a way that the matrix is well conditioned, on the diagonal of the matrix and all other entries for this line are set to zero) but the computed values are invalid (i.e., the corresponding entries in <code>system_rhs</code> are currently meaningless). We compute the correct values for these nodes at the end of the <code>solve</code> function.</p>
+</div><!-- fragment --><p>现在我们已经完成了线性系统的组装。约束矩阵照顾到了应用边界条件，也消除了悬挂的节点约束。受约束的节点仍然在线性系统中（在矩阵的对角线上有一个非零条目，以矩阵条件良好的方式选择，并且这一行的所有其他条目都被设置为零），但是计算出来的值是无效的（也就是说， <code>system_rhs</code> 中的相应条目目前没有意义）。我们在 <code>solve</code> 函数的最后为这些节点计算出正确的值。</p>
 <div class="fragment"><div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="Step6solve"></a> </p><h4>Step6::solve</h4>
-<p>We continue with gradual improvements. The function that solves the linear system again uses the SSOR preconditioner, and is again unchanged except that we have to incorporate hanging node constraints. As mentioned above, the degrees of freedom from the <a class="el" href="classAffineConstraints.html">AffineConstraints</a> object corresponding to hanging node constraints and boundary values have been removed from the linear system by giving the rows and columns of the matrix a special treatment. This way, the values for these degrees of freedom have wrong, but well-defined values after solving the linear system. What we then have to do is to use the constraints to assign to them the values that they should have. This process, called <code>distributing</code> constraints, computes the values of constrained nodes from the values of the unconstrained ones, and requires only a single additional function call that you find at the end of this function:</p>
+<p>我们继续逐步改进。解决线性系统的函数再次使用了SSOR预处理程序，除了我们必须加入悬空节点约束外，再次没有改变。如上所述，通过对矩阵的行和列进行特殊处理，将AffineConstraints对象中对应于悬挂节点约束和边界值的自由度从线性系统中移除。这样一来，这些自由度的值在求解线性系统后就有了错误的、但定义明确的值。然后我们要做的就是利用约束条件给它们分配它们应该有的值。这个过程被称为 <code>distributing</code> 约束，从无约束的节点的值中计算出约束节点的值，只需要一个额外的函数调用，你可以在这个函数的末尾找到。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> Step6&lt;dim&gt;::solve()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classSolverControl.html">SolverControl</a>            solver_control(1000, 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-12);</div>
 <div class="line">  <a class="code" href="classSolverCG.html">SolverCG&lt;Vector&lt;double&gt;</a>&gt; solver(solver_control);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classPreconditionSSOR.html">PreconditionSSOR&lt;SparseMatrix&lt;double&gt;</a>&gt; preconditioner;</div>
 <div class="line">  preconditioner.<a class="code" href="group__Preconditioners.html#ga7a3d66b17bb0ea1b16606e222474c2ea">initialize</a>(system_matrix, 1.2);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  solver.solve(system_matrix, solution, system_rhs, preconditioner);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  constraints.distribute(solution);</div>
 <div class="line">}</div>
@@ -442,15 +475,16 @@ A discontinuous shape function adjacent to a hanging node</div></div>
 <div class="ttc" id="agroup__Preconditioners_html_ga7a3d66b17bb0ea1b16606e222474c2ea"><div class="ttname"><a href="group__Preconditioners.html#ga7a3d66b17bb0ea1b16606e222474c2ea">PreconditionSSOR::initialize</a></div><div class="ttdeci">void initialize(const MatrixType &amp;A, const typename BaseClass::AdditionalData &amp;parameters=typename BaseClass::AdditionalData())</div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a9587d5229555daa5b1fa1ba2f8a40adb"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">Physics::Elasticity::Kinematics::e</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; e(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
 </div><!-- fragment --><p><a class="anchor" id="Step6refine_grid"></a> </p><h4>Step6::refine_grid</h4>
-<p>We use a sophisticated error estimation scheme to refine the mesh instead of global refinement. We will use the <a class="el" href="classKellyErrorEstimator.html">KellyErrorEstimator</a> class which implements an error estimator for the Laplace equation; it can in principle handle variable coefficients, but we will not use these advanced features, but rather use its most simple form since we are not interested in quantitative results but only in a quick way to generate locally refined grids.</p>
-<p>Although the error estimator derived by Kelly et al. was originally developed for the Laplace equation, we have found that it is also well suited to quickly generate locally refined grids for a wide class of problems. This error estimator uses the solution gradient's jump at cell faces (which is a measure for the second derivatives) and scales it by the size of the cell. It is therefore a measure for the local smoothness of the solution at the place of each cell and it is thus understandable that it yields reasonable grids also for hyperbolic transport problems or the wave equation as well, although these grids are certainly suboptimal compared to approaches specially tailored to the problem. This error estimator may therefore be understood as a quick way to test an adaptive program.</p>
-<p>The way the estimator works is to take a <code><a class="el" href="classDoFHandler.html">DoFHandler</a></code> object describing the degrees of freedom and a vector of values for each degree of freedom as input and compute a single indicator value for each active cell of the triangulation (i.e. one value for each of the active cells). To do so, it needs two additional pieces of information: a face quadrature formula, i.e., a quadrature formula on <code>dim-1</code> dimensional objects. We use a 3-point Gauss rule again, a choice that is consistent and appropriate with the bi-quadratic finite element shape functions in this program. (What constitutes a suitable quadrature rule here of course depends on knowledge of the way the error estimator evaluates the solution field. As said above, the jump of the gradient is integrated over each face, which would be a quadratic function on each face for the quadratic elements in use in this example. In fact, however, it is the square of the jump of the gradient, as explained in the documentation of that class, and that is a quartic function, for which a 3 point Gauss formula is sufficient since it integrates polynomials up to order 5 exactly.)</p>
-<p>Secondly, the function wants a list of boundary indicators for those boundaries where we have imposed Neumann values of the kind \(\partial_n u(\mathbf x) = h(\mathbf x)\), along with a function \(h(\mathbf x)\) for each such boundary. This information is represented by a map from boundary indicators to function objects describing the Neumann boundary values. In the present example program, we do not use Neumann boundary values, so this map is empty, and in fact constructed using the default constructor of the map in the place where the function call expects the respective function argument.</p>
-<p>The output is a vector of values for all active cells. While it may make sense to compute the <b>value</b> of a solution degree of freedom very accurately, it is usually not necessary to compute the <b>error indicator</b> corresponding to the solution on a cell particularly accurately. We therefore typically use a vector of floats instead of a vector of doubles to represent error indicators.</p>
+<p>我们使用一个复杂的误差估计方案来细化网格，而不是全局细化。我们将使用KellyErrorEstimator类，该类实现了拉普拉斯方程的误差估计器；原则上它可以处理可变系数，但我们不会使用这些高级功能，而是使用其最简单的形式，因为我们对定量结果不感兴趣，只对生成局部细化网格的快速方法感兴趣。</p>
+<p>尽管Kelly等人推导的误差估计器最初是为拉普拉斯方程开发的，但我们发现它也很适合于为一类广泛的问题快速生成局部细化网格。这个误差估计器使用了解梯度在单元面上的跳跃（这是一个测量二阶导数的方法），并将其按单元的大小进行缩放。因此，它是对每个单元的解的局部平滑性的测量，因此可以理解，它对双曲运输问题或波浪方程也能产生合理的网格，尽管这些网格与专门针对该问题的方法相比肯定是次优的。因此，这个误差估计器可以理解为测试自适应程序的一种快速方法。</p>
+<p>估算器的工作方式是将描述自由度的 <code><a class="el" href="classDoFHandler.html">DoFHandler</a></code> 对象和每个自由度的数值向量作为输入，为三角测量的每个活动单元计算一个指标值（即每个活动单元一个数值）。为此，它需要两个额外的信息：一个面部正交公式，即 <code>dim-1</code> 维物体上的正交公式。我们再次使用3点高斯法则，这个选择与本程序中的双二次方有限元形状函数是一致和合适的。当然，什么是合适的正交规则取决于对误差估计器评估解场的方式的了解。如上所述，梯度的跃迁是在每个面上进行积分的，对于本例中使用的二次元元素来说，这将是每个面上的二次元函数。然而，事实上，它是梯度跳变的平方，正如该类文件中所解释的那样，这是一个二次函数，对于它来说，3点高斯公式就足够了，因为它可以精确地整合5阶以下的多项式）。)</p>
+<p>其次，该函数需要一个边界指示器的列表，用于那些我们施加了 \(\partial_n u(\mathbf x) = h(\mathbf x)\) 类诺伊曼值的边界，以及每个此类边界的一个函数 \(h(\mathbf x)\) 。这些信息通过一个从边界指标到描述诺伊曼边界值的函数对象的映射来表示。在本例程序中，我们不使用诺伊曼边界值，所以这个映射是空的，事实上是在函数调用期望各自的函数参数的地方使用映射的默认构造器构造的。</p>
+<p>输出是一个所有活动单元的值的向量。虽然非常精确地计算一个解的自由度的<b>value</b>可能是有意义的，但通常没有必要特别精确地计算一个单元上对应于解的<b>error indicator</b>。因此，我们通常使用一个浮点数的矢量而不是一个双数的矢量来表示误差指标。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> Step6&lt;dim&gt;::refine_grid()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;float&gt;</a> estimated_error_per_cell(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classKellyErrorEstimator.html#aa0917e696d4f8ddb983223a68c512357">KellyErrorEstimator&lt;dim&gt;::estimate</a>(dof_handler,</div>
 <div class="line">                                     <a class="code" href="classQGauss.html">QGauss&lt;dim - 1&gt;</a>(fe.degree + 1),</div>
@@ -458,28 +492,32 @@ A discontinuous shape function adjacent to a hanging node</div></div>
 <div class="line">                                     solution,</div>
 <div class="line">                                     estimated_error_per_cell);</div>
 <div class="ttc" id="aclassKellyErrorEstimator_html_aa0917e696d4f8ddb983223a68c512357"><div class="ttname"><a href="classKellyErrorEstimator.html#aa0917e696d4f8ddb983223a68c512357">KellyErrorEstimator::estimate</a></div><div class="ttdeci">static void estimate(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const Quadrature&lt; dim - 1 &gt; &amp;quadrature, const std::map&lt; types::boundary_id, const Function&lt; spacedim, typename InputVector::value_type &gt; * &gt; &amp;neumann_bc, const InputVector &amp;solution, Vector&lt; float &gt; &amp;error, const ComponentMask &amp;component_mask=ComponentMask(), const Function&lt; spacedim &gt; *coefficients=nullptr, const unsigned int n_threads=numbers::invalid_unsigned_int, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id, const types::material_id material_id=numbers::invalid_material_id, const Strategy strategy=cell_diameter_over_24)</div></div>
-</div><!-- fragment --><p>The above function returned one error indicator value for each cell in the <code>estimated_error_per_cell</code> array. Refinement is now done as follows: refine those 30 per cent of the cells with the highest error values, and coarsen the 3 per cent of cells with the lowest values.</p>
-<p>One can easily verify that if the second number were zero, this would approximately result in a doubling of cells in each step in two space dimensions, since for each of the 30 per cent of cells, four new would be replaced, while the remaining 70 per cent of cells remain untouched. In practice, some more cells are usually produced since it is disallowed that a cell is refined twice while the neighbor cell is not refined; in that case, the neighbor cell would be refined as well.</p>
-<p>In many applications, the number of cells to be coarsened would be set to something larger than only three per cent. A non-zero value is useful especially if for some reason the initial (coarse) grid is already rather refined. In that case, it might be necessary to refine it in some regions, while coarsening in some other regions is useful. In our case here, the initial grid is very coarse, so coarsening is only necessary in a few regions where over-refinement may have taken place. Thus a small, non-zero value is appropriate here.</p>
-<p>The following function now takes these refinement indicators and flags some cells of the triangulation for refinement or coarsening using the method described above. It is from a class that implements several different algorithms to refine a triangulation based on cell-wise error indicators.</p>
+</div><!-- fragment --><p>上述函数为 <code>estimated_error_per_cell</code> 数组中的每个单元格返回一个误差指标值。现在的细化工作如下：细化那些误差值最高的30的单元格，粗化那些误差值最低的3的单元格。 <br  />
+</p>
+<p>人们可以很容易地验证，如果第二个数字为零，这将大约导致在两个空间维度上的每一步中的细胞增加一倍，因为对于每一个30的细胞，四个新的将被替换，而其余70的细胞保持不动。在实践中，通常会产生一些更多的单元，因为不允许一个单元被精炼两次而相邻的单元没有被精炼；在这种情况下，相邻的单元也会被精炼。 <br  />
+</p>
+<p>在许多应用中，被粗化的单元格数量将被设置为大于3的数值。一个非零的值是有用的，特别是在由于某种原因，初始（粗）网格已经相当精细了。在这种情况下，可能有必要在某些区域进行细化，而在另一些区域进行粗化是有用的。在我们这里，初始网格是非常粗的，所以粗化只需要在一些可能发生过度细化的区域。因此，一个小的、非零的值在这里是合适的。 <br  />
+</p>
+<p>下面的函数现在采用这些细化指标，并使用上述方法对三角形的一些单元进行细化或粗化标记。它来自一个实现了几种不同算法的类，可以根据单元的误差指标来细化三角剖面。</p>
 <div class="fragment"><div class="line"><a class="code" href="namespaceGridRefinement.html#a48e5395381ed87155942a61a1edd134d">GridRefinement::refine_and_coarsen_fixed_number</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>,</div>
 <div class="line">                                                estimated_error_per_cell,</div>
 <div class="line">                                                0.3,</div>
 <div class="line">                                                0.03);</div>
 <div class="ttc" id="anamespaceGridRefinement_html_a48e5395381ed87155942a61a1edd134d"><div class="ttname"><a href="namespaceGridRefinement.html#a48e5395381ed87155942a61a1edd134d">GridRefinement::refine_and_coarsen_fixed_number</a></div><div class="ttdeci">void refine_and_coarsen_fixed_number(Triangulation&lt; dim, spacedim &gt; &amp;triangulation, const Vector&lt; Number &gt; &amp;criteria, const double top_fraction_of_cells, const double bottom_fraction_of_cells, const unsigned int max_n_cells=std::numeric_limits&lt; unsigned int &gt;::max())</div><div class="ttdef"><b>Definition:</b> <a href="grid_2grid__refinement_8cc_source.html#l00322">grid_refinement.cc:322</a></div></div>
-</div><!-- fragment --><p>After the previous function has exited, some cells are flagged for refinement, and some other for coarsening. The refinement or coarsening itself is not performed by now, however, since there are cases where further modifications of these flags is useful. Here, we don't want to do any such thing, so we can tell the triangulation to perform the actions for which the cells are flagged:</p>
+</div><!-- fragment --><p>在前一个函数退出后，一些单元被标记为细化，另一些单元被标记为粗化。然而，细化或粗化本身并没有被执行，因为在有些情况下，进一步修改这些标志是有用的。在这里，我们不想做任何这样的事情，所以我们可以告诉三角计算执行单元格被标记的动作。</p>
 <div class="fragment"><div class="line">  <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.execute_coarsening_and_refinement();</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="Step6output_results"></a> </p><h4>Step6::output_results</h4>
-<p>At the end of computations on each grid, and just before we continue the next cycle with mesh refinement, we want to output the results from this cycle.</p>
-<p>We have already seen in <a class="el" href="step_1.html">step-1</a> how this can be achieved for the mesh itself. Here, we change a few things: </p><ol>
+<p>在每个网格的计算结束后，就在我们继续下一个网格细化周期之前，我们要输出这个周期的结果。</p>
+<p>我们已经在 <a class="el" href="step_1.html">step-1</a> 中看到了如何实现对网格本身的输出。在这里，我们改变一些东西。 </p><ol>
 <li>
-We use two different formats: gnuplot and VTU. </li>
+我们使用两种不同的格式。gnuplot和VTU。  </li>
 <li>
-We embed the cycle number in the output file name. </li>
+我们将周期号嵌入到输出文件名中。  </li>
 <li>
-For gnuplot output, we set up a <a class="el" href="structGridOutFlags_1_1Gnuplot.html">GridOutFlags::Gnuplot</a> object to provide a few extra visualization arguments so that edges appear curved. This is explained in further detail in <a class="el" href="step_10.html">step-10</a>. </li>
+对于gnuplot输出，我们设置了一个 <a class="el" href="structGridOutFlags_1_1Gnuplot.html">GridOutFlags::Gnuplot</a> 对象，以提供一些额外的可视化参数，使边缘看起来是弯曲的。这在 <a class="el" href="step_10.html">step-10</a> 中有进一步的详细解释。  </li>
 </ol>
+<p>。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> Step6&lt;dim&gt;::output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
@@ -492,11 +530,13 @@ For gnuplot output, we set up a <a class="el" href="structGridOutFlags_1_1Gnuplo
 <div class="line">    grid_out.<a class="code" href="classGridOut.html#ad114b5e2e6105f5a269b1599cc53d27e">write_gnuplot</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>, output, &amp;mapping);</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  {</div>
 <div class="line">    <a class="code" href="classDataOut.html">DataOut&lt;dim&gt;</a> data_out;</div>
 <div class="line">    data_out.<a class="code" href="classDataOut__DoFData.html#ac1eb26168177faa30ffbcf9cbb9c3cd5">attach_dof_handler</a>(dof_handler);</div>
 <div class="line">    data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(solution, <span class="stringliteral">&quot;solution&quot;</span>);</div>
 <div class="line">    data_out.<a class="code" href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">build_patches</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    std::ofstream output(<span class="stringliteral">&quot;solution-&quot;</span> + <a class="code" href="group__Exceptions.html#ga72743302dcb1a0fb1f2f8dc5122d299e">std::to_string</a>(cycle) + <span class="stringliteral">&quot;.vtu&quot;</span>);</div>
 <div class="line">    data_out.<a class="code" href="group__Exceptions.html#ga93c780f93105e0daaa76c6c43694b4ae">write_vtu</a>(output);</div>
@@ -514,17 +554,18 @@ For gnuplot output, we set up a <a class="el" href="structGridOutFlags_1_1Gnuplo
 <div class="ttc" id="agroup__Exceptions_html_ga93c780f93105e0daaa76c6c43694b4ae"><div class="ttname"><a href="group__Exceptions.html#ga93c780f93105e0daaa76c6c43694b4ae">DataOutInterface::write_vtu</a></div><div class="ttdeci">void write_vtu(std::ostream &amp;out) const</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l07188">data_out_base.cc:7188</a></div></div>
 <div class="ttc" id="astructGridOutFlags_1_1Gnuplot_html"><div class="ttname"><a href="structGridOutFlags_1_1Gnuplot.html">GridOutFlags::Gnuplot</a></div><div class="ttdef"><b>Definition:</b> <a href="grid__out_8h_source.html#l00234">grid_out.h:235</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="Step6run"></a> </p><h4>Step6::run</h4>
-<p>The final function before <code>main()</code> is again the main driver of the class, <code><a class="el" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run()</a></code>. It is similar to the one of <a class="el" href="step_5.html">step-5</a>, except that we generate a file in the program again instead of reading it from disk, in that we adaptively instead of globally refine the mesh, and that we output the solution on the final mesh in the present function.</p>
-<p>The first block in the main loop of the function deals with mesh generation. If this is the first cycle of the program, instead of reading the grid from a file on disk as in the previous example, we now again create it using a library function. The domain is again a circle with center at the origin and a radius of one (these are the two hidden arguments to the function, which have default values).</p>
-<p>You will notice by looking at the coarse grid that it is of inferior quality than the one which we read from the file in the previous example: the cells are less equally formed. However, using the library function this program works in any space dimension, which was not the case before.</p>
-<p>In case we find that this is not the first cycle, we want to refine the grid. Unlike the global refinement employed in the last example program, we now use the adaptive procedure described above.</p>
-<p>The rest of the loop looks as before:</p>
+<p><code>main()</code> 之前的最后一个函数又是该类的主要驱动力， <code><a class="el" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run()</a></code> 。它与 <a class="el" href="step_5.html">step-5</a> 的函数类似，只是我们在程序中再次生成一个文件，而不是从磁盘中读取文件，我们自适应地而不是全局地细化网格，并且我们在本函数中输出最终网格上的解。</p>
+<p>该函数主循环的第一个块是处理网格生成。如果这是该程序的第一个循环，我们不是像前面的例子那样从磁盘上的文件中读取网格，而是使用库函数再次创建网格。域还是一个圆，中心在原点，半径为1（这是函数的两个隐藏参数，有默认值）。</p>
+<p>通过观察粗略的网格，你会注意到它的质量比我们在上一个例子中从文件中读取的网格要差：单元格的形成不太平均。然而，使用库函数，这个程序可以在任何空间维度上工作，这在以前是不可能的。</p>
+<p>如果我们发现这不是第一个周期，我们要细化网格。与上一个例子程序中采用的全局细化不同，我们现在使用上述的自适应程序。</p>
+<p>循环的其余部分看起来和以前一样。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">Step6&lt;dim&gt;::run</a>()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle = 0; cycle &lt; 8; ++cycle)</div>
 <div class="line">    {</div>
 <div class="line">      std::cout &lt;&lt; <span class="stringliteral">&quot;Cycle &quot;</span> &lt;&lt; cycle &lt;&lt; <span class="charliteral">&#39;:&#39;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">if</span> (cycle == 0)</div>
 <div class="line">        {</div>
@@ -535,13 +576,17 @@ For gnuplot output, we set up a <a class="el" href="structGridOutFlags_1_1Gnuplo
 <div class="line">        refine_grid();</div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      std::cout &lt;&lt; <span class="stringliteral">&quot;   Number of active cells:       &quot;</span></div>
 <div class="line">                &lt;&lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells() &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      setup_system();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      std::cout &lt;&lt; <span class="stringliteral">&quot;   Number of degrees of freedom: &quot;</span> &lt;&lt; dof_handler.n_dofs()</div>
 <div class="line">                &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      assemble_system();</div>
 <div class="line">      solve();</div>
@@ -550,18 +595,20 @@ For gnuplot output, we set up a <a class="el" href="structGridOutFlags_1_1Gnuplo
 <div class="line">}</div>
 <div class="ttc" id="anamespaceGridGenerator_html_a533c4778cbc9bcbed365dcab42ca4418"><div class="ttname"><a href="namespaceGridGenerator.html#a533c4778cbc9bcbed365dcab42ca4418">GridGenerator::hyper_ball</a></div><div class="ttdeci">void hyper_ball(Triangulation&lt; dim &gt; &amp;tria, const Point&lt; dim &gt; &amp;center=Point&lt; dim &gt;(), const double radius=1., const bool attach_spherical_manifold_on_boundary_cells=false)</div></div>
 </div><!-- fragment --><p><a class="anchor" id="Thecodemaincodefunction"></a> </p><h3>The <code>main</code> function</h3>
-<p>The main function is unaltered in its functionality from the previous example, but we have taken a step of additional caution. Sometimes, something goes wrong (such as insufficient disk space upon writing an output file, not enough memory when trying to allocate a vector or a matrix, or if we can't read from or write to a file for whatever reason), and in these cases the library will throw exceptions. Since these are run-time problems, not programming errors that can be fixed once and for all, this kind of exceptions is not switched off in optimized mode, in contrast to the <code>Assert</code> macro which we have used to test against programming errors. If uncaught, these exceptions propagate the call tree up to the <code>main</code> function, and if they are not caught there either, the program is aborted. In many cases, like if there is not enough memory or disk space, we can't do anything but we can at least print some text trying to explain the reason why the program failed. A way to do so is shown in the following. It is certainly useful to write any larger program in this way, and you can do so by more or less copying this function except for the <code>try</code> block that actually encodes the functionality particular to the present application.</p>
+<p>主函数的功能与之前的例子相比没有改变，但我们采取了额外的谨慎措施。有时，会出现一些问题（比如写输出文件时磁盘空间不足，试图分配向量或矩阵时内存不足，或者由于某种原因我们无法从文件中读出或写入文件），在这些情况下，库会抛出异常。由于这些是运行时的问题，而不是可以一劳永逸的编程错误，这种异常在优化模式下不会被关闭，这与我们用来测试编程错误的 <code>Assert</code> 宏相反。如果没有被捕获，这些异常会传播到 <code>main</code> 函数的调用树上，如果它们在那里也没有被捕获，程序就会被中止。在很多情况下，比如内存或磁盘空间不足，我们什么也做不了，但我们至少可以打印一些文字，试图解释程序失败的原因。下面显示了一种方法。以这种方式编写任何较大的程序当然是有用的，你可以通过或多或少地复制这个函数来做到这一点，但 <code>try</code> 块除外，它实际上编码了本应用程序特有的功能。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-</div><!-- fragment --><p>The general idea behind the layout of this function is as follows: let's try to run the program as we did before...</p>
+</div><!-- fragment --><p>这个函数布局的总体思路如下：让我们试着像以前那样运行程序......</p>
 <div class="fragment"><div class="line"><span class="keywordflow">try</span></div>
 <div class="line">  {</div>
 <div class="line">    Step6&lt;2&gt; laplace_problem_2d;</div>
 <div class="line">    laplace_problem_2d.run();</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>...and if this should fail, try to gather as much information as possible. Specifically, if the exception that was thrown is an object of a class that is derived from the C++ standard class <code>exception</code>, then we can use the <code>what</code> member function to get a string which describes the reason why the exception was thrown.</p>
-<p>The deal.II exception classes are all derived from the standard class, and in particular, the <code>exc.what()</code> function will return approximately the same string as would be generated if the exception was thrown using the <code>Assert</code> macro. You have seen the output of such an exception in the previous example, and you then know that it contains the file and line number of where the exception occurred, and some other information. This is also what the following statements would print.</p>
-<p>Apart from this, there isn't much that we can do except exiting the program with an error code (this is what the <code>return 1;</code> does):</p>
+</div><!-- fragment --><p>...如果失败了，尽量收集尽可能多的信息。具体来说，如果被抛出的异常是一个从C++标准类派生出来的对象 <code>exception</code>, then we can use the <code>what</code> 成员函数，得到一个字符串，这个字符串描述了异常被抛出的原因。 <br  />
+</p>
+<p>deal.II的异常类都是从标准类派生出来的，特别是 <code>exc.what()</code> 函数将返回与使用 <code>Assert</code> 宏抛出异常时产生的字符串大致相同的字符串。在前面的例子中，你已经看到了这种异常的输出，然后你知道它包含了异常发生的文件和行号，以及其他一些信息。这也是下面的语句会打印的内容。 <br  />
+</p>
+<p>除此以外，除了以错误代码退出程序外，我们能做的并不多（这就是 <code>return 1;</code> 的作用）。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">catch</span> (std::exception &amp;exc)</div>
 <div class="line">  {</div>
 <div class="line">    std::cerr &lt;&lt; std::endl</div>
@@ -574,9 +621,10 @@ For gnuplot output, we set up a <a class="el" href="structGridOutFlags_1_1Gnuplo
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot;----------------------------------------------------&quot;</span></div>
 <div class="line">              &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> 1;</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>If the exception that was thrown somewhere was not an object of a class derived from the standard <code>exception</code> class, then we can't do anything at all. We then simply print an error message and exit.</p>
+</div><!-- fragment --><p>如果在某处抛出的异常不是从标准 <code>exception</code> 类派生出来的对象，那么我们根本就不能做什么。我们就简单地打印一个错误信息并退出。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">catch</span> (...)</div>
 <div class="line">  {</div>
 <div class="line">    std::cerr &lt;&lt; std::endl</div>
@@ -589,11 +637,12 @@ For gnuplot output, we set up a <a class="el" href="structGridOutFlags_1_1Gnuplo
 <div class="line">              &lt;&lt; std::endl;</div>
 <div class="line">    <span class="keywordflow">return</span> 1;</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>If we got to this point, there was no exception which propagated up to the main function (there may have been exceptions, but they were caught somewhere in the program or the library). Therefore, the program performed as was expected and we can return without error.</p>
+</div><!-- fragment --><p>如果我们走到这一步，就没有任何异常会传播到主函数上（可能有异常，但它们在程序或库的某个地方被捕获）。因此，程序按预期执行，我们可以无误返回。</p>
 <div class="fragment"><div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
-<p>The output of the program looks as follows: </p><div class="fragment"><div class="line">Cycle 0:</div>
+</div><!-- fragment --><p><a class="anchor" id="Results"></a></p><h1>Results</h1>
+<p>该程序的输出看起来如下。</p>
+<div class="fragment"><div class="line">Cycle 0:</div>
 <div class="line">   Number of active cells:       20</div>
 <div class="line">   Number of degrees of freedom: 89</div>
 <div class="line">Cycle 1:</div>
@@ -617,49 +666,61 @@ For gnuplot output, we set up a <a class="el" href="structGridOutFlags_1_1Gnuplo
 <div class="line">Cycle 7:</div>
 <div class="line">   Number of active cells:       3860</div>
 <div class="line">   Number of degrees of freedom: 18353</div>
-</div><!-- fragment --><p>As intended, the number of cells roughly doubles in each cycle. The number of degrees is slightly more than four times the number of cells; one would expect a factor of exactly four in two spatial dimensions on an infinite grid (since the spacing between the degrees of freedom is half the cell width: one additional degree of freedom on each edge and one in the middle of each cell), but it is larger than that factor due to the finite size of the mesh and due to additional degrees of freedom which are introduced by hanging nodes and local refinement.</p>
-<p>The program outputs the solution and mesh in each cycle of the refinement loop. The solution looks as follows:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-6.solution.9.2.png" alt="" class="inline"/></p>
-<p>It is interesting to follow how the program arrives at the final mesh:</p>
+</div><!-- fragment --><p>正如预期的那样，在每个周期中，单元格的数量大致增加了一倍。自由度的数量是单元数的四倍多；人们期望在无限网格的两个空间维度上的自由度系数正好是四（因为自由度之间的间距是单元宽度的一半：每个边缘有一个额外的自由度，每个单元的中间有一个），但是由于网格的有限尺寸和由悬挂节点和局部细化引入的额外自由度，它大于这个系数。</p>
+<p>程序在细化循环的每个周期都会输出解决方案和网格。解决方案看起来如下。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-6.solution.9.2.png" alt="" class="inline"/> <br  />
+</p>
+<p>有趣的是，我们可以看到程序是如何得出最终的网格的。</p>
 <div class="twocolumn" style="width: 80%"> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_0.svg" alt="Initial grid: the five-cell circle grid with one global refinement." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_1.svg" alt="First grid: the five-cell circle grid with two global refinements." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_2.svg" alt="Second grid: the five-cell circle grid with one adaptive refinement." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_3.svg" alt="Third grid: the five-cell circle grid with two adaptive
          refinements, showing clustering around the inner circle." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_4.svg" alt="Fourth grid: the five-cell circle grid with three adaptive
          refinements, showing clustering around the inner circle." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_5.svg" alt="Fifth grid: the five-cell circle grid with four adaptive
          refinements, showing clustering around the inner circle." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_6.svg" alt="Sixth grid: the five-cell circle grid with five adaptive
          refinements, showing clustering around the inner circle." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_7.svg" alt="Last grid: the five-cell circle grid with six adaptive
-         refinements, showing that most cells are clustered around the inner circle." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> </div><p>It is clearly visible that the region where the solution has a kink, i.e. the circle at radial distance 0.5 from the center, is refined most. Furthermore, the central region where the solution is very smooth and almost flat, is almost not refined at all, but this results from the fact that we did not take into account that the coefficient is large there. The region outside is refined rather arbitrarily, since the second derivative is constant there and refinement is therefore mostly based on the size of the cells and their deviation from the optimal square.</p>
+         refinements, showing that most cells are clustered around the inner circle." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> </div><p> <br  />
+</p>
+<p>我们可以清楚地看到，解决方案中出现扭结的区域，也就是距离中心0.5的径向距离的圆，被细化得最多。此外，解非常光滑和几乎平坦的中心区域几乎完全没有被细化，但这是由于我们没有考虑到那里的系数很大的事实。外面的区域被任意细化，因为那里的二阶导数是常数，因此细化主要是基于单元格的大小和它们与最优方格的偏差。</p>
 <p><a class="anchor" id="extensions"></a> <a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions</h3>
 <p><a class="anchor" id="Solversandpreconditioners"></a></p><h4>Solvers and preconditioners</h4>
-<p>One thing that is always worth playing around with if one solves problems of appreciable size (much bigger than the one we have here) is to try different solvers or preconditioners. In the current case, the linear system is symmetric and positive definite, which makes the CG algorithm pretty much the canonical choice for solving. However, the SSOR preconditioner we use in the <code>solve()</code> function is up for grabs.</p>
-<p>In deal.II, it is relatively simple to change the preconditioner. For example, by changing the existing lines of code </p><div class="fragment"><div class="line"><a class="code" href="classPreconditionSSOR.html">PreconditionSSOR&lt;SparseMatrix&lt;double&gt;</a>&gt; preconditioner;</div>
+<p>如果一个人解决相当大的问题（比我们这里的问题大得多），有一件事总是值得玩一玩的，那就是尝试不同的求解器或预处理器。在目前的情况下，线性系统是对称的和正定的，这使得CG算法几乎成了解题的典型选择。然而，我们在 <code>solve()</code> 函数中使用的SSOR预处理器是可以争夺的。</p>
+<p>在deal.II中，改变预处理程序是比较简单的。例如，通过改变现有的几行代码</p>
+<div class="fragment"><div class="line"><a class="code" href="classPreconditionSSOR.html">PreconditionSSOR&lt;SparseMatrix&lt;double&gt;</a>&gt; preconditioner;</div>
 <div class="line">preconditioner.<a class="code" href="group__Preconditioners.html#ga7a3d66b17bb0ea1b16606e222474c2ea">initialize</a>(system_matrix, 1.2);</div>
-</div><!-- fragment --><p> into </p><div class="fragment"><div class="line"><a class="code" href="classPreconditionSSOR.html">PreconditionSSOR&lt;SparseMatrix&lt;double&gt;</a>&gt; preconditioner;</div>
+</div><!-- fragment --><p>改为</p>
+<div class="fragment"><div class="line"><a class="code" href="classPreconditionSSOR.html">PreconditionSSOR&lt;SparseMatrix&lt;double&gt;</a>&gt; preconditioner;</div>
 <div class="line">preconditioner.<a class="code" href="group__Preconditioners.html#ga7a3d66b17bb0ea1b16606e222474c2ea">initialize</a>(system_matrix, 1.0);</div>
-</div><!-- fragment --><p> we can try out different relaxation parameters for SSOR. By using </p><div class="fragment"><div class="line"><a class="code" href="classPreconditionJacobi.html">PreconditionJacobi&lt;SparseMatrix&lt;double&gt;</a>&gt; preconditioner;</div>
+</div><!-- fragment --><p>我们可以尝试SSOR的不同松弛参数。通过使用</p>
+<div class="fragment"><div class="line"><a class="code" href="classPreconditionJacobi.html">PreconditionJacobi&lt;SparseMatrix&lt;double&gt;</a>&gt; preconditioner;</div>
 <div class="line">preconditioner.<a class="code" href="group__Preconditioners.html#ga73fb0eab08209d015a20797c19127588">initialize</a>(system_matrix);</div>
 <div class="ttc" id="aclassPreconditionJacobi_html"><div class="ttname"><a href="classPreconditionJacobi.html">PreconditionJacobi</a></div><div class="ttdef"><b>Definition:</b> <a href="precondition_8h_source.html#l00497">precondition.h:498</a></div></div>
 <div class="ttc" id="agroup__Preconditioners_html_ga73fb0eab08209d015a20797c19127588"><div class="ttname"><a href="group__Preconditioners.html#ga73fb0eab08209d015a20797c19127588">PreconditionRelaxation::initialize</a></div><div class="ttdeci">void initialize(const MatrixType &amp;A, const AdditionalData &amp;parameters=AdditionalData())</div></div>
-</div><!-- fragment --><p> we can use Jacobi as a preconditioner. And by using </p><div class="fragment"><div class="line"><a class="code" href="classSparseILU.html">SparseILU&lt;double&gt;</a> preconditioner;</div>
+</div><!-- fragment --><p>我们可以使用雅可比作为预处理程序。而通过使用</p>
+<div class="fragment"><div class="line"><a class="code" href="classSparseILU.html">SparseILU&lt;double&gt;</a> preconditioner;</div>
 <div class="line">preconditioner.<a class="code" href="group__Preconditioners.html#gae4b56dfaab3fd8820faa1b21160b1acb">initialize</a>(system_matrix);</div>
 <div class="ttc" id="aclassSparseILU_html"><div class="ttname"><a href="classSparseILU.html">SparseILU</a></div><div class="ttdef"><b>Definition:</b> <a href="sparse__ilu_8h_source.html#l00059">sparse_ilu.h:60</a></div></div>
 <div class="ttc" id="agroup__Preconditioners_html_gae4b56dfaab3fd8820faa1b21160b1acb"><div class="ttname"><a href="group__Preconditioners.html#gae4b56dfaab3fd8820faa1b21160b1acb">SparseILU::initialize</a></div><div class="ttdeci">void initialize(const SparseMatrix&lt; somenumber &gt; &amp;matrix, const AdditionalData &amp;parameters=AdditionalData())</div></div>
-</div><!-- fragment --><p> we can use a simple incomplete LU decomposition without any thresholding or strengthening of the diagonal (to use this preconditioner, you have to also add the header file <code>deal.II/lac/sparse_ilu.h</code> to the include list at the top of the file).</p>
-<p>Using these various different preconditioners, we can compare the number of CG iterations needed (available through the <code>solver_control.last_step()</code> call, see <a class="el" href="step_4.html">step-4</a>) as well as CPU time needed (using the <a class="el" href="classTimer.html">Timer</a> class, discussed, for example, in <a class="el" href="step_28.html">step-28</a>) and get the following results (left: iterations; right: CPU time):</p>
+</div><!-- fragment --><p>我们可以使用一个简单的不完全LU分解，没有任何阈值或对角线的加强（要使用这个预处理程序，你还必须将头文件 <code>deal.II/lac/sparse_ilu.h</code> 添加到文件顶部的包含列表中）。</p>
+<p>使用这些不同的前置条件，我们可以比较所需的CG迭代次数（可通过 <code>solver_control.last_step()</code> 调用，见 <a class="el" href="step_4.html">step-4</a> ）以及所需的CPU时间（使用Timer类，例如在 <a class="el" href="step_28.html">step-28</a> 中讨论），得到以下结果（左边：迭代次数；右边：CPU时间）。</p>
 <table width="60%" align="center">
 <tr>
 <td align="center"><img src="https://www.dealii.org/images/steps/developer/step-6.q2.dofs_vs_iterations.png" alt="" class="inline"/>  </td><td align="center"><img src="https://www.dealii.org/images/steps/developer/step-6.q2.dofs_vs_time.png" alt="" class="inline"/>   </td></tr>
 </table>
-<p>As we can see, all preconditioners behave pretty much the same on this simple problem, with the number of iterations growing like \({\cal O}(N^{1/2})\) and because each iteration requires around \({\cal O}(N)\) operations the total CPU time grows like \({\cal O}(N^{3/2})\) (for the few smallest meshes, the CPU time is so small that it doesn't record). Note that even though it is the simplest method, Jacobi is the fastest for this problem.</p>
-<p>The situation changes slightly when the finite element is not a bi-quadratic one as set in the constructor of this program, but a bi-linear one. If one makes this change, the results are as follows:</p>
+<p><br  />
+</p>
+<p>我们可以看到，在这个简单的问题上，所有的预处理程序的表现都差不多，迭代次数的增长是 \({\cal O}(N^{1/2})\) ，由于每个迭代需要大约 \({\cal O}(N)\) 次操作，总的CPU时间增长是 \({\cal O}(N^{3/2})\) （对于几个最小的网格，CPU时间小到没有记录）。请注意，即使是最简单的方法，Jacobi对于这个问题也是最快的。</p>
+<p>当有限元不是本程序构造函数中设定的双二次元，而是双线性时，情况会发生轻微变化。如果做此改变，结果如下。</p>
 <table width="60%" align="center">
 <tr>
 <td align="center"><img src="https://www.dealii.org/images/steps/developer/step-6.q1.dofs_vs_iterations.png" alt="" class="inline"/>  </td><td align="center"><img src="https://www.dealii.org/images/steps/developer/step-6.q1.dofs_vs_time.png" alt="" class="inline"/>   </td></tr>
 </table>
-<p>In other words, while the increase in iterations and CPU time is as before, Jacobi is now the method that requires the most iterations; it is still the fastest one, however, owing to the simplicity of the operations it has to perform. This is not to say that Jacobi is actually a good preconditioner &ndash; for problems of appreciable size, it is definitely not, and other methods will be substantially better &ndash; but really only that it is fast because its implementation is so simple that it can compensate for a larger number of iterations.</p>
-<p>The message to take away from this is not that simplicity in preconditioners is always best. While this may be true for the current problem, it definitely is not once we move to more complicated problems (elasticity or Stokes, for examples <a class="el" href="step_8.html">step-8</a> or <a class="el" href="step_22.html">step-22</a>). Secondly, all of these preconditioners still lead to an increase in the number of iterations as the number \(N\) of degrees of freedom grows, for example \({\cal O}(N^\alpha)\); this, in turn, leads to a total growth in effort as \({\cal O}(N^{1+\alpha})\) since each iteration takes \({\cal O}(N)\) work. This behavior is undesirable: we would really like to solve linear systems with \(N\) unknowns in a total of \({\cal O}(N)\) work; there is a class of preconditioners that can achieve this, namely geometric (<a class="el" href="step_16.html">step-16</a>, <a class="el" href="step_37.html">step-37</a>, <a class="el" href="step_39.html">step-39</a>) or algebraic multigrid (<a class="el" href="step_31.html">step-31</a>, <a class="el" href="step_40.html">step-40</a>, and several others) preconditioners. They are, however, significantly more complex than the preconditioners outlined above.</p>
-<p>Finally, the last message to take home is that when the data shown above was generated (in 2018), linear systems with 100,000 unknowns are easily solved on a desktop machine in about a second, making the solution of relatively simple 2d problems even to very high accuracy not that big a task as it used to be even in the past. At the time, the situation for 3d problems was entirely different, but even that has changed substantially in the intervening time &ndash; though solving problems in 3d to high accuracy remains a challenge.</p>
+<p><br  />
+</p>
+<p>换句话说，虽然迭代次数和CPU时间的增加与以前一样，但雅可比现在是需要迭代次数最多的方法；不过，由于它必须执行的操作很简单，所以它仍然是最快的方法。这并不是说Jacobi实际上是一个好的预处理方法&ndash;对于规模可观的问题，它绝对不是，其他方法会好得多&ndash;而实际上只是因为它的实现非常简单，可以补偿更多的迭代。</p>
+<p>从这里得到的信息并不是说前处理程序的简单性总是最好的。虽然这对当前的问题可能是正确的，但一旦我们转向更复杂的问题（弹性或斯托克斯，例如 <a class="el" href="step_8.html">step-8</a> 或 <a class="el" href="step_22.html">step-22</a> ），就绝对不是这样了。其次，所有这些预处理程序仍然会导致迭代次数随着自由度 \(N\) 的增加而增加，例如 \({\cal O}(N^\alpha)\) ；这反过来又会导致总工作量的增加，因为每次迭代都需要 \({\cal O}(N)\) 工作。这种行为是不可取的：我们真的希望用 \(N\) 个未知数解决线性系统，总工作量为 \({\cal O}(N)\) ；有一类预处理程序可以实现这一点，即几何（ <a class="el" href="step_16.html">step-16</a> , <a class="el" href="step_37.html">step-37</a> , <a class="el" href="step_39.html">step-39</a> ）或代数多网格（ <a class="el" href="step_31.html">step-31</a> , <a class="el" href="step_40.html">step-40</a> ，以及其他几个）预处理程序。然而，它们要比上述的预处理程序复杂得多。</p>
+<p>最后，要带回家的最后一个信息是，当上面显示的数据产生时（2018年），在台式机上，10万个未知数的线性系统很容易在大约一秒钟内解决，使得解决相对简单的2D问题甚至达到非常高的精度，甚至在过去也不是那么大的任务。当时，三维问题的情况完全不同，但即使是这样，在过去的时间里也发生了很大的变化&ndash;尽管在三维中解决高精度的问题仍然是一个挑战。</p>
 <p><a class="anchor" id="Abettermesh"></a></p><h4>A better mesh</h4>
-<p>If you look at the meshes above, you will see even though the domain is the unit disk, and the jump in the coefficient lies along a circle, the cells that make up the mesh do not track this geometry well. The reason, already hinted at in <a class="el" href="step_1.html">step-1</a>, is that in the absence of other information, the <a class="el" href="classTriangulation.html">Triangulation</a> class only sees a bunch of coarse grid cells but has, of course, no real idea what kind of geometry they might represent when looked at together. For this reason, we need to tell the <a class="el" href="classTriangulation.html">Triangulation</a> what to do when a cell is refined: where should the new vertices at the edge midpoints and the cell midpoint be located so that the child cells better represent the desired geometry than the parent cell.</p>
-<p>To visualize what the triangulation actually knows about the geometry, it is not enough to just output the location of vertices and draw a straight line for each edge; instead, we have to output both interior and boundary lines as multiple segments so that they look curved. We can do this by making one change to the gnuplot part of <code>output_results</code>: </p><div class="fragment"><div class="line">{</div>
+<p>如果你看一下上面的网格，你会发现即使域是单位盘，系数的跳动是沿着圆的，构成网格的单元并不能很好地跟踪这个几何形状。原因在 <a class="el" href="step_1.html">step-1</a> 中已经暗示过了，在没有其他信息的情况下，三角剖分类只看到一堆粗略的网格单元，但当然不知道它们在一起看时可能代表什么样的几何形状。出于这个原因，我们需要告诉三角函数在单元被细化时应该做什么：边缘中点和单元中点的新顶点应该位于哪里，以便子单元比父单元更好地代表所需的几何图形。</p>
+<p>为了直观地了解三角测量对几何体的实际了解，仅仅输出顶点的位置和为每条边画一条直线是不够的；相反，我们必须将内部线和边界线都输出为多条线段，使它们看起来是弯曲的。我们可以通过对 <code>output_results</code> 的gnuplot部分做一个改变来做到这一点。</p>
+<div class="fragment"><div class="line">{</div>
 <div class="line">  <a class="code" href="classGridOut.html">GridOut</a>       grid_out;</div>
 <div class="line">  std::ofstream output(<span class="stringliteral">&quot;grid-&quot;</span> + <a class="code" href="group__Exceptions.html#ga72743302dcb1a0fb1f2f8dc5122d299e">std::to_string</a>(cycle) + <span class="stringliteral">&quot;.gnuplot&quot;</span>);</div>
 <div class="line">  <a class="code" href="structGridOutFlags_1_1Gnuplot.html">GridOutFlags::Gnuplot</a> gnuplot_flags(<span class="keyword">false</span>, 5, <span class="comment">/*curved_interior_cells*/</span><span class="keyword">true</span>);</div>
@@ -667,7 +728,8 @@ For gnuplot output, we set up a <a class="el" href="structGridOutFlags_1_1Gnuplo
 <div class="line">  <a class="code" href="classMappingQGeneric.html">MappingQGeneric&lt;dim&gt;</a> mapping(3);</div>
 <div class="line">  grid_out.<a class="code" href="classGridOut.html#ad114b5e2e6105f5a269b1599cc53d27e">write_gnuplot</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>, output, &amp;mapping);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>In the code above, we already do this for faces that sit at the boundary: this happens automatically since we use <a class="el" href="namespaceGridGenerator.html#a533c4778cbc9bcbed365dcab42ca4418">GridGenerator::hyper_ball</a>, which attaches a <a class="el" href="classSphericalManifold.html">SphericalManifold</a> to the boundary of the domain. To make the mesh <em>interior</em> also track a circular domain, we need to work a bit harder, though. First, recall that our coarse mesh consists of a central square cell and four cells around it. Now first consider what would happen if we also attached the <a class="el" href="classSphericalManifold.html">SphericalManifold</a> object not only to the four exterior faces but also the four cells at the perimeter as well as all of their faces. We can do this by adding the following snippet (testing that the center of a cell is larger than a small multiple, say one tenth, of the cell diameter away from center of the mesh only fails for the central square of the mesh): </p><div class="fragment"><div class="line"><a class="code" href="namespaceGridGenerator.html#a533c4778cbc9bcbed365dcab42ca4418">GridGenerator::hyper_ball</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>);</div>
+</div><!-- fragment --><p>在上面的代码中，我们已经对位于边界的面做了这样的处理：由于我们使用了 <a class="el" href="namespaceGridGenerator.html#a533c4778cbc9bcbed365dcab42ca4418">GridGenerator::hyper_ball</a>, ，将SphericalManifold附加到域的边界上，所以这自动发生。为了使网格<em>interior</em>也能追踪到一个圆形域，我们需要更努力一些。首先，回顾一下我们的粗略网格由一个中心的方形单元和周围的四个单元组成。现在首先考虑一下，如果我们不仅将SphericalManifold对象附加到四个外部面，而且还附加到周边的四个单元以及它们的所有面，会发生什么。我们可以通过添加下面的片段来实现（测试一个单元格的中心是否大于单元格直径的一个小倍数，比如说十分之一，只对网格中心的正方形失效）。</p>
+<div class="fragment"><div class="line"><a class="code" href="namespaceGridGenerator.html#a533c4778cbc9bcbed365dcab42ca4418">GridGenerator::hyper_ball</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>);</div>
 <div class="line"><span class="comment">// after GridGenerator::hyper_ball is called the Triangulation has</span></div>
 <div class="line"><span class="comment">// a SphericalManifold with id 0. We can use it again on the interior.</span></div>
 <div class="line"><span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> mesh_center;</div>
@@ -675,105 +737,43 @@ For gnuplot output, we set up a <a class="el" href="structGridOutFlags_1_1Gnuplo
 <div class="line">  <span class="keywordflow">if</span> (mesh_center.<a class="code" href="classPoint.html#a3df8e6ab311dab9337c8d7b039c7b815">distance</a> (cell-&gt;center()) &gt; cell-&gt;diameter()/10)</div>
 <div class="line">    cell-&gt;set_all_manifold_ids(0);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.refine_global(1);</div>
 <div class="ttc" id="aclassPoint_html_a3df8e6ab311dab9337c8d7b039c7b815"><div class="ttname"><a href="classPoint.html#a3df8e6ab311dab9337c8d7b039c7b815">Point::distance</a></div><div class="ttdeci">numbers::NumberTraits&lt; Number &gt;::real_type distance(const Point&lt; dim, Number &gt; &amp;p) const</div></div>
-</div><!-- fragment --><p>After a few global refinement steps, this would lead to a mesh of the following kind:</p>
-<div class="onecolumn" style="width: 80%"> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_bad_grid_4.svg" alt="Grid where some central cells are nearly triangular." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> </div><p>This is not a good mesh: the central cell has been refined in such a way that the children located in the four corners of the original central cell <em>degenerate</em>: they all tend towards triangles as mesh refinement continues. This means that the Jacobian matrix of the transformation from reference cell to actual cell degenerates for these cells, and because all error estimates for finite element solutions contain the norm of the inverse of the Jacobian matrix, you will get very large errors on these cells and, in the limit as mesh refinement, a loss of convergence order because the cells in these corners become worse and worse under mesh refinement.</p>
-<p>So we need something smarter. To this end, consider the following solution originally developed by Konstantin Ladutenko. We will use the following code: </p><div class="fragment"><div class="line"><a class="code" href="namespaceGridGenerator.html#a533c4778cbc9bcbed365dcab42ca4418">GridGenerator::hyper_ball</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>);</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> mesh_center;</div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">double</span> core_radius  = 1.0/5.0,</div>
-<div class="line">             inner_radius = 1.0/3.0;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Step 1: Shrink the inner cell</span></div>
-<div class="line"><span class="comment">//</span></div>
-<div class="line"><span class="comment">// We cannot get a circle out of the inner cell because of</span></div>
-<div class="line"><span class="comment">// the degeneration problem mentioned above. Rather, shrink</span></div>
-<div class="line"><span class="comment">// the inner cell to a core radius of 1/5 that stays</span></div>
-<div class="line"><span class="comment">// sufficiently far away from the place where the</span></div>
-<div class="line"><span class="comment">// coefficient will have a discontinuity and where we want</span></div>
-<div class="line"><span class="comment">// to have cell interfaces that actually lie on a circle.</span></div>
-<div class="line"><span class="comment">// We do this shrinking by just scaling the location of each</span></div>
-<div class="line"><span class="comment">// of the vertices, given that the center of the circle is</span></div>
-<div class="line"><span class="comment">// simply the origin of the coordinate system.</span></div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.active_cell_iterators())</div>
-<div class="line">  <span class="keywordflow">if</span> (mesh_center.<a class="code" href="classPoint.html#a3df8e6ab311dab9337c8d7b039c7b815">distance</a>(cell-&gt;center()) &lt; 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-5)</div>
-<div class="line">    {</div>
-<div class="line">      <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> v : cell-&gt;vertex_indices())</div>
-<div class="line">        cell-&gt;vertex(v) *= core_radius/mesh_center.<a class="code" href="classPoint.html#a3df8e6ab311dab9337c8d7b039c7b815">distance</a>(cell-&gt;vertex(v));</div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Step 2: Refine all cells except the central one</span></div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.active_cell_iterators())</div>
-<div class="line">  <span class="keywordflow">if</span> (mesh_center.<a class="code" href="classPoint.html#a3df8e6ab311dab9337c8d7b039c7b815">distance</a>(cell-&gt;center()) &gt;= 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-5)</div>
-<div class="line">    cell-&gt;set_refine_flag();</div>
-<div class="line"><a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.execute_coarsening_and_refinement();</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Step 3: Resize the inner children of the outer cells</span></div>
-<div class="line"><span class="comment">//</span></div>
-<div class="line"><span class="comment">// The previous step replaced each of the four outer cells</span></div>
-<div class="line"><span class="comment">// by its four children, but the radial distance at which we</span></div>
-<div class="line"><span class="comment">// have intersected is not what we want to later refinement</span></div>
-<div class="line"><span class="comment">// steps. Consequently, move the vertices that were just</span></div>
-<div class="line"><span class="comment">// created in radial direction to a place where we need</span></div>
-<div class="line"><span class="comment">// them.</span></div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.active_cell_iterators())</div>
-<div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> v : cell-&gt;vertex_indices())</div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> dist = mesh_center.<a class="code" href="classPoint.html#a3df8e6ab311dab9337c8d7b039c7b815">distance</a>(cell-&gt;vertex(v));</div>
-<div class="line">      <span class="keywordflow">if</span> (dist &gt; core_radius*1.0001 &amp;&amp; dist &lt; 0.9999)</div>
-<div class="line">        cell-&gt;vertex(v) *= inner_radius/dist;</div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Step 4: Apply curved manifold description</span></div>
-<div class="line"><span class="comment">//</span></div>
-<div class="line"><span class="comment">// As discussed above, we can not expect to subdivide the</span></div>
-<div class="line"><span class="comment">// inner four cells (or their faces) onto concentric rings,</span></div>
-<div class="line"><span class="comment">// but we can do so for all other cells that are located</span></div>
-<div class="line"><span class="comment">// outside the inner radius. To this end, we loop over all</span></div>
-<div class="line"><span class="comment">// cells and determine whether it is in this zone. If it</span></div>
-<div class="line"><span class="comment">// isn&#39;t, then we set the manifold description of the cell</span></div>
-<div class="line"><span class="comment">// and all of its bounding faces to the one that describes</span></div>
-<div class="line"><span class="comment">// the spherical manifold already introduced above and that</span></div>
-<div class="line"><span class="comment">// will be used for all further mesh refinement.</span></div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.active_cell_iterators())</div>
-<div class="line">  {</div>
-<div class="line">    <span class="keywordtype">bool</span> is_in_inner_circle = <span class="keyword">false</span>;</div>
-<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> v : cell-&gt;vertex_indices())</div>
-<div class="line">      <span class="keywordflow">if</span> (mesh_center.<a class="code" href="classPoint.html#a3df8e6ab311dab9337c8d7b039c7b815">distance</a>(cell-&gt;vertex(v)) &lt; inner_radius)</div>
-<div class="line">        {</div>
-<div class="line">          is_in_inner_circle = <span class="keyword">true</span>;</div>
-<div class="line">          <span class="keywordflow">break</span>;</div>
-<div class="line">        }</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (is_in_inner_circle == <span class="keyword">false</span>)</div>
-<div class="line">    <span class="comment">// The Triangulation already has a SphericalManifold with</span></div>
-<div class="line">    <span class="comment">// manifold id 0 (see the documentation of</span></div>
-<div class="line">    <span class="comment">// GridGenerator::hyper_ball) so we just attach it to the outer</span></div>
-<div class="line">    <span class="comment">// ring here:</span></div>
-<div class="line">      cell-&gt;set_all_manifold_ids(0);</div>
-<div class="line">  }</div>
-</div><!-- fragment --><p>This code then generates the following, much better sequence of meshes:</p>
+</div><!-- fragment --><p>经过几个全局细化步骤，这将导致以下类型的网格。</p>
+<pre class="fragment">&lt;div class="onecolumn" style="width: 80%"&gt;
+&lt;div&gt;
+  &lt;img src="https://www.dealii.org/images/steps/developer/step_6_bad_grid_4.svg"
+       alt="Grid where some central cells are nearly triangular."
+       width="300" height="300"&gt;
+&lt;/div&gt;
+</pre> <p>This is not a good mesh: the central cell has been refined in such a way that the children located in the four corners of the original central cell [1.x.136]: they all tend towards triangles as mesh refinement continues. This means that the Jacobian matrix of the transformation from reference cell to actual cell degenerates for these cells, and because all error estimates for finite element solutions contain the norm of the inverse of the Jacobian matrix, you will get very large errors on these cells and, in the limit as mesh refinement, a loss of convergence order because the cells in these corners become worse and worse under mesh refinement.</p>
+<p>So we need something smarter. To this end, consider the following solution originally developed by Konstantin Ladutenko. We will use the following code:</p>
+<p>[1.x.137]</p>
+<p>This code then generates the following, much better sequence of meshes:</p>
 <div class="twocolumn" style="width: 80%"> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_0_ladutenko.svg" alt="Initial grid: the Ladutenko grid with one global refinement." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_1_ladutenko.svg" alt="First adaptively refined Ladutenko grid." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_2_ladutenko.svg" alt="Second adaptively refined Ladutenko grid." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_3_ladutenko.svg" alt="Third adaptively refined Ladutenko grid." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_4_ladutenko.svg" alt="Fourth adaptively refined Ladutenko grid. The cells are clustered
          along the inner circle." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step_6_grid_5_ladutenko.svg" alt="Fifth adaptively refined Ladutenko grid: the cells are clustered
-         along the inner circle." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> </div><p>Creating good meshes, and in particular making them fit the geometry you want, is a complex topic in itself. You can find much more on this in <a class="el" href="step_49.html">step-49</a>, <a class="el" href="step_53.html">step-53</a>, and <a class="el" href="step_54.html">step-54</a>, among other tutorial programs that cover the issue. <a class="el" href="step_65.html">step-65</a> shows another, less manual way to achieve a mesh well fit to the problem here. Information on curved domains can also be found in the documentation module on <a class="el" href="group__manifold.html">Manifold descriptions</a>.</p>
-<p>Why does it make sense to choose a mesh that tracks the internal interface? There are a number of reasons, but the most essential one comes down to what we actually integrate in our bilinear form. Conceptually, we want to integrate the term \(A_{ij}^K=\int_K a(\mathbf x) \nabla \varphi_i(\mathbf x) \nabla \varphi_j(\mathbf x) ; dx\) as the contribution of cell \(K\) to the matrix entry \(A_{ij}\). We can not compute it exactly and have to resort to quadrature. We know that quadrature is accurate if the integrand is smooth. That is because quadrature in essence computes a polynomial approximation to the integrand that coincides with the integrand in the quadrature points, and then computes the volume under this polynomial as an approximation to the volume under the original integrand. This polynomial interpolant is accurate if the integrand is smooth on a cell, but it is usually rather inaccurate if the integrand is discontinuous on a cell.</p>
-<p>Consequently, it is worthwhile to align cells in such a way that the interfaces across which the coefficient is discontinuous are aligned with cell interfaces. This way, the coefficient is constant on each cell, following which the integrand will be smooth, and its polynomial approximation and the quadrature approximation of the integral will both be accurate. Note that such an alignment is common in many practical cases, so deal.II provides a number of functions (such as <a class="el" href="DEALGlossary.html#GlossMaterialId">material_id</a>) to help manage such a scenario. Refer to <a class="el" href="step_28.html">step-28</a> and <a class="el" href="step_46.html">step-46</a> for examples of how material ids can be applied.</p>
-<p>Finally, let us consider the case of a coefficient that has a smooth and non-uniform distribution in space. We can repeat once again all of the above discussion on the representation of such a function with the quadrature. So, to simulate it accurately there are a few readily available options: you could reduce the cell size, increase the order of the polynomial used in the quadrature formula, select a more appropriate quadrature formula, or perform a combination of these steps. The key is that providing the best fit of the coefficient's spatial dependence with the quadrature polynomial will lead to a more accurate finite element solution of the PDE.</p>
-<p>As a final note: The discussion in the previous paragraphs shows, we here have a very concrete way of stating what we think of a good mesh &ndash; it should be aligned with the jump in the coefficient. But one could also have asked this kind of question in a more general setting: Given some equation with a smooth solution and smooth coefficients, can we say what a good mesh would look like? This is a question for which the answer is easier to state in intuitive terms than mathematically: A good mesh has cells that all, by and large, look like squares (or cubes, in 3d). A bad mesh would contain cells that are very elongated in some directions or, more generally, for which there are cells that have both short and long edges. There are many ways in which one could assign a numerical quality index to each cell that measures whether the cell is "good" or "bad"; some of these are often chosen because they are cheap and easy to compute, whereas others are based on what enters into proofs of convergence. An example of the former would be the ratio of the longest to the shortest edge of a cell: In the ideal case, that ratio would be one; bad cells have values much larger than one. An example of the latter kind would consider the gradient (the "Jacobian") of the mapping from the reference cell \(\hat K=[0,1]^d\) to the real cell \(K\); this gradient is a matrix, and a quantity that enters into error estimates is the maximum over all points on the reference cell of the ratio of the largest to the smallest eigenvalue of this matrix. It is again not difficult to see that this ratio is constant if the cell \(K\) is an affine image of \(\hat K\), and that it is one for squares and cubes.</p>
-<p>In practice, it might be interesting to visualize such quality measures. The function <a class="el" href="namespaceGridTools.html#a9b0cf2feadb3374ed24f70d99e6e7740">GridTools::compute_aspect_ratio_of_cells()</a> provides one way to get this kind of information. Even better, visualization tools such as VisIt often allow you to visualize this sort of information for a variety of measures from within the visualization software itself; in the case of VisIt, just add a "pseudo-color" plot and select one of the mesh quality measures instead of the solution field.</p>
+         along the inner circle." style="pointer-events: none;" width="300" height="300" class="inline"/> </div> </div><p> <br  />
+</p>
+<p>创建好的网格，特别是使它们符合你想要的几何形状，本身就是一个复杂的话题。你可以在 <a class="el" href="step_49.html">step-49</a> , <a class="el" href="step_53.html">step-53</a> , 和 <a class="el" href="step_54.html">step-54</a> 中找到更多关于这个问题的教程。 <a class="el" href="step_65.html">step-65</a> 展示了另一种不太需要手工操作的方法来实现与这里的问题相适应的网格。关于弯曲域的信息也可以在 <a class="el" href="group__manifold.html">Manifold description for triangulations</a> 的文档模块 "流形描述 "中找到。</p>
+<p>为什么选择跟踪内部界面的网格是有意义的？有很多原因，但最基本的原因是我们在双线性形式中实际整合的内容。从概念上讲，我们想把 \(A_{ij}^K=\int_K a(\mathbf x) \nabla \varphi_i(\mathbf x) \nabla \varphi_j(\mathbf x) ; dx\) 作为单元格 \(K\) 对矩阵条目 \(A_{ij}\) 的贡献来整合。我们无法精确计算，只能求助于正交法。我们知道，如果积分是平滑的，正交是准确的。这是因为正交法实质上是计算积分的多项式近似值，与积分在正交点重合，然后计算这个多项式下的体积，作为原始积分下的体积的近似值。如果积分在一个单元上是平滑的，这个多项式插值是准确的，但如果积分在一个单元上是不连续的，它通常就相当不准确了。</p>
+<p>因此，值得对单元进行调整，使系数不连续的界面与单元界面保持一致。这样一来，系数在每个单元上都是恒定的，之后积分将是平滑的，其多项式近似和积分的正交近似都将是准确的。请注意，这样的排列方式在许多实际情况下是很常见的，所以deal.II提供了一些函数（如 <a class="el" href="DEALGlossary.html#GlossMaterialId">material_id</a>）来帮助管理这样的情况。请参考 <a class="el" href="step_28.html">step-28</a> 和 <a class="el" href="step_46.html">step-46</a> ，了解如何应用material ids的例子。</p>
+<p>最后，让我们考虑一个在空间中具有平滑和非均匀分布的系数的情况。我们可以再一次重复上面关于用正交表示这种函数的所有讨论。所以，为了准确地模拟它，有几个现成的选择：你可以减少单元格的大小，增加正交公式中使用的多项式的阶数，选择一个更合适的正交公式，或进行这些步骤的组合。关键是，用正交多项式提供系数的空间依赖性的最佳拟合将导致PDE的更精确的有限元解。</p>
+<p>最后说明一下：前面几段的讨论表明，我们在这里有一个非常具体的方式来说明我们认为的好的网格&ndash;它应该与系数的跳动相一致。但人们也可以在一个更普遍的环境中提出这样的问题。给定一些具有光滑解和光滑系数的方程，我们能说一个好的网格是什么样子的吗？这个问题的答案在直觉上比数学上更容易表述。一个好的网格，其单元格大体上都像正方形（或立方体，在三维空间）。一个不好的网格会包含一些在某些方向上非常细长的单元，或者，更广泛地说，其中有一些单元的边缘既短又长。有很多方法可以给每个单元分配一个数字质量指数，以衡量该单元是 "好 "还是 "坏"；其中一些经常被选择，因为它们便宜且容易计算，而另一些则是基于收敛性证明中的内容。前者的一个例子是一个单元格的最长边与最短边的比率。在理想的情况下，这个比率是1；不好的单元格的值远远大于1。后者的例子是考虑从参考单元 \(\hat K=[0,1]^d\) 到实际单元 \(K\) 的映射的梯度（"Jacobian"）；这个梯度是一个矩阵，进入误差估计的一个量是参考单元上所有点的最大值，即这个矩阵的最大和最小的特征值的比率。同样不难看出，如果单元格 \(K\) 是 \(\hat K\) 的仿生图像，这个比率是恒定的，对于正方形和立方体来说，这个比率是一个。</p>
+<p>在实践中，将这种质量度量可视化可能是很有趣的。函数 <a class="el" href="namespaceGridTools.html#a9b0cf2feadb3374ed24f70d99e6e7740">GridTools::compute_aspect_ratio_of_cells()</a> 提供了一种获得这种信息的方法。更好的是，可视化工具，如VisIt，通常允许你在可视化软件中对各种度量的信息进行可视化；在VisIt的情况下，只需添加一个 "伪色 "图，并选择一个网格质量度量，而不是解域。</p>
 <p><a class="anchor" id="Playingwiththeregularityofthesolution"></a></p><h4>Playing with the regularity of the solution</h4>
-<p>From a mathematical perspective, solutions of the Laplace equation </p><p class="formulaDsp">
+<p>从数学的角度来看，拉普拉斯方程 </p><p class="formulaDsp">
 \[ -\Delta u = f \]
 </p>
-<p> on smoothly bounded, convex domains are known to be smooth themselves. The exact degree of smoothness, i.e., the function space in which the solution lives, depends on how smooth exactly the boundary of the domain is, and how smooth the right hand side is. Some regularity of the solution may be lost at the boundary, but one generally has that the solution is twice more differentiable in compact subsets of the domain than the right hand side. If, in particular, the right hand side satisfies \(f\in C^\infty(\Omega)\), then \(u \in C^\infty(\Omega_i)\) where \(\Omega_i\) is any compact subset of \(\Omega\) ( \(\Omega\) is an open domain, so a compact subset needs to keep a positive distance from \(\partial\Omega\)).</p>
-<p>The situation we chose for the current example is different, however: we look at an equation with a non-constant coefficient \(a(\mathbf x)\): </p><p class="formulaDsp">
+<p>在光滑有界的凸域上的解，已知其本身是光滑的。具体的光滑程度，即解所处的函数空间，取决于域的边界到底有多光滑，以及右手边的光滑程度。边界处可能会失去解的某些规律性，但一般来说，在域的紧凑子集中，解的可微性比右手边多一倍。特别是如果右手边满足 \(f\in C^\infty(\Omega)\) ，那么 \(u \in C^\infty(\Omega_i)\) ，其中 \(\Omega_i\) 是 \(\Omega\) 的任何紧凑子集（ \(\Omega\) 是一个开放域，所以紧凑子集需要与 \(\partial\Omega\) 保持一个正距离）。</p>
+<p>然而，我们为目前的例子选择的情况是不同的：我们看一个具有非常数系数的方程 \(a(\mathbf x)\) : </p><p class="formulaDsp">
 \[ -\nabla \cdot (a \nabla u) = f. \]
 </p>
-<p> Here, if \(a\) is not smooth, then the solution will not be smooth either, regardless of \(f\). In particular, we expect that wherever \(a\) is discontinuous along a line (or along a plane in 3d), the solution will have a kink. This is easy to see: if for example \(f\) is continuous, then \(f=-\nabla \cdot (a \nabla u)\) needs to be continuous. This means that \(a \nabla u\) must be continuously differentiable (not have a kink). Consequently, if \(a\) has a discontinuity, then \(\nabla u\) must have an opposite discontinuity so that the two exactly cancel and their product yields a function without a discontinuity. But for \(\nabla u\) to have a discontinuity, \(u\) must have a kink. This is of course exactly what is happening in the current example, and easy to observe in the pictures of the solution.</p>
-<p>In general, if the coefficient \(a(\mathbf x)\) is discontinuous along a line in 2d, or a plane in 3d, then the solution may have a kink, but the gradient of the solution will not go to infinity. That means, that the solution is at least still in the <a href="https://en.wikipedia.org/wiki/Sobolev_space">Sobolev space</a> \(W^{1,\infty}\) (i.e., roughly speaking, in the space of functions whose derivatives are bounded). On the other hand, we know that in the most extreme cases &ndash; i.e., where the domain has reentrant corners, the right hand side only satisfies \(f\in H^{-1}\), or the coefficient \(a\) is only in \(L^\infty\) &ndash; all we can expect is that \(u\in H^1\) (i.e., the <a href="https://en.wikipedia.org/wiki/Sobolev_space#Sobolev_spaces_with_integer_k">Sobolev space</a> of functions whose derivative is square integrable), a much larger space than \(W^{1,\infty}\). It is not very difficult to create cases where the solution is in a space \(H^{1+s}\) where we can get \(s\) to become as small as we want. Such cases are often used to test adaptive finite element methods because the mesh will have to resolve the singularity that causes the solution to not be in \(W^{1,\infty}\) any more.</p>
-<p>The typical example one uses for this is called the <em>Kellogg problem</em> (referring to <b>[Kel74]</b>), which in the commonly used form has a coefficient \(a(\mathbf x)\) that has different values in the four quadrants of the plane (or eight different values in the octants of \({\mathbb R}^3\)). The exact degree of regularity (the \(s\) in the index of the Sobolev space above) depends on the values of \(a(\mathbf x)\) coming together at the origin, and by choosing the jumps large enough, the regularity of the solution can be made as close as desired to \(H^1\).</p>
-<p>To implement something like this, one could replace the coefficient function by the following (shown here only for the 2d case): </p><div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
+<p> 这里，如果 \(a\) 不光滑，那么无论 \(f\) ，解也不会光滑。特别是，我们期望在 \(a\) 沿直线（或三维平面）不连续的地方，解决方案将有一个结点。这很容易看出：如果 \(f\) 是连续的，那么 \(f=-\nabla \cdot (a \nabla u)\) 也需要是连续的。这意味着 \(a \nabla u\) 必须是可连续微分的（不存在扭结）。因此，如果 \(a\) 有一个不连续，那么 \(\nabla u\) 必须有一个相反的不连续，这样，两者正好抵消，它们的乘积得到一个没有不连续的函数。但是要使 \(\nabla u\) 有一个不连续， \(u\) 必须有一个结点。当然，这正是当前例子中发生的情况，在解的图片中也很容易观察到。</p>
+<p>一般来说，如果系数 \(a(\mathbf x)\) 沿着2D的直线或3D的平面是不连续的，那么解可能有一个结点，但解的梯度不会到无限大。这意味着，该解至少仍在<a href="https://en.wikipedia.org/wiki/Sobolev_space">Sobolev space</a> \(W^{1,\infty}\) 中（即，大致上，在导数有界的函数空间中）。另一方面，我们知道，在最极端的情况下&ndash;即域有重入角，右手边只满足 \(f\in H^{-1}\) ，或者系数 \(a\) 只在 \(L^\infty\) 中&ndash;我们所能期待的是 \(u\in H^1\) （即导数可平方整除的函数的<a href="https://en.wikipedia.org/wiki/Sobolev_space#Sobolev_spaces_with_integer_k">Sobolev space</a>），一个比 \(W^{1,\infty}\) 大得多的空间 。创造出解在空间 \(H^{1+s}\) 中的案例并不十分困难，我们可以让 \(s\) 变得像我们想要的那样小。这样的情况经常被用来测试自适应有限元方法，因为网格必须解决导致解不再在 \(W^{1,\infty}\) 中的奇异点。</p>
+<p>人们为此使用的典型例子叫做<em>Kellogg problem</em>（指 <b>[Kel74]</b> ），在常用的形式下，它的系数 \(a(\mathbf x)\) 在平面的四个象限内有不同的值（或在 \({\mathbb R}^3\) 的八个象限内有不同的值）。确切的规则性程度（上述索博列夫空间索引中的 \(s\) ）取决于 \(a(\mathbf x)\) 的值在原点聚集，通过选择足够大的跳跃，可以使解的规则性尽可能地接近 \(H^1\) 。</p>
+<p>为了实现类似的目标，我们可以用下面的方法代替系数函数（这里只显示2d情况）。</p>
+<div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">double</span> coefficient (<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp;p)</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">if</span> ((p[0] &lt; 0) &amp;&amp; (p[1] &lt; 0))           <span class="comment">// lower left quadrant</span></div>
@@ -792,9 +792,9 @@ For gnuplot output, we set up a <a class="el" href="structGridOutFlags_1_1Gnuplo
 <div class="line">}</div>
 <div class="ttc" id="agroup__Exceptions_html_ga31978c026b8b6b5116df30b8e748f6b7"><div class="ttname"><a href="group__Exceptions.html#ga31978c026b8b6b5116df30b8e748f6b7">StandardExceptions::ExcInternalError</a></div><div class="ttdeci">static ::ExceptionBase &amp; ExcInternalError()</div></div>
 <div class="ttc" id="agroup__Exceptions_html_ga70a0bb353656e704acf927945277bbc6"><div class="ttname"><a href="group__Exceptions.html#ga70a0bb353656e704acf927945277bbc6">Assert</a></div><div class="ttdeci">#define Assert(cond, exc)</div><div class="ttdef"><b>Definition:</b> <a href="include_2deal_8II_2base_2exceptions_8h_source.html#l01473">exceptions.h:1473</a></div></div>
-</div><!-- fragment --><p> (Adding the <code>Assert</code> at the end ensures that either an exception is thrown or that the program aborts if we ever get to that point &ndash; which of course we shouldn't, but this is a good way to insure yourself: we all make mistakes by sometimes not thinking of all cases, for example by checking for <code>p[0]</code> to be less than and greater than zero, rather than greater-or-equal to zero, and thereby forgetting some cases that would otherwise lead to bugs that are awkward to find. The <code>return 0;</code> at the end is only there to avoid compiler warnings that the function does not end in a <code>return</code> statement &ndash; the compiler cannot see that the function would never actually get to that point because of the preceding <code>Assert</code> statement.)</p>
-<p>By playing with such cases where four or more sectors come together and on which the coefficient has different values, one can construct cases where the solution has singularities at the origin. One can also see how the meshes are refined in such cases.</p>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+</div><!-- fragment --><p>(在结尾处添加 <code>Assert</code> 可以确保在我们到达那个点时，要么抛出一个异常，要么程序中止。</p>
+<p>&ndash; 当然我们不应该这样做，但这是一个很好的方法来保证自己：我们都会犯错误，有时没有考虑到所有的情况，例如检查 <code>p[0]</code> 是否小于和大于0，而不是大于或等于0，从而忘记了一些情况，否则会导致难以发现的错误。最后的 <code>return 0;</code> 只是为了避免编译器警告说函数没有在 <code>return</code> 语句中结束 &ndash; 编译器无法看到由于前面的 <code>Assert</code> 语句，函数实际上永远不会到达那个点）。)</p>
+<p>通过玩弄这种四个或更多扇形聚集在一起并且系数有不同值的情况，我们可以构造出解在原点有奇异点的情况。我们还可以看到在这种情况下网格是如何被细化的。<a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2000 - 2020 by the deal.II authors</span></div>
@@ -1120,7 +1120,8 @@ For gnuplot output, we set up a <a class="el" href="structGridOutFlags_1_1Gnuplo
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> 。 </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

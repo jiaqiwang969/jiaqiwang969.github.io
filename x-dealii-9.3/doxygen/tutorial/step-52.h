@@ -1,1279 +1,1238 @@
-/**
-@page step_52 The step-52 tutorial program
-This tutorial depends on step-26.
+  /**   @page step_52 The step-52 tutorial program 。 
+
+本教程取决于  step-26  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Problemstatement">Problem statement</a>
-        <li><a href="#RungeKuttamethods">Runge-Kutta methods</a>
+        <li><a href="#Problemstatement">Problem statement</a><a href="#Problemstatement">Problem statement</a>
+        <li><a href="#RungeKuttamethods">Runge-Kutta methods</a><a href="#RungeKuttamethods">Runge-Kutta methods</a>
       <ul>
-        <li><a href="#ExplicitRungeKuttamethods">Explicit Runge-Kutta methods</a>
-        <li><a href="#EmbeddedRungeKuttamethods">Embedded Runge-Kutta methods</a>
-        <li><a href="#ImplicitRungeKuttamethods">Implicit Runge-Kutta methods</a>
+        <li><a href="#ExplicitRungeKuttamethods">Explicit Runge-Kutta methods</a><a href="#ExplicitRungeKuttamethods">Explicit Runge-Kutta methods</a>
+        <li><a href="#EmbeddedRungeKuttamethods">Embedded Runge-Kutta methods</a><a href="#EmbeddedRungeKuttamethods">Embedded Runge-Kutta methods</a>
+        <li><a href="#ImplicitRungeKuttamethods">Implicit Runge-Kutta methods</a><a href="#ImplicitRungeKuttamethods">Implicit Runge-Kutta methods</a>
       </ul>
-        <li><a href="#Spatiallydiscreteformulation">Spatially discrete formulation</a>
-        <li><a href="#Notesonthetestcase">Notes on the testcase</a>
+        <li><a href="#Spatiallydiscreteformulation">Spatially discrete formulation</a><a href="#Spatiallydiscreteformulation">Spatially discrete formulation</a>
+        <li><a href="#Notesonthetestcase">Notes on the testcase</a><a href="#Notesonthetestcase">Notes on the testcase</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#ThecodeDiffusioncodeclass">The <code>Diffusion</code> class</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#ThecodeDiffusioncodeclass">The <code>Diffusion</code> class</a><a href="#ThecodeDiffusioncodeclass">The <code>Diffusion</code> class</a>
       <ul>
-        <li><a href="#codeDiffusionsetup_systemcode"><code>Diffusion::setup_system</code></a>
-        <li><a href="#codeDiffusionassemble_systemcode"><code>Diffusion::assemble_system</code></a>
-        <li><a href="#codeDiffusionget_sourcecode"><code>Diffusion::get_source</code></a>
-        <li><a href="#codeDiffusionevaluate_diffusioncode"><code>Diffusion::evaluate_diffusion</code></a>
-        <li><a href="#codeDiffusionid_minus_tau_J_inversecode"><code>Diffusion::id_minus_tau_J_inverse</code></a>
-        <li><a href="#codeDiffusionoutput_resultscode"><code>Diffusion::output_results</code></a>
-        <li><a href="#codeDiffusionexplicit_methodcode"><code>Diffusion::explicit_method</code></a>
-        <li><a href="#codeDiffusionimplicit_methodcode"><code>Diffusion::implicit_method</code></a>
-        <li><a href="#codeDiffusionembedded_explicit_methodcode"><code>Diffusion::embedded_explicit_method</code></a>
-        <li><a href="#codeDiffusionruncode"><code>Diffusion::run</code></a>
+        <li><a href="#codeDiffusionsetup_systemcode"><code>Diffusion::setup_system</code></a><a href="#codeDiffusionsetup_systemcode"><code>Diffusion::setup_system</code></a>
+        <li><a href="#codeDiffusionassemble_systemcode"><code>Diffusion::assemble_system</code></a><a href="#codeDiffusionassemble_systemcode"><code>Diffusion::assemble_system</code></a>
+        <li><a href="#codeDiffusionget_sourcecode"><code>Diffusion::get_source</code></a><a href="#codeDiffusionget_sourcecode"><code>Diffusion::get_source</code></a>
+        <li><a href="#codeDiffusionevaluate_diffusioncode"><code>Diffusion::evaluate_diffusion</code></a><a href="#codeDiffusionevaluate_diffusioncode"><code>Diffusion::evaluate_diffusion</code></a>
+        <li><a href="#codeDiffusionid_minus_tau_J_inversecode"><code>Diffusion::id_minus_tau_J_inverse</code></a><a href="#codeDiffusionid_minus_tau_J_inversecode"><code>Diffusion::id_minus_tau_J_inverse</code></a>
+        <li><a href="#codeDiffusionoutput_resultscode"><code>Diffusion::output_results</code></a><a href="#codeDiffusionoutput_resultscode"><code>Diffusion::output_results</code></a>
+        <li><a href="#codeDiffusionexplicit_methodcode"><code>Diffusion::explicit_method</code></a><a href="#codeDiffusionexplicit_methodcode"><code>Diffusion::explicit_method</code></a>
+        <li><a href="#codeDiffusionimplicit_methodcode"><code>Diffusion::implicit_method</code></a><a href="#codeDiffusionimplicit_methodcode"><code>Diffusion::implicit_method</code></a>
+        <li><a href="#codeDiffusionembedded_explicit_methodcode"><code>Diffusion::embedded_explicit_method</code></a><a href="#codeDiffusionembedded_explicit_methodcode"><code>Diffusion::embedded_explicit_method</code></a>
+        <li><a href="#codeDiffusionruncode"><code>Diffusion::run</code></a><a href="#codeDiffusionruncode"><code>Diffusion::run</code></a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main()</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main()</code> function</a><a href="#Thecodemaincodefunction">The <code>main()</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<br>
+@endhtmlonly 
 
-<i>This program was contributed by Bruno Turcksin and Damien Lebrun-Grandie.</i>
+  <br>   
 
-@note In order to run this program, deal.II must be configured to use
-the UMFPACK sparse direct solver. Refer to the <a
-href="../../readme.html#umfpack">ReadMe</a> for instructions how to do this.
+<i>This program was contributed by Bruno Turcksin and Damien Lebrun-Grandie.</i> 
 
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+  @note  为了运行这个程序，deal.II必须被配置为使用UMFPACK稀疏直接解算器。请参考<a
+href="../../readme.html#umfpack">ReadMe</a>中的说明如何做到这一点。
+
+<a name="Intro"></a> <a name="Introduction"></a><h1>Introduction</h1>
 
 
-This program shows how to use Runge-Kutta methods to solve a time-dependent
-problem. It solves a small variation of the heat equation discussed first in
-step-26 but, since the purpose of this program is only to demonstrate using
-more advanced ways to interface with deal.II's time stepping algorithms, only
-solves a simple problem on a uniformly refined mesh.
+这个程序展示了如何使用Runge-Kutta方法来解决一个时间相关问题。它解决了在 step-26 中首先讨论的热方程的一个小变化，但由于这个程序的目的只是演示使用更高级的方法与deal.II的时间步进算法对接，所以只解决了均匀细化网格上的一个简单问题。
 
 
 <a name="Problemstatement"></a><h3>Problem statement</h3>
 
 
-In this example, we solve the one-group time-dependent diffusion
-approximation of the neutron transport equation (see step-28 for the
-time-independent multigroup diffusion). This is a model for how neutrons move
-around highly scattering media, and consequently it is a variant of the
-time-dependent diffusion equation -- which is just a different name for the
-heat equation discussed in step-26, plus some extra terms.
-We assume that the medium is not
-fissible and therefore, the neutron flux satisfies the following equation:
-@f{eqnarray*}
+在这个例子中，我们求解中子输运方程的单组时间依赖的扩散近似（时间依赖的多组扩散见 step-28 ）。这是一个关于中子如何在高散射介质中移动的模型，因此它是时间依赖性扩散方程的一个变体--它只是 step-26 中讨论的热方程的不同名称，加上一些额外的条款。我们假设介质是不可逆的，因此，中子通量满足以下方程。@f{eqnarray*}
 \frac{1}{v}\frac{\partial \phi(x,t)}{\partial t} = \nabla \cdot D(x) \nabla \phi(x,t)
-- \Sigma_a(x) \phi(x,t) + S(x,t)
-@f}
-augmented by appropriate boundary conditions. Here, $v$ is the velocity of
-neutrons (for simplicity we assume it is equal to 1 which can be achieved by
-simply scaling the time variable), $D$ is the diffusion coefficient,
-$\Sigma_a$ is the absorption cross section, and $S$ is a source. Because we are
-only interested in the time dependence, we assume that $D$ and $\Sigma_a$ are
-constant.
 
-Since this program only intends to demonstrate how to use advanced time
-stepping algorithms, we will only look for the solutions of relatively simple
-problems. Specifically, we are looking for a solution on a square domain
-$[0,b]\times[0,b]$ of the form
-@f{eqnarray*}
+
+- \Sigma_a(x) \phi(x,t) + S(x,t)
+@f} 
+
+用适当的边界条件来增强。这里， $v$ 是中子的速度（为简单起见，我们假设它等于1，这可以通过简单地缩放时间变量来实现）， $D$ 是扩散系数， $\Sigma_a$ 是吸收截面， $S$ 是一个源。因为我们只对时间依赖性感兴趣，我们假设 $D$ 和 $\Sigma_a$ 是常数。
+
+由于本程序只打算演示如何使用先进的时间步进算法，我们将只寻找相对简单问题的解决方案。具体来说，我们要在一个正方形域 $[0,b]\times[0,b]$ 上寻找解，其形式为@f{eqnarray*}
 \phi(x,t) = A\sin(\omega t)(bx-x^2).
 @f}
-By using quadratic finite elements, we can represent this function exactly at
-any particular time, and all the error will be due to the time
-discretization. We do this because it is then easy to observe the order of
-convergence of the various time stepping schemes we will consider, without
-having to separate spatial and temporal errors.
 
-We impose the following boundary conditions: homogeneous Dirichlet for $x=0$ and
-$x=b$ and homogeneous Neumann conditions for $y=0$ and $y=b$. We choose the
-source term so that the corresponding solution is
-in fact of the form stated above:
-@f{eqnarray*}
+通过使用二次有限元，我们可以在任何特定时间精确地表示这个函数，所有的误差都是由于时间离散化造成的。我们这样做是因为这样就很容易观察到我们将要考虑的各种时间步进方案的收敛顺序，而不需要将空间和时间误差分开。
+
+我们施加以下边界条件： $x=0$ 和 $x=b$ 的同质Dirichlet条件， $y=0$ 和 $y=b$ 的同质Neumann条件。我们选择源项，使相应的解实际上是上述形式。@f{eqnarray*}
 S=A\left(\frac{1}{v}\omega \cos(\omega t)(bx -x^2) + \sin(\omega t)
 \left(\Sigma_a (bx-x^2)+2D\right) \right).
-@f}
-Because the solution is a sine in time, we know that the exact solution
-satisfies $\phi\left(x,\frac{\pi}{\omega}\right) = 0$.
-Therefore, the error at time $t=\frac{\pi}{\omega}$ is simply the norm of the numerical
-solution, i.e., $\|e(\cdot,t=\frac{\pi}{\omega})\|_{L_2} = \|\phi_h(\cdot,t=\frac{\pi}{\omega})\|_{L_2}$,
-and is particularly easily evaluated. In the code, we evaluate the $l_2$ norm
-of the vector of nodal values of $\phi_h$ instead of the $L_2$ norm of the
-associated spatial function, since the former is simpler to compute; however,
-on uniform meshes, the two are just related by a constant and we can
-consequently observe the temporal convergence order with either.
+@f} 
+
+因为解是时间上的正弦，我们知道精确解满足 $\phi\left(x,\frac{\pi}{\omega}\right) = 0$  。因此，时间 $t=\frac{\pi}{\omega}$ 的误差只是数值解的规范，即 $\|e(\cdot,t=\frac{\pi}{\omega})\|_{L_2} = \|\phi_h(\cdot,t=\frac{\pi}{\omega})\|_{L_2}$ ，而且特别容易评估。在代码中，我们评估 $l_2$ 的节点值的规范，而不是相关空间函数的 $L_2$ 规范，因为前者的计算更简单；然而，在均匀网格上，两者只是由一个常数相关，因此我们可以用任何一种方式观察时间收敛顺序。
 
 
-<a name="RungeKuttamethods"></a><h3>Runge-Kutta methods</h3>
+<a name="RungeKuttamethods"></a><h3>Runge-Kutta methods</h3> 
 
 
-The Runge-Kutta methods implemented in deal.II assume that the equation to be
-solved can be written as:
-@f{eqnarray*}
+在deal.II中实现的Runge-Kutta方法假定要解决的方程可以写成：。@f{eqnarray*}
 \frac{dy}{dt} = g(t,y).
-@f}
-On the other hand, when using finite elements, discretized time derivatives always result in the
-presence of a mass matrix on the left hand side. This can easily be seen by
-considering that if the solution vector $y(t)$ in the equation above is in fact the vector
-of nodal coefficients $U(t)$ for a variable of the form
-@f{eqnarray*}
+@f} 
+
+另一方面，当使用有限元时，离散化的时间导数总是导致左手边存在一个质量矩阵。这可以很容易地看出，如果上式中的解向量 $y(t)$ 实际上是一个形式为@f{eqnarray*}
   u_h(x,t) = \sum_j U_j(t) \varphi_j(x)
-@f}
-with spatial shape functions $\varphi_j(x)$, then multiplying an equation of
-the form
-@f{eqnarray*}
+@f}的变量的节点系数向量 $U(t)$ 的话 
+
+与空间形状函数 $\varphi_j(x)$ ，然后将形式为@f{eqnarray*}
   \frac{\partial u(x,t)}{\partial t} = q(t,u(x,t))
-@f}
-by test functions, integrating over $\Omega$, substituting $u\rightarrow u_h$
-and restricting the test functions to the $\varphi_i(x)$ from above, then this
-spatially discretized equation has the form
-@f{eqnarray*}
+@f}的方程乘以测试函数。
+
+检验函数，对 $\Omega$ 进行积分，代入 $u\rightarrow u_h$ 并将检验函数限制在上面的 $\varphi_i(x)$ 中，那么这个空间离散方程的形式为@f{eqnarray*}
 M\frac{dU}{dt} = f(t,U),
-@f}
-where $M$ is the mass matrix and $f(t,U)$ is the spatially discretized version
-of $q(t,u(x,t))$ (where $q$ is typically the place where spatial
-derivatives appear, but this is not of much concern for the moment given that
-we only consider time derivatives). In other words, this form fits the general
-scheme above if we write
-@f{eqnarray*}
+@f} 
+
+其中 $M$ 是质量矩阵， $f(t,U)$ 是 $q(t,u(x,t))$ 的空间离散版本（其中 $q$ 通常是空间导数出现的地方，但鉴于我们只考虑时间导数，这一点目前还不太关心）。换句话说，如果我们写成@f{eqnarray*}
 \frac{dy}{dt} = g(t,y) = M^{-1}f(t,y).
-@f}
+@f}，这种形式符合上述的一般方案 
 
-Runke-Kutta methods are time stepping schemes that approximate $y(t_n)\approx
-y_{n}$ through a particular one-step approach. They are typically written in the form
-@f{eqnarray*}
+
+
+Runk-Kutta方法是一种时间步进方案，通过特定的一步法近似于 $y(t_n)\approx
+y_{n}$ 。它们通常被写成@f{eqnarray*}
 y_{n+1} = y_n + \sum_{i=1}^s b_i k_i
-@f}
-where for the form of the right hand side above
-@f{eqnarray*}
+@f}的形式 
+
+其中对于上面的右手边的形式@f{eqnarray*}
 k_i = h M^{-1} f\left(t_n+c_ih,y_n+\sum_{j=1}^sa_{ij}k_j\right).
-@f}
-Here $a_{ij}$, $b_i$, and $c_i$ are known coefficients that identify which
-particular Runge-Kutta scheme you want to use, and $h=t_{n+1}-t_n$ is the time step
-used. Different time stepping methods of the Runge-Kutta class differ in the
-number of stages $s$ and the values they use for the coefficients $a_{ij}$,
-$b_i$, and $c_i$ but are otherwise easy to implement since one can look up
-tabulated values for these coefficients. (These tables are often called
-Butcher tableaus.)
+@f} 
 
-At the time of the writing of this tutorial, the methods implemented in
-deal.II can be divided in three categories:
-<ol>
-<li> Explicit Runge-Kutta; in order for a method to be explicit, it is
-necessary that in the formula above defining $k_i$, $k_i$ does not appear
-on the right hand side. In other words, these methods have to satisfy
-$a_{ii}=0, i=1,\ldots,s$.
-<li> Embedded (or adaptive) Runge-Kutta; we will discuss their properties below.
-<li> Implicit Runge-Kutta; this class of methods require the solution of a
-possibly nonlinear system the stages $k_i$ above, i.e., they have
-$a_{ii}\neq 0$ for at least one of the stages $i=1,\ldots,s$.
-</ol>
-Many well known time stepping schemes that one does not typically associate
-with the names Runge or Kutta can in fact be written in a way so that they,
-too, can be expressed in these categories. They oftentimes represent the
-lowest-order members of these families.
+这里 $a_{ij}$  ， $b_i$  ，和 $c_i$ 是已知的系数，确定你要使用哪种特定的Runge-Kutta方案， $h=t_{n+1}-t_n$ 是使用的时间步长。Runge-Kutta类的不同时间步长方法在级数 $s$ 和系数 $a_{ij}$ 、 $b_i$ 和 $c_i$ 上有所不同，但由于可以查找这些系数的表格值，所以很容易实现。这些表格通常被称为Butcher tableaus）。
+
+在编写本教程时，deal.II中实现的方法可以分为三类。  <ol>   <li>  显式Runge-Kutta；为了使一个方法成为显式，必须在上述定义 $k_i$ 的公式中， $k_i$ 不出现在右侧。换句话说，这些方法必须满足  $a_{ii}=0, i=1,\ldots,s$  。  <li>  嵌入式（或自适应）Runge-Kutta；我们将在下面讨论其特性。  <li>  隐式Runge-Kutta；这类方法需要解决一个可能是非线性系统的上述阶段  $k_i$  ，即它们至少有  $a_{ii}\neq 0$  一个阶段  $i=1,\ldots,s$  。  </ol>  许多众所周知的时间步进方案，人们通常不会将其与Runge或Kutta的名字联系起来，事实上，它们也可以用这些类别来表达。它们往往代表了这些家族的最低阶成员。
 
 
-<a name="ExplicitRungeKuttamethods"></a><h4>Explicit Runge-Kutta methods</h4>
+<a name="ExplicitRungeKuttamethods"></a><h4>Explicit Runge-Kutta methods</h4> 
 
 
-These methods, only require a function to evaluate $M^{-1}f(t,y)$ but not
-(as implicit methods) to solve an equation that involves
-$f(t,y)$ for $y$. As all explicit time stepping methods, they become unstable
-when the time step chosen is too large.
+这些方法，只需要一个函数来评估 $M^{-1}f(t,y)$ ，但不需要（作为隐式方法）来解决涉及 $f(t,y)$ 的 $y$ 的方程。与所有显式时间步长方法一样，当选择的时间步长过大时，它们会变得不稳定。
 
-Well known methods in this class include forward Euler, third order
-Runge-Kutta, and fourth order Runge-Kutta (often abbreviated as RK4).
+这一类的知名方法包括正向欧拉法、三阶Runge-Kutta法和四阶Runge-Kutta法（通常缩写为RK4）。
 
 
 <a name="EmbeddedRungeKuttamethods"></a><h4>Embedded Runge-Kutta methods</h4>
 
 
-These methods use both a lower and a higher order method to
-estimate the error and decide if the time step needs to be shortened or can be
-increased. The term "embedded" refers to the fact that the lower-order method
-does not require additional evaluates of the function $M^{-1}f(\cdot,\cdot)$
-but reuses data that has to be computed for the high order method anyway. It
-is, in other words, essentially free, and we get the error estimate as a side
-product of using the higher order method.
+这些方法同时使用低阶和高阶方法来估计误差并决定是否需要缩短时间步长或可以增加时间步长。术语 "嵌入 "是指低阶方法不需要对函数进行额外的评估 $M^{-1}f(\cdot,\cdot)$ ，而是重复使用那些必须为高阶方法计算的数据。换句话说，它基本上是免费的，而我们得到的误差估计是使用高阶方法的副产品。
 
-This class of methods include Heun-Euler, Bogacki-Shampine, Dormand-Prince (ode45 in
-Matlab and often abbreviated as RK45 to indicate that the lower and higher order methods
-used here are 4th and 5th order Runge-Kutta methods, respectively), Fehlberg,
-and Cash-Karp.
+这类方法包括Heun-Euler、Bogacki-Shampine、Dormand-Prince（在Matlab中为ode45，通常缩写为RK45，表示这里使用的低阶和高阶方法分别为4阶和5阶Runge-Kutta方法）、Fehlberg和Cash-Karp。
 
-At the time of the writing, only embedded explicit methods have been implemented.
+在撰写本文时，只有嵌入式显式方法得到了实现。
 
 
-<a name="ImplicitRungeKuttamethods"></a><h4>Implicit Runge-Kutta methods</h4>
+<a name="ImplicitRungeKuttamethods"></a><h4>Implicit Runge-Kutta methods</h4> 
 
 
-Implicit methods require the solution of (possibly nonlinear) systems of the
-form $\alpha y = f(t,y)$
-for $y$ in each (sub-)timestep. Internally, this is
-done using a Newton-type method and, consequently, they require that the user
-provide functions that can evaluate $M^{-1}f(t,y)$ and
-$\left(I-\tau M^{-1} \frac{\partial f}{\partial y}\right)^{-1}$ or equivalently
-$\left(M - \tau \frac{\partial f}{\partial y}\right)^{-1} M$.
+隐式方法要求在每个（子）时间步中解决 $\alpha y = f(t,y)$ 和 $y$ 形式的（可能是非线性）系统。在内部，这是用牛顿式方法完成的，因此，他们要求用户提供能够评估 $M^{-1}f(t,y)$ 和 $\left(I-\tau M^{-1} \frac{\partial f}{\partial y}\right)^{-1}$ 或等同于 $\left(M - \tau \frac{\partial f}{\partial y}\right)^{-1} M$ 的函数。
 
-The particular form of this operator results from the fact that each Newton
-step requires the solution of an equation of the form
+这个算子的特殊形式来自于这样一个事实，即每一个牛顿步骤都需要解决一个形式的方程 
+
 @f{align*}
   \left(M - \tau \frac{\partial f}{\partial y}\right) \Delta y
   = -M h(t,y)
-@f}
-for some (given) $h(t,y)$. Implicit methods are
-always stable, regardless of the time step size, but too large time steps of
-course affect the <i>accuracy</i> of the solution, even if the numerical
-solution remains stable and bounded.
+@f} 
 
-Methods in this class include backward Euler, implicit midpoint,
-Crank-Nicolson, and the two stage SDIRK method (short for "singly diagonally
-implicit Runge-Kutta", a term coined to indicate that the diagonal elements
-$a_{ii}$ defining the time stepping method are all equal; this property
-allows for the Newton matrix $I-\tau M^{-1}\frac{\partial f}{\partial y}$ to
-be re-used between stages because $\tau$ is the same every time).
+对于一些（给定的） $h(t,y)$  。无论时间步长如何，隐式方法总是稳定的，但过大的时间步长当然会影响解的<i>accuracy</i>，即使数值解仍然稳定且有界。
+
+这类方法包括后退欧拉法、隐含中点法、Crank-Nicolson法和两阶段SDIRK法（"单对角隐含Runge-Kutta "的简称，这个术语是用来表示定义时间步长方法的对角线元素 $a_{ii}$ 都是相等的；这个特性使得牛顿矩阵 $I-\tau M^{-1}\frac{\partial f}{\partial y}$ 可以在各阶段之间重复使用，因为 $\tau$ 每次都相同）。
 
 
 <a name="Spatiallydiscreteformulation"></a><h3>Spatially discrete formulation</h3>
 
 
-By expanding the solution of our model problem
-as always using shape functions $\psi_j$ and writing
-@f{eqnarray*}
+通过将我们的模型问题的解决方案扩展为总是使用形状函数 $\psi_j$ 并写出@f{eqnarray*}
 \phi_h(x,t) = \sum_j U_j(t) \psi_j(x),
-@f}
-we immediately get the spatially discretized version of the diffusion equation as
-@f{eqnarray*}
+@f} 
+
+我们立即得到扩散方程的空间离散化版本@f{eqnarray*}
   M \frac{dU(t)}{dt}
   = -{\cal D} U(t) - {\cal A} U(t) + {\cal S}(t)
 @f}
-where
-@f{eqnarray*}
+
+其中@f{eqnarray*}
   M_{ij}  &=& (\psi_i,\psi_j), \\
   {\cal D}_{ij}  &=& (D\nabla\psi_i,\nabla\psi_j)_\Omega, \\
   {\cal A}_{ij}  &=& (\Sigma_a\psi_i,\psi_j)_\Omega, \\
   {\cal S}_{i}(t)  &=& (\psi_i,S(x,t))_\Omega.
-@f}
-See also step-24 and step-26 to understand how we arrive here.
-Boundary terms are not necessary due to the chosen boundary conditions for
-the current problem. To use the Runge-Kutta methods, we recast this
-as follows:
-@f{eqnarray*}
+@f} 
+
+参见 step-24 和 step-26 以了解我们是如何到达这里的。由于当前问题所选择的边界条件，边界项是没有必要的。为了使用Runge-Kutta方法，我们将其改写如下。@f{eqnarray*}
 f(y) = -{\cal D}y - {\cal A}y + {\cal S}.
-@f}
-In the code, we will need to be able to evaluate this function $f(U)$ along
-with its derivative,
-@f{eqnarray*}
+@f} 
+
+在代码中，我们需要能够评估这个函数 $f(U)$ 及其导数，@f{eqnarray*}
 \frac{\partial f}{\partial y} = -{\cal D} - {\cal A}.
 @f}
+
+
 
 
 <a name="Notesonthetestcase"></a><h3>Notes on the testcase</h3>
 
 
-To simplify the problem, the domain is two dimensional and the mesh is
-uniformly refined (there is no need to adapt the mesh since we use quadratic
-finite elements and the exact solution is quadratic). Going from a two
-dimensional domain to a three dimensional domain is not very
-challenging. However if you intend to solve more complex problems where the
-mesh must be adapted (as is done, for example, in step-26), then it is
-important to remember the following issues:
+为了简化问题，域是二维的，网格是均匀细化的（不需要调整网格，因为我们使用二次有限元，而且精确的解是二次的）。从二维域到三维域并不是很有挑战性。然而，如果你打算解决更复杂的问题，必须调整网格（例如，在 step-26 中的做法），那么必须记住以下问题。
 
-<ol>
-<li> You will need to project the solution to the new mesh when the mesh is changed. Of course,
-     the mesh
-     used should be the same from the beginning to the end of each time step,
-     a question that arises because Runge-Kutta methods use multiple
-     evaluations of the equations within each time step.
-<li> You will need to update the mass matrix and its inverse every time the
-     mesh is changed.
-</ol>
-The techniques for these steps are readily available by looking at step-26.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * 
- * <a name="Includefiles"></a> 
- * <h3>Include files</h3>
- * 
+  <ol>   <li>  当网格改变时，你需要将解决方案投影到新的网格上。当然，从每个时间步长的开始到结束，所使用的网格应该是相同的，这个问题的出现是因为Runge-Kutta方法在每个时间步长内使用了多次方程求值。  <li>  每次改变网格时，你都需要更新质量矩阵和它的逆值。  </ol>  这些步骤的技术可以通过查看  step-26  随时获得。<a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * The first task as usual is to include the functionality of these well-known
- * deal.II library files and some C++ header files.
- * 
- * @code
- * #include <deal.II/base/discrete_time.h>
- * #include <deal.II/base/function.h>
- * #include <deal.II/base/quadrature_lib.h>
- * 
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_out.h>
- * 
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/dofs/dof_tools.h>
- * 
- * #include <deal.II/fe/fe_q.h>
- * #include <deal.II/fe/fe_values.h>
- * 
- * #include <deal.II/lac/affine_constraints.h>
- * #include <deal.II/lac/sparse_direct.h>
- * 
- * #include <deal.II/numerics/vector_tools.h>
- * #include <deal.II/numerics/data_out.h>
- * 
- * #include <fstream>
- * #include <iostream>
- * #include <cmath>
- * #include <map>
- * 
- * @endcode
- * 
- * This is the only include file that is new: It includes all the Runge-Kutta
- * methods.
- * 
- * @code
- * #include <deal.II/base/time_stepping.h>
- * 
- * 
- * @endcode
- * 
- * The next step is like in all previous tutorial programs: We put everything
- * into a namespace of its own and then import the deal.II classes and functions
- * into it.
- * 
- * @code
- * namespace Step52
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeDiffusioncodeclass"></a> 
- * <h3>The <code>Diffusion</code> class</h3>
- * 
 
- * 
- * The next piece is the declaration of the main class. Most of the
- * functions in this class are not new and have been explained in previous
- * tutorials. The only interesting functions are
- * <code>evaluate_diffusion()</code> and
- * <code>id_minus_tau_J_inverse()</code>. <code>evaluate_diffusion()</code>
- * evaluates the diffusion equation, $M^{-1}(f(t,y))$, at a given time and a
- * given $y$. <code>id_minus_tau_J_inverse()</code> evaluates $\left(I-\tau
- * M^{-1} \frac{\partial f(t,y)}{\partial y}\right)^{-1}$ or equivalently
- * $\left(M-\tau \frac{\partial f}{\partial y}\right)^{-1} M$ at a given
- * time, for a given $\tau$ and $y$. This function is needed when an
- * implicit method is used.
- * 
- * @code
- *   class Diffusion
- *   {
- *   public:
- *     Diffusion();
- * 
- *     void run();
- * 
- *   private:
- *     void setup_system();
- * 
- *     void assemble_system();
- * 
- *     double get_source(const double time, const Point<2> &point) const;
- * 
- *     Vector<double> evaluate_diffusion(const double          time,
- *                                       const Vector<double> &y) const;
- * 
- *     Vector<double> id_minus_tau_J_inverse(const double          time,
- *                                           const double          tau,
- *                                           const Vector<double> &y);
- * 
- *     void output_results(const double                     time,
- *                         const unsigned int               time_step,
- *                         TimeStepping::runge_kutta_method method) const;
- * 
- * @endcode
- * 
- * The next three functions are the drivers for the explicit methods, the
- * implicit methods, and the embedded explicit methods respectively. The
- * driver function for embedded explicit methods returns the number of
- * steps executed given that it only takes the number of time steps passed
- * as an argument as a hint, but internally computed the optimal time step
- * itself.
- * 
- * @code
- *     void explicit_method(const TimeStepping::runge_kutta_method method,
- *                          const unsigned int                     n_time_steps,
- *                          const double                           initial_time,
- *                          const double                           final_time);
- * 
- *     void implicit_method(const TimeStepping::runge_kutta_method method,
- *                          const unsigned int                     n_time_steps,
- *                          const double                           initial_time,
- *                          const double                           final_time);
- * 
- *     unsigned int
- *     embedded_explicit_method(const TimeStepping::runge_kutta_method method,
- *                              const unsigned int n_time_steps,
- *                              const double       initial_time,
- *                              const double       final_time);
- * 
- * 
- *     const unsigned int fe_degree;
- * 
- *     const double diffusion_coefficient;
- *     const double absorption_cross_section;
- * 
- *     Triangulation<2> triangulation;
- * 
- *     const FE_Q<2> fe;
- * 
- *     DoFHandler<2> dof_handler;
- * 
- *     AffineConstraints<double> constraint_matrix;
- * 
- *     SparsityPattern sparsity_pattern;
- * 
- *     SparseMatrix<double> system_matrix;
- *     SparseMatrix<double> mass_matrix;
- *     SparseMatrix<double> mass_minus_tau_Jacobian;
- * 
- *     SparseDirectUMFPACK inverse_mass_matrix;
- * 
- *     Vector<double> solution;
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * We choose quadratic finite elements and we initialize the parameters.
- * 
- * @code
- *   Diffusion::Diffusion()
- *     : fe_degree(2)
- *     , diffusion_coefficient(1. / 30.)
- *     , absorption_cross_section(1.)
- *     , fe(fe_degree)
- *     , dof_handler(triangulation)
- *   {}
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeDiffusionsetup_systemcode"></a> 
- * <h4><code>Diffusion::setup_system</code></h4>
- * Now, we create the constraint matrix and the sparsity pattern. Then, we
- * initialize the matrices and the solution vector.
- * 
- * @code
- *   void Diffusion::setup_system()
- *   {
- *     dof_handler.distribute_dofs(fe);
- * 
- *     VectorTools::interpolate_boundary_values(dof_handler,
- *                                              1,
- *                                              Functions::ZeroFunction<2>(),
- *                                              constraint_matrix);
- *     constraint_matrix.close();
- * 
- *     DynamicSparsityPattern dsp(dof_handler.n_dofs());
- *     DoFTools::make_sparsity_pattern(dof_handler, dsp, constraint_matrix);
- *     sparsity_pattern.copy_from(dsp);
- * 
- *     system_matrix.reinit(sparsity_pattern);
- *     mass_matrix.reinit(sparsity_pattern);
- *     mass_minus_tau_Jacobian.reinit(sparsity_pattern);
- *     solution.reinit(dof_handler.n_dofs());
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeDiffusionassemble_systemcode"></a> 
- * <h4><code>Diffusion::assemble_system</code></h4>
- * In this function, we compute $-\int D \nabla b_i \cdot \nabla b_j
- * d\boldsymbol{r} - \int \Sigma_a b_i b_j d\boldsymbol{r}$ and the mass
- * matrix $\int b_i b_j d\boldsymbol{r}$. The mass matrix is then
- * inverted using a direct solver; the <code>inverse_mass_matrix</code>
- * variable will then store the inverse of the mass matrix so that
- * $M^{-1}$ can be applied to a vector using the <code>vmult()</code>
- * function of that object. (Internally, UMFPACK does not really store
- * the inverse of the matrix, but its LU factors; applying the inverse
- * matrix is then equivalent to doing one forward and one backward solves
- * with these two factors, which has the same complexity as applying an
- * explicit inverse of the matrix).
- * 
- * @code
- *   void Diffusion::assemble_system()
- *   {
- *     system_matrix = 0.;
- *     mass_matrix   = 0.;
- * 
- *     const QGauss<2> quadrature_formula(fe_degree + 1);
- * 
- *     FEValues<2> fe_values(fe,
- *                           quadrature_formula,
- *                           update_values | update_gradients | update_JxW_values);
- * 
- * 
- *     const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
- *     const unsigned int n_q_points    = quadrature_formula.size();
- * 
- *     FullMatrix<double> cell_matrix(dofs_per_cell, dofs_per_cell);
- *     FullMatrix<double> cell_mass_matrix(dofs_per_cell, dofs_per_cell);
- * 
- *     std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
- * 
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       {
- *         cell_matrix      = 0.;
- *         cell_mass_matrix = 0.;
- * 
- *         fe_values.reinit(cell);
- * 
- *         for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
- *           for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *             for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *               {
- *                 cell_matrix(i, j) +=
- *                   ((-diffusion_coefficient *                // (-D
- *                       fe_values.shape_grad(i, q_point) *    //  * grad phi_i
- *                       fe_values.shape_grad(j, q_point)      //  * grad phi_j
- *                     - absorption_cross_section *            //  -Sigma
- *                         fe_values.shape_value(i, q_point) * //  * phi_i
- *                         fe_values.shape_value(j, q_point))  //  * phi_j)
- *                    * fe_values.JxW(q_point));               // * dx
- *                 cell_mass_matrix(i, j) += fe_values.shape_value(i, q_point) *
- *                                           fe_values.shape_value(j, q_point) *
- *                                           fe_values.JxW(q_point);
- *               }
- * 
- *         cell->get_dof_indices(local_dof_indices);
- * 
- *         constraint_matrix.distribute_local_to_global(cell_matrix,
- *                                                      local_dof_indices,
- *                                                      system_matrix);
- *         constraint_matrix.distribute_local_to_global(cell_mass_matrix,
- *                                                      local_dof_indices,
- *                                                      mass_matrix);
- *       }
- * 
- *     inverse_mass_matrix.initialize(mass_matrix);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeDiffusionget_sourcecode"></a> 
- * <h4><code>Diffusion::get_source</code></h4>
- *   
+<a name="Includefiles"></a> <h3>Include files</h3>
 
- * 
- * In this function, the source term of the equation for a given time and a
- * given point is computed.
- * 
- * @code
- *   double Diffusion::get_source(const double time, const Point<2> &point) const
- *   {
- *     const double intensity = 10.;
- *     const double frequency = numbers::PI / 10.;
- *     const double b         = 5.;
- *     const double x         = point(0);
- * 
- *     return intensity *
- *            (frequency * std::cos(frequency * time) * (b * x - x * x) +
- *             std::sin(frequency * time) *
- *               (absorption_cross_section * (b * x - x * x) +
- *                2. * diffusion_coefficient));
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeDiffusionevaluate_diffusioncode"></a> 
- * <h4><code>Diffusion::evaluate_diffusion</code></h4>
- *   
 
- * 
- * Next, we evaluate the weak form of the diffusion equation at a given time
- * $t$ and for a given vector $y$. In other words, as outlined in the
- * introduction, we evaluate $M^{-1}(-{\cal D}y - {\cal A}y + {\cal
- * S})$. For this, we have to apply the matrix $-{\cal D} - {\cal A}$
- * (previously computed and stored in the variable
- * <code>system_matrix</code>) to $y$ and then add the source term which we
- * integrate as we usually do. (Integrating up the solution could be done
- * using VectorTools::create_right_hand_side() if you wanted to save a few
- * lines of code, or wanted to take advantage of doing the integration in
- * parallel.) The result is then multiplied by $M^{-1}$.
- * 
- * @code
- *   Vector<double> Diffusion::evaluate_diffusion(const double          time,
- *                                                const Vector<double> &y) const
- *   {
- *     Vector<double> tmp(dof_handler.n_dofs());
- *     tmp = 0.;
- *     system_matrix.vmult(tmp, y);
- * 
- *     const QGauss<2> quadrature_formula(fe_degree + 1);
- * 
- *     FEValues<2> fe_values(fe,
- *                           quadrature_formula,
- *                           update_values | update_quadrature_points |
- *                             update_JxW_values);
- * 
- * 
- *     const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
- *     const unsigned int n_q_points    = quadrature_formula.size();
- * 
- *     Vector<double> cell_source(dofs_per_cell);
- * 
- *     std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
- * 
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       {
- *         cell_source = 0.;
- * 
- *         fe_values.reinit(cell);
- * 
- *         for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
- *           {
- *             const double source =
- *               get_source(time, fe_values.quadrature_point(q_point));
- *             for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *               cell_source(i) += fe_values.shape_value(i, q_point) * // phi_i(x)
- *                                 source *                            // * S(x)
- *                                 fe_values.JxW(q_point);             // * dx
- *           }
- * 
- *         cell->get_dof_indices(local_dof_indices);
- * 
- *         constraint_matrix.distribute_local_to_global(cell_source,
- *                                                      local_dof_indices,
- *                                                      tmp);
- *       }
- * 
- *     Vector<double> value(dof_handler.n_dofs());
- *     inverse_mass_matrix.vmult(value, tmp);
- * 
- *     return value;
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeDiffusionid_minus_tau_J_inversecode"></a> 
- * <h4><code>Diffusion::id_minus_tau_J_inverse</code></h4>
- *   
 
- * 
- * We compute $\left(M-\tau \frac{\partial f}{\partial y}\right)^{-1} M$. This
- * is done in several steps:
- * - compute $M-\tau \frac{\partial f}{\partial y}$
- * - invert the matrix to get $\left(M-\tau \frac{\partial f}
- * {\partial y}\right)^{-1}$
- * - compute $tmp=My$
- * - compute $z=\left(M-\tau \frac{\partial f}{\partial y}\right)^{-1} tmp =
- * \left(M-\tau \frac{\partial f}{\partial y}\right)^{-1} My$
- * - return z.
- * 
- * @code
- *   Vector<double> Diffusion::id_minus_tau_J_inverse(const double /*time*/,
- *                                                    const double          tau,
- *                                                    const Vector<double> &y)
- *   {
- *     SparseDirectUMFPACK inverse_mass_minus_tau_Jacobian;
- * 
- *     mass_minus_tau_Jacobian.copy_from(mass_matrix);
- *     mass_minus_tau_Jacobian.add(-tau, system_matrix);
- * 
- *     inverse_mass_minus_tau_Jacobian.initialize(mass_minus_tau_Jacobian);
- * 
- *     Vector<double> tmp(dof_handler.n_dofs());
- *     mass_matrix.vmult(tmp, y);
- * 
- *     Vector<double> result(y);
- *     inverse_mass_minus_tau_Jacobian.vmult(result, tmp);
- * 
- *     return result;
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeDiffusionoutput_resultscode"></a> 
- * <h4><code>Diffusion::output_results</code></h4>
- *   
 
- * 
- * The following function then outputs the solution in vtu files indexed by
- * the number of the time step and the name of the time stepping method. Of
- * course, the (exact) result should really be the same for all time
- * stepping method, but the output here at least allows us to compare them.
- * 
- * @code
- *   void Diffusion::output_results(const double                     time,
- *                                  const unsigned int               time_step,
- *                                  TimeStepping::runge_kutta_method method) const
- *   {
- *     std::string method_name;
- * 
- *     switch (method)
- *       {
- *         case TimeStepping::FORWARD_EULER:
- *           {
- *             method_name = "forward_euler";
- *             break;
- *           }
- *         case TimeStepping::RK_THIRD_ORDER:
- *           {
- *             method_name = "rk3";
- *             break;
- *           }
- *         case TimeStepping::RK_CLASSIC_FOURTH_ORDER:
- *           {
- *             method_name = "rk4";
- *             break;
- *           }
- *         case TimeStepping::BACKWARD_EULER:
- *           {
- *             method_name = "backward_euler";
- *             break;
- *           }
- *         case TimeStepping::IMPLICIT_MIDPOINT:
- *           {
- *             method_name = "implicit_midpoint";
- *             break;
- *           }
- *         case TimeStepping::SDIRK_TWO_STAGES:
- *           {
- *             method_name = "sdirk";
- *             break;
- *           }
- *         case TimeStepping::HEUN_EULER:
- *           {
- *             method_name = "heun_euler";
- *             break;
- *           }
- *         case TimeStepping::BOGACKI_SHAMPINE:
- *           {
- *             method_name = "bocacki_shampine";
- *             break;
- *           }
- *         case TimeStepping::DOPRI:
- *           {
- *             method_name = "dopri";
- *             break;
- *           }
- *         case TimeStepping::FEHLBERG:
- *           {
- *             method_name = "fehlberg";
- *             break;
- *           }
- *         case TimeStepping::CASH_KARP:
- *           {
- *             method_name = "cash_karp";
- *             break;
- *           }
- *         default:
- *           {
- *             break;
- *           }
- *       }
- * 
- *     DataOut<2> data_out;
- * 
- *     data_out.attach_dof_handler(dof_handler);
- *     data_out.add_data_vector(solution, "solution");
- * 
- *     data_out.build_patches();
- * 
- *     data_out.set_flags(DataOutBase::VtkFlags(time, time_step));
- * 
- *     const std::string filename = "solution_" + method_name + "-" +
- *                                  Utilities::int_to_string(time_step, 3) +
- *                                  ".vtu";
- *     std::ofstream output(filename);
- *     data_out.write_vtu(output);
- * 
- *     static std::vector<std::pair<double, std::string>> times_and_names;
- * 
- *     static std::string method_name_prev = "";
- *     static std::string pvd_filename;
- *     if (method_name_prev != method_name)
- *       {
- *         times_and_names.clear();
- *         method_name_prev = method_name;
- *         pvd_filename     = "solution_" + method_name + ".pvd";
- *       }
- *     times_and_names.emplace_back(time, filename);
- *     std::ofstream pvd_output(pvd_filename);
- *     DataOutBase::write_pvd_record(pvd_output, times_and_names);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeDiffusionexplicit_methodcode"></a> 
- * <h4><code>Diffusion::explicit_method</code></h4>
- *   
+第一个任务照例是包括这些著名的deal.II库文件和一些C++头文件的功能。
 
- * 
- * This function is the driver for all the explicit methods. At the
- * top it initializes the time stepping and the solution (by setting
- * it to zero and then ensuring that boundary value and hanging node
- * constraints are respected; of course, with the mesh we use here,
- * hanging node constraints are not in fact an issue). It then calls
- * <code>evolve_one_time_step</code> which performs one time step.
- * Time is stored and incremented through a DiscreteTime object.
- *   
+@code
+#include <deal.II/base/discrete_time.h>
+#include <deal.II/base/function.h>
+#include <deal.II/base/quadrature_lib.h>
 
- * 
- * For explicit methods, <code>evolve_one_time_step</code> needs to
- * evaluate $M^{-1}(f(t,y))$, i.e, it needs
- * <code>evaluate_diffusion</code>. Because
- * <code>evaluate_diffusion</code> is a member function, it needs to
- * be bound to <code>this</code>. After each evolution step, we
- * again apply the correct boundary values and hanging node
- * constraints.
- *   
 
- * 
- * Finally, the solution is output
- * every 10 time steps.
- * 
- * @code
- *   void Diffusion::explicit_method(const TimeStepping::runge_kutta_method method,
- *                                   const unsigned int n_time_steps,
- *                                   const double       initial_time,
- *                                   const double       final_time)
- *   {
- *     const double time_step =
- *       (final_time - initial_time) / static_cast<double>(n_time_steps);
- * 
- *     solution = 0.;
- *     constraint_matrix.distribute(solution);
- * 
- *     TimeStepping::ExplicitRungeKutta<Vector<double>> explicit_runge_kutta(
- *       method);
- *     output_results(initial_time, 0, method);
- *     DiscreteTime time(initial_time, final_time, time_step);
- *     while (time.is_at_end() == false)
- *       {
- *         explicit_runge_kutta.evolve_one_time_step(
- *           [this](const double time, const Vector<double> &y) {
- *             return this->evaluate_diffusion(time, y);
- *           },
- *           time.get_current_time(),
- *           time.get_next_step_size(),
- *           solution);
- *         time.advance_time();
- * 
- *         constraint_matrix.distribute(solution);
- * 
- *         if (time.get_step_number() % 10 == 0)
- *           output_results(time.get_current_time(),
- *                          time.get_step_number(),
- *                          method);
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeDiffusionimplicit_methodcode"></a> 
- * <h4><code>Diffusion::implicit_method</code></h4>
- * This function is equivalent to <code>explicit_method</code> but for
- * implicit methods. When using implicit methods, we need to evaluate
- * $M^{-1}(f(t,y))$ and $\left(I-\tau M^{-1} \frac{\partial f(t,y)}{\partial
- * y}\right)^{-1}$ for which we use the two member functions previously
- * introduced.
- * 
- * @code
- *   void Diffusion::implicit_method(const TimeStepping::runge_kutta_method method,
- *                                   const unsigned int n_time_steps,
- *                                   const double       initial_time,
- *                                   const double       final_time)
- *   {
- *     const double time_step =
- *       (final_time - initial_time) / static_cast<double>(n_time_steps);
- * 
- *     solution = 0.;
- *     constraint_matrix.distribute(solution);
- * 
- *     TimeStepping::ImplicitRungeKutta<Vector<double>> implicit_runge_kutta(
- *       method);
- *     output_results(initial_time, 0, method);
- *     DiscreteTime time(initial_time, final_time, time_step);
- *     while (time.is_at_end() == false)
- *       {
- *         implicit_runge_kutta.evolve_one_time_step(
- *           [this](const double time, const Vector<double> &y) {
- *             return this->evaluate_diffusion(time, y);
- *           },
- *           [this](const double time, const double tau, const Vector<double> &y) {
- *             return this->id_minus_tau_J_inverse(time, tau, y);
- *           },
- *           time.get_current_time(),
- *           time.get_next_step_size(),
- *           solution);
- *         time.advance_time();
- * 
- *         constraint_matrix.distribute(solution);
- * 
- *         if (time.get_step_number() % 10 == 0)
- *           output_results(time.get_current_time(),
- *                          time.get_step_number(),
- *                          method);
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeDiffusionembedded_explicit_methodcode"></a> 
- * <h4><code>Diffusion::embedded_explicit_method</code></h4>
- * This function is the driver for the embedded explicit methods. It requires
- * more parameters:
- * - coarsen_param: factor multiplying the current time step when the error
- * is below the threshold.
- * - refine_param: factor multiplying the current time step when the error
- * is above the threshold.
- * - min_delta: smallest time step acceptable.
- * - max_delta: largest time step acceptable.
- * - refine_tol: threshold above which the time step is refined.
- * - coarsen_tol: threshold below which the time step is coarsen.
- *   
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_out.h>
 
- * 
- * Embedded methods use a guessed time step. If the error using this time step
- * is too large, the time step will be reduced. If the error is below the
- * threshold, a larger time step will be tried for the next time step.
- * <code>delta_t_guess</code> is the guessed time step produced by the
- * embedded method. In summary, time step size is potentially modified in
- * three ways:
- * - Reducing or increasing time step size within
- * TimeStepping::EmbeddedExplicitRungeKutta::evolve_one_time_step().
- * - Using the calculated <code>delta_t_guess</code>.
- * - Automatically adjusting the step size of the last time step to ensure
- * simulation ends precisely at <code>final_time</code>. This adjustment
- * is handled inside the DiscreteTime instance.
- * 
- * @code
- *   unsigned int Diffusion::embedded_explicit_method(
- *     const TimeStepping::runge_kutta_method method,
- *     const unsigned int                     n_time_steps,
- *     const double                           initial_time,
- *     const double                           final_time)
- *   {
- *     const double time_step =
- *       (final_time - initial_time) / static_cast<double>(n_time_steps);
- *     const double coarsen_param = 1.2;
- *     const double refine_param  = 0.8;
- *     const double min_delta     = 1e-8;
- *     const double max_delta     = 10 * time_step;
- *     const double refine_tol    = 1e-1;
- *     const double coarsen_tol   = 1e-5;
- * 
- *     solution = 0.;
- *     constraint_matrix.distribute(solution);
- * 
- *     TimeStepping::EmbeddedExplicitRungeKutta<Vector<double>>
- *       embedded_explicit_runge_kutta(method,
- *                                     coarsen_param,
- *                                     refine_param,
- *                                     min_delta,
- *                                     max_delta,
- *                                     refine_tol,
- *                                     coarsen_tol);
- *     output_results(initial_time, 0, method);
- *     DiscreteTime time(initial_time, final_time, time_step);
- *     while (time.is_at_end() == false)
- *       {
- *         const double new_time =
- *           embedded_explicit_runge_kutta.evolve_one_time_step(
- *             [this](const double time, const Vector<double> &y) {
- *               return this->evaluate_diffusion(time, y);
- *             },
- *             time.get_current_time(),
- *             time.get_next_step_size(),
- *             solution);
- *         time.set_next_step_size(new_time - time.get_current_time());
- *         time.advance_time();
- * 
- *         constraint_matrix.distribute(solution);
- * 
- *         if (time.get_step_number() % 10 == 0)
- *           output_results(time.get_current_time(),
- *                          time.get_step_number(),
- *                          method);
- * 
- *         time.set_desired_next_step_size(
- *           embedded_explicit_runge_kutta.get_status().delta_t_guess);
- *       }
- * 
- *     return time.get_step_number();
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeDiffusionruncode"></a> 
- * <h4><code>Diffusion::run</code></h4>
- *   
 
- * 
- * The following is the main function of the program. At the top, we create
- * the grid (a [0,5]x[0,5] square) and refine it four times to get a mesh
- * that has 16 by 16 cells, for a total of 256.  We then set the boundary
- * indicator to 1 for those parts of the boundary where $x=0$ and $x=5$.
- * 
- * @code
- *   void Diffusion::run()
- *   {
- *     GridGenerator::hyper_cube(triangulation, 0., 5.);
- *     triangulation.refine_global(4);
- * 
- *     for (const auto &cell : triangulation.active_cell_iterators())
- *       for (const auto &face : cell->face_iterators())
- *         if (face->at_boundary())
- *           {
- *             if ((face->center()[0] == 0.) || (face->center()[0] == 5.))
- *               face->set_boundary_id(1);
- *             else
- *               face->set_boundary_id(0);
- *           }
- * 
- * @endcode
- * 
- * Next, we set up the linear systems and fill them with content so that
- * they can be used throughout the time stepping process:
- * 
- * @code
- *     setup_system();
- * 
- *     assemble_system();
- * 
- * @endcode
- * 
- * Finally, we solve the diffusion problem using several of the
- * Runge-Kutta methods implemented in namespace TimeStepping, each time
- * outputting the error at the end time. (As explained in the
- * introduction, since the exact solution is zero at the final time, the
- * error equals the numerical solution and can be computed by just taking
- * the $l_2$ norm of the solution vector.)
- * 
- * @code
- *     unsigned int       n_steps      = 0;
- *     const unsigned int n_time_steps = 200;
- *     const double       initial_time = 0.;
- *     const double       final_time   = 10.;
- * 
- *     std::cout << "Explicit methods:" << std::endl;
- *     explicit_method(TimeStepping::FORWARD_EULER,
- *                     n_time_steps,
- *                     initial_time,
- *                     final_time);
- *     std::cout << "   Forward Euler:            error=" << solution.l2_norm()
- *               << std::endl;
- * 
- *     explicit_method(TimeStepping::RK_THIRD_ORDER,
- *                     n_time_steps,
- *                     initial_time,
- *                     final_time);
- *     std::cout << "   Third order Runge-Kutta:  error=" << solution.l2_norm()
- *               << std::endl;
- * 
- *     explicit_method(TimeStepping::RK_CLASSIC_FOURTH_ORDER,
- *                     n_time_steps,
- *                     initial_time,
- *                     final_time);
- *     std::cout << "   Fourth order Runge-Kutta: error=" << solution.l2_norm()
- *               << std::endl;
- *     std::cout << std::endl;
- * 
- * 
- *     std::cout << "Implicit methods:" << std::endl;
- *     implicit_method(TimeStepping::BACKWARD_EULER,
- *                     n_time_steps,
- *                     initial_time,
- *                     final_time);
- *     std::cout << "   Backward Euler:           error=" << solution.l2_norm()
- *               << std::endl;
- * 
- *     implicit_method(TimeStepping::IMPLICIT_MIDPOINT,
- *                     n_time_steps,
- *                     initial_time,
- *                     final_time);
- *     std::cout << "   Implicit Midpoint:        error=" << solution.l2_norm()
- *               << std::endl;
- * 
- *     implicit_method(TimeStepping::CRANK_NICOLSON,
- *                     n_time_steps,
- *                     initial_time,
- *                     final_time);
- *     std::cout << "   Crank-Nicolson:           error=" << solution.l2_norm()
- *               << std::endl;
- * 
- *     implicit_method(TimeStepping::SDIRK_TWO_STAGES,
- *                     n_time_steps,
- *                     initial_time,
- *                     final_time);
- *     std::cout << "   SDIRK:                    error=" << solution.l2_norm()
- *               << std::endl;
- *     std::cout << std::endl;
- * 
- * 
- *     std::cout << "Embedded explicit methods:" << std::endl;
- *     n_steps = embedded_explicit_method(TimeStepping::HEUN_EULER,
- *                                        n_time_steps,
- *                                        initial_time,
- *                                        final_time);
- *     std::cout << "   Heun-Euler:               error=" << solution.l2_norm()
- *               << std::endl;
- *     std::cout << "                   steps performed=" << n_steps << std::endl;
- * 
- *     n_steps = embedded_explicit_method(TimeStepping::BOGACKI_SHAMPINE,
- *                                        n_time_steps,
- *                                        initial_time,
- *                                        final_time);
- *     std::cout << "   Bogacki-Shampine:         error=" << solution.l2_norm()
- *               << std::endl;
- *     std::cout << "                   steps performed=" << n_steps << std::endl;
- * 
- *     n_steps = embedded_explicit_method(TimeStepping::DOPRI,
- *                                        n_time_steps,
- *                                        initial_time,
- *                                        final_time);
- *     std::cout << "   Dopri:                    error=" << solution.l2_norm()
- *               << std::endl;
- *     std::cout << "                   steps performed=" << n_steps << std::endl;
- * 
- *     n_steps = embedded_explicit_method(TimeStepping::FEHLBERG,
- *                                        n_time_steps,
- *                                        initial_time,
- *                                        final_time);
- *     std::cout << "   Fehlberg:                 error=" << solution.l2_norm()
- *               << std::endl;
- *     std::cout << "                   steps performed=" << n_steps << std::endl;
- * 
- *     n_steps = embedded_explicit_method(TimeStepping::CASH_KARP,
- *                                        n_time_steps,
- *                                        initial_time,
- *                                        final_time);
- *     std::cout << "   Cash-Karp:                error=" << solution.l2_norm()
- *               << std::endl;
- *     std::cout << "                   steps performed=" << n_steps << std::endl;
- *   }
- * } // namespace Step52
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Thecodemaincodefunction"></a> 
- * <h3>The <code>main()</code> function</h3>
- * 
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/dofs/dof_tools.h>
 
- * 
- * The following <code>main</code> function is similar to previous examples
- * and need not be commented on.
- * 
- * @code
- * int main()
- * {
- *   try
- *     {
- *       Step52::Diffusion diffusion;
- *       diffusion.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     };
- * 
- *   return 0;
- * }
- * @endcode
+
+#include <deal.II/fe/fe_q.h>
+#include <deal.II/fe/fe_values.h>
+
+
+#include <deal.II/lac/affine_constraints.h>
+#include <deal.II/lac/sparse_direct.h>
+
+
+#include <deal.II/numerics/vector_tools.h>
+#include <deal.II/numerics/data_out.h>
+
+
+#include <fstream>
+#include <iostream>
+#include <cmath>
+#include <map>
+
+
+@endcode 
+
+
+
+这是唯一一个新的包含文件：它包括所有的Runge-Kutta方法。
+
+@code
+#include <deal.II/base/time_stepping.h>
+
+
+
+@endcode 
+
+
+
+下一步就像以前所有的教程程序一样。我们把所有东西放到一个自己的命名空间中，然后把deal.II的类和函数导入其中。
+
+@code
+namespace Step52
+{
+  using namespace dealii;
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeDiffusioncodeclass"></a><h3>The <code>Diffusion</code> class</h3> 
+
+
+
+
+下一块是主类的声明。这个类中的大多数函数并不新鲜，在以前的教程中已经解释过了。唯一有趣的函数是  <code>evaluate_diffusion()</code>  和  <code>id_minus_tau_J_inverse()</code>. <code>evaluate_diffusion()</code>  评估扩散方程，  $M^{-1}(f(t,y))$  ，在给定时间和给定  $y$  。  <code>id_minus_tau_J_inverse()</code>  在给定的时间和给定的 $\tau$ 和 $y$ 下，评估 $\left(I-\tau
+M^{-1} \frac{\partial f(t,y)}{\partial y}\right)^{-1}$ 或等价的 $\left(M-\tau \frac{\partial f}{\partial y}\right)^{-1} M$  。当使用隐式方法时，需要这个函数。
+
+@code
+  class Diffusion
+  {
+  public:
+    Diffusion();
+
+
+    void run();
+
+
+  private:
+    void setup_system();
+
+
+    void assemble_system();
+
+
+    double get_source(const double time, const Point<2> &point) const;
+
+
+    Vector<double> evaluate_diffusion(const double          time,
+                                      const Vector<double> &y) const;
+
+
+    Vector<double> id_minus_tau_J_inverse(const double          time,
+                                          const double          tau,
+                                          const Vector<double> &y);
+
+
+    void output_results(const double                     time,
+                        const unsigned int               time_step,
+                        TimeStepping::runge_kutta_method method) const;
+
+
+@endcode 
+
+
+
+接下来的三个函数分别是显式方法、隐式方法和嵌入式显式方法的驱动。嵌入显式方法的驱动函数返回执行的步数，鉴于它只接受作为参数传递的时间步数作为提示，但内部计算了最佳时间步数本身。
+
+@code
+    void explicit_method(const TimeStepping::runge_kutta_method method,
+                         const unsigned int                     n_time_steps,
+                         const double                           initial_time,
+                         const double                           final_time);
+
+
+    void implicit_method(const TimeStepping::runge_kutta_method method,
+                         const unsigned int                     n_time_steps,
+                         const double                           initial_time,
+                         const double                           final_time);
+
+
+    unsigned int
+    embedded_explicit_method(const TimeStepping::runge_kutta_method method,
+                             const unsigned int n_time_steps,
+                             const double       initial_time,
+                             const double       final_time);
+
+
+
+    const unsigned int fe_degree;
+
+
+    const double diffusion_coefficient;
+    const double absorption_cross_section;
+
+
+    Triangulation<2> triangulation;
+
+
+    const FE_Q<2> fe;
+
+
+    DoFHandler<2> dof_handler;
+
+
+    AffineConstraints<double> constraint_matrix;
+
+
+    SparsityPattern sparsity_pattern;
+
+
+    SparseMatrix<double> system_matrix;
+    SparseMatrix<double> mass_matrix;
+    SparseMatrix<double> mass_minus_tau_Jacobian;
+
+
+    SparseDirectUMFPACK inverse_mass_matrix;
+
+
+    Vector<double> solution;
+  };
+
+
+
+
+
+@endcode 
+
+
+
+我们选择二次有限元，我们初始化参数。
+
+@code
+  Diffusion::Diffusion()
+    : fe_degree(2)
+    , diffusion_coefficient(1. / 30.)
+    , absorption_cross_section(1.)
+    , fe(fe_degree)
+    , dof_handler(triangulation)
+  {}
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="codeDiffusionsetup_systemcode"></a> <h4><code>Diffusion::setup_system</code></h4> 现在，我们创建约束矩阵和稀疏模式。然后，我们初始化矩阵和求解向量。
+
+@code
+  void Diffusion::setup_system()
+  {
+    dof_handler.distribute_dofs(fe);
+
+
+    VectorTools::interpolate_boundary_values(dof_handler,
+                                             1,
+                                             Functions::ZeroFunction<2>(),
+                                             constraint_matrix);
+    constraint_matrix.close();
+
+
+    DynamicSparsityPattern dsp(dof_handler.n_dofs());
+    DoFTools::make_sparsity_pattern(dof_handler, dsp, constraint_matrix);
+    sparsity_pattern.copy_from(dsp);
+
+
+    system_matrix.reinit(sparsity_pattern);
+    mass_matrix.reinit(sparsity_pattern);
+    mass_minus_tau_Jacobian.reinit(sparsity_pattern);
+    solution.reinit(dof_handler.n_dofs());
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="codeDiffusionassemble_systemcode"></a> <h4><code>Diffusion::assemble_system</code></h4> 在这个函数中，我们计算  $-\int D \nabla b_i \cdot \nabla b_j
+d\boldsymbol{r} - \int \Sigma_a b_i b_j d\boldsymbol{r}$  和质量矩阵  $\int b_i b_j d\boldsymbol{r}$  。然后使用直接求解器对质量矩阵进行反演；然后 <code>inverse_mass_matrix</code> 变量将存储质量矩阵的反值，这样 $M^{-1}$ 就可以使用该对象的 <code>vmult()</code> 函数应用于一个矢量。在内部，UMFPACK并没有真正存储矩阵的逆，而是存储它的LU因子；应用逆矩阵就相当于用这两个因子做一次正解和一次逆解，这与应用矩阵的显式逆具有相同的复杂性）。
+
+@code
+  void Diffusion::assemble_system()
+  {
+    system_matrix = 0.;
+    mass_matrix   = 0.;
+
+
+    const QGauss<2> quadrature_formula(fe_degree + 1);
+
+
+    FEValues<2> fe_values(fe,
+                          quadrature_formula,
+                          update_values | update_gradients | update_JxW_values);
+
+
+
+    const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
+    const unsigned int n_q_points    = quadrature_formula.size();
+
+
+    FullMatrix<double> cell_matrix(dofs_per_cell, dofs_per_cell);
+    FullMatrix<double> cell_mass_matrix(dofs_per_cell, dofs_per_cell);
+
+
+    std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
+
+
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      {
+        cell_matrix      = 0.;
+        cell_mass_matrix = 0.;
+
+
+        fe_values.reinit(cell);
+
+
+        for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
+          for (unsigned int i = 0; i < dofs_per_cell; ++i)
+            for (unsigned int j = 0; j < dofs_per_cell; ++j)
+              {
+                cell_matrix(i, j) +=
+                  ((-diffusion_coefficient *                // (-D
+                      fe_values.shape_grad(i, q_point) *    //  * grad phi_i
+                      fe_values.shape_grad(j, q_point)      //  * grad phi_j
+
+
+                    - absorption_cross_section *            //  -Sigma
+                        fe_values.shape_value(i, q_point) * //  * phi_i
+                        fe_values.shape_value(j, q_point))  //  * phi_j)
+                   * fe_values.JxW(q_point));               // * dx
+                cell_mass_matrix(i, j) += fe_values.shape_value(i, q_point) *
+                                          fe_values.shape_value(j, q_point) *
+                                          fe_values.JxW(q_point);
+              }
+
+
+        cell->get_dof_indices(local_dof_indices);
+
+
+        constraint_matrix.distribute_local_to_global(cell_matrix,
+                                                     local_dof_indices,
+                                                     system_matrix);
+        constraint_matrix.distribute_local_to_global(cell_mass_matrix,
+                                                     local_dof_indices,
+                                                     mass_matrix);
+      }
+
+
+    inverse_mass_matrix.initialize(mass_matrix);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="codeDiffusionget_sourcecode"></a><h4><code>Diffusion::get_source</code></h4>   
+
+
+在这个函数中，计算给定时间和给定点的方程的源项。
+
+@code
+  double Diffusion::get_source(const double time, const Point<2> &point) const
+  {
+    const double intensity = 10.;
+    const double frequency = numbers::PI / 10.;
+    const double b         = 5.;
+    const double x         = point(0);
+
+
+    return intensity *
+           (frequency * std::cos(frequency * time) * (b * x - x * x) +
+            std::sin(frequency * time) *
+              (absorption_cross_section * (b * x - x * x) +
+               2. * diffusion_coefficient));
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="codeDiffusionevaluate_diffusioncode"></a><h4><code>Diffusion::evaluate_diffusion</code></h4>   
+
+
+接下来，我们评估在给定时间  $t$  和给定矢量  $y$  的扩散方程的弱形式。换句话说，正如介绍中所述，我们评估  $M^{-1}(-{\cal D}y - {\cal A}y + {\cal
+S})$  。为此，我们必须将矩阵 $-{\cal D} - {\cal A}$ （先前计算并存储在变量 <code>system_matrix</code> 中）应用于 $y$ ，然后添加源项，我们像通常那样进行积分。(如果你想节省几行代码，或者想利用并行积分的优势，可以用 VectorTools::create_right_hand_side() 来进行积分。) 然后将结果乘以 $M^{-1}$  。
+
+@code
+  Vector<double> Diffusion::evaluate_diffusion(const double          time,
+                                               const Vector<double> &y) const
+  {
+    Vector<double> tmp(dof_handler.n_dofs());
+    tmp = 0.;
+    system_matrix.vmult(tmp, y);
+
+
+    const QGauss<2> quadrature_formula(fe_degree + 1);
+
+
+    FEValues<2> fe_values(fe,
+                          quadrature_formula,
+                          update_values | update_quadrature_points |
+                            update_JxW_values);
+
+
+
+    const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
+    const unsigned int n_q_points    = quadrature_formula.size();
+
+
+    Vector<double> cell_source(dofs_per_cell);
+
+
+    std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
+
+
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      {
+        cell_source = 0.;
+
+
+        fe_values.reinit(cell);
+
+
+        for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
+          {
+            const double source =
+              get_source(time, fe_values.quadrature_point(q_point));
+            for (unsigned int i = 0; i < dofs_per_cell; ++i)
+              cell_source(i) += fe_values.shape_value(i, q_point) * // phi_i(x)
+                                source *                            // * S(x)
+                                fe_values.JxW(q_point);             // * dx
+          }
+
+
+        cell->get_dof_indices(local_dof_indices);
+
+
+        constraint_matrix.distribute_local_to_global(cell_source,
+                                                     local_dof_indices,
+                                                     tmp);
+      }
+
+
+    Vector<double> value(dof_handler.n_dofs());
+    inverse_mass_matrix.vmult(value, tmp);
+
+
+    return value;
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="codeDiffusionid_minus_tau_J_inversecode"></a> <h4><code>Diffusion::id_minus_tau_J_inverse</code></h4>   
+
+
+我们计算出 $\left(M-\tau \frac{\partial f}{\partial y}\right)^{-1} M$  。这要分几个步骤进行。
+
+- 计算 $M-\tau \frac{\partial f}{\partial y}$ 。 
+
+- 反转矩阵，得到 $\left(M-\tau \frac{\partial f}
+{\partial y}\right)^{-1}$  。 
+
+- 计算 $tmp=My$  。 
+
+- 计算 $z=\left(M-\tau \frac{\partial f}{\partial y}\right)^{-1} tmp =
+\left(M-\tau \frac{\partial f}{\partial y}\right)^{-1} My$  。 
+
+- 返回z。
+
+@code
+  Vector<double> Diffusion::id_minus_tau_J_inverse(const double /*time*/,
+                                                   const double          tau,
+                                                   const Vector<double> &y)
+  {
+    SparseDirectUMFPACK inverse_mass_minus_tau_Jacobian;
+
+
+    mass_minus_tau_Jacobian.copy_from(mass_matrix);
+    mass_minus_tau_Jacobian.add(-tau, system_matrix);
+
+
+    inverse_mass_minus_tau_Jacobian.initialize(mass_minus_tau_Jacobian);
+
+
+    Vector<double> tmp(dof_handler.n_dofs());
+    mass_matrix.vmult(tmp, y);
+
+
+    Vector<double> result(y);
+    inverse_mass_minus_tau_Jacobian.vmult(result, tmp);
+
+
+    return result;
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="codeDiffusionoutput_resultscode"></a><h4><code>Diffusion::output_results</code></h4>   
+
+
+然后，下面的函数在vtu文件中输出解决方案，该文件以时间步长的数字和时间步长方法的名称为索引。当然，所有的时间步长方法的（精确）结果应该是一样的，但这里的输出至少可以让我们对它们进行比较。
+
+@code
+  void Diffusion::output_results(const double                     time,
+                                 const unsigned int               time_step,
+                                 TimeStepping::runge_kutta_method method) const
+  {
+    std::string method_name;
+
+
+    switch (method)
+      {
+        case TimeStepping::FORWARD_EULER:
+          {
+            method_name = "forward_euler";
+            break;
+          }
+        case TimeStepping::RK_THIRD_ORDER:
+          {
+            method_name = "rk3";
+            break;
+          }
+        case TimeStepping::RK_CLASSIC_FOURTH_ORDER:
+          {
+            method_name = "rk4";
+            break;
+          }
+        case TimeStepping::BACKWARD_EULER:
+          {
+            method_name = "backward_euler";
+            break;
+          }
+        case TimeStepping::IMPLICIT_MIDPOINT:
+          {
+            method_name = "implicit_midpoint";
+            break;
+          }
+        case TimeStepping::SDIRK_TWO_STAGES:
+          {
+            method_name = "sdirk";
+            break;
+          }
+        case TimeStepping::HEUN_EULER:
+          {
+            method_name = "heun_euler";
+            break;
+          }
+        case TimeStepping::BOGACKI_SHAMPINE:
+          {
+            method_name = "bocacki_shampine";
+            break;
+          }
+        case TimeStepping::DOPRI:
+          {
+            method_name = "dopri";
+            break;
+          }
+        case TimeStepping::FEHLBERG:
+          {
+            method_name = "fehlberg";
+            break;
+          }
+        case TimeStepping::CASH_KARP:
+          {
+            method_name = "cash_karp";
+            break;
+          }
+        default:
+          {
+            break;
+          }
+      }
+
+
+    DataOut<2> data_out;
+
+
+    data_out.attach_dof_handler(dof_handler);
+    data_out.add_data_vector(solution, "solution");
+
+
+    data_out.build_patches();
+
+
+    data_out.set_flags(DataOutBase::VtkFlags(time, time_step));
+
+
+    const std::string filename = "solution_" + method_name + "-" +
+                                 Utilities::int_to_string(time_step, 3) +
+                                 ".vtu";
+    std::ofstream output(filename);
+    data_out.write_vtu(output);
+
+
+    static std::vector<std::pair<double, std::string>> times_and_names;
+
+
+    static std::string method_name_prev = "";
+    static std::string pvd_filename;
+    if (method_name_prev != method_name)
+      {
+        times_and_names.clear();
+        method_name_prev = method_name;
+        pvd_filename     = "solution_" + method_name + ".pvd";
+      }
+    times_and_names.emplace_back(time, filename);
+    std::ofstream pvd_output(pvd_filename);
+    DataOutBase::write_pvd_record(pvd_output, times_and_names);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="codeDiffusionexplicit_methodcode"></a> <h4><code>Diffusion::explicit_method</code></h4>    
+
+
+这个函数是所有显式方法的驱动。在顶部，它初始化了时间步长和解决方案（通过将其设置为零，然后确保边界值和悬挂节点约束得到尊重；当然，对于我们在这里使用的网格，悬挂节点约束实际上并不是一个问题）。然后调用 <code>evolve_one_time_step</code> ，执行一个时间步骤。时间是通过DiscreteTime对象来存储和增加的。   
+
+
+对于显式方法， <code>evolve_one_time_step</code> 需要评估 $M^{-1}(f(t,y))$ ，即，它需要 <code>evaluate_diffusion</code> 。因为 <code>evaluate_diffusion</code> 是一个成员函数，它需要被绑定到 <code>this</code> 。在每个进化步骤之后，我们再次应用正确的边界值和悬挂节点约束。   
+
+
+最后，每隔10个时间步骤输出解决方案。
+
+@code
+  void Diffusion::explicit_method(const TimeStepping::runge_kutta_method method,
+                                  const unsigned int n_time_steps,
+                                  const double       initial_time,
+                                  const double       final_time)
+  {
+    const double time_step =
+      (final_time - initial_time) / static_cast<double>(n_time_steps);
+
+
+    solution = 0.;
+    constraint_matrix.distribute(solution);
+
+
+    TimeStepping::ExplicitRungeKutta<Vector<double>> explicit_runge_kutta(
+      method);
+    output_results(initial_time, 0, method);
+    DiscreteTime time(initial_time, final_time, time_step);
+    while (time.is_at_end() == false)
+      {
+        explicit_runge_kutta.evolve_one_time_step(
+          [this](const double time, const Vector<double> &y) {
+            return this->evaluate_diffusion(time, y);
+          },
+          time.get_current_time(),
+          time.get_next_step_size(),
+          solution);
+        time.advance_time();
+
+
+        constraint_matrix.distribute(solution);
+
+
+        if (time.get_step_number() % 10 == 0)
+          output_results(time.get_current_time(),
+                         time.get_step_number(),
+                         method);
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="codeDiffusionimplicit_methodcode"></a> <h4><code>Diffusion::implicit_method</code></h4> 这个函数等同于 <code>explicit_method</code> ，但用于隐式方法。当使用隐式方法时，我们需要评估 $M^{-1}(f(t,y))$ 和 $\left(I-\tau M^{-1} \frac{\partial f(t,y)}{\partial
+y}\right)^{-1}$ ，为此我们使用之前介绍的两个成员函数。
+
+@code
+  void Diffusion::implicit_method(const TimeStepping::runge_kutta_method method,
+                                  const unsigned int n_time_steps,
+                                  const double       initial_time,
+                                  const double       final_time)
+  {
+    const double time_step =
+      (final_time - initial_time) / static_cast<double>(n_time_steps);
+
+
+    solution = 0.;
+    constraint_matrix.distribute(solution);
+
+
+    TimeStepping::ImplicitRungeKutta<Vector<double>> implicit_runge_kutta(
+      method);
+    output_results(initial_time, 0, method);
+    DiscreteTime time(initial_time, final_time, time_step);
+    while (time.is_at_end() == false)
+      {
+        implicit_runge_kutta.evolve_one_time_step(
+          [this](const double time, const Vector<double> &y) {
+            return this->evaluate_diffusion(time, y);
+          },
+          [this](const double time, const double tau, const Vector<double> &y) {
+            return this->id_minus_tau_J_inverse(time, tau, y);
+          },
+          time.get_current_time(),
+          time.get_next_step_size(),
+          solution);
+        time.advance_time();
+
+
+        constraint_matrix.distribute(solution);
+
+
+        if (time.get_step_number() % 10 == 0)
+          output_results(time.get_current_time(),
+                         time.get_step_number(),
+                         method);
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="codeDiffusionembedded_explicit_methodcode"></a> <h4><code>Diffusion::embedded_explicit_method</code></h4> 这个函数是嵌入式显式方法的驱动。它需要更多的参数。
+
+- coarsen_param：当误差低于阈值时，乘以当前时间步骤的系数。
+
+- refine_param：当误差高于阈值时，乘以当前时间步长的系数。
+
+- min_delta：可接受的最小的时间步长。
+
+- max_delta：可接受的最大时间步长。
+
+- refine_tol：超过阈值的时间步长被细化。
+
+- coarsen_tol：阈值，低于此阈值的时间步长将被粗化。   
+
+
+嵌入式方法使用一个猜测的时间步长。如果使用这个时间步长的误差太大，时间步长将被缩小。如果误差低于阈值，下一个时间步长将尝试更大的时间步长。  <code>delta_t_guess</code> 是由嵌入方法产生的猜测时间步长。总之，时间步长有可能通过三种方式修改。
+
+- 在 TimeStepping::EmbeddedExplicitRungeKutta::evolve_one_time_step(). 内减少或增加时间步长  
+
+- 使用计算出的 <code>delta_t_guess</code>  。
+
+- 自动调整最后一个时间步骤的步长，以确保模拟在 <code>final_time</code> 处精确结束。这种调整是在DiscreteTime实例中处理的。
+
+@code
+  unsigned int Diffusion::embedded_explicit_method(
+    const TimeStepping::runge_kutta_method method,
+    const unsigned int                     n_time_steps,
+    const double                           initial_time,
+    const double                           final_time)
+  {
+    const double time_step =
+      (final_time - initial_time) / static_cast<double>(n_time_steps);
+    const double coarsen_param = 1.2;
+    const double refine_param  = 0.8;
+    const double min_delta     = 1e-8;
+    const double max_delta     = 10 * time_step;
+    const double refine_tol    = 1e-1;
+    const double coarsen_tol   = 1e-5;
+
+
+    solution = 0.;
+    constraint_matrix.distribute(solution);
+
+
+    TimeStepping::EmbeddedExplicitRungeKutta<Vector<double>>
+      embedded_explicit_runge_kutta(method,
+                                    coarsen_param,
+                                    refine_param,
+                                    min_delta,
+                                    max_delta,
+                                    refine_tol,
+                                    coarsen_tol);
+    output_results(initial_time, 0, method);
+    DiscreteTime time(initial_time, final_time, time_step);
+    while (time.is_at_end() == false)
+      {
+        const double new_time =
+          embedded_explicit_runge_kutta.evolve_one_time_step(
+            [this](const double time, const Vector<double> &y) {
+              return this->evaluate_diffusion(time, y);
+            },
+            time.get_current_time(),
+            time.get_next_step_size(),
+            solution);
+        time.set_next_step_size(new_time - time.get_current_time());
+        time.advance_time();
+
+
+        constraint_matrix.distribute(solution);
+
+
+        if (time.get_step_number() % 10 == 0)
+          output_results(time.get_current_time(),
+                         time.get_step_number(),
+                         method);
+
+
+        time.set_desired_next_step_size(
+          embedded_explicit_runge_kutta.get_status().delta_t_guess);
+      }
+
+
+    return time.get_step_number();
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="codeDiffusionruncode"></a> <h4><code>Diffusion::run</code></h4>   
+
+
+下面是程序的主要功能。在顶部，我们创建网格（一个[0,5]x[0,5]的正方形）并对其进行四次细化，得到一个有16乘16单元的网格，总共256个。 然后我们将边界指标设置为1，用于 $x=0$ 和 $x=5$ 的那些边界部分。
+
+@code
+  void Diffusion::run()
+  {
+    GridGenerator::hyper_cube(triangulation, 0., 5.);
+    triangulation.refine_global(4);
+
+
+    for (const auto &cell : triangulation.active_cell_iterators())
+      for (const auto &face : cell->face_iterators())
+        if (face->at_boundary())
+          {
+            if ((face->center()[0] == 0.) || (face->center()[0] == 5.))
+              face->set_boundary_id(1);
+            else
+              face->set_boundary_id(0);
+          }
+
+
+@endcode 
+
+
+
+接下来，我们设置线性系统并为其填充内容，以便在整个时间步进过程中使用它们。
+
+@code
+    setup_system();
+
+
+    assemble_system();
+
+
+@endcode 
+
+
+
+最后，我们使用命名空间TimeStepping中实现的几种Runge-Kutta方法解决扩散问题，每次都在结束时间输出误差。正如介绍中所解释的，由于精确解在最后时间为零，所以误差等于数值解，只需取解向量的 $l_2$ 准则就可以计算出来）。
+
+@code
+    unsigned int       n_steps      = 0;
+    const unsigned int n_time_steps = 200;
+    const double       initial_time = 0.;
+    const double       final_time   = 10.;
+
+
+    std::cout << "Explicit methods:" << std::endl;
+    explicit_method(TimeStepping::FORWARD_EULER,
+                    n_time_steps,
+                    initial_time,
+                    final_time);
+    std::cout << "   Forward Euler:            error=" << solution.l2_norm()
+              << std::endl;
+
+
+    explicit_method(TimeStepping::RK_THIRD_ORDER,
+                    n_time_steps,
+                    initial_time,
+                    final_time);
+    std::cout << "   Third order Runge-Kutta:  error=" << solution.l2_norm()
+              << std::endl;
+
+
+    explicit_method(TimeStepping::RK_CLASSIC_FOURTH_ORDER,
+                    n_time_steps,
+                    initial_time,
+                    final_time);
+    std::cout << "   Fourth order Runge-Kutta: error=" << solution.l2_norm()
+              << std::endl;
+    std::cout << std::endl;
+
+
+
+    std::cout << "Implicit methods:" << std::endl;
+    implicit_method(TimeStepping::BACKWARD_EULER,
+                    n_time_steps,
+                    initial_time,
+                    final_time);
+    std::cout << "   Backward Euler:           error=" << solution.l2_norm()
+              << std::endl;
+
+
+    implicit_method(TimeStepping::IMPLICIT_MIDPOINT,
+                    n_time_steps,
+                    initial_time,
+                    final_time);
+    std::cout << "   Implicit Midpoint:        error=" << solution.l2_norm()
+              << std::endl;
+
+
+    implicit_method(TimeStepping::CRANK_NICOLSON,
+                    n_time_steps,
+                    initial_time,
+                    final_time);
+    std::cout << "   Crank-Nicolson:           error=" << solution.l2_norm()
+              << std::endl;
+
+
+    implicit_method(TimeStepping::SDIRK_TWO_STAGES,
+                    n_time_steps,
+                    initial_time,
+                    final_time);
+    std::cout << "   SDIRK:                    error=" << solution.l2_norm()
+              << std::endl;
+    std::cout << std::endl;
+
+
+
+    std::cout << "Embedded explicit methods:" << std::endl;
+    n_steps = embedded_explicit_method(TimeStepping::HEUN_EULER,
+                                       n_time_steps,
+                                       initial_time,
+                                       final_time);
+    std::cout << "   Heun-Euler:               error=" << solution.l2_norm()
+              << std::endl;
+    std::cout << "                   steps performed=" << n_steps << std::endl;
+
+
+    n_steps = embedded_explicit_method(TimeStepping::BOGACKI_SHAMPINE,
+                                       n_time_steps,
+                                       initial_time,
+                                       final_time);
+    std::cout << "   Bogacki-Shampine:         error=" << solution.l2_norm()
+              << std::endl;
+    std::cout << "                   steps performed=" << n_steps << std::endl;
+
+
+    n_steps = embedded_explicit_method(TimeStepping::DOPRI,
+                                       n_time_steps,
+                                       initial_time,
+                                       final_time);
+    std::cout << "   Dopri:                    error=" << solution.l2_norm()
+              << std::endl;
+    std::cout << "                   steps performed=" << n_steps << std::endl;
+
+
+    n_steps = embedded_explicit_method(TimeStepping::FEHLBERG,
+                                       n_time_steps,
+                                       initial_time,
+                                       final_time);
+    std::cout << "   Fehlberg:                 error=" << solution.l2_norm()
+              << std::endl;
+    std::cout << "                   steps performed=" << n_steps << std::endl;
+
+
+    n_steps = embedded_explicit_method(TimeStepping::CASH_KARP,
+                                       n_time_steps,
+                                       initial_time,
+                                       final_time);
+    std::cout << "   Cash-Karp:                error=" << solution.l2_norm()
+              << std::endl;
+    std::cout << "                   steps performed=" << n_steps << std::endl;
+  }
+} // namespace Step52
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Thecodemaincodefunction"></a> <h3>The <code>main()</code> function</h3>
+
+
+
+
+下面的 <code>main</code> 函数与前面的例子类似，不需要注释。
+
+@code
+int main()
+{
+  try
+    {
+      Step52::Diffusion diffusion;
+      diffusion.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    };
+
+
+  return 0;
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
-The point of this program is less to show particular results, but instead to
-show how it is done. This we have already demonstrated simply by discussing
-the code above. Consequently, the output the program yields is relatively
-sparse and consists only of the console output and the solutions given in VTU
-format for visualization.
+这个程序的重点不在于显示特定的结果，而在于显示它是如何做到的。这一点我们已经通过讨论上面的代码证明了。因此，该程序的输出相对较少，只包括控制台输出和用于可视化的VTU格式的解决方案。
 
-The console output contains both errors and, for some of the methods, the
-number of steps they performed:
+控制台输出包含错误，对于某些方法，还包含它们所执行的步骤数。
+
 @code
 Explicit methods:
    Forward Euler:            error=1.00883
    Third order Runge-Kutta:  error=0.000227982
    Fourth order Runge-Kutta: error=1.90541e-06
 
+
 Implicit methods:
    Backward Euler:           error=1.03428
    Implicit Midpoint:        error=0.00862702
    Crank-Nicolson:           error=0.00862675
    SDIRK:                    error=0.0042349
+
 
 Embedded explicit methods:
    Heun-Euler:               error=0.0073012
@@ -1286,15 +1245,10 @@ Embedded explicit methods:
                    steps performed=106
    Cash-Karp:                error=0.0787735
                    steps performed=106
-@endcode
+@endcode 
 
-As expected the higher order methods give (much) more accurate solutions. We
-also see that the (rather inaccurate) Heun-Euler method increased the number of
-time steps in order to satisfy the tolerance. On the other hand, the other
-embedded methods used a lot less time steps than what was prescribed.
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-52.cc"
-*/
+
+
+正如预期的那样，高阶方法给出了（更）准确的解决方案。我们还看到，（相当不准确的）Heun-Euler方法增加了时间步骤的数量，以满足公差。另一方面，其他嵌入式方法使用的时间步数比规定的要少得多。<a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-52.cc" 。 
+
+  */  

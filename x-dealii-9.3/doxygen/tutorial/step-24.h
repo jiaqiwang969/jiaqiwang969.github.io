@@ -1,217 +1,150 @@
-/**
-@page step_24 The step-24 tutorial program
-This tutorial depends on step-23.
+  /**   @page step_24 The step-24 tutorial program 。 
+
+本教程取决于  step-23  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Theproblem">The problem</a>
-        <li><a href="#Weakformanddiscretization">Weak form and discretization</a>
-        <li><a href="#Whattheprogramdoes">What the program does</a>
-        <li><a href="#AppendixPDEswithDiracdeltafunctionsasrighthandsideandtheirtransformationtoaninitialvalueproblem">Appendix: PDEs with Dirac delta functions as right hand side and their transformation to an initial value problem</a>
+        <li><a href="#Theproblem">The problem</a><a href="#Theproblem">The problem</a>
+        <li><a href="#Weakformanddiscretization">Weak form and discretization</a><a href="#Weakformanddiscretization">Weak form and discretization</a>
+        <li><a href="#Whattheprogramdoes">What the program does</a><a href="#Whattheprogramdoes">What the program does</a>
+        <li><a href="#AppendixPDEswithDiracdeltafunctionsasrighthandsideandtheirtransformationtoaninitialvalueproblem">Appendix: PDEs with Dirac delta functions as right hand side and their transformation to an initial value problem</a><a href="#AppendixPDEswithDiracdeltafunctionsasrighthandsideandtheirtransformationtoaninitialvalueproblem">Appendix: PDEs with Dirac delta functions as right hand side and their transformation to an initial value problem</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#Theforwardproblemclasstemplate">The "forward problem" class template</a>
-        <li><a href="#Equationdata">Equation data</a>
-        <li><a href="#ImplementationofthecodeTATForwardProblemcodeclass">Implementation of the <code>TATForwardProblem</code> class</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#Theforwardproblemclasstemplate">The "forward problem" class template</a><a href="#Theforwardproblemclasstemplate">The "forward problem" class template</a>
+        <li><a href="#Equationdata">Equation data</a><a href="#Equationdata">Equation data</a>
+        <li><a href="#ImplementationofthecodeTATForwardProblemcodeclass">Implementation of the <code>TATForwardProblem</code> class</a><a href="#ImplementationofthecodeTATForwardProblemcodeclass">Implementation of the <code>TATForwardProblem</code> class</a>
       <ul>
-        <li><a href="#TATForwardProblemsetup_system">TATForwardProblem::setup_system</a>
-        <li><a href="#TATForwardProblemsolve_pandTATForwardProblemsolve_v">TATForwardProblem::solve_p and TATForwardProblem::solve_v</a>
-        <li><a href="#TATForwardProblemoutput_results">TATForwardProblem::output_results</a>
-        <li><a href="#TATForwardProblemrun">TATForwardProblem::run</a>
+        <li><a href="#TATForwardProblemsetup_system">TATForwardProblem::setup_system</a><a href="#TATForwardProblemsetup_system">TATForwardProblem::setup_system</a>
+        <li><a href="#TATForwardProblemsolve_pandTATForwardProblemsolve_v">TATForwardProblem::solve_p and TATForwardProblem::solve_v</a><a href="#TATForwardProblemsolve_pandTATForwardProblemsolve_v">TATForwardProblem::solve_p and TATForwardProblem::solve_v</a>
+        <li><a href="#TATForwardProblemoutput_results">TATForwardProblem::output_results</a><a href="#TATForwardProblemoutput_results">TATForwardProblem::output_results</a>
+        <li><a href="#TATForwardProblemrun">TATForwardProblem::run</a><a href="#TATForwardProblemrun">TATForwardProblem::run</a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Oneabsorber"> One absorber </a>
-        <li><a href="#Multipleabsorbers">Multiple absorbers</a>
+        <li><a href="#Oneabsorber"> One absorber </a><a href="#Oneabsorber"> One absorber </a>
+        <li><a href="#Multipleabsorbers">Multiple absorbers</a><a href="#Multipleabsorbers">Multiple absorbers</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+@endhtmlonly 
+
+<a name="Intro"></a> <a name="Introduction"></a><h1>Introduction</h1>
 
 
-This program grew out of a student project by Xing Jin at Texas A&amp;M
-University. Most of the work for this program is by her. Some of the work on
-this tutorial program has been funded by NSF under grant DMS-0604778.
+这个程序是由德克萨斯A&amp;M大学的Xing Jin的一个学生项目发展而来的。这个程序的大部分工作是由她完成的。这个教程程序的部分工作得到了美国国家科学基金会DMS-0604778的资助。
 
-The program is part of a project that aims to simulate thermoacoustic
-tomography imaging. In thermoacoustic tomography, pulsed electromagnetic
-energy is delivered into biological issues. Tissues absorb some of this energy
-and those parts of the tissue that absorb the most energy generate
-thermoacoustic waves through thermoelastic expansion. For imaging, one uses
-that different kinds of tissue, most importantly healthy and diseased tissue,
-absorb different amounts of energy and therefore expand at different
-rates. The experimental setup is to measure the amplitude of the pressure
-waves generated by these sources on the surface of the tissue and try to
-reconstruct the source distributions, which is indicative for the distribution
-of absorbers and therefore of different kinds of tissue. Part of this project
-is to compare simulated data with actual measurements, so one has to solve the
-"forward problem", i.e. the wave equation that describes the propagation of
-pressure waves in tissue. This program is therefore a continuation of @ref
-step_23 "step-23", where the wave equation was first introduced.
+该计划是一个旨在模拟热声断层成像的项目的一部分。在热声断层成像中，脉冲电磁能量被送入生物问题。组织吸收一些这种能量，组织中吸收能量最多的那些部分通过热弹性膨胀产生热声波。对于成像来说，人们利用不同种类的组织，最重要的是健康和病变组织，吸收不同数量的能量，因此以不同的速度膨胀。实验装置是测量这些源在组织表面产生的压力波的振幅，并试图重建源的分布，这对吸收器的分布有指示作用，因此对不同种类的组织有指示作用。这个项目的一部分是将模拟数据与实际测量进行比较，因此必须解决 "正向问题"，即描述压力波在组织中传播的波浪方程。因此，这个程序是 @ref
+step_23 " step-23 "的延续，其中首次介绍了波方程。
 
 
-<a name="Theproblem"></a><h3>The problem</h3>
+<a name="Theproblem"></a><h3>The problem</h3> 
 
 
-The temperature at a given location, neglecting thermal diffusion, can be
-stated as
+忽略热扩散，某一位置的温度可表述为 
 
 @f[
 \rho C_p \frac{\partial}{\partial t}T(t,\mathbf r) = H(t,\mathbf r)
-@f]
+@f] 
 
-Here $\rho (\mathbf r) $ is the density; $C_p (\mathbf r) $ is the specific
-heat; $\frac{\partial T}{\partial t}(t,\mathbf r)$ is the temperature rise due
-to the delivered microwave energy; and $H(t,\mathbf r)$ is the heating
-function defined as the thermal energy per time and volume transformed from
-deposited microwave energy.
+这里 $\rho (\mathbf r) $ 是密度； $C_p (\mathbf r) $ 是比热； $\frac{\partial T}{\partial t}(t,\mathbf r)$ 是由于传递的微波能量引起的温升； $H(t,\mathbf r)$ 是加热函数，定义为由沉积的微波能量转化的每一时间和容积的热能。
 
-Let us assume that tissues have heterogeneous dielectric properties but
-homogeneous acoustic properties. The basic acoustic generation equation in an
-acoustically homogeneous medium can be described as follows: if $u$ is the
-vector-valued displacement, then tissue certainly reacts to changes in
-pressure by acceleration:
-@f[
+让我们假设组织具有异质的介电特性，但具有同质的声学特性。在声学同质介质中的基本声学生成方程可以描述如下：如果 $u$ 是矢量值的位移，那么组织肯定会对压力的变化做出加速反应。@f[
 \rho \frac{\partial^2}{\partial t^2}u(t,\mathbf r) =
--\nabla p(t,\mathbf r).
-@f]
-Furthermore, it contracts due to excess pressure and expands based on changes in temperature:
-@f[
-\nabla \cdot u(t,\mathbf r) = -\frac{p(t,\mathbf r)}{\rho c_0^2}+\beta T(t,\mathbf r) .
-@f]
-Here, $\beta$ is a thermoexpansion coefficient.
 
-Let us now make the assumption that heating only happens on a time
-scale much shorter than wave propagation through tissue (i.e. the temporal
-length of the microwave pulse that heats the tissue is much shorter than the
-time it takes a wave to cross the domain). In that case, the heating
-rate $H(t,\mathbf r)$ can be written as $H(t,\mathbf r) = a(\mathbf
-r)\delta(t)$ (where $a(\mathbf r)$ is a map of absorption strengths for
-microwave energy and $\delta(t)$ is the Dirac delta function), which together
-with the first equation above will yield
-an instantaneous jump in the temperature $T(\mathbf r)$ at time $t=0$.
-Using this assumption, and taking all equations together, we can
-rewrite and combine the above as follows:
-@f[
+
+-\nabla p(t,\mathbf r).
+@f] 此外，它因压力过大而收缩，并根据温度的变化而膨胀。@f[
+\nabla \cdot u(t,\mathbf r) = -\frac{p(t,\mathbf r)}{\rho c_0^2}+\beta T(t,\mathbf r) .
+@f] 这里， $\beta$ 是热膨胀系数。
+
+现在让我们假设，加热只发生在一个比波在组织中传播短得多的时间尺度上（即加热组织的微波脉冲的时间长度比波穿过领域的时间短得多）。在这种情况下，加热率 $H(t,\mathbf r)$ 可以写成 $H(t,\mathbf r) = a(\mathbf
+r)\delta(t)$ （其中 $a(\mathbf r)$ 是微波能量的吸收强度图， $\delta(t)$ 是狄拉克三角函数），与上述第一个方程式一起，将产生温度 $T(\mathbf r)$ 在时间 $t=0$ 的瞬时跳跃。利用这一假设，并将所有方程放在一起，我们可以将上述内容重写并组合如下。@f[
 \Delta p-\frac{1}{c_0^2} \frac{\partial^2 p}{\partial t^2} = \lambda
 a(\mathbf r)\frac{d\delta(t)}{dt}
-@f]
-where $\lambda = - \frac{\beta}{C_p}$.
+@f] 其中  $\lambda = - \frac{\beta}{C_p}$  。
 
-This somewhat strange equation with the derivative of a Dirac delta function
-on the right hand side can be rewritten as an initial value problem as follows:
-@f{eqnarray*}
+这个有点奇怪的方程，右边是狄拉克三角函数的导数，可以改写为一个初值问题，如下所示。@f{eqnarray*}
 \Delta \bar{p}- \frac{1}{c_0^2} \frac{\partial^2 \bar{p}}{\partial t^2} & = &
 0 \\
 \bar{p}(0,\mathbf r) &=& c_0^2 \lambda a(\mathbf r) = b(\mathbf r)  \\
 \frac{\partial\bar{p}(0,\mathbf r)}{\partial t} &=& 0.
-@f}
-(A derivation of this transformation into an initial value problem is given at
-the end of this introduction as an appendix.)
+@f} 
 
-In the inverse problem, it is the initial condition $b(\mathbf r) = c_0^2 \lambda a(\mathbf r)$ that
-one would like to recover, since it is a map of absorption strengths for
-microwave energy, and therefore presumably an indicator to discern healthy
-from diseased tissue.
+(在本引言的末尾，作为附录给出了这一转换为初值问题的推导)。
 
-In real application, the thermoacoustic source is very small as compared to
-the medium.  The propagation path of the thermoacoustic waves can then be
-approximated as from the source to the infinity. Furthermore, detectors are
-only a limited distance from the source. One only needs to evaluate the values
-when the thermoacoustic waves pass through the detectors, although they do
-continue beyond. This is therefore a problem where we are only interested in a
-small part of an infinite medium, and we do not want waves generated somewhere
-to be reflected at the boundary of the domain which we consider
-interesting. Rather, we would like to simulate only that part of the wave
-field that is contained inside the domain of interest, and waves that hit the
-boundary of that domain to simply pass undisturbed through the boundary. In
-other words, we would like the boundary to absorb any waves that hit it.
+在反问题中，人们希望恢复的是初始条件 $b(\mathbf r) = c_0^2 \lambda a(\mathbf r)$ ，因为它是微波能量的吸收强度图，因此可能是区分健康和病变组织的指标。
 
-In general, this is a hard problem: Good absorbing boundary conditions are
-nonlinear and/or numerically very expensive. We therefore opt for a simple
-first order approximation to absorbing boundary conditions that reads
-@f[
+在实际应用中，热声源与介质相比是非常小的。 因此，热声波的传播路径可以被近似为从源头到无限远。此外，检测器离源头只有有限的距离。我们只需要评估热声波通过检测器时的数值，尽管它们确实继续超出。因此，这是一个我们只对无限介质的一小部分感兴趣的问题，我们不希望某个地方产生的波在我们认为有趣的领域的边界上被反射。相反，我们希望只模拟包含在感兴趣的领域内的那部分波场，而碰到该领域边界的波则不受干扰地通过边界。换句话说，我们希望边界能吸收撞击它的任何波。
+
+一般来说，这是一个困难的问题：好的吸收边界条件是非线性的和/或数值上非常昂贵。因此，我们选择了一个简单的一阶近似吸收边界条件，即@f[
 \frac{\partial\bar{p}}{\partial\mathbf n} =
+
+
 -\frac{1}{c_0} \frac{\partial\bar{p}}{\partial t}
-@f]
-Here, $\frac{\partial\bar{p}}{\partial\mathbf n}$ is the normal derivative at
-the boundary. It should be noted that this is not a particularly good boundary
-condition, but it is one of the very few that are reasonably simple to implement.
+@f]这里， $\frac{\partial\bar{p}}{\partial\mathbf n}$ 是边界的法向导数。应该注意的是，这不是一个特别好的边界条件，但它是为数不多的可以合理简单实现的条件之一。
 
 
 <a name="Weakformanddiscretization"></a><h3>Weak form and discretization</h3>
 
 
-As in step-23, one first introduces a second variable, which is
-defined as the derivative of the pressure potential:
-@f[
+如同在 step-23 中一样，首先要引入第二个变量，它被定义为压力势的导数。@f[
 v = \frac{\partial\bar{p}}{\partial t}
-@f]
+@f] 
 
-With the second variable, one then transforms the forward problem into
-two separate equations:
-@f{eqnarray*}
+有了第二个变量，我们就可以将正向问题转化为两个独立的方程。@f{eqnarray*}
 \bar{p}_{t} - v & = & 0 \\
 \Delta\bar{p} - \frac{1}{c_0^2}\,v_{t} & = & f
-@f}
-with initial conditions:
-@f{eqnarray*}
+@f} 
+
+带有初始条件。@f{eqnarray*}
 \bar{p}(0,\mathbf r) & = & b(r) \\
 v(0,\mathbf r)=\bar{p}_t(0,\mathbf r) & = & 0.
-@f}
-Note that we have introduced a right hand side $f(t,\mathbf r)$ here to show
-how to derive these formulas in the general case, although in the application
-to the thermoacoustic problem $f=0$.
+@f} 
 
-The semi-discretized, weak version of this model, using the general $\theta$ scheme
-introduced in step-23 is then:
-@f{eqnarray*}
+注意，我们在这里引入了一个右手边 $f(t,\mathbf r)$ ，以显示如何在一般情况下推导这些公式，尽管在应用于热声问题时 $f=0$  。
+
+那么，使用 step-23 中介绍的一般 $\theta$ 方案，这个模型的半具体化、弱化版本就是。@f{eqnarray*}
 \left(\frac{\bar{p}^n-\bar{p}^{n-1}}{k},\phi\right)_\Omega-
 \left(\theta v^{n}+(1-\theta)v^{n-1},\phi\right)_\Omega & = & 0   \\
+
+
 -\left(\nabla((\theta\bar{p}^n+(1-\theta)\bar{p}^{n-1})),\nabla\phi\right)_\Omega-
 \frac{1}{c_0}\left(\frac{\bar{p}^n-\bar{p}^{n-1}}{k},\phi\right)_{\partial\Omega} -
 \frac{1}{c_0^2}\left(\frac{v^n-v^{n-1}}{k},\phi\right)_\Omega & =
 & \left(\theta f^{n}+(1-\theta)f^{n-1}, \phi\right)_\Omega,
-@f}
-where $\phi$ is an arbitrary test function, and where we have used the
-absorbing boundary condition to integrate by parts:
-absorbing boundary conditions are incorporated into the weak form by using
-@f[
+@f} 
+
+其中 $\phi$ 是一个任意的测试函数，我们使用吸收边界条件进行部分积分：吸收边界条件通过使用@f[
 \int_\Omega\varphi \, \Delta p\; dx =
+
+
 -\int_\Omega\nabla \varphi \cdot \nabla p dx +
 \int_{\partial\Omega}\varphi \frac{\partial p}{\partial {\mathbf n}}ds.
-@f]
+@f]被纳入弱形式中 
 
-From this we obtain the discrete model by introducing a finite number of shape
-functions, and get
-@f{eqnarray*}
+由此我们通过引入有限数量的形状函数得到离散模型，并得到@f{eqnarray*}
 M\bar{p}^{n}-k \theta M v^n & = & M\bar{p}^{n-1}+k (1-\theta)Mv^{n-1},\\
+
 
 (-c_0^2k \theta A-c_0 B)\bar{p}^n-Mv^{n} & = &
 (c_0^2k(1-\theta)A-c_0B)\bar{p}^{n-1}-Mv^{n-1}+c_0^2k(\theta F^{n}+(1-\theta)F^{n-1}).
-@f}
-The matrices $M$ and $A$ are here as in step-23, and the
-boundary mass matrix
-@f[
-	B_{ij} = \left(\varphi_i,\varphi_j\right)_{\partial\Omega}
-@f]
-results from the use of absorbing boundary conditions.
+@f} 
 
-Above two equations can be rewritten in a matrix form with the pressure and its derivative as
-an unknown vector:
-@f[
+这里的矩阵 $M$ 和 $A$ 与 step-23 一样，而边界质量矩阵@f[
+	B_{ij} = \left(\varphi_i,\varphi_j\right)_{\partial\Omega}
+@f]是使用吸收性边界条件的结果。
+
+以上两个方程可以用矩阵形式重写，压力和它的导数是一个未知矢量。@f[
 \left(\begin{array}{cc}
  M         &       -k\theta M \\
 c_0^2\,k\,\theta\,A+c_0\,B  &  M   \\
@@ -224,10 +157,9 @@ c_0^2\,k\,\theta\,A+c_0\,B  &  M   \\
  G_1  \\
  G_2 -(\theta F^{n}+(1-\theta)F ^{n-1})c_{0}^{2}k \\
                 \end{array}\right)
-@f]
+@f] 
 
-where
-@f[
+其中@f[
 \left(\begin{array}{c}
 G_1 \\
 G_2 \\
@@ -236,853 +168,777 @@ G_2 \\
  M\bar{p}^{n-1}+k(1-\theta)Mv^{n-1}\\
  (-c_{0}^{2}k (1-\theta)A+c_0 B)\bar{p}^{n-1} +Mv^{n-1}
                 \end{array}\right)
-@f]
+@f] 
 
-By simple transformations, one then obtains two equations for
-the pressure potential and its derivative, just as in the previous tutorial program:
-@f{eqnarray*}
+通过简单的变换，就可以得到压力势及其导数的两个方程，就像在前面的教程程序中一样。@f{eqnarray*}
 (M+(k\,\theta\,c_{0})^{2}A+c_0k\theta B)\bar{p}^{n} & = &
 G_{1}+(k\, \theta)G_{2}-(c_0k)^2\theta (\theta F^{n}+(1-\theta)F^{n-1}) \\
 Mv^n & = & -(c_0^2\,k\, \theta\, A+c_0B)\bar{p}^{n}+ G_2 -
 c_0^2k(\theta F^{n}+(1-\theta)F^{n-1})
-@f}
+@f} 
+
+
 
 
 <a name="Whattheprogramdoes"></a><h3>What the program does</h3>
 
 
-Compared to step-23, this programs adds the treatment of a
-simple absorbing boundary conditions. In addition, it deals with data obtained
-from actual experimental measurements. To this end, we need to evaluate the
-solution at points at which the experiment also evaluates a real pressure
-field. We will see how to do that using the VectorTools::point_value function
-further down below.
+与 step-23 相比，本程序增加了对简单吸收边界条件的处理。此外，它还处理了从实际实验测量得到的数据。为此，我们需要在实验也评估了真实压力场的点上评估解决方案。我们将看到如何使用 VectorTools::point_value 函数在下文中进一步做到这一点。
+
 
 
 
 <a name="AppendixPDEswithDiracdeltafunctionsasrighthandsideandtheirtransformationtoaninitialvalueproblem"></a><h3>Appendix: PDEs with Dirac delta functions as right hand side and their transformation to an initial value problem</h3>
 
 
-In the derivation of the initial value problem for the wave equation, we
-initially found that the equation had the derivative of a Dirac delta function
-as a right hand side:
-@f[
+在推导波浪方程的初值问题时，我们最初发现该方程的右手边是狄拉克三角函数的导数。@f[
 \Delta p-\frac{1}{c_0^2} \frac{\partial^2 p}{\partial t^2} = \lambda
 a(\mathbf r)\frac{d\delta(t)}{dt}.
-@f]
-In order to see how to transform this single equation into the usual statement
-of a PDE with initial conditions, let us make the assumption that the
-physically quite reasonable medium is at rest initially, i.e. $p(t,\mathbf
-r)=\frac{\partial p(t,\mathbf r)}{\partial t}=0$ for $t<0$. Next, let us form
-the indefinite integral with respect to time of both sides:
-@f[
+@f] 为了看看如何将这个单一的方程转化为具有初始条件的PDE的通常陈述，让我们假设物理上相当合理的介质最初处于静止状态，即  $p(t,\mathbf
+r)=\frac{\partial p(t,\mathbf r)}{\partial t}=0$  为  $t<0$  。接下来，让我们对两边的时间形成不确定的积分。@f[
 \int^t \Delta p\; dt -\int^t \frac{1}{c_0^2} \frac{\partial^2 p}{\partial t^2}
 \; dt
 =
 \int^t \lambda a(\mathbf r)\frac{d\delta(t)}{dt} \;dt.
-@f]
-This immediately leads to the statement
-@f[
+@f] 这立即导致声明@f[
 P(t,\mathbf r) - \frac{1}{c_0^2} \frac{\partial p}{\partial t}
 =
 \lambda a(\mathbf r) \delta(t),
-@f]
-where $P(t,\mathbf r)$ is such that $\frac{dP(t,\mathbf r)}{dt}=\Delta
-p$. Next, we form the (definite) integral over time from $t=-\epsilon$ to
-$t=+\epsilon$ to find
-@f[
+@f]，其中 $P(t,\mathbf r)$ 是使 $\frac{dP(t,\mathbf r)}{dt}=\Delta
+p$  。接下来，我们从 $t=-\epsilon$ 到 $t=+\epsilon$ 形成时间上的（定）积分，以找到@f[
 \int_{-\epsilon}^{\epsilon} P(t,\mathbf r)\; dt
+
+
 - \frac{1}{c_0^2} \left[ p(\epsilon,\mathbf r) - p(-\epsilon,\mathbf r) \right]
 =
 \int_{-\epsilon}^{\epsilon} \lambda a(\mathbf r) \delta(t) \; dt.
-@f]
-If we use the property of the delta function that $\int_{-\epsilon}^{\epsilon}
-\delta(t)\; dt = 1$, and assume that $P$ is a continuous function in time, we find
-as we let $\epsilon$ go to zero that
-@f[
+@f] 如果我们使用三角洲函数的属性，即 $\int_{-\epsilon}^{\epsilon}
+\delta(t)\; dt = 1$  ，并假设 $P$ 是时间上的连续函数，我们发现当我们让 $\epsilon$ 归零时，@f[
+
+
 - \lim_{\epsilon\rightarrow 0}\frac{1}{c_0^2} \left[ p(\epsilon,\mathbf r) - p(-\epsilon,\mathbf r) \right]
 =
 \lambda a(\mathbf r).
-@f]
-In other words, using that $p(-\epsilon,\mathbf r)=0$, we retrieve the initial
-condition
-@f[
+@f] 也就是说，使用 $p(-\epsilon,\mathbf r)=0$  ]，我们检索到初始条件@f[
   \frac{1}{c_0^2} p(0,\mathbf r)
   =
   \lambda a(\mathbf r).
-@f]
-At the same time, we know that for every $t>0$ the delta function is zero, so
-for $0<t<T$ we get the equation
-@f[
+@f]。同时，我们知道对于每一个 $t>0$ ，delta函数都是零，所以对于 $0<t<T$ ，我们得到方程@f[
 \Delta p-\frac{1}{c_0^2} \frac{\partial^2 p}{\partial t^2} = 0.
-@f]
-Consequently, we have obtained a representation of the wave equation and one
-initial condition from the original somewhat strange equation.
+@f]。 因此，我们已经从原来有点奇怪的方程中得到一个波方程的表示和一个初始条件。
 
-Finally, because we here have an equation with two time derivatives, we still
-need a second initial condition. To this end, let us go back to the equation
-@f[
+最后，由于我们这里有一个具有两个时间导数的方程，我们仍然需要第二个初始条件。为此，让我们回到方程@f[
 \Delta p-\frac{1}{c_0^2} \frac{\partial^2 p}{\partial t^2} = \lambda
 a(\mathbf r)\frac{d\delta(t)}{dt}.
-@f]
-and integrate it in time from $t=-\epsilon$ to $t=+\epsilon$. This leads to
-@f[
+@f]，从 $t=-\epsilon$ 到 $t=+\epsilon$ 进行时间积分。这导致了@f[
 P(\epsilon)-P(-\epsilon)
+
+
 -\frac{1}{c_0^2} \left[\frac{\partial p(\epsilon)}{\partial t} -
                        \frac{\partial p(-\epsilon)}{\partial t}\right]
  = \lambda a(\mathbf r) \int_{-\epsilon}^{\epsilon}\frac{d\delta(t)}{dt} \; dt.
-@f]
-Using integration by parts of the form
-@f[
+@f] 使用@f[
   \int_{-\epsilon}^{\epsilon}\varphi(t)\frac{d\delta(t)}{dt} \; dt
   =
+
+
   -\int_{-\epsilon}^{\epsilon}\frac{d\varphi(t)}{dt} \delta(t)\; dt
-@f]
-where we use that $\delta(\pm \epsilon)=0$ and inserting $\varphi(t)=1$, we
-see that in fact
-@f[
+@f]形式的积分，其中我们使用 $\delta(\pm \epsilon)=0$ 并插入 $\varphi(t)=1$ ，我们看到事实上@f[
   \int_{-\epsilon}^{\epsilon}\frac{d\delta(t)}{dt} \; dt
   =
   0.
-@f]
+@f] 。
 
-Now, let $\epsilon\rightarrow 0$. Assuming that $P$ is a continuous function in
-time, we see that
-@f[
+现在，让 $\epsilon\rightarrow 0$  。假设 $P$ 是一个连续的时间函数，我们看到@f[
   P(\epsilon)-P(-\epsilon) \rightarrow 0,
-@f]
-and consequently
-@f[
+@f]，因此@f[
   \frac{\partial p(\epsilon)}{\partial t} -
                        \frac{\partial p(-\epsilon)}{\partial t}
 		       \rightarrow 0.
-@f]
-However, we have assumed that $\frac{\partial p(-\epsilon)}{\partial t}=0$.
-Consequently, we obtain as the second initial condition that
-@f[
+@f] 然而，我们已经假设 $\frac{\partial p(-\epsilon)}{\partial t}=0$  。因此，我们得到的第二个初始条件是@f[
   \frac{\partial p(0)}{\partial t} = 0,
-@f]
-completing the system of equations.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * 
- * <a name="Includefiles"></a> 
- * <h3>Include files</h3>
- * 
+@f]完成方程组。<a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * The following have all been covered previously:
- * 
- * @code
- * #include <deal.II/base/quadrature_lib.h>
- * #include <deal.II/base/function.h>
- * #include <deal.II/base/logstream.h>
- * #include <deal.II/base/utilities.h>
- * 
- * #include <deal.II/lac/vector.h>
- * #include <deal.II/lac/full_matrix.h>
- * #include <deal.II/lac/sparse_matrix.h>
- * #include <deal.II/lac/dynamic_sparsity_pattern.h>
- * #include <deal.II/lac/solver_cg.h>
- * #include <deal.II/lac/precondition.h>
- * #include <deal.II/lac/affine_constraints.h>
- * 
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_generator.h>
- * 
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/dofs/dof_tools.h>
- * 
- * #include <deal.II/fe/fe_q.h>
- * #include <deal.II/fe/fe_values.h>
- * 
- * #include <deal.II/numerics/data_out.h>
- * #include <deal.II/numerics/matrix_tools.h>
- * #include <deal.II/numerics/vector_tools.h>
- * 
- * #include <fstream>
- * #include <iostream>
- * 
- * @endcode
- * 
- * This is the only new one: We will need a library function defined in the
- * namespace GridTools that computes the minimal cell diameter.
- * 
- * @code
- * #include <deal.II/grid/grid_tools.h>
- * 
- * @endcode
- * 
- * The last step is as in all previous programs:
- * 
- * @code
- * namespace Step24
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * 
- * <a name="Theforwardproblemclasstemplate"></a> 
- * <h3>The "forward problem" class template</h3>
- * 
 
- * 
- * The first part of the main class is exactly as in step-23 (except for the
- * name):
- * 
- * @code
- *   template <int dim>
- *   class TATForwardProblem
- *   {
- *   public:
- *     TATForwardProblem();
- *     void run();
- * 
- *   private:
- *     void setup_system();
- *     void solve_p();
- *     void solve_v();
- *     void output_results() const;
- * 
- *     Triangulation<dim> triangulation;
- *     FE_Q<dim>          fe;
- *     DoFHandler<dim>    dof_handler;
- * 
- *     AffineConstraints<double> constraints;
- * 
- *     SparsityPattern      sparsity_pattern;
- *     SparseMatrix<double> system_matrix;
- *     SparseMatrix<double> mass_matrix;
- *     SparseMatrix<double> laplace_matrix;
- * 
- *     Vector<double> solution_p, solution_v;
- *     Vector<double> old_solution_p, old_solution_v;
- *     Vector<double> system_rhs_p, system_rhs_v;
- * 
- *     double       time_step, time;
- *     unsigned int timestep_number;
- *     const double theta;
- * 
- * @endcode
- * 
- * Here's what's new: first, we need that boundary mass matrix $B$ that
- * came out of the absorbing boundary condition. Likewise, since this
- * time we consider a realistic medium, we must have a measure of the
- * wave speed $c_0$ that will enter all the formulas with the Laplace
- * matrix (which we still define as $(\nabla \phi_i,\nabla \phi_j)$):
- * 
- * @code
- *     SparseMatrix<double> boundary_matrix;
- *     const double         wave_speed;
- * 
- * @endcode
- * 
- * The last thing we have to take care of is that we wanted to evaluate
- * the solution at a certain number of detector locations. We need an
- * array to hold these locations, declared here and filled in the
- * constructor:
- * 
- * @code
- *     std::vector<Point<dim>> detector_locations;
- *   };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Equationdata"></a> 
- * <h3>Equation data</h3>
- * 
+<a name="Includefiles"></a> <h3>Include files</h3>
 
- * 
- * As usual, we have to define our initial values, boundary conditions, and
- * right hand side functions. Things are a bit simpler this time: we
- * consider a problem that is driven by initial conditions, so there
- * is no right hand side function (though you could look up in step-23 to
- * see how this can be done). Secondly, there are no boundary conditions: the
- * entire boundary of the domain consists of absorbing boundary
- * conditions. That only leaves initial conditions, and there things are
- * simple too since for this particular application only nonzero initial
- * conditions for the pressure are prescribed, not for the velocity (which
- * is zero at the initial time).
- *   
 
- * 
- * So this is all we need: a class that specifies initial conditions for the
- * pressure. In the physical setting considered in this program, these are
- * small absorbers, which we model as a series of little circles where we
- * assume that the pressure surplus is one, whereas no absorption and
- * therefore no pressure surplus is everywhere else. This is how we do things
- * (note that if we wanted to expand this program to not only compile but
- * also to run, we would have to initialize the sources with
- * three-dimensional source locations):
- * 
- * @code
- *   template <int dim>
- *   class InitialValuesP : public Function<dim>
- *   {
- *   public:
- *     virtual double value(const Point<dim> &p,
- *                          const unsigned int /*component*/ = 0) const override
- *     {
- *       static const std::array<Source, 5> sources{
- *         {Source(Point<dim>(0, 0), 0.025),
- *          Source(Point<dim>(-0.135, 0), 0.05),
- *          Source(Point<dim>(0.17, 0), 0.03),
- *          Source(Point<dim>(-0.25, 0), 0.02),
- *          Source(Point<dim>(-0.05, -0.15), 0.015)}};
- * 
- *       for (const auto &source : sources)
- *         if (p.distance(source.location) < source.radius)
- *           return 1;
- * 
- *       return 0;
- *     }
- * 
- *   private:
- *     struct Source
- *     {
- *       Source(const Point<dim> &l, const double r)
- *         : location(l)
- *         , radius(r)
- *       {}
- * 
- *       const Point<dim> location;
- *       const double     radius;
- *     };
- *   };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ImplementationofthecodeTATForwardProblemcodeclass"></a> 
- * <h3>Implementation of the <code>TATForwardProblem</code> class</h3>
- * 
 
- * 
- * Let's start again with the constructor. Setting the member variables is
- * straightforward. We use the acoustic wave speed of mineral oil (in
- * millimeters per microsecond, a common unit in experimental biomedical
- * imaging) since this is where many of the experiments we want to compare
- * the output with are made in. The Crank-Nicolson scheme is used again,
- * i.e. theta is set to 0.5. The time step is later selected to satisfy $k =
- * \frac hc$: here we initialize it to an invalid number.
- * 
- * @code
- *   template <int dim>
- *   TATForwardProblem<dim>::TATForwardProblem()
- *     : fe(1)
- *     , dof_handler(triangulation)
- *     , time_step(std::numeric_limits<double>::quiet_NaN())
- *     , time(time_step)
- *     , timestep_number(1)
- *     , theta(0.5)
- *     , wave_speed(1.437)
- *   {
- * @endcode
- * 
- * The second task in the constructor is to initialize the array that
- * holds the detector locations. The results of this program were compared
- * with experiments in which the step size of the detector spacing is 2.25
- * degree, corresponding to 160 detector locations. The radius of the
- * scanning circle is selected to be half way between the center and the
- * boundary to avoid that the remaining reflections from the imperfect
- * boundary condition spoils our numerical results.
- *     
 
- * 
- * The locations of the detectors are then calculated in clockwise
- * order. Note that the following of course only works if we are computing
- * in 2d, a condition that we guard with an assertion. If we later wanted
- * to run the same program in 3d, we would have to add code here for the
- * initialization of detector locations in 3d. Due to the assertion, there
- * is no way we can forget to do this.
- * 
- * @code
- *     Assert(dim == 2, ExcNotImplemented());
- * 
- *     const double detector_step_angle = 2.25;
- *     const double detector_radius     = 0.5;
- * 
- *     for (double detector_angle = 2 * numbers::PI; detector_angle >= 0;
- *          detector_angle -= detector_step_angle / 360 * 2 * numbers::PI)
- *       detector_locations.push_back(
- *         Point<dim>(std::cos(detector_angle), std::sin(detector_angle)) *
- *         detector_radius);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TATForwardProblemsetup_system"></a> 
- * <h4>TATForwardProblem::setup_system</h4>
- * 
+以下内容之前都已经讲过了。
 
- * 
- * The following system is pretty much what we've already done in step-23,
- * but with two important differences. First, we have to create a circular
- * (or spherical) mesh around the origin, with a radius of 1. This nothing
- * new: we've done so before in step-6 and step-10, where we also explain
- * how the PolarManifold or SphericalManifold object places new points on
- * concentric circles when a cell is refined, which we will use here as
- * well.
- *   
+@code
+#include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/function.h>
+#include <deal.II/base/logstream.h>
+#include <deal.II/base/utilities.h>
 
- * 
- * One thing we had to make sure is that the time step satisfies the CFL
- * condition discussed in the introduction of step-23. Back in that program,
- * we ensured this by hand by setting a timestep that matches the mesh
- * width, but that was error prone because if we refined the mesh once more
- * we would also have to make sure the time step is changed. Here, we do
- * that automatically: we ask a library function for the minimal diameter of
- * any cell. Then we set $k=\frac h{c_0}$. The only problem is: what exactly
- * is $h$? The point is that there is really no good theory on this question
- * for the wave equation. It is known that for uniformly refined meshes
- * consisting of rectangles, $h$ is the minimal edge length. But for meshes
- * on general quadrilaterals, the exact relationship appears to be unknown,
- * i.e. it is unknown what properties of cells are relevant for the CFL
- * condition. The problem is that the CFL condition follows from knowledge
- * of the smallest eigenvalue of the Laplace matrix, and that can only be
- * computed analytically for simply structured meshes.
- *   
 
- * 
- * The upshot of all this is that we're not quite sure what exactly we
- * should take for $h$. The function GridTools::minimal_cell_diameter
- * computes the minimal diameter of all cells. If the cells were all squares
- * or cubes, then the minimal edge length would be the minimal diameter
- * divided by <code>std::sqrt(dim)</code>. We simply generalize this,
- * without theoretical justification, to the case of non-uniform meshes.
- *   
+#include <deal.II/lac/vector.h>
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/sparse_matrix.h>
+#include <deal.II/lac/dynamic_sparsity_pattern.h>
+#include <deal.II/lac/solver_cg.h>
+#include <deal.II/lac/precondition.h>
+#include <deal.II/lac/affine_constraints.h>
 
- * 
- * The only other significant change is that we need to build the boundary
- * mass matrix. We will comment on this further down below.
- * 
- * @code
- *   template <int dim>
- *   void TATForwardProblem<dim>::setup_system()
- *   {
- *     const Point<dim> center;
- *     GridGenerator::hyper_ball(triangulation, center, 1.);
- *     triangulation.refine_global(7);
- * 
- *     time_step = GridTools::minimal_cell_diameter(triangulation) / wave_speed /
- *                 std::sqrt(1. * dim);
- * 
- *     std::cout << "Number of active cells: " << triangulation.n_active_cells()
- *               << std::endl;
- * 
- *     dof_handler.distribute_dofs(fe);
- * 
- *     std::cout << "Number of degrees of freedom: " << dof_handler.n_dofs()
- *               << std::endl
- *               << std::endl;
- * 
- *     DynamicSparsityPattern dsp(dof_handler.n_dofs(), dof_handler.n_dofs());
- *     DoFTools::make_sparsity_pattern(dof_handler, dsp);
- *     sparsity_pattern.copy_from(dsp);
- * 
- *     system_matrix.reinit(sparsity_pattern);
- *     mass_matrix.reinit(sparsity_pattern);
- *     laplace_matrix.reinit(sparsity_pattern);
- * 
- *     MatrixCreator::create_mass_matrix(dof_handler,
- *                                       QGauss<dim>(fe.degree + 1),
- *                                       mass_matrix);
- *     MatrixCreator::create_laplace_matrix(dof_handler,
- *                                          QGauss<dim>(fe.degree + 1),
- *                                          laplace_matrix);
- * 
- * @endcode
- * 
- * The second difference, as mentioned, to step-23 is that we need to
- * build the boundary mass matrix that grew out of the absorbing boundary
- * conditions.
- *     
 
- * 
- * A first observation would be that this matrix is much sparser than the
- * regular mass matrix, since none of the shape functions with purely
- * interior support contribute to this matrix. We could therefore
- * optimize the storage pattern to this situation and build up a second
- * sparsity pattern that only contains the nonzero entries that we
- * need. There is a trade-off to make here: first, we would have to have a
- * second sparsity pattern object, so that costs memory. Secondly, the
- * matrix attached to this sparsity pattern is going to be smaller and
- * therefore requires less memory; it would also be faster to perform
- * matrix-vector multiplications with it. The final argument, however, is
- * the one that tips the scale: we are not primarily interested in
- * performing matrix-vector with the boundary matrix alone (though we need
- * to do that for the right hand side vector once per time step), but
- * mostly wish to add it up to the other matrices used in the first of the
- * two equations since this is the one that is going to be multiplied with
- * once per iteration of the CG method, i.e. significantly more often. It
- * is now the case that the SparseMatrix::add class allows to add one
- * matrix to another, but only if they use the same sparsity pattern (the
- * reason being that we can't add nonzero entries to a matrix after the
- * sparsity pattern has been created, so we simply require that the two
- * matrices have the same sparsity pattern).
- *     
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
 
- * 
- * So let's go with that:
- * 
- * @code
- *     boundary_matrix.reinit(sparsity_pattern);
- * 
- * @endcode
- * 
- * The second thing to do is to actually build the matrix. Here, we need
- * to integrate over faces of cells, so first we need a quadrature object
- * that works on <code>dim-1</code> dimensional objects. Secondly, the
- * FEFaceValues variant of FEValues that works on faces, as its name
- * suggest. And finally, the other variables that are part of the assembly
- * machinery. All of this we put between curly braces to limit the scope
- * of these variables to where we actually need them.
- *     
 
- * 
- * The actual act of assembling the matrix is then fairly straightforward:
- * we loop over all cells, over all faces of each of these cells, and then
- * do something only if that particular face is at the boundary of the
- * domain. Like this:
- * 
- * @code
- *     {
- *       const QGauss<dim - 1> quadrature_formula(fe.degree + 1);
- *       FEFaceValues<dim>     fe_values(fe,
- *                                   quadrature_formula,
- *                                   update_values | update_JxW_values);
- * 
- *       const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
- *       const unsigned int n_q_points    = quadrature_formula.size();
- * 
- *       FullMatrix<double> cell_matrix(dofs_per_cell, dofs_per_cell);
- * 
- *       std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
- * 
- *       for (const auto &cell : dof_handler.active_cell_iterators())
- *         for (const auto &face : cell->face_iterators())
- *           if (face->at_boundary())
- *             {
- *               cell_matrix = 0;
- * 
- *               fe_values.reinit(cell, face);
- * 
- *               for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
- *                 for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *                   for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *                     cell_matrix(i, j) += (fe_values.shape_value(i, q_point) *
- *                                           fe_values.shape_value(j, q_point) *
- *                                           fe_values.JxW(q_point));
- * 
- *               cell->get_dof_indices(local_dof_indices);
- *               for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *                 for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *                   boundary_matrix.add(local_dof_indices[i],
- *                                       local_dof_indices[j],
- *                                       cell_matrix(i, j));
- *             }
- *     }
- * 
- *     system_matrix.copy_from(mass_matrix);
- *     system_matrix.add(time_step * time_step * theta * theta * wave_speed *
- *                         wave_speed,
- *                       laplace_matrix);
- *     system_matrix.add(wave_speed * theta * time_step, boundary_matrix);
- * 
- * 
- *     solution_p.reinit(dof_handler.n_dofs());
- *     old_solution_p.reinit(dof_handler.n_dofs());
- *     system_rhs_p.reinit(dof_handler.n_dofs());
- * 
- *     solution_v.reinit(dof_handler.n_dofs());
- *     old_solution_v.reinit(dof_handler.n_dofs());
- *     system_rhs_v.reinit(dof_handler.n_dofs());
- * 
- *     constraints.close();
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TATForwardProblemsolve_pandTATForwardProblemsolve_v"></a> 
- * <h4>TATForwardProblem::solve_p and TATForwardProblem::solve_v</h4>
- * 
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/dofs/dof_tools.h>
 
- * 
- * The following two functions, solving the linear systems for the pressure
- * and the velocity variable, are taken pretty much verbatim (with the
- * exception of the change of name from $u$ to $p$ of the primary variable)
- * from step-23:
- * 
- * @code
- *   template <int dim>
- *   void TATForwardProblem<dim>::solve_p()
- *   {
- *     SolverControl solver_control(1000, 1e-8 * system_rhs_p.l2_norm());
- *     SolverCG<Vector<double>> cg(solver_control);
- * 
- *     cg.solve(system_matrix, solution_p, system_rhs_p, PreconditionIdentity());
- * 
- *     std::cout << "   p-equation: " << solver_control.last_step()
- *               << " CG iterations." << std::endl;
- *   }
- * 
- * 
- * 
- *   template <int dim>
- *   void TATForwardProblem<dim>::solve_v()
- *   {
- *     SolverControl solver_control(1000, 1e-8 * system_rhs_v.l2_norm());
- *     SolverCG<Vector<double>> cg(solver_control);
- * 
- *     cg.solve(mass_matrix, solution_v, system_rhs_v, PreconditionIdentity());
- * 
- *     std::cout << "   v-equation: " << solver_control.last_step()
- *               << " CG iterations." << std::endl;
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TATForwardProblemoutput_results"></a> 
- * <h4>TATForwardProblem::output_results</h4>
- * 
 
- * 
- * The same holds here: the function is from step-23.
- * 
- * @code
- *   template <int dim>
- *   void TATForwardProblem<dim>::output_results() const
- *   {
- *     DataOut<dim> data_out;
- * 
- *     data_out.attach_dof_handler(dof_handler);
- *     data_out.add_data_vector(solution_p, "P");
- *     data_out.add_data_vector(solution_v, "V");
- * 
- *     data_out.build_patches();
- * 
- *     const std::string filename =
- *       "solution-" + Utilities::int_to_string(timestep_number, 3) + ".vtu";
- *     DataOutBase::VtkFlags vtk_flags;
- *     vtk_flags.compression_level =
- *       DataOutBase::VtkFlags::ZlibCompressionLevel::best_speed;
- *     std::ofstream output(filename);
- *     data_out.write_vtu(output);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TATForwardProblemrun"></a> 
- * <h4>TATForwardProblem::run</h4>
- * 
+#include <deal.II/fe/fe_q.h>
+#include <deal.II/fe/fe_values.h>
 
- * 
- * This function that does most of the work is pretty much again like in
- * step-23, though we make things a bit clearer by using the vectors G1 and
- * G2 mentioned in the introduction. Compared to the overall memory
- * consumption of the program, the introduction of a few temporary vectors
- * isn't doing much harm.
- *   
 
- * 
- * The only changes to this function are: first, that we do not have to
- * project initial values for the velocity $v$, since we know that it is
- * zero. And second that we evaluate the solution at the detector locations
- * computed in the constructor. This is done using the
- * VectorTools::point_value function. These values are then written to a
- * file that we open at the beginning of the function.
- * 
- * @code
- *   template <int dim>
- *   void TATForwardProblem<dim>::run()
- *   {
- *     setup_system();
- * 
- *     VectorTools::project(dof_handler,
- *                          constraints,
- *                          QGauss<dim>(fe.degree + 1),
- *                          InitialValuesP<dim>(),
- *                          old_solution_p);
- *     old_solution_v = 0;
- * 
- * 
- *     std::ofstream detector_data("detectors.dat");
- * 
- *     Vector<double> tmp(solution_p.size());
- *     Vector<double> G1(solution_p.size());
- *     Vector<double> G2(solution_v.size());
- * 
- *     const double end_time = 0.7;
- *     for (time = time_step; time <= end_time;
- *          time += time_step, ++timestep_number)
- *       {
- *         std::cout << std::endl;
- *         std::cout << "time_step " << timestep_number << " @ t=" << time
- *                   << std::endl;
- * 
- *         mass_matrix.vmult(G1, old_solution_p);
- *         mass_matrix.vmult(tmp, old_solution_v);
- *         G1.add(time_step * (1 - theta), tmp);
- * 
- *         mass_matrix.vmult(G2, old_solution_v);
- *         laplace_matrix.vmult(tmp, old_solution_p);
- *         G2.add(-wave_speed * wave_speed * time_step * (1 - theta), tmp);
- * 
- *         boundary_matrix.vmult(tmp, old_solution_p);
- *         G2.add(wave_speed, tmp);
- * 
- *         system_rhs_p = G1;
- *         system_rhs_p.add(time_step * theta, G2);
- * 
- *         solve_p();
- * 
- *         system_rhs_v = G2;
- *         laplace_matrix.vmult(tmp, solution_p);
- *         system_rhs_v.add(-time_step * theta * wave_speed * wave_speed, tmp);
- * 
- *         boundary_matrix.vmult(tmp, solution_p);
- *         system_rhs_v.add(-wave_speed, tmp);
- * 
- *         solve_v();
- * 
- *         output_results();
- * 
- *         detector_data << time;
- *         for (unsigned int i = 0; i < detector_locations.size(); ++i)
- *           detector_data << " "
- *                         << VectorTools::point_value(dof_handler,
- *                                                     solution_p,
- *                                                     detector_locations[i])
- *                         << " ";
- *         detector_data << std::endl;
- * 
- *         old_solution_p = solution_p;
- *         old_solution_v = solution_v;
- *       }
- *   }
- * } // namespace Step24
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Thecodemaincodefunction"></a> 
- * <h3>The <code>main</code> function</h3>
- * 
+#include <deal.II/numerics/data_out.h>
+#include <deal.II/numerics/matrix_tools.h>
+#include <deal.II/numerics/vector_tools.h>
 
- * 
- * What remains is the main function of the program. There is nothing here
- * that hasn't been shown in several of the previous programs:
- * 
- * @code
- * int main()
- * {
- *   try
- *     {
- *       using namespace Step24;
- * 
- *       TATForwardProblem<2> forward_problem_solver;
- *       forward_problem_solver.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- * 
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
+
+#include <fstream>
+#include <iostream>
+
+
+@endcode 
+
+
+
+这是唯一的新内容。我们将需要一个定义在GridTools命名空间的库函数，用于计算最小单元直径。
+
+@code
+#include <deal.II/grid/grid_tools.h>
+
+
+@endcode 
+
+
+
+最后一步和以前所有的程序一样。
+
+@code
+namespace Step24
+{
+  using namespace dealii;
+
+
+@endcode 
+
+
+
+
+<a name="Theforwardproblemclasstemplate"></a> <h3>The "forward problem" class template</h3> 
+
+
+
+
+主类的第一部分与 step-23 中的完全一样（除了名称）。
+
+@code
+  template <int dim>
+  class TATForwardProblem
+  {
+  public:
+    TATForwardProblem();
+    void run();
+
+
+  private:
+    void setup_system();
+    void solve_p();
+    void solve_v();
+    void output_results() const;
+
+
+    Triangulation<dim> triangulation;
+    FE_Q<dim>          fe;
+    DoFHandler<dim>    dof_handler;
+
+
+    AffineConstraints<double> constraints;
+
+
+    SparsityPattern      sparsity_pattern;
+    SparseMatrix<double> system_matrix;
+    SparseMatrix<double> mass_matrix;
+    SparseMatrix<double> laplace_matrix;
+
+
+    Vector<double> solution_p, solution_v;
+    Vector<double> old_solution_p, old_solution_v;
+    Vector<double> system_rhs_p, system_rhs_v;
+
+
+    double       time_step, time;
+    unsigned int timestep_number;
+    const double theta;
+
+
+@endcode 
+
+
+
+下面是新的内容：首先，我们需要那个从吸收性边界条件中出来的边界质量矩阵 $B$ 。同样，由于这次我们考虑的是一个现实的介质，我们必须有一个衡量波速的标准 $c_0$ ，它将进入所有与拉普拉斯矩阵（我们仍然定义为 $(\nabla \phi_i,\nabla \phi_j)$ ）有关的公式。
+
+@code
+    SparseMatrix<double> boundary_matrix;
+    const double         wave_speed;
+
+
+@endcode 
+
+
+
+我们必须注意的最后一件事是，我们想在一定数量的检测器位置评估解决方案。我们需要一个数组来保存这些位置，在这里声明并在构造函数中填充。
+
+@code
+    std::vector<Point<dim>> detector_locations;
+  };
+
+
+
+@endcode 
+
+
+
+
+<a name="Equationdata"></a> <h3>Equation data</h3> 
+
+
+
+
+像往常一样，我们必须定义我们的初始值、边界条件和右手边的函数。这次事情有点简单：我们考虑的是一个由初始条件驱动的问题，所以没有右手函数（尽管你可以在 step-23 中查找，看看如何做到这一点）。其次，没有边界条件：域的整个边界由吸收性边界条件组成。这就只剩下初始条件了，那里的事情也很简单，因为对于这个特殊的应用，只规定了压力的非零初始条件，而没有规定速度的非零初始条件（在初始时间是零）。   
+
+
+所以这就是我们所需要的：一个指定压力初始条件的类。在本程序考虑的物理环境中，这些是小的吸收器，我们将其建模为一系列的小圆圈，我们假设压力盈余为1，而其他地方没有吸收，因此没有压力盈余。我们是这样做的（注意，如果我们想扩展这个程序，使其不仅可以编译，而且可以运行，我们将不得不用三维源的位置来初始化源）。
+
+@code
+  template <int dim>
+  class InitialValuesP : public Function<dim>
+  {
+  public:
+    virtual double value(const Point<dim> &p,
+                         const unsigned int /*component*/ = 0) const override
+    {
+      static const std::array<Source, 5> sources{
+        {Source(Point<dim>(0, 0), 0.025),
+         Source(Point<dim>(-0.135, 0), 0.05),
+         Source(Point<dim>(0.17, 0), 0.03),
+         Source(Point<dim>(-0.25, 0), 0.02),
+         Source(Point<dim>(-0.05, -0.15), 0.015)}};
+
+
+      for (const auto &source : sources)
+        if (p.distance(source.location) < source.radius)
+          return 1;
+
+
+      return 0;
+    }
+
+
+  private:
+    struct Source
+    {
+      Source(const Point<dim> &l, const double r)
+        : location(l)
+        , radius(r)
+      {}
+
+
+      const Point<dim> location;
+      const double     radius;
+    };
+  };
+
+
+
+@endcode 
+
+
+
+
+<a name="ImplementationofthecodeTATForwardProblemcodeclass"></a> <h3>Implementation of the <code>TATForwardProblem</code> class</h3> 
+
+
+
+
+让我们再从构造函数开始。设置成员变量是很直接的。我们使用矿物油的声波速度（单位为毫米/微秒，是实验性生物医学成像中的常用单位），因为我们想与输出的许多实验都是在这里进行的。再次使用Crank-Nicolson方案，即theta被设定为0.5。后来选择的时间步长要满足 $k =
+\frac hc$ ：这里我们把它初始化为一个无效的数字。
+
+@code
+  template <int dim>
+  TATForwardProblem<dim>::TATForwardProblem()
+    : fe(1)
+    , dof_handler(triangulation)
+    , time_step(std::numeric_limits<double>::quiet_NaN())
+    , time(time_step)
+    , timestep_number(1)
+    , theta(0.5)
+    , wave_speed(1.437)
+  {
+@endcode 
+
+
+
+构造函数中的第二个任务是初始化保存检测器位置的数组。这个程序的结果与实验进行了比较，其中检测器间距的步长为2.25度，对应于160个检测器位置。扫描圆的半径被选为中心和边界之间的一半，以避免不完善的边界条件产生的剩余反射破坏我们的数值结果。     
+
+
+然后按顺时针顺序计算探测器的位置。请注意，下面的方法当然只在我们以2d计算时有效，这个条件我们用一个断言来保护。如果我们以后想在三维中运行同样的程序，我们将不得不在这里添加代码来初始化三维中的检测器位置。由于断言的存在，我们不可能忘记这样做。
+
+@code
+    Assert(dim == 2, ExcNotImplemented());
+
+
+    const double detector_step_angle = 2.25;
+    const double detector_radius     = 0.5;
+
+
+    for (double detector_angle = 2 * numbers::PI; detector_angle >= 0;
+         detector_angle -= detector_step_angle / 360 * 2 * numbers::PI)
+      detector_locations.push_back(
+        Point<dim>(std::cos(detector_angle), std::sin(detector_angle)) *
+        detector_radius);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TATForwardProblemsetup_system"></a><h4>TATForwardProblem::setup_system</h4> 
+
+
+
+
+下面的系统几乎就是我们在  step-23  中已经做过的，但有两个重要的区别。首先，我们必须在原点周围创建一个半径为1的圆形（或球形）网格。这并不新鲜：我们之前在 step-6 和 step-10 中已经这样做了，在那里我们还解释了PolarManifold或SphericalManifold对象如何在细化单元时将新点放在同心圆上，我们在这里也会使用。   
+
+
+我们必须确保的一点是，时间步长满足  step-23  的介绍中讨论的 CFL 条件。在那个程序中，我们通过设置一个与网格宽度相匹配的时间步长来确保这一点，但是这很容易出错，因为如果我们再精化一次网格，我们也必须确保时间步长的改变。在这里，我们自动做到了这一点：我们向一个库函数询问任何单元的最小直径。然后我们设置 $k=\frac h{c_0}$  。唯一的问题是： $h$ 到底是什么？问题是，对于波浪方程来说，在这个问题上确实没有好的理论。众所周知，对于由矩形组成的均匀细化网格， $h$ 是最小边长。但对于一般四边形的网格来说，确切的关系似乎是未知的，也就是说，不知道单元的什么属性与CFL条件有关。问题是，CFL条件来自于对拉普拉斯矩阵最小特征值的了解，而这只能对简单结构的网格进行分析计算。   
+
+
+这一切的结果是，我们并不十分确定我们应该对 $h$ 采取什么具体措施。函数 GridTools::minimal_cell_diameter 计算了所有单元的最小直径。如果单元格都是正方形或立方体，那么最小边长就是最小直径除以 <code>std::sqrt(dim)</code>  。我们只是简单地将其概括为非均匀网格的情况，没有理论上的理由。   
+
+
+唯一的其他重大变化是，我们需要建立边界质量矩阵。我们将在下文中进一步评论这个问题。
+
+@code
+  template <int dim>
+  void TATForwardProblem<dim>::setup_system()
+  {
+    const Point<dim> center;
+    GridGenerator::hyper_ball(triangulation, center, 1.);
+    triangulation.refine_global(7);
+
+
+    time_step = GridTools::minimal_cell_diameter(triangulation) / wave_speed /
+                std::sqrt(1. * dim);
+
+
+    std::cout << "Number of active cells: " << triangulation.n_active_cells()
+              << std::endl;
+
+
+    dof_handler.distribute_dofs(fe);
+
+
+    std::cout << "Number of degrees of freedom: " << dof_handler.n_dofs()
+              << std::endl
+              << std::endl;
+
+
+    DynamicSparsityPattern dsp(dof_handler.n_dofs(), dof_handler.n_dofs());
+    DoFTools::make_sparsity_pattern(dof_handler, dsp);
+    sparsity_pattern.copy_from(dsp);
+
+
+    system_matrix.reinit(sparsity_pattern);
+    mass_matrix.reinit(sparsity_pattern);
+    laplace_matrix.reinit(sparsity_pattern);
+
+
+    MatrixCreator::create_mass_matrix(dof_handler,
+                                      QGauss<dim>(fe.degree + 1),
+                                      mass_matrix);
+    MatrixCreator::create_laplace_matrix(dof_handler,
+                                         QGauss<dim>(fe.degree + 1),
+                                         laplace_matrix);
+
+
+@endcode 
+
+
+
+如前所述，与 step-23 的第二个区别是，我们需要建立从吸收性边界条件中产生的边界质量矩阵。     
+
+
+第一个观察结果是，这个矩阵比常规质量矩阵要稀疏得多，因为没有一个具有纯内部支持的形状函数对这个矩阵作出贡献。因此，我们可以根据这种情况优化存储模式，建立第二个稀疏模式，只包含我们需要的非零条目。这里有一个权衡：首先，我们必须要有第二个稀疏模式对象，所以这需要花费内存。其次，与该稀疏性模式相连的矩阵将更小，因此需要更少的内存；用它进行矩阵-向量乘法也会更快。然而，最后一个论点是提示规模的论点：我们主要感兴趣的不是单独对边界矩阵进行矩阵-向量运算（尽管我们需要在每个时间步长对右侧向量进行一次运算），而是主要希望将其与两个方程中的第一个方程使用的其他矩阵相加，因为这是CG方法每个迭代都要与之相乘的一个方程，即明显更频繁。现在的情况是， SparseMatrix::add 类允许将一个矩阵添加到另一个矩阵中，但前提是它们使用相同的稀疏模式（原因是我们不能在稀疏模式创建后向矩阵添加非零条目，所以我们只是要求这两个矩阵具有相同的稀疏模式）。     
+
+
+所以我们就用这个方法吧。
+
+@code
+    boundary_matrix.reinit(sparsity_pattern);
+
+
+@endcode 
+
+
+
+第二件要做的事是实际建立矩阵。在这里，我们需要对单元格的面进行积分，所以首先我们需要一个能在 <code>dim-1</code> 维对象上工作的正交对象。其次，FEValues的变体FEFaceValues，正如其名字所暗示的，它可以在面上工作。最后，其他的变量是组装机器的一部分。所有这些我们都放在大括号里，以便将这些变量的范围限制在我们真正需要它们的地方。     
+
+
+组装矩阵的实际行为是相当直接的：我们在所有单元格上循环，在每个单元格的所有面上循环，然后只在特定的面位于域的边界时才做一些事情。像这样。
+
+@code
+    {
+      const QGauss<dim - 1> quadrature_formula(fe.degree + 1);
+      FEFaceValues<dim>     fe_values(fe,
+                                  quadrature_formula,
+                                  update_values | update_JxW_values);
+
+
+      const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
+      const unsigned int n_q_points    = quadrature_formula.size();
+
+
+      FullMatrix<double> cell_matrix(dofs_per_cell, dofs_per_cell);
+
+
+      std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
+
+
+      for (const auto &cell : dof_handler.active_cell_iterators())
+        for (const auto &face : cell->face_iterators())
+          if (face->at_boundary())
+            {
+              cell_matrix = 0;
+
+
+              fe_values.reinit(cell, face);
+
+
+              for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
+                for (unsigned int i = 0; i < dofs_per_cell; ++i)
+                  for (unsigned int j = 0; j < dofs_per_cell; ++j)
+                    cell_matrix(i, j) += (fe_values.shape_value(i, q_point) *
+                                          fe_values.shape_value(j, q_point) *
+                                          fe_values.JxW(q_point));
+
+
+              cell->get_dof_indices(local_dof_indices);
+              for (unsigned int i = 0; i < dofs_per_cell; ++i)
+                for (unsigned int j = 0; j < dofs_per_cell; ++j)
+                  boundary_matrix.add(local_dof_indices[i],
+                                      local_dof_indices[j],
+                                      cell_matrix(i, j));
+            }
+    }
+
+
+    system_matrix.copy_from(mass_matrix);
+    system_matrix.add(time_step * time_step * theta * theta * wave_speed *
+                        wave_speed,
+                      laplace_matrix);
+    system_matrix.add(wave_speed * theta * time_step, boundary_matrix);
+
+
+
+    solution_p.reinit(dof_handler.n_dofs());
+    old_solution_p.reinit(dof_handler.n_dofs());
+    system_rhs_p.reinit(dof_handler.n_dofs());
+
+
+    solution_v.reinit(dof_handler.n_dofs());
+    old_solution_v.reinit(dof_handler.n_dofs());
+    system_rhs_v.reinit(dof_handler.n_dofs());
+
+
+    constraints.close();
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="TATForwardProblemsolve_pandTATForwardProblemsolve_v"></a> <h4>TATForwardProblem::solve_p and TATForwardProblem::solve_v</h4>
+
+
+
+
+下面两个函数，解决压力和速度变量的线性系统，几乎是逐字逐句地从 step-23 中提取的（除了主变量的名称从 $u$ 改成 $p$ ）。
+
+@code
+  template <int dim>
+  void TATForwardProblem<dim>::solve_p()
+  {
+    SolverControl solver_control(1000, 1e-8 * system_rhs_p.l2_norm());
+    SolverCG<Vector<double>> cg(solver_control);
+
+
+    cg.solve(system_matrix, solution_p, system_rhs_p, PreconditionIdentity());
+
+
+    std::cout << "   p-equation: " << solver_control.last_step()
+              << " CG iterations." << std::endl;
+  }
+
+
+
+
+
+  template <int dim>
+  void TATForwardProblem<dim>::solve_v()
+  {
+    SolverControl solver_control(1000, 1e-8 * system_rhs_v.l2_norm());
+    SolverCG<Vector<double>> cg(solver_control);
+
+
+    cg.solve(mass_matrix, solution_v, system_rhs_v, PreconditionIdentity());
+
+
+    std::cout << "   v-equation: " << solver_control.last_step()
+              << " CG iterations." << std::endl;
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TATForwardProblemoutput_results"></a> <h4>TATForwardProblem::output_results</h4>
+
+
+
+
+这里也是如此：函数是从 step-23  . 
+
+@code
+  template <int dim>
+  void TATForwardProblem<dim>::output_results() const
+  {
+    DataOut<dim> data_out;
+
+
+    data_out.attach_dof_handler(dof_handler);
+    data_out.add_data_vector(solution_p, "P");
+    data_out.add_data_vector(solution_v, "V");
+
+
+    data_out.build_patches();
+
+
+    const std::string filename =
+      "solution-" + Utilities::int_to_string(timestep_number, 3) + ".vtu";
+    DataOutBase::VtkFlags vtk_flags;
+    vtk_flags.compression_level =
+      DataOutBase::VtkFlags::ZlibCompressionLevel::best_speed;
+    std::ofstream output(filename);
+    data_out.write_vtu(output);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TATForwardProblemrun"></a> <h4>TATForwardProblem::run</h4>
+
+
+
+
+这个做大部分工作的函数又和 step-23 中的差不多，尽管我们通过使用介绍中提到的向量G1和G2使事情变得更清楚。与程序的整体内存消耗相比，引入几个临时向量并没有什么坏处。   
+
+
+这个函数唯一的变化是：首先，我们不必为速度 $v$ 预测初始值，因为我们知道它是零。其次，我们在构造函数中计算的检测器位置评估解决方案。这是用 VectorTools::point_value 函数完成的。然后，这些值被写入我们在函数开始时打开的一个文件中。
+
+@code
+  template <int dim>
+  void TATForwardProblem<dim>::run()
+  {
+    setup_system();
+
+
+    VectorTools::project(dof_handler,
+                         constraints,
+                         QGauss<dim>(fe.degree + 1),
+                         InitialValuesP<dim>(),
+                         old_solution_p);
+    old_solution_v = 0;
+
+
+
+    std::ofstream detector_data("detectors.dat");
+
+
+    Vector<double> tmp(solution_p.size());
+    Vector<double> G1(solution_p.size());
+    Vector<double> G2(solution_v.size());
+
+
+    const double end_time = 0.7;
+    for (time = time_step; time <= end_time;
+         time += time_step, ++timestep_number)
+      {
+        std::cout << std::endl;
+        std::cout << "time_step " << timestep_number << " @ t=" << time
+                  << std::endl;
+
+
+        mass_matrix.vmult(G1, old_solution_p);
+        mass_matrix.vmult(tmp, old_solution_v);
+        G1.add(time_step * (1 - theta), tmp);
+
+
+        mass_matrix.vmult(G2, old_solution_v);
+        laplace_matrix.vmult(tmp, old_solution_p);
+        G2.add(-wave_speed * wave_speed * time_step * (1 - theta), tmp);
+
+
+        boundary_matrix.vmult(tmp, old_solution_p);
+        G2.add(wave_speed, tmp);
+
+
+        system_rhs_p = G1;
+        system_rhs_p.add(time_step * theta, G2);
+
+
+        solve_p();
+
+
+        system_rhs_v = G2;
+        laplace_matrix.vmult(tmp, solution_p);
+        system_rhs_v.add(-time_step * theta * wave_speed * wave_speed, tmp);
+
+
+        boundary_matrix.vmult(tmp, solution_p);
+        system_rhs_v.add(-wave_speed, tmp);
+
+
+        solve_v();
+
+
+        output_results();
+
+
+        detector_data << time;
+        for (unsigned int i = 0; i < detector_locations.size(); ++i)
+          detector_data << " "
+                        << VectorTools::point_value(dof_handler,
+                                                    solution_p,
+                                                    detector_locations[i])
+                        << " ";
+        detector_data << std::endl;
+
+
+        old_solution_p = solution_p;
+        old_solution_v = solution_v;
+      }
+  }
+} // namespace Step24
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Thecodemaincodefunction"></a><h3>The <code>main</code> function</h3>
+
+
+
+
+剩下的就是程序的主函数了。这里没有什么是在前面几个程序中没有展示过的。
+
+@code
+int main()
+{
+  try
+    {
+      using namespace Step24;
+
+
+      TATForwardProblem<2> forward_problem_solver;
+      forward_problem_solver.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+
+
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
-The program writes both graphical data for each time step as well as the
-values evaluated at each detector location to disk. We then
-draw them in plots. Experimental data were also collected for comparison.
-Currently our experiments have only been done in two dimensions by
-circularly scanning a single detector. The tissue sample here is a thin slice
-in the $X-Y$ plane ($Z=0$), and we assume that signals from other $Z$
-directions won't contribute to the data. Consequently, we only have to compare
-our experimental data with two dimensional simulated data.
+该程序将每个时间步骤的图形数据以及每个探测器位置的评估值都写入磁盘。然后我们将它们绘制成图。还收集了实验数据进行比较。目前，我们的实验只在二维空间通过圆形扫描单个探测器进行。这里的组织样本是 $X-Y$ 平面上的一个薄片（ $Z=0$ ），我们假设其他 $Z$ 方向的信号不会对数据有所贡献。因此，我们只需要将我们的实验数据与二维模拟数据进行比较。
 
 <a name="Oneabsorber"></a><h3> One absorber </h3>
 
 
-This movie shows the thermoacoustic waves generated by a single small absorber
-propagating in the medium (in our simulation, we assume the medium is mineral
-oil, which has a acoustic speed of 1.437 $\frac{mm}{\mu s}$):
+这部电影显示了由单个小吸收器产生的热声波在介质中传播（在我们的模拟中，我们假设介质是矿物油，它的声速为1.437  $\frac{mm}{\mu s}$  ）。
 
-<img src="https://www.dealii.org/images/steps/developer/step-24.one_movie.gif" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-24.one_movie.gif" alt="">   
 
-For a single absorber, we of course have to change the
-<code>InitialValuesP</code> class accordingly.
+对于单个吸收器，我们当然要相应地改变 <code>InitialValuesP</code> 类。
 
-Next, let us compare experimental and computational results. The visualization
-uses a technique long used in seismology, where the data of each detector is
-plotted all in one graph. The way this is done is by offsetting each
-detector's signal a bit compared to the previous one. For example, here is a
-plot of the first four detectors (from bottom to top, with time in
-microseconds running from left to right) using the source setup used in the
-program, to make things a bit more interesting compared to the present case of
-only a single source:
+接下来，让我们比较一下实验和计算的结果。可视化使用了地震学中长期使用的技术，即把每个探测器的数据全部绘制在一个图中。这样做的方法是将每个探测器的信号与前一个探测器相比偏移一点。例如，这里是前四个探测器的图（从下到上，时间从左到右为微秒），使用程序中使用的源设置，与目前只有一个源的情况相比，使事情更加有趣。
 
-<img src="https://www.dealii.org/images/steps/developer/step-24.traces.png" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-24.traces.png" alt="">   
 
-One thing that can be seen, for example, is that the arrival of the second and
-fourth signals shifts to earlier times for greater detector numbers (i.e. the
-topmost ones), but not the first and the third; this can be interpreted to
-mean that the origin of these signals must be closer to the latter detectors
-than to the former ones.
+例如，可以看到的一点是，第二和第四个信号的到达时间在探测器数量较多的情况下（即最上面的探测器）会转移到较早的时间，但第一和第三信号不会；这可以解释为，这些信号的起源必须比前者更接近后一个探测器。
 
-If we stack not only 4, but all 160 detectors in one graph, the individual
-lines blur, but where they run together they create a pattern of darker or
-lighter grayscales.  The following two figures show the results obtained at
-the detector locations stacked in that way. The left figure is obtained from
-experiments, and the right is the simulated data.
-In the experiment, a single small strong absorber was embedded in
-weaker absorbing tissue:
+如果我们不仅把4个，而且把所有160个探测器都堆在一个图中，个别的线就会模糊，但在它们一起运行的地方，就会形成一种较深或较浅的灰度模式。 下面两张图显示了在以这种方式堆叠的探测器位置获得的结果。左图是由实验得到的，右图是模拟数据。在实验中，一个小的强吸收器被嵌入到较弱的吸收组织中。
 
-<table width="100%">
+  <table width="100%">
 <tr>
 <td>
 <img src="https://www.dealii.org/images/steps/developer/step-24.one.png" alt="">
@@ -1091,44 +947,29 @@ weaker absorbing tissue:
 <img src="https://www.dealii.org/images/steps/developer/step-24.one_s.png" alt="">
 </td>
 </tr>
-</table>
+</table>   
 
-It is obvious that the source location is closer to the detectors at angle
-$180^\circ$. All the other signals that can be seen in the experimental data
-result from the fact that there are weak absorbers also in the rest of the
-tissue, which surrounds the signals generated by the small strong absorber in
-the center. On the other hand, in the simulated data, we only simulate the
-small strong absorber.
+很明显，在角度  $180^\circ$  的情况下，源的位置更接近探测器。实验数据中可以看到的所有其他信号都是由于其他组织中也有弱吸收体，这些弱吸收体包围着中心的小强吸收体产生的信号。另一方面，在模拟数据中，我们只模拟了小的强吸收体。
 
-In reality, detectors have limited bandwidth. The thermoacoustic waves passing
-through the detector will therefore be filtered. By using a high-pass filter
-(implemented in MATLAB and run against the data file produced by this program),
-the simulated results can be made to look closer to the experimental
-data:
+在现实中，检测器的带宽有限。因此，通过探测器的热声波将被过滤掉。通过使用高通滤波器（在MATLAB中实现并针对本程序产生的数据文件运行），可以使模拟结果看起来更接近于实验数据。
 
-<img src="https://www.dealii.org/images/steps/developer/step-24.one_sf.png" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-24.one_sf.png" alt="">   
 
-In our simulations, we see spurious signals behind the main wave that
-result from numerical artifacts. This problem can be alleviated by using finer
-mesh, resulting in the following plot:
+在我们的模拟中，我们看到了主波后面的假信号，这些假信号是由数字伪影造成的。这个问题可以通过使用更细的网格来缓解，从而得到以下的图。
 
-<img src="https://www.dealii.org/images/steps/developer/step-24.one_s2.png" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-24.one_s2.png" alt="">   
+
 
 
 
 <a name="Multipleabsorbers"></a><h3>Multiple absorbers</h3>
 
 
-To further verify the program, we will also show simulation results for
-multiple absorbers. This corresponds to the case that is actually implemented
-in the program. The following movie shows the propagation of the generated
-thermoacoustic waves in the medium by multiple absorbers:
+为了进一步验证该程序，我们还将展示多个吸收器的模拟结果。这与程序中实际实现的情况相对应。下面的影片显示了由多个吸收器产生的热声波在介质中的传播情况。
 
-<img src="https://www.dealii.org/images/steps/developer/step-24.multi_movie.gif" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-24.multi_movie.gif" alt="">   
 
-Experimental data and our simulated data are compared in the following two
-figures:
-<table width="100%">
+实验数据和我们的模拟数据在以下两个图中进行了比较。  <table width="100%">
 <tr>
 <td>
 <img src="https://www.dealii.org/images/steps/developer/step-24.multi.png" alt="">
@@ -1137,21 +978,13 @@ figures:
 <img src="https://www.dealii.org/images/steps/developer/step-24.multi_s.png" alt="">
 </td>
 </tr>
-</table>
+</table>   
 
-Note that in the experimental data, the first signal (i.e. the left-most dark
-line) results from absorption at the tissue boundary, and therefore reaches
-the detectors first and before any of the signals from the interior. This
-signal is also faintly visible at the end of the traces, around 30 $\mu s$,
-which indicates that the signal traveled through the entire tissue to reach
-detectors at the other side, after all the signals originating from the
-interior have reached them.
+请注意，在实验数据中，第一个信号（即最左边的暗线）来自组织边界的吸收，因此首先到达检测器，比来自内部的任何信号都早。这个信号在痕迹的末端也是微弱可见的，大约在30 $\mu s$ 左右，这表明信号穿过整个组织到达另一侧的检测器，在所有来自内部的信号到达它们之后。
 
-As before, the numerical result better matches experimental ones by applying a
-bandwidth filter that matches the actual behavior of detectors (left) and by
-choosing a finer mesh (right):
+和以前一样，通过应用符合探测器实际行为的带宽滤波器（左）和选择更细的网格（右），数值结果与实验结果更匹配。
 
-<table width="100%">
+  <table width="100%">
 <tr>
 <td>
 <img src="https://www.dealii.org/images/steps/developer/step-24.multi_sf.png" alt="">
@@ -1160,24 +993,8 @@ choosing a finer mesh (right):
 <img src="https://www.dealii.org/images/steps/developer/step-24.multi_s2.png" alt="">
 </td>
 </tr>
-</table>
+</table>   
 
-One of the important differences between the left and the right figure is that
-the curves look much less "angular" at the right. The angularity comes from
-the fact that while waves in the continuous equation travel equally fast in
-all directions, this isn't the case after discretization: there, waves that
-travel diagonal to cells move at slightly different speeds to those that move
-parallel to mesh lines. This anisotropy leads to wave fronts that aren't
-perfectly circular (and would produce sinusoidal signals in the stacked
-plots), but are bulged out in certain directions. To make things worse, the
-circular mesh we use (see for example step-6 for a view of the
-coarse mesh) is not isotropic either. The net result is that the signal fronts
-are not sinusoidal unless the mesh is sufficiently fine. The right image is a
-lot better in this respect, though artifacts in the form of trailing spurious
-waves can still be seen.
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-24.cc"
-*/
+左图和右图之间的一个重要区别是，右边的曲线看起来 "角度 "小得多。角度来自于这样一个事实：虽然连续方程中的波在各个方向上的移动速度相同，但离散化后的情况并非如此：在那里，对角线上的波与平行于网格线的波的移动速度略有不同。这种各向异性导致波前不是完全的圆形（在堆积图中会产生正弦信号），而是在某些方向上凸出。更糟糕的是，我们使用的圆形网格（例如见 step-6 的粗略网格视图）也不是各向异性的。最终的结果是，除非网格足够细，否则信号的前沿不是正弦的。右边的图像在这方面要好得多，尽管仍然可以看到尾随假波形式的伪影。<a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-24.cc"   
+
+  */  

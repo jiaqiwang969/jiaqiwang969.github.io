@@ -1,372 +1,250 @@
-/**
-@page step_21 The step-21 tutorial program
-This tutorial depends on step-20.
+  /**   @page step_21 The step-21 tutorial program  。 
+
+本教程取决于  step-20  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Thetwophaseflowproblem">The two phase flow problem</a>
-        <li><a href="#Timediscretization">Time discretization</a>
-        <li><a href="#Spacediscretization">Space discretization</a>
-        <li><a href="#Linearsolvers">Linear solvers</a>
-        <li><a href="#Choosingatimestep">Choosing a time step</a>
-        <li><a href="#Thetestcase">The test case</a>
+        <li><a href="#Thetwophaseflowproblem">The two phase flow problem</a><a href="#Thetwophaseflowproblem">The two phase flow problem</a>
+        <li><a href="#Timediscretization">Time discretization</a><a href="#Timediscretization">Time discretization</a>
+        <li><a href="#Spacediscretization">Space discretization</a><a href="#Spacediscretization">Space discretization</a>
+        <li><a href="#Linearsolvers">Linear solvers</a><a href="#Linearsolvers">Linear solvers</a>
+        <li><a href="#Choosingatimestep">Choosing a time step</a><a href="#Choosingatimestep">Choosing a time step</a>
+        <li><a href="#Thetestcase">The test case</a><a href="#Thetestcase">The test case</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#ThecodeTwoPhaseFlowProblemcodeclass">The <code>TwoPhaseFlowProblem</code> class</a>
-        <li><a href="#Equationdata">Equation data</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#ThecodeTwoPhaseFlowProblemcodeclass">The <code>TwoPhaseFlowProblem</code> class</a><a href="#ThecodeTwoPhaseFlowProblemcodeclass">The <code>TwoPhaseFlowProblem</code> class</a>
+        <li><a href="#Equationdata">Equation data</a><a href="#Equationdata">Equation data</a>
       <ul>
-        <li><a href="#Pressurerighthandside">Pressure right hand side</a>
-        <li><a href="#Pressureboundaryvalues">Pressure boundary values</a>
-        <li><a href="#Saturationboundaryvalues">Saturation boundary values</a>
-        <li><a href="#Initialdata">Initial data</a>
+        <li><a href="#Pressurerighthandside">Pressure right hand side</a><a href="#Pressurerighthandside">Pressure right hand side</a>
+        <li><a href="#Pressureboundaryvalues">Pressure boundary values</a><a href="#Pressureboundaryvalues">Pressure boundary values</a>
+        <li><a href="#Saturationboundaryvalues">Saturation boundary values</a><a href="#Saturationboundaryvalues">Saturation boundary values</a>
+        <li><a href="#Initialdata">Initial data</a><a href="#Initialdata">Initial data</a>
       </ul>
-        <li><a href="#Theinversepermeabilitytensor">The inverse permeability tensor</a>
+        <li><a href="#Theinversepermeabilitytensor">The inverse permeability tensor</a><a href="#Theinversepermeabilitytensor">The inverse permeability tensor</a>
       <ul>
-        <li><a href="#Singlecurvingcrackpermeability">Single curving crack permeability</a>
-        <li><a href="#Randommediumpermeability">Random medium permeability</a>
+        <li><a href="#Singlecurvingcrackpermeability">Single curving crack permeability</a><a href="#Singlecurvingcrackpermeability">Single curving crack permeability</a>
+        <li><a href="#Randommediumpermeability">Random medium permeability</a><a href="#Randommediumpermeability">Random medium permeability</a>
       </ul>
-        <li><a href="#Theinversemobilityandsaturationfunctions">The inverse mobility and saturation functions</a>
-        <li><a href="#Linearsolversandpreconditioners">Linear solvers and preconditioners</a>
-        <li><a href="#codeTwoPhaseFlowProblemcodeclassimplementation"><code>TwoPhaseFlowProblem</code> class implementation</a>
+        <li><a href="#Theinversemobilityandsaturationfunctions">The inverse mobility and saturation functions</a> ]<a href="#Theinversemobilityandsaturationfunctions">The inverse mobility and saturation functions</a>
+        <li><a href="#Linearsolversandpreconditioners">Linear solvers and preconditioners</a><a href="#Linearsolversandpreconditioners">Linear solvers and preconditioners</a>
+        <li><a href="#codeTwoPhaseFlowProblemcodeclassimplementation"><code>TwoPhaseFlowProblem</code> class implementation</a><a href="#codeTwoPhaseFlowProblemcodeclassimplementation"><code>TwoPhaseFlowProblem</code> class implementation</a>
       <ul>
-        <li><a href="#TwoPhaseFlowProblemTwoPhaseFlowProblem">TwoPhaseFlowProblem::TwoPhaseFlowProblem</a>
-        <li><a href="#TwoPhaseFlowProblemmake_grid_and_dofs">TwoPhaseFlowProblem::make_grid_and_dofs</a>
-        <li><a href="#TwoPhaseFlowProblemassemble_system">TwoPhaseFlowProblem::assemble_system</a>
-        <li><a href="#TwoPhaseFlowProblemassemble_rhs_S">TwoPhaseFlowProblem::assemble_rhs_S</a>
-        <li><a href="#TwoPhaseFlowProblemsolve">TwoPhaseFlowProblem::solve</a>
-        <li><a href="#TwoPhaseFlowProblemoutput_results">TwoPhaseFlowProblem::output_results</a>
-        <li><a href="#TwoPhaseFlowProblemproject_back_saturation">TwoPhaseFlowProblem::project_back_saturation</a>
-        <li><a href="#TwoPhaseFlowProblemget_maximal_velocity">TwoPhaseFlowProblem::get_maximal_velocity</a>
-        <li><a href="#TwoPhaseFlowProblemrun">TwoPhaseFlowProblem::run</a>
+        <li><a href="#TwoPhaseFlowProblemTwoPhaseFlowProblem">TwoPhaseFlowProblem::TwoPhaseFlowProblem</a><a href="#TwoPhaseFlowProblemTwoPhaseFlowProblem">TwoPhaseFlowProblem::TwoPhaseFlowProblem</a>
+        <li><a href="#TwoPhaseFlowProblemmake_grid_and_dofs">TwoPhaseFlowProblem::make_grid_and_dofs</a><a href="#TwoPhaseFlowProblemmake_grid_and_dofs">TwoPhaseFlowProblem::make_grid_and_dofs</a>
+        <li><a href="#TwoPhaseFlowProblemassemble_system">TwoPhaseFlowProblem::assemble_system</a><a href="#TwoPhaseFlowProblemassemble_system">TwoPhaseFlowProblem::assemble_system</a>
+        <li><a href="#TwoPhaseFlowProblemassemble_rhs_S">TwoPhaseFlowProblem::assemble_rhs_S</a><a href="#TwoPhaseFlowProblemassemble_rhs_S">TwoPhaseFlowProblem::assemble_rhs_S</a>
+        <li><a href="#TwoPhaseFlowProblemsolve">TwoPhaseFlowProblem::solve</a><a href="#TwoPhaseFlowProblemsolve">TwoPhaseFlowProblem::solve</a>
+        <li><a href="#TwoPhaseFlowProblemoutput_results">TwoPhaseFlowProblem::output_results</a><a href="#TwoPhaseFlowProblemoutput_results">TwoPhaseFlowProblem::output_results</a>
+        <li><a href="#TwoPhaseFlowProblemproject_back_saturation">TwoPhaseFlowProblem::project_back_saturation</a><a href="#TwoPhaseFlowProblemproject_back_saturation">TwoPhaseFlowProblem::project_back_saturation</a>
+        <li><a href="#TwoPhaseFlowProblemget_maximal_velocity">TwoPhaseFlowProblem::get_maximal_velocity</a><a href="#TwoPhaseFlowProblemget_maximal_velocity">TwoPhaseFlowProblem::get_maximal_velocity</a>
+        <li><a href="#TwoPhaseFlowProblemrun">TwoPhaseFlowProblem::run</a><a href="#TwoPhaseFlowProblemrun">TwoPhaseFlowProblem::run</a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
       <ul>
-        <li><a href="#Solvers">Solvers</a>
-        <li><a href="#Timestepping">Time stepping</a>
-        <li><a href="#Adaptivity">Adaptivity</a>
+        <li><a href="#Solvers">Solvers</a><a href="#Solvers">Solvers</a>
+        <li><a href="#Timestepping">Time stepping</a><a href="#Timestepping">Time stepping</a>
+        <li><a href="#Adaptivity">Adaptivity</a><a href="#Adaptivity">Adaptivity</a>
     </ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<a name="Introduction"></a><a name="Intro"></a> <h1>Introduction</h1>
+@endhtmlonly 
+
+<a name="Introduction"></a><a name="Intro"></a><h1>Introduction</h1>
 
 
-This program grew out of a student project by Yan Li at Texas A&amp;M
-University. Most of the work for this program is by her.
+这个程序是由德克萨斯A&amp;M大学的Yan Li的一个学生项目发展而来的。这个程序的大部分工作都是由她完成的。
 
-In this project, we propose a numerical simulation for two phase
-flow problems in porous media. This problem includes one
-elliptic equation and one nonlinear, time dependent transport
-equation. This is therefore also the first time-dependent tutorial
-program (besides the somewhat strange time-dependence of @ref step_18
-"step-18").
+在这个项目中，我们提出了一个针对多孔介质中两相流动问题的数值模拟。这个问题包括一个椭圆方程和一个非线性的、随时间变化的传输方程。因此，这也是第一个时间相关的教程程序（除了有点奇怪的时间相关的 @ref step_18  "  step-18  "）。
 
-The equations covered here are an extension of the material already covered in
-step-20. In particular, they fall into the class of
-vector-valued problems. A toplevel overview of this topic can be found in the
-@ref vector_valued module.
+这里涉及的方程是对  step-20  中已经涉及的材料的扩展。特别是，它们属于矢量值问题的范畴。这个主题的顶层概述可以在  @ref vector_valued  模块中找到。
 
 
 <a name="Thetwophaseflowproblem"></a><h3>The two phase flow problem</h3>
 
 
-Modeling of two phase flow in porous media is important for both
-environmental remediation and the management of petroleum and groundwater
-reservoirs. Practical situations involving two phase flow include the
-dispersal of a nonaqueous phase liquid in an aquifer, or the joint
-movement of a mixture of fluids such as oil and water in a
-reservoir. Simulation models, if they are to provide realistic
-predictions, must accurately account for these effects.
+多孔介质中的两相流建模对于环境修复以及石油和地下水库的管理都很重要。涉及两相流动的实际情况包括非水相液体在含水层中的分散，或油和水等流体混合物在储层中的联合运动。仿真模型如果要提供真实的预测，就必须准确地考虑到这些影响。
 
-To derive the governing equations, consider two phase flow in a
-reservoir $\Omega$ under the assumption that the movement of fluids is
-dominated by viscous effects; i.e. we neglect the effects of gravity,
-compressibility, and capillary pressure. Porosity will be considered
-to be constant. We will denote variables referring to either of the two
-phases using subscripts $w$ and $o$, short for water and oil. The
-derivation of the equations holds for other pairs of fluids as well,
-however.
+为了推导出管理方程，考虑储层中的两相流动 $\Omega$ ，假设流体的运动由粘性效应主导；也就是说，我们忽略了重力、压缩性和毛细压力的影响。孔隙率将被认为是恒定的。我们将使用下标 $w$ 和 $o$ 来表示两相中的任何一个变量，即水和油的简称。然而，方程的推导对其他流体对也是适用的。
 
-The velocity with which molecules of each of the two phases move is
-determined by Darcy's law that states that the velocity is
-proportional to the pressure gradient:
-@f{eqnarray*}
+两相中每一相的分子移动的速度由达西定律决定，即速度与压力梯度成正比。@f{eqnarray*}
   \mathbf{u}_{j}
   =
+
+
   -\frac{k_{rj}(S)}{\mu_{j}} \mathbf{K} \cdot \nabla p
-@f}
-where $\mathbf{u}_{j}$ is the velocity of phase $j=o,w$, $K$ is the
-permeability tensor, $k_{rj}$ is the relative permeability of phase
-$j$, $p$ is the
-pressure and $\mu_{j}$ is the viscosity of phase $j$. Finally, $S$ is
-the saturation (volume fraction), i.e. a function with values between
-0 and 1 indicating the composition of the mixture of fluids. In
-general, the coefficients $K, k_{rj}, \mu$ may be spatially dependent
-variables, and we will always treat them as non-constant functions in
-the following.
+@f} 
 
-We combine Darcy's law with the statement of conservation of mass for
-each phase,
-@f[
+其中 $\mathbf{u}_{j}$ 是相 $j=o,w$ 的速度， $K$ 是渗透性张量， $k_{rj}$ 是相 $j$ 的相对渗透性， $p$ 是压力， $\mu_{j}$ 是相 $j$ 的黏度。最后， $S$ 是饱和度（体积分数），即一个数值在0和1之间的函数，表示流体混合物的组成。一般来说，系数 $K, k_{rj}, \mu$ 可能是空间上的变量，我们在下文中总是将其视为非常数函数。
+
+我们将达西定律与各相的质量守恒声明结合起来，@f[
   \textrm{div}\ \mathbf{u}_{j} = q_j,
-@f]
-with a source term for each phase. By summing over the two phases,
-we can express the governing equations in terms of the
-so-called pressure equation:
-@f{eqnarray*}
+@f]为各相提供一个源项。通过对两相求和，我们可以用所谓的压力方程来表达治理方程。@f{eqnarray*}
+
+
 - \nabla \cdot (\mathbf{K}\lambda(S) \nabla p)= q.
-@f}
-Here, $q$ is the sum source term, and
-@f[
+@f} 
+
+这里， $q$ 是和源项，@f[
   \lambda(S) = \frac{k_{rw}(S)}{\mu_{w}}+\frac{k_{ro}(S)}{\mu_{o}}
-@f]
-is the total mobility.
+@f]是总流动性。
 
-So far, this looks like an ordinary stationary, Poisson-like equation that we
-can solve right away with the techniques of the first few tutorial programs
-(take a look at step-6, for example, for something very
-similar). However, we have not said anything yet about the saturation, which
-of course is going to change as the fluids move around.
+到目前为止，这看起来是一个普通的静止的、类似泊松的方程，我们可以用前几个教程的技术马上解决（例如，看一下 step-6 ，非常类似的东西）。然而，我们还没有说过任何关于饱和度的问题，当然，饱和度会随着流体的移动而改变。
 
-The second part of the equations is the description of the
-dynamics of the saturation, i.e., how the relative concentration of the
-two fluids changes with time. The saturation equation for the displacing
-fluid (water) is given by the following conservation law:
-@f{eqnarray*}
+方程的第二部分是对饱和度的动态描述，即两种液体的相对浓度如何随时间变化。置换流体（水）的饱和度方程由以下守恒定律给出。@f{eqnarray*}
   S_{t} + \nabla \cdot (F(S) \mathbf{u}) = q_{w},
-@f}
-which can be rewritten by using the product rule of the divergence operator
-in the previous equation:
-@f{eqnarray*}
+@f} 
+
+可以通过使用前一个方程中的发散算子的乘积规则来重写。@f{eqnarray*}
   S_{t} + F(S) \left[\nabla \cdot \mathbf{u}\right]
         + \mathbf{u} \cdot \left[ \nabla F(S)\right]
   = S_{t} + F(S) q + \mathbf{u} \cdot \nabla F(S) = q_{w}.
-@f}
-Here, $q=\nabla\cdot \mathbf{u}$ is the total influx introduced
-above, and $q_{w}$ is the flow rate of the displacing fluid (water).
-These two are related to the fractional flow $F(S)$ in the following way:
-@f[
+@f} 
+
+这里， $q=\nabla\cdot \mathbf{u}$ 是上面介绍的总流入量， $q_{w}$ 是置换流体（水）的流率。这两者与分流量 $F(S)$ 的关系如下。@f[
   q_{w} = F(S) q,
-@f]
-where the fractional flow is often parameterized via the (heuristic) expression
-@f[
+@f]其中分数流通常通过（启发式）表达式@f[
   F(S)
   =
   \frac{k_{rw}(S)/\mu_{w}}{k_{rw}(S)/\mu_{w} + k_{ro}(S)/\mu_{o}}.
-@f]
-Putting it all together yields the saturation equation in the following,
-advected form:
-@f{eqnarray*}
+@f]进行参数化。 把这些放在一起，可以得到以下形式的饱和度方程，平流式。@f{eqnarray*}
   S_{t} + \mathbf{u} \cdot \nabla F(S) = 0,
-@f}
-where $\mathbf u$ is the total velocity
-@f[
+@f} 
+
+其中 $\mathbf u$ 是总速度@f[
   \mathbf{u} =
   \mathbf{u}_{o} + \mathbf{u}_{w} = -\lambda(S) \mathbf{K}\cdot\nabla p.
-@f]
-Note that the advection equation contains the term $\mathbf{u} \cdot \nabla
-F(S)$ rather than $\mathbf{u} \cdot \nabla S$ to indicate that the saturation
-is not simply transported along; rather, since the two phases move with
-different velocities, the saturation can actually change even in the advected
-coordinate system. To see this, rewrite $\mathbf{u} \cdot \nabla F(S)
-= \mathbf{u} F'(S) \cdot \nabla S$ to observe that the <i>actual</i>
-velocity with which the phase with saturation $S$ is transported is
-$\mathbf u F'(S)$ whereas the other phase is transported at velocity
-$\mathbf u (1-F'(S))$. $F(S)$ is consequently often referred to as the
-<i>fractional flow</i>.
+@f]。注意，平流方程包含术语 $\mathbf{u} \cdot \nabla
+F(S)$ 而不是 $\mathbf{u} \cdot \nabla S$ ，表明饱和度不是简单地沿途传送；相反，由于两相以不同的速度运动，即使在平流坐标系中，饱和度实际上也会发生变化。为了看到这一点，重写 $\mathbf{u} \cdot \nabla F(S)
+= \mathbf{u} F'(S) \cdot \nabla S$ ，观察到具有饱和度 $S$ 的相的<i>actual</i>传输速度是 $\mathbf u F'(S)$ ，而另一个相的传输速度是 $\mathbf u (1-F'(S))$  。 因此， $F(S)$ 通常被称为<i>fractional flow</i>。
 
-In summary, what we get are the following two equations:
-@f{eqnarray*}
+总之，我们得到的是以下两个方程式。@f{eqnarray*}
+
+
   - \nabla \cdot (\mathbf{K}\lambda(S) \nabla p) &=& q
   \qquad \textrm{in}\ \Omega\times[0,T],
   \\
   S_{t} + \mathbf{u} \cdot \nabla F(S) &=& 0
   \qquad \textrm{in}\ \Omega\times[0,T].
-@f}
-Here, $p=p(\mathbf x, t), S=S(\mathbf x, t)$ are now time dependent
-functions: while at every time instant the flow field is in
-equilibrium with the pressure (i.e. we neglect dynamic
-accelerations), the saturation is transported along with the flow and
-therefore changes over time, in turn affected the flow field again
-through the dependence of the first equation on $S$.
+@f} 
 
-This set of equations has a peculiar character: one of the two
-equations has a time derivative, the other one doesn't. This
-corresponds to the character that the pressure and velocities are
-coupled through an instantaneous constraint, whereas the saturation
-evolves over finite time scales.
+这里， $p=p(\mathbf x, t), S=S(\mathbf x, t)$ 现在是与时间相关的函数：虽然在每个时间瞬间，流场与压力处于平衡状态（即我们忽略了动态加速），但饱和度与流动一起传输，因此随时间变化，反过来通过第一个方程对 $S$ 的依赖性再次影响流场。
 
-Such systems of equations are called Differential Algebraic Equations
-(DAEs), since one of the equations is a differential equation, the
-other is not (at least not with respect to the time variable) and is
-therefore an "algebraic" equation. (The notation comes from the field
-of ordinary differential equations, where everything that does not
-have derivatives with respect to the time variable is necessarily an
-algebraic equation.) This class of equations contains pretty
-well-known cases: for example, the time dependent Stokes and
-Navier-Stokes equations (where the algebraic constraint is that the
-divergence of the flow field, $\textrm{div}\ \mathbf u$, must be zero)
-as well as the time dependent Maxwell equations (here, the algebraic
-constraint is that the divergence of the electric displacement field
-equals the charge density, $\textrm{div}\ \mathbf D = \rho$ and that the
-divergence of the magnetic flux density is zero: $\textrm{div}\ \mathbf
-B = 0$); even the quasistatic model of step-18 falls into this
-category. We will see that the different character of the two equations
-will inform our discretization strategy for the two equations.
+这组方程有一个特殊的特点：两个方程中的一个有时间导数，另一个没有。这对应于压力和速度通过瞬时约束耦合的特点，而饱和度在有限的时间尺度上演变。
+
+这样的方程组被称为微分代数方程（DAE），因为其中一个方程是微分方程，另一个不是（至少不是就时间变量而言），因此是一个 "代数 "方程。这个符号来自常微分方程领域，在这个领域中，所有没有关于时间变量的导数的东西都必然是一个代数方程）。这类方程包含相当知名的情况：例如，与时间相关的斯托克斯和纳维-斯托克斯方程（其中代数约束是流场的发散， $\textrm{div}\ \mathbf u$ ，必须为零）以及与时间相关的麦克斯韦方程（这里，代数约束是电位移场的发散等于电荷密度， $\textrm{div}\ \mathbf D = \rho$ ，磁通密度的发散为零。  $\textrm{div}\ \mathbf
+B = 0$ ）；即使是 step-18 的准静态模型也属于这个类别。我们将看到，这两个方程的不同特征将告知我们这两个方程的离散化策略。
 
 
-<a name="Timediscretization"></a><h3>Time discretization</h3>
+<a name="Timediscretization"></a><h3>Time discretization</h3> 
 
 
-In the reservoir simulation community, it is common to solve the equations
-derived above by going back to the first order, mixed formulation. To this
-end, we re-introduce the total velocity $\mathbf u$ and write the equations in
-the following form:
-@f{eqnarray*}
+在储层模拟界，通常是通过回到一阶混合公式来解决上面得出的方程。为此，我们重新引入总速度 $\mathbf u$ ，将方程写成以下形式。@f{eqnarray*}
   \mathbf{u}+\mathbf{K}\lambda(S) \nabla p&=&0 \\
   \nabla \cdot\mathbf{u} &=& q \\
   S_{t} + \mathbf{u} \cdot \nabla F(S) &=& 0.
-@f}
-This formulation has the additional benefit that we do not have to express the
-total velocity $\mathbf u$ appearing in the transport equation as a function
-of the pressure, but can rather take the primary variable for it. Given the
-saddle point structure of the first two equations and their similarity to the
-mixed Laplace formulation we have introduced in step-20, it
-will come as no surprise that we will use a mixed discretization again.
+@f} 
 
-But let's postpone this for a moment. The first business we have with these
-equations is to think about the time discretization. In reservoir simulation,
-there is a rather standard algorithm that we will use here. It first solves
-the pressure using an implicit equation, then the saturation using an explicit
-time stepping scheme. The algorithm is called IMPES for IMplicit Pressure
-Explicit Saturation and was first proposed a long time ago: by Sheldon et
-al. in 1959 and Stone and Gardner in 1961 (J. W. Sheldon, B. Zondek and
-W. T. Cardwell: <i>One-dimensional, incompressible, non-capillary, two-phase
-fluid flow in a porous medium</i>, Trans. SPE AIME, 216 (1959), pp. 290-296; H.
-L. Stone and A. O. Gardner Jr: <i>Analysis of gas-cap or dissolved-gas
-reservoirs</i>, Trans. SPE AIME, 222 (1961), pp. 92-104).
-In a slightly modified form, this algorithm can be
-written as follows: for each time step, solve
-@f{eqnarray*}
+这种提法还有一个好处，即我们不必把出现在输运方程中的总速度 $\mathbf u$ 表示为压力的函数，而是可以把它作为主变量。鉴于前两个方程的鞍点结构以及它们与我们在 step-20 中介绍的混合拉普拉斯公式的相似性，我们将再次使用混合离散化，这并不奇怪。
+
+但让我们先把这个问题推迟一下。我们处理这些方程的第一件事是考虑时间离散化问题。在储层模拟中，有一个相当标准的算法，我们将在这里使用。它首先使用隐式方程解决压力问题，然后使用显式时间步进方案解决饱和问题。该算法被称为IMplicit Pressure Explicit Saturation（隐式压力显式饱和），很早以前就被提出：Sheldon等人在1959年，Stone和Gardner在1961年（J.W.Sheldon, B. Zondek and W. T. Cardwell: <i>One-dimensional, incompressible, non-capillary, two-phase
+fluid flow in a porous medium</i>, Trans. SPE AIME, 216 (1959), pp. 290-296; H. L. Stone and A. O. Gardner Jr: <i>Analysis of gas-cap or dissolved-gas
+reservoirs</i>, Trans. SPE AIME, 222 (1961), pp. 92-104）。) 在一个稍加修改的形式中，这个算法可以写成如下：对于每个时间步长，解决@f{eqnarray*}
   \mathbf{u}^{n+1}+\mathbf{K}\lambda(S^n) \nabla p^{n+1}&=&0 \\
   \nabla \cdot\mathbf{u}^{n+1} &=& q^{n+1} \\
   \frac {S^{n+1}-S^n}{\triangle t} + \mathbf{u}^{n+1} \cdot \nabla F(S^n) &=& 0,
-@f}
-where $\triangle t$ is the length of a time step. Note how we solve the
-implicit pressure-velocity system that only depends on the previously computed
-saturation $S^n$, and then do an explicit time step for $S^{n+1}$ that only
-depends on the previously known $S^n$ and the just computed
-$\mathbf{u}^{n+1}$. This way, we never have to iterate for the nonlinearities
-of the system as we would have if we used a fully implicit method. (In
-a more modern perspective, this should be seen as an "operator
-splitting" method. step-58 has a long description of the idea behind this.)
+@f} 
 
-We can then state the problem in weak form as follows, by multiplying each
-equation with test functions $\mathbf v$, $\phi$, and $\sigma$ and integrating
-terms by parts:
-@f{eqnarray*}
+其中 $\triangle t$ 是一个时间步骤的长度。请注意我们是如何解决隐式压力-速度系统的，它只取决于先前计算的饱和度 $S^n$ ，然后对 $S^{n+1}$ 做一个显式时间步长，它只取决于先前已知的 $S^n$ 和刚刚计算的 $\mathbf{u}^{n+1}$ 。这样一来，我们就不必像使用全隐式方法那样对系统的非线性进行迭代。从更现代的角度来看，这应该被看作是一种 "算子分割 "方法。  step-58 对这背后的想法有一个很长的描述）。) 
+
+然后我们可以以弱的形式陈述问题如下，用测试函数 $\mathbf v$ 、 $\phi$ 和 $\sigma$ 乘以每一个方程，并通过部分整合条款。@f{eqnarray*}
   \left((\mathbf{K}\lambda(S^n))^{-1} \mathbf{u}^{n+1},\mathbf v\right)_\Omega -
   (p^{n+1}, \nabla\cdot\mathbf v)_\Omega &=&
+
+
   - (p^{n+1}, \mathbf v)_{\partial\Omega}
   \\
   (\nabla \cdot\mathbf{u}^{n+1}, \phi)_\Omega &=& (q^{n+1},\phi)_\Omega
-@f}
-Note that in the first term, we have to prescribe the pressure $p^{n+1}$ on
-the boundary $\partial\Omega$ as boundary values for our problem. $\mathbf n$
-denotes the unit outward normal vector to $\partial K$, as usual.
+@f} 
 
-For the saturation equation, we obtain after integrating by parts
-@f{eqnarray*}
+注意，在第一项中，我们必须规定边界 $\partial\Omega$ 上的压力 $p^{n+1}$ 作为我们问题的边界值。  $\mathbf n$ 表示对 $\partial K$ 的单位外向法向量，如常。
+
+对于饱和方程，我们通过部分积分后得到@f{eqnarray*}
   (S^{n+1}, \sigma)_\Omega
+
+
   -
   \triangle t
   \sum_K
   \left\{
   \left(F(S^n), \nabla \cdot (\mathbf{u}^{n+1} \sigma)\right)_K
+
+
   -
   \left(F(S^n) (\mathbf n \cdot \mathbf{u}^{n+1}, \sigma\right)_{\partial K}
   \right\}
   &=&
   (S^n,\sigma)_\Omega.
 @f}
-Using the fact that $\nabla \cdot \mathbf{u}^{n+1}=q^{n+1}$, we can rewrite the
-cell term to get an equation as follows:
-@f{eqnarray*}
+
+利用 $\nabla \cdot \mathbf{u}^{n+1}=q^{n+1}$ 这一事实，我们可以重写单元项，得到如下方程。@f{eqnarray*}
   (S^{n+1}, \sigma)_\Omega
+
+
   -
   \triangle t
   \sum_K
   \left\{
   \left(F(S^n) \mathbf{u}^{n+1}, \nabla \sigma\right)_K
+
+
   -
   \left(F(S^n) (\mathbf n \cdot \mathbf{u}^{n+1}), \sigma\right)_{\partial K}
   \right\}
   &=&
   (S^n,\sigma)_\Omega +
   \triangle t \sum_K  \left(F(S^n) q^{n+1}, \sigma\right)_K.
-@f}
-We introduce an object of type DiscreteTime in order to keep track of the
-current value of time and time step in the code. This class encapsulates many
-complexities regarding adjusting time step size and stopping at a specified
-final time.
+@f} 
+
+我们引入一个DiscreteTime类型的对象，以便在代码中跟踪时间和时间步长的当前值。这个类封装了许多关于调整时间步长和在指定的最终时间停止的复杂情况。
 
 
 
-<a name="Spacediscretization"></a><h3>Space discretization</h3>
+
+<a name="Spacediscretization"></a><h3>Space discretization</h3> 
 
 
-In each time step, we then apply the mixed finite method of @ref step_20
-"step-20" to the velocity and pressure. To be well-posed, we choose
-Raviart-Thomas spaces $RT_{k}$ for $\mathbf{u}$ and discontinuous elements of
-class $DGQ_{k}$ for $p$. For the saturation, we will also choose $DGQ_{k}$
-spaces.
+在每个时间步长中，我们再对速度和压力应用 @ref step_20  "  step-20  " 的混合有限方法。为了得到良好的解决，我们对 $\mathbf{u}$ 选择Raviart-Thomas空间 $RT_{k}$ ，对 $p$ 选择 $DGQ_{k}$ 类的不连续元素。对于饱和度，我们也将选择 $DGQ_{k}$ 空间。
 
-Since we have discontinuous spaces, we have to think about how to evaluate
-terms on the interfaces between cells, since discontinuous functions are not
-really defined there. In particular, we have to give a meaning to the last
-term on the left hand side of the saturation equation. To this end, let us
-define that we want to evaluate it in the following sense:
-@f{eqnarray*}
+由于我们有不连续的空间，我们必须考虑如何评估单元间界面上的项，因为不连续的函数在那里并没有真正定义。特别是，我们必须给饱和方程左手边的最后一个项赋予一个意义。为此，让我们定义，我们要在以下意义上评估它。@f{eqnarray*}
   &&\left(F(S^n) (\mathbf n \cdot \mathbf{u}^{n+1}), \sigma\right)_{\partial K}
   \\
   &&\qquad =
   \left(F(S^n_+) (\mathbf n \cdot \mathbf{u}^{n+1}_+), \sigma\right)_{\partial K_+}
   +
   \left(F(S^n_-) (\mathbf n \cdot \mathbf{u}^{n+1}_-), \sigma\right)_{\partial K_-},
-@f}
-where $\partial K_{-} \dealcoloneq \{x\in \partial K, \mathbf{u}(x) \cdot \mathbf{n}<0\}$
-denotes the inflow boundary and $\partial K_{+} \dealcoloneq \{\partial K \setminus
-\partial K_{-}\}$ is the outflow part of the boundary.
-The quantities $S_+,\mathbf{u}_+$ then correspond to the values of these
-variables on the present cell, whereas $S_-,\mathbf{u}_-$ (needed on the
-inflow part of the boundary of $K$) are quantities taken from the neighboring
-cell. Some more context on discontinuous element techniques and evaluation of
-fluxes can also be found in step-12 and step-12b.
+@f} 
+
+其中 $\partial K_{-} \dealcoloneq \{x\in \partial K, \mathbf{u}(x) \cdot \mathbf{n}<0\}$ 表示流入边界， $\partial K_{+} \dealcoloneq \{\partial K \setminus
+\partial K_{-}\}$ 是边界的流出部分。那么数量 $S_+,\mathbf{u}_+$ 对应于这些变量在当前单元上的值，而 $S_-,\mathbf{u}_-$ （需要在 $K$ 的边界流入部分）是取自邻近单元的数量。关于非连续单元技术和通量评价的更多背景，也可以在 step-12 和 step-12 b中找到。
 
 
 <a name="Linearsolvers"></a><h3>Linear solvers</h3>
 
 
-The linear solvers used in this program are a straightforward extension of the
-ones used in step-20 (but without LinearOperator). Essentially, we simply have
-to extend everything from
-two to three solution components. If we use the discrete spaces
-mentioned above and put shape functions into the bilinear forms, we
-arrive at the following linear system to be solved for time step $n+1$:
-@f[
+本程序中使用的线性求解器是对 step-20 中使用的线性求解器的直接扩展（但没有LinearOperator）。从本质上讲，我们只需将一切从两个解元扩展到三个解元。如果我们使用上面提到的离散空间，并将形状函数放到双线性形式中，我们就会得到以下线性系统，以解决时间步长 $n+1$ ：@f[
 \left(
 \begin{array}{ccc}
 M^u(S^{n}) & B^{T}& 0\\
@@ -385,25 +263,29 @@ B &    0 & 0\\
 0 \\ F_2 \\ F_3
 \end{array}
 \right)
-@f]
-where the individual matrices and vectors are defined as follows using
-shape functions $\mathbf v_i$ (of type Raviart Thomas $RT_k$) for
-velocities and $\phi_i$ (of type $DGQ_k$) for both pressures and saturations:
-@f{eqnarray*}
+@f]，其中各个矩阵和向量的定义如下，使用形状函数 $\mathbf v_i$ （类型为Raviart Thomas $RT_k$ ）用于速度， $\phi_i$ （类型为 $DGQ_k$  ）用于压力和饱和。@f{eqnarray*}
 M^u(S^n)_{ij} &=&
 \left((\mathbf{K}\lambda(S^n))^{-1} \mathbf{v}_i,\mathbf
 v_j\right)_\Omega,
 \\
 B_{ij} &=&
+
+
 -(\nabla \cdot \mathbf v_j, \phi_i)_\Omega,
 \\
 H_{ij} &=&
+
+
   -
   \sum_K
   \left\{
   \left(F(S^n) \mathbf v_i, \nabla \phi_j)\right)_K
+
+
   -
   \left(F(S^n_+) (\mathbf n \cdot (\mathbf v_i)_+), \phi_j\right)_{\partial K_+}
+
+
   -
   \left(F(S^n_-) (\mathbf n \cdot (\mathbf v_i)_-), \phi_j\right)_{\partial K_-},
   \right\}
@@ -412,205 +294,88 @@ M^S_{ij} &=&
 (\phi_i, \phi_j)_\Omega,
 \\
 (F_2)_i &=&
+
+
 -(q^{n+1},\phi_i)_\Omega,
 \\
 (F_3)_i &=&
 (S^n,\phi_i)_\Omega +\triangle t \sum_K  \left(F(S^n) q^{n+1}, \phi_i\right)_K.
-@f}
-
-@note Due to historical accidents, the role of matrices $B$ and $B^T$
-has been reverted in this program compared to step-20. In other words,
-here $B$ refers to the divergence and $B^T$ to the gradient operators
-when it was the other way around in step-20.
-
-The system above presents a complication: Since the matrix $H_{ij}$
-depends on $\mathbf u^{n+1}$ implicitly (the velocities are needed to
-determine which parts of the boundaries $\partial K$ of cells are
-influx or outflux parts), we can only assemble this matrix after we
-have solved for the velocities.
-
-The solution scheme then involves the following steps:
-<ol>
-  <li>Solve for the pressure $p^{n+1}$ using the Schur complement
-  technique introduced in step-20.
-
-  <li>Solve for the velocity $\mathbf u^{n+1}$ as also discussed in
-  step-20.
-
-  <li>Compute the term $F_3-\triangle t\; H \mathbf u^{n+1}$, using
-  the just computed velocities.
-
-  <li>Solve for the saturation $S^{n+1}$.
-</ol>
-
-In this scheme, we never actually build the matrix $H$, but rather
-generate the right hand side of the third equation once we are ready
-to do so.
-
-In the program, we use a variable <code>solution</code> to store the
-solution of the present time step. At the end of each step, we copy
-its content, i.e. all three of its block components, into the variable
-<code>old_solution</code> for use in the next time step.
+@f} 
 
 
-<a name="Choosingatimestep"></a><h3>Choosing a time step</h3>
+
+  @note  由于历史事故，与 step-20 相比，矩阵 $B$ 和 $B^T$ 在本程序中的作用被还原了。换句话说，这里 $B$ 指的是发散， $B^T$ 指的是梯度算子，而在 step-20 中则正好相反。
+
+上面的系统出现了一个复杂的问题。由于矩阵 $H_{ij}$ 隐含地依赖于 $\mathbf u^{n+1}$ （需要速度来确定细胞边界 $\partial K$ 的哪些部分是流入或流出的部分），我们只有在解决了速度问题之后才能组装这个矩阵。
+
+然后，求解方案包括以下步骤。  <ol>   <li>  使用 step-20 中介绍的Schur补数技术求解压力  $p^{n+1}$  。
+
+    <li>  解决速度 $\mathbf u^{n+1}$ ，这在 step-20 中也有讨论。
+
+    <li>  计算项 $F_3-\triangle t\; H \mathbf u^{n+1}$  ，使用刚刚计算的速度。
+
+    <li>  求解饱和度  $S^{n+1}$  。  </ol>   
+
+在这个方案中，我们实际上从未建立矩阵  $H$  ，而是在我们准备好后生成第三个方程的右边。
+
+在程序中，我们使用一个变量 <code>solution</code> 来存储当前时间步骤的解决方案。在每一步结束时，我们把它的内容，即它的所有三个块成分，复制到变量 <code>old_solution</code> 中，以便在下一个时间步骤中使用。
 
 
-A general rule of thumb in hyperbolic transport equations like the equation we
-have to solve for the saturation equation is that if we use an explicit time
-stepping scheme, then we should use a time step such that the distance that a
-particle can travel within one time step is no larger than the diameter of a
-single cell. In other words, here, we should choose
-@f[
+<a name="Choosingatimestep"></a><h3>Choosing a time step</h3> 
+
+
+在像我们要解决的饱和方程这样的双曲运输方程中，一个一般的经验法则是，如果我们使用显式时间步长方案，那么我们应该使用这样的时间步长，即一个粒子在一个时间步长内所能移动的距离不大于一个细胞的直径。换句话说，在这里，我们应该选择@f[
   \triangle t_{n+1} \le \frac h{|\mathbf{u}^{n+1}(\mathbf{x})|}.
-@f]
-Fortunately, we are in a position where we can do that: we only need the
-time step when we want to assemble the right hand side of the saturation
-equation, which is after we have already solved for $\mathbf{u}^{n+1}$. All we
-therefore have to do after solving for the velocity is to loop over all
-quadrature points in the domain and determine the maximal magnitude of the
-velocity. We can then set the time step for the saturation equation to
-@f[
+@f]幸运的是，我们处于一个可以做到这一点的位置：我们只需要在我们想要组装饱和方程的右侧时，也就是在我们已经解决了 $\mathbf{u}^{n+1}$ 之后，才需要时间步骤。因此，在求解速度之后，我们要做的就是在域中的所有正交点上循环，确定速度的最大幅度。然后我们可以将饱和方程的时间步长设置为@f[
   \triangle t_{n+1} = \frac {\min_K h_K}{\max_{\mathbf{x}}|\mathbf{u}^{n+1}(\mathbf{x})|}.
-@f]
+@f] 。
 
-Why is it important to do this? If we don't, then we will end up with lots of
-places where our saturation is larger than one or less than zero, as can
-easily be verified. (Remember that the saturation corresponds to something
-like the water fraction in the fluid mixture, and therefore must physically be
-between 0 and 1.) On the other hand, if we choose our time step according to
-the criterion listed above, this only happens very very infrequently &mdash;
-in fact only once for the entire run of the program. However, to be on the
-safe side, however, we run a function <code>project_back_saturation</code> at
-the end of each time step, that simply projects the saturation back onto the
-interval $[0,1]$, should it have gotten out of the physical range. This is
-useful since the functions $\lambda(S)$ and $F(S)$ do not represent anything
-physical outside this range, and we should not expect the program to do
-anything useful once we have negative saturations or ones larger than one.
+为什么要这样做呢？如果我们不这样做，那么我们最终会有很多地方的饱和度大于1或小于0，这一点很容易得到验证。请记住，饱和度对应于流体混合物中的水比例，因此在物理上必须在0和1之间）。另一方面，如果我们根据上面列出的标准选择时间步长，这种情况只会非常非常少地发生，事实上在整个程序运行中只有一次。然而，为了安全起见，我们在每个时间步长结束时运行一个函数 <code>project_back_saturation</code> ，如果饱和度超出了物理范围，则简单地将其投影到区间 $[0,1]$ 。这很有用，因为函数 $\lambda(S)$ 和 $F(S)$ 并不代表这个范围之外的任何物理现象，而且一旦我们有负的饱和度或大于1的饱和度，我们不应该期望程序做任何有用的事情。
 
-Note that we will have similar restrictions on the time step also in
-step-23 and step-24 where we solve the time dependent
-wave equation, another hyperbolic problem. We will also come back to the issue
-of time step choice below in the section on <a href="#extensions">possible
-extensions to this program</a>.
+请注意，我们在 step-23 和 step-24 中也会对时间步长有类似的限制，在那里我们解决与时间有关的波浪方程，也是一个双曲问题。我们还将在下面关于<a href="#extensions">possible
+extensions to this program</a>一节中再来讨论时间步长的选择问题。
 
 
 <a name="Thetestcase"></a><h3>The test case</h3>
 
 
-For simplicity, this program assumes that there is no source, $q=0$, and that
-the heterogeneous porous medium is isotropic $\mathbf{K}(\mathbf{x}) =
-k(\mathbf{x}) \mathbf{I}$. The first one of these is a realistic assumption in
-oil reservoirs: apart from injection and production wells, there are usually
-no mechanisms for fluids to appear or disappear out of the blue. The second
-one is harder to justify: on a microscopic level, most rocks are isotropic,
-because they consist of a network of interconnected pores. However, this
-microscopic scale is out of the range of today's computer simulations, and we
-have to be content with simulating things on the scale of meters. On that
-scale, however, fluid transport typically happens through a network of cracks
-in the rock, rather than through pores. However, cracks often result from
-external stress fields in the rock layer (for example from tectonic faulting)
-and the cracks are therefore roughly aligned. This leads to a situation where
-the permeability is often orders of magnitude larger in the direction parallel
-to the cracks than perpendicular to the cracks. A problem typically faces in
-reservoir simulation, however, is that the modeler doesn't know the direction
-of cracks because oil reservoirs are not accessible to easy inspection. The
-only solution in that case is to assume an effective, isotropic permeability.
+为了简单起见，本程序假定没有源，  $q=0$  ，并且异质多孔介质是各向同性的  $\mathbf{K}(\mathbf{x}) =
+k(\mathbf{x}) \mathbf{I}$  。其中第一个是油藏中的现实假设：除了注水井和生产井之外，通常没有液体突然出现或消失的机制。第二个假设更难证明：在微观层面上，大多数岩石是各向同性的，因为它们是由相互连接的孔隙网络组成的。然而，这种微观尺度超出了今天计算机模拟的范围，我们不得不满足于模拟米级的东西。然而，在这个尺度上，流体运输通常是通过岩石中的裂缝网络，而不是通过孔隙发生的。然而，裂缝通常是由岩层中的外部应力场造成的（例如由构造断层造成的），因此裂缝是大致排列的。这就导致了这样一种情况：在平行于裂缝的方向上，渗透率往往比垂直于裂缝的方向大几个数量级。然而，在储层模拟中通常面临的一个问题是，建模者不知道裂缝的方向，因为油藏不容易被检查到。在这种情况下，唯一的解决办法是假设有效的、各向同性的渗透率。
 
-Whatever the matter, both of these restrictions, no sources and isotropy,
-would be easy to lift with a few lines of code in the program.
+无论怎样，这两个限制，即无源和各向同性，只要在程序中写上几行代码就可以轻松解除。
 
-Next, for simplicity, our numerical simulation will be done on the
-unit cell $\Omega = [0,1]\times [0,1]$ for $t\in [0,T]$. Our initial
-conditions are $S(\mathbf{x},0)=0$; in the oil reservoir picture, where $S$
-would indicate the water saturation, this means that the reservoir contains
-pure oil at the beginning. Note that we do not need any initial
-conditions for pressure or velocity, since the equations do not contain time
-derivatives of these variables. Finally, we impose the following pressure
-boundary conditions:
-@f[
+接下来，为了简单起见，我们的数值模拟将在 $\Omega = [0,1]\times [0,1]$ 的单元格上进行，用于 $t\in [0,T]$  。我们的初始条件是 $S(\mathbf{x},0)=0$ ；在油藏图片中， $S$ 将表示水的饱和度，这意味着油藏在开始时包含纯油。请注意，我们不需要任何压力或速度的初始条件，因为这些方程不包含这些变量的时间导数。最后，我们施加以下压力边界条件。@f[
   p(\mathbf{x},t)=1-x_1 \qquad \textrm{on}\ \partial\Omega.
-@f]
-Since the pressure and velocity solve a mixed form Poisson equation, the
-imposed pressure leads to a resulting flow field for the velocity. On the
-other hand, this flow field determines whether a piece of the boundary is of
-inflow or outflow type, which is of relevance because we have to impose
-boundary conditions for the saturation on the inflow part of the boundary,
-@f[
+@f] 由于压力和速度解决的是混合形式的泊松方程，强加的压力导致了速度的结果流场。另一方面，这个流场决定了边界的某一部分是流入的还是流出的，这很重要，因为我们必须在边界的流入部分施加饱和度的边界条件，@f[
   \Gamma_{in}(t) = \{\mathbf{x}\in\partial\Omega:
                      \mathbf{n} \cdot \mathbf{u}(\mathbf{x},t) < 0\}.
-@f]
-On this inflow boundary, we impose the following saturation values:
-@f{eqnarray}
+@f] 在这个流入的边界上，我们施加以下饱和度值。@f{eqnarray}
   S(\mathbf{x},t) = 1 & \textrm{on}\ \Gamma_{in}\cap\{x_1=0\},
   \\
   S(\mathbf{x},t) = 0 & \textrm{on}\ \Gamma_{in}\backslash \{x_1=0\}.
-@f}
-In other words, we have pure water entering the reservoir at the left, whereas
-the other parts of the boundary are in contact with undisturbed parts of the
-reservoir and whenever influx occurs on these boundaries, pure oil will enter.
+@f} 
 
-In our simulations, we choose the total mobility as
-@f[
+换句话说，我们有纯水在左边进入储层，而边界的其他部分与储层的未受干扰部分接触，只要这些边界上发生流入，纯油就会进入。
+
+在我们的模拟中，我们选择总的流动性为@f[
   \lambda (S) = \frac{1.0}{\mu} S^2 +(1-S)^2
-@f]
-where we use $\mu=0.2$ for the viscosity. In addition, the fractional flow of
-water is given by
-@f[
+@f]，其中我们使用 $\mu=0.2$ 的粘度。此外，水的分流量由@f[
   F(S)=\frac{S^2}{S^2+\mu (1-S)^2}
-@f]
+@f]给出。
 
-@note Coming back to this testcase in step-43 several years later revealed an
-oddity in the setup of this testcase. To this end, consider that we can
-rewrite the advection equation for the saturation as $S_{t} + (\mathbf{u}
-F'(S)) \cdot \nabla S = 0$. Now, at the initial time, we have $S=0$, and with
-the given choice of function $F(S)$, we happen to have $F'(0)=0$. In other
-words, at $t=0$, the equation reduces to $S_t=0$ for all $\mathbf x$, so the
-saturation is zero everywhere and it is going to stay zero everywhere! This is
-despite the fact that $\mathbf u$ is not necessarily zero: the combined fluid
-is moving, but we've chosen our partial flux $F(S)$ in such a way that
-infinitesimal amounts of wetting fluid also only move at infinitesimal speeds
-(i.e., they stick to the medium more than the non-wetting phase in which they
-are embedded). That said, how can we square this with the knowledge that
-wetting fluid is invading from the left, leading to the flow patterns seen in
-the <a href="#Results">results section</a>? That's where we get into
-mathematics: Equations like the transport equation we are considering here
-have infinitely many solutions, but only one of them is physical: the one that
-results from the so-called viscosity limit, called the <a
+  @note  几年后在 step-43 中再来看这个测试案例，发现这个测试案例的设置有一个奇怪之处。为此，考虑到我们可以将饱和度的平流方程改写为  $S_{t} + (\mathbf{u}
+F'(S)) \cdot \nabla S = 0$  。现在，在初始时间，我们有 $S=0$ ，在给定的函数 $F(S)$ 的选择下，我们刚好有 $F'(0)=0$ 。换句话说，在 $t=0$ 处，方程对所有 $\mathbf x$ 都还原为 $S_t=0$ ，所以饱和度在任何地方都是零，而且在任何地方都会保持零！这就是为什么在 $t=0$ 处，方程会还原为 $S_t=0$ 。尽管 $\mathbf u$ 不一定是零：组合流体在移动，但我们选择的部分通量 $F(S)$ 是这样的：无穷小量的润湿流体也只以无穷小的速度移动（也就是说，它们粘在介质上的时间比它们所嵌入的非润湿相的时间长）。也就是说，我们如何将这一点与湿润流体从左边侵入，导致<a href="#Results">results section</a>中看到的流动模式的知识相联系？这就是我们进入数学的地方。像我们在这里考虑的传输方程有无限多的解决方案，但其中只有一个是物理的：由所谓的粘性极限产生的解决方案，称为<a
 href="http://en.wikipedia.org/wiki/Viscosity_solution">viscosity
-solution</a>. The thing is that with discontinuous elements we arrive at this
-viscosity limit because using a numerical flux introduces a finite amount of
-artificial viscosity into the numerical scheme. On the other hand, in step-43,
-we use an artificial viscosity that is proportional to $\|\mathbf u F'(S)\|$
-on every cell, which at the initial time is zero. Thus, the saturation there is
-zero and remains zero; the solution we then get is <i>one</i> solution of the
-advection equation, but the method does not converge to the viscosity solution
-without further changes. We will therefore use a different initial condition in
-that program.
+solution</a>。事情是这样的，用不连续的元素，我们到达了这个粘性极限，因为使用数值通量在数值方案中引入了有限量的人工粘性。另一方面，在 step-43 中，我们在每个单元上使用与 $\|\mathbf u F'(S)\|$ 成比例的人工粘度，在初始时间是零。因此，那里的饱和度为零，并保持为零；然后我们得到的解是<i>one</i>的平流方程解，但如果不进一步改变，该方法不会收敛到粘度解。因此，我们将在该程序中使用一个不同的初始条件。
 
 
-Finally, to come back to the description of the testcase, we will show results
-for computations with the two permeability
-functions introduced at the end of the results section of @ref step_20
-"step-20":
-<ul>
-  <li>A function that models a single, winding crack that snakes through the
-  domain. In analogy to step-20, but taking care of the slightly
-  different geometry we have here, we describe this by the following function:
-  @f[
+最后，回到测试案例的描述，我们将展示用 @ref step_20 "  step-20 "结果部分末尾介绍的两个渗透率函数的计算结果： <ul>   <li> 一个函数，模拟一个蜿蜒穿过域的单一裂缝。与 step-20 相类似，但考虑到我们这里的几何形状略有不同，我们用以下函数来描述它。  @f[
     k(\mathbf x)
     =
     \max \left\{ e^{-\left(\frac{x_2-\frac 12 - 0.1\sin(10x_1)}{0.1}\right)^2}, 0.01 \right\}.
-  @f]
-  Taking the maximum is necessary to ensure that the ratio between maximal and
-  minimal permeability remains bounded. If we don't do that, permeabilities
-  will span many orders of magnitude. On the other hand, the ratio between
-  maximal and minimal permeability is a factor in the condition number of the
-  Schur complement matrix, and if too large leads to problems for which our
-  linear solvers will no longer converge properly.
+  @f] 取最大值是必要的，以确保最大和最小磁导率之间的比率保持有界。如果我们不这样做，渗透率将跨越许多数量级。另一方面，最大渗透率和最小渗透率之间的比率是Schur补充矩阵的条件数的一个因素，如果太大，会导致我们的线性求解器不再正常收敛的问题。
 
-  <li>A function that models a somewhat random medium. Here, we choose
-  @f{eqnarray*}
+    <li> 一个模拟某种随机介质的函数。在这里，我们选择@f{eqnarray*}
     k(\mathbf x)
     &=&
     \min \left\{ \max \left\{ \sum_{i=1}^N \sigma_i(\mathbf{x}), 0.01 \right\}, 4\right\},
@@ -619,1712 +384,1638 @@ functions introduced at the end of the results section of @ref step_20
     &=&
     e^{-\left(\frac{|\mathbf{x}-\mathbf{x}_i|}{0.05}\right)^2},
   @f}
-  where the centers $\mathbf{x}_i$ are $N$ randomly chosen locations inside
-  the domain. This function models a domain in which there are $N$ centers of
-  higher permeability (for example where rock has cracked) embedded in a
-  matrix of more pristine, unperturbed background rock. Note that here we have
-  cut off the permeability function both above and below to ensure a bounded
-  condition number.
-</ul>
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * This program is an adaptation of step-20 and includes some technique of DG
- * methods from step-12. A good part of the program is therefore very similar
- * to step-20 and we will not comment again on these parts. Only the new stuff
- * will be discussed in more detail.
- * 
 
- * 
- * 
- * <a name="Includefiles"></a> 
- * <h3>Include files</h3>
- * 
+  其中中心 $\mathbf{x}_i$ 是域内随机选择的 $N$ 位置。这个函数模拟了一个领域，其中有 $N$ 个渗透率较高的中心（例如，岩石开裂的地方）嵌入到一个更原始的、未受干扰的背景岩石矩阵中。请注意，在这里我们已经切断了渗透率函数的上方和下方，以确保条件数的约束。  </ul>  <a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * All of these include files have been used before:
- * 
- * @code
- * #include <deal.II/base/quadrature_lib.h>
- * #include <deal.II/base/logstream.h>
- * #include <deal.II/base/function.h>
- * 
- * #include <deal.II/lac/block_vector.h>
- * #include <deal.II/lac/full_matrix.h>
- * #include <deal.II/lac/block_sparse_matrix.h>
- * #include <deal.II/lac/solver_cg.h>
- * #include <deal.II/lac/precondition.h>
- * #include <deal.II/lac/affine_constraints.h>
- * 
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/grid_tools.h>
- * 
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/dofs/dof_renumbering.h>
- * #include <deal.II/dofs/dof_tools.h>
- * 
- * #include <deal.II/fe/fe_raviart_thomas.h>
- * #include <deal.II/fe/fe_dgq.h>
- * #include <deal.II/fe/fe_system.h>
- * #include <deal.II/fe/fe_values.h>
- * 
- * #include <deal.II/numerics/vector_tools.h>
- * #include <deal.II/numerics/matrix_tools.h>
- * #include <deal.II/numerics/data_out.h>
- * 
- * #include <iostream>
- * #include <fstream>
- * 
- * @endcode
- * 
- * In this program, we use a tensor-valued coefficient. Since it may have a
- * spatial dependence, we consider it a tensor-valued function. The following
- * include file provides the <code>TensorFunction</code> class that offers
- * such functionality:
- * 
- * @code
- * #include <deal.II/base/tensor_function.h>
- * 
- * @endcode
- * 
- * Additionally, we use the class <code>DiscreteTime</code> to perform
- * operations related to time incrementation.
- * 
- * @code
- * #include <deal.II/base/discrete_time.h>
- * 
- * @endcode
- * 
- * The last step is as in all previous programs:
- * 
- * @code
- * namespace Step21
- * {
- *   using namespace dealii;
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeTwoPhaseFlowProblemcodeclass"></a> 
- * <h3>The <code>TwoPhaseFlowProblem</code> class</h3>
- * 
+这个程序是对  step-20  的改编，包括一些来自  step-12  的DG方法的技术。因此，该程序的很大一部分与  step-20  非常相似，我们将不再对这些部分进行评论。只有新的东西会被更详细地讨论。
 
- * 
- * This is the main class of the program. It is close to the one of step-20,
- * but with a few additional functions:
- *   
 
- * 
- * <ul> <li><code>assemble_rhs_S</code> assembles the right hand side of the
- * saturation equation. As explained in the introduction, this can't be
- * integrated into <code>assemble_rhs</code> since it depends on the
- * velocity that is computed in the first part of the time step.
- *   
 
- * 
- * <li><code>get_maximal_velocity</code> does as its name suggests. This
- * function is used in the computation of the time step size.
- *   
 
- * 
- * <li><code>project_back_saturation</code> resets all saturation degrees
- * of freedom with values less than zero to zero, and all those with
- * saturations greater than one to one.  </ul>
- *   
 
- * 
- * The rest of the class should be pretty much obvious. The
- * <code>viscosity</code> variable stores the viscosity $\mu$ that enters
- * several of the formulas in the nonlinear equations. The variable
- * <code>time</code> keeps track of the time information within the
- * simulation.
- * 
- * @code
- *   template <int dim>
- *   class TwoPhaseFlowProblem
- *   {
- *   public:
- *     TwoPhaseFlowProblem(const unsigned int degree);
- *     void run();
- * 
- *   private:
- *     void   make_grid_and_dofs();
- *     void   assemble_system();
- *     void   assemble_rhs_S();
- *     double get_maximal_velocity() const;
- *     void   solve();
- *     void   project_back_saturation();
- *     void   output_results() const;
- * 
- *     const unsigned int degree;
- * 
- *     Triangulation<dim> triangulation;
- *     FESystem<dim>      fe;
- *     DoFHandler<dim>    dof_handler;
- * 
- *     BlockSparsityPattern      sparsity_pattern;
- *     BlockSparseMatrix<double> system_matrix;
- * 
- *     const unsigned int n_refinement_steps;
- * 
- *     DiscreteTime time;
- *     double       viscosity;
- * 
- *     BlockVector<double> solution;
- *     BlockVector<double> old_solution;
- *     BlockVector<double> system_rhs;
- *   };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Equationdata"></a> 
- * <h3>Equation data</h3>
- * 
+<a name="Includefiles"></a> <h3>Include files</h3>
 
- * 
- * 
- * <a name="Pressurerighthandside"></a> 
- * <h4>Pressure right hand side</h4>
- * 
 
- * 
- * At present, the right hand side of the pressure equation is simply the
- * zero function. However, the rest of the program is fully equipped to deal
- * with anything else, if this is desired:
- * 
- * @code
- *   template <int dim>
- *   class PressureRightHandSide : public Function<dim>
- *   {
- *   public:
- *     PressureRightHandSide()
- *       : Function<dim>(1)
- *     {}
- * 
- *     virtual double value(const Point<dim> & /*p*/,
- *                          const unsigned int /*component*/ = 0) const override
- *     {
- *       return 0;
- *     }
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Pressureboundaryvalues"></a> 
- * <h4>Pressure boundary values</h4>
- * 
 
- * 
- * The next are pressure boundary values. As mentioned in the introduction,
- * we choose a linear pressure field:
- * 
- * @code
- *   template <int dim>
- *   class PressureBoundaryValues : public Function<dim>
- *   {
- *   public:
- *     PressureBoundaryValues()
- *       : Function<dim>(1)
- *     {}
- * 
- *     virtual double value(const Point<dim> &p,
- *                          const unsigned int /*component*/ = 0) const override
- *     {
- *       return 1 - p[0];
- *     }
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Saturationboundaryvalues"></a> 
- * <h4>Saturation boundary values</h4>
- * 
 
- * 
- * Then we also need boundary values on the inflow portions of the
- * boundary. The question whether something is an inflow part is decided
- * when assembling the right hand side, we only have to provide a functional
- * description of the boundary values. This is as explained in the
- * introduction:
- * 
- * @code
- *   template <int dim>
- *   class SaturationBoundaryValues : public Function<dim>
- *   {
- *   public:
- *     SaturationBoundaryValues()
- *       : Function<dim>(1)
- *     {}
- * 
- *     virtual double value(const Point<dim> &p,
- *                          const unsigned int /*component*/ = 0) const override
- *     {
- *       if (p[0] == 0)
- *         return 1;
- *       else
- *         return 0;
- *     }
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Initialdata"></a> 
- * <h4>Initial data</h4>
- * 
+所有这些包含文件以前都被使用过。
 
- * 
- * Finally, we need initial data. In reality, we only need initial data for
- * the saturation, but we are lazy, so we will later, before the first time
- * step, simply interpolate the entire solution for the previous time step
- * from a function that contains all vector components.
- *   
+@code
+#include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/logstream.h>
+#include <deal.II/base/function.h>
 
- * 
- * We therefore simply create a function that returns zero in all
- * components. We do that by simply forward every function to the
- * Functions::ZeroFunction class. Why not use that right away in the places of
- * this program where we presently use the <code>InitialValues</code> class?
- * Because this way it is simpler to later go back and choose a different
- * function for initial values.
- * 
- * @code
- *   template <int dim>
- *   class InitialValues : public Function<dim>
- *   {
- *   public:
- *     InitialValues()
- *       : Function<dim>(dim + 2)
- *     {}
- * 
- *     virtual double value(const Point<dim> & p,
- *                          const unsigned int component = 0) const override
- *     {
- *       return Functions::ZeroFunction<dim>(dim + 2).value(p, component);
- *     }
- * 
- *     virtual void vector_value(const Point<dim> &p,
- *                               Vector<double> &  values) const override
- *     {
- *       Functions::ZeroFunction<dim>(dim + 2).vector_value(p, values);
- *     }
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Theinversepermeabilitytensor"></a> 
- * <h3>The inverse permeability tensor</h3>
- * 
 
- * 
- * As announced in the introduction, we implement two different permeability
- * tensor fields. Each of them we put into a namespace of its own, so that
- * it will be easy later to replace use of one by the other in the code.
- * 
+#include <deal.II/lac/block_vector.h>
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/block_sparse_matrix.h>
+#include <deal.II/lac/solver_cg.h>
+#include <deal.II/lac/precondition.h>
+#include <deal.II/lac/affine_constraints.h>
 
- * 
- * 
- * <a name="Singlecurvingcrackpermeability"></a> 
- * <h4>Single curving crack permeability</h4>
- * 
 
- * 
- * The first function for the permeability was the one that models a single
- * curving crack. It was already used at the end of step-20, and its
- * functional form is given in the introduction of the present tutorial
- * program. As in some previous programs, we have to declare a (seemingly
- * unnecessary) default constructor of the KInverse class to avoid warnings
- * from some compilers:
- * 
- * @code
- *   namespace SingleCurvingCrack
- *   {
- *     template <int dim>
- *     class KInverse : public TensorFunction<2, dim>
- *     {
- *     public:
- *       KInverse()
- *         : TensorFunction<2, dim>()
- *       {}
- * 
- *       virtual void
- *       value_list(const std::vector<Point<dim>> &points,
- *                  std::vector<Tensor<2, dim>> &  values) const override
- *       {
- *         Assert(points.size() == values.size(),
- *                ExcDimensionMismatch(points.size(), values.size()));
- * 
- *         for (unsigned int p = 0; p < points.size(); ++p)
- *           {
- *             values[p].clear();
- * 
- *             const double distance_to_flowline =
- *               std::fabs(points[p][1] - 0.5 - 0.1 * std::sin(10 * points[p][0]));
- * 
- *             const double permeability =
- *               std::max(std::exp(-(distance_to_flowline * distance_to_flowline) /
- *                                 (0.1 * 0.1)),
- *                        0.01);
- * 
- *             for (unsigned int d = 0; d < dim; ++d)
- *               values[p][d][d] = 1. / permeability;
- *           }
- *       }
- *     };
- *   } // namespace SingleCurvingCrack
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Randommediumpermeability"></a> 
- * <h4>Random medium permeability</h4>
- * 
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/grid_tools.h>
 
- * 
- * This function does as announced in the introduction, i.e. it creates an
- * overlay of exponentials at random places. There is one thing worth
- * considering for this class. The issue centers around the problem that the
- * class creates the centers of the exponentials using a random function. If
- * we therefore created the centers each time we create an object of the
- * present type, we would get a different list of centers each time. That's
- * not what we expect from classes of this type: they should reliably
- * represent the same function.
- *   
 
- * 
- * The solution to this problem is to make the list of centers a static
- * member variable of this class, i.e. there exists exactly one such
- * variable for the entire program, rather than for each object of this
- * type. That's exactly what we are going to do.
- *   
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/dofs/dof_renumbering.h>
+#include <deal.II/dofs/dof_tools.h>
 
- * 
- * The next problem, however, is that we need a way to initialize this
- * variable. Since this variable is initialized at the beginning of the
- * program, we can't use a regular member function for that since there may
- * not be an object of this type around at the time. The C++ standard
- * therefore says that only non-member and static member functions can be
- * used to initialize a static variable. We use the latter possibility by
- * defining a function <code>get_centers</code> that computes the list of
- * center points when called.
- *   
 
- * 
- * Note that this class works just fine in both 2d and 3d, with the only
- * difference being that we use more points in 3d: by experimenting we find
- * that we need more exponentials in 3d than in 2d (we have more ground to
- * cover, after all, if we want to keep the distance between centers roughly
- * equal), so we choose 40 in 2d and 100 in 3d. For any other dimension, the
- * function does presently not know what to do so simply throws an exception
- * indicating exactly this.
- * 
- * @code
- *   namespace RandomMedium
- *   {
- *     template <int dim>
- *     class KInverse : public TensorFunction<2, dim>
- *     {
- *     public:
- *       KInverse()
- *         : TensorFunction<2, dim>()
- *       {}
- * 
- *       virtual void
- *       value_list(const std::vector<Point<dim>> &points,
- *                  std::vector<Tensor<2, dim>> &  values) const override
- *       {
- *         Assert(points.size() == values.size(),
- *                ExcDimensionMismatch(points.size(), values.size()));
- * 
- *         for (unsigned int p = 0; p < points.size(); ++p)
- *           {
- *             values[p].clear();
- * 
- *             double permeability = 0;
- *             for (unsigned int i = 0; i < centers.size(); ++i)
- *               permeability += std::exp(-(points[p] - centers[i]).norm_square() /
- *                                        (0.05 * 0.05));
- * 
- *             const double normalized_permeability =
- *               std::min(std::max(permeability, 0.01), 4.);
- * 
- *             for (unsigned int d = 0; d < dim; ++d)
- *               values[p][d][d] = 1. / normalized_permeability;
- *           }
- *       }
- * 
- *     private:
- *       static std::vector<Point<dim>> centers;
- * 
- *       static std::vector<Point<dim>> get_centers()
- *       {
- *         const unsigned int N =
- *           (dim == 2 ? 40 : (dim == 3 ? 100 : throw ExcNotImplemented()));
- * 
- *         std::vector<Point<dim>> centers_list(N);
- *         for (unsigned int i = 0; i < N; ++i)
- *           for (unsigned int d = 0; d < dim; ++d)
- *             centers_list[i][d] = static_cast<double>(rand()) / RAND_MAX;
- * 
- *         return centers_list;
- *       }
- *     };
- * 
- * 
- * 
- *     template <int dim>
- *     std::vector<Point<dim>>
- *       KInverse<dim>::centers = KInverse<dim>::get_centers();
- *   } // namespace RandomMedium
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Theinversemobilityandsaturationfunctions"></a> 
- * <h3>The inverse mobility and saturation functions</h3>
- * 
+#include <deal.II/fe/fe_raviart_thomas.h>
+#include <deal.II/fe/fe_dgq.h>
+#include <deal.II/fe/fe_system.h>
+#include <deal.II/fe/fe_values.h>
 
- * 
- * There are two more pieces of data that we need to describe, namely the
- * inverse mobility function and the saturation curve. Their form is also
- * given in the introduction:
- * 
- * @code
- *   double mobility_inverse(const double S, const double viscosity)
- *   {
- *     return 1.0 / (1.0 / viscosity * S * S + (1 - S) * (1 - S));
- *   }
- * 
- *   double fractional_flow(const double S, const double viscosity)
- *   {
- *     return S * S / (S * S + viscosity * (1 - S) * (1 - S));
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Linearsolversandpreconditioners"></a> 
- * <h3>Linear solvers and preconditioners</h3>
- * 
 
- * 
- * The linear solvers we use are also completely analogous to the ones used
- * in step-20. The following classes are therefore copied verbatim from
- * there. Note that the classes here are not only copied from
- * step-20, but also duplicate classes in deal.II. In a future version of this
- * example, they should be replaced by an efficient method, though. There is a
- * single change: if the size of a linear system is small, i.e. when the mesh
- * is very coarse, then it is sometimes not sufficient to set a maximum of
- * <code>src.size()</code> CG iterations before the solver in the
- * <code>vmult()</code> function converges. (This is, of course, a result of
- * numerical round-off, since we know that on paper, the CG method converges
- * in at most <code>src.size()</code> steps.) As a consequence, we set the
- * maximum number of iterations equal to the maximum of the size of the linear
- * system and 200.
- * 
- * @code
- *   template <class MatrixType>
- *   class InverseMatrix : public Subscriptor
- *   {
- *   public:
- *     InverseMatrix(const MatrixType &m)
- *       : matrix(&m)
- *     {}
- * 
- *     void vmult(Vector<double> &dst, const Vector<double> &src) const
- *     {
- *       SolverControl solver_control(std::max<unsigned int>(src.size(), 200),
- *                                    1e-8 * src.l2_norm());
- *       SolverCG<Vector<double>> cg(solver_control);
- * 
- *       dst = 0;
- * 
- *       cg.solve(*matrix, dst, src, PreconditionIdentity());
- *     }
- * 
- *   private:
- *     const SmartPointer<const MatrixType> matrix;
- *   };
- * 
- * 
- * 
- *   class SchurComplement : public Subscriptor
- *   {
- *   public:
- *     SchurComplement(const BlockSparseMatrix<double> &          A,
- *                     const InverseMatrix<SparseMatrix<double>> &Minv)
- *       : system_matrix(&A)
- *       , m_inverse(&Minv)
- *       , tmp1(A.block(0, 0).m())
- *       , tmp2(A.block(0, 0).m())
- *     {}
- * 
- *     void vmult(Vector<double> &dst, const Vector<double> &src) const
- *     {
- *       system_matrix->block(0, 1).vmult(tmp1, src);
- *       m_inverse->vmult(tmp2, tmp1);
- *       system_matrix->block(1, 0).vmult(dst, tmp2);
- *     }
- * 
- *   private:
- *     const SmartPointer<const BlockSparseMatrix<double>>           system_matrix;
- *     const SmartPointer<const InverseMatrix<SparseMatrix<double>>> m_inverse;
- * 
- *     mutable Vector<double> tmp1, tmp2;
- *   };
- * 
- * 
- * 
- *   class ApproximateSchurComplement : public Subscriptor
- *   {
- *   public:
- *     ApproximateSchurComplement(const BlockSparseMatrix<double> &A)
- *       : system_matrix(&A)
- *       , tmp1(A.block(0, 0).m())
- *       , tmp2(A.block(0, 0).m())
- *     {}
- * 
- *     void vmult(Vector<double> &dst, const Vector<double> &src) const
- *     {
- *       system_matrix->block(0, 1).vmult(tmp1, src);
- *       system_matrix->block(0, 0).precondition_Jacobi(tmp2, tmp1);
- *       system_matrix->block(1, 0).vmult(dst, tmp2);
- *     }
- * 
- *   private:
- *     const SmartPointer<const BlockSparseMatrix<double>> system_matrix;
- * 
- *     mutable Vector<double> tmp1, tmp2;
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="codeTwoPhaseFlowProblemcodeclassimplementation"></a> 
- * <h3><code>TwoPhaseFlowProblem</code> class implementation</h3>
- * 
+#include <deal.II/numerics/vector_tools.h>
+#include <deal.II/numerics/matrix_tools.h>
+#include <deal.II/numerics/data_out.h>
 
- * 
- * Here now the implementation of the main class. Much of it is actually
- * copied from step-20, so we won't comment on it in much detail. You should
- * try to get familiar with that program first, then most of what is
- * happening here should be mostly clear.
- * 
 
- * 
- * 
- * <a name="TwoPhaseFlowProblemTwoPhaseFlowProblem"></a> 
- * <h4>TwoPhaseFlowProblem::TwoPhaseFlowProblem</h4>
- * 
+#include <iostream>
+#include <fstream>
 
- * 
- * First for the constructor. We use $RT_k \times DQ_k \times DQ_k$
- * spaces. For initializing the DiscreteTime object, we don't set the time
- * step size in the constructor because we don't have its value yet.
- * The time step size is initially set to zero, but it will be computed
- * before it is needed to increment time, as described in a subsection of
- * the introduction. The time object internally prevents itself from being
- * incremented when $dt = 0$, forcing us to set a non-zero desired size for
- * $dt$ before advancing time.
- * 
- * @code
- *   template <int dim>
- *   TwoPhaseFlowProblem<dim>::TwoPhaseFlowProblem(const unsigned int degree)
- *     : degree(degree)
- *     , fe(FE_RaviartThomas<dim>(degree),
- *          1,
- *          FE_DGQ<dim>(degree),
- *          1,
- *          FE_DGQ<dim>(degree),
- *          1)
- *     , dof_handler(triangulation)
- *     , n_refinement_steps(5)
- *     , time(/*start time*/ 0., /*end time*/ 1.)
- *     , viscosity(0.2)
- *   {}
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TwoPhaseFlowProblemmake_grid_and_dofs"></a> 
- * <h4>TwoPhaseFlowProblem::make_grid_and_dofs</h4>
- * 
 
- * 
- * This next function starts out with well-known functions calls that create
- * and refine a mesh, and then associate degrees of freedom with it. It does
- * all the same things as in step-20, just now for three components instead
- * of two.
- * 
- * @code
- *   template <int dim>
- *   void TwoPhaseFlowProblem<dim>::make_grid_and_dofs()
- *   {
- *     GridGenerator::hyper_cube(triangulation, 0, 1);
- *     triangulation.refine_global(n_refinement_steps);
- * 
- *     dof_handler.distribute_dofs(fe);
- *     DoFRenumbering::component_wise(dof_handler);
- * 
- *     const std::vector<types::global_dof_index> dofs_per_component =
- *       DoFTools::count_dofs_per_fe_component(dof_handler);
- *     const unsigned int n_u = dofs_per_component[0],
- *                        n_p = dofs_per_component[dim],
- *                        n_s = dofs_per_component[dim + 1];
- * 
- *     std::cout << "Number of active cells: " << triangulation.n_active_cells()
- *               << std::endl
- *               << "Number of degrees of freedom: " << dof_handler.n_dofs()
- *               << " (" << n_u << '+' << n_p << '+' << n_s << ')' << std::endl
- *               << std::endl;
- * 
- *     const unsigned int n_couplings = dof_handler.max_couplings_between_dofs();
- * 
- *     sparsity_pattern.reinit(3, 3);
- *     sparsity_pattern.block(0, 0).reinit(n_u, n_u, n_couplings);
- *     sparsity_pattern.block(1, 0).reinit(n_p, n_u, n_couplings);
- *     sparsity_pattern.block(2, 0).reinit(n_s, n_u, n_couplings);
- *     sparsity_pattern.block(0, 1).reinit(n_u, n_p, n_couplings);
- *     sparsity_pattern.block(1, 1).reinit(n_p, n_p, n_couplings);
- *     sparsity_pattern.block(2, 1).reinit(n_s, n_p, n_couplings);
- *     sparsity_pattern.block(0, 2).reinit(n_u, n_s, n_couplings);
- *     sparsity_pattern.block(1, 2).reinit(n_p, n_s, n_couplings);
- *     sparsity_pattern.block(2, 2).reinit(n_s, n_s, n_couplings);
- * 
- *     sparsity_pattern.collect_sizes();
- * 
- *     DoFTools::make_sparsity_pattern(dof_handler, sparsity_pattern);
- *     sparsity_pattern.compress();
- * 
- * 
- *     system_matrix.reinit(sparsity_pattern);
- * 
- * 
- *     solution.reinit(3);
- *     solution.block(0).reinit(n_u);
- *     solution.block(1).reinit(n_p);
- *     solution.block(2).reinit(n_s);
- *     solution.collect_sizes();
- * 
- *     old_solution.reinit(3);
- *     old_solution.block(0).reinit(n_u);
- *     old_solution.block(1).reinit(n_p);
- *     old_solution.block(2).reinit(n_s);
- *     old_solution.collect_sizes();
- * 
- *     system_rhs.reinit(3);
- *     system_rhs.block(0).reinit(n_u);
- *     system_rhs.block(1).reinit(n_p);
- *     system_rhs.block(2).reinit(n_s);
- *     system_rhs.collect_sizes();
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TwoPhaseFlowProblemassemble_system"></a> 
- * <h4>TwoPhaseFlowProblem::assemble_system</h4>
- * 
+@endcode 
 
- * 
- * This is the function that assembles the linear system, or at least
- * everything except the (1,3) block that depends on the still-unknown
- * velocity computed during this time step (we deal with this in
- * <code>assemble_rhs_S</code>). Much of it is again as in step-20, but we
- * have to deal with some nonlinearity this time.  However, the top of the
- * function is pretty much as usual (note that we set matrix and right hand
- * side to zero at the beginning &mdash; something we didn't have to do for
- * stationary problems since there we use each matrix object only once and
- * it is empty at the beginning anyway).
- *   
 
- * 
- * Note that in its present form, the function uses the permeability
- * implemented in the RandomMedium::KInverse class. Switching to the single
- * curved crack permeability function is as simple as just changing the
- * namespace name.
- * 
- * @code
- *   template <int dim>
- *   void TwoPhaseFlowProblem<dim>::assemble_system()
- *   {
- *     system_matrix = 0;
- *     system_rhs    = 0;
- * 
- *     QGauss<dim>     quadrature_formula(degree + 2);
- *     QGauss<dim - 1> face_quadrature_formula(degree + 2);
- * 
- *     FEValues<dim>     fe_values(fe,
- *                             quadrature_formula,
- *                             update_values | update_gradients |
- *                               update_quadrature_points | update_JxW_values);
- *     FEFaceValues<dim> fe_face_values(fe,
- *                                      face_quadrature_formula,
- *                                      update_values | update_normal_vectors |
- *                                        update_quadrature_points |
- *                                        update_JxW_values);
- * 
- *     const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
- * 
- *     const unsigned int n_q_points      = quadrature_formula.size();
- *     const unsigned int n_face_q_points = face_quadrature_formula.size();
- * 
- *     FullMatrix<double> local_matrix(dofs_per_cell, dofs_per_cell);
- *     Vector<double>     local_rhs(dofs_per_cell);
- * 
- *     std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
- * 
- *     const PressureRightHandSide<dim>  pressure_right_hand_side;
- *     const PressureBoundaryValues<dim> pressure_boundary_values;
- *     const RandomMedium::KInverse<dim> k_inverse;
- * 
- *     std::vector<double>         pressure_rhs_values(n_q_points);
- *     std::vector<double>         boundary_values(n_face_q_points);
- *     std::vector<Tensor<2, dim>> k_inverse_values(n_q_points);
- * 
- *     std::vector<Vector<double>>              old_solution_values(n_q_points,
- *                                                                  Vector<double>(dim + 2));
- *     std::vector<std::vector<Tensor<1, dim>>> old_solution_grads(
- *       n_q_points, std::vector<Tensor<1, dim>>(dim + 2));
- * 
- *     const FEValuesExtractors::Vector velocities(0);
- *     const FEValuesExtractors::Scalar pressure(dim);
- *     const FEValuesExtractors::Scalar saturation(dim + 1);
- * 
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       {
- *         fe_values.reinit(cell);
- *         local_matrix = 0;
- *         local_rhs    = 0;
- * 
- * @endcode
- * 
- * Here's the first significant difference: We have to get the values
- * of the saturation function of the previous time step at the
- * quadrature points. To this end, we can use the
- * FEValues::get_function_values (previously already used in step-9,
- * step-14 and step-15), a function that takes a solution vector and
- * returns a list of function values at the quadrature points of the
- * present cell. In fact, it returns the complete vector-valued
- * solution at each quadrature point, i.e. not only the saturation but
- * also the velocities and pressure:
- * 
- * @code
- *         fe_values.get_function_values(old_solution, old_solution_values);
- * 
- * @endcode
- * 
- * Then we also have to get the values of the pressure right hand side
- * and of the inverse permeability tensor at the quadrature points:
- * 
- * @code
- *         pressure_right_hand_side.value_list(fe_values.get_quadrature_points(),
- *                                             pressure_rhs_values);
- *         k_inverse.value_list(fe_values.get_quadrature_points(),
- *                              k_inverse_values);
- * 
- * @endcode
- * 
- * With all this, we can now loop over all the quadrature points and
- * shape functions on this cell and assemble those parts of the matrix
- * and right hand side that we deal with in this function. The
- * individual terms in the contributions should be self-explanatory
- * given the explicit form of the bilinear form stated in the
- * introduction:
- * 
- * @code
- *         for (unsigned int q = 0; q < n_q_points; ++q)
- *           for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *             {
- *               const double old_s = old_solution_values[q](dim + 1);
- * 
- *               const Tensor<1, dim> phi_i_u = fe_values[velocities].value(i, q);
- *               const double div_phi_i_u = fe_values[velocities].divergence(i, q);
- *               const double phi_i_p     = fe_values[pressure].value(i, q);
- *               const double phi_i_s     = fe_values[saturation].value(i, q);
- * 
- *               for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *                 {
- *                   const Tensor<1, dim> phi_j_u =
- *                     fe_values[velocities].value(j, q);
- *                   const double div_phi_j_u =
- *                     fe_values[velocities].divergence(j, q);
- *                   const double phi_j_p = fe_values[pressure].value(j, q);
- *                   const double phi_j_s = fe_values[saturation].value(j, q);
- * 
- *                   local_matrix(i, j) +=
- *                     (phi_i_u * k_inverse_values[q] *
- *                        mobility_inverse(old_s, viscosity) * phi_j_u -
- *                      div_phi_i_u * phi_j_p - phi_i_p * div_phi_j_u +
- *                      phi_i_s * phi_j_s) *
- *                     fe_values.JxW(q);
- *                 }
- * 
- *               local_rhs(i) +=
- *                 (-phi_i_p * pressure_rhs_values[q]) * fe_values.JxW(q);
- *             }
- * 
- * 
- * @endcode
- * 
- * Next, we also have to deal with the pressure boundary values. This,
- * again is as in step-20:
- * 
- * @code
- *         for (const auto &face : cell->face_iterators())
- *           if (face->at_boundary())
- *             {
- *               fe_face_values.reinit(cell, face);
- * 
- *               pressure_boundary_values.value_list(
- *                 fe_face_values.get_quadrature_points(), boundary_values);
- * 
- *               for (unsigned int q = 0; q < n_face_q_points; ++q)
- *                 for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *                   {
- *                     const Tensor<1, dim> phi_i_u =
- *                       fe_face_values[velocities].value(i, q);
- * 
- *                     local_rhs(i) +=
- *                       -(phi_i_u * fe_face_values.normal_vector(q) *
- *                         boundary_values[q] * fe_face_values.JxW(q));
- *                   }
- *             }
- * 
- * @endcode
- * 
- * The final step in the loop over all cells is to transfer local
- * contributions into the global matrix and right hand side vector:
- * 
- * @code
- *         cell->get_dof_indices(local_dof_indices);
- *         for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *           for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *             system_matrix.add(local_dof_indices[i],
- *                               local_dof_indices[j],
- *                               local_matrix(i, j));
- * 
- *         for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *           system_rhs(local_dof_indices[i]) += local_rhs(i);
- *       }
- *   }
- * 
- * 
- * @endcode
- * 
- * So much for assembly of matrix and right hand side. Note that we do not
- * have to interpolate and apply boundary values since they have all been
- * taken care of in the weak form already.
- * 
 
- * 
- * 
+在这个程序中，我们使用一个张量值的系数。由于它可能具有空间依赖性，我们认为它是一个张量值的函数。下面的include文件提供了提供这种功能的 <code>TensorFunction</code> 类。
 
- * 
- * 
- * <a name="TwoPhaseFlowProblemassemble_rhs_S"></a> 
- * <h4>TwoPhaseFlowProblem::assemble_rhs_S</h4>
- * 
+@code
+#include <deal.II/base/tensor_function.h>
 
- * 
- * As explained in the introduction, we can only evaluate the right hand
- * side of the saturation equation once the velocity has been computed. We
- * therefore have this separate function to this end.
- * 
- * @code
- *   template <int dim>
- *   void TwoPhaseFlowProblem<dim>::assemble_rhs_S()
- *   {
- *     QGauss<dim>       quadrature_formula(degree + 2);
- *     QGauss<dim - 1>   face_quadrature_formula(degree + 2);
- *     FEValues<dim>     fe_values(fe,
- *                             quadrature_formula,
- *                             update_values | update_gradients |
- *                               update_quadrature_points | update_JxW_values);
- *     FEFaceValues<dim> fe_face_values(fe,
- *                                      face_quadrature_formula,
- *                                      update_values | update_normal_vectors |
- *                                        update_quadrature_points |
- *                                        update_JxW_values);
- *     FEFaceValues<dim> fe_face_values_neighbor(fe,
- *                                               face_quadrature_formula,
- *                                               update_values);
- * 
- *     const unsigned int dofs_per_cell   = fe.n_dofs_per_cell();
- *     const unsigned int n_q_points      = quadrature_formula.size();
- *     const unsigned int n_face_q_points = face_quadrature_formula.size();
- * 
- *     Vector<double> local_rhs(dofs_per_cell);
- * 
- *     std::vector<Vector<double>> old_solution_values(n_q_points,
- *                                                     Vector<double>(dim + 2));
- *     std::vector<Vector<double>> old_solution_values_face(n_face_q_points,
- *                                                          Vector<double>(dim +
- *                                                                         2));
- *     std::vector<Vector<double>> old_solution_values_face_neighbor(
- *       n_face_q_points, Vector<double>(dim + 2));
- *     std::vector<Vector<double>> present_solution_values(n_q_points,
- *                                                         Vector<double>(dim +
- *                                                                        2));
- *     std::vector<Vector<double>> present_solution_values_face(
- *       n_face_q_points, Vector<double>(dim + 2));
- * 
- *     std::vector<double>                  neighbor_saturation(n_face_q_points);
- *     std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
- * 
- *     SaturationBoundaryValues<dim> saturation_boundary_values;
- * 
- *     const FEValuesExtractors::Scalar saturation(dim + 1);
- * 
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       {
- *         local_rhs = 0;
- *         fe_values.reinit(cell);
- * 
- *         fe_values.get_function_values(old_solution, old_solution_values);
- *         fe_values.get_function_values(solution, present_solution_values);
- * 
- * @endcode
- * 
- * First for the cell terms. These are, following the formulas in the
- * introduction, $(S^n,\sigma)-(F(S^n) \mathbf{v}^{n+1},\nabla
- * \sigma)$, where $\sigma$ is the saturation component of the test
- * function:
- * 
- * @code
- *         for (unsigned int q = 0; q < n_q_points; ++q)
- *           for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *             {
- *               const double   old_s = old_solution_values[q](dim + 1);
- *               Tensor<1, dim> present_u;
- *               for (unsigned int d = 0; d < dim; ++d)
- *                 present_u[d] = present_solution_values[q](d);
- * 
- *               const double         phi_i_s = fe_values[saturation].value(i, q);
- *               const Tensor<1, dim> grad_phi_i_s =
- *                 fe_values[saturation].gradient(i, q);
- * 
- *               local_rhs(i) +=
- *                 (time.get_next_step_size() * fractional_flow(old_s, viscosity) *
- *                    present_u * grad_phi_i_s +
- *                  old_s * phi_i_s) *
- *                 fe_values.JxW(q);
- *             }
- * 
- * @endcode
- * 
- * Secondly, we have to deal with the flux parts on the face
- * boundaries. This was a bit more involved because we first have to
- * determine which are the influx and outflux parts of the cell
- * boundary. If we have an influx boundary, we need to evaluate the
- * saturation on the other side of the face (or the boundary values,
- * if we are at the boundary of the domain).
- *         
 
- * 
- * All this is a bit tricky, but has been explained in some detail
- * already in step-9. Take a look there how this is supposed to work!
- * 
- * @code
- *         for (const auto face_no : cell->face_indices())
- *           {
- *             fe_face_values.reinit(cell, face_no);
- * 
- *             fe_face_values.get_function_values(old_solution,
- *                                                old_solution_values_face);
- *             fe_face_values.get_function_values(solution,
- *                                                present_solution_values_face);
- * 
- *             if (cell->at_boundary(face_no))
- *               saturation_boundary_values.value_list(
- *                 fe_face_values.get_quadrature_points(), neighbor_saturation);
- *             else
- *               {
- *                 const auto         neighbor = cell->neighbor(face_no);
- *                 const unsigned int neighbor_face =
- *                   cell->neighbor_of_neighbor(face_no);
- * 
- *                 fe_face_values_neighbor.reinit(neighbor, neighbor_face);
- * 
- *                 fe_face_values_neighbor.get_function_values(
- *                   old_solution, old_solution_values_face_neighbor);
- * 
- *                 for (unsigned int q = 0; q < n_face_q_points; ++q)
- *                   neighbor_saturation[q] =
- *                     old_solution_values_face_neighbor[q](dim + 1);
- *               }
- * 
- * 
- *             for (unsigned int q = 0; q < n_face_q_points; ++q)
- *               {
- *                 Tensor<1, dim> present_u_face;
- *                 for (unsigned int d = 0; d < dim; ++d)
- *                   present_u_face[d] = present_solution_values_face[q](d);
- * 
- *                 const double normal_flux =
- *                   present_u_face * fe_face_values.normal_vector(q);
- * 
- *                 const bool is_outflow_q_point = (normal_flux >= 0);
- * 
- *                 for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *                   local_rhs(i) -=
- *                     time.get_next_step_size() * normal_flux *
- *                     fractional_flow((is_outflow_q_point == true ?
- *                                        old_solution_values_face[q](dim + 1) :
- *                                        neighbor_saturation[q]),
- *                                     viscosity) *
- *                     fe_face_values[saturation].value(i, q) *
- *                     fe_face_values.JxW(q);
- *               }
- *           }
- * 
- *         cell->get_dof_indices(local_dof_indices);
- *         for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *           system_rhs(local_dof_indices[i]) += local_rhs(i);
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TwoPhaseFlowProblemsolve"></a> 
- * <h4>TwoPhaseFlowProblem::solve</h4>
- * 
+@endcode 
 
- * 
- * After all these preparations, we finally solve the linear system for
- * velocity and pressure in the same way as in step-20. After that, we have
- * to deal with the saturation equation (see below):
- * 
- * @code
- *   template <int dim>
- *   void TwoPhaseFlowProblem<dim>::solve()
- *   {
- *     const InverseMatrix<SparseMatrix<double>> m_inverse(
- *       system_matrix.block(0, 0));
- *     Vector<double> tmp(solution.block(0).size());
- *     Vector<double> schur_rhs(solution.block(1).size());
- *     Vector<double> tmp2(solution.block(2).size());
- * 
- * 
- * @endcode
- * 
- * First the pressure, using the pressure Schur complement of the first
- * two equations:
- * 
- * @code
- *     {
- *       m_inverse.vmult(tmp, system_rhs.block(0));
- *       system_matrix.block(1, 0).vmult(schur_rhs, tmp);
- *       schur_rhs -= system_rhs.block(1);
- * 
- * 
- *       SchurComplement schur_complement(system_matrix, m_inverse);
- * 
- *       ApproximateSchurComplement approximate_schur_complement(system_matrix);
- * 
- *       InverseMatrix<ApproximateSchurComplement> preconditioner(
- *         approximate_schur_complement);
- * 
- * 
- *       SolverControl            solver_control(solution.block(1).size(),
- *                                    1e-12 * schur_rhs.l2_norm());
- *       SolverCG<Vector<double>> cg(solver_control);
- * 
- *       cg.solve(schur_complement, solution.block(1), schur_rhs, preconditioner);
- * 
- *       std::cout << "   " << solver_control.last_step()
- *                 << " CG Schur complement iterations for pressure." << std::endl;
- *     }
- * 
- * @endcode
- * 
- * Now the velocity:
- * 
- * @code
- *     {
- *       system_matrix.block(0, 1).vmult(tmp, solution.block(1));
- *       tmp *= -1;
- *       tmp += system_rhs.block(0);
- * 
- *       m_inverse.vmult(solution.block(0), tmp);
- *     }
- * 
- * @endcode
- * 
- * Finally, we have to take care of the saturation equation. The first
- * business we have here is to determine the time step using the formula
- * in the introduction. Knowing the shape of our domain and that we
- * created the mesh by regular subdivision of cells, we can compute the
- * diameter of each of our cells quite easily (in fact we use the linear
- * extensions in coordinate directions of the cells, not the
- * diameter). Note that we will learn a more general way to do this in
- * step-24, where we use the GridTools::minimal_cell_diameter function.
- *     
 
- * 
- * The maximal velocity we compute using a helper function to compute the
- * maximal velocity defined below, and with all this we can evaluate our
- * new time step length. We use the method
- * DiscreteTime::set_desired_next_time_step() to suggest the new
- * calculated value of the time step to the DiscreteTime object. In most
- * cases, the time object uses the exact provided value to increment time.
- * It some case, the step size may be modified further by the time object.
- * For example, if the calculated time increment overshoots the end time,
- * it is truncated accordingly.
- * 
- * @code
- *     time.set_desired_next_step_size(std::pow(0.5, double(n_refinement_steps)) /
- *                                     get_maximal_velocity());
- * 
- * @endcode
- * 
- * The next step is to assemble the right hand side, and then to pass
- * everything on for solution. At the end, we project back saturations
- * onto the physically reasonable range:
- * 
- * @code
- *     assemble_rhs_S();
- *     {
- *       SolverControl            solver_control(system_matrix.block(2, 2).m(),
- *                                    1e-8 * system_rhs.block(2).l2_norm());
- *       SolverCG<Vector<double>> cg(solver_control);
- *       cg.solve(system_matrix.block(2, 2),
- *                solution.block(2),
- *                system_rhs.block(2),
- *                PreconditionIdentity());
- * 
- *       project_back_saturation();
- * 
- *       std::cout << "   " << solver_control.last_step()
- *                 << " CG iterations for saturation." << std::endl;
- *     }
- * 
- * 
- *     old_solution = solution;
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TwoPhaseFlowProblemoutput_results"></a> 
- * <h4>TwoPhaseFlowProblem::output_results</h4>
- * 
 
- * 
- * There is nothing surprising here. Since the program will do a lot of time
- * steps, we create an output file only every fifth time step and skip all
- * other time steps at the top of the file already.
- *   
+此外，我们使用 <code>DiscreteTime</code> 类来执行与时间递增有关的操作。
 
- * 
- * When creating file names for output close to the bottom of the function,
- * we convert the number of the time step to a string representation that
- * is padded by leading zeros to four digits. We do this because this way
- * all output file names have the same length, and consequently sort well
- * when creating a directory listing.
- * 
- * @code
- *   template <int dim>
- *   void TwoPhaseFlowProblem<dim>::output_results() const
- *   {
- *     if (time.get_step_number() % 5 != 0)
- *       return;
- * 
- *     std::vector<std::string> solution_names;
- *     switch (dim)
- *       {
- *         case 2:
- *           solution_names = {"u", "v", "p", "S"};
- *           break;
- * 
- *         case 3:
- *           solution_names = {"u", "v", "w", "p", "S"};
- *           break;
- * 
- *         default:
- *           Assert(false, ExcNotImplemented());
- *       }
- * 
- *     DataOut<dim> data_out;
- * 
- *     data_out.attach_dof_handler(dof_handler);
- *     data_out.add_data_vector(solution, solution_names);
- * 
- *     data_out.build_patches(degree + 1);
- * 
- *     std::ofstream output("solution-" +
- *                          Utilities::int_to_string(time.get_step_number(), 4) +
- *                          ".vtk");
- *     data_out.write_vtk(output);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TwoPhaseFlowProblemproject_back_saturation"></a> 
- * <h4>TwoPhaseFlowProblem::project_back_saturation</h4>
- * 
+@code
+#include <deal.II/base/discrete_time.h>
 
- * 
- * In this function, we simply run over all saturation degrees of freedom
- * and make sure that if they should have left the physically reasonable
- * range, that they be reset to the interval $[0,1]$. To do this, we only
- * have to loop over all saturation components of the solution vector; these
- * are stored in the block 2 (block 0 are the velocities, block 1 are the
- * pressures).
- *   
 
- * 
- * It may be instructive to note that this function almost never triggers
- * when the time step is chosen as mentioned in the introduction. However,
- * if we choose the timestep only slightly larger, we get plenty of values
- * outside the proper range. Strictly speaking, the function is therefore
- * unnecessary if we choose the time step small enough. In a sense, the
- * function is therefore only a safety device to avoid situations where our
- * entire solution becomes unphysical because individual degrees of freedom
- * have become unphysical a few time steps earlier.
- * 
- * @code
- *   template <int dim>
- *   void TwoPhaseFlowProblem<dim>::project_back_saturation()
- *   {
- *     for (unsigned int i = 0; i < solution.block(2).size(); ++i)
- *       if (solution.block(2)(i) < 0)
- *         solution.block(2)(i) = 0;
- *       else if (solution.block(2)(i) > 1)
- *         solution.block(2)(i) = 1;
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TwoPhaseFlowProblemget_maximal_velocity"></a> 
- * <h4>TwoPhaseFlowProblem::get_maximal_velocity</h4>
- * 
+@endcode 
 
- * 
- * The following function is used in determining the maximal allowable time
- * step. What it does is to loop over all quadrature points in the domain
- * and find what the maximal magnitude of the velocity is.
- * 
- * @code
- *   template <int dim>
- *   double TwoPhaseFlowProblem<dim>::get_maximal_velocity() const
- *   {
- *     QGauss<dim>        quadrature_formula(degree + 2);
- *     const unsigned int n_q_points = quadrature_formula.size();
- * 
- *     FEValues<dim> fe_values(fe, quadrature_formula, update_values);
- *     std::vector<Vector<double>> solution_values(n_q_points,
- *                                                 Vector<double>(dim + 2));
- *     double                      max_velocity = 0;
- * 
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       {
- *         fe_values.reinit(cell);
- *         fe_values.get_function_values(solution, solution_values);
- * 
- *         for (unsigned int q = 0; q < n_q_points; ++q)
- *           {
- *             Tensor<1, dim> velocity;
- *             for (unsigned int i = 0; i < dim; ++i)
- *               velocity[i] = solution_values[q](i);
- * 
- *             max_velocity = std::max(max_velocity, velocity.norm());
- *           }
- *       }
- * 
- *     return max_velocity;
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TwoPhaseFlowProblemrun"></a> 
- * <h4>TwoPhaseFlowProblem::run</h4>
- * 
 
- * 
- * This is the final function of our main class. Its brevity speaks for
- * itself. There are only two points worth noting: First, the function
- * projects the initial values onto the finite element space at the
- * beginning; the VectorTools::project function doing this requires an
- * argument indicating the hanging node constraints. We have none in this
- * program (we compute on a uniformly refined mesh), but the function
- * requires the argument anyway, of course. So we have to create a
- * constraint object. In its original state, constraint objects are
- * unsorted, and have to be sorted (using the AffineConstraints::close
- * function) before they can be used. This is what we do here, and which is
- * why we can't simply call the VectorTools::project function with an
- * anonymous temporary object <code>AffineConstraints<double>()</code> as the
- * second argument.
- *   
 
- * 
- * The second point worth mentioning is that we only compute the length of
- * the present time step in the middle of solving the linear system
- * corresponding to each time step. We can therefore output the present
- * time of a time step only at the end of the time step.
- * We increment time by calling the method DiscreteTime::advance_time()
- * inside the loop. Since we are reporting the time and dt after we
- * increment it, we have to call the method
- * DiscreteTime::get_previous_step_size() instead of
- * DiscreteTime::get_next_step_size(). After many steps, when the simulation
- * reaches the end time, the last dt is chosen by the DiscreteTime class in
- * such a way that the last step finishes exactly at the end time.
- * 
- * @code
- *   template <int dim>
- *   void TwoPhaseFlowProblem<dim>::run()
- *   {
- *     make_grid_and_dofs();
- * 
- *     {
- *       AffineConstraints<double> constraints;
- *       constraints.close();
- * 
- *       VectorTools::project(dof_handler,
- *                            constraints,
- *                            QGauss<dim>(degree + 2),
- *                            InitialValues<dim>(),
- *                            old_solution);
- *     }
- * 
- *     do
- *       {
- *         std::cout << "Timestep " << time.get_step_number() + 1 << std::endl;
- * 
- *         assemble_system();
- * 
- *         solve();
- * 
- *         output_results();
- * 
- *         time.advance_time();
- *         std::cout << "   Now at t=" << time.get_current_time()
- *                   << ", dt=" << time.get_previous_step_size() << '.'
- *                   << std::endl
- *                   << std::endl;
- *       }
- *     while (time.is_at_end() == false);
- *   }
- * } // namespace Step21
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Thecodemaincodefunction"></a> 
- * <h3>The <code>main</code> function</h3>
- * 
+最后一步和以前的所有程序一样。
 
- * 
- * That's it. In the main function, we pass the degree of the finite element
- * space to the constructor of the TwoPhaseFlowProblem object.  Here, we use
- * zero-th degree elements, i.e. $RT_0\times DQ_0 \times DQ_0$. The rest is as
- * in all the other programs.
- * 
- * @code
- * int main()
- * {
- *   try
- *     {
- *       using namespace Step21;
- * 
- *       TwoPhaseFlowProblem<2> two_phase_flow_problem(0);
- *       two_phase_flow_problem.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- * 
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
+@code
+namespace Step21
+{
+  using namespace dealii;
+
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeTwoPhaseFlowProblemcodeclass"></a> <h3>The <code>TwoPhaseFlowProblem</code> class</h3>
+
+
+
+
+这是该程序的主类。它接近于 step-20 中的一个，但增加了一些功能。   
+
+
+  <ul>   <li>   <code>assemble_rhs_S</code>  组装饱和方程的右侧。正如介绍中所解释的，这不能被集成到 <code>assemble_rhs</code> 中，因为它取决于在时间步长的第一部分计算的速度。   
+
+
+  <li>   <code>get_maximal_velocity</code> 正如其名称所示。这个函数被用于计算时间步长。   
+
+
+  <li>   <code>project_back_saturation</code>  将所有饱和度小于0的自由度重置为0，所有饱和度大于1的自由度重置为1。   </ul>      
+
+
+该类的其余部分应该是非常明显的。变量 <code>viscosity</code> 存储粘度 $\mu$ ，它进入了非线性方程中的几个公式。变量 <code>time</code> 记录了模拟过程中的时间信息。
+
+@code
+  template <int dim>
+  class TwoPhaseFlowProblem
+  {
+  public:
+    TwoPhaseFlowProblem(const unsigned int degree);
+    void run();
+
+
+  private:
+    void   make_grid_and_dofs();
+    void   assemble_system();
+    void   assemble_rhs_S();
+    double get_maximal_velocity() const;
+    void   solve();
+    void   project_back_saturation();
+    void   output_results() const;
+
+
+    const unsigned int degree;
+
+
+    Triangulation<dim> triangulation;
+    FESystem<dim>      fe;
+    DoFHandler<dim>    dof_handler;
+
+
+    BlockSparsityPattern      sparsity_pattern;
+    BlockSparseMatrix<double> system_matrix;
+
+
+    const unsigned int n_refinement_steps;
+
+
+    DiscreteTime time;
+    double       viscosity;
+
+
+    BlockVector<double> solution;
+    BlockVector<double> old_solution;
+    BlockVector<double> system_rhs;
+  };
+
+
+
+@endcode 
+
+
+
+
+<a name="Equationdata"></a> <h3>Equation data</h3> 
+
+
+
+
+
+<a name="Pressurerighthandside"></a> <h4>Pressure right hand side</h4>
+
+
+
+
+目前，压力方程的右侧仅仅是零函数。然而，如果需要的话，程序的其余部分完全可以处理任何其他问题。
+
+@code
+  template <int dim>
+  class PressureRightHandSide : public Function<dim>
+  {
+  public:
+    PressureRightHandSide()
+      : Function<dim>(1)
+    {}
+
+
+    virtual double value(const Point<dim> & /*p*/,
+                         const unsigned int /*component*/ = 0) const override
+    {
+      return 0;
+    }
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Pressureboundaryvalues"></a><h4>Pressure boundary values</h4>
+
+
+
+
+接下来是压力边界值。正如介绍中提到的，我们选择一个线性压力场。
+
+@code
+  template <int dim>
+  class PressureBoundaryValues : public Function<dim>
+  {
+  public:
+    PressureBoundaryValues()
+      : Function<dim>(1)
+    {}
+
+
+    virtual double value(const Point<dim> &p,
+                         const unsigned int /*component*/ = 0) const override
+    {
+      return 1 - p[0];
+    }
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Saturationboundaryvalues"></a> <h4>Saturation boundary values</h4>
+
+
+
+
+然后我们还需要边界的流入部分的边界值。某物是否为流入部分的问题是在组装右手边时决定的，我们只需要提供边界值的函数描述。这正如介绍中所解释的。
+
+@code
+  template <int dim>
+  class SaturationBoundaryValues : public Function<dim>
+  {
+  public:
+    SaturationBoundaryValues()
+      : Function<dim>(1)
+    {}
+
+
+    virtual double value(const Point<dim> &p,
+                         const unsigned int /*component*/ = 0) const override
+    {
+      if (p[0] == 0)
+        return 1;
+      else
+        return 0;
+    }
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Initialdata"></a> <h4>Initial data</h4>
+
+
+
+
+最后，我们需要初始数据。实际上，我们只需要饱和度的初始数据，但我们很懒，所以以后在第一个时间步骤之前，我们会简单地从一个包含所有矢量分量的函数中插值出前一个时间步骤的整个解。   
+
+
+因此，我们简单地创建一个在所有分量中返回零的函数。我们通过简单地将每个函数转发到 Functions::ZeroFunction 类来做到这一点。为什么不在这个程序中我们目前使用 <code>InitialValues</code> 类的地方立即使用呢？因为这样，以后再回去选择不同的函数作为初始值就更简单了。
+
+@code
+  template <int dim>
+  class InitialValues : public Function<dim>
+  {
+  public:
+    InitialValues()
+      : Function<dim>(dim + 2)
+    {}
+
+
+    virtual double value(const Point<dim> & p,
+                         const unsigned int component = 0) const override
+    {
+      return Functions::ZeroFunction<dim>(dim + 2).value(p, component);
+    }
+
+
+    virtual void vector_value(const Point<dim> &p,
+                              Vector<double> &  values) const override
+    {
+      Functions::ZeroFunction<dim>(dim + 2).vector_value(p, values);
+    }
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Theinversepermeabilitytensor"></a> <h3>The inverse permeability tensor</h3>
+
+
+
+
+正如介绍中所宣布的，我们实现了两个不同的渗透性张量场。我们将它们各自放入一个命名空间，这样以后就可以很容易地在代码中用另一个来代替使用。
+
+
+
+
+
+<a name="Singlecurvingcrackpermeability"></a> <h4>Single curving crack permeability</h4>
+
+
+
+
+渗透率的第一个函数是模拟单个弯曲裂缝的函数。它已经在 step-20 的结尾处被使用了，它的函数形式在本教程程序的介绍中给出。和以前的一些程序一样，我们必须声明KInverse类的一个（看似不必要的）默认构造函数，以避免某些编译器的警告。
+
+@code
+  namespace SingleCurvingCrack
+  {
+    template <int dim>
+    class KInverse : public TensorFunction<2, dim>
+    {
+    public:
+      KInverse()
+        : TensorFunction<2, dim>()
+      {}
+
+
+      virtual void
+      value_list(const std::vector<Point<dim>> &points,
+                 std::vector<Tensor<2, dim>> &  values) const override
+      {
+        Assert(points.size() == values.size(),
+               ExcDimensionMismatch(points.size(), values.size()));
+
+
+        for (unsigned int p = 0; p < points.size(); ++p)
+          {
+            values[p].clear();
+
+
+            const double distance_to_flowline =
+              std::fabs(points[p][1] - 0.5 - 0.1 * std::sin(10 * points[p][0]));
+
+
+            const double permeability =
+              std::max(std::exp(-(distance_to_flowline * distance_to_flowline) /
+                                (0.1 * 0.1)),
+                       0.01);
+
+
+            for (unsigned int d = 0; d < dim; ++d)
+              values[p][d][d] = 1. / permeability;
+          }
+      }
+    };
+  } // namespace SingleCurvingCrack
+
+
+
+@endcode 
+
+
+
+
+<a name="Randommediumpermeability"></a> <h4>Random medium permeability</h4>
+
+
+
+
+这个函数的作用与介绍中公布的一样，即在随机的地方创建一个指数的叠加。对于这个类，有一件事值得考虑。这个问题的核心是该类使用随机函数创建指数中心的问题。如果我们因此在每次创建本类型的对象时都创建中心，我们每次都会得到一个不同的中心列表。这不是我们对这种类型的类的期望：它们应该可靠地代表同一个函数。   
+
+
+解决这个问题的方法是使中心列表成为这个类的静态成员变量，也就是说，整个程序中只存在一个这样的变量，而不是为这个类型的每个对象。这正是我们要做的。   
+
+
+然而，接下来的问题是，我们需要一种方法来初始化这个变量。由于这个变量是在程序开始时初始化的，我们不能为此使用普通的成员函数，因为当时身边可能没有这种类型的对象。因此C++标准规定，只有非成员函数和静态成员函数可以用来初始化静态变量。我们通过定义一个函数 <code>get_centers</code> 来使用后一种可能性，该函数在调用时计算中心点的列表。   
+
+
+请注意，这个类在2D和3D中都能正常工作，唯一的区别是我们在3D中使用了更多的点：通过实验，我们发现我们在3D中比2D中需要更多的指数（毕竟我们有更多的地方需要覆盖，如果我们想保持中心之间的距离大致相等），所以我们在2D中选择40，在3D中选择100。对于任何其他维度，该函数目前不知道该怎么做，所以只是抛出一个异常，表明这一点。
+
+@code
+  namespace RandomMedium
+  {
+    template <int dim>
+    class KInverse : public TensorFunction<2, dim>
+    {
+    public:
+      KInverse()
+        : TensorFunction<2, dim>()
+      {}
+
+
+      virtual void
+      value_list(const std::vector<Point<dim>> &points,
+                 std::vector<Tensor<2, dim>> &  values) const override
+      {
+        Assert(points.size() == values.size(),
+               ExcDimensionMismatch(points.size(), values.size()));
+
+
+        for (unsigned int p = 0; p < points.size(); ++p)
+          {
+            values[p].clear();
+
+
+            double permeability = 0;
+            for (unsigned int i = 0; i < centers.size(); ++i)
+              permeability += std::exp(-(points[p] - centers[i]).norm_square() /
+                                       (0.05 * 0.05));
+
+
+            const double normalized_permeability =
+              std::min(std::max(permeability, 0.01), 4.);
+
+
+            for (unsigned int d = 0; d < dim; ++d)
+              values[p][d][d] = 1. / normalized_permeability;
+          }
+      }
+
+
+    private:
+      static std::vector<Point<dim>> centers;
+
+
+      static std::vector<Point<dim>> get_centers()
+      {
+        const unsigned int N =
+          (dim == 2 ? 40 : (dim == 3 ? 100 : throw ExcNotImplemented()));
+
+
+        std::vector<Point<dim>> centers_list(N);
+        for (unsigned int i = 0; i < N; ++i)
+          for (unsigned int d = 0; d < dim; ++d)
+            centers_list[i][d] = static_cast<double>(rand()) / RAND_MAX;
+
+
+        return centers_list;
+      }
+    };
+
+
+
+
+
+    template <int dim>
+    std::vector<Point<dim>>
+      KInverse<dim>::centers = KInverse<dim>::get_centers();
+  } // namespace RandomMedium
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Theinversemobilityandsaturationfunctions"></a><h3>The inverse mobility and saturation functions</h3>
+
+
+
+
+还有两个数据我们需要描述，即反流动性函数和饱和度曲线。它们的形式也在介绍中给出。
+
+@code
+  double mobility_inverse(const double S, const double viscosity)
+  {
+    return 1.0 / (1.0 / viscosity * S * S + (1 - S) * (1 - S));
+  }
+
+
+  double fractional_flow(const double S, const double viscosity)
+  {
+    return S * S / (S * S + viscosity * (1 - S) * (1 - S));
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Linearsolversandpreconditioners"></a> <h3>Linear solvers and preconditioners</h3>
+
+
+
+
+我们使用的线性求解器也完全类似于  step-20  中使用的线性求解器。因此，下面的类是逐字逐句地从那里复制的。请注意，这里的类不仅是从 step-20 中复制的，而且在deal.II中也有重复的类。在这个例子的未来版本中，它们应该被一个有效的方法所取代，虽然。有一个变化：如果线性系统的尺寸很小，即当网格很粗时，那么在 <code>src.size()</code> 函数中的求解器收敛之前，设置最大的 <code>vmult()</code> CG迭代次数有时是不够的。(当然，这是数值取舍的结果，因为我们知道在纸面上，CG方法最多只能在 <code>src.size()</code> 步内收敛)。因此，我们设定最大迭代次数等于线性系统大小的最大值和200。
+
+@code
+  template <class MatrixType>
+  class InverseMatrix : public Subscriptor
+  {
+  public:
+    InverseMatrix(const MatrixType &m)
+      : matrix(&m)
+    {}
+
+
+    void vmult(Vector<double> &dst, const Vector<double> &src) const
+    {
+      SolverControl solver_control(std::max<unsigned int>(src.size(), 200),
+                                   1e-8 * src.l2_norm());
+      SolverCG<Vector<double>> cg(solver_control);
+
+
+      dst = 0;
+
+
+      cg.solve(*matrix, dst, src, PreconditionIdentity());
+    }
+
+
+  private:
+    const SmartPointer<const MatrixType> matrix;
+  };
+
+
+
+
+
+  class SchurComplement : public Subscriptor
+  {
+  public:
+    SchurComplement(const BlockSparseMatrix<double> &          A,
+                    const InverseMatrix<SparseMatrix<double>> &Minv)
+      : system_matrix(&A)
+      , m_inverse(&Minv)
+      , tmp1(A.block(0, 0).m())
+      , tmp2(A.block(0, 0).m())
+    {}
+
+
+    void vmult(Vector<double> &dst, const Vector<double> &src) const
+    {
+      system_matrix->block(0, 1).vmult(tmp1, src);
+      m_inverse->vmult(tmp2, tmp1);
+      system_matrix->block(1, 0).vmult(dst, tmp2);
+    }
+
+
+  private:
+    const SmartPointer<const BlockSparseMatrix<double>>           system_matrix;
+    const SmartPointer<const InverseMatrix<SparseMatrix<double>>> m_inverse;
+
+
+    mutable Vector<double> tmp1, tmp2;
+  };
+
+
+
+
+
+  class ApproximateSchurComplement : public Subscriptor
+  {
+  public:
+    ApproximateSchurComplement(const BlockSparseMatrix<double> &A)
+      : system_matrix(&A)
+      , tmp1(A.block(0, 0).m())
+      , tmp2(A.block(0, 0).m())
+    {}
+
+
+    void vmult(Vector<double> &dst, const Vector<double> &src) const
+    {
+      system_matrix->block(0, 1).vmult(tmp1, src);
+      system_matrix->block(0, 0).precondition_Jacobi(tmp2, tmp1);
+      system_matrix->block(1, 0).vmult(dst, tmp2);
+    }
+
+
+  private:
+    const SmartPointer<const BlockSparseMatrix<double>> system_matrix;
+
+
+    mutable Vector<double> tmp1, tmp2;
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="codeTwoPhaseFlowProblemcodeclassimplementation"></a><h3><code>TwoPhaseFlowProblem</code> class implementation</h3>
+
+
+
+
+现在是主类的实现。它的大部分内容实际上是从 step-20 中复制过来的，所以我们不会对它进行过多的评论。你应该试着先熟悉一下那个程序，然后这里发生的大部分事情就应该很清楚了。
+
+
+
+
+
+<a name="TwoPhaseFlowProblemTwoPhaseFlowProblem"></a> <h4>TwoPhaseFlowProblem::TwoPhaseFlowProblem</h4>
+
+
+
+
+首先是构造函数。我们使用 $RT_k \times DQ_k \times DQ_k$ 空间。对于初始化DiscreteTime对象，我们不在构造函数中设置时间步长，因为我们还没有它的值。时间步长最初被设置为零，但在需要增量时间之前，它将被计算出来，正如介绍的一个小节中所描述的。当 $dt = 0$ 时，时间对象在内部阻止自己被递增，迫使我们在推进时间之前为 $dt$ 设置一个非零的期望大小。
+
+@code
+  template <int dim>
+  TwoPhaseFlowProblem<dim>::TwoPhaseFlowProblem(const unsigned int degree)
+    : degree(degree)
+    , fe(FE_RaviartThomas<dim>(degree),
+         1,
+         FE_DGQ<dim>(degree),
+         1,
+         FE_DGQ<dim>(degree),
+         1)
+    , dof_handler(triangulation)
+    , n_refinement_steps(5)
+    , time(/*start time*/ 0., /*end time*/ 1.)
+    , viscosity(0.2)
+  {}
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TwoPhaseFlowProblemmake_grid_and_dofs"></a> <h4>TwoPhaseFlowProblem::make_grid_and_dofs</h4>
+
+
+
+
+接下来的函数从众所周知的函数调用开始，创建和细化一个网格，然后将自由度与之关联。它所做的事情与 step-20 中的相同，只是现在是针对三个组件而不是两个。
+
+@code
+  template <int dim>
+  void TwoPhaseFlowProblem<dim>::make_grid_and_dofs()
+  {
+    GridGenerator::hyper_cube(triangulation, 0, 1);
+    triangulation.refine_global(n_refinement_steps);
+
+
+    dof_handler.distribute_dofs(fe);
+    DoFRenumbering::component_wise(dof_handler);
+
+
+    const std::vector<types::global_dof_index> dofs_per_component =
+      DoFTools::count_dofs_per_fe_component(dof_handler);
+    const unsigned int n_u = dofs_per_component[0],
+                       n_p = dofs_per_component[dim],
+                       n_s = dofs_per_component[dim + 1];
+
+
+    std::cout << "Number of active cells: " << triangulation.n_active_cells()
+              << std::endl
+              << "Number of degrees of freedom: " << dof_handler.n_dofs()
+              << " (" << n_u << '+' << n_p << '+' << n_s << ')' << std::endl
+              << std::endl;
+
+
+    const unsigned int n_couplings = dof_handler.max_couplings_between_dofs();
+
+
+    sparsity_pattern.reinit(3, 3);
+    sparsity_pattern.block(0, 0).reinit(n_u, n_u, n_couplings);
+    sparsity_pattern.block(1, 0).reinit(n_p, n_u, n_couplings);
+    sparsity_pattern.block(2, 0).reinit(n_s, n_u, n_couplings);
+    sparsity_pattern.block(0, 1).reinit(n_u, n_p, n_couplings);
+    sparsity_pattern.block(1, 1).reinit(n_p, n_p, n_couplings);
+    sparsity_pattern.block(2, 1).reinit(n_s, n_p, n_couplings);
+    sparsity_pattern.block(0, 2).reinit(n_u, n_s, n_couplings);
+    sparsity_pattern.block(1, 2).reinit(n_p, n_s, n_couplings);
+    sparsity_pattern.block(2, 2).reinit(n_s, n_s, n_couplings);
+
+
+    sparsity_pattern.collect_sizes();
+
+
+    DoFTools::make_sparsity_pattern(dof_handler, sparsity_pattern);
+    sparsity_pattern.compress();
+
+
+
+    system_matrix.reinit(sparsity_pattern);
+
+
+
+    solution.reinit(3);
+    solution.block(0).reinit(n_u);
+    solution.block(1).reinit(n_p);
+    solution.block(2).reinit(n_s);
+    solution.collect_sizes();
+
+
+    old_solution.reinit(3);
+    old_solution.block(0).reinit(n_u);
+    old_solution.block(1).reinit(n_p);
+    old_solution.block(2).reinit(n_s);
+    old_solution.collect_sizes();
+
+
+    system_rhs.reinit(3);
+    system_rhs.block(0).reinit(n_u);
+    system_rhs.block(1).reinit(n_p);
+    system_rhs.block(2).reinit(n_s);
+    system_rhs.collect_sizes();
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="TwoPhaseFlowProblemassemble_system"></a> <h4>TwoPhaseFlowProblem::assemble_system</h4>
+
+
+
+
+这是组装线性系统的函数，或者至少是除了(1,3)块之外的所有东西，它取决于在这个时间步长中计算的仍然未知的速度（我们在 <code>assemble_rhs_S</code> 中处理这个问题）。它的大部分内容与 step-20 中一样，但这次我们必须处理一些非线性问题。 然而，该函数的顶部与往常一样（注意我们在开始时将矩阵和右手边设置为零&mdash; 对于静止问题我们不必这样做，因为在那里我们只使用每个矩阵对象一次，而且在开始时它是空的）。   
+
+
+请注意，在目前的形式下，该函数使用 RandomMedium::KInverse 类中实现的渗透率。切换到单曲裂缝渗透率函数就像改变命名空间名称一样简单。
+
+@code
+  template <int dim>
+  void TwoPhaseFlowProblem<dim>::assemble_system()
+  {
+    system_matrix = 0;
+    system_rhs    = 0;
+
+
+    QGauss<dim>     quadrature_formula(degree + 2);
+    QGauss<dim - 1> face_quadrature_formula(degree + 2);
+
+
+    FEValues<dim>     fe_values(fe,
+                            quadrature_formula,
+                            update_values | update_gradients |
+                              update_quadrature_points | update_JxW_values);
+    FEFaceValues<dim> fe_face_values(fe,
+                                     face_quadrature_formula,
+                                     update_values | update_normal_vectors |
+                                       update_quadrature_points |
+                                       update_JxW_values);
+
+
+    const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
+
+
+    const unsigned int n_q_points      = quadrature_formula.size();
+    const unsigned int n_face_q_points = face_quadrature_formula.size();
+
+
+    FullMatrix<double> local_matrix(dofs_per_cell, dofs_per_cell);
+    Vector<double>     local_rhs(dofs_per_cell);
+
+
+    std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
+
+
+    const PressureRightHandSide<dim>  pressure_right_hand_side;
+    const PressureBoundaryValues<dim> pressure_boundary_values;
+    const RandomMedium::KInverse<dim> k_inverse;
+
+
+    std::vector<double>         pressure_rhs_values(n_q_points);
+    std::vector<double>         boundary_values(n_face_q_points);
+    std::vector<Tensor<2, dim>> k_inverse_values(n_q_points);
+
+
+    std::vector<Vector<double>>              old_solution_values(n_q_points,
+                                                                 Vector<double>(dim + 2));
+    std::vector<std::vector<Tensor<1, dim>>> old_solution_grads(
+      n_q_points, std::vector<Tensor<1, dim>>(dim + 2));
+
+
+    const FEValuesExtractors::Vector velocities(0);
+    const FEValuesExtractors::Scalar pressure(dim);
+    const FEValuesExtractors::Scalar saturation(dim + 1);
+
+
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      {
+        fe_values.reinit(cell);
+        local_matrix = 0;
+        local_rhs    = 0;
+
+
+@endcode 
+
+
+
+这里是第一个显著的区别。我们必须在正交点上获得前一个时间步长的饱和函数值。为此，我们可以使用 FEValues::get_function_values （之前已经在 step-9 、 step-14 和 step-15 中使用），这个函数接收一个解向量并返回当前单元的正交点的函数值列表。事实上，它返回每个正交点的完整矢量值解，即不仅是饱和度，还有速度和压力。
+
+@code
+        fe_values.get_function_values(old_solution, old_solution_values);
+
+
+@endcode 
+
+
+
+然后，我们还必须在正交点上得到压力的右手边和反渗透性张量的值。
+
+@code
+        pressure_right_hand_side.value_list(fe_values.get_quadrature_points(),
+                                            pressure_rhs_values);
+        k_inverse.value_list(fe_values.get_quadrature_points(),
+                             k_inverse_values);
+
+
+@endcode 
+
+
+
+有了所有这些，我们现在可以在这个单元的所有正交点和形状函数上进行循环，并将我们在这个函数中处理的矩阵和右手边的那些部分组合起来。鉴于引言中所述的双线性形式的明确形式，贡献中的各个条款应该是不言自明的。
+
+@code
+        for (unsigned int q = 0; q < n_q_points; ++q)
+          for (unsigned int i = 0; i < dofs_per_cell; ++i)
+            {
+              const double old_s = old_solution_values[q](dim + 1);
+
+
+              const Tensor<1, dim> phi_i_u = fe_values[velocities].value(i, q);
+              const double div_phi_i_u = fe_values[velocities].divergence(i, q);
+              const double phi_i_p     = fe_values[pressure].value(i, q);
+              const double phi_i_s     = fe_values[saturation].value(i, q);
+
+
+              for (unsigned int j = 0; j < dofs_per_cell; ++j)
+                {
+                  const Tensor<1, dim> phi_j_u =
+                    fe_values[velocities].value(j, q);
+                  const double div_phi_j_u =
+                    fe_values[velocities].divergence(j, q);
+                  const double phi_j_p = fe_values[pressure].value(j, q);
+                  const double phi_j_s = fe_values[saturation].value(j, q);
+
+
+                  local_matrix(i, j) +=
+                    (phi_i_u * k_inverse_values[q] *
+                       mobility_inverse(old_s, viscosity) * phi_j_u -
+                     div_phi_i_u * phi_j_p - phi_i_p * div_phi_j_u +
+                     phi_i_s * phi_j_s) *
+                    fe_values.JxW(q);
+                }
+
+
+              local_rhs(i) +=
+                (-phi_i_p * pressure_rhs_values[q]) * fe_values.JxW(q);
+            }
+
+
+
+@endcode 
+
+
+
+接下来，我们还必须处理压力边界值。这也是如 step-20 中所述。
+
+@code
+        for (const auto &face : cell->face_iterators())
+          if (face->at_boundary())
+            {
+              fe_face_values.reinit(cell, face);
+
+
+              pressure_boundary_values.value_list(
+                fe_face_values.get_quadrature_points(), boundary_values);
+
+
+              for (unsigned int q = 0; q < n_face_q_points; ++q)
+                for (unsigned int i = 0; i < dofs_per_cell; ++i)
+                  {
+                    const Tensor<1, dim> phi_i_u =
+                      fe_face_values[velocities].value(i, q);
+
+
+                    local_rhs(i) +=
+
+
+                      -(phi_i_u * fe_face_values.normal_vector(q) *
+                        boundary_values[q] * fe_face_values.JxW(q));
+                  }
+            }
+
+
+@endcode 
+
+
+
+在所有单元的循环中，最后一步是将局部贡献转移到全局矩阵和右手向量中。
+
+@code
+        cell->get_dof_indices(local_dof_indices);
+        for (unsigned int i = 0; i < dofs_per_cell; ++i)
+          for (unsigned int j = 0; j < dofs_per_cell; ++j)
+            system_matrix.add(local_dof_indices[i],
+                              local_dof_indices[j],
+                              local_matrix(i, j));
+
+
+        for (unsigned int i = 0; i < dofs_per_cell; ++i)
+          system_rhs(local_dof_indices[i]) += local_rhs(i);
+      }
+  }
+
+
+
+@endcode 
+
+
+
+矩阵和右手边的组装就这样了。请注意，我们不需要插值和应用边界值，因为它们都已经在弱式中得到了处理。
+
+
+
+
+
+
+
+
+
+
+<a name="TwoPhaseFlowProblemassemble_rhs_S"></a> <h4>TwoPhaseFlowProblem::assemble_rhs_S</h4>
+
+
+
+
+正如介绍中所解释的，我们只有在计算了速度后才能评估饱和方程的右边。因此，我们有这个单独的函数来达到这个目的。
+
+@code
+  template <int dim>
+  void TwoPhaseFlowProblem<dim>::assemble_rhs_S()
+  {
+    QGauss<dim>       quadrature_formula(degree + 2);
+    QGauss<dim - 1>   face_quadrature_formula(degree + 2);
+    FEValues<dim>     fe_values(fe,
+                            quadrature_formula,
+                            update_values | update_gradients |
+                              update_quadrature_points | update_JxW_values);
+    FEFaceValues<dim> fe_face_values(fe,
+                                     face_quadrature_formula,
+                                     update_values | update_normal_vectors |
+                                       update_quadrature_points |
+                                       update_JxW_values);
+    FEFaceValues<dim> fe_face_values_neighbor(fe,
+                                              face_quadrature_formula,
+                                              update_values);
+
+
+    const unsigned int dofs_per_cell   = fe.n_dofs_per_cell();
+    const unsigned int n_q_points      = quadrature_formula.size();
+    const unsigned int n_face_q_points = face_quadrature_formula.size();
+
+
+    Vector<double> local_rhs(dofs_per_cell);
+
+
+    std::vector<Vector<double>> old_solution_values(n_q_points,
+                                                    Vector<double>(dim + 2));
+    std::vector<Vector<double>> old_solution_values_face(n_face_q_points,
+                                                         Vector<double>(dim +
+                                                                        2));
+    std::vector<Vector<double>> old_solution_values_face_neighbor(
+      n_face_q_points, Vector<double>(dim + 2));
+    std::vector<Vector<double>> present_solution_values(n_q_points,
+                                                        Vector<double>(dim +
+                                                                       2));
+    std::vector<Vector<double>> present_solution_values_face(
+      n_face_q_points, Vector<double>(dim + 2));
+
+
+    std::vector<double>                  neighbor_saturation(n_face_q_points);
+    std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
+
+
+    SaturationBoundaryValues<dim> saturation_boundary_values;
+
+
+    const FEValuesExtractors::Scalar saturation(dim + 1);
+
+
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      {
+        local_rhs = 0;
+        fe_values.reinit(cell);
+
+
+        fe_values.get_function_values(old_solution, old_solution_values);
+        fe_values.get_function_values(solution, present_solution_values);
+
+
+@endcode 
+
+
+
+首先是单元项。按照介绍中的公式，这些是 $(S^n,\sigma)-(F(S^n) \mathbf{v}^{n+1},\nabla
+\sigma)$  ，其中 $\sigma$  是测试函数的饱和分量。
+
+@code
+        for (unsigned int q = 0; q < n_q_points; ++q)
+          for (unsigned int i = 0; i < dofs_per_cell; ++i)
+            {
+              const double   old_s = old_solution_values[q](dim + 1);
+              Tensor<1, dim> present_u;
+              for (unsigned int d = 0; d < dim; ++d)
+                present_u[d] = present_solution_values[q](d);
+
+
+              const double         phi_i_s = fe_values[saturation].value(i, q);
+              const Tensor<1, dim> grad_phi_i_s =
+                fe_values[saturation].gradient(i, q);
+
+
+              local_rhs(i) +=
+                (time.get_next_step_size() * fractional_flow(old_s, viscosity) *
+                   present_u * grad_phi_i_s +
+                 old_s * phi_i_s) *
+                fe_values.JxW(q);
+            }
+
+
+@endcode 
+
+
+
+其次，我们必须处理面的边界上的通量部分。这就比较麻烦了，因为我们首先要确定哪些是细胞边界的流入和流出部分。如果我们有一个流入的边界，我们需要评估面的另一边的饱和度（或者边界值，如果我们在域的边界）。         
+
+
+所有这些都有点棘手，但在  step-9  中已经有了一些详细的解释。请看一下，这应该是如何工作的! 
+
+@code
+        for (const auto face_no : cell->face_indices())
+          {
+            fe_face_values.reinit(cell, face_no);
+
+
+            fe_face_values.get_function_values(old_solution,
+                                               old_solution_values_face);
+            fe_face_values.get_function_values(solution,
+                                               present_solution_values_face);
+
+
+            if (cell->at_boundary(face_no))
+              saturation_boundary_values.value_list(
+                fe_face_values.get_quadrature_points(), neighbor_saturation);
+            else
+              {
+                const auto         neighbor = cell->neighbor(face_no);
+                const unsigned int neighbor_face =
+                  cell->neighbor_of_neighbor(face_no);
+
+
+                fe_face_values_neighbor.reinit(neighbor, neighbor_face);
+
+
+                fe_face_values_neighbor.get_function_values(
+                  old_solution, old_solution_values_face_neighbor);
+
+
+                for (unsigned int q = 0; q < n_face_q_points; ++q)
+                  neighbor_saturation[q] =
+                    old_solution_values_face_neighbor[q](dim + 1);
+              }
+
+
+
+            for (unsigned int q = 0; q < n_face_q_points; ++q)
+              {
+                Tensor<1, dim> present_u_face;
+                for (unsigned int d = 0; d < dim; ++d)
+                  present_u_face[d] = present_solution_values_face[q](d);
+
+
+                const double normal_flux =
+                  present_u_face * fe_face_values.normal_vector(q);
+
+
+                const bool is_outflow_q_point = (normal_flux >= 0);
+
+
+                for (unsigned int i = 0; i < dofs_per_cell; ++i)
+                  local_rhs(i) -=
+                    time.get_next_step_size() * normal_flux *
+                    fractional_flow((is_outflow_q_point == true ?
+                                       old_solution_values_face[q](dim + 1) :
+                                       neighbor_saturation[q]),
+                                    viscosity) *
+                    fe_face_values[saturation].value(i, q) *
+                    fe_face_values.JxW(q);
+              }
+          }
+
+
+        cell->get_dof_indices(local_dof_indices);
+        for (unsigned int i = 0; i < dofs_per_cell; ++i)
+          system_rhs(local_dof_indices[i]) += local_rhs(i);
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TwoPhaseFlowProblemsolve"></a> <h4>TwoPhaseFlowProblem::solve</h4>
+
+
+
+
+在所有这些准备工作之后，我们最终以与  step-20  相同的方式解决速度和压力的线性系统。在这之后，我们必须处理饱和方程（见下文）。
+
+@code
+  template <int dim>
+  void TwoPhaseFlowProblem<dim>::solve()
+  {
+    const InverseMatrix<SparseMatrix<double>> m_inverse(
+      system_matrix.block(0, 0));
+    Vector<double> tmp(solution.block(0).size());
+    Vector<double> schur_rhs(solution.block(1).size());
+    Vector<double> tmp2(solution.block(2).size());
+
+
+
+@endcode 
+
+
+
+首先是压力，使用前两个方程的压力舒尔补码。
+
+@code
+    {
+      m_inverse.vmult(tmp, system_rhs.block(0));
+      system_matrix.block(1, 0).vmult(schur_rhs, tmp);
+      schur_rhs -= system_rhs.block(1);
+
+
+
+      SchurComplement schur_complement(system_matrix, m_inverse);
+
+
+      ApproximateSchurComplement approximate_schur_complement(system_matrix);
+
+
+      InverseMatrix<ApproximateSchurComplement> preconditioner(
+        approximate_schur_complement);
+
+
+
+      SolverControl            solver_control(solution.block(1).size(),
+                                   1e-12 * schur_rhs.l2_norm());
+      SolverCG<Vector<double>> cg(solver_control);
+
+
+      cg.solve(schur_complement, solution.block(1), schur_rhs, preconditioner);
+
+
+      std::cout << "   " << solver_control.last_step()
+                << " CG Schur complement iterations for pressure." << std::endl;
+    }
+
+
+@endcode 
+
+
+
+现在是速度。
+
+@code
+    {
+      system_matrix.block(0, 1).vmult(tmp, solution.block(1));
+      tmp *= -1;
+      tmp += system_rhs.block(0);
+
+
+      m_inverse.vmult(solution.block(0), tmp);
+    }
+
+
+@endcode 
+
+
+
+最后，我们必须处理好饱和度方程。我们在这里要做的第一件事是用介绍中的公式确定时间步长。知道了我们领域的形状和我们通过有规律地划分单元来创建网格，我们可以很容易地计算每个单元的直径（事实上我们使用的是单元坐标方向上的线性扩展，而不是直径）。请注意，我们将在 step-24 中学习一种更通用的方法，在那里我们使用 GridTools::minimal_cell_diameter 的函数来做这个。     
+
+
+我们使用一个辅助函数来计算下面定义的最大速度，有了这些，我们就可以评估我们新的时间步长了。我们使用方法 DiscreteTime::set_desired_next_time_step() 来向DiscreteTime对象建议新的时间步长的计算值。在大多数情况下，时间对象使用精确提供的值来增加时间。在某些情况下，时间对象可以进一步修改步骤大小。例如，如果计算出的时间增量超过了结束时间，它将被相应地截断。
+
+@code
+    time.set_desired_next_step_size(std::pow(0.5, double(n_refinement_steps)) /
+                                    get_maximal_velocity());
+
+
+@endcode 
+
+
+
+下一步是组装右手边，然后把所有的东西都传给解。最后，我们将饱和度投射到物理上合理的范围内。
+
+@code
+    assemble_rhs_S();
+    {
+      SolverControl            solver_control(system_matrix.block(2, 2).m(),
+                                   1e-8 * system_rhs.block(2).l2_norm());
+      SolverCG<Vector<double>> cg(solver_control);
+      cg.solve(system_matrix.block(2, 2),
+               solution.block(2),
+               system_rhs.block(2),
+               PreconditionIdentity());
+
+
+      project_back_saturation();
+
+
+      std::cout << "   " << solver_control.last_step()
+                << " CG iterations for saturation." << std::endl;
+    }
+
+
+
+    old_solution = solution;
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="TwoPhaseFlowProblemoutput_results"></a> <h4>TwoPhaseFlowProblem::output_results</h4>
+
+
+
+
+这里没有什么令人惊讶的。由于程序会做大量的时间步骤，我们只在每五个时间步骤创建一个输出文件，并在文件的顶部已经跳过所有其他的时间步骤。   
+
+
+在为接近函数底部的输出创建文件名时，我们将时间步长的数字转换为字符串表示，用前导零填充到四位数。我们这样做是因为这样所有的输出文件名都有相同的长度，因此在创建目录列表时可以很好地排序。
+
+@code
+  template <int dim>
+  void TwoPhaseFlowProblem<dim>::output_results() const
+  {
+    if (time.get_step_number() % 5 != 0)
+      return;
+
+
+    std::vector<std::string> solution_names;
+    switch (dim)
+      {
+        case 2:
+          solution_names = {"u", "v", "p", "S"};
+          break;
+
+
+        case 3:
+          solution_names = {"u", "v", "w", "p", "S"};
+          break;
+
+
+        default:
+          Assert(false, ExcNotImplemented());
+      }
+
+
+    DataOut<dim> data_out;
+
+
+    data_out.attach_dof_handler(dof_handler);
+    data_out.add_data_vector(solution, solution_names);
+
+
+    data_out.build_patches(degree + 1);
+
+
+    std::ofstream output("solution-" +
+                         Utilities::int_to_string(time.get_step_number(), 4) +
+                         ".vtk");
+    data_out.write_vtk(output);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TwoPhaseFlowProblemproject_back_saturation"></a> <h4>TwoPhaseFlowProblem::project_back_saturation</h4> 
+
+
+
+
+在这个函数中，我们简单地运行所有的饱和自由度，并确保如果它们应该离开物理上的合理范围，就将它们重置到区间  $[0,1]$  。要做到这一点，我们只需循环查看解向量的所有饱和分量；这些分量被存储在块2中（块0是速度，块1是压力）。   
+
+
+值得注意的是，当时间步长选择如介绍中提到的那样时，这个函数几乎从未触发过，这可能很有启发。然而，如果我们只选择稍大的时间步长，我们会得到大量超出适当范围的数值。严格地说，如果我们选择的时间步长足够小，这个函数就没有必要。因此，从某种意义上说，该函数只是一个安全装置，以避免由于个别自由度在几个时间步长之前变得不符合物理条件而使我们的整个解决方案变得不符合物理条件的情况。
+
+@code
+  template <int dim>
+  void TwoPhaseFlowProblem<dim>::project_back_saturation()
+  {
+    for (unsigned int i = 0; i < solution.block(2).size(); ++i)
+      if (solution.block(2)(i) < 0)
+        solution.block(2)(i) = 0;
+      else if (solution.block(2)(i) > 1)
+        solution.block(2)(i) = 1;
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="TwoPhaseFlowProblemget_maximal_velocity"></a> <h4>TwoPhaseFlowProblem::get_maximal_velocity</h4> 
+
+
+
+
+以下函数用于确定最大的允许时间步长。它所做的是在域中的所有正交点上循环，找出速度的最大幅度。
+
+@code
+  template <int dim>
+  double TwoPhaseFlowProblem<dim>::get_maximal_velocity() const
+  {
+    QGauss<dim>        quadrature_formula(degree + 2);
+    const unsigned int n_q_points = quadrature_formula.size();
+
+
+    FEValues<dim> fe_values(fe, quadrature_formula, update_values);
+    std::vector<Vector<double>> solution_values(n_q_points,
+                                                Vector<double>(dim + 2));
+    double                      max_velocity = 0;
+
+
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      {
+        fe_values.reinit(cell);
+        fe_values.get_function_values(solution, solution_values);
+
+
+        for (unsigned int q = 0; q < n_q_points; ++q)
+          {
+            Tensor<1, dim> velocity;
+            for (unsigned int i = 0; i < dim; ++i)
+              velocity[i] = solution_values[q](i);
+
+
+            max_velocity = std::max(max_velocity, velocity.norm());
+          }
+      }
+
+
+    return max_velocity;
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="TwoPhaseFlowProblemrun"></a><h4>TwoPhaseFlowProblem::run</h4>
+
+
+
+
+这是我们主类的最后一个函数。它的简洁不言自明。只有两点是值得注意的。首先，该函数在开始时将初始值投射到有限元空间上； VectorTools::project 函数这样做需要一个表明悬挂节点约束的参数。我们在这个程序中没有（我们在一个均匀细化的网格上计算），但是这个函数当然需要这个参数。所以我们必须创建一个约束对象。在原始状态下，约束对象是没有排序的，在使用前必须进行排序（使用 AffineConstraints::close 函数）。这就是我们在这里所做的，这也是为什么我们不能简单地用一个匿名的临时对象 <code>AffineConstraints<double>()</code> 作为第二个参数来调用 VectorTools::project 函数。   
+
+
+第二点值得一提的是，我们只在求解每个时间步长对应的线性系统的过程中计算当前时间步长。因此，我们只有在时间步长结束时才能输出一个时间步长的当前时间。我们通过调用循环内的方法 DiscreteTime::advance_time() 来增加时间。由于我们在递增后报告时间和dt，我们必须调用方法 DiscreteTime::get_previous_step_size() ，而不是 DiscreteTime::get_next_step_size(). 。 经过许多步，当模拟到达结束时间时，最后的dt由DiscreteTime类选择，其方式是最后一步正好在结束时间完成。
+
+@code
+  template <int dim>
+  void TwoPhaseFlowProblem<dim>::run()
+  {
+    make_grid_and_dofs();
+
+
+    {
+      AffineConstraints<double> constraints;
+      constraints.close();
+
+
+      VectorTools::project(dof_handler,
+                           constraints,
+                           QGauss<dim>(degree + 2),
+                           InitialValues<dim>(),
+                           old_solution);
+    }
+
+
+    do
+      {
+        std::cout << "Timestep " << time.get_step_number() + 1 << std::endl;
+
+
+        assemble_system();
+
+
+        solve();
+
+
+        output_results();
+
+
+        time.advance_time();
+        std::cout << "   Now at t=" << time.get_current_time()
+                  << ", dt=" << time.get_previous_step_size() << '.'
+                  << std::endl
+                  << std::endl;
+      }
+    while (time.is_at_end() == false);
+  }
+} // namespace Step21
+
+
+
+@endcode 
+
+
+
+
+<a name="Thecodemaincodefunction"></a><h3>The <code>main</code> function</h3>
+
+
+
+
+就这样了。在主函数中，我们将有限元空间的度数传递给TwoPhaseFlowProblem对象的构造函数。 这里，我们使用零度元素，即 $RT_0\times DQ_0 \times DQ_0$  。其余的与所有其他程序一样。
+
+@code
+int main()
+{
+  try
+    {
+      using namespace Step21;
+
+
+      TwoPhaseFlowProblem<2> two_phase_flow_problem(0);
+      two_phase_flow_problem.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+
+
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
-The code as presented here does not actually compute the results
-found on the web page. The reason is, that even on a decent
-computer it runs more than a day. If you want to reproduce these
-results, modify the end time of the DiscreteTime object to `250` within the
-constructor of TwoPhaseFlowProblem.
+这里介绍的代码实际上并不计算网页上的结果。原因是，即使在一台体面的计算机上，它也要运行一天以上。如果你想重现这些结果，在TwoPhaseFlowProblem的构造函数中把DiscreteTime对象的结束时间修改为`250`。
 
-If we run the program, we get the following kind of output:
+如果我们运行该程序，我们会得到以下这种输出。
+
 @code
 Number of active cells: 1024
 Number of degrees of freedom: 4160 (2112+1024+1024)
+
 
 Timestep 1
    22 CG Schur complement iterations for pressure.
    1 CG iterations for saturation.
    Now at t=0.0326742, dt=0.0326742.
 
+
 Timestep 2
    17 CG Schur complement iterations for pressure.
    1 CG iterations for saturation.
    Now at t=0.0653816, dt=0.0327074.
+
 
 Timestep 3
    17 CG Schur complement iterations for pressure.
    1 CG iterations for saturation.
    Now at t=0.0980651, dt=0.0326836.
 
+
 ...
-@endcode
-As we can see, the time step is pretty much constant right from the start,
-which indicates that the velocities in the domain are not strongly dependent
-on changes in saturation, although they certainly are through the factor
-$\lambda(S)$ in the pressure equation.
+@endcode 
 
-Our second observation is that the number of CG iterations needed to solve the
-pressure Schur complement equation drops from 22 to 17 between the first and
-the second time step (in fact, it remains around 17 for the rest of the
-computations). The reason is actually simple: Before we solve for the pressure
-during a time step, we don't reset the <code>solution</code> variable to
-zero. The pressure (and the other variables) therefore have the previous time
-step's values at the time we get into the CG solver. Since the velocities and
-pressures don't change very much as computations progress, the previous time
-step's pressure is actually a good initial guess for this time step's
-pressure. Consequently, the number of iterations we need once we have computed
-the pressure once is significantly reduced.
+我们可以看到，时间步长从一开始就几乎是恒定的，这表明域中的速度并不强烈依赖于饱和度的变化，尽管它们肯定是通过压力方程中的因子 $\lambda(S)$ 来决定的。
 
-The final observation concerns the number of iterations needed to solve for
-the saturation, i.e. one. This shouldn't surprise us too much: the matrix we
-have to solve with is the mass matrix. However, this is the mass matrix for
-the $DGQ_0$ element of piecewise constants where no element couples with the
-degrees of freedom on neighboring cells. The matrix is therefore a diagonal
-one, and it is clear that we should be able to invert this matrix in a single
-CG iteration.
+我们的第二个观察结果是，在第一和第二时间步之间，解决压力舒尔补足方程所需的CG迭代次数从22次下降到17次（事实上，在其余的计算中，它保持在17次左右）。原因其实很简单。在我们求解一个时间步长的压力之前，我们没有将 <code>solution</code> 变量重置为零。因此，在我们进入CG求解器时，压力（和其他变量）具有前一个时间步骤的值。由于速度和压力在计算过程中变化不大，前一个时间步骤的压力实际上是对这个时间步骤压力的一个很好的初始猜测。因此，一旦我们计算了一次压力，我们需要的迭代次数就会大大减少。
+
+最后的观察是关于解决饱和度问题所需的迭代次数，即一次。这不应该让我们太惊讶：我们必须解决的矩阵是质量矩阵。然而，这是 $DGQ_0$ 元素的分片常数的质量矩阵，其中没有元素与相邻单元的自由度耦合。因此，该矩阵是一个对角线矩阵，很明显，我们应该能够在一次CG迭代中反转该矩阵。
 
 
-With all this, here are a few movies that show how the saturation progresses
-over time. First, this is for the single crack model, as implemented in the
-<code>SingleCurvingCrack::KInverse</code> class:
+有了这些，这里有几段电影，显示了饱和度是如何随时间推移而发展的。首先，这是针对单一裂缝模型的，如在 <code>SingleCurvingCrack::KInverse</code> 类中实现的。
 
-<img src="https://www.dealii.org/images/steps/developer/step-21.centerline.gif" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-21.centerline.gif" alt="">   
 
-As can be seen, the water rich fluid snakes its way mostly along the
-high-permeability zone in the middle of the domain, whereas the rest of the
-domain is mostly impermeable. This and the next movie are generated using
-<code>n_refinement_steps=7</code>, leading to a $128\times 128$ mesh with some
-16,000 cells and about 66,000 unknowns in total.
+可以看出，富水流体主要是沿着域中间的高渗透区蜿蜒前行，而域的其他部分则大部分是不渗透的。这部电影和下一部电影是用 <code>n_refinement_steps=7</code> 生成的，导致 $128\times 128$ 的网格有大约16000个单元，总共有大约66000个未知数。
 
 
-The second movie shows the saturation for the random medium model of class
-<code>RandomMedium::KInverse</code>, where we have randomly distributed
-centers of high permeability and fluid hops from one of these zones to
-the next:
+第二部电影显示了 <code>RandomMedium::KInverse</code> 类随机介质模型的饱和度，其中我们有随机分布的高渗透率中心，流体从一个区域跳到另一个区域。
 
-<img src="https://www.dealii.org/images/steps/developer/step-21.random2d.gif" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-21.random2d.gif" alt="">   
 
 
-Finally, here is the same situation in three space dimensions, on a mesh with
-<code>n_refinement_steps=5</code>, which produces a mesh of some 32,000 cells
-and 167,000 degrees of freedom:
+最后，这里是在三个空间维度上的相同情况，在一个具有 <code>n_refinement_steps=5</code> 的网格上，产生了一个大约32000个单元和167000个自由度的网格。
 
-<img src="https://www.dealii.org/images/steps/developer/step-21.random3d.gif" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-21.random3d.gif" alt="">   
 
-To repeat these computations, all you have to do is to change the line
+要重复这些计算，你所要做的就是改变这一行 
+
 @code
       TwoPhaseFlowProblem<2> two_phase_flow_problem(0);
-@endcode
-in the main function to
+@endcode 
+
+改为 
+
 @code
       TwoPhaseFlowProblem<3> two_phase_flow_problem(0);
-@endcode
-The visualization uses a cloud technique, where the saturation is indicated by
-colored but transparent clouds for each cell. This way, one can also see
-somewhat what happens deep inside the domain. A different way of visualizing
-would have been to show isosurfaces of the saturation evolving over
-time. There are techniques to plot isosurfaces transparently, so that one can
-see several of them at the same time like the layers of an onion.
+@endcode 
 
-So why don't we show such isosurfaces? The problem lies in the way isosurfaces
-are computed: they require that the field to be visualized is continuous, so
-that the isosurfaces can be generated by following contours at least across a
-single cell. However, our saturation field is piecewise constant and
-discontinuous. If we wanted to plot an isosurface for a saturation $S=0.5$,
-chances would be that there is no single point in the domain where that
-saturation is actually attained. If we had to define isosurfaces in that
-context at all, we would have to take the interfaces between cells, where one
-of the two adjacent cells has a saturation greater than and the other cell a
-saturation less than 0.5. However, it appears that most visualization programs
-are not equipped to do this kind of transformation.
+可视化采用了云技术，每个单元的饱和度都由彩色但透明的云来表示。这样一来，人们也可以多少看到域的深处发生了什么。另一种可视化的方式是显示饱和度随时间变化的等值线。有一些技术可以透明地绘制等值面，这样人们就可以像看到洋葱的层次一样同时看到几个等值面。
+
+那么，为什么我们不显示这样的等值面呢？问题在于等值面的计算方式：它们要求被可视化的场是连续的，因此等值面可以通过至少在单个细胞中的轮廓线来生成。然而，我们的饱和场是片状常数和不连续的。如果我们想为一个饱和度 $S=0.5$ 绘制一个等值面，那么在这个领域中就很可能没有一个点是真正达到饱和度的。如果我们必须在这种情况下定义等值面，我们将不得不采取细胞之间的界面，其中相邻的两个细胞之一的饱和度大于，另一个细胞的饱和度小于0.5。然而，大多数可视化程序似乎不具备做这种转换的能力。
 
 
-<a name="extensions"></a>
-<a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
+<a name="extensions"></a> <a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
 
 
-There are a number of areas where this program can be improved. Three of them
-are listed below. All of them are, in fact, addressed in a tutorial program
-that forms the continuation of the current one: step-43.
+这个程序有许多可以改进的地方。下面列出了其中的三个。事实上，所有这些都在构成当前程序的延续的教程程序中得到解决。  step-43  . 
 
 
 <a name="Solvers"></a><h4>Solvers</h4>
 
 
-At present, the program is not particularly fast: the 2d random medium
-computation took about a day for the 1,000 or so time steps. The corresponding
-3d computation took almost two days for 800 time steps. The reason why it
-isn't faster than this is twofold. First, we rebuild the entire matrix in
-every time step, although some parts such as the $B$, $B^T$, and $M^S$ blocks
-never change.
+目前，这个程序不是特别快：二维随机介质的计算在1000个左右的时间步数中花了大约一天时间。相应的三维计算在800个时间步数上几乎花了两天时间。没有比这更快的原因有两个方面。首先，我们在每个时间步骤中都重建了整个矩阵，尽管有些部分如 $B$ 、 $B^T$ 和 $M^S$ 块从未改变。
 
-Second, we could do a lot better with the solver and
-preconditioners. Presently, we solve the Schur complement $B^TM^u(S)^{-1}B$
-with a CG method, using $[B^T (\textrm{diag}(M^u(S)))^{-1} B]^{-1}$ as a
-preconditioner. Applying this preconditioner is expensive, since it involves
-solving a linear system each time. This may have been appropriate for @ref
-step_20 "step-20", where we have to solve the entire problem only
-once. However, here we have to solve it hundreds of times, and in such cases
-it is worth considering a preconditioner that is more expensive to set up the
-first time, but cheaper to apply later on.
+第二，我们可以在求解器和预处理器方面做得更好。目前，我们用CG方法解决舒尔补码 $B^TM^u(S)^{-1}B$ ，使用 $[B^T (\textrm{diag}(M^u(S)))^{-1} B]^{-1}$ 作为预处理。应用这个预处理程序是很昂贵的，因为它每次都要解一个线性系统。这可能适合于 @ref
+step_20 " step-20 "，在那里我们只需要解决整个问题一次。然而，在这里，我们必须求解数百次，在这种情况下，值得考虑一个预处理程序，它在第一次设置时比较昂贵，但在以后应用时比较便宜。
 
-One possibility would be to realize that the matrix we use as preconditioner,
-$B^T (\textrm{diag}(M^u(S)))^{-1} B$ is still sparse, and symmetric on top of
-that. If one looks at the flow field evolve over time, we also see that while
-$S$ changes significantly over time, the pressure hardly does and consequently
-$B^T (\textrm{diag}(M^u(S)))^{-1} B \approx B^T (\textrm{diag}(M^u(S^0)))^{-1}
-B$. In other words, the matrix for the first time step should be a good
-preconditioner also for all later time steps.  With a bit of
-back-and-forthing, it isn't hard to actually get a representation of it as a
-SparseMatrix object. We could then hand it off to the SparseMIC class to form
-a sparse incomplete Cholesky decomposition. To form this decomposition is
-expensive, but we have to do it only once in the first time step, and can then
-use it as a cheap preconditioner in the future. We could do better even by
-using the SparseDirectUMFPACK class that produces not only an incomplete, but
-a complete decomposition of the matrix, which should yield an even better
-preconditioner.
+一种可能性是认识到我们用作预处理的矩阵， $B^T (\textrm{diag}(M^u(S)))^{-1} B$ 仍然是稀疏的，而且是对称的，在此之上。如果看一下流场随时间的演变，我们还可以看到，虽然 $S$ 随时间变化很大，但压力几乎没有变化，因此 $B^T (\textrm{diag}(M^u(S)))^{-1} B \approx B^T (\textrm{diag}(M^u(S^0)))^{-1}
+B$  。换句话说，第一个时间步骤的矩阵应该是一个很好的前提条件，也适用于所有后来的时间步骤。 通过一些反反复复的操作，实际上并不难得到一个SparseMatrix对象的表示。然后我们可以把它交给SparseMIC类，以形成一个稀疏的不完全Cholesky分解。形成这种分解是很昂贵的，但是我们只需要在第一个时间步骤中做一次，然后就可以在将来把它作为一个廉价的预处理程序。我们甚至可以通过使用SparseDirectUMFPACK类来做得更好，它不仅能产生一个不完整的，而且是一个完整的矩阵分解，这应该能产生一个更好的预处理程序。
 
-Finally, why use the approximation $B^T (\textrm{diag}(M^u(S)))^{-1} B$ to
-precondition $B^T M^u(S)^{-1} B$? The latter matrix, after all, is the mixed
-form of the Laplace operator on the pressure space, for which we use linear
-elements. We could therefore build a separate matrix $A^p$ on the side that
-directly corresponds to the non-mixed formulation of the Laplacian, for
-example using the bilinear form $(\mathbf{K}\lambda(S^n) \nabla
-\varphi_i,\nabla\varphi_j)$. We could then form an incomplete or complete
-decomposition of this non-mixed matrix and use it as a preconditioner of the
-mixed form.
+最后，为什么使用近似值 $B^T (\textrm{diag}(M^u(S)))^{-1} B$ 来预处理 $B^T M^u(S)^{-1} B$ ？后者的矩阵毕竟是压力空间上拉普拉斯算子的混合形式，我们对其使用线性元素。因此，我们可以在直接对应于拉普拉斯的非混合形式的一侧建立一个单独的矩阵 $A^p$ ，例如使用双线性形式 $(\mathbf{K}\lambda(S^n) \nabla
+\varphi_i,\nabla\varphi_j)$  。然后我们可以形成这个非混合矩阵的不完全或完全分解，并将其作为混合形式的预处理。
 
-Using such techniques, it can reasonably be expected that the solution process
-will be faster by at least an order of magnitude.
+使用这样的技术，可以合理地预期，求解过程将至少快一个数量级。
 
 
-<a name="Timestepping"></a><h4>Time stepping</h4>
+<a name="Timestepping"></a><h4>Time stepping</h4> 
 
 
-In the introduction we have identified the time step restriction
-@f[
+在引言中，我们已经确定了时间步长限制@f[
   \triangle t_{n+1} \le \frac h{|\mathbf{u}^{n+1}(\mathbf{x})|}
-@f]
-that has to hold globally, i.e. for all $\mathbf x$. After discretization, we
-satisfy it by choosing
-@f[
+@f]，该限制必须全局成立，即对所有 $\mathbf x$ 。离散化后，我们通过选择@f[
   \triangle t_{n+1} = \frac {\min_K h_K}{\max_{\mathbf{x}}|\mathbf{u}^{n+1}(\mathbf{x})|}.
-@f]
+@f]来满足它。
 
-This restriction on the time step is somewhat annoying: the finer we make the
-mesh the smaller the time step; in other words, we get punished twice: each
-time step is more expensive to solve and we have to do more time steps.
+这种对时间步长的限制有点令人讨厌：我们把网格做得越细，时间步长就越小；换句话说，我们受到了两次惩罚：每个时间步长的求解成本更高，我们必须做更多的时间步长。
 
-This is particularly annoying since the majority of the additional work is
-spent solving the implicit part of the equations, i.e. the pressure-velocity
-system, whereas it is the hyperbolic transport equation for the saturation
-that imposes the time step restriction.
+这尤其令人恼火，因为大部分额外的工作是用于解决方程的隐含部分，即压力-速度系统，而正是饱和度的双曲传输方程造成了时间步长的限制。
 
-To avoid this bottleneck, people have invented a number of approaches. For
-example, they may only re-compute the pressure-velocity field every few time
-steps (or, if you want, use different time step sizes for the
-pressure/velocity and saturation equations). This keeps the time step
-restriction on the cheap explicit part while it makes the solution of the
-implicit part less frequent. Experiments in this direction are
-certainly worthwhile; one starting point for such an approach is the paper by
-Zhangxin Chen, Guanren Huan and Baoyan Li: <i>An improved IMPES method for
-two-phase flow in porous media</i>, Transport in Porous Media, 54 (2004),
-pp. 361&mdash;376. There are certainly many other papers on this topic as well, but
-this one happened to land on our desk a while back.
+为了避免这一瓶颈，人们发明了一些方法。例如，他们可能每隔几个时间步数才重新计算压力-速度场（或者，如果你愿意，对压力/速度和饱和度方程使用不同的时间步数）。这就保持了对廉价显式部分的时间步长限制，而使隐式部分的求解不那么频繁。这个方向的实验当然是值得的；这种方法的一个起点是陈章新、桓冠仁和李宝岩的论文：<i>An improved IMPES method for
+two-phase flow in porous media</i>，Transport in Porous Media，54（2004），第361&mdash；376页。当然也有很多其他关于这个主题的论文，但这篇论文前段时间刚好落在我们的桌上。
+
 
 
 
 <a name="Adaptivity"></a><h4>Adaptivity</h4>
 
 
-Adaptivity would also clearly help. Looking at the movies, one clearly sees
-that most of the action is confined to a relatively small part of the domain
-(this particularly obvious for the saturation, but also holds for the
-velocities and pressures). Adaptivity can therefore be expected to keep the
-necessary number of degrees of freedom low, or alternatively increase the
-accuracy.
+适应性显然也会有帮助。看一下这些电影，我们可以清楚地看到，大部分的行动都被限制在领域的一个相对较小的部分（这对饱和度来说特别明显，但对速度和压力也是如此）。因此，自适应性可望保持较低的必要自由度数，或者增加精确度。
 
-On the other hand, adaptivity for time dependent problems is not a trivial
-thing: we would have to change the mesh every few time steps, and we would
-have to transport our present solution to the next mesh every time we change
-it (something that the SolutionTransfer class can help with). These are not
-insurmountable obstacles, but they do require some additional coding and more
-than we felt comfortable was worth packing into this tutorial program.
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-21.cc"
-*/
+另一方面，对于时间相关问题的自适应性不是一件简单的事情：我们必须每隔几个时间步数改变网格，而且每次改变网格时，我们都必须将目前的解决方案传送到下一个网格（SolutionTransfer类可以帮助解决这个问题）。这些并不是无法克服的障碍，但它们确实需要一些额外的编码，而且比我们认为值得打包到这个教程程序中的更多。<a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-21.cc" 。 
+
+  */  

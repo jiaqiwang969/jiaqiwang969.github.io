@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-19 tutorial program</title>
+<title>The deal.II Library: The step-19 tutorial program   &lt;br&gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,157 +86,161 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-19 tutorial program </div>  </div>
+<div class="title">The step-19 tutorial program <br  />
+ </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_6.html">step-6</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_6.html">step-6</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Timediscretization">Time discretization</a>
-        <li><a href="#Spatialdiscretization">Spatial discretization</a>
-        <li><a href="#Dealingwithparticlesprogrammatically">Dealing with particles programmatically</a>
-        <li><a href="#Thetestcase">The test case</a>
+        <li><a href="#Timediscretization">Time discretization</a><a href="#Timediscretization">Time discretization</a>
+        <li><a href="#Spatialdiscretization">Spatial discretization</a><a href="#Spatialdiscretization">Spatial discretization</a>
+        <li><a href="#Dealingwithparticlesprogrammatically">Dealing with particles programmatically</a><a href="#Dealingwithparticlesprogrammatically">Dealing with particles programmatically</a>
+        <li><a href="#Thetestcase">The test case</a><a href="#Thetestcase">The test case</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#Globaldefinitions">Global definitions</a>
-        <li><a href="#Themainclass">The main class</a>
-        <li><a href="#ThecodeCathodeRaySimulatorcodeclassimplementation">The <code>CathodeRaySimulator</code> class implementation</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#Globaldefinitions">Global definitions</a><a href="#Globaldefinitions">Global definitions</a>
+        <li><a href="#Themainclass">The main class</a><a href="#Themainclass">The main class</a>
+        <li><a href="#ThecodeCathodeRaySimulatorcodeclassimplementation">The <code>CathodeRaySimulator</code> class implementation</a><a href="#ThecodeCathodeRaySimulatorcodeclassimplementation">The <code>CathodeRaySimulator</code> class implementation</a>
       <ul>
-        <li><a href="#ThecodeCathodeRaySimulatorcodeconstructor">The <code>CathodeRaySimulator</code> constructor</a>
-        <li><a href="#ThecodeCathodeRaySimulatormake_gridcodefunction">The <code>CathodeRaySimulator::make_grid</code> function</a>
-        <li><a href="#ThecodeCathodeRaySimulatorsetup_systemcodefunction">The <code>CathodeRaySimulator::setup_system</code> function</a>
-        <li><a href="#ThecodeCathodeRaySimulatorassemble_systemcodefunction">The <code>CathodeRaySimulator::assemble_system</code> function</a>
-        <li><a href="#CathodeRaySimulatorsolve">CathodeRaySimulator::solve</a>
-        <li><a href="#CathodeRaySimulatorrefine_grid">CathodeRaySimulator::refine_grid</a>
-        <li><a href="#CathodeRaySimulatorcreate_particles">CathodeRaySimulator::create_particles</a>
-        <li><a href="#CathodeRaySimulatormove_particles">CathodeRaySimulator::move_particles</a>
-        <li><a href="#CathodeRaySimulatortrack_lost_particle">CathodeRaySimulator::track_lost_particle</a>
-        <li><a href="#CathodeRaySimulatorupdate_timestep_size">CathodeRaySimulator::update_timestep_size</a>
-        <li><a href="#ThecodeCathodeRaySimulatoroutput_resultscodefunction">The <code>CathodeRaySimulator::output_results()</code> function</a>
-        <li><a href="#CathodeRaySimulatorrun">CathodeRaySimulator::run</a>
+        <li><a href="#ThecodeCathodeRaySimulatorcodeconstructor">The <code>CathodeRaySimulator</code> constructor</a><a href="#ThecodeCathodeRaySimulatorcodeconstructor">The <code>CathodeRaySimulator</code> constructor</a>
+        <li><a href="#ThecodeCathodeRaySimulatormake_gridcodefunction">The <code>CathodeRaySimulator::make_grid</code> function</a><a href="#ThecodeCathodeRaySimulatormake_gridcodefunction">The <code>CathodeRaySimulator::make_grid</code> function</a>
+        <li><a href="#ThecodeCathodeRaySimulatorsetup_systemcodefunction">The <code>CathodeRaySimulator::setup_system</code> function</a><a href="#ThecodeCathodeRaySimulatorsetup_systemcodefunction">The <code>CathodeRaySimulator::setup_system</code> function</a>
+        <li><a href="#ThecodeCathodeRaySimulatorassemble_systemcodefunction">The <code>CathodeRaySimulator::assemble_system</code> function</a><a href="#ThecodeCathodeRaySimulatorassemble_systemcodefunction">The <code>CathodeRaySimulator::assemble_system</code> function</a>
+        <li><a href="#CathodeRaySimulatorsolve">CathodeRaySimulator::solve</a><a href="#CathodeRaySimulatorsolve">CathodeRaySimulator::solve</a>
+        <li><a href="#CathodeRaySimulatorrefine_grid">CathodeRaySimulator::refine_grid</a> ]<a href="#CathodeRaySimulatorrefine_grid">CathodeRaySimulator::refine_grid</a>
+        <li><a href="#CathodeRaySimulatorcreate_particles">CathodeRaySimulator::create_particles</a><a href="#CathodeRaySimulatorcreate_particles">CathodeRaySimulator::create_particles</a>
+        <li><a href="#CathodeRaySimulatormove_particles">CathodeRaySimulator::move_particles</a><a href="#CathodeRaySimulatormove_particles">CathodeRaySimulator::move_particles</a>
+        <li><a href="#CathodeRaySimulatortrack_lost_particle">CathodeRaySimulator::track_lost_particle</a><a href="#CathodeRaySimulatortrack_lost_particle">CathodeRaySimulator::track_lost_particle</a>
+        <li><a href="#CathodeRaySimulatorupdate_timestep_size">CathodeRaySimulator::update_timestep_size</a><a href="#CathodeRaySimulatorupdate_timestep_size">CathodeRaySimulator::update_timestep_size</a>
+        <li><a href="#ThecodeCathodeRaySimulatoroutput_resultscodefunction">The <code>CathodeRaySimulator::output_results()</code> function</a><a href="#ThecodeCathodeRaySimulatoroutput_resultscodefunction">The <code>CathodeRaySimulator::output_results()</code> function</a>
+        <li><a href="#CathodeRaySimulatorrun">CathodeRaySimulator::run</a><a href="#CathodeRaySimulatorrun">CathodeRaySimulator::run</a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
       <ul>
-        <li><a href="#Avoidingaperformancebottleneckwithparticles"> Avoiding a performance bottleneck with particles </a>
-        <li><a href="#Morestatisticsaboutelectrons"> More statistics about electrons </a>
-        <li><a href="#Abettersynchronizedvisualization"> A better-synchronized visualization </a>
-        <li><a href="#Abettertimeintegrator"> A better time integrator </a>
-        <li><a href="#Parallelization"> Parallelization </a>
+        <li><a href="#Avoidingaperformancebottleneckwithparticles"> Avoiding a performance bottleneck with particles </a><a href="#Avoidingaperformancebottleneckwithparticles"> Avoiding a performance bottleneck with particles </a>
+        <li><a href="#Morestatisticsaboutelectrons"> More statistics about electrons </a><a href="#Morestatisticsaboutelectrons"> More statistics about electrons </a>
+        <li><a href="#Abettersynchronizedvisualization"> A better-synchronized visualization </a><a href="#Abettersynchronizedvisualization"> A better-synchronized visualization </a>
+        <li><a href="#Abettertimeintegrator"> A better time integrator </a><a href="#Abettertimeintegrator"> A better time integrator </a>
+        <li><a href="#Parallelization"> Parallelization </a><a href="#Parallelization"> Parallelization </a>
     </ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
 </p>
 <p><br  />
+ <br  />
 </p>
 <p><em> This program was contributed by Wolfgang Bangerth, Rene Gassmoeller, and Peter Munch.</em></p>
 <p><em>Wolfgang Bangerth acknowledges support through NSF awards DMS-1821210, EAR-1550901, and OAC-1835673. </em></p>
-<dl class="section note"><dt>Note</dt><dd>Support for particles exists in deal.II primarily due to the initial efforts of Rene Gassmoeller. Please acknowledge this work by citing the publication <b>[GLHPW2018]</b> if you use particle functionality in your own work.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>deal.II中存在对粒子的支持，主要是由于Rene Gassmoeller的最初努力。如果你在自己的工作中使用粒子功能，请通过引用出版物 <b>[GLHPW2018]</b> 来确认这项工作。</dd></dl>
 <p><a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
-<p>The finite element method in general, and deal.II in particular, were invented to solve partial differential equations &ndash; in other words, to solve <a href="https://en.wikipedia.org/wiki/Continuum_mechanics">continuum mechanics</a> problems. On the other hand, sometimes one wants to solve problems in which it is useful to track individual objects ("particles") and how their positions evolve. If this simply leads to a set of ordinary differential equations, for example if you want to track the positions of the planets in the solar system over time, then deal.II is clearly not your right tool. On the other hand, if this evolution is due to the interaction with the solution of partial differential equation, or if having a mesh to determine which particles interact with others (such as in the <a href="https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics">smoothed particle hydrodynamics (SPH)</a> method), then deal.II has support for you.</p>
-<p>The case we will consider here is how electrically charged particles move through an electric field. As motivation, we will consider <a href="https://en.wikipedia.org/wiki/Cathode_ray">cathode rays</a>: Electrons emitted by a heated piece of metal that is negatively charged (the "cathode"), and that are then accelerated by an electric field towards the positively charged electrode (the "anode"). The anode is typically ring-shaped so that the majority of electrons can fly through the hole in the form of an electron beam. In the olden times, they might then have illuminated the screen of a TV built from a <a href="https://en.wikipedia.org/wiki/Cathode-ray_tube">cathode ray tube</a>. Today, instead, electron beams are useful in <a href="https://en.wikipedia.org/wiki/X-ray_tube">X-ray machines</a>, <a href="https://en.wikipedia.org/wiki/Electron-beam_lithography">electron beam lithography</a>, <a href="https://en.wikipedia.org/wiki/Electron-beam_welding">electron beam welding</a>, and a number of other areas.</p>
-<p>The equations we will then consider are as follows: First, we need to describe the electric field. This is most easily accomplished by noting that the electric potential \(V\) satisfied the equation </p><p class="formulaDsp">
+<p>一般来说，有限元方法，特别是deal.II，是为了解决偏微分方程而发明的&ndash;换句话说，是为了解决<a href="https://en.wikipedia.org/wiki/Continuum_mechanics">连续体力学</a>问题。另一方面，有时人们想解决的问题是，跟踪单个物体（"粒子"）以及它们的位置如何演变是有用的。如果这只是导致一组常微分方程，例如，如果你想跟踪太阳系中行星随时间变化的位置，那么deal.II显然不是你合适的工具。另一方面，如果这种演变是由于与偏微分方程的解的相互作用，或者有一个网格来确定哪些粒子与其他粒子相互作用（例如在<a href="https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics">平滑粒子流体力学（SPH）</a>方法中），那么deal.II对你有支持。</p>
+<p>我们这里要考虑的情况是带电粒子如何在电场中运动。作为动机，我们将考虑<a href="https://en.wikipedia.org/wiki/Cathode_ray">阴极射线</a>。由一块被加热的带负电的金属（"阴极"）发出的电子，然后被电场加速到带正电的电极（"阳极"）。阳极通常是环形的，这样大部分电子可以以电子束的形式飞过孔。在过去，它们可能会照亮由<a href="https://en.wikipedia.org/wiki/Cathode-ray_tube">阴极射线管</a>制成的电视的屏幕。而今天，电子束在<a href="https://en.wikipedia.org/wiki/X-ray_tube">X射线机</a>、<a href="https://en.wikipedia.org/wiki/Electron-beam_lithography">电子束光刻</a>、<a href="https://en.wikipedia.org/wiki/Electron-beam_welding">电子束焊接</a>以及其他一些领域都很有用。</p>
+<p>我们接下来要考虑的方程式如下。首先，我们需要描述电场。这是最容易做到的，注意到电动势 \(V\) 满足方程 </p><p class="formulaDsp">
 \[ -\epsilon_0 \Delta V = \rho \]
 </p>
-<p> where \(\epsilon_0\) is the dielectric constant of vacuum, and \(\rho\) is the charge density. This is augmented by boundary conditions that we will choose as follows: </p><p class="formulaDsp">
+<p>，其中 \(\epsilon_0\) 是真空的介电常数， \(\rho\) 是电荷密度。这是由我们将选择的边界条件所增强的，如下所示。</p>
+<p class="formulaDsp">
 \begin{align*} V &amp;= -V_0 &amp;&amp; \text{on}\; \Gamma_\text{cathode}\subset\partial\Omega \\ V &amp;= +V_0 &amp;&amp; \text{on}\; \Gamma_\text{anode}\subset\partial\Omega \\ \epsilon\frac{\partial V}{\partial n} &amp;= 0 &amp;&amp; \text{on}\; \partial\Omega\setminus\Gamma_\text{cathode}\setminus\Gamma_\text{anode}. \end{align*}
 </p>
-<p> In other words, we prescribe voltages \(+V_0\) and \(-V_0\) at the two electrodes and insulating (Neumann) boundary conditions elsewhere. Since the dynamics of the particles are purely due to the electric field \(\mathbf E=\nabla V\), we could as well have prescribed \(2V_0\) and \(0\) at the two electrodes &ndash; all that matters is the voltage difference at the two electrodes.</p>
-<p>Given this electric potential \(V\) and the electric field \(\mathbf E=\nabla V\), we can describe the trajectory of the \(i\)th particle using the differential equation </p><p class="formulaDsp">
+<p>换句话说，我们在两个电极上规定电压 \(+V_0\) 和 \(-V_0\) ，在其他地方规定绝缘（诺伊曼）边界条件。由于粒子的动力学纯粹是由于电场 \(\mathbf E=\nabla V\) ，我们也可以在两个电极上规定 \(2V_0\) 和 \(0\) &ndash;所有重要的是两个电极上的电压差。</p>
+<p>考虑到这个电动势 \(V\) 和电场 \(\mathbf E=\nabla V\) ，我们可以用微分方程 </p><p class="formulaDsp">
 \[ m {\ddot {\mathbf x}}_i = e\mathbf E, \]
 </p>
-<p> where \(m,e\) are the mass and electric charge of each particle. In practice, it is convenient to write this as a system of first-order differential equations in the position \(\mathbf x\) and velocity \(\mathbf v\): </p><p class="formulaDsp">
+<p>来描述第 \(i\) 个粒子的运动轨迹，其中 \(m,e\) 是每个粒子的质量和电荷。在实践中，将其写成位置 \(\mathbf x\) 和速度 \(\mathbf v\) 的一阶微分方程系统很方便。</p>
+<p class="formulaDsp">
 \begin{align*} {\dot {\mathbf v}}_i &amp;= \frac{e\mathbf E}{m}, \\ {\dot {\mathbf x}}_i &amp;= {\mathbf v}_i. \end{align*}
 </p>
-<p> The deal.II class we will use to deal with particles, <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a>, stores particles in a way so that the position \(\mathbf x_i\) is part of the <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> data structures. (It stores particles sorted by cell they are in, and consequently needs to know where each particle is.) The velocity \(\mathbf v_i\), on the other hand, is of no concern to <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> and consequently we will store it as a "property" of each particle that we will update in each time step. Properties can also be used to store any other quantity we might care about each particle: its charge, or if they were larger than just an electron, its color, mass, attitude in space, chemical composition, etc.</p>
-<p>There remain two things to discuss to complete the model: Where particles start and what the charge density \(\rho\) is.</p>
-<p>First, historically, cathode rays used very large electric fields to pull electrons out of the metal. This produces only a relatively small current. One can do better by heating the cathode: a statistical fraction of electrons in that case have enough thermal energy to leave the metal; the electric field then just has to be strong enough to pull them away from the attraction of their host body. We will model this in the following way: We will create a new particle if (i) the electric field points away from the electrode, i.e., if \(\mathbf E \cdot \mathbf n &lt; 0\) where \(\mathbf n\) is the normal vector at a face pointing out of the domain (into the electrode), and (ii) the electric field exceeds a threshold value \(|\mathbf E|\ge E_\text{threshold}\). This is surely not a sufficiently accurate model for what really happens, but is good enough for our current tutorial program.</p>
-<p>Second, in principle we would have to model the charge density via </p><p class="formulaDsp">
+<p>我们将用来处理粒子的deal.II类， <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a>, 以一种方式存储粒子，因此位置 \(\mathbf x_i\) 是 <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> 数据结构的一部分。它存储的粒子是按它们所在的单元分类的，因此需要知道每个粒子的位置）。另一方面，速度 \(\mathbf v_i\) 与 <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> 无关，因此我们将把它存储为每个粒子的 "属性"，并在每个时间步长中更新。属性也可以用来存储我们可能关心的关于每个粒子的任何其他数量：它的电荷，或者如果它们大于一个电子，它的颜色、质量、在空间的位置、化学成分等等。</p>
+<p>要完成这个模型，还有两件事要讨论。粒子从哪里开始以及电荷密度 \(\rho\) 是什么。</p>
+<p>首先，在历史上，阴极射线使用非常大的电场将电子从金属中拉出来。这只产生一个相对较小的电流。我们可以通过加热阴极来做得更好：在这种情况下，统计学上的一部分电子有足够的热能离开金属；然后电场只要足够强，就可以把它们从宿主的吸引中拉出来。我们将以下列方式对此进行建模。如果（i）电场指向远离电极的地方，即如果 \(\mathbf E \cdot \mathbf n &lt; 0\) ，其中 \(\mathbf n\) 是指向域外（进入电极）的面的法向量，以及（ii）电场超过一个阈值 \(|\mathbf E|\ge E_\text{threshold}\) ，我们将创建一个新粒子。这肯定不是一个足够准确的模型，但对于我们目前的教程项目来说已经足够好了。</p>
+<p>第二，原则上，我们必须通过 </p><p class="formulaDsp">
 \[ \rho(\mathbf x) = \sum_i e\delta(\mathbf x-\mathbf x_i). \]
 </p>
-<dl class="section note"><dt>Note</dt><dd>The issue now is that in reality, a cathode ray tube in an old television yields a current of somewhere around a few milli-Amperes. In the much higher energy beams of particle accelerators, the current may only be a few nano-Ampere. But an Ampere is \(6\times 10^{18}\) electrons flowing per second. Now, as you will see in the results section, we really only simulate a few microseconds ( \(10^{-5}\) seconds), but that still results in very very large numbers of electrons &ndash; far more than we can hope to simulate with a program as small as the current one. As a consequence, let us presume that each particle represents \(N\) electrons. Then the particle mass and charge are also \(Nm\) and \(Ne\) and the equations we have to solve are <p class="formulaDsp">
+<p>对电荷密度进行建模。</p>
+<dl class="section note"><dt>Note</dt><dd>现在的问题是，在现实中，一台老式电视中的阴极射线管产生的电流大约为几毫安培。在粒子加速器的更高能量的光束中，电流可能只有几纳安培。但一个安培是每秒流动的 \(6\times 10^{18}\) 个电子。现在，正如你将在结果部分看到的那样，我们实际上只模拟了几微秒（ \(10^{-5}\) 秒），但这仍然导致非常非常多的电子 &ndash; 远远超过我们希望用一个像目前这样小的程序来模拟的数量。因此，让我们假设每个粒子代表 \(N\) 个电子。那么粒子的质量和电荷也是 \(Nm\) 和 \(Ne\) ，我们要解决的方程是 <p class="formulaDsp">
 \[ (Nm) {\ddot {\mathbf x}}_i = (Ne)\mathbf E, \]
 </p>
- which is of course exactly the same as above. On the other hand, the charge density for these "clumps" of electrons is given by <p class="formulaDsp">
+，这当然与上述情况完全相同。另一方面，这些电子 "团块 "的电荷密度由 <p class="formulaDsp">
 \[ \rho(\mathbf x) = \sum_i (Ne)\delta(\mathbf x-\mathbf x_i). \]
 </p>
- It is this form that we will implement in the program, where \(N\) is chosen rather large in the program to ensure that the particles actually affect the electric field. (This may not be realistic in practice: In most cases, there are just not enough electrons to actually affect the overall electric field. But realism is not our goal here.)</dd>
-<dd>
-One may wonder why the equation for the electric field (or, rather, the electric potential) has no time derivative whereas the equations for the electron positions do. In essence, this is a modeling assumption: We assume that the particles move so slowly that at any given time the electric field is in equilibrium. This is saying, in other words, that the velocity of the electrons is much less than the speed of light. In yet other words, we can rephrase this in terms of the electrode voltage \(V_0\): Since every volt of electric potential accelerates electrons by approximately 600 km/s (neglecting relativistic effects), requiring \(|\mathbf v_i\|\ll c\) is equivalent to saying that \(2V_0 \ll 500 \text{V}\). Under this assumption (and the assumption that the total number of electrons is small), one can also neglect the creation of magnetic fields by the moving charges, which would otherwise also affect the movement of the electrons.</dd></dl>
+给出。我们将在程序中实现这种形式，其中 \(N\) 在程序中被选择得相当大，以确保粒子实际影响电场。这在实践中可能并不现实。在大多数情况下，没有足够的电子来实际影响整个电场。但现实主义不是我们的目标）。)</dd></dl>
+<p>人们可能会问，为什么电场（或者说，电势）的方程没有时间导数，而电子位置的方程却有。从本质上讲，这是一个建模假设。我们假设粒子移动得很慢，以至于在任何时候电场都处于平衡状态。这就是说，换句话说，电子的速度远远小于光速。换句话说，我们可以用电极电压来重新表述 \(V_0\) ：由于每伏特的电动势都会使电子加速约600公里/秒（忽略相对论效应），要求 \(|\mathbf v_i\|\ll c\) 等于说 \(2V_0 \ll 500 \text{V}\) 。在这个假设下（以及电子总数较少的假设），我们也可以忽略运动电荷产生的磁场，否则也会影响电子的运动。</p>
 <p><a class="anchor" id="Timediscretization"></a></p><h3>Time discretization</h3>
-<p>The equations outlined above form a set of coupled differential equations. Let us bring them all together in one place again to make that clear: </p><p class="formulaDsp">
+<p>上面概述的方程构成了一组耦合微分方程。让我们再次把它们集中在一起，以明确这一点。</p>
+<p class="formulaDsp">
 \begin{align*} -\epsilon_0 \Delta V &amp;= \sum_i e\delta(\mathbf x-\mathbf x_i) \\ {\dot {\mathbf x}}_i &amp;= {\mathbf v}_i, \\ {\dot {\mathbf v}}_i &amp;= \frac{e\mathbf E}{m} = \frac{e\mathbf \nabla V}{m}. \end{align*}
 </p>
-<p> Because of the awkward dependence of the electric potential on the particle locations, we don't want to solve this as a coupled system but instead use a decoupled approach where we first solve for the potential in each time step and then the particle locations. (One could also do it the other way around, of course.) This is very much in the same spirit as we do in <a class="el" href="step_21.html">step-21</a>, <a class="el" href="step_31.html">step-31</a>, and <a class="el" href="step_32.html">step-32</a>, to name just a few, and can all be understood in the context of the operator splitting methods discussed in <a class="el" href="step_58.html">step-58</a>.</p>
-<p>So, if we denote by an upper index \(n\) the time step, and if we use a simple time discretization for the ODE, then this means that we have to solve the following set of equations in each time step: </p><p class="formulaDsp">
+<p>由于电势对粒子位置的依赖性很强，我们不想将其作为一个耦合系统来解决，而是采用一种解耦的方法，即首先解决每个时间步长的电势，然后解决粒子位置。这与我们在 <a class="el" href="step_21.html">step-21</a> 、 <a class="el" href="step_31.html">step-31</a> 和 <a class="el" href="step_32.html">step-32</a> 中所做的非常一致，仅举几例，都可以在 <a class="el" href="step_58.html">step-58</a> 中讨论的算子分割方法的背景下理解。</p>
+<p>因此，如果我们用大指数 \(n\) 表示时间步长，并且如果我们对ODE使用简单的时间离散化，那么这意味着我们必须在每个时间步长中解决以下方程组。</p>
+<p class="formulaDsp">
 \begin{align*} -\epsilon_0 \Delta V^{(n)} &amp;= \sum_i e\delta(\mathbf x-\mathbf x_i^{(n-1)}) \\ \frac{{\mathbf v}_i^{(n)}-{\mathbf v}_i^{(n-1)}}{\Delta t} &amp;= \frac{e\nabla V^{(n)}}{m} \\ \frac{{\mathbf x}_i^{(n)}-{\mathbf x}_i^{(n-1)}}{\Delta t} &amp;= {\mathbf v}_i^{(n)}. \end{align*}
 </p>
-<p> There are of course many better ways to do a time discretization (for example the simple <a href="https://en.wikipedia.org/wiki/Leapfrog_integration">leapfrog scheme</a>) but this isn't the point of the tutorial program, and so we will be content with what we have here. (We will comment on a piece of this puzzle in the <a href="#extensions">possibilities for extensions</a> section of this program, however.)</p>
-<p>There remains the question of how we should choose the time step size \(\Delta t\). The limitation here is that the <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> class needs to keep track of which cell each particle is in. This is particularly an issue if we are running computations in parallel (say, in <a class="el" href="step_70.html">step-70</a>) because in that case every process only stores those cells it owns plus one layer of "ghost cells". That's not relevant here, but in general we should make sure that over the course of each time step, a particle moves only from one cell to any of its immediate neighbors (face, edge, or vertex neighbors). If we can ensure that, then <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> is guaranteed to be able to figure out which cell a particle ends up in. To do this, a useful rule of thumb is that we should choose the time step so that for all particles the expected distance the particle moves by is less than one cell diameter: </p><p class="formulaDsp">
-\[ \Delta t \le \frac{h_i}{\|\mathbf v_i\|} \qquad\qquad \forall i, \]
-</p>
-<p> or equivalently </p><p class="formulaDsp">
-\[ \Delta t \le \min_i \frac{h_i}{\|\mathbf v_i\|}. \]
-</p>
-<p> Here, \(h_i\) is the length of the shortest edge of the cell on which particle \(i\) is located &ndash; in essence, a measure of the size of a cell.</p>
-<p>On the other hand, a particle might already be at the boundary of one cell and the neighboring cell might be once further refined. So then the time to cross that <em>neighboring</em> cell would actually be half the amount above, suggesting </p><p class="formulaDsp">
+<p>当然，有许多更好的方法来做时间离散化（例如简单的<a href="https://en.wikipedia.org/wiki/Leapfrog_integration">跃迁方案</a>），但这不是本教程程序的重点，因此我们将满足于我们在这里的内容。不过，我们将在本程序的<a href="#extensions">possibilities for extensions</a>部分对这个难题的一个部分进行评论）。</p>
+<p>还有一个问题是我们应该如何选择时间步长 \(\Delta t\) 。这里的限制是， <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> 类需要跟踪每个粒子在哪个单元中。如果我们平行运行计算，这尤其是一个问题（例如，在 <a class="el" href="step_70.html">step-70</a> 中），因为在这种情况下，每个进程只存储它所拥有的那些单元，外加一层 "幽灵单元"。这在这里并不重要，但一般来说，我们应该确保在每个时间步长中，一个粒子只从一个单元移动到它的任何一个近邻（面、边或顶点邻居）。如果我们能确保这一点，那么 <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> 就能保证能够弄清粒子最后在哪个单元。要做到这一点，一个有用的经验法则是，我们应该选择时间步长，使所有粒子的预期移动距离小于一个单元格直径。这里， \(h_i\) 是粒子 \(i\) 所在的单元的最短边缘的长度&ndash;本质上是对单元大小的衡量。</p>
+<p>另一方面，一个粒子可能已经在一个单元的边界上，而邻近的单元可能曾经进一步细化。因此，那么穿过那个*相邻*单元的时间实际上将是上述数量的一半，建议 </p><p class="formulaDsp">
 \[ \Delta t \le \min_i \frac{\tfrac 12 h_i}{\|\mathbf v_i\|}. \]
 </p>
-<p>But even that is not good enough: The formula above updates the particle positions in each time using the formula </p><p class="formulaDsp">
+<p>但即使这样也是不够好的。上面的公式使用公式 </p><p class="formulaDsp">
 \[ \frac{{\mathbf x}_i^{(n)}-{\mathbf x}_i^{(n-1)}}{\Delta t} = {\mathbf v}_i^{(n)}, \]
 </p>
-<p> that is, using the <em>current</em> velocity \({\mathbf v}_i^{n}\). But we don't have the current velocity yet at the time when we need to choose \(\Delta t\) &ndash; which is after we have updated the potential \(V^{(n)}\) but before we update the velocity from \({\mathbf v}_i^{(n-1)}\) to \({\mathbf v}_i^{(n)}\). All we have is \({\mathbf v}_i^{(n-1)}\). So we need an additional safety factor for our final choice: </p><p class="formulaDsp">
+<p>更新粒子的位置，也就是说，使用*当前*速度 \({\mathbf v}_i^{n}\) 。但是在我们需要选择 \(\Delta t\) 的时候，我们还没有当前的速度&ndash;也就是在我们更新了势 \(V^{(n)}\) 之后，但在我们从 \({\mathbf v}_i^{(n-1)}\) 到 \({\mathbf v}_i^{(n)}\) 更新速度之前。我们有的只是 \({\mathbf v}_i^{(n-1)}\) 。所以我们需要为我们的最终选择增加一个安全系数。 </p><p class="formulaDsp">
 \[ \Delta t^{(n)} = c_\text{safety} \min_i \frac{\tfrac 12 h_i}{\|\mathbf v_i^{(n-1)}\|}. \]
 </p>
-<p> How large should \(c_\text{safety}\) be? That depends on how much of underestimate \(\|\mathbf v_i^{(n-1)}\|\) might be compared to \(\|\mathbf v_i^{(n)}\|\), and that is actually quite easy to assess: A particle created in one time step with zero velocity will roughly pick up equal velocity increments in each successive time step if the electric field it encounters along the way were roughly constant. So the maximal difference between \(\|\mathbf v_i^{(n-1)}\|\) and \(\|\mathbf v_i^{(n)}\|\) would be a factor of two. As a consequence, we will choose \(c_\text{saftey}=0.5\).</p>
-<p>There is only one other case we ought to consider: What happens in the very first time step? There, any particles to be moved along have just been created, but they have a zero velocity. So we don't know what velocity we should choose for them. Of course, in all other time steps there are also particles that have just been created, but in general, the particles with the highest velocity limit the time step size and so the newly created particles with their zero velocity don't matter. But if we <em>only</em> have such particles?</p>
-<p>In that case, we can use the following approximation: If a particle starts at \(\mathbf v^{(0)}=0\), then the update formula tells us that </p><p class="formulaDsp">
+<p> \(c_\text{safety}\) 应该有多大？这取决于与 \(\|\mathbf v_i^{(n)}\|\) 相比， \(\|\mathbf v_i^{(n-1)}\|\) 可能被低估了多少，而这实际上是很容易评估的。如果沿途遇到的电场大致恒定，在一个时间步长中产生的速度为零的粒子，在每个连续的时间步长中大致会获得相等的速度增量。因此， \(\|\mathbf v_i^{(n-1)}\|\) 和 \(\|\mathbf v_i^{(n)}\|\) 之间的最大差异将是一个系数。因此，我们将选择 \(c_\text{saftey}=0.5\) 。</p>
+<p>只有另外一种情况我们应该考虑。在第一个时间步骤中会发生什么？在那里，任何要被移动的粒子刚刚被创造出来，但它们的速度是零。所以我们不知道我们应该为它们选择什么速度。当然，在所有其他时间步骤中，也有刚刚被创造出来的粒子，但一般来说，具有最高速度的粒子限制了时间步骤的大小，因此新创造出来的具有零速度的粒子并不重要。但是如果我们**只有这样的粒子？</p>
+<p>在这种情况下，我们可以使用下面的近似方法。如果一个粒子从 \(\mathbf v^{(0)}=0\) 开始，那么更新公式告诉我们， </p><p class="formulaDsp">
 \[ {\mathbf v}_i^{(1)} = \frac{e\nabla V^{(1)}}{m} \Delta t, \]
 </p>
-<p> and consequently </p><p class="formulaDsp">
+<p>和随之而来的 </p><p class="formulaDsp">
 \[ \frac{{\mathbf x}_i^{(1)}-{\mathbf x}_i^{(0)}}{\Delta t} = {\mathbf v}_i^{(1)}, \]
 </p>
-<p> which we can write as </p><p class="formulaDsp">
+<p>，我们可以写成 </p><p class="formulaDsp">
 \[ {\mathbf x}_i^{(1)} - {\mathbf x}_i^{(0)} = \frac{e\nabla V^{(1)}}{m} \Delta t^2. \]
 </p>
-<p> Not wanting to move a particle by more than \(\frac 12 h_i\) then implies that we should choose the time step as </p><p class="formulaDsp">
+<p> 不想让一个粒子移动超过 \(\frac 12 h_i\) ，那么意味着我们应该选择时间步长为 </p><p class="formulaDsp">
 \[ \Delta t \le \min_i \sqrt{ \frac{h_i m}{e \|\nabla V^{(1)}\| }}. \]
 </p>
-<p> Using the same argument about neighboring cells possibly being smaller by a factor of two then leads to the final formula for time step zero: </p><p class="formulaDsp">
+<p> 使用关于相邻单元可能小2倍的相同论点，然后得出时间步长为0的最终公式。 </p><p class="formulaDsp">
 \[ \Delta t = \min_i \sqrt{ \frac{\frac 12 h_i m}{e \|\nabla V^{(1)}\| } }. \]
 </p>
-<p>Strictly speaking, we would have to evaluate the electric potential \(V^{(1)}\) at the location of each particle, but a good enough approximation is to use the maximum of the values at the vertices of the respective cell. (Why the vertices and not the midpoint? Because the gradient of the solution of the Laplace equation, i.e., the electric field, is largest in corner singularities which are located at the vertices of cells.) This has the advantage that we can make good use of the <a class="el" href="classFEValues.html">FEValues</a> functionality which can recycle pre-computed material as long as the quadrature points are the same from one cell to the next.</p>
-<p>We could always run this kind of scheme to estimate the difference between \(\mathbf v_i^{(n-1)}\) and \(\mathbf v_i^{(n)}\), but it relies on evaluating the electric field \(\mathbf E\) on each cell, and that is expensive. As a consequence, we will limit this approach to the very first time step.</p>
+<p>严格来说，我们必须在每个粒子的位置评估电势 \(V^{(1)}\) ，但一个足够好的近似值是使用各自单元顶点的最大值。为什么是顶点而不是中点？因为拉普拉斯方程的解的梯度，即电场，在位于单元顶点的角落奇点上是最大的）。) 这样做的好处是，我们可以很好地利用FEValues功能，只要各单元的正交点相同，就可以循环使用预计算的材料。</p>
+<p>我们总是可以运行这种方案来估计 \(\mathbf v_i^{(n-1)}\) 和 \(\mathbf v_i^{(n)}\) 之间的差异，但它依赖于评估每个单元的电场 \(\mathbf E\) ，这很昂贵。因此，我们将把这种方法限制在第一个时间步骤上。</p>
 <p><a class="anchor" id="Spatialdiscretization"></a></p><h3>Spatial discretization</h3>
-<p>Having discussed the time discretization, the discussion of the spatial discretization is going to be short: We use quadratic finite elements, i.e., the space \(Q_2\), to approximate the electric potential \(V\). The mesh is adapted a couple of times during the initial time step. All of this is entirely standard if you have read <a class="el" href="step_6.html">step-6</a>, and the implementation does not provide for any kind of surprise.</p>
+<p>在讨论了时间离散化之后，对空间离散化的讨论将很简短：我们使用二次有限元，即空间 \(Q_2\) ，来近似计算电动势 \(V\) 。在初始时间步骤中，网格被调整了几次。如果你读过 <a class="el" href="step_6.html">step-6</a> ，所有这些都是完全标准的，而且实现起来也没有规定任何形式的惊喜。</p>
 <p><a class="anchor" id="Dealingwithparticlesprogrammatically"></a></p><h3>Dealing with particles programmatically</h3>
-<p>Adding and moving particles is, in practice, not very difficult in deal.II. To add one, the <code>create_particles()</code> function of this program simply uses a code snippet of the following form: </p><div class="fragment"><div class="line"><a class="code" href="classParticles_1_1Particle.html">Particles::Particle&lt;dim&gt;</a> new_particle;</div>
+<p>添加和移动粒子实际上在deal.II中并不十分困难。要添加一个粒子，本程序的&lt;tt&gt;create_particles()函数只需使用以下形式的代码片段。</p>
+<div class="fragment"><div class="line"><a class="code" href="classParticles_1_1Particle.html">Particles::Particle&lt;dim&gt;</a> new_particle;</div>
 <div class="line">new_particle.<a class="code" href="classParticles_1_1Particle.html#afbe52b594cf4a8dd11431679c4ef2b52">set_location</a>(location);</div>
 <div class="line">new_particle.<a class="code" href="classParticles_1_1Particle.html#a57efa2034baca617ba3160ccfbbc7cd7">set_reference_location</a></div>
 <div class="line">    (mapping.transform_real_to_unit_cell(cell, location));</div>
 <div class="line">new_particle.<a class="code" href="classParticles_1_1Particle.html#af792bce47ec4746ad2c78e7e800299a8">set_id</a>(n_current_particles);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">particle_handler.insert_particle(new_particle, cell);</div>
 <div class="ttc" id="aclassParticles_1_1Particle_html"><div class="ttname"><a href="classParticles_1_1Particle.html">Particles::Particle</a></div><div class="ttdef"><b>Definition:</b> <a href="particle_8h_source.html#l00094">particle.h:95</a></div></div>
 <div class="ttc" id="aclassParticles_1_1Particle_html_a57efa2034baca617ba3160ccfbbc7cd7"><div class="ttname"><a href="classParticles_1_1Particle.html#a57efa2034baca617ba3160ccfbbc7cd7">Particles::Particle::set_reference_location</a></div><div class="ttdeci">void set_reference_location(const Point&lt; dim &gt; &amp;new_reference_location)</div><div class="ttdef"><b>Definition:</b> <a href="particle_8h_source.html#l00528">particle.h:528</a></div></div>
 <div class="ttc" id="aclassParticles_1_1Particle_html_af792bce47ec4746ad2c78e7e800299a8"><div class="ttname"><a href="classParticles_1_1Particle.html#af792bce47ec4746ad2c78e7e800299a8">Particles::Particle::set_id</a></div><div class="ttdeci">void set_id(const types::particle_index &amp;new_id)</div><div class="ttdef"><b>Definition:</b> <a href="particle_8h_source.html#l00555">particle.h:555</a></div></div>
 <div class="ttc" id="aclassParticles_1_1Particle_html_afbe52b594cf4a8dd11431679c4ef2b52"><div class="ttname"><a href="classParticles_1_1Particle.html#afbe52b594cf4a8dd11431679c4ef2b52">Particles::Particle::set_location</a></div><div class="ttdeci">void set_location(const Point&lt; spacedim &gt; &amp;new_location)</div><div class="ttdef"><b>Definition:</b> <a href="particle_8h_source.html#l00510">particle.h:510</a></div></div>
-</div><!-- fragment --><p> In other words, it is not all that different from inserting an object into a <code>std::set</code> or <code>std::map</code>: Create the object, set its properties (here, the current location, its reference cell location, and its id) and call <code>insert_particle</code>. The only thing that may be surprising is the reference location: In order to evaluate things such as \(\nabla V(\mathbf x_i)\), it is necessary to evaluate finite element fields at locations \(\mathbf x_i\). But this requires evaluating the finite element shape functions at points on the refence cell \(\hat{\mathbf x}_i\). To make this efficient, every particle doesn't just store its location and the cell it is on, but also what location that point corresponds to in the cell's reference coordinate system.</p>
-<p>Updating a particle's position is then no more difficult: One just has to call </p><div class="fragment"><div class="line">particle-&gt;set_location(new_location);</div>
-</div><!-- fragment --><p> We do this in the <code>move_particles()</code> function. The only difference is that we then have to tell the <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> class to also find what cell that position corresponds to (and, when computing in parallel, which process owns this cell). For efficiency reason, this is most easily done after updating all particles' locations, and is achieved via the <a class="el" href="classParticles_1_1ParticleHandler.html#ad817e16828f2355b0cad6fef8db7df81">Particles::ParticleHandler::sort_particles_into_subdomains_and_cells()</a> function.</p>
-<p>There are, of course, times where a particle may leave the domain in question. In that case, <a class="el" href="classParticles_1_1ParticleHandler.html#ad817e16828f2355b0cad6fef8db7df81">Particles::ParticleHandler::sort_particles_into_subdomains_and_cells()</a> can not find a surrounding cell and simply deletes the particle. But, it is often useful to track the number of particles that have been lost this way, and for this the <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> class offers a "signal" that one can attach to. We show how to do this in the constructor of the main class to count how many particles were lost in each time step. Specifically, the way this works is that the <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> class has a "signal" to which one can attach a function that will be executed whenever the signal is triggered. Here, this looks as follows: </p><div class="fragment"><div class="line">particle_handler.signals.particle_lost.connect(</div>
+</div><!-- fragment --><p>换句话说，这与在 <code>std::set</code> 或 <code>std::map</code>: 中插入一个对象没有什么不同。 创建对象，设置其属性（这里是当前位置、其参考单元位置和其id）并调用<code>insert_particle</code>。唯一可能令人惊讶的是参考位置。为了评估诸如 \(\nabla V(\mathbf x_i)\) 这样的东西，有必要在位置 \(\mathbf x_i\) 评估有限元场。但这需要在参考单元 \(\hat{\mathbf x}_i\) 上的点评估有限元形状函数。为了提高效率，每个粒子不仅要存储它的位置和它所在的单元，还要存储该点在单元的参考坐标系中所对应的位置。</p>
+<p>这样一来，更新一个粒子的位置就不再困难了。我们只需要调用</p>
+<div class="fragment"><div class="line">particle-&gt;set_location(new_location);</div>
+</div><!-- fragment --><p>我们在 "move_particles() "函数中这样做。唯一的区别是，我们必须告诉 <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> 类也要找到该位置对应的单元（以及在并行计算时，哪个进程拥有该单元）。出于效率的考虑，这在更新所有粒子的位置后最容易完成，并通过 <a class="el" href="classParticles_1_1ParticleHandler.html#ad817e16828f2355b0cad6fef8db7df81">Particles::ParticleHandler::sort_particles_into_subdomains_and_cells()</a> 函数实现。</p>
+<p>当然，有些时候，一个粒子可能会离开相关的领域。在这种情况下， <a class="el" href="classParticles_1_1ParticleHandler.html#ad817e16828f2355b0cad6fef8db7df81">Particles::ParticleHandler::sort_particles_into_subdomains_and_cells()</a> 不能找到周围的单元，而只是简单地删除该粒子。但是，追踪以这种方式丢失的粒子的数量往往是有用的，为此， <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> 类提供了一个可以附加的 "信号"。我们在主类的构造函数中展示了如何做到这一点，以计算每个时间步骤中损失了多少粒子。具体来说，这种工作方式是， <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> 类有一个 "信号"，人们可以附加一个函数，只要信号被触发就会执行。在这里，这看起来如下。</p>
+<div class="fragment"><div class="line">particle_handler.signals.particle_lost.connect(</div>
 <div class="line">  [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keyword">typename</span> <a class="code" href="classParticles_1_1ParticleIterator.html">Particles::ParticleIterator&lt;dim&gt;</a> &amp;        particle,</div>
 <div class="line">         <span class="keyword">const</span> <span class="keyword">typename</span> <a class="code" href="classTriaActiveIterator.html">Triangulation&lt;dim&gt;::active_cell_iterator</a> &amp;cell)</div>
 <div class="line">  {</div>
@@ -244,25 +248,30 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">  });</div>
 <div class="ttc" id="aclassParticles_1_1ParticleIterator_html"><div class="ttname"><a href="classParticles_1_1ParticleIterator.html">Particles::ParticleIterator</a></div><div class="ttdef"><b>Definition:</b> <a href="particle__iterator_8h_source.html#l00039">particle_iterator.h:40</a></div></div>
 <div class="ttc" id="aclassTriaActiveIterator_html"><div class="ttname"><a href="classTriaActiveIterator.html">TriaActiveIterator</a></div><div class="ttdef"><b>Definition:</b> <a href="tria__iterator_8h_source.html#l00758">tria_iterator.h:759</a></div></div>
-</div><!-- fragment --><p> That's a bit of a mouthful, but what's happening is this: We declare a lambda function that "captures" the <code>this</code> pointer (so that we can access member functions of the surrounding object inside the lambda function), and that takes two arguments:</p><ul>
-<li>A reference to the particle that has been "lost".</li>
-<li>A reference to the cell it was on last. The lambda function then simply calls the <code>CathodeRaySimulator::track_lost_particle</code> function with these arguments. When we attach this lambda function to the signal, the <a class="el" href="classParticles_1_1ParticleHandler.html#ad817e16828f2355b0cad6fef8db7df81">Particles::ParticleHandler::sort_particles_into_subdomains_and_cells()</a> function will trigger the signal for every particle for which it can't find a new home. This gives us the chance to record where the particle is, and to record statistics on it.</li>
-</ul>
-<dl class="section note"><dt>Note</dt><dd>In this tutorial program, we insert particles by hand and at locations we specifically choose based on conditions that include the solution of the electrostatic problem. But there are other cases where one primarily wants to use particles as passive objects, for example to trace and visualize the flow field of a fluid flow problem. In those cases, there are numerous functions in the <a class="el" href="namespaceParticles_1_1Generators.html">Particles::Generators</a> namespace that can generate particles automatically. One of the functions of this namespace is also used in the <a class="el" href="step_70.html">step-70</a> tutorial program, for example.</dd></dl>
+</div><!-- fragment --><p>这有点拗口，但实际情况是这样的。我们声明一个lambda函数来 "捕获"<code>this</code>指针（这样我们就可以在lambda函数中访问周围对象的成员函数），它需要两个参数。</p>
+<ul>
+<li>被 "丢失 "的粒子的一个引用。</li>
+<li><p class="startli">它最后所在的单元格的引用。然后lambda函数用这些参数简单地调用 <code>CathodeRaySimulator::track_lost_particle</code> 函数。当我们把这个lambda函数附加到信号上时， <a class="el" href="classParticles_1_1ParticleHandler.html#ad817e16828f2355b0cad6fef8db7df81">Particles::ParticleHandler::sort_particles_into_subdomains_and_cells()</a> 函数将为每个找不到新家的粒子触发信号。这让我们有机会记录下粒子的位置，并记录下关于它的统计数据。</p>
+<dl class="section note"><dt>Note</dt><dd>在这个教程程序中，我们通过手工插入粒子，并在我们根据包括静电问题的解决在内的条件而特别选择的位置插入粒子。但在其他情况下，人们主要想把粒子作为被动对象使用，例如，追踪和可视化流体流动问题的流场。在这些情况下，在 <a class="el" href="namespaceParticles_1_1Generators.html">Particles::Generators</a> 命名空间中有许多函数可以自动生成粒子。这个命名空间中的一个函数也被用于 <a class="el" href="step_70.html">step-70</a> 教程程序中，例如。</dd></dl>
 <p><a class="anchor" id="Thetestcase"></a></p><h3>The test case</h3>
-<p>The test case here is not meant to be a realistic depiction of a cathode ray tube, but it has the right general characteristics and the point is, in any case, only to demonstrate how one would implement deal.II codes that use particles.</p>
-<p>The following picture shows the geometry that we're going to use:</p>
+</li>
+</ul>
+<p>这里的测试案例并不意味着是对阴极射线管的真实描述，但它具有正确的一般特征，而且在任何情况下，重点只是为了演示如何实现使用粒子的deal.II代码。</p>
+<p>下图显示了我们将要使用的几何图形。</p>
 <p align="center"></p>
 <p><img src="https://www.dealii.org/images/steps/developer/step-19.geometry.png" alt="The geometry used in this program" width="600" class="inline"/> </p>
-<p>In this picture, the parts of the boundary marked in red and blue are the cathode, held at an electric potential \(V=-V_0\). The part of the cathode shown in red is the part that is heated, leading to electrons leaving the metal and then being accelerated by the electric field (a few electric field lines are also shown). The green part of the boundary is the anode, held at \(V=+V_0\). The rest of the boundary satisfies a Neumann boundary condition.</p>
-<p>This setup mimicks real devices. The re-entrant corner results in an electric potential \(V\) whose derivative (the electric field \(\mathbf E\)) has a singularity &ndash; in other words, it becomes very large in the vicinity of the corner, allowing it to rip electrons away from the metal. These electrons are then accelerated towards the (green) anode which has a hole in the middle through which the electrons can escape the device and fly on to hit the screen, where they excite the "phosphor" to then emit the light that we see from these old-style TV screens. The non-heated part of the cathode is not subject to the emission of electrons &ndash; in the code, we will mark this as the "focussing element" of the tube, because its negative electric voltage repels the electrons and makes sure that they do not just fly away from the heated part of the cathode perpendicular to the boundary, but in fact bend their paths towards the anode on the right.</p>
-<p>The electric field lines also shown in the picture illustrate that the electric field connects the negative and positive electrodes, respectively. The accelerating force the electrons experience is along these field lines. Finally, the picture shows the mesh used in the computation, illustrating that there are singularities at the tip of the re-rentrant corner as well as at all places where the boundary conditions change; these singularities are visible because the mesh is refined in these locations.</p>
-<p>Of practical interest is to figure out which fraction of the electrons emitted from the cathode actually make it through the hole in the anode &ndash; electrons that just bounce into the anode itself are not actually doing anything useful other than converting eletricity into heat. As a consequence, in the <code>track_lost_particle()</code> function (which is called for each particle that leaves the domain, see above), we will estimate where it might have left the domain and report this in the output.</p>
-<dl class="section note"><dt>Note</dt><dd>It is worth repeating that neither the geometry used here, nor in fact any other aspect of this program is intended to represent anything even half-way realistic. Tutorial programs are our tools to teach how deal.II works, and we often use situations for which we have some kind of intuition since this helps us interpret the output of a program, but that's about the extent to which we intend the program to do anything of use besides being a teaching tool.</dd></dl>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+<p><br  />
+</p>
+<p>在这幅图中，边界上标有红色和蓝色的部分是阴极，保持在一个电势 \(V=-V_0\) 。阴极的红色部分是被加热的部分，导致电子离开金属，然后被电场加速（还显示了一些电场线）。边界的绿色部分是阳极，保持在 \(V=+V_0\) 。边界的其余部分满足诺伊曼边界条件。</p>
+<p>这个设置模仿了真实的设备。重心角导致电势 \(V\) ，其导数（电场 \(\mathbf E\) ）有一个奇点&ndash;换句话说，它在角的附近变得非常大，允许它把电子从金属上扯下来。这些电子然后被加速推向（绿色）阳极，阳极中间有一个孔，电子可以通过这个孔逃离设备，飞向屏幕，在那里它们激发 "荧光粉"，然后发出我们从这些老式电视屏幕上看到的光。阴极的非加热部分不受电子发射的影响&ndash;在代码中，我们将其标记为电子管的 "聚焦元件"，因为它的负电压会排斥电子，并确保它们不会从垂直于边界的阴极加热部分飞走，而是事实上将其路径弯曲到右侧的阳极上。</p>
+<p>图中的电场线也说明了电场分别连接着负极和正极。电子经历的加速力是沿着这些场线的。最后，图片显示了计算中使用的网格，说明在重租角的顶端以及边界条件改变的所有地方都有奇异点；这些奇异点是可见的，因为网格在这些地方被细化。</p>
+<p>实际的利益是要弄清楚从阴极发射的电子中有哪一部分真正通过了阳极上的孔&ndash;那些只是弹到阳极本身的电子除了将电能转化为热能外，实际上并没有什么用处。因此，在<code>track_lost_particle()</code>函数中（为每个离开域的粒子调用，见上文），我们将估计它可能离开域的位置并在输出中报告。</p>
+<dl class="section note"><dt>Note</dt><dd>值得重申的是，这里使用的几何图形，以及这个程序的任何其他方面，都不是为了代表任何东西，甚至是半点现实的。教程是我们教授deal.II如何工作的工具，我们经常使用我们有某种直觉的情况，因为这有助于我们解释程序的输出，但这就是我们打算让程序除了作为教学工具之外做任何有用的事情的程度。<a class="anchor" id="CommProg"></a><h1>The commented program</h1>
+</dd></dl>
 <p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
-<p>The majority of the include files used in this program are well known from <a class="el" href="step_6.html">step-6</a> and similar programs:</p>
+<p>本程序中使用的大部分include文件在 <a class="el" href="step_6.html">step-6</a> 和类似程序中都是众所周知的。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="quadrature__lib_8h.html">deal.II/base/quadrature_lib.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dynamic__sparsity__pattern_8h.html">deal.II/lac/dynamic_sparsity_pattern.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="full__matrix_8h.html">deal.II/lac/full_matrix.h</a>&gt;</span></div>
@@ -272,16 +281,20 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector_8h.html">deal.II/lac/vector.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="affine__constraints_8h.html">deal.II/lac/affine_constraints.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2tria_8h.html">deal.II/grid/tria.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2grid__refinement_8h.html">deal.II/grid/grid_refinement.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="mapping__q_8h.html">deal.II/fe/mapping_q.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__point__evaluation_8h.html">deal.II/fe/fe_point_evaluation.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__q_8h.html">deal.II/fe/fe_q.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe_2fe__values_8h.html">deal.II/fe/fe_values.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dofs_2dof__handler_8h.html">deal.II/dofs/dof_handler.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dof__tools_8h.html">deal.II/dofs/dof_tools.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="numerics_2data__out_8h.html">deal.II/numerics/data_out.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector__tools_8h.html">deal.II/numerics/vector_tools.h</a>&gt;</span></div>
@@ -305,12 +318,14 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="ttc" id="asparse__matrix_8h_html"><div class="ttname"><a href="sparse__matrix_8h.html">sparse_matrix.h</a></div></div>
 <div class="ttc" id="avector_8h_html"><div class="ttname"><a href="vector_8h.html">vector.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p>The ones that are new are only the following three: The first declares the <a class="el" href="classDiscreteTime.html">DiscreteTime</a> class that helps us keep track of time in a time-dependent simulation. The latter two provide all of the particle functionality, namely a way to keep track of particles located on a mesh (the <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> class) and the ability to output these particles' locations and their properties for the purposes of visualization (the <a class="el" href="classParticles_1_1DataOut.html">Particles::DataOut</a> class).</p>
+</div><!-- fragment --><p>新的文件只有以下三个。第一个声明了DiscreteTime类，它帮助我们在时间相关的模拟中跟踪时间。后面两个提供了所有的粒子功能，即跟踪位于网格上的粒子的方法（ <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> 类）和为可视化目的输出这些粒子的位置和属性的能力（ <a class="el" href="classParticles_1_1DataOut.html">Particles::DataOut</a> 类）。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="discrete__time_8h.html">deal.II/base/discrete_time.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="particle__handler_8h.html">deal.II/particles/particle_handler.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="particles_2data__out_8h.html">deal.II/particles/data_out.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
 <div class="ttc" id="adiscrete__time_8h_html"><div class="ttname"><a href="discrete__time_8h.html">discrete_time.h</a></div></div>
@@ -318,9 +333,9 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="ttc" id="aparticle__handler_8h_html"><div class="ttname"><a href="particle__handler_8h.html">particle_handler.h</a></div></div>
 <div class="ttc" id="aparticles_2data__out_8h_html"><div class="ttname"><a href="particles_2data__out_8h.html">data_out.h</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="Globaldefinitions"></a> </p><h3>Global definitions</h3>
-<p>As is customary, we put everything that corresponds to the details of the program into a namespace of its own. At the top, we define a few constants for which we would rather use symbolic names than hard-coded numbers.</p>
-<p>Specifically, we define numbers for <a class="el" href="DEALGlossary.html#GlossBoundaryIndicator">boundary indicators</a> for the various parts of the geometry, as well as the physical properties of electrons and other specifics of the setup we use here.</p>
-<p>For the boundary indicators, let us start enumerating at some random value 101. The principle here is to use numbers that are <em>uncommon</em>. If there are pre-defined boundary indicators previously set by the <code><a class="el" href="namespaceGridGenerator.html">GridGenerator</a></code> functions, they will likely be small integers starting from zero, but not in this rather randomly chosen range. Using numbers such as those below avoids the possibility for conflicts, and also reduces the temptation to just spell these numbers out in the program (because you will probably never remember which is which, whereas you might have been tempted if they had started at 0).</p>
+<p>按照惯例，我们把所有与程序细节相对应的东西都放到一个自己的命名空间中。在顶部，我们定义了一些常数，我们宁愿使用符号名称而不是硬编码的数字。</p>
+<p>具体来说，我们为几何学各部分的 <a class="el" href="DEALGlossary.html#GlossBoundaryIndicator">边界指标</a>，以及电子的物理特性和我们在这里使用的其他具体设置定义了数字。</p>
+<p>对于边界指标，让我们从某个随机值101开始列举。这里的原则是要使用*不常见的数字。如果之前有`GridGenerator'函数设置的预定义边界指标，它们很可能是从0开始的小整数，但不在这个相当随机的选择范围内。使用下面这样的数字可以避免冲突的可能性，同时也减少了在程序中直接拼出这些数字的诱惑（因为你可能永远不会记得哪个是哪个，而如果它们从0开始，你可能会受到诱惑）。</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>Step19</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">namespace </span>BoundaryIds</div>
@@ -331,27 +346,33 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">    constexpr <a class="code" href="namespacetypes.html#aed8813fee8c8a2edcc6005e6a48c321a">types::boundary_id</a> anode         = 104;</div>
 <div class="line">  } <span class="comment">// namespace BoundaryIds</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">namespace </span>Constants</div>
 <div class="line">  {</div>
 <div class="line">    constexpr <span class="keywordtype">double</span> electron_mass   = 9.1093837015e-31;</div>
 <div class="line">    constexpr <span class="keywordtype">double</span> electron_charge = 1.602176634e-19;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    constexpr <span class="keywordtype">double</span> V0 = 1;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    constexpr <span class="keywordtype">double</span> E_threshold = 0.05;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    constexpr <span class="keywordtype">double</span> electrons_per_particle = 3e15;</div>
 <div class="line">  } <span class="comment">// namespace Constants</span></div>
 <div class="ttc" id="anamespacetypes_html_aed8813fee8c8a2edcc6005e6a48c321a"><div class="ttname"><a href="namespacetypes.html#aed8813fee8c8a2edcc6005e6a48c321a">types::boundary_id</a></div><div class="ttdeci">unsigned int boundary_id</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00129">types.h:129</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="Themainclass"></a> </p><h3>The main class</h3>
-<p>The following is then the main class of this program. It has, fundamentally, the same structure as <a class="el" href="step_6.html">step-6</a> and many other tutorial programs. This includes the majority of the member functions (with the purpose of the rest probably self-explanatory from their names) as well as only a small number of member variables beyond those of <a class="el" href="step_6.html">step-6</a>, all of which are related to dealing with particles.</p>
+<p>下面是这个程序的主类。从根本上说，它的结构与 <a class="el" href="step_6.html">step-6</a> 和其他许多教程程序相同。这包括大多数成员函数（其余的目的可能从它们的名字中不言自明），以及只有少数成员变量超出了 <a class="el" href="step_6.html">step-6</a> 的范围，所有这些都与处理粒子有关。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>CathodeRaySimulator</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  CathodeRaySimulator();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keywordtype">void</span> make_grid();</div>
@@ -360,6 +381,7 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">  <span class="keywordtype">void</span> solve_field();</div>
 <div class="line">  <span class="keywordtype">void</span> refine_grid();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> create_particles();</div>
 <div class="line">  <span class="keywordtype">void</span> move_particles();</div>
 <div class="line">  <span class="keywordtype">void</span> track_lost_particle(</div>
@@ -367,8 +389,10 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">    <span class="keyword">const</span> <span class="keyword">typename</span> <a class="code" href="classTriaActiveIterator.html">Triangulation&lt;dim&gt;::active_cell_iterator</a> &amp;cell);</div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> update_timestep_size();</div>
 <div class="line">  <span class="keywordtype">void</span> output_results() <span class="keyword">const</span>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classTriangulation.html">Triangulation&lt;dim&gt;</a>        <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
 <div class="line">  <a class="code" href="classMappingQ.html">MappingQ&lt;dim&gt;</a>             mapping;</div>
@@ -376,17 +400,21 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">  <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a>           dof_handler;</div>
 <div class="line">  <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> constraints;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classSparseMatrix.html">SparseMatrix&lt;double&gt;</a> system_matrix;</div>
 <div class="line">  <a class="code" href="classSparsityPattern.html">SparsityPattern</a>      sparsity_pattern;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> solution;</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> system_rhs;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler&lt;dim&gt;</a> particle_handler;</div>
 <div class="line">  <a class="code" href="namespacetypes.html#ae4ea18e3efb31f0312a9e754873d71b8">types::particle_index</a>           next_unused_particle_id;</div>
 <div class="line">  <a class="code" href="namespacetypes.html#ae4ea18e3efb31f0312a9e754873d71b8">types::particle_index</a>           n_recently_lost_particles;</div>
 <div class="line">  <a class="code" href="namespacetypes.html#ae4ea18e3efb31f0312a9e754873d71b8">types::particle_index</a>           n_total_lost_particles;</div>
 <div class="line">  <a class="code" href="namespacetypes.html#ae4ea18e3efb31f0312a9e754873d71b8">types::particle_index</a>           n_particles_lost_through_anode;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classDiscreteTime.html">DiscreteTime</a> time;</div>
 <div class="line">};</div>
@@ -405,9 +433,11 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="ThecodeCathodeRaySimulatorcodeclassimplementation"></a> </p><h3>The <code>CathodeRaySimulator</code> class implementation</h3>
 <p><a class="anchor" id="ThecodeCathodeRaySimulatorcodeconstructor"></a> </p><h4>The <code>CathodeRaySimulator</code> constructor</h4>
-<p>So then let us get started on the implementation. What the constructor does is really only a straight-forward initialization of all of the member variables at the top. The only two worth mentioning are the <code>particle_handler</code>, which is handed a reference to the triangulation on which the particles will live (currently of course still empty, but the particle handler stores the reference and will use it once particles are added &ndash; which happens after the triangulation is built). The other piece of information it gets is how many "properties" each particle needs to store. Here, all we need each particle to remember is its current velocity, i.e., a vector with <code>dim</code> components. There are, however, other intrinsic properties that each particle has and that the <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> class automatically and always makes sure are available; in particular, these are the current location of a particle, the cell it is on, it's reference location within that cell, and the particle's ID.</p>
-<p>The only other variable of interest is <code>time</code>, an object of type <a class="el" href="classDiscreteTime.html">DiscreteTime</a>. It keeps track of the current time we are in a time-dependent simulation, and is initialized with the start time (zero) and end time ( \(10^{-4}\)). We will later set the time step size in <code>update_timestep_size()</code>.</p>
-<p>The body of the constructor consists of a piece of code we have already discussed in the introduction. Namely, we make sure that the <code>track_lost_particle()</code> function is called by the <code>particle_handler</code> object every time a particle leaves the domain.</p>
+<p>那么，让我们开始实施。构造函数所做的实际上只是对顶部的所有成员变量进行简单的初始化。唯一值得一提的是<code>particle_handler'，它被交给了一个指向粒子所处的三角形的引用（目前当然还是空的，但是粒子处理程序存储了这个引用，一旦粒子被添加，就会使用它--这发生在三角形被建立之后）。它得到的另一个信息是每个粒子需要存储多少 "属性"。在这里，我们需要每个粒子记住的是它当前的速度，也就是一个带有</code>dim`分量的矢量。然而，每个粒子还有其他的内在属性， <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> 类会自动并始终确保这些属性是可用的；特别是，这些属性是粒子的当前位置、它所在的单元、它在该单元中的参考位置，以及粒子的ID。 <br  />
+</p>
+<p>唯一感兴趣的其他变量是 "时间"，一个DiscreteTime类型的对象。它记录了我们在一个随时间变化的模拟中的当前时间，并以开始时间（零）和结束时间（ \(10^{-4}\) ）初始化。我们以后将在<code>update_timestep_size()</code>中设置时间步长。 <br  />
+</p>
+<p>构造函数的主体由我们在介绍中已经讨论过的一段代码组成。也就是说，我们要确保每次有粒子离开领域时，<code>track_lost_particle()</code>函数都会被<code>particle_handler</code>对象调用。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">CathodeRaySimulator&lt;dim&gt;::CathodeRaySimulator()</div>
 <div class="line">  : mapping(1)</div>
@@ -428,24 +458,22 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">}</div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a9587d5229555daa5b1fa1ba2f8a40adb"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">Physics::Elasticity::Kinematics::e</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; e(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
 </div><!-- fragment --><p><a class="anchor" id="ThecodeCathodeRaySimulatormake_gridcodefunction"></a> </p><h4>The <code>CathodeRaySimulator::make_grid</code> function</h4>
-<p align="center">The next function is then responsible for generating the mesh on which we want to solve. Recall how the domain looks like: </p>
+<p align="center">然后，下一个函数负责生成我们要解决的网格。回顾一下域的样子。 </p>
 <p><img src="https://www.dealii.org/images/steps/developer/step-19.geometry.png" alt="The geometry used in this program" width="600" class="inline"/> </p>
-<p>We subdivide this geometry into a mesh of \(4\times 2\) cells that looks like this: </p><div class="CodeFragmentInTutorialComment"> <div class="fragment"><div class="line">*---*---*---*---*</div>
-<div class="line">\   |   |   |   |</div>
-<div class="line"> *--*---*---*---*</div>
-<div class="line">/   |   |   |   |</div>
-<div class="line">*---*---*---*---*</div>
-</div><!-- fragment --> </div><p> The way this is done is by first defining where the \(15=5\times 3\) vertices are located &ndash; here, we say that they are on integer points with the middle one on the left side moved to the right by a value of <code>delta=0.5</code>.</p>
-<p>In the following, we then have to say which vertices together form the 8 cells. The following code is then entirely equivalent to what we also do in <a class="el" href="step_14.html">step-14</a>:</p>
+<p>我们将这个几何体细分为 \(4\times 2\) 个单元的网格，看起来像这样。 </p><div class="CodeFragmentInTutorialComment"></div><div class="CodeFragmentInTutorialComment">[1.x.87]</div><div class="CodeFragmentInTutorialComment"></div><p> 这样做的方法是首先定义 \(15=5\times 3\) 顶点的位置&ndash;在这里，我们说它们在整数点上，左边的中间点向右移动了一个`delta=0.5'的值。 <br  />
+</p>
+<p>在下文中，我们必须说明哪些顶点共同组成了8个单元。下面的代码就完全等同于我们在 <a class="el" href="step_14.html">step-14</a> 中的做法。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> CathodeRaySimulator&lt;dim&gt;::make_grid()</div>
 <div class="line">{</div>
 <div class="line">  static_assert(dim == 2,</div>
 <div class="line">                <span class="stringliteral">&quot;This function is currently only implemented for 2d.&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span>       delta = 0.5;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> nx    = 5;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> ny    = 3;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; <a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a> </div>
 <div class="line">    = {{0, 0},</div>
@@ -465,11 +493,13 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">       {4, 2}};</div>
 <div class="line">  <a class="code" href="group__Exceptions.html#ga9442b63275c9ef3fab29bc222831c49c">AssertDimension</a>(<a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>.size(), nx * ny);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> std::vector&lt;unsigned int&gt; cell_vertices[(nx - 1) * (ny - 1)] = {</div>
 <div class="line">    {0, 1, nx + 0, nx + 1},</div>
 <div class="line">    {1, 2, nx + 1, nx + 2},</div>
 <div class="line">    {2, 3, nx + 2, nx + 3},</div>
 <div class="line">    {3, 4, nx + 3, nx + 4},</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    {5, nx + 1, 2 * nx + 0, 2 * nx + 1},</div>
 <div class="line">    {nx + 1, nx + 2, 2 * nx + 1, 2 * nx + 2},</div>
@@ -477,8 +507,9 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">    {nx + 3, nx + 4, 2 * nx + 3, 2 * nx + 4}};</div>
 <div class="ttc" id="adata__out__base_8cc_html_accc45da40beb7ae1b485306984e904a2"><div class="ttname"><a href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a></div><div class="ttdeci">Point&lt; 3 &gt; vertices[4]</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l00175">data_out_base.cc:175</a></div></div>
 <div class="ttc" id="agroup__Exceptions_html_ga9442b63275c9ef3fab29bc222831c49c"><div class="ttname"><a href="group__Exceptions.html#ga9442b63275c9ef3fab29bc222831c49c">AssertDimension</a></div><div class="ttdeci">#define AssertDimension(dim1, dim2)</div><div class="ttdef"><b>Definition:</b> <a href="include_2deal_8II_2base_2exceptions_8h_source.html#l01630">exceptions.h:1630</a></div></div>
-</div><!-- fragment --><p>With these arrays out of the way, we can move to slightly higher higher-level data structures. We create a vector of <a class="el" href="structCellData.html">CellData</a> objects that store for each cell to be created the vertices in question as well as the <a class="el" href="DEALGlossary.html#GlossMaterialId">material id</a> (which we will here simply set to zero since we don't use it in the program).</p>
-<p>This information is then handed to the <a class="el" href="classTriangulation.html#a1b191fa3249c9c3641492b6eedebf456">Triangulation::create_triangulation()</a> function, and the mesh is twice globally refined.</p>
+</div><!-- fragment --><p>有了这些数组，我们就可以转向更高级别的数据结构了。我们创建一个CellData对象的向量，为每个要创建的单元存储相关的顶点以及 <a class="el" href="DEALGlossary.html#GlossMaterialId">材料ID</a>（在这里我们将简单地设置为0，因为我们在程序中不使用它）。 <br  />
+</p>
+<p>这些信息然后被交给 <a class="el" href="classTriangulation.html#a1b191fa3249c9c3641492b6eedebf456">Triangulation::create_triangulation()</a> 函数，网格会被两次全局细化。</p>
 <div class="fragment"><div class="line">std::vector&lt;CellData&lt;dim&gt;&gt; cells((nx - 1) * (ny - 1), <a class="code" href="structCellData.html">CellData&lt;dim&gt;</a>());</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; cells.size(); ++i)</div>
 <div class="line">  {</div>
@@ -486,16 +517,19 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">    cells[i].material_id = 0;</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.create_triangulation(</div>
 <div class="line">  <a class="code" href="data__out__base_8cc.html#accc45da40beb7ae1b485306984e904a2">vertices</a>,</div>
 <div class="line">  cells,</div>
 <div class="line">  <a class="code" href="structSubCellData.html">SubCellData</a>()); <span class="comment">// No boundary information</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.refine_global(2);</div>
 <div class="ttc" id="astructCellData_html"><div class="ttname"><a href="structCellData.html">CellData</a></div><div class="ttdef"><b>Definition:</b> <a href="tria__description_8h_source.html#l00067">tria_description.h:68</a></div></div>
 <div class="ttc" id="astructSubCellData_html"><div class="ttname"><a href="structSubCellData.html">SubCellData</a></div><div class="ttdef"><b>Definition:</b> <a href="tria__description_8h_source.html#l00202">tria_description.h:203</a></div></div>
-</div><!-- fragment --><p>The remaining part of the function loops over all cells and their faces, and if a face is at the boundary determines which boundary indicator should be applied to it. The various conditions should make sense if you compare the code with the picture of the geometry above.</p>
-<p>Once done with this step, we refine the mesh once more globally.</p>
+</div><!-- fragment --><p>该函数的其余部分循环所有单元及其面，如果一个面在边界上，则决定哪一个边界指标应该应用到它。如果你将代码与上面的几何图形相比较，各种条件应该是有意义的。 <br  />
+</p>
+<p>一旦完成了这一步，我们再一次全局地细化网格。</p>
 <div class="fragment"><div class="line">  <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;cell : <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.active_cell_iterators())</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;face : cell-&gt;face_iterators())</div>
 <div class="line">      <span class="keywordflow">if</span> (face-&gt;at_boundary())</div>
@@ -512,29 +546,37 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">            face-&gt;set_boundary_id(BoundaryIds::open);</div>
 <div class="line">        }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.refine_global(1);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="ThecodeCathodeRaySimulatorsetup_systemcodefunction"></a> </p><h4>The <code>CathodeRaySimulator::setup_system</code> function</h4>
-<p>The next function in this program deals with setting up the various objects related to solving the partial differential equations. It is in essence a copy of the corresponding function in <a class="el" href="step_6.html">step-6</a> and requires no further discussion.</p>
+<p>本程序的下一个函数是处理与求解偏微分方程有关的各种对象的设置。它实质上是对 <a class="el" href="step_6.html">step-6</a> 中相应函数的复制，不需要进一步讨论。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> CathodeRaySimulator&lt;dim&gt;::setup_system()</div>
 <div class="line">{</div>
 <div class="line">  dof_handler.distribute_dofs(fe);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  solution.reinit(dof_handler.n_dofs());</div>
 <div class="line">  system_rhs.reinit(dof_handler.n_dofs());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  constraints.clear();</div>
 <div class="line">  <a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, constraints);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(dof_handler,</div>
 <div class="line">                                           BoundaryIds::cathode,</div>
 <div class="line">                                           <a class="code" href="classFunctions_1_1ConstantFunction.html">Functions::ConstantFunction&lt;dim&gt;</a>(</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line">                                             -Constants::V0),</div>
 <div class="line">                                           constraints);</div>
 <div class="line">  <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(dof_handler,</div>
 <div class="line">                                           BoundaryIds::focus_element,</div>
 <div class="line">                                           <a class="code" href="classFunctions_1_1ConstantFunction.html">Functions::ConstantFunction&lt;dim&gt;</a>(</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line">                                             -Constants::V0),</div>
 <div class="line">                                           constraints);</div>
 <div class="line">  <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(dof_handler,</div>
@@ -544,12 +586,14 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">                                           constraints);</div>
 <div class="line">  constraints.close();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a> dsp(dof_handler.n_dofs());</div>
 <div class="line">  <a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler,</div>
 <div class="line">                                  dsp,</div>
 <div class="line">                                  constraints,</div>
 <div class="line">                                  <span class="comment">/*keep_constrained_dofs = */</span> <span class="keyword">false</span>);</div>
 <div class="line">  sparsity_pattern.copy_from(dsp);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  system_matrix.reinit(sparsity_pattern);</div>
 <div class="line">}</div>
@@ -559,33 +603,41 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="ttc" id="agroup__constraints_html_gaf78e864edbfba7e0a7477457bfb96b26"><div class="ttname"><a href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a></div><div class="ttdeci">void make_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, SparsityPatternType &amp;sparsity_pattern, const AffineConstraints&lt; number &gt; &amp;constraints=AffineConstraints&lt; number &gt;(), const bool keep_constrained_dofs=true, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__sparsity_8cc_source.html#l00064">dof_tools_sparsity.cc:64</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_html_ab2562d41bb26f362043f9719a8cd9b87"><div class="ttname"><a href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a></div><div class="ttdeci">void interpolate_boundary_values(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const std::map&lt; types::boundary_id, const Function&lt; spacedim, number &gt; * &gt; &amp;function_map, std::map&lt; types::global_dof_index, number &gt; &amp;boundary_values, const ComponentMask &amp;component_mask=ComponentMask())</div></div>
 </div><!-- fragment --><p><a class="anchor" id="ThecodeCathodeRaySimulatorassemble_systemcodefunction"></a> </p><h4>The <code>CathodeRaySimulator::assemble_system</code> function</h4>
-<p>The function that computes the matrix entries is again in essence a copy of the corresponding function in <a class="el" href="step_6.html">step-6</a>:</p>
+<p>计算矩阵项的函数实质上也是对 <a class="el" href="step_6.html">step-6</a> 中相应函数的复制。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> CathodeRaySimulator&lt;dim&gt;::assemble_system()</div>
 <div class="line">{</div>
 <div class="line">  system_matrix = 0;</div>
 <div class="line">  system_rhs    = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a> quadrature_formula(fe.degree + 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> fe_values(fe,</div>
 <div class="line">                          quadrature_formula,</div>
 <div class="line">                          <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a> |</div>
 <div class="line">                            <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = fe.dofs_per_cell;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>(dofs_per_cell, dofs_per_cell);</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a>     cell_rhs(dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices(dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">    {</div>
 <div class="line">      <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a> = 0;</div>
 <div class="line">      cell_rhs    = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      fe_values.reinit(cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q_index : fe_values.quadrature_point_indices())</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i : fe_values.dof_indices())</div>
@@ -604,20 +656,25 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a></div><div class="ttdeci">@ update_gradients</div><div class="ttdoc">Shape function gradients.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00084">fe_update_flags.h:84</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a></div><div class="ttdeci">@ update_quadrature_points</div><div class="ttdoc">Transformed quadrature points.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00122">fe_update_flags.h:122</a></div></div>
 <div class="ttc" id="anamespaceLocalIntegrators_1_1Advection_html_a8bc7b8136646134f73a4193adefe15f8"><div class="ttname"><a href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">LocalIntegrators::Advection::cell_matrix</a></div><div class="ttdeci">void cell_matrix(FullMatrix&lt; double &gt; &amp;M, const FEValuesBase&lt; dim &gt; &amp;fe, const FEValuesBase&lt; dim &gt; &amp;fetest, const ArrayView&lt; const std::vector&lt; double &gt;&gt; &amp;velocity, const double factor=1.)</div><div class="ttdef"><b>Definition:</b> <a href="advection_8h_source.html#l00075">advection.h:75</a></div></div>
-</div><!-- fragment --><p>The only interesting part of this function is how it forms the right hand side of the linear system. Recall that the right hand side of the PDE is </p><p class="formulaDsp">
+</div><!-- fragment --><p>这个函数唯一有趣的部分是它是如何形成线性系统的右手边的。回顾一下，PDE的右边是 </p><p class="formulaDsp">
 \[ \sum_p (N e)\delta(\mathbf x-\mathbf x_p), \]
 </p>
-<p> where we have used \(p\) to index the particles here to avoid confusion with the shape function \(\varphi_i\); \(\mathbf x_p\) is the position of the \(p\)th particle.</p>
-<p>When multiplied by a test function \(\varphi_i\) and integrated over the domain results in a right hand side vector </p><p class="formulaDsp">
+<p>，在这里我们用 \(p\) 来索引粒子，以避免与形状函数 \(\varphi_i\) 混淆； \(\mathbf x_p\) 是第 \(p\) 个粒子的位置。</p>
+<p>当与测试函数 \(\varphi_i\) 相乘并在域上进行积分时，会得到一个右手边的矢量</p>
+<p class="formulaDsp">
 \begin{align*} F_i &amp;= \int_\Omega \varphi_i (\mathbf x)\left[ \sum_p (N e)\delta(\mathbf x-\mathbf x_p) \right] dx \\ &amp;= \sum_p (N e) \varphi_i(\mathbf x_p). \end{align*}
 </p>
-<p> Note that the final line no longer contains an integral, and consequently also no occurrence of \(dx\) which would require the appearance of the <code>JxW</code> symbol in our code.</p>
-<p>For a given cell \(K\), this cell's contribution to the right hand side is then </p><p class="formulaDsp">
+<p>请注意，最后一行不再包含积分，因此也没有出现 \(dx\) ，这需要在我们的代码中出现<code>JxW</code>符号。 <br  />
+</p>
+<p>对于一个给定的单元格 \(K\) ，这个单元格对右边的贡献是</p>
+<p class="formulaDsp">
 \begin{align*} F_i^K &amp;= \sum_{p, \mathbf x_p\in K} (N e) \varphi_i(\mathbf x_p), \end{align*}
 </p>
-<p> i.e., we only have to worry about those particles that are actually located on the current cell \(K\).</p>
-<p>In practice, what we do here is the following: If there are any particles on the current cell, then we first obtain an iterator range pointing to the first particle of that cell as well as the particle past the last one on this cell (or the end iterator) &ndash; i.e., a half-open range as is common for C++ functions. Knowing now the list of particles, we query their reference locations (with respect to the reference cell), evaluate the shape functions in these reference locations, and compute the force according to the formula above (without any <a class="el" href="classFEValuesBase.html#abade89efb068b71b7ced7082012a2441">FEValues::JxW</a>).</p>
-<dl class="section note"><dt>Note</dt><dd>It is worth pointing out that calling the <a class="el" href="classParticles_1_1ParticleHandler.html#acaf1232ffce0746baa64122a5c65822e">Particles::ParticleHandler::particles_in_cell()</a> and <a class="el" href="classParticles_1_1ParticleHandler.html#ac043a4ea224ed50a03b8e9c3d3b98aec">Particles::ParticleHandler::n_particles_in_cell()</a> functions is not very efficient on problems with a large number of particles. But it illustrates the easiest way to write this algorithm, and so we are willing to incur this cost for the moment for expository purposes. We discuss the issue in more detail in the <a href="#extensions">"possibilities for extensions" section</a> below, and use a better approach in <a class="el" href="step_70.html">step-70</a>, for example.</dd></dl>
+<p>也就是说，我们只需要担心那些实际位于当前单元 \(K\) 上的粒子。 <br  />
+</p>
+<p>在实践中，我们在这里所做的是以下几点。如果当前单元格上有任何粒子，那么我们首先获得一个迭代器范围，指向该单元格的第一个粒子以及该单元格上最后一个粒子之后的粒子（或结束迭代器）&ndash;即C++函数中常见的半开放范围。现在知道了粒子的列表，我们查询它们的参考位置（相对于参考单元），评估这些参考位置的形状函数，并根据上面的公式计算力（没有任何 <a class="el" href="classFEValuesBase.html#abade89efb068b71b7ced7082012a2441">FEValues::JxW</a>). 。 <br  />
+</p>
+<dl class="section note"><dt>Note</dt><dd>值得指出的是，调用 <a class="el" href="classParticles_1_1ParticleHandler.html#acaf1232ffce0746baa64122a5c65822e">Particles::ParticleHandler::particles_in_cell()</a> 和 <a class="el" href="classParticles_1_1ParticleHandler.html#ac043a4ea224ed50a03b8e9c3d3b98aec">Particles::ParticleHandler::n_particles_in_cell()</a> 函数在有大量粒子的问题上不是很有效。但是它说明了写这个算法的最简单的方法，所以我们愿意为了说明问题而暂时承担这个代价。我们在下面的<a href="#extensions">"possibilities for extensions" section</a>中更详细地讨论了这个问题，并在 <a class="el" href="step_70.html">step-70</a> 中使用了一个更好的方法，例如：。</dd></dl>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (particle_handler.n_particles_in_cell(cell) &gt; 0)</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;particle : particle_handler.particles_in_cell(cell))</div>
 <div class="line">    {</div>
@@ -630,24 +687,27 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">            Constants::electron_charge));          <span class="comment">// e</span></div>
 <div class="line">    }</div>
 <div class="ttc" id="aclassPoint_html"><div class="ttname"><a href="classPoint.html">Point</a></div><div class="ttdef"><b>Definition:</b> <a href="base_2point_8h_source.html#l00110">point.h:111</a></div></div>
-</div><!-- fragment --><p>Finally, we can copy the contributions of this cell into the global matrix and right hand side vector:</p>
+</div><!-- fragment --><p>最后，我们可以把这个单元的贡献复制到全局矩阵和右手边的向量中。</p>
 <div class="fragment"><div class="line">      cell-&gt;get_dof_indices(local_dof_indices);</div>
 <div class="line">      constraints.distribute_local_to_global(</div>
 <div class="line">        <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>, cell_rhs, local_dof_indices, system_matrix, system_rhs);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="CathodeRaySimulatorsolve"></a> </p><h4>CathodeRaySimulator::solve</h4>
-<p>The function that solves the linear system is then again exactly as in <a class="el" href="step_6.html">step-6</a>:</p>
+<p>然后，解决线性系统的函数又与 <a class="el" href="step_6.html">step-6</a> 中的完全一样。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> CathodeRaySimulator&lt;dim&gt;::solve_field()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classSolverControl.html">SolverControl</a>            solver_control(1000, 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-12);</div>
 <div class="line">  <a class="code" href="classSolverCG.html">SolverCG&lt;Vector&lt;double&gt;</a>&gt; solver(solver_control);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classPreconditionSSOR.html">PreconditionSSOR&lt;SparseMatrix&lt;double&gt;</a>&gt; preconditioner;</div>
 <div class="line">  preconditioner.<a class="code" href="group__Preconditioners.html#ga7a3d66b17bb0ea1b16606e222474c2ea">initialize</a>(system_matrix, 1.2);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  solver.solve(system_matrix, solution, system_rhs, preconditioner);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  constraints.distribute(solution);</div>
 <div class="line">}</div>
@@ -656,11 +716,12 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="ttc" id="aclassSolverControl_html"><div class="ttname"><a href="classSolverControl.html">SolverControl</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__control_8h_source.html#l00065">solver_control.h:66</a></div></div>
 <div class="ttc" id="agroup__Preconditioners_html_ga7a3d66b17bb0ea1b16606e222474c2ea"><div class="ttname"><a href="group__Preconditioners.html#ga7a3d66b17bb0ea1b16606e222474c2ea">PreconditionSSOR::initialize</a></div><div class="ttdeci">void initialize(const MatrixType &amp;A, const typename BaseClass::AdditionalData &amp;parameters=typename BaseClass::AdditionalData())</div></div>
 </div><!-- fragment --><p><a class="anchor" id="CathodeRaySimulatorrefine_grid"></a> </p><h4>CathodeRaySimulator::refine_grid</h4>
-<p>The final field-related function is the one that refines the grid. We will call it a number of times in the first time step to obtain a mesh that is well-adapted to the structure of the solution and, in particular, resolves the various singularities in the solution that are due to re-entrant corners and places where the boundary condition type changes. You might want to refer to <a class="el" href="step_6.html">step-6</a> again for more details:</p>
+<p>最后一个与场相关的函数是细化网格的函数。我们将在第一个时间步骤中多次调用它，以获得一个能很好地适应解的结构的网格，特别是解决解中由于重心角和边界条件类型变化的地方而产生的各种奇异现象。你可能想再参考一下 <a class="el" href="step_6.html">step-6</a> 以了解更多细节。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> CathodeRaySimulator&lt;dim&gt;::refine_grid()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;float&gt;</a> estimated_error_per_cell(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classKellyErrorEstimator.html#aa0917e696d4f8ddb983223a68c512357">KellyErrorEstimator&lt;dim&gt;::estimate</a>(dof_handler,</div>
 <div class="line">                                     <a class="code" href="classQGauss.html">QGauss&lt;dim - 1&gt;</a>(fe.degree + 1),</div>
@@ -668,18 +729,21 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">                                     solution,</div>
 <div class="line">                                     estimated_error_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="namespaceGridRefinement.html#a48e5395381ed87155942a61a1edd134d">GridRefinement::refine_and_coarsen_fixed_number</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>,</div>
 <div class="line">                                                  estimated_error_per_cell,</div>
 <div class="line">                                                  0.1,</div>
 <div class="line">                                                  0.03);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.execute_coarsening_and_refinement();</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassKellyErrorEstimator_html_aa0917e696d4f8ddb983223a68c512357"><div class="ttname"><a href="classKellyErrorEstimator.html#aa0917e696d4f8ddb983223a68c512357">KellyErrorEstimator::estimate</a></div><div class="ttdeci">static void estimate(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const Quadrature&lt; dim - 1 &gt; &amp;quadrature, const std::map&lt; types::boundary_id, const Function&lt; spacedim, typename InputVector::value_type &gt; * &gt; &amp;neumann_bc, const InputVector &amp;solution, Vector&lt; float &gt; &amp;error, const ComponentMask &amp;component_mask=ComponentMask(), const Function&lt; spacedim &gt; *coefficients=nullptr, const unsigned int n_threads=numbers::invalid_unsigned_int, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id, const types::material_id material_id=numbers::invalid_material_id, const Strategy strategy=cell_diameter_over_24)</div></div>
 <div class="ttc" id="anamespaceGridRefinement_html_a48e5395381ed87155942a61a1edd134d"><div class="ttname"><a href="namespaceGridRefinement.html#a48e5395381ed87155942a61a1edd134d">GridRefinement::refine_and_coarsen_fixed_number</a></div><div class="ttdeci">void refine_and_coarsen_fixed_number(Triangulation&lt; dim, spacedim &gt; &amp;triangulation, const Vector&lt; Number &gt; &amp;criteria, const double top_fraction_of_cells, const double bottom_fraction_of_cells, const unsigned int max_n_cells=std::numeric_limits&lt; unsigned int &gt;::max())</div><div class="ttdef"><b>Definition:</b> <a href="grid_2grid__refinement_8cc_source.html#l00322">grid_refinement.cc:322</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="CathodeRaySimulatorcreate_particles"></a> </p><h4>CathodeRaySimulator::create_particles</h4>
-<p>Let us now turn to the functions that deal with particles. The first one is about the creation of particles. As mentioned in the introduction, we want to create a particle at points of the cathode if the the electric field \(\mathbf E=\nabla V\) exceeds a certain threshold, i.e., if \(|\mathbf E| \ge E_\text{threshold}\), and if furthermore the electric field points into the domain (i.e., if \(\mathbf E \cdot \mathbf n &lt; 0\)). As is common in the finite element method, we evaluate fields (and their derivatives) at specific evaluation points; typically, these are "quadrature points", and so we create a "quadrature formula" that we will use to designate the points at which we want to evaluate the solution. Here, we will simply take <a class="el" href="classQMidpoint.html">QMidpoint</a> implying that we will only check the threshold condition at the midpoints of faces. We then use this to initialize an object of type <a class="el" href="classFEFaceValues.html">FEFaceValues</a> to evaluate the solution at these points.</p>
-<p>All of this will then be used in a loop over all cells, their faces, and specifically those faces that are at the boundary and, moreover, the cathode part of the boundary.</p>
+<p>现在让我们来看看处理粒子的函数。第一个是关于粒子的创造。正如介绍中提到的，如果电场 \(\mathbf E=\nabla V\) 超过某个阈值，即如果 \(|\mathbf E| \ge E_\text{threshold}\) ，并且如果电场指向域内（即如果 \(\mathbf E \cdot \mathbf n &lt; 0\) ），我们希望在阴极的各点创建一个粒子。正如有限元方法中常见的那样，我们在特定的评估点评估场（及其导数）；通常，这些是 "正交点"，因此我们创建了一个 "正交公式"，我们将用它来指定我们想要评估解决方案的点。在这里，我们将简单地采用QMidpoint，意味着我们将只在面的中点检查阈值条件。然后我们用它来初始化一个FEFaceValues类型的对象来评估这些点的解决方案。 <br  />
+</p>
+<p>然后，所有这些将被用于所有单元格、它们的面，特别是那些位于边界的面，而且是边界的阴极部分的循环中。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> CathodeRaySimulator&lt;dim&gt;::create_particles()</div>
 <div class="line">{</div>
@@ -689,8 +753,10 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">                                     <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a> |</div>
 <div class="line">                                     <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa5e7366a91c84a50ca4e7dbd43ca6369f">update_normal_vectors</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;Tensor&lt;1, dim&gt;&gt; solution_gradients(</div>
 <div class="line">    fe_face_values.n_quadrature_points);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;face : cell-&gt;face_iterators())</div>
@@ -701,7 +767,7 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="ttc" id="aclassFEFaceValues_html"><div class="ttname"><a href="classFEFaceValues.html">FEFaceValues</a></div><div class="ttdef"><b>Definition:</b> <a href="fe_2fe__values_8h_source.html#l04157">fe_values.h:4158</a></div></div>
 <div class="ttc" id="aclassQMidpoint_html"><div class="ttname"><a href="classQMidpoint.html">QMidpoint</a></div><div class="ttdef"><b>Definition:</b> <a href="quadrature__lib_8h_source.html#l00089">quadrature_lib.h:90</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fa5e7366a91c84a50ca4e7dbd43ca6369f"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa5e7366a91c84a50ca4e7dbd43ca6369f">update_normal_vectors</a></div><div class="ttdeci">@ update_normal_vectors</div><div class="ttdoc">Normal vectors.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00136">fe_update_flags.h:136</a></div></div>
-</div><!-- fragment --><p>So we have found a face on the cathode. Next, we let the <a class="el" href="classFEFaceValues.html">FEFaceValues</a> object compute the gradient of the solution at each "quadrature" point, and extract the electric field vector from the gradient in the form of a <a class="el" href="classTensor.html">Tensor</a> variable through the methods discussed in the <a class="el" href="group__vector__valued.html">vector-valued problems</a> documentation module.</p>
+</div><!-- fragment --><p>所以我们已经找到了阴极上的一个面。接下来，我们让FEFaceValues对象计算每个 "正交 "点的解的梯度，并通过 <a class="el" href="group__vector__valued.html">矢量值问题 </a>文件模块中讨论的方法，以张量变量的形式从梯度中提取电场向量。</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code" href="structFEValuesExtractors_1_1Scalar.html">FEValuesExtractors::Scalar</a> electric_potential(0);</div>
 <div class="line">fe_face_values[electric_potential].get_function_gradients(</div>
 <div class="line">  solution, solution_gradients);</div>
@@ -712,13 +778,15 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="ttc" id="aclassTensor_html"><div class="ttname"><a href="classTensor.html">Tensor&lt; 1, dim &gt;</a></div></div>
 <div class="ttc" id="anamespacenumbers_html_a3c7239f00d5e87dfcf6dd19cbc3ddc74"><div class="ttname"><a href="namespacenumbers.html#a3c7239f00d5e87dfcf6dd19cbc3ddc74">numbers::E</a></div><div class="ttdeci">static constexpr double E</div><div class="ttdef"><b>Definition:</b> <a href="numbers_8h_source.html#l00206">numbers.h:206</a></div></div>
 <div class="ttc" id="astructFEValuesExtractors_1_1Scalar_html"><div class="ttname"><a href="structFEValuesExtractors_1_1Scalar.html">FEValuesExtractors::Scalar</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__values__extractors_8h_source.html#l00095">fe_values_extractors.h:96</a></div></div>
-</div><!-- fragment --><p>Electrons can only escape the cathode if the electric field strength exceeds a threshold and, crucially, if the electric field points <em>into</em> the domain. Once we have that checked, we create a new <a class="el" href="classParticles_1_1Particle.html">Particles::Particle</a> object at this location and insert it into the <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> object with a unique ID.</p>
-<p>The only thing that may be not obvious here is that we also associate with this particle the location in the reference coordinates of the cell we are currently on. This is done because we will in downstream functions compute quantities such as the electric field at the location of the particle (e.g., to compute the forces that act on it when updating its position in each time step). Evaluating a finite element field at arbitrary coordinates is quite an expensive operation because shape functions are really only defined on the reference cell, and so when asking for the electric field at an arbitrary point requires us first to determine what the reference coordinates of that point are. To avoid having to do this over and over, we determine these coordinates once and for all and then store these reference coordinates directly with the particle.</p>
+</div><!-- fragment --><p>只有当电场强度超过阈值时，电子才能逃离阴极，而且关键是，如果电场指向*域内，电子才能逃离阴极。一旦我们检查了这一点，我们就在这个位置创建一个新的 <a class="el" href="classParticles_1_1Particle.html">Particles::Particle</a> 对象，并将其插入到 <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a> 对象中，并设置一个唯一的ID。 <br  />
+</p>
+<p>这里唯一不明显的是，我们还将这个粒子与我们当前所在的单元格的参考坐标中的位置联系起来。这样做是因为我们将在下游函数中计算诸如粒子位置的电场等量（例如，在每个时间步长中更新其位置时计算作用于它的力）。在任意坐标上评估有限元场是一个相当昂贵的操作，因为形状函数实际上只定义在参考单元上，所以当要求一个任意点的电场时，我们首先要确定这个点的参考坐标是什么。为了避免反复操作，我们一次性地确定这些坐标，然后将这些参考坐标直接存储在粒子上。</p>
 <div class="fragment"><div class="line">      <span class="keywordflow">if</span> ((<a class="code" href="namespacenumbers.html#a3c7239f00d5e87dfcf6dd19cbc3ddc74">E</a> * fe_face_values.normal_vector(q_point) &lt; 0) &amp;&amp;</div>
 <div class="line">          (<a class="code" href="namespacenumbers.html#a3c7239f00d5e87dfcf6dd19cbc3ddc74">E</a>.norm() &gt; Constants::E_threshold))</div>
 <div class="line">        {</div>
 <div class="line">          <span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> location =</div>
 <div class="line">            fe_face_values.quadrature_point(q_point);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">          <a class="code" href="classParticles_1_1Particle.html">Particles::Particle&lt;dim&gt;</a> new_particle;</div>
 <div class="line">          new_particle.<a class="code" href="classParticles_1_1Particle.html#afbe52b594cf4a8dd11431679c4ef2b52">set_location</a>(location);</div>
@@ -727,23 +795,27 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">          new_particle.<a class="code" href="classParticles_1_1Particle.html#af792bce47ec4746ad2c78e7e800299a8">set_id</a>(next_unused_particle_id);</div>
 <div class="line">          particle_handler.insert_particle(new_particle, cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          ++next_unused_particle_id;</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>At the end of all of these insertions, we let the <code>particle_handler</code> update some internal statistics about the particles it stores.</p>
+</div><!-- fragment --><p>在所有这些插入结束时，我们让<code>particle_handler</code>更新一些关于它所存储的粒子的内部统计数据。</p>
 <div class="fragment"><div class="line">  particle_handler.update_cached_numbers();</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="CathodeRaySimulatormove_particles"></a> </p><h4>CathodeRaySimulator::move_particles</h4>
-<p>The second particle-related function is the one that moves the particles in each time step. To do this, we have to loop over all cells, the particles in each cell, and evaluate the electric field at each of the particles' positions.</p>
-<p>The approach used here is conceptually the same used in the <code>assemble_system()</code> function: We loop over all cells, find the particles located there (with the same caveat about the inefficiency of the algorithm used here to find these particles), and use <a class="el" href="classFEPointEvaluation.html">FEPointEvaluation</a> object to evaluate the gradient at these positions:</p>
+</div><!-- fragment --><p><a class="anchor" id="CathodeRaySimulatormove_particles"></a></p><h4>CathodeRaySimulator::move_particles</h4>
+<p>第二个与粒子有关的函数是在每个时间步骤中移动粒子的函数。要做到这一点，我们必须在所有单元、每个单元的粒子上进行循环，并评估每个粒子位置的电场。 <br  />
+</p>
+<p>这里使用的方法在概念上与<code>assemble_system()</code>函数中使用的相同。我们在所有单元中循环，找到位于那里的粒子（同样要注意这里用来寻找这些粒子的算法的低效率），并使用FEPointEvaluation对象来评估这些位置的梯度。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> CathodeRaySimulator&lt;dim&gt;::move_particles()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> dt = time.get_next_step_size();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a>            solution_values(fe.n_dofs_per_cell());</div>
 <div class="line">  <a class="code" href="classFEPointEvaluation.html">FEPointEvaluation&lt;1, dim&gt;</a> evaluator(mapping, fe);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">    <span class="keywordflow">if</span> (particle_handler.n_particles_in_cell(cell) &gt; 0)</div>
@@ -752,18 +824,21 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">          dim&gt;::particle_iterator_range particles_in_cell =</div>
 <div class="line">          particle_handler.<a class="code" href="classParticles_1_1ParticleHandler.html#acaf1232ffce0746baa64122a5c65822e">particles_in_cell</a>(cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        std::vector&lt;Point&lt;dim&gt;&gt; particle_positions;</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;particle : particles_in_cell)</div>
 <div class="line">          particle_positions.push_back(particle.get_reference_location());</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        cell-&gt;get_dof_values(solution, solution_values);</div>
 <div class="ttc" id="aclassFEPointEvaluation_html"><div class="ttname"><a href="classFEPointEvaluation.html">FEPointEvaluation</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__point__evaluation_8h_source.html#l00372">fe_point_evaluation.h:373</a></div></div>
 <div class="ttc" id="aclassParticles_1_1ParticleHandler_html_acaf1232ffce0746baa64122a5c65822e"><div class="ttname"><a href="classParticles_1_1ParticleHandler.html#acaf1232ffce0746baa64122a5c65822e">Particles::ParticleHandler::particles_in_cell</a></div><div class="ttdeci">particle_iterator_range particles_in_cell(const typename Triangulation&lt; dim, spacedim &gt;::active_cell_iterator &amp;cell)</div><div class="ttdef"><b>Definition:</b> <a href="particle__handler_8cc_source.html#l00316">particle_handler.cc:316</a></div></div>
-</div><!-- fragment --><p>Then we can ask the <a class="el" href="classFEPointEvaluation.html">FEPointEvaluation</a> object for the gradients of the solution (i.e., the electric field \(\mathbf E\)) at these locations and loop over the individual particles:</p>
+</div><!-- fragment --><p>然后我们可以向FEPointEvaluation对象询问这些位置上的解决方案的梯度（即电场 \(\mathbf E\) ），并在各个粒子上循环。</p>
 <div class="fragment"><div class="line">evaluator.evaluate(cell,</div>
 <div class="line">                   particle_positions,</div>
 <div class="line">                   <a class="code" href="classArrayView.html#a2339bfed866b07b8d100f017616e2f2a">make_array_view</a>(solution_values),</div>
 <div class="line">                   <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aea91b5f00e4be473005cc331b8644ab2f1">EvaluationFlags::gradients</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">typename</span> <a class="code" href="classParticles_1_1ParticleIterator.html">Particles::ParticleHandler&lt;dim&gt;::particle_iterator</a></div>
@@ -775,30 +850,34 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">      <span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> <a class="code" href="namespacenumbers.html#a3c7239f00d5e87dfcf6dd19cbc3ddc74">E</a> = evaluator.get_gradient(<a class="code" href="namespacetypes.html#ae4ea18e3efb31f0312a9e754873d71b8">particle_index</a>);</div>
 <div class="ttc" id="aclassArrayView_html_a2339bfed866b07b8d100f017616e2f2a"><div class="ttname"><a href="classArrayView.html#a2339bfed866b07b8d100f017616e2f2a">ArrayView::make_array_view</a></div><div class="ttdeci">ArrayView&lt; typename std::remove_reference&lt; typename std::iterator_traits&lt; Iterator &gt;::reference &gt;::type, MemorySpaceType &gt; make_array_view(const Iterator begin, const Iterator end)</div><div class="ttdef"><b>Definition:</b> <a href="array__view_8h_source.html#l00697">array_view.h:697</a></div></div>
 <div class="ttc" id="anamespaceEvaluationFlags_html_a9b7c6d689cb76386839d0d13640f59aea91b5f00e4be473005cc331b8644ab2f1"><div class="ttname"><a href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aea91b5f00e4be473005cc331b8644ab2f1">EvaluationFlags::gradients</a></div><div class="ttdeci">@ gradients</div><div class="ttdef"><b>Definition:</b> <a href="evaluation__flags_8h_source.html#l00055">evaluation_flags.h:55</a></div></div>
-</div><!-- fragment --><p>Having now obtained the electric field at the location of one of the particles, we use this to update first the velocity and then the position. To do so, let us first get the old velocity out of the properties stored with the particle, compute the acceleration, update the velocity, and store this new velocity again in the properties of the particle. Recall that this corresponds to the first of the following set of update equations discussed in the introduction: </p><p class="formulaDsp">
+</div><!-- fragment --><p>现在得到了其中一个粒子位置的电场，我们首先用它来更新速度，然后更新位置。要做到这一点，让我们首先从存储在粒子的属性中得到旧的速度，计算加速度，更新速度，并将这个新速度再次存储在粒子的属性中。回顾一下，这对应于介绍中讨论的以下一组更新方程中的第一个。</p>
+<p class="formulaDsp">
 \begin{align*} \frac{{\mathbf v}_i^{(n)} -{\mathbf v}_i^{(n-1)}}{\Delta t} &amp;= \frac{e\nabla V^{(n)}}{m} \\ \frac{{\mathbf x}_i^{(n)}-{\mathbf x}_i^{(n-1)}} {\Delta t} &amp;= {\mathbf v}_i^{(n)}. \end{align*}
 </p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> old_velocity(particle-&gt;get_properties());</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> acceleration =</div>
 <div class="line">  Constants::electron_charge / Constants::electron_mass * <a class="code" href="namespacenumbers.html#a3c7239f00d5e87dfcf6dd19cbc3ddc74">E</a>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> new_velocity =</div>
 <div class="line">  old_velocity + acceleration * dt;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">particle-&gt;set_properties(<a class="code" href="classArrayView.html#a2339bfed866b07b8d100f017616e2f2a">make_array_view</a>(new_velocity));</div>
-</div><!-- fragment --><p>With the new velocity, we can then also update the location of the particle and tell the particle about it.</p>
+</div><!-- fragment --><p>有了新的速度，我们还可以更新粒子的位置，并告诉粒子有关情况。</p>
 <div class="fragment"><div class="line">        <span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> new_location =</div>
 <div class="line">          particle-&gt;get_location() + dt * new_velocity;</div>
 <div class="line">        particle-&gt;set_location(new_location);</div>
 <div class="line">      }</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Having updated the locations and properties (i.e., velocities) of all particles, we need to make sure that the <code>particle_handler</code> again knows which cells they are in, and what their locations in the coordinate system of the reference cell are. The following function does that. (It also makes sure that, in parallel computations, particles are moved from one processor to another processor if a particle moves from the subdomain owned by the former to the subdomain owned by the latter.)</p>
+</div><!-- fragment --><p>在更新了所有粒子的位置和属性（即速度）之后，我们需要确保<code>particle_handler</code>再次知道它们在哪个单元中，以及它们在参考单元的坐标系中的位置是什么。下面的函数就是这样做的。它还确保在并行计算中，如果粒子从一个处理器所拥有的子域移动到另一个处理器所拥有的子域，那么粒子就会从一个处理器移动到另一个处理器）。</p>
 <div class="fragment"><div class="line">  particle_handler.sort_particles_into_subdomains_and_cells();</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="CathodeRaySimulatortrack_lost_particle"></a> </p><h4>CathodeRaySimulator::track_lost_particle</h4>
-<p>The final particle-related function is the one that is called whenever a particle is lost from the simulation. This typically happens if it leaves the domain. If that happens, this function is called both the cell (which we can ask for its new location) and the cell it was previously on. The function then keeps track of updating the number of particles lost in this time step, the total number of lost particles, and then estimates whether the particle left through the hole in the middle of the anode. We do so by first checking whether the cell it was in last had an \(x\) coordinate to the left of the right boundary (located at \(x=4\)) and the particle now has a position to the right of the right boundary. If that is so, we compute a direction vector of its motion that is normalized so that the \(x\) component of the direction vector is equal to \(1\). With this direction vector, we can compute where it would have intersected the line \(x=4\). If this intersect is between \(0.5\) and \(1.5\), then we claim that the particle left through the hole and increment a counter.</p>
+<p>最后一个与粒子有关的函数是当一个粒子从模拟中丢失时被调用的函数。这通常发生在它离开域的时候。如果发生这种情况，这个函数会同时调用单元（我们可以询问它的新位置）和它之前所在的单元。然后，该函数不断跟踪更新这个时间步骤中丢失的粒子数，丢失的粒子总数，然后估计该粒子是否通过阳极中间的孔离开。我们这样做，首先检查它最后所在的单元是否有一个 \(x\) 坐标在右边边界的左边（位于 \(x=4\) ），而粒子现在的位置在右边边界的右边。如果是这样的话，我们就计算出它的运动方向矢量，这个方向矢量被归一化了，所以方向矢量的 \(x\) 分量等于 \(1\) 。有了这个方向矢量，我们可以计算出它与直线 \(x=4\) 相交的位置。如果这个相交点在 \(0.5\) 和 \(1.5\) 之间，那么我们声称粒子从孔中离开并增加了一个计数器。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> CathodeRaySimulator&lt;dim&gt;::track_lost_particle(</div>
 <div class="line">  <span class="keyword">const</span> <span class="keyword">typename</span> <a class="code" href="classParticles_1_1ParticleIterator.html">Particles::ParticleIterator&lt;dim&gt;</a> &amp;        particle,</div>
@@ -807,14 +886,17 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">  ++n_recently_lost_particles;</div>
 <div class="line">  ++n_total_lost_particles;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> current_location              = particle-&gt;get_location();</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> approximate_previous_location = cell-&gt;center();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">if</span> ((approximate_previous_location[0] &lt; 4) &amp;&amp; (current_location[0] &gt; 4))</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">const</span> <a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> direction =</div>
 <div class="line">        (current_location - approximate_previous_location) /</div>
 <div class="line">        (current_location[0] - approximate_previous_location[0]);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> right_boundary_intercept =</div>
 <div class="line">        approximate_previous_location[1] +</div>
@@ -825,7 +907,7 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="CathodeRaySimulatorupdate_timestep_size"></a> </p><h4>CathodeRaySimulator::update_timestep_size</h4>
-<p>As discussed at length in the introduction, we need to respect a time step condition whereby particles can not move further than one cell in one time step. To ensure that this is the case, we again first compute the maximal speed of all particles on each cell, and divide the cell size by that speed. We then compute the next time step size as the minimum of this quantity over all cells, using the safety factor discussed in the introduction, and set this as the desired time step size using the DiscreteTime::set_desired_time_step_size() function.</p>
+<p>正如在介绍中详细讨论的那样，我们需要尊重一个时间步长条件，即粒子在一个时间步长中不能移动超过一个单元。为了确保这一点，我们首先计算每个单元上所有粒子的最大速度，然后用该速度除以单元大小。然后，我们使用介绍中讨论的安全系数，将下一个时间步长计算为所有单元上该数量的最小值，并使用 DiscreteTime::set_desired_time_step_size() 函数将其设定为所需的时间步长。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> CathodeRaySimulator&lt;dim&gt;::update_timestep_size()</div>
 <div class="line">{</div>
@@ -833,12 +915,15 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">    {</div>
 <div class="line">      <span class="keywordtype">double</span> min_cell_size_over_velocity = <a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">std::numeric_limits&lt;double&gt;::max</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">        <span class="keywordflow">if</span> (particle_handler.n_particles_in_cell(cell) &gt; 0)</div>
 <div class="line">          {</div>
 <div class="line">            <span class="keyword">const</span> <span class="keywordtype">double</span> cell_size = cell-&gt;minimum_vertex_distance();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">            <span class="keywordtype">double</span> max_particle_velocity(0.0);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;particle :</div>
 <div class="line">                 particle_handler.particles_in_cell(cell))</div>
@@ -848,11 +933,13 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">                  <a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">std::max</a>(max_particle_velocity, velocity.norm());</div>
 <div class="line">              }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">            <span class="keywordflow">if</span> (max_particle_velocity &gt; 0)</div>
 <div class="line">              min_cell_size_over_velocity =</div>
 <div class="line">                <a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffdaeb244a97c0c9e9e7ca4765e096f0badc">std::min</a>(min_cell_size_over_velocity,</div>
 <div class="line">                         cell_size / max_particle_velocity);</div>
 <div class="line">          }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      constexpr <span class="keywordtype">double</span> c_safety = 0.5;</div>
 <div class="line">      time.set_desired_next_step_size(c_safety * 0.5 *</div>
@@ -860,27 +947,33 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">    }</div>
 <div class="ttc" id="anamespaceVectorTools_1_1EvaluationFlags_html_ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420"><div class="ttname"><a href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">VectorTools::EvaluationFlags::max</a></div><div class="ttdeci">@ max</div><div class="ttdef"><b>Definition:</b> <a href="vector__tools__evaluate_8h_source.html#l00053">vector_tools_evaluate.h:53</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_1_1EvaluationFlags_html_ac6721740e24732d6afabcf28ddfc1ffdaeb244a97c0c9e9e7ca4765e096f0badc"><div class="ttname"><a href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffdaeb244a97c0c9e9e7ca4765e096f0badc">VectorTools::EvaluationFlags::min</a></div><div class="ttdeci">@ min</div><div class="ttdef"><b>Definition:</b> <a href="vector__tools__evaluate_8h_source.html#l00059">vector_tools_evaluate.h:59</a></div></div>
-</div><!-- fragment --><p>As mentioned in the introduction, we have to treat the very first time step differently since there, particles are not available yet or do not yet have the information associated that we need for the computation of a reasonable step length. The formulas below follow the discussion in the introduction.</p>
+</div><!-- fragment --><p>正如介绍中提到的，我们必须以不同的方式对待第一个时间步长，因为在那里，粒子还没有可用，或者还没有我们计算合理步长所需的相关信息。下面的公式遵循导言中的讨论。</p>
 <div class="fragment"><div class="line">  <span class="keywordflow">else</span></div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">const</span> <a class="code" href="classQTrapezoid.html">QTrapezoid&lt;dim&gt;</a> vertex_quadrature;</div>
 <div class="line">      <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> fe_values(fe, vertex_quadrature, <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      std::vector&lt;Tensor&lt;1, dim&gt;&gt; field_gradients(vertex_quadrature.<a class="code" href="classQuadrature.html#af9f7d82770fa8126e19113f3e3db755b">size</a>());</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordtype">double</span> min_timestep = <a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">std::numeric_limits&lt;double&gt;::max</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">        <span class="keywordflow">if</span> (particle_handler.n_particles_in_cell(cell) &gt; 0)</div>
 <div class="line">          {</div>
 <div class="line">            <span class="keyword">const</span> <span class="keywordtype">double</span> cell_size = cell-&gt;minimum_vertex_distance();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">            fe_values.reinit(cell);</div>
 <div class="line">            fe_values.get_function_gradients(solution, field_gradients);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">            <span class="keywordtype">double</span> max_E = 0;</div>
 <div class="line">            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> q_point : fe_values.quadrature_point_indices())</div>
 <div class="line">              max_E = <a class="code" href="namespaceVectorTools_1_1EvaluationFlags.html#ac6721740e24732d6afabcf28ddfc1ffda8e7f5b8545162dccd5ed717792bdf420">std::max</a>(max_E, field_gradients[q_point].<a class="code" href="namespaceLocalIntegrators_1_1Divergence.html#a8bcfc37d2a2be8faa18628a601ecf112">norm</a>());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">            <span class="keywordflow">if</span> (max_E &gt; 0)</div>
 <div class="line">              min_timestep =</div>
@@ -890,6 +983,7 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">                                   Constants::electron_charge / max_E));</div>
 <div class="line">          }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      time.set_desired_next_step_size(min_timestep);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
@@ -897,9 +991,11 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="ttc" id="aclassQuadrature_html_af9f7d82770fa8126e19113f3e3db755b"><div class="ttname"><a href="classQuadrature.html#af9f7d82770fa8126e19113f3e3db755b">Quadrature::size</a></div><div class="ttdeci">unsigned int size() const</div></div>
 <div class="ttc" id="anamespaceLocalIntegrators_1_1Divergence_html_a8bcfc37d2a2be8faa18628a601ecf112"><div class="ttname"><a href="namespaceLocalIntegrators_1_1Divergence.html#a8bcfc37d2a2be8faa18628a601ecf112">LocalIntegrators::Divergence::norm</a></div><div class="ttdeci">double norm(const FEValuesBase&lt; dim &gt; &amp;fe, const ArrayView&lt; const std::vector&lt; Tensor&lt; 1, dim &gt;&gt;&gt; &amp;Du)</div><div class="ttdef"><b>Definition:</b> <a href="divergence_8h_source.html#l00472">divergence.h:472</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="ThecodeCathodeRaySimulatoroutput_resultscodefunction"></a> </p><h4>The <code>CathodeRaySimulator::output_results()</code> function</h4>
-<p>The final function implementing pieces of the overall algorithm is the one that generates graphical output. In the current context, we want to output both the electric potential field as well as the particle locations and velocities. But we also want to output the electric field, i.e., the gradient of the solution.</p>
-<p>deal.II has a general way how one can compute derived quantities from the solution and output those as well. Here, this is the electric field, but it could also be some other quantity &ndash; say, the norm of the electric field, or in fact anything else one could want to compute from the solution \(V_h(\mathbf x)\) or its derivatives. This general solution uses the <a class="el" href="classDataPostprocessor.html">DataPostprocessor</a> class and, in cases like the one here where we want to output a quantity that represents a vector field, the <a class="el" href="classDataPostprocessorVector.html">DataPostprocessorVector</a> class.</p>
-<p>Rather than try and explain how this class works, let us simply refer to the documentation of the <a class="el" href="classDataPostprocessorVector.html">DataPostprocessorVector</a> class that has essentially this case as a well-documented example.</p>
+<p>实现整个算法的最后一个函数是生成图形输出的函数。在目前的情况下，我们想同时输出电势场以及粒子的位置和速度。但我们也想输出电场，即解决方案的梯度。 <br  />
+</p>
+<p>deal.II有一个一般的方法，可以从解决方案中计算出派生量，并输出这些量。在这里，这是电场，但也可以是其他的量&ndash;比如说，电场的法线，或者事实上任何其他人们想从解 \(V_h(\mathbf x)\) 或其导数中计算的量。这个一般的解决方案使用了DataPostprocessor类，在像这里的情况下，我们想输出一个代表矢量场的量，则使用DataPostprocessorVector类。 <br  />
+</p>
+<p>与其尝试解释这个类是如何工作的，不如让我们简单地参考一下DataPostprocessorVector类的文档，这个案例基本上是一个有据可查的例子。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>ElectricFieldPostprocessor : <span class="keyword">public</span> <a class="code" href="classDataPostprocessorVector.html">DataPostprocessorVector</a>&lt;dim&gt;</div>
 <div class="line">{</div>
@@ -908,12 +1004,14 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">    : <a class="code" href="classDataPostprocessorVector.html">DataPostprocessorVector</a>&lt;dim&gt;(<span class="stringliteral">&quot;electric_field&quot;</span>, <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a>)</div>
 <div class="line">  {}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classDataPostprocessor.html#a07ebcf764cf911c6d78f21c32ea1d2d0">evaluate_scalar_field</a>(</div>
 <div class="line">    <span class="keyword">const</span> <a class="code" href="structDataPostprocessorInputs_1_1Scalar.html">DataPostprocessorInputs::Scalar&lt;dim&gt;</a> &amp;input_data,</div>
 <div class="line">    std::vector&lt;<a class="code" href="classVector.html">Vector&lt;double&gt;</a>&gt; &amp;computed_quantities)<span class="keyword"> const override</span></div>
 <div class="line"><span class="keyword">  </span>{</div>
 <div class="line">    <a class="code" href="group__Exceptions.html#ga9442b63275c9ef3fab29bc222831c49c">AssertDimension</a>(input_data.<a class="code" href="structDataPostprocessorInputs_1_1Scalar.html#ab816d7aff9d49ca60eabecc71e5a04a6">solution_gradients</a>.size(),</div>
 <div class="line">                    computed_quantities.size());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> p = 0; p &lt; input_data.<a class="code" href="structDataPostprocessorInputs_1_1Scalar.html#ab816d7aff9d49ca60eabecc71e5a04a6">solution_gradients</a>.size(); ++p)</div>
 <div class="line">      {</div>
@@ -928,8 +1026,7 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a15728437b942dab0b0042eb06a407d2c"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">Physics::Elasticity::Kinematics::d</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; d(const Tensor&lt; 2, dim, Number &gt; &amp;F, const Tensor&lt; 2, dim, Number &gt; &amp;dF_dt)</div></div>
 <div class="ttc" id="astructDataPostprocessorInputs_1_1Scalar_html"><div class="ttname"><a href="structDataPostprocessorInputs_1_1Scalar.html">DataPostprocessorInputs::Scalar</a></div><div class="ttdef"><b>Definition:</b> <a href="data__postprocessor_8h_source.html#l00259">data_postprocessor.h:260</a></div></div>
 <div class="ttc" id="astructDataPostprocessorInputs_1_1Scalar_html_ab816d7aff9d49ca60eabecc71e5a04a6"><div class="ttname"><a href="structDataPostprocessorInputs_1_1Scalar.html#ab816d7aff9d49ca60eabecc71e5a04a6">DataPostprocessorInputs::Scalar::solution_gradients</a></div><div class="ttdeci">std::vector&lt; Tensor&lt; 1, spacedim &gt; &gt; solution_gradients</div><div class="ttdef"><b>Definition:</b> <a href="data__postprocessor_8h_source.html#l00281">data_postprocessor.h:281</a></div></div>
-</div><!-- fragment --><p>With this, the <code>output_results()</code> function becomes relatively straightforward: We use the <a class="el" href="classDataOut.html">DataOut</a> class as we have in almost every one of the previous tutorial programs to output the solution (the "electric
-   potential") and we use the postprocessor defined above to also output its gradient (the "electric field"). This all is then written into a file in VTU format after also associating the current time and time step number with this file.</p>
+</div><!-- fragment --><p>有了这个，<code>output_results()</code>函数就变得相对简单了。我们使用DataOut类，就像我们在以前几乎所有的教程程序中使用的那样，来输出解决方案（"电动势"），我们使用上面定义的后处理程序来输出其梯度（"电场"）。这一切都被写入一个VTU格式的文件中，同时将当前时间和时间步长与该文件联系起来。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> CathodeRaySimulator&lt;dim&gt;::output_results()<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
@@ -941,8 +1038,10 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">    data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(solution, electric_field);</div>
 <div class="line">    data_out.<a class="code" href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">build_patches</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    data_out.<a class="code" href="group__Exceptions.html#gac7280a24690b117454acfb0fa058299c">set_flags</a>(</div>
 <div class="line">      <a class="code" href="structDataOutBase_1_1VtkFlags.html">DataOutBase::VtkFlags</a>(time.get_current_time(), time.get_step_number()));</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    std::ofstream output(<span class="stringliteral">&quot;solution-&quot;</span> +</div>
 <div class="line">                         <a class="code" href="namespaceUtilities.html#a6195c5f009ea8c7c536c6ffdf108c32f">Utilities::int_to_string</a>(time.get_step_number(), 4) +</div>
@@ -957,7 +1056,7 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="ttc" id="agroup__Exceptions_html_gac7280a24690b117454acfb0fa058299c"><div class="ttname"><a href="group__Exceptions.html#gac7280a24690b117454acfb0fa058299c">DataOutInterface::set_flags</a></div><div class="ttdeci">void set_flags(const FlagType &amp;flags)</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l08166">data_out_base.cc:8166</a></div></div>
 <div class="ttc" id="anamespaceUtilities_html_a6195c5f009ea8c7c536c6ffdf108c32f"><div class="ttname"><a href="namespaceUtilities.html#a6195c5f009ea8c7c536c6ffdf108c32f">Utilities::int_to_string</a></div><div class="ttdeci">std::string int_to_string(const unsigned int value, const unsigned int digits=numbers::invalid_unsigned_int)</div><div class="ttdef"><b>Definition:</b> <a href="base_2utilities_8cc_source.html#l00473">utilities.cc:473</a></div></div>
 <div class="ttc" id="astructDataOutBase_1_1VtkFlags_html"><div class="ttname"><a href="structDataOutBase_1_1VtkFlags.html">DataOutBase::VtkFlags</a></div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8h_source.html#l01087">data_out_base.h:1088</a></div></div>
-</div><!-- fragment --><p>Output the particle positions and properties is not more complicated. The <a class="el" href="classParticles_1_1DataOut.html">Particles::DataOut</a> class plays the role of the <a class="el" href="classDataOut.html">DataOut</a> class for particles, and all we have to do is tell that class where to take particles from and how to interpret the <code>dim</code> components of the properties &ndash; namely, as a single vector indicating the velocity, rather than as <code>dim</code> scalar properties. The rest is then the same as above:</p>
+</div><!-- fragment --><p>输出粒子的位置和属性并不复杂。 <a class="el" href="classParticles_1_1DataOut.html">Particles::DataOut</a> 类扮演了粒子的DataOut类的角色，我们所要做的就是告诉该类从哪里获取粒子，以及如何解释属性的<code>dim'分量--即作为表示速度的单一矢量，而不是</code>dim'标量属性。剩下的就和上面一样了。</p>
 <div class="fragment"><div class="line">  {</div>
 <div class="line">    <a class="code" href="classParticles_1_1DataOut.html">Particles::DataOut&lt;dim, dim&gt;</a> particle_out;</div>
 <div class="line">    particle_out.<a class="code" href="classParticles_1_1DataOut.html#adf095165dc286310226584b2b9972701">build_patches</a>(</div>
@@ -966,8 +1065,10 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">      std::vector&lt;DataComponentInterpretation::DataComponentInterpretation&gt;(</div>
 <div class="line">        dim, <a class="code" href="namespaceDataComponentInterpretation.html#a0cd2da3afe902f9004c23a73dbcc8ab0aa783915dbc182d5a49e111815fd23fe0">DataComponentInterpretation::component_is_part_of_vector</a>));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    particle_out.<a class="code" href="group__Exceptions.html#gac7280a24690b117454acfb0fa058299c">set_flags</a>(</div>
 <div class="line">      <a class="code" href="structDataOutBase_1_1VtkFlags.html">DataOutBase::VtkFlags</a>(time.get_current_time(), time.get_step_number()));</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    std::ofstream output(<span class="stringliteral">&quot;particles-&quot;</span> +</div>
 <div class="line">                         <a class="code" href="namespaceUtilities.html#a6195c5f009ea8c7c536c6ffdf108c32f">Utilities::int_to_string</a>(time.get_step_number(), 4) +</div>
@@ -979,12 +1080,12 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="ttc" id="aclassParticles_1_1DataOut_html_adf095165dc286310226584b2b9972701"><div class="ttname"><a href="classParticles_1_1DataOut.html#adf095165dc286310226584b2b9972701">Particles::DataOut::build_patches</a></div><div class="ttdeci">void build_patches(const Particles::ParticleHandler&lt; dim, spacedim &gt; &amp;particles, const std::vector&lt; std::string &gt; &amp;data_component_names={}, const std::vector&lt; DataComponentInterpretation::DataComponentInterpretation &gt; &amp;data_component_interpretations={})</div><div class="ttdef"><b>Definition:</b> <a href="particles_2data__out_8cc_source.html#l00028">data_out.cc:28</a></div></div>
 <div class="ttc" id="anamespaceDataComponentInterpretation_html_a0cd2da3afe902f9004c23a73dbcc8ab0aa783915dbc182d5a49e111815fd23fe0"><div class="ttname"><a href="namespaceDataComponentInterpretation.html#a0cd2da3afe902f9004c23a73dbcc8ab0aa783915dbc182d5a49e111815fd23fe0">DataComponentInterpretation::component_is_part_of_vector</a></div><div class="ttdeci">@ component_is_part_of_vector</div><div class="ttdef"><b>Definition:</b> <a href="data__component__interpretation_8h_source.html#l00059">data_component_interpretation.h:59</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="CathodeRaySimulatorrun"></a> </p><h4>CathodeRaySimulator::run</h4>
-<p>The last member function of the principal class of this program is then the driver. At the top, it refines the mesh a number of times by solving the problem (with not particles yet created) on a sequence of finer and finer meshes.</p>
+<p>这个程序的主类的最后一个成员函数是驱动。在顶部，它通过在一连串越来越细的网格上求解问题（尚未创建粒子）来多次细化网格。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">CathodeRaySimulator&lt;dim&gt;::run</a>()</div>
 <div class="line">{</div>
 <div class="line">  make_grid();</div>
-</div><!-- fragment --><p>do a few refinement cycles up front</p>
+</div><!-- fragment --><p>在前面做一些细化循环</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_pre_refinement_cycles = 3;</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> refinement_cycle = 0;</div>
 <div class="line">     refinement_cycle &lt; n_pre_refinement_cycles;</div>
@@ -995,8 +1096,7 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">    solve_field();</div>
 <div class="line">    refine_grid();</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>Now do the loop over time. The sequence of steps follows closely the outline of the algorithm discussed in the introduction. As discussed in great detail in the documentation of the <a class="el" href="classDiscreteTime.html">DiscreteTime</a> class, while we move the field and particle information forward by one time step, the time stored in the <code>time</code> variable is not consistent with where (some of) these quantities are (in the diction of <a class="el" href="classDiscreteTime.html">DiscreteTime</a>, this is the "update
-   stage"). The call to <code>time.advance_time()</code> makes everything consistent again by setting the <code>time</code> variable to the time at which the field and particles already are, and once we are in this "consistent stage", we can generate graphical output and write information about the current state of the simulation to screen.</p>
+</div><!-- fragment --><p>现在随着时间的推移做循环。这个步骤的顺序紧跟介绍中所讨论的算法的大纲。正如在DiscreteTime类的文档中详细讨论的那样，当我们将场和粒子信息向前移动一个时间步长时，存储在<code>time</code>变量中的时间与这些量的（部分）位置不一致（在DiscreteTime的字典中，这就是 "更新阶段"）。对<code>time.advance_time()</code>的调用通过将<code>time</code>变量设置为场和粒子已经处于的时间而使一切重新保持一致，一旦我们处于这个 "一致阶段"，我们就可以生成图形输出并将模拟的当前状态的信息写入屏幕。</p>
 <div class="fragment"><div class="line">    setup_system();</div>
 <div class="line">    <span class="keywordflow">do</span></div>
 <div class="line">      {</div>
@@ -1004,20 +1104,26 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;  Field degrees of freedom:                 &quot;</span></div>
 <div class="line">                  &lt;&lt; dof_handler.n_dofs() &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        assemble_system();</div>
 <div class="line">        solve_field();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        create_particles();</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;  Total number of particles in simulation:  &quot;</span></div>
 <div class="line">                  &lt;&lt; particle_handler.n_global_particles() &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        n_recently_lost_particles = 0;</div>
 <div class="line">        update_timestep_size();</div>
 <div class="line">        move_particles();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        time.advance_time();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        output_results();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;  Number of particles lost this time step:  &quot;</span></div>
 <div class="line">                  &lt;&lt; n_recently_lost_particles &lt;&lt; std::endl;</div>
@@ -1026,6 +1132,7 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">                    &lt;&lt; 1. * n_particles_lost_through_anode /</div>
 <div class="line">                         n_total_lost_particles</div>
 <div class="line">                    &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        std::cout &lt;&lt; std::endl</div>
 <div class="line">                  &lt;&lt; <span class="stringliteral">&quot;  Now at t=&quot;</span> &lt;&lt; time.get_current_time()</div>
@@ -1036,8 +1143,8 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">    <span class="keywordflow">while</span> (time.is_at_end() == <span class="keyword">false</span>);</div>
 <div class="line">  }</div>
 <div class="line">} <span class="comment">// namespace Step19</span></div>
-</div><!-- fragment --><p><a class="anchor" id="Thecodemaincodefunction"></a> </p><h3>The <code>main</code> function</h3>
-<p>The final function of the program is then again the <code>main()</code> function. It is unchanged in all tutorial programs since <a class="el" href="step_6.html">step-6</a> and so there is nothing new to discuss:</p>
+</div><!-- fragment --><p><a class="anchor" id="Thecodemaincodefunction"></a></p><h3>The <code>main</code> function</h3>
+<p>程序的最后一个函数又是<code>main()</code>函数。自 <a class="el" href="step_6.html">step-6</a> 以来，它在所有的教程程序中都没有变化，因此没有什么新的东西可以讨论。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">try</span></div>
@@ -1057,6 +1164,7 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">                &lt;&lt; <span class="stringliteral">&quot;----------------------------------------------------&quot;</span></div>
 <div class="line">                &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line">  <span class="keywordflow">catch</span> (...)</div>
@@ -1073,83 +1181,28 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">    }</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
-<p>When this program is run, it produces output that looks as follows: </p><div class="fragment"><div class="line">Timestep 1</div>
-<div class="line">  Field degrees of freedom:                                 4989</div>
-<div class="line">  Total number of particles in simulation:  20</div>
-<div class="line">  Number of particles lost <span class="keyword">this</span> time step:  0</div>
-<div class="line"> </div>
-<div class="line">  Now at t=2.12647e-07, dt=2.12647e-07.</div>
-<div class="line"> </div>
-<div class="line">Timestep 2</div>
-<div class="line">  Field degrees of freedom:                 4989</div>
-<div class="line">  Total number of particles in simulation:  24</div>
-<div class="line">  Number of particles lost <span class="keyword">this</span> time step:  0</div>
-<div class="line"> </div>
-<div class="line">  Now at t=4.14362e-07, dt=2.01715e-07.</div>
-<div class="line"> </div>
-<div class="line">Timestep 3</div>
-<div class="line">  Field degrees of freedom:                 4989</div>
-<div class="line">  Total number of particles in simulation:  28</div>
-<div class="line">  Number of particles lost <span class="keyword">this</span> time step:  0</div>
-<div class="line"> </div>
-<div class="line">  Now at t=5.96019e-07, dt=1.81657e-07.</div>
-<div class="line"> </div>
-<div class="line">Timestep 4</div>
-<div class="line">  Field degrees of freedom:                 4989</div>
-<div class="line">  Total number of particles in simulation:  32</div>
-<div class="line">  Number of particles lost <span class="keyword">this</span> time step:  0</div>
-<div class="line"> </div>
-<div class="line">  Now at t=7.42634e-07, dt=1.46614e-07.</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">...</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">  Timestep 1000</div>
-<div class="line">  Field degrees of freedom:                 4989</div>
-<div class="line">  Total number of particles in simulation:  44</div>
-<div class="line">  Number of particles lost <span class="keyword">this</span> time step:  6</div>
-<div class="line">  Fraction of particles lost through anode: 0.0601266</div>
-<div class="line"> </div>
-<div class="line">  Now at t=4.93276e-05, dt=4.87463e-08.</div>
-<div class="line"> </div>
-<div class="line">Timestep 1001</div>
-<div class="line">  Field degrees of freedom:                 4989</div>
-<div class="line">  Total number of particles in simulation:  44</div>
-<div class="line">  Number of particles lost <span class="keyword">this</span> time step:  0</div>
-<div class="line">  Fraction of particles lost through anode: 0.0601266</div>
-<div class="line"> </div>
-<div class="line">  Now at t=4.93759e-05, dt=4.82873e-08.</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">...</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">Timestep 2091</div>
-<div class="line">  Field degrees of freedom:                 4989</div>
-<div class="line">  Total number of particles in simulation:  44</div>
-<div class="line">  Number of particles lost <span class="keyword">this</span> time step:  0</div>
-<div class="line">  Fraction of particles lost through anode: 0.0503338</div>
-<div class="line"> </div>
-<div class="line">  Now at t=9.99237e-05, dt=4.26254e-08.</div>
-<div class="line"> </div>
-<div class="line">Timestep 2092</div>
-<div class="line">  Field degrees of freedom:                 4989</div>
-<div class="line">  Total number of particles in simulation:  44</div>
-<div class="line">  Number of particles lost <span class="keyword">this</span> time step:  0</div>
-<div class="line">  Fraction of particles lost through anode: 0.0503338</div>
-<div class="line"> </div>
-<div class="line">  Now at t=9.99661e-05, dt=4.24442e-08.</div>
-<div class="line"> </div>
-<div class="line">Timestep 2093</div>
-<div class="line">  Field degrees of freedom:                 4989</div>
-<div class="line">  Total number of particles in simulation:  44</div>
-<div class="line">  Number of particles lost <span class="keyword">this</span> time step:  2</div>
-<div class="line">  Fraction of particles lost through anode: 0.050308</div>
-<div class="line"> </div>
-<div class="line">  Now at t=0.0001, dt=3.38577e-08.</div>
-</div><!-- fragment --><p>Picking a random few time steps, we can visualize the solution in the form of streamlines for the electric field and dots for the electrons: </p><div class="twocolumn" style="width: 80%"> <div> <img src="https://www.dealii.org/images/steps/developer/step-19.solution.0000.png" alt="The solution at time step 0 (t=0 seconds)." width="500" class="inline"/> <br  />
+</div><!-- fragment --><p><a class="anchor" id="Results"></a></p><h1>Results</h1>
+<p>当这个程序被运行时，它产生的输出看起来如下。``时间步数1 场自由度：4989 仿真中的粒子总数：20 这个时间步数损失的粒子数：0</p>
+<p>现在在t=2.12647e-07，dt=2.12647e-07。</p>
+<p>时间步数2 场自由度：4989 仿真中的粒子总数：24 本时间步数损失的粒子数：0</p>
+<p>现在在t=4.14362e-07，dt=2.01715e-07。</p>
+<p>时间步数3 场自由度：4989 仿真中的粒子总数：28 本时间步数损失的粒子数：0</p>
+<p>现在在t=5.96019e-07，dt=1.81657e-07。</p>
+<p>时间步数4 场自由度：4989 仿真中的粒子总数。 32 这个时间步骤损失的粒子数：0</p>
+<p>现在在t=7.42634e-07，dt=1.46614e-07。</p>
+<p>...</p>
+<p>时间步数1000 场自由度：4989 仿真中的粒子总数。 44 这个时间步骤损失的粒子数：6 通过阳极损失的粒子数。0.0601266</p>
+<p>现在在t=4.93276e-05，dt=4.87463e-08。</p>
+<p>时间步数1001 场自由度：4989 仿真中的粒子总数。 44 这个时间步长损失的粒子数：0 通过阳极损失的粒子的分数。0.0601266</p>
+<p>现在在t=4.93759e-05，dt=4.82873e-08。</p>
+<p>...</p>
+<p>时间步数2091场自由度：4989模拟中的粒子总数。 44 这个时间步骤损失的粒子数：0 通过阳极损失的粒子数。0.0503338</p>
+<p>现在在t=9.99237e-05，dt=4.26254e-08。</p>
+<p>时间步数2092场自由度：4989模拟中的粒子总数。 44 这个时间步长损失的粒子数：0 通过阳极损失的粒子的分数。0.0503338</p>
+<p>现在在t=9.99661e-05，dt=4.24442e-08。</p>
+<p>时间步数2093 场自由度：4989 仿真中的粒子总数。 44 这个时间步长损失的粒子数：2 通过阳极损失的粒子的分数。0.050308</p>
+<p>现在在t=0.0001，dt=3.38577e-08。```</p>
+<p>随机选取几个时间步长，我们可以用电场的流线和电子的圆点的形式来可视化解决方案。 </p><div class="twocolumn" style="width: 80%"> <div> <img src="https://www.dealii.org/images/steps/developer/step-19.solution.0000.png" alt="The solution at time step 0 (t=0 seconds)." width="500" class="inline"/> <br  />
  Solution at time step 0 (t=0 seconds). <br  />
  </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-19.solution.1400.png" alt="The solution at time step 1400 (t=0.000068 seconds)." width="500" class="inline"/> <br  />
  Solution at time step 1400 (t=0.000068 seconds). <br  />
@@ -1157,7 +1210,9 @@ One may wonder why the equation for the electric field (or, rather, the electric
  Solution at time step 700 (t=0.000035 seconds). <br  />
  </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-19.solution.2092.png" alt="The solution at time step 2092 (t=0.0001 seconds)." width="500" class="inline"/> <br  />
  Solution at time step 2092 (t=0.0001 seconds). <br  />
- </div> </div><p>That said, a more appropriate way to visualize the results of this program are by creating a video that shows how these electrons move, and how the electric field changes in response to their motion:</p>
+ </div> </div><p> <br  />
+</p>
+<p>也就是说，将这个程序的结果可视化的一个更合适的方法是创建一个视频，显示这些电子是如何运动的，以及电场是如何随着它们的运动而变化的。</p>
 <p> 
 <p align="center">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/HwUtE7xuteE"
@@ -1166,13 +1221,14 @@ One may wonder why the equation for the electric field (or, rather, the electric
    allowfullscreen></iframe>
  </p>
 </p>
-<p>What you can see here is how the "focus element" of the boundary with its negative voltage repels the electrons and makes sure that they do not just fly away perpendicular from the cathode (as they do in the initial part of their trajectories). It also shows how the electric field lines move around over time, in response to the charges flying by &ndash; in other words, the feedback the particles have on the electric field that itself drives the motion of the electrons.</p>
-<p>The movie suggests that electrons move in "bunches" or "bursts". One element of this appearance is an artifact of how the movie was created: Every frame of the movie corresponds to one time step, but the time step length varies. More specifically, the fastest particle moving through the smallest cell determines the length of the time step (see the discussion in the introduction), and consequently time steps are small whenever a (fast) particle moves through the small cells at the right edge of the domain; time steps are longer again once the particle has left the domain. This slowing-accelerating effect can easily be visualized by plotting the time step length shown in the screen output.</p>
-<p>The second part of this is real, however: The simulation creates a large group of particles in the beginning, and fewer after about the 300th time step. This is probably because of the negative charge of the particles in the simulation: They reduce the magnitude of the electric field at the (also negatively charged electrode) and consequently reduce the number of points on the cathode at which the magnitude exceeds the threshold necessary to draw an electron out of the electrode.</p>
+<p>你在这里可以看到，边界的 "焦点元素 "是如何用其负电压排斥电子，并确保它们不会直接从阴极垂直飞走（就像它们在其轨迹的初始部分那样）。它还显示了电场线如何随着时间的推移而移动，以回应飞过的电荷&ndash;换句话说，粒子对电场的反馈，而电场本身又驱动着电子的运动。</p>
+<p>这部电影表明，电子是以 "成串 "或 "突发 "的方式运动的。这种表象的一个因素是电影创作方式的一个伪命题。电影的每一帧都对应着一个时间步长，但时间步长是不同的。更具体地说，穿过最小单元的最快粒子决定了时间步长（见介绍中的讨论），因此，每当一个（快速）粒子穿过域的右边缘的小单元时，时间步长都很小；一旦粒子离开域，时间步长又会变长。通过绘制屏幕输出中显示的时间步长，可以很容易地看到这种减速-加速的效果。</p>
+<p>然而，这其中的第二部分是真实的。仿真在开始时创造了一大群粒子，而在大约第300个时间步长之后，粒子就会减少。这可能是因为模拟中的粒子带有负电荷。它们降低了（同样带负电的电极）的电场强度，因此减少了阴极上的点的数量，在这些点上，电场强度超过了将电子从电极中吸引出来所需的阈值。</p>
 <p><a class="anchor" id="extensions"></a> <a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions</h3>
 <p><a class="anchor" id="Avoidingaperformancebottleneckwithparticles"></a></p><h4>Avoiding a performance bottleneck with particles </h4>
-<p>The <code>assemble_system()</code>, <code>move_particles()</code>, and <code>update_timestep_size()</code> functions all call <a class="el" href="classParticles_1_1ParticleHandler.html#acaf1232ffce0746baa64122a5c65822e">Particles::ParticleHandler::particles_in_cell()</a> and <a class="el" href="classParticles_1_1ParticleHandler.html#ac043a4ea224ed50a03b8e9c3d3b98aec">Particles::ParticleHandler::n_particles_in_cell()</a> that query information about the particles located on the current cell. While this is convenient, it's also inefficient. To understand why this is so, one needs to know how particles are stored in <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a>: namely, in a data structure in which particles are ordered in some kind of linear fashion sorted by the cell they are on. Consequently, in order to find the particles associated with a given cell, these functions need to search for the first (and possibly last) particle on a given cell &ndash; an effort that costs \({\cal O}(\log N)\) operations where \(N\) is the number of particles. But this is repeated on every cell; assuming that for large computations, the number of cells and particles are roughly proportional, the accumulated cost of these function calls is then \({\cal O}(N \log N)\) and consequently larger than the \({\cal O}(N)\) cost that we should shoot for with all parts of a program.</p>
-<p>We can make this cheaper, though. First, instead of calling <a class="el" href="classParticles_1_1ParticleHandler.html#ac043a4ea224ed50a03b8e9c3d3b98aec">Particles::ParticleHandler::n_particles_in_cell()</a>, we might first call <a class="el" href="classParticles_1_1ParticleHandler.html#acaf1232ffce0746baa64122a5c65822e">Particles::ParticleHandler::particles_in_cell()</a> and then compute the number of particles on a cell by just computing the distance of the last to the first particle on the current cell: </p><div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">typename</span> <a class="code" href="classParticles_1_1ParticleHandler.html#a655ae2bdfe026f1ed172a2ec4c6c3d60">Particles::ParticleHandler&lt;dim, spacedim&gt;::particle_iterator_range</a></div>
+<p><code>assemble_system()</code>、<code>move_particles()</code>和<code>update_timestep_size()</code>函数都调用 <a class="el" href="classParticles_1_1ParticleHandler.html#acaf1232ffce0746baa64122a5c65822e">Particles::ParticleHandler::particles_in_cell()</a> 和 <a class="el" href="classParticles_1_1ParticleHandler.html#ac043a4ea224ed50a03b8e9c3d3b98aec">Particles::ParticleHandler::n_particles_in_cell()</a> ，查询位于当前单元上的粒子信息。虽然这很方便，但也很低效。为了理解为什么会这样，我们需要知道粒子是如何存储在 <a class="el" href="classParticles_1_1ParticleHandler.html">Particles::ParticleHandler</a>: 中的，即在一个数据结构中，粒子是以某种线性方式排序的，按它们所在的单元格排序。因此，为了找到与给定单元相关的粒子，这些函数需要搜索给定单元上的第一个（也可能是最后一个）粒子&ndash;这种努力需要花费 \({\cal O}(\log N)\) 次操作，其中 \(N\) 是粒子的数量。但这是在每个单元上重复进行的；假设对于大型计算来说，单元和粒子的数量大致成正比，那么这些函数调用的累积成本是 \({\cal O}(N \log N)\) ，因此大于我们应该在程序的所有部分中争取的 \({\cal O}(N)\) 成本。</p>
+<p>不过，我们可以使之更便宜。首先，我们可以不调用 <a class="el" href="classParticles_1_1ParticleHandler.html#ac043a4ea224ed50a03b8e9c3d3b98aec">Particles::ParticleHandler::n_particles_in_cell()</a>, ，而是先调用 <a class="el" href="classParticles_1_1ParticleHandler.html#acaf1232ffce0746baa64122a5c65822e">Particles::ParticleHandler::particles_in_cell()</a> ，然后通过计算当前单元上最后一个粒子到第一个粒子的距离来计算单元上的粒子数。</p>
+<div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">typename</span> <a class="code" href="classParticles_1_1ParticleHandler.html#a655ae2bdfe026f1ed172a2ec4c6c3d60">Particles::ParticleHandler&lt;dim, spacedim&gt;::particle_iterator_range</a></div>
 <div class="line">  particles_in_cell = particle_handler.particles_in_cell(cell);</div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span></div>
 <div class="line">  n_particles_in_cell = std::distance (particles_in_cell.<a class="code" href="classParticles_1_1ParticleHandler.html#a958a15b3aa325db82b4876cdb9feb527">begin</a>(),</div>
@@ -1180,8 +1236,9 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="ttc" id="aclassParticles_1_1ParticleHandler_html_a655ae2bdfe026f1ed172a2ec4c6c3d60"><div class="ttname"><a href="classParticles_1_1ParticleHandler.html#a655ae2bdfe026f1ed172a2ec4c6c3d60">Particles::ParticleHandler::particle_iterator_range</a></div><div class="ttdeci">boost::iterator_range&lt; particle_iterator &gt; particle_iterator_range</div><div class="ttdef"><b>Definition:</b> <a href="particle__handler_8h_source.html#l00072">particle_handler.h:72</a></div></div>
 <div class="ttc" id="aclassParticles_1_1ParticleHandler_html_a958a15b3aa325db82b4876cdb9feb527"><div class="ttname"><a href="classParticles_1_1ParticleHandler.html#a958a15b3aa325db82b4876cdb9feb527">Particles::ParticleHandler::begin</a></div><div class="ttdeci">particle_iterator begin() const</div><div class="ttdef"><b>Definition:</b> <a href="particle__handler_8h_source.html#l01012">particle_handler.h:1012</a></div></div>
 <div class="ttc" id="aclassParticles_1_1ParticleHandler_html_ab5f542a397843198eb82d8537602daf3"><div class="ttname"><a href="classParticles_1_1ParticleHandler.html#ab5f542a397843198eb82d8537602daf3">Particles::ParticleHandler::end</a></div><div class="ttdeci">particle_iterator end() const</div><div class="ttdef"><b>Definition:</b> <a href="particle__handler_8h_source.html#l01030">particle_handler.h:1030</a></div></div>
-</div><!-- fragment --><p> The first of these calls is of course still \({\cal O}(\log N)\), but at least the second call only takes a compute time proportional to the number of particles on the current cell and so, when accumulated over all cells, has a cost of \({\cal O}(N)\).</p>
-<p>But we can even get rid of the first of these calls with some proper algorithm design. That's because particles are ordered in the same way as cells, and so we can just walk them as we move along on the cells. The following outline of an algorithm does this: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> begin_particle_on_cell = particle_handler.begin();</div>
+</div><!-- fragment --><p>当然，这些调用中的第一个仍然是 \({\cal O}(\log N)\) ，但至少第二个调用只需要与当前单元格上的粒子数成比例的计算时间，因此，当累积到所有单元格时，其成本为 \({\cal O}(N)\) 。</p>
+<p>但我们甚至可以通过一些适当的算法设计摆脱这些调用中的第一个。这是因为粒子的排列方式与单元格相同，所以我们可以在单元格上移动时直接走动它们。下面的算法纲要就是这样做的。</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> begin_particle_on_cell = particle_handler.begin();</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">  {</div>
 <div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_particles_on_cell = 0;</div>
@@ -1193,30 +1250,32 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">        ++end_particle_on_cell;</div>
 <div class="line">      }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    ...now operate on the range of particles from begin_particle_on_cell</div>
 <div class="line">       to end_particle_on_cell, all of which are known to be on the current</div>
 <div class="line">       cell...;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Move the begin iterator forward so that it points to the first</span></div>
 <div class="line">    <span class="comment">// particle on the next cell</span></div>
 <div class="line">    begin_particle_on_cell = end_particle_on_cell;</div>
 <div class="line">  }</div>
-</div><!-- fragment --><p>In this code, we touch every cell exactly once and we never have to search the big data structure for the first or last particle on each cell. As a consequence, the algorithm costs a total of \({\cal O}(N)\) for a complete sweep of all particles and all cells.</p>
-<p>It would not be very difficult to implement this scheme for all three of the functions in this program that have this issue.</p>
+</div><!-- fragment --><p>在这段代码中，我们对每个单元都精确地触摸了一次，而且我们不必在大数据结构中搜索每个单元上的第一个或最后一个粒子。因此，该算法总共花费了 \({\cal O}(N)\) 来完成对所有粒子和所有单元的扫瞄。</p>
+<p>对于本程序中存在这个问题的所有三个函数来说，实现这个方案并不十分困难。</p>
 <p><a class="anchor" id="Morestatisticsaboutelectrons"></a></p><h4>More statistics about electrons </h4>
-<p>The program already computes the fraction of the electrons that leave the domain through the hole in the anode. But there are other quantities one might be interested in. For example, the average velocity of these particles. It would not be very difficult to obtain each particle's velocity from its properties, in the same way as we do in the <code>move_particles()</code> function, and compute statistics from it.</p>
+<p>该程序已经计算出通过阳极上的孔离开域的电子的比例。但是还有一些人们可能感兴趣的量。例如，这些粒子的平均速度。从每个粒子的属性中获得其速度并不是很困难，就像我们在<code>move_particles()</code>函数中所做的那样，并从中计算出统计数据。</p>
 <p><a class="anchor" id="Abettersynchronizedvisualization"></a></p><h4>A better-synchronized visualization </h4>
-<p>As discussed above, there is a varying time difference between different frames of the video because we create output for every time step. A better way to create movies would be to generate a new output file in fixed time intervals, regardless of how many time steps lie between each such point.</p>
+<p>如上所述，由于我们为每个时间步长创建输出，所以视频的不同帧之间存在着不同的时间差。一个更好的创建电影的方法是在固定的时间间隔内生成一个新的输出文件，不管每个这样的点之间有多少时间步骤。</p>
 <p><a class="anchor" id="Abettertimeintegrator"></a></p><h4>A better time integrator </h4>
-<p>The problem we are considering in this program is a coupled, multiphysics problem. But the way we solve it is by first computing the (electric) potential field and then update the particle locations. This is what is called an "operator-splitting method", a concept we will investigate in more detail in <a class="el" href="step_58.html">step-58</a>.</p>
-<p>While it is awkward to think of a way to solve this problem that does not involve splitting the problem into a PDE piece and a particles piece, one can* (and probably should!) think of a better way to update the particle locations. Specifically, the equations we use to update the particle location are </p><p class="formulaDsp">
+<p>我们在这个程序中考虑的问题是一个耦合的、多物理学问题。但我们解决它的方法是首先计算（电）势场，然后更新粒子的位置。这就是所谓的 "算子分割法"，这个概念我们将在 <a class="el" href="step_58.html">step-58</a> 中详细研究。</p>
+<p>虽然要想出一个不涉及将问题分割成PDE部分和粒子部分的方法是很困难的，但人们*可以*（而且可能应该！）想出一个更好的方法来更新粒子的位置。具体来说，我们用来更新粒子位置的方程是</p>
+<p class="formulaDsp">
 \begin{align*} \frac{{\mathbf v}_i^{(n)}-{\mathbf v}_i^{(n-1)}}{\Delta t} &amp;= \frac{e\nabla V^{(n)}}{m} \\ \frac{{\mathbf x}_i^{(n)}-{\mathbf x}_i^{(n-1)}}{\Delta t} &amp;= {\mathbf v}_i^{(n)}. \end{align*}
 </p>
-<p> This corresponds to a simple forward-Euler time discretization &ndash; a method of first order accuracy in the time step size \(\Delta t\) that we know we should avoid because we can do better. Rather, one might want to consider a scheme such as the <a href="https://en.wikipedia.org/wiki/Leapfrog_integration">leapfrog scheme</a> or more generally <a href="https://en.wikipedia.org/wiki/Symplectic_integrator">symplectic integrators</a> such as the <a href="https://en.wikipedia.org/wiki/Verlet_integration">Verlet scheme</a>.</p>
+<p>这相当于一个简单的正向欧拉时间离散化&ndash;一种在时间步长上具有一阶精度的方法 \(\Delta t\) ，我们知道我们应该避免，因为我们可以做得更好。相反，我们可能想考虑一种方案，如<a href="https://en.wikipedia.org/wiki/Leapfrog_integration">跃迁方案</a>或更普遍的<a href="https://en.wikipedia.org/wiki/Symplectic_integrator">折衷积分器</a>，如<a href="https://en.wikipedia.org/wiki/Verlet_integration">Verlet方案</a>。</p>
 <p><a class="anchor" id="Parallelization"></a></p><h4>Parallelization </h4>
-<p>In release mode, the program runs in about 3.5 minutes on one of the author's laptops at the time of writing this. That's acceptable. But what if we wanted to make the simulation three-dimensional? If we wanted to not use a maximum of around 100 particles at any given time (as happens with the parameters used here) but 100,000? If we needed a substantially finer mesh?</p>
-<p>In those cases, one would want to run the program not just on a single processor, but in fact on as many as one has available. This requires parallelization both the PDE solution as well as over particles. In practice, while there are substantial challenges to making this efficient and scale well, these challenges are all addressed in deal.II itself. For example, <a class="el" href="step_40.html">step-40</a> shows how to parallelize the finite element part, and <a class="el" href="step_70.html">step-70</a> shows how one can then also parallelize the particles part.</p>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+<p>在发布模式下，在写这篇文章时，该程序在作者的一台笔记本电脑上运行大约3.5分钟。这是可以接受的。但是，如果我们想让模拟变成三维的呢？如果我们想在任何时候都不使用最多约100个粒子（如这里使用的参数），而是使用100,000个？如果我们需要一个更细的网格？</p>
+<p>在这些情况下，我们不仅要在单个处理器上运行程序，而且要在尽可能多的可用处理器上运行。这就要求对PDE的解决方案以及粒子进行并行化。在实践中，虽然有大量的挑战要使其高效和规模化，但这些挑战都是在deal.II本身解决的。例如， step-40 展示了如何将有限元部分并行化， step-70 展示了如何将粒子部分也并行化。<a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2020 by the deal.II authors</span></div>
@@ -1944,7 +2003,8 @@ One may wonder why the equation for the electric field (or, rather, the electric
 <div class="line">    }</div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> 。 </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

@@ -1,339 +1,221 @@
-/**
-@page step_44 The step-44 tutorial program
-This tutorial depends on step-18.
+  /**   @page step_44 The step-44 tutorial program 。 
+
+本教程取决于  step-18  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Listofreferences">List of references</a>
-        <li><a href="#Notation"> Notation </a>
-        <li><a href="#Kinematics">Kinematics</a>
-        <li><a href="#Kinetics">Kinetics</a>
-        <li><a href="#Pushforwardandpullbackoperators"> Push-forward and pull-back operators </a>
-        <li><a href="#Hyperelasticmaterials">Hyperelastic materials</a>
+        <li><a href="#Listofreferences">List of references</a><a href="#Listofreferences">List of references</a>
+        <li><a href="#Notation"> Notation </a><a href="#Notation"> Notation </a>
+        <li><a href="#Kinematics">Kinematics</a><a href="#Kinematics">Kinematics</a>
+        <li><a href="#Kinetics">Kinetics</a><a href="#Kinetics">Kinetics</a>
+        <li><a href="#Pushforwardandpullbackoperators"> Push-forward and pull-back operators </a><a href="#Pushforwardandpullbackoperators"> Push-forward and pull-back operators </a>
+        <li><a href="#Hyperelasticmaterials">Hyperelastic materials</a><a href="#Hyperelasticmaterials">Hyperelastic materials</a>
       <ul>
-        <li><a href="#NeoHookeanmaterials"> Neo-Hookean materials </a>
+        <li><a href="#NeoHookeanmaterials"> Neo-Hookean materials </a><a href="#NeoHookeanmaterials"> Neo-Hookean materials </a>
       </ul>
-        <li><a href="#Elasticitytensors">Elasticity tensors</a>
-        <li><a href="#Principleofstationarypotentialenergyandthethreefieldformulation">Principle of stationary potential energy and the three-field formulation</a>
-        <li><a href="#Discretizationofgoverningequations"> Discretization of governing equations </a>
-        <li><a href="#Thematerialclass"> The material class </a>
-        <li><a href="#Numericalexample"> Numerical example </a>
+        <li><a href="#Elasticitytensors">Elasticity tensors</a><a href="#Elasticitytensors">Elasticity tensors</a>
+        <li><a href="#Principleofstationarypotentialenergyandthethreefieldformulation">Principle of stationary potential energy and the three-field formulation</a><a href="#Principleofstationarypotentialenergyandthethreefieldformulation">Principle of stationary potential energy and the three-field formulation</a>
+        <li><a href="#Discretizationofgoverningequations"> Discretization of governing equations </a><a href="#Discretizationofgoverningequations"> Discretization of governing equations </a>
+        <li><a href="#Thematerialclass"> The material class </a><a href="#Thematerialclass"> The material class </a>
+        <li><a href="#Numericalexample"> Numerical example </a> ]<a href="#Numericalexample"> Numerical example </a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Runtimeparameters">Run-time parameters</a>
+        <li><a href="#Runtimeparameters">Run-time parameters</a><a href="#Runtimeparameters">Run-time parameters</a>
       <ul>
-        <li><a href="#FiniteElementsystem">Finite Element system</a>
-        <li><a href="#Geometry">Geometry</a>
-        <li><a href="#Materials">Materials</a>
-        <li><a href="#Linearsolver">Linear solver</a>
-        <li><a href="#Nonlinearsolver">Nonlinear solver</a>
-        <li><a href="#Time">Time</a>
-        <li><a href="#Allparameters">All parameters</a>
+        <li><a href="#FiniteElementsystem">Finite Element system</a><a href="#FiniteElementsystem">Finite Element system</a>
+        <li><a href="#Geometry">Geometry</a><a href="#Geometry">Geometry</a>
+        <li><a href="#Materials">Materials</a><a href="#Materials">Materials</a>
+        <li><a href="#Linearsolver">Linear solver</a><a href="#Linearsolver">Linear solver</a>
+        <li><a href="#Nonlinearsolver">Nonlinear solver</a><a href="#Nonlinearsolver">Nonlinear solver</a>
+        <li><a href="#Time">Time</a><a href="#Time">Time</a>
+        <li><a href="#Allparameters">All parameters</a><a href="#Allparameters">All parameters</a>
       </ul>
-        <li><a href="#Timeclass">Time class</a>
-        <li><a href="#CompressibleneoHookeanmaterialwithinathreefieldformulation">Compressible neo-Hookean material within a three-field formulation</a>
-        <li><a href="#Quadraturepointhistory">Quadrature point history</a>
-        <li><a href="#Quasistaticquasiincompressiblefinitestrainsolid">Quasi-static quasi-incompressible finite-strain solid</a>
-        <li><a href="#ImplementationofthecodeSolidcodeclass">Implementation of the <code>Solid</code> class</a>
+        <li><a href="#Timeclass">Time class</a><a href="#Timeclass">Time class</a>
+        <li><a href="#CompressibleneoHookeanmaterialwithinathreefieldformulation">Compressible neo-Hookean material within a three-field formulation</a><a href="#CompressibleneoHookeanmaterialwithinathreefieldformulation">Compressible neo-Hookean material within a three-field formulation</a>
+        <li><a href="#Quadraturepointhistory">Quadrature point history</a><a href="#Quadraturepointhistory">Quadrature point history</a>
+        <li><a href="#Quasistaticquasiincompressiblefinitestrainsolid">Quasi-static quasi-incompressible finite-strain solid</a> ]<a href="#Quasistaticquasiincompressiblefinitestrainsolid">Quasi-static quasi-incompressible finite-strain solid</a>
+        <li><a href="#ImplementationofthecodeSolidcodeclass">Implementation of the <code>Solid</code> class</a><a href="#ImplementationofthecodeSolidcodeclass">Implementation of the <code>Solid</code> class</a>
       <ul>
-        <li><a href="#Publicinterface">Public interface</a>
+        <li><a href="#Publicinterface">Public interface</a><a href="#Publicinterface">Public interface</a>
       </ul>
-        <li><a href="#Privateinterface">Private interface</a>
+        <li><a href="#Privateinterface">Private interface</a><a href="#Privateinterface">Private interface</a>
       <ul>
-        <li><a href="#Threadingbuildingblocksstructures">Threading-building-blocks structures</a>
-        <li><a href="#Solidmake_grid">Solid::make_grid</a>
-        <li><a href="#Solidsystem_setup">Solid::system_setup</a>
-        <li><a href="#Soliddetermine_component_extractors">Solid::determine_component_extractors</a>
-        <li><a href="#Solidsetup_qph">Solid::setup_qph</a>
-        <li><a href="#Solidupdate_qph_incremental">Solid::update_qph_incremental</a>
-        <li><a href="#Solidsolve_nonlinear_timestep">Solid::solve_nonlinear_timestep</a>
-        <li><a href="#Solidprint_conv_headerandSolidprint_conv_footer">Solid::print_conv_header and Solid::print_conv_footer</a>
-        <li><a href="#Solidget_error_dilation">Solid::get_error_dilation</a>
-        <li><a href="#Solidget_error_residual">Solid::get_error_residual</a>
-        <li><a href="#Solidget_error_update">Solid::get_error_update</a>
-        <li><a href="#Solidget_total_solution">Solid::get_total_solution</a>
-        <li><a href="#Solidassemble_system">Solid::assemble_system</a>
-        <li><a href="#Solidmake_constraints">Solid::make_constraints</a>
-        <li><a href="#Solidassemble_sc">Solid::assemble_sc</a>
-        <li><a href="#Solidsolve_linear_system">Solid::solve_linear_system</a>
-        <li><a href="#Solidoutput_results">Solid::output_results</a>
+        <li><a href="#Threadingbuildingblocksstructures">Threading-building-blocks structures</a><a href="#Threadingbuildingblocksstructures">Threading-building-blocks structures</a>
+        <li><a href="#Solidmake_grid">Solid::make_grid</a><a href="#Solidmake_grid">Solid::make_grid</a>
+        <li><a href="#Solidsystem_setup">Solid::system_setup</a><a href="#Solidsystem_setup">Solid::system_setup</a>
+        <li><a href="#Soliddetermine_component_extractors">Solid::determine_component_extractors</a><a href="#Soliddetermine_component_extractors">Solid::determine_component_extractors</a>
+        <li><a href="#Solidsetup_qph">Solid::setup_qph</a><a href="#Solidsetup_qph">Solid::setup_qph</a>
+        <li><a href="#Solidupdate_qph_incremental">Solid::update_qph_incremental</a><a href="#Solidupdate_qph_incremental">Solid::update_qph_incremental</a>
+        <li><a href="#Solidsolve_nonlinear_timestep">Solid::solve_nonlinear_timestep</a><a href="#Solidsolve_nonlinear_timestep">Solid::solve_nonlinear_timestep</a>
+        <li><a href="#Solidprint_conv_headerandSolidprint_conv_footer">Solid::print_conv_header and Solid::print_conv_footer</a><a href="#Solidprint_conv_headerandSolidprint_conv_footer">Solid::print_conv_header and Solid::print_conv_footer</a>
+        <li><a href="#Solidget_error_dilation">Solid::get_error_dilation</a> ]<a href="#Solidget_error_dilation">Solid::get_error_dilation</a>
+        <li><a href="#Solidget_error_residual">Solid::get_error_residual</a><a href="#Solidget_error_residual">Solid::get_error_residual</a>
+        <li><a href="#Solidget_error_update">Solid::get_error_update</a><a href="#Solidget_error_update">Solid::get_error_update</a>
+        <li><a href="#Solidget_total_solution">Solid::get_total_solution</a><a href="#Solidget_total_solution">Solid::get_total_solution</a>
+        <li><a href="#Solidassemble_system">Solid::assemble_system</a><a href="#Solidassemble_system">Solid::assemble_system</a>
+        <li><a href="#Solidmake_constraints">Solid::make_constraints</a><a href="#Solidmake_constraints">Solid::make_constraints</a>
+        <li><a href="#Solidassemble_sc">Solid::assemble_sc</a><a href="#Solidassemble_sc">Solid::assemble_sc</a>
+        <li><a href="#Solidsolve_linear_system">Solid::solve_linear_system</a><a href="#Solidsolve_linear_system">Solid::solve_linear_system</a>
+        <li><a href="#Solidoutput_results">Solid::output_results</a><a href="#Solidoutput_results">Solid::output_results</a>
       </ul>
-        <li><a href="#Mainfunction">Main function</a>
+        <li><a href="#Mainfunction">Main function</a><a href="#Mainfunction">Main function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<br>
+@endhtmlonly 
+
+  <br>   
 
 <i>This program was contributed by Jean-Paul Pelteret and Andrew McBride.
 <br>
 This material is based upon work supported by  the German Science Foundation (Deutsche
 Forschungsgemeinschaft, DFG), grant STE 544/39-1,  and the National Research Foundation of South Africa.
-</i>
+</i> 
 
-@dealiiTutorialDOI{10.5281/zenodo.439772,https://zenodo.org/badge/DOI/10.5281/zenodo.439772.svg}
+  @dealiiTutorialDOI{10.5281/zenodo.439772,https://zenodo.org/badge/DOI/10.5281/zenodo.439772.svg}   
 
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+<a name="Intro"></a> <a name="Introduction"></a> <h1>Introduction</h1> 
 
 
-The subject of this tutorial is nonlinear solid mechanics.
-Classical single-field approaches (see e.g. step-18) can not correctly describe the response of quasi-incompressible materials.
-The response is overly stiff; a phenomenon known as locking.
-Locking problems can be circumvented using a variety of alternative strategies.
-One such strategy is the  three-field formulation.
-It is used here  to model the three-dimensional, fully-nonlinear (geometrical and material) response of an isotropic continuum body.
-The material response is approximated as hyperelastic.
-Additionally, the three-field formulation employed is valid for quasi-incompressible as well as compressible materials.
+本教程的主题是非线性固体力学。经典的单场方法（见例如 step-18 ）不能正确描述准不可压缩材料的响应。响应过于僵硬；这种现象被称为锁定。锁定问题可以通过各种替代策略来规避。其中一个策略是三场公式。在这里，它被用来模拟各向同性连续体的三维、完全非线性（几何和材料）响应。材料响应被近似为超弹性。此外，所采用的三场公式对准不可压缩和可压缩材料都有效。
 
-The objective of this presentation is to provide a basis for using deal.II for problems in nonlinear solid mechanics.
-The linear problem was addressed in step-8.
-A non-standard, hypoelastic-type form of the geometrically nonlinear problem was partially considered in step-18: a rate form of the linearised constitutive relations is used and the problem domain evolves with the motion.
-Important concepts surrounding the nonlinear kinematics are absent in the theory and implementation.
-Step-18 does, however, describe many of the key concepts to implement elasticity within the framework of deal.II.
+本报告的目的是为使用deal.II处理非线性固体力学问题提供一个基础。线性问题在 step-8 中已经解决。在 step-18 中部分考虑了几何非线性问题的非标准、超弹性类型的形式：使用线性化构成关系的速率形式，问题域随着运动的进行而变化。围绕非线性运动学的重要概念在理论和实施中都没有。 然而， Step-18 确实描述了许多关键概念，以便在deal.II的框架内实现弹性。
 
-We begin with a crash-course in nonlinear kinematics.
-For the sake of simplicity, we restrict our attention to the quasi-static problem.
-Thereafter, various key stress measures are introduced and the constitutive model described.
-We then describe the three-field formulation in detail prior to explaining the structure of the class used to manage the material.
-The setup of the example problem is then presented.
+我们从非线性运动学的速成课程开始。为了简单起见，我们将注意力限制在准静态问题上。此后，我们介绍了各种关键的应力测量，并描述了构成模型。然后，在解释用于管理材料的类的结构之前，我们详细描述了三场公式。然后介绍实例问题的设置。
 
-@note This tutorial has been developed (and is described in the introduction) for the problem of elasticity in three dimensions.
- While the space dimension could be changed in the main() routine, care needs to be taken.
- Two-dimensional elasticity problems, in general, exist only as idealizations of three-dimensional ones.
- That is, they are either plane strain or plane stress.
- The assumptions that follow either of these choices needs to be consistently imposed.
- For more information see the note in step-8.
+  @note  本教程是针对三维空间的弹性问题而开发的（并在介绍中进行了描述）。 虽然空间维度可以在main()例程中改变，但需要注意的是。 一般来说，二维弹性问题只是作为三维问题的理想化而存在。 也就是说，它们要么是平面应变，要么是平面应力。 这些选择中的任何一个的假设都需要被一致地施加。 更多信息见  step-8  中的说明。
 
 <a name="Listofreferences"></a><h3>List of references</h3>
 
 
-The three-field formulation implemented here was pioneered by Simo et al. (1985) and is known as the mixed Jacobian-pressure formulation.
-Important related contributions include those by Simo and Taylor (1991), and Miehe (1994).
-The notation adopted here draws heavily on the excellent overview of the theoretical aspects of nonlinear solid mechanics by Holzapfel (2001).
-A nice overview of issues pertaining to incompressible elasticity (at small strains) is given in Hughes (2000).
+这里实现的三场公式是由Simo等人（1985）开创的，被称为混合雅各布-压力公式。重要的相关贡献包括Simo和Taylor（1991）以及Miehe（1994）的贡献。这里采用的符号在很大程度上借鉴了Holzapfel（2001）对非线性固体力学理论方面的出色概述。Hughes (2000)对与不可压缩弹性（小应变时）有关的问题作了很好的概述。
 
-<ol>
-	<li> J.C. Simo, R.L. Taylor and K.S. Pister (1985),
-		Variational and projection methods for the volume constraint in finite deformation elasto-plasticity,
-		<em> Computer Methods in Applied Mechanics and Engineering </em>,
-		<strong> 51 </strong>, 1-3,
-		177-208.
-		DOI: <a href="http://doi.org/10.1016/0045-7825(85)90033-7">10.1016/0045-7825(85)90033-7</a>;
-	<li> J.C. Simo and R.L. Taylor (1991),
-  		Quasi-incompressible finite elasticity in principal stretches. Continuum
-			basis and numerical algorithms,
-		<em> Computer Methods in Applied Mechanics and Engineering </em>,
-		<strong> 85 </strong>, 3,
-		273-310.
-		DOI: <a href="http://doi.org/10.1016/0045-7825(91)90100-K">10.1016/0045-7825(91)90100-K</a>;
-	<li> C. Miehe (1994),
-		Aspects of the formulation and finite element implementation of large strain isotropic elasticity
-		<em> International Journal for Numerical Methods in Engineering </em>
-		<strong> 37 </strong>, 12,
-		1981-2004.
-		DOI: <a href="http://doi.org/10.1002/nme.1620371202">10.1002/nme.1620371202</a>;
-	<li> G.A. Holzapfel (2001),
-		Nonlinear Solid Mechanics. A Continuum Approach for Engineering,
-		John Wiley & Sons.
-		ISBN: 0-471-82304-X;
-	<li> T.J.R. Hughes (2000),
-		The Finite Element Method: Linear Static and Dynamic Finite Element Analysis,
-		Dover.
-		ISBN: 978-0486411811
-</ol>
+  <ol>   <li>  J.C. Simo, R.L. Taylor and K.S. Pister (1985), Variational and projection methods for the volume constraint in finite deformation elasto-plasticity,  <em>  Computer Methods in Applied Mechanics and Engineering  </em>  , <strong> 51 </strong>, 1-3, 177-208。 		DOI: <a href="http://doi.org/10.1016/0045-7825(85)90033-7">10.1016/0045-7825(85)90033-7</a>;  <li>  J.C. Simo and R.L. Taylor (1991), Quasi-incompressible finite elasticity in principal stretches. 连续体基础和数值算法,  <em>  应用力学和工程的计算机方法  </em>  , <strong> 85 </strong>, 3, 273-310. 		DOI: <a href="http://doi.org/10.1016/0045-7825(91)90100-K">10.1016/0045-7825(91)90100-K</a>;  <li>  C. Miehe (1994), Aspects of the formulation and finite element implementation of large strain isotropic elasticity  <em>  International Journal for Numerical Methods in Engineering  </em>  <strong> 37 /strong>, 12, 1981-2004. 		DOI: <a href="http://doi.org/10.1002/nme.1620371202">10.1002/nme.1620371202</a>;  <li>  G.A. Holzapfel (2001), Nonlinear Solid Mechanics. A Continuum Approach for Engineering, John Wiley & Sons. 		ISBN: 0-471-82304-X;  <li>  T.J.R. Hughes (2000), The Finite Element Method: 线性静态和动态有限元分析》，多佛。 		ISBN: 978-0486411811  </ol>  。 
 
-An example where this three-field formulation is used in a coupled problem is documented in
-<ol>
-	<li> J-P. V. Pelteret, D. Davydov, A. McBride, D. K. Vu, and P. Steinmann (2016),
-		Computational electro- and magneto-elasticity for quasi-incompressible media immersed in free space,
-		<em> International Journal for Numerical Methods in Engineering </em>.
-		DOI: <a href="http://doi.org/10.1002/nme.5254">10.1002/nme.5254</a>
-</ol>
+一个在耦合问题中使用这种三场公式的例子记录在 <ol>   <li>  J-P. V. Pelteret, D. Davydov, A. McBride, D. K. Vu, and P. Steinmann (2016), Computational electro- and magneto-elasticity for quasi-incompressible media immersed in free space,  <em>  International Journal for Numerical Methods in Engineering  </em>  。 		DOI: <a href="http://doi.org/10.1002/nme.5254">10.1002/nme.5254</a>  </ol>  。 
 
 <a name="Notation"></a><h3> Notation </h3>
 
 
-One can think of fourth-order tensors as linear operators mapping second-order
-tensors (matrices) onto themselves in much the same way as matrices map
-vectors onto vectors.
-There are various fourth-order unit tensors that will be required in the forthcoming presentation.
-The fourth-order unit tensors $\mathcal{I}$ and $\overline{\mathcal{I}}$ are defined by
-@f[
+我们可以把四阶张量看作是将二阶张量（矩阵）映射到自己身上的线性算子，其方式与矩阵将向量映射到向量上一样。有各种四阶单位张量，在即将到来的演讲中会被要求。四阶单位张量 $\mathcal{I}$ 和 $\overline{\mathcal{I}}$ 是由@f[
 	\mathbf{A} = \mathcal{I}:\mathbf{A}
 		\qquad \text{and} \qquad
 	\mathbf{A}^T = \overline{\mathcal{I}}:\mathbf{A} \, .
-@f]
-Note $\mathcal{I} \neq \overline{\mathcal{I}}^T$.
-Furthermore, we define the symmetric and skew-symmetric fourth-order unit tensors by
-@f[
+@f]注 $\mathcal{I} \neq \overline{\mathcal{I}}^T$ 定义。此外，我们通过@f[
 	\mathcal{S} \dealcoloneq \dfrac{1}{2}[\mathcal{I} + \overline{\mathcal{I}}]
 		\qquad \text{and} \qquad
 	\mathcal{W} \dealcoloneq \dfrac{1}{2}[\mathcal{I} - \overline{\mathcal{I}}] \, ,
-@f]
-such that
-@f[
+@f]定义对称和偏斜对称的四阶单位张量，这样@f[
 	\dfrac{1}{2}[\mathbf{A} + \mathbf{A}^T] = \mathcal{S}:\mathbf{A}
 		\qquad \text{and} \qquad
 	\dfrac{1}{2}[\mathbf{A} - \mathbf{A}^T] = \mathcal{W}:\mathbf{A} \, .
-@f]
-The fourth-order <code>SymmetricTensor</code> returned by identity_tensor() is $\mathcal{S}$.
+@f] identity_tensor()返回的四阶 <code>SymmetricTensor</code> 是 $\mathcal{S}$  。
 
 
 <a name="Kinematics"></a><h3>Kinematics</h3>
 
 
-Let the time domain be denoted $\mathbb{T} = [0,T_{\textrm{end}}]$, where $t \in \mathbb{T}$ and $T_{\textrm{end}}$ is the total problem duration.
-Consider a continuum body that occupies the reference configuration $\Omega_0$ at time $t=0$.
-%Particles in the reference configuration are identified by the position vector $\mathbf{X}$.
-The configuration of the body at a later time $t>0$ is termed the current configuration, denoted $\Omega$, with particles identified by the vector $\mathbf{x}$.
-The nonlinear map between the reference and current configurations, denoted $\boldsymbol{\varphi}$, acts as follows:
-@f[
+让时间域表示为 $\mathbb{T} = [0,T_{\textrm{end}}]$  ，其中 $t \in \mathbb{T}$ 和 $T_{\textrm{end}}$ 是总的问题时间。考虑一个连续体在时间 $t=0$ 占据参考配置 $\Omega_0$ 。参考配置中的%粒子由位置矢量 $\mathbf{X}$ 识别。身体在后来的时间 $t>0$ 的配置被称为当前配置，表示为 $\Omega$ ，粒子由矢量 $\mathbf{x}$ 识别。参考配置和当前配置之间的非线性映射，表示为 $\boldsymbol{\varphi}$  ，作用如下。@f[
 	\mathbf{x} = \boldsymbol{\varphi}(\mathbf{X},t) \, .
-@f]
-The material description of the displacement of a particle is defined by
-@f[
+@f] 粒子的位移的材料描述由@f[
 	\mathbf{U}(\mathbf{X},t) = \mathbf{x}(\mathbf{X},t) - \mathbf{X} \, .
-@f]
+@f]定义。
 
-The deformation gradient $\mathbf{F}$ is defined as the material gradient of the motion:
-@f[
+变形梯度 $\mathbf{F}$ 被定义为运动的材料梯度。@f[
 	\mathbf{F}(\mathbf{X},t)
 		\dealcoloneq \dfrac{\partial \boldsymbol{\varphi}(\mathbf{X},t)}{\partial \mathbf{X}}
 		= \textrm{Grad}\ \mathbf{x}(\mathbf{X},t)
 		= \mathbf{I} + \textrm{Grad}\ \mathbf{U} \, .
-@f]
-The determinant of the of the deformation gradient
-$J(\mathbf{X},t) \dealcoloneq \textrm{det}\ \mathbf{F}(\mathbf{X},t) > 0$
-maps corresponding volume elements in the reference and current configurations, denoted
-$\textrm{d}V$ and $\textrm{d}v$,
-respectively, as
-@f[
-	\textrm{d}v = J(\mathbf{X},t)\; \textrm{d}V \, .
-@f]
+@f] 变形梯度 $J(\mathbf{X},t) \dealcoloneq \textrm{det}\ \mathbf{F}(\mathbf{X},t) > 0$ 的行列式在参考配置和当前配置中映射出相应的体积元素，分别表示为 $\textrm{d}V$ 和 $\textrm{d}v$  。
 
-Two important measures of the deformation in terms of the spatial and material coordinates are the left and right Cauchy-Green tensors, respectively,
-and denoted $\mathbf{b} \dealcoloneq \mathbf{F}\mathbf{F}^T$ and $\mathbf{C} \dealcoloneq \mathbf{F}^T\mathbf{F}$.
-They are both symmetric and positive definite.
+就空间和材料坐标而言，变形的两个重要措施是左和右Cauchy-Green张量，分别表示为  $\mathbf{b} \dealcoloneq \mathbf{F}\mathbf{F}^T$  和  $\mathbf{C} \dealcoloneq \mathbf{F}^T\mathbf{F}$  。它们都是对称的和正定的。
 
-The Green-Lagrange strain tensor is defined by
-@f[
+格林-拉格朗日应变张量由@f[
 	\mathbf{E} \dealcoloneq \frac{1}{2}[\mathbf{C} - \mathbf{I} ]
 		= \underbrace{\frac{1}{2}[\textrm{Grad}^T \mathbf{U} +	\textrm{Grad}\mathbf{U}]}_{\boldsymbol{\varepsilon}}
 			+ \frac{1}{2}[\textrm{Grad}^T\ \mathbf{U}][\textrm{Grad}\ \mathbf{U}] \, .
-@f]
-If the assumption of infinitesimal deformations is made, then the second term
-on the right can be neglected, and $\boldsymbol{\varepsilon}$ (the linearised
-strain tensor) is the only component of the strain tensor.
-This assumption is, looking at the setup of the problem, not valid in step-18,
-making the use of the linearized $\boldsymbol{\varepsilon}$ as the strain
-measure in that tutorial program questionable.
+@f]定义，如果假设变形为无限小，那么右边的第二项可以忽略， $\boldsymbol{\varepsilon}$ （线性化应变张量）是应变张量的唯一组成部分。从问题的设置来看，这个假设在 step-18 中是不成立的，因此在该教程程序中使用线性化的 $\boldsymbol{\varepsilon}$ 作为应变度量是值得怀疑的。
 
-In order to handle the different response that materials exhibit when subjected to bulk and shear type deformations we consider the following decomposition of the deformation gradient $\mathbf{F}$  and the left Cauchy-Green tensor $\mathbf{b}$ into volume-changing (volumetric) and volume-preserving (isochoric) parts:
-@f[
+为了处理材料在受到体型和剪切型变形时表现出的不同响应，我们考虑将变形梯度 $\mathbf{F}$ 和左Cauchy-Green张量 $\mathbf{b}$ 分解为体积变化（volumetric）和体积保留（isochoric）部分。@f[
 	\mathbf{F}
 		= (J^{1/3}\mathbf{I})\overline{\mathbf{F}}
 	\qquad \text{and} \qquad
 	\mathbf{b}
         = (J^{2/3}\mathbf{I})\overline{\mathbf{F}}\,\overline{\mathbf{F}}^T
 		=  (J^{2/3}\mathbf{I})\overline{\mathbf{b}} \, .
-@f]
-Clearly, $\textrm{det}\ \mathbf{F} = \textrm{det}\ (J^{1/3}\mathbf{I}) = J$.
+@f] 很明显， $\textrm{det}\ \mathbf{F} = \textrm{det}\ (J^{1/3}\mathbf{I}) = J$  。
 
-The spatial velocity field is denoted $\mathbf{v}(\mathbf{x},t)$.
-The derivative of the spatial velocity field with respect to the spatial coordinates gives the spatial velocity gradient $\mathbf{l}(\mathbf{x},t)$, that is
-@f[
+空间速度场被表示为  $\mathbf{v}(\mathbf{x},t)$  。空间速度场相对于空间坐标的导数给出空间速度梯度  $\mathbf{l}(\mathbf{x},t)$  ，即 @f[
 	\mathbf{l}(\mathbf{x},t)
 		\dealcoloneq \dfrac{\partial \mathbf{v}(\mathbf{x},t)}{\partial \mathbf{x}}
 		= \textrm{grad}\ \mathbf{v}(\mathbf{x},t) \, ,
-@f]
-where $\textrm{grad} \{\bullet \}
+@f] 其中  $\textrm{grad} \{\bullet \}
 = \frac{\partial \{ \bullet \} }{ \partial \mathbf{x}}
 = \frac{\partial \{ \bullet \} }{ \partial \mathbf{X}}\frac{\partial \mathbf{X} }{ \partial \mathbf{x}}
-= \textrm{Grad} \{ \bullet \} \mathbf{F}^{-1}$.
+= \textrm{Grad} \{ \bullet \} \mathbf{F}^{-1}$  。
 
 
 <a name="Kinetics"></a><h3>Kinetics</h3>
 
 
-Cauchy's stress theorem equates the Cauchy traction $\mathbf{t}$ acting on an infinitesimal surface element in the current configuration $\mathrm{d}a$ to the product of the Cauchy stress tensor $\boldsymbol{\sigma}$ (a spatial quantity)  and the outward unit normal to the surface $\mathbf{n}$ as
-@f[
+考奇应力定理将作用在当前构型 $\mathrm{d}a$ 的无穷小表面元素上的考奇牵引力 $\mathbf{t}$ 等同于考奇应力张量 $\boldsymbol{\sigma}$ （一个空间量）与表面的外向单位法线 $\mathbf{n}$ 的乘积，为@f[
 	\mathbf{t}(\mathbf{x},t, \mathbf{n}) = \boldsymbol{\sigma}\mathbf{n} \, .
-@f]
-The Cauchy stress is symmetric.
-Similarly,  the first Piola-Kirchhoff traction $\mathbf{T}$ which acts on an infinitesimal surface element in the reference configuration $\mathrm{d}A$ is the product of the first Piola-Kirchhoff stress tensor $\mathbf{P}$ (a two-point tensor)  and the outward unit normal to the surface $\mathbf{N}$ as
-@f[
+@f] 考奇应力是对称的。同样，作用于参考构型中无限小的表面元素 $\mathrm{d}A$ 的第一Piola-Kirchhoff牵引力 $\mathbf{T}$ 是第一Piola-Kirchhoff应力张量 $\mathbf{P}$  ] (两点张量)与表面的外向单位法线 $\mathbf{N}$ 的乘积为@f[
 	\mathbf{T}(\mathbf{X},t, \mathbf{N}) = \mathbf{P}\mathbf{N} \, .
-@f]
-The Cauchy traction $\mathbf{t}$ and the first Piola-Kirchhoff traction $\mathbf{T}$ are related as
-@f[
+@f] Cauchy牵引力 $\mathbf{t}$ 与第一Piola-Kirchhoff牵引力 $\mathbf{T}$ 的关系为@f[
 	\mathbf{t}\mathrm{d}a = \mathbf{T}\mathrm{d}A \, .
-@f]
-This can be demonstrated using <a href="http://en.wikipedia.org/wiki/Finite_strain_theory">Nanson's formula</a>.
+@f] 这可以用<a href="http://en.wikipedia.org/wiki/Finite_strain_theory">Nanson's formula</a>证明。
 
-The first Piola-Kirchhoff stress tensor is related to the Cauchy stress as
-@f[
+第一Piola-Kirchhoff应力张量与Cauchy应力的关系为@f[
 	\mathbf{P} = J \boldsymbol{\sigma}\mathbf{F}^{-T} \, .
-@f]
-Further important stress measures are the (spatial) Kirchhoff stress  $\boldsymbol{\tau} = J \boldsymbol{\sigma}$
-and the (referential) second Piola-Kirchhoff stress
-$\mathbf{S} = {\mathbf{F}}^{-1} \boldsymbol{\tau} {\mathbf{F}}^{-T}$.
+@f] 进一步的重要应力测量是（空间）Kirchhoff应力 $\boldsymbol{\tau} = J \boldsymbol{\sigma}$  和（参考）第二Piola-Kirchhoff应力 $\mathbf{S} = {\mathbf{F}}^{-1} \boldsymbol{\tau} {\mathbf{F}}^{-T}$  。
 
 
-<a name="Pushforwardandpullbackoperators"></a><h3> Push-forward and pull-back operators </h3>
+<a name="Pushforwardandpullbackoperators"></a> <h3> Push-forward and pull-back operators </h3>
 
 
-Push-forward and pull-back operators allow one to transform various measures between the material and spatial settings.
-The stress measures used here are contravariant, while the strain measures are covariant.
+前推和后拉运算符允许人们在材料和空间设置之间转换各种措施。这里使用的应力测量是逆变的，而应变测量是协变的。
 
-The push-forward and-pull back operations for second-order covariant tensors $(\bullet)^{\text{cov}}$ are respectively given by:
-@f[
+二阶协变张量 $(\bullet)^{\text{cov}}$ 的前推和后拉运算分别由以下方式给出。@f[
 	\chi_{*}(\bullet)^{\text{cov}} \dealcoloneq \mathbf{F}^{-T} (\bullet)^{\text{cov}} \mathbf{F}^{-1}
 	\qquad \text{and} \qquad
 	\chi^{-1}_{*}(\bullet)^{\text{cov}} \dealcoloneq \mathbf{F}^{T} (\bullet)^{\text{cov}} \mathbf{F} \, .
-@f]
+@f] 
 
-The push-forward and pull back operations for second-order contravariant tensors $(\bullet)^{\text{con}}$ are respectively given by:
-@f[
+二阶协变张量 $(\bullet)^{\text{con}}$ 的前推和后拉操作分别由以下方法给出。@f[
 	\chi_{*}(\bullet)^{\text{con}} \dealcoloneq \mathbf{F} (\bullet)^{\text{con}} \mathbf{F}^T
 	\qquad \text{and} \qquad
 	\chi^{-1}_{*}(\bullet)^{\text{con}} \dealcoloneq \mathbf{F}^{-1} (\bullet)^{\text{con}} \mathbf{F}^{-T} \, .
-@f]
-For example $\boldsymbol{\tau} = \chi_{*}(\mathbf{S})$.
+@f] 例如 $\boldsymbol{\tau} = \chi_{*}(\mathbf{S})$  。
 
 
 <a name="Hyperelasticmaterials"></a><h3>Hyperelastic materials</h3>
 
 
-A hyperelastic material response is governed by a Helmholtz free energy function $\Psi = \Psi(\mathbf{F}) = \Psi(\mathbf{C}) = \Psi(\mathbf{b})$ which serves as a potential for the stress.
-For example, if the Helmholtz free energy depends on the right Cauchy-Green tensor $\mathbf{C}$ then the isotropic hyperelastic response is
-@f[
+超弹性材料的反应受亥姆霍兹自由能函数 $\Psi = \Psi(\mathbf{F}) = \Psi(\mathbf{C}) = \Psi(\mathbf{b})$ 的支配，该函数作为应力的势能。例如，如果Helmholtz自由能取决于右Cauchy-Green张量 $\mathbf{C}$ ，那么各向同性的超弹性响应就是@f[
 	\mathbf{S}
 		= 2 \dfrac{\partial \Psi(\mathbf{C})}{\partial \mathbf{C}} \, .
-@f]
-If the Helmholtz free energy depends on the left Cauchy-Green tensor $\mathbf{b}$ then the isotropic hyperelastic response is
-@f[
+@f] 如果Helmholtz自由能取决于左Cauchy-Green张量 $\mathbf{b}$ ，那么各向同性的超弹性响应就是@f[
 	\boldsymbol{\tau}
 		= 2 \dfrac{\partial \Psi(\mathbf{b})}{\partial \mathbf{b}} \mathbf{b}
 		=  2 \mathbf{b} \dfrac{\partial \Psi(\mathbf{b})}{\partial \mathbf{b}} \, .
-@f]
+@f] 。
 
-Following the multiplicative decomposition of the deformation gradient, the Helmholtz free energy can be decomposed as
-@f[
+按照变形梯度的乘法分解，亥姆霍兹自由能可以分解为@f[
 	\Psi(\mathbf{b}) = \Psi_{\text{vol}}(J) + \Psi_{\text{iso}}(\overline{\mathbf{b}}) \, .
-@f]
-Similarly, the Kirchhoff stress can be decomposed into volumetric and isochoric parts as $\boldsymbol{\tau} = \boldsymbol{\tau}_{\text{vol}} + \boldsymbol{\tau}_{\text{iso}}$ where:
+@f] 同样，基尔霍夫应力可以分解为体积部分和等熵部分 $\boldsymbol{\tau} = \boldsymbol{\tau}_{\text{vol}} + \boldsymbol{\tau}_{\text{iso}}$  ，其中。
+
 @f{align*}
 	\boldsymbol{\tau}_{\text{vol}} &=
 		2 \mathbf{b} \dfrac{\partial \Psi_{\textrm{vol}}(J)}{\partial \mathbf{b}}
@@ -344,73 +226,52 @@ Similarly, the Kirchhoff stress can be decomposed into volumetric and isochoric 
 		2 \mathbf{b} \dfrac{\partial \Psi_{\textrm{iso}} (\overline{\mathbf{b}})}{\partial \mathbf{b}}
 		\\
 		&= \underbrace{( \mathcal{I} - \dfrac{1}{3} \mathbf{I} \otimes \mathbf{I})}_{\mathbb{P}} : \overline{\boldsymbol{\tau}} \, ,
-@f}
-where
-$p \dealcoloneq \dfrac{\partial \Psi_{\text{vol}}(J)}{\partial J}$ is the pressure response.
-$\mathbb{P}$ is the projection tensor which provides the deviatoric operator in the Eulerian setting.
-The fictitious Kirchhoff stress tensor $\overline{\boldsymbol{\tau}}$ is defined by
-@f[
+@f} 
+
+其中 $p \dealcoloneq \dfrac{\partial \Psi_{\text{vol}}(J)}{\partial J}$ 是压力响应。  $\mathbb{P}$ 是投影张量，它提供了欧拉环境下的偏离算子。虚构的基尔霍夫应力张量 $\overline{\boldsymbol{\tau}}$ 由@f[
 	\overline{\boldsymbol{\tau}}
 		\dealcoloneq 2 \overline{\mathbf{b}} \dfrac{\partial \Psi_{\textrm{iso}}(\overline{\mathbf{b}})}{\partial \overline{\mathbf{b}}} \, .
-@f]
+@f]定义。
 
 
-@note The pressure response as defined above differs from the widely-used definition of the
-pressure in solid mechanics as
-$p = - 1/3 \textrm{tr} \boldsymbol{\sigma} = - 1/3 J^{-1} \textrm{tr} \boldsymbol{\tau}$.
-Here $p$ is the hydrostatic pressure.
-We make use of the pressure response throughout this tutorial (although we refer to it as the pressure).
+
+
+  @note  以上定义的压力响应与固体力学中广泛使用的压力定义不同，为  $p = - 1/3 \textrm{tr} \boldsymbol{\sigma} = - 1/3 J^{-1} \textrm{tr} \boldsymbol{\tau}$  。这里 $p$ 是静水压力。我们在本教程中使用压力响应（尽管我们把它称为压力）。
 
 <a name="NeoHookeanmaterials"></a><h4> Neo-Hookean materials </h4>
 
 
-The Helmholtz free energy corresponding to a compressible <a href="http://en.wikipedia.org/wiki/Neo-Hookean_solid">neo-Hookean material</a> is given by
-@f[
+与可压缩<a href="http://en.wikipedia.org/wiki/Neo-Hookean_solid">neo-Hookean material</a>相对应的亥姆霍兹自由能由@f[
     \Psi \equiv
         \underbrace{\kappa [ \mathcal{G}(J) ] }_{\Psi_{\textrm{vol}}(J)}
         + \underbrace{\bigl[c_1 [ \overline{I}_1 - 3] \bigr]}_{\Psi_{\text{iso}}(\overline{\mathbf{b}})} \, ,
-@f]
-where $\kappa \dealcoloneq \lambda + 2/3 \mu$ is the bulk modulus ($\lambda$ and $\mu$ are the Lam&eacute; parameters)
-and $\overline{I}_1 \dealcoloneq \textrm{tr}\ \overline{\mathbf{b}}$.
-The function $\mathcal{G}(J)$ is required to be strictly convex and satisfy the condition $\mathcal{G}(1) = 0$,
-among others, see Holzapfel (2001) for further details.
-In this work $\mathcal{G} \dealcoloneq \frac{1}{4} [ J^2 - 1 - 2\textrm{ln}J ]$.
+@f]给出，其中 $\kappa \dealcoloneq \lambda + 2/3 \mu$ 是体积模量（ $\lambda$ 和 $\mu$ 是Lam&eacute; 参数）和 $\overline{I}_1 \dealcoloneq \textrm{tr}\ \overline{\mathbf{b}}$  。函数 $\mathcal{G}(J)$ 被要求是严格凸的，并满足 $\mathcal{G}(1) = 0$ 等条件，进一步细节见Holzapfel（2001）。在这项工作中  $\mathcal{G} \dealcoloneq \frac{1}{4} [ J^2 - 1 - 2\textrm{ln}J ]$  。
 
-Incompressibility imposes the isochoric constraint that $J=1$ for all motions $\boldsymbol{\varphi}$.
-The Helmholtz free energy corresponding to an incompressible neo-Hookean material is given by
-@f[
+不可压缩性对所有运动施加了等时性约束  $J=1$   $\boldsymbol{\varphi}$  。与不可压缩的新胡克材料相对应的亥姆霍兹自由能由 @f[
     \Psi \equiv
         \underbrace{\bigl[ c_1 [ I_1 - 3] \bigr] }_{\Psi_{\textrm{iso}}(\mathbf{b})} \, ,
-@f]
-where $ I_1 \dealcoloneq \textrm{tr}\mathbf{b} $.
-Thus, the incompressible response is obtained by removing the volumetric component from the compressible free energy and enforcing $J=1$.
+@f] 得到，其中  $ I_1 \dealcoloneq \textrm{tr}\mathbf{b} $  。因此，通过从可压缩自由能中去除体积分量并执行  $J=1$  得到不可压缩响应。
 
 
 <a name="Elasticitytensors"></a><h3>Elasticity tensors</h3>
 
 
-We will use a Newton-Raphson strategy to solve the nonlinear boundary value problem.
-Thus, we will need to linearise the constitutive relations.
+我们将使用Newton-Raphson策略来解决非线性边界值问题。因此，我们将需要线性化构成关系。
 
-The fourth-order elasticity tensor in the material description is defined by
-@f[
+材料描述中的四阶弹性张量定义为@f[
 	\mathfrak{C}
 		= 2\dfrac{\partial \mathbf{S}(\mathbf{C})}{\partial \mathbf{C}}
 		= 4\dfrac{\partial^2 \Psi(\mathbf{C})}{\partial \mathbf{C} \partial \mathbf{C}} \, .
-@f]
-The fourth-order elasticity tensor in the spatial description $\mathfrak{c}$ is obtained from the push-forward of $\mathfrak{C}$ as
-@f[
+@f] 空间描述中的四阶弹性张量 $\mathfrak{c}$ 由 $\mathfrak{C}$ 的前推得到@f[
 	\mathfrak{c} = J^{-1} \chi_{*}(\mathfrak{C})
 		\qquad \text{and thus} \qquad
 	J\mathfrak{c} = 4 \mathbf{b} \dfrac{\partial^2 \Psi(\mathbf{b})} {\partial \mathbf{b} \partial \mathbf{b}} \mathbf{b}	\, .
-@f]
-The fourth-order elasticity tensors (for hyperelastic materials) possess both major and minor symmetries.
+@f] 四阶弹性张量（对于超弹性材料）拥有主要和次要对称性。
 
-The fourth-order spatial elasticity tensor can be written in the following decoupled form:
-@f[
+四阶空间弹性张量可以写成以下解耦形式。@f[
 	\mathfrak{c} = \mathfrak{c}_{\text{vol}} + \mathfrak{c}_{\text{iso}} \, ,
-@f]
-where
+@f] 其中 
+
 @f{align*}
 	J \mathfrak{c}_{\text{vol}}
 		&= 4 \mathbf{b} \dfrac{\partial^2 \Psi_{\text{vol}}(J)} {\partial \mathbf{b} \partial \mathbf{b}} \mathbf{b}
@@ -424,51 +285,44 @@ where
 		\\
 		&= \mathbb{P} : \mathfrak{\overline{c}} : \mathbb{P}
 			+ \dfrac{2}{3}[\overline{\boldsymbol{\tau}}:\mathbf{I}]\mathbb{P}
+
+
 			- \dfrac{2}{3}[ \mathbf{I}\otimes\boldsymbol{\tau}_{\text{iso}}
 				+ \boldsymbol{\tau}_{\text{iso}} \otimes \mathbf{I} ] \, ,
-@f}
-where the fictitious elasticity tensor $\overline{\mathfrak{c}}$ in the spatial description is defined by
-@f[
+@f} 
+
+其中空间描述中的虚构弹性张量 $\overline{\mathfrak{c}}$ 由@f[
 	\overline{\mathfrak{c}}
 		= 4 \overline{\mathbf{b}} \dfrac{ \partial^2 \Psi_{\textrm{iso}}(\overline{\mathbf{b}})} {\partial \overline{\mathbf{b}} \partial \overline{\mathbf{b}}} \overline{\mathbf{b}} \, .
-@f]
+@f]定义。
 
 <a name="Principleofstationarypotentialenergyandthethreefieldformulation"></a><h3>Principle of stationary potential energy and the three-field formulation</h3>
 
 
-The total potential energy of the system $\Pi$ is the sum of the internal and external potential energies, denoted $\Pi_{\textrm{int}}$ and $\Pi_{\textrm{ext}}$, respectively.
-We wish to find the equilibrium configuration by minimising the potential energy.
+系统的总势能 $\Pi$ 是内部和外部势能之和，分别表示为 $\Pi_{\textrm{int}}$ 和 $\Pi_{\textrm{ext}}$  。我们希望通过最小化势能找到平衡配置。
 
-As mentioned above, we adopt a three-field formulation.
-We denote the set of primary unknowns by
-$\mathbf{\Xi} \dealcoloneq \{ \mathbf{u}, \widetilde{p}, \widetilde{J} \}$.
-The independent kinematic variable $\widetilde{J}$ enters the formulation as a constraint on $J$ enforced by the Lagrange multiplier $\widetilde{p}$ (the pressure, as we shall see).
+如上所述，我们采用了三场公式。我们用 $\mathbf{\Xi} \dealcoloneq \{ \mathbf{u}, \widetilde{p}, \widetilde{J} \}$ 表示主要未知数的集合。独立运动变量 $\widetilde{J}$ 作为对 $J$ 的约束进入公式，由拉格朗日乘数 $\widetilde{p}$ （压力，我们将看到）执行。
 
-The three-field variational principle used here is given by
-@f[
+这里使用的三场变分原理由@f[
 	\Pi(\mathbf{\Xi}) \dealcoloneq \int_\Omega \bigl[
 		\Psi_{\textrm{vol}}(\widetilde{J})
 		+ \widetilde{p}\,[J(\mathbf{u}) - \widetilde{J}]
 		+ \Psi_{\textrm{iso}}(\overline{\mathbf{b}}(\mathbf{u}))
 		\bigr] \textrm{d}v
 	+ 	\Pi_{\textrm{ext}} \, ,
-@f]
-where the external potential is defined by
-@f[
+@f]给出，其中外部势由@f[
 	\Pi_{\textrm{ext}}
 		= - \int_\Omega \mathbf{b}^\text{p} \cdot \mathbf{u}~\textrm{d}v
+
+
 			- \int_{\partial \Omega_{\sigma}} \mathbf{t}^\text{p} \cdot \mathbf{u}~\textrm{d}a \, .
-@f]
-The boundary of the current configuration  $\partial \Omega$ is composed into two parts as
-$\partial \Omega = \partial \Omega_{\mathbf{u}} \cup \partial \Omega_{\sigma}$,
-where
-$\partial \Omega_{\mathbf{u}} \cap \partial \Omega_{\boldsymbol{\sigma}} = \emptyset$.
-The prescribed Cauchy traction, denoted $\mathbf{t}^\text{p}$, is applied to $ \partial \Omega_{\boldsymbol{\sigma}}$ while the motion is prescribed on the remaining portion of the boundary $\partial \Omega_{\mathbf{u}}$.
-The body force per unit current volume is denoted $\mathbf{b}^\text{p}$.
+@f]定义。 当前配置 $\partial \Omega$ 的边界由两部分组成： $\partial \Omega = \partial \Omega_{\mathbf{u}} \cup \partial \Omega_{\sigma}$  ，其中 $\partial \Omega_{\mathbf{u}} \cap \partial \Omega_{\boldsymbol{\sigma}} = \emptyset$  。规定的Cauchy牵引力，表示为  $\mathbf{t}^\text{p}$  ，被应用于  $ \partial \Omega_{\boldsymbol{\sigma}}$  ，而运动被规定在边界的其余部分  $\partial \Omega_{\mathbf{u}}$  。每单位电流体积的体力表示为  $\mathbf{b}^\text{p}$  。
 
 
 
-The stationarity of the potential follows as
+
+势的静止性如下 
+
 @f{align*}
 	R(\mathbf\Xi;\delta \mathbf{\Xi})
 		&= D_{\delta \mathbf{\Xi}}\Pi(\mathbf{\Xi})
@@ -482,94 +336,84 @@ The stationarity of the potential follows as
             +  \boldsymbol{\tau}_{\textrm{iso}}]
 			+ \delta \widetilde{p}\, [ J(\mathbf{u}) - \widetilde{J}]
 			+ \delta \widetilde{J}\left[ \dfrac{\textrm{d} \Psi_{\textrm{vol}}(\widetilde{J})}{\textrm{d} \widetilde{J}}
+
+
             -\widetilde{p}\right]
 			\right]~\textrm{d}V
 			\\
 		&\quad - \int_{\Omega_0} \delta \mathbf{u} \cdot \mathbf{B}^\text{p}~\textrm{d}V
+
+
 			- \int_{\partial \Omega_{0,\boldsymbol{\sigma}}} \delta \mathbf{u} \cdot \mathbf{T}^\text{p}~\textrm{d}A
 			\\
 		&=0 \, ,
-@f}
-for all virtual displacements $\delta \mathbf{u} \in H^1(\Omega)$ subject to the constraint that $\delta \mathbf{u} = \mathbf{0}$ on $\partial \Omega_{\mathbf{u}}$, and all virtual pressures $\delta \widetilde{p} \in L^2(\Omega)$ and virtual dilatations $\delta \widetilde{J} \in L^2(\Omega)$.
+@f} 
 
-One should note that the definitions of the volumetric Kirchhoff stress in the three field formulation
-$\boldsymbol{\tau}_{\textrm{vol}} \equiv \widetilde{p} J \mathbf{I}$
- and the subsequent volumetric tangent differs slightly from the general form given in the section on hyperelastic materials where
-$\boldsymbol{\tau}_{\textrm{vol}} \equiv p J\mathbf{I}$.
-This is because the pressure $\widetilde{p}$ is now a primary field as opposed to a constitutively derived quantity.
-One needs to carefully distinguish between the primary fields and those obtained from the constitutive relations.
+对于所有虚拟位移 $\delta \mathbf{u} \in H^1(\Omega)$ ，受 $\delta \mathbf{u} = \mathbf{0}$ 对 $\partial \Omega_{\mathbf{u}}$ 的约束，以及所有虚拟压力 $\delta \widetilde{p} \in L^2(\Omega)$ 和虚拟膨胀 $\delta \widetilde{J} \in L^2(\Omega)$ 。
 
-@note Although the variables are all expressed in terms of spatial quantities, the domain of integration is the initial configuration.
-This approach is called a <em> total-Lagrangian formulation </em>.
-The approach given in step-18, where the domain of integration is the current configuration, could be called an <em> updated Lagrangian formulation </em>.
-The various merits of these two approaches are discussed widely in the literature.
-It should be noted however that they are equivalent.
+应该注意的是，三场公式中的体积基尔霍夫应力的定义  $\boldsymbol{\tau}_{\textrm{vol}} \equiv \widetilde{p} J \mathbf{I}$  和随后的体积正切与超弹性材料一节中给出的一般形式略有不同，其中  $\boldsymbol{\tau}_{\textrm{vol}} \equiv p J\mathbf{I}$  。这是因为压力 $\widetilde{p}$ 现在是一个主要的场，而不是一个构成性的派生量。我们需要仔细区分主要场和从构成关系中得到的场。
+
+  @note 尽管变量都是以空间量来表示的，但积分的领域是初始配置。这种方法被称为  <em>  总拉格朗日公式  </em>  。在 step-18 中给出的方法，积分域是当前配置，可称为 <em> 更新的拉格朗日公式  </em>  。这两种方法的各种优点在文献中被广泛讨论。然而，应该指出的是，它们是等价的。
 
 
-The Euler-Lagrange equations corresponding to the residual are:
+对应于残差的欧拉-拉格朗日方程是。
+
 @f{align*}
 	&\textrm{div}\ \boldsymbol{\sigma} + \mathbf{b}^\text{p} = \mathbf{0} && \textrm{[equilibrium]}
 		\\
 	&J(\mathbf{u}) = \widetilde{J} 		&& \textrm{[dilatation]}
 		\\
 	&\widetilde{p} = \dfrac{\textrm{d} \Psi_{\textrm{vol}}(\widetilde{J})}{\textrm{d} \widetilde{J}} && \textrm{[pressure]} \, .
-@f}
-The first equation is the (quasi-static) equilibrium equation in the spatial setting.
-The second is the constraint that $J(\mathbf{u}) = \widetilde{J}$.
-The third is the definition of the pressure $\widetilde{p}$.
+@f} 
 
-@note The simplified single-field derivation ($\mathbf{u}$ is the only primary variable) below makes it clear how we transform the limits of integration to the reference domain:
+第一个方程是空间环境中的（准静态）平衡方程。第二个是约束条件：  $J(\mathbf{u}) = \widetilde{J}$  。第三是压力的定义  $\widetilde{p}$  。
+
+  @note  下面简化的单场推导（ $\mathbf{u}$ 是唯一的主变量）使我们清楚地知道如何将积分的极限转化为参考域。
+
 @f{align*}
 \int_{\Omega}\delta \mathbf{u} \cdot [\textrm{div}\ \boldsymbol{\sigma} + \mathbf{b}^\text{p}]~\mathrm{d}v
 &=
 \int_{\Omega} [-\mathrm{grad}\delta \mathbf{u}:\boldsymbol{\sigma} + \delta \mathbf{u} \cdot\mathbf{b}^\text{p}]~\mathrm{d}v
   + \int_{\partial \Omega} \delta \mathbf{u} \cdot \mathbf{t}^\text{p}~\mathrm{d}a \\
 &=
+
+
 - \int_{\Omega_0} \mathrm{grad}\delta \mathbf{u}:\boldsymbol{\tau}~\mathrm{d}V
 + \int_{\Omega_0} \delta \mathbf{u} \cdot J\mathbf{b}^\text{p}~\mathrm{d}V
  + \int_{\partial \Omega_0} \delta \mathbf{u} \cdot \mathbf{T}^\text{p}~\mathrm{d}A \\
 &=
+
+
 - \int_{\Omega_0} \mathrm{grad}\delta \mathbf{u}:\boldsymbol{\tau}~\mathrm{d}V
 + \int_{\Omega_0} \delta \mathbf{u} \cdot \mathbf{B}^\text{p}~\mathrm{d}V
  + \int_{\partial \Omega_{0,\sigma}} \delta \mathbf{u} \cdot \mathbf{T}^\text{p}~\mathrm{d}A \\
 &=
+
+
 - \int_{\Omega_0} [\mathrm{grad}\delta\mathbf{u}]^{\text{sym}} :\boldsymbol{\tau}~\mathrm{d}V
 + \int_{\Omega_0} \delta \mathbf{u} \cdot \mathbf{B}^\text{p}~\mathrm{d}V
  + \int_{\partial \Omega_{0,\sigma}} \delta \mathbf{u} \cdot \mathbf{T}^\text{p}~\mathrm{d}A \, ,
-@f}
-where
-$[\mathrm{grad}\delta\mathbf{u}]^{\text{sym}} = 1/2[ \mathrm{grad}\delta\mathbf{u} + [\mathrm{grad}\delta\mathbf{u}]^T] $.
+@f} 
 
-We will use an iterative Newton-Raphson method to solve the nonlinear residual equation $R$.
-For the sake of simplicity we assume dead loading, i.e. the loading does not change due to the deformation.
+其中 $[\mathrm{grad}\delta\mathbf{u}]^{\text{sym}} = 1/2[ \mathrm{grad}\delta\mathbf{u} + [\mathrm{grad}\delta\mathbf{u}]^T] $  。
 
-The change in a quantity between the known state at $t_{\textrm{n}-1}$
-and the currently unknown state at $t_{\textrm{n}}$ is denoted
-$\varDelta \{ \bullet \} = { \{ \bullet \} }^{\textrm{n}} - { \{ \bullet \} }^{\textrm{n-1}}$.
-The value of a quantity at the current iteration $\textrm{i}$ is denoted
-${ \{ \bullet \} }^{\textrm{n}}_{\textrm{i}} = { \{ \bullet \} }_{\textrm{i}}$.
-The incremental change between iterations $\textrm{i}$ and $\textrm{i}+1$ is denoted
-$d \{ \bullet \} \dealcoloneq \{ \bullet \}_{\textrm{i}+1} - \{ \bullet \}_{\textrm{i}}$.
+我们将使用迭代牛顿-拉弗森方法来解决非线性残差方程  $R$  。为了简单起见，我们假设死荷载，即荷载不因变形而改变。
 
-Assume that the state of the system is known for some iteration $\textrm{i}$.
-The linearised approximation to nonlinear governing equations to be solved using the  Newton-Raphson method is:
-Find $d \mathbf{\Xi}$ such that
-@f[
+在 $t_{\textrm{n}-1}$ 的已知状态和 $t_{\textrm{n}}$ 的当前未知状态之间的一个量的变化被表示为 $\varDelta \{ \bullet \} = { \{ \bullet \} }^{\textrm{n}} - { \{ \bullet \} }^{\textrm{n-1}}$  。在当前迭代 $\textrm{i}$ 的一个数量的值表示为  ${ \{ \bullet \} }^{\textrm{n}}_{\textrm{i}} = { \{ \bullet \} }_{\textrm{i}}$  。迭代  $\textrm{i}$  和  $\textrm{i}+1$  之间的增量变化表示为  $d \{ \bullet \} \dealcoloneq \{ \bullet \}_{\textrm{i}+1} - \{ \bullet \}_{\textrm{i}}$  。
+
+假设系统的状态在某个迭代中是已知的  $\textrm{i}$  。使用牛顿-拉弗森方法解决非线性治理方程的线性化近似为：找到 $d \mathbf{\Xi}$ ，使@f[
 	R(\mathbf{\Xi}_{\mathsf{i}+1}) =
 		R(\mathbf{\Xi}_{\mathsf{i}})
 		+ D^2_{d \mathbf{\Xi}, \delta \mathbf{\Xi}} \Pi(\mathbf{\Xi_{\mathsf{i}}}) \cdot d \mathbf{\Xi} \equiv 0 \, ,
-@f]
-then set
-$\mathbf{\Xi}_{\textrm{i}+1} = \mathbf{\Xi}_{\textrm{i}}
-+ d \mathbf{\Xi}$.
-The tangent is given by
+@f]，然后设置 $\mathbf{\Xi}_{\textrm{i}+1} = \mathbf{\Xi}_{\textrm{i}}
++ d \mathbf{\Xi}$  。正切线由 
 
 @f[
 	D^2_{d \mathbf{\Xi}, \delta \mathbf{\Xi}} \Pi( \mathbf{\Xi}_{\mathsf{i}} )
 		= D_{d \mathbf{\Xi}} R( \mathbf{\Xi}_{\mathsf{i}}; \delta \mathbf{\Xi})
 		=: K(\mathbf{\Xi}_{\mathsf{i}}; d \mathbf{\Xi}, \delta \mathbf{\Xi}) \, .
-@f]
-Thus,
+@f] 因此。
+
 @f{align*}
  	K(\mathbf{\Xi}_{\mathsf{i}}; d \mathbf{\Xi}, \delta \mathbf{\Xi})
  		&=
@@ -580,8 +424,10 @@ Thus,
  			 \\
  			 	&\quad +
  			  D_{d \widetilde{J}} R( \mathbf{\Xi}_{\mathsf{i}}; \delta \mathbf{\Xi})  d \widetilde{J} \, ,
-@f}
-where
+@f} 
+
+其中 
+
 @f{align*}
 	D_{d \mathbf{u}} R( \mathbf{\Xi}; \delta \mathbf{\Xi})
  	&=
@@ -597,14 +443,19 @@ where
  	D_{d \widetilde{p}} R( \mathbf{\Xi}; \delta \mathbf{\Xi})
  	&=
  	\int_{\Omega_0} \textrm{grad}\ \delta \mathbf{u} : J \mathbf{I} d \widetilde{p} ~\textrm{d}V
+
+
  		-  \int_{\Omega_0} \delta \widetilde{J} d \widetilde{p}  ~\textrm{d}V \, ,
  	\\
  	D_{d \widetilde{J}} R( \mathbf{\Xi}; \delta \mathbf{\Xi})
  	&=  -\int_{\Omega_0} \delta \widetilde{p} d \widetilde{J}~\textrm{d}V
  	 + \int_{\Omega_0} \delta \widetilde{J}  \dfrac{\textrm{d}^2 \Psi_{\textrm{vol}}(\widetilde{J})}{\textrm{d} \widetilde{J}\textrm{d}\widetilde{J}} d \widetilde{J} ~\textrm{d}V \, .
-@f}
+@f} 
 
-Note that the following terms are termed the geometrical stress and  the material contributions to the tangent matrix:
+
+
+注意，以下条款被称为切线矩阵的几何应力和材料贡献。
+
 @f{align*}
 & \int_{\Omega_0} \textrm{grad}\ \delta \mathbf{u} :
  			\textrm{grad}\ d \mathbf{u} [\boldsymbol{\tau}_{\textrm{iso}} +  \boldsymbol{\tau}_{\textrm{vol}}]~\textrm{d}V
@@ -614,38 +465,25 @@ Note that the following terms are termed the geometrical stress and  the materia
  			[J\mathfrak{c}_{\textrm{vol}} + J\mathfrak{c}_{\textrm{iso}}] :\textrm{grad}\ d \mathbf{u}
  		~\textrm{d}V
  		&& \quad {[\textrm{Material}]} \, .
-@f}
+@f} 
+
+
 
 
 <a name="Discretizationofgoverningequations"></a><h3> Discretization of governing equations </h3>
 
 
-The three-field formulation used here is effective for quasi-incompressible materials,
-that is where $\nu \rightarrow 0.5$ (where $\nu$ is <a
-href="http://en.wikipedia.org/wiki/Poisson's_ratio">Poisson's ratio</a>), subject to a good choice of the interpolation fields
-for $\mathbf{u},~\widetilde{p}$ and $\widetilde{J}$.
-Typically a choice of $Q_n \times DGPM_{n-1} \times DGPM_{n-1}$ is made.
-Here $DGPM$ is the FE_DGPMonomial class.
-A popular choice is $Q_1 \times DGPM_0 \times DGPM_0$ which is known as the mean dilatation method (see Hughes (2000) for an intuitive discussion).
-This code can accommodate a $Q_n \times DGPM_{n-1} \times DGPM_{n-1}$ formulation.
-The discontinuous approximation
-allows $\widetilde{p}$ and $\widetilde{J}$ to be condensed out
-and a classical displacement based method is recovered.
+这里使用的三场公式对准不可压缩材料是有效的，即在 $\nu \rightarrow 0.5$ （其中 $\nu$ 是<a
+href="http://en.wikipedia.org/wiki/Poisson's_ratio">Poisson's ratio</a>）的情况下，对 $\mathbf{u},~\widetilde{p}$ 和 $\widetilde{J}$ 的插值场进行良好选择。通常情况下，选择 $Q_n \times DGPM_{n-1} \times DGPM_{n-1}$ 。这里 $DGPM$ 是FE_DGPMonomial类。一个流行的选择是 $Q_1 \times DGPM_0 \times DGPM_0$ ，它被称为平均扩张法（见Hughes（2000）的直观讨论）。这个代码可以容纳一个 $Q_n \times DGPM_{n-1} \times DGPM_{n-1}$ 的表述。不连续的近似允许 $\widetilde{p}$ 和 $\widetilde{J}$ 被浓缩出来，并恢复了基于位移的经典方法。
 
-For fully-incompressible materials $\nu = 0.5$ and the three-field formulation will still exhibit
-locking behavior.
-This can be overcome by introducing an additional constraint into the free energy of the form
-$\int_{\Omega_0} \Lambda [ \widetilde{J} - 1]~\textrm{d}V$.
-Here $\Lambda$ is a Lagrange multiplier to enforce the isochoric constraint.
-For further details see Miehe (1994).
+对于完全不可压缩的材料 $\nu = 0.5$ 和三场公式仍将表现出锁定行为。这可以通过在自由能中引入一个额外的约束条件来克服  $\int_{\Omega_0} \Lambda [ \widetilde{J} - 1]~\textrm{d}V$  。这里 $\Lambda$ 是一个拉格朗日乘数，用于强制执行等时约束条件。进一步的细节见Miehe (1994)。
 
-The linearised problem can be written as
-@f[
+线性化问题可以写成@f[
 	\mathbf{\mathsf{K}}( \mathbf{\Xi}_{\textrm{i}}) d\mathbf{\Xi}
 	=
 	\mathbf{ \mathsf{F}}(\mathbf{\Xi}_{\textrm{i}})
-@f]
-where
+@f]，其中 
+
 @f{align*}
 		\underbrace{\begin{bmatrix}
 			\mathbf{\mathsf{K}}_{uu}	&	\mathbf{\mathsf{K}}_{u\widetilde{p}}	& \mathbf{0}
@@ -661,8 +499,14 @@ where
 		\end{bmatrix}}_{d \mathbf{\Xi}}
         =
         \underbrace{\begin{bmatrix}
+
+
 			-\mathbf{\mathsf{R}}_{u}(\mathbf{u}_{\textrm{i}}) \\
+
+
             -\mathbf{\mathsf{R}}_{\widetilde{p}}(\widetilde{p}_{\textrm{i}}) \\
+
+
            -\mathbf{\mathsf{R}}_{\widetilde{J}}(\widetilde{J}_{\textrm{i}})
 		\end{bmatrix}}_{ -\mathbf{\mathsf{R}}(\mathbf{\Xi}_{\textrm{i}}) }
 =
@@ -671,63 +515,67 @@ where
             \mathbf{\mathsf{F}}_{\widetilde{p}}(\widetilde{p}_{\textrm{i}}) \\
            \mathbf{\mathsf{F}}_{\widetilde{J}}(\widetilde{J}_{\textrm{i}})
 		\end{bmatrix}}_{ \mathbf{\mathsf{F}}(\mathbf{\Xi}_{\textrm{i}}) } \, .
-@f}
+@f} 
 
-There are no derivatives of the pressure and dilatation (primary) variables present in the formulation.
-Thus the discontinuous finite element interpolation of the pressure and dilatation yields a block
-diagonal matrix for
-$\mathbf{\mathsf{K}}_{\widetilde{p}\widetilde{J}}$,
-$\mathbf{\mathsf{K}}_{\widetilde{J}\widetilde{p}}$ and
-$\mathbf{\mathsf{K}}_{\widetilde{J}\widetilde{J}}$.
-Therefore we can easily express the fields $\widetilde{p}$ and $\widetilde{J}$ on each cell simply
-by inverting a local matrix and multiplying it by the local right hand
-side. We can then insert the result into the remaining equations and recover
-a classical displacement-based method.
-In order to condense out the pressure and dilatation contributions at the element level we need the following results:
+
+
+该公式中没有压力和膨胀（主要）变量的导数存在。因此，压力和膨胀的不连续有限元插值产生了 $\mathbf{\mathsf{K}}_{\widetilde{p}\widetilde{J}}$ 、 $\mathbf{\mathsf{K}}_{\widetilde{J}\widetilde{p}}$ 和 $\mathbf{\mathsf{K}}_{\widetilde{J}\widetilde{J}}$ 的块对角矩阵。因此，我们可以很容易地表达每个单元上的场 $\widetilde{p}$ 和 $\widetilde{J}$ ，只需倒置一个局部矩阵并乘以局部右手。然后我们可以将结果插入其余的方程中，并恢复一个经典的基于位移的方法。为了在元素水平上凝结出压力和膨胀的贡献，我们需要以下结果。
+
 @f{align*}
 		d \widetilde{\mathbf{\mathsf{p}}}
 		& = \mathbf{\mathsf{K}}_{\widetilde{J}\widetilde{p}}^{-1} \bigl[
 			 \mathbf{\mathsf{F}}_{\widetilde{J}}
+
+
 			 - \mathbf{\mathsf{K}}_{\widetilde{J}\widetilde{J}} d \widetilde{\mathbf{\mathsf{J}}} \bigr]
 			\\
 		d \widetilde{\mathbf{\mathsf{J}}}
 		& = \mathbf{\mathsf{K}}_{\widetilde{p}\widetilde{J}}^{-1} \bigl[
 			\mathbf{\mathsf{F}}_{\widetilde{p}}
+
+
 			- \mathbf{\mathsf{K}}_{\widetilde{p}u} d \mathbf{\mathsf{u}}
 			\bigr]
 		\\
 		 \Rightarrow d \widetilde{\mathbf{\mathsf{p}}}
 		&=  \mathbf{\mathsf{K}}_{\widetilde{J}\widetilde{p}}^{-1} \mathbf{\mathsf{F}}_{\widetilde{J}}
+
+
 		- \underbrace{\bigl[\mathbf{\mathsf{K}}_{\widetilde{J}\widetilde{p}}^{-1} \mathbf{\mathsf{K}}_{\widetilde{J}\widetilde{J}}
 		\mathbf{\mathsf{K}}_{\widetilde{p}\widetilde{J}}^{-1}\bigr]}_{\overline{\mathbf{\mathsf{K}}}}\bigl[ \mathbf{\mathsf{F}}_{\widetilde{p}}
+
+
  		- \mathbf{\mathsf{K}}_{\widetilde{p}u} d \mathbf{\mathsf{u}} \bigr]
-@f}
-and thus
-@f[
+@f} 
+
+因此@f[
 		\underbrace{\bigl[ \mathbf{\mathsf{K}}_{uu} + \overline{\overline{\mathbf{\mathsf{K}}}}~ \bigr]
 		}_{\mathbf{\mathsf{K}}_{\textrm{con}}} d \mathbf{\mathsf{u}}
 		=
         \underbrace{
 		\Bigl[
 		\mathbf{\mathsf{F}}_{u}
+
+
 			- \mathbf{\mathsf{K}}_{u\widetilde{p}} \bigl[ \mathbf{\mathsf{K}}_{\widetilde{J}\widetilde{p}}^{-1} \mathbf{\mathsf{F}}_{\widetilde{J}}
+
+
 			- \overline{\mathbf{\mathsf{K}}}\mathbf{\mathsf{F}}_{\widetilde{p}} \bigr]
 		\Bigr]}_{\mathbf{\mathsf{F}}_{\textrm{con}}}
-@f]
-where
-@f[
+@f]，其中@f[
 		\overline{\overline{\mathbf{\mathsf{K}}}} \dealcoloneq
 			\mathbf{\mathsf{K}}_{u\widetilde{p}} \overline{\mathbf{\mathsf{K}}} \mathbf{\mathsf{K}}_{\widetilde{p}u} \, .
-@f]
-Note that due to the choice of $\widetilde{p}$ and $\widetilde{J}$ as discontinuous at the element level, all matrices that need to be inverted are defined at the element level.
+@f]注意，由于 $\widetilde{p}$ 和 $\widetilde{J}$ 被选择为元素级的不连续，所有需要反转的矩阵都在元素级定义。
 
-The procedure to construct the various contributions is as follows:
-- Construct $\mathbf{\mathsf{K}}$.
-- Form $\mathbf{\mathsf{K}}_{\widetilde{p}\widetilde{J}}^{-1}$ for element and store where $\mathbf{\mathsf{K}}_{\widetilde{p}\widetilde{J}}$ was stored in $\mathbf{\mathsf{K}}$.
-- Form $\overline{\overline{\mathbf{\mathsf{K}}}}$ and add to $\mathbf{\mathsf{K}}_{uu}$ to get $\mathbf{\mathsf{K}}_{\textrm{con}}$
-- The modified system matrix is called ${\mathbf{\mathsf{K}}}_{\textrm{store}}$.
-  That is
-  @f[
+构建各种贡献的程序如下。
+
+- 构建  $\mathbf{\mathsf{K}}$  。
+
+- 形成 $\mathbf{\mathsf{K}}_{\widetilde{p}\widetilde{J}}^{-1}$ 的元素，并存储在 $\mathbf{\mathsf{K}}_{\widetilde{p}\widetilde{J}}$ 被存储的地方 $\mathbf{\mathsf{K}}$  。
+
+- 形成 $\overline{\overline{\mathbf{\mathsf{K}}}}$ 并与 $\mathbf{\mathsf{K}}_{uu}$ 相加，得到 $\mathbf{\mathsf{K}}_{\textrm{con}}$  。 
+
+- 修改后的系统矩阵被称为  ${\mathbf{\mathsf{K}}}_{\textrm{store}}$  。  也就是@f[
         \mathbf{\mathsf{K}}_{\textrm{store}}
 \dealcoloneq
         \begin{bmatrix}
@@ -737,4220 +585,4344 @@ The procedure to construct the various contributions is as follows:
 			\\
 			\mathbf{0}	& 	\mathbf{\mathsf{K}}_{\widetilde{J}\widetilde{p}}		& \mathbf{\mathsf{K}}_{\widetilde{J}\widetilde{J}}
 		\end{bmatrix} \, .
-  @f]
+  @f] 
 
 
 <a name="Thematerialclass"></a><h3> The material class </h3>
 
 
-A good object-oriented design of a Material class would facilitate the extension of this tutorial to a wide range of material types.
-In this tutorial we simply have one Material class named Material_Compressible_Neo_Hook_Three_Field.
-Ideally this class would derive from a class HyperelasticMaterial which would derive from the base class Material.
-The three-field nature of the formulation used here also complicates the matter.
+一个好的面向对象的材料类的设计将有利于本教程扩展到广泛的材料类型。在本教程中，我们只有一个名为Material_Compressible_Neo_Hook_Three_Field的材料类。理想情况下，这个类会派生自超弹性材料（HyperelasticMaterial），而超弹性材料会派生自基类Material。这里使用的三场性质的表述也使问题复杂化。
 
-The Helmholtz free energy function for the three field formulation is $\Psi = \Psi_\text{vol}(\widetilde{J}) + \Psi_\text{iso}(\overline{\mathbf{b}})$.
-The isochoric part of the Kirchhoff stress ${\boldsymbol{\tau}}_{\text{iso}}(\overline{\mathbf{b}})$ is identical to that obtained using a one-field formulation for a hyperelastic material.
-However, the volumetric part of the free energy is now a function of the primary variable $\widetilde{J}$.
-Thus, for a three field formulation the constitutive response for the volumetric part of the Kirchhoff stress ${\boldsymbol{\tau}}_{\text{vol}}$ (and the tangent) is not given by the hyperelastic constitutive law as in a one-field formulation.
-One can label the term
-$\boldsymbol{\tau}_{\textrm{vol}} \equiv \widetilde{p} J \mathbf{I}$
-as the volumetric Kirchhoff stress, but the pressure $\widetilde{p}$ is not derived from the free energy; it is a primary field.
+三场公式的亥姆霍兹自由能函数是  $\Psi = \Psi_\text{vol}(\widetilde{J}) + \Psi_\text{iso}(\overline{\mathbf{b}})$  。Kirchhoff应力的等效部分 ${\boldsymbol{\tau}}_{\text{iso}}(\overline{\mathbf{b}})$ 与使用超弹性材料的单场公式得到的完全相同。然而，自由能的体积部分现在是一个主要变量的函数  $\widetilde{J}$  。因此，对于三场公式来说，基尔霍夫应力 ${\boldsymbol{\tau}}_{\text{vol}}$ 的体积部分的构成反应（和正切）并不像单场公式那样由超弹性构成法给出。我们可以将术语 $\boldsymbol{\tau}_{\textrm{vol}} \equiv \widetilde{p} J \mathbf{I}$ 标记为体积Kirchhoff应力，但压力 $\widetilde{p}$ 不是由自由能得出的；它是一个主场。
 
-In order to have a flexible approach, it was decided that the Material_Compressible_Neo_Hook_Three_Field would still be able to calculate and return a volumetric Kirchhoff stress and tangent.
-In order to do this, we choose to store the interpolated primary fields $\widetilde{p}$ and $\widetilde{J}$ in the Material_Compressible_Neo_Hook_Three_Field class associated with the quadrature point.
-This decision should be revisited at a later stage when the tutorial is extended to account for other materials.
+为了有一个灵活的方法，我们决定Material_Compressible_Neo_Hook_Three_Field仍然能够计算并返回体积Kirchhoff应力和切线。为了做到这一点，我们选择在与正交点相关的Material_Compressible_Neo_Hook_Three_Field类中存储插值的主域 $\widetilde{p}$ 和 $\widetilde{J}$ 。这个决定应该在以后的阶段，当教程扩展到考虑其他材料时，再重新审视。
 
 
 <a name="Numericalexample"></a><h3> Numerical example </h3>
 
 
-The numerical example considered here is a nearly-incompressible block under compression.
-This benchmark problem is taken from
-- S. Reese, P. Wriggers, B.D. Reddy (2000),
-  A new locking-free brick element technique for large deformation problems in elasticity,
-  <em> Computers and Structures </em>,
-  <strong> 75 </strong>,
-  291-304.
-  DOI: <a href="http://doi.org/10.1016/S0045-7949(99)00137-6">10.1016/S0045-7949(99)00137-6</a>
-
- <img src="https://www.dealii.org/images/steps/developer/step-44.setup.png" alt="">
-
-The material is quasi-incompressible neo-Hookean with <a href="http://en.wikipedia.org/wiki/Shear_modulus">shear modulus</a> $\mu = 80.194e6$ and $\nu = 0.4999$.
-For such a choice of material properties a conventional single-field $Q_1$ approach would lock.
-That is, the response would be overly stiff.
-The initial and final configurations are shown in the image above.
-Using symmetry, we solve for only one quarter of the geometry (i.e. a cube with dimension $0.001$).
-The inner-quarter of the upper surface of the domain is subject to a load of $p_0$.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * We start by including all the necessary deal.II header files and some C++
- * related ones. They have been discussed in detail in previous tutorial
- * programs, so you need only refer to past tutorials for details.
- * 
- * @code
- * #include <deal.II/base/function.h>
- * #include <deal.II/base/parameter_handler.h>
- * #include <deal.II/base/point.h>
- * #include <deal.II/base/quadrature_lib.h>
- * #include <deal.II/base/symmetric_tensor.h>
- * #include <deal.II/base/tensor.h>
- * #include <deal.II/base/timer.h>
- * #include <deal.II/base/work_stream.h>
- * #include <deal.II/dofs/dof_renumbering.h>
- * #include <deal.II/dofs/dof_tools.h>
- * 
- * @endcode
- * 
- * This header gives us the functionality to store
- * data at quadrature points
- * 
- * @code
- * #include <deal.II/base/quadrature_point_data.h>
- * 
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/grid_tools.h>
- * #include <deal.II/grid/grid_in.h>
- * #include <deal.II/grid/tria.h>
- * 
- * #include <deal.II/fe/fe_dgp_monomial.h>
- * #include <deal.II/fe/fe_q.h>
- * #include <deal.II/fe/fe_system.h>
- * #include <deal.II/fe/fe_tools.h>
- * #include <deal.II/fe/fe_values.h>
- * #include <deal.II/fe/mapping_q_eulerian.h>
- * 
- * #include <deal.II/lac/block_sparse_matrix.h>
- * #include <deal.II/lac/block_vector.h>
- * #include <deal.II/lac/dynamic_sparsity_pattern.h>
- * #include <deal.II/lac/full_matrix.h>
- * #include <deal.II/lac/precondition_selector.h>
- * #include <deal.II/lac/solver_cg.h>
- * #include <deal.II/lac/solver_selector.h>
- * #include <deal.II/lac/sparse_direct.h>
- * #include <deal.II/lac/affine_constraints.h>
- * 
- * @endcode
- * 
- * Here are the headers necessary to use the LinearOperator class.
- * These are also all conveniently packaged into a single
- * header file, namely <deal.II/lac/linear_operator_tools.h>
- * but we list those specifically required here for the sake
- * of transparency.
- * 
- * @code
- * #include <deal.II/lac/linear_operator.h>
- * #include <deal.II/lac/packaged_operation.h>
- * 
- * #include <deal.II/numerics/data_out.h>
- * #include <deal.II/numerics/vector_tools.h>
- * 
- * @endcode
- * 
- * Defined in these two headers are some operations that are pertinent to
- * finite strain elasticity. The first will help us compute some kinematic
- * quantities, and the second provides some stanard tensor definitions.
- * 
- * @code
- * #include <deal.II/physics/elasticity/kinematics.h>
- * #include <deal.II/physics/elasticity/standard_tensors.h>
- * 
- * #include <iostream>
- * #include <fstream>
- * 
- * 
- * @endcode
- * 
- * We then stick everything that relates to this tutorial program into a
- * namespace of its own, and import all the deal.II function and class names
- * into it:
- * 
- * @code
- * namespace Step44
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * 
- * <a name="Runtimeparameters"></a> 
- * <h3>Run-time parameters</h3>
- *   
-
- * 
- * There are several parameters that can be set in the code so we set up a
- * ParameterHandler object to read in the choices at run-time.
- * 
- * @code
- *   namespace Parameters
- *   {
- * @endcode
- * 
- * 
- * <a name="FiniteElementsystem"></a> 
- * <h4>Finite Element system</h4>
- * 
-
- * 
- * As mentioned in the introduction, a different order interpolation should
- * be used for the displacement $\mathbf{u}$ than for the pressure
- * $\widetilde{p}$ and the dilatation $\widetilde{J}$.  Choosing
- * $\widetilde{p}$ and $\widetilde{J}$ as discontinuous (constant) functions
- * at the element level leads to the mean-dilatation method. The
- * discontinuous approximation allows $\widetilde{p}$ and $\widetilde{J}$ to
- * be condensed out and a classical displacement based method is recovered.
- * Here we specify the polynomial order used to approximate the solution.
- * The quadrature order should be adjusted accordingly.
- * 
- * @code
- *     struct FESystem
- *     {
- *       unsigned int poly_degree;
- *       unsigned int quad_order;
- * 
- *       static void declare_parameters(ParameterHandler &prm);
- * 
- *       void parse_parameters(ParameterHandler &prm);
- *     };
- * 
- * 
- *     void FESystem::declare_parameters(ParameterHandler &prm)
- *     {
- *       prm.enter_subsection("Finite element system");
- *       {
- *         prm.declare_entry("Polynomial degree",
- *                           "2",
- *                           Patterns::Integer(0),
- *                           "Displacement system polynomial order");
- * 
- *         prm.declare_entry("Quadrature order",
- *                           "3",
- *                           Patterns::Integer(0),
- *                           "Gauss quadrature order");
- *       }
- *       prm.leave_subsection();
- *     }
- * 
- *     void FESystem::parse_parameters(ParameterHandler &prm)
- *     {
- *       prm.enter_subsection("Finite element system");
- *       {
- *         poly_degree = prm.get_integer("Polynomial degree");
- *         quad_order  = prm.get_integer("Quadrature order");
- *       }
- *       prm.leave_subsection();
- *     }
- * 
- * @endcode
- * 
- * 
- * <a name="Geometry"></a> 
- * <h4>Geometry</h4>
- * 
-
- * 
- * Make adjustments to the problem geometry and the applied load.  Since the
- * problem modelled here is quite specific, the load scale can be altered to
- * specific values to compare with the results given in the literature.
- * 
- * @code
- *     struct Geometry
- *     {
- *       unsigned int global_refinement;
- *       double       scale;
- *       double       p_p0;
- * 
- *       static void declare_parameters(ParameterHandler &prm);
- * 
- *       void parse_parameters(ParameterHandler &prm);
- *     };
- * 
- *     void Geometry::declare_parameters(ParameterHandler &prm)
- *     {
- *       prm.enter_subsection("Geometry");
- *       {
- *         prm.declare_entry("Global refinement",
- *                           "2",
- *                           Patterns::Integer(0),
- *                           "Global refinement level");
- * 
- *         prm.declare_entry("Grid scale",
- *                           "1e-3",
- *                           Patterns::Double(0.0),
- *                           "Global grid scaling factor");
- * 
- *         prm.declare_entry("Pressure ratio p/p0",
- *                           "100",
- *                           Patterns::Selection("20|40|60|80|100"),
- *                           "Ratio of applied pressure to reference pressure");
- *       }
- *       prm.leave_subsection();
- *     }
- * 
- *     void Geometry::parse_parameters(ParameterHandler &prm)
- *     {
- *       prm.enter_subsection("Geometry");
- *       {
- *         global_refinement = prm.get_integer("Global refinement");
- *         scale             = prm.get_double("Grid scale");
- *         p_p0              = prm.get_double("Pressure ratio p/p0");
- *       }
- *       prm.leave_subsection();
- *     }
- * 
- * @endcode
- * 
- * 
- * <a name="Materials"></a> 
- * <h4>Materials</h4>
- * 
-
- * 
- * We also need the shear modulus $ \mu $ and Poisson ration $ \nu $ for the
- * neo-Hookean material.
- * 
- * @code
- *     struct Materials
- *     {
- *       double nu;
- *       double mu;
- * 
- *       static void declare_parameters(ParameterHandler &prm);
- * 
- *       void parse_parameters(ParameterHandler &prm);
- *     };
- * 
- *     void Materials::declare_parameters(ParameterHandler &prm)
- *     {
- *       prm.enter_subsection("Material properties");
- *       {
- *         prm.declare_entry("Poisson's ratio",
- *                           "0.4999",
- *                           Patterns::Double(-1.0, 0.5),
- *                           "Poisson's ratio");
- * 
- *         prm.declare_entry("Shear modulus",
- *                           "80.194e6",
- *                           Patterns::Double(),
- *                           "Shear modulus");
- *       }
- *       prm.leave_subsection();
- *     }
- * 
- *     void Materials::parse_parameters(ParameterHandler &prm)
- *     {
- *       prm.enter_subsection("Material properties");
- *       {
- *         nu = prm.get_double("Poisson's ratio");
- *         mu = prm.get_double("Shear modulus");
- *       }
- *       prm.leave_subsection();
- *     }
- * 
- * @endcode
- * 
- * 
- * <a name="Linearsolver"></a> 
- * <h4>Linear solver</h4>
- * 
-
- * 
- * Next, we choose both solver and preconditioner settings.  The use of an
- * effective preconditioner is critical to ensure convergence when a large
- * nonlinear motion occurs within a Newton increment.
- * 
- * @code
- *     struct LinearSolver
- *     {
- *       std::string type_lin;
- *       double      tol_lin;
- *       double      max_iterations_lin;
- *       bool        use_static_condensation;
- *       std::string preconditioner_type;
- *       double      preconditioner_relaxation;
- * 
- *       static void declare_parameters(ParameterHandler &prm);
- * 
- *       void parse_parameters(ParameterHandler &prm);
- *     };
- * 
- *     void LinearSolver::declare_parameters(ParameterHandler &prm)
- *     {
- *       prm.enter_subsection("Linear solver");
- *       {
- *         prm.declare_entry("Solver type",
- *                           "CG",
- *                           Patterns::Selection("CG|Direct"),
- *                           "Type of solver used to solve the linear system");
- * 
- *         prm.declare_entry("Residual",
- *                           "1e-6",
- *                           Patterns::Double(0.0),
- *                           "Linear solver residual (scaled by residual norm)");
- * 
- *         prm.declare_entry(
- *           "Max iteration multiplier",
- *           "1",
- *           Patterns::Double(0.0),
- *           "Linear solver iterations (multiples of the system matrix size)");
- * 
- *         prm.declare_entry("Use static condensation",
- *                           "true",
- *                           Patterns::Bool(),
- *                           "Solve the full block system or a reduced problem");
- * 
- *         prm.declare_entry("Preconditioner type",
- *                           "ssor",
- *                           Patterns::Selection("jacobi|ssor"),
- *                           "Type of preconditioner");
- * 
- *         prm.declare_entry("Preconditioner relaxation",
- *                           "0.65",
- *                           Patterns::Double(0.0),
- *                           "Preconditioner relaxation value");
- *       }
- *       prm.leave_subsection();
- *     }
- * 
- *     void LinearSolver::parse_parameters(ParameterHandler &prm)
- *     {
- *       prm.enter_subsection("Linear solver");
- *       {
- *         type_lin                  = prm.get("Solver type");
- *         tol_lin                   = prm.get_double("Residual");
- *         max_iterations_lin        = prm.get_double("Max iteration multiplier");
- *         use_static_condensation   = prm.get_bool("Use static condensation");
- *         preconditioner_type       = prm.get("Preconditioner type");
- *         preconditioner_relaxation = prm.get_double("Preconditioner relaxation");
- *       }
- *       prm.leave_subsection();
- *     }
- * 
- * @endcode
- * 
- * 
- * <a name="Nonlinearsolver"></a> 
- * <h4>Nonlinear solver</h4>
- * 
-
- * 
- * A Newton-Raphson scheme is used to solve the nonlinear system of
- * governing equations.  We now define the tolerances and the maximum number
- * of iterations for the Newton-Raphson nonlinear solver.
- * 
- * @code
- *     struct NonlinearSolver
- *     {
- *       unsigned int max_iterations_NR;
- *       double       tol_f;
- *       double       tol_u;
- * 
- *       static void declare_parameters(ParameterHandler &prm);
- * 
- *       void parse_parameters(ParameterHandler &prm);
- *     };
- * 
- *     void NonlinearSolver::declare_parameters(ParameterHandler &prm)
- *     {
- *       prm.enter_subsection("Nonlinear solver");
- *       {
- *         prm.declare_entry("Max iterations Newton-Raphson",
- *                           "10",
- *                           Patterns::Integer(0),
- *                           "Number of Newton-Raphson iterations allowed");
- * 
- *         prm.declare_entry("Tolerance force",
- *                           "1.0e-9",
- *                           Patterns::Double(0.0),
- *                           "Force residual tolerance");
- * 
- *         prm.declare_entry("Tolerance displacement",
- *                           "1.0e-6",
- *                           Patterns::Double(0.0),
- *                           "Displacement error tolerance");
- *       }
- *       prm.leave_subsection();
- *     }
- * 
- *     void NonlinearSolver::parse_parameters(ParameterHandler &prm)
- *     {
- *       prm.enter_subsection("Nonlinear solver");
- *       {
- *         max_iterations_NR = prm.get_integer("Max iterations Newton-Raphson");
- *         tol_f             = prm.get_double("Tolerance force");
- *         tol_u             = prm.get_double("Tolerance displacement");
- *       }
- *       prm.leave_subsection();
- *     }
- * 
- * @endcode
- * 
- * 
- * <a name="Time"></a> 
- * <h4>Time</h4>
- * 
-
- * 
- * Set the timestep size $ \varDelta t $ and the simulation end-time.
- * 
- * @code
- *     struct Time
- *     {
- *       double delta_t;
- *       double end_time;
- * 
- *       static void declare_parameters(ParameterHandler &prm);
- * 
- *       void parse_parameters(ParameterHandler &prm);
- *     };
- * 
- *     void Time::declare_parameters(ParameterHandler &prm)
- *     {
- *       prm.enter_subsection("Time");
- *       {
- *         prm.declare_entry("End time", "1", Patterns::Double(), "End time");
- * 
- *         prm.declare_entry("Time step size",
- *                           "0.1",
- *                           Patterns::Double(),
- *                           "Time step size");
- *       }
- *       prm.leave_subsection();
- *     }
- * 
- *     void Time::parse_parameters(ParameterHandler &prm)
- *     {
- *       prm.enter_subsection("Time");
- *       {
- *         end_time = prm.get_double("End time");
- *         delta_t  = prm.get_double("Time step size");
- *       }
- *       prm.leave_subsection();
- *     }
- * 
- * @endcode
- * 
- * 
- * <a name="Allparameters"></a> 
- * <h4>All parameters</h4>
- * 
-
- * 
- * Finally we consolidate all of the above structures into a single
- * container that holds all of our run-time selections.
- * 
- * @code
- *     struct AllParameters : public FESystem,
- *                            public Geometry,
- *                            public Materials,
- *                            public LinearSolver,
- *                            public NonlinearSolver,
- *                            public Time
- * 
- *     {
- *       AllParameters(const std::string &input_file);
- * 
- *       static void declare_parameters(ParameterHandler &prm);
- * 
- *       void parse_parameters(ParameterHandler &prm);
- *     };
- * 
- *     AllParameters::AllParameters(const std::string &input_file)
- *     {
- *       ParameterHandler prm;
- *       declare_parameters(prm);
- *       prm.parse_input(input_file);
- *       parse_parameters(prm);
- *     }
- * 
- *     void AllParameters::declare_parameters(ParameterHandler &prm)
- *     {
- *       FESystem::declare_parameters(prm);
- *       Geometry::declare_parameters(prm);
- *       Materials::declare_parameters(prm);
- *       LinearSolver::declare_parameters(prm);
- *       NonlinearSolver::declare_parameters(prm);
- *       Time::declare_parameters(prm);
- *     }
- * 
- *     void AllParameters::parse_parameters(ParameterHandler &prm)
- *     {
- *       FESystem::parse_parameters(prm);
- *       Geometry::parse_parameters(prm);
- *       Materials::parse_parameters(prm);
- *       LinearSolver::parse_parameters(prm);
- *       NonlinearSolver::parse_parameters(prm);
- *       Time::parse_parameters(prm);
- *     }
- *   } // namespace Parameters
- * 
- * @endcode
- * 
- * 
- * <a name="Timeclass"></a> 
- * <h3>Time class</h3>
- * 
-
- * 
- * A simple class to store time data. Its functioning is transparent so no
- * discussion is necessary. For simplicity we assume a constant time step
- * size.
- * 
- * @code
- *   class Time
- *   {
- *   public:
- *     Time(const double time_end, const double delta_t)
- *       : timestep(0)
- *       , time_current(0.0)
- *       , time_end(time_end)
- *       , delta_t(delta_t)
- *     {}
- * 
- *     virtual ~Time() = default;
- * 
- *     double current() const
- *     {
- *       return time_current;
- *     }
- *     double end() const
- *     {
- *       return time_end;
- *     }
- *     double get_delta_t() const
- *     {
- *       return delta_t;
- *     }
- *     unsigned int get_timestep() const
- *     {
- *       return timestep;
- *     }
- *     void increment()
- *     {
- *       time_current += delta_t;
- *       ++timestep;
- *     }
- * 
- *   private:
- *     unsigned int timestep;
- *     double       time_current;
- *     const double time_end;
- *     const double delta_t;
- *   };
- * 
- * @endcode
- * 
- * 
- * <a name="CompressibleneoHookeanmaterialwithinathreefieldformulation"></a> 
- * <h3>Compressible neo-Hookean material within a three-field formulation</h3>
- * 
-
- * 
- * As discussed in the Introduction, Neo-Hookean materials are a type of
- * hyperelastic materials.  The entire domain is assumed to be composed of a
- * compressible neo-Hookean material.  This class defines the behavior of
- * this material within a three-field formulation.  Compressible neo-Hookean
- * materials can be described by a strain-energy function (SEF) $ \Psi =
- * \Psi_{\text{iso}}(\overline{\mathbf{b}}) + \Psi_{\text{vol}}(\widetilde{J})
- * $.
- *   
-
- * 
- * The isochoric response is given by $
- * \Psi_{\text{iso}}(\overline{\mathbf{b}}) = c_{1} [\overline{I}_{1} - 3] $
- * where $ c_{1} = \frac{\mu}{2} $ and $\overline{I}_{1}$ is the first
- * invariant of the left- or right-isochoric Cauchy-Green deformation tensors.
- * That is $\overline{I}_1 \dealcoloneq \textrm{tr}(\overline{\mathbf{b}})$.
- * In this example the SEF that governs the volumetric response is defined as
- * $ \Psi_{\text{vol}}(\widetilde{J}) = \kappa \frac{1}{4} [ \widetilde{J}^2 -
- * 1 - 2\textrm{ln}\; \widetilde{J} ]$, where $\kappa \dealcoloneq \lambda +
- * 2/3 \mu$ is the <a href="http://en.wikipedia.org/wiki/Bulk_modulus">bulk
- * modulus</a> and $\lambda$ is <a
- * href="http://en.wikipedia.org/wiki/Lam%C3%A9_parameters">Lam&eacute;'s
- * first parameter</a>.
- *   
-
- * 
- * The following class will be used to characterize the material we work with,
- * and provides a central point that one would need to modify if one were to
- * implement a different material model. For it to work, we will store one
- * object of this type per quadrature point, and in each of these objects
- * store the current state (characterized by the values or measures  of the
- * three fields) so that we can compute the elastic coefficients linearized
- * around the current state.
- * 
- * @code
- *   template <int dim>
- *   class Material_Compressible_Neo_Hook_Three_Field
- *   {
- *   public:
- *     Material_Compressible_Neo_Hook_Three_Field(const double mu, const double nu)
- *       : kappa((2.0 * mu * (1.0 + nu)) / (3.0 * (1.0 - 2.0 * nu)))
- *       , c_1(mu / 2.0)
- *       , det_F(1.0)
- *       , p_tilde(0.0)
- *       , J_tilde(1.0)
- *       , b_bar(Physics::Elasticity::StandardTensors<dim>::I)
- *     {
- *       Assert(kappa > 0, ExcInternalError());
- *     }
- * 
- * @endcode
- * 
- * We update the material model with various deformation dependent data
- * based on $F$ and the pressure $\widetilde{p}$ and dilatation
- * $\widetilde{J}$, and at the end of the function include a physical
- * check for internal consistency:
- * 
- * @code
- *     void update_material_data(const Tensor<2, dim> &F,
- *                               const double          p_tilde_in,
- *                               const double          J_tilde_in)
- *     {
- *       det_F                      = determinant(F);
- *       const Tensor<2, dim> F_bar = Physics::Elasticity::Kinematics::F_iso(F);
- *       b_bar                      = Physics::Elasticity::Kinematics::b(F_bar);
- *       p_tilde                    = p_tilde_in;
- *       J_tilde                    = J_tilde_in;
- * 
- *       Assert(det_F > 0, ExcInternalError());
- *     }
- * 
- * @endcode
- * 
- * The second function determines the Kirchhoff stress $\boldsymbol{\tau}
- * = \boldsymbol{\tau}_{\textrm{iso}} + \boldsymbol{\tau}_{\textrm{vol}}$
- * 
- * @code
- *     SymmetricTensor<2, dim> get_tau()
- *     {
- *       return get_tau_iso() + get_tau_vol();
- *     }
- * 
- * @endcode
- * 
- * The fourth-order elasticity tensor in the spatial setting
- * $\mathfrak{c}$ is calculated from the SEF $\Psi$ as $ J
- * \mathfrak{c}_{ijkl} = F_{iA} F_{jB} \mathfrak{C}_{ABCD} F_{kC} F_{lD}$
- * where $ \mathfrak{C} = 4 \frac{\partial^2 \Psi(\mathbf{C})}{\partial
- * \mathbf{C} \partial \mathbf{C}}$
- * 
- * @code
- *     SymmetricTensor<4, dim> get_Jc() const
- *     {
- *       return get_Jc_vol() + get_Jc_iso();
- *     }
- * 
- * @endcode
- * 
- * Derivative of the volumetric free energy with respect to
- * $\widetilde{J}$ return $\frac{\partial
- * \Psi_{\text{vol}}(\widetilde{J})}{\partial \widetilde{J}}$
- * 
- * @code
- *     double get_dPsi_vol_dJ() const
- *     {
- *       return (kappa / 2.0) * (J_tilde - 1.0 / J_tilde);
- *     }
- * 
- * @endcode
- * 
- * Second derivative of the volumetric free energy wrt $\widetilde{J}$. We
- * need the following computation explicitly in the tangent so we make it
- * public.  We calculate $\frac{\partial^2
- * \Psi_{\textrm{vol}}(\widetilde{J})}{\partial \widetilde{J} \partial
- * \widetilde{J}}$
- * 
- * @code
- *     double get_d2Psi_vol_dJ2() const
- *     {
- *       return ((kappa / 2.0) * (1.0 + 1.0 / (J_tilde * J_tilde)));
- *     }
- * 
- * @endcode
- * 
- * The next few functions return various data that we choose to store with
- * the material:
- * 
- * @code
- *     double get_det_F() const
- *     {
- *       return det_F;
- *     }
- * 
- *     double get_p_tilde() const
- *     {
- *       return p_tilde;
- *     }
- * 
- *     double get_J_tilde() const
- *     {
- *       return J_tilde;
- *     }
- * 
- *   protected:
- * @endcode
- * 
- * Define constitutive model parameters $\kappa$ (bulk modulus) and the
- * neo-Hookean model parameter $c_1$:
- * 
- * @code
- *     const double kappa;
- *     const double c_1;
- * 
- * @endcode
- * 
- * Model specific data that is convenient to store with the material:
- * 
- * @code
- *     double                  det_F;
- *     double                  p_tilde;
- *     double                  J_tilde;
- *     SymmetricTensor<2, dim> b_bar;
- * 
- * @endcode
- * 
- * The following functions are used internally in determining the result
- * of some of the public functions above. The first one determines the
- * volumetric Kirchhoff stress $\boldsymbol{\tau}_{\textrm{vol}}$:
- * 
- * @code
- *     SymmetricTensor<2, dim> get_tau_vol() const
- *     {
- *       return p_tilde * det_F * Physics::Elasticity::StandardTensors<dim>::I;
- *     }
- * 
- * @endcode
- * 
- * Next, determine the isochoric Kirchhoff stress
- * $\boldsymbol{\tau}_{\textrm{iso}} =
- * \mathcal{P}:\overline{\boldsymbol{\tau}}$:
- * 
- * @code
- *     SymmetricTensor<2, dim> get_tau_iso() const
- *     {
- *       return Physics::Elasticity::StandardTensors<dim>::dev_P * get_tau_bar();
- *     }
- * 
- * @endcode
- * 
- * Then, determine the fictitious Kirchhoff stress
- * $\overline{\boldsymbol{\tau}}$:
- * 
- * @code
- *     SymmetricTensor<2, dim> get_tau_bar() const
- *     {
- *       return 2.0 * c_1 * b_bar;
- *     }
- * 
- * @endcode
- * 
- * Calculate the volumetric part of the tangent $J
- * \mathfrak{c}_\textrm{vol}$:
- * 
- * @code
- *     SymmetricTensor<4, dim> get_Jc_vol() const
- *     {
- *       return p_tilde * det_F *
- *              (Physics::Elasticity::StandardTensors<dim>::IxI -
- *               (2.0 * Physics::Elasticity::StandardTensors<dim>::S));
- *     }
- * 
- * @endcode
- * 
- * Calculate the isochoric part of the tangent $J
- * \mathfrak{c}_\textrm{iso}$:
- * 
- * @code
- *     SymmetricTensor<4, dim> get_Jc_iso() const
- *     {
- *       const SymmetricTensor<2, dim> tau_bar = get_tau_bar();
- *       const SymmetricTensor<2, dim> tau_iso = get_tau_iso();
- *       const SymmetricTensor<4, dim> tau_iso_x_I =
- *         outer_product(tau_iso, Physics::Elasticity::StandardTensors<dim>::I);
- *       const SymmetricTensor<4, dim> I_x_tau_iso =
- *         outer_product(Physics::Elasticity::StandardTensors<dim>::I, tau_iso);
- *       const SymmetricTensor<4, dim> c_bar = get_c_bar();
- * 
- *       return (2.0 / dim) * trace(tau_bar) *
- *                Physics::Elasticity::StandardTensors<dim>::dev_P -
- *              (2.0 / dim) * (tau_iso_x_I + I_x_tau_iso) +
- *              Physics::Elasticity::StandardTensors<dim>::dev_P * c_bar *
- *                Physics::Elasticity::StandardTensors<dim>::dev_P;
- *     }
- * 
- * @endcode
- * 
- * Calculate the fictitious elasticity tensor $\overline{\mathfrak{c}}$.
- * For the material model chosen this is simply zero:
- * 
- * @code
- *     SymmetricTensor<4, dim> get_c_bar() const
- *     {
- *       return SymmetricTensor<4, dim>();
- *     }
- *   };
- * 
- * @endcode
- * 
- * 
- * <a name="Quadraturepointhistory"></a> 
- * <h3>Quadrature point history</h3>
- * 
-
- * 
- * As seen in step-18, the <code> PointHistory </code> class offers a method
- * for storing data at the quadrature points.  Here each quadrature point
- * holds a pointer to a material description.  Thus, different material models
- * can be used in different regions of the domain.  Among other data, we
- * choose to store the Kirchhoff stress $\boldsymbol{\tau}$ and the tangent
- * $J\mathfrak{c}$ for the quadrature points.
- * 
- * @code
- *   template <int dim>
- *   class PointHistory
- *   {
- *   public:
- *     PointHistory()
- *       : F_inv(Physics::Elasticity::StandardTensors<dim>::I)
- *       , tau(SymmetricTensor<2, dim>())
- *       , d2Psi_vol_dJ2(0.0)
- *       , dPsi_vol_dJ(0.0)
- *       , Jc(SymmetricTensor<4, dim>())
- *     {}
- * 
- *     virtual ~PointHistory() = default;
- * 
- * @endcode
- * 
- * The first function is used to create a material object and to
- * initialize all tensors correctly: The second one updates the stored
- * values and stresses based on the current deformation measure
- * $\textrm{Grad}\mathbf{u}_{\textrm{n}}$, pressure $\widetilde{p}$ and
- * dilation $\widetilde{J}$ field values.
- * 
- * @code
- *     void setup_lqp(const Parameters::AllParameters &parameters)
- *     {
- *       material =
- *         std::make_shared<Material_Compressible_Neo_Hook_Three_Field<dim>>(
- *           parameters.mu, parameters.nu);
- *       update_values(Tensor<2, dim>(), 0.0, 1.0);
- *     }
- * 
- * @endcode
- * 
- * To this end, we calculate the deformation gradient $\mathbf{F}$ from
- * the displacement gradient $\textrm{Grad}\ \mathbf{u}$, i.e.
- * $\mathbf{F}(\mathbf{u}) = \mathbf{I} + \textrm{Grad}\ \mathbf{u}$ and
- * then let the material model associated with this quadrature point
- * update itself. When computing the deformation gradient, we have to take
- * care with which data types we compare the sum $\mathbf{I} +
- * \textrm{Grad}\ \mathbf{u}$: Since $I$ has data type SymmetricTensor,
- * just writing <code>I + Grad_u_n</code> would convert the second
- * argument to a symmetric tensor, perform the sum, and then cast the
- * result to a Tensor (i.e., the type of a possibly nonsymmetric
- * tensor). However, since <code>Grad_u_n</code> is nonsymmetric in
- * general, the conversion to SymmetricTensor will fail. We can avoid this
- * back and forth by converting $I$ to Tensor first, and then performing
- * the addition as between nonsymmetric tensors:
- * 
- * @code
- *     void update_values(const Tensor<2, dim> &Grad_u_n,
- *                        const double          p_tilde,
- *                        const double          J_tilde)
- *     {
- *       const Tensor<2, dim> F = Physics::Elasticity::Kinematics::F(Grad_u_n);
- *       material->update_material_data(F, p_tilde, J_tilde);
- * 
- * @endcode
- * 
- * The material has been updated so we now calculate the Kirchhoff
- * stress $\mathbf{\tau}$, the tangent $J\mathfrak{c}$ and the first and
- * second derivatives of the volumetric free energy.
- *       
-
- * 
- * We also store the inverse of the deformation gradient since we
- * frequently use it:
- * 
- * @code
- *       F_inv         = invert(F);
- *       tau           = material->get_tau();
- *       Jc            = material->get_Jc();
- *       dPsi_vol_dJ   = material->get_dPsi_vol_dJ();
- *       d2Psi_vol_dJ2 = material->get_d2Psi_vol_dJ2();
- *     }
- * 
- * @endcode
- * 
- * We offer an interface to retrieve certain data.  Here are the kinematic
- * variables:
- * 
- * @code
- *     double get_J_tilde() const
- *     {
- *       return material->get_J_tilde();
- *     }
- * 
- *     double get_det_F() const
- *     {
- *       return material->get_det_F();
- *     }
- * 
- *     const Tensor<2, dim> &get_F_inv() const
- *     {
- *       return F_inv;
- *     }
- * 
- * @endcode
- * 
- * ...and the kinetic variables.  These are used in the material and
- * global tangent matrix and residual assembly operations:
- * 
- * @code
- *     double get_p_tilde() const
- *     {
- *       return material->get_p_tilde();
- *     }
- * 
- *     const SymmetricTensor<2, dim> &get_tau() const
- *     {
- *       return tau;
- *     }
- * 
- *     double get_dPsi_vol_dJ() const
- *     {
- *       return dPsi_vol_dJ;
- *     }
- * 
- *     double get_d2Psi_vol_dJ2() const
- *     {
- *       return d2Psi_vol_dJ2;
- *     }
- * 
- * @endcode
- * 
- * And finally the tangent:
- * 
- * @code
- *     const SymmetricTensor<4, dim> &get_Jc() const
- *     {
- *       return Jc;
- *     }
- * 
- * @endcode
- * 
- * In terms of member functions, this class stores for the quadrature
- * point it represents a copy of a material type in case different
- * materials are used in different regions of the domain, as well as the
- * inverse of the deformation gradient...
- * 
- * @code
- *   private:
- *     std::shared_ptr<Material_Compressible_Neo_Hook_Three_Field<dim>> material;
- * 
- *     Tensor<2, dim> F_inv;
- * 
- * @endcode
- * 
- * ... and stress-type variables along with the tangent $J\mathfrak{c}$:
- * 
- * @code
- *     SymmetricTensor<2, dim> tau;
- *     double                  d2Psi_vol_dJ2;
- *     double                  dPsi_vol_dJ;
- * 
- *     SymmetricTensor<4, dim> Jc;
- *   };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Quasistaticquasiincompressiblefinitestrainsolid"></a> 
- * <h3>Quasi-static quasi-incompressible finite-strain solid</h3>
- * 
-
- * 
- * The Solid class is the central class in that it represents the problem at
- * hand. It follows the usual scheme in that all it really has is a
- * constructor, destructor and a <code>run()</code> function that dispatches
- * all the work to private functions of this class:
- * 
- * @code
- *   template <int dim>
- *   class Solid
- *   {
- *   public:
- *     Solid(const std::string &input_file);
- * 
- *     void run();
- * 
- *   private:
- * @endcode
- * 
- * In the private section of this class, we first forward declare a number
- * of objects that are used in parallelizing work using the WorkStream
- * object (see the @ref threads module for more information on this).
- *     
-
- * 
- * We declare such structures for the computation of tangent (stiffness)
- * matrix and right hand side vector, static condensation, and for updating
- * quadrature points:
- * 
- * @code
- *     struct PerTaskData_ASM;
- *     struct ScratchData_ASM;
- * 
- *     struct PerTaskData_SC;
- *     struct ScratchData_SC;
- * 
- *     struct PerTaskData_UQPH;
- *     struct ScratchData_UQPH;
- * 
- * @endcode
- * 
- * We start the collection of member functions with one that builds the
- * grid:
- * 
- * @code
- *     void make_grid();
- * 
- * @endcode
- * 
- * Set up the finite element system to be solved:
- * 
- * @code
- *     void system_setup();
- * 
- *     void determine_component_extractors();
- * 
- * @endcode
- * 
- * Create Dirichlet constraints for the incremental displacement field:
- * 
- * @code
- *     void make_constraints(const int it_nr);
- * 
- * @endcode
- * 
- * Several functions to assemble the system and right hand side matrices
- * using multithreading. Each of them comes as a wrapper function, one
- * that is executed to do the work in the WorkStream model on one cell,
- * and one that copies the work done on this one cell into the global
- * object that represents it:
- * 
- * @code
- *     void assemble_system();
- * 
- *     void assemble_system_one_cell(
- *       const typename DoFHandler<dim>::active_cell_iterator &cell,
- *       ScratchData_ASM &                                     scratch,
- *       PerTaskData_ASM &                                     data) const;
- * 
- * @endcode
- * 
- * And similar to perform global static condensation:
- * 
- * @code
- *     void assemble_sc();
- * 
- *     void assemble_sc_one_cell(
- *       const typename DoFHandler<dim>::active_cell_iterator &cell,
- *       ScratchData_SC &                                      scratch,
- *       PerTaskData_SC &                                      data);
- * 
- *     void copy_local_to_global_sc(const PerTaskData_SC &data);
- * 
- * @endcode
- * 
- * Create and update the quadrature points. Here, no data needs to be
- * copied into a global object, so the copy_local_to_global function is
- * empty:
- * 
- * @code
- *     void setup_qph();
- * 
- *     void update_qph_incremental(const BlockVector<double> &solution_delta);
- * 
- *     void update_qph_incremental_one_cell(
- *       const typename DoFHandler<dim>::active_cell_iterator &cell,
- *       ScratchData_UQPH &                                    scratch,
- *       PerTaskData_UQPH &                                    data);
- * 
- *     void copy_local_to_global_UQPH(const PerTaskData_UQPH & /*data*/)
- *     {}
- * 
- * @endcode
- * 
- * Solve for the displacement using a Newton-Raphson method. We break this
- * function into the nonlinear loop and the function that solves the
- * linearized Newton-Raphson step:
- * 
- * @code
- *     void solve_nonlinear_timestep(BlockVector<double> &solution_delta);
- * 
- *     std::pair<unsigned int, double>
- *     solve_linear_system(BlockVector<double> &newton_update);
- * 
- * @endcode
- * 
- * Solution retrieval as well as post-processing and writing data to file:
- * 
- * @code
- *     BlockVector<double>
- *     get_total_solution(const BlockVector<double> &solution_delta) const;
- * 
- *     void output_results() const;
- * 
- * @endcode
- * 
- * Finally, some member variables that describe the current state: A
- * collection of the parameters used to describe the problem setup...
- * 
- * @code
- *     Parameters::AllParameters parameters;
- * 
- * @endcode
- * 
- * ...the volume of the reference configuration...
- * 
- * @code
- *     double vol_reference;
- * 
- * @endcode
- * 
- * ...and description of the geometry on which the problem is solved:
- * 
- * @code
- *     Triangulation<dim> triangulation;
- * 
- * @endcode
- * 
- * Also, keep track of the current time and the time spent evaluating
- * certain functions
- * 
- * @code
- *     Time                time;
- *     mutable TimerOutput timer;
- * 
- * @endcode
- * 
- * A storage object for quadrature point information. As opposed to
- * step-18, deal.II's native quadrature point data manager is employed
- * here.
- * 
- * @code
- *     CellDataStorage<typename Triangulation<dim>::cell_iterator,
- *                     PointHistory<dim>>
- *       quadrature_point_history;
- * 
- * @endcode
- * 
- * A description of the finite-element system including the displacement
- * polynomial degree, the degree-of-freedom handler, number of DoFs per
- * cell and the extractor objects used to retrieve information from the
- * solution vectors:
- * 
- * @code
- *     const unsigned int               degree;
- *     const FESystem<dim>              fe;
- *     DoFHandler<dim>                  dof_handler;
- *     const unsigned int               dofs_per_cell;
- *     const FEValuesExtractors::Vector u_fe;
- *     const FEValuesExtractors::Scalar p_fe;
- *     const FEValuesExtractors::Scalar J_fe;
- * 
- * @endcode
- * 
- * Description of how the block-system is arranged. There are 3 blocks,
- * the first contains a vector DOF $\mathbf{u}$ while the other two
- * describe scalar DOFs, $\widetilde{p}$ and $\widetilde{J}$.
- * 
- * @code
- *     static const unsigned int n_blocks          = 3;
- *     static const unsigned int n_components      = dim + 2;
- *     static const unsigned int first_u_component = 0;
- *     static const unsigned int p_component       = dim;
- *     static const unsigned int J_component       = dim + 1;
- * 
- *     enum
- *     {
- *       u_dof = 0,
- *       p_dof = 1,
- *       J_dof = 2
- *     };
- * 
- *     std::vector<types::global_dof_index> dofs_per_block;
- *     std::vector<types::global_dof_index> element_indices_u;
- *     std::vector<types::global_dof_index> element_indices_p;
- *     std::vector<types::global_dof_index> element_indices_J;
- * 
- * @endcode
- * 
- * Rules for Gauss-quadrature on both the cell and faces. The number of
- * quadrature points on both cells and faces is recorded.
- * 
- * @code
- *     const QGauss<dim>     qf_cell;
- *     const QGauss<dim - 1> qf_face;
- *     const unsigned int    n_q_points;
- *     const unsigned int    n_q_points_f;
- * 
- * @endcode
- * 
- * Objects that store the converged solution and right-hand side vectors,
- * as well as the tangent matrix. There is an AffineConstraints object used
- * to keep track of constraints.  We make use of a sparsity pattern
- * designed for a block system.
- * 
- * @code
- *     AffineConstraints<double> constraints;
- *     BlockSparsityPattern      sparsity_pattern;
- *     BlockSparseMatrix<double> tangent_matrix;
- *     BlockVector<double>       system_rhs;
- *     BlockVector<double>       solution_n;
- * 
- * @endcode
- * 
- * Then define a number of variables to store norms and update norms and
- * normalization factors.
- * 
- * @code
- *     struct Errors
- *     {
- *       Errors()
- *         : norm(1.0)
- *         , u(1.0)
- *         , p(1.0)
- *         , J(1.0)
- *       {}
- * 
- *       void reset()
- *       {
- *         norm = 1.0;
- *         u    = 1.0;
- *         p    = 1.0;
- *         J    = 1.0;
- *       }
- *       void normalize(const Errors &rhs)
- *       {
- *         if (rhs.norm != 0.0)
- *           norm /= rhs.norm;
- *         if (rhs.u != 0.0)
- *           u /= rhs.u;
- *         if (rhs.p != 0.0)
- *           p /= rhs.p;
- *         if (rhs.J != 0.0)
- *           J /= rhs.J;
- *       }
- * 
- *       double norm, u, p, J;
- *     };
- * 
- *     Errors error_residual, error_residual_0, error_residual_norm, error_update,
- *       error_update_0, error_update_norm;
- * 
- * @endcode
- * 
- * Methods to calculate error measures
- * 
- * @code
- *     void get_error_residual(Errors &error_residual);
- * 
- *     void get_error_update(const BlockVector<double> &newton_update,
- *                           Errors &                   error_update);
- * 
- *     std::pair<double, double> get_error_dilation() const;
- * 
- * @endcode
- * 
- * Compute the volume in the spatial configuration
- * 
- * @code
- *     double compute_vol_current() const;
- * 
- * @endcode
- * 
- * Print information to screen in a pleasing way...
- * 
- * @code
- *     static void print_conv_header();
- * 
- *     void print_conv_footer();
- *   };
- * 
- * @endcode
- * 
- * 
- * <a name="ImplementationofthecodeSolidcodeclass"></a> 
- * <h3>Implementation of the <code>Solid</code> class</h3>
- * 
-
- * 
- * 
- * <a name="Publicinterface"></a> 
- * <h4>Public interface</h4>
- * 
-
- * 
- * We initialize the Solid class using data extracted from the parameter file.
- * 
- * @code
- *   template <int dim>
- *   Solid<dim>::Solid(const std::string &input_file)
- *     : parameters(input_file)
- *     , vol_reference(0.)
- *     , triangulation(Triangulation<dim>::maximum_smoothing)
- *     , time(parameters.end_time, parameters.delta_t)
- *     , timer(std::cout, TimerOutput::summary, TimerOutput::wall_times)
- *     , degree(parameters.poly_degree)
- *     ,
- * @endcode
- * 
- * The Finite Element System is composed of dim continuous displacement
- * DOFs, and discontinuous pressure and dilatation DOFs. In an attempt to
- * satisfy the Babuska-Brezzi or LBB stability conditions (see Hughes
- * (2000)), we setup a $Q_n \times DGPM_{n-1} \times DGPM_{n-1}$
- * system. $Q_2 \times DGPM_1 \times DGPM_1$ elements satisfy this
- * condition, while $Q_1 \times DGPM_0 \times DGPM_0$ elements do
- * not. However, it has been shown that the latter demonstrate good
- * convergence characteristics nonetheless.
- * 
- * @code
- *     fe(FE_Q<dim>(parameters.poly_degree),
- *        dim, // displacement
- *        FE_DGPMonomial<dim>(parameters.poly_degree - 1),
- *        1, // pressure
- *        FE_DGPMonomial<dim>(parameters.poly_degree - 1),
- *        1)
- *     , // dilatation
- *     dof_handler(triangulation)
- *     , dofs_per_cell(fe.n_dofs_per_cell())
- *     , u_fe(first_u_component)
- *     , p_fe(p_component)
- *     , J_fe(J_component)
- *     , dofs_per_block(n_blocks)
- *     , qf_cell(parameters.quad_order)
- *     , qf_face(parameters.quad_order)
- *     , n_q_points(qf_cell.size())
- *     , n_q_points_f(qf_face.size())
- *   {
- *     Assert(dim == 2 || dim == 3,
- *            ExcMessage("This problem only works in 2 or 3 space dimensions."));
- *     determine_component_extractors();
- *   }
- * 
- * 
- * @endcode
- * 
- * In solving the quasi-static problem, the time becomes a loading parameter,
- * i.e. we increasing the loading linearly with time, making the two concepts
- * interchangeable. We choose to increment time linearly using a constant time
- * step size.
- *   
-
- * 
- * We start the function with preprocessing, setting the initial dilatation
- * values, and then output the initial grid before starting the simulation
- * proper with the first time (and loading)
- * increment.
- *   
-
- * 
- * Care must be taken (or at least some thought given) when imposing the
- * constraint $\widetilde{J}=1$ on the initial solution field. The constraint
- * corresponds to the determinant of the deformation gradient in the
- * undeformed configuration, which is the identity tensor. We use
- * FE_DGPMonomial bases to interpolate the dilatation field, thus we can't
- * simply set the corresponding dof to unity as they correspond to the
- * monomial coefficients. Thus we use the VectorTools::project function to do
- * the work for us. The VectorTools::project function requires an argument
- * indicating the hanging node constraints. We have none in this program
- * So we have to create a constraint object. In its original state, constraint
- * objects are unsorted, and have to be sorted (using the
- * AffineConstraints::close function) before they can be used. Have a look at
- * step-21 for more information. We only need to enforce the initial condition
- * on the dilatation. In order to do this, we make use of a
- * ComponentSelectFunction which acts as a mask and sets the J_component of
- * n_components to 1. This is exactly what we want. Have a look at its usage
- * in step-20 for more information.
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::run()
- *   {
- *     make_grid();
- *     system_setup();
- *     {
- *       AffineConstraints<double> constraints;
- *       constraints.close();
- * 
- *       const ComponentSelectFunction<dim> J_mask(J_component, n_components);
- * 
- *       VectorTools::project(
- *         dof_handler, constraints, QGauss<dim>(degree + 2), J_mask, solution_n);
- *     }
- *     output_results();
- *     time.increment();
- * 
- * @endcode
- * 
- * We then declare the incremental solution update $\varDelta
- * \mathbf{\Xi} \dealcoloneq \{\varDelta \mathbf{u},\varDelta \widetilde{p},
- * \varDelta \widetilde{J} \}$ and start the loop over the time domain.
- *     
-
- * 
- * At the beginning, we reset the solution update for this time step...
- * 
- * @code
- *     BlockVector<double> solution_delta(dofs_per_block);
- *     while (time.current() < time.end())
- *       {
- *         solution_delta = 0.0;
- * 
- * @endcode
- * 
- * ...solve the current time step and update total solution vector
- * $\mathbf{\Xi}_{\textrm{n}} = \mathbf{\Xi}_{\textrm{n-1}} +
- * \varDelta \mathbf{\Xi}$...
- * 
- * @code
- *         solve_nonlinear_timestep(solution_delta);
- *         solution_n += solution_delta;
- * 
- * @endcode
- * 
- * ...and plot the results before moving on happily to the next time
- * step:
- * 
- * @code
- *         output_results();
- *         time.increment();
- *       }
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Privateinterface"></a> 
- * <h3>Private interface</h3>
- * 
-
- * 
- * 
- * <a name="Threadingbuildingblocksstructures"></a> 
- * <h4>Threading-building-blocks structures</h4>
- * 
-
- * 
- * The first group of private member functions is related to parallelization.
- * We use the Threading Building Blocks library (TBB) to perform as many
- * computationally intensive distributed tasks as possible. In particular, we
- * assemble the tangent matrix and right hand side vector, the static
- * condensation contributions, and update data stored at the quadrature points
- * using TBB. Our main tool for this is the WorkStream class (see the @ref
- * threads module for more information).
- * 
-
- * 
- * Firstly we deal with the tangent matrix and right-hand side assembly
- * structures. The PerTaskData object stores local contributions to the global
- * system.
- * 
- * @code
- *   template <int dim>
- *   struct Solid<dim>::PerTaskData_ASM
- *   {
- *     FullMatrix<double>                   cell_matrix;
- *     Vector<double>                       cell_rhs;
- *     std::vector<types::global_dof_index> local_dof_indices;
- * 
- *     PerTaskData_ASM(const unsigned int dofs_per_cell)
- *       : cell_matrix(dofs_per_cell, dofs_per_cell)
- *       , cell_rhs(dofs_per_cell)
- *       , local_dof_indices(dofs_per_cell)
- *     {}
- * 
- *     void reset()
- *     {
- *       cell_matrix = 0.0;
- *       cell_rhs    = 0.0;
- *     }
- *   };
- * 
- * 
- * @endcode
- * 
- * On the other hand, the ScratchData object stores the larger objects such as
- * the shape-function values array (<code>Nx</code>) and a shape function
- * gradient and symmetric gradient vector which we will use during the
- * assembly.
- * 
- * @code
- *   template <int dim>
- *   struct Solid<dim>::ScratchData_ASM
- *   {
- *     FEValues<dim>     fe_values;
- *     FEFaceValues<dim> fe_face_values;
- * 
- *     std::vector<std::vector<double>>                  Nx;
- *     std::vector<std::vector<Tensor<2, dim>>>          grad_Nx;
- *     std::vector<std::vector<SymmetricTensor<2, dim>>> symm_grad_Nx;
- * 
- *     ScratchData_ASM(const FiniteElement<dim> &fe_cell,
- *                     const QGauss<dim> &       qf_cell,
- *                     const UpdateFlags         uf_cell,
- *                     const QGauss<dim - 1> &   qf_face,
- *                     const UpdateFlags         uf_face)
- *       : fe_values(fe_cell, qf_cell, uf_cell)
- *       , fe_face_values(fe_cell, qf_face, uf_face)
- *       , Nx(qf_cell.size(), std::vector<double>(fe_cell.n_dofs_per_cell()))
- *       , grad_Nx(qf_cell.size(),
- *                 std::vector<Tensor<2, dim>>(fe_cell.n_dofs_per_cell()))
- *       , symm_grad_Nx(qf_cell.size(),
- *                      std::vector<SymmetricTensor<2, dim>>(
- *                        fe_cell.n_dofs_per_cell()))
- *     {}
- * 
- *     ScratchData_ASM(const ScratchData_ASM &rhs)
- *       : fe_values(rhs.fe_values.get_fe(),
- *                   rhs.fe_values.get_quadrature(),
- *                   rhs.fe_values.get_update_flags())
- *       , fe_face_values(rhs.fe_face_values.get_fe(),
- *                        rhs.fe_face_values.get_quadrature(),
- *                        rhs.fe_face_values.get_update_flags())
- *       , Nx(rhs.Nx)
- *       , grad_Nx(rhs.grad_Nx)
- *       , symm_grad_Nx(rhs.symm_grad_Nx)
- *     {}
- * 
- *     void reset()
- *     {
- *       const unsigned int n_q_points      = Nx.size();
- *       const unsigned int n_dofs_per_cell = Nx[0].size();
- *       for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
- *         {
- *           Assert(Nx[q_point].size() == n_dofs_per_cell, ExcInternalError());
- *           Assert(grad_Nx[q_point].size() == n_dofs_per_cell,
- *                  ExcInternalError());
- *           Assert(symm_grad_Nx[q_point].size() == n_dofs_per_cell,
- *                  ExcInternalError());
- *           for (unsigned int k = 0; k < n_dofs_per_cell; ++k)
- *             {
- *               Nx[q_point][k]           = 0.0;
- *               grad_Nx[q_point][k]      = 0.0;
- *               symm_grad_Nx[q_point][k] = 0.0;
- *             }
- *         }
- *     }
- *   };
- * 
- * 
- * @endcode
- * 
- * Then we define structures to assemble the statically condensed tangent
- * matrix. Recall that we wish to solve for a displacement-based formulation.
- * We do the condensation at the element level as the $\widetilde{p}$ and
- * $\widetilde{J}$ fields are element-wise discontinuous.  As these operations
- * are matrix-based, we need to setup a number of matrices to store the local
- * contributions from a number of the tangent matrix sub-blocks.  We place
- * these in the PerTaskData struct.
- *   
-
- * 
- * We choose not to reset any data in the <code>reset()</code> function as the
- * matrix extraction and replacement tools will take care of this
- * 
- * @code
- *   template <int dim>
- *   struct Solid<dim>::PerTaskData_SC
- *   {
- *     FullMatrix<double>                   cell_matrix;
- *     std::vector<types::global_dof_index> local_dof_indices;
- * 
- *     FullMatrix<double> k_orig;
- *     FullMatrix<double> k_pu;
- *     FullMatrix<double> k_pJ;
- *     FullMatrix<double> k_JJ;
- *     FullMatrix<double> k_pJ_inv;
- *     FullMatrix<double> k_bbar;
- *     FullMatrix<double> A;
- *     FullMatrix<double> B;
- *     FullMatrix<double> C;
- * 
- *     PerTaskData_SC(const unsigned int dofs_per_cell,
- *                    const unsigned int n_u,
- *                    const unsigned int n_p,
- *                    const unsigned int n_J)
- *       : cell_matrix(dofs_per_cell, dofs_per_cell)
- *       , local_dof_indices(dofs_per_cell)
- *       , k_orig(dofs_per_cell, dofs_per_cell)
- *       , k_pu(n_p, n_u)
- *       , k_pJ(n_p, n_J)
- *       , k_JJ(n_J, n_J)
- *       , k_pJ_inv(n_p, n_J)
- *       , k_bbar(n_u, n_u)
- *       , A(n_J, n_u)
- *       , B(n_J, n_u)
- *       , C(n_p, n_u)
- *     {}
- * 
- *     void reset()
- *     {}
- *   };
- * 
- * 
- * @endcode
- * 
- * The ScratchData object for the operations we wish to perform here is empty
- * since we need no temporary data, but it still needs to be defined for the
- * current implementation of TBB in deal.II.  So we create a dummy struct for
- * this purpose.
- * 
- * @code
- *   template <int dim>
- *   struct Solid<dim>::ScratchData_SC
- *   {
- *     void reset()
- *     {}
- *   };
- * 
- * 
- * @endcode
- * 
- * And finally we define the structures to assist with updating the quadrature
- * point information. Similar to the SC assembly process, we do not need the
- * PerTaskData object (since there is nothing to store here) but must define
- * one nonetheless. Note that this is because for the operation that we have
- * here -- updating the data on quadrature points -- the operation is purely
- * local: the things we do on every cell get consumed on every cell, without
- * any global aggregation operation as is usually the case when using the
- * WorkStream class. The fact that we still have to define a per-task data
- * structure points to the fact that the WorkStream class may be ill-suited to
- * this operation (we could, in principle simply create a new task using
- * Threads::new_task for each cell) but there is not much harm done to doing
- * it this way anyway.
- * Furthermore, should there be different material models associated with a
- * quadrature point, requiring varying levels of computational expense, then
- * the method used here could be advantageous.
- * 
- * @code
- *   template <int dim>
- *   struct Solid<dim>::PerTaskData_UQPH
- *   {
- *     void reset()
- *     {}
- *   };
- * 
- * 
- * @endcode
- * 
- * The ScratchData object will be used to store an alias for the solution
- * vector so that we don't have to copy this large data structure. We then
- * define a number of vectors to extract the solution values and gradients at
- * the quadrature points.
- * 
- * @code
- *   template <int dim>
- *   struct Solid<dim>::ScratchData_UQPH
- *   {
- *     const BlockVector<double> &solution_total;
- * 
- *     std::vector<Tensor<2, dim>> solution_grads_u_total;
- *     std::vector<double>         solution_values_p_total;
- *     std::vector<double>         solution_values_J_total;
- * 
- *     FEValues<dim> fe_values;
- * 
- *     ScratchData_UQPH(const FiniteElement<dim> & fe_cell,
- *                      const QGauss<dim> &        qf_cell,
- *                      const UpdateFlags          uf_cell,
- *                      const BlockVector<double> &solution_total)
- *       : solution_total(solution_total)
- *       , solution_grads_u_total(qf_cell.size())
- *       , solution_values_p_total(qf_cell.size())
- *       , solution_values_J_total(qf_cell.size())
- *       , fe_values(fe_cell, qf_cell, uf_cell)
- *     {}
- * 
- *     ScratchData_UQPH(const ScratchData_UQPH &rhs)
- *       : solution_total(rhs.solution_total)
- *       , solution_grads_u_total(rhs.solution_grads_u_total)
- *       , solution_values_p_total(rhs.solution_values_p_total)
- *       , solution_values_J_total(rhs.solution_values_J_total)
- *       , fe_values(rhs.fe_values.get_fe(),
- *                   rhs.fe_values.get_quadrature(),
- *                   rhs.fe_values.get_update_flags())
- *     {}
- * 
- *     void reset()
- *     {
- *       const unsigned int n_q_points = solution_grads_u_total.size();
- *       for (unsigned int q = 0; q < n_q_points; ++q)
- *         {
- *           solution_grads_u_total[q]  = 0.0;
- *           solution_values_p_total[q] = 0.0;
- *           solution_values_J_total[q] = 0.0;
- *         }
- *     }
- *   };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Solidmake_grid"></a> 
- * <h4>Solid::make_grid</h4>
- * 
-
- * 
- * On to the first of the private member functions. Here we create the
- * triangulation of the domain, for which we choose the scaled cube with each
- * face given a boundary ID number.  The grid must be refined at least once
- * for the indentation problem.
- *   
-
- * 
- * We then determine the volume of the reference configuration and print it
- * for comparison:
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::make_grid()
- *   {
- *     GridGenerator::hyper_rectangle(
- *       triangulation,
- *       (dim == 3 ? Point<dim>(0.0, 0.0, 0.0) : Point<dim>(0.0, 0.0)),
- *       (dim == 3 ? Point<dim>(1.0, 1.0, 1.0) : Point<dim>(1.0, 1.0)),
- *       true);
- *     GridTools::scale(parameters.scale, triangulation);
- *     triangulation.refine_global(std::max(1U, parameters.global_refinement));
- * 
- *     vol_reference = GridTools::volume(triangulation);
- *     std::cout << "Grid:\n\t Reference volume: " << vol_reference << std::endl;
- * 
- * @endcode
- * 
- * Since we wish to apply a Neumann BC to a patch on the top surface, we
- * must find the cell faces in this part of the domain and mark them with
- * a distinct boundary ID number.  The faces we are looking for are on the
- * +y surface and will get boundary ID 6 (zero through five are already
- * used when creating the six faces of the cube domain):
- * 
- * @code
- *     for (const auto &cell : triangulation.active_cell_iterators())
- *       for (const auto &face : cell->face_iterators())
- *         {
- *           if (face->at_boundary() == true &&
- *               face->center()[1] == 1.0 * parameters.scale)
- *             {
- *               if (dim == 3)
- *                 {
- *                   if (face->center()[0] < 0.5 * parameters.scale &&
- *                       face->center()[2] < 0.5 * parameters.scale)
- *                     face->set_boundary_id(6);
- *                 }
- *               else
- *                 {
- *                   if (face->center()[0] < 0.5 * parameters.scale)
- *                     face->set_boundary_id(6);
- *                 }
- *             }
- *         }
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Solidsystem_setup"></a> 
- * <h4>Solid::system_setup</h4>
- * 
-
- * 
- * Next we describe how the FE system is setup.  We first determine the number
- * of components per block. Since the displacement is a vector component, the
- * first dim components belong to it, while the next two describe scalar
- * pressure and dilatation DOFs.
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::system_setup()
- *   {
- *     timer.enter_subsection("Setup system");
- * 
- *     std::vector<unsigned int> block_component(n_components,
- *                                               u_dof); // Displacement
- *     block_component[p_component] = p_dof;             // Pressure
- *     block_component[J_component] = J_dof;             // Dilatation
- * 
- * @endcode
- * 
- * The DOF handler is then initialized and we renumber the grid in an
- * efficient manner. We also record the number of DOFs per block.
- * 
- * @code
- *     dof_handler.distribute_dofs(fe);
- *     DoFRenumbering::Cuthill_McKee(dof_handler);
- *     DoFRenumbering::component_wise(dof_handler, block_component);
- * 
- *     dofs_per_block =
- *       DoFTools::count_dofs_per_fe_block(dof_handler, block_component);
- * 
- *     std::cout << "Triangulation:"
- *               << "\n\t Number of active cells: "
- *               << triangulation.n_active_cells()
- *               << "\n\t Number of degrees of freedom: " << dof_handler.n_dofs()
- *               << std::endl;
- * 
- * @endcode
- * 
- * Setup the sparsity pattern and tangent matrix
- * 
- * @code
- *     tangent_matrix.clear();
- *     {
- *       const types::global_dof_index n_dofs_u = dofs_per_block[u_dof];
- *       const types::global_dof_index n_dofs_p = dofs_per_block[p_dof];
- *       const types::global_dof_index n_dofs_J = dofs_per_block[J_dof];
- * 
- *       BlockDynamicSparsityPattern dsp(n_blocks, n_blocks);
- * 
- *       dsp.block(u_dof, u_dof).reinit(n_dofs_u, n_dofs_u);
- *       dsp.block(u_dof, p_dof).reinit(n_dofs_u, n_dofs_p);
- *       dsp.block(u_dof, J_dof).reinit(n_dofs_u, n_dofs_J);
- * 
- *       dsp.block(p_dof, u_dof).reinit(n_dofs_p, n_dofs_u);
- *       dsp.block(p_dof, p_dof).reinit(n_dofs_p, n_dofs_p);
- *       dsp.block(p_dof, J_dof).reinit(n_dofs_p, n_dofs_J);
- * 
- *       dsp.block(J_dof, u_dof).reinit(n_dofs_J, n_dofs_u);
- *       dsp.block(J_dof, p_dof).reinit(n_dofs_J, n_dofs_p);
- *       dsp.block(J_dof, J_dof).reinit(n_dofs_J, n_dofs_J);
- *       dsp.collect_sizes();
- * 
- * @endcode
- * 
- * The global system matrix initially has the following structure
- * @f{align*}
- * \underbrace{\begin{bmatrix}
- * \mathsf{\mathbf{K}}_{uu}  & \mathsf{\mathbf{K}}_{u\widetilde{p}} &
- * \mathbf{0}
- * \\ \mathsf{\mathbf{K}}_{\widetilde{p}u} & \mathbf{0} &
- * \mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}
- * \\ \mathbf{0} & \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}} &
- * \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
- * \end{bmatrix}}_{\mathsf{\mathbf{K}}(\mathbf{\Xi}_{\textrm{i}})}
- * \underbrace{\begin{bmatrix}
- * d \mathsf{u}
- * \\  d \widetilde{\mathsf{\mathbf{p}}}
- * \\  d \widetilde{\mathsf{\mathbf{J}}}
- * \end{bmatrix}}_{d \mathbf{\Xi}}
- * =
- * \underbrace{\begin{bmatrix}
- * \mathsf{\mathbf{F}}_{u}(\mathbf{u}_{\textrm{i}})
- * \\ \mathsf{\mathbf{F}}_{\widetilde{p}}(\widetilde{p}_{\textrm{i}})
- * \\ \mathsf{\mathbf{F}}_{\widetilde{J}}(\widetilde{J}_{\textrm{i}})
- * \end{bmatrix}}_{ \mathsf{\mathbf{F}}(\mathbf{\Xi}_{\textrm{i}}) } \, .
- * @f}
- * We optimize the sparsity pattern to reflect this structure
- * and prevent unnecessary data creation for the right-diagonal
- * block components.
- * 
- * @code
- *       Table<2, DoFTools::Coupling> coupling(n_components, n_components);
- *       for (unsigned int ii = 0; ii < n_components; ++ii)
- *         for (unsigned int jj = 0; jj < n_components; ++jj)
- *           if (((ii < p_component) && (jj == J_component)) ||
- *               ((ii == J_component) && (jj < p_component)) ||
- *               ((ii == p_component) && (jj == p_component)))
- *             coupling[ii][jj] = DoFTools::none;
- *           else
- *             coupling[ii][jj] = DoFTools::always;
- *       DoFTools::make_sparsity_pattern(
- *         dof_handler, coupling, dsp, constraints, false);
- *       sparsity_pattern.copy_from(dsp);
- *     }
- * 
- *     tangent_matrix.reinit(sparsity_pattern);
- * 
- * @endcode
- * 
- * We then set up storage vectors
- * 
- * @code
- *     system_rhs.reinit(dofs_per_block);
- *     system_rhs.collect_sizes();
- * 
- *     solution_n.reinit(dofs_per_block);
- *     solution_n.collect_sizes();
- * 
- * @endcode
- * 
- * ...and finally set up the quadrature
- * point history:
- * 
- * @code
- *     setup_qph();
- * 
- *     timer.leave_subsection();
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Soliddetermine_component_extractors"></a> 
- * <h4>Solid::determine_component_extractors</h4>
- * Next we compute some information from the FE system that describes which
- * local element DOFs are attached to which block component.  This is used
- * later to extract sub-blocks from the global matrix.
- *   
-
- * 
- * In essence, all we need is for the FESystem object to indicate to which
- * block component a DOF on the reference cell is attached to.  Currently, the
- * interpolation fields are setup such that 0 indicates a displacement DOF, 1
- * a pressure DOF and 2 a dilatation DOF.
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::determine_component_extractors()
- *   {
- *     element_indices_u.clear();
- *     element_indices_p.clear();
- *     element_indices_J.clear();
- * 
- *     for (unsigned int k = 0; k < fe.n_dofs_per_cell(); ++k)
- *       {
- *         const unsigned int k_group = fe.system_to_base_index(k).first.first;
- *         if (k_group == u_dof)
- *           element_indices_u.push_back(k);
- *         else if (k_group == p_dof)
- *           element_indices_p.push_back(k);
- *         else if (k_group == J_dof)
- *           element_indices_J.push_back(k);
- *         else
- *           {
- *             Assert(k_group <= J_dof, ExcInternalError());
- *           }
- *       }
- *   }
- * 
- * @endcode
- * 
- * 
- * <a name="Solidsetup_qph"></a> 
- * <h4>Solid::setup_qph</h4>
- * The method used to store quadrature information is already described in
- * step-18. Here we implement a similar setup for a SMP machine.
- *   
-
- * 
- * Firstly the actual QPH data objects are created. This must be done only
- * once the grid is refined to its finest level.
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::setup_qph()
- *   {
- *     std::cout << "    Setting up quadrature point data..." << std::endl;
- * 
- *     quadrature_point_history.initialize(triangulation.begin_active(),
- *                                         triangulation.end(),
- *                                         n_q_points);
- * 
- * @endcode
- * 
- * Next we setup the initial quadrature point data.
- * Note that when the quadrature point data is retrieved,
- * it is returned as a vector of smart pointers.
- * 
- * @code
- *     for (const auto &cell : triangulation.active_cell_iterators())
- *       {
- *         const std::vector<std::shared_ptr<PointHistory<dim>>> lqph =
- *           quadrature_point_history.get_data(cell);
- *         Assert(lqph.size() == n_q_points, ExcInternalError());
- * 
- *         for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
- *           lqph[q_point]->setup_lqp(parameters);
- *       }
- *   }
- * 
- * @endcode
- * 
- * 
- * <a name="Solidupdate_qph_incremental"></a> 
- * <h4>Solid::update_qph_incremental</h4>
- * As the update of QP information occurs frequently and involves a number of
- * expensive operations, we define a multithreaded approach to distributing
- * the task across a number of CPU cores.
- *   
-
- * 
- * To start this, we first we need to obtain the total solution as it stands
- * at this Newton increment and then create the initial copy of the scratch
- * and copy data objects:
- * 
- * @code
- *   template <int dim>
- *   void
- *   Solid<dim>::update_qph_incremental(const BlockVector<double> &solution_delta)
- *   {
- *     timer.enter_subsection("Update QPH data");
- *     std::cout << " UQPH " << std::flush;
- * 
- *     const BlockVector<double> solution_total(
- *       get_total_solution(solution_delta));
- * 
- *     const UpdateFlags uf_UQPH(update_values | update_gradients);
- *     PerTaskData_UQPH  per_task_data_UQPH;
- *     ScratchData_UQPH  scratch_data_UQPH(fe, qf_cell, uf_UQPH, solution_total);
- * 
- * @endcode
- * 
- * We then pass them and the one-cell update function to the WorkStream to
- * be processed:
- * 
- * @code
- *     WorkStream::run(dof_handler.active_cell_iterators(),
- *                     *this,
- *                     &Solid::update_qph_incremental_one_cell,
- *                     &Solid::copy_local_to_global_UQPH,
- *                     scratch_data_UQPH,
- *                     per_task_data_UQPH);
- * 
- *     timer.leave_subsection();
- *   }
- * 
- * 
- * @endcode
- * 
- * Now we describe how we extract data from the solution vector and pass it
- * along to each QP storage object for processing.
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::update_qph_incremental_one_cell(
- *     const typename DoFHandler<dim>::active_cell_iterator &cell,
- *     ScratchData_UQPH &                                    scratch,
- *     PerTaskData_UQPH & /*data*/)
- *   {
- *     const std::vector<std::shared_ptr<PointHistory<dim>>> lqph =
- *       quadrature_point_history.get_data(cell);
- *     Assert(lqph.size() == n_q_points, ExcInternalError());
- * 
- *     Assert(scratch.solution_grads_u_total.size() == n_q_points,
- *            ExcInternalError());
- *     Assert(scratch.solution_values_p_total.size() == n_q_points,
- *            ExcInternalError());
- *     Assert(scratch.solution_values_J_total.size() == n_q_points,
- *            ExcInternalError());
- * 
- *     scratch.reset();
- * 
- * @endcode
- * 
- * We first need to find the values and gradients at quadrature points
- * inside the current cell and then we update each local QP using the
- * displacement gradient and total pressure and dilatation solution
- * values:
- * 
- * @code
- *     scratch.fe_values.reinit(cell);
- *     scratch.fe_values[u_fe].get_function_gradients(
- *       scratch.solution_total, scratch.solution_grads_u_total);
- *     scratch.fe_values[p_fe].get_function_values(
- *       scratch.solution_total, scratch.solution_values_p_total);
- *     scratch.fe_values[J_fe].get_function_values(
- *       scratch.solution_total, scratch.solution_values_J_total);
- * 
- *     for (const unsigned int q_point :
- *          scratch.fe_values.quadrature_point_indices())
- *       lqph[q_point]->update_values(scratch.solution_grads_u_total[q_point],
- *                                    scratch.solution_values_p_total[q_point],
- *                                    scratch.solution_values_J_total[q_point]);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Solidsolve_nonlinear_timestep"></a> 
- * <h4>Solid::solve_nonlinear_timestep</h4>
- * 
-
- * 
- * The next function is the driver method for the Newton-Raphson scheme. At
- * its top we create a new vector to store the current Newton update step,
- * reset the error storage objects and print solver header.
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::solve_nonlinear_timestep(BlockVector<double> &solution_delta)
- *   {
- *     std::cout << std::endl
- *               << "Timestep " << time.get_timestep() << " @ " << time.current()
- *               << "s" << std::endl;
- * 
- *     BlockVector<double> newton_update(dofs_per_block);
- * 
- *     error_residual.reset();
- *     error_residual_0.reset();
- *     error_residual_norm.reset();
- *     error_update.reset();
- *     error_update_0.reset();
- *     error_update_norm.reset();
- * 
- *     print_conv_header();
- * 
- * @endcode
- * 
- * We now perform a number of Newton iterations to iteratively solve the
- * nonlinear problem.  Since the problem is fully nonlinear and we are
- * using a full Newton method, the data stored in the tangent matrix and
- * right-hand side vector is not reusable and must be cleared at each
- * Newton step. We then initially build the linear system and
- * check for convergence (and store this value in the first iteration).
- * The unconstrained DOFs of the rhs vector hold the out-of-balance
- * forces, and collectively determine whether or not the equilibrium
- * solution has been attained.
- *     
-
- * 
- * Although for this particular problem we could potentially construct the
- * RHS vector before assembling the system matrix, for the sake of
- * extensibility we choose not to do so. The benefit to assembling the RHS
- * vector and system matrix separately is that the latter is an expensive
- * operation and we can potentially avoid an extra assembly process by not
- * assembling the tangent matrix when convergence is attained. However, this
- * makes parallelizing the code using MPI more difficult. Furthermore, when
- * extending the problem to the transient case additional contributions to
- * the RHS may result from the time discretization and application of
- * constraints for the velocity and acceleration fields.
- * 
- * @code
- *     unsigned int newton_iteration = 0;
- *     for (; newton_iteration < parameters.max_iterations_NR; ++newton_iteration)
- *       {
- *         std::cout << " " << std::setw(2) << newton_iteration << " "
- *                   << std::flush;
- * 
- * @endcode
- * 
- * We construct the linear system, but hold off on solving it
- * (a step that should be significantly more expensive than assembly):
- * 
- * @code
- *         make_constraints(newton_iteration);
- *         assemble_system();
- * 
- * @endcode
- * 
- * We can now determine the normalized residual error and check for
- * solution convergence:
- * 
- * @code
- *         get_error_residual(error_residual);
- *         if (newton_iteration == 0)
- *           error_residual_0 = error_residual;
- * 
- *         error_residual_norm = error_residual;
- *         error_residual_norm.normalize(error_residual_0);
- * 
- *         if (newton_iteration > 0 && error_update_norm.u <= parameters.tol_u &&
- *             error_residual_norm.u <= parameters.tol_f)
- *           {
- *             std::cout << " CONVERGED! " << std::endl;
- *             print_conv_footer();
- * 
- *             break;
- *           }
- * 
- * @endcode
- * 
- * If we have decided that we want to continue with the iteration, we
- * solve the linearized system:
- * 
- * @code
- *         const std::pair<unsigned int, double> lin_solver_output =
- *           solve_linear_system(newton_update);
- * 
- * @endcode
- * 
- * We can now determine the normalized Newton update error:
- * 
- * @code
- *         get_error_update(newton_update, error_update);
- *         if (newton_iteration == 0)
- *           error_update_0 = error_update;
- * 
- *         error_update_norm = error_update;
- *         error_update_norm.normalize(error_update_0);
- * 
- * @endcode
- * 
- * Lastly, since we implicitly accept the solution step we can perform
- * the actual update of the solution increment for the current time
- * step, update all quadrature point information pertaining to
- * this new displacement and stress state and continue iterating:
- * 
- * @code
- *         solution_delta += newton_update;
- *         update_qph_incremental(solution_delta);
- * 
- *         std::cout << " | " << std::fixed << std::setprecision(3) << std::setw(7)
- *                   << std::scientific << lin_solver_output.first << "  "
- *                   << lin_solver_output.second << "  "
- *                   << error_residual_norm.norm << "  " << error_residual_norm.u
- *                   << "  " << error_residual_norm.p << "  "
- *                   << error_residual_norm.J << "  " << error_update_norm.norm
- *                   << "  " << error_update_norm.u << "  " << error_update_norm.p
- *                   << "  " << error_update_norm.J << "  " << std::endl;
- *       }
- * 
- * @endcode
- * 
- * At the end, if it turns out that we have in fact done more iterations
- * than the parameter file allowed, we raise an exception that can be
- * caught in the main() function. The call <code>AssertThrow(condition,
- * exc_object)</code> is in essence equivalent to <code>if (!cond) throw
- * exc_object;</code> but the former form fills certain fields in the
- * exception object that identify the location (filename and line number)
- * where the exception was raised to make it simpler to identify where the
- * problem happened.
- * 
- * @code
- *     AssertThrow(newton_iteration < parameters.max_iterations_NR,
- *                 ExcMessage("No convergence in nonlinear solver!"));
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Solidprint_conv_headerandSolidprint_conv_footer"></a> 
- * <h4>Solid::print_conv_header and Solid::print_conv_footer</h4>
- * 
-
- * 
- * This program prints out data in a nice table that is updated
- * on a per-iteration basis. The next two functions set up the table
- * header and footer:
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::print_conv_header()
- *   {
- *     static const unsigned int l_width = 150;
- * 
- *     for (unsigned int i = 0; i < l_width; ++i)
- *       std::cout << "_";
- *     std::cout << std::endl;
- * 
- *     std::cout << "               SOLVER STEP               "
- *               << " |  LIN_IT   LIN_RES    RES_NORM    "
- *               << " RES_U     RES_P      RES_J     NU_NORM     "
- *               << " NU_U       NU_P       NU_J " << std::endl;
- * 
- *     for (unsigned int i = 0; i < l_width; ++i)
- *       std::cout << "_";
- *     std::cout << std::endl;
- *   }
- * 
- * 
- * 
- *   template <int dim>
- *   void Solid<dim>::print_conv_footer()
- *   {
- *     static const unsigned int l_width = 150;
- * 
- *     for (unsigned int i = 0; i < l_width; ++i)
- *       std::cout << "_";
- *     std::cout << std::endl;
- * 
- *     const std::pair<double, double> error_dil = get_error_dilation();
- * 
- *     std::cout << "Relative errors:" << std::endl
- *               << "Displacement:\t" << error_update.u / error_update_0.u
- *               << std::endl
- *               << "Force: \t\t" << error_residual.u / error_residual_0.u
- *               << std::endl
- *               << "Dilatation:\t" << error_dil.first << std::endl
- *               << "v / V_0:\t" << error_dil.second * vol_reference << " / "
- *               << vol_reference << " = " << error_dil.second << std::endl;
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Solidget_error_dilation"></a> 
- * <h4>Solid::get_error_dilation</h4>
- * 
-
- * 
- * Calculate the volume of the domain in the spatial configuration
- * 
- * @code
- *   template <int dim>
- *   double Solid<dim>::compute_vol_current() const
- *   {
- *     double vol_current = 0.0;
- * 
- *     FEValues<dim> fe_values(fe, qf_cell, update_JxW_values);
- * 
- *     for (const auto &cell : triangulation.active_cell_iterators())
- *       {
- *         fe_values.reinit(cell);
- * 
- * @endcode
- * 
- * In contrast to that which was previously called for,
- * in this instance the quadrature point data is specifically
- * non-modifiable since we will only be accessing data.
- * We ensure that the right get_data function is called by
- * marking this update function as constant.
- * 
- * @code
- *         const std::vector<std::shared_ptr<const PointHistory<dim>>> lqph =
- *           quadrature_point_history.get_data(cell);
- *         Assert(lqph.size() == n_q_points, ExcInternalError());
- * 
- *         for (const unsigned int q_point : fe_values.quadrature_point_indices())
- *           {
- *             const double det_F_qp = lqph[q_point]->get_det_F();
- *             const double JxW      = fe_values.JxW(q_point);
- * 
- *             vol_current += det_F_qp * JxW;
- *           }
- *       }
- *     Assert(vol_current > 0.0, ExcInternalError());
- *     return vol_current;
- *   }
- * 
- * @endcode
- * 
- * Calculate how well the dilatation $\widetilde{J}$ agrees with $J
- * \dealcoloneq \textrm{det}\ \mathbf{F}$ from the $L^2$ error $ \bigl[
- * \int_{\Omega_0} {[ J - \widetilde{J}]}^{2}\textrm{d}V \bigr]^{1/2}$.
- * We also return the ratio of the current volume of the
- * domain to the reference volume. This is of interest for incompressible
- * media where we want to check how well the isochoric constraint has been
- * enforced.
- * 
- * @code
- *   template <int dim>
- *   std::pair<double, double> Solid<dim>::get_error_dilation() const
- *   {
- *     double dil_L2_error = 0.0;
- * 
- *     FEValues<dim> fe_values(fe, qf_cell, update_JxW_values);
- * 
- *     for (const auto &cell : triangulation.active_cell_iterators())
- *       {
- *         fe_values.reinit(cell);
- * 
- *         const std::vector<std::shared_ptr<const PointHistory<dim>>> lqph =
- *           quadrature_point_history.get_data(cell);
- *         Assert(lqph.size() == n_q_points, ExcInternalError());
- * 
- *         for (const unsigned int q_point : fe_values.quadrature_point_indices())
- *           {
- *             const double det_F_qp   = lqph[q_point]->get_det_F();
- *             const double J_tilde_qp = lqph[q_point]->get_J_tilde();
- *             const double the_error_qp_squared =
- *               std::pow((det_F_qp - J_tilde_qp), 2);
- *             const double JxW = fe_values.JxW(q_point);
- * 
- *             dil_L2_error += the_error_qp_squared * JxW;
- *           }
- *       }
- * 
- *     return std::make_pair(std::sqrt(dil_L2_error),
- *                           compute_vol_current() / vol_reference);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Solidget_error_residual"></a> 
- * <h4>Solid::get_error_residual</h4>
- * 
-
- * 
- * Determine the true residual error for the problem.  That is, determine the
- * error in the residual for the unconstrained degrees of freedom.  Note that
- * to do so, we need to ignore constrained DOFs by setting the residual in
- * these vector components to zero.
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::get_error_residual(Errors &error_residual)
- *   {
- *     BlockVector<double> error_res(dofs_per_block);
- * 
- *     for (unsigned int i = 0; i < dof_handler.n_dofs(); ++i)
- *       if (!constraints.is_constrained(i))
- *         error_res(i) = system_rhs(i);
- * 
- *     error_residual.norm = error_res.l2_norm();
- *     error_residual.u    = error_res.block(u_dof).l2_norm();
- *     error_residual.p    = error_res.block(p_dof).l2_norm();
- *     error_residual.J    = error_res.block(J_dof).l2_norm();
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Solidget_error_update"></a> 
- * <h4>Solid::get_error_update</h4>
- * 
-
- * 
- * Determine the true Newton update error for the problem
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::get_error_update(const BlockVector<double> &newton_update,
- *                                     Errors &                   error_update)
- *   {
- *     BlockVector<double> error_ud(dofs_per_block);
- *     for (unsigned int i = 0; i < dof_handler.n_dofs(); ++i)
- *       if (!constraints.is_constrained(i))
- *         error_ud(i) = newton_update(i);
- * 
- *     error_update.norm = error_ud.l2_norm();
- *     error_update.u    = error_ud.block(u_dof).l2_norm();
- *     error_update.p    = error_ud.block(p_dof).l2_norm();
- *     error_update.J    = error_ud.block(J_dof).l2_norm();
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Solidget_total_solution"></a> 
- * <h4>Solid::get_total_solution</h4>
- * 
-
- * 
- * This function provides the total solution, which is valid at any Newton
- * step. This is required as, to reduce computational error, the total
- * solution is only updated at the end of the timestep.
- * 
- * @code
- *   template <int dim>
- *   BlockVector<double> Solid<dim>::get_total_solution(
- *     const BlockVector<double> &solution_delta) const
- *   {
- *     BlockVector<double> solution_total(solution_n);
- *     solution_total += solution_delta;
- *     return solution_total;
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Solidassemble_system"></a> 
- * <h4>Solid::assemble_system</h4>
- * 
-
- * 
- * Since we use TBB for assembly, we simply setup a copy of the
- * data structures required for the process and pass them, along
- * with the assembly functions to the WorkStream object for processing. Note
- * that we must ensure that the matrix and RHS vector are reset before any
- * assembly operations can occur. Furthermore, since we are describing a
- * problem with Neumann BCs, we will need the face normals and so must specify
- * this in the face update flags.
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::assemble_system()
- *   {
- *     timer.enter_subsection("Assemble system");
- *     std::cout << " ASM_SYS " << std::flush;
- * 
- *     tangent_matrix = 0.0;
- *     system_rhs     = 0.0;
- * 
- *     const UpdateFlags uf_cell(update_values | update_gradients |
- *                               update_JxW_values);
- *     const UpdateFlags uf_face(update_values | update_normal_vectors |
- *                               update_JxW_values);
- * 
- *     PerTaskData_ASM per_task_data(dofs_per_cell);
- *     ScratchData_ASM scratch_data(fe, qf_cell, uf_cell, qf_face, uf_face);
- * 
- * @endcode
- * 
- * The syntax used here to pass data to the WorkStream class
- * is discussed in step-13.
- * 
- * @code
- *     WorkStream::run(
- *       dof_handler.active_cell_iterators(),
- *       [this](const typename DoFHandler<dim>::active_cell_iterator &cell,
- *              ScratchData_ASM &                                     scratch,
- *              PerTaskData_ASM &                                     data) {
- *         this->assemble_system_one_cell(cell, scratch, data);
- *       },
- *       [this](const PerTaskData_ASM &data) {
- *         this->constraints.distribute_local_to_global(data.cell_matrix,
- *                                                      data.cell_rhs,
- *                                                      data.local_dof_indices,
- *                                                      tangent_matrix,
- *                                                      system_rhs);
- *       },
- *       scratch_data,
- *       per_task_data);
- * 
- *     timer.leave_subsection();
- *   }
- * 
- * @endcode
- * 
- * Of course, we still have to define how we assemble the tangent matrix
- * contribution for a single cell.  We first need to reset and initialize some
- * of the scratch data structures and retrieve some basic information
- * regarding the DOF numbering on this cell.  We can precalculate the cell
- * shape function values and gradients. Note that the shape function gradients
- * are defined with regard to the current configuration.  That is
- * $\textrm{grad}\ \boldsymbol{\varphi} = \textrm{Grad}\ \boldsymbol{\varphi}
- * \ \mathbf{F}^{-1}$.
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::assemble_system_one_cell(
- *     const typename DoFHandler<dim>::active_cell_iterator &cell,
- *     ScratchData_ASM &                                     scratch,
- *     PerTaskData_ASM &                                     data) const
- *   {
- *     data.reset();
- *     scratch.reset();
- *     scratch.fe_values.reinit(cell);
- *     cell->get_dof_indices(data.local_dof_indices);
- * 
- *     const std::vector<std::shared_ptr<const PointHistory<dim>>> lqph =
- *       quadrature_point_history.get_data(cell);
- *     Assert(lqph.size() == n_q_points, ExcInternalError());
- * 
- *     for (const unsigned int q_point :
- *          scratch.fe_values.quadrature_point_indices())
- *       {
- *         const Tensor<2, dim> F_inv = lqph[q_point]->get_F_inv();
- *         for (const unsigned int k : scratch.fe_values.dof_indices())
- *           {
- *             const unsigned int k_group = fe.system_to_base_index(k).first.first;
- * 
- *             if (k_group == u_dof)
- *               {
- *                 scratch.grad_Nx[q_point][k] =
- *                   scratch.fe_values[u_fe].gradient(k, q_point) * F_inv;
- *                 scratch.symm_grad_Nx[q_point][k] =
- *                   symmetrize(scratch.grad_Nx[q_point][k]);
- *               }
- *             else if (k_group == p_dof)
- *               scratch.Nx[q_point][k] =
- *                 scratch.fe_values[p_fe].value(k, q_point);
- *             else if (k_group == J_dof)
- *               scratch.Nx[q_point][k] =
- *                 scratch.fe_values[J_fe].value(k, q_point);
- *             else
- *               Assert(k_group <= J_dof, ExcInternalError());
- *           }
- *       }
- * 
- * @endcode
- * 
- * Now we build the local cell stiffness matrix and RHS vector. Since the
- * global and local system matrices are symmetric, we can exploit this
- * property by building only the lower half of the local matrix and copying
- * the values to the upper half.  So we only assemble half of the
- * $\mathsf{\mathbf{k}}_{uu}$, $\mathsf{\mathbf{k}}_{\widetilde{p}
- * \widetilde{p}} = \mathbf{0}$, $\mathsf{\mathbf{k}}_{\widetilde{J}
- * \widetilde{J}}$ blocks, while the whole
- * $\mathsf{\mathbf{k}}_{\widetilde{p} \widetilde{J}}$,
- * $\mathsf{\mathbf{k}}_{u \widetilde{J}} = \mathbf{0}$,
- * $\mathsf{\mathbf{k}}_{u \widetilde{p}}$ blocks are built.
- *     
-
- * 
- * In doing so, we first extract some configuration dependent variables
- * from our quadrature history objects for the current quadrature point.
- * 
- * @code
- *     for (const unsigned int q_point :
- *          scratch.fe_values.quadrature_point_indices())
- *       {
- *         const SymmetricTensor<2, dim> tau     = lqph[q_point]->get_tau();
- *         const Tensor<2, dim>          tau_ns  = lqph[q_point]->get_tau();
- *         const SymmetricTensor<4, dim> Jc      = lqph[q_point]->get_Jc();
- *         const double                  det_F   = lqph[q_point]->get_det_F();
- *         const double                  p_tilde = lqph[q_point]->get_p_tilde();
- *         const double                  J_tilde = lqph[q_point]->get_J_tilde();
- *         const double dPsi_vol_dJ   = lqph[q_point]->get_dPsi_vol_dJ();
- *         const double d2Psi_vol_dJ2 = lqph[q_point]->get_d2Psi_vol_dJ2();
- *         const SymmetricTensor<2, dim> &I =
- *           Physics::Elasticity::StandardTensors<dim>::I;
- * 
- * @endcode
- * 
- * These two tensors store some precomputed data. Their use will
- * explained shortly.
- * 
- * @code
- *         SymmetricTensor<2, dim> symm_grad_Nx_i_x_Jc;
- *         Tensor<1, dim>          grad_Nx_i_comp_i_x_tau;
- * 
- * @endcode
- * 
- * Next we define some aliases to make the assembly process easier to
- * follow.
- * 
- * @code
- *         const std::vector<double> &                 N = scratch.Nx[q_point];
- *         const std::vector<SymmetricTensor<2, dim>> &symm_grad_Nx =
- *           scratch.symm_grad_Nx[q_point];
- *         const std::vector<Tensor<2, dim>> &grad_Nx = scratch.grad_Nx[q_point];
- *         const double                       JxW = scratch.fe_values.JxW(q_point);
- * 
- *         for (const unsigned int i : scratch.fe_values.dof_indices())
- *           {
- *             const unsigned int component_i =
- *               fe.system_to_component_index(i).first;
- *             const unsigned int i_group = fe.system_to_base_index(i).first.first;
- * 
- * @endcode
- * 
- * We first compute the contributions
- * from the internal forces.  Note, by
- * definition of the rhs as the negative
- * of the residual, these contributions
- * are subtracted.
- * 
- * @code
- *             if (i_group == u_dof)
- *               data.cell_rhs(i) -= (symm_grad_Nx[i] * tau) * JxW;
- *             else if (i_group == p_dof)
- *               data.cell_rhs(i) -= N[i] * (det_F - J_tilde) * JxW;
- *             else if (i_group == J_dof)
- *               data.cell_rhs(i) -= N[i] * (dPsi_vol_dJ - p_tilde) * JxW;
- *             else
- *               Assert(i_group <= J_dof, ExcInternalError());
- * 
- * @endcode
- * 
- * Before we go into the inner loop, we have one final chance to
- * introduce some optimizations. We've already taken into account
- * the symmetry of the system, and we can now precompute some
- * common terms that are repeatedly applied in the inner loop.
- * We won't be excessive here, but will rather focus on expensive
- * operations, namely those involving the rank-4 material stiffness
- * tensor and the rank-2 stress tensor.
- *             
-
- * 
- * What we may observe is that both of these tensors are contracted
- * with shape function gradients indexed on the "i" DoF. This
- * implies that this particular operation remains constant as we
- * loop over the "j" DoF. For that reason, we can extract this from
- * the inner loop and save the many operations that, for each
- * quadrature point and DoF index "i" and repeated over index "j"
- * are required to double contract a rank-2 symmetric tensor with a
- * rank-4 symmetric tensor, and a rank-1 tensor with a rank-2
- * tensor.
- *             
-
- * 
- * At the loss of some readability, this small change will reduce
- * the assembly time of the symmetrized system by about half when
- * using the simulation default parameters, and becomes more
- * significant as the h-refinement level increases.
- * 
- * @code
- *             if (i_group == u_dof)
- *               {
- *                 symm_grad_Nx_i_x_Jc    = symm_grad_Nx[i] * Jc;
- *                 grad_Nx_i_comp_i_x_tau = grad_Nx[i][component_i] * tau_ns;
- *               }
- * 
- * @endcode
- * 
- * Now we're prepared to compute the tangent matrix contributions:
- * 
- * @code
- *             for (const unsigned int j :
- *                  scratch.fe_values.dof_indices_ending_at(i))
- *               {
- *                 const unsigned int component_j =
- *                   fe.system_to_component_index(j).first;
- *                 const unsigned int j_group =
- *                   fe.system_to_base_index(j).first.first;
- * 
- * @endcode
- * 
- * This is the $\mathsf{\mathbf{k}}_{uu}$
- * contribution. It comprises a material contribution, and a
- * geometrical stress contribution which is only added along
- * the local matrix diagonals:
- * 
- * @code
- *                 if ((i_group == j_group) && (i_group == u_dof))
- *                   {
- * @endcode
- * 
- * The material contribution:
- * 
- * @code
- *                     data.cell_matrix(i, j) += symm_grad_Nx_i_x_Jc *  
- *                                               symm_grad_Nx[j] * JxW; 
- * 
- * @endcode
- * 
- * The geometrical stress contribution:
- * 
- * @code
- *                     if (component_i == component_j)
- *                       data.cell_matrix(i, j) +=
- *                         grad_Nx_i_comp_i_x_tau * grad_Nx[j][component_j] * JxW;
- *                   }
- * @endcode
- * 
- * Next is the $\mathsf{\mathbf{k}}_{ \widetilde{p} u}$
- * contribution
- * 
- * @code
- *                 else if ((i_group == p_dof) && (j_group == u_dof))
- *                   {
- *                     data.cell_matrix(i, j) += N[i] * det_F *               
- *                                               (symm_grad_Nx[j] * I) * JxW; 
- *                   }
- * @endcode
- * 
- * and lastly the $\mathsf{\mathbf{k}}_{ \widetilde{J}
- * \widetilde{p}}$ and $\mathsf{\mathbf{k}}_{ \widetilde{J}
- * \widetilde{J}}$ contributions:
- * 
- * @code
- *                 else if ((i_group == J_dof) && (j_group == p_dof))
- *                   data.cell_matrix(i, j) -= N[i] * N[j] * JxW;
- *                 else if ((i_group == j_group) && (i_group == J_dof))
- *                   data.cell_matrix(i, j) += N[i] * d2Psi_vol_dJ2 * N[j] * JxW;
- *                 else
- *                   Assert((i_group <= J_dof) && (j_group <= J_dof),
- *                          ExcInternalError());
- *               }
- *           }
- *       }
- * 
- * @endcode
- * 
- * Next we assemble the Neumann contribution. We first check to see it the
- * cell face exists on a boundary on which a traction is applied and add
- * the contribution if this is the case.
- * 
- * @code
- *     for (const auto &face : cell->face_iterators())
- *       if (face->at_boundary() && face->boundary_id() == 6)
- *         {
- *           scratch.fe_face_values.reinit(cell, face);
- * 
- *           for (const unsigned int f_q_point :
- *                scratch.fe_face_values.quadrature_point_indices())
- *             {
- *               const Tensor<1, dim> &N =
- *                 scratch.fe_face_values.normal_vector(f_q_point);
- * 
- * @endcode
- * 
- * Using the face normal at this quadrature point we specify the
- * traction in reference configuration. For this problem, a
- * defined pressure is applied in the reference configuration.
- * The direction of the applied traction is assumed not to
- * evolve with the deformation of the domain. The traction is
- * defined using the first Piola-Kirchhoff stress is simply
- * $\mathbf{t} = \mathbf{P}\mathbf{N} = [p_0 \mathbf{I}]
- * \mathbf{N} = p_0 \mathbf{N}$ We use the time variable to
- * linearly ramp up the pressure load.
- *               
-
- * 
- * Note that the contributions to the right hand side vector we
- * compute here only exist in the displacement components of the
- * vector.
- * 
- * @code
- *               static const double p0 =
- *                 -4.0 / (parameters.scale * parameters.scale);
- *               const double         time_ramp = (time.current() / time.end());
- *               const double         pressure  = p0 * parameters.p_p0 * time_ramp;
- *               const Tensor<1, dim> traction  = pressure * N;
- * 
- *               for (const unsigned int i : scratch.fe_values.dof_indices())
- *                 {
- *                   const unsigned int i_group =
- *                     fe.system_to_base_index(i).first.first;
- * 
- *                   if (i_group == u_dof)
- *                     {
- *                       const unsigned int component_i =
- *                         fe.system_to_component_index(i).first;
- *                       const double Ni =
- *                         scratch.fe_face_values.shape_value(i, f_q_point);
- *                       const double JxW = scratch.fe_face_values.JxW(f_q_point);
- * 
- *                       data.cell_rhs(i) += (Ni * traction[component_i]) * JxW;
- *                     }
- *                 }
- *             }
- *         }
- * 
- * @endcode
- * 
- * Finally, we need to copy the lower half of the local matrix into the
- * upper half:
- * 
- * @code
- *     for (const unsigned int i : scratch.fe_values.dof_indices())
- *       for (const unsigned int j :
- *            scratch.fe_values.dof_indices_starting_at(i + 1))
- *         data.cell_matrix(i, j) = data.cell_matrix(j, i);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Solidmake_constraints"></a> 
- * <h4>Solid::make_constraints</h4>
- * The constraints for this problem are simple to describe.
- * In this particular example, the boundary values will be calculated for
- * the two first iterations of Newton's algorithm. In general, one would
- * build non-homogeneous constraints in the zeroth iteration (that is, when
- * `apply_dirichlet_bc == true` in the code block that follows) and build
- * only the corresponding homogeneous constraints in the following step. While
- * the current example has only homogeneous constraints, previous experiences
- * have shown that a common error is forgetting to add the extra condition
- * when refactoring the code to specific uses. This could lead to errors that
- * are hard to debug. In this spirit, we choose to make the code more verbose
- * in terms of what operations are performed at each Newton step.
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::make_constraints(const int it_nr)
- *   {
- * @endcode
- * 
- * Since we (a) are dealing with an iterative Newton method, (b) are using
- * an incremental formulation for the displacement, and (c) apply the
- * constraints to the incremental displacement field, any non-homogeneous
- * constraints on the displacement update should only be specified at the
- * zeroth iteration. No subsequent contributions are to be made since the
- * constraints will be exactly satisfied after that iteration.
- * 
- * @code
- *     const bool apply_dirichlet_bc = (it_nr == 0);
- * 
- * @endcode
- * 
- * Furthermore, after the first Newton iteration within a timestep, the
- * constraints remain the same and we do not need to modify or rebuild them
- * so long as we do not clear the @p constraints object.
- * 
- * @code
- *     if (it_nr > 1)
- *       {
- *         std::cout << " --- " << std::flush;
- *         return;
- *       }
- * 
- *     std::cout << " CST " << std::flush;
- * 
- *     if (apply_dirichlet_bc)
- *       {
- * @endcode
- * 
- * At the zeroth Newton iteration we wish to apply the full set of
- * non-homogeneous and homogeneous constraints that represent the
- * boundary conditions on the displacement increment. Since in general
- * the constraints may be different at each time step, we need to clear
- * the constraints matrix and completely rebuild it. An example case
- * would be if a surface is accelerating; in such a scenario the change
- * in displacement is non-constant between each time step.
- * 
- * @code
- *         constraints.clear();
- * 
- * @endcode
- * 
- * The boundary conditions for the indentation problem in 3D are as
- * follows: On the -x, -y and -z faces (IDs 0,2,4) we set up a symmetry
- * condition to allow only planar movement while the +x and +z faces
- * (IDs 1,5) are traction free. In this contrived problem, part of the
- * +y face (ID 3) is set to have no motion in the x- and z-component.
- * Finally, as described earlier, the other part of the +y face has an
- * the applied pressure but is also constrained in the x- and
- * z-directions.
- *         
-
- * 
- * In the following, we will have to tell the function interpolation
- * boundary values which components of the solution vector should be
- * constrained (i.e., whether it's the x-, y-, z-displacements or
- * combinations thereof). This is done using ComponentMask objects (see
- * @ref GlossComponentMask) which we can get from the finite element if we
- * provide it with an extractor object for the component we wish to
- * select. To this end we first set up such extractor objects and later
- * use it when generating the relevant component masks:
- * 
- * @code
- *         const FEValuesExtractors::Scalar x_displacement(0);
- *         const FEValuesExtractors::Scalar y_displacement(1);
- * 
- *         {
- *           const int boundary_id = 0;
- * 
- *           VectorTools::interpolate_boundary_values(
- *             dof_handler,
- *             boundary_id,
- *             Functions::ZeroFunction<dim>(n_components),
- *             constraints,
- *             fe.component_mask(x_displacement));
- *         }
- *         {
- *           const int boundary_id = 2;
- * 
- *           VectorTools::interpolate_boundary_values(
- *             dof_handler,
- *             boundary_id,
- *             Functions::ZeroFunction<dim>(n_components),
- *             constraints,
- *             fe.component_mask(y_displacement));
- *         }
- * 
- *         if (dim == 3)
- *           {
- *             const FEValuesExtractors::Scalar z_displacement(2);
- * 
- *             {
- *               const int boundary_id = 3;
- * 
- *               VectorTools::interpolate_boundary_values(
- *                 dof_handler,
- *                 boundary_id,
- *                 Functions::ZeroFunction<dim>(n_components),
- *                 constraints,
- *                 (fe.component_mask(x_displacement) |
- *                  fe.component_mask(z_displacement)));
- *             }
- *             {
- *               const int boundary_id = 4;
- * 
- *               VectorTools::interpolate_boundary_values(
- *                 dof_handler,
- *                 boundary_id,
- *                 Functions::ZeroFunction<dim>(n_components),
- *                 constraints,
- *                 fe.component_mask(z_displacement));
- *             }
- * 
- *             {
- *               const int boundary_id = 6;
- * 
- *               VectorTools::interpolate_boundary_values(
- *                 dof_handler,
- *                 boundary_id,
- *                 Functions::ZeroFunction<dim>(n_components),
- *                 constraints,
- *                 (fe.component_mask(x_displacement) |
- *                  fe.component_mask(z_displacement)));
- *             }
- *           }
- *         else
- *           {
- *             {
- *               const int boundary_id = 3;
- * 
- *               VectorTools::interpolate_boundary_values(
- *                 dof_handler,
- *                 boundary_id,
- *                 Functions::ZeroFunction<dim>(n_components),
- *                 constraints,
- *                 (fe.component_mask(x_displacement)));
- *             }
- *             {
- *               const int boundary_id = 6;
- * 
- *               VectorTools::interpolate_boundary_values(
- *                 dof_handler,
- *                 boundary_id,
- *                 Functions::ZeroFunction<dim>(n_components),
- *                 constraints,
- *                 (fe.component_mask(x_displacement)));
- *             }
- *           }
- *       }
- *     else
- *       {
- * @endcode
- * 
- * As all Dirichlet constraints are fulfilled exactly after the zeroth
- * Newton iteration, we want to ensure that no further modification are
- * made to those entries. This implies that we want to convert
- * all non-homogeneous Dirichlet constraints into homogeneous ones.
- *         
-
- * 
- * In this example the procedure to do this is quite straightforward,
- * and in fact we can (and will) circumvent any unnecessary operations
- * when only homogeneous boundary conditions are applied.
- * In a more general problem one should be mindful of hanging node
- * and periodic constraints, which may also introduce some
- * inhomogeneities. It might then be advantageous to keep disparate
- * objects for the different types of constraints, and merge them
- * together once the homogeneous Dirichlet constraints have been
- * constructed.
- * 
- * @code
- *         if (constraints.has_inhomogeneities())
- *           {
- * @endcode
- * 
- * Since the affine constraints were finalized at the previous
- * Newton iteration, they may not be modified directly. So
- * we need to copy them to another temporary object and make
- * modification there. Once we're done, we'll transfer them
- * back to the main @p constraints object.
- * 
- * @code
- *             AffineConstraints<double> homogeneous_constraints(constraints);
- *             for (unsigned int dof = 0; dof != dof_handler.n_dofs(); ++dof)
- *               if (homogeneous_constraints.is_inhomogeneously_constrained(dof))
- *                 homogeneous_constraints.set_inhomogeneity(dof, 0.0);
- * 
- *             constraints.clear();
- *             constraints.copy_from(homogeneous_constraints);
- *           }
- *       }
- * 
- *     constraints.close();
- *   }
- * 
- * @endcode
- * 
- * 
- * <a name="Solidassemble_sc"></a> 
- * <h4>Solid::assemble_sc</h4>
- * Solving the entire block system is a bit problematic as there are no
- * contributions to the $\mathsf{\mathbf{K}}_{ \widetilde{J} \widetilde{J}}$
- * block, rendering it noninvertible (when using an iterative solver).
- * Since the pressure and dilatation variables DOFs are discontinuous, we can
- * condense them out to form a smaller displacement-only system which
- * we will then solve and subsequently post-process to retrieve the
- * pressure and dilatation solutions.
- * 
-
- * 
- * The static condensation process could be performed at a global level but we
- * need the inverse of one of the blocks. However, since the pressure and
- * dilatation variables are discontinuous, the static condensation (SC)
- * operation can also be done on a per-cell basis and we can produce the
- * inverse of the block-diagonal
- * $\mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}$ block by inverting the
- * local blocks. We can again use TBB to do this since each operation will be
- * independent of one another.
- *   
-
- * 
- * Using the TBB via the WorkStream class, we assemble the contributions to
- * form
- * $
- * \mathsf{\mathbf{K}}_{\textrm{con}}
- * = \bigl[ \mathsf{\mathbf{K}}_{uu} +
- * \overline{\overline{\mathsf{\mathbf{K}}}}~ \bigr]
- * $
- * from each element's contributions. These contributions are then added to
- * the global stiffness matrix. Given this description, the following two
- * functions should be clear:
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::assemble_sc()
- *   {
- *     timer.enter_subsection("Perform static condensation");
- *     std::cout << " ASM_SC " << std::flush;
- * 
- *     PerTaskData_SC per_task_data(dofs_per_cell,
- *                                  element_indices_u.size(),
- *                                  element_indices_p.size(),
- *                                  element_indices_J.size());
- *     ScratchData_SC scratch_data;
- * 
- *     WorkStream::run(dof_handler.active_cell_iterators(),
- *                     *this,
- *                     &Solid::assemble_sc_one_cell,
- *                     &Solid::copy_local_to_global_sc,
- *                     scratch_data,
- *                     per_task_data);
- * 
- *     timer.leave_subsection();
- *   }
- * 
- * 
- *   template <int dim>
- *   void Solid<dim>::copy_local_to_global_sc(const PerTaskData_SC &data)
- *   {
- *     for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *       for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *         tangent_matrix.add(data.local_dof_indices[i],
- *                            data.local_dof_indices[j],
- *                            data.cell_matrix(i, j));
- *   }
- * 
- * 
- * @endcode
- * 
- * Now we describe the static condensation process. As per usual, we must
- * first find out which global numbers the degrees of freedom on this cell
- * have and reset some data structures:
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::assemble_sc_one_cell(
- *     const typename DoFHandler<dim>::active_cell_iterator &cell,
- *     ScratchData_SC &                                      scratch,
- *     PerTaskData_SC &                                      data)
- *   {
- *     data.reset();
- *     scratch.reset();
- *     cell->get_dof_indices(data.local_dof_indices);
- * 
- * @endcode
- * 
- * We now extract the contribution of the dofs associated with the current
- * cell to the global stiffness matrix.  The discontinuous nature of the
- * $\widetilde{p}$ and $\widetilde{J}$ interpolations mean that their is
- * no coupling of the local contributions at the global level. This is not
- * the case with the $\mathbf{u}$ dof.  In other words,
- * $\mathsf{\mathbf{k}}_{\widetilde{J} \widetilde{p}}$,
- * $\mathsf{\mathbf{k}}_{\widetilde{p} \widetilde{p}}$ and
- * $\mathsf{\mathbf{k}}_{\widetilde{J} \widetilde{p}}$, when extracted
- * from the global stiffness matrix are the element contributions.  This
- * is not the case for $\mathsf{\mathbf{k}}_{uu}$.
- *     
-
- * 
- * Note: A lower-case symbol is used to denote element stiffness matrices.
- * 
-
- * 
- * Currently the matrix corresponding to
- * the dof associated with the current element
- * (denoted somewhat loosely as $\mathsf{\mathbf{k}}$)
- * is of the form:
- * @f{align*}
- * \begin{bmatrix}
- * \mathsf{\mathbf{k}}_{uu}  &  \mathsf{\mathbf{k}}_{u\widetilde{p}}
- * & \mathbf{0}
- * \\ \mathsf{\mathbf{k}}_{\widetilde{p}u} & \mathbf{0}  &
- * \mathsf{\mathbf{k}}_{\widetilde{p}\widetilde{J}}
- * \\ \mathbf{0}  &  \mathsf{\mathbf{k}}_{\widetilde{J}\widetilde{p}}  &
- * \mathsf{\mathbf{k}}_{\widetilde{J}\widetilde{J}} \end{bmatrix}
- * @f}
- *     
-
- * 
- * We now need to modify it such that it appear as
- * @f{align*}
- * \begin{bmatrix}
- * \mathsf{\mathbf{k}}_{\textrm{con}}   &
- * \mathsf{\mathbf{k}}_{u\widetilde{p}}    & \mathbf{0}
- * \\ \mathsf{\mathbf{k}}_{\widetilde{p}u} & \mathbf{0} &
- * \mathsf{\mathbf{k}}_{\widetilde{p}\widetilde{J}}^{-1}
- * \\ \mathbf{0} & \mathsf{\mathbf{k}}_{\widetilde{J}\widetilde{p}} &
- * \mathsf{\mathbf{k}}_{\widetilde{J}\widetilde{J}} \end{bmatrix}
- * @f}
- * with $\mathsf{\mathbf{k}}_{\textrm{con}} = \bigl[
- * \mathsf{\mathbf{k}}_{uu} +\overline{\overline{\mathsf{\mathbf{k}}}}~
- * \bigr]$ where $               \overline{\overline{\mathsf{\mathbf{k}}}}
- * \dealcoloneq \mathsf{\mathbf{k}}_{u\widetilde{p}}
- * \overline{\mathsf{\mathbf{k}}} \mathsf{\mathbf{k}}_{\widetilde{p}u}
- * $
- * and
- * $
- * \overline{\mathsf{\mathbf{k}}} =
- * \mathsf{\mathbf{k}}_{\widetilde{J}\widetilde{p}}^{-1}
- * \mathsf{\mathbf{k}}_{\widetilde{J}\widetilde{J}}
- * \mathsf{\mathbf{k}}_{\widetilde{p}\widetilde{J}}^{-1}
- * $.
- *     
-
- * 
- * At this point, we need to take note of
- * the fact that global data already exists
- * in the $\mathsf{\mathbf{K}}_{uu}$,
- * $\mathsf{\mathbf{K}}_{\widetilde{p} \widetilde{J}}$
- * and
- * $\mathsf{\mathbf{K}}_{\widetilde{J} \widetilde{p}}$
- * sub-blocks.  So if we are to modify them, we must account for the data
- * that is already there (i.e. simply add to it or remove it if
- * necessary).  Since the copy_local_to_global operation is a "+="
- * operation, we need to take this into account
- *     
-
- * 
- * For the $\mathsf{\mathbf{K}}_{uu}$ block in particular, this means that
- * contributions have been added from the surrounding cells, so we need to
- * be careful when we manipulate this block.  We can't just erase the
- * sub-blocks.
- *     
-
- * 
- * This is the strategy we will employ to get the sub-blocks we want:
- *     
-
- * 
- * - $ {\mathsf{\mathbf{k}}}_{\textrm{store}}$:
- * Since we don't have access to $\mathsf{\mathbf{k}}_{uu}$,
- * but we know its contribution is added to
- * the global $\mathsf{\mathbf{K}}_{uu}$ matrix, we just want
- * to add the element wise
- * static-condensation $\overline{\overline{\mathsf{\mathbf{k}}}}$.
- *     
-
- * 
- * - $\mathsf{\mathbf{k}}^{-1}_{\widetilde{p} \widetilde{J}}$:
- * Similarly, $\mathsf{\mathbf{k}}_{\widetilde{p}
- * \widetilde{J}}$ exists in
- * the subblock. Since the copy
- * operation is a += operation, we
- * need to subtract the existing
- * $\mathsf{\mathbf{k}}_{\widetilde{p} \widetilde{J}}$
- * submatrix in addition to
- * "adding" that which we wish to
- * replace it with.
- *     
-
- * 
- * - $\mathsf{\mathbf{k}}^{-1}_{\widetilde{J} \widetilde{p}}$:
- * Since the global matrix
- * is symmetric, this block is the
- * same as the one above and we
- * can simply use
- * $\mathsf{\mathbf{k}}^{-1}_{\widetilde{p} \widetilde{J}}$
- * as a substitute for this one.
- *     
-
- * 
- * We first extract element data from the
- * system matrix. So first we get the
- * entire subblock for the cell, then
- * extract $\mathsf{\mathbf{k}}$
- * for the dofs associated with
- * the current element
- * 
- * @code
- *     data.k_orig.extract_submatrix_from(tangent_matrix,
- *                                        data.local_dof_indices,
- *                                        data.local_dof_indices);
- * @endcode
- * 
- * and next the local matrices for
- * $\mathsf{\mathbf{k}}_{ \widetilde{p} u}$
- * $\mathsf{\mathbf{k}}_{ \widetilde{p} \widetilde{J}}$
- * and
- * $\mathsf{\mathbf{k}}_{ \widetilde{J} \widetilde{J}}$:
- * 
- * @code
- *     data.k_pu.extract_submatrix_from(data.k_orig,
- *                                      element_indices_p,
- *                                      element_indices_u);
- *     data.k_pJ.extract_submatrix_from(data.k_orig,
- *                                      element_indices_p,
- *                                      element_indices_J);
- *     data.k_JJ.extract_submatrix_from(data.k_orig,
- *                                      element_indices_J,
- *                                      element_indices_J);
- * 
- * @endcode
- * 
- * To get the inverse of $\mathsf{\mathbf{k}}_{\widetilde{p}
- * \widetilde{J}}$, we invert it directly.  This operation is relatively
- * inexpensive since $\mathsf{\mathbf{k}}_{\widetilde{p} \widetilde{J}}$
- * since block-diagonal.
- * 
- * @code
- *     data.k_pJ_inv.invert(data.k_pJ);
- * 
- * @endcode
- * 
- * Now we can make condensation terms to
- * add to the $\mathsf{\mathbf{k}}_{uu}$
- * block and put them in
- * the cell local matrix
- * $
- * \mathsf{\mathbf{A}}
- * =
- * \mathsf{\mathbf{k}}^{-1}_{\widetilde{p} \widetilde{J}}
- * \mathsf{\mathbf{k}}_{\widetilde{p} u}
- * $:
- * 
- * @code
- *     data.k_pJ_inv.mmult(data.A, data.k_pu);
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{B}}
- * =
- * \mathsf{\mathbf{k}}^{-1}_{\widetilde{J} \widetilde{J}}
- * \mathsf{\mathbf{k}}^{-1}_{\widetilde{p} \widetilde{J}}
- * \mathsf{\mathbf{k}}_{\widetilde{p} u}
- * $
- * 
- * @code
- *     data.k_JJ.mmult(data.B, data.A);
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{C}}
- * =
- * \mathsf{\mathbf{k}}^{-1}_{\widetilde{J} \widetilde{p}}
- * \mathsf{\mathbf{k}}^{-1}_{\widetilde{J} \widetilde{J}}
- * \mathsf{\mathbf{k}}^{-1}_{\widetilde{p} \widetilde{J}}
- * \mathsf{\mathbf{k}}_{\widetilde{p} u}
- * $
- * 
- * @code
- *     data.k_pJ_inv.Tmmult(data.C, data.B);
- * @endcode
- * 
- * $
- * \overline{\overline{\mathsf{\mathbf{k}}}}
- * =
- * \mathsf{\mathbf{k}}_{u \widetilde{p}}
- * \mathsf{\mathbf{k}}^{-1}_{\widetilde{J} \widetilde{p}}
- * \mathsf{\mathbf{k}}^{-1}_{\widetilde{J} \widetilde{J}}
- * \mathsf{\mathbf{k}}^{-1}_{\widetilde{p} \widetilde{J}}
- * \mathsf{\mathbf{k}}_{\widetilde{p} u}
- * $
- * 
- * @code
- *     data.k_pu.Tmmult(data.k_bbar, data.C);
- *     data.k_bbar.scatter_matrix_to(element_indices_u,
- *                                   element_indices_u,
- *                                   data.cell_matrix);
- * 
- * @endcode
- * 
- * Next we place
- * $\mathsf{\mathbf{k}}^{-1}_{ \widetilde{p} \widetilde{J}}$
- * in the
- * $\mathsf{\mathbf{k}}_{ \widetilde{p} \widetilde{J}}$
- * block for post-processing.  Note again
- * that we need to remove the
- * contribution that already exists there.
- * 
- * @code
- *     data.k_pJ_inv.add(-1.0, data.k_pJ);
- *     data.k_pJ_inv.scatter_matrix_to(element_indices_p,
- *                                     element_indices_J,
- *                                     data.cell_matrix);
- *   }
- * 
- * @endcode
- * 
- * 
- * <a name="Solidsolve_linear_system"></a> 
- * <h4>Solid::solve_linear_system</h4>
- * We now have all of the necessary components to use one of two possible
- * methods to solve the linearised system. The first is to perform static
- * condensation on an element level, which requires some alterations
- * to the tangent matrix and RHS vector. Alternatively, the full block
- * system can be solved by performing condensation on a global level.
- * Below we implement both approaches.
- * 
- * @code
- *   template <int dim>
- *   std::pair<unsigned int, double>
- *   Solid<dim>::solve_linear_system(BlockVector<double> &newton_update)
- *   {
- *     unsigned int lin_it  = 0;
- *     double       lin_res = 0.0;
- * 
- *     if (parameters.use_static_condensation == true)
- *       {
- * @endcode
- * 
- * Firstly, here is the approach using the (permanent) augmentation of
- * the tangent matrix. For the following, recall that
- * @f{align*}
- * \mathsf{\mathbf{K}}_{\textrm{store}}
- * \dealcoloneq
- * \begin{bmatrix}
- * \mathsf{\mathbf{K}}_{\textrm{con}}      &
- * \mathsf{\mathbf{K}}_{u\widetilde{p}}    & \mathbf{0}
- * \\  \mathsf{\mathbf{K}}_{\widetilde{p}u}    &       \mathbf{0} &
- * \mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}^{-1}
- * \\  \mathbf{0}      &
- * \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}                &
- * \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}} \end{bmatrix} \, .
- * @f}
- * and
- * @f{align*}
- * d \widetilde{\mathsf{\mathbf{p}}}
- * & =
- * \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}
- * \bigl[
- * \mathsf{\mathbf{F}}_{\widetilde{J}}
- * -
- * \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
- * d \widetilde{\mathsf{\mathbf{J}}} \bigr]
- * \\ d \widetilde{\mathsf{\mathbf{J}}}
- * & =
- * \mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}^{-1}
- * \bigl[
- * \mathsf{\mathbf{F}}_{\widetilde{p}}
- * - \mathsf{\mathbf{K}}_{\widetilde{p}u} d
- * \mathsf{\mathbf{u}} \bigr]
- * \\ \Rightarrow d \widetilde{\mathsf{\mathbf{p}}}
- * &= \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}
- * \mathsf{\mathbf{F}}_{\widetilde{J}}
- * -
- * \underbrace{\bigl[\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}
- * \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
- * \mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}^{-1}\bigr]}_{\overline{\mathsf{\mathbf{K}}}}\bigl[
- * \mathsf{\mathbf{F}}_{\widetilde{p}}
- * - \mathsf{\mathbf{K}}_{\widetilde{p}u} d
- * \mathsf{\mathbf{u}} \bigr]
- * @f}
- * and thus
- * @f[
- * \underbrace{\bigl[ \mathsf{\mathbf{K}}_{uu} +
- * \overline{\overline{\mathsf{\mathbf{K}}}}~ \bigr]
- * }_{\mathsf{\mathbf{K}}_{\textrm{con}}} d
- * \mathsf{\mathbf{u}}
- * =
- * \underbrace{
- * \Bigl[
- * \mathsf{\mathbf{F}}_{u}
- * - \mathsf{\mathbf{K}}_{u\widetilde{p}} \bigl[
- * \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}
- * \mathsf{\mathbf{F}}_{\widetilde{J}}
- * -
- * \overline{\mathsf{\mathbf{K}}}\mathsf{\mathbf{F}}_{\widetilde{p}}
- * \bigr]
- * \Bigr]}_{\mathsf{\mathbf{F}}_{\textrm{con}}}
- * @f]
- * where
- * @f[
- * \overline{\overline{\mathsf{\mathbf{K}}}} \dealcoloneq
- * \mathsf{\mathbf{K}}_{u\widetilde{p}}
- * \overline{\mathsf{\mathbf{K}}}
- * \mathsf{\mathbf{K}}_{\widetilde{p}u} \, .
- * @f]
- * 
-
- * 
- * At the top, we allocate two temporary vectors to help with the
- * static condensation, and variables to store the number of
- * linear solver iterations and the (hopefully converged) residual.
- * 
- * @code
- *         BlockVector<double> A(dofs_per_block);
- *         BlockVector<double> B(dofs_per_block);
- * 
- * 
- * @endcode
- * 
- * In the first step of this function, we solve for the incremental
- * displacement $d\mathbf{u}$.  To this end, we perform static
- * condensation to make
- * $\mathsf{\mathbf{K}}_{\textrm{con}}
- * = \bigl[ \mathsf{\mathbf{K}}_{uu} +
- * \overline{\overline{\mathsf{\mathbf{K}}}}~ \bigr]$
- * and put
- * $\mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}$
- * in the original $\mathsf{\mathbf{K}}_{\widetilde{p} \widetilde{J}}$
- * block. That is, we make $\mathsf{\mathbf{K}}_{\textrm{store}}$.
- * 
- * @code
- *         {
- *           assemble_sc();
- * 
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{A}}_{\widetilde{J}}
- * =
- * \mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}
- * \mathsf{\mathbf{F}}_{\widetilde{p}}
- * $
- * 
- * @code
- *           tangent_matrix.block(p_dof, J_dof)
- *             .vmult(A.block(J_dof), system_rhs.block(p_dof));
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{B}}_{\widetilde{J}}
- * =
- * \mathsf{\mathbf{K}}_{\widetilde{J} \widetilde{J}}
- * \mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}
- * \mathsf{\mathbf{F}}_{\widetilde{p}}
- * $
- * 
- * @code
- *           tangent_matrix.block(J_dof, J_dof)
- *             .vmult(B.block(J_dof), A.block(J_dof));
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{A}}_{\widetilde{J}}
- * =
- * \mathsf{\mathbf{F}}_{\widetilde{J}}
- * -
- * \mathsf{\mathbf{K}}_{\widetilde{J} \widetilde{J}}
- * \mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}
- * \mathsf{\mathbf{F}}_{\widetilde{p}}
- * $
- * 
- * @code
- *           A.block(J_dof) = system_rhs.block(J_dof);
- *           A.block(J_dof) -= B.block(J_dof);
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{A}}_{\widetilde{J}}
- * =
- * \mathsf{\mathbf{K}}^{-1}_{\widetilde{J} \widetilde{p}}
- * [
- * \mathsf{\mathbf{F}}_{\widetilde{J}}
- * -
- * \mathsf{\mathbf{K}}_{\widetilde{J} \widetilde{J}}
- * \mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}
- * \mathsf{\mathbf{F}}_{\widetilde{p}}
- * ]
- * $
- * 
- * @code
- *           tangent_matrix.block(p_dof, J_dof)
- *             .Tvmult(A.block(p_dof), A.block(J_dof));
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{A}}_{u}
- * =
- * \mathsf{\mathbf{K}}_{u \widetilde{p}}
- * \mathsf{\mathbf{K}}^{-1}_{\widetilde{J} \widetilde{p}}
- * [
- * \mathsf{\mathbf{F}}_{\widetilde{J}}
- * -
- * \mathsf{\mathbf{K}}_{\widetilde{J} \widetilde{J}}
- * \mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}
- * \mathsf{\mathbf{F}}_{\widetilde{p}}
- * ]
- * $
- * 
- * @code
- *           tangent_matrix.block(u_dof, p_dof)
- *             .vmult(A.block(u_dof), A.block(p_dof));
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{F}}_{\text{con}}
- * =
- * \mathsf{\mathbf{F}}_{u}
- * -
- * \mathsf{\mathbf{K}}_{u \widetilde{p}}
- * \mathsf{\mathbf{K}}^{-1}_{\widetilde{J} \widetilde{p}}
- * [
- * \mathsf{\mathbf{F}}_{\widetilde{J}}
- * -
- * \mathsf{\mathbf{K}}_{\widetilde{J} \widetilde{J}}
- * \mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}
- * \mathsf{\mathbf{F}}_{\widetilde{p}}
- * ]
- * $
- * 
- * @code
- *           system_rhs.block(u_dof) -= A.block(u_dof);
- * 
- *           timer.enter_subsection("Linear solver");
- *           std::cout << " SLV " << std::flush;
- *           if (parameters.type_lin == "CG")
- *             {
- *               const auto solver_its = static_cast<unsigned int>(
- *                 tangent_matrix.block(u_dof, u_dof).m() *
- *                 parameters.max_iterations_lin);
- *               const double tol_sol =
- *                 parameters.tol_lin * system_rhs.block(u_dof).l2_norm();
- * 
- *               SolverControl solver_control(solver_its, tol_sol);
- * 
- *               GrowingVectorMemory<Vector<double>> GVM;
- *               SolverCG<Vector<double>> solver_CG(solver_control, GVM);
- * 
- * @endcode
- * 
- * We've chosen by default a SSOR preconditioner as it appears to
- * provide the fastest solver convergence characteristics for this
- * problem on a single-thread machine.  However, this might not be
- * true for different problem sizes.
- * 
- * @code
- *               PreconditionSelector<SparseMatrix<double>, Vector<double>>
- *                 preconditioner(parameters.preconditioner_type,
- *                                parameters.preconditioner_relaxation);
- *               preconditioner.use_matrix(tangent_matrix.block(u_dof, u_dof));
- * 
- *               solver_CG.solve(tangent_matrix.block(u_dof, u_dof),
- *                               newton_update.block(u_dof),
- *                               system_rhs.block(u_dof),
- *                               preconditioner);
- * 
- *               lin_it  = solver_control.last_step();
- *               lin_res = solver_control.last_value();
- *             }
- *           else if (parameters.type_lin == "Direct")
- *             {
- * @endcode
- * 
- * Otherwise if the problem is small
- * enough, a direct solver can be
- * utilised.
- * 
- * @code
- *               SparseDirectUMFPACK A_direct;
- *               A_direct.initialize(tangent_matrix.block(u_dof, u_dof));
- *               A_direct.vmult(newton_update.block(u_dof),
- *                              system_rhs.block(u_dof));
- * 
- *               lin_it  = 1;
- *               lin_res = 0.0;
- *             }
- *           else
- *             Assert(false, ExcMessage("Linear solver type not implemented"));
- * 
- *           timer.leave_subsection();
- *         }
- * 
- * @endcode
- * 
- * Now that we have the displacement update, distribute the constraints
- * back to the Newton update:
- * 
- * @code
- *         constraints.distribute(newton_update);
- * 
- *         timer.enter_subsection("Linear solver postprocessing");
- *         std::cout << " PP " << std::flush;
- * 
- * @endcode
- * 
- * The next step after solving the displacement
- * problem is to post-process to get the
- * dilatation solution from the
- * substitution:
- * $
- * d \widetilde{\mathsf{\mathbf{J}}}
- * = \mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}^{-1} \bigl[
- * \mathsf{\mathbf{F}}_{\widetilde{p}}
- * - \mathsf{\mathbf{K}}_{\widetilde{p}u} d \mathsf{\mathbf{u}}
- * \bigr]
- * $
- * 
- * @code
- *         {
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{A}}_{\widetilde{p}}
- * =
- * \mathsf{\mathbf{K}}_{\widetilde{p}u} d \mathsf{\mathbf{u}}
- * $
- * 
- * @code
- *           tangent_matrix.block(p_dof, u_dof)
- *             .vmult(A.block(p_dof), newton_update.block(u_dof));
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{A}}_{\widetilde{p}}
- * =
- * -\mathsf{\mathbf{K}}_{\widetilde{p}u} d \mathsf{\mathbf{u}}
- * $
- * 
- * @code
- *           A.block(p_dof) *= -1.0;
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{A}}_{\widetilde{p}}
- * =
- * \mathsf{\mathbf{F}}_{\widetilde{p}}
- * -\mathsf{\mathbf{K}}_{\widetilde{p}u} d \mathsf{\mathbf{u}}
- * $
- * 
- * @code
- *           A.block(p_dof) += system_rhs.block(p_dof);
- * @endcode
- * 
- * $
- * d\mathsf{\mathbf{\widetilde{J}}}
- * =
- * \mathsf{\mathbf{K}}^{-1}_{\widetilde{p}\widetilde{J}}
- * [
- * \mathsf{\mathbf{F}}_{\widetilde{p}}
- * -\mathsf{\mathbf{K}}_{\widetilde{p}u} d \mathsf{\mathbf{u}}
- * ]
- * $
- * 
- * @code
- *           tangent_matrix.block(p_dof, J_dof)
- *             .vmult(newton_update.block(J_dof), A.block(p_dof));
- *         }
- * 
- * @endcode
- * 
- * we ensure here that any Dirichlet constraints
- * are distributed on the updated solution:
- * 
- * @code
- *         constraints.distribute(newton_update);
- * 
- * @endcode
- * 
- * Finally we solve for the pressure
- * update with the substitution:
- * $
- * d \widetilde{\mathsf{\mathbf{p}}}
- * =
- * \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}
- * \bigl[
- * \mathsf{\mathbf{F}}_{\widetilde{J}}
- * - \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
- * d \widetilde{\mathsf{\mathbf{J}}}
- * \bigr]
- * $
- * 
- * @code
- *         {
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{A}}_{\widetilde{J}}
- * =
- * \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
- * d \widetilde{\mathsf{\mathbf{J}}}
- * $
- * 
- * @code
- *           tangent_matrix.block(J_dof, J_dof)
- *             .vmult(A.block(J_dof), newton_update.block(J_dof));
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{A}}_{\widetilde{J}}
- * =
- * -\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
- * d \widetilde{\mathsf{\mathbf{J}}}
- * $
- * 
- * @code
- *           A.block(J_dof) *= -1.0;
- * @endcode
- * 
- * $
- * \mathsf{\mathbf{A}}_{\widetilde{J}}
- * =
- * \mathsf{\mathbf{F}}_{\widetilde{J}}
- * -
- * \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
- * d \widetilde{\mathsf{\mathbf{J}}}
- * $
- * 
- * @code
- *           A.block(J_dof) += system_rhs.block(J_dof);
- * @endcode
- * 
- * and finally....
- * $
- * d \widetilde{\mathsf{\mathbf{p}}}
- * =
- * \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}
- * \bigl[
- * \mathsf{\mathbf{F}}_{\widetilde{J}}
- * - \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
- * d \widetilde{\mathsf{\mathbf{J}}}
- * \bigr]
- * $
- * 
- * @code
- *           tangent_matrix.block(p_dof, J_dof)
- *             .Tvmult(newton_update.block(p_dof), A.block(J_dof));
- *         }
- * 
- * @endcode
- * 
- * We are now at the end, so we distribute all
- * constrained dofs back to the Newton
- * update:
- * 
- * @code
- *         constraints.distribute(newton_update);
- * 
- *         timer.leave_subsection();
- *       }
- *     else
- *       {
- *         std::cout << " ------ " << std::flush;
- * 
- *         timer.enter_subsection("Linear solver");
- *         std::cout << " SLV " << std::flush;
- * 
- *         if (parameters.type_lin == "CG")
- *           {
- * @endcode
- * 
- * Manual condensation of the dilatation and pressure fields on
- * a local level, and subsequent post-processing, took quite a
- * bit of effort to achieve. To recap, we had to produce the
- * inverse matrix
- * $\mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}^{-1}$, which
- * was permanently written into the global tangent matrix. We then
- * permanently modified $\mathsf{\mathbf{K}}_{uu}$ to produce
- * $\mathsf{\mathbf{K}}_{\textrm{con}}$. This involved the
- * extraction and manipulation of local sub-blocks of the tangent
- * matrix. After solving for the displacement, the individual
- * matrix-vector operations required to solve for dilatation and
- * pressure were carefully implemented. Contrast these many sequence
- * of steps to the much simpler and transparent implementation using
- * functionality provided by the LinearOperator class.
- * 
-
- * 
- * For ease of later use, we define some aliases for
- * blocks in the RHS vector
- * 
- * @code
- *             const Vector<double> &f_u = system_rhs.block(u_dof);
- *             const Vector<double> &f_p = system_rhs.block(p_dof);
- *             const Vector<double> &f_J = system_rhs.block(J_dof);
- * 
- * @endcode
- * 
- * ... and for blocks in the Newton update vector.
- * 
- * @code
- *             Vector<double> &d_u = newton_update.block(u_dof);
- *             Vector<double> &d_p = newton_update.block(p_dof);
- *             Vector<double> &d_J = newton_update.block(J_dof);
- * 
- * @endcode
- * 
- * We next define some linear operators for the tangent matrix
- * sub-blocks We will exploit the symmetry of the system, so not all
- * blocks are required.
- * 
- * @code
- *             const auto K_uu =
- *               linear_operator(tangent_matrix.block(u_dof, u_dof));
- *             const auto K_up =
- *               linear_operator(tangent_matrix.block(u_dof, p_dof));
- *             const auto K_pu =
- *               linear_operator(tangent_matrix.block(p_dof, u_dof));
- *             const auto K_Jp =
- *               linear_operator(tangent_matrix.block(J_dof, p_dof));
- *             const auto K_JJ =
- *               linear_operator(tangent_matrix.block(J_dof, J_dof));
- * 
- * @endcode
- * 
- * We then construct a LinearOperator that represents the inverse of
- * (square block)
- * $\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}$. Since it is
- * diagonal (or, when a higher order ansatz it used, nearly
- * diagonal), a Jacobi preconditioner is suitable.
- * 
- * @code
- *             PreconditionSelector<SparseMatrix<double>, Vector<double>>
- *               preconditioner_K_Jp_inv("jacobi");
- *             preconditioner_K_Jp_inv.use_matrix(
- *               tangent_matrix.block(J_dof, p_dof));
- *             ReductionControl solver_control_K_Jp_inv(
- *               static_cast<unsigned int>(tangent_matrix.block(J_dof, p_dof).m() *
- *                                         parameters.max_iterations_lin),
- *               1.0e-30,
- *               parameters.tol_lin);
- *             SolverSelector<Vector<double>> solver_K_Jp_inv;
- *             solver_K_Jp_inv.select("cg");
- *             solver_K_Jp_inv.set_control(solver_control_K_Jp_inv);
- *             const auto K_Jp_inv =
- *               inverse_operator(K_Jp, solver_K_Jp_inv, preconditioner_K_Jp_inv);
- * 
- * @endcode
- * 
- * Now we can construct that transpose of
- * $\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}$ and a
- * linear operator that represents the condensed operations
- * $\overline{\mathsf{\mathbf{K}}}$ and
- * $\overline{\overline{\mathsf{\mathbf{K}}}}$ and the final
- * augmented matrix
- * $\mathsf{\mathbf{K}}_{\textrm{con}}$.
- * Note that the schur_complement() operator could also be of use
- * here, but for clarity and the purpose of demonstrating the
- * similarities between the formulation and implementation of the
- * linear solution scheme, we will perform these operations
- * manually.
- * 
- * @code
- *             const auto K_pJ_inv     = transpose_operator(K_Jp_inv);
- *             const auto K_pp_bar     = K_Jp_inv * K_JJ * K_pJ_inv;
- *             const auto K_uu_bar_bar = K_up * K_pp_bar * K_pu;
- *             const auto K_uu_con     = K_uu + K_uu_bar_bar;
- * 
- * @endcode
- * 
- * Lastly, we define an operator for inverse of augmented stiffness
- * matrix, namely $\mathsf{\mathbf{K}}_{\textrm{con}}^{-1}$. Note
- * that the preconditioner for the augmented stiffness matrix is
- * different to the case when we use static condensation. In this
- * instance, the preconditioner is based on a non-modified
- * $\mathsf{\mathbf{K}}_{uu}$, while with the first approach we
- * actually modified the entries of this sub-block. However, since
- * $\mathsf{\mathbf{K}}_{\textrm{con}}$ and
- * $\mathsf{\mathbf{K}}_{uu}$ operate on the same space, it remains
- * adequate for this problem.
- * 
- * @code
- *             PreconditionSelector<SparseMatrix<double>, Vector<double>>
- *               preconditioner_K_con_inv(parameters.preconditioner_type,
- *                                        parameters.preconditioner_relaxation);
- *             preconditioner_K_con_inv.use_matrix(
- *               tangent_matrix.block(u_dof, u_dof));
- *             ReductionControl solver_control_K_con_inv(
- *               static_cast<unsigned int>(tangent_matrix.block(u_dof, u_dof).m() *
- *                                         parameters.max_iterations_lin),
- *               1.0e-30,
- *               parameters.tol_lin);
- *             SolverSelector<Vector<double>> solver_K_con_inv;
- *             solver_K_con_inv.select("cg");
- *             solver_K_con_inv.set_control(solver_control_K_con_inv);
- *             const auto K_uu_con_inv =
- *               inverse_operator(K_uu_con,
- *                                solver_K_con_inv,
- *                                preconditioner_K_con_inv);
- * 
- * @endcode
- * 
- * Now we are in a position to solve for the displacement field.
- * We can nest the linear operations, and the result is immediately
- * written to the Newton update vector.
- * It is clear that the implementation closely mimics the derivation
- * stated in the introduction.
- * 
- * @code
- *             d_u =
- *               K_uu_con_inv * (f_u - K_up * (K_Jp_inv * f_J - K_pp_bar * f_p));
- * 
- *             timer.leave_subsection();
- * 
- * @endcode
- * 
- * The operations need to post-process for the dilatation and
- * pressure fields are just as easy to express.
- * 
- * @code
- *             timer.enter_subsection("Linear solver postprocessing");
- *             std::cout << " PP " << std::flush;
- * 
- *             d_J = K_pJ_inv * (f_p - K_pu * d_u);
- *             d_p = K_Jp_inv * (f_J - K_JJ * d_J);
- * 
- *             lin_it  = solver_control_K_con_inv.last_step();
- *             lin_res = solver_control_K_con_inv.last_value();
- *           }
- *         else if (parameters.type_lin == "Direct")
- *           {
- * @endcode
- * 
- * Solve the full block system with
- * a direct solver. As it is relatively
- * robust, it may be immune to problem
- * arising from the presence of the zero
- * $\mathsf{\mathbf{K}}_{ \widetilde{J} \widetilde{J}}$
- * block.
- * 
- * @code
- *             SparseDirectUMFPACK A_direct;
- *             A_direct.initialize(tangent_matrix);
- *             A_direct.vmult(newton_update, system_rhs);
- * 
- *             lin_it  = 1;
- *             lin_res = 0.0;
- * 
- *             std::cout << " -- " << std::flush;
- *           }
- *         else
- *           Assert(false, ExcMessage("Linear solver type not implemented"));
- * 
- *         timer.leave_subsection();
- * 
- * @endcode
- * 
- * Finally, we again ensure here that any Dirichlet
- * constraints are distributed on the updated solution:
- * 
- * @code
- *         constraints.distribute(newton_update);
- *       }
- * 
- *     return std::make_pair(lin_it, lin_res);
- *   }
- * 
- * @endcode
- * 
- * 
- * <a name="Solidoutput_results"></a> 
- * <h4>Solid::output_results</h4>
- * Here we present how the results are written to file to be viewed
- * using ParaView or VisIt. The method is similar to that shown in previous
- * tutorials so will not be discussed in detail.
- * 
- * @code
- *   template <int dim>
- *   void Solid<dim>::output_results() const
- *   {
- *     DataOut<dim> data_out;
- *     std::vector<DataComponentInterpretation::DataComponentInterpretation>
- *       data_component_interpretation(
- *         dim, DataComponentInterpretation::component_is_part_of_vector);
- *     data_component_interpretation.push_back(
- *       DataComponentInterpretation::component_is_scalar);
- *     data_component_interpretation.push_back(
- *       DataComponentInterpretation::component_is_scalar);
- * 
- *     std::vector<std::string> solution_name(dim, "displacement");
- *     solution_name.emplace_back("pressure");
- *     solution_name.emplace_back("dilatation");
- * 
- *     DataOutBase::VtkFlags output_flags;
- *     output_flags.write_higher_order_cells = true;
- *     data_out.set_flags(output_flags);
- * 
- *     data_out.attach_dof_handler(dof_handler);
- *     data_out.add_data_vector(solution_n,
- *                              solution_name,
- *                              DataOut<dim>::type_dof_data,
- *                              data_component_interpretation);
- * 
- * @endcode
- * 
- * Since we are dealing with a large deformation problem, it would be nice
- * to display the result on a displaced grid!  The MappingQEulerian class
- * linked with the DataOut class provides an interface through which this
- * can be achieved without physically moving the grid points in the
- * Triangulation object ourselves.  We first need to copy the solution to
- * a temporary vector and then create the Eulerian mapping. We also
- * specify the polynomial degree to the DataOut object in order to produce
- * a more refined output data set when higher order polynomials are used.
- * 
- * @code
- *     Vector<double> soln(solution_n.size());
- *     for (unsigned int i = 0; i < soln.size(); ++i)
- *       soln(i) = solution_n(i);
- *     MappingQEulerian<dim> q_mapping(degree, dof_handler, soln);
- *     data_out.build_patches(q_mapping, degree);
- * 
- *     std::ofstream output("solution-" + std::to_string(dim) + "d-" +
- *                          std::to_string(time.get_timestep()) + ".vtu");
- *     data_out.write_vtu(output);
- *   }
- * 
- * } // namespace Step44
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Mainfunction"></a> 
- * <h3>Main function</h3>
- * Lastly we provide the main driver function which appears
- * no different to the other tutorials.
- * 
- * @code
- * int main()
- * {
- *   using namespace Step44;
- * 
- *   try
- *     {
- *       const unsigned int dim = 3;
- *       Solid<dim>         solid("parameters.prm");
- *       solid.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- * 
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
-<a name="Results"></a><h1>Results</h1>
-
-
-Firstly, we present a comparison of a series of 3-d results with those
-in the literature (see Reese et al (2000)) to demonstrate that the program works as expected.
-
-We begin with a comparison of the convergence with mesh refinement for the $Q_1-DGPM_0-DGPM_0$ and
-$Q_2-DGPM_1-DGPM_1$ formulations, as summarised in the figure below.
-The vertical displacement of the midpoint of the upper surface of the block is used to assess convergence.
-Both schemes demonstrate good convergence properties for varying values of the load parameter $p/p_0$.
-The results agree with those in the literature.
-The lower-order formulation typically overestimates the displacement for low levels of refinement,
-while the higher-order interpolation scheme underestimates it, but be a lesser degree.
-This benchmark, and a series of others not shown here, give us confidence that the code is working
-as it should.
-
-<table align="center" class="tutorial" cellspacing="3" cellpadding="3">
+这里考虑的数值例子是一个在压缩下的几乎不可压缩的块。这个基准问题取自 
+
+- S. Reese, P. Wriggers, B.D. Reddy (2000), A new locking-free brick element technique for large deformation problems in elasticity,  <em>  Computers and Structures  </em>  , <strong> 75 </strong>, 291-304.   DOI：<a href="http://doi.org/10.1016/S0045-7949(99)00137-6">10.1016/S0045-7949(99)00137-6</a> 。
+
+   <img src="https://www.dealii.org/images/steps/developer/step-44.setup.png" alt="">   
+
+该材料是准不可压缩的新胡克，具有 <a href="http://en.wikipedia.org/wiki/Shear_modulus">shear modulus</a>  $\mu = 80.194e6$  和  $\nu = 0.4999$  。对于这样一个材料特性的选择，传统的单场 $Q_1$ 方法会被锁定。也就是说，响应会过于僵硬。初始和最终配置显示在上面的图片中。利用对称性，我们只求解四分之一的几何体（即一个尺寸为 $0.001$ 的立方体）。域的上表面的内四分之一受到 $p_0$  的载荷。<a name="CommProg"></a> <h1> The commented program</h1>
+
+我们首先包括所有必要的deal.II头文件和一些C++相关的文件。它们已经在以前的教程程序中详细讨论过了，所以你只需要参考过去的教程就可以了。
+
+@code
+#include <deal.II/base/function.h>
+#include <deal.II/base/parameter_handler.h>
+#include <deal.II/base/point.h>
+#include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/symmetric_tensor.h>
+#include <deal.II/base/tensor.h>
+#include <deal.II/base/timer.h>
+#include <deal.II/base/work_stream.h>
+#include <deal.II/dofs/dof_renumbering.h>
+#include <deal.II/dofs/dof_tools.h>
+
+
+@endcode 
+
+
+
+这个头文件为我们提供了在正交点存储数据的功能 
+
+@code
+#include <deal.II/base/quadrature_point_data.h>
+
+
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/grid_tools.h>
+#include <deal.II/grid/grid_in.h>
+#include <deal.II/grid/tria.h>
+
+
+#include <deal.II/fe/fe_dgp_monomial.h>
+#include <deal.II/fe/fe_q.h>
+#include <deal.II/fe/fe_system.h>
+#include <deal.II/fe/fe_tools.h>
+#include <deal.II/fe/fe_values.h>
+#include <deal.II/fe/mapping_q_eulerian.h>
+
+
+#include <deal.II/lac/block_sparse_matrix.h>
+#include <deal.II/lac/block_vector.h>
+#include <deal.II/lac/dynamic_sparsity_pattern.h>
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/precondition_selector.h>
+#include <deal.II/lac/solver_cg.h>
+#include <deal.II/lac/solver_selector.h>
+#include <deal.II/lac/sparse_direct.h>
+#include <deal.II/lac/affine_constraints.h>
+
+
+@endcode 
+
+
+
+这里是使用LinearOperator类所需的头文件。这些也都被方便地打包到一个头文件中，即<deal.II/lac/linear_operator_tools.h>，但为了透明起见，我们在此列出那些特别需要的头文件。
+
+@code
+#include <deal.II/lac/linear_operator.h>
+#include <deal.II/lac/packaged_operation.h>
+
+
+#include <deal.II/numerics/data_out.h>
+#include <deal.II/numerics/vector_tools.h>
+
+
+@endcode 
+
+
+
+这两个头文件中定义了一些与有限应变弹性有关的操作。第一个将帮助我们计算一些运动量，第二个提供一些标准的张量定义。
+
+@code
+#include <deal.II/physics/elasticity/kinematics.h>
+#include <deal.II/physics/elasticity/standard_tensors.h>
+
+
+#include <iostream>
+#include <fstream>
+
+
+
+@endcode 
+
+
+
+然后，我们将所有与本教程程序有关的东西都放入一个自己的命名空间，并将所有deal.II的函数和类名导入其中。
+
+@code
+namespace Step44
+{
+  using namespace dealii;
+
+
+@endcode 
+
+
+
+
+<a name="Runtimeparameters"></a> <h3>Run-time parameters</h3>   
+
+
+有几个参数可以在代码中设置，所以我们设置了一个ParameterHandler对象，在运行时读入选择。
+
+@code
+  namespace Parameters
+  {
+@endcode 
+
+
+
+
+<a name="FiniteElementsystem"></a> <h4>Finite Element system</h4> 
+
+
+
+
+正如在介绍中提到的，对于位移 $\mathbf{u}$ 应该使用不同的插值顺序，而对于压力 $\widetilde{p}$ 和膨胀 $\widetilde{J}$ 则是如此。 选择 $\widetilde{p}$ 和 $\widetilde{J}$ 作为元素层面的不连续（常数）函数，导致平均扩张方法。不连续的近似允许 $\widetilde{p}$ 和 $\widetilde{J}$ 被浓缩出来，并恢复了一个基于位移的经典方法。这里我们指定用于近似解的多项式阶数。正交阶数应作相应调整。
+
+@code
+    struct FESystem
+    {
+      unsigned int poly_degree;
+      unsigned int quad_order;
+
+
+      static void declare_parameters(ParameterHandler &prm);
+
+
+      void parse_parameters(ParameterHandler &prm);
+    };
+
+
+
+    void FESystem::declare_parameters(ParameterHandler &prm)
+    {
+      prm.enter_subsection("Finite element system");
+      {
+        prm.declare_entry("Polynomial degree",
+                          "2",
+                          Patterns::Integer(0),
+                          "Displacement system polynomial order");
+
+
+        prm.declare_entry("Quadrature order",
+                          "3",
+                          Patterns::Integer(0),
+                          "Gauss quadrature order");
+      }
+      prm.leave_subsection();
+    }
+
+
+    void FESystem::parse_parameters(ParameterHandler &prm)
+    {
+      prm.enter_subsection("Finite element system");
+      {
+        poly_degree = prm.get_integer("Polynomial degree");
+        quad_order  = prm.get_integer("Quadrature order");
+      }
+      prm.leave_subsection();
+    }
+
+
+@endcode 
+
+
+
+
+<a name="Geometry"></a><h4>Geometry</h4>
+
+
+
+
+对问题的几何形状和施加的载荷进行调整。 由于这里所模拟的问题相当特殊，可以将载荷比例改变为特定值，以便与文献中给出的结果进行比较。
+
+@code
+    struct Geometry
+    {
+      unsigned int global_refinement;
+      double       scale;
+      double       p_p0;
+
+
+      static void declare_parameters(ParameterHandler &prm);
+
+
+      void parse_parameters(ParameterHandler &prm);
+    };
+
+
+    void Geometry::declare_parameters(ParameterHandler &prm)
+    {
+      prm.enter_subsection("Geometry");
+      {
+        prm.declare_entry("Global refinement",
+                          "2",
+                          Patterns::Integer(0),
+                          "Global refinement level");
+
+
+        prm.declare_entry("Grid scale",
+                          "1e-3",
+                          Patterns::Double(0.0),
+                          "Global grid scaling factor");
+
+
+        prm.declare_entry("Pressure ratio p/p0",
+                          "100",
+                          Patterns::Selection("20|40|60|80|100"),
+                          "Ratio of applied pressure to reference pressure");
+      }
+      prm.leave_subsection();
+    }
+
+
+    void Geometry::parse_parameters(ParameterHandler &prm)
+    {
+      prm.enter_subsection("Geometry");
+      {
+        global_refinement = prm.get_integer("Global refinement");
+        scale             = prm.get_double("Grid scale");
+        p_p0              = prm.get_double("Pressure ratio p/p0");
+      }
+      prm.leave_subsection();
+    }
+
+
+@endcode 
+
+
+
+
+<a name="Materials"></a> <h4>Materials</h4>
+
+
+
+
+我们还需要新胡克材料的剪切模量 $ \mu $ 和泊松率 $ \nu $ 。
+
+@code
+    struct Materials
+    {
+      double nu;
+      double mu;
+
+
+      static void declare_parameters(ParameterHandler &prm);
+
+
+      void parse_parameters(ParameterHandler &prm);
+    };
+
+
+    void Materials::declare_parameters(ParameterHandler &prm)
+    {
+      prm.enter_subsection("Material properties");
+      {
+        prm.declare_entry("Poisson's ratio",
+                          "0.4999",
+                          Patterns::Double(-1.0, 0.5),
+                          "Poisson's ratio");
+
+
+        prm.declare_entry("Shear modulus",
+                          "80.194e6",
+                          Patterns::Double(),
+                          "Shear modulus");
+      }
+      prm.leave_subsection();
+    }
+
+
+    void Materials::parse_parameters(ParameterHandler &prm)
+    {
+      prm.enter_subsection("Material properties");
+      {
+        nu = prm.get_double("Poisson's ratio");
+        mu = prm.get_double("Shear modulus");
+      }
+      prm.leave_subsection();
+    }
+
+
+@endcode 
+
+
+
+
+<a name="Linearsolver"></a> <h4>Linear solver</h4>
+
+
+
+
+接下来，我们同时选择求解器和预处理器的设置。 当牛顿增量内发生大的非线性运动时，使用有效的预处理程序对于确保收敛性至关重要。
+
+@code
+    struct LinearSolver
+    {
+      std::string type_lin;
+      double      tol_lin;
+      double      max_iterations_lin;
+      bool        use_static_condensation;
+      std::string preconditioner_type;
+      double      preconditioner_relaxation;
+
+
+      static void declare_parameters(ParameterHandler &prm);
+
+
+      void parse_parameters(ParameterHandler &prm);
+    };
+
+
+    void LinearSolver::declare_parameters(ParameterHandler &prm)
+    {
+      prm.enter_subsection("Linear solver");
+      {
+        prm.declare_entry("Solver type",
+                          "CG",
+                          Patterns::Selection("CG|Direct"),
+                          "Type of solver used to solve the linear system");
+
+
+        prm.declare_entry("Residual",
+                          "1e-6",
+                          Patterns::Double(0.0),
+                          "Linear solver residual (scaled by residual norm)");
+
+
+        prm.declare_entry(
+          "Max iteration multiplier",
+          "1",
+          Patterns::Double(0.0),
+          "Linear solver iterations (multiples of the system matrix size)");
+
+
+        prm.declare_entry("Use static condensation",
+                          "true",
+                          Patterns::Bool(),
+                          "Solve the full block system or a reduced problem");
+
+
+        prm.declare_entry("Preconditioner type",
+                          "ssor",
+                          Patterns::Selection("jacobi|ssor"),
+                          "Type of preconditioner");
+
+
+        prm.declare_entry("Preconditioner relaxation",
+                          "0.65",
+                          Patterns::Double(0.0),
+                          "Preconditioner relaxation value");
+      }
+      prm.leave_subsection();
+    }
+
+
+    void LinearSolver::parse_parameters(ParameterHandler &prm)
+    {
+      prm.enter_subsection("Linear solver");
+      {
+        type_lin                  = prm.get("Solver type");
+        tol_lin                   = prm.get_double("Residual");
+        max_iterations_lin        = prm.get_double("Max iteration multiplier");
+        use_static_condensation   = prm.get_bool("Use static condensation");
+        preconditioner_type       = prm.get("Preconditioner type");
+        preconditioner_relaxation = prm.get_double("Preconditioner relaxation");
+      }
+      prm.leave_subsection();
+    }
+
+
+@endcode 
+
+
+
+
+<a name="Nonlinearsolver"></a><h4>Nonlinear solver</h4> 
+
+
+
+
+牛顿-拉弗森方案被用来解决非线性治理方程组。 我们现在定义牛顿-拉普森非线性求解器的公差和最大迭代次数。
+
+@code
+    struct NonlinearSolver
+    {
+      unsigned int max_iterations_NR;
+      double       tol_f;
+      double       tol_u;
+
+
+      static void declare_parameters(ParameterHandler &prm);
+
+
+      void parse_parameters(ParameterHandler &prm);
+    };
+
+
+    void NonlinearSolver::declare_parameters(ParameterHandler &prm)
+    {
+      prm.enter_subsection("Nonlinear solver");
+      {
+        prm.declare_entry("Max iterations Newton-Raphson",
+                          "10",
+                          Patterns::Integer(0),
+                          "Number of Newton-Raphson iterations allowed");
+
+
+        prm.declare_entry("Tolerance force",
+                          "1.0e-9",
+                          Patterns::Double(0.0),
+                          "Force residual tolerance");
+
+
+        prm.declare_entry("Tolerance displacement",
+                          "1.0e-6",
+                          Patterns::Double(0.0),
+                          "Displacement error tolerance");
+      }
+      prm.leave_subsection();
+    }
+
+
+    void NonlinearSolver::parse_parameters(ParameterHandler &prm)
+    {
+      prm.enter_subsection("Nonlinear solver");
+      {
+        max_iterations_NR = prm.get_integer("Max iterations Newton-Raphson");
+        tol_f             = prm.get_double("Tolerance force");
+        tol_u             = prm.get_double("Tolerance displacement");
+      }
+      prm.leave_subsection();
+    }
+
+
+@endcode 
+
+
+
+
+<a name="Time"></a> <h4>Time</h4> 
+
+
+
+
+设置时间步长 $ \varDelta t $ 和仿真结束时间。
+
+@code
+    struct Time
+    {
+      double delta_t;
+      double end_time;
+
+
+      static void declare_parameters(ParameterHandler &prm);
+
+
+      void parse_parameters(ParameterHandler &prm);
+    };
+
+
+    void Time::declare_parameters(ParameterHandler &prm)
+    {
+      prm.enter_subsection("Time");
+      {
+        prm.declare_entry("End time", "1", Patterns::Double(), "End time");
+
+
+        prm.declare_entry("Time step size",
+                          "0.1",
+                          Patterns::Double(),
+                          "Time step size");
+      }
+      prm.leave_subsection();
+    }
+
+
+    void Time::parse_parameters(ParameterHandler &prm)
+    {
+      prm.enter_subsection("Time");
+      {
+        end_time = prm.get_double("End time");
+        delta_t  = prm.get_double("Time step size");
+      }
+      prm.leave_subsection();
+    }
+
+
+@endcode 
+
+
+
+
+<a name="Allparameters"></a> <h4>All parameters</h4> 
+
+
+
+
+最后，我们把上述所有的结构合并到一个容器中，这个容器中存放着我们所有的运行时选择。
+
+@code
+    struct AllParameters : public FESystem,
+                           public Geometry,
+                           public Materials,
+                           public LinearSolver,
+                           public NonlinearSolver,
+                           public Time
+
+
+    {
+      AllParameters(const std::string &input_file);
+
+
+      static void declare_parameters(ParameterHandler &prm);
+
+
+      void parse_parameters(ParameterHandler &prm);
+    };
+
+
+    AllParameters::AllParameters(const std::string &input_file)
+    {
+      ParameterHandler prm;
+      declare_parameters(prm);
+      prm.parse_input(input_file);
+      parse_parameters(prm);
+    }
+
+
+    void AllParameters::declare_parameters(ParameterHandler &prm)
+    {
+      FESystem::declare_parameters(prm);
+      Geometry::declare_parameters(prm);
+      Materials::declare_parameters(prm);
+      LinearSolver::declare_parameters(prm);
+      NonlinearSolver::declare_parameters(prm);
+      Time::declare_parameters(prm);
+    }
+
+
+    void AllParameters::parse_parameters(ParameterHandler &prm)
+    {
+      FESystem::parse_parameters(prm);
+      Geometry::parse_parameters(prm);
+      Materials::parse_parameters(prm);
+      LinearSolver::parse_parameters(prm);
+      NonlinearSolver::parse_parameters(prm);
+      Time::parse_parameters(prm);
+    }
+  } // namespace Parameters
+
+
+@endcode 
+
+
+
+
+<a name="Timeclass"></a> <h3>Time class</h3> 
+
+
+
+
+一个简单的类来存储时间数据。它的功能是透明的，所以没有必要讨论。为了简单起见，我们假设时间步长是恒定的。
+
+@code
+  class Time
+  {
+  public:
+    Time(const double time_end, const double delta_t)
+      : timestep(0)
+      , time_current(0.0)
+      , time_end(time_end)
+      , delta_t(delta_t)
+    {}
+
+
+    virtual ~Time() = default;
+
+
+    double current() const
+    {
+      return time_current;
+    }
+    double end() const
+    {
+      return time_end;
+    }
+    double get_delta_t() const
+    {
+      return delta_t;
+    }
+    unsigned int get_timestep() const
+    {
+      return timestep;
+    }
+    void increment()
+    {
+      time_current += delta_t;
+      ++timestep;
+    }
+
+
+  private:
+    unsigned int timestep;
+    double       time_current;
+    const double time_end;
+    const double delta_t;
+  };
+
+
+@endcode 
+
+
+
+
+<a name="CompressibleneoHookeanmaterialwithinathreefieldformulation"></a> <h3>Compressible neo-Hookean material within a three-field formulation</h3> 
+
+
+
+
+正如介绍中所讨论的，新胡克材料是一种超弹性材料。 整个领域被假定为由可压缩的新胡克材料组成。 这类材料在三场公式中定义了这种材料的行为。 可压缩的新Hookean材料可以用应变能量函数（SEF）来描述  $ \Psi =
+\Psi_{\text{iso}}(\overline{\mathbf{b}}) + \Psi_{\text{vol}}(\widetilde{J})
+$  。   
+
+
+等效响应由 $
+\Psi_{\text{iso}}(\overline{\mathbf{b}}) = c_{1} [\overline{I}_{1} - 3] $ 给出，其中 $ c_{1} = \frac{\mu}{2} $ 和 $\overline{I}_{1}$ 是左或右等效Cauchy-Green变形张量的第一不变量。这就是 $\overline{I}_1 \dealcoloneq \textrm{tr}(\overline{\mathbf{b}})$  。在这个例子中，支配体积响应的SEF被定义为 $ \Psi_{\text{vol}}(\widetilde{J}) = \kappa \frac{1}{4} [ \widetilde{J}^2 -
+1 - 2\textrm{ln}\; \widetilde{J} ]$  ，其中 $\kappa \dealcoloneq \lambda +
+2/3 \mu$  是<a href="http://en.wikipedia.org/wiki/Bulk_modulus">bulk
+modulus</a>， $\lambda$ 是<a
+href="http://en.wikipedia.org/wiki/Lam%C3%A9_parameters">Lam&eacute;'s
+first parameter</a>。   
+
+
+下面的类将被用来描述我们工作中的材料特征，并提供一个中心点，如果要实现不同的材料模型，就需要对其进行修改。为了工作，我们将在每个正交点存储一个这种类型的对象，并在每个对象中存储当前状态（由三个场的值或度量来表征），以便我们能够计算围绕当前状态的线性化弹性系数。
+
+@code
+  template <int dim>
+  class Material_Compressible_Neo_Hook_Three_Field
+  {
+  public:
+    Material_Compressible_Neo_Hook_Three_Field(const double mu, const double nu)
+      : kappa((2.0 * mu * (1.0 + nu)) / (3.0 * (1.0 - 2.0 * nu)))
+      , c_1(mu / 2.0)
+      , det_F(1.0)
+      , p_tilde(0.0)
+      , J_tilde(1.0)
+      , b_bar(Physics::Elasticity::StandardTensors<dim>::I)
+    {
+      Assert(kappa > 0, ExcInternalError());
+    }
+
+
+@endcode 
+
+
+
+我们用基于 $F$ 和压力 $\widetilde{p}$ 及膨胀 $\widetilde{J}$ 的各种变形相关数据更新材料模型，并在函数的最后包括一个内部一致性的物理检查。
+
+@code
+    void update_material_data(const Tensor<2, dim> &F,
+                              const double          p_tilde_in,
+                              const double          J_tilde_in)
+    {
+      det_F                      = determinant(F);
+      const Tensor<2, dim> F_bar = Physics::Elasticity::Kinematics::F_iso(F);
+      b_bar                      = Physics::Elasticity::Kinematics::b(F_bar);
+      p_tilde                    = p_tilde_in;
+      J_tilde                    = J_tilde_in;
+
+
+      Assert(det_F > 0, ExcInternalError());
+    }
+
+
+@endcode 
+
+
+
+第二个函数确定基尔霍夫应力 $\boldsymbol{\tau}
+= \boldsymbol{\tau}_{\textrm{iso}} + \boldsymbol{\tau}_{\textrm{vol}}$  。 
+
+@code
+    SymmetricTensor<2, dim> get_tau()
+    {
+      return get_tau_iso() + get_tau_vol();
+    }
+
+
+@endcode 
+
+
+
+空间设置中的四阶弹性张量 $\mathfrak{c}$ 由SEF $\Psi$ 计算为 $ J
+\mathfrak{c}_{ijkl} = F_{iA} F_{jB} \mathfrak{C}_{ABCD} F_{kC} F_{lD}$  其中 $ \mathfrak{C} = 4 \frac{\partial^2 \Psi(\mathbf{C})}{\partial
+\mathbf{C} \partial \mathbf{C}}$   
+
+@code
+    SymmetricTensor<4, dim> get_Jc() const
+    {
+      return get_Jc_vol() + get_Jc_iso();
+    }
+
+
+@endcode 
+
+
+
+体积自由能相对于 $\widetilde{J}$ 的导数，返回 $\frac{\partial
+\Psi_{\text{vol}}(\widetilde{J})}{\partial \widetilde{J}}$ 。 
+
+@code
+    double get_dPsi_vol_dJ() const
+    {
+      return (kappa / 2.0) * (J_tilde - 1.0 / J_tilde);
+    }
+
+
+@endcode 
+
+
+
+体积自由能相对于 $\widetilde{J}$ 的二次导数。我们需要在切线中明确地进行以下计算，所以我们将其公开。 我们计算出 $\frac{\partial^2
+\Psi_{\textrm{vol}}(\widetilde{J})}{\partial \widetilde{J} \partial
+\widetilde{J}}$  。 
+
+@code
+    double get_d2Psi_vol_dJ2() const
+    {
+      return ((kappa / 2.0) * (1.0 + 1.0 / (J_tilde * J_tilde)));
+    }
+
+
+@endcode 
+
+
+
+接下来的几个函数返回各种数据，我们选择与材料一起存储。
+
+@code
+    double get_det_F() const
+    {
+      return det_F;
+    }
+
+
+    double get_p_tilde() const
+    {
+      return p_tilde;
+    }
+
+
+    double get_J_tilde() const
+    {
+      return J_tilde;
+    }
+
+
+  protected:
+@endcode 
+
+
+
+定义构成模型参数  $\kappa$  （体积模量）和新胡克模型参数  $c_1$  。
+
+@code
+    const double kappa;
+    const double c_1;
+
+
+@endcode 
+
+
+
+方便与材料一起存储的模型具体数据。
+
+@code
+    double                  det_F;
+    double                  p_tilde;
+    double                  J_tilde;
+    SymmetricTensor<2, dim> b_bar;
+
+
+@endcode 
+
+
+
+以下函数在内部用于确定上述一些公共函数的结果。第一个是确定体积基尔霍夫应力  $\boldsymbol{\tau}_{\textrm{vol}}$  。
+
+@code
+    SymmetricTensor<2, dim> get_tau_vol() const
+    {
+      return p_tilde * det_F * Physics::Elasticity::StandardTensors<dim>::I;
+    }
+
+
+@endcode 
+
+
+
+接下来，确定等效基尔霍夫应力  $\boldsymbol{\tau}_{\textrm{iso}} =
+\mathcal{P}:\overline{\boldsymbol{\tau}}$  。
+
+@code
+    SymmetricTensor<2, dim> get_tau_iso() const
+    {
+      return Physics::Elasticity::StandardTensors<dim>::dev_P * get_tau_bar();
+    }
+
+
+@endcode 
+
+
+
+然后，确定虚构的基尔霍夫应力  $\overline{\boldsymbol{\tau}}$  。
+
+@code
+    SymmetricTensor<2, dim> get_tau_bar() const
+    {
+      return 2.0 * c_1 * b_bar;
+    }
+
+
+@endcode 
+
+
+
+计算切线的体积部分  $J
+\mathfrak{c}_\textrm{vol}$  。
+
+@code
+    SymmetricTensor<4, dim> get_Jc_vol() const
+    {
+      return p_tilde * det_F *
+             (Physics::Elasticity::StandardTensors<dim>::IxI -
+              (2.0 * Physics::Elasticity::StandardTensors<dim>::S));
+    }
+
+
+@endcode 
+
+
+
+计算正切的等值部分  $J
+\mathfrak{c}_\textrm{iso}$  。
+
+@code
+    SymmetricTensor<4, dim> get_Jc_iso() const
+    {
+      const SymmetricTensor<2, dim> tau_bar = get_tau_bar();
+      const SymmetricTensor<2, dim> tau_iso = get_tau_iso();
+      const SymmetricTensor<4, dim> tau_iso_x_I =
+        outer_product(tau_iso, Physics::Elasticity::StandardTensors<dim>::I);
+      const SymmetricTensor<4, dim> I_x_tau_iso =
+        outer_product(Physics::Elasticity::StandardTensors<dim>::I, tau_iso);
+      const SymmetricTensor<4, dim> c_bar = get_c_bar();
+
+
+      return (2.0 / dim) * trace(tau_bar) *
+               Physics::Elasticity::StandardTensors<dim>::dev_P -
+             (2.0 / dim) * (tau_iso_x_I + I_x_tau_iso) +
+             Physics::Elasticity::StandardTensors<dim>::dev_P * c_bar *
+               Physics::Elasticity::StandardTensors<dim>::dev_P;
+    }
+
+
+@endcode 
+
+
+
+计算虚构的弹性张量  $\overline{\mathfrak{c}}$  。对于所选择的材料模型，这只是零。
+
+@code
+    SymmetricTensor<4, dim> get_c_bar() const
+    {
+      return SymmetricTensor<4, dim>();
+    }
+  };
+
+
+@endcode 
+
+
+
+
+<a name="Quadraturepointhistory"></a> <h3>Quadrature point history</h3>
+
+
+
+
+正如在 step-18 中看到的， <code> PointHistory </code> 类提供了一种在正交点存储数据的方法。 这里每个正交点都持有一个指向材料描述的指针。 因此，不同的材料模型可以用在域的不同区域。 在其他数据中，我们选择为正交点存储Kirchhoff应力 $\boldsymbol{\tau}$ 和正切 $J\mathfrak{c}$ 。
+
+@code
+  template <int dim>
+  class PointHistory
+  {
+  public:
+    PointHistory()
+      : F_inv(Physics::Elasticity::StandardTensors<dim>::I)
+      , tau(SymmetricTensor<2, dim>())
+      , d2Psi_vol_dJ2(0.0)
+      , dPsi_vol_dJ(0.0)
+      , Jc(SymmetricTensor<4, dim>())
+    {}
+
+
+    virtual ~PointHistory() = default;
+
+
+@endcode 
+
+
+
+第一个函数用于创建材料对象并正确初始化所有张量。第二个函数根据当前的变形量 $\textrm{Grad}\mathbf{u}_{\textrm{n}}$ 、压力 $\widetilde{p}$ 和扩张 $\widetilde{J}$ 场值更新存储的值和应力。
+
+@code
+    void setup_lqp(const Parameters::AllParameters &parameters)
+    {
+      material =
+        std::make_shared<Material_Compressible_Neo_Hook_Three_Field<dim>>(
+          parameters.mu, parameters.nu);
+      update_values(Tensor<2, dim>(), 0.0, 1.0);
+    }
+
+
+@endcode 
+
+
+
+为此，我们从位移梯度 $\textrm{Grad}\ \mathbf{u}$ 计算变形梯度 $\mathbf{F}$ ，即 $\mathbf{F}(\mathbf{u}) = \mathbf{I} + \textrm{Grad}\ \mathbf{u}$ ，然后让与该正交点相关的材料模型进行自我更新。当计算变形梯度时，我们必须注意和 $\mathbf{I} +
+\textrm{Grad}\ \mathbf{u}$ 的数据类型：由于 $I$ 的数据类型是SymmetricTensor，只要写出 <code>I + Grad_u_n</code> 就可以将第二个参数转换成对称张量，执行和，然后将结果投给Tensor（即，可能是非对称张量的类型）。然而，由于 <code>Grad_u_n</code> 在一般情况下是非对称的，转换为SymmetricTensor将失败。我们可以通过先将 $I$ 转换为张量，然后在非对称张量之间执行加法，来避免这种来回折腾。
+
+@code
+    void update_values(const Tensor<2, dim> &Grad_u_n,
+                       const double          p_tilde,
+                       const double          J_tilde)
+    {
+      const Tensor<2, dim> F = Physics::Elasticity::Kinematics::F(Grad_u_n);
+      material->update_material_data(F, p_tilde, J_tilde);
+
+
+@endcode 
+
+
+
+材料已经更新，所以我们现在计算基尔霍夫应力 $\mathbf{\tau}$ 、正切 $J\mathfrak{c}$ 和体积自由能的一、二次导数。       
+
+
+我们还存储了变形梯度的逆值，因为我们经常使用它。
+
+@code
+      F_inv         = invert(F);
+      tau           = material->get_tau();
+      Jc            = material->get_Jc();
+      dPsi_vol_dJ   = material->get_dPsi_vol_dJ();
+      d2Psi_vol_dJ2 = material->get_d2Psi_vol_dJ2();
+    }
+
+
+@endcode 
+
+
+
+我们提供一个接口来检索某些数据。 这里是运动学变量。
+
+@code
+    double get_J_tilde() const
+    {
+      return material->get_J_tilde();
+    }
+
+
+    double get_det_F() const
+    {
+      return material->get_det_F();
+    }
+
+
+    const Tensor<2, dim> &get_F_inv() const
+    {
+      return F_inv;
+    }
+
+
+@endcode 
+
+
+
+...和运动变量。 这些在材料和全局切线矩阵和残余装配操作中使用。
+
+@code
+    double get_p_tilde() const
+    {
+      return material->get_p_tilde();
+    }
+
+
+    const SymmetricTensor<2, dim> &get_tau() const
+    {
+      return tau;
+    }
+
+
+    double get_dPsi_vol_dJ() const
+    {
+      return dPsi_vol_dJ;
+    }
+
+
+    double get_d2Psi_vol_dJ2() const
+    {
+      return d2Psi_vol_dJ2;
+    }
+
+
+@endcode 
+
+
+
+最后是切线。
+
+@code
+    const SymmetricTensor<4, dim> &get_Jc() const
+    {
+      return Jc;
+    }
+
+
+@endcode 
+
+
+
+在成员函数方面，该类为正交点存储了它所代表的材料类型的副本，以备在域的不同区域使用不同的材料，以及变形梯度的逆值... 
+
+@code
+  private:
+    std::shared_ptr<Material_Compressible_Neo_Hook_Three_Field<dim>> material;
+
+
+    Tensor<2, dim> F_inv;
+
+
+@endcode 
+
+
+
+......和应力型变量与切线一起  $J\mathfrak{c}$  。
+
+@code
+    SymmetricTensor<2, dim> tau;
+    double                  d2Psi_vol_dJ2;
+    double                  dPsi_vol_dJ;
+
+
+    SymmetricTensor<4, dim> Jc;
+  };
+
+
+
+@endcode 
+
+
+
+
+<a name="Quasistaticquasiincompressiblefinitestrainsolid"></a> <h3>Quasi-static quasi-incompressible finite-strain solid</h3>
+
+
+
+
+固体类是中心类，因为它代表了手头的问题。它遵循通常的方案，即它真正拥有的是一个构造函数、析构函数和一个 <code>run()</code> 函数，该函数将所有工作分派给该类的私有函数。
+
+@code
+  template <int dim>
+  class Solid
+  {
+  public:
+    Solid(const std::string &input_file);
+
+
+    void run();
+
+
+  private:
+@endcode 
+
+
+
+在这个类的私有部分，我们首先向前声明了一些对象，这些对象用于使用WorkStream对象的并行工作（关于这方面的更多信息，见 @ref threads 模块）。     
+
+
+我们声明这样的结构，用于正切（刚度）矩阵和右手边矢量的计算，静态凝结，以及更新正交点。
+
+@code
+    struct PerTaskData_ASM;
+    struct ScratchData_ASM;
+
+
+    struct PerTaskData_SC;
+    struct ScratchData_SC;
+
+
+    struct PerTaskData_UQPH;
+    struct ScratchData_UQPH;
+
+
+@endcode 
+
+
+
+我们以一个建立网格的成员函数开始收集。
+
+@code
+    void make_grid();
+
+
+@endcode 
+
+
+
+设置要解决的有限元系统。
+
+@code
+    void system_setup();
+
+
+    void determine_component_extractors();
+
+
+@endcode 
+
+
+
+为增量位移场建立Dirichlet约束。
+
+@code
+    void make_constraints(const int it_nr);
+
+
+@endcode 
+
+
+
+使用多线程的几个函数来组装系统和右手边的矩阵。它们中的每一个都是包装函数，一个被执行以在WorkStream模型中对一个单元做工作，另一个将在这一个单元上做的工作复制到代表它的全局对象中。
+
+@code
+    void assemble_system();
+
+
+    void assemble_system_one_cell(
+      const typename DoFHandler<dim>::active_cell_iterator &cell,
+      ScratchData_ASM &                                     scratch,
+      PerTaskData_ASM &                                     data) const;
+
+
+@endcode 
+
+
+
+还有类似的，执行全局静态凝结。
+
+@code
+    void assemble_sc();
+
+
+    void assemble_sc_one_cell(
+      const typename DoFHandler<dim>::active_cell_iterator &cell,
+      ScratchData_SC &                                      scratch,
+      PerTaskData_SC &                                      data);
+
+
+    void copy_local_to_global_sc(const PerTaskData_SC &data);
+
+
+@endcode 
+
+
+
+创建并更新正交点。这里，没有数据需要被复制到全局对象中，所以copy_local_to_global函数是空的。
+
+@code
+    void setup_qph();
+
+
+    void update_qph_incremental(const BlockVector<double> &solution_delta);
+
+
+    void update_qph_incremental_one_cell(
+      const typename DoFHandler<dim>::active_cell_iterator &cell,
+      ScratchData_UQPH &                                    scratch,
+      PerTaskData_UQPH &                                    data);
+
+
+    void copy_local_to_global_UQPH(const PerTaskData_UQPH & /*data*/)
+    {}
+
+
+@endcode 
+
+
+
+使用Newton-Raphson方法求解位移。我们把这个函数分成非线性循环和解决线性化的Newton-Raphson步骤的函数。
+
+@code
+    void solve_nonlinear_timestep(BlockVector<double> &solution_delta);
+
+
+    std::pair<unsigned int, double>
+    solve_linear_system(BlockVector<double> &newton_update);
+
+
+@endcode 
+
+
+
+解的检索以及后处理和写数据到文件。
+
+@code
+    BlockVector<double>
+    get_total_solution(const BlockVector<double> &solution_delta) const;
+
+
+    void output_results() const;
+
+
+@endcode 
+
+
+
+最后，一些描述当前状态的成员变量。用于描述问题设置的参数的集合... 
+
+@code
+    Parameters::AllParameters parameters;
+
+
+@endcode 
+
+
+
+...参考配置的体积... 
+
+@code
+    double vol_reference;
+
+
+@endcode 
+
+
+
+...以及对解决问题的几何形状的描述。
+
+@code
+    Triangulation<dim> triangulation;
+
+
+@endcode 
+
+
+
+此外，还要记录当前时间和评估某些函数的时间 
+
+@code
+    Time                time;
+    mutable TimerOutput timer;
+
+
+@endcode 
+
+
+
+一个用于正交点信息的存储对象。与 step-18 相反，这里采用了deal.II的本地正交点数据管理器。
+
+@code
+    CellDataStorage<typename Triangulation<dim>::cell_iterator,
+                    PointHistory<dim>>
+      quadrature_point_history;
+
+
+@endcode 
+
+
+
+对有限元系统的描述，包括位移多项式程度、自由度处理程序、每个单元的DoF数量以及用于从解向量中检索信息的提取器对象。
+
+@code
+    const unsigned int               degree;
+    const FESystem<dim>              fe;
+    DoFHandler<dim>                  dof_handler;
+    const unsigned int               dofs_per_cell;
+    const FEValuesExtractors::Vector u_fe;
+    const FEValuesExtractors::Scalar p_fe;
+    const FEValuesExtractors::Scalar J_fe;
+
+
+@endcode 
+
+
+
+说明区块系统是如何安排的。有3个块，第一个包含一个矢量DOF  $\mathbf{u}$ ，而另外两个描述标量DOF， $\widetilde{p}$  和  $\widetilde{J}$  。
+
+@code
+    static const unsigned int n_blocks          = 3;
+    static const unsigned int n_components      = dim + 2;
+    static const unsigned int first_u_component = 0;
+    static const unsigned int p_component       = dim;
+    static const unsigned int J_component       = dim + 1;
+
+
+    enum
+    {
+      u_dof = 0,
+      p_dof = 1,
+      J_dof = 2
+    };
+
+
+    std::vector<types::global_dof_index> dofs_per_block;
+    std::vector<types::global_dof_index> element_indices_u;
+    std::vector<types::global_dof_index> element_indices_p;
+    std::vector<types::global_dof_index> element_indices_J;
+
+
+@endcode 
+
+
+
+单元和面的高斯正交规则。单元和面的正交点的数量被记录。
+
+@code
+    const QGauss<dim>     qf_cell;
+    const QGauss<dim - 1> qf_face;
+    const unsigned int    n_q_points;
+    const unsigned int    n_q_points_f;
+
+
+@endcode 
+
+
+
+存储收敛的解和右手边向量以及切线矩阵的对象。有一个AffineConstraints对象，用于记录约束条件。 我们利用了为块状系统设计的稀疏性模式。
+
+@code
+    AffineConstraints<double> constraints;
+    BlockSparsityPattern      sparsity_pattern;
+    BlockSparseMatrix<double> tangent_matrix;
+    BlockVector<double>       system_rhs;
+    BlockVector<double>       solution_n;
+
+
+@endcode 
+
+
+
+然后定义一些变量来存储规范，更新规范和归一化因子。
+
+@code
+    struct Errors
+    {
+      Errors()
+        : norm(1.0)
+        , u(1.0)
+        , p(1.0)
+        , J(1.0)
+      {}
+
+
+      void reset()
+      {
+        norm = 1.0;
+        u    = 1.0;
+        p    = 1.0;
+        J    = 1.0;
+      }
+      void normalize(const Errors &rhs)
+      {
+        if (rhs.norm != 0.0)
+          norm /= rhs.norm;
+        if (rhs.u != 0.0)
+          u /= rhs.u;
+        if (rhs.p != 0.0)
+          p /= rhs.p;
+        if (rhs.J != 0.0)
+          J /= rhs.J;
+      }
+
+
+      double norm, u, p, J;
+    };
+
+
+    Errors error_residual, error_residual_0, error_residual_norm, error_update,
+      error_update_0, error_update_norm;
+
+
+@endcode 
+
+
+
+计算误差措施的方法 
+
+@code
+    void get_error_residual(Errors &error_residual);
+
+
+    void get_error_update(const BlockVector<double> &newton_update,
+                          Errors &                   error_update);
+
+
+    std::pair<double, double> get_error_dilation() const;
+
+
+@endcode 
+
+
+
+计算空间配置中的体积 
+
+@code
+    double compute_vol_current() const;
+
+
+@endcode 
+
+
+
+以赏心悦目的方式向屏幕打印信息... 
+
+@code
+    static void print_conv_header();
+
+
+    void print_conv_footer();
+  };
+
+
+@endcode 
+
+
+
+
+<a name="ImplementationofthecodeSolidcodeclass"></a> <h3>Implementation of the <code>Solid</code> class</h3> 
+
+
+
+
+
+<a name="Publicinterface"></a> <h4>Public interface</h4> 
+
+
+
+
+我们使用从参数文件中提取的数据来初始化Solid类。
+
+@code
+  template <int dim>
+  Solid<dim>::Solid(const std::string &input_file)
+    : parameters(input_file)
+    , vol_reference(0.)
+    , triangulation(Triangulation<dim>::maximum_smoothing)
+    , time(parameters.end_time, parameters.delta_t)
+    , timer(std::cout, TimerOutput::summary, TimerOutput::wall_times)
+    , degree(parameters.poly_degree)
+    ,
+@endcode 
+
+
+
+有限元系统由昏暗的连续位移DOF，以及不连续的压力和膨胀DOF组成。为了满足Babuska-Brezzi或LBB稳定性条件（见Hughes（2000）），我们设置了一个 $Q_n \times DGPM_{n-1} \times DGPM_{n-1}$ 系统。  $Q_2 \times DGPM_1 \times DGPM_1$ 元素满足这一条件，而 $Q_1 \times DGPM_0 \times DGPM_0$ 元素不满足。然而，事实证明，后者还是表现出良好的收敛特性。
+
+@code
+    fe(FE_Q<dim>(parameters.poly_degree),
+       dim, // displacement
+       FE_DGPMonomial<dim>(parameters.poly_degree - 1),
+       1, // pressure
+       FE_DGPMonomial<dim>(parameters.poly_degree - 1),
+       1)
+    , // dilatation
+    dof_handler(triangulation)
+    , dofs_per_cell(fe.n_dofs_per_cell())
+    , u_fe(first_u_component)
+    , p_fe(p_component)
+    , J_fe(J_component)
+    , dofs_per_block(n_blocks)
+    , qf_cell(parameters.quad_order)
+    , qf_face(parameters.quad_order)
+    , n_q_points(qf_cell.size())
+    , n_q_points_f(qf_face.size())
+  {
+    Assert(dim == 2 || dim == 3,
+           ExcMessage("This problem only works in 2 or 3 space dimensions."));
+    determine_component_extractors();
+  }
+
+
+
+@endcode 
+
+
+
+在解决准静态问题时，时间成为一个加载参数，即我们随着时间线性增加加载，使得这两个概念可以互换。我们选择用一个恒定的时间步长来线性增加时间。   
+
+
+我们从预处理开始，设置初始扩张值，然后输出初始网格，再以第一次时间（和载荷）递增开始模拟。   
+
+
+在对初始解场施加约束 $\widetilde{J}=1$ 时，必须注意（或者至少要考虑一下）。该约束对应于未变形构型中变形梯度的行列式，也就是身份张量。我们使用FE_DGPMonomial基数来插值扩张场，因此我们不能简单地将相应的dof设置为unity，因为它们对应于单项式系数。因此，我们使用 VectorTools::project 函数来为我们做这个工作。 VectorTools::project 函数需要一个参数，表明悬挂节点的约束。我们在这个程序中没有 所以我们必须创建一个约束对象。在原始状态下，约束对象是没有排序的，必须先进行排序（使用 AffineConstraints::close 函数）才能使用。请看  step-21  以了解更多信息。我们只需要强制执行扩张的初始条件。为了做到这一点，我们使用ComponentSelectFunction，它作为一个掩码，将n_components的J_component设置为1。 这正是我们想要的。请看 step-20 中的用法，以了解更多信息。
+
+@code
+  template <int dim>
+  void Solid<dim>::run()
+  {
+    make_grid();
+    system_setup();
+    {
+      AffineConstraints<double> constraints;
+      constraints.close();
+
+
+      const ComponentSelectFunction<dim> J_mask(J_component, n_components);
+
+
+      VectorTools::project(
+        dof_handler, constraints, QGauss<dim>(degree + 2), J_mask, solution_n);
+    }
+    output_results();
+    time.increment();
+
+
+@endcode 
+
+
+
+然后我们声明增量解决方案更新 $\varDelta
+\mathbf{\Xi} \dealcoloneq \{\varDelta \mathbf{u},\varDelta \widetilde{p},
+\varDelta \widetilde{J} \}$ 并开始在时域上循环。     
+
+
+在开始时，我们重新设定这个时间步长的解决方案更新... 
+
+@code
+    BlockVector<double> solution_delta(dofs_per_block);
+    while (time.current() < time.end())
+      {
+        solution_delta = 0.0;
+
+
+@endcode 
+
+
+
+...求解当前时间步长并更新总解向量  $\mathbf{\Xi}_{\textrm{n}} = \mathbf{\Xi}_{\textrm{n-1}} +
+\varDelta \mathbf{\Xi}$  ... 
+
+@code
+        solve_nonlinear_timestep(solution_delta);
+        solution_n += solution_delta;
+
+
+@endcode 
+
+
+
+...在愉快地进入下一个时间步长之前，绘制结果。
+
+@code
+        output_results();
+        time.increment();
+      }
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="Privateinterface"></a> <h3>Private interface</h3>
+
+
+
+
+
+<a name="Threadingbuildingblocksstructures"></a> <h4>Threading-building-blocks structures</h4>
+
+
+
+
+第一组私有成员函数与并行化有关。我们使用线程积木库（TBB）来执行尽可能多的计算密集型分布式任务。特别是，我们使用TBB组装正切矩阵和右手向量、静态凝结贡献，以及更新存储在正交点的数据。我们在这方面的主要工具是WorkStream类（更多信息见 @ref
+threads 模块）。
+
+
+
+
+首先我们要处理正切矩阵和右手边的装配结构。PerTaskData对象存储本地对全局系统的贡献。
+
+@code
+  template <int dim>
+  struct Solid<dim>::PerTaskData_ASM
+  {
+    FullMatrix<double>                   cell_matrix;
+    Vector<double>                       cell_rhs;
+    std::vector<types::global_dof_index> local_dof_indices;
+
+
+    PerTaskData_ASM(const unsigned int dofs_per_cell)
+      : cell_matrix(dofs_per_cell, dofs_per_cell)
+      , cell_rhs(dofs_per_cell)
+      , local_dof_indices(dofs_per_cell)
+    {}
+
+
+    void reset()
+    {
+      cell_matrix = 0.0;
+      cell_rhs    = 0.0;
+    }
+  };
+
+
+
+@endcode 
+
+
+
+另一方面，ScratchData对象存储较大的对象，如形状函数值数组（  <code>Nx</code>  ）和形状函数梯度和对称梯度向量，我们将在装配时使用。
+
+@code
+  template <int dim>
+  struct Solid<dim>::ScratchData_ASM
+  {
+    FEValues<dim>     fe_values;
+    FEFaceValues<dim> fe_face_values;
+
+
+    std::vector<std::vector<double>>                  Nx;
+    std::vector<std::vector<Tensor<2, dim>>>          grad_Nx;
+    std::vector<std::vector<SymmetricTensor<2, dim>>> symm_grad_Nx;
+
+
+    ScratchData_ASM(const FiniteElement<dim> &fe_cell,
+                    const QGauss<dim> &       qf_cell,
+                    const UpdateFlags         uf_cell,
+                    const QGauss<dim - 1> &   qf_face,
+                    const UpdateFlags         uf_face)
+      : fe_values(fe_cell, qf_cell, uf_cell)
+      , fe_face_values(fe_cell, qf_face, uf_face)
+      , Nx(qf_cell.size(), std::vector<double>(fe_cell.n_dofs_per_cell()))
+      , grad_Nx(qf_cell.size(),
+                std::vector<Tensor<2, dim>>(fe_cell.n_dofs_per_cell()))
+      , symm_grad_Nx(qf_cell.size(),
+                     std::vector<SymmetricTensor<2, dim>>(
+                       fe_cell.n_dofs_per_cell()))
+    {}
+
+
+    ScratchData_ASM(const ScratchData_ASM &rhs)
+      : fe_values(rhs.fe_values.get_fe(),
+                  rhs.fe_values.get_quadrature(),
+                  rhs.fe_values.get_update_flags())
+      , fe_face_values(rhs.fe_face_values.get_fe(),
+                       rhs.fe_face_values.get_quadrature(),
+                       rhs.fe_face_values.get_update_flags())
+      , Nx(rhs.Nx)
+      , grad_Nx(rhs.grad_Nx)
+      , symm_grad_Nx(rhs.symm_grad_Nx)
+    {}
+
+
+    void reset()
+    {
+      const unsigned int n_q_points      = Nx.size();
+      const unsigned int n_dofs_per_cell = Nx[0].size();
+      for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
+        {
+          Assert(Nx[q_point].size() == n_dofs_per_cell, ExcInternalError());
+          Assert(grad_Nx[q_point].size() == n_dofs_per_cell,
+                 ExcInternalError());
+          Assert(symm_grad_Nx[q_point].size() == n_dofs_per_cell,
+                 ExcInternalError());
+          for (unsigned int k = 0; k < n_dofs_per_cell; ++k)
+            {
+              Nx[q_point][k]           = 0.0;
+              grad_Nx[q_point][k]      = 0.0;
+              symm_grad_Nx[q_point][k] = 0.0;
+            }
+        }
+    }
+  };
+
+
+
+@endcode 
+
+
+
+然后我们定义结构来组装静态凝结的切线矩阵。回顾一下，我们希望解决一个基于位移的公式。由于 $\widetilde{p}$ 和 $\widetilde{J}$ 字段是元素不连续的，所以我们在元素层面上进行缩合。 由于这些操作是基于矩阵的，我们需要设置一些矩阵来存储一些切线矩阵子块的局部贡献。 我们将这些放在PerTaskData结构中。   
+
+
+我们选择不在 <code>reset()</code> 函数中重置任何数据，因为矩阵提取和替换工具会处理这个问题 
+
+@code
+  template <int dim>
+  struct Solid<dim>::PerTaskData_SC
+  {
+    FullMatrix<double>                   cell_matrix;
+    std::vector<types::global_dof_index> local_dof_indices;
+
+
+    FullMatrix<double> k_orig;
+    FullMatrix<double> k_pu;
+    FullMatrix<double> k_pJ;
+    FullMatrix<double> k_JJ;
+    FullMatrix<double> k_pJ_inv;
+    FullMatrix<double> k_bbar;
+    FullMatrix<double> A;
+    FullMatrix<double> B;
+    FullMatrix<double> C;
+
+
+    PerTaskData_SC(const unsigned int dofs_per_cell,
+                   const unsigned int n_u,
+                   const unsigned int n_p,
+                   const unsigned int n_J)
+      : cell_matrix(dofs_per_cell, dofs_per_cell)
+      , local_dof_indices(dofs_per_cell)
+      , k_orig(dofs_per_cell, dofs_per_cell)
+      , k_pu(n_p, n_u)
+      , k_pJ(n_p, n_J)
+      , k_JJ(n_J, n_J)
+      , k_pJ_inv(n_p, n_J)
+      , k_bbar(n_u, n_u)
+      , A(n_J, n_u)
+      , B(n_J, n_u)
+      , C(n_p, n_u)
+    {}
+
+
+    void reset()
+    {}
+  };
+
+
+
+@endcode 
+
+
+
+由于我们不需要临时数据，所以我们希望在这里执行的操作的ScratchData对象是空的，但它仍然需要在deal.II中为TBB的当前实现定义。 所以我们为此创建了一个假结构。
+
+@code
+  template <int dim>
+  struct Solid<dim>::ScratchData_SC
+  {
+    void reset()
+    {}
+  };
+
+
+
+@endcode 
+
+
+
+最后我们定义结构以协助更新正交点信息。与SC组装过程类似，我们不需要PerTaskData对象（因为这里没有什么可存储的），但还是必须定义一个。请注意，这是因为对于我们这里的操作--更新正交点的数据--是纯粹的局部操作：我们在每个单元上做的事情在每个单元上都会被消耗掉，没有像使用WorkStream类时通常会有的全局聚合操作。我们仍然必须定义每个任务的数据结构，这表明WorkStream类可能不适合这种操作（原则上，我们可以简单地使用 Threads::new_task 为每个单元创建一个新的任务），但无论如何这样做并没有什么坏处。此外，如果有不同的材料模型与一个正交点相关联，需要不同程度的计算费用，那么这里使用的方法可能是有利的。
+
+@code
+  template <int dim>
+  struct Solid<dim>::PerTaskData_UQPH
+  {
+    void reset()
+    {}
+  };
+
+
+
+@endcode 
+
+
+
+ScratchData对象将被用来存储解向量的别名，这样我们就不必复制这个大的数据结构。然后我们定义一些向量来提取正交点的解值和梯度。
+
+@code
+  template <int dim>
+  struct Solid<dim>::ScratchData_UQPH
+  {
+    const BlockVector<double> &solution_total;
+
+
+    std::vector<Tensor<2, dim>> solution_grads_u_total;
+    std::vector<double>         solution_values_p_total;
+    std::vector<double>         solution_values_J_total;
+
+
+    FEValues<dim> fe_values;
+
+
+    ScratchData_UQPH(const FiniteElement<dim> & fe_cell,
+                     const QGauss<dim> &        qf_cell,
+                     const UpdateFlags          uf_cell,
+                     const BlockVector<double> &solution_total)
+      : solution_total(solution_total)
+      , solution_grads_u_total(qf_cell.size())
+      , solution_values_p_total(qf_cell.size())
+      , solution_values_J_total(qf_cell.size())
+      , fe_values(fe_cell, qf_cell, uf_cell)
+    {}
+
+
+    ScratchData_UQPH(const ScratchData_UQPH &rhs)
+      : solution_total(rhs.solution_total)
+      , solution_grads_u_total(rhs.solution_grads_u_total)
+      , solution_values_p_total(rhs.solution_values_p_total)
+      , solution_values_J_total(rhs.solution_values_J_total)
+      , fe_values(rhs.fe_values.get_fe(),
+                  rhs.fe_values.get_quadrature(),
+                  rhs.fe_values.get_update_flags())
+    {}
+
+
+    void reset()
+    {
+      const unsigned int n_q_points = solution_grads_u_total.size();
+      for (unsigned int q = 0; q < n_q_points; ++q)
+        {
+          solution_grads_u_total[q]  = 0.0;
+          solution_values_p_total[q] = 0.0;
+          solution_values_J_total[q] = 0.0;
+        }
+    }
+  };
+
+
+
+@endcode 
+
+
+
+
+<a name="Solidmake_grid"></a> <h4>Solid::make_grid</h4> 
+
+
+
+
+接着是第一个私有成员函数。在这里，我们创建域的三角形，为此我们选择按比例的立方体，每个面都有一个边界ID号。 对于压痕问题，网格必须至少被细化一次。   
+
+
+然后我们确定参考配置的体积，并将其打印出来进行比较。
+
+@code
+  template <int dim>
+  void Solid<dim>::make_grid()
+  {
+    GridGenerator::hyper_rectangle(
+      triangulation,
+      (dim == 3 ? Point<dim>(0.0, 0.0, 0.0) : Point<dim>(0.0, 0.0)),
+      (dim == 3 ? Point<dim>(1.0, 1.0, 1.0) : Point<dim>(1.0, 1.0)),
+      true);
+    GridTools::scale(parameters.scale, triangulation);
+    triangulation.refine_global(std::max(1U, parameters.global_refinement));
+
+
+    vol_reference = GridTools::volume(triangulation);
+    std::cout << "Grid:\n\t Reference volume: " << vol_reference << std::endl;
+
+
+@endcode 
+
+
+
+由于我们希望将Neumann BC应用于顶面的一个补丁，我们必须找到域的这一部分的单元面，并用一个明显的边界ID号标记它们。 我们要找的面在+y面上，将得到边界ID 6（0到5已经在创建立方体域的六个面时使用了）。
+
+@code
+    for (const auto &cell : triangulation.active_cell_iterators())
+      for (const auto &face : cell->face_iterators())
+        {
+          if (face->at_boundary() == true &&
+              face->center()[1] == 1.0 * parameters.scale)
+            {
+              if (dim == 3)
+                {
+                  if (face->center()[0] < 0.5 * parameters.scale &&
+                      face->center()[2] < 0.5 * parameters.scale)
+                    face->set_boundary_id(6);
+                }
+              else
+                {
+                  if (face->center()[0] < 0.5 * parameters.scale)
+                    face->set_boundary_id(6);
+                }
+            }
+        }
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="Solidsystem_setup"></a> <h4>Solid::system_setup</h4>
+
+
+
+
+接下来我们描述一下FE系统是如何设置的。 我们首先确定每块的分量数量。由于位移是一个矢量分量，前两个分量属于它，而后两个分量描述标量压力和扩张DOF。
+
+@code
+  template <int dim>
+  void Solid<dim>::system_setup()
+  {
+    timer.enter_subsection("Setup system");
+
+
+    std::vector<unsigned int> block_component(n_components,
+                                              u_dof); // Displacement
+    block_component[p_component] = p_dof;             // Pressure
+    block_component[J_component] = J_dof;             // Dilatation
+
+
+@endcode 
+
+
+
+然后，DOF处理程序被初始化，我们以一种有效的方式对网格重新编号。我们还记录了每个区块的DOFs的数量。
+
+@code
+    dof_handler.distribute_dofs(fe);
+    DoFRenumbering::Cuthill_McKee(dof_handler);
+    DoFRenumbering::component_wise(dof_handler, block_component);
+
+
+    dofs_per_block =
+      DoFTools::count_dofs_per_fe_block(dof_handler, block_component);
+
+
+    std::cout << "Triangulation:"
+              << "\n\t Number of active cells: "
+              << triangulation.n_active_cells()
+              << "\n\t Number of degrees of freedom: " << dof_handler.n_dofs()
+              << std::endl;
+
+
+@endcode 
+
+
+
+设置稀疏模式和切线矩阵 
+
+@code
+    tangent_matrix.clear();
+    {
+      const types::global_dof_index n_dofs_u = dofs_per_block[u_dof];
+      const types::global_dof_index n_dofs_p = dofs_per_block[p_dof];
+      const types::global_dof_index n_dofs_J = dofs_per_block[J_dof];
+
+
+      BlockDynamicSparsityPattern dsp(n_blocks, n_blocks);
+
+
+      dsp.block(u_dof, u_dof).reinit(n_dofs_u, n_dofs_u);
+      dsp.block(u_dof, p_dof).reinit(n_dofs_u, n_dofs_p);
+      dsp.block(u_dof, J_dof).reinit(n_dofs_u, n_dofs_J);
+
+
+      dsp.block(p_dof, u_dof).reinit(n_dofs_p, n_dofs_u);
+      dsp.block(p_dof, p_dof).reinit(n_dofs_p, n_dofs_p);
+      dsp.block(p_dof, J_dof).reinit(n_dofs_p, n_dofs_J);
+
+
+      dsp.block(J_dof, u_dof).reinit(n_dofs_J, n_dofs_u);
+      dsp.block(J_dof, p_dof).reinit(n_dofs_J, n_dofs_p);
+      dsp.block(J_dof, J_dof).reinit(n_dofs_J, n_dofs_J);
+      dsp.collect_sizes();
+
+
+@endcode 
+
+
+
+全局系统矩阵最初具有以下结构 
+
+@f{align*}
+\underbrace{\begin{bmatrix}
+\mathsf{\mathbf{K}}_{uu}  & \mathsf{\mathbf{K}}_{u\widetilde{p}} &
+\mathbf{0}
+\\ \mathsf{\mathbf{K}}_{\widetilde{p}u} & \mathbf{0} &
+\mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}
+\\ \mathbf{0} & \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}} &
+\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
+\end{bmatrix}}_{\mathsf{\mathbf{K}}(\mathbf{\Xi}_{\textrm{i}})}
+\underbrace{\begin{bmatrix}
+d \mathsf{u}
+\\  d \widetilde{\mathsf{\mathbf{p}}}
+\\  d \widetilde{\mathsf{\mathbf{J}}}
+\end{bmatrix}}_{d \mathbf{\Xi}}
+=
+\underbrace{\begin{bmatrix}
+\mathsf{\mathbf{F}}_{u}(\mathbf{u}_{\textrm{i}})
+\\ \mathsf{\mathbf{F}}_{\widetilde{p}}(\widetilde{p}_{\textrm{i}})
+\\ \mathsf{\mathbf{F}}_{\widetilde{J}}(\widetilde{J}_{\textrm{i}})
+\end{bmatrix}}_{ \mathsf{\mathbf{F}}(\mathbf{\Xi}_{\textrm{i}}) } \, .
+@f} 
+
+我们对稀疏模式进行优化，以反映这一结构，并防止为右对角块成分创建不必要的数据。
+
+@code
+      Table<2, DoFTools::Coupling> coupling(n_components, n_components);
+      for (unsigned int ii = 0; ii < n_components; ++ii)
+        for (unsigned int jj = 0; jj < n_components; ++jj)
+          if (((ii < p_component) && (jj == J_component)) ||
+              ((ii == J_component) && (jj < p_component)) ||
+              ((ii == p_component) && (jj == p_component)))
+            coupling[ii][jj] = DoFTools::none;
+          else
+            coupling[ii][jj] = DoFTools::always;
+      DoFTools::make_sparsity_pattern(
+        dof_handler, coupling, dsp, constraints, false);
+      sparsity_pattern.copy_from(dsp);
+    }
+
+
+    tangent_matrix.reinit(sparsity_pattern);
+
+
+@endcode 
+
+
+
+然后我们设置存储向量 
+
+@code
+    system_rhs.reinit(dofs_per_block);
+    system_rhs.collect_sizes();
+
+
+    solution_n.reinit(dofs_per_block);
+    solution_n.collect_sizes();
+
+
+@endcode 
+
+
+
+...最后设置正交点历史。
+
+@code
+    setup_qph();
+
+
+    timer.leave_subsection();
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="Soliddetermine_component_extractors"></a> <h4>Solid::determine_component_extractors</h4> 接下来我们从FE系统中计算一些信息，描述哪些局部元素DOF连接到哪个块状部件。 这将在后面用于从全局矩阵中提取子块。   
+
+
+从本质上讲，我们所需要的是FESystem对象指出参考单元上的DOF连接到哪个块状部件上。 目前，插值场的设置是：0表示位移DOF，1表示压力DOF，2表示膨胀DOF。
+
+@code
+  template <int dim>
+  void Solid<dim>::determine_component_extractors()
+  {
+    element_indices_u.clear();
+    element_indices_p.clear();
+    element_indices_J.clear();
+
+
+    for (unsigned int k = 0; k < fe.n_dofs_per_cell(); ++k)
+      {
+        const unsigned int k_group = fe.system_to_base_index(k).first.first;
+        if (k_group == u_dof)
+          element_indices_u.push_back(k);
+        else if (k_group == p_dof)
+          element_indices_p.push_back(k);
+        else if (k_group == J_dof)
+          element_indices_J.push_back(k);
+        else
+          {
+            Assert(k_group <= J_dof, ExcInternalError());
+          }
+      }
+  }
+
+
+@endcode 
+
+
+
+
+<a name="Solidsetup_qph"></a> <h4>Solid::setup_qph</h4> 用于存储正交信息的方法已经在  step-18  中描述。这里我们为SMP机器实现了一个类似的设置。   
+
+
+首先，实际的QPH数据对象被创建。这必须在网格被细化到最精细的程度后才能完成。
+
+@code
+  template <int dim>
+  void Solid<dim>::setup_qph()
+  {
+    std::cout << "    Setting up quadrature point data..." << std::endl;
+
+
+    quadrature_point_history.initialize(triangulation.begin_active(),
+                                        triangulation.end(),
+                                        n_q_points);
+
+
+@endcode 
+
+
+
+接下来我们设置初始正交点数据。注意，当正交点数据被检索时，它将以智能指针的矢量形式返回。
+
+@code
+    for (const auto &cell : triangulation.active_cell_iterators())
+      {
+        const std::vector<std::shared_ptr<PointHistory<dim>>> lqph =
+          quadrature_point_history.get_data(cell);
+        Assert(lqph.size() == n_q_points, ExcInternalError());
+
+
+        for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
+          lqph[q_point]->setup_lqp(parameters);
+      }
+  }
+
+
+@endcode 
+
+
+
+
+<a name="Solidupdate_qph_incremental"></a> <h4>Solid::update_qph_incremental</h4> 由于QP信息的更新经常发生，并涉及一些昂贵的操作，我们定义了一个多线程的方法，将任务分布在若干CPU核上。   
+
+
+为了开始这个工作，我们首先需要获得这个牛顿增量时的总解，然后创建初始的从头开始和复制数据对象的副本。
+
+@code
+  template <int dim>
+  void
+  Solid<dim>::update_qph_incremental(const BlockVector<double> &solution_delta)
+  {
+    timer.enter_subsection("Update QPH data");
+    std::cout << " UQPH " << std::flush;
+
+
+    const BlockVector<double> solution_total(
+      get_total_solution(solution_delta));
+
+
+    const UpdateFlags uf_UQPH(update_values | update_gradients);
+    PerTaskData_UQPH  per_task_data_UQPH;
+    ScratchData_UQPH  scratch_data_UQPH(fe, qf_cell, uf_UQPH, solution_total);
+
+
+@endcode 
+
+
+
+然后我们将它们和单细胞更新函数传递给WorkStream进行处理。
+
+@code
+    WorkStream::run(dof_handler.active_cell_iterators(),
+                    *this,
+                    &Solid::update_qph_incremental_one_cell,
+                    &Solid::copy_local_to_global_UQPH,
+                    scratch_data_UQPH,
+                    per_task_data_UQPH);
+
+
+    timer.leave_subsection();
+  }
+
+
+
+@endcode 
+
+
+
+现在我们描述一下我们如何从解决方案矢量中提取数据并将其传递给每个QP存储对象进行处理。
+
+@code
+  template <int dim>
+  void Solid<dim>::update_qph_incremental_one_cell(
+    const typename DoFHandler<dim>::active_cell_iterator &cell,
+    ScratchData_UQPH &                                    scratch,
+    PerTaskData_UQPH & /*data*/)
+  {
+    const std::vector<std::shared_ptr<PointHistory<dim>>> lqph =
+      quadrature_point_history.get_data(cell);
+    Assert(lqph.size() == n_q_points, ExcInternalError());
+
+
+    Assert(scratch.solution_grads_u_total.size() == n_q_points,
+           ExcInternalError());
+    Assert(scratch.solution_values_p_total.size() == n_q_points,
+           ExcInternalError());
+    Assert(scratch.solution_values_J_total.size() == n_q_points,
+           ExcInternalError());
+
+
+    scratch.reset();
+
+
+@endcode 
+
+
+
+我们首先需要找到当前单元内正交点的值和梯度，然后利用位移梯度和总压力及扩张解值更新每个局部QP。
+
+@code
+    scratch.fe_values.reinit(cell);
+    scratch.fe_values[u_fe].get_function_gradients(
+      scratch.solution_total, scratch.solution_grads_u_total);
+    scratch.fe_values[p_fe].get_function_values(
+      scratch.solution_total, scratch.solution_values_p_total);
+    scratch.fe_values[J_fe].get_function_values(
+      scratch.solution_total, scratch.solution_values_J_total);
+
+
+    for (const unsigned int q_point :
+         scratch.fe_values.quadrature_point_indices())
+      lqph[q_point]->update_values(scratch.solution_grads_u_total[q_point],
+                                   scratch.solution_values_p_total[q_point],
+                                   scratch.solution_values_J_total[q_point]);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="Solidsolve_nonlinear_timestep"></a> <h4>Solid::solve_nonlinear_timestep</h4> 
+
+
+
+
+下一个函数是Newton-Raphson方案的驱动方法。在它的顶部，我们创建一个新的向量来存储当前的牛顿更新步骤，重置误差存储对象并打印求解器的标题。
+
+@code
+  template <int dim>
+  void Solid<dim>::solve_nonlinear_timestep(BlockVector<double> &solution_delta)
+  {
+    std::cout << std::endl
+              << "Timestep " << time.get_timestep() << " @ " << time.current()
+              << "s" << std::endl;
+
+
+    BlockVector<double> newton_update(dofs_per_block);
+
+
+    error_residual.reset();
+    error_residual_0.reset();
+    error_residual_norm.reset();
+    error_update.reset();
+    error_update_0.reset();
+    error_update_norm.reset();
+
+
+    print_conv_header();
+
+
+@endcode 
+
+
+
+现在我们执行一些牛顿迭代来迭代解决非线性问题。 由于问题是完全非线性的，而且我们使用的是完全牛顿方法，所以存储在正切矩阵和右手边向量中的数据是不能重复使用的，必须在每个牛顿步骤中清除。然后，我们最初建立线性系统并检查收敛性（并在第一次迭代中存储这个值）。rhs向量的无约束DOFs保持失衡的力，并共同决定是否达到了平衡解。     
+
+
+尽管对于这个特定的问题，我们可以在组装系统矩阵之前构建RHS向量，但为了扩展性，我们选择不这样做。分别组装RHS向量和系统矩阵的好处是，后者是一个昂贵的操作，我们可以通过在达到收敛时不组装切线矩阵来避免一个额外的组装过程。然而，这使得使用MPI并行化代码变得更加困难。此外，当把问题扩展到瞬态情况时，由于时间离散化和对速度和加速度场的约束应用，可能会对RHS产生额外的贡献。
+
+@code
+    unsigned int newton_iteration = 0;
+    for (; newton_iteration < parameters.max_iterations_NR; ++newton_iteration)
+      {
+        std::cout << " " << std::setw(2) << newton_iteration << " "
+                  << std::flush;
+
+
+@endcode 
+
+
+
+我们构建线性系统，但暂不对其进行求解（这一步骤应该比装配要昂贵得多）。
+
+@code
+        make_constraints(newton_iteration);
+        assemble_system();
+
+
+@endcode 
+
+
+
+我们现在可以确定归一化残余误差，并检查解决方案的收敛性。
+
+@code
+        get_error_residual(error_residual);
+        if (newton_iteration == 0)
+          error_residual_0 = error_residual;
+
+
+        error_residual_norm = error_residual;
+        error_residual_norm.normalize(error_residual_0);
+
+
+        if (newton_iteration > 0 && error_update_norm.u <= parameters.tol_u &&
+            error_residual_norm.u <= parameters.tol_f)
+          {
+            std::cout << " CONVERGED! " << std::endl;
+            print_conv_footer();
+
+
+            break;
+          }
+
+
+@endcode 
+
+
+
+如果我们已经决定要继续迭代，我们就解决线性化系统。
+
+@code
+        const std::pair<unsigned int, double> lin_solver_output =
+          solve_linear_system(newton_update);
+
+
+@endcode 
+
+
+
+我们现在可以确定归一化的牛顿更新误差。
+
+@code
+        get_error_update(newton_update, error_update);
+        if (newton_iteration == 0)
+          error_update_0 = error_update;
+
+
+        error_update_norm = error_update;
+        error_update_norm.normalize(error_update_0);
+
+
+@endcode 
+
+
+
+最后，由于我们隐含地接受了求解步骤，我们可以对当前时间步骤的求解增量进行实际更新，更新与这个新位移和应力状态有关的所有正交点信息，并继续迭代。
+
+@code
+        solution_delta += newton_update;
+        update_qph_incremental(solution_delta);
+
+
+        std::cout << " | " << std::fixed << std::setprecision(3) << std::setw(7)
+                  << std::scientific << lin_solver_output.first << "  "
+                  << lin_solver_output.second << "  "
+                  << error_residual_norm.norm << "  " << error_residual_norm.u
+                  << "  " << error_residual_norm.p << "  "
+                  << error_residual_norm.J << "  " << error_update_norm.norm
+                  << "  " << error_update_norm.u << "  " << error_update_norm.p
+                  << "  " << error_update_norm.J << "  " << std::endl;
+      }
+
+
+@endcode 
+
+
+
+最后，如果发现我们事实上做了比参数文件允许的更多的迭代，我们会引发一个异常，可以在main()函数中捕获。调用<code>AssertThrow(condition, exc_object)</code>实质上等同于<code>if (!cond) throw exc_object;</code>，但前一种形式在异常对象中填充了某些字段，以确定异常发生的位置（文件名和行号），使之更容易确定问题发生在哪里。
+
+@code
+    AssertThrow(newton_iteration < parameters.max_iterations_NR,
+                ExcMessage("No convergence in nonlinear solver!"));
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="Solidprint_conv_headerandSolidprint_conv_footer"></a> <h4>Solid::print_conv_header and Solid::print_conv_footer</h4> 
+
+
+
+
+这个程序在一个漂亮的表格中打印出数据，这个表格在每次迭代的基础上更新。接下来的两个函数设置了表头和表脚。
+
+@code
+  template <int dim>
+  void Solid<dim>::print_conv_header()
+  {
+    static const unsigned int l_width = 150;
+
+
+    for (unsigned int i = 0; i < l_width; ++i)
+      std::cout << "_";
+    std::cout << std::endl;
+
+
+    std::cout << "               SOLVER STEP               "
+              << " |  LIN_IT   LIN_RES    RES_NORM    "
+              << " RES_U     RES_P      RES_J     NU_NORM     "
+              << " NU_U       NU_P       NU_J " << std::endl;
+
+
+    for (unsigned int i = 0; i < l_width; ++i)
+      std::cout << "_";
+    std::cout << std::endl;
+  }
+
+
+
+
+
+  template <int dim>
+  void Solid<dim>::print_conv_footer()
+  {
+    static const unsigned int l_width = 150;
+
+
+    for (unsigned int i = 0; i < l_width; ++i)
+      std::cout << "_";
+    std::cout << std::endl;
+
+
+    const std::pair<double, double> error_dil = get_error_dilation();
+
+
+    std::cout << "Relative errors:" << std::endl
+              << "Displacement:\t" << error_update.u / error_update_0.u
+              << std::endl
+              << "Force: \t\t" << error_residual.u / error_residual_0.u
+              << std::endl
+              << "Dilatation:\t" << error_dil.first << std::endl
+              << "v / V_0:\t" << error_dil.second * vol_reference << " / "
+              << vol_reference << " = " << error_dil.second << std::endl;
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="Solidget_error_dilation"></a> <h4>Solid::get_error_dilation</h4> 
+
+
+
+
+计算空间配置中的域的体积 
+
+@code
+  template <int dim>
+  double Solid<dim>::compute_vol_current() const
+  {
+    double vol_current = 0.0;
+
+
+    FEValues<dim> fe_values(fe, qf_cell, update_JxW_values);
+
+
+    for (const auto &cell : triangulation.active_cell_iterators())
+      {
+        fe_values.reinit(cell);
+
+
+@endcode 
+
+
+
+与之前要求的不同，在这个例子中，正交点数据是特别不可修改的，因为我们将只访问数据。我们通过将这个更新函数标记为常数来确保正确的get_data函数被调用。
+
+@code
+        const std::vector<std::shared_ptr<const PointHistory<dim>>> lqph =
+          quadrature_point_history.get_data(cell);
+        Assert(lqph.size() == n_q_points, ExcInternalError());
+
+
+        for (const unsigned int q_point : fe_values.quadrature_point_indices())
+          {
+            const double det_F_qp = lqph[q_point]->get_det_F();
+            const double JxW      = fe_values.JxW(q_point);
+
+
+            vol_current += det_F_qp * JxW;
+          }
+      }
+    Assert(vol_current > 0.0, ExcInternalError());
+    return vol_current;
+  }
+
+
+@endcode 
+
+
+
+计算扩张  $\widetilde{J}$  与  $J
+\dealcoloneq \textrm{det}\ \mathbf{F}$  的一致程度，从  $L^2$  的误差  $ \bigl[
+\int_{\Omega_0} {[ J - \widetilde{J}]}^{2}\textrm{d}V \bigr]^{1/2}$  。我们还返回域的当前体积与参考体积的比率。这对不可压缩介质很有意义，因为我们要检查等压线约束的执行情况如何。
+
+@code
+  template <int dim>
+  std::pair<double, double> Solid<dim>::get_error_dilation() const
+  {
+    double dil_L2_error = 0.0;
+
+
+    FEValues<dim> fe_values(fe, qf_cell, update_JxW_values);
+
+
+    for (const auto &cell : triangulation.active_cell_iterators())
+      {
+        fe_values.reinit(cell);
+
+
+        const std::vector<std::shared_ptr<const PointHistory<dim>>> lqph =
+          quadrature_point_history.get_data(cell);
+        Assert(lqph.size() == n_q_points, ExcInternalError());
+
+
+        for (const unsigned int q_point : fe_values.quadrature_point_indices())
+          {
+            const double det_F_qp   = lqph[q_point]->get_det_F();
+            const double J_tilde_qp = lqph[q_point]->get_J_tilde();
+            const double the_error_qp_squared =
+              std::pow((det_F_qp - J_tilde_qp), 2);
+            const double JxW = fe_values.JxW(q_point);
+
+
+            dil_L2_error += the_error_qp_squared * JxW;
+          }
+      }
+
+
+    return std::make_pair(std::sqrt(dil_L2_error),
+                          compute_vol_current() / vol_reference);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="Solidget_error_residual"></a><h4>Solid::get_error_residual</h4>
+
+
+
+
+确定问题的真实剩余误差。 也就是说，确定未受约束的自由度的残差误差。 注意，要做到这一点，我们需要忽略受约束的自由度，将这些向量分量的残差设置为零。
+
+@code
+  template <int dim>
+  void Solid<dim>::get_error_residual(Errors &error_residual)
+  {
+    BlockVector<double> error_res(dofs_per_block);
+
+
+    for (unsigned int i = 0; i < dof_handler.n_dofs(); ++i)
+      if (!constraints.is_constrained(i))
+        error_res(i) = system_rhs(i);
+
+
+    error_residual.norm = error_res.l2_norm();
+    error_residual.u    = error_res.block(u_dof).l2_norm();
+    error_residual.p    = error_res.block(p_dof).l2_norm();
+    error_residual.J    = error_res.block(J_dof).l2_norm();
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="Solidget_error_update"></a><h4>Solid::get_error_update</h4>
+
+
+
+
+确定问题的真实牛顿更新误差 
+
+@code
+  template <int dim>
+  void Solid<dim>::get_error_update(const BlockVector<double> &newton_update,
+                                    Errors &                   error_update)
+  {
+    BlockVector<double> error_ud(dofs_per_block);
+    for (unsigned int i = 0; i < dof_handler.n_dofs(); ++i)
+      if (!constraints.is_constrained(i))
+        error_ud(i) = newton_update(i);
+
+
+    error_update.norm = error_ud.l2_norm();
+    error_update.u    = error_ud.block(u_dof).l2_norm();
+    error_update.p    = error_ud.block(p_dof).l2_norm();
+    error_update.J    = error_ud.block(J_dof).l2_norm();
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Solidget_total_solution"></a><h4>Solid::get_total_solution</h4> <h4>Solid::get_total_solution</h4>
+
+
+
+
+这个函数提供了总的解决方案，它在任何牛顿步骤中都是有效的。这是必要的，因为为了减少计算误差，总解只在时间步数结束时更新。
+
+@code
+  template <int dim>
+  BlockVector<double> Solid<dim>::get_total_solution(
+    const BlockVector<double> &solution_delta) const
+  {
+    BlockVector<double> solution_total(solution_n);
+    solution_total += solution_delta;
+    return solution_total;
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="Solidassemble_system"></a><h4>Solid::assemble_system</h4>
+
+
+
+
+由于我们使用TBB进行装配，所以我们只需设置过程所需的数据结构的副本，并将其与装配函数一起传递给WorkStream对象进行处理。请注意，我们必须确保在任何装配操作发生之前，矩阵和RHS向量被重置。此外，由于我们描述的是诺伊曼BC的问题，我们将需要面的法线，所以必须在面的更新标志中指定这一点。
+
+@code
+  template <int dim>
+  void Solid<dim>::assemble_system()
+  {
+    timer.enter_subsection("Assemble system");
+    std::cout << " ASM_SYS " << std::flush;
+
+
+    tangent_matrix = 0.0;
+    system_rhs     = 0.0;
+
+
+    const UpdateFlags uf_cell(update_values | update_gradients |
+                              update_JxW_values);
+    const UpdateFlags uf_face(update_values | update_normal_vectors |
+                              update_JxW_values);
+
+
+    PerTaskData_ASM per_task_data(dofs_per_cell);
+    ScratchData_ASM scratch_data(fe, qf_cell, uf_cell, qf_face, uf_face);
+
+
+@endcode 
+
+
+
+这里用于向WorkStream类传递数据的语法在  step-13  中讨论。
+
+@code
+    WorkStream::run(
+      dof_handler.active_cell_iterators(),
+      [this](const typename DoFHandler<dim>::active_cell_iterator &cell,
+             ScratchData_ASM &                                     scratch,
+             PerTaskData_ASM &                                     data) {
+        this->assemble_system_one_cell(cell, scratch, data);
+      },
+      [this](const PerTaskData_ASM &data) {
+        this->constraints.distribute_local_to_global(data.cell_matrix,
+                                                     data.cell_rhs,
+                                                     data.local_dof_indices,
+                                                     tangent_matrix,
+                                                     system_rhs);
+      },
+      scratch_data,
+      per_task_data);
+
+
+    timer.leave_subsection();
+  }
+
+
+@endcode 
+
+
+
+当然，我们仍然要定义如何为单个单元组装正切矩阵的贡献。 我们首先需要重置和初始化一些从头开始的数据结构，并检索一些关于这个单元上DOF编号的基本信息。 我们可以预先计算单元的形状函数值和梯度。请注意，形状函数梯度是针对当前配置而定义的。 也就是 $\textrm{grad}\ \boldsymbol{\varphi} = \textrm{Grad}\ \boldsymbol{\varphi}
+\ \mathbf{F}^{-1}$  。
+
+@code
+  template <int dim>
+  void Solid<dim>::assemble_system_one_cell(
+    const typename DoFHandler<dim>::active_cell_iterator &cell,
+    ScratchData_ASM &                                     scratch,
+    PerTaskData_ASM &                                     data) const
+  {
+    data.reset();
+    scratch.reset();
+    scratch.fe_values.reinit(cell);
+    cell->get_dof_indices(data.local_dof_indices);
+
+
+    const std::vector<std::shared_ptr<const PointHistory<dim>>> lqph =
+      quadrature_point_history.get_data(cell);
+    Assert(lqph.size() == n_q_points, ExcInternalError());
+
+
+    for (const unsigned int q_point :
+         scratch.fe_values.quadrature_point_indices())
+      {
+        const Tensor<2, dim> F_inv = lqph[q_point]->get_F_inv();
+        for (const unsigned int k : scratch.fe_values.dof_indices())
+          {
+            const unsigned int k_group = fe.system_to_base_index(k).first.first;
+
+
+            if (k_group == u_dof)
+              {
+                scratch.grad_Nx[q_point][k] =
+                  scratch.fe_values[u_fe].gradient(k, q_point) * F_inv;
+                scratch.symm_grad_Nx[q_point][k] =
+                  symmetrize(scratch.grad_Nx[q_point][k]);
+              }
+            else if (k_group == p_dof)
+              scratch.Nx[q_point][k] =
+                scratch.fe_values[p_fe].value(k, q_point);
+            else if (k_group == J_dof)
+              scratch.Nx[q_point][k] =
+                scratch.fe_values[J_fe].value(k, q_point);
+            else
+              Assert(k_group <= J_dof, ExcInternalError());
+          }
+      }
+
+
+@endcode 
+
+
+
+现在我们建立本地单元刚度矩阵和RHS向量。由于全局和局部系统矩阵是对称的，我们可以利用这一特性，只建立局部矩阵的下半部分，并将其值复制到上半部分。 所以我们只组装一半的 $\mathsf{\mathbf{k}}_{uu}$  ,  $\mathsf{\mathbf{k}}_{\widetilde{p}
+\widetilde{p}} = \mathbf{0}$  ,  $\mathsf{\mathbf{k}}_{\widetilde{J}
+\widetilde{J}}$ 块，而整个 $\mathsf{\mathbf{k}}_{\widetilde{p} \widetilde{J}}$  ,  $\mathsf{\mathbf{k}}_{u \widetilde{J}} = \mathbf{0}$  ,  $\mathsf{\mathbf{k}}_{u \widetilde{p}}$ 块是建立的。     
+
+
+在这样做时，我们首先从我们的正交历史对象中提取一些配置相关的变量，用于当前的正交点。
+
+@code
+    for (const unsigned int q_point :
+         scratch.fe_values.quadrature_point_indices())
+      {
+        const SymmetricTensor<2, dim> tau     = lqph[q_point]->get_tau();
+        const Tensor<2, dim>          tau_ns  = lqph[q_point]->get_tau();
+        const SymmetricTensor<4, dim> Jc      = lqph[q_point]->get_Jc();
+        const double                  det_F   = lqph[q_point]->get_det_F();
+        const double                  p_tilde = lqph[q_point]->get_p_tilde();
+        const double                  J_tilde = lqph[q_point]->get_J_tilde();
+        const double dPsi_vol_dJ   = lqph[q_point]->get_dPsi_vol_dJ();
+        const double d2Psi_vol_dJ2 = lqph[q_point]->get_d2Psi_vol_dJ2();
+        const SymmetricTensor<2, dim> &I =
+          Physics::Elasticity::StandardTensors<dim>::I;
+
+
+@endcode 
+
+
+
+这两个张量存储了一些预计算的数据。它们的用途将很快得到解释。
+
+@code
+        SymmetricTensor<2, dim> symm_grad_Nx_i_x_Jc;
+        Tensor<1, dim>          grad_Nx_i_comp_i_x_tau;
+
+
+@endcode 
+
+
+
+接下来我们定义一些别名，使装配过程更容易操作。
+
+@code
+        const std::vector<double> &                 N = scratch.Nx[q_point];
+        const std::vector<SymmetricTensor<2, dim>> &symm_grad_Nx =
+          scratch.symm_grad_Nx[q_point];
+        const std::vector<Tensor<2, dim>> &grad_Nx = scratch.grad_Nx[q_point];
+        const double                       JxW = scratch.fe_values.JxW(q_point);
+
+
+        for (const unsigned int i : scratch.fe_values.dof_indices())
+          {
+            const unsigned int component_i =
+              fe.system_to_component_index(i).first;
+            const unsigned int i_group = fe.system_to_base_index(i).first.first;
+
+
+@endcode 
+
+
+
+我们首先计算来自内力的贡献。 注意，通过定义rhs为残差的负数，这些贡献被减去。
+
+@code
+            if (i_group == u_dof)
+              data.cell_rhs(i) -= (symm_grad_Nx[i] * tau) * JxW;
+            else if (i_group == p_dof)
+              data.cell_rhs(i) -= N[i] * (det_F - J_tilde) * JxW;
+            else if (i_group == J_dof)
+              data.cell_rhs(i) -= N[i] * (dPsi_vol_dJ - p_tilde) * JxW;
+            else
+              Assert(i_group <= J_dof, ExcInternalError());
+
+
+@endcode 
+
+
+
+在我们进入内循环之前，我们还有最后一次机会来引入一些优化。我们已经考虑到了系统的对称性，现在我们可以预先计算一些在内循环中反复应用的常用项。我们在这里不会过分，而是将重点放在昂贵的操作上，即那些涉及等级4材料刚度张量和等级2应力张量的操作。             
+
+
+我们可以观察到的是，这两个张量都是以 "i "DoF为索引的形状函数梯度收缩的。这意味着，当我们在 "j "DoF上循环时，这个特殊的操作保持不变。出于这个原因，我们可以从内循环中提取这个操作，并节省许多操作，对于每个正交点和DoF索引 "i"，并在索引 "j "上重复，需要用等级4对称张量对等级2对称张量进行双重收缩，用等级2张量对等级1张量进行双重收缩。             
+
+
+在损失一些可读性的情况下，当使用模拟默认参数时，这个小变化将使对称系统的装配时间减少约一半，并且随着h-精化水平的提高而变得更加显著。
+
+@code
+            if (i_group == u_dof)
+              {
+                symm_grad_Nx_i_x_Jc    = symm_grad_Nx[i] * Jc;
+                grad_Nx_i_comp_i_x_tau = grad_Nx[i][component_i] * tau_ns;
+              }
+
+
+@endcode 
+
+
+
+现在我们准备计算切线矩阵的贡献。
+
+@code
+            for (const unsigned int j :
+                 scratch.fe_values.dof_indices_ending_at(i))
+              {
+                const unsigned int component_j =
+                  fe.system_to_component_index(j).first;
+                const unsigned int j_group =
+                  fe.system_to_base_index(j).first.first;
+
+
+@endcode 
+
+
+
+这就是 $\mathsf{\mathbf{k}}_{uu}$ 贡献。它包括一个材料贡献，和一个几何应力贡献，只沿局部矩阵对角线添加。
+
+@code
+                if ((i_group == j_group) && (i_group == u_dof))
+                  {
+@endcode 
+
+
+
+材料贡献。
+
+@code
+                    data.cell_matrix(i, j) += symm_grad_Nx_i_x_Jc *  
+                                              symm_grad_Nx[j] * JxW; 
+
+
+@endcode 
+
+
+
+几何应力贡献。
+
+@code
+                    if (component_i == component_j)
+                      data.cell_matrix(i, j) +=
+                        grad_Nx_i_comp_i_x_tau * grad_Nx[j][component_j] * JxW;
+                  }
+@endcode 
+
+
+
+接下来是 $\mathsf{\mathbf{k}}_{ \widetilde{p} u}$ 的贡献 
+
+@code
+                else if ((i_group == p_dof) && (j_group == u_dof))
+                  {
+                    data.cell_matrix(i, j) += N[i] * det_F *               
+                                              (symm_grad_Nx[j] * I) * JxW; 
+                  }
+@endcode 
+
+
+
+最后是 $\mathsf{\mathbf{k}}_{ \widetilde{J}
+\widetilde{p}}$ 和 $\mathsf{\mathbf{k}}_{ \widetilde{J}
+\widetilde{J}}$ 贡献。
+
+@code
+                else if ((i_group == J_dof) && (j_group == p_dof))
+                  data.cell_matrix(i, j) -= N[i] * N[j] * JxW;
+                else if ((i_group == j_group) && (i_group == J_dof))
+                  data.cell_matrix(i, j) += N[i] * d2Psi_vol_dJ2 * N[j] * JxW;
+                else
+                  Assert((i_group <= J_dof) && (j_group <= J_dof),
+                         ExcInternalError());
+              }
+          }
+      }
+
+
+@endcode 
+
+
+
+接下来我们组装诺伊曼贡献。我们首先检查单元格面是否存在于施加了牵引力的边界上，如果是这样的话，就加入贡献。
+
+@code
+    for (const auto &face : cell->face_iterators())
+      if (face->at_boundary() && face->boundary_id() == 6)
+        {
+          scratch.fe_face_values.reinit(cell, face);
+
+
+          for (const unsigned int f_q_point :
+               scratch.fe_face_values.quadrature_point_indices())
+            {
+              const Tensor<1, dim> &N =
+                scratch.fe_face_values.normal_vector(f_q_point);
+
+
+@endcode 
+
+
+
+使用这个正交点的面的法线，我们指定参考配置中的牵引力。对于这个问题，在参考构型中应用一个定义的压力。所施加的牵引力的方向被假定为不随领域的变形而变化。牵引力是用第一个Piola-Kirchhoff应力来定义的，即 $\mathbf{t} = \mathbf{P}\mathbf{N} = [p_0 \mathbf{I}]
+\mathbf{N} = p_0 \mathbf{N}$ 我们用时间变量来线性提升压力负荷。               
+
+
+请注意，我们在这里计算的对右侧向量的贡献只存在于向量的位移分量中。
+
+@code
+              static const double p0 =
+
+
+                -4.0 / (parameters.scale * parameters.scale);
+              const double         time_ramp = (time.current() / time.end());
+              const double         pressure  = p0 * parameters.p_p0 * time_ramp;
+              const Tensor<1, dim> traction  = pressure * N;
+
+
+              for (const unsigned int i : scratch.fe_values.dof_indices())
+                {
+                  const unsigned int i_group =
+                    fe.system_to_base_index(i).first.first;
+
+
+                  if (i_group == u_dof)
+                    {
+                      const unsigned int component_i =
+                        fe.system_to_component_index(i).first;
+                      const double Ni =
+                        scratch.fe_face_values.shape_value(i, f_q_point);
+                      const double JxW = scratch.fe_face_values.JxW(f_q_point);
+
+
+                      data.cell_rhs(i) += (Ni * traction[component_i]) * JxW;
+                    }
+                }
+            }
+        }
+
+
+@endcode 
+
+
+
+最后，我们需要将局部矩阵的下半部分复制到上半部分。
+
+@code
+    for (const unsigned int i : scratch.fe_values.dof_indices())
+      for (const unsigned int j :
+           scratch.fe_values.dof_indices_starting_at(i + 1))
+        data.cell_matrix(i, j) = data.cell_matrix(j, i);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Solidmake_constraints"></a> <h4>Solid::make_constraints</h4> 这个问题的约束条件很容易描述。在这个特殊的例子中，边界值将被计算为牛顿算法的两次第一次迭代。一般来说，我们会在第2次迭代中建立非均质约束（也就是在后面的代码块中`apply_dirichlet_bc == true`时），在接下来的步骤中只建立相应的均质约束。虽然目前的例子只有同质约束，但以前的经验表明，一个常见的错误是在重构代码到特定用途时忘记添加额外的条件。这可能导致难以调试的错误。本着这种精神，我们选择让代码在每个牛顿步骤中执行什么操作方面变得更加啰嗦。
+
+@code
+  template <int dim>
+  void Solid<dim>::make_constraints(const int it_nr)
+  {
+@endcode 
+
+
+
+由于我们(a)处理的是牛顿迭代方法，(b)对位移使用增量公式，(c)对增量位移场应用约束，所以对位移更新的任何非同质约束只应在第2次迭代时指定。由于该迭代后约束条件将被完全满足，因此不需要做出后续贡献。
+
+@code
+    const bool apply_dirichlet_bc = (it_nr == 0);
+
+
+@endcode 
+
+
+
+此外，在一个时间步长内的第一次牛顿迭代之后，约束条件保持不变，只要不清除 @p constraints 对象，我们就不需要修改或重建它们。
+
+@code
+    if (it_nr > 1)
+      {
+        std::cout << " --- " << std::flush;
+        return;
+      }
+
+
+    std::cout << " CST " << std::flush;
+
+
+    if (apply_dirichlet_bc)
+      {
+@endcode 
+
+
+
+在牛顿第2次迭代时，我们希望应用代表位移增量边界条件的全套非均质和均质约束。由于一般情况下，每个时间步长的约束条件可能是不同的，我们需要清除约束矩阵并完全重建它。一个例子是，如果一个表面正在加速，在这种情况下，每个时间步骤之间的位移变化是不恒定的。
+
+@code
+        constraints.clear();
+
+
+@endcode 
+
+
+
+三维压痕问题的边界条件如下。在-x、-y和-z面（IDs 0,2,4）我们设置了一个对称条件，只允许平面运动，而+x和+z面（IDs 1,5）无牵引力。在这个设计好的问题中，+y面的一部分（ID 3）被设定为在x-和z-分量上没有运动。最后，如前所述，+y面的另一部分有一个施加的压力，但在x和z方向上也受到约束。         
+
+
+在下文中，我们将不得不告诉函数插值的边界值，解向量的哪些分量应该受到约束（也就是说，是x-、y-、z-位移还是它们的组合）。这是用ComponentMask对象完成的（见 @ref GlossComponentMask ），如果我们为有限元提供一个我们希望选择的分量的提取器对象，我们可以从有限元中得到这些对象。为此，我们首先设置这样的提取器对象，然后在生成相关构件掩码时使用它。
+
+@code
+        const FEValuesExtractors::Scalar x_displacement(0);
+        const FEValuesExtractors::Scalar y_displacement(1);
+
+
+        {
+          const int boundary_id = 0;
+
+
+          VectorTools::interpolate_boundary_values(
+            dof_handler,
+            boundary_id,
+            Functions::ZeroFunction<dim>(n_components),
+            constraints,
+            fe.component_mask(x_displacement));
+        }
+        {
+          const int boundary_id = 2;
+
+
+          VectorTools::interpolate_boundary_values(
+            dof_handler,
+            boundary_id,
+            Functions::ZeroFunction<dim>(n_components),
+            constraints,
+            fe.component_mask(y_displacement));
+        }
+
+
+        if (dim == 3)
+          {
+            const FEValuesExtractors::Scalar z_displacement(2);
+
+
+            {
+              const int boundary_id = 3;
+
+
+              VectorTools::interpolate_boundary_values(
+                dof_handler,
+                boundary_id,
+                Functions::ZeroFunction<dim>(n_components),
+                constraints,
+                (fe.component_mask(x_displacement) |
+                 fe.component_mask(z_displacement)));
+            }
+            {
+              const int boundary_id = 4;
+
+
+              VectorTools::interpolate_boundary_values(
+                dof_handler,
+                boundary_id,
+                Functions::ZeroFunction<dim>(n_components),
+                constraints,
+                fe.component_mask(z_displacement));
+            }
+
+
+            {
+              const int boundary_id = 6;
+
+
+              VectorTools::interpolate_boundary_values(
+                dof_handler,
+                boundary_id,
+                Functions::ZeroFunction<dim>(n_components),
+                constraints,
+                (fe.component_mask(x_displacement) |
+                 fe.component_mask(z_displacement)));
+            }
+          }
+        else
+          {
+            {
+              const int boundary_id = 3;
+
+
+              VectorTools::interpolate_boundary_values(
+                dof_handler,
+                boundary_id,
+                Functions::ZeroFunction<dim>(n_components),
+                constraints,
+                (fe.component_mask(x_displacement)));
+            }
+            {
+              const int boundary_id = 6;
+
+
+              VectorTools::interpolate_boundary_values(
+                dof_handler,
+                boundary_id,
+                Functions::ZeroFunction<dim>(n_components),
+                constraints,
+                (fe.component_mask(x_displacement)));
+            }
+          }
+      }
+    else
+      {
+@endcode 
+
+
+
+由于所有的Dirichlet约束在牛顿第2次迭代后被完全满足，我们要确保对这些条目不做进一步的修改。这意味着我们要将所有非均质的Dirichlet约束转换成均质的约束。         
+
+
+在这个例子中，这样做的程序是非常直接的，事实上，当只应用同质边界条件时，我们可以（也将）规避任何不必要的操作。在一个更普遍的问题中，我们应该注意悬挂节点和周期性约束，这也可能引入一些不均匀性。那么，为不同类型的约束保留不同的对象可能是有利的，一旦构建了同质Dirichlet约束，就将它们合并在一起。
+
+@code
+        if (constraints.has_inhomogeneities())
+          {
+@endcode 
+
+
+
+由于仿生约束是在上一次牛顿迭代中确定的，因此不能直接修改。因此，我们需要将它们复制到另一个临时对象，并在那里进行修改。一旦我们完成了，我们将把它们转移回主 @p constraints 对象。
+
+@code
+            AffineConstraints<double> homogeneous_constraints(constraints);
+            for (unsigned int dof = 0; dof != dof_handler.n_dofs(); ++dof)
+              if (homogeneous_constraints.is_inhomogeneously_constrained(dof))
+                homogeneous_constraints.set_inhomogeneity(dof, 0.0);
+
+
+            constraints.clear();
+            constraints.copy_from(homogeneous_constraints);
+          }
+      }
+
+
+    constraints.close();
+  }
+
+
+@endcode 
+
+
+
+
+<a name="Solidassemble_sc"></a> <h4>Solid::assemble_sc</h4> 解决整个块系统有点问题，因为对 $\mathsf{\mathbf{K}}_{ \widetilde{J} \widetilde{J}}$ 块没有贡献，使其不可逆转（当使用迭代求解器时）。由于压力和扩张变量DOF是不连续的，我们可以把它们浓缩出来，形成一个较小的仅有位移的系统，然后我们将解决这个问题，并随后进行后处理以检索压力和扩张的解决方案。
+
+
+
+
+静态凝结过程可以在全局层面上进行，但我们需要其中一个块的逆。然而，由于压力和扩张变量是不连续的，静态凝结（SC）操作也可以在每个单元的基础上进行，我们可以通过反转局部块来产生块对角线 $\mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}$ 块的逆。我们可以再次使用TBB来做这件事，因为每个操作将是相互独立的。   
+
+
+通过WorkStream类使用TBB，我们将每个元素的贡献集合起来，形成 $
+\mathsf{\mathbf{K}}_{\textrm{con}}
+= \bigl[ \mathsf{\mathbf{K}}_{uu} +
+\overline{\overline{\mathsf{\mathbf{K}}}}~ \bigr]
+$ 。然后，这些贡献被添加到全局刚度矩阵中。鉴于这一描述，以下两个函数应该是清楚的。
+
+@code
+  template <int dim>
+  void Solid<dim>::assemble_sc()
+  {
+    timer.enter_subsection("Perform static condensation");
+    std::cout << " ASM_SC " << std::flush;
+
+
+    PerTaskData_SC per_task_data(dofs_per_cell,
+                                 element_indices_u.size(),
+                                 element_indices_p.size(),
+                                 element_indices_J.size());
+    ScratchData_SC scratch_data;
+
+
+    WorkStream::run(dof_handler.active_cell_iterators(),
+                    *this,
+                    &Solid::assemble_sc_one_cell,
+                    &Solid::copy_local_to_global_sc,
+                    scratch_data,
+                    per_task_data);
+
+
+    timer.leave_subsection();
+  }
+
+
+
+  template <int dim>
+  void Solid<dim>::copy_local_to_global_sc(const PerTaskData_SC &data)
+  {
+    for (unsigned int i = 0; i < dofs_per_cell; ++i)
+      for (unsigned int j = 0; j < dofs_per_cell; ++j)
+        tangent_matrix.add(data.local_dof_indices[i],
+                           data.local_dof_indices[j],
+                           data.cell_matrix(i, j));
+  }
+
+
+
+@endcode 
+
+
+
+现在我们描述静态凝结过程。按照惯例，我们必须首先找出这个单元上的自由度有哪些全局数字，并重置一些数据结构。
+
+@code
+  template <int dim>
+  void Solid<dim>::assemble_sc_one_cell(
+    const typename DoFHandler<dim>::active_cell_iterator &cell,
+    ScratchData_SC &                                      scratch,
+    PerTaskData_SC &                                      data)
+  {
+    data.reset();
+    scratch.reset();
+    cell->get_dof_indices(data.local_dof_indices);
+
+
+@endcode 
+
+
+
+我们现在提取与当前单元相关的自由度对全局刚度矩阵的贡献。  $\widetilde{p}$ 和 $\widetilde{J}$ 插值的不连续性质意味着它们在全局层面没有局部贡献的耦合。而 $\mathbf{u}$ 道夫则不是这样。 换句话说， $\mathsf{\mathbf{k}}_{\widetilde{J} \widetilde{p}}$ 、 $\mathsf{\mathbf{k}}_{\widetilde{p} \widetilde{p}}$ 和 $\mathsf{\mathbf{k}}_{\widetilde{J} \widetilde{p}}$ ，当从全局刚度矩阵中提取时是元素贡献。 而 $\mathsf{\mathbf{k}}_{uu}$ 则不是这种情况。     
+
+
+注意：小写的符号用于表示元素刚度矩阵。
+
+
+
+
+目前，与当前元素相关的道夫矩阵（松散地表示为 $\mathsf{\mathbf{k}}$ ）的形式是：。
+
+@f{align*}
+\begin{bmatrix}
+\mathsf{\mathbf{k}}_{uu}  &  \mathsf{\mathbf{k}}_{u\widetilde{p}}
+& \mathbf{0}
+\\ \mathsf{\mathbf{k}}_{\widetilde{p}u} & \mathbf{0}  &
+\mathsf{\mathbf{k}}_{\widetilde{p}\widetilde{J}}
+\\ \mathbf{0}  &  \mathsf{\mathbf{k}}_{\widetilde{J}\widetilde{p}}  &
+\mathsf{\mathbf{k}}_{\widetilde{J}\widetilde{J}} \end{bmatrix}
+@f} 
+
+     
+
+
+我们现在需要修改它，使其显示为 
+
+@f{align*}
+\begin{bmatrix}
+\mathsf{\mathbf{k}}_{\textrm{con}}   &
+\mathsf{\mathbf{k}}_{u\widetilde{p}}    & \mathbf{0}
+\\ \mathsf{\mathbf{k}}_{\widetilde{p}u} & \mathbf{0} &
+\mathsf{\mathbf{k}}_{\widetilde{p}\widetilde{J}}^{-1}
+\\ \mathbf{0} & \mathsf{\mathbf{k}}_{\widetilde{J}\widetilde{p}} &
+\mathsf{\mathbf{k}}_{\widetilde{J}\widetilde{J}} \end{bmatrix}
+@f} 
+
+与 $\mathsf{\mathbf{k}}_{\textrm{con}} = \bigl[
+\mathsf{\mathbf{k}}_{uu} +\overline{\overline{\mathsf{\mathbf{k}}}}~
+\bigr]$ ，其中 $               \overline{\overline{\mathsf{\mathbf{k}}}}
+\dealcoloneq \mathsf{\mathbf{k}}_{u\widetilde{p}}
+\overline{\mathsf{\mathbf{k}}} \mathsf{\mathbf{k}}_{\widetilde{p}u}
+$ 和 $
+\overline{\mathsf{\mathbf{k}}} =
+\mathsf{\mathbf{k}}_{\widetilde{J}\widetilde{p}}^{-1}
+\mathsf{\mathbf{k}}_{\widetilde{J}\widetilde{J}}
+\mathsf{\mathbf{k}}_{\widetilde{p}\widetilde{J}}^{-1}
+$  。     
+
+
+在这一点上，我们需要注意的是，全局数据已经存在于 $\mathsf{\mathbf{K}}_{uu}$ 、 $\mathsf{\mathbf{K}}_{\widetilde{p} \widetilde{J}}$ 和 $\mathsf{\mathbf{K}}_{\widetilde{J} \widetilde{p}}$ 子区块。 因此，如果我们要修改它们，我们必须考虑到已经存在的数据（也就是说，如果需要的话，简单地添加到它或删除它）。 由于copy_local_to_global操作是一个 "+="操作，我们需要考虑到这一点      
+
+
+特别是对于 $\mathsf{\mathbf{K}}_{uu}$ 块，这意味着从周围的单元格中增加了贡献，所以我们在操作这个块时需要小心。 我们不能直接擦除子块。     
+
+
+这就是我们将采用的策略，以获得我们想要的子块。
+
+     
+
+
+
+
+-  $ {\mathsf{\mathbf{k}}}_{\textrm{store}}$  : 由于我们不能访问 $\mathsf{\mathbf{k}}_{uu}$ ，但我们知道它的贡献被添加到全局 $\mathsf{\mathbf{K}}_{uu}$ 矩阵中，我们只想添加元素明智的静态凝结 $\overline{\overline{\mathsf{\mathbf{k}}}}$  。
+
+     
+
+
+
+
+-  $\mathsf{\mathbf{k}}^{-1}_{\widetilde{p} \widetilde{J}}$  : 同样， $\mathsf{\mathbf{k}}_{\widetilde{p}
+\widetilde{J}}$  也存在于子块中。由于复制操作是一个+=操作，我们需要减去现有的 $\mathsf{\mathbf{k}}_{\widetilde{p} \widetilde{J}}$ 子矩阵，此外还需要 "添加 "我们希望替换它的子矩阵。
+
+     
+
+
+
+
+-  $\mathsf{\mathbf{k}}^{-1}_{\widetilde{J} \widetilde{p}}$  : 由于全局矩阵是对称的，这个块与上面的块相同，我们可以简单地用 $\mathsf{\mathbf{k}}^{-1}_{\widetilde{p} \widetilde{J}}$ 来代替这个块。     
+
+
+我们首先从系统矩阵中提取元素数据。因此，首先我们得到单元格的整个子块，然后提取 $\mathsf{\mathbf{k}}$ 作为与当前元素相关的道夫。
+
+@code
+    data.k_orig.extract_submatrix_from(tangent_matrix,
+                                       data.local_dof_indices,
+                                       data.local_dof_indices);
+@endcode 
+
+
+
+接下来是 $\mathsf{\mathbf{k}}_{ \widetilde{p} u}$  $\mathsf{\mathbf{k}}_{ \widetilde{p} \widetilde{J}}$ 和 $\mathsf{\mathbf{k}}_{ \widetilde{J} \widetilde{J}}$ 的局部矩阵。
+
+@code
+    data.k_pu.extract_submatrix_from(data.k_orig,
+                                     element_indices_p,
+                                     element_indices_u);
+    data.k_pJ.extract_submatrix_from(data.k_orig,
+                                     element_indices_p,
+                                     element_indices_J);
+    data.k_JJ.extract_submatrix_from(data.k_orig,
+                                     element_indices_J,
+                                     element_indices_J);
+
+
+@endcode 
+
+
+
+为了得到 $\mathsf{\mathbf{k}}_{\widetilde{p}
+\widetilde{J}}$ 的逆值，我们直接将其反转。 这个操作相对便宜，因为 $\mathsf{\mathbf{k}}_{\widetilde{p} \widetilde{J}}$ 是块对角线。
+
+@code
+    data.k_pJ_inv.invert(data.k_pJ);
+
+
+@endcode 
+
+
+
+现在我们可以做凝结项来添加到 $\mathsf{\mathbf{k}}_{uu}$ 块中，并把它们放在单元格局部矩阵 $
+\mathsf{\mathbf{A}}
+=
+\mathsf{\mathbf{k}}^{-1}_{\widetilde{p} \widetilde{J}}
+\mathsf{\mathbf{k}}_{\widetilde{p} u}
+$  中。
+
+@code
+    data.k_pJ_inv.mmult(data.A, data.k_pu);
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{B}}
+=
+\mathsf{\mathbf{k}}^{-1}_{\widetilde{J} \widetilde{J}}
+\mathsf{\mathbf{k}}^{-1}_{\widetilde{p} \widetilde{J}}
+\mathsf{\mathbf{k}}_{\widetilde{p} u}
+$   
+
+@code
+    data.k_JJ.mmult(data.B, data.A);
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{C}}
+=
+\mathsf{\mathbf{k}}^{-1}_{\widetilde{J} \widetilde{p}}
+\mathsf{\mathbf{k}}^{-1}_{\widetilde{J} \widetilde{J}}
+\mathsf{\mathbf{k}}^{-1}_{\widetilde{p} \widetilde{J}}
+\mathsf{\mathbf{k}}_{\widetilde{p} u}
+$   
+
+@code
+    data.k_pJ_inv.Tmmult(data.C, data.B);
+@endcode 
+
+
+
+  $
+\overline{\overline{\mathsf{\mathbf{k}}}}
+=
+\mathsf{\mathbf{k}}_{u \widetilde{p}}
+\mathsf{\mathbf{k}}^{-1}_{\widetilde{J} \widetilde{p}}
+\mathsf{\mathbf{k}}^{-1}_{\widetilde{J} \widetilde{J}}
+\mathsf{\mathbf{k}}^{-1}_{\widetilde{p} \widetilde{J}}
+\mathsf{\mathbf{k}}_{\widetilde{p} u}
+$   
+
+@code
+    data.k_pu.Tmmult(data.k_bbar, data.C);
+    data.k_bbar.scatter_matrix_to(element_indices_u,
+                                  element_indices_u,
+                                  data.cell_matrix);
+
+
+@endcode 
+
+
+
+接下来我们将 $\mathsf{\mathbf{k}}^{-1}_{ \widetilde{p} \widetilde{J}}$ 放在 $\mathsf{\mathbf{k}}_{ \widetilde{p} \widetilde{J}}$ 块中进行后处理。 再次注意，我们需要删除那里已经存在的贡献。
+
+@code
+    data.k_pJ_inv.add(-1.0, data.k_pJ);
+    data.k_pJ_inv.scatter_matrix_to(element_indices_p,
+                                    element_indices_J,
+                                    data.cell_matrix);
+  }
+
+
+@endcode 
+
+
+
+
+<a name="Solidsolve_linear_system"></a> <h4>Solid::solve_linear_system</h4> 我们现在拥有所有必要的组件，可以使用两种可能的方法之一来解决线性化系统。首先是在元素层面上进行静态凝结，这需要对切线矩阵和RHS向量进行一些修改。或者，可以通过在全局层面上进行凝结来解决全块系统。下面我们实现这两种方法。
+
+@code
+  template <int dim>
+  std::pair<unsigned int, double>
+  Solid<dim>::solve_linear_system(BlockVector<double> &newton_update)
+  {
+    unsigned int lin_it  = 0;
+    double       lin_res = 0.0;
+
+
+    if (parameters.use_static_condensation == true)
+      {
+@endcode 
+
+
+
+首先，这里是使用切线矩阵的（永久）增量的方法。对于下文，请回顾 
+
+@f{align*}
+\mathsf{\mathbf{K}}_{\textrm{store}}
+\dealcoloneq
+\begin{bmatrix}
+\mathsf{\mathbf{K}}_{\textrm{con}}      &
+\mathsf{\mathbf{K}}_{u\widetilde{p}}    & \mathbf{0}
+\\  \mathsf{\mathbf{K}}_{\widetilde{p}u}    &       \mathbf{0} &
+\mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}^{-1}
+\\  \mathbf{0}      &
+\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}                &
+\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}} \end{bmatrix} \, .
+@f} 
+
+和 
+
+@f{align*}
+d \widetilde{\mathsf{\mathbf{p}}}
+& =
+\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}
+\bigl[
+\mathsf{\mathbf{F}}_{\widetilde{J}}
+
+
+-
+\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
+d \widetilde{\mathsf{\mathbf{J}}} \bigr]
+\\ d \widetilde{\mathsf{\mathbf{J}}}
+& =
+\mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}^{-1}
+\bigl[
+\mathsf{\mathbf{F}}_{\widetilde{p}}
+
+
+- \mathsf{\mathbf{K}}_{\widetilde{p}u} d
+\mathsf{\mathbf{u}} \bigr]
+\\ \Rightarrow d \widetilde{\mathsf{\mathbf{p}}}
+&= \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}
+\mathsf{\mathbf{F}}_{\widetilde{J}}
+
+
+-
+\underbrace{\bigl[\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}
+\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
+\mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}^{-1}\bigr]}_{\overline{\mathsf{\mathbf{K}}}}\bigl[
+\mathsf{\mathbf{F}}_{\widetilde{p}}
+
+
+- \mathsf{\mathbf{K}}_{\widetilde{p}u} d
+\mathsf{\mathbf{u}} \bigr]
+@f} 
+
+从而@f[
+\underbrace{\bigl[ \mathsf{\mathbf{K}}_{uu} +
+\overline{\overline{\mathsf{\mathbf{K}}}}~ \bigr]
+}_{\mathsf{\mathbf{K}}_{\textrm{con}}} d
+\mathsf{\mathbf{u}}
+=
+\underbrace{
+\Bigl[
+\mathsf{\mathbf{F}}_{u}
+
+
+- \mathsf{\mathbf{K}}_{u\widetilde{p}} \bigl[
+\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}
+\mathsf{\mathbf{F}}_{\widetilde{J}}
+
+
+-
+\overline{\mathsf{\mathbf{K}}}\mathsf{\mathbf{F}}_{\widetilde{p}}
+\bigr]
+\Bigr]}_{\mathsf{\mathbf{F}}_{\textrm{con}}}
+@f]，其中@f[
+\overline{\overline{\mathsf{\mathbf{K}}}} \dealcoloneq
+\mathsf{\mathbf{K}}_{u\widetilde{p}}
+\overline{\mathsf{\mathbf{K}}}
+\mathsf{\mathbf{K}}_{\widetilde{p}u} \, .
+@f]。
+
+
+
+
+在顶部，我们分配了两个临时向量来帮助静态凝结，还有一些变量来存储线性求解器的迭代次数和（希望是收敛的）残差。
+
+@code
+        BlockVector<double> A(dofs_per_block);
+        BlockVector<double> B(dofs_per_block);
+
+
+
+@endcode 
+
+
+
+在这个函数的第一步，我们求解增量位移  $d\mathbf{u}$  。 为此，我们进行静态浓缩，使 $\mathsf{\mathbf{K}}_{\textrm{con}}
+= \bigl[ \mathsf{\mathbf{K}}_{uu} +
+\overline{\overline{\mathsf{\mathbf{K}}}}~ \bigr]$ ，并将 $\mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}$ 放在原来的 $\mathsf{\mathbf{K}}_{\widetilde{p} \widetilde{J}}$ 块中。也就是说，我们做出 $\mathsf{\mathbf{K}}_{\textrm{store}}$  。
+
+@code
+        {
+          assemble_sc();
+
+
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{A}}_{\widetilde{J}}
+=
+\mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}
+\mathsf{\mathbf{F}}_{\widetilde{p}}
+$   
+
+@code
+          tangent_matrix.block(p_dof, J_dof)
+            .vmult(A.block(J_dof), system_rhs.block(p_dof));
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{B}}_{\widetilde{J}}
+=
+\mathsf{\mathbf{K}}_{\widetilde{J} \widetilde{J}}
+\mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}
+\mathsf{\mathbf{F}}_{\widetilde{p}}
+$   
+
+@code
+          tangent_matrix.block(J_dof, J_dof)
+            .vmult(B.block(J_dof), A.block(J_dof));
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{A}}_{\widetilde{J}}
+=
+\mathsf{\mathbf{F}}_{\widetilde{J}}
+
+
+-
+\mathsf{\mathbf{K}}_{\widetilde{J} \widetilde{J}}
+\mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}
+\mathsf{\mathbf{F}}_{\widetilde{p}}
+$   
+
+@code
+          A.block(J_dof) = system_rhs.block(J_dof);
+          A.block(J_dof) -= B.block(J_dof);
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{A}}_{\widetilde{J}}
+=
+\mathsf{\mathbf{K}}^{-1}_{\widetilde{J} \widetilde{p}}
+[
+\mathsf{\mathbf{F}}_{\widetilde{J}}
+
+
+-
+\mathsf{\mathbf{K}}_{\widetilde{J} \widetilde{J}}
+\mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}
+\mathsf{\mathbf{F}}_{\widetilde{p}}
+]
+$   
+
+@code
+          tangent_matrix.block(p_dof, J_dof)
+            .Tvmult(A.block(p_dof), A.block(J_dof));
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{A}}_{u}
+=
+\mathsf{\mathbf{K}}_{u \widetilde{p}}
+\mathsf{\mathbf{K}}^{-1}_{\widetilde{J} \widetilde{p}}
+[
+\mathsf{\mathbf{F}}_{\widetilde{J}}
+
+
+-
+\mathsf{\mathbf{K}}_{\widetilde{J} \widetilde{J}}
+\mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}
+\mathsf{\mathbf{F}}_{\widetilde{p}}
+]
+$   
+
+@code
+          tangent_matrix.block(u_dof, p_dof)
+            .vmult(A.block(u_dof), A.block(p_dof));
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{F}}_{\text{con}}
+=
+\mathsf{\mathbf{F}}_{u}
+
+
+-
+\mathsf{\mathbf{K}}_{u \widetilde{p}}
+\mathsf{\mathbf{K}}^{-1}_{\widetilde{J} \widetilde{p}}
+[
+\mathsf{\mathbf{F}}_{\widetilde{J}}
+
+
+-
+\mathsf{\mathbf{K}}_{\widetilde{J} \widetilde{J}}
+\mathsf{\mathbf{K}}^{-1}_{\widetilde{p} \widetilde{J}}
+\mathsf{\mathbf{F}}_{\widetilde{p}}
+]
+$   
+
+@code
+          system_rhs.block(u_dof) -= A.block(u_dof);
+
+
+          timer.enter_subsection("Linear solver");
+          std::cout << " SLV " << std::flush;
+          if (parameters.type_lin == "CG")
+            {
+              const auto solver_its = static_cast<unsigned int>(
+                tangent_matrix.block(u_dof, u_dof).m() *
+                parameters.max_iterations_lin);
+              const double tol_sol =
+                parameters.tol_lin * system_rhs.block(u_dof).l2_norm();
+
+
+              SolverControl solver_control(solver_its, tol_sol);
+
+
+              GrowingVectorMemory<Vector<double>> GVM;
+              SolverCG<Vector<double>> solver_CG(solver_control, GVM);
+
+
+@endcode 
+
+
+
+我们默认选择了SSOR预处理，因为它似乎为这个问题在单线程机器上提供了最快的求解器收敛特性。 然而，对于不同的问题规模，这可能不是真的。
+
+@code
+              PreconditionSelector<SparseMatrix<double>, Vector<double>>
+                preconditioner(parameters.preconditioner_type,
+                               parameters.preconditioner_relaxation);
+              preconditioner.use_matrix(tangent_matrix.block(u_dof, u_dof));
+
+
+              solver_CG.solve(tangent_matrix.block(u_dof, u_dof),
+                              newton_update.block(u_dof),
+                              system_rhs.block(u_dof),
+                              preconditioner);
+
+
+              lin_it  = solver_control.last_step();
+              lin_res = solver_control.last_value();
+            }
+          else if (parameters.type_lin == "Direct")
+            {
+@endcode 
+
+
+
+否则，如果问题足够小，可以利用直接求解器。
+
+@code
+              SparseDirectUMFPACK A_direct;
+              A_direct.initialize(tangent_matrix.block(u_dof, u_dof));
+              A_direct.vmult(newton_update.block(u_dof),
+                             system_rhs.block(u_dof));
+
+
+              lin_it  = 1;
+              lin_res = 0.0;
+            }
+          else
+            Assert(false, ExcMessage("Linear solver type not implemented"));
+
+
+          timer.leave_subsection();
+        }
+
+
+@endcode 
+
+
+
+现在我们有了位移更新，将约束条件分配回牛顿更新。
+
+@code
+        constraints.distribute(newton_update);
+
+
+        timer.enter_subsection("Linear solver postprocessing");
+        std::cout << " PP " << std::flush;
+
+
+@endcode 
+
+
+
+解决位移问题后的下一步是进行后处理，从置换中得到扩张解。  $
+d \widetilde{\mathsf{\mathbf{J}}}
+= \mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}^{-1} \bigl[
+\mathsf{\mathbf{F}}_{\widetilde{p}}
+
+
+- \mathsf{\mathbf{K}}_{\widetilde{p}u} d \mathsf{\mathbf{u}}
+\bigr]
+$   
+
+@code
+        {
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{A}}_{\widetilde{p}}
+=
+\mathsf{\mathbf{K}}_{\widetilde{p}u} d \mathsf{\mathbf{u}}
+$   
+
+@code
+          tangent_matrix.block(p_dof, u_dof)
+            .vmult(A.block(p_dof), newton_update.block(u_dof));
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{A}}_{\widetilde{p}}
+=
+
+
+-\mathsf{\mathbf{K}}_{\widetilde{p}u} d \mathsf{\mathbf{u}}
+$   
+
+@code
+          A.block(p_dof) *= -1.0;
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{A}}_{\widetilde{p}}
+=
+\mathsf{\mathbf{F}}_{\widetilde{p}}
+
+
+-\mathsf{\mathbf{K}}_{\widetilde{p}u} d \mathsf{\mathbf{u}}
+$   
+
+@code
+          A.block(p_dof) += system_rhs.block(p_dof);
+@endcode 
+
+
+
+  $
+d\mathsf{\mathbf{\widetilde{J}}}
+=
+\mathsf{\mathbf{K}}^{-1}_{\widetilde{p}\widetilde{J}}
+[
+\mathsf{\mathbf{F}}_{\widetilde{p}}
+
+
+-\mathsf{\mathbf{K}}_{\widetilde{p}u} d \mathsf{\mathbf{u}}
+]
+$   
+
+@code
+          tangent_matrix.block(p_dof, J_dof)
+            .vmult(newton_update.block(J_dof), A.block(p_dof));
+        }
+
+
+@endcode 
+
+
+
+我们在此确保任何迪里切特约束都分布在更新的解决方案上。
+
+@code
+        constraints.distribute(newton_update);
+
+
+@endcode 
+
+
+
+最后我们用代入法求解压力的更新。  $
+d \widetilde{\mathsf{\mathbf{p}}}
+=
+\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}
+\bigl[
+\mathsf{\mathbf{F}}_{\widetilde{J}}
+
+
+- \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
+d \widetilde{\mathsf{\mathbf{J}}}
+\bigr]
+$   
+
+@code
+        {
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{A}}_{\widetilde{J}}
+=
+\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
+d \widetilde{\mathsf{\mathbf{J}}}
+$   
+
+@code
+          tangent_matrix.block(J_dof, J_dof)
+            .vmult(A.block(J_dof), newton_update.block(J_dof));
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{A}}_{\widetilde{J}}
+=
+
+
+-\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
+d \widetilde{\mathsf{\mathbf{J}}}
+$   
+
+@code
+          A.block(J_dof) *= -1.0;
+@endcode 
+
+
+
+  $
+\mathsf{\mathbf{A}}_{\widetilde{J}}
+=
+\mathsf{\mathbf{F}}_{\widetilde{J}}
+
+
+-
+\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
+d \widetilde{\mathsf{\mathbf{J}}}
+$   
+
+@code
+          A.block(J_dof) += system_rhs.block(J_dof);
+@endcode 
+
+
+
+和最后....   $
+d \widetilde{\mathsf{\mathbf{p}}}
+=
+\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}
+\bigl[
+\mathsf{\mathbf{F}}_{\widetilde{J}}
+
+
+- \mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{J}}
+d \widetilde{\mathsf{\mathbf{J}}}
+\bigr]
+$   
+
+@code
+          tangent_matrix.block(p_dof, J_dof)
+            .Tvmult(newton_update.block(p_dof), A.block(J_dof));
+        }
+
+
+@endcode 
+
+
+
+我们现在已经到了终点，所以我们将所有受限的道夫分配回牛顿更新。
+
+@code
+        constraints.distribute(newton_update);
+
+
+        timer.leave_subsection();
+      }
+    else
+      {
+        std::cout << " ------ " << std::flush;
+
+
+        timer.enter_subsection("Linear solver");
+        std::cout << " SLV " << std::flush;
+
+
+        if (parameters.type_lin == "CG")
+          {
+@endcode 
+
+
+
+在局部水平上手动凝结膨胀和压力场，以及随后的后处理，需要花费相当多的精力才能实现。简而言之，我们必须产生逆矩阵 $\mathsf{\mathbf{K}}_{\widetilde{p}\widetilde{J}}^{-1}$ ，并将其永久写入全局切线矩阵中。然后我们对 $\mathsf{\mathbf{K}}_{uu}$ 进行永久修改，产生 $\mathsf{\mathbf{K}}_{\textrm{con}}$ 。这涉及到对切线矩阵局部子块的提取和处理。在对位移进行求解后，对扩张和压力进行求解所需的各个矩阵-向量操作被仔细地执行。将这些众多的步骤与使用LinearOperator类提供的功能的更简单和透明的实现进行对比。
+
+
+
+
+为了便于以后使用，我们为RHS向量中的块定义了一些别名 
+
+@code
+            const Vector<double> &f_u = system_rhs.block(u_dof);
+            const Vector<double> &f_p = system_rhs.block(p_dof);
+            const Vector<double> &f_J = system_rhs.block(J_dof);
+
+
+@endcode 
+
+
+
+...以及牛顿更新向量中的块。
+
+@code
+            Vector<double> &d_u = newton_update.block(u_dof);
+            Vector<double> &d_p = newton_update.block(p_dof);
+            Vector<double> &d_J = newton_update.block(J_dof);
+
+
+@endcode 
+
+
+
+我们接下来为切线矩阵子块定义一些线性算子 我们将利用系统的对称性，所以不需要所有块。
+
+@code
+            const auto K_uu =
+              linear_operator(tangent_matrix.block(u_dof, u_dof));
+            const auto K_up =
+              linear_operator(tangent_matrix.block(u_dof, p_dof));
+            const auto K_pu =
+              linear_operator(tangent_matrix.block(p_dof, u_dof));
+            const auto K_Jp =
+              linear_operator(tangent_matrix.block(J_dof, p_dof));
+            const auto K_JJ =
+              linear_operator(tangent_matrix.block(J_dof, J_dof));
+
+
+@endcode 
+
+
+
+然后我们构造一个线性算子，表示（方形块）的逆 $\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}$ 。由于它是对角线的（或者，当使用高阶解析时，几乎是对角线的），雅可比预处理器是合适的。
+
+@code
+            PreconditionSelector<SparseMatrix<double>, Vector<double>>
+              preconditioner_K_Jp_inv("jacobi");
+            preconditioner_K_Jp_inv.use_matrix(
+              tangent_matrix.block(J_dof, p_dof));
+            ReductionControl solver_control_K_Jp_inv(
+              static_cast<unsigned int>(tangent_matrix.block(J_dof, p_dof).m() *
+                                        parameters.max_iterations_lin),
+              1.0e-30,
+              parameters.tol_lin);
+            SolverSelector<Vector<double>> solver_K_Jp_inv;
+            solver_K_Jp_inv.select("cg");
+            solver_K_Jp_inv.set_control(solver_control_K_Jp_inv);
+            const auto K_Jp_inv =
+              inverse_operator(K_Jp, solver_K_Jp_inv, preconditioner_K_Jp_inv);
+
+
+@endcode 
+
+
+
+现在我们可以构建 $\mathsf{\mathbf{K}}_{\widetilde{J}\widetilde{p}}^{-1}$ 的转置和一个线性算子，表示凝结操作 $\overline{\mathsf{\mathbf{K}}}$ 和 $\overline{\overline{\mathsf{\mathbf{K}}}}$ 以及最后的增强矩阵 $\mathsf{\mathbf{K}}_{\textrm{con}}$  。请注意，schur_complement()算子在这里也能派上用场，但为了清楚起见，也为了展示线性求解方案的表述和实现之间的相似性，我们将手动执行这些操作。
+
+@code
+            const auto K_pJ_inv     = transpose_operator(K_Jp_inv);
+            const auto K_pp_bar     = K_Jp_inv * K_JJ * K_pJ_inv;
+            const auto K_uu_bar_bar = K_up * K_pp_bar * K_pu;
+            const auto K_uu_con     = K_uu + K_uu_bar_bar;
+
+
+@endcode 
+
+
+
+最后，我们定义了一个增强刚度矩阵的逆运算，即  $\mathsf{\mathbf{K}}_{\textrm{con}}^{-1}$  。请注意，增强刚度矩阵的预处理程序与我们使用静态凝结的情况不同。在这种情况下，预处理程序是基于未修改的 $\mathsf{\mathbf{K}}_{uu}$ ，而在第一种方法中，我们实际上修改了这个子块的条目。然而，由于 $\mathsf{\mathbf{K}}_{\textrm{con}}$ 和 $\mathsf{\mathbf{K}}_{uu}$ 在同一空间操作，它对这个问题仍然足够。
+
+@code
+            PreconditionSelector<SparseMatrix<double>, Vector<double>>
+              preconditioner_K_con_inv(parameters.preconditioner_type,
+                                       parameters.preconditioner_relaxation);
+            preconditioner_K_con_inv.use_matrix(
+              tangent_matrix.block(u_dof, u_dof));
+            ReductionControl solver_control_K_con_inv(
+              static_cast<unsigned int>(tangent_matrix.block(u_dof, u_dof).m() *
+                                        parameters.max_iterations_lin),
+              1.0e-30,
+              parameters.tol_lin);
+            SolverSelector<Vector<double>> solver_K_con_inv;
+            solver_K_con_inv.select("cg");
+            solver_K_con_inv.set_control(solver_control_K_con_inv);
+            const auto K_uu_con_inv =
+              inverse_operator(K_uu_con,
+                               solver_K_con_inv,
+                               preconditioner_K_con_inv);
+
+
+@endcode 
+
+
+
+现在我们可以解决位移场的问题了。我们可以对线性运算进行嵌套，其结果立即被写入牛顿更新矢量。很明显，这个实现紧密地模仿了介绍中所说的推导。
+
+@code
+            d_u =
+              K_uu_con_inv * (f_u - K_up * (K_Jp_inv * f_J - K_pp_bar * f_p));
+
+
+            timer.leave_subsection();
+
+
+@endcode 
+
+
+
+需要对扩张场和压力场进行后处理的操作也同样容易表达。
+
+@code
+            timer.enter_subsection("Linear solver postprocessing");
+            std::cout << " PP " << std::flush;
+
+
+            d_J = K_pJ_inv * (f_p - K_pu * d_u);
+            d_p = K_Jp_inv * (f_J - K_JJ * d_J);
+
+
+            lin_it  = solver_control_K_con_inv.last_step();
+            lin_res = solver_control_K_con_inv.last_value();
+          }
+        else if (parameters.type_lin == "Direct")
+          {
+@endcode 
+
+
+
+用直接求解器求解全块系统。由于它是相对稳健的，它可能对因零 $\mathsf{\mathbf{K}}_{ \widetilde{J} \widetilde{J}}$ 块的存在而产生的问题免疫。
+
+@code
+            SparseDirectUMFPACK A_direct;
+            A_direct.initialize(tangent_matrix);
+            A_direct.vmult(newton_update, system_rhs);
+
+
+            lin_it  = 1;
+            lin_res = 0.0;
+
+
+            std::cout << " -- " << std::flush;
+          }
+        else
+          Assert(false, ExcMessage("Linear solver type not implemented"));
+
+
+        timer.leave_subsection();
+
+
+@endcode 
+
+
+
+最后，我们在此再次确保任何Dirichlet约束都分布在更新的解上。
+
+@code
+        constraints.distribute(newton_update);
+      }
+
+
+    return std::make_pair(lin_it, lin_res);
+  }
+
+
+@endcode 
+
+
+
+
+<a name="Solidoutput_results"></a> <h4>Solid::output_results</h4> 这里我们介绍了如何将结果写入文件，以便使用ParaView或Viscit查看。该方法与以前的教程中显示的方法类似，因此将不作详细讨论。
+
+@code
+  template <int dim>
+  void Solid<dim>::output_results() const
+  {
+    DataOut<dim> data_out;
+    std::vector<DataComponentInterpretation::DataComponentInterpretation>
+      data_component_interpretation(
+        dim, DataComponentInterpretation::component_is_part_of_vector);
+    data_component_interpretation.push_back(
+      DataComponentInterpretation::component_is_scalar);
+    data_component_interpretation.push_back(
+      DataComponentInterpretation::component_is_scalar);
+
+
+    std::vector<std::string> solution_name(dim, "displacement");
+    solution_name.emplace_back("pressure");
+    solution_name.emplace_back("dilatation");
+
+
+    DataOutBase::VtkFlags output_flags;
+    output_flags.write_higher_order_cells = true;
+    data_out.set_flags(output_flags);
+
+
+    data_out.attach_dof_handler(dof_handler);
+    data_out.add_data_vector(solution_n,
+                             solution_name,
+                             DataOut<dim>::type_dof_data,
+                             data_component_interpretation);
+
+
+@endcode 
+
+
+
+由于我们要处理的是一个大的变形问题，如果能在一个位移网格上显示结果就更好了  与DataOut类相连的MappingQEulerian类提供了一个接口，通过该接口可以实现这一目的，而不需要我们自己物理性地移动三角测量对象中的网格点。 我们首先需要将解决方案复制到一个临时矢量，然后创建欧拉映射。我们还向DataOut对象指定了多项式的程度，以便在使用高阶多项式时产生更精细的输出数据集。
+
+@code
+    Vector<double> soln(solution_n.size());
+    for (unsigned int i = 0; i < soln.size(); ++i)
+      soln(i) = solution_n(i);
+    MappingQEulerian<dim> q_mapping(degree, dof_handler, soln);
+    data_out.build_patches(q_mapping, degree);
+
+
+    std::ofstream output("solution-" + std::to_string(dim) + "d-" +
+                         std::to_string(time.get_timestep()) + ".vtu");
+    data_out.write_vtu(output);
+  }
+
+
+} // namespace Step44
+
+
+
+@endcode 
+
+
+
+
+<a name="Mainfunction"></a> <h3>Main function</h3> 最后，我们提供了主要的驱动函数，它看起来与其他教程没有什么不同。
+
+@code
+int main()
+{
+  using namespace Step44;
+
+
+  try
+    {
+      const unsigned int dim = 3;
+      Solid<dim>         solid("parameters.prm");
+      solid.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+
+
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
+<a name="Results"></a> <h1>Results</h1> 
+
+
+首先，我们介绍了一系列3-d结果与文献中的结果的比较（见Reese等人（2000）），以证明该程序按预期工作。
+
+我们首先比较了 $Q_1-DGPM_0-DGPM_0$ 和 $Q_2-DGPM_1-DGPM_1$ 公式随着网格细化的收敛性，如下图所总结的。块的上表面的中点的垂直位移被用来评估收敛性。对于不同的载荷参数值 $p/p_0$ ，两种方案都表现出良好的收敛特性。这些结果与文献中的结果一致。低阶公式通常高估了低层次细化的位移，而高阶插值方案则低估了位移，但程度较轻。这个基准，以及其他一系列没有在这里显示的基准，给了我们信心，代码正在按照它应该的方式工作。
+
+  <table align="center" class="tutorial" cellspacing="3" cellpadding="3">
   <tr>
      <td align="center">
         <img src="https://www.dealii.org/images/steps/developer/step-44.Q1-P0_convergence.png" alt="">
@@ -4965,14 +4937,10 @@ as it should.
 	</p>
     </td>
   </tr>
-</table>
+</table>   
 
 
-A typical screen output generated by running the problem is shown below.
-The particular case demonstrated is that of the $Q_2-DGPM_1-DGPM_1$ formulation.
-It is clear that, using the Newton-Raphson method, quadratic convergence of the solution is obtained.
-Solution convergence is achieved within 5 Newton increments for all time-steps.
-The converged displacement's $L_2$-norm is several orders of magnitude less than the geometry scale.
+下面是运行该问题产生的典型屏幕输出。所展示的特殊情况是 $Q_2-DGPM_1-DGPM_1$ 公式的情况。很明显，使用牛顿-拉弗森方法，可以得到二次收敛的解决方案。在所有的时间步长中，解的收敛是在5个牛顿增量内实现的。收敛后的位移的 $L_2$ -norm比几何尺度小几个数量级。
 
 @code
 Grid:
@@ -4981,6 +4949,7 @@ Triangulation:
 	 Number of active cells: 64
 	 Number of degrees of freedom: 2699
     Setting up quadrature point data...
+
 
 Timestep 1 @ 0.1s
 ___________________________________________________________________________________________________________________________________________________________
@@ -4999,7 +4968,9 @@ Dilatation:	1.353e-07
 v / V_0:	1.000e-09 / 1.000e-09 = 1.000e+00
 
 
+
 [...]
+
 
 Timestep 10 @ 1.000e+00s
 ___________________________________________________________________________________________________________________________________________________________
@@ -5016,18 +4987,16 @@ Displacement:	6.842e-07
 Force: 		8.995e-10
 Dilatation:	1.528e-06
 v / V_0:	1.000e-09 / 1.000e-09 = 1.000e+00
-@endcode
+@endcode 
 
 
 
-Using the Timer class, we can discern which parts of the code require the highest computational expense.
-For a case with a large number of degrees-of-freedom (i.e. a high level of refinement), a typical output of the Timer is given below.
-Much of the code in the tutorial has been developed based on the optimizations described,
-discussed and demonstrated in Step-18 and others.
-With over 93% of the time being spent in the linear solver, it is obvious that it may be necessary
-to invest in a better solver for large three-dimensional problems.
-The SSOR preconditioner is not multithreaded but is effective for this class of solid problems.
-It may be beneficial to investigate the use of another solver such as those available through the Trilinos library.
+
+
+
+使用定时器类，我们可以分辨出代码的哪些部分需要最高的计算费用。对于一个有大量自由度的案例（即高度精细化），下面给出了定时器的典型输出。本教程中的大部分代码都是基于 Step-18 和其他文献中描述、讨论和演示的优化而开发的。超过93%的时间花在线性求解器上，很明显，对于大型三维问题，可能有必要投资一个更好的求解器。SSOR预处理程序不是多线程的，但对于这类实体问题是有效的。研究使用另一种求解器可能是有益的，比如通过Trilinos库提供的那些求解器。
+
+
 
 
 @code
@@ -5044,35 +5013,18 @@ It may be beneficial to investigate the use of another solver such as those avai
 | Setup system                    |         1 | 3.897e-01s |  3.95e-02% |
 | Update QPH data                 |        43 | 5.770e-01s |  5.84e-02% |
 +---------------------------------+-----------+------------+------------+
-@endcode
+@endcode 
 
 
-We then used ParaView to visualize the results for two cases.
-The first was for the coarsest grid and the lowest-order interpolation method: $Q_1-DGPM_0-DGPM_0$.
-The second was on a refined grid using a $Q_2-DGPM_1-DGPM_1$ formulation.
-The vertical component of the displacement, the pressure $\widetilde{p}$ and the dilatation $\widetilde{J}$ fields
-are shown below.
 
 
-For the first case it is clear that the coarse spatial discretization coupled with large displacements leads to a low quality solution
-(the loading ratio is  $p/p_0=80$).
-Additionally, the pressure difference between elements is very large.
-The constant pressure field on the element means that the large pressure gradient is not captured.
-However, it should be noted that locking, which would be present in a standard $Q_1$ displacement formulation does not arise
-even in this poorly discretised case.
-The final vertical displacement of the tracked node on the top surface of the block is still within 12.5% of the converged solution.
-The pressure solution is very coarse and has large jumps between adjacent cells.
-It is clear that the volume nearest to the applied traction undergoes compression while the outer extents
-of the domain are in a state of expansion.
-The dilatation solution field and pressure field are clearly linked,
-with positive dilatation indicating regions of positive pressure and negative showing regions placed in compression.
-As discussed in the Introduction, a compressive pressure has a negative sign
-while an expansive pressure takes a positive sign.
-This stems from the definition of the volumetric strain energy function
-and is opposite to the physically realistic interpretation of pressure.
+然后，我们使用ParaView对两种情况的结果进行了可视化。第一个是最粗的网格和最低阶插值方法。  $Q_1-DGPM_0-DGPM_0$  . 第二种是在细化网格上使用 $Q_2-DGPM_1-DGPM_1$ 公式。位移的垂直分量、压力 $\widetilde{p}$ 和扩张 $\widetilde{J}$ 场显示如下。
 
 
-<table align="center" class="tutorial" cellspacing="3" cellpadding="3">
+对于第一种情况，很明显，粗略的空间离散化加上大的位移导致了低质量的解决方案（负载率为 $p/p_0=80$ ）。此外，元素之间的压力差非常大。元素上的恒定压力场意味着大的压力梯度没有被捕获。然而，应该注意的是，即使在这种离散性差的情况下，在标准 $Q_1$ 位移公式中会出现的锁定现象也不会出现。块体顶面的跟踪节点的最终垂直位移仍在收敛解的12.5%以内。压力解决方案是非常粗略的，在相邻的单元之间有很大的跳跃。很明显，离施加的牵引力最近的体积经历了压缩，而域的外延则处于膨胀状态。膨胀解场和压力场明显相关，正的膨胀表示正压区域，负的表示压缩区域。正如介绍中所讨论的，压缩性压力有一个负号，而扩张性压力有一个正号。这源于体积应变能量函数的定义，与压力的物理现实解释相反。
+
+
+  <table align="center" class="tutorial" cellspacing="3" cellpadding="3">
   <tr>
     <td align="center">
         <img src="https://www.dealii.org/images/steps/developer/step-44.Q1-P0_gr_1_p_ratio_80-displacement.png" alt="">
@@ -5093,27 +5045,14 @@ and is opposite to the physically realistic interpretation of pressure.
 	</p>
     </td>
   </tr>
-</table>
+</table>   
 
-Combining spatial refinement and a higher-order interpolation scheme results in a high-quality solution.
-Three grid refinements coupled with a $Q_2-DGPM_1-DGPM_1$ formulation produces
-a result that clearly captures the mechanics of the problem.
-The deformation of the traction surface is well resolved.
-We can now observe the actual extent of the applied traction, with the maximum force being applied
-at the central point of the surface causing the largest compression.
-Even though very high strains are experienced in the domain,
-especially at the boundary of the region of applied traction,
-the solution remains accurate.
-The pressure field is captured in far greater detail than before.
-There is a clear distinction and transition between regions of compression and expansion,
-and the linear approximation of the pressure field allows a refined visualization
-of the pressure at the sub-element scale.
-It should however be noted that the pressure field remains discontinuous
-and could be smoothed on a continuous grid for the post-processing purposes.
+结合空间细化和高阶插值方案可以得到高质量的解决方案。三个网格细化加上 $Q_2-DGPM_1-DGPM_1$ 公式产生的结果清楚地抓住了问题的力学原理。牵引面的变形得到了很好的解决。我们现在可以观察到所施加的牵引力的实际范围，最大的力被施加在表面的中心点，造成最大的压缩。尽管领域中出现了很高的应变，特别是在施加牵引力的区域的边界，但解决方案仍然是准确的。压力场被捕捉到的细节比以前多得多。压缩和膨胀区域之间有明显的区别和过渡，压力场的线性近似允许在子元素尺度上对压力进行精细的可视化。然而，应该注意的是，压力场仍然是不连续的，可以在一个连续的网格上进行平滑处理，以达到后处理的目的。
 
 
 
-<table align="center" class="tutorial" cellspacing="3" cellpadding="3">
+
+  <table align="center" class="tutorial" cellspacing="3" cellpadding="3">
   <tr>
     <td align="center">
         <img src="https://www.dealii.org/images/steps/developer/step-44.Q2-P1_gr_3_p_ratio_80-displacement.png" alt="">
@@ -5134,31 +5073,14 @@ and could be smoothed on a continuous grid for the post-processing purposes.
 	</p>
     </td>
   </tr>
-</table>
+</table>   
 
-This brief analysis of the results demonstrates that the three-field formulation is effective
-in circumventing volumetric locking for highly-incompressible media.
-The mixed formulation is able to accurately simulate the displacement of a
-near-incompressible block under compression.
-The command-line output indicates that the volumetric change under extreme compression resulted in
-less than 0.01% volume change for a Poisson's ratio of 0.4999.
+对结果的这一简要分析表明，三场公式能有效地规避高度不可压缩介质的体积锁定问题。混合公式能够准确模拟近乎不可压缩的块体在压缩状态下的位移。命令行输出表明，在泊松比为0.4999的情况下，极端压缩下的体积变化导致体积变化小于0.01%。
 
-In terms of run-time, the $Q_2-DGPM_1-DGPM_1$ formulation tends to be more computationally expensive
-than the $Q_1-DGPM_0-DGPM_0$ for a similar number of degrees-of-freedom
-(produced by adding an extra grid refinement level for the lower-order interpolation).
-This is shown in the graph below for a batch of tests run consecutively on a single 4-core (8-thread) machine.
-The increase in computational time for the higher-order method is likely due to
-the increased band-width required for the higher-order elements.
-As previously mentioned, the use of a better solver and preconditioner may mitigate the
-expense of using a higher-order formulation.
-It was observed that for the given problem using the multithreaded Jacobi preconditioner can reduce the
-computational runtime by up to 72% (for the worst case being a higher-order formulation with a large number
-of degrees-of-freedom) in comparison to the single-thread SSOR preconditioner.
-However, it is the author's experience that the Jacobi method of preconditioning may not be suitable for
-some finite-strain problems involving alternative constitutive models.
+在运行时间方面，对于类似的自由度数量， $Q_2-DGPM_1-DGPM_1$ 公式往往比 $Q_1-DGPM_0-DGPM_0$ 的计算成本更高（通过为低阶插值增加一个额外的网格细化级别产生）。下图显示了在一台4核（8线程）机器上连续运行的一批测试的情况。高阶方法计算时间的增加可能是由于高阶元素所需的带宽增加。如前所述，使用更好的求解器和预处理程序可以减轻使用高阶公式的费用。据观察，对于给定的问题，与单线程的SSOR预处理程序相比，使用多线程的Jacobi预处理程序可以减少72%的计算运行时间（在最坏的情况下是具有大量自由度的高阶公式）。然而，根据作者的经验，雅可比预处理方法可能不适合某些涉及替代构成模型的有限应变问题。
 
 
-<table align="center" class="tutorial" cellspacing="3" cellpadding="3">
+  <table align="center" class="tutorial" cellspacing="3" cellpadding="3">
   <tr>
      <td align="center">
         <img src="https://www.dealii.org/images/steps/developer/step-44.Normalised_runtime.png" alt="">
@@ -5167,16 +5089,13 @@ some finite-strain problems involving alternative constitutive models.
 	</p>
     </td>
   </tr>
-</table>
+</table>   
 
 
-Lastly, results for the displacement solution for the 2-d problem are showcased below for
-two different levels of grid refinement.
-It is clear that due to the extra constraints imposed by simulating in 2-d that the resulting
-displacement field, although qualitatively similar, is different to that of the 3-d case.
+最后，下面展示了两个不同级别的网格细化的2维问题的位移解结果。很明显，由于二维模拟的额外约束，所产生的位移场虽然在质量上相似，但与三维模拟的情况不同。
 
 
-<table align="center" class="tutorial" cellspacing="3" cellpadding="3">
+  <table align="center" class="tutorial" cellspacing="3" cellpadding="3">
   <tr>
     <td align="center">
         <img src="https://www.dealii.org/images/steps/developer/step-44.2d-gr_2.png" alt="">
@@ -5191,61 +5110,27 @@ displacement field, although qualitatively similar, is different to that of the 
 	</p>
     </td>
   </tr>
-</table>
+</table>   
 
-<a name="extensions"></a>
-<a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
+<a name="extensions"></a> <a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
 
 
-There are a number of obvious extensions for this work:
+这项工作有一些明显的扩展。
 
-- Firstly, an additional constraint could be added to the free-energy
-  function in order to enforce a high degree of incompressibility in
-  materials. An additional Lagrange multiplier would be introduced,
-  but this could most easily be dealt with using the principle of
-  augmented Lagrange multipliers. This is demonstrated in <em>Simo and
-  Taylor (1991) </em>.
-- The constitutive relationship used in this
-  model is relatively basic. It may be beneficial to split the material
-  class into two separate classes, one dealing with the volumetric
-  response and the other the isochoric response, and produce a generic
-  materials class (i.e. having abstract virtual functions that derived
-  classes have to implement) that would allow for the addition of more complex
-  material models. Such models could include other hyperelastic
-  materials, plasticity and viscoelastic materials and others.
-- The program has been developed for solving problems on single-node
-  multicore machines. With a little effort, the program could be
-  extended to a large-scale computing environment through the use of
-  Petsc or Trilinos, using a similar technique to that demonstrated in
-  step-40. This would mostly involve changes to the setup, assembly,
-  <code>PointHistory</code> and linear solver routines.
-- As this program assumes quasi-static equilibrium, extensions to
-  include dynamic effects would be necessary to study problems where
-  inertial effects are important, e.g. problems involving impact.
-- Load and solution limiting procedures may be necessary for highly
-  nonlinear problems. It is possible to add a linesearch algorithm to
-  limit the step size within a Newton increment to ensure optimum
-  convergence. It may also be necessary to use a load limiting method,
-  such as the Riks method, to solve unstable problems involving
-  geometric instability such as buckling and snap-through.
-- Many physical problems involve contact. It is possible to include
-  the effect of frictional or frictionless contact between objects
-  into this program. This would involve the addition of an extra term
-  in the free-energy functional and therefore an addition to the
-  assembly routine. One would also need to manage the contact problem
-  (detection and stress calculations) itself. An alternative to
-  additional penalty terms in the free-energy functional would be to
-  use active set methods such as the one used in step-41.
-- The complete condensation procedure using LinearOperators has been
-  coded into the linear solver routine. This could also have been
-  achieved through the application of the schur_complement()
-  operator to condense out one or more of the fields in a more
-  automated manner.
-- Finally, adaptive mesh refinement, as demonstrated in step-6 and
-  step-18, could provide additional solution accuracy.
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-44.cc"
-*/
+- 首先，可以在自由能函数中加入一个额外的约束条件，以便在材料中强制执行高度的不可压缩性。一个额外的拉格朗日乘数将被引入，但这可以最容易地使用增强的拉格朗日乘数的原则来处理。这在  <em>  Simo和Taylor (1991)  </em>  中得到了证明。
+
+- 这个模型中使用的构成关系是比较基本的。将材料类分成两个独立的类，一个处理体积响应，另一个处理等熵响应，并产生一个通用的材料类（即有抽象的虚拟函数，派生类必须实现），允许增加更复杂的材料模型，这可能是有益的。这种模型可以包括其他超弹性材料、塑性和粘弹性材料以及其他材料。
+
+- 该程序是为解决单节点多核机器上的问题而开发的。只要稍加努力，该程序就可以通过使用Petsc或Trilinos扩展到大规模的计算环境，使用的技术与  step-40  中演示的类似。这主要涉及对设置、装配、 <code>PointHistory</code> 和线性求解器程序的修改。
+
+- 由于该程序假定为准静态平衡，为了研究惯性效应重要的问题，例如涉及冲击的问题，有必要进行扩展以包括动态效应。
+
+- 对于高度非线性的问题，负载和解决方案的限制程序可能是必要的。有可能增加一个线搜索算法，将步长限制在牛顿增量内，以确保最佳收敛性。也可能需要使用负载限制方法，如Riks方法，来解决涉及几何不稳定性的不稳定问题，如屈曲和快穿。
+
+- 许多物理问题涉及接触。有可能将物体之间的摩擦或无摩擦接触的影响纳入这个程序。这将涉及到在自由能函数中增加一个额外的项，因此需要增加装配程序。我们还需要管理接触问题（检测和应力计算）本身。在自由能函数中增加惩罚项的一个替代方法是使用主动集方法，如  step-41  中使用的方法。
+
+- 使用LinearOperators的完整凝结程序已经被编码到线性求解器例程中。这也可以通过应用schur_complement()操作符来实现，以更自动化的方式缩减一个或多个场。
+
+- 最后，自适应网格细化，如 step-6 和 step-18 所示，可以提供额外的求解精度。<a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-44.cc"  。 
+
+  */  

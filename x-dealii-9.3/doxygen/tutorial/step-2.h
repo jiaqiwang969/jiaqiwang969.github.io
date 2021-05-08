@@ -1,635 +1,441 @@
-/**
-@page step_2 The step-2 tutorial program
-This tutorial depends on step-1.
+  /**   @page step_2 The step-2 tutorial program   
+
+本教程取决于  step-1  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Sparsity"> Sparsity </a>
-        <li><a href="#Howdegreesoffreedomareenumerated"> How degrees of freedom are enumerated </a>
+        <li><a href="#Sparsity"> Sparsity </a><a href="#Sparsity"> Sparsity </a>
+        <li><a href="#Howdegreesoffreedomareenumerated"> How degrees of freedom are enumerated </a><a href="#Howdegreesoffreedomareenumerated"> How degrees of freedom are enumerated </a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Meshgeneration">Mesh generation</a>
-        <li><a href="#CreationofaDoFHandler">Creation of a DoFHandler</a>
-        <li><a href="#RenumberingofDoFs">Renumbering of DoFs</a>
-        <li><a href="#Themainfunction">The main function</a>
+        <li><a href="#Meshgeneration">Mesh generation</a><a href="#Meshgeneration">Mesh generation</a>
+        <li><a href="#CreationofaDoFHandler">Creation of a DoFHandler</a><a href="#CreationofaDoFHandler">Creation of a DoFHandler</a>
+        <li><a href="#RenumberingofDoFs">Renumbering of DoFs</a><a href="#RenumberingofDoFs">Renumbering of DoFs</a>
+        <li><a href="#Themainfunction">The main function</a><a href="#Themainfunction">The main function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions"> Possibilities for extensions </a>
+        <li><a href="#Possibilitiesforextensions"> Possibilities for extensions </a><a href="#Possibilitiesforextensions"> Possibilities for extensions </a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+@endhtmlonly 
+
+<a name="Intro"></a> <a name="Introduction"></a><h1>Introduction</h1>
 
 
-@dealiiVideoLecture{9}
+  @dealiiVideoLecture{9}   
 
-After we have created a grid in the previous example, we now show how
-to define degrees of freedom on this mesh. For this example, we
-will use the lowest order ($Q_1$) finite elements, for which the degrees
-of freedom are associated with the vertices of the mesh. Later
-examples will demonstrate higher order elements where degrees of freedom are
-not necessarily associated with vertices any more, but can be associated
-with edges, faces, or cells.
+在前面的例子中，我们已经创建了一个网格，现在我们展示如何在这个网格上定义自由度。在这个例子中，我们将使用最低阶的( $Q_1$ )有限元，自由度与网格的顶点相关。以后的例子将展示更高阶的元素，自由度不一定与顶点相关，但可以与边、面或单元相关。
 
-The term "degree of freedom" is commonly used in the finite element community
-to indicate two slightly different, but related things. The first is that we'd
-like to represent the finite element solution as a linear combination of shape
-functions, in the form $u_h(\mathbf x) = \sum_{j=0}^{N-1} U_j \varphi_j(\mathbf
-x)$. Here, $U_j$ is a vector of expansion coefficients. Because we don't know
-their values yet (we will compute them as the solution of a linear or
-nonlinear system), they are called "unknowns" or "degrees of freedom". The
-second meaning of the term can be explained as follows: A mathematical
-description of finite element problems is often to say that we are looking for
-a finite dimensional function $u_h \in V_h$ that satisfies some set of equations
-(e.g. $a(u_h,\varphi_h)=(f,\varphi_h)$ for all test functions $\varphi_h\in
-V_h$). In other words, all we say here that the solution needs to lie in some
-space $V_h$. However, to actually solve this problem on a computer we need to
-choose a basis of this space; this is the set of shape functions
-$\varphi_j(\mathbf x)$ we have used above in the expansion of $u_h(\mathbf x)$
-with coefficients $U_j$. There are of course many bases of the space $V_h$,
-but we will specifically choose the one that is described by the finite
-element functions that are traditionally defined locally on the cells of the
-mesh. Describing "degrees of freedom" in this context requires us to simply
-<i>enumerate</i> the basis functions of the space $V_h$. For $Q_1$ elements
-this means simply enumerating the vertices of the mesh in some way, but for
-higher order elements, one also has to enumerate the shape functions that are
-associated with edges, faces, or cell interiors of the mesh. In other words,
-the enumeration of degrees of freedom is an entirely separate thing from the
-indices we use for vertices. The class that
-provides this enumeration of the basis functions of $V_h$ is called DoFHandler.
+术语 "自由度 "在有限元界通常用来表示两个略有不同但相关的东西。首先，我们希望将有限元解表示为形状函数的线性组合，形式为 $u_h(\mathbf x) = \sum_{j=0}^{N-1} U_j \varphi_j(\mathbf
+x)$  。这里， $U_j$ 是一个膨胀系数的向量。因为我们还不知道它们的值（我们将计算它们作为线性或非线性系统的解），它们被称为 "未知数 "或 "自由度"。该术语的第二个含义可以解释如下。对有限元问题的数学描述通常是说，我们正在寻找一个满足某些方程组的有限维函数 $u_h \in V_h$ （例如， $a(u_h,\varphi_h)=(f,\varphi_h)$ 为所有测试函数 $\varphi_h\in
+V_h$ ）。换句话说，我们在这里说的是，解决方案需要位于某个空间  $V_h$  中。然而，为了在计算机上实际解决这个问题，我们需要选择这个空间的一个基；这就是我们在上面用系数 $U_j$ 展开 $u_h(\mathbf x)$ 时使用的形状函数 $\varphi_j(\mathbf x)$ 的集合。当然，空间 $V_h$ 的基数有很多，但我们将特别选择由传统上在网格单元上局部定义的有限元函数描述的基数。在这种情况下描述 "自由度 "需要我们简单地 <i>enumerate</i> 空间的基函数  $V_h$  。对于 $Q_1$ 元素，这意味着简单地以某种方式列举网格的顶点，但对于高阶元素，还必须列举与网格的边、面或单元内部相关的形状函数。换句话说，自由度的枚举是一个完全独立于我们用于顶点的索引的东西。提供这种列举 $V_h$ 的基础函数的类被称为DoFHandler。
 
-Defining degrees of freedom ("DoF"s in short) on a mesh is a rather
-simple task, since the library does all the work for you. Essentially,
-all you have to do is create a finite element object (from one of the
-many finite element classes deal.II already has, see for example the
-@ref fe documentation) and give it to a DoFHandler object through the
-DoFHandler::distribute_dofs function ("distributing DoFs" is the term we use
-to describe the process of <i>enumerating</i> the basis functions as discussed
-above). The DoFHandler is a class that
-knows which degrees of freedom live where, i.e., it can answer
-questions like "how many degrees of freedom are there globally" and
-"on this cell, give me the global indices of the shape functions that
-live here". This is the sort of information you need when determining
-how big your system matrix should be, and when copying the
-contributions of a single cell into the global matrix.
+在一个网格上定义自由度（简称 "DoF"）是一个相当简单的任务，因为这个库为你做了所有的工作。基本上，你所要做的就是创建一个有限元对象（从deal.II已有的众多有限元类中选取，例如参见 @ref fe 文档），并通过 DoFHandler::distribute_dofs 函数将其交给DoFHandler对象（"分配DoF "是我们用来描述<i>enumerating</i>基础函数过程的术语，如上所述）。DoFHandler是一个知道哪些自由度住在哪里的类，也就是说，它可以回答 "全局有多少个自由度 "和 "在这个单元上，给我住在这里的形状函数的全局索引 "这样的问题。当你决定你的系统矩阵应该有多大时，以及当把单个单元的贡献复制到全局矩阵时，你需要这种信息。
 
 <a name="Sparsity"></a><h3> Sparsity </h3>
 
 
-The next step would then be to compute a matrix and right hand side
-corresponding to a particular differential equation using this finite element
-and mesh. We will keep this step for the step-3 program and rather talk about
-one practical aspect of a finite element program, namely that finite element
-matrices are always very sparse: almost all entries in these
-matrices are zero.
+然后，下一步将是使用这个有限元和网格来计算对应于特定微分方程的矩阵和右手。我们将为 step-3 程序保留这一步骤，而是谈论有限元程序的一个实际问题，即有限元矩阵总是非常稀疏的：这些矩阵中几乎所有条目都是零。
 
-To be more precise, we say that a matrix is sparse
-if the number of nonzero entries <i>per row</i> in the matrix is
-bounded by a number that is independent of the overall number of degrees of
-freedom. For example, the simple 5-point stencil of a finite difference
-approximation of the Laplace equation leads to a sparse matrix since the
-number of nonzero entries per row is five, and therefore independent of the
-total size of the matrix. For more complicated problems -- say, the Stokes
-problem of step-22 -- and in particular in 3d, the number of entries per row
-may be several hundred. But the important point is that this number is
-independent of the overall size of the problem: If you refine the mesh, the
-maximal number of unknowns per row remains the same.
+更准确地说，如果矩阵中的非零项<i>per row</i>的数量与整个自由度的数量无关，我们就说该矩阵是稀疏的。例如，拉普拉斯方程的有限差分近似的简单5点模版导致了一个稀疏矩阵，因为每行的非零条目数是5，因此与矩阵的总大小无关。对于更复杂的问题--例如， step-22 的斯托克斯问题--特别是在三维中，每行的条目数可能是几百个。但重要的一点是，这个数字与问题的总体大小无关：如果你细化网格，每行的最大未知数保持不变。
 
-Sparsity is one of the distinguishing feature of
-the finite element method compared to, say, approximating the solution of a
-partial differential equation using a Taylor expansion and matching
-coefficients, or using a Fourier basis.
+稀疏性是有限元方法的显著特征之一，与之相比，例如使用泰勒扩展和匹配系数来逼近偏微分方程的解，或使用傅里叶基础。
 
-In practical terms, it is the sparsity of matrices that enables us to solve
-problems with millions or billions of unknowns. To understand this, note that
-a matrix with $N$ rows, each with a fixed upper bound for the number of
-nonzero entries, requires ${\cal O}(N)$ memory locations for storage, and a
-matrix-vector multiplication also requires only ${\cal O}(N)$
-operations. Consequently, if we had a linear solver that requires only a fixed
-number of matrix-vector multiplications to come up with the solution of a
-linear system with this matrix, then we would have a solver that can find the
-values of all $N$ unknowns with optimal complexity, i.e., with a total of
-${\cal O}(N)$ operations. It is clear that this wouldn't be possible if the
-matrix were not sparse (because then the number of entries in the matrix would
-have to be ${\cal O}(N^s)$ with some $s>1$, and doing a fixed number of
-matrix-vector products would take ${\cal O}(N^s)$ operations),
-but it also requires very specialized solvers such as
-multigrid methods to satisfy the requirement that the solution requires only a
-fixed number of matrix-vector multiplications. We will frequently look at the
-question of what solver to use in the remaining programs of this tutorial.
+在实践中，正是由于矩阵的稀疏性，使我们能够解决有数百万或数十亿未知数的问题。为了理解这一点，请注意，一个有 $N$ 行的矩阵，每个非零项的数量都有一个固定的上限，需要 ${\cal O}(N)$ 个内存位置来存储，而矩阵-向量乘法也只需要 ${\cal O}(N)$ 次操作。因此，如果我们有一个线性求解器，只需要固定数量的矩阵-向量乘法就可以得出这个矩阵的线性系统的解，那么我们就会有一个求解器，可以以最佳的复杂度找到所有 $N$ 个未知数的值，即总共需要 ${\cal O}(N)$ 次运算。很明显，如果矩阵不是稀疏的，这是不可能的（因为那样的话，矩阵中的条目数必须是 ${\cal O}(N^s)$ 与一些 $s>1$ ，做固定数量的矩阵-向量乘积将需要 ${\cal O}(N^s)$ 次操作），但这也需要非常专业的求解器，如多网格方法，以满足求解只需要固定数量的矩阵-向量乘法的要求。在本教程的其余程序中，我们将经常研究使用何种求解器的问题。
 
-The sparsity is generated by the fact that finite element shape
-functions are defined <i>locally</i> on individual cells, rather than
-globally, and that the local differential operators in the bilinear
-form only couple shape functions whose support overlaps. (The "support" of
-a function is the area where it is nonzero. For the finite element method,
-the support of a shape function is generally the cells adjacent to the vertex,
-edge, or face it is defined on.) In other words, degrees of freedom $i$ and $j$
-that are not defined on the same cell do not overlap, and consequently
-the matrix entry $A_{ij}$ will be zero.  (In some cases such
-as the Discontinuous Galerkin method, shape functions may also connect
-to neighboring cells through face integrals. But finite element
-methods do not generally couple shape functions beyond the immediate
-neighbors of a cell on which the function is defined.)
+稀疏性是由以下事实产生的：有限元形状函数是在单个单元上定义的<i>locally</i>，而不是全局的，而且双线性形式中的局部微分算子只对支持度重叠的形状函数进行耦合。一个函数的 "支持 "是指它的非零区域。对于有限元方法，形状函数的支持通常是指与它所定义的顶点、边或面相邻的单元。) 换句话说，不在同一单元上定义的自由度 $i$ 和 $j$ 不会重叠，因此，矩阵条目 $A_{ij}$ 将为零。 (在某些情况下，如非连续加尔金法，形状函数也可以通过面积分连接到相邻的单元。但有限元方法一般不会将形状函数与定义了该函数的单元的近邻相联系。) 
 
 
 <a name="Howdegreesoffreedomareenumerated"></a><h3> How degrees of freedom are enumerated </h3>
 
 
-By default, the DoFHandler class enumerates degrees of freedom on a mesh in a
-rather random way; consequently, the sparsity pattern is also not
-optimized for any particular purpose. To show this, the code below will
-demonstrate a simple way to output the "sparsity pattern" that corresponds to
-a DoFHandler, i.e., an object that represents all of the potentially nonzero
-elements of a matrix one may build when discretizing a partial differential
-equation on a mesh and its DoFHandler. This lack of structure in the sparsity
-pattern will be apparent from the pictures we show below.
+默认情况下，DoFHandler类以一种相当随机的方式列举网格上的自由度；因此，稀疏模式也没有为任何特定目的进行优化。为了说明这一点，下面的代码将演示一个简单的方法来输出对应于DoFHandler的 "稀疏模式"，即一个对象代表了在网格上离散偏微分方程时可能建立的矩阵的所有潜在的非零元素及其DoFHandler。这种缺乏结构的稀疏模式将从我们下面展示的图片中显现出来。
 
-For most applications and algorithms, the exact way in which degrees of freedom
-are numbered does not matter. For example, the Conjugate Gradient method we
-use to solve linear systems does not care. On the other hand,
-some algorithms do care: in particular, some preconditioners such as SSOR
-will work better if they can walk through degrees of freedom in a particular
-order, and it would be nice if we could just sort them in such a way that
-SSOR can iterate through them from zero to $N$ in this order. Other examples
-include computing incomplete LU or Cholesky factorizations, or if we care
-about the block structure of matrices (see step-20 for an example).
-deal.II therefore has algorithms that can re-enumerate degrees of freedom
-in particular ways in namespace DoFRenumbering. Renumbering can be thought
-of as choosing a different, permuted basis of the finite element space. The
-sparsity pattern and matrices that result from this renumbering are therefore
-also simply a permutation of rows and columns compared to the ones we would
-get without explicit renumbering.
+对于大多数应用和算法来说，自由度的确切编号方式并不重要。例如，我们用来解决线性系统的共轭梯度方法并不关心。另一方面，有些算法确实关心：特别是一些预处理程序，如SSOR，如果它们能以特定的顺序走过自由度，就能更好地工作，如果我们能以这样的方式排序，使SSOR能以这样的顺序从零到 $N$ 迭代它们，那就太好了。其他的例子包括计算不完整的LU或Cholesky因式分解，或者如果我们关心矩阵的块结构（见 step-20 的例子）。因此，deal.II在命名空间DoFRenumbering中有可以以特定方式重新列举自由度的算法。重新编号可以被认为是选择了一个不同的、排列过的有限元空间的基础。因此，这种重新编号所产生的稀疏模式和矩阵与我们没有明确的重新编号所得到的行和列相比，也只是一种排列组合。
 
-In the program below, we will use the algorithm of Cuthill and McKee to do
-so. We will show the sparsity pattern for both the original enumeration of
-degrees of freedom and of the renumbered version below,
-in the <a href="#Results">results section</a>.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * The first few includes are just like in the previous program, so do not
- * require additional comments:
- * 
- * @code
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_generator.h>
- * 
- * @endcode
- * 
- * However, the next file is new. We need this include file for the
- * association of degrees of freedom ("DoF"s) to vertices, lines, and cells:
- * 
- * @code
- * #include <deal.II/dofs/dof_handler.h>
- * 
- * @endcode
- * 
- * The following include contains the description of the bilinear finite
- * element, including the facts that it has one degree of freedom on each
- * vertex of the triangulation, but none on faces and none in the interior of
- * the cells.
- * 
+在下面的程序中，我们将使用Cuthill和McKee的算法来做这件事。我们将在下面的<a href="#Results">results section</a>中展示原始自由度列举和重新编号版本的稀疏模式。<a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * (In fact, the file contains the description of Lagrange elements in
- * general, i.e. also the quadratic, cubic, etc versions, and not only for 2d
- * but also 1d and 3d.)
- * 
- * @code
- * #include <deal.II/fe/fe_q.h>
- * @endcode
- * 
- * In the following file, several tools for manipulating degrees of freedom
- * can be found:
- * 
- * @code
- * #include <deal.II/dofs/dof_tools.h>
- * @endcode
- * 
- * We will use a sparse matrix to visualize the pattern of nonzero entries
- * resulting from the distribution of degrees of freedom on the grid. That
- * class can be found here:
- * 
- * @code
- * #include <deal.II/lac/sparse_matrix.h>
- * @endcode
- * 
- * We will also need to use an intermediate sparsity pattern structure, which
- * is found in this file:
- * 
- * @code
- * #include <deal.II/lac/dynamic_sparsity_pattern.h>
- * 
- * @endcode
- * 
- * We will want to use a special algorithm to renumber degrees of freedom. It
- * is declared here:
- * 
- * @code
- * #include <deal.II/dofs/dof_renumbering.h>
- * 
- * @endcode
- * 
- * And this is again needed for C++ output:
- * 
- * @code
- * #include <fstream>
- * 
- * @endcode
- * 
- * Finally, as in step-1, we import the deal.II namespace into the global
- * scope:
- * 
- * @code
- * using namespace dealii;
- * 
- * @endcode
- * 
- * 
- * <a name="Meshgeneration"></a> 
- * <h3>Mesh generation</h3>
- * 
+前面的几个包括就像前面的程序一样，所以不需要额外的注释。
 
- * 
- * This is the function that produced the circular grid in the previous step-1
- * example program with fewer refinements steps. The sole difference is that it
- * returns the grid it produces via its argument.
- * 
- * @code
- * void make_grid(Triangulation<2> &triangulation)
- * {
- *   const Point<2> center(1, 0);
- *   const double   inner_radius = 0.5, outer_radius = 1.0;
- *   GridGenerator::hyper_shell(
- *     triangulation, center, inner_radius, outer_radius, 5);
- * 
- *   for (unsigned int step = 0; step < 3; ++step)
- *     {
- *       for (auto &cell : triangulation.active_cell_iterators())
- *         for (const auto v : cell->vertex_indices())
- *           {
- *             const double distance_from_center =
- *               center.distance(cell->vertex(v));
- * 
- *             if (std::fabs(distance_from_center - inner_radius) <=
- *                 1e-6 * inner_radius)
- *               {
- *                 cell->set_refine_flag();
- *                 break;
- *               }
- *           }
- * 
- *       triangulation.execute_coarsening_and_refinement();
- *     }
- * }
- * 
- * @endcode
- * 
- * 
- * <a name="CreationofaDoFHandler"></a> 
- * <h3>Creation of a DoFHandler</h3>
- * 
+@code
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
 
- * 
- * Up to now, we only have a grid, i.e. some geometrical (the position of the
- * vertices) and some topological information (how vertices are connected to
- * lines, and lines to cells, as well as which cells neighbor which other
- * cells). To use numerical algorithms, one needs some logic information in
- * addition to that: we would like to associate degree of freedom numbers to
- * each vertex (or line, or cell, in case we were using higher order elements)
- * to later generate matrices and vectors which describe a finite element
- * field on the triangulation.
- * 
 
- * 
- * This function shows how to do this. The object to consider is the
- * <code>DoFHandler</code> class template.  Before we do so, however, we first
- * need something that describes how many degrees of freedom are to be
- * associated to each of these objects. Since this is one aspect of the
- * definition of a finite element space, the finite element base class stores
- * this information. In the present context, we therefore create an object of
- * the derived class <code>FE_Q</code> that describes Lagrange elements. Its
- * constructor takes one argument that states the polynomial degree of the
- * element, which here is one (indicating a bi-linear element); this then
- * corresponds to one degree of freedom for each vertex, while there are none
- * on lines and inside the quadrilateral. A value of, say, three given to the
- * constructor would instead give us a bi-cubic element with one degree of
- * freedom per vertex, two per line, and four inside the cell. In general,
- * <code>FE_Q</code> denotes the family of continuous elements with complete
- * polynomials (i.e. tensor-product polynomials) up to the specified order.
- * 
+@endcode 
 
- * 
- * We first need to create an object of this class and then pass it on to the
- * <code>DoFHandler</code> object to allocate storage for the degrees of
- * freedom (in deal.II lingo: we <i>distribute degrees of
- * freedom</i>).
- * 
- * @code
- * void distribute_dofs(DoFHandler<2> &dof_handler)
- * {
- *   const FE_Q<2> finite_element(1);
- *   dof_handler.distribute_dofs(finite_element);
- * 
- * @endcode
- * 
- * Now that we have associated a degree of freedom with a global number to
- * each vertex, we wonder how to visualize this?  There is no simple way to
- * directly visualize the DoF number associated with each vertex. However,
- * such information would hardly ever be truly important, since the
- * numbering itself is more or less arbitrary. There are more important
- * factors, of which we will demonstrate one in the following.
- *   
 
- * 
- * Associated with each vertex of the triangulation is a shape
- * function. Assume we want to solve something like Laplace's equation, then
- * the different matrix entries will be the integrals over the gradient of
- * each pair of such shape functions. Obviously, since the shape functions
- * are nonzero only on the cells adjacent to the vertex they are associated
- * with, matrix entries will be nonzero only if the supports of the shape
- * functions associated to that column and row %numbers intersect. This is
- * only the case for adjacent shape functions, and therefore only for
- * adjacent vertices. Now, since the vertices are numbered more or less
- * randomly by the above function (DoFHandler::distribute_dofs), the pattern
- * of nonzero entries in the matrix will be somewhat ragged, and we will
- * take a look at it now.
- *   
 
- * 
- * First we have to create a structure which we use to store the places of
- * nonzero elements. This can then later be used by one or more sparse
- * matrix objects that store the values of the entries in the locations
- * stored by this sparsity pattern. The class that stores the locations is
- * the SparsityPattern class. As it turns out, however, this class has some
- * drawbacks when we try to fill it right away: its data structures are set
- * up in such a way that we need to have an estimate for the maximal number
- * of entries we may wish to have in each row. In two space dimensions,
- * reasonable values for this estimate are available through the
- * DoFHandler::max_couplings_between_dofs() function, but in three
- * dimensions the function almost always severely overestimates the true
- * number, leading to a lot of wasted memory, sometimes too much for the
- * machine used, even if the unused memory can be released immediately after
- * computing the sparsity pattern. In order to avoid this, we use an
- * intermediate object of type DynamicSparsityPattern that uses a
- * different %internal data structure and that we can later copy into the
- * SparsityPattern object without much overhead. (Some more information on
- * these data structures can be found in the @ref Sparsity module.) In order
- * to initialize this intermediate data structure, we have to give it the
- * size of the matrix, which in our case will be square with as many rows
- * and columns as there are degrees of freedom on the grid:
- * 
- * @code
- *   DynamicSparsityPattern dynamic_sparsity_pattern(dof_handler.n_dofs(),
- *                                                   dof_handler.n_dofs());
- * 
- * @endcode
- * 
- * We then fill this object with the places where nonzero elements will be
- * located given the present numbering of degrees of freedom:
- * 
- * @code
- *   DoFTools::make_sparsity_pattern(dof_handler, dynamic_sparsity_pattern);
- * 
- * @endcode
- * 
- * Now we are ready to create the actual sparsity pattern that we could
- * later use for our matrix. It will just contain the data already assembled
- * in the DynamicSparsityPattern.
- * 
- * @code
- *   SparsityPattern sparsity_pattern;
- *   sparsity_pattern.copy_from(dynamic_sparsity_pattern);
- * 
- * @endcode
- * 
- * With this, we can now write the results to a file:
- * 
- * @code
- *   std::ofstream out("sparsity_pattern1.svg");
- *   sparsity_pattern.print_svg(out);
- * @endcode
- * 
- * The result is stored in an <code>.svg</code> file, where each nonzero entry
- * in the matrix corresponds with a red square in the image. The output will
- * be shown below.
- *   
+然而，下一个文件是新的。我们需要这个包含文件来将自由度（"DoF"）与顶点、线和单元联系起来。
 
- * 
- * If you look at it, you will note that the sparsity pattern is
- * symmetric. This should not come as a surprise, since we have not given
- * the <code>DoFTools::make_sparsity_pattern</code> any information that
- * would indicate that our bilinear form may couple shape functions in a
- * non-symmetric way. You will also note that it has several distinct
- * region, which stem from the fact that the numbering starts from the
- * coarsest cells and moves on to the finer ones; since they are all
- * distributed symmetrically around the origin, this shows up again in the
- * sparsity pattern.
- * 
- * @code
- * }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="RenumberingofDoFs"></a> 
- * <h3>Renumbering of DoFs</h3>
- * 
+@code
+#include <deal.II/dofs/dof_handler.h>
 
- * 
- * In the sparsity pattern produced above, the nonzero entries extended quite
- * far off from the diagonal. For some algorithms, for example for incomplete
- * LU decompositions or Gauss-Seidel preconditioners, this is unfavorable, and
- * we will show a simple way how to improve this situation.
- * 
 
- * 
- * Remember that for an entry $(i,j)$ in the matrix to be nonzero, the
- * supports of the shape functions i and j needed to intersect (otherwise in
- * the integral, the integrand would be zero everywhere since either the one
- * or the other shape function is zero at some point). However, the supports
- * of shape functions intersected only if they were adjacent to each other, so
- * in order to have the nonzero entries clustered around the diagonal (where
- * $i$ equals $j$), we would like to have adjacent shape functions to be
- * numbered with indices (DoF numbers) that differ not too much.
- * 
+@endcode 
 
- * 
- * This can be accomplished by a simple front marching algorithm, where one
- * starts at a given vertex and gives it the index zero. Then, its neighbors
- * are numbered successively, making their indices close to the original
- * one. Then, their neighbors, if not yet numbered, are numbered, and so on.
- * 
 
- * 
- * One algorithm that adds a little bit of sophistication along these lines is
- * the one by Cuthill and McKee. We will use it in the following function to
- * renumber the degrees of freedom such that the resulting sparsity pattern is
- * more localized around the diagonal. The only interesting part of the
- * function is the first call to <code>DoFRenumbering::Cuthill_McKee</code>,
- * the rest is essentially as before:
- * 
- * @code
- * void renumber_dofs(DoFHandler<2> &dof_handler)
- * {
- *   DoFRenumbering::Cuthill_McKee(dof_handler);
- * 
- *   DynamicSparsityPattern dynamic_sparsity_pattern(dof_handler.n_dofs(),
- *                                                   dof_handler.n_dofs());
- *   DoFTools::make_sparsity_pattern(dof_handler, dynamic_sparsity_pattern);
- * 
- *   SparsityPattern sparsity_pattern;
- *   sparsity_pattern.copy_from(dynamic_sparsity_pattern);
- * 
- *   std::ofstream out("sparsity_pattern2.svg");
- *   sparsity_pattern.print_svg(out);
- * }
- * 
- * @endcode
- * 
- * Again, the output is shown below. Note that the nonzero entries are
- * clustered far better around the diagonal than before. This effect is even
- * more distinguished for larger matrices (the present one has 1260 rows and
- * columns, but large matrices often have several 100,000s).
- * 
 
- * 
- * It is worth noting that the <code>DoFRenumbering</code> class offers a
- * number of other algorithms as well to renumber degrees of freedom. For
- * example, it would of course be ideal if all couplings were in the lower or
- * upper triangular part of a matrix, since then solving the linear system
- * would amount to only forward or backward substitution. This is of course
- * unachievable for symmetric sparsity patterns, but in some special
- * situations involving transport equations, this is possible by enumerating
- * degrees of freedom from the inflow boundary along streamlines to the
- * outflow boundary. Not surprisingly, <code>DoFRenumbering</code> also has
- * algorithms for this.
- * 
+下面的包含文件包含了对双线性有限元的描述，包括它在三角形的每个顶点上都有一个自由度，但在面和单元的内部没有自由度。
 
- * 
- * 
 
- * 
- * 
- * <a name="Themainfunction"></a> 
- * <h3>The main function</h3>
- * 
 
- * 
- * Finally, this is the main program. The only thing it does is to allocate
- * and create the triangulation, then create a <code>DoFHandler</code> object
- * and associate it to the triangulation, and finally call above two functions
- * on it:
- * 
- * @code
- * int main()
- * {
- *   Triangulation<2> triangulation;
- *   make_grid(triangulation);
- * 
- *   DoFHandler<2> dof_handler(triangulation);
- * 
- *   distribute_dofs(dof_handler);
- *   renumber_dofs(dof_handler);
- * }
- * @endcode
+
+事实上，该文件包含了对Lagrange元素的一般描述，即还有二次、三次等版本，而且不仅是2d，还有1d和3d。
+
+@code
+#include <deal.II/fe/fe_q.h>
+@endcode 
+
+
+
+在以下文件中，可以找到几个操纵自由度的工具。
+
+@code
+#include <deal.II/dofs/dof_tools.h>
+@endcode 
+
+
+
+我们将使用一个稀疏矩阵来可视化自由度在网格上的分布所产生的非零项的模式。这个类目可以在这里找到。
+
+@code
+#include <deal.II/lac/sparse_matrix.h>
+@endcode 
+
+
+
+我们还将需要使用一个中间的稀疏模式结构，在这个文件中可以找到。
+
+@code
+#include <deal.II/lac/dynamic_sparsity_pattern.h>
+
+
+@endcode 
+
+
+
+我们要使用一种特殊的算法对自由度进行重新编号。它在这里被声明。
+
+@code
+#include <deal.II/dofs/dof_renumbering.h>
+
+
+@endcode 
+
+
+
+而这也是C++输出所需要的。
+
+@code
+#include <fstream>
+
+
+@endcode 
+
+
+
+最后，和 step-1 一样，我们将deal.II命名空间导入到全局范围。
+
+@code
+using namespace dealii;
+
+
+@endcode 
+
+
+
+
+<a name="Meshgeneration"></a> <h3>Mesh generation</h3>
+
+
+
+
+这是之前 step-1 示例程序中产生圆形网格的函数，细化步骤较少。唯一的区别是它通过其参数返回它所产生的网格。
+
+@code
+void make_grid(Triangulation<2> &triangulation)
+{
+  const Point<2> center(1, 0);
+  const double   inner_radius = 0.5, outer_radius = 1.0;
+  GridGenerator::hyper_shell(
+    triangulation, center, inner_radius, outer_radius, 5);
+
+
+  for (unsigned int step = 0; step < 3; ++step)
+    {
+      for (auto &cell : triangulation.active_cell_iterators())
+        for (const auto v : cell->vertex_indices())
+          {
+            const double distance_from_center =
+              center.distance(cell->vertex(v));
+
+
+            if (std::fabs(distance_from_center - inner_radius) <=
+                1e-6 * inner_radius)
+              {
+                cell->set_refine_flag();
+                break;
+              }
+          }
+
+
+      triangulation.execute_coarsening_and_refinement();
+    }
+}
+
+
+@endcode 
+
+
+
+
+<a name="CreationofaDoFHandler"></a> <h3>Creation of a DoFHandler</h3>
+
+
+
+
+到目前为止，我们只有一个网格，即一些几何信息（顶点的位置）和一些拓扑信息（顶点如何连接到线，线如何连接到单元，以及哪些单元与其他单元相邻）。要使用数值算法，还需要一些逻辑信息：我们希望将自由度数字与每个顶点（或线，或单元，如果我们使用高阶元素的话）联系起来，以便随后生成描述三角形上的有限元场的矩阵和向量。
+
+
+
+
+这个函数显示了如何做到这一点。要考虑的对象是 <code>DoFHandler</code> 类模板。 然而，在我们这样做之前，我们首先需要一些东西来描述有多少自由度要与这些对象中的每一个相关联。由于这是有限元空间定义的一个方面，有限元基类存储了这个信息。因此，在目前情况下，我们创建了一个描述拉格朗日元素的派生类 <code>FE_Q</code> 的对象。它的构造函数需要一个参数，说明元素的多项式程度，这里是1（表示双线性元素）；这就对应于每个顶点的一个自由度，而在线和四边形内部没有自由度。如果给构造函数的值是3，我们就会得到一个双立方体元素，每个顶点有一个自由度，每条线有两个自由度，单元内有四个自由度。一般来说， <code>FE_Q</code> 表示具有完整多项式（即张量积多项式）的连续元素家族，直到指定的阶数。
+
+
+
+
+我们首先需要创建一个该类的对象，然后将其传递给 <code>DoFHandler</code> 对象，为自由度分配存储空间（用交易二的行话说：我们<i>distribute degrees of
+freedom</i>）。
+
+@code
+void distribute_dofs(DoFHandler<2> &dof_handler)
+{
+  const FE_Q<2> finite_element(1);
+  dof_handler.distribute_dofs(finite_element);
+
+
+@endcode 
+
+
+
+现在我们已经将自由度与每个顶点的全局数字联系起来，我们想知道如何将其可视化？ 没有简单的方法可以直接将与每个顶点相关的自由度数字可视化。然而，这样的信息几乎不会真正重要，因为编号本身或多或少是任意的。还有更重要的因素，我们将在下文中展示其中一个。   
+
+
+与三角形的每个顶点相关的是一个形状函数。假设我们想解决类似拉普拉斯方程的问题，那么不同的矩阵条目将是每一对此类形状函数的梯度的积分。显然，由于形状函数只在与它们相关的顶点相邻的单元格上是非零的，所以只有当与该列和行%号相关的形状函数的支持相交时，矩阵条目才是非零的。这只是相邻形状函数的情况，因此也只是相邻顶点的情况。现在，由于顶点被上述函数 (DoFHandler::distribute_dofs), 或多或少地随机编号，矩阵中非零项的模式将有些参差不齐，我们现在就来看一下。   
+
+
+首先，我们必须创建一个结构，用来存储非零元素的位置。然后，这可以被一个或多个稀疏矩阵对象使用，这些对象在这个稀疏模式所存储的位置上存储条目的值。存储这些位置的类是SparsityPattern类。然而，事实证明，当我们试图立即填充这个类时，它有一些缺点：它的数据结构的设置方式是，我们需要对我们可能希望在每一行的最大条目数有一个估计。在两个空间维度上，通过 DoFHandler::max_couplings_between_dofs() 函数可以得到合理的估计值，但是在三个维度上，该函数几乎总是严重高估真实的数字，导致大量的内存浪费，有时对于使用的机器来说太多，即使未使用的内存可以在计算稀疏模式后立即释放。为了避免这种情况，我们使用了一个中间对象DynamicSparsityPattern，该对象使用了一个不同的%内部数据结构，我们可以随后将其复制到SparsityPattern对象中，而不需要太多的开销。关于这些数据结构的一些更多信息可以在 @ref Sparsity 模块中找到）。为了初始化这个中间数据结构，我们必须给它提供矩阵的大小，在我们的例子中，矩阵是正方形的，行和列的数量与网格上的自由度相同。
+
+@code
+  DynamicSparsityPattern dynamic_sparsity_pattern(dof_handler.n_dofs(),
+                                                  dof_handler.n_dofs());
+
+
+@endcode 
+
+
+
+然后我们用非零元素的位置来填充这个对象，鉴于目前自由度的编号，非零元素将位于这个对象中。
+
+@code
+  DoFTools::make_sparsity_pattern(dof_handler, dynamic_sparsity_pattern);
+
+
+@endcode 
+
+
+
+现在我们已经准备好创建实际的稀疏模式，以后可以用于我们的矩阵。它将包含已经在DynamicSparsityPattern中集合的数据。
+
+@code
+  SparsityPattern sparsity_pattern;
+  sparsity_pattern.copy_from(dynamic_sparsity_pattern);
+
+
+@endcode 
+
+
+
+有了这个，我们现在可以把结果写到一个文件里。
+
+@code
+  std::ofstream out("sparsity_pattern1.svg");
+  sparsity_pattern.print_svg(out);
+@endcode 
+
+
+
+结果被存储在一个 <code>.svg</code> 文件中，矩阵中的每个非零条目都对应于图像中的一个红色方块。输出结果将显示在下面。   
+
+
+如果你看一下，你会注意到稀疏性模式是对称的。这不应该是一个惊喜，因为我们没有给 <code>DoFTools::make_sparsity_pattern</code> 任何信息，表明我们的双线性形式可能以非对称的方式耦合形状函数。你还会注意到，它有几个明显的区域，这源于编号从最粗的单元开始，然后到较细的单元；由于它们都是围绕原点对称分布的，这在稀疏模式中又显示出来。
+
+@code
+}
+
+
+
+@endcode 
+
+
+
+
+<a name="RenumberingofDoFs"></a><h3>Renumbering of DoFs</h3>
+
+
+
+
+在上面产生的稀疏性模式中，非零条目从对角线上延伸得相当远。对于某些算法，例如不完全LU分解或Gauss-Seidel预处理，这是不利的，我们将展示一个简单的方法来改善这种情况。
+
+
+
+
+请记住，为了使矩阵中的一个条目 $(i,j)$ 不为零，形状函数i和j的支持需要相交（否则在积分中，积分项将到处为零，因为在某个点上，一个或另一个形状函数为零）。然而，形状函数的支持只有在它们彼此相邻的情况下才会相交，所以为了让非零条目聚集在对角线周围（其中 $i$ 等于 $j$ ），我们希望相邻的形状函数的索引（DoF编号）相差不太大。
+
+
+
+
+这可以通过一个简单的前行算法来实现，即从一个给定的顶点开始，给它的索引为0。然后，它的邻居被连续编号，使它们的指数接近于原始指数。然后，他们的邻居，如果还没有被编号，也被编号，以此类推。
+
+
+
+
+Cuthill和McKee的算法是一种沿着这些思路增加了一点复杂性的算法。我们将在下面的函数中使用它来对自由度进行重新编号，从而使产生的稀疏模式在对角线周围更加局部化。该函数唯一有趣的部分是对 <code>DoFRenumbering::Cuthill_McKee</code> 的第一次调用，其余部分基本与之前一样。
+
+@code
+void renumber_dofs(DoFHandler<2> &dof_handler)
+{
+  DoFRenumbering::Cuthill_McKee(dof_handler);
+
+
+  DynamicSparsityPattern dynamic_sparsity_pattern(dof_handler.n_dofs(),
+                                                  dof_handler.n_dofs());
+  DoFTools::make_sparsity_pattern(dof_handler, dynamic_sparsity_pattern);
+
+
+  SparsityPattern sparsity_pattern;
+  sparsity_pattern.copy_from(dynamic_sparsity_pattern);
+
+
+  std::ofstream out("sparsity_pattern2.svg");
+  sparsity_pattern.print_svg(out);
+}
+
+
+@endcode 
+
+
+
+同样，输出结果显示如下。请注意，非零项在对角线附近的聚集情况比以前好得多。这种效果对于较大的矩阵来说甚至更加突出（目前的矩阵有1260行和列，但大的矩阵往往有几十万行）。
+
+
+
+
+值得注意的是， <code>DoFRenumbering</code> 类也提供了一些其他的算法来重新编号自由度。例如，如果所有的耦合都在矩阵的下三角或上三角部分，那当然是最理想的，因为那样的话，解决线性系统就只需要向前或向后替换。当然，这对于对称稀疏模式来说是无法实现的，但在一些涉及传输方程的特殊情况下，通过列举从流入边界沿流线到流出边界的自由度，这是可能的。毫不奇怪， <code>DoFRenumbering</code> 也有这方面的算法。
+
+
+
+
+
+
+
+
+
+
+<a name="Themainfunction"></a> <h3>The main function</h3>
+
+
+
+
+最后，这是主程序。它所做的唯一事情是分配和创建三角形，然后创建一个 <code>DoFHandler</code> 对象并将其与三角形相关联，最后对其调用上述两个函数。
+
+@code
+int main()
+{
+  Triangulation<2> triangulation;
+  make_grid(triangulation);
+
+
+  DoFHandler<2> dof_handler(triangulation);
+
+
+  distribute_dofs(dof_handler);
+  renumber_dofs(dof_handler);
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
-The program has, after having been run, produced two sparsity
-patterns. We can visualize them by opening the <code>.svg</code> files in a web browser.
+该程序运行后，产生了两个疏散模式。我们可以通过在网络浏览器中打开 <code>.svg</code> 文件来可视化它们。
 
-The results then look like this (every point denotes an entry which
-might be nonzero; of course the fact whether the entry actually is
-zero or not depends on the equation under consideration, but the
-indicated positions in the matrix tell us which shape functions can
-and which can't couple when discretizing a local, i.e. differential,
-equation):
-<table style="width:60%" align="center">
+结果是这样的（每一个点都表示一个可能为非零的条目；当然，这个条目是否真的为零取决于所考虑的方程，但矩阵中的指示位置告诉我们，在离散化局部，即微分方程时，哪些形状函数可以，哪些不可以耦合）。  <table style="width:60%" align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-2.sparsity-1.svg" alt=""></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-2.sparsity-2.svg" alt=""></td>
   </tr>
-</table>
+</table>   
 
-The different regions in the left picture, indicated by kinks in the lines and
-single dots on the left and top, represent the degrees of
-freedom on the different refinement levels of the triangulation.  As
-can be seen in the right picture, the sparsity pattern is much better
-clustered around the main diagonal of the matrix after
-renumbering. Although this might not be apparent, the number of
-nonzero entries is the same in both pictures, of course.
+左图中的不同区域，由线条中的结点和左边和上面的单点表示，代表了三角化不同细化层次上的自由度。 从右图中可以看出，重新编号后，稀疏模式在矩阵的主对角线附近的聚类情况要好得多。虽然这可能不明显，但两张图片中的非零项数量当然是一样的。
 
 
 
-<a name="Possibilitiesforextensions"></a><h3> Possibilities for extensions </h3>
+
+<a name="Possibilitiesforextensions"></a><h3> Possibilities for extensions </h3> 
 
 
-Just as with step-1, you may want to play with the program a bit to
-familiarize yourself with deal.II. For example, in the
-<code>distribute_dofs</code> function, we use linear finite elements
-(that's what the argument "1" to the FE_Q object is). Explore how the
-sparsity pattern changes if you use higher order elements, for example
-cubic or quintic ones (by using 3 and 5 as the respective arguments).
+就像 step-1 一样，你可能想玩一下程序，熟悉一下deal.II。例如，在 <code>distribute_dofs</code> 函数中，我们使用线性有限元（这就是FE_Q对象的参数 "1"）。如果你使用高阶元素，例如立方或五元元素（使用3和5作为各自的参数），探索稀疏模式如何变化。
 
-You could also explore how the sparsity pattern changes by refining
-the mesh. You will see that not only the size of the matrix
-changes, but also its bandwidth (the distance from the diagonal of
-those nonzero elements of the matrix that are farthest away from the
-diagonal), though the ratio of bandwidth to size typically shrinks,
-i.e. the matrix clusters more around the diagonal.
+你也可以通过细化网格来探索稀疏性模式的变化。你会发现不仅矩阵的大小会发生变化，而且其带宽也会发生变化（矩阵中离对角线最远的非零元素与对角线的距离），不过带宽与大小的比例通常会缩小，也就是说，矩阵在对角线周围聚集得更多。
 
-Another idea of experiments would be to try other renumbering
-strategies than Cuthill-McKee from the DoFRenumbering namespace and see how
-they affect the sparsity pattern.
+另一个实验想法是尝试DoFRenumbering命名空间中除Cuthill-McKee之外的其他重编号策略，看看它们如何影响稀疏性模式。
 
-You can also visualize the output using <a
-href="http://www.gnuplot.info/">GNUPLOT</a> (one of the simpler visualization
-programs; maybe not the easiest to use since it is command line driven, but
-also universally available on all Linux and other Unix-like systems) by changing from <code>print_svg()</code> to <code>print_gnuplot()</code> in <code>distribute_dofs()</code> and <code>renumber_dofs()</code>:
+你也可以用<a
+href="http://www.gnuplot.info/">GNUPLOT</a>（较简单的可视化程序之一；也许不是最容易使用的，因为它是命令行驱动的，但在所有的Linux和其他类似Unix的系统上也是普遍可用的）通过改变 <code>print_svg()</code> to <code>print_gnuplot()</code> in <code>distribute_dofs()</code> and <code>renumber_dofs()</code>  来可视化输出。
+
 @code
 examples/\step-2> gnuplot
+
 
         G N U P L O T
         Version 3.7 patchlevel 3
         last modified Thu Dec 12 13:00:00 GMT 2002
         System: Linux 2.6.11.4-21.10-default
 
+
         Copyright(C) 1986 - 1993, 1998 - 2002
         Thomas Williams, Colin Kelley and many others
+
 
         Type `help` to access the on-line reference manual
         The gnuplot FAQ is available from
         http://www.gnuplot.info/gnuplot-faq.html
 
+
         Send comments and requests for help to <info-gnuplot@dartmouth.edu>
         Send bugs, suggestions and mods to <bug-gnuplot@dartmouth.edu>
+
 
 
 Terminal type set to 'x11'
 gnuplot> set style data points
 gnuplot> plot "sparsity_pattern.1"
-@endcode
+@endcode 
 
-Another practice based on
-<a href="http://www.gnuplot.info/">GNUPLOT</a> is trying to
-print out the mesh with locations and numbering of the support
-points. For that, you need to include header files for GridOut and MappingQ1.
-The code for this is:
+
+
+另一个基于<a href="http://www.gnuplot.info/">GNUPLOT</a>的做法是尝试打印出带有支撑点位置和编号的网格。为此，你需要包含GridOut和MappingQ1的头文件。这方面的代码是。
+
 @code
   std::ofstream out("gnuplot.gpl");
   out << "plot '-' using 1:2 with lines, "
@@ -645,18 +451,12 @@ The code for this is:
   DoFTools::write_gnuplot_dof_support_point_info(out,
                                                  support_points);
   out << "e" << std::endl;
-@endcode
-After we run the code, we get a file called gnuplot.gpl. To view this
-file, we can run the following code in the command line:
+@endcode 
+
+在我们运行代码后，我们得到一个叫做gnuplot.gpl的文件。要查看这个文件，我们可以在命令行中运行以下代码。
+
 @code
 gnuplot -p gnuplot.gpl
-@endcode.
-With that, you will get a picture similar to
-@image html support_point_dofs1.png
-depending on the mesh you are looking at. For more information, see DoFTools::write_gnuplot_dof_support_point_info.
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-2.cc"
-*/
+@endcode. 有了它，你会得到一个类似于 @image html support_point_dofs1.png 的图片，这取决于你正在看的网格。更多信息，请参见  DoFTools::write_gnuplot_dof_support_point_info.  <a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-2.cc"  。 
+
+  */  

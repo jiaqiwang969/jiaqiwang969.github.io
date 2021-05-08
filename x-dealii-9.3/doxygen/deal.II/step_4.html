@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-4 tutorial program</title>
+<title>The deal.II Library: The step-4 tutorial program 。</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,46 +86,49 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-4 tutorial program </div>  </div>
+<div class="title">The step-4 tutorial program 。 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_3.html">step-3</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_3.html">step-3</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#ThecodeStep4codeclasstemplate">The <code>Step4</code> class template</a>
-        <li><a href="#Righthandsideandboundaryvalues">Right hand side and boundary values</a>
-        <li><a href="#ImplementationofthecodeStep4codeclass">Implementation of the <code>Step4</code> class</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#ThecodeStep4codeclasstemplate">The <code>Step4</code> class template</a><a href="#ThecodeStep4codeclasstemplate">The <code>Step4</code> class template</a>
+        <li><a href="#Righthandsideandboundaryvalues">Right hand side and boundary values</a><a href="#Righthandsideandboundaryvalues">Right hand side and boundary values</a>
+        <li><a href="#ImplementationofthecodeStep4codeclass">Implementation of the <code>Step4</code> class</a><a href="#ImplementationofthecodeStep4codeclass">Implementation of the <code>Step4</code> class</a>
       <ul>
-        <li><a href="#Step4Step4">Step4::Step4</a>
-        <li><a href="#Step4make_grid">Step4::make_grid</a>
-        <li><a href="#Step4setup_system">Step4::setup_system</a>
-        <li><a href="#Step4assemble_system">Step4::assemble_system</a>
-        <li><a href="#Step4solve">Step4::solve</a>
-        <li><a href="#Step4output_results">Step4::output_results</a>
-        <li><a href="#Step4run">Step4::run</a>
+        <li><a href="#Step4Step4">Step4::Step4</a><a href="#Step4Step4">Step4::Step4</a>
+        <li><a href="#Step4make_grid">Step4::make_grid</a><a href="#Step4make_grid">Step4::make_grid</a>
+        <li><a href="#Step4setup_system">Step4::setup_system</a><a href="#Step4setup_system">Step4::setup_system</a>
+        <li><a href="#Step4assemble_system">Step4::assemble_system</a><a href="#Step4assemble_system">Step4::assemble_system</a>
+        <li><a href="#Step4solve">Step4::solve</a><a href="#Step4solve">Step4::solve</a>
+        <li><a href="#Step4output_results">Step4::output_results</a><a href="#Step4output_results">Step4::output_results</a>
+        <li><a href="#Step4run">Step4::run</a><a href="#Step4run">Step4::run</a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
- <a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
-<dl class="section note"><dt>Note</dt><dd>The material presented here is also discussed in <a href="http://www.math.colostate.edu/~bangerth/videos.676.12.html">video lecture 12</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.13.html">video lecture 13</a>. (All video lectures are also available <a href="http://www.math.colostate.edu/~bangerth/videos.html">here</a>.)</dd></dl>
-<p>deal.II has a unique feature which we call `&lsquo;dimension independent programming&rsquo;'. You may have noticed in the previous examples that many classes had a number in angle brackets suffixed to them. This is to indicate that for example the triangulation in two and three space dimensions are different, but related data types. We could as well have called them <code>Triangulation2d</code> and <code>Triangulation3d</code> instead of <code><a class="el" href="classTriangulation.html">Triangulation</a>&lt;2&gt;</code> and <code><a class="el" href="classTriangulation.html">Triangulation</a>&lt;3&gt;</code> to name the two classes, but this has an important drawback: assume you have a function which does exactly the same functionality, but on 2d or 3d triangulations, depending on which dimension we would like to solve the equation in presently (if you don't believe that it is the common case that a function does something that is the same in all dimensions, just take a look at the code below - there are almost no distinctions between 2d and 3d!). We would have to write the same function twice, once working on <code>Triangulation2d</code> and once working with a <code>Triangulation3d</code>. This is an unnecessary obstacle in programming and leads to a nuisance to keep the two function in sync (at best) or difficult to find errors if the two versions get out of sync (at worst; this would probably the more common case).</p>
-<p>Such obstacles can be circumvented by using some template magic as provided by the C++ language: templatized classes and functions are not really classes or functions but only a pattern depending on an as-yet undefined data type parameter or on a numerical value which is also unknown at the point of definition. However, the compiler can build proper classes or functions from these templates if you provide it with the information that is needed for that. Of course, parts of the template can depend on the template parameters, and they will be resolved at the time of compilation for a specific template parameter. For example, consider the following piece of code: </p><div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
+</p>
+<p><a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
+<dl class="section note"><dt>Note</dt><dd>The material presented here is also discussed in <a href="http://www.math.colostate.edu/~bangerth/videos.676.12.html">video lecture 12</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.13.html">video lecture 13</a>. (All video lectures are also available <a href="http://www.math.colostate.edu/~bangerth/videos.html">here</a>.) <br  />
+</dd></dl>
+<p>deal.II有一个独特的功能，我们称之为 "无维度编程"。你可能已经注意到在前面的例子中，许多类都有一个带角括号的数字后缀。这是为了表明，例如，二维和三维空间的三角形是不同的，但是相关的数据类型。我们完全可以把它们称为 <code>Triangulation2d</code> and <code>Triangulation3d</code> 而不是 <code><a class="el" href="classTriangulation.html">Triangulation</a>&lt;2&gt;</code> 和 <code><a class="el" href="classTriangulation.html">Triangulation</a>&lt;3&gt;</code> ]来命名这两个类，但这有一个重要的缺点：假设你有一个功能完全相同的函数，但在2D或3D三角形上，取决于我们目前想在哪个维度上求解方程（如果你不相信一个函数在所有维度上都做同样的事情是常见的情况，看看下面的代码就知道了，2D和3D之间几乎没有区别！）。我们将不得不把同一个函数写两次，一次在 <code>Triangulation2d</code> 上工作，一次在 <code>Triangulation3d</code> 上工作。这在编程中是一个不必要的障碍，并且导致了保持两个函数同步的麻烦（最好是），或者在两个版本不同步时难以发现错误（最坏的情况是；这可能是更常见的情况）。</p>
+<p>这种障碍可以通过使用C++语言提供的一些模板魔法来规避：模板化的类和函数并不是真正的类或函数，而只是取决于一个尚未定义的数据类型参数或一个在定义时也未知的数值的模式。然而，如果你向它提供了所需的信息，编译器可以从这些模板中建立适当的类或函数。当然，模板的部分内容可以依赖于模板参数，它们将在编译时被解析为特定的模板参数。例如，考虑下面这段代码。</p>
+<div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> make_grid (<a class="code" href="classTriangulation.html">Triangulation&lt;dim&gt;</a> &amp;<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>)</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a> (<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>, -1, 1);</div>
@@ -133,30 +136,34 @@ $(function() {
 <div class="ttc" id="aclassTriangulation_html"><div class="ttname"><a href="classTriangulation.html">Triangulation</a></div><div class="ttdef"><b>Definition:</b> <a href="grid_2tria_8h_source.html#l01127">tria.h:1128</a></div></div>
 <div class="ttc" id="anamespaceGridGenerator_html_acea0cbcd68e52ce8113d1134b87de403"><div class="ttname"><a href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a></div><div class="ttdeci">void hyper_cube(Triangulation&lt; dim, spacedim &gt; &amp;tria, const double left=0., const double right=1., const bool colorize=false)</div></div>
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
-</div><!-- fragment --><p>At the point where the compiler sees this function, it does not know anything about the actual value of <code>dim</code>. The only thing the compiler has is a template, i.e. a blueprint, to generate functions <code>make_grid</code> if given a particular value of <code>dim</code>. Since <code>dim</code> has an unknown value, there is no code the compiler can generate for the moment.</p>
-<p>However, if later down the compiler would encounter code that looks, for example, like this, </p><div class="fragment"><div class="line"><a class="code" href="classTriangulation.html">Triangulation&lt;2&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
+</div><!-- fragment --><p>在编译器看到这个函数的时候，它不知道任何关于 <code>dim</code> 的实际值。编译器唯一拥有的是一个模板，也就是一个蓝图，用来生成函数 <code>make_grid</code> 如果给定 <code>dim</code>. Since <code>dim</code> 的特定值为未知值，编译器暂时没有代码可以生成。</p>
+<p>然而，如果以后下来编译器会遇到代码，例如，看起来像这样。</p>
+<div class="fragment"><div class="line"><a class="code" href="classTriangulation.html">Triangulation&lt;2&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
 <div class="line">make_grid (<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>);</div>
-</div><!-- fragment --><p> then the compiler will deduce that the function <code>make_grid</code> for <code>dim==2</code> was requested and will compile the template above into a function with dim replaced by 2 everywhere, i.e. it will compile the function as if it were defined as </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> make_grid (<a class="code" href="classTriangulation.html">Triangulation&lt;2&gt;</a> &amp;<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>)</div>
+</div><!-- fragment --><p>那么编译器将推断出 <code>make_grid</code> 是为 <code>dim==2</code> 请求的函数，并将上面的模板编译成一个到处都用2代替dim的函数，也就是说，它将编译这个函数，就好像它被定义为</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> make_grid (<a class="code" href="classTriangulation.html">Triangulation&lt;2&gt;</a> &amp;<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>)</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a> (<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>, -1, 1);</div>
 <div class="line">};</div>
-</div><!-- fragment --><p>However, it is worth to note that the function <code><a class="el" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a></code> depends on the dimension as well, so in this case, the compiler will call the function <code><a class="el" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a>&lt;2&gt;</code> while if dim were 3, it would call <code><a class="el" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a>&lt;3&gt;</code> which might be (and actually is) a totally unrelated function.</p>
-<p>The same can be done with member variables. Consider the following function, which might in turn call the above one: </p><div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
+</div><!-- fragment --><p>然而，值得注意的是，函数 <code><a class="el" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a></code> 也依赖于维度，所以在这种情况下，编译器将调用函数 <code><a class="el" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a>&lt;2&gt;</code> ，而如果dim是3，它将调用 <code><a class="el" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a>&lt;3&gt;</code> ，这可能是（而且实际上是）一个完全不相关的函数。</p>
+<p>同样的情况也可以用成员变量来做。考虑以下函数，它可能会反过来调用上述函数。</p>
+<div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> make_grid_and_dofs (<a class="code" href="classTriangulation.html">Triangulation&lt;dim&gt;</a> &amp;<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>)</div>
 <div class="line">{</div>
 <div class="line">  make_grid (<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a> dof_handler(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>);</div>
 <div class="line">  ...</div>
 <div class="line">};</div>
 <div class="ttc" id="aclassDoFHandler_html"><div class="ttname"><a href="classDoFHandler.html">DoFHandler</a></div><div class="ttdef"><b>Definition:</b> <a href="dofs_2dof__handler_8h_source.html#l00314">dof_handler.h:315</a></div></div>
-</div><!-- fragment --><p> This function has a member variable of type <code><a class="el" href="classDoFHandler.html">DoFHandler</a>&lt;dim&gt;</code>. Again, the compiler can't compile this function until it knows for which dimension. If you call this function for a specific dimension as above, the compiler will take the template, replace all occurrences of dim by the dimension for which it was called, and compile it. If you call the function several times for different dimensions, it will compile it several times, each time calling the right <code>make_grid</code> function and reserving the right amount of memory for the member variable; note that the size of a <code><a class="el" href="classDoFHandler.html">DoFHandler</a></code> might, and indeed does, depend on the space dimension.</p>
-<p>The deal.II library is built around this concept of dimension-independent programming, and therefore allows you to program in a way that will not need to distinguish between the space dimensions. It should be noted that in only a very few places is it necessary to actually compare the dimension using <code>if</code>s or <code>switch</code>es. However, since the compiler has to compile each function for each dimension separately, even there it knows the value of <code>dim</code> at the time of compilation and will therefore be able to optimize away the <code>if</code> statement along with the unused branch.</p>
-<p>In this example program, we will show how to program dimension independently (which in fact is even simpler than if you had to take care about the dimension) and we will extend the Laplace problem of the last example to a program that runs in two and three space dimensions at the same time. Other extensions are the use of a non-constant right hand side function and of non-zero boundary values.</p>
-<dl class="section note"><dt>Note</dt><dd>When using templates, C++ imposes all sorts of syntax constraints that make it sometimes a bit difficult to understand why exactly something has to be written this way. A typical example is the need to use the keyword <code>typename</code> in so many places. If you are not entirely familiar with this already, then several of these difficulties are explained in the deal.II Frequently Asked Questions (FAQ) linked to from the <a href="http://www.dealii.org/">deal.II homepage</a>.</dd></dl>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+</div><!-- fragment --><p>这个函数有一个类型为 <code><a class="el" href="classDoFHandler.html">DoFHandler</a>&lt;dim&gt;</code> 的成员变量。同样的，编译器在知道为哪个维度调用这个函数之前，是不能编译的。如果你像上面那样为一个特定的维度调用这个函数，编译器将使用模板，用调用的维度替换所有出现的dim，并编译它。如果你为不同的维度多次调用该函数，它将多次编译，每次都调用正确的 <code>make_grid</code> 函数，并为成员变量保留适当的内存量；注意， <code><a class="el" href="classDoFHandler.html">DoFHandler</a></code> 的大小可能，事实上也确实取决于空间维度。</p>
+<p>deal.II库是围绕这个维度无关的编程概念建立的，因此允许你以一种不需要区分空间维度的方式编程。应该注意的是，只有在极少数的地方才有必要使用 <code>if</code>s or <code>switch</code> es来实际比较维度。然而，由于编译器必须为每个维度单独编译每个函数，即使在那里，它在编译时也知道 <code>dim</code> 的值，因此将能够优化掉 <code>if</code> 语句和未使用的分支。</p>
+<p>在这个例子程序中，我们将展示如何独立编程维度（事实上，这比你必须照顾到维度还要简单），我们将把上一个例子的拉普拉斯问题扩展到一个同时在二维和三维空间运行的程序。其他的扩展是使用非常数的右侧函数和非零的边界值。</p>
+<dl class="section note"><dt>Note</dt><dd>在使用模板时，C++施加了各种语法限制，有时会让人有点难以理解为什么到底要这样写。一个典型的例子是，在很多地方都需要使用关键字 <code>typename</code> 。如果你已经不完全熟悉，那么在<a href="http://www.dealii.org/">deal.II homepage</a>中链接的deal.II常见问题解答（FAQ）中解释了其中的几个困难。</dd></dl>
+<p>&lt;！&ndash;我们需要一个空行来正确地结束上述区块。--&gt; <a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
 <p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
-<p>The first few (many?) include files have already been used in the previous example, so we will not explain their meaning here again.</p>
+<p>前面几个（很多）include文件已经在前面的例子中使用过了，所以我们在这里不再解释它们的含义。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2tria_8h.html">deal.II/grid/tria.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dofs_2dof__handler_8h.html">deal.II/dofs/dof_handler.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__generator_8h.html">deal.II/grid/grid_generator.h</a>&gt;</span></div>
@@ -173,6 +180,7 @@ $(function() {
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dynamic__sparsity__pattern_8h.html">deal.II/lac/dynamic_sparsity_pattern.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="solver__cg_8h.html">deal.II/lac/solver_cg.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="precondition_8h.html">deal.II/lac/precondition.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="numerics_2data__out_8h.html">deal.II/numerics/data_out.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
@@ -194,20 +202,21 @@ $(function() {
 <div class="ttc" id="asparse__matrix_8h_html"><div class="ttname"><a href="sparse__matrix_8h.html">sparse_matrix.h</a></div></div>
 <div class="ttc" id="avector_8h_html"><div class="ttname"><a href="vector_8h.html">vector.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p>This is new, however: in the previous example we got some unwanted output from the linear solvers. If we want to suppress it, we have to include this file and add a single line somewhere to the program (see the main() function below for that):</p>
+</div><!-- fragment --><p>不过这是新的：在前面的例子中，我们从线性求解器得到了一些不需要的输出。如果我们想抑制它，我们必须包括这个文件，并在程序的某个地方添加一行（见下面的main()函数）。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logstream_8h.html">deal.II/base/logstream.h</a>&gt;</span></div>
 <div class="ttc" id="alogstream_8h_html"><div class="ttname"><a href="logstream_8h.html">logstream.h</a></div></div>
-</div><!-- fragment --><p>The final step, as in previous programs, is to import all the deal.II class and function names into the global namespace:</p>
+</div><!-- fragment --><p>最后一步，和以前的程序一样，是将所有deal.II的类和函数名导入全局命名空间。</p>
 <div class="fragment"><div class="line"><span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="namespace__dealii_8h_source.html#l00025">namespace_dealii.h:26</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="ThecodeStep4codeclasstemplate"></a> </p><h3>The <code>Step4</code> class template</h3>
-<p>This is again the same <code>Step4</code> class as in the previous example. The only difference is that we have now declared it as a class with a template parameter, and the template parameter is of course the spatial dimension in which we would like to solve the Laplace equation. Of course, several of the member variables depend on this dimension as well, in particular the <a class="el" href="classTriangulation.html">Triangulation</a> class, which has to represent quadrilaterals or hexahedra, respectively. Apart from this, everything is as before.</p>
+</div><!-- fragment --><p><a class="anchor" id="ThecodeStep4codeclasstemplate"></a></p><h3>The <code>Step4</code> class template</h3>
+<p>这又是与前面的例子中相同的 <code>Step4</code> 类。唯一不同的是，我们现在把它声明为一个带有模板参数的类，而模板参数当然是我们要解决拉普拉斯方程的空间维度。当然，几个成员变量也取决于这个维度，特别是Triangulation类，它必须分别表示四边形或六面体。除此以外，一切都和以前一样。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>Step4</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  Step4();</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keywordtype">void</span> make_grid();</div>
@@ -216,12 +225,15 @@ $(function() {
 <div class="line">  <span class="keywordtype">void</span> solve();</div>
 <div class="line">  <span class="keywordtype">void</span> output_results() <span class="keyword">const</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classTriangulation.html">Triangulation&lt;dim&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
 <div class="line">  <a class="code" href="classFE__Q.html">FE_Q&lt;dim&gt;</a>          fe;</div>
 <div class="line">  <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a>    dof_handler;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classSparsityPattern.html">SparsityPattern</a>      sparsity_pattern;</div>
 <div class="line">  <a class="code" href="classSparseMatrix.html">SparseMatrix&lt;double&gt;</a> system_matrix;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> solution;</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> system_rhs;</div>
@@ -232,10 +244,10 @@ $(function() {
 <div class="ttc" id="aclassVector_html"><div class="ttname"><a href="classVector.html">Vector&lt; double &gt;</a></div></div>
 <div class="ttc" id="anamespaceWorkStream_1_1internal_1_1tbb__no__coloring_html_a8673698a405bf47aa24002aeb6d76d70"><div class="ttname"><a href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">WorkStream::internal::tbb_no_coloring::run</a></div><div class="ttdeci">void run(const Iterator &amp;begin, const typename identity&lt; Iterator &gt;::type &amp;end, Worker worker, Copier copier, const ScratchData &amp;sample_scratch_data, const CopyData &amp;sample_copy_data, const unsigned int queue_length, const unsigned int chunk_size)</div><div class="ttdef"><b>Definition:</b> <a href="work__stream_8h_source.html#l00691">work_stream.h:691</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="Righthandsideandboundaryvalues"></a> </p><h3>Right hand side and boundary values</h3>
-<p>In the following, we declare two more classes denoting the right hand side and the non-homogeneous Dirichlet boundary values. Both are functions of a dim-dimensional space variable, so we declare them as templates as well.</p>
-<p>Each of these classes is derived from a common, abstract base class <a class="el" href="classFunction.html">Function</a>, which declares the common interface which all functions have to follow. In particular, concrete classes have to overload the <code>value</code> function, which takes a point in dim-dimensional space as parameters and returns the value at that point as a <code>double</code> variable.</p>
-<p>The <code>value</code> function takes a second argument, which we have here named <code>component</code>: This is only meant for vector-valued functions, where you may want to access a certain component of the vector at the point <code>p</code>. However, our functions are scalar, so we need not worry about this parameter and we will not use it in the implementation of the functions. Inside the library's header files, the <a class="el" href="classFunction.html">Function</a> base class's declaration of the <code>value</code> function has a default value of zero for the component, so we will access the <code>value</code> function of the right hand side with only one parameter, namely the point where we want to evaluate the function. A value for the component can then simply be omitted for scalar functions.</p>
-<p><a class="el" href="classFunction.html">Function</a> objects are used in lots of places in the library (for example, in <a class="el" href="step_3.html">step-3</a> we used a <a class="el" href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction</a> instance as an argument to <a class="el" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>) and this is the first tutorial where we define a new class that inherits from <a class="el" href="classFunction.html">Function</a>. Since we only ever call <a class="el" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">Function::value()</a>, we could get away with just a plain function (and this is what is done in <a class="el" href="step_5.html">step-5</a>), but since this is a tutorial we inherit from <a class="el" href="classFunction.html">Function</a> for the sake of example.</p>
+<p>在下文中，我们再声明两个类，表示右手边和非均质Dirichlet边界值。两者都是一个二维空间变量的函数，所以我们也将它们声明为模板。</p>
+<p>这些类中的每一个都是从一个共同的、抽象的基类Function派生出来的，它声明了所有函数都必须遵循的共同接口。特别是，具体的类必须重载 <code>value</code> 函数，该函数将二维空间中的一个点作为参数，并将该点的值作为 <code>double</code> 变量返回。</p>
+<p><code>value</code> 函数需要第二个参数，我们在这里将其命名为 <code>component</code> ：这只是为了矢量值函数，你可能想访问点 <code>p</code> 处的矢量的某个分量。然而，我们的函数是标量的，所以我们不需要担心这个参数，在函数的实现中也不会使用它。在库的头文件中，Function基类对 <code>value</code> 函数的声明中，分量的默认值为0，所以我们在访问右手边的 <code>value</code> 函数时，只有一个参数，即我们要评估函数的点。然后，对于标量函数，可以简单地省略分量的值。</p>
+<p>函数对象在库中很多地方都有使用（例如，在 <a class="el" href="step_3.html">step-3</a> 中，我们用 <a class="el" href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction</a> 实例作为 <a class="el" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>) 的参数，这是第一个我们定义继承于Function的新类的教程。由于我们只调用 <a class="el" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">Function::value()</a>, ，我们可以只用一个普通的函数（这就是 <a class="el" href="step_5.html">step-5</a> 中的做法），但由于这是一个教程，为了举例说明，我们继承了Function。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>RightHandSide : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
@@ -243,6 +255,8 @@ $(function() {
 <div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">value</a>(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp; p,</div>
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0) <span class="keyword">const override</span>;</div>
 <div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -256,12 +270,10 @@ $(function() {
 <div class="ttc" id="aclassFunction_html"><div class="ttname"><a href="classFunction.html">Function</a></div><div class="ttdef"><b>Definition:</b> <a href="function_8h_source.html#l00150">function.h:153</a></div></div>
 <div class="ttc" id="aclassFunction_html_acbfcab66b2fc63bfea59268f40772bb4"><div class="ttname"><a href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">Function::value</a></div><div class="ttdeci">virtual RangeNumberType value(const Point&lt; dim &gt; &amp;p, const unsigned int component=0) const</div></div>
 <div class="ttc" id="aclassPoint_html"><div class="ttname"><a href="classPoint.html">Point</a></div><div class="ttdef"><b>Definition:</b> <a href="base_2point_8h_source.html#l00110">point.h:111</a></div></div>
-</div><!-- fragment --><p>If you are not familiar with what the keywords <code>virtual</code> and <code>override</code> in the function declarations above mean, you will probably want to take a look at your favorite C++ book or an online tutorial such as <a href="http://www.cplusplus.com/doc/tutorial/polymorphism/">http://www.cplusplus.com/doc/tutorial/polymorphism/</a> . In essence, what is happening here is that Function&lt;dim&gt; is an "abstract" base class that declares a certain "interface" &ndash; a set of functions one can call on objects of this kind. But it does not actually <em>implement</em> these functions: it just says "this is how Function objects look like", but what kind of function it actually is, is left to derived classes that implement the <code>value()</code> function.</p>
-<p>Deriving one class from another is often called an "is-a" relationship function. Here, the <code>RightHandSide</code> class "is a" <a class="el" href="classFunction.html">Function</a> class because it implements the interface described by the <a class="el" href="classFunction.html">Function</a> base class. (The actual implementation of the <code>value()</code> function is in the code block below.) The <code>virtual</code> keyword then means "Yes, the
-   function here is one that can be overridden by derived classes", and the <code>override</code> keyword means "Yes, this is in fact a function we know
-   has been declared as part of the base class". The <code>override</code> keyword is not strictly necessary, but is an insurance against typos: If we get the name of the function or the type of one argument wrong, the compiler will warn us by stating "You say that this function overrides one in a base class, but I don't actually know any such function with this name and these arguments."</p>
-<p>But back to the concrete case here: For this tutorial, we choose as right hand side the function \(4(x^4+y^4)\) in 2D, or \(4(x^4+y^4+z^4)\) in 3D. We could write this distinction using an if-statement on the space dimension, but here is a simple way that also allows us to use the same function in 1D (or in 4D, if you should desire to do so), by using a short loop. Fortunately, the compiler knows the size of the loop at compile time (remember that at the time when you define the template, the compiler doesn't know the value of <code>dim</code>, but when it later encounters a statement or declaration <code>RightHandSide&lt;2&gt;</code>, it will take the template, replace all occurrences of dim by 2 and compile the resulting function). In other words, at the time of compiling this function, the number of times the body will be executed is known, and the compiler can minimize the overhead needed for the loop; the result will be as fast as if we had used the formulas above right away.</p>
-<p>The last thing to note is that a <code><a class="el" href="classPoint.html">Point</a>&lt;dim&gt;</code> denotes a point in dim-dimensional space, and its individual components (i.e. \(x\), \(y\), ... coordinates) can be accessed using the () operator (in fact, the [] operator will work just as well) with indices starting at zero as usual in C and C++.</p>
+</div><!-- fragment --><p>如果你不熟悉上述函数声明中的关键字 "virtual "和 "override "是什么意思，你可能想看看你最喜欢的C++书籍或在线教程，如http://www.cplusplus.com/doc/tutorial/polymorphism/ 。从本质上讲，这里发生的事情是Function&lt;dim&gt;是一个 "抽象 "基类，它声明了某种 "接口"&ndash;一组可以在这类对象上调用的函数。但它实际上并没有*实现*这些函数：它只是说 "Function对象是这样的"，但它实际上是什么类型的函数，则留给实现`value()'函数的派生类。</p>
+<p>从一个类派生出另一个类，通常被称为 "is-a "关系函数。在这里，<code>RightHandSide'类 "是一个 "函数类，因为它实现了函数基类所描述的接口。("value() "函数的实际实现在下面的代码块中)。那么</code>virtual<code>关键字意味着 "是的，这里的函数可以被派生类覆盖"，而</code>override`关键字意味着 "是的，这实际上是一个我们知道已经被声明为基类一部分的函数"。覆盖 "关键字不是严格必要的，但它是防止打字错误的一个保险。如果我们把函数的名字或一个参数的类型弄错了，编译器会警告我们说："你说这个函数覆盖了基类中的一个函数，但实际上我不知道有任何这样的函数有这个名字和这些参数。"</p>
+<p>但回到这里的具体案例。在本教程中，我们选择2D中的函数 \(4(x^4+y^4)\) ，或3D中的 \(4(x^4+y^4+z^4)\) 作为右手边。我们可以用空间维度上的if语句来写这个区别，但这里有一个简单的方法，它也允许我们在一维（或四维，如果你想这样做）中使用相同的函数，通过使用一个短循环。 幸运的是，编译器在编译时就知道循环的大小（记住，在你定义模板时，编译器不知道 <code>dim</code> 的值，但当它后来遇到语句或声明 <code>RightHandSide&lt;2&gt;</code> 时，它将采取模板，用2替换所有出现的dim，并编译出结果函数）。 换句话说，在编译这个函数的时候，主体将被执行的次数是已知的，编译器可以将循环所需的开销降到最低；结果将和我们马上使用上面的公式一样快。</p>
+<p>最后要注意的是， <code><a class="el" href="classPoint.html">Point</a>&lt;dim&gt;</code> 表示二维空间中的一个点，它的各个组成部分（即 \(x\) ， \(y\) ，...坐标）可以像C和C++中一样使用（）运算符访问（事实上，[]运算符也同样有效），索引从零开始。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">double</span> RightHandSide&lt;dim&gt;::value(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp;p,</div>
 <div class="line">                                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="comment">/*component*/</span>)<span class="keyword"> const</span></div>
@@ -270,9 +282,10 @@ $(function() {
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; ++i)</div>
 <div class="line">    return_value += 4.0 * std::pow(p(i), 4.0);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> return_value;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>As boundary values, we choose \(x^2+y^2\) in 2D, and \(x^2+y^2+z^2\) in 3D. This happens to be equal to the square of the vector from the origin to the point at which we would like to evaluate the function, irrespective of the dimension. So that is what we return:</p>
+</div><!-- fragment --><p>作为边界值，我们选择二维的 \(x^2+y^2\) ，三维的 \(x^2+y^2+z^2\) 。这恰好等于从原点到我们想评估函数的点的矢量的平方，而不考虑维度。因此，这就是我们的回报。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">double</span> BoundaryValues&lt;dim&gt;::value(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp;p,</div>
 <div class="line">                                  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="comment">/*component*/</span>)<span class="keyword"> const</span></div>
@@ -281,60 +294,65 @@ $(function() {
 <div class="line">}</div>
 <div class="ttc" id="aclassPoint_html_a859ea7f3bf3e64be2e0f5ed1bfcc8550"><div class="ttname"><a href="classPoint.html#a859ea7f3bf3e64be2e0f5ed1bfcc8550">Point::square</a></div><div class="ttdeci">numbers::NumberTraits&lt; Number &gt;::real_type square() const</div></div>
 </div><!-- fragment --><p><a class="anchor" id="ImplementationofthecodeStep4codeclass"></a> </p><h3>Implementation of the <code>Step4</code> class</h3>
-<p>Next for the implementation of the class template that makes use of the functions above. As before, we will write everything as templates that have a formal parameter <code>dim</code> that we assume unknown at the time we define the template functions. Only later, the compiler will find a declaration of <code>Step4&lt;2&gt;</code> (in the <code>main</code> function, actually) and compile the entire class with <code>dim</code> replaced by 2, a process referred to as &lsquo;instantiation of a template&rsquo;. When doing so, it will also replace instances of <code>RightHandSide&lt;dim&gt;</code> by <code>RightHandSide&lt;2&gt;</code> and instantiate the latter class from the class template.</p>
-<p>In fact, the compiler will also find a declaration <code>Step4&lt;3&gt;</code> in <code>main()</code>. This will cause it to again go back to the general <code>Step4&lt;dim&gt;</code> template, replace all occurrences of <code>dim</code>, this time by 3, and compile the class a second time. Note that the two instantiations <code>Step4&lt;2&gt;</code> and <code>Step4&lt;3&gt;</code> are completely independent classes; their only common feature is that they are both instantiated from the same general template, but they are not convertible into each other, for example, and share no code (both instantiations are compiled completely independently).</p>
+<p>接下来是使用上述函数的类模板的实现。和以前一样，我们将把所有东西写成模板，这些模板有一个形式参数 <code>dim</code> ，在我们定义模板函数的时候，我们假设这个参数是未知的。只有在以后，编译器才会发现 <code>Step4&lt;2&gt;</code> (in the <code>main</code> 函数的声明，实际上）并在编译整个类的时候用2替换 <code>dim</code> ，这个过程被称为 "模板的实例化"。这样做时，它还会用 <code>RightHandSide&lt;2&gt;</code> 替换 <code>RightHandSide&lt;dim&gt;</code> 的实例，并从类模板中实例化后一个类。</p>
+<p>事实上，编译器也会在 <code>main()</code> 中发现一个声明 <code>Step4&lt;3&gt;</code> 。这将导致它再次回到一般的 <code>Step4&lt;dim&gt;</code> 模板，替换所有出现的 <code>dim</code> ，这次是3，并第二次编译这个类。请注意， <code>Step4&lt;2&gt;</code> 和 <code>Step4&lt;3&gt;</code> 这两个实例是完全独立的类；它们唯一的共同特征是它们都是从同一个通用模板中实例化出来的，但它们不能相互转换，例如，不能共享任何代码（两个实例都是完全独立编译的）。</p>
 <p><a class="anchor" id="Step4Step4"></a> </p><h4>Step4::Step4</h4>
-<p>After this introduction, here is the constructor of the <code>Step4</code> class. It specifies the desired polynomial degree of the finite elements and associates the <a class="el" href="classDoFHandler.html">DoFHandler</a> to the triangulation just as in the previous example program, <a class="el" href="step_3.html">step-3</a>:</p>
+<p>在这个介绍之后，这里是 <code>Step4</code> 类的构造函数。它指定了所需的有限元素的多项式程度，并将DoFHandler与三角形关联起来，就像在前面的例子程序中一样， <a class="el" href="step_3.html">step-3</a> 。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">Step4&lt;dim&gt;::Step4()</div>
 <div class="line">  : fe(1)</div>
 <div class="line">  , dof_handler(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>)</div>
 <div class="line">{}</div>
 </div><!-- fragment --><p><a class="anchor" id="Step4make_grid"></a> </p><h4>Step4::make_grid</h4>
-<p>Grid creation is something inherently dimension dependent. However, as long as the domains are sufficiently similar in 2D or 3D, the library can abstract for you. In our case, we would like to again solve on the square \([-1,1]\times [-1,1]\) in 2D, or on the cube \([-1,1] \times [-1,1] \times [-1,1]\) in 3D; both can be termed <a class="el" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube()</a>, so we may use the same function in whatever dimension we are. Of course, the functions that create a hypercube in two and three dimensions are very much different, but that is something you need not care about. Let the library handle the difficult things.</p>
+<p>网格的创建在本质上是依赖于维度的东西。然而，只要领域在二维或三维中足够相似，库就可以为你抽象。在我们的例子中，我们想再次在二维的正方形 \([-1,1]\times [-1,1]\) 上求解，或者在三维的立方体 \([-1,1] \times [-1,1] \times [-1,1]\) 上求解；两者都可以被称为 <a class="el" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube()</a>, ，因此我们可以在任何维度上使用同一个函数。当然，在二维和三维中创建超立方体的函数有很大的不同，但这是你不需要关心的事情。让库来处理这些困难的事情。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> Step4&lt;dim&gt;::make_grid()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>, -1, 1);</div>
 <div class="line">  <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.refine_global(4);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;   Number of active cells: &quot;</span> &lt;&lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells()</div>
 <div class="line">            &lt;&lt; std::endl</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;   Total number of cells: &quot;</span> &lt;&lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_cells()</div>
 <div class="line">            &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="Step4setup_system"></a> </p><h4>Step4::setup_system</h4>
-<p>This function looks exactly like in the previous example, although it performs actions that in their details are quite different if <code>dim</code> happens to be 3. The only significant difference from a user's perspective is the number of cells resulting, which is much higher in three than in two space dimensions!</p>
+</div><!-- fragment --><p><a class="anchor" id="Step4setup_system"></a></p><h4>Step4::setup_system</h4>
+<p>这个函数看起来和前面的例子一模一样，尽管它执行的动作在细节上有很大不同，如果 <code>dim</code> 刚好是3的话。从用户的角度来看，唯一显著的区别是所产生的单元格数量，在三个空间维度中比在两个空间维度中要高得多!</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> Step4&lt;dim&gt;::setup_system()</div>
 <div class="line">{</div>
 <div class="line">  dof_handler.distribute_dofs(fe);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;   Number of degrees of freedom: &quot;</span> &lt;&lt; dof_handler.n_dofs()</div>
 <div class="line">            &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a> dsp(dof_handler.n_dofs());</div>
 <div class="line">  <a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler, dsp);</div>
 <div class="line">  sparsity_pattern.copy_from(dsp);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  system_matrix.reinit(sparsity_pattern);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  solution.reinit(dof_handler.n_dofs());</div>
 <div class="line">  system_rhs.reinit(dof_handler.n_dofs());</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassDynamicSparsityPattern_html"><div class="ttname"><a href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a></div><div class="ttdef"><b>Definition:</b> <a href="dynamic__sparsity__pattern_8h_source.html#l00318">dynamic_sparsity_pattern.h:319</a></div></div>
 <div class="ttc" id="agroup__constraints_html_gaf78e864edbfba7e0a7477457bfb96b26"><div class="ttname"><a href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a></div><div class="ttdeci">void make_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, SparsityPatternType &amp;sparsity_pattern, const AffineConstraints&lt; number &gt; &amp;constraints=AffineConstraints&lt; number &gt;(), const bool keep_constrained_dofs=true, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__sparsity_8cc_source.html#l00064">dof_tools_sparsity.cc:64</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="Step4assemble_system"></a> </p><h4>Step4::assemble_system</h4>
-<p>Unlike in the previous example, we would now like to use a non-constant right hand side function and non-zero boundary values. Both are tasks that are readily achieved with only a few new lines of code in the assemblage of the matrix and right hand side.</p>
-<p>More interesting, though, is the way we assemble matrix and right hand side vector dimension independently: there is simply no difference to the two-dimensional case. Since the important objects used in this function (quadrature formula, <a class="el" href="classFEValues.html">FEValues</a>) depend on the dimension by way of a template parameter as well, they can take care of setting up properly everything for the dimension for which this function is compiled. By declaring all classes which might depend on the dimension using a template parameter, the library can make nearly all work for you and you don't have to care about most things.</p>
+</div><!-- fragment --><p><a class="anchor" id="Step4assemble_system"></a></p><h4>Step4::assemble_system</h4>
+<p>与之前的例子不同，我们现在想使用非恒定的右手函数和非零边界值。这两个任务都很容易实现，只需在矩阵和右手边的组合中增加几行代码。</p>
+<p>不过，更有趣的是我们独立组装矩阵和右手边向量维度的方式：与二维的情况根本没有区别。由于这个函数中使用的重要对象（正交公式、FEValues）也通过模板参数的方式依赖于维度，它们可以为这个函数所编译的维度正确设置一切。通过使用模板参数声明所有可能依赖维度的类，库可以为你完成几乎所有的工作，你不必关心大多数事情。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> Step4&lt;dim&gt;::assemble_system()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a> quadrature_formula(fe.degree + 1);</div>
 <div class="ttc" id="aclassQGauss_html"><div class="ttname"><a href="classQGauss.html">QGauss</a></div><div class="ttdef"><b>Definition:</b> <a href="quadrature__lib_8h_source.html#l00038">quadrature_lib.h:39</a></div></div>
-</div><!-- fragment --><p>We wanted to have a non-constant right hand side, so we use an object of the class declared above to generate the necessary data. Since this right hand side object is only used locally in the present function, we declare it here as a local variable:</p>
+</div><!-- fragment --><p>我们希望有一个非恒定的右手边，所以我们使用上面声明的类的一个对象来生成必要的数据。由于这个右手对象只在本函数中局部使用，所以我们在此将其声明为局部变量。</p>
 <div class="fragment"><div class="line">RightHandSide&lt;dim&gt; right_hand_side;</div>
-</div><!-- fragment --><p>Compared to the previous example, in order to evaluate the non-constant right hand side function we now also need the quadrature points on the cell we are presently on (previously, we only required values and gradients of the shape function from the <a class="el" href="classFEValues.html">FEValues</a> object, as well as the quadrature weights, <a class="el" href="classFEValuesBase.html#abade89efb068b71b7ced7082012a2441">FEValues::JxW()</a> ). We can tell the <a class="el" href="classFEValues.html">FEValues</a> object to do for us by also giving it the <a class="el" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a" title="Transformed quadrature points.">update_quadrature_points</a> flag:</p>
+</div><!-- fragment --><p>与之前的例子相比，为了评估非恒定右侧函数，我们现在还需要目前所在单元上的正交点（之前，我们只需要FEValues对象中的形状函数的值和梯度，以及正交权重， <a class="el" href="classFEValuesBase.html#abade89efb068b71b7ced7082012a2441">FEValues::JxW()</a> ）。我们可以通过给FEValues对象添加::update_quadrature_points标志来告诉它为我们做什么。</p>
 <div class="fragment"><div class="line"><a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> fe_values(fe,</div>
 <div class="line">                        quadrature_formula,</div>
 <div class="line">                        <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a> |</div>
@@ -344,23 +362,26 @@ $(function() {
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a></div><div class="ttdeci">@ update_JxW_values</div><div class="ttdoc">Transformed quadrature weights.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00129">fe_update_flags.h:129</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a></div><div class="ttdeci">@ update_gradients</div><div class="ttdoc">Shape function gradients.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00084">fe_update_flags.h:84</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a></div><div class="ttdeci">@ update_quadrature_points</div><div class="ttdoc">Transformed quadrature points.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00122">fe_update_flags.h:122</a></div></div>
-</div><!-- fragment --><p>We then again define the same abbreviation as in the previous program. The value of this variable of course depends on the dimension which we are presently using, but the <a class="el" href="classFiniteElement.html">FiniteElement</a> class does all the necessary work for you and you don't have to care about the dimension dependent parts:</p>
+</div><!-- fragment --><p>然后我们再次定义与前面程序中相同的缩写。这个变量的值当然取决于我们现在使用的维度，但是FiniteElement类为你做了所有必要的工作，你不需要关心与维度有关的部分。</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = fe.n_dofs_per_cell();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>(dofs_per_cell, dofs_per_cell);</div>
 <div class="line"><a class="code" href="classVector.html">Vector&lt;double&gt;</a>     cell_rhs(dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">std::vector&lt;types::global_dof_index&gt; local_dof_indices(dofs_per_cell);</div>
 <div class="ttc" id="aclassFullMatrix_html"><div class="ttname"><a href="classFullMatrix.html">FullMatrix&lt; double &gt;</a></div></div>
 <div class="ttc" id="anamespaceLocalIntegrators_1_1Advection_html_a8bc7b8136646134f73a4193adefe15f8"><div class="ttname"><a href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">LocalIntegrators::Advection::cell_matrix</a></div><div class="ttdeci">void cell_matrix(FullMatrix&lt; double &gt; &amp;M, const FEValuesBase&lt; dim &gt; &amp;fe, const FEValuesBase&lt; dim &gt; &amp;fetest, const ArrayView&lt; const std::vector&lt; double &gt;&gt; &amp;velocity, const double factor=1.)</div><div class="ttdef"><b>Definition:</b> <a href="advection_8h_source.html#l00075">advection.h:75</a></div></div>
-</div><!-- fragment --><p>Next, we again have to loop over all cells and assemble local contributions. Note, that a cell is a quadrilateral in two space dimensions, but a hexahedron in 3D. In fact, the <code>active_cell_iterator</code> data type is something different, depending on the dimension we are in, but to the outside world they look alike and you will probably never see a difference. In any case, the real type is hidden by using <code>auto</code>:</p>
+</div><!-- fragment --><p>接下来，我们又要在所有的单元中进行循环，并将局部贡献集合起来。 注意，一个单元在两个空间维度上是一个四边形，但在三维上是一个六面体。事实上， <code>active_cell_iterator</code> 的数据类型是不同的，这取决于我们所处的维度，但对外界来说，它们看起来是一样的，你可能永远不会看到区别。在任何情况下，真正的类型是通过使用 "自动 "来隐藏的。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">  {</div>
 <div class="line">    fe_values.reinit(cell);</div>
 <div class="line">    <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a> = 0;</div>
 <div class="line">    cell_rhs    = 0;</div>
-</div><!-- fragment --><p>Now we have to assemble the local matrix and right hand side. This is done exactly like in the previous example, but now we revert the order of the loops (which we can safely do since they are independent of each other) and merge the loops for the local matrix and the local vector as far as possible to make things a bit faster.</p>
-<p>Assembling the right hand side presents the only significant difference to how we did things in <a class="el" href="step_3.html">step-3</a>: Instead of using a constant right hand side with value 1, we use the object representing the right hand side and evaluate it at the quadrature points:</p>
+</div><!-- fragment --><p>现在我们要组装本地矩阵和右手边。这个过程和前面的例子完全一样，但是现在我们改变了循环的顺序（我们可以安全地这样做，因为它们是相互独立的），并且尽可能地合并本地矩阵和本地向量的循环，使事情变得更快。 <br  />
+</p>
+<p>组装右手边与我们在 <a class="el" href="step_3.html">step-3</a> 中所做的事情有唯一显著的不同：我们没有使用值为1的常数右手边，而是使用代表右手边的对象并在正交点对其进行评估。</p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q_index : fe_values.quadrature_point_indices())</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i : fe_values.dof_indices())</div>
 <div class="line">    {</div>
@@ -370,13 +391,14 @@ $(function() {
 <div class="line">           fe_values.shape_grad(j, q_index) * <span class="comment">// grad phi_j(x_q)</span></div>
 <div class="line">           fe_values.JxW(q_index));           <span class="comment">// dx</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keyword">const</span> <span class="keyword">auto</span> x_q = fe_values.quadrature_point(q_index);</div>
 <div class="line">      cell_rhs(i) += (fe_values.shape_value(i, q_index) * <span class="comment">// phi_i(x_q)</span></div>
 <div class="line">                      right_hand_side.value(x_q) *        <span class="comment">// f(x_q)</span></div>
 <div class="line">                      fe_values.JxW(q_index));            <span class="comment">// dx</span></div>
 <div class="line">    }</div>
-</div><!-- fragment --><p>As a final remark to these loops: when we assemble the local contributions into <code>cell_matrix(i,j)</code>, we have to multiply the gradients of shape functions \(i\) and \(j\) at point number q_index and multiply it with the scalar weights JxW. This is what actually happens: <code>fe_values.shape_grad(i,q_index)</code> returns a <code>dim</code> dimensional vector, represented by a <code><a class="el" href="classTensor.html">Tensor</a>&lt;1,dim&gt;</code> object, and the operator* that multiplies it with the result of <code>fe_values.shape_grad(j,q_index)</code> makes sure that the <code>dim</code> components of the two vectors are properly contracted, and the result is a scalar floating point number that then is multiplied with the weights. Internally, this operator* makes sure that this happens correctly for all <code>dim</code> components of the vectors, whether <code>dim</code> be 2, 3, or any other space dimension; from a user's perspective, this is not something worth bothering with, however, making things a lot simpler if one wants to write code dimension independently.</p>
-<p>With the local systems assembled, the transfer into the global matrix and right hand side is done exactly as before, but here we have again merged some loops for efficiency:</p>
+</div><!-- fragment --><p>作为对这些循环的最后说明：当我们将局部贡献集合到 <code>cell_matrix(i,j)</code> 时，我们必须在点号q_index处将形状函数 \(i\) 和 \(j\) 的梯度相乘并与标量权重JxW相乘。这就是实际发生的情况。 <code>fe_values.shape_grad(i,q_index)</code> 返回一个 <code>dim</code> 维向量，由 <code><a class="el" href="classTensor.html">Tensor</a>&lt;1,dim&gt;</code> 对象表示，将其与 <code>fe_values.shape_grad(j,q_index)</code> 的结果相乘的运算器*确保两个向量的 <code>dim</code> 分量被适当收缩，其结果是一个标量浮点数，然后与权重相乘。在内部，这个运算符*确保对向量的所有 <code>dim</code> 分量都能正确发生，无论 <code>dim</code> 是2、3还是其他空间维度；从用户的角度来看，这并不值得费心，然而，如果想独立编写代码维度，事情就会变得简单很多。</p>
+<p>随着局部系统的组装，转移到全局矩阵和右手边的工作与之前完全一样，但在这里我们再次合并了一些循环以提高效率。</p>
 <div class="fragment"><div class="line">  cell-&gt;get_dof_indices(local_dof_indices);</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i : fe_values.dof_indices())</div>
 <div class="line">    {</div>
@@ -385,11 +407,13 @@ $(function() {
 <div class="line">                          local_dof_indices[j],</div>
 <div class="line">                          <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>(i, j));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      system_rhs(local_dof_indices[i]) += cell_rhs(i);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>As the final step in this function, we wanted to have non-homogeneous boundary values in this example, unlike the one before. This is a simple task, we only have to replace the <a class="el" href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction</a> used there by an object of the class which describes the boundary values we would like to use (i.e. the <code>BoundaryValues</code> class declared above):</p>
-<p>The function <a class="el" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values()</a> will only work on faces that have been marked with boundary indicator 0 (because that's what we say the function should work on with the second argument below). If there are faces with boundary id other than 0, then the function interpolate_boundary_values will do nothing on these faces. For the Laplace equation doing nothing is equivalent to assuming that on those parts of the boundary a zero Neumann boundary condition holds.</p>
+</div><!-- fragment --><p>作为这个函数的最后一步，我们希望在这个例子中拥有非均质的边界值，与之前的例子不同。这是一个简单的任务，我们只需要用一个描述我们想使用的边界值的类的对象（即上面声明的 <code>BoundaryValues</code> 类）来取代那里使用的 <a class="el" href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction</a> 。 <br  />
+</p>
+<p>函数 <a class="el" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values()</a> 只对标有边界指标0的面起作用（因为这就是我们在下面的第二个参数中所说的函数应该起作用）。如果有的面的边界指标不是0，那么函数interpolate_boundary_values将对这些面不起作用。对于拉普拉斯方程来说，什么都不做相当于假设在边界的这些部分，零诺伊曼边界条件成立。</p>
 <div class="fragment"><div class="line">  std::map&lt;types::global_dof_index, double&gt; boundary_values;</div>
 <div class="line">  <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(dof_handler,</div>
 <div class="line">                                           0,</div>
@@ -402,8 +426,8 @@ $(function() {
 <div class="line">}</div>
 <div class="ttc" id="anamespaceMatrixTools_html_a9ad0eb7a8662628534586716748d62fb"><div class="ttname"><a href="namespaceMatrixTools.html#a9ad0eb7a8662628534586716748d62fb">MatrixTools::apply_boundary_values</a></div><div class="ttdeci">void apply_boundary_values(const std::map&lt; types::global_dof_index, number &gt; &amp;boundary_values, SparseMatrix&lt; number &gt; &amp;matrix, Vector&lt; number &gt; &amp;solution, Vector&lt; number &gt; &amp;right_hand_side, const bool eliminate_columns=true)</div><div class="ttdef"><b>Definition:</b> <a href="matrix__tools_8cc_source.html#l00081">matrix_tools.cc:81</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_html_ab2562d41bb26f362043f9719a8cd9b87"><div class="ttname"><a href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a></div><div class="ttdeci">void interpolate_boundary_values(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const std::map&lt; types::boundary_id, const Function&lt; spacedim, number &gt; * &gt; &amp;function_map, std::map&lt; types::global_dof_index, number &gt; &amp;boundary_values, const ComponentMask &amp;component_mask=ComponentMask())</div></div>
-</div><!-- fragment --><p><a class="anchor" id="Step4solve"></a> </p><h4>Step4::solve</h4>
-<p>Solving the linear system of equations is something that looks almost identical in most programs. In particular, it is dimension independent, so this function is copied verbatim from the previous example.</p>
+</div><!-- fragment --><p><a class="anchor" id="Step4solve"></a></p><h4>Step4::solve</h4>
+<p>解决线性方程组是大多数程序中看起来几乎相同的事情。特别是，它与维度无关，所以这个函数是从前面的例子中逐字复制的。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> Step4&lt;dim&gt;::solve()</div>
 <div class="line">{</div>
@@ -414,22 +438,25 @@ $(function() {
 <div class="ttc" id="aclassSolverCG_html"><div class="ttname"><a href="classSolverCG.html">SolverCG</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__cg_8h_source.html#l00095">solver_cg.h:96</a></div></div>
 <div class="ttc" id="aclassSolverControl_html"><div class="ttname"><a href="classSolverControl.html">SolverControl</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__control_8h_source.html#l00065">solver_control.h:66</a></div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a9587d5229555daa5b1fa1ba2f8a40adb"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">Physics::Elasticity::Kinematics::e</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; e(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
-</div><!-- fragment --><p>We have made one addition, though: since we suppress output from the linear solvers, we have to print the number of iterations by hand.</p>
+</div><!-- fragment --><p>不过我们做了一个补充：由于我们抑制了线性求解器的输出，我们必须手工打印迭代次数。</p>
 <div class="fragment"><div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;   &quot;</span> &lt;&lt; solver_control.last_step()</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot; CG iterations needed to obtain convergence.&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="Step4output_results"></a> </p><h4>Step4::output_results</h4>
-<p>This function also does what the respective one did in <a class="el" href="step_3.html">step-3</a>. No changes here for dimension independence either.</p>
-<p>Since the program will run both 2d and 3d versions of the Laplace solver, we use the dimension in the filename to generate distinct filenames for each run (in a better program, one would check whether <code>dim</code> can have other values than 2 or 3, but we neglect this here for the sake of brevity).</p>
+</div><!-- fragment --><p><a class="anchor" id="Step4output_results"></a></p><h4>Step4::output_results</h4>
+<p>这个函数也做了在 <a class="el" href="step_3.html">step-3</a> 中各自做的事情。这里也没有改变尺寸的独立性。</p>
+<p>由于程序将同时运行2d和3d版本的拉普拉斯求解器，我们使用文件名中的维度为每次运行生成不同的文件名（在一个更好的程序中，可以检查 <code>dim</code> 是否可以有2或3以外的其他值，但为了简洁起见，我们在这里忽略了这一点）。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> Step4&lt;dim&gt;::output_results()<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <a class="code" href="classDataOut.html">DataOut&lt;dim&gt;</a> data_out;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ac1eb26168177faa30ffbcf9cbb9c3cd5">attach_dof_handler</a>(dof_handler);</div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(solution, <span class="stringliteral">&quot;solution&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  data_out.<a class="code" href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">build_patches</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::ofstream output(dim == 2 ? <span class="stringliteral">&quot;solution-2d.vtk&quot;</span> : <span class="stringliteral">&quot;solution-3d.vtk&quot;</span>);</div>
 <div class="line">  data_out.<a class="code" href="group__Exceptions.html#gacad99726038e4fca7f605fdffb3317e4">write_vtk</a>(output);</div>
@@ -440,12 +467,13 @@ $(function() {
 <div class="ttc" id="aclassDataOut_html_a5eb51872b8736849bb7e8d2007fae086"><div class="ttname"><a href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">DataOut::build_patches</a></div><div class="ttdeci">virtual void build_patches(const unsigned int n_subdivisions=0)</div><div class="ttdef"><b>Definition:</b> <a href="numerics_2data__out_8cc_source.html#l01085">data_out.cc:1085</a></div></div>
 <div class="ttc" id="agroup__Exceptions_html_gacad99726038e4fca7f605fdffb3317e4"><div class="ttname"><a href="group__Exceptions.html#gacad99726038e4fca7f605fdffb3317e4">DataOutInterface::write_vtk</a></div><div class="ttdeci">void write_vtk(std::ostream &amp;out) const</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l07177">data_out_base.cc:7177</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="Step4run"></a> </p><h4>Step4::run</h4>
-<p>This is the function which has the top-level control over everything. Apart from one line of additional output, it is the same as for the previous example.</p>
+<p>这是一个对一切都有顶层控制的函数。除了一行额外的输出外，它与前面的例子相同。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">Step4&lt;dim&gt;::run</a>()</div>
 <div class="line">{</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Solving problem in &quot;</span> &lt;&lt; dim &lt;&lt; <span class="stringliteral">&quot; space dimensions.&quot;</span></div>
 <div class="line">            &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  make_grid();</div>
 <div class="line">  setup_system();</div>
@@ -453,10 +481,10 @@ $(function() {
 <div class="line">  solve();</div>
 <div class="line">  output_results();</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="Thecodemaincodefunction"></a> </p><h3>The <code>main</code> function</h3>
-<p>And this is the main function. It also looks mostly like in <a class="el" href="step_3.html">step-3</a>, but if you look at the code below, note how we first create a variable of type <code>Step4&lt;2&gt;</code> (forcing the compiler to compile the class template with <code>dim</code> replaced by <code>2</code>) and run a 2d simulation, and then we do the whole thing over in 3d.</p>
-<p>In practice, this is probably not what you would do very frequently (you probably either want to solve a 2d problem, or one in 3d, but not both at the same time). However, it demonstrates the mechanism by which we can simply change which dimension we want in a single place, and thereby force the compiler to recompile the dimension independent class templates for the dimension we request. The emphasis here lies on the fact that we only need to change a single place. This makes it rather trivial to debug the program in 2d where computations are fast, and then switch a single place to a 3 to run the much more computing intensive program in 3d for &lsquo;real&rsquo; computations.</p>
-<p>Each of the two blocks is enclosed in braces to make sure that the <code>laplace_problem_2d</code> variable goes out of scope (and releases the memory it holds) before we move on to allocate memory for the 3d case. Without the additional braces, the <code>laplace_problem_2d</code> variable would only be destroyed at the end of the function, i.e. after running the 3d problem, and would needlessly hog memory while the 3d run could actually use it.</p>
+</div><!-- fragment --><p><a class="anchor" id="Thecodemaincodefunction"></a></p><h3>The <code>main</code> function</h3>
+<p>这就是主函数。它看起来也大多像在 <a class="el" href="step_3.html">step-3</a> ，但如果你看下面的代码，注意我们如何首先创建一个 <code>Step4&lt;2&gt;</code> 类型的变量（迫使编译器用 <code>dim</code> replaced by <code>2</code> 编译类模板）并运行一个2d模拟，然后我们用3d做整个事情。</p>
+<p>在实践中，这可能不是你经常做的事情（你可能要么想解决一个2D问题，要么想解决一个3D问题，但不会同时解决这两个问题）。然而，它展示了一种机制，我们可以在一个地方简单地改变我们想要的维度，从而迫使编译器为我们要求的维度重新编译独立的类模板。这里的重点在于，我们只需要改变一个地方。这使得在计算速度较快的2D中调试程序变得非常简单，然后将一个地方切换到3，在3D中运行计算量更大的程序，进行 "真实 "计算。</p>
+<p>这两个区块中的每一个都用大括号括起来，以确保 <code>laplace_problem_2d</code> 这个变量在我们继续为3D情况分配内存之前就已经超出了范围（并释放了它所持有的内存）。如果没有额外的大括号， <code>laplace_problem_2d</code> 变量只会在函数结束时被销毁，也就是在运行3d问题之后，并且会在3d运行时不必要地占用内存。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  {</div>
@@ -464,15 +492,18 @@ $(function() {
 <div class="line">    laplace_problem_2d.run();</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  {</div>
 <div class="line">    Step4&lt;3&gt; laplace_problem_3d;</div>
 <div class="line">    laplace_problem_3d.run();</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
-<p>The output of the program looks as follows (the number of iterations may vary by one or two, depending on your computer, since this is often dependent on the round-off accuracy of floating point operations, which differs between processors): </p><div class="fragment"><div class="line">Solving problem in 2 space dimensions.</div>
+</div><!-- fragment --><p><a class="anchor" id="Results"></a></p><h1>Results</h1>
+<p>程序的输出看起来如下（迭代次数可能会有一到两次的变化，这取决于你的电脑，因为这通常取决于浮点运算的舍入精度，这在不同的处理器中是不同的）。</p>
+<div class="fragment"><div class="line">Solving problem in 2 space dimensions.</div>
 <div class="line">   Number of active cells: 256</div>
 <div class="line">   Total number of cells: 341</div>
 <div class="line">   Number of degrees of freedom: 289</div>
@@ -482,21 +513,24 @@ $(function() {
 <div class="line">   Total number of cells: 4681</div>
 <div class="line">   Number of degrees of freedom: 4913</div>
 <div class="line">   30 CG iterations needed to obtain convergence.</div>
-</div><!-- fragment --><p> It is obvious that in three spatial dimensions the number of cells and therefore also the number of degrees of freedom is much higher. What cannot be seen here, is that besides this higher number of rows and columns in the matrix, there are also significantly more entries per row of the matrix in three space dimensions. Together, this leads to a much higher numerical effort for solving the system of equation, which you can feel in the run time of the two solution steps when you actually run the program.</p>
-<p>The program produces two files: <code>solution-2d.vtk</code> and <code>solution-3d.vtk</code>, which can be viewed using the programs VisIt or Paraview (in case you do not have these programs, you can easily change the output format in the program to something which you can view more easily). Visualizing solutions is a bit of an art, but it can also be fun, so you should play around with your favorite visualization tool to get familiar with its functionality. Here's what I have come up with for the 2d solution:</p>
+</div><!-- fragment --><p>很明显，在三个空间维度中，单元格的数量以及自由度的数量要高得多。这里看不到的是，除了矩阵中更多的行和列之外，在三个空间维度中，矩阵的每一行也有明显更多的条目。这就导致了解方程组的数值工作量大大增加，当你实际运行程序时，你可以从两个求解步骤的运行时间中感受到这一点。</p>
+<p>该程序产生两个文件。 <code>solution-2d.vtk</code> 和 <code>solution-3d.vtk</code> ，可以用VisIt或Paraview程序查看（如果你没有这些程序，你可以很容易地改变程序的输出格式，使你更容易查看）。解决方案的可视化是一门艺术，但它也可以很有趣，所以你应该玩一玩你最喜欢的可视化工具，熟悉它的功能。下面是我想出的2d解决方案的内容。</p>
 <p align="center"></p>
 <p><img src="https://www.dealii.org/images/steps/developer/step-4.solution-2d.png" alt="" class="inline"/> </p>
-<p>(See also <a href="http://www.math.colostate.edu/~bangerth/videos.676.11.html">video lecture 11</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.32.html">video lecture 32</a>.) The picture shows the solution of the problem under consideration as a 3D plot. As can be seen, the solution is almost flat in the interior of the domain and has a higher curvature near the boundary. This, of course, is due to the fact that for Laplace's equation the curvature of the solution is equal to the right hand side and that was chosen as a quartic polynomial which is nearly zero in the interior and is only rising sharply when approaching the boundaries of the domain; the maximal values of the right hand side function are at the corners of the domain, where also the solution is moving most rapidly. It is also nice to see that the solution follows the desired quadratic boundary values along the boundaries of the domain. It can also be useful to verify a computed solution against an analytical solution. For an explanation of this technique, see <a class="el" href="step_7.html">step-7</a>.</p>
-<p>On the other hand, even though the picture does not show the mesh lines explicitly, you can see them as little kinks in the solution. This clearly indicates that the solution hasn't been computed to very high accuracy and that to get a better solution, we may have to compute on a finer mesh.</p>
-<p>In three spatial dimensions, visualization is a bit more difficult. The left picture shows the solution and the mesh it was computed on on the surface of the domain. This is nice, but it has the drawback that it completely hides what is happening on the inside. The picture on the right is an attempt at visualizing the interior as well, by showing surfaces where the solution has constant values (as indicated by the legend at the top left). Isosurface pictures look best if one makes the individual surfaces slightly transparent so that it is possible to see through them and see what's behind.</p>
+<p><br  />
+</p>
+<p>( See also <a href="http://www.math.colostate.edu/~bangerth/videos.676.11.html">video lecture 11</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.32.html">video lecture 32</a>.) 图中显示了正在考虑的问题的解决方案，是一个三维图。可以看出，该解在域的内部几乎是平的，在边界附近有较高的曲率。当然，这是因为对于拉普拉斯方程来说，解的曲率等于右手边，而右手边被选为四次多项式，在内部几乎为零，只有在接近域的边界时才急剧上升；右手边函数的最大值在域的角落，在那里解的移动也最迅速。很高兴看到解沿着域的边界遵循理想的二次边界值。将计算出的解与分析出的解进行验证也是很有用的。关于这一技术的解释，见 <a class="el" href="step_7.html">step-7</a> 。</p>
+<p>另一方面，尽管图片中没有明确显示网格线，但你可以看到它们在解中的小结点。这清楚地表明，解没有被计算到非常高的精度，为了得到更好的解，我们可能要在更细的网格上进行计算。</p>
+<p>在三个空间维度上，可视化就比较困难了。左图显示了解决方案和它在域的表面上计算的网格。这很好，但它的缺点是完全掩盖了内部的情况。右图是通过显示解的恒定值的表面（如左上角的图例所示），试图将内部的情况也可视化。如果我们把各个表面弄得稍微透明一些，这样就有可能透过它们看到后面的东西，那么等值面图片看起来就最好了。</p>
 <table width="60%" align="center">
 <tr>
 <td align="center"><img src="https://www.dealii.org/images/steps/developer/step-4.solution-3d.png" alt="" class="inline"/>  </td><td align="center"><img src="https://www.dealii.org/images/steps/developer/step-4.contours-3d.png" alt="" class="inline"/>   </td></tr>
 </table>
-<dl class="section note"><dt>Note</dt><dd>A final remark on visualization: the idea of visualization is to give insight, which is not the same as displaying information. In particular, it is easy to overload a picture with information, but while it shows more information it makes it also more difficult to glean insight. As an example, the program I used to generate these pictures, VisIt, by default puts tick marks on every axis, puts a big fat label "X Axis" on the \(x\) axis and similar for the other axes, shows the file name from which the data was taken in the top left and the name of the user doing so and the time and date on the bottom right. None of this is important here: the axes are equally easy to make out because the tripod at the bottom left is still visible, and we know from the program that the domain is \([-1,1]^3\), so there is no need for tick marks. As a consequence, I have switched off all the extraneous stuff in the picture: the art of visualization is to reduce the picture to those parts that are important to see what one wants to see, but no more.</dd></dl>
+<p><br  />
+</p>
+<dl class="section note"><dt>Note</dt><dd>关于可视化的最后一句话：可视化的想法是提供洞察力，这与显示信息不同。特别是，在一张图片上很容易显示过多的信息，但在显示更多的信息的同时，也使人们更难收集到洞察力。举个例子，我用来生成这些图片的程序，VisIt，默认情况下在每个轴上都有刻度线，在 \(x\) 轴上贴上一个大胖标签 "X轴"，其他轴也是如此，在左上方显示提取数据的文件名，在右下方显示用户的名字以及时间和日期。这些在这里都不重要：轴同样容易辨认，因为左下方的三脚架仍然可见，而且我们从程序中知道域是 \([-1,1]^3\) ，所以不需要刻度线。因此，我关掉了图片中所有不相干的东西：可视化的艺术在于把图片缩减到那些对看到自己想看的东西很重要的部分，而不是更多。</dd></dl>
 <p><a class="anchor" id="extensions"></a> <a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions</h3>
-<p>Essentially the possibilities for playing around with the program are the same as for the previous one, except that they will now also apply to the 3d case. For inspiration read up on <a href="step_3.html#extensions" target="body">possible extensions in the documentation of step 3</a>.</p>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+<p>从本质上讲，使用该程序的可能性与前一个程序相同，只是它们现在也适用于3D情况。为了获得灵感，请阅读<a href="step_3.html#extensions" target="body">possible extensions in the documentation of step 3</a>。<a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 1999 - 2020 by the deal.II authors</span></div>
@@ -780,7 +814,8 @@ $(function() {
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespaceinternal_html_aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804"><div class="ttname"><a href="namespaceinternal.html#aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804">internal::EvaluatorQuantity::value</a></div><div class="ttdeci">@ value</div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> 。 </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

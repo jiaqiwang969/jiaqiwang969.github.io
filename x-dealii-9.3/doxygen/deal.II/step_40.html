@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-40 tutorial program</title>
+<title>The deal.II Library: The step-40 tutorial program 。</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,78 +86,85 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-40 tutorial program </div>  </div>
+<div class="title">The step-40 tutorial program 。 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_6.html">step-6</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_6.html">step-6</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Thetestcase">The testcase</a>
+        <li><a href="#Thetestcase">The testcase</a><a href="#Thetestcase">The testcase</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#ThecodeLaplaceProblemcodeclasstemplate">The <code>LaplaceProblem</code> class template</a>
-        <li><a href="#ThecodeLaplaceProblemcodeclassimplementation">The <code>LaplaceProblem</code> class implementation</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#ThecodeLaplaceProblemcodeclasstemplate">The <code>LaplaceProblem</code> class template</a><a href="#ThecodeLaplaceProblemcodeclasstemplate">The <code>LaplaceProblem</code> class template</a>
+        <li><a href="#ThecodeLaplaceProblemcodeclassimplementation">The <code>LaplaceProblem</code> class implementation</a><a href="#ThecodeLaplaceProblemcodeclassimplementation">The <code>LaplaceProblem</code> class implementation</a>
       <ul>
-        <li><a href="#Constructor">Constructor</a>
-        <li><a href="#LaplaceProblemsetup_system">LaplaceProblem::setup_system</a>
-        <li><a href="#LaplaceProblemassemble_system">LaplaceProblem::assemble_system</a>
-        <li><a href="#LaplaceProblemsolve">LaplaceProblem::solve</a>
-        <li><a href="#LaplaceProblemrefine_grid">LaplaceProblem::refine_grid</a>
-        <li><a href="#LaplaceProblemoutput_results">LaplaceProblem::output_results</a>
-        <li><a href="#LaplaceProblemrun">LaplaceProblem::run</a>
-        <li><a href="#main">main()</a>
+        <li><a href="#Constructor">Constructor</a><a href="#Constructor">Constructor</a>
+        <li><a href="#LaplaceProblemsetup_system">LaplaceProblem::setup_system</a><a href="#LaplaceProblemsetup_system">LaplaceProblem::setup_system</a>
+        <li><a href="#LaplaceProblemassemble_system">LaplaceProblem::assemble_system</a><a href="#LaplaceProblemassemble_system">LaplaceProblem::assemble_system</a>
+        <li><a href="#LaplaceProblemsolve">LaplaceProblem::solve</a><a href="#LaplaceProblemsolve">LaplaceProblem::solve</a>
+        <li><a href="#LaplaceProblemrefine_grid">LaplaceProblem::refine_grid</a><a href="#LaplaceProblemrefine_grid">LaplaceProblem::refine_grid</a>
+        <li><a href="#LaplaceProblemoutput_results">LaplaceProblem::output_results</a><a href="#LaplaceProblemoutput_results">LaplaceProblem::output_results</a>
+        <li><a href="#LaplaceProblemrun">LaplaceProblem::run</a><a href="#LaplaceProblemrun">LaplaceProblem::run</a>
+        <li><a href="#main">main()</a><a href="#main">main()</a>
       </ul>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
+</p>
+<p><br  />
  <br  />
 </p>
 <p><em>This program was contributed by Timo Heister, Martin Kronbichler and Wolfgang Bangerth. <br  />
  This material is based upon work partly supported by the National Science Foundation under Award No. EAR-0426271 and The California Institute of Technology. Any opinions, findings, and conclusions or recommendations expressed in this publication are those of the author and do not necessarily reflect the views of the National Science Foundation or of The California Institute of Technology. </em></p>
-<dl class="section note"><dt>Note</dt><dd>As a prerequisite of this program, you need to have both PETSc and the p4est library installed. The installation of deal.II together with these two additional libraries is described in the <a href="../../readme.html" target="body">README</a> file. Note also that to work properly, this program needs access to the Hypre preconditioner package implementing algebraic multigrid; it can be installed as part of PETSc but has to be explicitly enabled during PETSc configuration; see the page linked to from the installation instructions for PETSc.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>作为这个程序的先决条件，你需要同时安装PETSc和p4est库。在<a href="../../readme.html" target="body">README</a>文件中描述了deal.II和这两个附加库的安装情况。还需要注意的是，为了正常工作，该程序需要访问实现代数多网格的Hypre预处理程序包；它可以作为PETSc的一部分安装，但必须在配置PETSc时明确启用；参见PETSc的安装说明中链接的页面。</dd></dl>
 <p><a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
-<dl class="section note"><dt>Note</dt><dd>The material presented here is also discussed in <a href="http://www.math.colostate.edu/~bangerth/videos.676.41.5.html">video lecture 41.5</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.41.75.html">video lecture 41.75</a>. (All video lectures are also available <a href="http://www.math.colostate.edu/~bangerth/videos.html">here</a>.)</dd></dl>
-<p>Given today's computers, most finite element computations can be done on a single machine. The majority of previous tutorial programs therefore shows only this, possibly splitting up work among a number of processors that, however, can all access the same, shared memory space. That said, there are problems that are simply too big for a single machine and in that case the problem has to be split up in a suitable way among multiple machines each of which contributes its part to the whole. A simple way to do that was shown in <a class="el" href="step_17.html">step-17</a> and <a class="el" href="step_18.html">step-18</a>, where we show how a program can use <a href="http://www.mpi-forum.org/" target="_top">MPI</a> to parallelize assembling the linear system, storing it, solving it, and computing error estimators. All of these operations scale relatively trivially (for a definition of what it means for an operation to "scale", see <a class="el" href="DEALGlossary.html#GlossParallelScaling">this glossary entry</a>), but there was one significant drawback: for this to be moderately simple to implement, each MPI processor had to keep its own copy of the entire <a class="el" href="classTriangulation.html">Triangulation</a> and <a class="el" href="classDoFHandler.html">DoFHandler</a> objects. Consequently, while we can suspect (with good reasons) that the operations listed above can scale to thousands of computers and problem sizes of billions of cells and billions of degrees of freedom, building the one big mesh for the entire problem these thousands of computers are solving on every last processor is clearly not going to scale: it is going to take forever, and maybe more importantly no single machine will have enough memory to store a mesh that has a billion cells (at least not at the time of writing this). In reality, programs like <a class="el" href="step_17.html">step-17</a> and <a class="el" href="step_18.html">step-18</a> can therefore not be run on more than maybe 100 or 200 processors and even there storing the <a class="el" href="classTriangulation.html">Triangulation</a> and <a class="el" href="classDoFHandler.html">DoFHandler</a> objects consumes the vast majority of memory on each machine.</p>
-<p>Consequently, we need to approach the problem differently: to scale to very large problems each processor can only store its own little piece of the <a class="el" href="classTriangulation.html">Triangulation</a> and <a class="el" href="classDoFHandler.html">DoFHandler</a> objects. deal.II implements such a scheme in the <a class="el" href="namespaceparallel_1_1distributed.html">parallel::distributed</a> namespace and the classes therein. It builds on an external library, <a href="http://www.p4est.org/">p4est</a> (a play on the expression <em>parallel forest</em> that describes the parallel storage of a hierarchically constructed mesh as a forest of quad- or oct-trees). You need to <a href="../../external-libs/p4est.html">install and configure p4est</a> but apart from that all of its workings are hidden under the surface of deal.II.</p>
-<p>In essence, what the <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a> class and code inside the <a class="el" href="classDoFHandler.html">DoFHandler</a> class do is to split the global mesh so that every processor only stores a small bit it "owns" along with one layer of "ghost" cells that surround the ones it owns. What happens in the rest of the domain on which we want to solve the partial differential equation is unknown to each processor and can only be inferred through communication with other machines if such information is needed. This implies that we also have to think about problems in a different way than we did in, for example, <a class="el" href="step_17.html">step-17</a> and <a class="el" href="step_18.html">step-18</a>: no processor can have the entire solution vector for postprocessing, for example, and every part of a program has to be parallelized because no processor has all the information necessary for sequential operations.</p>
-<p>A general overview of how this parallelization happens is described in the <a class="el" href="group__distributed.html">Parallel computing with multiple processors using distributed memory</a> documentation module. You should read it for a top-level overview before reading through the source code of this program. A concise discussion of many terms we will use in the program is also provided in the <a class="el" href="DEALGlossary.html#distributed_paper">Distributed Computing paper</a>. It is probably worthwhile reading it for background information on how things work internally in this program.</p>
+<dl class="section note"><dt>Note</dt><dd>The material presented here is also discussed in <a href="http://www.math.colostate.edu/~bangerth/videos.676.41.5.html">video lecture 41.5</a>, <a href="http://www.math.colostate.edu/~bangerth/videos.676.41.75.html">video lecture 41.75</a>. (All video lectures are also available <a href="http://www.math.colostate.edu/~bangerth/videos.html">here</a>.) <br  />
+</dd></dl>
+<p>鉴于今天的计算机，大多数有限元计算可以在一台机器上完成。因此，以前的大多数教程程序只显示了这一点，可能是在一些处理器之间分工合作，但这些处理器都可以访问相同的、共享的内存空间。也就是说，有些问题对于单台机器来说实在是太大了，在这种情况下，必须以适当的方式将问题分割给多台机器，每台机器都为整体贡献自己的一部分。一个简单的方法是在 <a class="el" href="step_17.html">step-17</a> 和 <a class="el" href="step_18.html">step-18</a> 中展示的，在那里我们展示了一个程序如何使用<a href="http://www.mpi-forum.org/" target="_top">MPI</a>来并行组装线性系统，存储它，解决它，并计算误差估计。所有这些操作的规模都相对微不足道（关于操作 "规模 "的定义，见 <a class="el" href="DEALGlossary.html#GlossParallelScaling">本词汇表条目</a>），但有一个明显的缺点：为了适度简化实现，每个MPI处理器都必须保留自己的整个Triangulation和DoFHandler对象的副本。因此，虽然我们可以怀疑（有充分的理由）上面列出的操作可以扩展到数千台计算机和数十亿个单元和数十亿个自由度的问题规模，但在每一个处理器上为这数千台计算机所解决的整个问题建立一个大的网格显然是无法扩展的：这将会花费很长时间，也许更重要的是没有一台机器会有足够的内存来存储一个有十亿个单元的网格（至少在写这篇文章时不会）。在现实中，像 <a class="el" href="step_17.html">step-17</a> 和 <a class="el" href="step_18.html">step-18</a> 这样的程序不能在超过100或200个处理器上运行，即使在那里，存储三角形和DoFHandler对象也会消耗每台机器上的绝大部分内存。</p>
+<p>因此，我们需要以不同的方式来解决这个问题：为了扩展到非常大的问题，每个处理器只能存储它自己的一小部分Triangulation和DoFHandler对象。deal.II在 <a class="el" href="namespaceparallel_1_1distributed.html">parallel::distributed</a> 命名空间和其中的类中实现了这样一个方案。它建立在一个外部库上，<a href="http://www.p4est.org/">p4est</a>（对表达式<em>parallel forest</em>的发挥，描述了将分层构造的网格平行存储为四叉树或八叉树的森林）。你需要<a href="../../external-libs/p4est.html">install and configure p4est</a>，除此之外，它的所有工作原理都隐藏在deal.II的表面之下。</p>
+<p>本质上， <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a> 类和DoFHandler类中的代码所做的是分割全局网格，使每个处理器只存储它 "拥有 "的一小部分，以及围绕它拥有的那些单元的一层 "幽灵 "单元。在我们想要解决偏微分方程的领域的其余部分发生了什么，对每个处理器来说都是未知的，如果需要这些信息，只能通过与其他机器的交流来推断。这意味着我们还必须以一种与我们在例如 <a class="el" href="step_17.html">step-17</a> 和 <a class="el" href="step_18.html">step-18</a> 中不同的方式来思考问题：例如，没有一个处理器可以拥有用于后处理的整个解向量，而且程序的每一部分都必须被并行化，因为没有一个处理器拥有顺序操作所需的全部信息。</p>
+<p><a class="el" href="group__distributed.html">Parallel computing with multiple processors using distributed memory</a> 文件模块中描述了这种并行化如何发生的一般概况。在阅读本程序的源代码之前，你应该先阅读它以获得一个顶层的概述。在 <a class="el" href="DEALGlossary.html#distributed_paper">distributed_paper</a> 的 "分布式计算论文 "中也对我们在程序中使用的许多术语进行了简要的讨论。也许值得一读，以了解本程序内部如何工作的背景信息。</p>
 <p><a class="anchor" id="Thetestcase"></a></p><h3>The testcase</h3>
-<p>This program essentially re-solves what we already do in <a class="el" href="step_6.html">step-6</a>, i.e. it solves the Laplace equation </p><p class="formulaDsp">
+<p>这个程序基本上重新解决了我们在 <a class="el" href="step_6.html">step-6</a> 中已经做过的事情，即它解决了拉普拉斯方程。</p>
+<p class="formulaDsp">
 \begin{align*} -\Delta u &amp;= f \qquad &amp;&amp;\text{in}\ \Omega=[0,1]^2, \\ u &amp;= 0 \qquad &amp;&amp;\text{on}\ \partial\Omega. \end{align*}
 </p>
-<p> The difference of course is now that we want to do so on a mesh that may have a billion cells, with a billion or so degrees of freedom. There is no doubt that doing so is completely silly for such a simple problem, but the point of a tutorial program is, after all, not to do something useful but to show how useful programs can be implemented using deal.II. Be that as it may, to make things at least a tiny bit interesting, we choose the right hand side as a discontinuous function, </p><p class="formulaDsp">
+<p>当然，不同的是，我们现在要在一个可能有十亿个单元、十亿个左右自由度的网格上这样做。毫无疑问，对于这样一个简单的问题，这样做是完全愚蠢的，但毕竟一个教程程序的重点不是做一些有用的东西，而是展示如何用deal.II实现有用的程序。尽管如此，为了使事情至少有一点意思，我们选择右手边是一个不连续的函数。</p>
+<p class="formulaDsp">
 \begin{align*} f(x,y) = \left\{ \begin{array}{ll} 1 &amp; \text{if}\ y &gt; \frac 12 + \frac 14 \sin(4\pi x), \\ -1 &amp; \text{otherwise}, \end{array} \right. \end{align*}
 </p>
-<p> so that the solution has a singularity along the sinusoidal line snaking its way through the domain. As a consequence, mesh refinement will be concentrated along this line. You can see this in the mesh picture shown below in the results section.</p>
-<p>Rather than continuing here and giving a long introduction, let us go straight to the program code. If you have read through <a class="el" href="step_6.html">step-6</a> and the <a class="el" href="group__distributed.html">Parallel computing with multiple processors using distributed memory</a> documentation module, most of things that are going to happen should be familiar to you already. In fact, comparing the two programs you will notice that the additional effort necessary to make things work in parallel is almost insignificant: the two programs have about the same number of lines of code (though <a class="el" href="step_6.html">step-6</a> spends more space on dealing with coefficients and output). In either case, the comments below will only be on the things that set <a class="el" href="step_40.html">step-40</a> apart from <a class="el" href="step_6.html">step-6</a> and that aren't already covered in the <a class="el" href="group__distributed.html">Parallel computing with multiple processors using distributed memory</a> documentation module.</p>
-<dl class="section note"><dt>Note</dt><dd>This program will be able to compute on as many processors as you want to throw at it, and for as large a problem as you have the memory and patience to solve. However, there <em>is</em> a limit: the number of unknowns can not exceed the largest number that can be stored with an object of type <a class="el" href="namespacetypes.html#a3543786f7dc7c57385fc923a6afd5917">types::global_dof_index</a>. By default, this is an alias for <code>unsigned int</code>, which on most machines today is a 32-bit integer, limiting you to some 4 billion (in reality, since this program uses PETSc, you will be limited to half that as PETSc uses signed integers). However, this can be changed during configuration to use 64-bit integers, see the ReadMe file. This will give problem sizes you are unlikely to exceed anytime soon.</dd></dl>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+<p>这样，解决方案就会沿着蜿蜒穿过领域的正弦线出现奇点。因此，网格细化将集中在这条线上。你可以在下面的结果部分的网格图中看到这一点。</p>
+<p>与其在这里继续做冗长的介绍，不如直接进入程序代码。如果你已经通读了 <a class="el" href="step_6.html">step-6</a> 和 <a class="el" href="group__distributed.html">Parallel computing with multiple processors using distributed memory</a> 的文档模块，大部分将要发生的事情你应该已经熟悉了。事实上，比较这两个程序，你会发现在parallel中工作所需的额外努力几乎是微不足道的：这两个程序的代码行数差不多（尽管 <a class="el" href="step_6.html">step-6</a> 在处理系数和输出方面花费了更多的空间）。无论哪种情况，下面的评论将只针对 <a class="el" href="step_40.html">step-40</a> 与 <a class="el" href="step_6.html">step-6</a> 不同的地方，以及 <a class="el" href="group__distributed.html">Parallel computing with multiple processors using distributed memory</a> 文档模块中还没有涉及的内容。</p>
+<dl class="section note"><dt>Note</dt><dd>这个程序将能够在你想扔给它的多少个处理器上进行计算，以及你有多少内存和耐心来解决多大的问题。然而，<em>is</em>有一个限制：未知数的数量不能超过可以用类型 <a class="el" href="namespacetypes.html#a3543786f7dc7c57385fc923a6afd5917">types::global_dof_index</a>. 的对象存储的最大数量。默认情况下，这是<code>unsigned int</code>的别名，在目前大多数机器上是一个32位的整数，限制了你大约40亿（实际上，由于这个程序使用PETSc，你将被限制在一半，因为PETSc使用有符号整数）。然而，这可以在配置过程中改变为使用64位整数，见ReadMe文件。这将使问题的大小在短期内不太可能超过。<a class="anchor" id="CommProg"></a> <h1>The commented program</h1>
+</dd></dl>
 <p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
-<p>Most of the include files we need for this program have already been discussed in previous programs. In particular, all of the following should already be familiar friends:</p>
+<p>我们在这个程序中需要的大多数包含文件已经在以前的程序中讨论过了。特别是，以下所有的文件应该已经是熟悉的朋友了。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="quadrature__lib_8h.html">deal.II/base/quadrature_lib.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="function_8h.html">deal.II/base/function.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="timer_8h.html">deal.II/base/timer.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="generic__linear__algebra_8h.html">deal.II/lac/generic_linear_algebra.h</a>&gt;</span></div>
 <div class="ttc" id="afunction_8h_html"><div class="ttname"><a href="function_8h.html">function.h</a></div></div>
 <div class="ttc" id="ageneric__linear__algebra_8h_html"><div class="ttname"><a href="generic__linear__algebra_8h.html">generic_linear_algebra.h</a></div></div>
 <div class="ttc" id="aquadrature__lib_8h_html"><div class="ttname"><a href="quadrature__lib_8h.html">quadrature_lib.h</a></div></div>
 <div class="ttc" id="atimer_8h_html"><div class="ttname"><a href="timer_8h.html">timer.h</a></div></div>
-</div><!-- fragment --><p>This program can use either PETSc or Trilinos for its parallel algebra needs. By default, if deal.II has been configured with PETSc, it will use PETSc. Otherwise, the following few lines will check that deal.II has been configured with Trilinos and take that.</p>
-<p>But there may be cases where you want to use Trilinos, even though deal.II has <em>also</em> been configured with PETSc, for example to compare the performance of these two libraries. To do this, add the following #define to the source code: </p><div class="CodeFragmentInTutorialComment"> <div class="fragment"><div class="line"><span class="preprocessor">#define FORCE_USE_OF_TRILINOS</span></div>
-</div><!-- fragment --> </div><p>Using this logic, the following lines will then import either the PETSc or Trilinos wrappers into the namespace <code>LA</code> (for "linear algebra). In the former case, we are also defining the macro <code>USE_PETSC_LA</code> so that we can detect if we are using PETSc (see solve() for an example where this is necessary).</p>
+</div><!-- fragment --><p>本程序可以使用PETSc或Trilinos来满足其并行代数的需要。默认情况下，如果deal.II已被配置为PETSc，它将使用PETSc。否则，下面几行将检查deal.II是否已经配置了Trilinos，并采用它。</p>
+<p>但是在某些情况下，你可能想使用Trilinos，即使deal.II也已经**了PETSc的配置，例如，比较这两个库的性能。要做到这一点，请在源代码中添加以下的#define。 </p><div class="CodeFragmentInTutorialComment"></div><div class="CodeFragmentInTutorialComment">[1.x.38]</div><div class="CodeFragmentInTutorialComment"></div><p> <br  />
+</p>
+<p>利用这一逻辑，下面几行将把PETSc或Trilinos包装器导入命名空间<code>LA</code>（代表 "线性代数"）。在前一种情况下，我们还定义了宏<code>USE_PETSC_LA</code>，这样我们就可以检测到我们是否在使用PETSc（见solve()中的一个例子，这是有必要的）。</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>LA</div>
 <div class="line">{</div>
 <div class="line"><span class="preprocessor">#if defined(DEAL_II_WITH_PETSC) &amp;&amp; !defined(DEAL_II_PETSC_WITH_COMPLEX) &amp;&amp; \</span></div>
@@ -172,11 +179,13 @@ $(function() {
 <div class="line">} <span class="comment">// namespace LA</span></div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector_8h.html">deal.II/lac/vector.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="full__matrix_8h.html">deal.II/lac/full_matrix.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="solver__cg_8h.html">deal.II/lac/solver_cg.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="affine__constraints_8h.html">deal.II/lac/affine_constraints.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dynamic__sparsity__pattern_8h.html">deal.II/lac/dynamic_sparsity_pattern.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__generator_8h.html">deal.II/grid/grid_generator.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dofs_2dof__handler_8h.html">deal.II/dofs/dof_handler.h</a>&gt;</span></div>
@@ -199,24 +208,26 @@ $(function() {
 <div class="ttc" id="asolver__cg_8h_html"><div class="ttname"><a href="solver__cg_8h.html">solver_cg.h</a></div></div>
 <div class="ttc" id="avector_8h_html"><div class="ttname"><a href="vector_8h.html">vector.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p>The following, however, will be new or be used in new roles. Let's walk through them. The first of these will provide the tools of the <a class="el" href="namespaceUtilities_1_1System.html">Utilities::System</a> namespace that we will use to query things like the number of processors associated with the current MPI universe, or the number within this universe the processor this job runs on is:</p>
+</div><!-- fragment --><p>然而，以下这些将是新的或在新角色中使用的。让我们来看看它们。其中第一个将提供 <a class="el" href="namespaceUtilities_1_1System.html">Utilities::System</a> 命名空间的工具，我们将用它来查询诸如与当前MPI宇宙相关的处理器数量，或者这个作业运行的处理器在这个宇宙中的数量。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="include_2deal_8II_2base_2utilities_8h.html">deal.II/base/utilities.h</a>&gt;</span></div>
 <div class="ttc" id="ainclude_2deal_8II_2base_2utilities_8h_html"><div class="ttname"><a href="include_2deal_8II_2base_2utilities_8h.html">utilities.h</a></div></div>
-</div><!-- fragment --><p>The next one provides a class, ConditionOStream that allows us to write code that would output things to a stream (such as <code>std::cout</code> on every processor but throws the text away on all but one of them. We could achieve the same by simply putting an <code>if</code> statement in front of each place where we may generate output, but this doesn't make the code any prettier. In addition, the condition whether this processor should or should not produce output to the screen is the same every time &ndash; and consequently it should be simple enough to put it into the statements that generate output itself.</p>
+</div><!-- fragment --><p>下一个提供了一个类，ConditionOStream，它允许我们编写代码，将东西输出到一个流（如 <code>std::cout</code> 在每个处理器上，但在除一个处理器外的所有处理器上将文本扔掉。我们可以通过简单地在每个可能产生输出的地方前面放一个 <code>if</code> 语句来实现同样的目的，但这并不能使代码更漂亮。此外，这个处理器是否应该向屏幕输出的条件每次都是一样的&ndash;因此，把它放在产生输出的语句中应该是很简单的。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="conditional__ostream_8h.html">deal.II/base/conditional_ostream.h</a>&gt;</span></div>
 <div class="ttc" id="aconditional__ostream_8h_html"><div class="ttname"><a href="conditional__ostream_8h.html">conditional_ostream.h</a></div></div>
-</div><!-- fragment --><p>After these preliminaries, here is where it becomes more interesting. As mentioned in the <a class="el" href="group__distributed.html">Parallel computing with multiple processors using distributed memory</a> module, one of the fundamental truths of solving problems on large numbers of processors is that there is no way for any processor to store everything (e.g. information about all cells in the mesh, all degrees of freedom, or the values of all elements of the solution vector). Rather, every processor will <em>own</em> a few of each of these and, if necessary, may <em>know</em> about a few more, for example the ones that are located on cells adjacent to the ones this processor owns itself. We typically call the latter <em>ghost cells</em>, <em>ghost nodes</em> or <em>ghost elements of a vector</em>. The point of this discussion here is that we need to have a way to indicate which elements a particular processor owns or need to know of. This is the realm of the <a class="el" href="classIndexSet.html">IndexSet</a> class: if there are a total of \(N\) cells, degrees of freedom, or vector elements, associated with (non-negative) integral indices \([0,N)\), then both the set of elements the current processor owns as well as the (possibly larger) set of indices it needs to know about are subsets of the set \([0,N)\). <a class="el" href="classIndexSet.html">IndexSet</a> is a class that stores subsets of this set in an efficient format:</p>
+</div><!-- fragment --><p>在这些预演之后，这里就变得更加有趣了。正如在 <a class="el" href="group__distributed.html">Parallel computing with multiple processors using distributed memory</a> 模块中提到的，在大量处理器上解决问题的一个基本事实是，任何处理器都不可能存储所有的东西（例如，关于网格中所有单元的信息，所有的自由度，或者解向量中所有元素的值）。相反，每个处理器都会<em>own</em>其中的几个，如果有必要，还可能<em>know</em>另外几个，例如，位于与该处理器自己拥有的单元相邻的单元。我们通常称后者为<em>ghost cells</em>、<em>ghost nodes</em>或<em>ghost elements of a vector</em>。这里讨论的重点是，我们需要有一种方法来表明一个特定的处理器拥有或需要知道哪些元素。这就是IndexSet类的领域：如果总共有 \(N\) 个单元、自由度或向量元素，与（非负）积分指数 \([0,N)\) 相关，那么当前处理器拥有的元素集以及它需要知道的（可能更大）指数集都是集合的子集 \([0,N)\) 。IndexSet是一个类，它以一种有效的格式存储这个集合的子集。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="index__set_8h.html">deal.II/base/index_set.h</a>&gt;</span></div>
 <div class="ttc" id="aindex__set_8h_html"><div class="ttname"><a href="index__set_8h.html">index_set.h</a></div></div>
-</div><!-- fragment --><p>The next header file is necessary for a single function, <a class="el" href="namespaceSparsityTools.html#afbc0c7a206ced91b154666215ea3c218">SparsityTools::distribute_sparsity_pattern</a>. The role of this function will be explained below.</p>
+</div><!-- fragment --><p>下一个头文件对于一个单一的函数是必要的， <a class="el" href="namespaceSparsityTools.html#afbc0c7a206ced91b154666215ea3c218">SparsityTools::distribute_sparsity_pattern</a>. 这个函数的作用将在下面解释。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="sparsity__tools_8h.html">deal.II/lac/sparsity_tools.h</a>&gt;</span></div>
 <div class="ttc" id="asparsity__tools_8h_html"><div class="ttname"><a href="sparsity__tools_8h.html">sparsity_tools.h</a></div></div>
-</div><!-- fragment --><p>The final two, new header files provide the class <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a> that provides meshes distributed across a potentially very large number of processors, while the second provides the namespace <a class="el" href="namespaceparallel_1_1distributed_1_1GridRefinement.html">parallel::distributed::GridRefinement</a> that offers functions that can adaptively refine such distributed meshes:</p>
+</div><!-- fragment --><p>最后两个新的头文件提供了类 <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a> ，该类提供了分布在可能非常多的处理器上的网格，而第二个文件提供了命名空间 <a class="el" href="namespaceparallel_1_1distributed_1_1GridRefinement.html">parallel::distributed::GridRefinement</a> ，该命名空间提供了可以自适应地细化这种分布式网格的函数。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="distributed_2tria_8h.html">deal.II/distributed/tria.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="distributed_2grid__refinement_8h.html">deal.II/distributed/grid_refinement.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span>Step40</div>
 <div class="line">{</div>
@@ -225,12 +236,13 @@ $(function() {
 <div class="ttc" id="adistributed_2tria_8h_html"><div class="ttname"><a href="distributed_2tria_8h.html">tria.h</a></div></div>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="namespace__dealii_8h_source.html#l00025">namespace_dealii.h:26</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="ThecodeLaplaceProblemcodeclasstemplate"></a> </p><h3>The <code>LaplaceProblem</code> class template</h3>
-<p>Next let's declare the main class of this program. Its structure is almost exactly that of the <a class="el" href="step_6.html">step-6</a> tutorial program. The only significant differences are:</p><ul>
-<li>The <code>mpi_communicator</code> variable that describes the set of processors we want this code to run on. In practice, this will be MPI_COMM_WORLD, i.e. all processors the batch scheduling system has assigned to this particular job.</li>
-<li>The presence of the <code>pcout</code> variable of type ConditionOStream.</li>
-<li>The obvious use of <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a> instead of <a class="el" href="classTriangulation.html">Triangulation</a>.</li>
-<li>The presence of two <a class="el" href="classIndexSet.html">IndexSet</a> objects that denote which sets of degrees of freedom (and associated elements of solution and right hand side vectors) we own on the current processor and which we need (as ghost elements) for the algorithms in this program to work.</li>
-<li>The fact that all matrices and vectors are now distributed. We use either the PETSc or Trilinos wrapper classes so that we can use one of the sophisticated preconditioners offered by Hypre (with PETSc) or ML (with Trilinos). Note that as part of this class, we store a solution vector that does not only contain the degrees of freedom the current processor owns, but also (as ghost elements) all those vector elements that correspond to "locally relevant" degrees of freedom (i.e. all those that live on locally owned cells or the layer of ghost cells that surround it).</li>
+<p>接下来让我们来声明这个程序的主类。它的结构几乎与 <a class="el" href="step_6.html">step-6</a> 的教程程序一模一样。唯一显著的区别是。</p>
+<ul>
+<li><code>mpi_communicator</code> 变量描述了我们希望这段代码运行的处理器集合。在实践中，这将是MPI_COMM_WORLD，即批处理调度系统分配给这个特定作业的所有处理器。</li>
+<li>ConditionOStream类型的 <code>pcout</code> 变量的存在。</li>
+<li>显然使用了 <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a> 而不是Triangulation。</li>
+<li>两个IndexSet对象的存在，表示我们在当前处理器上拥有哪些自由度集（以及解和右手向量的相关元素），以及我们需要哪些（作为幽灵元素）来使这个程序中的算法工作。</li>
+<li>事实上，现在所有的矩阵和向量都是分布式的。我们使用PETSc或Trilinos包装类，这样我们就可以使用Hypre（使用PETSc）或ML（使用Trilinos）提供的复杂的预处理器之一。请注意，作为这个类的一部分，我们存储的解向量不仅包含当前处理器拥有的自由度，还包括（作为鬼魂元素）所有对应于 "本地相关 "自由度的向量元素（即所有生活在本地拥有的单元或围绕它的鬼魂单元层的自由度）。</li>
 </ul>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>LaplaceProblem</div>
@@ -238,7 +250,9 @@ $(function() {
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">  LaplaceProblem();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keywordtype">void</span> setup_system();</div>
@@ -247,21 +261,28 @@ $(function() {
 <div class="line">  <span class="keywordtype">void</span> refine_grid();</div>
 <div class="line">  <span class="keywordtype">void</span> output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  MPI_Comm mpi_communicator;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation&lt;dim&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFE__Q.html">FE_Q&lt;dim&gt;</a>       fe;</div>
 <div class="line">  <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a> dof_handler;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classIndexSet.html">IndexSet</a> locally_owned_dofs;</div>
 <div class="line">  <a class="code" href="classIndexSet.html">IndexSet</a> locally_relevant_dofs;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> constraints;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="namespaceLinearAlgebraDealII.html#a912abe2208022aec6753876bcc72f6bf">LA::MPI::SparseMatrix</a> system_matrix;</div>
 <div class="line">  <a class="code" href="namespaceLinearAlgebraDealII.html#a9fe13d579422411556954ab3f28a59be">LA::MPI::Vector</a>       locally_relevant_solution;</div>
 <div class="line">  <a class="code" href="namespaceLinearAlgebraDealII.html#a9fe13d579422411556954ab3f28a59be">LA::MPI::Vector</a>       system_rhs;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classConditionalOStream.html">ConditionalOStream</a> pcout;</div>
 <div class="line">  <a class="code" href="classTimerOutput.html">TimerOutput</a>        computing_timer;</div>
@@ -279,7 +300,7 @@ $(function() {
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="ThecodeLaplaceProblemcodeclassimplementation"></a> </p><h3>The <code>LaplaceProblem</code> class implementation</h3>
 <p><a class="anchor" id="Constructor"></a> </p><h4>Constructor</h4>
-<p>Constructors and destructors are rather trivial. In addition to what we do in <a class="el" href="step_6.html">step-6</a>, we set the set of processors we want to work on to all machines available (MPI_COMM_WORLD); ask the triangulation to ensure that the mesh remains smooth and free to refined islands, for example; and initialize the <code>pcout</code> variable to only allow processor zero to output anything. The final piece is to initialize a timer that we use to determine how much compute time the different parts of the program take:</p>
+<p>构造器和析构器是相当微不足道的。除了我们在 <a class="el" href="step_6.html">step-6</a> 中所做的，我们将我们想要工作的处理器集合设置为所有可用的机器（MPI_COMM_WORLD）；要求三角化以确保网格保持平滑和自由精炼的岛屿，例如；并初始化 <code>pcout</code> 变量，只允许处理器0输出任何东西。最后一块是初始化一个定时器，我们用它来决定程序的不同部分需要多少计算时间。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">LaplaceProblem&lt;dim&gt;::LaplaceProblem()</div>
 <div class="line">  : mpi_communicator(MPI_COMM_WORLD)</div>
@@ -300,26 +321,29 @@ $(function() {
 <div class="ttc" id="anamespaceUtilities_1_1MPI_html_a895dcd8223a0ee6f0e6a80b80e2d5982"><div class="ttname"><a href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">Utilities::MPI::this_mpi_process</a></div><div class="ttdeci">unsigned int this_mpi_process(const MPI_Comm &amp;mpi_communicator)</div><div class="ttdef"><b>Definition:</b> <a href="mpi_8cc_source.html#l00128">mpi.cc:128</a></div></div>
 <div class="ttc" id="anamespaceUtilities_html"><div class="ttname"><a href="namespaceUtilities.html">Utilities</a></div><div class="ttdef"><b>Definition:</b> <a href="base_2communication__pattern__base_8h_source.html#l00030">communication_pattern_base.h:31</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemsetup_system"></a> </p><h4>LaplaceProblem::setup_system</h4>
-<p>The following function is, arguably, the most interesting one in the entire program since it goes to the heart of what distinguishes parallel <a class="el" href="step_40.html">step-40</a> from sequential <a class="el" href="step_6.html">step-6</a>.</p>
-<p>At the top we do what we always do: tell the <a class="el" href="classDoFHandler.html">DoFHandler</a> object to distribute degrees of freedom. Since the triangulation we use here is distributed, the <a class="el" href="classDoFHandler.html">DoFHandler</a> object is smart enough to recognize that on each processor it can only distribute degrees of freedom on cells it owns; this is followed by an exchange step in which processors tell each other about degrees of freedom on ghost cell. The result is a <a class="el" href="classDoFHandler.html">DoFHandler</a> that knows about the degrees of freedom on locally owned cells and ghost cells (i.e. cells adjacent to locally owned cells) but nothing about cells that are further away, consistent with the basic philosophy of distributed computing that no processor can know everything.</p>
+<p>下面这个函数可以说是整个程序中最有趣的一个，因为它涉及到了parallel <a class="el" href="step_40.html">step-40</a> 和 sequential <a class="el" href="step_6.html">step-6</a> 的核心区别。 <br  />
+</p>
+<p>在顶部，我们做了我们一直在做的事情：告诉DoFHandler对象来分配自由度。由于我们在这里使用的三角测量是分布式的，DoFHandler对象足够聪明，它认识到在每个处理器上只能在它所拥有的单元上分配自由度；接下来是一个交换步骤，处理器相互告诉对方关于ghost单元的自由度。结果是一个DoFHandler知道本地拥有的单元和幽灵单元（即与本地拥有的单元相邻的单元）的自由度，但对更远的单元则一无所知，这与分布式计算的基本理念一致，即没有一个处理器可以知道所有的事情。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::setup_system()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> t(computing_timer, <span class="stringliteral">&quot;setup&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  dof_handler.distribute_dofs(fe);</div>
 <div class="ttc" id="aclassTimerOutput_1_1Scope_html"><div class="ttname"><a href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a></div><div class="ttdef"><b>Definition:</b> <a href="timer_8h_source.html#l00552">timer.h:553</a></div></div>
-</div><!-- fragment --><p>The next two lines extract some information we will need later on, namely two index sets that provide information about which degrees of freedom are owned by the current processor (this information will be used to initialize solution and right hand side vectors, and the system matrix, indicating which elements to store on the current processor and which to expect to be stored somewhere else); and an index set that indicates which degrees of freedom are locally relevant (i.e. live on cells that the current processor owns or on the layer of ghost cells around the locally owned cells; we need all of these degrees of freedom, for example, to estimate the error on the local cells).</p>
+</div><!-- fragment --><p>接下来的两行提取了我们稍后需要的一些信息，即两个索引集，提供关于哪些自由度为当前处理器所拥有的信息（该信息将用于初始化解和右手向量，以及系统矩阵，表明哪些元素要存储在当前处理器上，哪些要期望存储在其他地方）；以及一个索引集，表明哪些自由度是本地相关的（即生活在当前处理器的单元上。 即生活在当前处理器拥有的单元上或本地拥有的单元周围的幽灵单元层上；我们需要所有这些自由度，例如，估计本地单元的误差）。)</p>
 <div class="fragment"><div class="line">locally_owned_dofs = dof_handler.locally_owned_dofs();</div>
 <div class="line"><a class="code" href="namespaceDoFTools.html#acad7e0841b9046eaafddc4c617ab1d9d">DoFTools::extract_locally_relevant_dofs</a>(dof_handler, locally_relevant_dofs);</div>
 <div class="ttc" id="anamespaceDoFTools_html_acad7e0841b9046eaafddc4c617ab1d9d"><div class="ttname"><a href="namespaceDoFTools.html#acad7e0841b9046eaafddc4c617ab1d9d">DoFTools::extract_locally_relevant_dofs</a></div><div class="ttdeci">void extract_locally_relevant_dofs(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, IndexSet &amp;dof_set)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools_8cc_source.html#l01210">dof_tools.cc:1210</a></div></div>
-</div><!-- fragment --><p>Next, let us initialize the solution and right hand side vectors. As mentioned above, the solution vector we seek does not only store elements we own, but also ghost entries; on the other hand, the right hand side vector only needs to have the entries the current processor owns since all we will ever do is write into it, never read from it on locally owned cells (of course the linear solvers will read from it, but they do not care about the geometric location of degrees of freedom).</p>
+</div><!-- fragment --><p>接下来，让我们初始化解和右手边的向量。如上所述，我们所寻求的解向量不仅存储我们拥有的元素，还存储鬼魂条目；另一方面，右手向量只需要拥有当前处理器拥有的条目，因为我们所做的只是向其中写入，而从不在本地拥有的单元上读取（当然，线性求解器会从其中读取，但它们并不关心自由度的几何位置）。</p>
 <div class="fragment"><div class="line">locally_relevant_solution.reinit(locally_owned_dofs,</div>
 <div class="line">                                 locally_relevant_dofs,</div>
 <div class="line">                                 mpi_communicator);</div>
 <div class="line">system_rhs.reinit(locally_owned_dofs, mpi_communicator);</div>
-</div><!-- fragment --><p>The next step is to compute hanging node and boundary value constraints, which we combine into a single object storing all constraints.</p>
-<p>As with all other things in parallel, the mantra must be that no processor can store all information about the entire universe. As a consequence, we need to tell the <a class="el" href="classAffineConstraints.html">AffineConstraints</a> object for which degrees of freedom it can store constraints and for which it may not expect any information to store. In our case, as explained in the <a class="el" href="group__distributed.html">Parallel computing with multiple processors using distributed memory</a> module, the degrees of freedom we need to care about on each processor are the locally relevant ones, so we pass this to the <a class="el" href="classAffineConstraints.html#a2c9d71b5b7e8851c25a411ccf34de986">AffineConstraints::reinit</a> function. As a side note, if you forget to pass this argument, the <a class="el" href="classAffineConstraints.html">AffineConstraints</a> class will allocate an array with length equal to the largest DoF index it has seen so far. For processors with high MPI process number, this may be very large &ndash; maybe on the order of billions. The program would then allocate more memory than for likely all other operations combined for this single array.</p>
+</div><!-- fragment --><p>下一步是计算悬挂节点和边界值约束，我们将其合并为一个存储所有约束的对象。 <br  />
+</p>
+<p>就像parallel中的所有其他事情一样，口头禅必须是没有一个处理器可以存储关于整个宇宙的所有信息。因此，我们需要告诉AffineConstraints对象哪些自由度可以存储约束条件，哪些自由度可能不需要存储任何信息。在我们的例子中，正如在 <a class="el" href="group__distributed.html">Parallel computing with multiple processors using distributed memory</a> 模块中所解释的，我们在每个处理器上需要关心的自由度是本地相关的自由度，所以我们把这个传递给 <a class="el" href="classAffineConstraints.html#a2c9d71b5b7e8851c25a411ccf34de986">AffineConstraints::reinit</a> 函数。顺便提一下，如果你忘记传递这个参数，AffineConstraints类将分配一个长度等于它目前看到的最大自由度索引的数组。对于MPI进程数很高的处理器来说，这可能是非常大的 &ndash; 也许是数十亿的数量级。然后，程序将为这个单一的数组分配比所有其他操作加起来还要多的内存。</p>
 <div class="fragment"><div class="line">constraints.clear();</div>
 <div class="line">constraints.reinit(locally_relevant_dofs);</div>
 <div class="line"><a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, constraints);</div>
@@ -331,15 +355,18 @@ $(function() {
 <div class="ttc" id="aclassFunctions_1_1ZeroFunction_html"><div class="ttname"><a href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction</a></div><div class="ttdef"><b>Definition:</b> <a href="function_8h_source.html#l00510">function.h:511</a></div></div>
 <div class="ttc" id="agroup__constraints_html_ga3b4ea7dfd313e388d868c4e4aa685799"><div class="ttname"><a href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a></div><div class="ttdeci">void make_hanging_node_constraints(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, AffineConstraints&lt; number &gt; &amp;constraints)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__constraints_8cc_source.html#l01787">dof_tools_constraints.cc:1787</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_html_ab2562d41bb26f362043f9719a8cd9b87"><div class="ttname"><a href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a></div><div class="ttdeci">void interpolate_boundary_values(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const std::map&lt; types::boundary_id, const Function&lt; spacedim, number &gt; * &gt; &amp;function_map, std::map&lt; types::global_dof_index, number &gt; &amp;boundary_values, const ComponentMask &amp;component_mask=ComponentMask())</div></div>
-</div><!-- fragment --><p>The last part of this function deals with initializing the matrix with accompanying sparsity pattern. As in previous tutorial programs, we use the <a class="el" href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a> as an intermediate with which we then initialize the system matrix. To do so we have to tell the sparsity pattern its size but as above there is no way the resulting object will be able to store even a single pointer for each global degree of freedom; the best we can hope for is that it stores information about each locally relevant degree of freedom, i.e. all those that we may ever touch in the process of assembling the matrix (the <a class="el" href="DEALGlossary.html#distributed_paper">distributed computing paper</a> has a long discussion why one really needs the locally relevant, and not the small set of locally active degrees of freedom in this context).</p>
-<p>So we tell the sparsity pattern its size and what DoFs to store anything for and then ask <a class="el" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a> to fill it (this function ignores all cells that are not locally owned, mimicking what we will do below in the assembly process). After this, we call a function that exchanges entries in these sparsity pattern between processors so that in the end each processor really knows about all the entries that will exist in that part of the finite element matrix that it will own. The final step is to initialize the matrix with the sparsity pattern.</p>
+</div><!-- fragment --><p>这个函数的最后一部分是处理初始化矩阵与伴随的稀疏模式。和以前的教程程序一样，我们使用DynamicSparsityPattern作为一个中介，然后用它来初始化系统矩阵。为了做到这一点，我们必须告诉稀疏性模式它的大小，但是如上所述，所产生的对象不可能为每个全局自由度存储一个指针；我们所希望的最好结果是它存储每个局部相关自由度的信息，即所有我们在组装矩阵的过程中可能接触到的自由度（ <a class="el" href="DEALGlossary.html#distributed_paper">分布式计算论文 </a>有很长的讨论，为什么我们真正需要局部相关自由度，而不是在此背景下的小的局部活动自由度集）。 <br  />
+</p>
+<p>所以我们告诉稀疏模式它的大小和要存储什么自由度，然后要求 <a class="el" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a> 来填充它（这个函数忽略了所有不属于本地的单元，模仿我们下面在装配过程中要做的）。在这之后，我们调用一个函数，在处理器之间交换这些稀疏模式的条目，以便最后每个处理器真正知道它将拥有的那部分有限元矩阵中的所有条目。最后一步是用稀疏模式初始化矩阵。</p>
 <div class="fragment"><div class="line">  <a class="code" href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a> dsp(locally_relevant_dofs);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler, dsp, constraints, <span class="keyword">false</span>);</div>
 <div class="line">  <a class="code" href="namespaceSparsityTools.html#afbc0c7a206ced91b154666215ea3c218">SparsityTools::distribute_sparsity_pattern</a>(dsp,</div>
 <div class="line">                                             dof_handler.locally_owned_dofs(),</div>
 <div class="line">                                             mpi_communicator,</div>
 <div class="line">                                             locally_relevant_dofs);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  system_matrix.reinit(locally_owned_dofs,</div>
 <div class="line">                       locally_owned_dofs,</div>
@@ -350,30 +377,37 @@ $(function() {
 <div class="ttc" id="agroup__constraints_html_gaf78e864edbfba7e0a7477457bfb96b26"><div class="ttname"><a href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a></div><div class="ttdeci">void make_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, SparsityPatternType &amp;sparsity_pattern, const AffineConstraints&lt; number &gt; &amp;constraints=AffineConstraints&lt; number &gt;(), const bool keep_constrained_dofs=true, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__sparsity_8cc_source.html#l00064">dof_tools_sparsity.cc:64</a></div></div>
 <div class="ttc" id="anamespaceSparsityTools_html_afbc0c7a206ced91b154666215ea3c218"><div class="ttname"><a href="namespaceSparsityTools.html#afbc0c7a206ced91b154666215ea3c218">SparsityTools::distribute_sparsity_pattern</a></div><div class="ttdeci">void distribute_sparsity_pattern(DynamicSparsityPattern &amp;dsp, const IndexSet &amp;locally_owned_rows, const MPI_Comm &amp;mpi_comm, const IndexSet &amp;locally_relevant_rows)</div><div class="ttdef"><b>Definition:</b> <a href="sparsity__tools_8cc_source.html#l01045">sparsity_tools.cc:1045</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemassemble_system"></a> </p><h4>LaplaceProblem::assemble_system</h4>
-<p>The function that then assembles the linear system is comparatively boring, being almost exactly what we've seen before. The points to watch out for are:</p><ul>
-<li>Assembly must only loop over locally owned cells. There are multiple ways to test that; for example, we could compare a cell's subdomain_id against information from the triangulation as in <code>cell-&gt;<a class="el" href="namespacetypes.html#a3d8ea8a4c6a58127f8c2fcc9ec74af6e">subdomain_id()</a> == triangulation.locally_owned_subdomain()</code>, or skip all cells for which the condition <code>cell-&gt;is_ghost() || cell-&gt;is_artificial()</code> is true. The simplest way, however, is to simply ask the cell whether it is owned by the local processor.</li>
-<li>Copying local contributions into the global matrix must include distributing constraints and boundary values. In other words, we cannot (as we did in <a class="el" href="step_6.html">step-6</a>) first copy every local contribution into the global matrix and only in a later step take care of hanging node constraints and boundary values. The reason is, as discussed in <a class="el" href="step_17.html">step-17</a>, that the parallel vector classes do not provide access to arbitrary elements of the matrix once they have been assembled into it &ndash; in parts because they may simply no longer reside on the current processor but have instead been shipped to a different machine.</li>
-<li>The way we compute the right hand side (given the formula stated in the introduction) may not be the most elegant but will do for a program whose focus lies somewhere entirely different.</li>
+<p>然后组装线性系统的函数相对来说比较无聊，几乎和我们之前看到的一模一样。需要注意的地方是。</p>
+<ul>
+<li>装配必须只在本地拥有的单元上循环。有多种方法来测试；例如，我们可以将一个单元的subdomain_id与三角形的信息进行比较，如<code>cell-&gt;<a class="el" href="namespacetypes.html#a3d8ea8a4c6a58127f8c2fcc9ec74af6e">subdomain_id()</a> == triangulation.local_owned_subdomain()</code>，或者跳过所有条件<code>cell-&gt;is_ghost() || cell-&gt;is_artificial()</code>为真的单元。然而，最简单的方法是简单地询问单元格是否为本地处理器所拥有。</li>
+<li>将本地贡献复制到全局矩阵中必须包括分配约束和边界值。换句话说，我们不能（就像我们在 <a class="el" href="step_6.html">step-6</a> 中所做的那样）首先将每个本地贡献复制到全局矩阵中，然后在后面的步骤中才处理悬挂节点约束和边界值。原因是，正如在 <a class="el" href="step_17.html">step-17</a> 中所讨论的那样，一旦矩阵中的任意元素被组合到一起，并行矢量类就不能提供对这些元素的访问&ndash;部分原因是它们可能不再存在于当前的处理器中，而是被运到了不同的机器上。</li>
+<li>我们计算右手边的方式（考虑到介绍中的公式）可能不是最优雅的，但对于一个重点在完全不同的地方的程序来说是可以的。</li>
 </ul>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::assemble_system()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> t(computing_timer, <span class="stringliteral">&quot;assembly&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classQGauss.html">QGauss&lt;dim&gt;</a> quadrature_formula(fe.degree + 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> fe_values(fe,</div>
 <div class="line">                          quadrature_formula,</div>
 <div class="line">                          <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a> |</div>
 <div class="line">                            <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = fe.n_dofs_per_cell();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points    = quadrature_formula.size();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>(dofs_per_cell, dofs_per_cell);</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a>     cell_rhs(dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices(dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">    <span class="keywordflow">if</span> (cell-&gt;is_locally_owned())</div>
@@ -381,7 +415,9 @@ $(function() {
 <div class="line">        <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a> = 0.;</div>
 <div class="line">        cell_rhs    = 0.;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        fe_values.reinit(cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q_point = 0; q_point &lt; n_q_points; ++q_point)</div>
 <div class="line">          {</div>
@@ -391,7 +427,10 @@ $(function() {
 <div class="line">                     0.25 * <a class="code" href="numbers_8h.html#a27989bdc7b4b828564982787d126bd91">std::sin</a>(4.0 * <a class="code" href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a> *</div>
 <div class="line">                                     fe_values.quadrature_point(q_point)[0]) ?</div>
 <div class="line">                 1. :</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line">                 -1.);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">              {</div>
@@ -400,11 +439,13 @@ $(function() {
 <div class="line">                                       fe_values.shape_grad(j, q_point) *</div>
 <div class="line">                                       fe_values.JxW(q_point);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">                cell_rhs(i) += rhs_value *                         </div>
 <div class="line">                               fe_values.shape_value(i, q_point) * </div>
 <div class="line">                               fe_values.JxW(q_point);</div>
 <div class="line">              }</div>
 <div class="line">          }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        cell-&gt;get_dof_indices(local_dof_indices);</div>
 <div class="line">        constraints.distribute_local_to_global(<a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>,</div>
@@ -424,15 +465,16 @@ $(function() {
 <div class="ttc" id="anamespaceLocalIntegrators_1_1Advection_html_a8bc7b8136646134f73a4193adefe15f8"><div class="ttname"><a href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">LocalIntegrators::Advection::cell_matrix</a></div><div class="ttdeci">void cell_matrix(FullMatrix&lt; double &gt; &amp;M, const FEValuesBase&lt; dim &gt; &amp;fe, const FEValuesBase&lt; dim &gt; &amp;fetest, const ArrayView&lt; const std::vector&lt; double &gt;&gt; &amp;velocity, const double factor=1.)</div><div class="ttdef"><b>Definition:</b> <a href="advection_8h_source.html#l00075">advection.h:75</a></div></div>
 <div class="ttc" id="anamespacenumbers_html_a3e24f194a9cb9b6ff4442b8a7a877d4a"><div class="ttname"><a href="namespacenumbers.html#a3e24f194a9cb9b6ff4442b8a7a877d4a">numbers::PI</a></div><div class="ttdeci">static constexpr double PI</div><div class="ttdef"><b>Definition:</b> <a href="numbers_8h_source.html#l00231">numbers.h:231</a></div></div>
 <div class="ttc" id="anumbers_8h_html_a27989bdc7b4b828564982787d126bd91"><div class="ttname"><a href="numbers_8h.html#a27989bdc7b4b828564982787d126bd91">std::sin</a></div><div class="ttdeci">::VectorizedArray&lt; Number, width &gt; sin(const ::VectorizedArray&lt; Number, width &gt; &amp;)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l05291">vectorization.h:5291</a></div></div>
-</div><!-- fragment --><p>Notice that the assembling above is just a local operation. So, to form the "global" linear system, a synchronization between all processors is needed. This could be done by invoking the function <a class="el" href="namespaceUtilities.html#a6155277fd058eddb1504f9562cb1c04d">compress()</a>. See <a class="el" href="DEALGlossary.html#GlossCompress">Compressing distributed objects</a> for more information on what is <a class="el" href="namespaceUtilities.html#a6155277fd058eddb1504f9562cb1c04d">compress()</a> designed to do.</p>
+</div><!-- fragment --><p>注意，上面的装配只是一个局部操作。因此，为了形成 "全局 "线性系统，需要在所有处理器之间进行同步。这可以通过调用函数compress()来实现。参见 <a class="el" href="DEALGlossary.html#GlossCompress">压缩分布式对象</a>，以了解更多关于compress()的设计目的的信息。</p>
 <div class="fragment"><div class="line">  system_matrix.compress(<a class="code" href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a>);</div>
 <div class="line">  system_rhs.compress(<a class="code" href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a>);</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__Vectors_html_gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708"><div class="ttname"><a href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a></div><div class="ttdeci">@ add</div><div class="ttdef"><b>Definition:</b> <a href="vector__operation_8h_source.html#l00053">vector_operation.h:53</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemsolve"></a> </p><h4>LaplaceProblem::solve</h4>
-<p>Even though solving linear systems on potentially tens of thousands of processors is by far not a trivial job, the function that does this is &ndash; at least at the outside &ndash; relatively simple. Most of the parts you've seen before. There are really only two things worth mentioning:</p><ul>
-<li>Solvers and preconditioners are built on the deal.II wrappers of PETSc and Trilinos functionality. It is relatively well known that the primary bottleneck of massively parallel linear solvers is not actually the communication between processors, but the fact that it is difficult to produce preconditioners that scale well to large numbers of processors. Over the second half of the first decade of the 21st century, it has become clear that algebraic multigrid (AMG) methods turn out to be extremely efficient in this context, and we will use one of them &ndash; either the BoomerAMG implementation of the Hypre package that can be interfaced to through PETSc, or a preconditioner provided by ML, which is part of Trilinos &ndash; for the current program. The rest of the solver itself is boilerplate and has been shown before. Since the linear system is symmetric and positive definite, we can use the CG method as the outer solver.</li>
-<li>Ultimately, we want a vector that stores not only the elements of the solution for degrees of freedom the current processor owns, but also all other locally relevant degrees of freedom. On the other hand, the solver itself needs a vector that is uniquely split between processors, without any overlap. We therefore create a vector at the beginning of this function that has these properties, use it to solve the linear system, and only assign it to the vector we want at the very end. This last step ensures that all ghost elements are also copied as necessary.</li>
+<p>尽管在可能是数以万计的处理器上求解线性系统到目前为止还不是一项微不足道的工作，但完成这项工作的函数&ndash;至少在外部&ndash;相对简单。大部分的部分你都见过了。真正值得一提的只有两件事。</p>
+<ul>
+<li>解算器和预处理器是建立在PETSc和Trilinos功能的deal.II包装上的。众所周知，大规模并行线性求解器的主要瓶颈实际上并不是处理器之间的通信，而是很难产生能够很好地扩展到大量处理器的预处理程序。在21世纪前十年的后半段，代数多网格（AMG）方法在这种情况下显然是非常有效的，我们将使用其中的一种方法&ndash;要么是可以通过PETSc接口的Hypre软件包的BoomerAMG实现，要么是由ML提供的预处理程序，它是Trilinos的一部分&ndash;用于当前的程序。解算器本身的其余部分是模板，之前已经展示过了。由于线性系统是对称和正定的，我们可以使用CG方法作为外解器。</li>
+<li>最终，我们希望有一个向量，不仅存储当前处理器拥有的自由度的解的元素，而且还存储所有其他本地相关的自由度。另一方面，求解器本身需要一个在处理器之间唯一分割的向量，没有任何重叠。因此，我们在这个函数的开头创建一个具有这些特性的向量，用它来求解线性系统，并在最后才将它分配给我们想要的向量。这最后一步确保所有的鬼魂元素也在必要时被复制。</li>
 </ul>
 <div class="fragment"><div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">  <span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::solve()</div>
@@ -441,7 +483,9 @@ $(function() {
 <div class="line">    <a class="code" href="namespaceLinearAlgebraDealII.html#a9fe13d579422411556954ab3f28a59be">LA::MPI::Vector</a>    completely_distributed_solution(locally_owned_dofs,</div>
 <div class="line">                                                    mpi_communicator);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <a class="code" href="classSolverControl.html">SolverControl</a> solver_control(dof_handler.n_dofs(), 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-12);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#ifdef USE_PETSC_LA</span></div>
 <div class="line">    <a class="code" href="namespaceLinearAlgebraPETSc.html#a9d2c129d77c89b40badfb65d94c5b955">LA::SolverCG</a> solver(solver_control, mpi_communicator);</div>
@@ -449,9 +493,12 @@ $(function() {
 <div class="line">    <a class="code" href="namespaceLinearAlgebraPETSc.html#a9d2c129d77c89b40badfb65d94c5b955">LA::SolverCG</a> solver(solver_control);</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <a class="code" href="namespaceLinearAlgebraPETSc_1_1MPI.html#a41f11f7a1992c6d6aa9367b12c68f791">LA::MPI::PreconditionAMG</a> preconditioner;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    LA::MPI::PreconditionAMG::AdditionalData data;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#ifdef USE_PETSC_LA</span></div>
 <div class="line">    data.symmetric_operator = <span class="keyword">true</span>;</div>
@@ -460,15 +507,19 @@ $(function() {
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line">    preconditioner.<a class="code" href="classPETScWrappers_1_1PreconditionBoomerAMG.html#a3c82672eac786d7f369b296439859ff2">initialize</a>(system_matrix, data);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    solver.solve(system_matrix,</div>
 <div class="line">                 completely_distributed_solution,</div>
 <div class="line">                 system_rhs,</div>
 <div class="line">                 preconditioner);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    pcout &lt;&lt; <span class="stringliteral">&quot;   Solved in &quot;</span> &lt;&lt; solver_control.last_step() &lt;&lt; <span class="stringliteral">&quot; iterations.&quot;</span></div>
 <div class="line">          &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    constraints.distribute(completely_distributed_solution);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    locally_relevant_solution = completely_distributed_solution;</div>
 <div class="line">  }</div>
@@ -477,13 +528,15 @@ $(function() {
 <div class="ttc" id="anamespaceLinearAlgebraPETSc_1_1MPI_html_a41f11f7a1992c6d6aa9367b12c68f791"><div class="ttname"><a href="namespaceLinearAlgebraPETSc_1_1MPI.html#a41f11f7a1992c6d6aa9367b12c68f791">LinearAlgebraPETSc::MPI::PreconditionAMG</a></div><div class="ttdeci">PETScWrappers::PreconditionBoomerAMG PreconditionAMG</div><div class="ttdef"><b>Definition:</b> <a href="generic__linear__algebra_8h_source.html#l00133">generic_linear_algebra.h:133</a></div></div>
 <div class="ttc" id="anamespaceLinearAlgebraPETSc_html_a9d2c129d77c89b40badfb65d94c5b955"><div class="ttname"><a href="namespaceLinearAlgebraPETSc.html#a9d2c129d77c89b40badfb65d94c5b955">LinearAlgebraPETSc::SolverCG</a></div><div class="ttdeci">PETScWrappers::SolverCG SolverCG</div><div class="ttdef"><b>Definition:</b> <a href="generic__linear__algebra_8h_source.html#l00090">generic_linear_algebra.h:90</a></div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a9587d5229555daa5b1fa1ba2f8a40adb"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">Physics::Elasticity::Kinematics::e</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; e(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
-</div><!-- fragment --><p><a class="anchor" id="LaplaceProblemrefine_grid"></a> </p><h4>LaplaceProblem::refine_grid</h4>
-<p>The function that estimates the error and refines the grid is again almost exactly like the one in <a class="el" href="step_6.html">step-6</a>. The only difference is that the function that flags cells to be refined is now in namespace <a class="el" href="namespaceparallel_1_1distributed_1_1GridRefinement.html">parallel::distributed::GridRefinement</a> &ndash; a namespace that has functions that can communicate between all involved processors and determine global thresholds to use in deciding which cells to refine and which to coarsen.</p>
-<p>Note that we didn't have to do anything special about the <a class="el" href="classKellyErrorEstimator.html">KellyErrorEstimator</a> class: we just give it a vector with as many elements as the local triangulation has cells (locally owned cells, ghost cells, and artificial ones), but it only fills those entries that correspond to cells that are locally owned.</p>
+</div><!-- fragment --><p><a class="anchor" id="LaplaceProblemrefine_grid"></a></p><h4>LaplaceProblem::refine_grid</h4>
+<p>估计误差和细化网格的函数又与 <a class="el" href="step_6.html">step-6</a> 中的函数几乎完全一样。唯一不同的是，标志着要细化的单元格的函数现在在命名空间 <a class="el" href="namespaceparallel_1_1distributed_1_1GridRefinement.html">parallel::distributed::GridRefinement</a> 中&ndash;这个命名空间中的函数可以在所有参与的处理器之间进行通信，并确定全局阈值，以决定哪些单元要细化，哪些要粗化。 <br  />
+</p>
+<p>请注意，我们不必对KellyErrorEstimator类做任何特殊处理：我们只是给它一个向量，其元素数量与本地三角形的单元（本地拥有的单元、幽灵单元和人工单元）一样多，但它只填入那些对应于本地拥有的单元的条目。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::refine_grid()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTimerOutput_1_1Scope.html">TimerOutput::Scope</a> t(computing_timer, <span class="stringliteral">&quot;refine&quot;</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;float&gt;</a> estimated_error_per_cell(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
 <div class="line">  <a class="code" href="classKellyErrorEstimator.html#aa0917e696d4f8ddb983223a68c512357">KellyErrorEstimator&lt;dim&gt;::estimate</a>(</div>
@@ -500,9 +553,10 @@ $(function() {
 <div class="ttc" id="aclassKellyErrorEstimator_html_aa0917e696d4f8ddb983223a68c512357"><div class="ttname"><a href="classKellyErrorEstimator.html#aa0917e696d4f8ddb983223a68c512357">KellyErrorEstimator::estimate</a></div><div class="ttdeci">static void estimate(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const Quadrature&lt; dim - 1 &gt; &amp;quadrature, const std::map&lt; types::boundary_id, const Function&lt; spacedim, typename InputVector::value_type &gt; * &gt; &amp;neumann_bc, const InputVector &amp;solution, Vector&lt; float &gt; &amp;error, const ComponentMask &amp;component_mask=ComponentMask(), const Function&lt; spacedim &gt; *coefficients=nullptr, const unsigned int n_threads=numbers::invalid_unsigned_int, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id, const types::material_id material_id=numbers::invalid_material_id, const Strategy strategy=cell_diameter_over_24)</div></div>
 <div class="ttc" id="anamespaceparallel_1_1distributed_1_1GridRefinement_html_aa2ffb707a796ae6dedb75036606ef2e6"><div class="ttname"><a href="namespaceparallel_1_1distributed_1_1GridRefinement.html#aa2ffb707a796ae6dedb75036606ef2e6">parallel::distributed::GridRefinement::refine_and_coarsen_fixed_number</a></div><div class="ttdeci">void refine_and_coarsen_fixed_number(parallel::distributed::Triangulation&lt; dim, spacedim &gt; &amp;tria, const ::Vector&lt; Number &gt; &amp;criteria, const double top_fraction_of_cells, const double bottom_fraction_of_cells, const types::global_cell_index max_n_cells=std::numeric_limits&lt; types::global_cell_index &gt;::max())</div><div class="ttdef"><b>Definition:</b> <a href="distributed_2grid__refinement_8cc_source.html#l00493">grid_refinement.cc:493</a></div></div>
 <div class="ttc" id="anamespacetypes_html_aed8813fee8c8a2edcc6005e6a48c321a"><div class="ttname"><a href="namespacetypes.html#aed8813fee8c8a2edcc6005e6a48c321a">types::boundary_id</a></div><div class="ttdeci">unsigned int boundary_id</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00129">types.h:129</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="LaplaceProblemoutput_results"></a> </p><h4>LaplaceProblem::output_results</h4>
-<p>Compared to the corresponding function in <a class="el" href="step_6.html">step-6</a>, the one here is a tad more complicated. There are two reasons: the first one is that we do not just want to output the solution but also for each cell which processor owns it (i.e. which "subdomain" it is in). Secondly, as discussed at length in <a class="el" href="step_17.html">step-17</a> and <a class="el" href="step_18.html">step-18</a>, generating graphical data can be a bottleneck in parallelizing. In <a class="el" href="step_18.html">step-18</a>, we have moved this step out of the actual computation but shifted it into a separate program that later combined the output from various processors into a single file. But this doesn't scale: if the number of processors is large, this may mean that the step of combining data on a single processor later becomes the longest running part of the program, or it may produce a file that's so large that it can't be visualized any more. We here follow a more sensible approach, namely creating individual files for each MPI process and leaving it to the visualization program to make sense of that.</p>
-<p>To start, the top of the function looks like it usually does. In addition to attaching the solution vector (the one that has entries for all locally relevant, not only the locally owned, elements), we attach a data vector that stores, for each cell, the subdomain the cell belongs to. This is slightly tricky, because of course not every processor knows about every cell. The vector we attach therefore has an entry for every cell that the current processor has in its mesh (locally owned ones, ghost cells, and artificial cells), but the <a class="el" href="classDataOut.html">DataOut</a> class will ignore all entries that correspond to cells that are not owned by the current processor. As a consequence, it doesn't actually matter what values we write into these vector entries: we simply fill the entire vector with the number of the current MPI process (i.e. the subdomain_id of the current process); this correctly sets the values we care for, i.e. the entries that correspond to locally owned cells, while providing the wrong value for all other elements &ndash; but these are then ignored anyway.</p>
+</div><!-- fragment --><p><a class="anchor" id="LaplaceProblemoutput_results"></a></p><h4>LaplaceProblem::output_results</h4>
+<p>与 <a class="el" href="step_6.html">step-6</a> 中的相应函数相比，这里的函数要复杂一些。有两个原因：第一个原因是我们不只是想输出解决方案，还想输出每个单元的处理器（即它在哪个 "子域"）。其次，正如在 <a class="el" href="step_17.html">step-17</a> 和 <a class="el" href="step_18.html">step-18</a> 中详细讨论的那样，生成图形数据可能是并行化的一个瓶颈。在 <a class="el" href="step_18.html">step-18</a> 中，我们将这一步骤从实际计算中移出，而是将其转移到一个单独的程序中，随后将各个处理器的输出合并到一个文件中。但这并不具规模：如果处理器的数量很大，这可能意味着在单个处理器上合并数据的步骤后来成为程序中运行时间最长的部分，或者它可能产生一个大到无法再可视化的文件。我们在这里遵循一个更合理的方法，即为每个MPI进程创建单独的文件，并把它留给可视化程序来理解。 <br  />
+</p>
+<p>首先，函数的顶部看起来和通常的一样。除了附加解决方案向量（有所有本地相关元素的条目，而不仅仅是本地拥有的元素）外，我们还附加一个数据向量，为每个单元存储该单元所属的子域。这稍微有点棘手，因为当然不是每个处理器都知道每个单元。因此，我们附加的向量有一个当前处理器在其网格中拥有的每个单元的条目（本地拥有的单元、幽灵单元和人造单元），但DataOut类将忽略所有对应于不属于当前处理器的单元的条目。因此，我们在这些向量条目中写入什么值实际上并不重要：我们只是用当前MPI进程的编号（即当前进程的子域_id）来填充整个向量；这正确地设置了我们关心的值，即对应于本地拥有的单元的条目，而为所有其他元素提供了错误的值&ndash;但这些元素随后被忽略。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
@@ -510,24 +564,27 @@ $(function() {
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ac1eb26168177faa30ffbcf9cbb9c3cd5">attach_dof_handler</a>(dof_handler);</div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(locally_relevant_solution, <span class="stringliteral">&quot;u&quot;</span>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;float&gt;</a> subdomain(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; subdomain.size(); ++i)</div>
 <div class="line">    subdomain(i) = <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.locally_owned_subdomain();</div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(subdomain, <span class="stringliteral">&quot;subdomain&quot;</span>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  data_out.<a class="code" href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">build_patches</a>();</div>
 <div class="ttc" id="aclassDataOut__DoFData_html_ac1eb26168177faa30ffbcf9cbb9c3cd5"><div class="ttname"><a href="classDataOut__DoFData.html#ac1eb26168177faa30ffbcf9cbb9c3cd5">DataOut_DoFData::attach_dof_handler</a></div><div class="ttdeci">void attach_dof_handler(const DoFHandlerType &amp;)</div></div>
 <div class="ttc" id="aclassDataOut__DoFData_html_ace4b76e565ba0701c4d32c26075ed3b9"><div class="ttname"><a href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">DataOut_DoFData::add_data_vector</a></div><div class="ttdeci">void add_data_vector(const VectorType &amp;data, const std::vector&lt; std::string &gt; &amp;names, const DataVectorType type=type_automatic, const std::vector&lt; DataComponentInterpretation::DataComponentInterpretation &gt; &amp;data_component_interpretation=std::vector&lt; DataComponentInterpretation::DataComponentInterpretation &gt;())</div><div class="ttdef"><b>Definition:</b> <a href="data__out__dof__data_8h_source.html#l01087">data_out_dof_data.h:1087</a></div></div>
 <div class="ttc" id="aclassDataOut_html"><div class="ttname"><a href="classDataOut.html">DataOut</a></div><div class="ttdef"><b>Definition:</b> <a href="numerics_2data__out_8h_source.html#l00147">data_out.h:150</a></div></div>
 <div class="ttc" id="aclassDataOut_html_a5eb51872b8736849bb7e8d2007fae086"><div class="ttname"><a href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">DataOut::build_patches</a></div><div class="ttdeci">virtual void build_patches(const unsigned int n_subdivisions=0)</div><div class="ttdef"><b>Definition:</b> <a href="numerics_2data__out_8cc_source.html#l01085">data_out.cc:1085</a></div></div>
-</div><!-- fragment --><p>The next step is to write this data to disk. We write up to 8 VTU files in parallel with the help of MPI-IO. Additionally a PVTU record is generated, which groups the written VTU files.</p>
+</div><!-- fragment --><p>下一步是把这些数据写到磁盘上。在MPI-IO的帮助下，我们最多可并行写入8个VTU文件。此外，还产生了一个PVTU记录，它将写入的VTU文件分组。</p>
 <div class="fragment"><div class="line">  data_out.<a class="code" href="group__Exceptions.html#ga0864e51eb173c87e2a3edc9391ea8009">write_vtu_with_pvtu_record</a>(</div>
 <div class="line">    <span class="stringliteral">&quot;./&quot;</span>, <span class="stringliteral">&quot;solution&quot;</span>, cycle, mpi_communicator, 2, 8);</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__Exceptions_html_ga0864e51eb173c87e2a3edc9391ea8009"><div class="ttname"><a href="group__Exceptions.html#ga0864e51eb173c87e2a3edc9391ea8009">DataOutInterface::write_vtu_with_pvtu_record</a></div><div class="ttdeci">std::string write_vtu_with_pvtu_record(const std::string &amp;directory, const std::string &amp;filename_without_extension, const unsigned int counter, const MPI_Comm &amp;mpi_communicator, const unsigned int n_digits_for_counter=numbers::invalid_unsigned_int, const unsigned int n_groups=0) const</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l07326">data_out_base.cc:7326</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemrun"></a> </p><h4>LaplaceProblem::run</h4>
-<p>The function that controls the overall behavior of the program is again like the one in <a class="el" href="step_6.html">step-6</a>. The minor difference are the use of <code>pcout</code> instead of <code>std::cout</code> for output to the console (see also <a class="el" href="step_17.html">step-17</a>) and that we only generate graphical output if at most 32 processors are involved. Without this limit, it would be just too easy for people carelessly running this program without reading it first to bring down the cluster interconnect and fill any file system available :-)</p>
-<p>A functional difference to <a class="el" href="step_6.html">step-6</a> is the use of a square domain and that we start with a slightly finer mesh (5 global refinement cycles) &ndash; there just isn't much of a point showing a massively parallel program starting on 4 cells (although admittedly the point is only slightly stronger starting on 1024).</p>
+<p>控制程序整体行为的函数又和 <a class="el" href="step_6.html">step-6</a> 中的函数一样。小的区别是使用 <code>pcout</code> instead of <code>std::cout</code> 来输出到控制台（也见 <a class="el" href="step_17.html">step-17</a> ），而且我们只在最多涉及32个处理器的情况下产生图形输出。如果没有这个限制，人们很容易在不看程序的情况下粗心大意地运行这个程序，从而导致集群的互连中断，并填满任何可用的文件系统 :-) <br  />
+</p>
+<p>与 <a class="el" href="step_6.html">step-6</a> 的一个功能上的区别是使用了一个正方形域，并且我们从一个稍细的网格开始（5个全局细化周期）&ndash;在4个单元上开始显示一个大规模的并行程序没有什么意义（尽管承认从1024开始的意义只是稍强）。</p>
 <div class="fragment"><div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">LaplaceProblem&lt;dim&gt;::run</a>()</div>
 <div class="line">  {</div>
@@ -540,10 +597,12 @@ $(function() {
 <div class="line">          &lt;&lt; <span class="stringliteral">&quot; on &quot;</span> &lt;&lt; <a class="code" href="namespaceUtilities_1_1MPI.html#ac26de0c059200523177bb1d92cc25d00">Utilities::MPI::n_mpi_processes</a>(mpi_communicator)</div>
 <div class="line">          &lt;&lt; <span class="stringliteral">&quot; MPI rank(s)...&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_cycles = 8;</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle = 0; cycle &lt; n_cycles; ++cycle)</div>
 <div class="line">      {</div>
 <div class="line">        pcout &lt;&lt; <span class="stringliteral">&quot;Cycle &quot;</span> &lt;&lt; cycle &lt;&lt; <span class="charliteral">&#39;:&#39;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">if</span> (cycle == 0)</div>
 <div class="line">          {</div>
@@ -553,15 +612,19 @@ $(function() {
 <div class="line">        <span class="keywordflow">else</span></div>
 <div class="line">          refine_grid();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        setup_system();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        pcout &lt;&lt; <span class="stringliteral">&quot;   Number of active cells:       &quot;</span></div>
 <div class="line">              &lt;&lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_global_active_cells() &lt;&lt; std::endl</div>
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot;   Number of degrees of freedom: &quot;</span> &lt;&lt; dof_handler.n_dofs()</div>
 <div class="line">              &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        assemble_system();</div>
 <div class="line">        solve();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">if</span> (<a class="code" href="namespaceUtilities_1_1MPI.html#ac26de0c059200523177bb1d92cc25d00">Utilities::MPI::n_mpi_processes</a>(mpi_communicator) &lt;= 32)</div>
 <div class="line">          {</div>
@@ -569,8 +632,10 @@ $(function() {
 <div class="line">            output_results(cycle);</div>
 <div class="line">          }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        computing_timer.print_summary();</div>
 <div class="line">        computing_timer.reset();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        pcout &lt;&lt; std::endl;</div>
 <div class="line">      }</div>
@@ -579,8 +644,8 @@ $(function() {
 <div class="ttc" id="anamespaceGridGenerator_html_acea0cbcd68e52ce8113d1134b87de403"><div class="ttname"><a href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a></div><div class="ttdeci">void hyper_cube(Triangulation&lt; dim, spacedim &gt; &amp;tria, const double left=0., const double right=1., const bool colorize=false)</div></div>
 <div class="ttc" id="anamespaceUtilities_1_1MPI_html_ac26de0c059200523177bb1d92cc25d00"><div class="ttname"><a href="namespaceUtilities_1_1MPI.html#ac26de0c059200523177bb1d92cc25d00">Utilities::MPI::n_mpi_processes</a></div><div class="ttdeci">unsigned int n_mpi_processes(const MPI_Comm &amp;mpi_communicator)</div><div class="ttdef"><b>Definition:</b> <a href="mpi_8cc_source.html#l00117">mpi.cc:117</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="main"></a> </p><h4>main()</h4>
-<p>The final function, <code>main()</code>, again has the same structure as in all other programs, in particular <a class="el" href="step_6.html">step-6</a>. Like the other programs that use MPI, we have to initialize and finalize MPI, which is done using the helper object <a class="el" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a>. The constructor of that class also initializes libraries that depend on MPI, such as p4est, PETSc, SLEPc, and Zoltan (though the last two are not used in this tutorial). The order here is important: we cannot use any of these libraries until they are initialized, so it does not make sense to do anything before creating an instance of <a class="el" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a>.</p>
-<p>After the solver finishes, the LaplaceProblem destructor will run followed by <a class="el" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html#a812d3e3369e2c86ba94beb13368d92d7">Utilities::MPI::MPI_InitFinalize::~MPI_InitFinalize()</a>. This order is also important: <a class="el" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html#a812d3e3369e2c86ba94beb13368d92d7">Utilities::MPI::MPI_InitFinalize::~MPI_InitFinalize()</a> calls <code>PetscFinalize</code> (and finalization functions for other libraries), which will delete any in-use PETSc objects. This must be done after we destruct the Laplace solver to avoid double deletion errors. Fortunately, due to the order of destructor call rules of C++, we do not need to worry about any of this: everything happens in the correct order (i.e., the reverse of the order of construction). The last function called by <a class="el" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html#a812d3e3369e2c86ba94beb13368d92d7">Utilities::MPI::MPI_InitFinalize::~MPI_InitFinalize()</a> is <code>MPI_Finalize</code>: i.e., once this object is destructed the program should exit since MPI will no longer be available.</p>
+<p>最后一个函数， <code>main()</code> ，同样具有与所有其他程序相同的结构，特别是 <a class="el" href="step_6.html">step-6</a> 。像其他使用MPI的程序一样，我们必须初始化和最终确定MPI，这是用辅助对象 <a class="el" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a>. 完成的，该类的构造函数也初始化了依赖MPI的库，如p4est、PETSc、SLEPc和Zoltan（尽管后两个在本教程中没有使用）。这里的顺序很重要：在这些库被初始化之前，我们不能使用它们，所以在创建 <a class="el" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a>. 的实例之前做任何事情都没有意义。</p>
+<p>在求解器完成后，LaplaceProblem解构器将运行，然后是 <a class="el" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html#a812d3e3369e2c86ba94beb13368d92d7">Utilities::MPI::MPI_InitFinalize::~MPI_InitFinalize()</a>. ，这个顺序也很重要： <a class="el" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html#a812d3e3369e2c86ba94beb13368d92d7">Utilities::MPI::MPI_InitFinalize::~MPI_InitFinalize()</a> 调用 <code>PetscFinalize</code> （以及其他库的最终化函数），这将删除任何正在使用的PETSc对象。这必须在我们解构拉普拉斯求解器之后进行，以避免双重删除错误。幸运的是，由于C++的析构器调用顺序规则，我们不需要担心这些：一切都以正确的顺序发生（即，与构造顺序相反）。 <a class="el" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html#a812d3e3369e2c86ba94beb13368d92d7">Utilities::MPI::MPI_InitFinalize::~MPI_InitFinalize()</a> 调用的最后一个函数是 <code>MPI_Finalize</code> ：也就是说，一旦这个对象被解构，程序就应该退出，因为MPI将不再可用。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">try</span></div>
@@ -588,7 +653,9 @@ $(function() {
 <div class="line">      <span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
 <div class="line">      <span class="keyword">using namespace </span>Step40;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <a class="code" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a> mpi_initialization(argc, argv, 1);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      LaplaceProblem&lt;2&gt; laplace_problem_2d;</div>
 <div class="line">      laplace_problem_2d.run();</div>
@@ -605,6 +672,7 @@ $(function() {
 <div class="line">                &lt;&lt; <span class="stringliteral">&quot;----------------------------------------------------&quot;</span></div>
 <div class="line">                &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line">  <span class="keywordflow">catch</span> (...)</div>
@@ -620,14 +688,17 @@ $(function() {
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassUtilities_1_1MPI_1_1MPI__InitFinalize_html"><div class="ttname"><a href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a></div><div class="ttdef"><b>Definition:</b> <a href="mpi_8h_source.html#l00902">mpi.h:903</a></div></div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
-<p>When you run the program, on a single processor or with your local MPI installation on a few, you should get output like this: </p><div class="fragment"><div class="line">Cycle 0:</div>
+</div><!-- fragment --><p><a class="anchor" id="Results"></a></p><h1>Results</h1>
+<p>当你在单个处理器上或在几个本地MPI安装上运行该程序时，你应该得到这样的输出。</p>
+<div class="fragment"><div class="line">Cycle 0:</div>
 <div class="line">   Number of active cells:       1024</div>
 <div class="line">   Number of degrees of freedom: 4225</div>
 <div class="line">   Solved in 10 iterations.</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">+---------------------------------------------+------------+------------+</div>
@@ -642,10 +713,12 @@ $(function() {
 <div class="line">+---------------------------------+-----------+------------+------------+</div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">Cycle 1:</div>
 <div class="line">   Number of active cells:       1954</div>
 <div class="line">   Number of degrees of freedom: 8399</div>
 <div class="line">   Solved in 10 iterations.</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">+---------------------------------------------+------------+------------+</div>
@@ -661,37 +734,44 @@ $(function() {
 <div class="line">+---------------------------------+-----------+------------+------------+</div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">Cycle 2:</div>
 <div class="line">   Number of active cells:       3664</div>
 <div class="line">   Number of degrees of freedom: 16183</div>
 <div class="line">   Solved in 11 iterations.</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">...</div>
 <div class="ttc" id="anamespaceGridRefinement_html_a1cf30058b31ce7f9b389e8310bb9fc54"><div class="ttname"><a href="namespaceGridRefinement.html#a1cf30058b31ce7f9b389e8310bb9fc54">GridRefinement::refine</a></div><div class="ttdeci">void refine(Triangulation&lt; dim, spacedim &gt; &amp;tria, const Vector&lt; Number &gt; &amp;criteria, const double threshold, const unsigned int max_to_mark=numbers::invalid_unsigned_int)</div><div class="ttdef"><b>Definition:</b> <a href="grid_2grid__refinement_8cc_source.html#l00168">grid_refinement.cc:168</a></div></div>
-</div><!-- fragment --><p>The exact numbers differ, depending on how many processors we use; this is due to the fact that the preconditioner depends on the partitioning of the problem, the solution then differs in the last few digits, and consequently the mesh refinement differs slightly. The primary thing to notice here, though, is that the number of iterations does not increase with the size of the problem. This guarantees that we can efficiently solve even the largest problems.</p>
-<p>When run on a sufficiently large number of machines (say a few thousand), this program can relatively easily solve problems with well over one billion unknowns in less than a minute. On the other hand, such big problems can no longer be visualized, so we also ran the program on only 16 processors. Here are a mesh, along with its partitioning onto the 16 processors, and the corresponding solution:</p>
+</div><!-- fragment --><p>确切的数字是不同的，这取决于我们使用多少个处理器；这是由于预处理程序取决于问题的分区，然后解决方案在最后几位上有所不同，因此网格细化也略有不同。不过，这里最值得注意的是，迭代次数并不随问题的大小而增加。这保证了我们甚至可以有效地解决最大的问题。</p>
+<p>当在足够多的机器上运行时（比如几千台），这个程序可以相对容易地在不到一分钟内解决超过10亿个未知数的问题。另一方面，这样的大问题已经不能被视觉化，所以我们也只在16个处理器上运行这个程序。下面是一个网格，以及它在16个处理器上的划分，还有相应的解决方案。</p>
 <table width="100%">
 <tr>
 <td><img src="https://www.dealii.org/images/steps/developer/step-40.mesh.png" alt="" class="inline"/>  </td><td><img src="https://www.dealii.org/images/steps/developer/step-40.solution.png" alt="" class="inline"/>   </td></tr>
 </table>
-<p>The mesh on the left has a mere 7,069 cells. This is of course a problem we would easily have been able to solve already on a single processor using <a class="el" href="step_6.html">step-6</a>, but the point of the program was to show how to write a program that scales to many more machines. For example, here are two graphs that show how the run time of a large number of parts of the program scales on problems with around 52 and 375 million degrees of freedom if we take more and more processors (these and the next couple of graphs are taken from an earlier version of the <a class="el" href="DEALGlossary.html#distributed_paper">Distributed Computing paper</a>; updated graphs showing data of runs on even larger numbers of processors, and a lot more interpretation can be found in the final version of the paper):</p>
+<p><br  />
+</p>
+<p>左边的网格仅有7,069个单元。当然，这个问题我们在单个处理器上已经可以很容易地用 <a class="el" href="step_6.html">step-6</a> 来解决了，但是这个程序的重点是展示如何编写一个可以扩展到更多机器的程序。例如，这里有两张图，显示了如果我们使用越来越多的处理器，程序的大量部分的运行时间是如何在大约5200万和37500万自由度的问题上扩展的（这些和接下来的几张图取自 <a class="el" href="DEALGlossary.html#distributed_paper">分布式计算论文 </a>的早期版本；显示在更大数量的处理器上运行数据的更新图，以及更多的解释可以在该论文的最终版本找到）。</p>
 <table width="100%">
 <tr>
 <td><img src="https://www.dealii.org/images/steps/developer/step-40.strong2.png" alt="" class="inline"/>  </td><td><img src="https://www.dealii.org/images/steps/developer/step-40.strong.png" alt="" class="inline"/>   </td></tr>
 </table>
-<p>As can clearly be seen, the program scales nicely to very large numbers of processors. (For a discussion of what we consider "scalable" programs, see <a class="el" href="DEALGlossary.html#GlossParallelScaling">this glossary entry</a>.) The curves, in particular the linear solver, become a bit wobbly at the right end of the graphs since each processor has too little to do to offset the cost of communication (the part of the whole problem each processor has to solve in the above two examples is only 13,000 and 90,000 degrees of freedom when 4,096 processors are used; a good rule of thumb is that parallel programs work well if each processor has at least 100,000 unknowns).</p>
-<p>While the strong scaling graphs above show that we can solve a problem of fixed size faster and faster if we take more and more processors, the more interesting question may be how big problems can become so that they can still be solved within a reasonable time on a machine of a particular size. We show this in the following two graphs for 256 and 4096 processors:</p>
+<p><br  />
+</p>
+<p>可以清楚地看到，该程序可以很好地扩展到非常大的处理器数量。关于我们认为的 "可扩展 "程序的讨论，见 <a class="el" href="DEALGlossary.html#GlossParallelScaling">本词汇表条目</a>）。曲线，特别是线性求解器，在图形的右端变得有些摇摆不定，因为每个处理器要做的事情太少，无法抵消通信成本（在上面两个例子中，每个处理器要解决的整个问题的部分，在使用4,096个处理器时，只有13,000和90,000个自由度；一个好的经验法则是，如果每个处理器至少有100,000个未知数，并行程序就会运行良好）。</p>
+<p>虽然上面的强扩展图显示，如果我们采取越来越多的处理器，我们可以越来越快地解决一个固定大小的问题，但更有趣的问题可能是，问题可以变得多大，以便在一个特定大小的机器上仍然可以在合理的时间内解决它们。我们在下面两张256和4096处理器的图中展示了这一点。</p>
 <table width="100%">
 <tr>
 <td><img src="https://www.dealii.org/images/steps/developer/step-40.256.png" alt="" class="inline"/>  </td><td><img src="https://www.dealii.org/images/steps/developer/step-40.4096.png" alt="" class="inline"/>   </td></tr>
 </table>
-<p>What these graphs show is that all parts of the program scale linearly with the number of degrees of freedom. This time, lines are wobbly at the left as the size of local problems is too small. For more discussions of these results we refer to the <a class="el" href="DEALGlossary.html#distributed_paper">Distributed Computing paper</a>.</p>
-<p>So how large are the largest problems one can solve? At the time of writing this problem, the limiting factor is that the program uses the BoomerAMG algebraic multigrid method from the <a href="http://acts.nersc.gov/hypre/" target="_top">Hypre package</a> as a preconditioner, which unfortunately uses signed 32-bit integers to index the elements of a distributed matrix. This limits the size of problems to \(2^{31}-1=2,147,483,647\) degrees of freedom. From the graphs above it is obvious that the scalability would extend beyond this number, and one could expect that given more than the 4,096 machines shown above would also further reduce the compute time. That said, one can certainly expect that this limit will eventually be lifted by the hypre developers.</p>
-<p>On the other hand, this does not mean that deal.II cannot solve bigger problems. Indeed, <a class="el" href="step_37.html">step-37</a> shows how one can solve problems that are not just a little, but very substantially larger than anything we have shown here.</p>
+<p><br  />
+</p>
+<p>这些图显示的是，程序的所有部分都随着自由度数的增加而线性扩展。这一次，由于局部问题的规模太小，线条在左边是摇摆不定的。关于这些结果的更多讨论，我们参考了 <a class="el" href="DEALGlossary.html#distributed_paper">分布式计算论文</a>。</p>
+<p>那么，一个人能够解决的最大问题是多大呢？在写这个问题的时候，限制因素是程序使用<a href="http://acts.nersc.gov/hypre/" target="_top">Hypre package</a>中的BoomerAMG代数多网格方法作为预处理程序，不幸的是，它使用有符号的32位整数来索引分布式矩阵的元素。这将问题的大小限制在 \(2^{31}-1=2,147,483,647\) 个自由度。从上面的图中可以看出，可扩展性会超过这个数字，人们可以预期，给定超过上面显示的4,096台机器也会进一步减少计算时间。也就是说，人们当然可以期待，这个限制最终会被hybre的开发者解除。</p>
+<p>另一方面，这并不意味着deal.II不能解决更大的问题。事实上， <a class="el" href="step_37.html">step-37</a> 展示了如何解决比我们在这里展示的任何问题都要大得多的问题，而不仅仅是一点，而是非常大。</p>
 <p><a class="anchor" id="extensions"></a> <a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions</h3>
-<p>In a sense, this program is the ultimate solver for the Laplace equation: it can essentially solve the equation to whatever accuracy you want, if only you have enough processors available. Since the Laplace equation by itself is not terribly interesting at this level of accuracy, the more interesting possibilities for extension therefore concern not so much this program but what comes beyond it. For example, several of the other programs in this tutorial have significant run times, especially in 3d. It would therefore be interesting to use the techniques explained here to extend other programs to support parallel distributed computations. We have done this for <a class="el" href="step_31.html">step-31</a> in the <a class="el" href="step_32.html">step-32</a> tutorial program, but the same would apply to, for example, <a class="el" href="step_23.html">step-23</a> and <a class="el" href="step_25.html">step-25</a> for hyperbolic time dependent problems, <a class="el" href="step_33.html">step-33</a> for gas dynamics, or <a class="el" href="step_35.html">step-35</a> for the Navier-Stokes equations.</p>
-<p>Maybe equally interesting is the problem of postprocessing. As mentioned above, we only show pictures of the solution and the mesh for 16 processors because 4,096 processors solving 1 billion unknowns would produce graphical output on the order of several 10 gigabyte. Currently, no program is able to visualize this amount of data in any reasonable way unless it also runs on at least several hundred processors. There are, however, approaches where visualization programs directly communicate with solvers on each processor with each visualization process rendering the part of the scene computed by the solver on this processor. Implementing such an interface would allow to quickly visualize things that are otherwise not amenable to graphical display.</p>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+<p>从某种意义上说，这个程序是拉普拉斯方程的终极解算器：只要你有足够的处理器可用，它基本上可以把方程解到你想要的任何精度。由于拉普拉斯方程本身在这个精度水平上并不十分有趣，因此，更有趣的扩展可能性不在于这个程序，而在于它之后的内容。例如，本教程中的其他几个程序都有相当长的运行时间，特别是在3D中。因此，使用这里解释的技术来扩展其他程序以支持并行的分布式计算将是很有趣的。我们已经在 <a class="el" href="step_32.html">step-32</a> 教程程序中为 <a class="el" href="step_31.html">step-31</a> 做了这个工作，但同样的情况也适用于例如 <a class="el" href="step_23.html">step-23</a> 和 <a class="el" href="step_25.html">step-25</a> 的双曲时间相关问题， <a class="el" href="step_33.html">step-33</a> 的气体动力学，或 <a class="el" href="step_35.html">step-35</a> 的纳维尔-斯托克斯方程。</p>
+<p>也许同样有趣的是后处理的问题。如上所述，我们只展示了16个处理器的解和网格的图片，因为4,096个处理器解决10亿个未知数会产生几10G的图形输出。目前，除非在至少几百个处理器上运行，否则没有任何程序能够以任何合理的方式将如此大量的数据可视化。然而，有一些方法，可视化程序直接与每个处理器上的求解器进行通信，每个可视化进程渲染这个处理器上的求解器所计算的场景部分。实现这样的接口将允许快速可视化那些在其他方面不适合用图形显示的东西。<a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2009 - 2020 by the deal.II authors</span></div>
@@ -1104,7 +1184,9 @@ $(function() {
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> <br  />
+ </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

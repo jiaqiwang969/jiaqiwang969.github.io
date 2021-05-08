@@ -1,142 +1,101 @@
-/**
-@page step_8 The step-8 tutorial program
-This tutorial depends on step-6.
+  /**  @page step_8 The step-8 tutorial program  。 
+
+本教程取决于  step-6  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#ThecodeElasticProblemcodeclasstemplate">The <code>ElasticProblem</code> class template</a>
-        <li><a href="#Righthandsidevalues">Right hand side values</a>
-        <li><a href="#ThecodeElasticProblemcodeclassimplementation">The <code>ElasticProblem</code> class implementation</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#ThecodeElasticProblemcodeclasstemplate">The <code>ElasticProblem</code> class template</a><a href="#ThecodeElasticProblemcodeclasstemplate">The <code>ElasticProblem</code> class template</a>
+        <li><a href="#Righthandsidevalues">Right hand side values</a><a href="#Righthandsidevalues">Right hand side values</a>
+        <li><a href="#ThecodeElasticProblemcodeclassimplementation">The <code>ElasticProblem</code> class implementation</a><a href="#ThecodeElasticProblemcodeclassimplementation">The <code>ElasticProblem</code> class implementation</a>
       <ul>
-        <li><a href="#ElasticProblemElasticProblemconstructor">ElasticProblem::ElasticProblem constructor</a>
-        <li><a href="#ElasticProblemsetup_system">ElasticProblem::setup_system</a>
-        <li><a href="#ElasticProblemassemble_system">ElasticProblem::assemble_system</a>
-        <li><a href="#ElasticProblemsolve">ElasticProblem::solve</a>
-        <li><a href="#ElasticProblemrefine_grid">ElasticProblem::refine_grid</a>
-        <li><a href="#ElasticProblemoutput_results">ElasticProblem::output_results</a>
-        <li><a href="#ElasticProblemrun">ElasticProblem::run</a>
+        <li><a href="#ElasticProblemElasticProblemconstructor">ElasticProblem::ElasticProblem constructor</a><a href="#ElasticProblemElasticProblemconstructor">ElasticProblem::ElasticProblem constructor</a>
+        <li><a href="#ElasticProblemsetup_system">ElasticProblem::setup_system</a><a href="#ElasticProblemsetup_system">ElasticProblem::setup_system</a>
+        <li><a href="#ElasticProblemassemble_system">ElasticProblem::assemble_system</a><a href="#ElasticProblemassemble_system">ElasticProblem::assemble_system</a>
+        <li><a href="#ElasticProblemsolve">ElasticProblem::solve</a><a href="#ElasticProblemsolve">ElasticProblem::solve</a>
+        <li><a href="#ElasticProblemrefine_grid">ElasticProblem::refine_grid</a><a href="#ElasticProblemrefine_grid">ElasticProblem::refine_grid</a>
+        <li><a href="#ElasticProblemoutput_results">ElasticProblem::output_results</a><a href="#ElasticProblemoutput_results">ElasticProblem::output_results</a>
+        <li><a href="#ElasticProblemrun">ElasticProblem::run</a><a href="#ElasticProblemrun">ElasticProblem::run</a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+@endhtmlonly 
+
+<a name="Intro"></a> <a name="Introduction"></a> <h1>Introduction</h1> 
 
 
 
-In real life, most partial differential equations are really systems
-of equations. Accordingly, the solutions are usually
-vector-valued. The deal.II library supports such problems (see the
-extensive documentation in the @ref vector_valued module), and we will show
-that that is mostly rather simple. The only more complicated problems
-are in assembling matrix and right hand side, but these are easily
-understood as well.
 
-@dealiiVideoLecture{19}
+在现实生活中，大多数偏微分方程实际上是方程组。因此，解通常是矢量值的。deal.II库支持这类问题（见 @ref vector_valued 模块中的大量文档），我们将证明那大多是相当简单的。唯一比较复杂的问题是在组装矩阵和右手边，但这些也很容易理解。
 
-In this tutorial program we will want to solve the
-<a href="https://en.wikipedia.org/wiki/Linear_elasticity">elastic equations</a>.
-They are an extension to Laplace's equation with a vector-valued solution that
-describes the displacement in each space direction of a rigid body
-which is subject to a force. Of course, the force is also
-vector-valued, meaning that in each point it has a direction and an
-absolute value.
+  @dealiiVideoLecture{19}   
 
-One can write the elasticity equations in a number of ways. The one that shows
-the symmetry with the Laplace equation in the most obvious way is to write it
-as
-@f[
-  -
-  \text{div}\,
-  ({\mathbf C} \nabla \mathbf{u})
-  =
-  \mathbf f,
-@f]
-where $\mathbf u$ is the vector-valued displacement at each point,
-$\mathbf f$ the force, and ${\mathbf C}$ is a rank-4 tensor (i.e., it has four
-indices) that encodes the stress-strain relationship -- in essence,
-it represents the
-<a href="https://en.wikipedia.org/wiki/Hooke%27s_law">"spring constant"</a> in
-Hookes law that relates the displacement to the forces. ${\mathbf C}$ will, in many
-cases, depend on $\mathbf x$ if the body whose deformation we want to
-simulate is composed of different materials.
+在这个教程程序中，我们将想解决<a href="https://en.wikipedia.org/wiki/Linear_elasticity">elastic equations</a>的问题。它们是拉普拉斯方程的扩展，有一个矢量值的解决方案，描述了受力的刚体在每个空间方向的位移。当然，力也是矢量值的，意味着在每个点上都有一个方向和一个绝对值。
 
-While the form of the equations above is correct, it is not the way
-they are usually derived. In truth, the gradient of the displacement
-$\nabla\mathbf u$ (a matrix) has no physical meaning whereas its
-symmetrized version,
-@f[
+人们可以用多种方式来写弹性方程。其中 $\mathbf u$ 是每一点的向量值位移， $\mathbf f$ 是力， ${\mathbf C}$ 是编码应力-应变关系的第4级张量（即，它有四个指数）--实质上，它代表胡克斯定律中的<a href="https://en.wikipedia.org/wiki/Hooke%27s_law">"spring constant"</a>，将位移和力联系起来。 在许多情况下，如果我们想要模拟的物体的变形是由不同的材料组成的，那么 ${\mathbf C}$ 将取决于 $\mathbf x$ 。
+
+虽然上述方程的形式是正确的，但这并不是它们通常的推导方式。事实上，位移的梯度 $\nabla\mathbf u$ （一个矩阵）没有物理意义，而它的对称版本@f[
 \varepsilon(\mathbf u)_{kl} =\frac{1}{2}(\partial_k u_l + \partial_l u_k),
-@f]
-does and is typically called the "strain". (Here and in the following,
-$\partial_k=\frac{\partial}{\partial x_k}$. We will also use the
-<a href="https://en.wikipedia.org/wiki/Einstein_notation">Einstein summation
-convention</a> that whenever the same index appears twice in an equation,
-summation over this index is implied; we will, however, not distinguish
-between upper and lower indices.)
-With this definition of the strain, the elasticity equations
-then read as
-@f[
+@f]却有，通常被称为 "应变"。这里和下文中， $\partial_k=\frac{\partial}{\partial x_k}$  。我们还将使用<a href="https://en.wikipedia.org/wiki/Einstein_notation">Einstein summation
+convention</a>，即只要同一个指数在一个方程中出现两次，就意味着对这个指数进行求和；但是，我们将不区分上级和下级指数）。) 有了这个应变的定义，弹性方程就读作@f[
+
+
   -
   \text{div}\,
   ({\mathbf C} \varepsilon(\mathbf u))
   =
   \mathbf f,
-@f]
-which you can think of as the more natural generalization of the Laplace
-equation to vector-valued problems. (The form shown first is equivalent to
-this form because the tensor ${\mathbf C}$ has certain symmetries, namely that
-$C_{ijkl}=C_{ijlk}$, and consequently ${\mathbf C} \varepsilon(\mathbf u)_{kl}
-= {\mathbf C} \nabla\mathbf u$.)
+@f]，你可以认为这是拉普拉斯方程对矢量值问题的更自然的概括。首先显示的形式等同于这种形式，因为张量 ${\mathbf C}$ 具有某些对称性，即 $C_{ijkl}=C_{ijlk}$  ，因此 ${\mathbf C} \varepsilon(\mathbf u)_{kl}
+= {\mathbf C} \nabla\mathbf u$  。
 
-One can of course alternatively write these equations in component form:
-@f[
+当然，我们也可以把这些方程写成组件形式。@f[
+
+
   -
   \partial_j (c_{ijkl} \varepsilon_{kl})
   =
   f_i,
   \qquad
   i=1\ldots d.
-@f]
+@f] 
 
-In many cases, one knows that the material under consideration is
-isotropic, in which case by introduction of the two coefficients
-$\lambda$ and $\mu$ the coefficient tensor reduces to
-@f[
+在许多情况下，我们知道所考虑的材料是各向同性的，在这种情况下，通过引入两个系数 $\lambda$ 和 $\mu$ ，系数张量减少为@f[
   c_{ijkl}
   =
   \lambda \delta_{ij} \delta_{kl} +
   \mu (\delta_{ik} \delta_{jl} + \delta_{il} \delta_{jk}).
-@f]
+@f] 。
 
-The elastic equations can then be rewritten in much simpler a form:
-@f[
+然后，弹性方程可以以更简单的形式重写。@f[
+
+
    -
    \nabla \lambda (\nabla\cdot {\mathbf u})
+
+
    -
    (\nabla \cdot \mu \nabla) {\mathbf u}
+
+
    -
    \nabla\cdot \mu (\nabla {\mathbf u})^T
    =
    {\mathbf f},
-@f]
-and the respective bilinear form is then
-@f[
+@f]，然后各自的双线性形式是@f[
   a({\mathbf u}, {\mathbf v}) =
   \left(
     \lambda \nabla\cdot {\mathbf u}, \nabla\cdot {\mathbf v}
@@ -151,9 +110,7 @@ and the respective bilinear form is then
   \left(
     \mu \partial_k u_l, \partial_l v_k
   \right)_\Omega,
-@f]
-or also writing the first term a sum over components:
-@f[
+@f]，或者也可以把第一项写成分量上的和。@f[
   a({\mathbf u}, {\mathbf v}) =
   \sum_{k,l}
   \left(
@@ -169,65 +126,22 @@ or also writing the first term a sum over components:
   \left(
     \mu \partial_k u_l, \partial_l v_k
   \right)_\Omega.
-@f]
+@f] 
 
-@note As written, the equations above are generally considered to be the right
-description for the displacement of three-dimensional objects if the
-displacement is small and we can assume that <a
-href="http://en.wikipedia.org/wiki/Hookes_law">Hooke's law</a> is valid. In
-that case, the indices $i,j,k,l$ above all run over the set $\{1,2,3\}$ (or,
-in the C++ source, over $\{0,1,2\}$). However, as is, the program runs in 2d,
-and while the equations above also make mathematical sense in that case, they
-would only describe a truly two-dimensional solid. In particular, they are not
-the appropriate description of an $x-y$ cross-section of a body infinite in
-the $z$ direction; this is in contrast to many other two-dimensional equations
-that can be obtained by assuming that the body has infinite extent in
-$z$-direction and that the solution function does not depend on the $z$
-coordinate. On the other hand, there are equations for two-dimensional models
-of elasticity; see for example the Wikipedia article on <a
+  @note  按照写法，如果位移很小，我们可以假设<a
+href="http://en.wikipedia.org/wiki/Hookes_law">Hooke's law</a>有效，上述方程一般被认为是对三维物体位移的正确描述。在这种情况下，上面的指数 $i,j,k,l$ 都在集合 $\{1,2,3\}$ 上运行（或者，在C++源中，在 $\{0,1,2\}$ 上）。然而，按照目前的情况，程序是在2D中运行的，虽然上面的方程在这种情况下也有数学意义，但它们只能描述一个真正的二维实体。特别是，它们不是对 $x-y$ 方向无限大的体的 $z$ 截面的适当描述；这与其他许多二维方程相反，这些方程可以通过假设体在 $z$ -方向上有无限大的范围，并且解函数不依赖于 $z$ 坐标而得到。另一方面，也有二维弹性模型的方程；例如，见维基百科关于<a
 href="http://en.wikipedia.org/wiki/Infinitesimal_strain_theory#Special_cases">plane
-strain</a>, <a
-href="http://en.wikipedia.org/wiki/Antiplane_shear">antiplane shear</a> and <a
-href="http://en.wikipedia.org/wiki/Plane_stress#Plane_stress">plan stress</a>.
+strain</a>、<a
+href="http://en.wikipedia.org/wiki/Antiplane_shear">antiplane shear</a>和<a
+href="http://en.wikipedia.org/wiki/Plane_stress#Plane_stress">plan stress</a>的文章。
 
-But let's get back to the original problem.
-How do we assemble the matrix for such an equation? A very long answer
-with a number of different alternatives is given in the documentation of the
-@ref vector_valued module. Historically, the solution shown below was the only
-one available in the early years of the library. It turns out to also be the
-fastest. On the other hand, if a few per cent of compute time do not matter,
-there are simpler and probably more intuitive ways to assemble the linear
-system than the one discussed below but that weren't available until several
-years after this tutorial program was first written; if you are interested in
-them, take a look at the @ref vector_valued module.
+但让我们回到最初的问题上。我们如何组装这样一个方程的矩阵？在 @ref vector_valued 模块的文档中给出了一个很长的答案，其中有许多不同的选择。从历史上看，下面所示的解决方案是该库早期唯一可用的解决方案。事实证明，它也是最快的。另一方面，如果百分之几的计算时间并不重要，还有比下面讨论的更简单、更直观的方法来组装线性系统，但这些方法直到本教程程序首次编写的几年后才可用；如果你对它们感兴趣，可以看一下 @ref vector_valued 模块。
 
-Let us go back to the question of how to assemble the linear system. The first
-thing we need is some knowledge about how the shape functions work in the case
-of vector-valued finite elements. Basically, this comes down to the following:
-let $n$ be the number of shape functions for the scalar finite element of
-which we build the vector element (for example, we will use bilinear functions
-for each component of the vector-valued finite element, so the scalar finite
-element is the <code>FE_Q(1)</code> element which we have used in previous
-examples already, and $n=4$ in two space dimensions). Further, let $N$ be the
-number of shape functions for the vector element; in two space dimensions, we
-need $n$ shape functions for each component of the vector, so $N=2n$. Then,
-the $i$th shape function of the vector element has the form
-@f[
+让我们回到如何组装线性系统的问题上来。首先我们需要一些关于形状函数在矢量值有限元情况下如何工作的知识。基本上，这归结为以下几点：让 $n$ 为我们建立矢量元素的标量有限元素的形状函数的数量（例如，我们将对矢量值有限元素的每个分量使用双线性函数，所以标量有限元素是我们在以前的例子中已经使用过的 <code>FE_Q(1)</code> 元素，以及两个空间维度的 $n=4$ ）。此外，让 $N$ 为矢量元素的形状函数的数量；在两个空间维度上，我们需要 $n$ 矢量的每个分量的形状函数，所以 $N=2n$  。然后，矢量元素的 $i$ 个形状函数具有@f[
   \Phi_i({\mathbf x}) = \varphi_{\text{base}(i)}({\mathbf x})\ {\mathbf e}_{\text{comp}(i)},
-@f]
-where $e_l$ is the $l$th unit vector, $\text{comp}(i)$ is the function that tells
-us which component of $\Phi_i$ is the one that is nonzero (for
-each vector shape function, only one component is nonzero, and all others are
-zero). $\varphi_{\text{base}(i)}(x)$ describes the space dependence of the shape
-function, which is taken to be the $\text{base}(i)$-th shape function of the scalar
-element. Of course, while $i$ is in the range $0,\ldots,N-1$, the functions
-$\text{comp}(i)$ and $\text{base}(i)$ have the ranges $0,1$ (in 2D) and $0,\ldots,n-1$,
-respectively.
+@f]的形式，其中 $e_l$ 是 $l$ 个单位矢量， $\text{comp}(i)$ 是告诉我们 $\Phi_i$ 的哪个分量是不为零的函数（对于每个矢量形状函数，只有一个分量是不为零，其他都是零）。  $\varphi_{\text{base}(i)}(x)$ 描述了形状函数的空间依赖性，它被认为是标量元素的第 $\text{base}(i)$ 个形状函数。当然，虽然 $i$ 的范围是 $0,\ldots,N-1$ ，但函数 $\text{comp}(i)$ 和 $\text{base}(i)$ 的范围分别为 $0,1$ （在二维）和 $0,\ldots,n-1$ 。
 
-For example (though this sequence of shape functions is not
-guaranteed, and you should not rely on it),
-the following layout could be used by the library:
-@f{eqnarray*}
+例如（尽管这种形状函数的顺序不被保证，你也不应该依赖它），下面的布局可以被库使用。@f{eqnarray*}
   \Phi_0({\mathbf x}) &=&
   \left(\begin{array}{c}
     \varphi_0({\mathbf x}) \\ 0
@@ -248,46 +162,30 @@ the following layout could be used by the library:
     0 \\ \varphi_1({\mathbf x})
   \end{array}\right),
   \ldots
-@f}
-where here
-@f[
+@f} 
+
+这里 @f[
   \text{comp}(0)=0, \quad  \text{comp}(1)=1, \quad  \text{comp}(2)=0, \quad  \text{comp}(3)=1, \quad  \ldots
-@f]
-@f[
+@f] @f[
   \text{base}(0)=0, \quad  \text{base}(1)=0, \quad  \text{base}(2)=1, \quad  \text{base}(3)=1, \quad  \ldots
-@f]
+@f] 。
 
-In all but very rare cases, you will not need to know which shape function
-$\varphi_{\text{base}(i)}$ of the scalar element belongs to a shape function $\Phi_i$
-of the vector element. Let us therefore define
-@f[
+除了非常罕见的情况，你不需要知道标量元素的哪个形状函数 $\varphi_{\text{base}(i)}$ 属于矢量元素的一个形状函数 $\Phi_i$ 。因此，让我们定义@f[
   \phi_i = \varphi_{\text{base}(i)}
-@f]
-by which we can write the vector shape function as
-@f[
+@f]，通过它我们可以把向量形状函数写成@f[
   \Phi_i({\mathbf x}) = \phi_{i}({\mathbf x})\ {\mathbf e}_{\text{comp}(i)}.
-@f]
-You can now safely forget about the function $\text{base}(i)$, at least for the rest
-of this example program.
+@f]，现在你可以安全地忘记函数 $\text{base}(i)$ ，至少在这个例子程序的其余部分。
 
-Now using this vector shape functions, we can write the discrete finite
-element solution as
-@f[
+现在使用这个矢量形状函数，我们可以把离散的有限元解写成 @f[
   {\mathbf u}_h({\mathbf x}) =
   \sum_i \Phi_i({\mathbf x})\ U_i
-@f]
-with scalar coefficients $U_i$. If we define an analog function ${\mathbf v}_h$ as
-test function, we can write the discrete problem as follows: Find coefficients
-$U_i$ such that
-@f[
+@f] ，标量系数  $U_i$  。如果我们定义一个模拟函数 ${\mathbf v}_h$ 作为测试函数，我们可以把离散问题写成如下。找出系数 $U_i$ ，使@f[
   a({\mathbf u}_h, {\mathbf v}_h) = ({\mathbf f}, {\mathbf v}_h)
   \qquad
   \forall {\mathbf v}_h.
-@f]
+@f]的系数符合要求。
 
-If we insert the definition of the bilinear form and the representation of
-${\mathbf u}_h$ and ${\mathbf v}_h$ into this formula:
-@f{eqnarray*}
+如果我们把双线性形式的定义和 ${\mathbf u}_h$ 和 ${\mathbf v}_h$ 的表示插入这个公式。@f{eqnarray*}
   \sum_{i,j}
     U_i V_j
   \sum_{k,l}
@@ -312,13 +210,11 @@ ${\mathbf u}_h$ and ${\mathbf v}_h$ into this formula:
     f_l,
     (\Phi_j)_l
   \right)_\Omega.
-@f}
-We note that here and in the following, the indices $k,l$ run over spatial
-directions, i.e. $0\le k,l < d$, and that indices $i,j$ run over degrees
-of freedom.
+@f} 
 
-The local stiffness matrix on cell $K$ therefore has the following entries:
-@f[
+我们注意到，在这里和下文中，指数 $k,l$ 在空间方向上运行，即 $0\le k,l < d$  ，而指数 $i,j$ 在自由度上运行。
+
+因此，单元格 $K$ 上的局部刚度矩阵有以下条目。@f[
   A^K_{ij}
   =
   \sum_{k,l}
@@ -335,16 +231,9 @@ The local stiffness matrix on cell $K$ therefore has the following entries:
     \mu \partial_l (\Phi_i)_k, \partial_k (\Phi_j)_l
   \right)_K
   \right\},
-@f]
-where $i,j$ now are local degrees of freedom and therefore $0\le i,j < N$.
-In these formulas, we always take some component of the vector shape functions
-$\Phi_i$, which are of course given as follows (see their definition):
-@f[
+@f] 其中 $i,j$  现在是局部自由度，因此 $0\le i,j < N$  。在这些公式中，我们总是取矢量形状函数 $\Phi_i$ 的一些分量，当然这些分量是如下给出的（见其定义）。@f[
   (\Phi_i)_l = \phi_i \delta_{l,\text{comp}(i)},
-@f]
-with the Kronecker symbol $\delta_{nm}$. Due to this, we can delete some of
-the sums over $k$ and $l$:
-@f{eqnarray*}
+@f]带有克朗克符号  $\delta_{nm}$  。由于这个原因，我们可以删除一些对 $k$ 和 $l$ 的和：@f{eqnarray*}
   A^K_{ij}
   &=&
   \sum_{k,l}
@@ -402,8 +291,9 @@ the sums over $k$ and $l$:
   \right)_K.
 @f}
 
-Likewise, the contribution of cell $K$ to the right hand side vector is
-@f{eqnarray*}
+
+
+同样，单元格 $K$ 对右手边向量的贡献是@f{eqnarray*}
   f^K_j
   &=&
   \sum_l
@@ -426,854 +316,767 @@ Likewise, the contribution of cell $K$ to the right hand side vector is
   \right)_K.
 @f}
 
-This is the form in which we will implement the local stiffness matrix and
-right hand side vectors.
 
-As a final note: in the step-17 example program, we will
-revisit the elastic problem laid out here, and will show how to solve it in
-%parallel on a cluster of computers. The resulting program will thus be able to
-solve this problem to significantly higher accuracy, and more efficiently if
-this is required. In addition, in step-20, @ref step_21
-"step-21", as well as a few other of the later tutorial programs, we will
-revisit some vector-valued problems and show a few techniques that may make it
-simpler to actually go through all the stuff shown above, with
-FiniteElement::system_to_component_index etc.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * 
- * <a name="Includefiles"></a> 
- * <h3>Include files</h3>
- * 
 
- * 
- * As usual, the first few include files are already known, so we will not
- * comment on them further.
- * 
- * @code
- * #include <deal.II/base/quadrature_lib.h>
- * #include <deal.II/base/function.h>
- * #include <deal.II/base/tensor.h>
- * 
- * #include <deal.II/lac/vector.h>
- * #include <deal.II/lac/full_matrix.h>
- * #include <deal.II/lac/sparse_matrix.h>
- * #include <deal.II/lac/dynamic_sparsity_pattern.h>
- * #include <deal.II/lac/solver_cg.h>
- * #include <deal.II/lac/precondition.h>
- * #include <deal.II/lac/affine_constraints.h>
- * 
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/grid_refinement.h>
- * 
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/dofs/dof_tools.h>
- * 
- * #include <deal.II/fe/fe_values.h>
- * 
- * #include <deal.II/numerics/vector_tools.h>
- * #include <deal.II/numerics/matrix_tools.h>
- * #include <deal.II/numerics/data_out.h>
- * #include <deal.II/numerics/error_estimator.h>
- * 
- * @endcode
- * 
- * In this example, we need vector-valued finite elements. The support for
- * these can be found in the following include file:
- * 
- * @code
- * #include <deal.II/fe/fe_system.h>
- * @endcode
- * 
- * We will compose the vector-valued finite elements from regular Q1 elements
- * which can be found here, as usual:
- * 
- * @code
- * #include <deal.II/fe/fe_q.h>
- * 
- * @endcode
- * 
- * This again is C++:
- * 
- * @code
- * #include <fstream>
- * #include <iostream>
- * 
- * @endcode
- * 
- * The last step is as in previous programs. In particular, just like in
- * step-7, we pack everything that's specific to this program into a namespace
- * of its own.
- * 
- * @code
- * namespace Step8
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeElasticProblemcodeclasstemplate"></a> 
- * <h3>The <code>ElasticProblem</code> class template</h3>
- * 
+这就是我们将实现局部刚度矩阵和右手向量的形式。
 
- * 
- * The main class is, except for its name, almost unchanged with respect to
- * the step-6 example.
- *   
+作为最后的说明：在 step-17 示例程序中，我们将重新审视这里提出的弹性问题，并将展示如何在计算机集群上以%并行方式解决它。因此，所产生的程序将能够以更高的精度来解决这个问题，而且如果需要的话，效率更高。此外，在 step-20 ， @ref step_21 " step-21 "，以及其他一些后来的教程程序中，我们将重新审视一些向量值问题，并展示一些技术，这些技术可能使实际通过上面显示的所有东西更简单，与 FiniteElement::system_to_component_index 等。<a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * The only change is the use of a different class for the <code>fe</code>
- * variable: Instead of a concrete finite element class such as FE_Q, we now
- * use a more generic one, FESystem. In fact, FESystem is not really a
- * finite element itself in that it does not implement shape functions of
- * its own. Rather, it is a class that can be used to stack several other
- * elements together to form one vector-valued finite element. In our case,
- * we will compose the vector-valued element of <code>FE_Q(1)</code>
- * objects, as shown below in the constructor of this class.
- * 
- * @code
- *   template <int dim>
- *   class ElasticProblem
- *   {
- *   public:
- *     ElasticProblem();
- *     void run();
- * 
- *   private:
- *     void setup_system();
- *     void assemble_system();
- *     void solve();
- *     void refine_grid();
- *     void output_results(const unsigned int cycle) const;
- * 
- *     Triangulation<dim> triangulation;
- *     DoFHandler<dim>    dof_handler;
- * 
- *     FESystem<dim> fe;
- * 
- *     AffineConstraints<double> constraints;
- * 
- *     SparsityPattern      sparsity_pattern;
- *     SparseMatrix<double> system_matrix;
- * 
- *     Vector<double> solution;
- *     Vector<double> system_rhs;
- *   };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Righthandsidevalues"></a> 
- * <h3>Right hand side values</h3>
- * 
 
- * 
- * Before going over to the implementation of the main class, we declare and
- * define the function which describes the right hand side. This time, the
- * right hand side is vector-valued, as is the solution, so we will describe
- * the changes required for this in some more detail.
- *   
+<a name="Includefiles"></a> <h3>Include files</h3>
 
- * 
- * To prevent cases where the return vector has not previously been set to
- * the right size we test for this case and otherwise throw an exception at
- * the beginning of the function. Note that enforcing that output arguments
- * already have the correct size is a convention in deal.II, and enforced
- * almost everywhere. The reason is that we would otherwise have to check at
- * the beginning of the function and possibly change the size of the output
- * vector. This is expensive, and would almost always be unnecessary (the
- * first call to the function would set the vector to the right size, and
- * subsequent calls would only have to do redundant checks). In addition,
- * checking and possibly resizing the vector is an operation that can not be
- * removed if we can't rely on the assumption that the vector already has
- * the correct size; this is in contract to the Assert call that is
- * completely removed if the program is compiled in optimized mode.
- *   
 
- * 
- * Likewise, if by some accident someone tried to compile and run the
- * program in only one space dimension (in which the elastic equations do
- * not make much sense since they reduce to the ordinary Laplace equation),
- * we terminate the program in the second assertion. The program will work
- * just fine in 3d, however.
- * 
- * @code
- *   template <int dim>
- *   void right_hand_side(const std::vector<Point<dim>> &points,
- *                        std::vector<Tensor<1, dim>> &  values)
- *   {
- *     Assert(values.size() == points.size(),
- *            ExcDimensionMismatch(values.size(), points.size()));
- *     Assert(dim >= 2, ExcNotImplemented());
- * 
- * @endcode
- * 
- * The rest of the function implements computing force values. We will use
- * a constant (unit) force in x-direction located in two little circles
- * (or spheres, in 3d) around points (0.5,0) and (-0.5,0), and y-force in
- * an area around the origin; in 3d, the z-component of these centers is
- * zero as well.
- *     
 
- * 
- * For this, let us first define two objects that denote the centers of
- * these areas. Note that upon construction of the Point objects, all
- * components are set to zero.
- * 
- * @code
- *     Point<dim> point_1, point_2;
- *     point_1(0) = 0.5;
- *     point_2(0) = -0.5;
- * 
- *     for (unsigned int point_n = 0; point_n < points.size(); ++point_n)
- *       {
- * @endcode
- * 
- * If <code>points[point_n]</code> is in a circle (sphere) of radius
- * 0.2 around one of these points, then set the force in x-direction
- * to one, otherwise to zero:
- * 
- * @code
- *         if (((points[point_n] - point_1).norm_square() < 0.2 * 0.2) ||
- *             ((points[point_n] - point_2).norm_square() < 0.2 * 0.2))
- *           values[point_n][0] = 1.0;
- *         else
- *           values[point_n][0] = 0.0;
- * 
- * @endcode
- * 
- * Likewise, if <code>points[point_n]</code> is in the vicinity of the
- * origin, then set the y-force to one, otherwise to zero:
- * 
- * @code
- *         if (points[point_n].norm_square() < 0.2 * 0.2)
- *           values[point_n][1] = 1.0;
- *         else
- *           values[point_n][1] = 0.0;
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeElasticProblemcodeclassimplementation"></a> 
- * <h3>The <code>ElasticProblem</code> class implementation</h3>
- * 
 
- * 
- * 
- * <a name="ElasticProblemElasticProblemconstructor"></a> 
- * <h4>ElasticProblem::ElasticProblem constructor</h4>
- * 
+像往常一样，前几个include文件已经是众所周知的了，所以我们将不再评论它们。
 
- * 
- * Following is the constructor of the main class. As said before, we would
- * like to construct a vector-valued finite element that is composed of
- * several scalar finite elements (i.e., we want to build the vector-valued
- * element so that each of its vector components consists of the shape
- * functions of a scalar element). Of course, the number of scalar finite
- * elements we would like to stack together equals the number of components
- * the solution function has, which is <code>dim</code> since we consider
- * displacement in each space direction. The FESystem class can handle this:
- * we pass it the finite element of which we would like to compose the
- * system of, and how often it shall be repeated:
- * 
+@code
+#include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/function.h>
+#include <deal.II/base/tensor.h>
 
- * 
- * 
- * @code
- *   template <int dim>
- *   ElasticProblem<dim>::ElasticProblem()
- *     : dof_handler(triangulation)
- *     , fe(FE_Q<dim>(1), dim)
- *   {}
- * @endcode
- * 
- * In fact, the FESystem class has several more constructors which can
- * perform more complex operations than just stacking together several
- * scalar finite elements of the same type into one; we will get to know
- * these possibilities in later examples.
- * 
 
- * 
- * 
+#include <deal.II/lac/vector.h>
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/sparse_matrix.h>
+#include <deal.II/lac/dynamic_sparsity_pattern.h>
+#include <deal.II/lac/solver_cg.h>
+#include <deal.II/lac/precondition.h>
+#include <deal.II/lac/affine_constraints.h>
 
- * 
- * 
- * <a name="ElasticProblemsetup_system"></a> 
- * <h4>ElasticProblem::setup_system</h4>
- * 
 
- * 
- * Setting up the system of equations is identical to the function used in
- * the step-6 example. The DoFHandler class and all other classes used here
- * are fully aware that the finite element we want to use is vector-valued,
- * and take care of the vector-valuedness of the finite element
- * themselves. (In fact, they do not, but this does not need to bother you:
- * since they only need to know how many degrees of freedom there are per
- * vertex, line and cell, and they do not ask what they represent,
- * i.e. whether the finite element under consideration is vector-valued or
- * whether it is, for example, a scalar Hermite element with several degrees
- * of freedom on each vertex).
- * 
- * @code
- *   template <int dim>
- *   void ElasticProblem<dim>::setup_system()
- *   {
- *     dof_handler.distribute_dofs(fe);
- *     solution.reinit(dof_handler.n_dofs());
- *     system_rhs.reinit(dof_handler.n_dofs());
- * 
- *     constraints.clear();
- *     DoFTools::make_hanging_node_constraints(dof_handler, constraints);
- *     VectorTools::interpolate_boundary_values(dof_handler,
- *                                              0,
- *                                              Functions::ZeroFunction<dim>(dim),
- *                                              constraints);
- *     constraints.close();
- * 
- *     DynamicSparsityPattern dsp(dof_handler.n_dofs(), dof_handler.n_dofs());
- *     DoFTools::make_sparsity_pattern(dof_handler,
- *                                     dsp,
- *                                     constraints,
- *                                     /*keep_constrained_dofs = */ false);
- *     sparsity_pattern.copy_from(dsp);
- * 
- *     system_matrix.reinit(sparsity_pattern);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ElasticProblemassemble_system"></a> 
- * <h4>ElasticProblem::assemble_system</h4>
- * 
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/grid_refinement.h>
 
- * 
- * The big changes in this program are in the creation of matrix and right
- * hand side, since they are problem-dependent. We will go through that
- * process step-by-step, since it is a bit more complicated than in previous
- * examples.
- *   
 
- * 
- * The first parts of this function are the same as before, however: setting
- * up a suitable quadrature formula, initializing an FEValues object for the
- * (vector-valued) finite element we use as well as the quadrature object,
- * and declaring a number of auxiliary arrays. In addition, we declare the
- * ever same two abbreviations: <code>n_q_points</code> and
- * <code>dofs_per_cell</code>. The number of degrees of freedom per cell we
- * now obviously ask from the composed finite element rather than from the
- * underlying scalar Q1 element. Here, it is <code>dim</code> times the
- * number of degrees of freedom per cell of the Q1 element, though this is
- * not explicit knowledge we need to care about:
- * 
- * @code
- *   template <int dim>
- *   void ElasticProblem<dim>::assemble_system()
- *   {
- *     QGauss<dim> quadrature_formula(fe.degree + 1);
- * 
- *     FEValues<dim> fe_values(fe,
- *                             quadrature_formula,
- *                             update_values | update_gradients |
- *                               update_quadrature_points | update_JxW_values);
- * 
- *     const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
- *     const unsigned int n_q_points    = quadrature_formula.size();
- * 
- *     FullMatrix<double> cell_matrix(dofs_per_cell, dofs_per_cell);
- *     Vector<double>     cell_rhs(dofs_per_cell);
- * 
- *     std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
- * 
- * @endcode
- * 
- * As was shown in previous examples as well, we need a place where to
- * store the values of the coefficients at all the quadrature points on a
- * cell. In the present situation, we have two coefficients, lambda and
- * mu.
- * 
- * @code
- *     std::vector<double> lambda_values(n_q_points);
- *     std::vector<double> mu_values(n_q_points);
- * 
- * @endcode
- * 
- * Well, we could as well have omitted the above two arrays since we will
- * use constant coefficients for both lambda and mu, which can be declared
- * like this. They both represent functions always returning the constant
- * value 1.0. Although we could omit the respective factors in the
- * assemblage of the matrix, we use them here for purpose of
- * demonstration.
- * 
- * @code
- *     Functions::ConstantFunction<dim> lambda(1.), mu(1.);
- * 
- * @endcode
- * 
- * Like the two constant functions above, we will call the function
- * right_hand_side just once per cell to make things simpler.
- * 
- * @code
- *     std::vector<Tensor<1, dim>> rhs_values(n_q_points);
- * 
- * @endcode
- * 
- * Now we can begin with the loop over all cells:
- * 
- * @code
- *     for (const auto &cell : dof_handler.active_cell_iterators())
- *       {
- *         cell_matrix = 0;
- *         cell_rhs    = 0;
- * 
- *         fe_values.reinit(cell);
- * 
- * @endcode
- * 
- * Next we get the values of the coefficients at the quadrature
- * points. Likewise for the right hand side:
- * 
- * @code
- *         lambda.value_list(fe_values.get_quadrature_points(), lambda_values);
- *         mu.value_list(fe_values.get_quadrature_points(), mu_values);
- *         right_hand_side(fe_values.get_quadrature_points(), rhs_values);
- * 
- * @endcode
- * 
- * Then assemble the entries of the local stiffness matrix and right
- * hand side vector. This follows almost one-to-one the pattern
- * described in the introduction of this example.  One of the few
- * comments in place is that we can compute the number
- * <code>comp(i)</code>, i.e. the index of the only nonzero vector
- * component of shape function <code>i</code> using the
- * <code>fe.system_to_component_index(i).first</code> function call
- * below.
- *         
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/dofs/dof_tools.h>
 
- * 
- * (By accessing the <code>first</code> variable of the return value
- * of the <code>system_to_component_index</code> function, you might
- * already have guessed that there is more in it. In fact, the
- * function returns a <code>std::pair@<unsigned int, unsigned
- * int@></code>, of which the first element is <code>comp(i)</code>
- * and the second is the value <code>base(i)</code> also noted in the
- * introduction, i.e.  the index of this shape function within all the
- * shape functions that are nonzero in this component,
- * i.e. <code>base(i)</code> in the diction of the introduction. This
- * is not a number that we are usually interested in, however.)
- *         
 
- * 
- * With this knowledge, we can assemble the local matrix
- * contributions:
- * 
- * @code
- *         for (const unsigned int i : fe_values.dof_indices())
- *           {
- *             const unsigned int component_i =
- *               fe.system_to_component_index(i).first;
- * 
- *             for (const unsigned int j : fe_values.dof_indices())
- *               {
- *                 const unsigned int component_j =
- *                   fe.system_to_component_index(j).first;
- * 
- *                 for (const unsigned int q_point :
- *                      fe_values.quadrature_point_indices())
- *                   {
- *                     cell_matrix(i, j) +=
- * @endcode
- * 
- * The first term is $\lambda \partial_i u_i, \partial_j
- * v_j) + (\mu \partial_i u_j, \partial_j v_i)$. Note
- * that <code>shape_grad(i,q_point)</code> returns the
- * gradient of the only nonzero component of the i-th
- * shape function at quadrature point q_point. The
- * component <code>comp(i)</code> of the gradient, which
- * is the derivative of this only nonzero vector
- * component of the i-th shape function with respect to
- * the comp(i)th coordinate is accessed by the appended
- * brackets.
- * 
- * @code
- *                       (                                                  
- *                         (fe_values.shape_grad(i, q_point)[component_i] * 
- *                          fe_values.shape_grad(j, q_point)[component_j] * 
- *                          lambda_values[q_point])                         
- *                         +                                                
- *                         (fe_values.shape_grad(i, q_point)[component_j] * 
- *                          fe_values.shape_grad(j, q_point)[component_i] * 
- *                          mu_values[q_point])                             
- *                         +                                                
- * @endcode
- * 
- * The second term is $(\mu \nabla u_i, \nabla
- * v_j)$. We need not access a specific component of
- * the gradient, since we only have to compute the
- * scalar product of the two gradients, of which an
- * overloaded version of <tt>operator*</tt> takes
- * care, as in previous examples.
- *                         
+#include <deal.II/fe/fe_values.h>
 
- * 
- * Note that by using the <tt>?:</tt> operator, we only
- * do this if <tt>component_i</tt> equals
- * <tt>component_j</tt>, otherwise a zero is added
- * (which will be optimized away by the compiler).
- * 
- * @code
- *                         ((component_i == component_j) ?        
- *                            (fe_values.shape_grad(i, q_point) * 
- *                             fe_values.shape_grad(j, q_point) * 
- *                             mu_values[q_point]) :              
- *                            0)                                  
- *                         ) *                                    
- *                       fe_values.JxW(q_point);                  
- *                   }
- *               }
- *           }
- * 
- * @endcode
- * 
- * Assembling the right hand side is also just as discussed in the
- * introduction:
- * 
- * @code
- *         for (const unsigned int i : fe_values.dof_indices())
- *           {
- *             const unsigned int component_i =
- *               fe.system_to_component_index(i).first;
- * 
- *             for (const unsigned int q_point :
- *                  fe_values.quadrature_point_indices())
- *               cell_rhs(i) += fe_values.shape_value(i, q_point) *
- *                              rhs_values[q_point][component_i] *
- *                              fe_values.JxW(q_point);
- *           }
- * 
- * @endcode
- * 
- * The transfer from local degrees of freedom into the global matrix
- * and right hand side vector does not depend on the equation under
- * consideration, and is thus the same as in all previous
- * examples.
- * 
- * @code
- *         cell->get_dof_indices(local_dof_indices);
- *         constraints.distribute_local_to_global(
- *           cell_matrix, cell_rhs, local_dof_indices, system_matrix, system_rhs);
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ElasticProblemsolve"></a> 
- * <h4>ElasticProblem::solve</h4>
- * 
 
- * 
- * The solver does not care about where the system of equations comes, as
- * long as it stays positive definite and symmetric (which are the
- * requirements for the use of the CG solver), which the system indeed
- * is. Therefore, we need not change anything.
- * 
- * @code
- *   template <int dim>
- *   void ElasticProblem<dim>::solve()
- *   {
- *     SolverControl            solver_control(1000, 1e-12);
- *     SolverCG<Vector<double>> cg(solver_control);
- * 
- *     PreconditionSSOR<SparseMatrix<double>> preconditioner;
- *     preconditioner.initialize(system_matrix, 1.2);
- * 
- *     cg.solve(system_matrix, solution, system_rhs, preconditioner);
- * 
- *     constraints.distribute(solution);
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ElasticProblemrefine_grid"></a> 
- * <h4>ElasticProblem::refine_grid</h4>
- * 
+#include <deal.II/numerics/vector_tools.h>
+#include <deal.II/numerics/matrix_tools.h>
+#include <deal.II/numerics/data_out.h>
+#include <deal.II/numerics/error_estimator.h>
 
- * 
- * The function that does the refinement of the grid is the same as in the
- * step-6 example. The quadrature formula is adapted to the linear elements
- * again. Note that the error estimator by default adds up the estimated
- * obtained from all components of the finite element solution, i.e., it
- * uses the displacement in all directions with the same weight. If we would
- * like the grid to be adapted to the x-displacement only, we could pass the
- * function an additional parameter which tells it to do so and do not
- * consider the displacements in all other directions for the error
- * indicators. However, for the current problem, it seems appropriate to
- * consider all displacement components with equal weight.
- * 
- * @code
- *   template <int dim>
- *   void ElasticProblem<dim>::refine_grid()
- *   {
- *     Vector<float> estimated_error_per_cell(triangulation.n_active_cells());
- * 
- *     KellyErrorEstimator<dim>::estimate(dof_handler,
- *                                        QGauss<dim - 1>(fe.degree + 1),
- *                                        {},
- *                                        solution,
- *                                        estimated_error_per_cell);
- * 
- *     GridRefinement::refine_and_coarsen_fixed_number(triangulation,
- *                                                     estimated_error_per_cell,
- *                                                     0.3,
- *                                                     0.03);
- * 
- *     triangulation.execute_coarsening_and_refinement();
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ElasticProblemoutput_results"></a> 
- * <h4>ElasticProblem::output_results</h4>
- * 
 
- * 
- * The output happens mostly as has been shown in previous examples
- * already. The only difference is that the solution function is vector
- * valued. The DataOut class takes care of this automatically, but we have
- * to give each component of the solution vector a different name.
- *   
+@endcode 
 
- * 
- * To do this, the DataOut::add_vector() function wants a vector of
- * strings. Since the number of components is the same as the number
- * of dimensions we are working in, we use the <code>switch</code>
- * statement below.
- *   
 
- * 
- * We note that some graphics programs have restriction on what
- * characters are allowed in the names of variables. deal.II therefore
- * supports only the minimal subset of these characters that is supported
- * by all programs. Basically, these are letters, numbers, underscores,
- * and some other characters, but in particular no whitespace and
- * minus/hyphen. The library will throw an exception otherwise, at least
- * if in debug mode.
- *   
 
- * 
- * After listing the 1d, 2d, and 3d case, it is good style to let the
- * program die if we run upon a case which we did not consider. Remember
- * that the Assert macro generates an exception if the condition in the
- * first parameter is not satisfied. Of course, the condition
- * <code>false</code> can never be satisfied, so the program will always
- * abort whenever it gets to the default statement:
- * 
- * @code
- *   template <int dim>
- *   void ElasticProblem<dim>::output_results(const unsigned int cycle) const
- *   {
- *     DataOut<dim> data_out;
- *     data_out.attach_dof_handler(dof_handler);
- * 
- *     std::vector<std::string> solution_names;
- *     switch (dim)
- *       {
- *         case 1:
- *           solution_names.emplace_back("displacement");
- *           break;
- *         case 2:
- *           solution_names.emplace_back("x_displacement");
- *           solution_names.emplace_back("y_displacement");
- *           break;
- *         case 3:
- *           solution_names.emplace_back("x_displacement");
- *           solution_names.emplace_back("y_displacement");
- *           solution_names.emplace_back("z_displacement");
- *           break;
- *         default:
- *           Assert(false, ExcNotImplemented());
- *       }
- * 
- * @endcode
- * 
- * After setting up the names for the different components of the
- * solution vector, we can add the solution vector to the list of
- * data vectors scheduled for output. Note that the following
- * function takes a vector of strings as second argument, whereas
- * the one which we have used in all previous examples accepted a
- * string there. (In fact, the function we had used before would
- * convert the single string into a vector with only one element
- * and forwards that to the other function.)
- * 
- * @code
- *     data_out.add_data_vector(solution, solution_names);
- *     data_out.build_patches();
- * 
- *     std::ofstream output("solution-" + std::to_string(cycle) + ".vtk");
- *     data_out.write_vtk(output);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="ElasticProblemrun"></a> 
- * <h4>ElasticProblem::run</h4>
- * 
+在这个例子中，我们需要矢量值的有限元。对这些的支持可以在下面的include文件中找到。
 
- * 
- * The <code>run</code> function does the same things as in step-6, for
- * example. This time, we use the square [-1,1]^d as domain, and we refine
- * it globally four times before starting the first iteration.
- *   
+@code
+#include <deal.II/fe/fe_system.h>
+@endcode 
 
- * 
- * The reason for refining is a bit accidental: we use the QGauss
- * quadrature formula with two points in each direction for integration of the
- * right hand side; that means that there are four quadrature points on each
- * cell (in 2D). If we only refine the initial grid once globally, then there
- * will be only four quadrature points in each direction on the
- * domain. However, the right hand side function was chosen to be rather
- * localized and in that case, by pure chance, it happens that all quadrature
- * points lie at points where the right hand side function is zero (in
- * mathematical terms, the quadrature points happen to be at points outside
- * the <i>support</i> of the right hand side function). The right hand side
- * vector computed with quadrature will then contain only zeroes (even though
- * it would of course be nonzero if we had computed the right hand side vector
- * exactly using the integral) and the solution of the system of
- * equations is the zero vector, i.e., a finite element function that is zero
- * everywhere. In a sense, we
- * should not be surprised that this is happening since we have chosen
- * an initial grid that is totally unsuitable for the problem at hand.
- *   
 
- * 
- * The unfortunate thing is that if the discrete solution is constant, then
- * the error indicators computed by the KellyErrorEstimator class are zero
- * for each cell as well, and the call to
- * Triangulation::refine_and_coarsen_fixed_number() will not flag any cells
- * for refinement (why should it if the indicated error is zero for each
- * cell?). The grid in the next iteration will therefore consist of four
- * cells only as well, and the same problem occurs again.
- *   
 
- * 
- * The conclusion needs to be: while of course we will not choose the
- * initial grid to be well-suited for the accurate solution of the problem,
- * we must at least choose it such that it has the chance to capture the
- * important features of the solution. In this case, it needs to be able to
- * see the right hand side. Thus, we refine globally four times. (Any larger
- * number of global refinement steps would of course also work.)
- * 
- * @code
- *   template <int dim>
- *   void ElasticProblem<dim>::run()
- *   {
- *     for (unsigned int cycle = 0; cycle < 8; ++cycle)
- *       {
- *         std::cout << "Cycle " << cycle << ':' << std::endl;
- * 
- *         if (cycle == 0)
- *           {
- *             GridGenerator::hyper_cube(triangulation, -1, 1);
- *             triangulation.refine_global(4);
- *           }
- *         else
- *           refine_grid();
- * 
- *         std::cout << "   Number of active cells:       "
- *                   << triangulation.n_active_cells() << std::endl;
- * 
- *         setup_system();
- * 
- *         std::cout << "   Number of degrees of freedom: " << dof_handler.n_dofs()
- *                   << std::endl;
- * 
- *         assemble_system();
- *         solve();
- *         output_results(cycle);
- *       }
- *   }
- * } // namespace Step8
- * 
- * @endcode
- * 
- * 
- * <a name="Thecodemaincodefunction"></a> 
- * <h3>The <code>main</code> function</h3>
- * 
+我们将用常规的Q1元素组成矢量值有限元素，像往常一样，可以在这里找到。
 
- * 
- * After closing the <code>Step8</code> namespace in the last line above, the
- * following is the main function of the program and is again exactly like in
- * step-6 (apart from the changed class names, of course).
- * 
- * @code
- * int main()
- * {
- *   try
- *     {
- *       Step8::ElasticProblem<2> elastic_problem_2d;
- *       elastic_problem_2d.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- * 
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
+@code
+#include <deal.II/fe/fe_q.h>
+
+
+@endcode 
+
+
+
+这又是C++。
+
+@code
+#include <fstream>
+#include <iostream>
+
+
+@endcode 
+
+
+
+最后一步和以前的程序一样。特别是，就像在 step-7 中一样，我们把这个程序所特有的一切都打包到一个自己的命名空间中。
+
+@code
+namespace Step8
+{
+  using namespace dealii;
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeElasticProblemcodeclasstemplate"></a> <h3>The <code>ElasticProblem</code> class template</h3> 
+
+
+
+
+除了名字之外，主类与 step-6 的例子相比几乎没有变化。   
+
+
+唯一的变化是为 <code>fe</code> 变量使用了一个不同的类。我们现在使用的不是FE_Q这样的具体的有限元类，而是一个更通用的类，FESystem。事实上，FESystem本身并不是一个真正的有限元，因为它没有实现自己的形状函数。相反，它是一个可以用来将其他几个元素堆叠在一起形成一个矢量值的有限元的类。在我们的例子中，我们将组成 <code>FE_Q(1)</code> 对象的矢量值元素，如下图中这个类的构造函数。
+
+@code
+  template <int dim>
+  class ElasticProblem
+  {
+  public:
+    ElasticProblem();
+    void run();
+
+
+  private:
+    void setup_system();
+    void assemble_system();
+    void solve();
+    void refine_grid();
+    void output_results(const unsigned int cycle) const;
+
+
+    Triangulation<dim> triangulation;
+    DoFHandler<dim>    dof_handler;
+
+
+    FESystem<dim> fe;
+
+
+    AffineConstraints<double> constraints;
+
+
+    SparsityPattern      sparsity_pattern;
+    SparseMatrix<double> system_matrix;
+
+
+    Vector<double> solution;
+    Vector<double> system_rhs;
+  };
+
+
+
+@endcode 
+
+
+
+
+<a name="Righthandsidevalues"></a> <h3>Right hand side values</h3>
+
+
+
+
+在进入主类的实现之前，我们声明并定义描述右手边的函数。这一次，右手边是矢量值，就像解决方案一样，所以我们将更详细地描述为此所需的变化。   
+
+
+为了防止出现返回向量没有被设置为正确大小的情况，我们对这种情况进行测试，否则将在函数开始时抛出一个异常。请注意，强制要求输出参数已经具有正确的大小是deal.II中的一个惯例，并且几乎在所有地方都强制执行。原因是，否则我们将不得不在函数开始时检查，并可能改变输出向量的大小。这很昂贵，而且几乎总是不必要的（对函数的第一次调用会将向量设置为正确的大小，随后的调用只需要做多余的检查）。此外，如果我们不能依赖向量已经具有正确大小的假设，检查并可能调整向量的大小是一个不能被删除的操作；这是与Assert调用的契约，如果程序是在优化模式下编译的，则完全可以删除。   
+
+
+同样，如果由于某种意外，有人试图在只有一个空间维度的情况下编译和运行程序（在这种情况下，弹性方程没有什么意义，因为它们还原为普通的拉普拉斯方程），我们在第二个断言中终止程序。然而，该程序在三维空间中也能正常工作。
+
+@code
+  template <int dim>
+  void right_hand_side(const std::vector<Point<dim>> &points,
+                       std::vector<Tensor<1, dim>> &  values)
+  {
+    Assert(values.size() == points.size(),
+           ExcDimensionMismatch(values.size(), points.size()));
+    Assert(dim >= 2, ExcNotImplemented());
+
+
+@endcode 
+
+
+
+该函数的其余部分实现了对力值的计算。我们将使用一个位于(0.5,0)和(-0.5,0)点周围的两个小圆圈（或球体，在3D中）的X方向的恒定（单位）力，以及位于原点周围的Y方向的力；在3D中，这些中心的Z分量也是零。     
+
+
+为此，让我们首先定义两个对象来表示这些区域的中心。注意，在构建点对象时，所有分量都被设置为零。
+
+@code
+    Point<dim> point_1, point_2;
+    point_1(0) = 0.5;
+    point_2(0) = -0.5;
+
+
+    for (unsigned int point_n = 0; point_n < points.size(); ++point_n)
+      {
+@endcode 
+
+
+
+如果 <code>points[point_n]</code> 处于围绕这些点之一的半径为0.2的圆（球）中，那么将X方向的力设置为1，否则为0。
+
+@code
+        if (((points[point_n] - point_1).norm_square() < 0.2 * 0.2) ||
+            ((points[point_n] - point_2).norm_square() < 0.2 * 0.2))
+          values[point_n][0] = 1.0;
+        else
+          values[point_n][0] = 0.0;
+
+
+@endcode 
+
+
+
+同样，如果 <code>points[point_n]</code> 在原点附近，那么将Y方向的力设置为1，否则为0。
+
+@code
+        if (points[point_n].norm_square() < 0.2 * 0.2)
+          values[point_n][1] = 1.0;
+        else
+          values[point_n][1] = 0.0;
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeElasticProblemcodeclassimplementation"></a> <h3>The <code>ElasticProblem</code> class implementation</h3>
+
+
+
+
+
+<a name="ElasticProblemElasticProblemconstructor"></a> <h4>ElasticProblem::ElasticProblem constructor</h4>
+
+
+
+
+下面是主类的构造函数。如前所述，我们想构造一个由多个标量有限元组成的矢量值有限元（即，我们想构造矢量值元素，使其每个矢量分量由一个标量元素的形状函数组成）。当然，我们想堆叠在一起的标量有限元的数量等于解函数的分量数量，由于我们考虑每个空间方向上的位移，所以是 <code>dim</code> 。FESystem类可以处理这个问题：我们传递给它我们想组成系统的有限元，以及它的重复频率。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  ElasticProblem<dim>::ElasticProblem()
+    : dof_handler(triangulation)
+    , fe(FE_Q<dim>(1), dim)
+  {}
+@endcode 
+
+
+
+事实上，FESystem类还有几个构造函数，可以进行更复杂的操作，而不仅仅是将几个相同类型的标量有限元堆叠在一起；我们将在后面的例子中了解这些可能性。
+
+
+
+
+
+
+
+
+
+
+<a name="ElasticProblemsetup_system"></a> <h4>ElasticProblem::setup_system</h4>
+
+
+
+
+设置方程组与 step-6 例子中使用的函数相同。DoFHandler类和这里使用的所有其他类都完全知道我们要使用的有限元是矢量值的，并且照顾到了有限元本身的矢量值性。事实上，它们不知道，但这不需要困扰你：因为它们只需要知道每个顶点、直线和单元有多少个自由度，而且它们不问这些自由度代表什么，即所考虑的有限元是矢量值的还是例如在每个顶点有几个自由度的标量Hermite元）。
+
+@code
+  template <int dim>
+  void ElasticProblem<dim>::setup_system()
+  {
+    dof_handler.distribute_dofs(fe);
+    solution.reinit(dof_handler.n_dofs());
+    system_rhs.reinit(dof_handler.n_dofs());
+
+
+    constraints.clear();
+    DoFTools::make_hanging_node_constraints(dof_handler, constraints);
+    VectorTools::interpolate_boundary_values(dof_handler,
+                                             0,
+                                             Functions::ZeroFunction<dim>(dim),
+                                             constraints);
+    constraints.close();
+
+
+    DynamicSparsityPattern dsp(dof_handler.n_dofs(), dof_handler.n_dofs());
+    DoFTools::make_sparsity_pattern(dof_handler,
+                                    dsp,
+                                    constraints,
+                                    /*keep_constrained_dofs = */ false);
+    sparsity_pattern.copy_from(dsp);
+
+
+    system_matrix.reinit(sparsity_pattern);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="ElasticProblemassemble_system"></a><h4>ElasticProblem::assemble_system</h4>
+
+
+
+
+这个程序中最大的变化是在创建矩阵和右手边，因为它们是取决于问题的。我们将一步步走过这个过程 step- ，因为它比以前的例子要复杂一些。   
+
+
+然而，这个函数的前几部分和以前一样：设置一个合适的正交公式，为我们使用的（矢量值的）有限元以及正交对象初始化一个FEValues对象，并声明一些辅助数组。此外，我们还声明了永远相同的两个缩写。  <code>n_q_points</code>  和  <code>dofs_per_cell</code>  。每个单元的自由度数量，我们现在显然是从组成的有限元中询问，而不是从底层的标量Q1元中询问。这里，它是 <code>dim</code> 乘以Q1元素的每单元自由度数，尽管这不是我们需要关心的明确知识。
+
+@code
+  template <int dim>
+  void ElasticProblem<dim>::assemble_system()
+  {
+    QGauss<dim> quadrature_formula(fe.degree + 1);
+
+
+    FEValues<dim> fe_values(fe,
+                            quadrature_formula,
+                            update_values | update_gradients |
+                              update_quadrature_points | update_JxW_values);
+
+
+    const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
+    const unsigned int n_q_points    = quadrature_formula.size();
+
+
+    FullMatrix<double> cell_matrix(dofs_per_cell, dofs_per_cell);
+    Vector<double>     cell_rhs(dofs_per_cell);
+
+
+    std::vector<types::global_dof_index> local_dof_indices(dofs_per_cell);
+
+
+@endcode 
+
+
+
+正如之前的例子所显示的那样，我们需要一个地方来存储一个单元上所有正交点的系数值。在目前情况下，我们有两个系数，lambda和mu。
+
+@code
+    std::vector<double> lambda_values(n_q_points);
+    std::vector<double> mu_values(n_q_points);
+
+
+@endcode 
+
+
+
+那么，我们也可以省略上述两个数组，因为我们将对lambda和mu使用常数系数，可以这样声明。它们都代表函数总是返回常量值1.0。尽管我们可以在矩阵的组合中省略各自的系数，但为了演示，我们在这里使用它们。
+
+@code
+    Functions::ConstantFunction<dim> lambda(1.), mu(1.);
+
+
+@endcode 
+
+
+
+和上面的两个常数函数一样，我们将在每个单元格中只调用一次函数right_hand_side，以使事情变得更简单。
+
+@code
+    std::vector<Tensor<1, dim>> rhs_values(n_q_points);
+
+
+@endcode 
+
+
+
+现在我们可以开始对所有单元格进行循环。
+
+@code
+    for (const auto &cell : dof_handler.active_cell_iterators())
+      {
+        cell_matrix = 0;
+        cell_rhs    = 0;
+
+
+        fe_values.reinit(cell);
+
+
+@endcode 
+
+
+
+接下来我们得到正交点的系数值。同样，对于右手边也是如此。
+
+@code
+        lambda.value_list(fe_values.get_quadrature_points(), lambda_values);
+        mu.value_list(fe_values.get_quadrature_points(), mu_values);
+        right_hand_side(fe_values.get_quadrature_points(), rhs_values);
+
+
+@endcode 
+
+
+
+然后将局部刚度矩阵的条目和右手边的向量组合起来。这几乎是一对一地遵循本例介绍中描述的模式。 为数不多的评论之一是，我们可以计算数字 <code>comp(i)</code>  ，即使用下面的 <code>fe.system_to_component_index(i).first</code> 函数调用形状函数 <code>i</code> 的唯一非零向量分量的索引。         
+
+
+(通过访问 <code>system_to_component_index</code> 函数返回值的 <code>first</code> 变量，你可能已经猜到其中还有更多内容。事实上，该函数返回一个 <code>std::pair@<unsigned int，无符号int@></code>，其中第一个元素是 <code>comp(i)</code> ，第二个元素是介绍中也指出的值 <code>base(i)</code> ，即这个形状函数在这个组件中所有非零的形状函数中的索引，即介绍中的字典 <code>base(i)</code> 。然而，这并不是我们通常感兴趣的数字）。)          
+
+
+有了这些知识，我们就可以把本地矩阵的贡献集合起来。
+
+@code
+        for (const unsigned int i : fe_values.dof_indices())
+          {
+            const unsigned int component_i =
+              fe.system_to_component_index(i).first;
+
+
+            for (const unsigned int j : fe_values.dof_indices())
+              {
+                const unsigned int component_j =
+                  fe.system_to_component_index(j).first;
+
+
+                for (const unsigned int q_point :
+                     fe_values.quadrature_point_indices())
+                  {
+                    cell_matrix(i, j) +=
+@endcode 
+
+
+
+第一个项是 $\lambda \partial_i u_i, \partial_j
+v_j) + (\mu \partial_i u_j, \partial_j v_i)$  。注意， <code>shape_grad(i,q_point)</code> 返回正交点q_point处第i个形状函数的唯一非零分量的梯度。梯度的分量 <code>comp(i)</code> 是第i个形状函数的唯一非零矢量分量相对于comp(i)th坐标的导数，由附加的括号访问。
+
+@code
+                      (                                                  
+                        (fe_values.shape_grad(i, q_point)[component_i] * 
+                         fe_values.shape_grad(j, q_point)[component_j] * 
+                         lambda_values[q_point])                         
+                        +                                                
+                        (fe_values.shape_grad(i, q_point)[component_j] * 
+                         fe_values.shape_grad(j, q_point)[component_i] * 
+                         mu_values[q_point])                             
+                        +                                                
+@endcode 
+
+
+
+第二个项是 $(\mu \nabla u_i, \nabla
+v_j)$  。我们不需要访问梯度的具体分量，因为我们只需要计算两个梯度的标量乘积，其中<tt>operator*</tt>的重载版本负责，就像以前的例子一样。                         
+
+
+注意，通过使用<tt>?:</tt>操作符，我们只在<tt>component_i</tt>等于<tt>component_j</tt>时才这样做，否则会加上一个零（编译器会将其优化掉）。
+
+@code
+                        ((component_i == component_j) ?        
+                           (fe_values.shape_grad(i, q_point) * 
+                            fe_values.shape_grad(j, q_point) * 
+                            mu_values[q_point]) :              
+                           0)                                  
+                        ) *                                    
+                      fe_values.JxW(q_point);                  
+                  }
+              }
+          }
+
+
+@endcode 
+
+
+
+组装右手边的内容也和介绍中讨论的一样。
+
+@code
+        for (const unsigned int i : fe_values.dof_indices())
+          {
+            const unsigned int component_i =
+              fe.system_to_component_index(i).first;
+
+
+            for (const unsigned int q_point :
+                 fe_values.quadrature_point_indices())
+              cell_rhs(i) += fe_values.shape_value(i, q_point) *
+                             rhs_values[q_point][component_i] *
+                             fe_values.JxW(q_point);
+          }
+
+
+@endcode 
+
+
+
+从局部自由度到全局矩阵和右手向量的转移并不取决于所考虑的方程，因此与之前所有的例子相同。
+
+@code
+        cell->get_dof_indices(local_dof_indices);
+        constraints.distribute_local_to_global(
+          cell_matrix, cell_rhs, local_dof_indices, system_matrix, system_rhs);
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="ElasticProblemsolve"></a><h4>ElasticProblem::solve</h4>
+
+
+
+
+解算器并不关心方程组的来源，只要它保持正定和对称（这是使用CG解算器的要求），而这个方程组确实是这样的。因此，我们不需要改变任何东西。
+
+@code
+  template <int dim>
+  void ElasticProblem<dim>::solve()
+  {
+    SolverControl            solver_control(1000, 1e-12);
+    SolverCG<Vector<double>> cg(solver_control);
+
+
+    PreconditionSSOR<SparseMatrix<double>> preconditioner;
+    preconditioner.initialize(system_matrix, 1.2);
+
+
+    cg.solve(system_matrix, solution, system_rhs, preconditioner);
+
+
+    constraints.distribute(solution);
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="ElasticProblemrefine_grid"></a><h4>ElasticProblem::refine_grid</h4>
+
+
+
+
+对网格进行细化的函数与 step-6 中的例子相同。正交公式再次适应于线性元素。请注意，误差估计器默认情况下是将从有限元解的所有分量中得到的估计值相加，也就是说，它使用所有方向上的位移，权重相同。如果我们希望网格只适应x方向的位移，我们可以给函数传递一个额外的参数，告诉它这样做，而不考虑其他所有方向的位移作为误差指标。然而，对于目前的问题来说，考虑所有的位移分量并给予同等权重似乎是合适的。
+
+@code
+  template <int dim>
+  void ElasticProblem<dim>::refine_grid()
+  {
+    Vector<float> estimated_error_per_cell(triangulation.n_active_cells());
+
+
+    KellyErrorEstimator<dim>::estimate(dof_handler,
+                                       QGauss<dim - 1>(fe.degree + 1),
+                                       {},
+                                       solution,
+                                       estimated_error_per_cell);
+
+
+    GridRefinement::refine_and_coarsen_fixed_number(triangulation,
+                                                    estimated_error_per_cell,
+                                                    0.3,
+                                                    0.03);
+
+
+    triangulation.execute_coarsening_and_refinement();
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="ElasticProblemoutput_results"></a><h4>ElasticProblem::output_results</h4>
+
+
+
+
+输出的情况大多与以前的例子中已经显示的一样。唯一的区别是，求解函数是矢量值的。DataOut类会自动处理这个问题，但我们必须给求解向量的每个组件一个不同的名字。   
+
+
+要做到这一点， DataOut::add_vector() 函数需要一个字符串的矢量。由于分量的数量与我们工作的维数相同，我们使用下面的 <code>switch</code> 语句。   
+
+
+我们注意到，一些图形程序对变量名称中允许的字符有限制。因此，deal.II只支持所有程序都支持的这些字符的最小子集。基本上，这些字符是字母、数字、下划线和其他一些字符，但特别是没有空格和减号/横线。否则，该库将抛出一个异常，至少在调试模式下是这样。   
+
+
+在列出了1d、2d和3d的情况后，如果我们遇到一个我们没有考虑到的情况，让程序死亡是一种很好的风格。记住，如果第一个参数中的条件不满足，Assert宏就会产生一个异常。当然，条件 <code>false</code> 永远不可能被满足，所以只要程序运行到默认语句，就会中止。
+
+@code
+  template <int dim>
+  void ElasticProblem<dim>::output_results(const unsigned int cycle) const
+  {
+    DataOut<dim> data_out;
+    data_out.attach_dof_handler(dof_handler);
+
+
+    std::vector<std::string> solution_names;
+    switch (dim)
+      {
+        case 1:
+          solution_names.emplace_back("displacement");
+          break;
+        case 2:
+          solution_names.emplace_back("x_displacement");
+          solution_names.emplace_back("y_displacement");
+          break;
+        case 3:
+          solution_names.emplace_back("x_displacement");
+          solution_names.emplace_back("y_displacement");
+          solution_names.emplace_back("z_displacement");
+          break;
+        default:
+          Assert(false, ExcNotImplemented());
+      }
+
+
+@endcode 
+
+
+
+在为解向量的不同组成部分设置了名称之后，我们可以将解向量添加到计划输出的数据向量列表中。请注意，下面的函数需要一个字符串向量作为第二个参数，而我们在以前所有例子中使用的函数在那里接受一个字符串。事实上，我们之前使用的函数会将单个字符串转换成只有一个元素的向量，并将其转发给另一个函数）。
+
+@code
+    data_out.add_data_vector(solution, solution_names);
+    data_out.build_patches();
+
+
+    std::ofstream output("solution-" + std::to_string(cycle) + ".vtk");
+    data_out.write_vtk(output);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="ElasticProblemrun"></a> <h4>ElasticProblem::run</h4>
+
+
+
+
+例如， <code>run</code> 函数与 step-6 中做的事情相同。这一次，我们使用平方[-1,1]^d作为域，在开始第一次迭代之前，我们对它进行全局细化四次。   
+
+
+细化的原因有点意外：我们使用QGauss正交公式，在每个方向上有两个点用于整合右手边；这意味着每个单元上有四个正交点（在二维）。如果我们只对初始网格进行一次全局细化，那么在域上每个方向上就只有四个正交点。然而，右侧函数被选择为相当局部的，在这种情况下，纯属偶然，恰好所有的正交点都位于右侧函数为零的点上（用数学术语来说，正交点恰好在右侧函数的<i>support</i>之外的点上）。这样一来，用正交计算的右手向量将只包含零（尽管如果我们完全用积分计算右手向量的话，它当然会是非零的），方程组的解就是零向量，即一个处处为零的有限元函数。从某种意义上说，我们不应该对这种情况的发生感到惊讶，因为我们选择了一个完全不适合当前问题的初始网格。   
+
+
+不幸的是，如果离散解是常数，那么KellyErrorEstimator类计算的误差指标对每个单元来说也是零，对 Triangulation::refine_and_coarsen_fixed_number() 的调用将不会标记任何单元进行细化（如果每个单元的指示误差是零，为什么要这样做？因此，下一次迭代中的网格也将只由四个单元组成，同样的问题再次发生。   
+
+
+结论需要是：虽然我们当然不会选择非常适合准确解决问题的初始网格，但我们至少必须选择它，使它有机会捕捉到解决方案的重要特征。在这种情况下，它需要能够看到右手边的情况。因此，我们进行了四次全局细化。当然，任何更大数量的全局细化步骤也是可以的）。
+
+@code
+  template <int dim>
+  void ElasticProblem<dim>::run()
+  {
+    for (unsigned int cycle = 0; cycle < 8; ++cycle)
+      {
+        std::cout << "Cycle " << cycle << ':' << std::endl;
+
+
+        if (cycle == 0)
+          {
+            GridGenerator::hyper_cube(triangulation, -1, 1);
+            triangulation.refine_global(4);
+          }
+        else
+          refine_grid();
+
+
+        std::cout << "   Number of active cells:       "
+                  << triangulation.n_active_cells() << std::endl;
+
+
+        setup_system();
+
+
+        std::cout << "   Number of degrees of freedom: " << dof_handler.n_dofs()
+                  << std::endl;
+
+
+        assemble_system();
+        solve();
+        output_results(cycle);
+      }
+  }
+} // namespace Step8
+
+
+@endcode 
+
+
+
+
+<a name="Thecodemaincodefunction"></a> <h3>The <code>main</code> function</h3>
+
+
+
+
+在上面最后一行关闭了 <code>Step8</code> 的名字空间后，下面是程序的主要功能，又和 step-6 中一模一样（当然，除了改变了类名）。
+
+@code
+int main()
+{
+  try
+    {
+      Step8::ElasticProblem<2> elastic_problem_2d;
+      elastic_problem_2d.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+
+
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
 
-There is not much to be said about the results of this program, other than
-that they look nice. All images were made using VisIt from the
-output files that the program wrote to disk. The first two pictures show
-the $x$- and $y$-displacements as scalar components:
 
-<table width="100%">
+关于这个程序的结果，除了看起来很好之外，没有什么可说的。所有图片都是用VisIt从程序写入磁盘的输出文件中制作的。前两张图片显示了 $x$ -和 $y$ -位移的标量分量。
+
+  <table width="100%">
 <tr>
 <td>
 <img src="https://www.dealii.org/images/steps/developer/step-8.x.png" alt="">
@@ -1282,45 +1085,16 @@ the $x$- and $y$-displacements as scalar components:
 <img src="https://www.dealii.org/images/steps/developer/step-8.y.png" alt="">
 </td>
 </tr>
-</table>
+</table>   
 
 
-You can clearly see the sources of $x$-displacement around $x=0.5$ and
-$x=-0.5$, and of $y$-displacement at the origin.
+你可以清楚地看到 $x$ -位移在 $x=0.5$ 和 $x=-0.5$ 周围的来源，以及 $y$ -位移在原点的来源。
 
-What one frequently would like to do is to show the displacement as a vector
-field, i.e., vectors that for each point illustrate the direction and magnitude
-of displacement. Unfortunately, that's a bit more involved. To understand why
-this is so, remember that we have just defined our finite element as a
-collection of two  components (in <code>dim=2</code> dimensions). Nowhere have
-we said that this is not just a pressure and a concentration (two scalar
-quantities) but that the two components actually are the parts of a
-vector-valued quantity, namely the displacement. Absent this knowledge, the
-DataOut class assumes that all individual variables we print are separate
-scalars, and VisIt and Paraview then faithfully assume that this is indeed what it is. In
-other words, once we have written the data as scalars, there is nothing in
-these programs that allows us to paste these two scalar fields back together as a
-vector field. Where we would have to attack this problem is at the root,
-namely in <code>ElasticProblem::output_results()</code>. We won't do so here but
-instead refer the reader to the step-22 program where we show how to do this
-for a more general situation. That said, we couldn't help generating the data
-anyway that would show how this would look if implemented as discussed in
-step-22. The vector field then looks like this (VisIt and Paraview
-randomly select a few
-hundred vertices from which to draw the vectors; drawing them from each
-individual vertex would make the picture unreadable):
+人们经常想做的是将位移显示为一个矢量场，也就是说，每个点的矢量都能说明位移的方向和大小。不幸的是，这就有点复杂了。为了理解为什么会这样，请记住，我们刚刚将我们的有限元定义为两个分量的集合（在 <code>dim=2</code> 维度）。我们没有说过这不仅仅是一个压力和一个浓度（两个标量），而是说这两个分量实际上是一个矢量值量的组成部分，即位移。如果没有这方面的知识，DataOut类就会假定我们打印的所有单个变量都是独立的标量，然后VisIt和Paraview就会忠实地假定这确实是这样的。换句话说，一旦我们把数据写成标量，这些程序中就没有任何东西可以让我们把这两个标量字段粘贴到一起作为一个矢量字段。我们要攻击这个问题的地方是根源，即在 <code>ElasticProblem::output_results()</code> 。我们不会在这里这样做，而是让读者参考 step-22 程序，在那里我们展示了如何在一个更普遍的情况下这样做。尽管如此，我们还是忍不住要生成数据，以显示如果按照 step-22 中讨论的方式实施，会是什么样子。矢量场看起来是这样的（VisIt和Paraview随机选择几百个顶点来绘制矢量；从每个单独的顶点绘制矢量会使图片无法阅读）。
 
-<img src="https://www.dealii.org/images/steps/developer/step-8.vectors.png" alt="">
+  <img src="https://www.dealii.org/images/steps/developer/step-8.vectors.png" alt="">   
 
 
-We note that one may have intuitively expected the
-solution to be symmetric about the $x$- and $y$-axes since the $x$- and
-$y$-forces are symmetric with respect to these axes. However, the force
-considered as a vector is not symmetric and consequently neither is
-the solution.
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-8.cc"
-*/
+我们注意到，由于 $x$ 和 $y$ 的力相对于这些轴是对称的，所以人们可能直观地期望解是关于 $x$ -和 $y$ 轴的对称性。然而，作为矢量的力是不对称的，因此也不是解决方案。<a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-8.cc" 。 
+
+  */  

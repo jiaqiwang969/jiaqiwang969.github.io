@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-27 tutorial program</title>
+<title>The deal.II Library: The step-27 tutorial program  。</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,126 +86,127 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-27 tutorial program </div>  </div>
+<div class="title">The step-27 tutorial program 。 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_6.html">step-6</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_6.html">step-6</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Finiteelementcollections">Finite element collections</a>
-        <li><a href="#TheDoFHandlerclassinihpimodeassociatingcellswithfiniteelementsandconstraints">The DoFHandler class in <i>hp</i>-mode, associating cells with finite elements, and constraints</a>
-        <li><a href="#Assemblingmatricesandvectorswithhpobjects">Assembling matrices and vectors with hp-objects</a>
-        <li><a href="#Asimpleindicatorforhprefinementandestimatingsmoothness">A simple indicator for hp-refinement and estimating smoothness</a>
+        <li><a href="#Finiteelementcollections">Finite element collections</a><a href="#Finiteelementcollections">Finite element collections</a>
+        <li><a href="#TheDoFHandlerclassinihpimodeassociatingcellswithfiniteelementsandconstraints">The DoFHandler class in <i>hp</i><a href="#TheDoFHandlerclassinihpimodeassociatingcellswithfiniteelementsandconstraints">The DoFHandler class in <i>hp</i>-mode, associating cells with finite elements, and constraints</a><i>hp</i>-mode, associating cells with finite elements, and constraints</a>
+        <li><a href="#Assemblingmatricesandvectorswithhpobjects">Assembling matrices and vectors with hp-objects</a><a href="#Assemblingmatricesandvectorswithhpobjects">Assembling matrices and vectors with hp-objects</a>
+        <li><a href="#Asimpleindicatorforhprefinementandestimatingsmoothness">A simple indicator for hp-refinement and estimating smoothness</a><a href="#Asimpleindicatorforhprefinementandestimatingsmoothness">A simple indicator for hp-refinement and estimating smoothness</a>
       <ul>
-        <li><a href="#Theidea">The idea</a>
-        <li><a href="#Whatwehavetodo">What we have to do</a>
-        <li><a href="#Compensatingforanisotropy">Compensating for anisotropy</a>
-        <li><a href="#Questionsaboutcellsizes">Questions about cell sizes</a>
+        <li><a href="#Theidea">The idea</a><a href="#Theidea">The idea</a>
+        <li><a href="#Whatwehavetodo">What we have to do</a><a href="#Whatwehavetodo">What we have to do</a>
+        <li><a href="#Compensatingforanisotropy">Compensating for anisotropy</a><a href="#Compensatingforanisotropy">Compensating for anisotropy</a>
+        <li><a href="#Questionsaboutcellsizes">Questions about cell sizes</a><a href="#Questionsaboutcellsizes">Questions about cell sizes</a>
       </ul>
-        <li><a href="#Complicationswithlinearsystemsforhpdiscretizations">Complications with linear systems for hp-discretizations</a>
+        <li><a href="#Complicationswithlinearsystemsforhpdiscretizations">Complications with linear systems for hp-discretizations</a><a href="#Complicationswithlinearsystemsforhpdiscretizations">Complications with linear systems for hp-discretizations</a>
       <ul>
-        <li><a href="#Creatingthesparsitypattern">Creating the sparsity pattern</a>
-        <li><a href="#Eliminatingconstraineddegreesoffreedom">Eliminating constrained degrees of freedom</a>
+        <li><a href="#Creatingthesparsitypattern">Creating the sparsity pattern</a><a href="#Creatingthesparsitypattern">Creating the sparsity pattern</a>
+        <li><a href="#Eliminatingconstraineddegreesoffreedom">Eliminating constrained degrees of freedom</a><a href="#Eliminatingconstraineddegreesoffreedom">Eliminating constrained degrees of freedom</a>
       </ul>
-        <li><a href="#Thetestcase">The test case</a>
+        <li><a href="#Thetestcase">The test case</a><a href="#Thetestcase">The test case</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#Themainclass">The main class</a>
-        <li><a href="#Equationdata">Equation data</a>
-        <li><a href="#Implementationofthemainclass">Implementation of the main class</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#Themainclass">The main class</a> ]<a href="#Themainclass">The main class</a>
+        <li><a href="#Equationdata">Equation data</a><a href="#Equationdata">Equation data</a>
+        <li><a href="#Implementationofthemainclass">Implementation of the main class</a><a href="#Implementationofthemainclass">Implementation of the main class</a>
       <ul>
-        <li><a href="#LaplaceProblemLaplaceProblemconstructor">LaplaceProblem::LaplaceProblem constructor</a>
-        <li><a href="#LaplaceProblemLaplaceProblemdestructor">LaplaceProblem::~LaplaceProblem destructor</a>
-        <li><a href="#LaplaceProblemsetup_system">LaplaceProblem::setup_system</a>
-        <li><a href="#LaplaceProblemassemble_system">LaplaceProblem::assemble_system</a>
-        <li><a href="#LaplaceProblemsolve">LaplaceProblem::solve</a>
-        <li><a href="#LaplaceProblempostprocess">LaplaceProblem::postprocess</a>
-        <li><a href="#LaplaceProblemcreate_coarse_grid">LaplaceProblem::create_coarse_grid</a>
-        <li><a href="#LaplaceProblemrun">LaplaceProblem::run</a>
+        <li><a href="#LaplaceProblemLaplaceProblemconstructor">LaplaceProblem::LaplaceProblem constructor</a><a href="#LaplaceProblemLaplaceProblemconstructor">LaplaceProblem::LaplaceProblem constructor</a>
+        <li><a href="#LaplaceProblemLaplaceProblemdestructor">LaplaceProblem::~LaplaceProblem destructor</a><a href="#LaplaceProblemLaplaceProblemdestructor">LaplaceProblem::~LaplaceProblem destructor</a>
+        <li><a href="#LaplaceProblemsetup_system">LaplaceProblem::setup_system</a><a href="#LaplaceProblemsetup_system">LaplaceProblem::setup_system</a>
+        <li><a href="#LaplaceProblemassemble_system">LaplaceProblem::assemble_system</a><a href="#LaplaceProblemassemble_system">LaplaceProblem::assemble_system</a>
+        <li><a href="#LaplaceProblemsolve">LaplaceProblem::solve</a><a href="#LaplaceProblemsolve">LaplaceProblem::solve</a>
+        <li><a href="#LaplaceProblempostprocess">LaplaceProblem::postprocess</a><a href="#LaplaceProblempostprocess">LaplaceProblem::postprocess</a>
+        <li><a href="#LaplaceProblemcreate_coarse_grid">LaplaceProblem::create_coarse_grid</a><a href="#LaplaceProblemcreate_coarse_grid">LaplaceProblem::create_coarse_grid</a>
+        <li><a href="#LaplaceProblemrun">LaplaceProblem::run</a><a href="#LaplaceProblemrun">LaplaceProblem::run</a>
       </ul>
-        <li><a href="#Themainfunction">The main function</a>
+        <li><a href="#Themainfunction">The main function</a><a href="#Themainfunction">The main function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
       <ul>
-        <li><a href="#Differenthpdecisionstrategies">Different hp-decision strategies</a>
-        <li><a href="#Parallelhpadaptivefiniteelements">Parallel hp-adaptive finite elements</a>
+        <li><a href="#Differenthpdecisionstrategies">Different hp-decision strategies</a><a href="#Differenthpdecisionstrategies">Different hp-decision strategies</a>
+        <li><a href="#Parallelhpadaptivefiniteelements">Parallel hp-adaptive finite elements</a><a href="#Parallelhpadaptivefiniteelements">Parallel hp-adaptive finite elements</a>
     </ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
- <a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
-<p>This tutorial program attempts to show how to use \(hp\)-finite element methods with deal.II. It solves the Laplace equation and so builds only on the first few tutorial programs, in particular on <a class="el" href="step_4.html">step-4</a> for dimension independent programming and <a class="el" href="step_6.html">step-6</a> for adaptive mesh refinement.</p>
-<p>The \(hp\)-finite element method was proposed in the early 1980s by Babu&scaron;ka and Guo as an alternative to either (i) mesh refinement (i.e., decreasing the mesh parameter \(h\) in a finite element computation) or (ii) increasing the polynomial degree \(p\) used for shape functions. It is based on the observation that increasing the polynomial degree of the shape functions reduces the approximation error if the solution is sufficiently smooth. On the other hand, it is well known that even for the generally well-behaved class of elliptic problems, higher degrees of regularity can not be guaranteed in the vicinity of boundaries, corners, or where coefficients are discontinuous; consequently, the approximation can not be improved in these areas by increasing the polynomial degree \(p\) but only by refining the mesh, i.e., by reducing the mesh size \(h\). These differing means to reduce the error have led to the notion of \(hp\)-finite elements, where the approximating finite element spaces are adapted to have a high polynomial degree \(p\) wherever the solution is sufficiently smooth, while the mesh width \(h\) is reduced at places wherever the solution lacks regularity. It was already realized in the first papers on this method that \(hp\)-finite elements can be a powerful tool that can guarantee that the error is reduced not only with some negative power of the number of degrees of freedom, but in fact exponentially.</p>
-<p>In order to implement this method, we need several things above and beyond what a usual finite element program needs, and in particular above what we have introduced in the tutorial programs leading up to <a class="el" href="step_6.html">step-6</a>. In particular, we will have to discuss the following aspects: </p><ul>
+</p>
+<p><a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
+<p>本教程程序试图展示如何使用 \(hp\) &ndash;deal.II的有限元方法。它解决的是拉普拉斯方程，因此只建立在前几个教程程序的基础上，特别是建立在 <a class="el" href="step_4.html">step-4</a> 的尺寸独立编程和 <a class="el" href="step_6.html">step-6</a> 的自适应网格细化上。</p>
+<p>\(hp\) 有限元方法是由Babu&scaron;ka和Guo在20世纪80年代初提出的，作为(i)网格细化（即减少有限元计算中的网格参数 \(h\) ）或(ii)增加用于形状函数的多项式程度 \(p\) 的替代方法。它是基于这样的观察：如果解足够光滑，增加形状函数的多项式程度可以减少近似误差。另一方面，众所周知，即使对于一般良好的椭圆问题，在边界附近、角落或系数不连续的地方也不能保证较高的规则度；因此，在这些地方不能通过增加多项式度来改善近似 \(p\) ，而只能通过细化网格，即减少网格大小 \(h\) 。这些减少误差的不同手段导致了 \(hp\) 有限元的概念，即在解足够光滑的地方，近似的有限元空间被调整为具有高多项式度 \(p\) ，而在解缺乏规则性的地方，网格宽度 \(h\) 被减少。在关于这种方法的第一篇论文中已经意识到， \(hp\) &ndash;无限元可以是一个强有力的工具，它可以保证误差不仅以自由度数的某个负数减少，而且实际上是以指数形式减少。</p>
+<p>为了实现这种方法，我们需要一些高于一般有限元程序所需的东西，特别是高于我们在通往 <a class="el" href="step_6.html">step-6</a> 的教程程序中介绍的东西。特别是，我们将不得不讨论以下几个方面。 </p><ul>
 <li>
-<p class="startli">Instead of using the same finite element on all cells, we now will want a collection of finite element objects, and associate each cell with one of these objects in this collection.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">Degrees of freedom will then have to be allocated on each cell depending on what finite element is associated with this particular cell. Constraints will have to be generated in the same way as for hanging nodes, but we now also have to deal with the case where two neighboring cells have different finite elements assigned.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">We will need to be able to assemble cell and face contributions to global matrices and right hand side vectors.</p>
-<p class="endli"></p>
-</li>
-<li>
-After solving the resulting linear system, we will want to analyze the solution. In particular, we will want to compute error indicators that tell us whether a given cell should be refined and/or whether the polynomial degree of the shape functions used on it should be increased. </li>
-</ul>
-<p>We will discuss all these aspects in the following subsections of this introduction. It will not come as a big surprise that most of these tasks are already well supported by functionality provided by the deal.II, and that we will only have to provide the logic of what the program should do, not exactly how all this is going to happen.</p>
-<p>In deal.II, the \(hp\)-functionality is largely packaged into the hp-namespace. This namespace provides classes that handle \(hp\)-discretizations, assembling matrices and vectors, and other tasks. We will get to know many of them further down below. In addition, most of the functions in the <a class="el" href="namespaceDoFTools.html">DoFTools</a>, and <a class="el" href="namespaceVectorTools.html">VectorTools</a> namespaces accept \(hp\)-objects in addition to the non- \(hp\)-ones. Much of the \(hp\)-implementation is also discussed in the <a class="el" href="group__hp.html">hp-finite element support</a> documentation module and the links found there.</p>
-<p>It may be worth giving a slightly larger perspective at the end of this first part of the introduction. \(hp\)-functionality has been implemented in a number of different finite element packages (see, for example, the list of references cited in the <a class="el" href="DEALGlossary.html#hp_paper">hp-paper</a>). However, by and large, most of these packages have implemented it only for the (i) the 2d case, and/or (ii) the discontinuous Galerkin method. The latter is a significant simplification because discontinuous finite elements by definition do not require continuity across faces between cells and therefore do not require the special treatment otherwise necessary whenever finite elements of different polynomial degree meet at a common face. In contrast, deal.II implements the most general case, i.e., it allows for continuous and discontinuous elements in 1d, 2d, and 3d, and automatically handles the resulting complexity. In particular, it handles computing the constraints (similar to hanging node constraints) of elements of different degree meeting at a face or edge. The many algorithmic and data structure techniques necessary for this are described in the <a class="el" href="DEALGlossary.html#hp_paper">hp-paper</a> for those interested in such detail.</p>
-<p>We hope that providing such a general implementation will help explore the potential of \(hp\)-methods further.</p>
-<p><a class="anchor" id="Finiteelementcollections"></a></p><h3>Finite element collections</h3>
-<p>Now on again to the details of how to use the \(hp\)-functionality in deal.II. The first aspect we have to deal with is that now we do not have only a single finite element any more that is used on all cells, but a number of different elements that cells can choose to use. For this, deal.II introduces the concept of a <em>finite element collection</em>, implemented in the class <a class="el" href="classhp_1_1FECollection.html">hp::FECollection</a>. In essence, such a collection acts like an object of type <code>std::vector&lt;<a class="el" href="classFiniteElement.html">FiniteElement</a>&gt;</code>, but with a few more bells and whistles and a memory management better suited to the task at hand. As we will later see, we will also use similar quadrature collections, and &mdash; although we don't use them here &mdash; there is also the concept of mapping collections. All of these classes are described in the <a class="el" href="group__hpcollection.html">hp-Collections</a> overview.</p>
-<p>In this tutorial program, we will use continuous Lagrange elements of orders 2 through 7 (in 2d) or 2 through 5 (in 3d). The collection of used elements can then be created as follows: </p><div class="fragment"><div class="line"><a class="code" href="classhp_1_1FECollection.html">hp::FECollection&lt;dim&gt;</a> fe_collection;</div>
+<p class="startli">我们现在不是在所有单元上使用同一个有限元，而是希望有一个有限元对象的集合，并将每个单元与这个集合中的一个对象相关联。  <br  />
+ </p><pre class="fragment">&lt;li&gt;  然后必须根据与该特定单元相关的有限元在每个单元上分配自由度。约束条件的生成方式与悬挂节点的生成方式相同，但我们现在还必须处理两个相邻单元分配不同有限元的情况。 &lt;/li&gt;   
+
+&lt;li&gt;  我们将需要能够汇集单元和面对全局矩阵和右手向量的贡献。 &lt;/li&gt;   
+
+&lt;li&gt;  在解决了所产生的线性系统后，我们将想分析该解决方案。特别是，我们要计算误差指标，告诉我们是否应该细化一个给定的单元和/或是否应该增加对其使用的形状函数的多项式程度。 &lt;/li&gt;   &lt;/ul&gt;  。 
+</pre><p> 我们将在本介绍的以下几个小节中讨论所有这些方面。我们不会感到惊讶的是，这些任务中的大部分已经被deal.II提供的功能很好地支持了，我们只需要提供程序应该做什么的逻辑，而不是确切地说明这一切将如何发生。</p>
+<p class="interli">在deal.II中， \(hp\) 的功能主要被打包到hp-namespace中。这个命名空间提供了处理 \(hp\) 分解、集合矩阵和向量以及其他任务的类。我们将在下文中进一步了解它们中的许多。此外，DoFTools和VectorTools命名空间中的大多数函数除了接受非 \(hp\) 的对象外，还接受 \(hp\) 的对象。许多 \(hp\) 的实现也在 <a class="el" href="group__hp.html">hp-finite element support</a> 文档模块和那里的链接中讨论。</p>
+<p class="interli">也许值得在这第一部分介绍的最后给出一个稍大的观点。 \(hp\) -功能已经在许多不同的有限元软件包中实现（例如，见 <a class="el" href="DEALGlossary.html#hp_paper">hp-paper </a>中引用的参考文献列表）。然而，总的来说，这些软件包大多只在(i)2d情况下和/或(ii)不连续的Galerkin方法中实现了它。后者是一个重要的简化，因为根据定义，不连续的有限元不要求单元之间的面的连续性，因此，当不同的多项式程度的有限元在一个共同的面相遇时，不需要特殊处理。相比之下，deal.II实现了最普遍的情况，即它允许1d、2d和3d的连续和不连续元素，并自动处理由此产生的复杂性。特别是，它可以处理不同程度的元素在一个面或边缘相遇时的约束（类似于悬挂节点约束）的计算。许多必要的算法和数据结构技术在 <a class="el" href="DEALGlossary.html#hp_paper">hp-paper </a>中为那些对这些细节感兴趣的人进行了描述。</p>
+<p class="interli">我们希望提供这样一个通用的实现方法将有助于进一步探索 \(hp\) -方法的潜力。</p>
+<p class="interli"><a class="anchor" id="Finiteelementcollections"></a></p><h3>Finite element collections</h3>
+<p class="interli"></p>
+<p class="interli">现在再来谈谈如何在deal.II中使用 \(hp\) 的功能的细节。我们必须处理的第一个方面是，现在我们不再只有一个用于所有单元的单一有限元，而是有许多不同的单元可以选择使用。为此，deal.II引入了&lt;i&gt;finite element collection的概念，在 <a class="el" href="classhp_1_1FECollection.html">hp::FECollection</a>. 类中实现。实质上，这样的集合就像 <code>std::vector&lt;<a class="el" href="classFiniteElement.html">FiniteElement</a>&gt;</code> 类型的对象，但多了一些小功能和内存管理，更适合手头的工作。正如我们以后所看到的，我们还将使用类似的正交集合，以及&mdash; 尽管我们在这里没有使用它们&mdash; 还有映射集合的概念。所有这些类在 <a class="el" href="group__hpcollection.html">hp-Collections</a> 概述中都有描述。</p>
+<p class="interli">在这个教程程序中，我们将使用2到7阶（在2D中）或2到5阶（在3D中）的连续Lagrange元素。然后可以按如下方式创建所用元素的集合。</p>
+<div class="fragment"><div class="line"><a class="code" href="classhp_1_1FECollection.html">hp::FECollection&lt;dim&gt;</a> fe_collection;</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> degree = 2; degree &lt;= max_degree; ++degree)</div>
 <div class="line">  fe_collection.<a class="code" href="classhp_1_1FECollection.html#a4b0e75a805ff012e76d33ad6d4c3eac8">push_back</a>(<a class="code" href="classFE__Q.html">FE_Q&lt;dim&gt;</a>(degree));</div>
 <div class="ttc" id="aclassFE__Q_html"><div class="ttname"><a href="classFE__Q.html">FE_Q</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__q_8h_source.html#l00548">fe_q.h:549</a></div></div>
 <div class="ttc" id="aclasshp_1_1FECollection_html"><div class="ttname"><a href="classhp_1_1FECollection.html">hp::FECollection</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__collection_8h_source.html#l00053">fe_collection.h:54</a></div></div>
 <div class="ttc" id="aclasshp_1_1FECollection_html_a4b0e75a805ff012e76d33ad6d4c3eac8"><div class="ttname"><a href="classhp_1_1FECollection.html#a4b0e75a805ff012e76d33ad6d4c3eac8">hp::FECollection::push_back</a></div><div class="ttdeci">void push_back(const FiniteElement&lt; dim, spacedim &gt; &amp;new_fe)</div><div class="ttdef"><b>Definition:</b> <a href="fe__collection_8cc_source.html#l00273">fe_collection.cc:273</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="TheDoFHandlerclassinihpimodeassociatingcellswithfiniteelementsandconstraints"></a></p><h3>The <a class="el" href="classDoFHandler.html">DoFHandler</a> class in <em>hp</em>-mode, associating cells with finite elements, and constraints</h3>
-<p>The next task we have to consider is what to do with the list of finite element objects we want to use. In previous tutorial programs, starting with <a class="el" href="step_2.html">step-2</a>, we have seen that the <a class="el" href="classDoFHandler.html">DoFHandler</a> class is responsible for making the connection between a mesh (described by a <a class="el" href="classTriangulation.html">Triangulation</a> object) and a finite element, by allocating the correct number of degrees of freedom for each vertex, face, edge, and cell of the mesh.</p>
-<p>The situation here is a bit more complicated since we do not just have a single finite element object, but rather may want to use different elements on different cells. We therefore need two things: (i) a version of the <a class="el" href="classDoFHandler.html">DoFHandler</a> class that can deal with this situation, and (ii) a way to tell the <a class="el" href="classDoFHandler.html">DoFHandler</a> which element to use on which cell.</p>
-<p>The first of these two things is implemented in the <em>hp</em>-mode of the <a class="el" href="classDoFHandler.html">DoFHandler</a> class: rather than associating it with a triangulation and a single finite element object, it is associated with a triangulation and a finite element collection. The second part is achieved by a loop over all cells of this <a class="el" href="classDoFHandler.html">DoFHandler</a> and for each cell setting the index of the finite element within the collection that shall be used on this cell. We call the index of the finite element object within the collection that shall be used on a cell the cell's <em>active FE index</em> to indicate that this is the finite element that is active on this cell, whereas all the other elements of the collection are inactive on it. The general outline of this reads like this:</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="TheDoFHandlerclassinihpimodeassociatingcellswithfiniteelementsandconstraints"></a></p><h3>The <a class="el" href="classDoFHandler.html">DoFHandler</a> class in <em>hp</em><em>hp</em>-mode, associating cells with finite elements, and constraints</h3>
+<p class="interli"></p>
+<p class="interli">我们要考虑的下一个任务是如何处理我们要使用的有限元对象的列表。在以前的教程程序中，从 <a class="el" href="step_2.html">step-2</a> 开始，我们已经看到DoFHandler类负责在网格（由三角形对象描述）和有限元之间建立联系，为网格的每个顶点、面、边和单元分配正确的自由度数。</p>
+<p class="interli">这里的情况有点复杂，因为我们不只是有一个单一的有限元对象，而是可能想在不同的单元上使用不同的元素。因此，我们需要两样东西。(i) 一个可以处理这种情况的DoFHandler类的版本，以及(ii) 告诉DoFHandler在哪个单元上使用哪个元素的方法。</p>
+<p class="interli">这两件事中的第一件是在DoFHandler类的<em>hp</em>模式下实现的：不是将其与一个三角形和一个有限元对象相关联，而是与一个三角形和一个有限元集合相关联。第二部分是通过在DoFHandler的所有单元上的循环来实现的，并为每个单元设置集合中的有限元的索引，该索引将被用于该单元。我们将集合中用于某个单元的有限元对象的索引称为该单元的<em>active FE index</em>，以表明这是在该单元上活动的有限元，而集合中的所有其他元素在该单元上是不活动的。其大致内容是这样的。</p>
 <div class="fragment"><div class="line"><a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a> dof_handler(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>);</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;cell: dof_handler.active_cell_iterators())</div>
 <div class="line">  cell-&gt;set_active_fe_index(...);</div>
 <div class="line">dof_handler.distribute_dofs(fe_collection);</div>
 <div class="ttc" id="aclassDoFHandler_html"><div class="ttname"><a href="classDoFHandler.html">DoFHandler</a></div><div class="ttdef"><b>Definition:</b> <a href="dofs_2dof__handler_8h_source.html#l00314">dof_handler.h:315</a></div></div>
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
-</div><!-- fragment --><p>Dots in the call to <code>set_active_fe_index()</code> indicate that we will have to have some sort of strategy later on to decide which element to use on which cell; we will come back to this later. The main point here is that the first and last line of this code snippet is pretty much exactly the same as for the non- \(hp\)-case.</p>
-<p>Another complication arises from the fact that this time we do not simply have hanging nodes from local mesh refinement, but we also have to deal with the case that if there are two cells with different active finite element indices meeting at a face (for example a Q2 and a Q3 element) then we have to compute additional constraints on the finite element field to ensure that it is continuous. This is conceptually very similar to how we compute hanging node constraints, and in fact the code looks exactly the same: </p><div class="fragment"><div class="line"><a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> constraints;</div>
+</div><!-- fragment --><p class="interli">调用 <code>set_active_fe_index()</code> 中的点表示我们以后要有某种策略来决定在哪个单元上使用哪个元素；我们以后会再来讨论这个问题。这里的重点是，这个代码片段的第一行和最后一行与非 \(hp\) 的情况几乎完全相同。</p>
+<p class="interli">另一个复杂的情况是，这次我们不只是有来自局部网格细化的悬挂节点，我们还必须处理这样的情况：如果有两个具有不同活动有限元指数的单元在一个面上相遇（例如一个Q2和一个Q3单元），那么我们必须计算有限元场的额外约束，以确保它是连续的。这在概念上与我们计算悬挂节点约束的方式非常相似，事实上，代码看起来完全一样。</p>
+<div class="fragment"><div class="line"><a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> constraints;</div>
 <div class="line"><a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, constraints);</div>
 <div class="ttc" id="aclassAffineConstraints_html"><div class="ttname"><a href="classAffineConstraints.html">AffineConstraints&lt; double &gt;</a></div></div>
 <div class="ttc" id="agroup__constraints_html_ga3b4ea7dfd313e388d868c4e4aa685799"><div class="ttname"><a href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a></div><div class="ttdeci">void make_hanging_node_constraints(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, AffineConstraints&lt; number &gt; &amp;constraints)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__constraints_8cc_source.html#l01787">dof_tools_constraints.cc:1787</a></div></div>
-</div><!-- fragment --><p> In other words, the <a class="el" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a> deals not only with hanging node constraints, but also with \(hp\)-constraints at the same time.</p>
-<p><a class="anchor" id="Assemblingmatricesandvectorswithhpobjects"></a></p><h3>Assembling matrices and vectors with hp-objects</h3>
-<p>Following this, we have to set up matrices and vectors for the linear system of the correct size and assemble them. Setting them up works in exactly the same way as for the non- \(hp\)-case. Assembling requires a bit more thought.</p>
-<p>The main idea is of course unchanged: we have to loop over all cells, assemble local contributions, and then copy them into the global objects. As discussed in some detail first in <a class="el" href="step_3.html">step-3</a>, deal.II has the <a class="el" href="classFEValues.html">FEValues</a> class that pulls the finite element description, mapping, and quadrature formula together and aids in evaluating values and gradients of shape functions as well as other information on each of the quadrature points mapped to the real location of a cell. Every time we move on to a new cell we re-initialize this <a class="el" href="classFEValues.html">FEValues</a> object, thereby asking it to re-compute that part of the information that changes from cell to cell. It can then be used to sum up local contributions to bilinear form and right hand side.</p>
-<p>In the context of \(hp\)-finite element methods, we have to deal with the fact that we do not use the same finite element object on each cell. In fact, we should not even use the same quadrature object for all cells, but rather higher order quadrature formulas for cells where we use higher order finite elements. Similarly, we may want to use higher order mappings on such cells as well.</p>
-<p>To facilitate these considerations, deal.II has a class <a class="el" href="classhp_1_1FEValues.html">hp::FEValues</a> that does what we need in the current context. The difference is that instead of a single finite element, quadrature formula, and mapping, it takes collections of these objects. It's use is very much like the regular <a class="el" href="classFEValues.html">FEValues</a> class, i.e., the interesting part of the loop over all cells would look like this:</p>
+</div><!-- fragment --><p class="interli">换句话说， <a class="el" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a> 不仅要处理悬挂节点约束，还要同时处理 \(hp\) -约束。</p>
+<p class="interli"><a class="anchor" id="Assemblingmatricesandvectorswithhpobjects"></a></p><h3>Assembling matrices and vectors with hp-objects</h3>
+<p class="interli"></p>
+<p class="interli">在这之后，我们必须为正确大小的线性系统设置矩阵和向量，并将它们组合起来。设置它们的方法与非 \(hp\) 情况下的设置方法完全相同。组装则需要更多的思考。</p>
+<p class="interli">主要的想法当然是不变的：我们必须在所有的单元中循环，集合局部贡献，然后将它们复制到全局对象中。正如第一次在 <a class="el" href="step_3.html">step-3</a> 中详细讨论的那样，deal.II有FEValues类，它将有限元描述、映射和正交公式拉到一起，帮助评估形状函数的值和梯度，以及映射到单元实际位置的每个正交点的其他信息。每当我们转到一个新的单元时，我们就会重新初始化这个FEValues对象，从而要求它重新计算从一个单元到另一个单元的那部分信息。然后，它可以被用来总结对双线性形式和右手边的局部贡献。</p>
+<p class="interli">在 \(hp\) 有限元方法的背景下，我们必须处理这样一个事实，即我们不在每个单元上使用相同的有限元对象。事实上，我们甚至不应该对所有单元使用相同的正交对象，而应该对使用高阶有限元的单元使用高阶正交公式。同样地，我们可能也想在这些单元中使用高阶映射。</p>
+<p class="interli">为了方便这些考虑，deal.II有一个类 <a class="el" href="classhp_1_1FEValues.html">hp::FEValues</a> ，可以做我们在当前背景下需要的事情。不同的是，它不是一个单一的有限元、正交公式和映射，而是这些对象的集合。它的使用非常类似于常规的FEValues类，也就是说，在所有单元中循环的有趣部分看起来像这样。</p>
 <div class="fragment"><div class="line"><a class="code" href="classhp_1_1FEValues.html">hp::FEValues&lt;dim&gt;</a> hp_fe_values(mapping_collection,</div>
 <div class="line">                               fe_collection,</div>
 <div class="line">                               quadrature_collection,</div>
 <div class="line">                               <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a> |</div>
 <div class="line">                               <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">  {</div>
 <div class="line">    hp_fe_values.reinit(cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> &amp;fe_values = hp_fe_values.<a class="code" href="classFEValues.html#a902429920d32c81c9c279d9a15faa263">get_present_fe_values</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    ...  <span class="comment">// assemble local contributions and copy them into global object</span></div>
 <div class="line">  }</div>
@@ -216,121 +217,131 @@ After solving the resulting linear system, we will want to analyze the solution.
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a></div><div class="ttdeci">@ update_JxW_values</div><div class="ttdoc">Transformed quadrature weights.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00129">fe_update_flags.h:129</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a></div><div class="ttdeci">@ update_gradients</div><div class="ttdoc">Shape function gradients.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00084">fe_update_flags.h:84</a></div></div>
 <div class="ttc" id="afe__update__flags_8h_html_aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a"><div class="ttname"><a href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a></div><div class="ttdeci">@ update_quadrature_points</div><div class="ttdoc">Transformed quadrature points.</div><div class="ttdef"><b>Definition:</b> <a href="fe__update__flags_8h_source.html#l00122">fe_update_flags.h:122</a></div></div>
-</div><!-- fragment --><p>In this tutorial program, we will always use a Q1 mapping, so the mapping collection argument to the <a class="el" href="classhp_1_1FEValues.html">hp::FEValues</a> construction will be omitted. Inside the loop, we first initialize the <a class="el" href="classhp_1_1FEValues.html">hp::FEValues</a> object for the current cell. The second, third and fourth arguments denote the index within their respective collections of the quadrature, mapping, and finite element objects we wish to use on this cell. These arguments can be omitted (and are in the program below), in which case <code>cell-&gt;active_fe_index()</code> is used for this index. The order of these arguments is chosen in this way because one may sometimes want to pick a different quadrature or mapping object from their respective collections, but hardly ever a different finite element than the one in use on this cell, i.e., one with an index different from <code>cell-&gt;active_fe_index()</code>. The finite element collection index is therefore the last default argument so that it can be conveniently omitted.</p>
-<p>What this <code>reinit</code> call does is the following: the <a class="el" href="classhp_1_1FEValues.html">hp::FEValues</a> class checks whether it has previously already allocated a non- \(hp\)-<a class="el" href="classFEValues.html">FEValues</a> object for this combination of finite element, quadrature, and mapping objects. If not, it allocates one. It then re-initializes this object for the current cell, after which there is now a <a class="el" href="classFEValues.html">FEValues</a> object for the selected finite element, quadrature and mapping usable on the current cell. A reference to this object is then obtained using the call <code>hp_fe_values.get_present_fe_values()</code>, and will be used in the usual fashion to assemble local contributions.</p>
-<p><a class="anchor" id="Asimpleindicatorforhprefinementandestimatingsmoothness"></a></p><h3>A simple indicator for hp-refinement and estimating smoothness</h3>
-<p>One of the central pieces of the adaptive finite element method is that we inspect the computed solution (a posteriori) with an indicator that tells us which are the cells where the error is largest, and then refine them. In many of the other tutorial programs, we use the <a class="el" href="classKellyErrorEstimator.html">KellyErrorEstimator</a> class to get an indication of the size of the error on a cell, although we also discuss more complicated strategies in some programs, most importantly in <a class="el" href="step_14.html">step-14</a>.</p>
-<p>In any case, as long as the decision is only "refine this cell" or "do not
-refine this cell", the actual refinement step is not particularly challenging. However, here we have a code that is capable of hp-refinement, i.e., we suddenly have two choices whenever we detect that the error on a certain cell is too large for our liking: we can refine the cell by splitting it into several smaller ones, or we can increase the polynomial degree of the shape functions used on it. How do we know which is the more promising strategy? Answering this question is the central problem in \(hp\)-finite element research at the time of this writing.</p>
-<p>In short, the question does not appear to be settled in the literature at this time. There are a number of more or less complicated schemes that address it, but there is nothing like the <a class="el" href="classKellyErrorEstimator.html">KellyErrorEstimator</a> that is universally accepted as a good, even if not optimal, indicator of the error. Most proposals use the fact that it is beneficial to increase the polynomial degree whenever the solution is locally smooth whereas it is better to refine the mesh wherever it is rough. However, the questions of how to determine the local smoothness of the solution as well as the decision when a solution is smooth enough to allow for an increase in \(p\) are certainly big and important ones.</p>
-<p>In the following, we propose a simple estimator of the local smoothness of a solution. As we will see in the results section, this estimator has flaws, in particular as far as cells with local hanging nodes are concerned. We therefore do not intend to present the following ideas as a complete solution to the problem. Rather, it is intended as an idea to approach it that merits further research and investigation. In other words, we do not intend to enter a sophisticated proposal into the fray about answers to the general question. However, to demonstrate our approach to \(hp\)-finite elements, we need a simple indicator that does generate some useful information that is able to drive the simple calculations this tutorial program will perform.</p>
-<p><a class="anchor" id="Theidea"></a></p><h4>The idea</h4>
-<p>Our approach here is simple: for a function \(u({\bf x})\) to be in the Sobolev space \(H^s(K)\) on a cell \(K\), it has to satisfy the condition </p><p class="formulaDsp">
+</div><!-- fragment --><p class="interli">在这个教程程序中，我们将始终使用Q1映射，所以 <a class="el" href="classhp_1_1FEValues.html">hp::FEValues</a> 结构的映射集合参数将被省略。在循环内部，我们首先为当前单元格初始化 <a class="el" href="classhp_1_1FEValues.html">hp::FEValues</a> 对象。第二个、第三个和第四个参数表示我们希望在该单元上使用的正交、映射和有限元对象在各自集合中的索引。这些参数可以省略（在下面的程序中也是如此），在这种情况下， <code>cell-&gt;active_fe_index()</code> 被用于该索引。之所以这样选择这些参数的顺序，是因为有时人们可能想从各自的集合中挑选不同的正交或映射对象，但几乎不可能从这个单元上使用的有限元中挑选不同的有限元，也就是说，索引与 <code>cell-&gt;active_fe_index()</code> 不同的有限元。因此，有限元集合索引是最后一个默认参数，这样可以方便地省略它。</p>
+<p class="interli">这个 <code>reinit</code> 调用的作用如下： <a class="el" href="classhp_1_1FEValues.html">hp::FEValues</a> 类检查它是否已经为这个有限元、正交和映射对象的组合分配了一个非 \(hp\) -FEValues对象。如果没有，它将分配一个。然后，它为当前单元重新初始化这个对象，之后，现在有一个FEValues对象可用于当前单元上选定的有限元、正交和映射。然后通过调用 <code>hp_fe_values.get_present_fe_values()</code> 获得对该对象的引用，并将以通常的方式用于集合局部贡献。</p>
+<p class="interli"><a class="anchor" id="Asimpleindicatorforhprefinementandestimatingsmoothness"></a></p><h3>A simple indicator for hp-refinement and estimating smoothness</h3>
+<p class="interli"></p>
+<p class="interli">自适应有限元方法的核心之一是，我们用一个指标来检查计算出的解（后验），告诉我们哪些是误差最大的单元，然后对它们进行细化。在其他许多教程程序中，我们使用KellyErrorEstimator类来获得单元格上的误差大小指示，尽管我们也在一些程序中讨论了更复杂的策略，最重要的是在 <a class="el" href="step_14.html">step-14</a> 。</p>
+<p class="interli">在任何情况下，只要决定只是 "细化这个单元 "或 "不细化这个单元"，实际的细化步骤就不是特别具有挑战性。然而，在这里，我们有一个能够进行hp细化的代码，也就是说，每当我们检测到某个单元上的误差太大，我们突然有两个选择：我们可以通过把它分割成几个小单元来细化这个单元，或者我们可以增加在它上面使用的形状函数的多项式程度。我们如何知道哪个是更有希望的策略？回答这个问题是本文写作时 \(hp\) -无限元研究的核心问题。</p>
+<p class="interli">简而言之，这个问题在目前的文献中似乎还没有解决。有许多或多或少复杂的方案来解决这个问题，但没有什么像KellyErrorEstimator那样被普遍接受为一个好的、即使不是最优的误差指标。大多数建议采用这样的事实：只要解是局部光滑的，增加多项式的度数是有益的，而只要网格是粗糙的，就应该细化。然而，如何确定解的局部光滑度以及决定一个解何时足够光滑以允许增加 \(p\) 的问题无疑是大而重要的问题。</p>
+<p class="interli">在下文中，我们提出了一个简单的解的局部光滑度的估计方法。正如我们将在结果部分看到的，这个估计器有缺陷，特别是就有局部悬空节点的单元而言。因此，我们不打算把下面的想法作为问题的完整解决方案。相反，它是作为一个值得进一步研究和调查的思路来处理的。换句话说，我们不打算在关于一般问题的答案的争论中进入一个复杂的建议。然而，为了证明我们对 \(hp\) -无限元素的方法，我们需要一个简单的指标，它确实产生一些有用的信息，能够驱动本教程程序将进行的简单计算。</p>
+<p class="interli"><a class="anchor" id="Theidea"></a></p><h4>The idea</h4>
+<p class="interli"></p>
+<p class="interli">我们的方法很简单：对于一个函数 \(u({\bf x})\) 来说，它在单元格 \(K\) 的Sobolev空间 \(H^s(K)\) 中，必须满足条件 </p><p class="formulaDsp">
 \[ \int_K |\nabla^s u({\bf x})|^2 \; d{\bf x} &lt; \infty. \]
 </p>
-<p> Assuming that the cell \(K\) is not degenerate, i.e., that the mapping from the unit cell to cell \(K\) is sufficiently regular, above condition is of course equivalent to </p><p class="formulaDsp">
+<p> 假设单元格 \(K\) 不是退化的，即。从单元格到单元格 \(K\) 的映射足够规则，上述条件当然等同于 </p><p class="formulaDsp">
 \[ \int_{\hat K} |\nabla^s \hat u(\hat{\bf x})|^2 \; d\hat{\bf x} &lt; \infty\,, \]
 </p>
-<p> where \(\hat u(\hat{\bf x})\) is the function \(u({\bf x})\) mapped back onto the unit cell \(\hat K\). From here, we can do the following: first, let us define the Fourier series of \(\hat u\) as </p><p class="formulaDsp">
+<p>，其中 \(\hat u(\hat{\bf x})\) 是映射回单元格 \(\hat K\) 的函数 \(u({\bf x})\) 。从这里，我们可以做以下工作：首先，让我们定义 \(\hat u\) 的傅里叶级数为 </p><p class="formulaDsp">
 \[ \hat u(\hat{\bf x}) = \sum_{\bf k} \hat U_{\bf k}\,e^{-i {\bf k}\cdot \hat{\bf x}}, \]
 </p>
-<p> with Fourier vectors \({\bf k}=(k_x,k_y)\) in 2d, \({\bf k}=(k_x,k_y,k_z)\) in 3d, etc, and \(k_x,k_y,k_z=0,2\pi,4\pi,\ldots\). The coefficients of expansion \(\hat U_{\bf k}\) can be obtained using \(L^2\)-orthogonality of the exponential basis </p><p class="formulaDsp">
+<p>，傅里叶向量 \({\bf k}=(k_x,k_y)\) 在2d， \({\bf k}=(k_x,k_y,k_z)\) 在3d，等等，和 \(k_x,k_y,k_z=0,2\pi,4\pi,\ldots\) 。膨胀系数 \(\hat U_{\bf k}\) 可以利用指数基 </p><p class="formulaDsp">
 \[ \int_{\hat K} e^{-i {\bf m}\cdot \hat{\bf x}} e^{i {\bf n}\cdot \hat{\bf x}} d\hat{\bf x} = \delta_{\bf m \bf n}, \]
 </p>
-<p> that leads to the following expression </p><p class="formulaDsp">
+<p>的 \(L^2\) 正交性得到，这导致了以下表达式 </p><p class="formulaDsp">
 \[ \hat U_{\bf k} = \int_{\hat K} e^{i {\bf k}\cdot \hat{\bf x}} \hat u(\hat{\bf x}) d\hat{\bf x} \,. \]
 </p>
-<p> It becomes clear that we can then write the \(H^s\) norm of \(\hat u\) as </p><p class="formulaDsp">
+<p> 很明显，我们可以把 \(H^s\) 的 \(\hat u\) ] 的规范写成 </p><p class="formulaDsp">
 \[ \int_{\hat K} |\nabla^s \hat u(\hat{\bf x})|^2 \; d\hat{\bf x} = \int_{\hat K} \left| \sum_{\bf k} |{\bf k}|^s e^{-i{\bf k}\cdot \hat{\bf x}} \hat U_{\bf k} \right|^2 \; d\hat{\bf x} = \sum_{\bf k} |{\bf k}|^{2s} |\hat U_{\bf k}|^2. \]
 </p>
-<p> In other words, if this norm is to be finite (i.e., for \(\hat u(\hat{\bf x})\) to be in \(H^s(\hat K)\)), we need that </p><p class="formulaDsp">
+<p> 换句话说，如果这个规范是有限的（即，为了使 \(\hat u(\hat{\bf x})\) 在 \(H^s(\hat K)\) 中），我们需要 </p><p class="formulaDsp">
 \[ |\hat U_{\bf k}| = {\cal O}\left(|{\bf k}|^{-\left(s+1/2+\frac{d-1}{2}+\epsilon\right)}\right). \]
 </p>
-<p> Put differently: the higher regularity \(s\) we want, the faster the Fourier coefficients have to go to zero. If you wonder where the additional exponent \(\frac{d-1}2\) comes from: we would like to make use of the fact that \(\sum_l a_l &lt; \infty\) if the sequence \(a_l = {\cal O}(l^{-1-\epsilon})\) for any \(\epsilon&gt;0\). The problem is that we here have a summation not only over a single variable, but over all the integer multiples of \(2\pi\) that are located inside the \(d\)-dimensional sphere, because we have vector components \(k_x, k_y, \ldots\). In the same way as we prove that the sequence \(a_l\) above converges by replacing the sum by an integral over the entire line, we can replace our \(d\)-dimensional sum by an integral over \(d\)-dimensional space. Now we have to note that between distance \(|{\bf k}|\) and \(|{\bf k}|+d|{\bf k}|\), there are, up to a constant, \(|{\bf k}|^{d-1}\) modes, in much the same way as we can transform the volume element \(dx\;dy\) into \(2\pi r\; dr\). Consequently, it is no longer \(|{\bf k}|^{2s}|\hat U_{\bf k}|^2\) that has to decay as \({\cal O}(|{\bf k}|^{-1-\epsilon})\), but it is in fact \(|{\bf k}|^{2s}|\hat U_{\bf k}|^2 |{\bf k}|^{d-1}\). A comparison of exponents yields the result.</p>
-<p>We can turn this around: Assume we are given a function \(\hat u\) of unknown smoothness. Let us compute its Fourier coefficients \(\hat U_{\bf k}\) and see how fast they decay. If they decay as </p><p class="formulaDsp">
+<p> 换句话说：我们想要的规则性 \(s\) 越高，傅里叶系数归零的速度越快。如果你想知道额外的指数 \(\frac{d-1}2\) 从何而来：我们想利用这样一个事实： \(\sum_l a_l &lt; \infty\) 如果序列 \(a_l = {\cal O}(l^{-1-\epsilon})\) 为任何 \(\epsilon&gt;0\) 。问题是，我们在这里不仅有一个单一变量的求和，而且有 \(2\pi\) 的所有整数倍，这些整数倍位于 \(d\) 维球内，因为我们有矢量成分 \(k_x, k_y, \ldots\) 。就像我们通过用整个直线上的积分代替总和来证明上面的序列 \(a_l\) 收敛一样，我们可以用 \(d\) -维空间的积分代替我们的 \(d\) -维总和。现在我们必须注意，在距离 \(|{\bf k}|\) 和 \(|{\bf k}|+d|{\bf k}|\) 之间，在一个常数以内，有 \(|{\bf k}|^{d-1}\) 个模式，这与我们可以将体积元素 \(dx\;dy\) 转化为 \(2\pi r\; dr\) 的方式相同。因此，不再是 \(|{\bf k}|^{2s}|\hat U_{\bf k}|^2\) 必须衰减为 \({\cal O}(|{\bf k}|^{-1-\epsilon})\) ，而实际上是 \(|{\bf k}|^{2s}|\hat U_{\bf k}|^2 |{\bf k}|^{d-1}\) 。指数的比较产生了这个结果。</p>
+<p class="interli">我们可以把这个问题转过来。假设我们得到了一个未知平滑度的函数 \(\hat u\) 。让我们计算一下它的傅里叶系数 \(\hat U_{\bf k}\) ，看看它们衰减的速度。如果它们以 </p><p class="formulaDsp">
 \[ |\hat U_{\bf k}| = {\cal O}(|{\bf k}|^{-\mu-\epsilon}), \]
 </p>
-<p> then consequently the function we had here was in \(H^{\mu-d/2}\).</p>
-<p><a class="anchor" id="Whatwehavetodo"></a></p><h4>What we have to do</h4>
-<p>So what do we have to do to estimate the local smoothness of \(u({\bf x})\) on a cell \(K\)? Clearly, the first step is to compute the Fourier coefficients of our solution. Fourier series being infinite series, we simplify our task by only computing the first few terms of the series, such that \(|{\bf k}|\le 2\pi N\) with a cut-off \(N\). Let us parenthetically remark that we want to choose \(N\) large enough so that we capture at least the variation of those shape functions that vary the most. On the other hand, we should not choose \(N\) too large: clearly, a finite element function, being a polynomial, is in \(C^\infty\) on any given cell, so the coefficients will have to decay exponentially at one point; since we want to estimate the smoothness of the function this polynomial approximates, not of the polynomial itself, we need to choose a reasonable cutoff for \(N\). Either way, computing this series is not particularly hard: from the definition </p><p class="formulaDsp">
+<p>的速度衰减，那么我们这里的函数就在 \(H^{\mu-d/2}\) 中。</p>
+<p class="interli"><a class="anchor" id="Whatwehavetodo"></a></p><h4>What we have to do</h4>
+<p class="interli"></p>
+<p class="interli">那么，我们要做什么来估计 \(u({\bf x})\) 在 \(K\) 单元上的局部平稳性？显然，第一步是计算我们解决方案的傅里叶系数。傅里叶级数是无限级数，我们通过只计算级数的前几项来简化我们的任务，比如 \(|{\bf k}|\le 2\pi N\) 有一个截止点 \(N\) 。让我们顺便说一下，我们希望选择 \(N\) 足够大，这样我们至少可以捕获那些变化最大的形状函数的变化。另一方面，我们不应该把 \(N\) 选得太大：显然，一个有限元函数，作为一个多项式，在任何给定的单元上都在 \(C^\infty\) 中，所以系数将不得不在某一点上指数衰减；由于我们想估计这个多项式所近似的函数的平稳性，而不是多项式本身，我们需要为 \(N\) 选择一个合理的截止点。无论怎样，计算这个数列并不特别难：从定义 </p><p class="formulaDsp">
 \[ \hat U_{\bf k} = \int_{\hat K} e^{i {\bf k}\cdot \hat{\bf x}} \hat u(\hat{\bf x}) d\hat{\bf x} \]
 </p>
-<p> we see that we can compute the coefficient \(\hat U_{\bf k}\) as </p><p class="formulaDsp">
+<p>中我们可以看到，我们可以将系数 \(\hat U_{\bf k}\) 计算为 </p><p class="formulaDsp">
 \[ \hat U_{\bf k} = \sum_{i=0}^{\textrm{dofs per cell}} \left[\int_{\hat K} e^{i {\bf k}\cdot \hat{\bf x}} \hat \varphi_i(\hat{\bf x}) d\hat{\bf x} \right] u_i, \]
 </p>
-<p> where \(u_i\) is the value of the \(i\)th degree of freedom on this cell. In other words, we can write it as a matrix-vector product </p><p class="formulaDsp">
+<p>，其中 \(u_i\) 是这个单元上的 \(i\) 个自由度的值。换句话说，我们可以把它写成 </p><p class="formulaDsp">
 \[ \hat U_{\bf k} = {\cal F}_{{\bf k},j} u_j, \]
 </p>
-<p> with the matrix </p><p class="formulaDsp">
+<p>与矩阵 </p><p class="formulaDsp">
 \[ {\cal F}_{{\bf k},j} = \int_{\hat K} e^{i {\bf k}\cdot \hat{\bf x}} \hat \varphi_j(\hat{\bf x}) d\hat{\bf x}. \]
 </p>
-<p> This matrix is easily computed for a given number of shape functions \(\varphi_j\) and Fourier modes \(N\). Consequently, finding the coefficients \(\hat U_{\bf k}\) is a rather trivial job. To simplify our life even further, we will use <a class="el" href="classFESeries_1_1Fourier.html">FESeries::Fourier</a> class which does exactly this.</p>
-<p>The next task is that we have to estimate how fast these coefficients decay with \(|{\bf k}|\). The problem is that, of course, we have only finitely many of these coefficients in the first place. In other words, the best we can do is to fit a function \(\alpha |{\bf k}|^{-\mu}\) to our data points \(\hat U_{\bf k}\), for example by determining \(\alpha,\mu\) via a least-squares procedure: </p><p class="formulaDsp">
+<p>的矩阵-向量乘积。对于给定数量的形状函数 \(\varphi_j\) 和傅里叶模式 \(N\) ，这个矩阵很容易计算。因此，寻找系数 \(\hat U_{\bf k}\) 是一个相当琐碎的工作。为了进一步简化我们的生活，我们将使用 <a class="el" href="classFESeries_1_1Fourier.html">FESeries::Fourier</a> 类，它正是这样做的。</p>
+<p class="interli">下一个任务是，我们必须估计这些系数的衰减速度 \(|{\bf k}|\) 。问题是，当然，我们首先只有有限的这些系数。换句话说，我们能做的最好的事情就是将一个函数 \(\alpha |{\bf k}|^{-\mu}\) 拟合到我们的数据点 \(\hat U_{\bf k}\) ，例如通过最小二乘法程序确定 \(\alpha,\mu\) 。 </p><p class="formulaDsp">
 \[ \min_{\alpha,\mu} \frac 12 \sum_{{\bf k}, |{\bf k}|\le N} \left( |\hat U_{\bf k}| - \alpha |{\bf k}|^{-\mu}\right)^2 \]
 </p>
-<p> However, the problem with this is that it leads to a nonlinear problem, a fact that we would like to avoid. On the other hand, we can transform the problem into a simpler one if we try to fit the logarithm of our coefficients to the logarithm of \(\alpha |{\bf k}|^{-\mu}\), like this: </p><p class="formulaDsp">
+<p> 然而，这样做的问题是，它导致了一个非线性问题，这是我们想避免的事实。另一方面，如果我们试图将我们的系数的对数与 \(\alpha |{\bf k}|^{-\mu}\) 的对数进行拟合，我们可以将这个问题转化为一个更简单的问题，就像这样。 </p><p class="formulaDsp">
 \[ \min_{\alpha,\mu} Q(\alpha,\mu) = \frac 12 \sum_{{\bf k}, |{\bf k}|\le N} \left( \ln |\hat U_{\bf k}| - \ln (\alpha |{\bf k}|^{-\mu})\right)^2. \]
 </p>
-<p> Using the usual facts about logarithms, we see that this yields the problem </p><p class="formulaDsp">
+<p> 利用通常的对数事实，我们可以看到，这将产生问题 </p><p class="formulaDsp">
 \[ \min_{\beta,\mu} Q(\beta,\mu) = \frac 12 \sum_{{\bf k}, |{\bf k}|\le N} \left( \ln |\hat U_{\bf k}| - \beta + \mu \ln |{\bf k}|\right)^2, \]
 </p>
-<p> where \(\beta=\ln \alpha\). This is now a problem for which the optimality conditions \(\frac{\partial Q}{\partial\beta}=0, \frac{\partial Q}{\partial\mu}=0\), are linear in \(\beta,\mu\). We can write these conditions as follows: </p><p class="formulaDsp">
+<p> 其中 \(\beta=\ln \alpha\) 。现在这是一个问题，对于这个问题，优化条件 \(\frac{\partial Q}{\partial\beta}=0, \frac{\partial Q}{\partial\mu}=0\) ，在 \(\beta,\mu\) 中是线性的。我们可以把这些条件写成如下。 </p><p class="formulaDsp">
 \[ \left(\begin{array}{cc} \sum_{{\bf k}, |{\bf k}|\le N} 1 &amp; \sum_{{\bf k}, |{\bf k}|\le N} \ln |{\bf k}| \\ \sum_{{\bf k}, |{\bf k}|\le N} \ln |{\bf k}| &amp; \sum_{{\bf k}, |{\bf k}|\le N} (\ln |{\bf k}|)^2 \end{array}\right) \left(\begin{array}{c} \beta \\ -\mu \end{array}\right) = \left(\begin{array}{c} \sum_{{\bf k}, |{\bf k}|\le N} \ln |\hat U_{{\bf k}}| \\ \sum_{{\bf k}, |{\bf k}|\le N} \ln |\hat U_{{\bf k}}| \ln |{\bf k}| \end{array}\right) \]
 </p>
-<p> This linear system is readily inverted to yield </p><p class="formulaDsp">
+<p> 这个线性系统很容易倒置，得到 </p><p class="formulaDsp">
 \[ \beta = \frac { \left(\sum_{{\bf k}, |{\bf k}|\le N} (\ln |{\bf k}|)^2\right) \left(\sum_{{\bf k}, |{\bf k}|\le N} \ln |\hat U_{{\bf k}}|\right) - \left(\sum_{{\bf k}, |{\bf k}|\le N} \ln |{\bf k}|\right) \left(\sum_{{\bf k}, |{\bf k}|\le N} \ln |\hat U_{{\bf k}}| \ln |{\bf k}| \right) } { \left(\sum_{{\bf k}, |{\bf k}|\le N} 1\right) \left(\sum_{{\bf k}, |{\bf k}|\le N} (\ln |{\bf k}|)^2\right) - \left(\sum_{{\bf k}, |{\bf k}|\le N} \ln |{\bf k}|\right)^2 } \]
 </p>
-<p> and </p><p class="formulaDsp">
+<p> 和 </p><p class="formulaDsp">
 \[ \mu = \frac { \left(\sum_{{\bf k}, |{\bf k}|\le N} \ln |{\bf k}|\right) \left(\sum_{{\bf k}, |{\bf k}|\le N} \ln |\hat U_{{\bf k}}|\right) - \left(\sum_{{\bf k}, |{\bf k}|\le N} 1\right) \left(\sum_{{\bf k}, |{\bf k}|\le N} \ln |\hat U_{{\bf k}}| \ln |{\bf k}| \right) } { \left(\sum_{{\bf k}, |{\bf k}|\le N} 1\right) \left(\sum_{{\bf k}, |{\bf k}|\le N} (\ln |{\bf k}|)^2\right) - \left(\sum_{{\bf k}, |{\bf k}|\le N} \ln |{\bf k}|\right)^2 }. \]
 </p>
-<p>This is nothing else but linear regression fit and to do that we will use <a class="el" href="namespaceFESeries.html#afa42058db3555536415fae91822d27e3">FESeries::linear_regression()</a>. While we are not particularly interested in the actual value of \(\beta\), the formula above gives us a mean to calculate the value of the exponent \(\mu\) that we can then use to determine that \(\hat u(\hat{\bf x})\) is in \(H^s(\hat K)\) with \(s=\mu-\frac d2\).</p>
-<p>These steps outlined above are applicable to many different scenarios, which motivated the introduction of a generic function <a class="el" href="namespaceSmoothnessEstimator_1_1Fourier.html#aae63069820e030e1f012e3e84d28e6f8">SmoothnessEstimator::Fourier::coefficient_decay()</a> in deal.II, that combines all the tasks described in this section in one simple function call. We will use it in the implementation of this program.</p>
-<p><a class="anchor" id="Compensatingforanisotropy"></a></p><h4>Compensating for anisotropy</h4>
-<p>In the formulas above, we have derived the Fourier coefficients \(\hat U_{\bf k}\). Because \({\bf k}\) is a vector, we will get a number of Fourier coefficients \(\hat U_{{\bf k}}\) for the same absolute value \(|{\bf k}|\), corresponding to the Fourier transform in different directions. If we now consider a function like \(|x|y^2\) then we will find lots of large Fourier coefficients in \(x\)-direction because the function is non-smooth in this direction, but fast-decaying Fourier coefficients in \(y\)-direction because the function is smooth there. The question that arises is this: if we simply fit our polynomial decay \(\alpha |{\bf k}|^\mu\) to <em>all</em> Fourier coefficients, we will fit it to a smoothness <em>averaged in all spatial directions</em>. Is this what we want? Or would it be better to only consider the largest coefficient \(\hat U_{{\bf k}}\) for all \({\bf k}\) with the same magnitude, essentially trying to determine the smoothness of the solution in that spatial direction in which the solution appears to be roughest?</p>
-<p>One can probably argue for either case. The issue would be of more interest if deal.II had the ability to use anisotropic finite elements, i.e., ones that use different polynomial degrees in different spatial directions, as they would be able to exploit the directionally variable smoothness much better. Alas, this capability does not exist at the time of writing this tutorial program.</p>
-<p>Either way, because we only have isotopic finite element classes, we adopt the viewpoint that we should tailor the polynomial degree to the lowest amount of regularity, in order to keep numerical efforts low. Consequently, instead of using the formula </p><p class="formulaDsp">
+<p> 。</p>
+<p class="interli">这无非是线性回归拟合，为了做到这一点，我们将使用 <a class="el" href="namespaceFESeries.html#afa42058db3555536415fae91822d27e3">FESeries::linear_regression()</a>. 虽然我们对 \(\beta\) 的实际值不是特别感兴趣，但上面的公式给了我们一个计算指数 \(\mu\) 的平均值，然后我们可以用它来确定 \(\hat u(\hat{\bf x})\) 在 \(H^s(\hat K)\) 与 \(s=\mu-\frac d2\) 之间。</p>
+<p class="interli">上面概述的这些步骤适用于许多不同的情况，这促使我们在deal.II中引入了一个通用函数 <a class="el" href="namespaceSmoothnessEstimator_1_1Fourier.html#aae63069820e030e1f012e3e84d28e6f8">SmoothnessEstimator::Fourier::coefficient_decay()</a> ，它将本节中描述的所有任务结合在一个简单的函数调用中。我们将在这个程序的实现中使用它。</p>
+<p class="interli"><a class="anchor" id="Compensatingforanisotropy"></a></p><h4>Compensating for anisotropy</h4>
+<p class="interli"></p>
+<p class="interli">在上面的公式中，我们已经得出了傅里叶系数 \(\hat U_{\bf k}\) 。因为 \({\bf k}\) 是一个矢量，对于相同的绝对值 \(|{\bf k}|\) ，我们将得到许多傅里叶系数 \(\hat U_{{\bf k}}\) ，对应于不同方向的傅里叶变换。如果我们现在考虑一个像 \(|x|y^2\) 这样的函数，那么我们会发现在 \(x\) 方向有很多大的傅里叶系数，因为这个方向的函数是不平滑的，但在 \(y\) 方向有快速衰减的傅里叶系数，因为那里的函数是平滑的。由此产生的问题是：如果我们简单地将我们的多项式衰减 \(\alpha |{\bf k}|^\mu\) 与<em>all</em>的傅里叶系数拟合，我们将把它拟合成一个光滑度<em>averaged in all spatial directions</em>。这就是我们想要的吗？还是只考虑所有 \({\bf k}\) 中幅度最大的系数 \(\hat U_{{\bf k}}\) ，本质上是试图确定解在那个空间方向上的平滑度，在这个方向上解显得最粗糙？</p>
+<p class="interli">人们也许可以为这两种情况争辩。如果deal.II有能力使用各向异性的有限元，即在不同的空间方向使用不同的多项式度数的有限元，那么这个问题将更有意义，因为它们能够更好地利用方向可变的光滑度。唉，在写这个教程程序的时候，这种能力并不存在。</p>
+<p class="interli">无论如何，由于我们只有同位素的有限元类，我们采取的观点是，我们应该将多项式的程度调整到最低的规则性，以保持低的数值努力。因此，与其使用公式 </p><p class="formulaDsp">
 \[ \mu = \frac { \left(\sum_{{\bf k}, |{\bf k}|\le N} \ln |{\bf k}|\right) \left(\sum_{{\bf k}, |{\bf k}|\le N} \ln |\hat U_{{\bf k}}|\right) - \left(\sum_{{\bf k}, |{\bf k}|\le N} 1\right) \left(\sum_{{\bf k}, |{\bf k}|\le N} \ln |\hat U_{{\bf k}}| \ln |{\bf k}| \right) } { \left(\sum_{{\bf k}, |{\bf k}|\le N} 1\right) \left(\sum_{{\bf k}, |{\bf k}|\le N} (\ln |{\bf k}|)^2\right) - \left(\sum_{{\bf k}, |{\bf k}|\le N} \ln |{\bf k}|\right)^2 }. \]
 </p>
-<p> To calculate \(\mu\) as shown above, we have to slightly modify all sums: instead of summing over all Fourier modes, we only sum over those for which the Fourier coefficient is the largest one among all \(\hat U_{{\bf k}}\) with the same magnitude \(|{\bf k}|\), i.e., all sums above have to replaced by the following sums: </p><p class="formulaDsp">
+<p> 计算如上所示的 \(\mu\) ，我们必须稍微修改所有的和：与其在所有的傅里叶模式上求和，我们只求那些傅里叶系数是所有 \(\hat U_{{\bf k}}\) 中幅度最大的 \(|{\bf k}|\) ，即上述所有和必须由以下和代替。 </p><p class="formulaDsp">
 \[ \sum_{{\bf k}, |{\bf k}|\le N} \longrightarrow \sum_{\begin{matrix}{{\bf k}, |{\bf k}|\le N} \\ {|\hat U_{{\bf k}}| \ge |\hat U_{{\bf k}&#39;}| \ \textrm{for all}\ {\bf k}&#39;\ \textrm{with}\ |{\bf k}&#39;|=|{\bf k}|}\end{matrix}}. \]
 </p>
-<p> This is the form we will implement in the program.</p>
-<p><a class="anchor" id="Questionsaboutcellsizes"></a></p><h4>Questions about cell sizes</h4>
-<p>One may ask whether it is a problem that we only compute the Fourier transform on the <em>reference cell</em> (rather than the real cell) of the solution. After all, we stretch the solution by a factor \(\frac 1h\) during the transformation, thereby shifting the Fourier frequencies by a factor of \(h\). This is of particular concern since we may have neighboring cells with mesh sizes \(h\) that differ by a factor of 2 if one of them is more refined than the other. The concern is also motivated by the fact that, as we will see in the results section below, the estimated smoothness of the solution should be a more or less continuous function, but exhibits jumps at locations where the mesh size jumps. It therefore seems natural to ask whether we have to compensate for the transformation.</p>
-<p>The short answer is "no". In the process outlined above, we attempt to find coefficients \(\beta,\mu\) that minimize the sum of squares of the terms </p><p class="formulaDsp">
+<p> 这就是我们将在程序中实现的形式。</p>
+<p class="interli"><a class="anchor" id="Questionsaboutcellsizes"></a></p><h4>Questions about cell sizes</h4>
+<p class="interli"></p>
+<p class="interli">有人可能会问，我们只计算解的<em>reference cell</em>（而不是实数单元）上的傅里叶变换，这是否有问题？毕竟，在变换过程中，我们将解决方案拉伸了一个系数 \(\frac 1h\) ，从而使傅里叶频率移动了一个系数 \(h\) 。这是一个特别值得关注的问题，因为我们可能有相邻的单元，其网格大小 \(h\) 相差2倍，如果其中一个单元比另一个更精细。正如我们在下面的结果部分所看到的那样，解决方案的估计平滑度应该是一个或多或少的连续函数，但在网格大小跳跃的地方却表现出跳跃性。因此，我们似乎很自然地要问，我们是否必须对变换进行补偿。</p>
+<p class="interli">简短的回答是 "不"。在上述过程中，我们试图找到系数 \(\beta,\mu\) ，使项 </p><p class="formulaDsp">
 \[ \ln |\hat U_{{\bf k}}| - \beta + \mu \ln |{\bf k}|. \]
 </p>
-<p> To compensate for the transformation means not attempting to fit a decay \(|{\bf k}|^\mu\) with respect to the Fourier frequencies \({\bf k}\) <em>on the unit cell</em>, but to fit the coefficients \(\hat U_{{\bf k}}\) computed on the reference cell <em>to the Fourier frequencies on the real cell \(|\bf k|h\)</em>, where \(h\) is the norm of the transformation operator (i.e., something like the diameter of the cell). In other words, we would have to minimize the sum of squares of the terms </p><p class="formulaDsp">
+<p>的平方之和最小化，以补偿变换意味着不试图适应衰减 \(|{\bf k}|^\mu\) ]相对于傅里叶频率 \({\bf k}\) <em>on the unit cell</em>，而是拟合在参考单元<em>to the Fourier frequencies on the real cell \(|\bf k|h\)</em>上计算的系数 \(\hat U_{{\bf k}}\) ，其中 \(h\) 是变换算子的规范（即类似单元的直径）。换句话说，我们将不得不最小化 </p><p class="formulaDsp">
 \[ \ln |\hat U_{{\bf k}}| - \beta + \mu \ln (|{\bf k}|h). \]
 </p>
-<p> instead. However, using fundamental properties of the logarithm, this is simply equivalent to minimizing </p><p class="formulaDsp">
+<p>项的平方之和。然而，利用对数的基本属性，这只是相当于最小化 </p><p class="formulaDsp">
 \[ \ln |\hat U_{{\bf k}}| - (\beta - \mu \ln h) + \mu \ln (|{\bf k}|). \]
 </p>
-<p> In other words, this and the original least squares problem will produce the same best-fit exponent \(\mu\), though the offset will in one case be \(\beta\) and in the other \(\beta-\mu \ln h\). However, since we are not interested in the offset at all but only in the exponent, it doesn't matter whether we scale Fourier frequencies in order to account for mesh size effects or not, the estimated smoothness exponent will be the same in either case.</p>
-<p><a class="anchor" id="Complicationswithlinearsystemsforhpdiscretizations"></a></p><h3>Complications with linear systems for hp-discretizations</h3>
-<p><a class="anchor" id="Creatingthesparsitypattern"></a></p><h4>Creating the sparsity pattern</h4>
-<p>One of the problems with \(hp\)-methods is that the high polynomial degree of shape functions together with the large number of constrained degrees of freedom leads to matrices with large numbers of nonzero entries in some rows. At the same time, because there are areas where we use low polynomial degree and consequently matrix rows with relatively few nonzero entries. Consequently, allocating the sparsity pattern for these matrices is a challenge: we cannot simply assemble a <a class="el" href="classSparsityPattern.html">SparsityPattern</a> by starting with an estimate of the bandwidth without using a lot of extra memory.</p>
-<p>The way in which we create a <a class="el" href="classSparsityPattern.html">SparsityPattern</a> for the underlying linear system is tightly coupled to the strategy we use to enforce constraints. deal.II supports handling constraints in linear systems in two ways: </p><ol>
+<p> 换句话说，这和原始的最小二乘法问题将产生相同的最佳拟合指数 \(\mu\) ，尽管在一种情况下偏移量是 \(\beta\) 而在另一种情况下是 \(\beta-\mu \ln h\) 。然而，由于我们对偏移量根本不感兴趣，而只对指数感兴趣，所以无论我们是否为了考虑网格大小的影响而对傅里叶频率进行缩放，都没有关系，在两种情况下估计的平滑度指数都是一样的。</p>
+<p class="interli"><a class="anchor" id="Complicationswithlinearsystemsforhpdiscretizations"></a></p><h3>Complications with linear systems for hp-discretizations</h3>
+<p class="interli"></p>
+<p class="interli"><a class="anchor" id="Creatingthesparsitypattern"></a></p><h4>Creating the sparsity pattern</h4>
+<p class="interli"></p>
+<p class="interli">\(hp\) -方法的问题之一是，形状函数的高多项式程度与大量受限自由度一起导致矩阵在某些行有大量非零条目。同时，因为有些地方我们使用的是低多项式度，因此矩阵行的非零项相对较少。因此，为这些矩阵分配稀疏性模式是一个挑战：我们不能简单地从带宽的估计开始组装一个SparsityPattern，而不使用大量的额外内存。</p>
+<p class="interli">我们为底层线性系统创建SparsityPattern的方式与我们用来执行约束的策略是紧密相连的。 </p><ol>
 <li>
-Assembling the matrix without regard to the constraints and applying them afterwards with <a class="el" href="classAffineConstraints.html#a5a1bc1bb2d705b582889ebaa24bcae5c">AffineConstraints::condense</a>, or </li>
+在不考虑约束条件的情况下组装矩阵，然后用 <a class="el" href="classAffineConstraints.html#a5a1bc1bb2d705b582889ebaa24bcae5c">AffineConstraints::condense</a>, 或  </li>
 <li>
-Applying constraints as we assemble the system with <a class="el" href="classAffineConstraints.html#a373fbdacd8c486e675b8d2bff8943192">AffineConstraints::distribute_local_to_global</a>. </li>
+在我们用 <a class="el" href="classAffineConstraints.html#a373fbdacd8c486e675b8d2bff8943192">AffineConstraints::distribute_local_to_global</a>. </li>
 </ol>
-<p>Most programs built on deal.II use the <a class="el" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a> function to allocate a <a class="el" href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a> that takes constraints into account. The system matrix then uses a <a class="el" href="classSparsityPattern.html">SparsityPattern</a> copied over from the <a class="el" href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a>. This method is explained in <a class="el" href="step_2.html">step-2</a> and used in most tutorial programs.</p>
-<p>The early tutorial programs use first or second degree finite elements, so removing entries in the sparsity pattern corresponding to constrained degrees of freedom does not have a large impact on the overall number of zeros explicitly stored by the matrix. However, since as many as a third of the degrees of freedom may be constrained in an hp-discretization (and, with higher degree elements, these constraints can couple one DoF to as many as ten or twenty other DoFs), it is worthwhile to take these constraints into consideration since the resulting matrix will be much sparser (and, therefore, matrix-vector products or factorizations will be substantially faster too).</p>
-<p><a class="anchor" id="Eliminatingconstraineddegreesoffreedom"></a></p><h4>Eliminating constrained degrees of freedom</h4>
-<p>A second problem particular to \(hp\)-methods arises because we have so many constrained degrees of freedom: typically up to about one third of all degrees of freedom (in 3d) are constrained because they either belong to cells with hanging nodes or because they are on cells adjacent to cells with a higher or lower polynomial degree. This is, in fact, not much more than the fraction of constrained degrees of freedom in non- \(hp\)-mode, but the difference is that each constrained hanging node is constrained not only against the two adjacent degrees of freedom, but is constrained against many more degrees of freedom.</p>
-<p>It turns out that the strategy presented first in <a class="el" href="step_6.html">step-6</a> to eliminate the constraints while computing the element matrices and vectors with <a class="el" href="classAffineConstraints.html#a373fbdacd8c486e675b8d2bff8943192">AffineConstraints::distribute_local_to_global</a> is the most efficient approach also for this case. The alternative strategy to first build the matrix without constraints and then "condensing" away constrained degrees of freedom is considerably more expensive. It turns out that building the sparsity pattern by this inefficient algorithm requires at least \({\cal O}(N \log N)\) in the number of unknowns, whereas an ideal finite element program would of course only have algorithms that are linear in the number of unknowns. Timing the sparsity pattern creation as well as the matrix assembly shows that the algorithm presented in <a class="el" href="step_6.html">step-6</a> (and used in the code below) is indeed faster.</p>
-<p>In our program, we will also treat the boundary conditions as (possibly inhomogeneous) constraints and eliminate the matrix rows and columns to those as well. All we have to do for this is to call the function that interpolates the Dirichlet boundary conditions already in the setup phase in order to tell the <a class="el" href="classAffineConstraints.html">AffineConstraints</a> object about them, and then do the transfer from local to global data on matrix and vector simultaneously. This is exactly what we've shown in <a class="el" href="step_6.html">step-6</a>.</p>
-<p><a class="anchor" id="Thetestcase"></a></p><h3>The test case</h3>
-<p>The test case we will solve with this program is a re-take of the one we already look at in <a class="el" href="step_14.html">step-14</a>: we solve the Laplace equation </p><p class="formulaDsp">
+<p>组装系统时应用约束条件，大多数基于deal.II的程序使用 <a class="el" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a> 函数来分配一个考虑到约束的动态SparsityPattern。然后系统矩阵使用从DynamicSparsityPattern复制过来的SparsityPattern。这种方法在 <a class="el" href="step_2.html">step-2</a> 中作了解释，并在大多数教程程序中使用。</p>
+<p class="interli">早期的教程程序使用一阶或二阶有限元，因此删除疏散模式中对应于受限自由度的条目对矩阵明确存储的零的总体数量影响不大。然而，由于多达三分之一的自由度在hp分解中可能受到约束（而且，对于更高程度的元素，这些约束可以将一个自由度与多达10或20个其他自由度相联系），值得考虑这些约束，因为所产生的矩阵将更加稀疏（因此，矩阵-向量乘积或因子化也将大大加快）。</p>
+<p class="interli"><a class="anchor" id="Eliminatingconstraineddegreesoffreedom"></a></p><h4>Eliminating constrained degrees of freedom</h4>
+<p class="interli"></p>
+<p class="interli">\(hp\) 方法的第二个问题是，我们有很多受约束的自由度：通常有三分之一的自由度（在三维中）是受约束的，因为它们要么属于有悬空节点的单元，要么位于与具有更高或更低多项式度的单元相邻的单元上。事实上，这并不比非 \(hp\) 模式中受约束自由度的比例多多少，但不同的是，每个受约束的悬空节点不仅受制于相邻的两个自由度，而且还受制于更多的自由度。</p>
+<p class="interli">事实证明，在用 <a class="el" href="step_6.html">step-6</a> 计算元素矩阵和向量时，首先提出的消除约束的策略，对于这种情况也是最有效的方法。另一种策略是首先建立没有约束的矩阵，然后 "浓缩 "掉有约束的自由度，这种策略要昂贵得多。事实证明，用这种低效率的算法建立稀疏模式至少需要 \({\cal O}(N \log N)\) 个未知数，而理想的有限元程序当然只有与未知数成线性的算法。对稀疏模式的创建以及矩阵的装配进行计时显示， <a class="el" href="step_6.html">step-6</a> 中提出的算法（并在下面的代码中使用）确实更快。</p>
+<p class="interli">在我们的程序中，我们还将把边界条件作为（可能是不均匀的）约束条件，并将矩阵的行和列也消除。为此我们所要做的就是在设置阶段调用插值Dirichlet边界条件的函数，以便告诉AffineConstraints对象关于它们的情况，然后同时在矩阵和向量上做从局部到全局的数据转移。这正是我们在 <a class="el" href="step_6.html">step-6</a> 中所展示的内容。</p>
+<p class="interli"><a class="anchor" id="Thetestcase"></a></p><h3>The test case</h3>
+<p class="interli"></p>
+<p class="interli">我们将用这个程序解决的测试案例是我们在 <a class="el" href="step_14.html">step-14</a> 中已经看过的案例的重考：我们用 \(f=(x+1)(y+1)\) 解决2d中的拉普拉斯方程 </p><p class="formulaDsp">
 \[ -\Delta u = f \]
 </p>
-<p> in 2d, with \(f=(x+1)(y+1)\), and with zero Dirichlet boundary values for \(u\). We do so on the domain \([-1,1]^2\backslash[-\frac 12,\frac 12]^2\), i.e., a square with a square hole in the middle.</p>
-<p>The difference to <a class="el" href="step_14.html">step-14</a> is of course that we use \(hp\)-finite elements for the solution. The test case is of interest because it has re-entrant corners in the corners of the hole, at which the solution has singularities. We therefore expect that the solution will be smooth in the interior of the domain, and rough in the vicinity of the singularities. The hope is that our refinement and smoothness indicators will be able to see this behavior and refine the mesh close to the singularities, while the polynomial degree is increased away from it. As we will see in the results section, this is indeed the case.</p>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
-<p>The first few files have already been covered in previous examples and will thus not be further commented on.</p>
+<p>，并且用 \(u\) 的零迪里希特边界值。我们在域 \([-1,1]^2\backslash[-\frac 12,\frac 12]^2\) 上这样做，即一个中间有一个正方形孔的正方形。</p>
+<p class="interli">当然，与 step-14 不同的是，我们使用 \(hp\) 的无限元来求解。这个测试案例是有意义的，因为它在洞的四角有重入角，在这些地方解有奇异性。因此，我们期望解在域的内部是平滑的，而在奇点附近是粗糙的。希望我们的细化和光滑度指标能够看到这种行为，并在远离奇点的地方细化网格，同时提高多项式的度数。正如我们将在结果部分看到的，情况确实如此。<a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+<p class="interli"></p>
+<p class="interli"><a class="anchor" id="Includefiles"></a></p><h3>Include files</h3>
+<p class="interli"></p>
+<p class="interli">前面几个文件已经在前面的例子中讲过了，因此不再进一步评论。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="quadrature__lib_8h.html">deal.II/base/quadrature_lib.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="function_8h.html">deal.II/base/function.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logstream_8h.html">deal.II/base/logstream.h</a>&gt;</span></div>
@@ -371,7 +382,7 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="ttc" id="asparse__matrix_8h_html"><div class="ttname"><a href="sparse__matrix_8h.html">sparse_matrix.h</a></div></div>
 <div class="ttc" id="avector_8h_html"><div class="ttname"><a href="vector_8h.html">vector.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p>These are the new files we need. The first and second provide the FECollection and the <em>hp</em> version of the <a class="el" href="classFEValues.html">FEValues</a> class as described in the introduction of this program. The next one provides the functionality for automatic \(hp\)-adaptation, for which we will use the estimation algorithms based on decaying series expansion coefficients that are part of the last two files.</p>
+</div><!-- fragment --><p class="interli">这些是我们需要的新文件。第一个和第二个提供了FECollection和<em>hp</em>版本的FEValues类，如本程序介绍中所述。下一个文件提供了自动 \(hp\) 适应的功能，为此我们将使用基于衰变系列扩展系数的估计算法，这是最后两个文件的一部分。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__collection_8h.html">deal.II/hp/fe_collection.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="hp_2fe__values_8h.html">deal.II/hp/fe_values.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="refinement_8h.html">deal.II/hp/refinement.h</a>&gt;</span></div>
@@ -382,17 +393,19 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="ttc" id="ahp_2fe__values_8h_html"><div class="ttname"><a href="hp_2fe__values_8h.html">fe_values.h</a></div></div>
 <div class="ttc" id="arefinement_8h_html"><div class="ttname"><a href="refinement_8h.html">refinement.h</a></div></div>
 <div class="ttc" id="asmoothness__estimator_8h_html"><div class="ttname"><a href="smoothness__estimator_8h.html">smoothness_estimator.h</a></div></div>
-</div><!-- fragment --><p>The last set of include files are standard C++ headers.</p>
+</div><!-- fragment --><p class="interli">最后一组include文件是标准的C++头文件。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-</div><!-- fragment --><p>Finally, this is as in previous programs:</p>
+</div><!-- fragment --><p class="interli">最后，这和以前的程序一样。</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>Step27</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="namespace__dealii_8h_source.html#l00025">namespace_dealii.h:26</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="Themainclass"></a> </p><h3>The main class</h3>
-<p>The main class of this program looks very much like the one already used in the first few tutorial programs, for example the one in <a class="el" href="step_6.html">step-6</a>. The main difference is that we have merged the refine_grid and output_results functions into one since we will also want to output some of the quantities used in deciding how to refine the mesh (in particular the estimated smoothness of the solution).</p>
-<p>As far as member variables are concerned, we use the same structure as already used in <a class="el" href="step_6.html">step-6</a>, but we need collections instead of individual finite element, quadrature, and face quadrature objects. We will fill these collections in the constructor of the class. The last variable, <code>max_degree</code>, indicates the maximal polynomial degree of shape functions used.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Themainclass"></a> </p><h3>The main class</h3>
+<p class="interli"></p>
+<p class="interli">这个程序的主类看起来非常像前几个教程程序中已经使用过的主类，例如 <a class="el" href="step_6.html">step-6</a> 中的那个。主要的区别是我们将refine_grid和output_results函数合并为一个，因为我们还想输出一些用于决定如何细化网格的量（特别是估计的解的光滑度）。 <br  />
+</p>
+<p class="interli">就成员变量而言，我们使用与 <a class="el" href="step_6.html">step-6</a> 中已经使用的相同的结构，但我们需要集合，而不是单个的有限元、正交和面状正交对象。我们将在类的构造函数中填充这些集合。最后一个变量， <code>max_degree</code> ，表示使用的形状函数的最大多项式程度。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>LaplaceProblem</div>
 <div class="line">{</div>
@@ -400,7 +413,9 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">  LaplaceProblem();</div>
 <div class="line">  ~LaplaceProblem();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keywordtype">void</span> setup_system();</div>
@@ -409,20 +424,26 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">  <span class="keywordtype">void</span> create_coarse_grid();</div>
 <div class="line">  <span class="keywordtype">void</span> postprocess(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classTriangulation.html">Triangulation&lt;dim&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a>          dof_handler;</div>
 <div class="line">  <a class="code" href="classhp_1_1FECollection.html">hp::FECollection&lt;dim&gt;</a>    fe_collection;</div>
 <div class="line">  <a class="code" href="classhp_1_1QCollection.html">hp::QCollection&lt;dim&gt;</a>     quadrature_collection;</div>
 <div class="line">  <a class="code" href="classhp_1_1QCollection.html">hp::QCollection</a>&lt;dim - 1&gt; face_quadrature_collection;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> constraints;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classSparsityPattern.html">SparsityPattern</a>      sparsity_pattern;</div>
 <div class="line">  <a class="code" href="classSparseMatrix.html">SparseMatrix&lt;double&gt;</a> system_matrix;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> solution;</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> system_rhs;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> max_degree;</div>
 <div class="line">};</div>
@@ -432,8 +453,10 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="ttc" id="aclassVector_html"><div class="ttname"><a href="classVector.html">Vector&lt; double &gt;</a></div></div>
 <div class="ttc" id="aclasshp_1_1QCollection_html"><div class="ttname"><a href="classhp_1_1QCollection.html">hp::QCollection</a></div><div class="ttdef"><b>Definition:</b> <a href="q__collection_8h_source.html#l00046">q_collection.h:47</a></div></div>
 <div class="ttc" id="anamespaceWorkStream_1_1internal_1_1tbb__no__coloring_html_a8673698a405bf47aa24002aeb6d76d70"><div class="ttname"><a href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">WorkStream::internal::tbb_no_coloring::run</a></div><div class="ttdeci">void run(const Iterator &amp;begin, const typename identity&lt; Iterator &gt;::type &amp;end, Worker worker, Copier copier, const ScratchData &amp;sample_scratch_data, const CopyData &amp;sample_copy_data, const unsigned int queue_length, const unsigned int chunk_size)</div><div class="ttdef"><b>Definition:</b> <a href="work__stream_8h_source.html#l00691">work_stream.h:691</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="Equationdata"></a> </p><h3>Equation data</h3>
-<p>Next, let us define the right hand side function for this problem. It is \(x+1\) in 1d, \((x+1)(y+1)\) in 2d, and so on.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Equationdata"></a> </p><h3>Equation data</h3>
+<p class="interli"><br  />
+</p>
+<p class="interli">接下来，让我们为这个问题定义右手边的函数。它在1d中是 \(x+1\) ，在2d中是 \((x+1)(y+1)\) ，以此类推。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>RightHandSide : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
@@ -441,6 +464,7 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">value</a>(<span class="keyword">const</span> <a class="code" href="classPoint.html">Point&lt;dim&gt;</a> &amp; p,</div>
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component) <span class="keyword">const override</span>;</div>
 <div class="line">};</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
@@ -456,10 +480,13 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="ttc" id="aclassFunction_html_acbfcab66b2fc63bfea59268f40772bb4"><div class="ttname"><a href="classFunction.html#acbfcab66b2fc63bfea59268f40772bb4">Function::value</a></div><div class="ttdeci">virtual RangeNumberType value(const Point&lt; dim &gt; &amp;p, const unsigned int component=0) const</div></div>
 <div class="ttc" id="aclassPoint_html"><div class="ttname"><a href="classPoint.html">Point</a></div><div class="ttdef"><b>Definition:</b> <a href="base_2point_8h_source.html#l00110">point.h:111</a></div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a15728437b942dab0b0042eb06a407d2c"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">Physics::Elasticity::Kinematics::d</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; d(const Tensor&lt; 2, dim, Number &gt; &amp;F, const Tensor&lt; 2, dim, Number &gt; &amp;dF_dt)</div></div>
-</div><!-- fragment --><p><a class="anchor" id="Implementationofthemainclass"></a> </p><h3>Implementation of the main class</h3>
-<p><a class="anchor" id="LaplaceProblemLaplaceProblemconstructor"></a> </p><h4>LaplaceProblem::LaplaceProblem constructor</h4>
-<p>The constructor of this class is fairly straightforward. It associates the <a class="el" href="classDoFHandler.html">DoFHandler</a> object with the triangulation, and then sets the maximal polynomial degree to 7 (in 1d and 2d) or 5 (in 3d and higher). We do so because using higher order polynomial degrees becomes prohibitively expensive, especially in higher space dimensions.</p>
-<p>Following this, we fill the collections of finite element, and cell and face quadrature objects. We start with quadratic elements, and each quadrature formula is chosen so that it is appropriate for the matching finite element in the <a class="el" href="classhp_1_1FECollection.html">hp::FECollection</a> object.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Implementationofthemainclass"></a> </p><h3>Implementation of the main class</h3>
+<p class="interli"></p>
+<p class="interli"><a class="anchor" id="LaplaceProblemLaplaceProblemconstructor"></a> </p><h4>LaplaceProblem::LaplaceProblem constructor</h4>
+<p class="interli"></p>
+<p class="interli">这个类的构造函数是相当直接的。它将DoFHandler对象与三角形关联起来，然后将最大多项式度数设置为7（在1d和2d中）或5（在3d及以上）。我们这样做是因为使用高阶多项式度数会变得过于昂贵，特别是在更高的空间维度上。 <br  />
+</p>
+<p class="interli">在这之后，我们填补了有限元的集合，以及单元和面的四分法对象。我们从二次元开始，每个正交公式的选择是为了适合 <a class="el" href="classhp_1_1FECollection.html">hp::FECollection</a> 对象中的匹配有限元。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">LaplaceProblem&lt;dim&gt;::LaplaceProblem()</div>
 <div class="line">  : dof_handler(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>)</div>
@@ -473,22 +500,27 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassQGauss_html"><div class="ttname"><a href="classQGauss.html">QGauss</a></div><div class="ttdef"><b>Definition:</b> <a href="quadrature__lib_8h_source.html#l00038">quadrature_lib.h:39</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="LaplaceProblemLaplaceProblemdestructor"></a> </p><h4>LaplaceProblem::~LaplaceProblem destructor</h4>
-<p>The destructor is unchanged from what we already did in <a class="el" href="step_6.html">step-6</a>:</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="LaplaceProblemLaplaceProblemdestructor"></a> </p><h4>LaplaceProblem::~LaplaceProblem destructor</h4>
+<p class="interli"></p>
+<p class="interli">解构器与我们在 <a class="el" href="step_6.html">step-6</a> 中已经做的没有变化。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">LaplaceProblem&lt;dim&gt;::~LaplaceProblem()</div>
 <div class="line">{</div>
 <div class="line">  dof_handler.clear();</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="LaplaceProblemsetup_system"></a> </p><h4>LaplaceProblem::setup_system</h4>
-<p>This function is again a verbatim copy of what we already did in <a class="el" href="step_6.html">step-6</a>. Despite function calls with exactly the same names and arguments, the algorithms used internally are different in some aspect since the dof_handler variable here is in \(hp\)-mode.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="LaplaceProblemsetup_system"></a> </p><h4>LaplaceProblem::setup_system</h4>
+<p class="interli"><br  />
+</p>
+<p class="interli">这个函数再次逐字复制了我们在 <a class="el" href="step_6.html">step-6</a> 中已经做过的事情。尽管函数调用的名称和参数完全相同，但内部使用的算法在某些方面是不同的，因为这里的dof_handler变量是在 \(hp\) -mode。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::setup_system()</div>
 <div class="line">{</div>
 <div class="line">  dof_handler.distribute_dofs(fe_collection);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  solution.reinit(dof_handler.n_dofs());</div>
 <div class="line">  system_rhs.reinit(dof_handler.n_dofs());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  constraints.<a class="code" href="classAffineConstraints.html#addd15bc409c61d6f795f0132c574335b">clear</a>();</div>
 <div class="line">  <a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, constraints);</div>
@@ -498,9 +530,11 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">                                           constraints);</div>
 <div class="line">  constraints.<a class="code" href="classAffineConstraints.html#a1611aa37f754086388ca76bcd421cce5">close</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a> dsp(dof_handler.n_dofs(), dof_handler.n_dofs());</div>
 <div class="line">  <a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler, dsp, constraints, <span class="keyword">false</span>);</div>
 <div class="line">  sparsity_pattern.copy_from(dsp);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  system_matrix.reinit(sparsity_pattern);</div>
 <div class="line">}</div>
@@ -510,9 +544,11 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="ttc" id="aclassFunctions_1_1ZeroFunction_html"><div class="ttname"><a href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction</a></div><div class="ttdef"><b>Definition:</b> <a href="function_8h_source.html#l00510">function.h:511</a></div></div>
 <div class="ttc" id="agroup__constraints_html_gaf78e864edbfba7e0a7477457bfb96b26"><div class="ttname"><a href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a></div><div class="ttdeci">void make_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, SparsityPatternType &amp;sparsity_pattern, const AffineConstraints&lt; number &gt; &amp;constraints=AffineConstraints&lt; number &gt;(), const bool keep_constrained_dofs=true, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__sparsity_8cc_source.html#l00064">dof_tools_sparsity.cc:64</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_html_ab2562d41bb26f362043f9719a8cd9b87"><div class="ttname"><a href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a></div><div class="ttdeci">void interpolate_boundary_values(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const std::map&lt; types::boundary_id, const Function&lt; spacedim, number &gt; * &gt; &amp;function_map, std::map&lt; types::global_dof_index, number &gt; &amp;boundary_values, const ComponentMask &amp;component_mask=ComponentMask())</div></div>
-</div><!-- fragment --><p><a class="anchor" id="LaplaceProblemassemble_system"></a> </p><h4>LaplaceProblem::assemble_system</h4>
-<p>This is the function that assembles the global matrix and right hand side vector from the local contributions of each cell. Its main working is as has been described in many of the tutorial programs before. The significant deviations are the ones necessary for <em>hp</em> finite element methods. In particular, that we need to use a collection of <a class="el" href="classFEValues.html">FEValues</a> object (implemented through the <a class="el" href="classhp_1_1FEValues.html">hp::FEValues</a> class), and that we have to eliminate constrained degrees of freedom already when copying local contributions into global objects. Both of these are explained in detail in the introduction of this program.</p>
-<p>One other slight complication is the fact that because we use different polynomial degrees on different cells, the matrices and vectors holding local contributions do not have the same size on all cells. At the beginning of the loop over all cells, we therefore each time have to resize them to the correct size (given by <code>dofs_per_cell</code>). Because these classes are implemented in such a way that reducing the size of a matrix or vector does not release the currently allocated memory (unless the new size is zero), the process of resizing at the beginning of the loop will only require re-allocation of memory during the first few iterations. Once we have found in a cell with the maximal finite element degree, no more re-allocations will happen because all subsequent <code>reinit</code> calls will only set the size to something that fits the currently allocated memory. This is important since allocating memory is expensive, and doing so every time we visit a new cell would take significant compute time.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="LaplaceProblemassemble_system"></a> </p><h4>LaplaceProblem::assemble_system</h4>
+<p class="interli"></p>
+<p class="interli">这是一个从每个单元的局部贡献组装全局矩阵和右手向量的函数。它的主要工作与之前的许多教程程序中描述的一样。重要的差异是<em>hp</em>有限元方法所需要的。特别是，我们需要使用FEValues对象的集合（通过 <a class="el" href="classhp_1_1FEValues.html">hp::FEValues</a> 类实现），并且在将局部贡献复制到全局对象时，我们必须消除受限自由度。这两点在本程序的介绍中都有详细解释。 <br  />
+</p>
+<p class="interli">还有一个轻微的复杂情况是，由于我们在不同的单元上使用了不同的多项式度数，所以持有局部贡献的矩阵和向量在所有单元上的大小不一样。因此，在所有单元的循环开始时，我们每次都必须将它们的大小调整到正确的大小（由 <code>dofs_per_cell</code> 给出）。因为这些类的实现方式是减少矩阵或向量的大小不会释放当前分配的内存（除非新的大小为零），所以在循环开始时调整大小的过程只需要在最初几次迭代中重新分配内存。一旦我们在一个单元中找到了最大的有限元度，就不会再发生重新分配，因为所有后续的 <code>reinit</code> 调用只会将大小设置为适合当前分配的内存。这一点很重要，因为分配内存是很昂贵的，而且每次我们访问一个新的单元时都这样做会花费大量的计算时间。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::assemble_system()</div>
 <div class="line">{</div>
@@ -522,29 +558,39 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">                                   <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a> |</div>
 <div class="line">                                   <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  RightHandSide&lt;dim&gt; rhs_function;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>;</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a>     cell_rhs;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = cell-&gt;get_fe().n_dofs_per_cell();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>.reinit(dofs_per_cell, dofs_per_cell);</div>
 <div class="line">      <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a> = 0;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      cell_rhs.<a class="code" href="group__Vectors.html#gac4a4dbef7dd65ef8ad35ae56b57d7c05">reinit</a>(dofs_per_cell);</div>
 <div class="line">      cell_rhs = 0;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      hp_fe_values.<a class="code" href="group__Vectors.html#gac4a4dbef7dd65ef8ad35ae56b57d7c05">reinit</a>(cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keyword">const</span> <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> &amp;fe_values = hp_fe_values.<a class="code" href="classFEValues.html#a902429920d32c81c9c279d9a15faa263">get_present_fe_values</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      std::vector&lt;double&gt; rhs_values(fe_values.<a class="code" href="classFEValuesBase.html#a807c3049bfe81743fc0f237dfc2fbdea">n_quadrature_points</a>);</div>
 <div class="line">      rhs_function.value_list(fe_values.<a class="code" href="classFEValuesBase.html#ae41b67cfd48e02f6035e39c84f0fb47a">get_quadrature_points</a>(), rhs_values);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q_point = 0; q_point &lt; fe_values.<a class="code" href="classFEValuesBase.html#a807c3049bfe81743fc0f237dfc2fbdea">n_quadrature_points</a>;</div>
 <div class="line">           ++q_point)</div>
@@ -556,13 +602,16 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">                 fe_values.<a class="code" href="classFEValuesBase.html#a46aefdb527125dafb59dcba92a0f256e">shape_grad</a>(j, q_point) * <span class="comment">// grad phi_j(x_q)</span></div>
 <div class="line">                 fe_values.<a class="code" href="classFEValuesBase.html#abade89efb068b71b7ced7082012a2441">JxW</a>(q_point));           <span class="comment">// dx</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">            cell_rhs(i) += (fe_values.<a class="code" href="classFEValuesBase.html#a1dd48cb744013c448d57f8f77640c08d">shape_value</a>(i, q_point) * <span class="comment">// phi_i(x_q)</span></div>
 <div class="line">                            rhs_values[q_point] *               <span class="comment">// f(x_q)</span></div>
 <div class="line">                            fe_values.<a class="code" href="classFEValuesBase.html#abade89efb068b71b7ced7082012a2441">JxW</a>(q_point));            <span class="comment">// dx</span></div>
 <div class="line">          }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      local_dof_indices.resize(dofs_per_cell);</div>
 <div class="line">      cell-&gt;get_dof_indices(local_dof_indices);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      constraints.<a class="code" href="classAffineConstraints.html#a373fbdacd8c486e675b8d2bff8943192">distribute_local_to_global</a>(</div>
 <div class="line">        <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>, cell_rhs, local_dof_indices, system_matrix, system_rhs);</div>
@@ -577,8 +626,9 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="ttc" id="aclassFullMatrix_html"><div class="ttname"><a href="classFullMatrix.html">FullMatrix&lt; double &gt;</a></div></div>
 <div class="ttc" id="agroup__Vectors_html_gac4a4dbef7dd65ef8ad35ae56b57d7c05"><div class="ttname"><a href="group__Vectors.html#gac4a4dbef7dd65ef8ad35ae56b57d7c05">Vector::reinit</a></div><div class="ttdeci">virtual void reinit(const size_type N, const bool omit_zeroing_entries=false)</div></div>
 <div class="ttc" id="anamespaceLocalIntegrators_1_1Advection_html_a8bc7b8136646134f73a4193adefe15f8"><div class="ttname"><a href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">LocalIntegrators::Advection::cell_matrix</a></div><div class="ttdeci">void cell_matrix(FullMatrix&lt; double &gt; &amp;M, const FEValuesBase&lt; dim &gt; &amp;fe, const FEValuesBase&lt; dim &gt; &amp;fetest, const ArrayView&lt; const std::vector&lt; double &gt;&gt; &amp;velocity, const double factor=1.)</div><div class="ttdef"><b>Definition:</b> <a href="advection_8h_source.html#l00075">advection.h:75</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="LaplaceProblemsolve"></a> </p><h4>LaplaceProblem::solve</h4>
-<p>The function solving the linear system is entirely unchanged from previous examples. We simply try to reduce the initial residual (which equals the \(l_2\) norm of the right hand side) by a certain factor:</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="LaplaceProblemsolve"></a></p><h4>LaplaceProblem::solve</h4>
+<p class="interli"></p>
+<p class="interli">解决线性系统的函数与之前的例子完全没有变化。我们只是试图将初始残差（相当于右手边的 \(l_2\) 准则）减少一定的系数。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::solve()</div>
 <div class="line">{</div>
@@ -586,10 +636,13 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">                               1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-12 * system_rhs.l2_norm());</div>
 <div class="line">  <a class="code" href="classSolverCG.html">SolverCG&lt;Vector&lt;double&gt;</a>&gt; cg(solver_control);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classPreconditionSSOR.html">PreconditionSSOR&lt;SparseMatrix&lt;double&gt;</a>&gt; preconditioner;</div>
 <div class="line">  preconditioner.<a class="code" href="group__Preconditioners.html#ga7a3d66b17bb0ea1b16606e222474c2ea">initialize</a>(system_matrix, 1.2);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  cg.solve(system_matrix, solution, system_rhs, preconditioner);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  constraints.<a class="code" href="classAffineConstraints.html#a7b3d3f295bb56d6cd6856bdc6cbe8a01">distribute</a>(solution);</div>
 <div class="line">}</div>
@@ -599,12 +652,13 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="ttc" id="aclassSolverControl_html"><div class="ttname"><a href="classSolverControl.html">SolverControl</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__control_8h_source.html#l00065">solver_control.h:66</a></div></div>
 <div class="ttc" id="agroup__Preconditioners_html_ga7a3d66b17bb0ea1b16606e222474c2ea"><div class="ttname"><a href="group__Preconditioners.html#ga7a3d66b17bb0ea1b16606e222474c2ea">PreconditionSSOR::initialize</a></div><div class="ttdeci">void initialize(const MatrixType &amp;A, const typename BaseClass::AdditionalData &amp;parameters=typename BaseClass::AdditionalData())</div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a9587d5229555daa5b1fa1ba2f8a40adb"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">Physics::Elasticity::Kinematics::e</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; e(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
-</div><!-- fragment --><p><a class="anchor" id="LaplaceProblempostprocess"></a> </p><h4>LaplaceProblem::postprocess</h4>
-<p>After solving the linear system, we will want to postprocess the solution. Here, all we do is to estimate the error, estimate the local smoothness of the solution as described in the introduction, then write graphical output, and finally refine the mesh in both \(h\) and \(p\) according to the indicators computed before. We do all this in the same function because we want the estimated error and smoothness indicators not only for refinement, but also include them in the graphical output.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="LaplaceProblempostprocess"></a> </p><h4>LaplaceProblem::postprocess</h4>
+<p class="interli"></p>
+<p class="interli">在解决了线性系统之后，我们要对解决方案进行后处理。在这里，我们所做的就是估计误差，估计解的局部平滑度，如介绍中所述，然后写出图形输出，最后根据之前计算的指标，在 \(h\) 和 \(p\) 中细化网格。我们在同一个函数中完成这一切，因为我们希望估计的误差和平滑度指标不仅用于细化，而且还包括在图形输出中。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::postprocess(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle)</div>
 <div class="line">{</div>
-</div><!-- fragment --><p>Let us start with computing estimated error and smoothness indicators, which each are one number for each active cell of our triangulation. For the error indicator, we use the <a class="el" href="classKellyErrorEstimator.html">KellyErrorEstimator</a> class as always.</p>
+</div><!-- fragment --><p class="interli">让我们从计算估计误差和平滑度指标开始，这两个指标对于我们三角测量的每个活动单元都是一个数字。对于误差指标，我们一如既往地使用KellyErrorEstimator类。</p>
 <div class="fragment"><div class="line"><a class="code" href="classVector.html">Vector&lt;float&gt;</a> estimated_error_per_cell(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
 <div class="line"><a class="code" href="classKellyErrorEstimator.html#aa0917e696d4f8ddb983223a68c512357">KellyErrorEstimator&lt;dim&gt;::estimate</a>(</div>
 <div class="line">  dof_handler,</div>
@@ -614,7 +668,7 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">  estimated_error_per_cell);</div>
 <div class="ttc" id="aclassKellyErrorEstimator_html_aa0917e696d4f8ddb983223a68c512357"><div class="ttname"><a href="classKellyErrorEstimator.html#aa0917e696d4f8ddb983223a68c512357">KellyErrorEstimator::estimate</a></div><div class="ttdeci">static void estimate(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const Quadrature&lt; dim - 1 &gt; &amp;quadrature, const std::map&lt; types::boundary_id, const Function&lt; spacedim, typename InputVector::value_type &gt; * &gt; &amp;neumann_bc, const InputVector &amp;solution, Vector&lt; float &gt; &amp;error, const ComponentMask &amp;component_mask=ComponentMask(), const Function&lt; spacedim &gt; *coefficients=nullptr, const unsigned int n_threads=numbers::invalid_unsigned_int, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id, const types::material_id material_id=numbers::invalid_material_id, const Strategy strategy=cell_diameter_over_24)</div></div>
 <div class="ttc" id="anamespacetypes_html_aed8813fee8c8a2edcc6005e6a48c321a"><div class="ttname"><a href="namespacetypes.html#aed8813fee8c8a2edcc6005e6a48c321a">types::boundary_id</a></div><div class="ttdeci">unsigned int boundary_id</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00129">types.h:129</a></div></div>
-</div><!-- fragment --><p>Estimating the smoothness is performed with the method of decaying expansion coefficients as outlined in the introduction. We will first need to create an object capable of transforming the finite element solution on every single cell into a sequence of Fourier series coefficients. The <a class="el" href="namespaceSmoothnessEstimator.html">SmoothnessEstimator</a> namespace offers a factory function for such a <a class="el" href="classFESeries_1_1Fourier.html">FESeries::Fourier</a> object that is optimized for the process of estimating smoothness. The actual determination of the decay of Fourier coefficients on every individual cell then happens in the last function.</p>
+</div><!-- fragment --><p class="interli">估算平滑度是用介绍中所述的衰减膨胀系数的方法进行的。我们首先需要创建一个对象，能够将每一个单元上的有限元解转化为一串傅里叶级数系数。SmoothnessEstimator命名空间为这样一个 <a class="el" href="classFESeries_1_1Fourier.html">FESeries::Fourier</a> 对象提供了一个工厂函数，它为估计平滑度的过程进行了优化。然后在最后一个函数中实际确定每个单独单元上的傅里叶系数的衰减情况。</p>
 <div class="fragment"><div class="line"><a class="code" href="classVector.html">Vector&lt;float&gt;</a> smoothness_indicators(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
 <div class="line"><a class="code" href="classFESeries_1_1Fourier.html">FESeries::Fourier&lt;dim&gt;</a> fourier =</div>
 <div class="line">  <a class="code" href="namespaceSmoothnessEstimator_1_1Fourier.html#a748faa704c9dfb67a074d11316e777b4">SmoothnessEstimator::Fourier::default_fe_series</a>(fe_collection);</div>
@@ -625,15 +679,17 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="ttc" id="aclassFESeries_1_1Fourier_html"><div class="ttname"><a href="classFESeries_1_1Fourier.html">FESeries::Fourier</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__series_8h_source.html#l00088">fe_series.h:89</a></div></div>
 <div class="ttc" id="anamespaceSmoothnessEstimator_1_1Fourier_html_a748faa704c9dfb67a074d11316e777b4"><div class="ttname"><a href="namespaceSmoothnessEstimator_1_1Fourier.html#a748faa704c9dfb67a074d11316e777b4">SmoothnessEstimator::Fourier::default_fe_series</a></div><div class="ttdeci">FESeries::Fourier&lt; dim, spacedim &gt; default_fe_series(const hp::FECollection&lt; dim, spacedim &gt; &amp;fe_collection, const unsigned int component=numbers::invalid_unsigned_int)</div><div class="ttdef"><b>Definition:</b> <a href="smoothness__estimator_8cc_source.html#l00579">smoothness_estimator.cc:579</a></div></div>
 <div class="ttc" id="anamespaceSmoothnessEstimator_1_1Fourier_html_aae63069820e030e1f012e3e84d28e6f8"><div class="ttname"><a href="namespaceSmoothnessEstimator_1_1Fourier.html#aae63069820e030e1f012e3e84d28e6f8">SmoothnessEstimator::Fourier::coefficient_decay</a></div><div class="ttdeci">void coefficient_decay(FESeries::Fourier&lt; dim, spacedim &gt; &amp;fe_fourier, const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, const VectorType &amp;solution, Vector&lt; float &gt; &amp;smoothness_indicators, const VectorTools::NormType regression_strategy=VectorTools::Linfty_norm, const double smallest_abs_coefficient=1e-10, const bool only_flagged_cells=false)</div><div class="ttdef"><b>Definition:</b> <a href="smoothness__estimator_8cc_source.html#l00370">smoothness_estimator.cc:370</a></div></div>
-</div><!-- fragment --><p>Next we want to generate graphical output. In addition to the two estimated quantities derived above, we would also like to output the polynomial degree of the finite elements used on each of the elements on the mesh.</p>
-<p>The way to do that requires that we loop over all cells and poll the active finite element index of them using <code>cell-&gt;active_fe_index()</code>. We then use the result of this operation and query the finite element collection for the finite element with that index, and finally determine the polynomial degree of that element. The result we put into a vector with one element per cell. The <a class="el" href="classDataOut.html">DataOut</a> class requires this to be a vector of <code>float</code> or <code>double</code>, even though our values are all integers, so that is what we use:</p>
+</div><!-- fragment --><p class="interli">接下来我们要生成图形输出。除了上面得出的两个估计量之外，我们还想输出网格上每个元素所使用的有限元的多项式程度。 <br  />
+</p>
+<p class="interli">要做到这一点，我们需要在所有单元上循环，并使用 <code>cell-&gt;active_fe_index()</code> 轮询它们的活动有限元索引。然后我们使用这个操作的结果，在有限元集合中查询具有该索引的有限元，最后确定该元素的多项式程度。我们将结果放入一个矢量，每个单元有一个元素。DataOut类要求这是一个 <code>float</code> or <code>double</code> 的向量，尽管我们的值都是整数，所以我们就用这个。</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;float&gt;</a> fe_degrees(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : dof_handler.active_cell_iterators())</div>
 <div class="line">    fe_degrees(cell-&gt;active_cell_index()) =</div>
 <div class="line">      fe_collection[cell-&gt;active_fe_index()].degree;</div>
-</div><!-- fragment --><p>With now all data vectors available &ndash; solution, estimated errors and smoothness indicators, and finite element degrees &ndash;, we create a <a class="el" href="classDataOut.html">DataOut</a> object for graphical output and attach all data:</p>
+</div><!-- fragment --><p class="interli">现在有了所有的数据向量&ndash;解决方案、估计误差和平滑度指标以及有限元度&ndash;我们创建一个用于图形输出的DataOut对象并附加所有数据。</p>
 <div class="fragment"><div class="line"><a class="code" href="classDataOut.html">DataOut&lt;dim&gt;</a> data_out;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">data_out.<a class="code" href="classDataOut__DoFData.html#ac1eb26168177faa30ffbcf9cbb9c3cd5">attach_dof_handler</a>(dof_handler);</div>
 <div class="line">data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(solution, <span class="stringliteral">&quot;solution&quot;</span>);</div>
@@ -645,7 +701,7 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="ttc" id="aclassDataOut__DoFData_html_ace4b76e565ba0701c4d32c26075ed3b9"><div class="ttname"><a href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">DataOut_DoFData::add_data_vector</a></div><div class="ttdeci">void add_data_vector(const VectorType &amp;data, const std::vector&lt; std::string &gt; &amp;names, const DataVectorType type=type_automatic, const std::vector&lt; DataComponentInterpretation::DataComponentInterpretation &gt; &amp;data_component_interpretation=std::vector&lt; DataComponentInterpretation::DataComponentInterpretation &gt;())</div><div class="ttdef"><b>Definition:</b> <a href="data__out__dof__data_8h_source.html#l01087">data_out_dof_data.h:1087</a></div></div>
 <div class="ttc" id="aclassDataOut_html"><div class="ttname"><a href="classDataOut.html">DataOut</a></div><div class="ttdef"><b>Definition:</b> <a href="numerics_2data__out_8h_source.html#l00147">data_out.h:150</a></div></div>
 <div class="ttc" id="aclassDataOut_html_a5eb51872b8736849bb7e8d2007fae086"><div class="ttname"><a href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">DataOut::build_patches</a></div><div class="ttdeci">virtual void build_patches(const unsigned int n_subdivisions=0)</div><div class="ttdef"><b>Definition:</b> <a href="numerics_2data__out_8cc_source.html#l01085">data_out.cc:1085</a></div></div>
-</div><!-- fragment --><p>The final step in generating output is to determine a file name, open the file, and write the data into it (here, we use VTK format):</p>
+</div><!-- fragment --><p class="interli">生成输出的最后一步是确定一个文件名，打开文件，并将数据写入其中（这里，我们使用VTK格式）。</p>
 <div class="fragment"><div class="line">  <span class="keyword">const</span> std::string filename =</div>
 <div class="line">    <span class="stringliteral">&quot;solution-&quot;</span> + <a class="code" href="namespaceUtilities.html#a6195c5f009ea8c7c536c6ffdf108c32f">Utilities::int_to_string</a>(cycle, 2) + <span class="stringliteral">&quot;.vtk&quot;</span>;</div>
 <div class="line">  std::ofstream output(filename);</div>
@@ -653,36 +709,39 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">}</div>
 <div class="ttc" id="agroup__Exceptions_html_gacad99726038e4fca7f605fdffb3317e4"><div class="ttname"><a href="group__Exceptions.html#gacad99726038e4fca7f605fdffb3317e4">DataOutInterface::write_vtk</a></div><div class="ttdeci">void write_vtk(std::ostream &amp;out) const</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l07177">data_out_base.cc:7177</a></div></div>
 <div class="ttc" id="anamespaceUtilities_html_a6195c5f009ea8c7c536c6ffdf108c32f"><div class="ttname"><a href="namespaceUtilities.html#a6195c5f009ea8c7c536c6ffdf108c32f">Utilities::int_to_string</a></div><div class="ttdeci">std::string int_to_string(const unsigned int value, const unsigned int digits=numbers::invalid_unsigned_int)</div><div class="ttdef"><b>Definition:</b> <a href="base_2utilities_8cc_source.html#l00473">utilities.cc:473</a></div></div>
-</div><!-- fragment --><p>After this, we would like to actually refine the mesh, in both \(h\) and \(p\). The way we are going to do this is as follows: first, we use the estimated error to flag those cells for refinement that have the largest error. This is what we have always done:</p>
+</div><!-- fragment --><p class="interli">在这之后，我们想实际细化网格，在 \(h\) 和 \(p\) 。我们要做的是：首先，我们使用估计的误差来标记那些误差最大的单元，以便进行细化。这就是我们一直以来的做法。</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  <a class="code" href="namespaceGridRefinement.html#a48e5395381ed87155942a61a1edd134d">GridRefinement::refine_and_coarsen_fixed_number</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>,</div>
 <div class="line">                                                  estimated_error_per_cell,</div>
 <div class="line">                                                  0.3,</div>
 <div class="line">                                                  0.03);</div>
 <div class="ttc" id="anamespaceGridRefinement_html_a48e5395381ed87155942a61a1edd134d"><div class="ttname"><a href="namespaceGridRefinement.html#a48e5395381ed87155942a61a1edd134d">GridRefinement::refine_and_coarsen_fixed_number</a></div><div class="ttdeci">void refine_and_coarsen_fixed_number(Triangulation&lt; dim, spacedim &gt; &amp;triangulation, const Vector&lt; Number &gt; &amp;criteria, const double top_fraction_of_cells, const double bottom_fraction_of_cells, const unsigned int max_n_cells=std::numeric_limits&lt; unsigned int &gt;::max())</div><div class="ttdef"><b>Definition:</b> <a href="grid_2grid__refinement_8cc_source.html#l00322">grid_refinement.cc:322</a></div></div>
-</div><!-- fragment --><p>Next we would like to figure out which of the cells that have been flagged for refinement should actually have \(p\) increased instead of \(h\) decreased. The strategy we choose here is that we look at the smoothness indicators of those cells that are flagged for refinement, and increase \(p\) for those with a smoothness larger than a certain relative threshold. In other words, for every cell for which (i) the refinement flag is set, (ii) the smoothness indicator is larger than the threshold, and (iii) we still have a finite element with a polynomial degree higher than the current one in the finite element collection, we will assign a future FE index that corresponds to a polynomial with degree one higher than it currently is. The following function is capable of doing exactly this. Absent any better strategies, we will set the threshold via interpolation between the minimal and maximal smoothness indicators on cells flagged for refinement. Since the corner singularities are strongly localized, we will favor \(p\)- over \(h\)-refinement quantitatively. We achieve this with a low threshold by setting a small interpolation factor of 0.2. In the same way, we deal with cells that are going to be coarsened and decrease their polynomial degree when their smoothness indicator is below the corresponding threshold determined on cells to be coarsened.</p>
+</div><!-- fragment --><p class="interli">接下来，我们要弄清楚哪些被标记为细化的单元格实际上应该增加 \(p\) 而不是减少 \(h\) 。我们选择的策略是，我们看一下那些被标记为细化的单元格的平滑度指标，对那些平滑度大于某个相对阈值的单元格增加 \(p\) 。换句话说，对于每一个(i)细化标志被设置，(ii)平滑度指标大于阈值，以及(iii)我们在有限元集合中仍有一个多项式程度高于当前的有限元的单元，我们将分配一个未来的FE指数，对应于一个比当前高一个程度的多项式。下面的函数正是能够做到这一点。在没有更好的策略的情况下，我们将通过在标记为细化的单元上的最小和最大平滑度指标之间进行插值来设置阈值。由于角部奇点具有很强的局部性，我们将在数量上支持 \(p\) -而不是 \(h\) -细化。我们通过设置0.2的小插值因子，以低阈值实现这一点。以同样的方式，我们处理要被粗化的单元，当它们的平滑度指标低于在要被粗化的单元上确定的相应阈值时，减少它们的多项式程度。</p>
 <div class="fragment"><div class="line"><a class="code" href="namespacehp_1_1Refinement.html#a54156dbe64e8eda42b2e964c9b1c0963">hp::Refinement::p_adaptivity_from_relative_threshold</a>(</div>
 <div class="line">  dof_handler, smoothness_indicators, 0.2, 0.2);</div>
 <div class="ttc" id="anamespacehp_1_1Refinement_html_a54156dbe64e8eda42b2e964c9b1c0963"><div class="ttname"><a href="namespacehp_1_1Refinement.html#a54156dbe64e8eda42b2e964c9b1c0963">hp::Refinement::p_adaptivity_from_relative_threshold</a></div><div class="ttdeci">void p_adaptivity_from_relative_threshold(const ::DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, const Vector&lt; Number &gt; &amp;criteria, const double p_refine_fraction=0.5, const double p_coarsen_fraction=0.5, const ComparisonFunction&lt; typename identity&lt; Number &gt;::type &gt; &amp;compare_refine=std::greater_equal&lt; Number &gt;(), const ComparisonFunction&lt; typename identity&lt; Number &gt;::type &gt; &amp;compare_coarsen=std::less_equal&lt; Number &gt;())</div><div class="ttdef"><b>Definition:</b> <a href="refinement_8cc_source.html#l00150">refinement.cc:150</a></div></div>
-</div><!-- fragment --><p>The above function only determines whether the polynomial degree will change via future FE indices, but does not manipulate the \(h\)-refinement flags. So for cells that are flagged for both refinement categories, we prefer \(p\)- over \(h\)-refinement. The following function call ensures that only one of \(p\)- or \(h\)-refinement is imposed, and not both at once.</p>
+</div><!-- fragment --><p class="interli">上述函数只决定了多项式程度是否会通过未来的FE指数发生变化，但并不操作 \(h\) -细化标志。所以对于被标记为两种细化类别的单元格，我们更倾向于 \(p\) -而不是 \(h\) -细化。下面的函数调用确保只有 \(p\) -或 \(h\) -细化中的一个被施加，而不是同时施加。</p>
 <div class="fragment"><div class="line"><a class="code" href="namespacehp_1_1Refinement.html#a4890d9eae896d749b103c8eec9c2029d">hp::Refinement::choose_p_over_h</a>(dof_handler);</div>
 <div class="ttc" id="anamespacehp_1_1Refinement_html_a4890d9eae896d749b103c8eec9c2029d"><div class="ttname"><a href="namespacehp_1_1Refinement.html#a4890d9eae896d749b103c8eec9c2029d">hp::Refinement::choose_p_over_h</a></div><div class="ttdeci">void choose_p_over_h(const ::DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler)</div><div class="ttdef"><b>Definition:</b> <a href="refinement_8cc_source.html#l00690">refinement.cc:690</a></div></div>
-</div><!-- fragment --><p>For grid adaptive refinement, we ensure a 2:1 mesh balance by limiting the difference of refinement levels of neighboring cells to one by calling <a class="el" href="classTriangulation.html#abf55199c30b0330cf9bf98e2582078e1">Triangulation::prepare_coarsening_and_refinement()</a>. We would like to achieve something similar for the p-levels of neighboring cells: levels of future finite elements are not allowed to differ by more than a specified difference. With its default parameters, a call of <a class="el" href="namespacehp_1_1Refinement.html#a33d9d552f696d578da30dc9a83048670">hp::Refinement::limit_p_level_difference()</a> ensures that their level difference is limited to one. This will not necessarily decrease the number of hanging nodes in the domain, but makes sure that high order polynomials are not constrained to much lower polynomials on faces, e.g., fifth order to second order polynomials.</p>
+</div><!-- fragment --><p class="interli">对于网格自适应细化，我们通过调用 <a class="el" href="classTriangulation.html#abf55199c30b0330cf9bf98e2582078e1">Triangulation::prepare_coarsening_and_refinement()</a>. 将相邻单元的细化水平差异限制为1，以确保2:1的网格平衡。 我们希望对相邻单元的p水平实现类似的效果：未来有限元的水平差异不允许超过指定的差异。通过其默认参数，调用 <a class="el" href="namespacehp_1_1Refinement.html#a33d9d552f696d578da30dc9a83048670">hp::Refinement::limit_p_level_difference()</a> 可以确保它们的级差被限制在1以内。这不一定会减少域中的悬挂节点的数量，但可以确保高阶多项式不会被限制在面的低得多的多项式上，例如，五阶多项式对二阶多项式。</p>
 <div class="fragment"><div class="line"><a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.prepare_coarsening_and_refinement();</div>
 <div class="line"><a class="code" href="namespacehp_1_1Refinement.html#a33d9d552f696d578da30dc9a83048670">hp::Refinement::limit_p_level_difference</a>(dof_handler);</div>
 <div class="ttc" id="anamespacehp_1_1Refinement_html_a33d9d552f696d578da30dc9a83048670"><div class="ttname"><a href="namespacehp_1_1Refinement.html#a33d9d552f696d578da30dc9a83048670">hp::Refinement::limit_p_level_difference</a></div><div class="ttdeci">bool limit_p_level_difference(const ::DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, const unsigned int max_difference=1, const unsigned int contains_fe_index=0)</div><div class="ttdef"><b>Definition:</b> <a href="refinement_8cc_source.html#l00804">refinement.cc:804</a></div></div>
-</div><!-- fragment --><p>At the end of this procedure, we then refine the mesh. During this process, children of cells undergoing bisection inherit their mother cell's finite element index. Further, future finite element indices will turn into active ones, so that the new finite elements will be assigned to cells after the next call of <a class="el" href="classDoFHandler.html#a553ca864aaf70330d9be86bc78f36d1e">DoFHandler::distribute_dofs()</a>.</p>
+</div><!-- fragment --><p class="interli">在这个过程的最后，我们再细化网格。在这个过程中，正在进行二分的单元的子单元会继承其母单元的有限元指数。此外，未来的有限元指数将变成活动的，因此新的有限元将在下一次调用 <a class="el" href="classDoFHandler.html#a553ca864aaf70330d9be86bc78f36d1e">DoFHandler::distribute_dofs()</a>. 后被分配给单元。</p>
 <div class="fragment"><div class="line">    <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.execute_coarsening_and_refinement();</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="LaplaceProblemcreate_coarse_grid"></a> </p><h4>LaplaceProblem::create_coarse_grid</h4>
-<p>The following function is used when creating the initial grid. The grid we would like to create is actually similar to the one from <a class="el" href="step_14.html">step-14</a>, i.e., the square domain with the square hole in the middle. It can be generated by excatly the same function. However, since its implementation is only a specialization of the 2d case, we will present a different way of creating this domain which is dimension independent.</p>
-<p>We first create a hypercube triangulation with enough cells so that it already holds our desired domain \([-1,1]^d\), subdivided into \(4^d\) cells. We then remove those cells in the center of the domain by testing the coordinate values of the vertices on each cell. In the end, we refine the so created grid globally as usual.</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="LaplaceProblemcreate_coarse_grid"></a> </p><h4>LaplaceProblem::create_coarse_grid</h4>
+<p class="interli"></p>
+<p class="interli">在创建初始网格时，会使用以下函数。我们想要创建的网格实际上类似于 <a class="el" href="step_14.html">step-14</a> 中的网格，即中间有方孔的方形域。它可以由完全相同的函数生成。然而，由于它的实现只是2d情况下的一种特殊化，我们将介绍一种不同的创建这个域的方法，它是独立于维度的。 <br  />
+</p>
+<p class="interli">我们首先创建一个有足够单元的超立方体三角形，这样它就已经包含了我们想要的域 \([-1,1]^d\) ，并细分为 \(4^d\) 单元。然后，我们通过测试每个单元上顶点的坐标值来移除域中心的那些单元。最后，我们像往常一样对如此创建的网格进行全局细化。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::create_coarse_grid()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classTriangulation.html">Triangulation&lt;dim&gt;</a> cube;</div>
 <div class="line">  <a class="code" href="namespaceGridGenerator.html#a358d5bd545bc115c8645d93fa79b64bc">GridGenerator::subdivided_hyper_cube</a>(cube, 4, -1., 1.);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::set&lt;typename Triangulation&lt;dim&gt;::active_cell_iterator&gt; cells_to_remove;</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;cell : cube.<a class="code" href="group__CPP11.html#ga23e860c5192f6501650dda8bb3e2b497">active_cell_iterators</a>())</div>
@@ -690,18 +749,22 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">      <span class="keywordflow">if</span> (cell-&gt;vertex(v).square() &lt; .1)</div>
 <div class="line">        cells_to_remove.insert(cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="namespaceGridGenerator.html#ada140ece81bf38a23e738e0e57f89e97">GridGenerator::create_triangulation_with_removed_cells</a>(cube,</div>
 <div class="line">                                                         cells_to_remove,</div>
 <div class="line">                                                         <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.refine_global(3);</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__CPP11_html_ga23e860c5192f6501650dda8bb3e2b497"><div class="ttname"><a href="group__CPP11.html#ga23e860c5192f6501650dda8bb3e2b497">Triangulation::active_cell_iterators</a></div><div class="ttdeci">IteratorRange&lt; active_cell_iterator &gt; active_cell_iterators() const</div></div>
 <div class="ttc" id="anamespaceGridGenerator_html_a358d5bd545bc115c8645d93fa79b64bc"><div class="ttname"><a href="namespaceGridGenerator.html#a358d5bd545bc115c8645d93fa79b64bc">GridGenerator::subdivided_hyper_cube</a></div><div class="ttdeci">void subdivided_hyper_cube(Triangulation&lt; dim, spacedim &gt; &amp;tria, const unsigned int repetitions, const double left=0., const double right=1., const bool colorize=false)</div></div>
 <div class="ttc" id="anamespaceGridGenerator_html_ada140ece81bf38a23e738e0e57f89e97"><div class="ttname"><a href="namespaceGridGenerator.html#ada140ece81bf38a23e738e0e57f89e97">GridGenerator::create_triangulation_with_removed_cells</a></div><div class="ttdeci">void create_triangulation_with_removed_cells(const Triangulation&lt; dim, spacedim &gt; &amp;input_triangulation, const std::set&lt; typename Triangulation&lt; dim, spacedim &gt;::active_cell_iterator &gt; &amp;cells_to_remove, Triangulation&lt; dim, spacedim &gt; &amp;result)</div></div>
-</div><!-- fragment --><p><a class="anchor" id="LaplaceProblemrun"></a> </p><h4>LaplaceProblem::run</h4>
-<p>This function implements the logic of the program, as did the respective function in most of the previous programs already, see for example <a class="el" href="step_6.html">step-6</a>.</p>
-<p>Basically, it contains the adaptive loop: in the first iteration create a coarse grid, and then set up the linear system, assemble it, solve, and postprocess the solution including mesh refinement. Then start over again. In the meantime, also output some information for those staring at the screen trying to figure out what the program does:</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="LaplaceProblemrun"></a> </p><h4>LaplaceProblem::run</h4>
+<p class="interli"></p>
+<p class="interli">这个函数实现了程序的逻辑，就像以前大多数程序中的相应函数一样，例如见 <a class="el" href="step_6.html">step-6</a> 。 <br  />
+</p>
+<p class="interli">基本上，它包含了自适应循环：在第一次迭代中创建一个粗大的网格，然后建立线性系统，组装它，求解，并对解决方案进行后处理，包括网格细化。然后再重新开始。同时，也输出一些信息给那些盯着屏幕试图搞清楚程序是干什么的人。</p>
 <div class="fragment"><div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">LaplaceProblem&lt;dim&gt;::run</a>()</div>
 <div class="line">  {</div>
@@ -709,10 +772,13 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">      {</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Cycle &quot;</span> &lt;&lt; cycle &lt;&lt; <span class="charliteral">&#39;:&#39;</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        <span class="keywordflow">if</span> (cycle == 0)</div>
 <div class="line">          create_coarse_grid();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        setup_system();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;   Number of active cells      : &quot;</span></div>
 <div class="line">                  &lt;&lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells() &lt;&lt; std::endl</div>
@@ -721,6 +787,7 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">                  &lt;&lt; <span class="stringliteral">&quot;   Number of constraints       : &quot;</span></div>
 <div class="line">                  &lt;&lt; constraints.<a class="code" href="classAffineConstraints.html#adf261da8033116444de6140403ba8c3d">n_constraints</a>() &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        assemble_system();</div>
 <div class="line">        solve();</div>
 <div class="line">        postprocess(cycle);</div>
@@ -728,13 +795,15 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">  }</div>
 <div class="line">} <span class="comment">// namespace Step27</span></div>
 <div class="ttc" id="aclassAffineConstraints_html_adf261da8033116444de6140403ba8c3d"><div class="ttname"><a href="classAffineConstraints.html#adf261da8033116444de6140403ba8c3d">AffineConstraints::n_constraints</a></div><div class="ttdeci">size_type n_constraints() const</div><div class="ttdef"><b>Definition:</b> <a href="affine__constraints_8h_source.html#l02115">affine_constraints.h:2115</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="Themainfunction"></a> </p><h3>The main function</h3>
-<p>The main function is again verbatim what we had before: wrap creating and running an object of the main class into a <code>try</code> block and catch whatever exceptions are thrown, thereby producing meaningful output if anything should go wrong:</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Themainfunction"></a> </p><h3>The main function</h3>
+<p class="interli"></p>
+<p class="interli">主函数又是逐字逐句地执行我们之前的功能：把创建和运行一个主类的对象包装成一个 <code>try</code> 块，并捕捉任何抛出的异常，从而在出现问题时产生有意义的输出。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">try</span></div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using namespace </span>Step27;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      LaplaceProblem&lt;2&gt; laplace_problem;</div>
 <div class="line">      laplace_problem.run();</div>
@@ -751,6 +820,7 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">                &lt;&lt; <span class="stringliteral">&quot;----------------------------------------------------&quot;</span></div>
 <div class="line">                &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line">  <span class="keywordflow">catch</span> (...)</div>
@@ -766,11 +836,13 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
-<p>In this section, we discuss a few results produced from running the current tutorial program. More results, in particular the extension to 3d calculations and determining how much compute time the individual components of the program take, are given in the <a class="el" href="DEALGlossary.html#hp_paper">hp-paper</a>.</p>
-<p>When run, this is what the program produces:</p>
+</div><!-- fragment --><p class="interli"><a class="anchor" id="Results"></a></p><h1>Results</h1>
+<p class="interli"></p>
+<p class="interli">在本节中，我们讨论了运行当前教程程序所产生的一些结果。更多的结果，特别是对三维计算的扩展和确定程序的各个部分需要多少计算时间，在 <a class="el" href="DEALGlossary.html#hp_paper">hp-paper </a>中给出。</p>
+<p class="interli">当运行时，这是该程序产生的结果。</p>
 <div class="fragment"><div class="line">&gt; make <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a></div>
 <div class="line">[ 66%] Built target @ref step_27 <span class="stringliteral">&quot;step-27&quot;</span></div>
 <div class="line">[100%] Run @ref step_27 <span class="stringliteral">&quot;step-27&quot;</span> with Release configuration</div>
@@ -798,44 +870,50 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">   Number of active cells      : 1149</div>
 <div class="line">   Number of degrees of freedom: 22078</div>
 <div class="line">   Number of constraints       : 5230</div>
-</div><!-- fragment --><p>The first thing we learn from this is that the number of constrained degrees of freedom is on the order of 20-25% of the total number of degrees of freedom, at least on the later grids when we have elements of relatively high order (in 3d, the fraction of constrained degrees of freedom can be up to 30%). This is, in fact, on the same order of magnitude as for non- \(hp\)-discretizations. For example, in the last step of the <a class="el" href="step_6.html">step-6</a> program, we have 18353 degrees of freedom, 4432 of which are constrained. The difference is that in the latter program, each constrained hanging node is constrained against only the two adjacent degrees of freedom, whereas in the \(hp\)-case, constrained nodes are constrained against many more degrees of freedom. Note also that the current program also includes nodes subject to Dirichlet boundary conditions in the list of constraints. In cycle 0, all the constraints are actually because of boundary conditions.</p>
-<p>Of maybe more interest is to look at the graphical output. First, here is the solution of the problem:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-27-solution.png" alt="Elevation plot of the solution, showing the lack of regularity near
-          the interior (reentrant) corners." width="200" height="200" class="inline"/></p>
-<p>Secondly, let us look at the sequence of meshes generated:</p>
+</div><!-- fragment --><p class="interli">我们从中了解到的第一件事是，受限自由度的数量是总自由度的20-25，至少在后来的网格上，当我们有相对高阶的元素时（在3D中，受限自由度的比例可以达到30）。事实上，这与非 \(hp\) 分化的数量级相同。例如，在 <a class="el" href="step_6.html">step-6</a> 程序的最后一步，我们有18353个自由度，其中4432个是受约束的。不同的是，在后一个程序中，每个受约束的悬挂节点只对相邻的两个自由度进行约束，而在 \(hp\) -案例中，受约束的节点对更多的自由度进行约束。还要注意的是，目前的程序在约束列表中还包括受迪里希特边界条件约束的节点。在第0周期，所有的约束条件实际上都是因为边界条件。</p>
+<p class="interli">也许更有趣的是看一下图形输出。首先，这是该问题的解决方案。</p>
+<p class="interli"><img src="https://www.dealii.org/images/steps/developer/  step-27  -solution.png" alt="解决方案的高程图，显示内部（重入）角附近缺乏规则性。" width="200" height="200" class="inline"/>。</p>
+<p class="interli">其次，让我们看一下生成的网格序列。</p>
 <div class="threecolumn" style="width: 80%"> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.mesh-00.svg" alt="Triangulation containing reentrant corners without adaptive refinement." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.mesh-01.svg" alt="Triangulation containing reentrant corners with one level of
          refinement. New cells are placed near the corners." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.mesh-02.svg" alt="Triangulation containing reentrant corners with two levels of
          refinement. New cells are placed near the corners." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.mesh-03.svg" alt="Triangulation containing reentrant corners with three levels of
          refinement. New cells are placed near the corners." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.mesh-04.svg" alt="Triangulation containing reentrant corners with four levels of
          refinement. New cells are placed near the corners." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.mesh-05.svg" alt="Triangulation containing reentrant corners with five levels of
-         refinement. New cells are placed near the corners." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> </div><p>It is clearly visible how the mesh is refined near the corner singularities, as one would expect it. More interestingly, we should be curious to see the distribution of finite element polynomial degrees to these mesh cells, where the lightest color corresponds to degree two and the darkest one corresponds to degree seven:</p>
-<div class="threecolumn" style="width: 80%"> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.fe_degree-00.svg" alt="Initial grid where all cells contain just biquadratic functions." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.fe_degree-01.svg" alt="Depiction of local approximation degrees after one refinement." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.fe_degree-02.svg" alt="Depiction of local approximation degrees after two refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.fe_degree-03.svg" alt="Depiction of local approximation degrees after three refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.fe_degree-04.svg" alt="Depiction of local approximation degrees after four refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.fe_degree-05.svg" alt="Depiction of local approximation degrees after five refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> </div><p>While this is certainly not a perfect arrangement, it does make some sense: we use low order elements close to boundaries and corners where regularity is low. On the other hand, higher order elements are used where (i) the error was at one point fairly large, i.e., mainly in the general area around the corner singularities and in the top right corner where the solution is large, and (ii) where the solution is smooth, i.e., far away from the boundary.</p>
-<p>This arrangement of polynomial degrees of course follows from our smoothness estimator. Here is the estimated smoothness of the solution, with darker colors indicating least smoothness and lighter indicating the smoothest areas:</p>
-<div class="threecolumn" style="width: 80%"> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.smoothness-00.svg" alt="Estimated regularity per cell on the initial grid." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.smoothness-01.svg" alt="Depiction of the estimated regularity per cell after one refinement." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.smoothness-02.svg" alt="Depiction of the estimated regularity per cell after two refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.smoothness-03.svg" alt="Depiction of the estimated regularity per cell after three refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.smoothness-04.svg" alt="Depiction of the estimated regularity per cell after four refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.smoothness-05.svg" alt="Depiction of the estimated regularity per cell after five refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> </div><p>The primary conclusion one can draw from this is that the loss of regularity at the internal corners is a highly localized phenomenon; it only seems to impact the cells adjacent to the corner itself, so when we refine the mesh the black coloring is no longer visible. Besides the corners, this sequence of plots implies that the smoothness estimates are somewhat independent of the mesh refinement, particularly when we are far away from boundaries. It is also obvious that the smoothness estimates are independent of the actual size of the solution (see the picture of the solution above), as it should be. A point of larger concern, however, is that one realizes on closer inspection that the estimator we have overestimates the smoothness of the solution on cells with hanging nodes. This in turn leads to higher polynomial degrees in these areas, skewing the allocation of finite elements onto cells.</p>
-<p>We have no good explanation for this effect at the moment. One theory is that the numerical solution on cells with hanging nodes is, of course, constrained and therefore not entirely free to explore the function space to get close to the exact solution. This lack of degrees of freedom may manifest itself by yielding numerical solutions on these cells with suppressed oscillation, meaning a higher degree of smoothness. The estimator picks this signal up and the estimated smoothness overestimates the actual value. However, a definite answer to what is going on currently eludes the authors of this program.</p>
-<p>The bigger question is, of course, how to avoid this problem. Possibilities include estimating the smoothness not on single cells, but cell assemblies or patches surrounding each cell. It may also be possible to find simple correction factors for each cell depending on the number of constrained degrees of freedom it has. In either case, there are ample opportunities for further research on finding good \(hp\)-refinement criteria. On the other hand, the main point of the current program was to demonstrate using the \(hp\)-technology in deal.II, which is unaffected by our use of a possible sub-optimal refinement criterion.</p>
-<p><a class="anchor" id="extensions"></a> <a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions</h3>
-<p><a class="anchor" id="Differenthpdecisionstrategies"></a></p><h4>Different hp-decision strategies</h4>
-<p>This tutorial demonstrates only one particular strategy to decide between \(h\)- and \(p\)-adaptation. In fact, there are many more ways to automatically decide on the adaptation type, of which a few are already implemented in deal.II: </p><ul>
+         refinement. New cells are placed near the corners." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> </div><p> <br  />
+</p>
+<p class="interli">可以清楚地看到网格在角部奇点附近是如何被细化的，正如人们所期望的那样。更有趣的是，我们应该好奇地看看这些网格单元的有限元多项式度数的分布，其中最浅的颜色对应的是2度，最深的对应的是7度。</p>
+<div class="threecolumn" style="width: 80%"> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.fe_degree-00.svg" alt="Initial grid where all cells contain just biquadratic functions." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.fe_degree-01.svg" alt="Depiction of local approximation degrees after one refinement." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.fe_degree-02.svg" alt="Depiction of local approximation degrees after two refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.fe_degree-03.svg" alt="Depiction of local approximation degrees after three refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.fe_degree-04.svg" alt="Depiction of local approximation degrees after four refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.fe_degree-05.svg" alt="Depiction of local approximation degrees after five refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> </div><p> <br  />
+</p>
+<p class="interli">虽然这肯定不是一个完美的安排，但它确实有一定的意义：我们在靠近边界和角落的地方使用低阶元素，那里的规则性很低。另一方面，在以下情况下使用高阶元素：(i) 误差一度相当大，即主要在角部奇点周围的一般区域和右上角解大的地方；(ii) 解是平滑的，即远离边界的地方。</p>
+<p class="interli">这种多项式程度的安排当然是由我们的光滑性估计器得出的。这里是对解的光滑度的估计，深色表示最不光滑，浅色表示最光滑的区域。</p>
+<div class="threecolumn" style="width: 80%"> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.smoothness-00.svg" alt="Estimated regularity per cell on the initial grid." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.smoothness-01.svg" alt="Depiction of the estimated regularity per cell after one refinement." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.smoothness-02.svg" alt="Depiction of the estimated regularity per cell after two refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.smoothness-03.svg" alt="Depiction of the estimated regularity per cell after three refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.smoothness-04.svg" alt="Depiction of the estimated regularity per cell after four refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> <div> <img src="https://www.dealii.org/images/steps/developer/step-27.smoothness-05.svg" alt="Depiction of the estimated regularity per cell after five refinements." style="pointer-events: none;" width="200" height="200" class="inline"/> </div> </div><p> <br  />
+</p>
+<p class="interli">从这里可以得出的主要结论是，内角的规则性损失是一个高度局部的现象；它似乎只影响到与角本身相邻的单元，所以当我们细化网格时，黑色的颜色就不再明显。除了角部，这一连串的图示意味着平滑度估计在某种程度上与网格细化无关，特别是当我们远离边界时。同样明显的是，平滑度估计值与解的实际尺寸无关（见上面的解的图片），这也是应该的。然而，更值得关注的一点是，人们在仔细观察后发现，我们的估计器高估了有悬空节点的单元格的解决方案的平滑度。这反过来又导致了这些区域的多项式度数更高，使有限元在单元上的分配出现偏差。</p>
+<p class="interli">目前我们对这种影响没有很好的解释。一种理论是，有悬空节点的单元上的数值解当然是受限制的，因此不能完全自由地探索函数空间以接近精确解。这种自由度的缺乏可能表现为在这些单元上产生具有抑制振荡的数值解，意味着更高的平滑度。估计器会捕捉到这个信号，估计的平滑度会高估实际值。然而，这个程序的作者目前还没有找到发生了什么的明确答案。</p>
+<p class="interli">当然，更大的问题是如何避免这个问题。可能的方法包括不是在单个细胞上估计平滑度，而是在每个细胞周围的细胞集合体或斑块上估计。也可以根据每个细胞所具有的受限自由度的数量，为其找到简单的修正系数。无论哪种情况，都有大量的机会来进一步研究寻找好的 \(hp\) -精化标准。另一方面，目前方案的主要内容是在deal.II中演示使用 \(hp\) -技术，这不受我们使用可能的次优细化标准的影响。</p>
+<p class="interli"><a class="anchor" id="extensions"></a> <a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions</h3>
+<p class="interli"></p>
+<p class="interli"><a class="anchor" id="Differenthpdecisionstrategies"></a></p><h4>Different hp-decision strategies</h4>
+<p class="interli"></p>
+<p class="interli">本教程只演示了决定 \(h\) -和 \(p\) -适应的一种特殊策略。事实上，还有许多自动决定适应类型的方法，其中一些已经在deal.II中实现： </p><ul>
 <li>
-<p class="startli"><em>Fourier coefficient decay:</em> This is the strategy currently implemented in this tutorial. For more information on this strategy, see the general documentation of the <a class="el" href="namespaceSmoothnessEstimator_1_1Fourier.html">SmoothnessEstimator::Fourier</a> namespace.</p>
+<p class="startli"><em>Fourier coefficient decay:</em> 这是本教程中目前实现的策略。关于这个策略的更多信息，请参见 <a class="el" href="namespaceSmoothnessEstimator_1_1Fourier.html">SmoothnessEstimator::Fourier</a> 命名空间的一般文档。  <br  />
+ </p><pre class="fragment">&lt;li&gt;  &lt;i&gt;Legendre coefficient decay:&lt;/i&gt; 这个策略与目前的策略很相似，但使用了Legendre级数展开，而不是傅里叶级数：这个策略使用Legendre多项式而不是正弦波作为基础函数。当然，由于我们在每个单元上使用有限维度的多项式来近似解，因此解在Legendre多项式中的扩展也是有限的，因此，当我们谈论这个扩展的 "衰减 "时，我们只能考虑这个扩展的有限多个非零系数，而不是用渐进的方式来思考。  但是，如果我们有足够多的这些系数，我们当然可以把这些系数的衰减看作是精确解的系数衰减的特征（一般来说，精确解不是多项式的，所以会有一个无限的Legendre扩展），考虑我们拥有的系数应该可以揭示一些关于精确解的特性。
+</pre><p> 从傅里叶策略到Legendre策略的过渡非常简单。 你只需要改变数列扩展类和相应的平滑度估计函数，使其成为适当命名空间 <a class="el" href="classFESeries_1_1Legendre.html">FESeries::Legendre</a> 和 <a class="el" href="namespaceSmoothnessEstimator_1_1Legendre.html">SmoothnessEstimator::Legendre</a>. 的一部分。 关于这一策略的理论背景，请查阅 <a class="el" href="namespaceSmoothnessEstimator_1_1Legendre.html">SmoothnessEstimator::Legendre</a> 命名空间的一般文档，以及 <b>[mavriplis1994hp]</b> 、 <b>[eibner2007hp]</b> 和 <b>[davydov2017hp]</b> 。  <br  />
+</p>
 <p class="endli"></p>
 </li>
 <li>
-<p class="startli"><em>Legendre coefficient decay:</em> This strategy is quite similar to the current one, but uses Legendre series expansion rather than the Fourier one: instead of sinusoids as basis functions, this strategy uses Legendre polynomials. Of course, since we approximate the solution using a finite-dimensional polynomial on each cell, the expansion of the solution in Legendre polynomials is also finite and, consequently, when we talk about the "decay" of this expansion, we can only consider the finitely many nonzero coefficients of this expansion, rather than think about it in asymptotic terms. But, if we have enough of these coefficients, we can certainly think of the decay of these coefficients as characteristic of the decay of the coefficients of the exact solution (which is, in general, not polynomial and so will have an infinite Legendre expansion), and considering the coefficients we have should reveal something about the properties of the exact solution.</p>
-<p class="interli">The transition from the Fourier strategy to the Legendre one is quite simple: You just need to change the series expansion class and the corresponding smoothness estimation function to be part of the proper namespaces <a class="el" href="classFESeries_1_1Legendre.html">FESeries::Legendre</a> and <a class="el" href="namespaceSmoothnessEstimator_1_1Legendre.html">SmoothnessEstimator::Legendre</a>. For the theoretical background of this strategy, consult the general documentation of the <a class="el" href="namespaceSmoothnessEstimator_1_1Legendre.html">SmoothnessEstimator::Legendre</a> namespace, as well as <b>[mavriplis1994hp]</b> , <b>[eibner2007hp]</b> and <b>[davydov2017hp]</b>.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli"><em>Refinement history:</em> The last strategy is quite different from the other two. In theory, we know how the error will converge after changing the discretization of the function space. With \(h\)-refinement the solution converges algebraically as already pointed out in <a class="el" href="step_7.html">step-7</a>. If the solution is sufficiently smooth, though, we expect that the solution will converge exponentially with increasing polynomial degree of the finite element. We can compare a proper prediction of the error with the actual error in the following step to see if our choice of adaptation type was justified.</p>
-<p class="interli">The transition to this strategy is a bit more complicated. For this, we need an initialization step with pure \(h\)- or \(p\)-refinement and we need to transfer the predicted errors over adapted meshes. The extensive documentation of the <a class="el" href="namespacehp_1_1Refinement.html#a9c96d6a85b38f120b5d7cf68126cded9">hp::Refinement::predict_error()</a> function describes not only the theoretical details of this approach, but also presents a blueprint on how to implement this strategy in your code. For more information, see <b>[melenk2001hp]</b> .</p>
-<p class="endli">Note that with this particular function you cannot predict the error for the next time step in time-dependent problems. Therefore, this strategy cannot be applied to this type of problem without further ado. Alternatively, the following approach could be used, which works for all the other strategies as well: start each time step with a coarse mesh, keep refining until happy with the result, and only then move on to the next time step. </p>
+<p class="startli"><em>Refinement history:</em> 最后一个策略与其他两个有很大不同。在理论上，我们知道在改变函数空间离散化后，误差会如何收敛。通过 \(h\) -细化，解决方案以代数方式收敛，正如在 <a class="el" href="step_7.html">step-7</a> 中已经指出的。不过，如果解足够平滑，我们预计解将随着有限元的多项式程度的增加而指数级收敛。我们可以在下面的步骤中把对误差的适当预测与实际误差进行比较，以了解我们对适应类型的选择是否合理。</p>
+<p class="interli">过渡到这种策略的过程比较复杂。为此，我们需要一个纯 \(h\) -或 \(p\) -细化的初始化步骤，我们需要将预测的误差转移到适应的网格上。 <a class="el" href="namespacehp_1_1Refinement.html#a9c96d6a85b38f120b5d7cf68126cded9">hp::Refinement::predict_error()</a> 函数的大量文档不仅描述了这种方法的理论细节，而且还介绍了如何在你的代码中实现这种策略的蓝图。欲了解更多信息，请参见 <b>[melenk2001hp]</b> 。</p>
+<p class="endli">请注意，在时间依赖性问题上，用这个特殊的函数你无法预测下一个时间步骤的误差。因此，这种策略不能不加思索地应用于这种类型的问题。另外，也可以使用下面的方法，它也适用于所有其他的策略：从每个时间步长的粗网格开始，不断细化，直到对结果满意，然后才进入下一个时间步长。  </p>
 </li>
 </ul>
-<p>Try implementing one of these strategies into this tutorial and observe the subtle changes to the results. You will notice that all strategies are capable of identifying the singularities near the reentrant corners and will perform \(h\)-refinement in these regions, while preferring \(p\)-refinement in the bulk domain. A detailed comparison of these strategies is presented in <b>[fehling2020]</b> .</p>
-<p><a class="anchor" id="Parallelhpadaptivefiniteelements"></a></p><h4>Parallel hp-adaptive finite elements</h4>
-<p>All functionality presented in this tutorial already works for both sequential and parallel applications. It is possible without too much effort to change to either the <a class="el" href="classparallel_1_1shared_1_1Triangulation.html">parallel::shared::Triangulation</a> or the <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a> classes. If you feel eager to try it, we recommend reading <a class="el" href="step_18.html">step-18</a> for the former and <a class="el" href="step_40.html">step-40</a> for the latter case first for further background information on the topic, and then come back to this tutorial to try out your newly acquired skills.</p>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+<p>。</p>
+<p class="interli">试着在本教程中实施这些策略之一，观察结果的细微变化。你会注意到，所有的策略都能够识别重心角附近的奇点，并将在这些区域执行 \(h\) -精简，而在体域中更倾向于 \(p\) -精简。这些策略的详细比较见 <b>[fehling2020]</b> 。</p>
+<p class="interli"><a class="anchor" id="Parallelhpadaptivefiniteelements"></a></p><h4>Parallel hp-adaptive finite elements</h4>
+<p class="interli"></p>
+<p class="interli">本教程中介绍的所有功能都已经适用于顺序和并行应用。不费吹灰之力就可以改成 <a class="el" href="classparallel_1_1shared_1_1Triangulation.html">parallel::shared::Triangulation</a> 或 <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a> 类。如果你觉得急于尝试，我们建议先阅读前者的 step-18 和后者的 step-40 ，以了解有关该主题的进一步背景信息，然后再回来看本教程，试试你新获得的技能。<a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2006 - 2020 by the deal.II authors</span></div>
@@ -1229,7 +1307,10 @@ Applying constraints as we assemble the system with <a class="el" href="classAff
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespaceinternal_html_aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804"><div class="ttname"><a href="namespaceinternal.html#aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804">internal::EvaluatorQuantity::value</a></div><div class="ttdeci">@ value</div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> 。 </p>
+</li>
+</ul>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

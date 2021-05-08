@@ -1,296 +1,206 @@
-/**
-@page step_51 The step-51 tutorial program
-This tutorial depends on step-7, step-9, step-61.
+  /**  @page step_51 The step-51 tutorial program  。 
+
+本教程取决于  step-7  ,  step-9  ,  step-61  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#HybridizablediscontinuousGalerkinmethods"> Hybridizable discontinuous Galerkin methods </a>
+        <li><a href="#HybridizablediscontinuousGalerkinmethods"> Hybridizable discontinuous Galerkin methods </a><a href="#HybridizablediscontinuousGalerkinmethods"> Hybridizable discontinuous Galerkin methods </a>
       <ul>
-        <li><a href="#Reducingthesizeofthelinearsystem"> Reducing the size of the linear system </a>
-        <li><a href="#RelationwithStaticCondensation"> Relation with Static Condensation </a>
-        <li><a href="#Solutionqualityandratesofconvergence"> Solution quality and rates of convergence</a>
-        <li><a href="#Alternativeapproaches"> Alternative approaches </a>
+        <li><a href="#Reducingthesizeofthelinearsystem"> Reducing the size of the linear system </a><a href="#Reducingthesizeofthelinearsystem"> Reducing the size of the linear system </a>
+        <li><a href="#RelationwithStaticCondensation"> Relation with Static Condensation </a><a href="#RelationwithStaticCondensation"> Relation with Static Condensation </a>
+        <li><a href="#Solutionqualityandratesofconvergence"> Solution quality and rates of convergence</a><a href="#Solutionqualityandratesofconvergence"> Solution quality and rates of convergence</a>
+        <li><a href="#Alternativeapproaches"> Alternative approaches </a><a href="#Alternativeapproaches"> Alternative approaches </a>
       </ul>
-        <li><a href="#HDGappliedtotheconvectiondiffusionproblem"> HDG applied to the convection-diffusion problem </a>
+        <li><a href="#HDGappliedtotheconvectiondiffusionproblem"> HDG applied to the convection-diffusion problem </a><a href="#HDGappliedtotheconvectiondiffusionproblem"> HDG applied to the convection-diffusion problem </a>
       <ul>
-        <li><a href="#Postprocessingandsuperconvergence"> Post-processing and super-convergence </a>
+        <li><a href="#Postprocessingandsuperconvergence"> Post-processing and super-convergence </a><a href="#Postprocessingandsuperconvergence"> Post-processing and super-convergence </a>
       </ul>
-        <li><a href="#Problemspecificdata"> Problem specific data </a>
-        <li><a href="#Implementation"> Implementation </a>
+        <li><a href="#Problemspecificdata"> Problem specific data </a><a href="#Problemspecificdata"> Problem specific data </a>
+        <li><a href="#Implementation"> Implementation </a><a href="#Implementation"> Implementation </a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#Equationdata">Equation data</a>
-        <li><a href="#TheHDGsolverclass">The HDG solver class</a>
-        <li><a href="#TheHDGclassimplementation">The HDG class implementation</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#Equationdata">Equation data</a><a href="#Equationdata">Equation data</a>
+        <li><a href="#TheHDGsolverclass">The HDG solver class</a><a href="#TheHDGsolverclass">The HDG solver class</a>
+        <li><a href="#TheHDGclassimplementation">The HDG class implementation</a><a href="#TheHDGclassimplementation">The HDG class implementation</a>
       <ul>
-        <li><a href="#Constructor">Constructor</a>
-        <li><a href="#HDGsetup_system">HDG::setup_system</a>
-        <li><a href="#HDGPerTaskData">HDG::PerTaskData</a>
-        <li><a href="#HDGScratchData">HDG::ScratchData</a>
-        <li><a href="#HDGPostProcessScratchData">HDG::PostProcessScratchData</a>
-        <li><a href="#HDGassemble_system">HDG::assemble_system</a>
-        <li><a href="#HDGassemble_system_one_cell">HDG::assemble_system_one_cell</a>
-        <li><a href="#HDGcopy_local_to_global">HDG::copy_local_to_global</a>
-        <li><a href="#HDGsolve">HDG::solve</a>
-        <li><a href="#HDGpostprocess">HDG::postprocess</a>
-        <li><a href="#HDGpostprocess_one_cell">HDG::postprocess_one_cell</a>
-        <li><a href="#HDGoutput_results">HDG::output_results</a>
-        <li><a href="#HDGrefine_grid">HDG::refine_grid</a>
-        <li><a href="#HDGrun">HDG::run</a>
+        <li><a href="#Constructor">Constructor</a><a href="#Constructor">Constructor</a>
+        <li><a href="#HDGsetup_system">HDG::setup_system</a><a href="#HDGsetup_system">HDG::setup_system</a>
+        <li><a href="#HDGPerTaskData">HDG::PerTaskData</a><a href="#HDGPerTaskData">HDG::PerTaskData</a>
+        <li><a href="#HDGScratchData">HDG::ScratchData</a> ]<a href="#HDGScratchData">HDG::ScratchData</a>
+        <li><a href="#HDGPostProcessScratchData">HDG::PostProcessScratchData</a><a href="#HDGPostProcessScratchData">HDG::PostProcessScratchData</a>
+        <li><a href="#HDGassemble_system">HDG::assemble_system</a><a href="#HDGassemble_system">HDG::assemble_system</a>
+        <li><a href="#HDGassemble_system_one_cell">HDG::assemble_system_one_cell</a><a href="#HDGassemble_system_one_cell">HDG::assemble_system_one_cell</a>
+        <li><a href="#HDGcopy_local_to_global">HDG::copy_local_to_global</a><a href="#HDGcopy_local_to_global">HDG::copy_local_to_global</a>
+        <li><a href="#HDGsolve">HDG::solve</a><a href="#HDGsolve">HDG::solve</a>
+        <li><a href="#HDGpostprocess">HDG::postprocess</a><a href="#HDGpostprocess">HDG::postprocess</a>
+        <li><a href="#HDGpostprocess_one_cell">HDG::postprocess_one_cell</a><a href="#HDGpostprocess_one_cell">HDG::postprocess_one_cell</a>
+        <li><a href="#HDGoutput_results">HDG::output_results</a><a href="#HDGoutput_results">HDG::output_results</a>
+        <li><a href="#HDGrefine_grid">HDG::refine_grid</a><a href="#HDGrefine_grid">HDG::refine_grid</a>
+        <li><a href="#HDGrun">HDG::run</a><a href="#HDGrun">HDG::run</a>
       </ul>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Programoutput">Program output</a>
+        <li><a href="#Programoutput">Program output</a><a href="#Programoutput">Program output</a>
       <ul>
-        <li><a href="#Convergencetables">Convergence tables</a>
+        <li><a href="#Convergencetables">Convergence tables</a><a href="#Convergencetables">Convergence tables</a>
       </ul>
-        <li><a href="#Comparisonwithcontinuousfiniteelements">Comparison with continuous finite elements</a>
+        <li><a href="#Comparisonwithcontinuousfiniteelements">Comparison with continuous finite elements</a><a href="#Comparisonwithcontinuousfiniteelements">Comparison with continuous finite elements</a>
       <ul>
-        <li><a href="#Resultsfor2D">Results for 2D</a>
-        <li><a href="#Resultsfor3D">Results for 3D</a>
+        <li><a href="#Resultsfor2D">Results for 2D</a><a href="#Resultsfor2D">Results for 2D</a>
+        <li><a href="#Resultsfor3D">Results for 3D</a><a href="#Resultsfor3D">Results for 3D</a>
       </ul>
-        <li><a href="#Possibilitiesforimprovements">Possibilities for improvements</a>
+        <li><a href="#Possibilitiesforimprovements">Possibilities for improvements</a><a href="#Possibilitiesforimprovements">Possibilities for improvements</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<br>
+@endhtmlonly 
+
+  <br>   
 
 <i>
 This program was contributed by Martin Kronbichler and Scott Miller.
-</i>
+</i> 
 
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+<a name="Intro"></a> <a name="Introduction"></a> <h1>Introduction</h1> 
 
 
-This tutorial program presents the implementation of a hybridizable
-discontinuous Galkerin method for the convection-diffusion equation.
+本教程程序介绍了对流-扩散方程的可混合的不连续Galkerin方法的实现。
 
 <a name="HybridizablediscontinuousGalerkinmethods"></a><h3> Hybridizable discontinuous Galerkin methods </h3>
 
 
-One common argument against the use of discontinuous Galerkin elements
-is the large number of globally coupled degrees of freedom that one
-must solve in an implicit system.  This is because, unlike continuous finite
-elements, in typical discontinuous elements there is one degree of freedom at
-each vertex <i>for each of the adjacent elements</i>, rather than just one,
-and similarly for edges and faces.  As an example of how fast the number of
-unknowns grows, consider the FE_DGPMonomial basis: each
-scalar solution component is represented by polynomials of degree $p$
-with $(1/\text{dim}!) \prod_{i=1}^{\text{dim}}(p+i)$ degrees of freedom per
-element. Typically, all degrees of freedom in an element are coupled
-to all of the degrees of freedom in the adjacent elements.  The resulting
-discrete equations yield very large linear systems very quickly, especially
-for systems of equations in 2 or 3 dimensions.
+反对使用非连续Galerkin元素的一个常见论点是，在隐式系统中必须解决大量的全局耦合自由度。 这是因为，与连续有限元不同，在典型的非连续元中，每个顶点有一个自由度<i>for each of the adjacent elements</i>，而不是只有一个，对边和面也是如此。 作为未知数增长速度的例子，考虑FE_DGPMonomial基础：每个标量解分量都由度数为 $p$ 的多项式表示，每个元素有 $(1/\text{dim}!) \prod_{i=1}^{\text{dim}}(p+i)$ 个自由度。通常，一个元素的所有自由度都与相邻元素的所有自由度相耦合。 由此产生的离散方程会很快产生非常大的线性系统，特别是对于2或3维的方程系统。
 
 <a name="Reducingthesizeofthelinearsystem"></a><h4> Reducing the size of the linear system </h4>
 
-To alleviate the computational cost of solving such large linear systems,
-the hybridizable discontinuous Galerkin (HDG) methodology was introduced
-by Cockburn and co-workers (see the references in the recent HDG overview
-article by Nguyen and Peraire @cite Ngu2012).
+为了减轻解决这些大型线性系统的计算成本，Cockburn和同事们提出了可混合的非连续Galerkin（HDG）方法（见Nguyen和Peraire最近发表的HDG概述文章中的参考文献 @cite Ngu2012 ）。
 
-The HDG method achieves this goal by formulating the mathematical problem using
-Dirichlet-to-Neumann mappings.  The partial differential equations are first
-written as a first order system, and each field is then discretized via a DG
-method.  At this point, the single-valued "trace" values on the skeleton of the
-mesh, i.e., element faces, are taken to be independent unknown quantities.
-This yields unknowns in the discrete formulation that fall into two categories:
-- Face unknowns that only couple with the cell unknowns from both sides of the face;
-- Cell unknowns that only couple with the cell and face unknowns
-  defined within the same cell. Crucially, no cell interior degree of freedom
-  on one cell ever couples to any interior cell degree of freedom of a
-  different cell.
+HDG方法通过使用Dirichlet-to-Neumann映射制定数学问题来实现这一目标。 偏微分方程首先被写成一阶系统，然后通过DG方法将每个场离散化。 在这一点上，网格骨架上的单值 "跟踪 "值，即元素面，被视为独立的未知量。这就产生了离散公式中的未知数，分为两类。
 
-The Dirichlet-to-Neumann map concept then permits the following solution procedure:
-<ol>
-  <li>  Use local element interior data to enforce a Neumann condition on the
-skeleton of the triangulation.  The global problem is then to solve for the
-trace values, which are the only globally coupled unknowns.
-  <li>  Use the known skeleton values as Dirichlet data for solving local
-element-level solutions.  This is known as the 'local solver', and is an
-<i>embarrassingly parallel</i> element-by-element solution process.
-</ol>
+- 面未知数，只与面的两边的单元未知数耦合。
 
-<a name="RelationwithStaticCondensation"></a><h4> Relation with Static Condensation </h4>
+- 单元未知数，只与定义在同一单元内的单元和面的未知数耦合。最重要的是，一个单元的内部自由度不会与另一个单元的任何内部自由度相耦合。
 
-The above procedure also has a linear algebra interpretation---referred to
-as <i>static condensation</i>---that was exploited to reduce the size of the
-global linear system by Guyan in the context of continuous Finite Elements
-@cite G65, and by Fraeijs de Veubeke for mixed methods @cite F65. In the
-latter case (mixed formulation), the system reduction was achieved through the
-use of discontinuous fluxes combined with the introduction of an additional
-auxiliary <i>hybrid</i> variable that approximates the trace of the unknown
-at the boundary of every element. This procedure became known as hybridization
-and---by analogy---is the reason why the local discontinuous Galerkin method
-introduced by Cockburn, Gopalakrishnan, and Lazarov in 2009 @cite CGL2009, and
-subsequently developed by their collaborators, eventually came to be known as
-the <i>hybridizable discontinuous Galerkin</i> (HDG) method.
+Dirichlet-to-Neumann图的概念允许以下求解过程。  <ol>   <li>  使用局部元素内部数据来强制执行三角结构骨架上的诺伊曼条件。 然后，全局问题是求解轨迹值，这是唯一全局耦合的未知数。    <li>  使用已知的骨架值作为Dirichlet数据来求解局部元素级的解决方案。 这被称为 "局部求解器"，是一个<i>embarrassingly parallel</i>逐个元素的求解过程。  </ol>   
 
-Let us write the complete linear system associated to the HDG problem as a
-block system with the discrete DG (cell interior) variables $U$ as first block
-and the skeleton (face) variables $\Lambda$ as the second block:
-@f{eqnarray*}
+<a name="RelationwithStaticCondensation"></a><h4> Relation with Static Condensation </h4> 
+
+上述程序也有一个线性代数的解释--被称为<i>static condensation</i>--被Guyan在连续有限元的背景下利用来减少全局线性系统的大小  @cite G65  ，以及被Fraeijs de Veubeke用于混合方法  @cite F65  。在后一种情况下（混合公式），系统的减少是通过使用不连续的通量与引入额外的辅助变量<i>hybrid</i>来实现的，该变量近似于每个元素边界上的未知数的轨迹。这个过程被称为混合化，并且通过类比，这也是Cockburn、Gopalakrishnan和Lazarov在2009年引入的局部非连续Galerkin方法 @cite CGL2009 ，以及随后由他们的合作者开发的，最终被称为<i>hybridizable discontinuous Galerkin</i>（HDG）方法的原因。
+
+让我们把与HDG问题相关的完整线性系统写成一个块状系统，离散DG（单元内部）变量 $U$ 为第一块，骨架（面）变量 $\Lambda$ 为第二块。@f{eqnarray*}
 \begin{pmatrix} A & B \\ C & D \end{pmatrix}
 \begin{pmatrix} U \\ \Lambda \end{pmatrix}
 =
 \begin{pmatrix} F \\ G \end{pmatrix}.
-@f}
-Our aim is now to eliminate the $U$ block with a Schur complement
-approach similar to step-20, which results in the following two steps:
-@f{eqnarray*}
+@f} 
+
+我们现在的目标是用类似于 step-20 的舒尔补码方法消除 $U$ 块，这将导致以下两个步骤。@f{eqnarray*}
 (D - C A^{-1} B) \Lambda &=& G - C A^{-1} F, \\
 A U &=& F - B \Lambda.
-@f}
-The point is that the presence of $A^{-1}$ is not a problem because $A$ is a
-block diagonal matrix where each block corresponds to one cell and is
-therefore easy enough to invert.
-The coupling to other cells is introduced by the matrices
-$B$ and $C$ over the skeleton variable. The block-diagonality of
-$A$ and the structure in $B$ and $C$ allow us to invert the
-matrix $A$ element by element (the local solution of the Dirichlet
-problem) and subtract $CA^{-1}B$ from $D$. The steps in the Dirichlet-to-Neumann
-map concept hence correspond to
-<ol>
-  <li> constructing the Schur complement matrix $D-C A^{-1} B$ and right hand
-    side $G - C A^{-1} F$  <i>locally on each cell</i>
-    and inserting the contribution into the global trace matrix in the usual way,
-  <li> solving the Schur complement system for $\Lambda$, and
-  <li> solving for $U$ using the second equation, given $\Lambda$.
-</ol>
+@f} 
+
+重点是 $A^{-1}$ 的存在不是问题，因为 $A$ 是一个块对角线矩阵，每个块对应一个单元，因此足够容易反转。与其他单元的耦合是由骨架变量上的矩阵 $B$ 和 $C$ 引入的。 $A$ 的块对角性以及 $B$ 和 $C$ 的结构使我们能够逐元反转矩阵 $A$ （迪里切特问题的局部解）并从 $D$ 中减去 $CA^{-1}B$ 。因此，Dirichlet-to-Neumann地图概念的步骤对应于  <ol>   <li>  构建Schur补足矩阵  $D-C A^{-1} B$  和右手边  $G - C A^{-1} F$  <i>locally on each cell</i> ]并以通常的方式将贡献插入全局跟踪矩阵， <li> 求解舒尔互补系统 $\Lambda$ ， <li> 使用第二个方程求解 $U$ ，给出 $\Lambda$  。  </ol>   
 
 
 <a name="Solutionqualityandratesofconvergence"></a><h4> Solution quality and rates of convergence</h4>
 
-Another criticism of traditional DG methods is that the approximate fluxes
-converge suboptimally.  The local HDG solutions can be shown to converge
-as $\mathcal{O}(h^{p+1})$, i.e., at optimal order.  Additionally, a
-super-convergence property can be used to post-process a new approximate
-solution that converges at the rate $\mathcal{O}(h^{p+2})$.
+对传统DG方法的另一个批评是，近似通量的收敛是次优的。 局部HDG解决方案可以被证明是收敛的 $\mathcal{O}(h^{p+1})$  ，即以最优的顺序收敛。 此外，超级收敛特性可用于后处理新的近似解，其收敛速度为 $\mathcal{O}(h^{p+2})$  。
 
 
 <a name="Alternativeapproaches"></a><h4> Alternative approaches </h4>
 
 
-The hybridizable discontinuous Galerkin method is only one way in
-which the problems of the discontinuous Galerkin method can be
-addressed. Another idea is what is called the "weak Galerkin"
-method. It is explored in step-61.
+可混合的非连续Galerkin方法只是解决非连续Galerkin方法的问题的一种方法。另一种思路是所谓的 "弱Galerkin "方法。它在 step-61 中进行了探讨。
 
 
 <a name="HDGappliedtotheconvectiondiffusionproblem"></a><h3> HDG applied to the convection-diffusion problem </h3>
 
 
-The HDG formulation used for this example is taken from
-<br>
-<b>
+本例中使用的HDG公式取自 <br>  <b>
   N.C. Nguyen, J. Peraire, B. Cockburn:
   <i>An implicit high-order hybridizable discontinuous Galerkin method
+  for linear convection–diffusion equations</i><i>An implicit high-order hybridizable discontinuous Galerkin method
   for linear convection–diffusion equations</i>,
   Journal of Computational Physics, 2009, 228:9, 3232-3254.
-  <a href="http://dx.doi.org/10.1016/j.jcp.2009.01.030">[DOI]</a>
-</b>
+  <a href="http://dx.doi.org/10.1016/j.jcp.2009.01.030">[DOI]</a><a href="http://dx.doi.org/10.1016/j.jcp.2009.01.030">[DOI]</a>
+</b> 。
 
-We consider the convection-diffusion equation over the domain $\Omega$
-with Dirichlet boundary $\partial \Omega_D$ and Neumann boundary
-$\partial \Omega_N$:
-@f{eqnarray*}
+我们考虑域 $\Omega$ 上的对流-扩散方程，其边界为Dirichlet边界 $\partial \Omega_D$ 和Neumann边界 $\partial \Omega_N$  : @f{eqnarray*}
 	\nabla \cdot (\mathbf{c} u) - \nabla \cdot (\kappa \nabla u) &=& f,
 	\quad \text{ in } \Omega, \\
 	u &=& g_D, \quad \text{ on } \partial \Omega_D, \\
 	(\mathbf{c} u - \kappa \nabla u)\cdot \mathbf{n} &=& g_N,
 	\quad \text{ on }  \partial \Omega_N.
-@f}
+@f} 
 
-Introduce the auxiliary variable $\mathbf{q}=-\kappa \nabla u$ and rewrite
-the above equation as the first order system:
-@f{eqnarray*}
+
+
+引入辅助变量 $\mathbf{q}=-\kappa \nabla u$ ，将上述方程改写为一阶系统。@f{eqnarray*}
   \mathbf{q} + \kappa \nabla u &=& 0, \quad \text{ in } \Omega, \\
   \nabla \cdot (\mathbf{c} u + \mathbf{q}) &=& f, \quad \text{ in } \Omega, \\
   u &=& g_D, \quad \text{ on } \partial \Omega_D, \\
   (\mathbf{q} + \mathbf{c}u)\cdot\mathbf{n}  &=& g_N,
 	\quad \text{ on }  \partial \Omega_N.
-@f}
+@f} 
 
-We multiply these equations by the weight functions $\mathbf{v}, w$
-and integrate by parts over every element $K$ to obtain:
-@f{eqnarray*}
+
+
+我们将这些方程乘以权重函数 $\mathbf{v}, w$ ，并对每个元素 $K$ 进行部分积分，得到。@f{eqnarray*}
   (\mathbf{v}, \kappa^{-1} \mathbf{q})_K - (\nabla\cdot\mathbf{v}, u)_K
     + \left<\mathbf{v}\cdot\mathbf{n}, {\hat{u}}\right>_{\partial K} &=& 0, \\
+
+
   - (\nabla w, \mathbf{c} u + \mathbf{q})_K
     + \left<w, (\widehat{\mathbf{c} u}+{\hat{\mathbf{q}}})\cdot\mathbf{n}\right>_{\partial K}
     &=& (w,f)_K.
-@f}
+@f} 
 
-The terms decorated with a hat denote the numerical traces (also commonly referred
-to as numerical fluxes).  They are approximations
-to the interior values on the boundary of the element.  To ensure conservation,
-these terms must be single-valued on any given element edge $\partial K$ even
-though, with discontinuous shape functions, there may of course be multiple
-values coming from the cells adjacent to an interface.
-We eliminate the numerical trace $\hat{\mathbf{q}}$ by using traces of the form:
-@f{eqnarray*}
+
+
+用帽子装饰的条款表示数值轨迹（通常也被称为数值通量）。 它们是对元素边界上的内部值的近似。 为了确保守恒，这些项在任何给定的元素边上必须是单值的 $\partial K$ ，即使在不连续的形状函数中，当然可能有来自界面附近单元的多个值。我们通过使用以下形式的轨迹来消除数字轨迹 $\hat{\mathbf{q}}$ 。@f{eqnarray*}
   \widehat{\mathbf{c} u}+\hat{\mathbf{q}} = \mathbf{c}\hat{u} + \mathbf{q}
   + \tau(u - \hat{u})\mathbf{n} \quad \text{ on } \partial K.
-@f}
+@f} 
 
-The variable $\hat {u}$ is introduced as an additional independent variable
-and is the one for which we finally set up a globally coupled linear
-system. As mentioned above, it is defined on the element faces and
-discontinuous from one face to another wherever faces meet (at
-vertices in 2d, and at edges and vertices in 3d).
-Values for $u$ and $\mathbf{q}$ appearing in the numerical trace function
-are taken to be the cell's interior solution restricted
-to the boundary $\partial K$.
 
-The local stabilization parameter $\tau$ has effects on stability and accuracy
-of HDG solutions; see the literature for a further discussion. A stabilization
-parameter of unity is reported to be the choice which gives best results. A
-stabilization parameter $\tau$ that tends to infinity prohibits jumps in the
-solution over the element boundaries, making the HDG solution approach the
-approximation with continuous finite elements. In the program below, we choose
-the stabilization parameter as
-@f{eqnarray*}
+
+变量 $\hat {u}$ 作为一个额外的自变量被引入，是我们最终建立一个全局耦合线性系统的变量。如上所述，它被定义在元素面上，并且在面与面的交汇处（2D中的顶点，3D中的边缘和顶点）不连续。数值跟踪函数中出现的 $u$ 和 $\mathbf{q}$ 的值被认为是限制在边界 $\partial K$ 的单元内部解。
+
+局部稳定参数 $\tau$ 对HDG解的稳定性和准确性有影响；进一步讨论见文献。据报道，稳定参数为1是给出最佳结果的选择。趋向于无穷大的稳定参数 $\tau$ 禁止解在元素边界上跳跃，使HDG解接近于连续有限元素的近似值。在下面的程序中，我们选择稳定参数为@f{eqnarray*}
   \tau = \frac{\kappa}{\ell} + |\mathbf{c} \cdot \mathbf{n}|
 @f}
-where we set the diffusion $\kappa=1$ and the diffusion length scale to
-$\ell = \frac{1}{5}$.
 
-The trace/skeleton variables in HDG methods are single-valued on element
-faces.  As such, they must strongly represent the Dirichlet data on
-$\partial\Omega_D$.  This means that
-@f{equation*}
+其中我们设定扩散 $\kappa=1$ ，扩散长度尺度为 $\ell = \frac{1}{5}$  。
+
+HDG方法中的轨迹/骨架变量在元素面上是单值的。 因此，它们必须强有力地代表 $\partial\Omega_D$ 上的迪里希特数据。 这意味着@f{equation*}
   \hat{u}|_{\partial \Omega_D} = g_D,
 @f}
-where the equal sign actually means an $L_2$ projection of the boundary
-function $g$ onto the space of the face variables (e.g. linear functions on
-the faces). This constraint is then applied to the skeleton variable $\hat{u}$
-using inhomogeneous constraints by the method
-VectorTools::project_boundary_values.
 
-Summing the elemental
-contributions across all elements in the triangulation, enforcing the normal
-component of the numerical flux, and integrating by parts
-on the equation weighted by $w$, we arrive at the final form of the problem:
-Find $(\mathbf{q}_h, u_h, \hat{u}_h) \in
-\mathcal{V}_h^p \times \mathcal{W}_h^p \times \mathcal{M}_h^p$ such that
+其中等号实际上是指边界函数 $g$ 对面变量空间的 $L_2$ 投影（例如面的线性函数）。然后用不均匀约束的方法 VectorTools::project_boundary_values. 将这种约束应用于骨架变量 $\hat{u}$ 。 
+
+将三角结构中所有元素的贡献相加，强制执行数值通量的法线分量，并对由 $w$ 加权的方程进行部分积分，我们得出问题的最终形式：找到 $(\mathbf{q}_h, u_h, \hat{u}_h) \in
+\mathcal{V}_h^p \times \mathcal{W}_h^p \times \mathcal{M}_h^p$ ，以便 
+
 @f{align*}
   (\mathbf{v}, \kappa^{-1} \mathbf{q}_h)_{\mathcal{T}}
+
+
     - ( \nabla\cdot\mathbf{v}, u_h)_{\mathcal{T}}
     + \left<\mathbf{v}\cdot\mathbf{n}, \hat{u}_h\right>_{\partial\mathcal{T}}
     &= 0,
     \quad &&\forall \mathbf{v} \in \mathcal{V}_h^p,
 \\
+
+
    - (\nabla w, \mathbf{c} u_h)_{\mathcal{T}}
    + (w, \nabla \cdot \mathbf{q}_h)_{\mathcal{T}}
    + (w, (\mathbf{c}\cdot\mathbf{n}) \hat{u}_h)_{\partial \mathcal{T}}
@@ -305,1917 +215,1828 @@ Find $(\mathbf{q}_h, u_h, \hat{u}_h) \in
     &=
     \left<\mu, g_N\right>_{\partial\Omega_N},
     \quad &&\forall \mu \in \mathcal{M}_h^p.
-@f}
+@f} 
 
-The unknowns $(\mathbf{q}_h, u_h)$ are referred to as local variables; they are
-represented as standard DG variables.  The unknown $\hat{u}_h$ is the skeleton
-variable which has support on the codimension-1 surfaces (faces) of the mesh.
 
-We use the notation $(\cdot, \cdot)_{\mathcal{T}} = \sum_K (\cdot, \cdot)_K$
-to denote the sum of integrals over all cells and $\left<\cdot,
+
+未知数 $(\mathbf{q}_h, u_h)$ 被称为局部变量；它们被表示为标准DG变量。 未知数 $\hat{u}_h$ 是骨架变量，在网格的一维表面（面）上有支持。
+
+我们用符号 $(\cdot, \cdot)_{\mathcal{T}} = \sum_K (\cdot, \cdot)_K$ 表示所有单元上的积分之和， $\left<\cdot,
 \cdot\right>_{\partial \mathcal{T}} = \sum_K \left<\cdot,
-\cdot\right>_{\partial K}$ to denote integration over all faces of all cells,
-i.e., interior faces are visited twice, once from each side and with
-the corresponding normal vectors. When combining the contribution from
-both elements sharing a face, the above equation yields terms familiar
-from the DG method, with jumps of the solution over the cell boundaries.
+\cdot\right>_{\partial K}$ 表示所有单元的所有面的积分，也就是说，内部面被访问两次，每边一次，并有相应的法向量。当结合共享一个面的两个元素的贡献时，上述方程产生了DG方法中熟悉的条款，解在单元边界上有跳跃。
 
-In the equation above, the space $\mathcal {W}_h^{p}$ for the scalar variable
-$u_h$ is defined as the space of functions that are tensor
-product polynomials of degree $p$ on each cell and discontinuous over the
-element boundaries $\mathcal Q_{-p}$, i.e., the space described by
-<code>FE_DGQ<dim>(p)</code>. The space for the gradient or flux variable
-$\mathbf{q}_i$ is a vector element space where each component is
-a locally polynomial and discontinuous $\mathcal Q_{-p}$. In the code below,
-we collect these two local parts together in one FESystem where the first @p
-dim components denote the gradient part and the last scalar component
-corresponds to the scalar variable. For the skeleton component $\hat{u}_h$, we
-define a space that consists of discontinuous tensor product polynomials that
-live on the element faces, which in deal.II is implemented by the class
-FE_FaceQ. This space is otherwise similar to FE_DGQ, i.e., the solution
-function is not continuous between two neighboring faces, see also the results
-section below for an illustration.
+在上述方程中，标量变量 $\mathcal {W}_h^{p}$ 的空间 $u_h$ 被定义为在每个单元上为张量积多项式 $p$ 且在元素边界上不连续的函数空间 $\mathcal Q_{-p}$ ，即由 <code>FE_DGQ<dim>(p)</code> 描述的空间。梯度或通量变量的空间  $\mathbf{q}_i$  是一个矢量元素空间，其中每个分量是局部多项式且不连续  $\mathcal Q_{-p}$  。在下面的代码中，我们将这两个局部部分收集在一个FESystem中，其中第一个@p dim分量表示梯度部分，最后一个标量分量对应于标量变量。对于骨架部分 $\hat{u}_h$ ，我们定义了一个由住在元素面上的不连续张量积多项式组成的空间，在deal.II中由FE_FaceQ这个类来实现。这个空间在其他方面与FE_DGQ相似，即解函数在两个相邻的面之间不连续，也可参见下面的结果部分进行说明。
 
-In the weak form given above, we can note the following coupling patterns:
-<ol>
-  <li> The matrix $A$ consists of local-local coupling terms.  These arise when the
-  local weighting functions $(\mathbf{v}, w)$ multiply the local solution terms
-  $(\mathbf{q}_h, u_h)$. Because the elements are discontinuous, $A$
-  is block diagonal.
-  <li> The matrix $B$ represents the local-face coupling.  These are the terms
-  with weighting functions $(\mathbf{v}, w)$ multiplying the skeleton variable
-  $\hat{u}_h$.
-  <li> The matrix $C$ represents the face-local coupling, which involves the
-  weighting function $\mu$ multiplying the local solutions $(\mathbf{q}_h, u_h)$.
-  <li>  The matrix $D$ is the face-face coupling;
-  terms involve both $\mu$ and $\hat{u}_h$.
-</ol>
+在上面给出的弱形式中，我们可以注意到以下的耦合模式。  <ol>   <li>  矩阵 $A$ 包括局部-局部耦合项。 当局部加权函数 $(\mathbf{v}, w)$ 与局部求解项 $(\mathbf{q}_h, u_h)$ 相乘时就会产生这些耦合项。因为这些元素是不连续的，所以 $A$ 是块对角线的。    <li>  矩阵 $B$ 代表局部面的耦合。 这些是具有加权函数 $(\mathbf{v}, w)$ 的条款，乘以骨架变量 $\hat{u}_h$  。    <li>  矩阵 $C$ 代表面-局域耦合，它涉及加权函数 $\mu$ 乘以局域解 $(\mathbf{q}_h, u_h)$  。    <li>  矩阵 $D$ 是面-面耦合；条款涉及 $\mu$ 和 $\hat{u}_h$  。  </ol>   
 
 <a name="Postprocessingandsuperconvergence"></a><h4> Post-processing and super-convergence </h4>
 
 
-One special feature of the HDG methods is that they typically allow for
-constructing an enriched solution that gains accuracy. This post-processing
-takes the HDG solution in an element-by-element fashion and combines it such
-that one can get $\mathcal O(h^{p+2})$ order of accuracy when using
-polynomials of degree $p$. For this to happen, there are two necessary
-ingredients:
-<ol>
-  <li> The computed solution gradient $\mathbf{q}_h$ converges at optimal rate,
-   i.e., $\mathcal{O}(h^{p+1})$.
-  <li> The cell-wise average of the scalar part of the solution,
-   $\frac{(1,u_h)_K}{\text{vol}(K)}$, super-converges at rate
-   $\mathcal{O}(h^{p+2})$.
-</ol>
+HDG方法的一个特点是，它们通常允许构建一个丰富的解决方案，以提高精确度。这种后处理方法以逐个元素的方式获取HDG解决方案，并将其结合起来，这样在使用度数为 $p$ 的多项式时可以获得 $\mathcal O(h^{p+2})$ 级的精度。要做到这一点，有两个必要的因素。  <ol>   <li>  计算的解决方案梯度  $\mathbf{q}_h$  以最佳速度收敛，即  $\mathcal{O}(h^{p+1})$  。    <li>  解的标量部分的单元平均， $\frac{(1,u_h)_K}{\text{vol}(K)}$  ，以 $\mathcal{O}(h^{p+2})$ 的速度超级收敛。  </ol>   
 
-We now introduce a new variable $u_h^* \in \mathcal{V}_h^{p+1}$, which we find
-by minimizing the expression $|\kappa \nabla u_h^* + \mathbf{q}_h|^2$ over the cell
-$K$ under the constraint $\left(1, u_h^*\right)_K = \left(1,
-u_h\right)_K$. The constraint is necessary because the minimization
-functional does not determine the constant part of $u_h^*$. This
-translates to the following system of equations:
-@f{eqnarray*}
+我们现在引入一个新的变量 $u_h^* \in \mathcal{V}_h^{p+1}$ ，在约束条件 $\left(1, u_h^*\right)_K = \left(1,
+u_h\right)_K$ 下，通过最小化单元 $|\kappa \nabla u_h^* + \mathbf{q}_h|^2$ 的表达式找到它。这个约束是必要的，因为最小化函数并不能确定 $u_h^*$ 的常数部分。这就转化为以下方程组。@f{eqnarray*}
 \left(1, u_h^*\right)_K &=& \left(1, u_h\right)_K\\
 \left(\nabla w_h^*, \kappa \nabla u_h^*\right)_K &=&
+
+
 -\left(\nabla w_h^*, \mathbf{q}_h\right)_K
 \quad \text{for all } w_h^* \in \mathcal Q^{p+1}.
-@f}
+@f} 
 
-Since we test by the whole set of basis functions in the space of tensor
-product polynomials of degree $p+1$ in the second set of equations, this
-is an overdetermined system with one more equation than unknowns. We fix this
-in the code below by omitting one of these equations (since the rows in the
-Laplacian are linearly dependent when representing a constant function). As we
-will see below, this form of the post-processing gives the desired
-super-convergence result with rate $\mathcal {O}(h^{p+2})$.  It should be
-noted that there is some freedom in constructing $u_h^*$ and this minimization
-approach to extract the information from the gradient is not the only one. In
-particular, the post-processed solution defined here does not satisfy the
-convection-diffusion equation in any sense. As an alternative, the paper by
-Nguyen, Peraire and Cockburn cited above suggests another somewhat more
-involved formula for convection-diffusion that can also post-process the flux
-variable into an $H(\Omega,\mathrm{div})$-conforming variant and better
-represents the local convection-diffusion operator when the diffusion is
-small. We leave the implementation of a more sophisticated post-processing as
-a possible extension to the interested reader.
 
-Note that for vector-valued problems, the post-processing works similarly. One
-simply sets the constraint for the mean value of each vector component
-separately and uses the gradient as the main source of information.
+
+由于我们在第二组方程中用张量积多项式空间中的整套基函数进行测试，这是一个过度确定的系统，方程比未知数多一个。我们在下面的代码中通过省略其中一个方程来解决这个问题（因为拉普拉斯的行在代表一个常数函数时是线性依赖的）。正如我们将在下面看到的，这种形式的后处理给出了所需的超级收敛结果，速率为 $\mathcal {O}(h^{p+2})$  。 应该指出的是，在构建 $u_h^*$ 时有一定的自由度，这种从梯度中提取信息的最小化方法不是唯一的方法。特别是，这里定义的后处理方案在任何意义上都不满足对流-扩散方程。作为替代方案，上面引用的Nguyen, Peraire和Cockburn的论文提出了另一个有点复杂的对流-扩散公式，该公式也可以将通量变量后处理为 $H(\Omega,\mathrm{div})$ -符合的变体，并且在扩散较小时更好地表示局部对流-扩散算子。我们把更复杂的后处理的实现作为一个可能的扩展留给感兴趣的读者。
+
+请注意，对于矢量值的问题，后处理的工作原理是类似的。我们只需为每个向量分量的平均值分别设置约束，并使用梯度作为主要信息来源。
 
 <a name="Problemspecificdata"></a><h3> Problem specific data </h3>
 
 
-For this tutorial program, we consider almost the same test case as in
-step-7. The computational domain is $\Omega \dealcoloneq [-1,1]^d$ and the exact
-solution corresponds to the one in step-7, except for a scaling. We use the
-following source centers $x_i$ for the exponentials
-<ul>
-  <li> 1D:  $\{x_i\}^1 = \{ -\frac{1}{3}, 0, \frac{1}{3} \}$,
-  <li> 2D: $\{\mathbf{x}_i\}^2 = \{ (-\frac{1}{2},\frac{1}{2}),
+在这个教程程序中，我们考虑的测试案例与  step-7  中的几乎一样。计算域是 $\Omega \dealcoloneq [-1,1]^d$ ，确切的解决方案对应于 step-7 中的解决方案，除了一个缩放。我们使用以下源中心 $x_i$ 的指数  <ul>   <li>  一维： $\{x_i\}^1 = \{ -\frac{1}{3}, 0, \frac{1}{3} \}$  ,  <li>  二维： $\{\mathbf{x}_i\}^2 = \{ (-\frac{1}{2},\frac{1}{2}),
                         		 (-\frac{1}{2},-\frac{1}{2}),
   					 (\frac{1}{2},-\frac{1}{2})
-  				   \}$,
-  <li> 3D: $\{\mathbf{x}_i\}^3 = \{ (-\frac{1}{2},\frac{1}{2}, \frac{1}{4}),
+  				   \}$  ,  <li>  三维： $\{\mathbf{x}_i\}^3 = \{ (-\frac{1}{2},\frac{1}{2}, \frac{1}{4}),
   				      (-\frac{3}{5},-\frac{1}{2}, -\frac{1}{8}),
   				      (\frac{1}{2},-\frac{1}{2}, \frac{1}{2})
-  				   \}$.
-</ul>
+  				   \}$  。  </ul>   
 
-With the exact solution given, we then choose the forcing on the right hand
-side and the Neumann boundary condition such that we obtain this solution
-(manufactured solution technique). In this example, we choose the diffusion
-equal to one and the convection as
-\f[
+有了精确的解决方案，我们就可以选择右侧的强制力和诺伊曼边界条件，从而得到这个解决方案（制造的解决方案技术）。在这个例子中，我们选择扩散等于1，对流为\f[
 \mathbf{c} = \begin{cases}
 1, & \textrm{dim}=1 \\
 (y, -x), & \textrm{dim}=2 \\
 (y, -x, 1), & \textrm{dim}=3
 \end{cases}
-\f]
-Note that the convection is divergence-free, $\nabla \cdot c = 0$.
+\f] 注意，对流是无发散的， $\nabla \cdot c = 0$  。
 
-<a name="Implementation"></a><h3> Implementation </h3>
+<a name="Implementation"></a> <h3> Implementation </h3>
 
 
-Besides implementing the above equations, the implementation below provides
-the following features:
-<ul>
-  <li> WorkStream to parallelize local solvers. Workstream has been presented
-  in detail in step-9.
-  <li> Reconstruct the local DG solution from the trace.
-  <li> Post-processing the solution for superconvergence.
-  <li> DataOutFaces for direct output of the global skeleton solution.
-</ul>
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * 
- * <a name="Includefiles"></a> 
- * <h3>Include files</h3>
- * 
+除了实现上述方程，下面的实现还提供了以下特点。  <ul>   <li>  WorkStream来并行化局部求解器。Workstream已在  step-9  中详细介绍。    <li>  从跟踪中重构本地DG解。    <li>  对解进行后处理以实现超融合。    <li>  用于直接输出全局骨架解的DataOutFaces。  </ul>  <a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * Most of the deal.II include files have already been covered in previous
- * examples and are not commented on.
- * 
- * @code
- * #include <deal.II/base/quadrature_lib.h>
- * #include <deal.II/base/function.h>
- * #include <deal.II/base/tensor_function.h>
- * #include <deal.II/base/exceptions.h>
- * #include <deal.II/base/logstream.h>
- * #include <deal.II/base/work_stream.h>
- * #include <deal.II/base/convergence_table.h>
- * #include <deal.II/lac/vector.h>
- * #include <deal.II/lac/affine_constraints.h>
- * #include <deal.II/lac/full_matrix.h>
- * #include <deal.II/lac/dynamic_sparsity_pattern.h>
- * #include <deal.II/lac/solver_bicgstab.h>
- * #include <deal.II/lac/precondition.h>
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/grid_refinement.h>
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/dofs/dof_renumbering.h>
- * #include <deal.II/dofs/dof_tools.h>
- * #include <deal.II/fe/fe_dgq.h>
- * #include <deal.II/fe/fe_system.h>
- * #include <deal.II/fe/fe_values.h>
- * #include <deal.II/numerics/vector_tools.h>
- * #include <deal.II/numerics/error_estimator.h>
- * #include <deal.II/numerics/matrix_tools.h>
- * #include <deal.II/numerics/data_out.h>
- * 
- * @endcode
- * 
- * However, we do have a few new includes for the example.
- * The first one defines finite element spaces on the faces
- * of the triangulation, which we refer to as the 'skeleton'.
- * These finite elements do not have any support on the element
- * interior, and they represent polynomials that have a single
- * value on each codimension-1 surface, but admit discontinuities
- * on codimension-2 surfaces.
- * 
- * @code
- * #include <deal.II/fe/fe_face.h>
- * 
- * @endcode
- * 
- * The second new file we include defines a new type of sparse matrix.  The
- * regular <code>SparseMatrix</code> type stores indices to all non-zero
- * entries.  The <code>ChunkSparseMatrix</code> takes advantage of the coupled
- * nature of DG solutions.  It stores an index to a matrix sub-block of a
- * specified size.  In the HDG context, this sub-block-size is actually the
- * number of degrees of freedom per face defined by the skeleton solution
- * field. This reduces the memory consumption of the matrix by up to one third
- * and results in similar speedups when using the matrix in solvers.
- * 
- * @code
- * #include <deal.II/lac/chunk_sparse_matrix.h>
- * 
- * @endcode
- * 
- * The final new include for this example deals with data output.  Since
- * we have a finite element field defined on the skeleton of the mesh,
- * we would like to visualize what that solution actually is.
- * DataOutFaces does exactly this; the interface is the almost the same
- * as the familiar DataOut, but the output only has codimension-1 data for
- * the simulation.
- * 
- * @code
- * #include <deal.II/numerics/data_out_faces.h>
- * 
- * #include <iostream>
- * 
- * 
- * 
- * @endcode
- * 
- * We start by putting all of our classes into their own namespace.
- * 
- * @code
- * namespace Step51
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * 
- * <a name="Equationdata"></a> 
- * <h3>Equation data</h3>
- *   
 
- * 
- * The structure of the analytic solution is the same as in step-7. There are
- * two exceptions. Firstly, we also create a solution for the 3d case, and
- * secondly, we scale the solution so its norm is of order unity for all
- * values of the solution width.
- * 
- * @code
- *   template <int dim>
- *   class SolutionBase
- *   {
- *   protected:
- *     static const unsigned int n_source_centers = 3;
- *     static const Point<dim>   source_centers[n_source_centers];
- *     static const double       width;
- *   };
- * 
- * 
- *   template <>
- *   const Point<1>
- *     SolutionBase<1>::source_centers[SolutionBase<1>::n_source_centers] =
- *       {Point<1>(-1.0 / 3.0), Point<1>(0.0), Point<1>(+1.0 / 3.0)};
- * 
- * 
- *   template <>
- *   const Point<2>
- *     SolutionBase<2>::source_centers[SolutionBase<2>::n_source_centers] =
- *       {Point<2>(-0.5, +0.5), Point<2>(-0.5, -0.5), Point<2>(+0.5, -0.5)};
- * 
- *   template <>
- *   const Point<3>
- *     SolutionBase<3>::source_centers[SolutionBase<3>::n_source_centers] = {
- *       Point<3>(-0.5, +0.5, 0.25),
- *       Point<3>(-0.6, -0.5, -0.125),
- *       Point<3>(+0.5, -0.5, 0.5)};
- * 
- *   template <int dim>
- *   const double SolutionBase<dim>::width = 1. / 5.;
- * 
- * 
- *   template <int dim>
- *   class Solution : public Function<dim>, protected SolutionBase<dim>
- *   {
- *   public:
- *     virtual double value(const Point<dim> &p,
- *                          const unsigned int /*component*/ = 0) const override
- *     {
- *       double sum = 0;
- *       for (unsigned int i = 0; i < this->n_source_centers; ++i)
- *         {
- *           const Tensor<1, dim> x_minus_xi = p - this->source_centers[i];
- *           sum +=
- *             std::exp(-x_minus_xi.norm_square() / (this->width * this->width));
- *         }
- * 
- *       return sum /
- *              std::pow(2. * numbers::PI * this->width * this->width, dim / 2.);
- *     }
- * 
- *     virtual Tensor<1, dim>
- *     gradient(const Point<dim> &p,
- *              const unsigned int /*component*/ = 0) const override
- *     {
- *       Tensor<1, dim> sum;
- *       for (unsigned int i = 0; i < this->n_source_centers; ++i)
- *         {
- *           const Tensor<1, dim> x_minus_xi = p - this->source_centers[i];
- * 
- *           sum +=
- *             (-2 / (this->width * this->width) *
- *              std::exp(-x_minus_xi.norm_square() / (this->width * this->width)) *
- *              x_minus_xi);
- *         }
- * 
- *       return sum /
- *              std::pow(2. * numbers::PI * this->width * this->width, dim / 2.);
- *     }
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * This class implements a function where the scalar solution and its negative
- * gradient are collected together. This function is used when computing the
- * error of the HDG approximation and its implementation is to simply call
- * value and gradient function of the Solution class.
- * 
- * @code
- *   template <int dim>
- *   class SolutionAndGradient : public Function<dim>, protected SolutionBase<dim>
- *   {
- *   public:
- *     SolutionAndGradient()
- *       : Function<dim>(dim + 1)
- *     {}
- * 
- *     virtual void vector_value(const Point<dim> &p,
- *                               Vector<double> &  v) const override
- *     {
- *       AssertDimension(v.size(), dim + 1);
- *       Solution<dim>  solution;
- *       Tensor<1, dim> grad = solution.gradient(p);
- *       for (unsigned int d = 0; d < dim; ++d)
- *         v[d] = -grad[d];
- *       v[dim] = solution.value(p);
- *     }
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * Next comes the implementation of the convection velocity. As described in
- * the introduction, we choose a velocity field that is $(y, -x)$ in 2D and
- * $(y, -x, 1)$ in 3D. This gives a divergence-free velocity field.
- * 
- * @code
- *   template <int dim>
- *   class ConvectionVelocity : public TensorFunction<1, dim>
- *   {
- *   public:
- *     ConvectionVelocity()
- *       : TensorFunction<1, dim>()
- *     {}
- * 
- *     virtual Tensor<1, dim> value(const Point<dim> &p) const override
- *     {
- *       Tensor<1, dim> convection;
- *       switch (dim)
- *         {
- *           case 1:
- *             convection[0] = 1;
- *             break;
- *           case 2:
- *             convection[0] = p[1];
- *             convection[1] = -p[0];
- *             break;
- *           case 3:
- *             convection[0] = p[1];
- *             convection[1] = -p[0];
- *             convection[2] = 1;
- *             break;
- *           default:
- *             Assert(false, ExcNotImplemented());
- *         }
- *       return convection;
- *     }
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * The last function we implement is the right hand side for the
- * manufactured solution. It is very similar to step-7, with the exception
- * that we now have a convection term instead of the reaction term. Since
- * the velocity field is incompressible, i.e., $\nabla \cdot \mathbf{c} =
- * 0$, the advection term simply reads $\mathbf{c} \nabla u$.
- * 
- * @code
- *   template <int dim>
- *   class RightHandSide : public Function<dim>, protected SolutionBase<dim>
- *   {
- *   public:
- *     virtual double value(const Point<dim> &p,
- *                          const unsigned int /*component*/ = 0) const override
- *     {
- *       ConvectionVelocity<dim> convection_velocity;
- *       Tensor<1, dim>          convection = convection_velocity.value(p);
- *       double                  sum        = 0;
- *       for (unsigned int i = 0; i < this->n_source_centers; ++i)
- *         {
- *           const Tensor<1, dim> x_minus_xi = p - this->source_centers[i];
- * 
- *           sum +=
- *             ((2 * dim - 2 * convection * x_minus_xi -
- *               4 * x_minus_xi.norm_square() / (this->width * this->width)) /
- *              (this->width * this->width) *
- *              std::exp(-x_minus_xi.norm_square() / (this->width * this->width)));
- *         }
- * 
- *       return sum /
- *              std::pow(2. * numbers::PI * this->width * this->width, dim / 2.);
- *     }
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="TheHDGsolverclass"></a> 
- * <h3>The HDG solver class</h3>
- * 
+<a name="Includefiles"></a> <h3>Include files</h3> ．
 
- * 
- * The HDG solution procedure follows closely that of step-7. The major
- * difference is the use of three different sets of DoFHandler and FE
- * objects, along with the ChunkSparseMatrix and the corresponding solutions
- * vectors. We also use WorkStream to enable a multithreaded local solution
- * process which exploits the embarrassingly parallel nature of the local
- * solver. For WorkStream, we define the local operations on a cell and a
- * copy function into the global matrix and vector. We do this both for the
- * assembly (which is run twice, once when we generate the system matrix and
- * once when we compute the element-interior solutions from the skeleton
- * values) and for the postprocessing where we extract a solution that
- * converges at higher order.
- * 
- * @code
- *   template <int dim>
- *   class HDG
- *   {
- *   public:
- *     enum RefinementMode
- *     {
- *       global_refinement,
- *       adaptive_refinement
- *     };
- * 
- *     HDG(const unsigned int degree, const RefinementMode refinement_mode);
- *     void run();
- * 
- *   private:
- *     void setup_system();
- *     void assemble_system(const bool reconstruct_trace = false);
- *     void solve();
- *     void postprocess();
- *     void refine_grid(const unsigned int cycle);
- *     void output_results(const unsigned int cycle);
- * 
- * @endcode
- * 
- * Data for the assembly and solution of the primal variables.
- * 
- * @code
- *     struct PerTaskData;
- *     struct ScratchData;
- * 
- * @endcode
- * 
- * Post-processing the solution to obtain $u^*$ is an element-by-element
- * procedure; as such, we do not need to assemble any global data and do
- * not declare any 'task data' for WorkStream to use.
- * 
- * @code
- *     struct PostProcessScratchData;
- * 
- * @endcode
- * 
- * The following three functions are used by WorkStream to do the actual
- * work of the program.
- * 
- * @code
- *     void assemble_system_one_cell(
- *       const typename DoFHandler<dim>::active_cell_iterator &cell,
- *       ScratchData &                                         scratch,
- *       PerTaskData &                                         task_data);
- * 
- *     void copy_local_to_global(const PerTaskData &data);
- * 
- *     void postprocess_one_cell(
- *       const typename DoFHandler<dim>::active_cell_iterator &cell,
- *       PostProcessScratchData &                              scratch,
- *       unsigned int &                                        empty_data);
- * 
- * 
- *     Triangulation<dim> triangulation;
- * 
- * @endcode
- * 
- * The 'local' solutions are interior to each element.  These
- * represent the primal solution field $u$ as well as the auxiliary
- * field $\mathbf{q}$.
- * 
- * @code
- *     FESystem<dim>   fe_local;
- *     DoFHandler<dim> dof_handler_local;
- *     Vector<double>  solution_local;
- * 
- * @endcode
- * 
- * The new finite element type and corresponding <code>DoFHandler</code> are
- * used for the global skeleton solution that couples the element-level
- * local solutions.
- * 
- * @code
- *     FE_FaceQ<dim>   fe;
- *     DoFHandler<dim> dof_handler;
- *     Vector<double>  solution;
- *     Vector<double>  system_rhs;
- * 
- * @endcode
- * 
- * As stated in the introduction, HDG solutions can be post-processed to
- * attain superconvergence rates of $\mathcal{O}(h^{p+2})$.  The
- * post-processed solution is a discontinuous finite element solution
- * representing the primal variable on the interior of each cell.  We define
- * a FE type of degree $p+1$ to represent this post-processed solution,
- * which we only use for output after constructing it.
- * 
- * @code
- *     FE_DGQ<dim>     fe_u_post;
- *     DoFHandler<dim> dof_handler_u_post;
- *     Vector<double>  solution_u_post;
- * 
- * @endcode
- * 
- * The degrees of freedom corresponding to the skeleton strongly enforce
- * Dirichlet boundary conditions, just as in a continuous Galerkin finite
- * element method. We can enforce the boundary conditions in an analogous
- * manner via an AffineConstraints object. In addition, hanging nodes are
- * handled in the same way as for continuous finite elements: For the face
- * elements which only define degrees of freedom on the face, this process
- * sets the solution on the refined side to coincide with the
- * representation on the coarse side.
- *     
 
- * 
- * Note that for HDG, the elimination of hanging nodes is not the only
- * possibility &mdash; in terms of the HDG theory, one could also use the
- * unknowns from the refined side and express the local solution on the
- * coarse side through the trace values on the refined side. However, such
- * a setup is not as easily implemented in terms of deal.II loops and not
- * further analyzed.
- * 
- * @code
- *     AffineConstraints<double> constraints;
- * 
- * @endcode
- * 
- * The usage of the ChunkSparseMatrix class is similar to the usual sparse
- * matrices: You need a sparsity pattern of type ChunkSparsityPattern and
- * the actual matrix object. When creating the sparsity pattern, we just
- * have to additionally pass the size of local blocks.
- * 
- * @code
- *     ChunkSparsityPattern      sparsity_pattern;
- *     ChunkSparseMatrix<double> system_matrix;
- * 
- * @endcode
- * 
- * Same as step-7:
- * 
- * @code
- *     const RefinementMode refinement_mode;
- *     ConvergenceTable     convergence_table;
- *   };
- * 
- * @endcode
- * 
- * 
- * <a name="TheHDGclassimplementation"></a> 
- * <h3>The HDG class implementation</h3>
- * 
 
- * 
- * 
- * <a name="Constructor"></a> 
- * <h4>Constructor</h4>
- * The constructor is similar to those in other examples, with the exception
- * of handling multiple DoFHandler and FiniteElement objects. Note that we
- * create a system of finite elements for the local DG part, including the
- * gradient/flux part and the scalar part.
- * 
- * @code
- *   template <int dim>
- *   HDG<dim>::HDG(const unsigned int degree, const RefinementMode refinement_mode)
- *     : fe_local(FE_DGQ<dim>(degree), dim, FE_DGQ<dim>(degree), 1)
- *     , dof_handler_local(triangulation)
- *     , fe(degree)
- *     , dof_handler(triangulation)
- *     , fe_u_post(degree + 1)
- *     , dof_handler_u_post(triangulation)
- *     , refinement_mode(refinement_mode)
- *   {}
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="HDGsetup_system"></a> 
- * <h4>HDG::setup_system</h4>
- * The system for an HDG solution is setup in an analogous manner to most
- * of the other tutorial programs.  We are careful to distribute dofs with
- * all of our DoFHandler objects.  The @p solution and @p system_matrix
- * objects go with the global skeleton solution.
- * 
- * @code
- *   template <int dim>
- *   void HDG<dim>::setup_system()
- *   {
- *     dof_handler_local.distribute_dofs(fe_local);
- *     dof_handler.distribute_dofs(fe);
- *     dof_handler_u_post.distribute_dofs(fe_u_post);
- * 
- *     std::cout << "   Number of degrees of freedom: " << dof_handler.n_dofs()
- *               << std::endl;
- * 
- *     solution.reinit(dof_handler.n_dofs());
- *     system_rhs.reinit(dof_handler.n_dofs());
- * 
- *     solution_local.reinit(dof_handler_local.n_dofs());
- *     solution_u_post.reinit(dof_handler_u_post.n_dofs());
- * 
- *     constraints.clear();
- *     DoFTools::make_hanging_node_constraints(dof_handler, constraints);
- *     std::map<types::boundary_id, const Function<dim> *> boundary_functions;
- *     Solution<dim>                                       solution_function;
- *     boundary_functions[0] = &solution_function;
- *     VectorTools::project_boundary_values(dof_handler,
- *                                          boundary_functions,
- *                                          QGauss<dim - 1>(fe.degree + 1),
- *                                          constraints);
- *     constraints.close();
- * 
- * @endcode
- * 
- * When creating the chunk sparsity pattern, we first create the usual
- * dynamic sparsity pattern and then set the chunk size, which is equal
- * to the number of dofs on a face, when copying this into the final
- * sparsity pattern.
- * 
- * @code
- *     {
- *       DynamicSparsityPattern dsp(dof_handler.n_dofs());
- *       DoFTools::make_sparsity_pattern(dof_handler, dsp, constraints, false);
- *       sparsity_pattern.copy_from(dsp, fe.n_dofs_per_face());
- *     }
- *     system_matrix.reinit(sparsity_pattern);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="HDGPerTaskData"></a> 
- * <h4>HDG::PerTaskData</h4>
- * Next comes the definition of the local data structures for the parallel
- * assembly. The first structure @p PerTaskData contains the local vector
- * and matrix that are written into the global matrix, whereas the
- * ScratchData contains all data that we need for the local assembly. There
- * is one variable worth noting here, namely the boolean variable @p
- * trace_reconstruct. As mentioned in the introduction, we solve the HDG
- * system in two steps. First, we create a linear system for the skeleton
- * system where we condense the local part into it via the Schur complement
- * $D-CA^{-1}B$. Then, we solve for the local part using the skeleton
- * solution. For these two steps, we need the same matrices on the elements
- * twice, which we want to compute by two assembly steps. Since most of the
- * code is similar, we do this with the same function but only switch
- * between the two based on a flag that we set when starting the
- * assembly. Since we need to pass this information on to the local worker
- * routines, we store it once in the task data.
- * 
- * @code
- *   template <int dim>
- *   struct HDG<dim>::PerTaskData
- *   {
- *     FullMatrix<double>                   cell_matrix;
- *     Vector<double>                       cell_vector;
- *     std::vector<types::global_dof_index> dof_indices;
- * 
- *     bool trace_reconstruct;
- * 
- *     PerTaskData(const unsigned int n_dofs, const bool trace_reconstruct)
- *       : cell_matrix(n_dofs, n_dofs)
- *       , cell_vector(n_dofs)
- *       , dof_indices(n_dofs)
- *       , trace_reconstruct(trace_reconstruct)
- *     {}
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="HDGScratchData"></a> 
- * <h4>HDG::ScratchData</h4>
- * @p ScratchData contains persistent data for each
- * thread within WorkStream.  The FEValues, matrix,
- * and vector objects should be familiar by now.  There are two objects that
- * need to be discussed: `std::vector<std::vector<unsigned int> >
- * fe_local_support_on_face` and `std::vector<std::vector<unsigned int> >
- * fe_support_on_face`.  These are used to indicate whether or not the finite
- * elements chosen have support (non-zero values) on a given face of the
- * reference cell for the local part associated to @p fe_local and the
- * skeleton part @p fe. We extract this information in the
- * constructor and store it once for all cells that we work on.  Had we not
- * stored this information, we would be forced to assemble a large number of
- * zero terms on each cell, which would significantly slow the program.
- * 
- * @code
- *   template <int dim>
- *   struct HDG<dim>::ScratchData
- *   {
- *     FEValues<dim>     fe_values_local;
- *     FEFaceValues<dim> fe_face_values_local;
- *     FEFaceValues<dim> fe_face_values;
- * 
- *     FullMatrix<double> ll_matrix;
- *     FullMatrix<double> lf_matrix;
- *     FullMatrix<double> fl_matrix;
- *     FullMatrix<double> tmp_matrix;
- *     Vector<double>     l_rhs;
- *     Vector<double>     tmp_rhs;
- * 
- *     std::vector<Tensor<1, dim>> q_phi;
- *     std::vector<double>         q_phi_div;
- *     std::vector<double>         u_phi;
- *     std::vector<Tensor<1, dim>> u_phi_grad;
- *     std::vector<double>         tr_phi;
- *     std::vector<double>         trace_values;
- * 
- *     std::vector<std::vector<unsigned int>> fe_local_support_on_face;
- *     std::vector<std::vector<unsigned int>> fe_support_on_face;
- * 
- *     ConvectionVelocity<dim> convection_velocity;
- *     RightHandSide<dim>      right_hand_side;
- *     const Solution<dim>     exact_solution;
- * 
- *     ScratchData(const FiniteElement<dim> &fe,
- *                 const FiniteElement<dim> &fe_local,
- *                 const QGauss<dim> &       quadrature_formula,
- *                 const QGauss<dim - 1> &   face_quadrature_formula,
- *                 const UpdateFlags         local_flags,
- *                 const UpdateFlags         local_face_flags,
- *                 const UpdateFlags         flags)
- *       : fe_values_local(fe_local, quadrature_formula, local_flags)
- *       , fe_face_values_local(fe_local,
- *                              face_quadrature_formula,
- *                              local_face_flags)
- *       , fe_face_values(fe, face_quadrature_formula, flags)
- *       , ll_matrix(fe_local.n_dofs_per_cell(), fe_local.n_dofs_per_cell())
- *       , lf_matrix(fe_local.n_dofs_per_cell(), fe.n_dofs_per_cell())
- *       , fl_matrix(fe.n_dofs_per_cell(), fe_local.n_dofs_per_cell())
- *       , tmp_matrix(fe.n_dofs_per_cell(), fe_local.n_dofs_per_cell())
- *       , l_rhs(fe_local.n_dofs_per_cell())
- *       , tmp_rhs(fe_local.n_dofs_per_cell())
- *       , q_phi(fe_local.n_dofs_per_cell())
- *       , q_phi_div(fe_local.n_dofs_per_cell())
- *       , u_phi(fe_local.n_dofs_per_cell())
- *       , u_phi_grad(fe_local.n_dofs_per_cell())
- *       , tr_phi(fe.n_dofs_per_cell())
- *       , trace_values(face_quadrature_formula.size())
- *       , fe_local_support_on_face(GeometryInfo<dim>::faces_per_cell)
- *       , fe_support_on_face(GeometryInfo<dim>::faces_per_cell)
- *       , exact_solution()
- *     {
- *       for (unsigned int face_no : GeometryInfo<dim>::face_indices())
- *         for (unsigned int i = 0; i < fe_local.n_dofs_per_cell(); ++i)
- *           {
- *             if (fe_local.has_support_on_face(i, face_no))
- *               fe_local_support_on_face[face_no].push_back(i);
- *           }
- * 
- *       for (unsigned int face_no : GeometryInfo<dim>::face_indices())
- *         for (unsigned int i = 0; i < fe.n_dofs_per_cell(); ++i)
- *           {
- *             if (fe.has_support_on_face(i, face_no))
- *               fe_support_on_face[face_no].push_back(i);
- *           }
- *     }
- * 
- *     ScratchData(const ScratchData &sd)
- *       : fe_values_local(sd.fe_values_local.get_fe(),
- *                         sd.fe_values_local.get_quadrature(),
- *                         sd.fe_values_local.get_update_flags())
- *       , fe_face_values_local(sd.fe_face_values_local.get_fe(),
- *                              sd.fe_face_values_local.get_quadrature(),
- *                              sd.fe_face_values_local.get_update_flags())
- *       , fe_face_values(sd.fe_face_values.get_fe(),
- *                        sd.fe_face_values.get_quadrature(),
- *                        sd.fe_face_values.get_update_flags())
- *       , ll_matrix(sd.ll_matrix)
- *       , lf_matrix(sd.lf_matrix)
- *       , fl_matrix(sd.fl_matrix)
- *       , tmp_matrix(sd.tmp_matrix)
- *       , l_rhs(sd.l_rhs)
- *       , tmp_rhs(sd.tmp_rhs)
- *       , q_phi(sd.q_phi)
- *       , q_phi_div(sd.q_phi_div)
- *       , u_phi(sd.u_phi)
- *       , u_phi_grad(sd.u_phi_grad)
- *       , tr_phi(sd.tr_phi)
- *       , trace_values(sd.trace_values)
- *       , fe_local_support_on_face(sd.fe_local_support_on_face)
- *       , fe_support_on_face(sd.fe_support_on_face)
- *       , exact_solution()
- *     {}
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="HDGPostProcessScratchData"></a> 
- * <h4>HDG::PostProcessScratchData</h4>
- * @p PostProcessScratchData contains the data used by WorkStream
- * when post-processing the local solution $u^*$.  It is similar, but much
- * simpler, than @p ScratchData.
- * 
- * @code
- *   template <int dim>
- *   struct HDG<dim>::PostProcessScratchData
- *   {
- *     FEValues<dim> fe_values_local;
- *     FEValues<dim> fe_values;
- * 
- *     std::vector<double>         u_values;
- *     std::vector<Tensor<1, dim>> u_gradients;
- *     FullMatrix<double>          cell_matrix;
- * 
- *     Vector<double> cell_rhs;
- *     Vector<double> cell_sol;
- * 
- *     PostProcessScratchData(const FiniteElement<dim> &fe,
- *                            const FiniteElement<dim> &fe_local,
- *                            const QGauss<dim> &       quadrature_formula,
- *                            const UpdateFlags         local_flags,
- *                            const UpdateFlags         flags)
- *       : fe_values_local(fe_local, quadrature_formula, local_flags)
- *       , fe_values(fe, quadrature_formula, flags)
- *       , u_values(quadrature_formula.size())
- *       , u_gradients(quadrature_formula.size())
- *       , cell_matrix(fe.n_dofs_per_cell(), fe.n_dofs_per_cell())
- *       , cell_rhs(fe.n_dofs_per_cell())
- *       , cell_sol(fe.n_dofs_per_cell())
- *     {}
- * 
- *     PostProcessScratchData(const PostProcessScratchData &sd)
- *       : fe_values_local(sd.fe_values_local.get_fe(),
- *                         sd.fe_values_local.get_quadrature(),
- *                         sd.fe_values_local.get_update_flags())
- *       , fe_values(sd.fe_values.get_fe(),
- *                   sd.fe_values.get_quadrature(),
- *                   sd.fe_values.get_update_flags())
- *       , u_values(sd.u_values)
- *       , u_gradients(sd.u_gradients)
- *       , cell_matrix(sd.cell_matrix)
- *       , cell_rhs(sd.cell_rhs)
- *       , cell_sol(sd.cell_sol)
- *     {}
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="HDGassemble_system"></a> 
- * <h4>HDG::assemble_system</h4>
- * The @p assemble_system function is similar to the one on Step-32, where
- * the quadrature formula and the update flags are set up, and then
- * <code>WorkStream</code> is used to do the work in a multi-threaded
- * manner.  The @p trace_reconstruct input parameter is used to decide
- * whether we are solving for the global skeleton solution (false) or the
- * local solution (true).
- *   
 
- * 
- * One thing worth noting for the multi-threaded execution of assembly is
- * the fact that the local computations in `assemble_system_one_cell()` call
- * into BLAS and LAPACK functions if those are available in deal.II. Thus,
- * the underlying BLAS/LAPACK library must support calls from multiple
- * threads at the same time. Most implementations do support this, but some
- * libraries need to be built in a specific way to avoid problems. For
- * example, OpenBLAS compiled without multithreading inside the BLAS/LAPACK
- * calls needs to built with a flag called `USE_LOCKING` set to true.
- * 
- * @code
- *   template <int dim>
- *   void HDG<dim>::assemble_system(const bool trace_reconstruct)
- *   {
- *     const QGauss<dim>     quadrature_formula(fe.degree + 1);
- *     const QGauss<dim - 1> face_quadrature_formula(fe.degree + 1);
- * 
- *     const UpdateFlags local_flags(update_values | update_gradients |
- *                                   update_JxW_values | update_quadrature_points);
- * 
- *     const UpdateFlags local_face_flags(update_values);
- * 
- *     const UpdateFlags flags(update_values | update_normal_vectors |
- *                             update_quadrature_points | update_JxW_values);
- * 
- *     PerTaskData task_data(fe.n_dofs_per_cell(), trace_reconstruct);
- *     ScratchData scratch(fe,
- *                         fe_local,
- *                         quadrature_formula,
- *                         face_quadrature_formula,
- *                         local_flags,
- *                         local_face_flags,
- *                         flags);
- * 
- *     WorkStream::run(dof_handler.begin_active(),
- *                     dof_handler.end(),
- *                     *this,
- *                     &HDG<dim>::assemble_system_one_cell,
- *                     &HDG<dim>::copy_local_to_global,
- *                     scratch,
- *                     task_data);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="HDGassemble_system_one_cell"></a> 
- * <h4>HDG::assemble_system_one_cell</h4>
- * The real work of the HDG program is done by @p assemble_system_one_cell.
- * Assembling the local matrices $A, B, C$ is done here, along with the
- * local contributions of the global matrix $D$.
- * 
- * @code
- *   template <int dim>
- *   void HDG<dim>::assemble_system_one_cell(
- *     const typename DoFHandler<dim>::active_cell_iterator &cell,
- *     ScratchData &                                         scratch,
- *     PerTaskData &                                         task_data)
- *   {
- * @endcode
- * 
- * Construct iterator for dof_handler_local for FEValues reinit function.
- * 
- * @code
- *     typename DoFHandler<dim>::active_cell_iterator loc_cell(&triangulation,
- *                                                             cell->level(),
- *                                                             cell->index(),
- *                                                             &dof_handler_local);
- * 
- *     const unsigned int n_q_points =
- *       scratch.fe_values_local.get_quadrature().size();
- *     const unsigned int n_face_q_points =
- *       scratch.fe_face_values_local.get_quadrature().size();
- * 
- *     const unsigned int loc_dofs_per_cell =
- *       scratch.fe_values_local.get_fe().n_dofs_per_cell();
- * 
- *     const FEValuesExtractors::Vector fluxes(0);
- *     const FEValuesExtractors::Scalar scalar(dim);
- * 
- *     scratch.ll_matrix = 0;
- *     scratch.l_rhs     = 0;
- *     if (!task_data.trace_reconstruct)
- *       {
- *         scratch.lf_matrix     = 0;
- *         scratch.fl_matrix     = 0;
- *         task_data.cell_matrix = 0;
- *         task_data.cell_vector = 0;
- *       }
- *     scratch.fe_values_local.reinit(loc_cell);
- * 
- * @endcode
- * 
- * We first compute the cell-interior contribution to @p ll_matrix matrix
- * (referred to as matrix $A$ in the introduction) corresponding to
- * local-local coupling, as well as the local right-hand-side vector.  We
- * store the values at each quadrature point for the basis functions, the
- * right-hand-side value, and the convection velocity, in order to have
- * quick access to these fields.
- * 
- * @code
- *     for (unsigned int q = 0; q < n_q_points; ++q)
- *       {
- *         const double rhs_value = scratch.right_hand_side.value(
- *           scratch.fe_values_local.quadrature_point(q));
- *         const Tensor<1, dim> convection = scratch.convection_velocity.value(
- *           scratch.fe_values_local.quadrature_point(q));
- *         const double JxW = scratch.fe_values_local.JxW(q);
- *         for (unsigned int k = 0; k < loc_dofs_per_cell; ++k)
- *           {
- *             scratch.q_phi[k] = scratch.fe_values_local[fluxes].value(k, q);
- *             scratch.q_phi_div[k] =
- *               scratch.fe_values_local[fluxes].divergence(k, q);
- *             scratch.u_phi[k] = scratch.fe_values_local[scalar].value(k, q);
- *             scratch.u_phi_grad[k] =
- *               scratch.fe_values_local[scalar].gradient(k, q);
- *           }
- *         for (unsigned int i = 0; i < loc_dofs_per_cell; ++i)
- *           {
- *             for (unsigned int j = 0; j < loc_dofs_per_cell; ++j)
- *               scratch.ll_matrix(i, j) +=
- *                 (scratch.q_phi[i] * scratch.q_phi[j] -
- *                  scratch.q_phi_div[i] * scratch.u_phi[j] +
- *                  scratch.u_phi[i] * scratch.q_phi_div[j] -
- *                  (scratch.u_phi_grad[i] * convection) * scratch.u_phi[j]) *
- *                 JxW;
- *             scratch.l_rhs(i) += scratch.u_phi[i] * rhs_value * JxW;
- *           }
- *       }
- * 
- * @endcode
- * 
- * Face terms are assembled on all faces of all elements. This is in
- * contrast to more traditional DG methods, where each face is only visited
- * once in the assembly procedure.
- * 
- * @code
- *     for (const auto face_no : cell->face_indices())
- *       {
- *         scratch.fe_face_values_local.reinit(loc_cell, face_no);
- *         scratch.fe_face_values.reinit(cell, face_no);
- * 
- * @endcode
- * 
- * The already obtained $\hat{u}$ values are needed when solving for the
- * local variables.
- * 
- * @code
- *         if (task_data.trace_reconstruct)
- *           scratch.fe_face_values.get_function_values(solution,
- *                                                      scratch.trace_values);
- * 
- *         for (unsigned int q = 0; q < n_face_q_points; ++q)
- *           {
- *             const double     JxW = scratch.fe_face_values.JxW(q);
- *             const Point<dim> quadrature_point =
- *               scratch.fe_face_values.quadrature_point(q);
- *             const Tensor<1, dim> normal =
- *               scratch.fe_face_values.normal_vector(q);
- *             const Tensor<1, dim> convection =
- *               scratch.convection_velocity.value(quadrature_point);
- * 
- * @endcode
- * 
- * Here we compute the stabilization parameter discussed in the
- * introduction: since the diffusion is one and the diffusion
- * length scale is set to 1/5, it simply results in a contribution
- * of 5 for the diffusion part and the magnitude of convection
- * through the element boundary in a centered scheme for the
- * convection part.
- * 
- * @code
- *             const double tau_stab = (5. + std::abs(convection * normal));
- * 
- * @endcode
- * 
- * We store the non-zero flux and scalar values, making use of the
- * support_on_face information we created in @p ScratchData.
- * 
- * @code
- *             for (unsigned int k = 0;
- *                  k < scratch.fe_local_support_on_face[face_no].size();
- *                  ++k)
- *               {
- *                 const unsigned int kk =
- *                   scratch.fe_local_support_on_face[face_no][k];
- *                 scratch.q_phi[k] =
- *                   scratch.fe_face_values_local[fluxes].value(kk, q);
- *                 scratch.u_phi[k] =
- *                   scratch.fe_face_values_local[scalar].value(kk, q);
- *               }
- * 
- * @endcode
- * 
- * When @p trace_reconstruct=false, we are preparing to assemble the
- * system for the skeleton variable $\hat{u}$. If this is the case,
- * we must assemble all local matrices associated with the problem:
- * local-local, local-face, face-local, and face-face.  The
- * face-face matrix is stored as @p TaskData::cell_matrix, so that
- * it can be assembled into the global system by @p
- * copy_local_to_global.
- * 
- * @code
- *             if (!task_data.trace_reconstruct)
- *               {
- *                 for (unsigned int k = 0;
- *                      k < scratch.fe_support_on_face[face_no].size();
- *                      ++k)
- *                   scratch.tr_phi[k] = scratch.fe_face_values.shape_value(
- *                     scratch.fe_support_on_face[face_no][k], q);
- *                 for (unsigned int i = 0;
- *                      i < scratch.fe_local_support_on_face[face_no].size();
- *                      ++i)
- *                   for (unsigned int j = 0;
- *                        j < scratch.fe_support_on_face[face_no].size();
- *                        ++j)
- *                     {
- *                       const unsigned int ii =
- *                         scratch.fe_local_support_on_face[face_no][i];
- *                       const unsigned int jj =
- *                         scratch.fe_support_on_face[face_no][j];
- *                       scratch.lf_matrix(ii, jj) +=
- *                         ((scratch.q_phi[i] * normal +
- *                           (convection * normal - tau_stab) * scratch.u_phi[i]) *
- *                          scratch.tr_phi[j]) *
- *                         JxW;
- * 
- * @endcode
- * 
- * Note the sign of the face_no-local matrix.  We negate
- * the sign during assembly here so that we can use the
- * FullMatrix::mmult with addition when computing the
- * Schur complement.
- * 
- * @code
- *                       scratch.fl_matrix(jj, ii) -=
- *                         ((scratch.q_phi[i] * normal +
- *                           tau_stab * scratch.u_phi[i]) *
- *                          scratch.tr_phi[j]) *
- *                         JxW;
- *                     }
- * 
- *                 for (unsigned int i = 0;
- *                      i < scratch.fe_support_on_face[face_no].size();
- *                      ++i)
- *                   for (unsigned int j = 0;
- *                        j < scratch.fe_support_on_face[face_no].size();
- *                        ++j)
- *                     {
- *                       const unsigned int ii =
- *                         scratch.fe_support_on_face[face_no][i];
- *                       const unsigned int jj =
- *                         scratch.fe_support_on_face[face_no][j];
- *                       task_data.cell_matrix(ii, jj) +=
- *                         ((convection * normal - tau_stab) * scratch.tr_phi[i] *
- *                          scratch.tr_phi[j]) *
- *                         JxW;
- *                     }
- * 
- *                 if (cell->face(face_no)->at_boundary() &&
- *                     (cell->face(face_no)->boundary_id() == 1))
- *                   {
- *                     const double neumann_value =
- *                       -scratch.exact_solution.gradient(quadrature_point) *
- *                         normal +
- *                       convection * normal *
- *                         scratch.exact_solution.value(quadrature_point);
- *                     for (unsigned int i = 0;
- *                          i < scratch.fe_support_on_face[face_no].size();
- *                          ++i)
- *                       {
- *                         const unsigned int ii =
- *                           scratch.fe_support_on_face[face_no][i];
- *                         task_data.cell_vector(ii) +=
- *                           scratch.tr_phi[i] * neumann_value * JxW;
- *                       }
- *                   }
- *               }
- * 
- * @endcode
- * 
- * This last term adds the contribution of the term $\left<w,\tau
- * u_h\right>_{\partial \mathcal T}$ to the local matrix. As opposed
- * to the face matrices above, we need it in both assembly stages.
- * 
- * @code
- *             for (unsigned int i = 0;
- *                  i < scratch.fe_local_support_on_face[face_no].size();
- *                  ++i)
- *               for (unsigned int j = 0;
- *                    j < scratch.fe_local_support_on_face[face_no].size();
- *                    ++j)
- *                 {
- *                   const unsigned int ii =
- *                     scratch.fe_local_support_on_face[face_no][i];
- *                   const unsigned int jj =
- *                     scratch.fe_local_support_on_face[face_no][j];
- *                   scratch.ll_matrix(ii, jj) +=
- *                     tau_stab * scratch.u_phi[i] * scratch.u_phi[j] * JxW;
- *                 }
- * 
- * @endcode
- * 
- * When @p trace_reconstruct=true, we are solving for the local
- * solutions on an element by element basis.  The local
- * right-hand-side is calculated by replacing the basis functions @p
- * tr_phi in the @p lf_matrix computation by the computed values @p
- * trace_values.  Of course, the sign of the matrix is now minus
- * since we have moved everything to the other side of the equation.
- * 
- * @code
- *             if (task_data.trace_reconstruct)
- *               for (unsigned int i = 0;
- *                    i < scratch.fe_local_support_on_face[face_no].size();
- *                    ++i)
- *                 {
- *                   const unsigned int ii =
- *                     scratch.fe_local_support_on_face[face_no][i];
- *                   scratch.l_rhs(ii) -=
- *                     (scratch.q_phi[i] * normal +
- *                      scratch.u_phi[i] * (convection * normal - tau_stab)) *
- *                     scratch.trace_values[q] * JxW;
- *                 }
- *           }
- *       }
- * 
- * @endcode
- * 
- * Once assembly of all of the local contributions is complete, we must
- * either: (1) assemble the global system, or (2) compute the local solution
- * values and save them. In either case, the first step is to invert the
- * local-local matrix.
- * 
- * @code
- *     scratch.ll_matrix.gauss_jordan();
- * 
- * @endcode
- * 
- * For (1), we compute the Schur complement and add it to the @p
- * cell_matrix, matrix $D$ in the introduction.
- * 
- * @code
- *     if (task_data.trace_reconstruct == false)
- *       {
- *         scratch.fl_matrix.mmult(scratch.tmp_matrix, scratch.ll_matrix);
- *         scratch.tmp_matrix.vmult_add(task_data.cell_vector, scratch.l_rhs);
- *         scratch.tmp_matrix.mmult(task_data.cell_matrix,
- *                                  scratch.lf_matrix,
- *                                  true);
- *         cell->get_dof_indices(task_data.dof_indices);
- *       }
- * @endcode
- * 
- * For (2), we are simply solving (ll_matrix).(solution_local) = (l_rhs).
- * Hence, we multiply @p l_rhs by our already inverted local-local matrix
- * and store the result using the <code>set_dof_values</code> function.
- * 
- * @code
- *     else
- *       {
- *         scratch.ll_matrix.vmult(scratch.tmp_rhs, scratch.l_rhs);
- *         loc_cell->set_dof_values(scratch.tmp_rhs, solution_local);
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="HDGcopy_local_to_global"></a> 
- * <h4>HDG::copy_local_to_global</h4>
- * If we are in the first step of the solution, i.e. @p trace_reconstruct=false,
- * then we assemble the local matrices into the global system.
- * 
- * @code
- *   template <int dim>
- *   void HDG<dim>::copy_local_to_global(const PerTaskData &data)
- *   {
- *     if (data.trace_reconstruct == false)
- *       constraints.distribute_local_to_global(data.cell_matrix,
- *                                              data.cell_vector,
- *                                              data.dof_indices,
- *                                              system_matrix,
- *                                              system_rhs);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="HDGsolve"></a> 
- * <h4>HDG::solve</h4>
- * The skeleton solution is solved for by using a BiCGStab solver with
- * identity preconditioner.
- * 
- * @code
- *   template <int dim>
- *   void HDG<dim>::solve()
- *   {
- *     SolverControl                  solver_control(system_matrix.m() * 10,
- *                                  1e-11 * system_rhs.l2_norm());
- *     SolverBicgstab<Vector<double>> solver(solver_control);
- *     solver.solve(system_matrix, solution, system_rhs, PreconditionIdentity());
- * 
- *     std::cout << "   Number of BiCGStab iterations: "
- *               << solver_control.last_step() << std::endl;
- * 
- *     system_matrix.clear();
- *     sparsity_pattern.reinit(0, 0, 0, 1);
- * 
- *     constraints.distribute(solution);
- * 
- * @endcode
- * 
- * Once we have solved for the skeleton solution,
- * we can solve for the local solutions in an element-by-element
- * fashion.  We do this by re-using the same @p assemble_system function
- * but switching @p trace_reconstruct to true.
- * 
- * @code
- *     assemble_system(true);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="HDGpostprocess"></a> 
- * <h4>HDG::postprocess</h4>
- * 
+大多数deal.II的include文件在以前的例子中已经涉及到了，没有注释。
 
- * 
- * The postprocess method serves two purposes. First, we want to construct a
- * post-processed scalar variables in the element space of degree $p+1$ that
- * we hope will converge at order $p+2$. This is again an element-by-element
- * process and only involves the scalar solution as well as the gradient on
- * the local cell. To do this, we introduce the already defined scratch data
- * together with some update flags and run the work stream to do this in
- * parallel.
- *   
+@code
+#include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/function.h>
+#include <deal.II/base/tensor_function.h>
+#include <deal.II/base/exceptions.h>
+#include <deal.II/base/logstream.h>
+#include <deal.II/base/work_stream.h>
+#include <deal.II/base/convergence_table.h>
+#include <deal.II/lac/vector.h>
+#include <deal.II/lac/affine_constraints.h>
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/dynamic_sparsity_pattern.h>
+#include <deal.II/lac/solver_bicgstab.h>
+#include <deal.II/lac/precondition.h>
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/grid_refinement.h>
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/dofs/dof_renumbering.h>
+#include <deal.II/dofs/dof_tools.h>
+#include <deal.II/fe/fe_dgq.h>
+#include <deal.II/fe/fe_system.h>
+#include <deal.II/fe/fe_values.h>
+#include <deal.II/numerics/vector_tools.h>
+#include <deal.II/numerics/error_estimator.h>
+#include <deal.II/numerics/matrix_tools.h>
+#include <deal.II/numerics/data_out.h>
 
- * 
- * Secondly, we want to compute discretization errors just as we did in
- * step-7. The overall procedure is similar with calls to
- * VectorTools::integrate_difference. The difference is in how we compute
- * the errors for the scalar variable and the gradient variable. In step-7,
- * we did this by computing @p L2_norm or @p H1_seminorm
- * contributions. Here, we have a DoFHandler with these two contributions
- * computed and sorted by their vector component, <code>[0, dim)</code> for
- * the
- * gradient and @p dim for the scalar. To compute their value, we hence use
- * a ComponentSelectFunction with either of them, together with the @p
- * SolutionAndGradient class introduced above that contains the analytic
- * parts of either of them. Eventually, we also compute the L2-error of the
- * post-processed solution and add the results into the convergence table.
- * 
- * @code
- *   template <int dim>
- *   void HDG<dim>::postprocess()
- *   {
- *     {
- *       const QGauss<dim> quadrature_formula(fe_u_post.degree + 1);
- *       const UpdateFlags local_flags(update_values);
- *       const UpdateFlags flags(update_values | update_gradients |
- *                               update_JxW_values);
- * 
- *       PostProcessScratchData scratch(
- *         fe_u_post, fe_local, quadrature_formula, local_flags, flags);
- * 
- *       WorkStream::run(
- *         dof_handler_u_post.begin_active(),
- *         dof_handler_u_post.end(),
- *         [this](const typename DoFHandler<dim>::active_cell_iterator &cell,
- *                PostProcessScratchData &                              scratch,
- *                unsigned int &                                        data) {
- *           this->postprocess_one_cell(cell, scratch, data);
- *         },
- *         std::function<void(const unsigned int &)>(),
- *         scratch,
- *         0U);
- *     }
- * 
- *     Vector<float> difference_per_cell(triangulation.n_active_cells());
- * 
- *     ComponentSelectFunction<dim> value_select(dim, dim + 1);
- *     VectorTools::integrate_difference(dof_handler_local,
- *                                       solution_local,
- *                                       SolutionAndGradient<dim>(),
- *                                       difference_per_cell,
- *                                       QGauss<dim>(fe.degree + 2),
- *                                       VectorTools::L2_norm,
- *                                       &value_select);
- *     const double L2_error =
- *       VectorTools::compute_global_error(triangulation,
- *                                         difference_per_cell,
- *                                         VectorTools::L2_norm);
- * 
- *     ComponentSelectFunction<dim> gradient_select(
- *       std::pair<unsigned int, unsigned int>(0, dim), dim + 1);
- *     VectorTools::integrate_difference(dof_handler_local,
- *                                       solution_local,
- *                                       SolutionAndGradient<dim>(),
- *                                       difference_per_cell,
- *                                       QGauss<dim>(fe.degree + 2),
- *                                       VectorTools::L2_norm,
- *                                       &gradient_select);
- *     const double grad_error =
- *       VectorTools::compute_global_error(triangulation,
- *                                         difference_per_cell,
- *                                         VectorTools::L2_norm);
- * 
- *     VectorTools::integrate_difference(dof_handler_u_post,
- *                                       solution_u_post,
- *                                       Solution<dim>(),
- *                                       difference_per_cell,
- *                                       QGauss<dim>(fe.degree + 3),
- *                                       VectorTools::L2_norm);
- *     const double post_error =
- *       VectorTools::compute_global_error(triangulation,
- *                                         difference_per_cell,
- *                                         VectorTools::L2_norm);
- * 
- *     convergence_table.add_value("cells", triangulation.n_active_cells());
- *     convergence_table.add_value("dofs", dof_handler.n_dofs());
- * 
- *     convergence_table.add_value("val L2", L2_error);
- *     convergence_table.set_scientific("val L2", true);
- *     convergence_table.set_precision("val L2", 3);
- * 
- *     convergence_table.add_value("grad L2", grad_error);
- *     convergence_table.set_scientific("grad L2", true);
- *     convergence_table.set_precision("grad L2", 3);
- * 
- *     convergence_table.add_value("val L2-post", post_error);
- *     convergence_table.set_scientific("val L2-post", true);
- *     convergence_table.set_precision("val L2-post", 3);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="HDGpostprocess_one_cell"></a> 
- * <h4>HDG::postprocess_one_cell</h4>
- *   
 
- * 
- * This is the actual work done for the postprocessing. According to the
- * discussion in the introduction, we need to set up a system that projects
- * the gradient part of the DG solution onto the gradient of the
- * post-processed variable. Moreover, we need to set the average of the new
- * post-processed variable to equal the average of the scalar DG solution
- * on the cell.
- *   
+@endcode 
 
- * 
- * More technically speaking, the projection of the gradient is a system
- * that would potentially fills our @p dofs_per_cell times @p dofs_per_cell
- * matrix but is singular (the sum of all rows would be zero because the
- * constant function has zero gradient). Therefore, we take one row away and
- * use it for imposing the average of the scalar value. We pick the first
- * row for the scalar part, even though we could pick any row for $\mathcal
- * Q_{-p}$ elements. However, had we used FE_DGP elements instead, the first
- * row would correspond to the constant part already and deleting e.g. the
- * last row would give us a singular system. This way, our program can also
- * be used for those elements.
- * 
- * @code
- *   template <int dim>
- *   void HDG<dim>::postprocess_one_cell(
- *     const typename DoFHandler<dim>::active_cell_iterator &cell,
- *     PostProcessScratchData &                              scratch,
- *     unsigned int &)
- *   {
- *     typename DoFHandler<dim>::active_cell_iterator loc_cell(&triangulation,
- *                                                             cell->level(),
- *                                                             cell->index(),
- *                                                             &dof_handler_local);
- * 
- *     scratch.fe_values_local.reinit(loc_cell);
- *     scratch.fe_values.reinit(cell);
- * 
- *     FEValuesExtractors::Vector fluxes(0);
- *     FEValuesExtractors::Scalar scalar(dim);
- * 
- *     const unsigned int n_q_points = scratch.fe_values.get_quadrature().size();
- *     const unsigned int dofs_per_cell = scratch.fe_values.dofs_per_cell;
- * 
- *     scratch.fe_values_local[scalar].get_function_values(solution_local,
- *                                                         scratch.u_values);
- *     scratch.fe_values_local[fluxes].get_function_values(solution_local,
- *                                                         scratch.u_gradients);
- * 
- *     double sum = 0;
- *     for (unsigned int i = 1; i < dofs_per_cell; ++i)
- *       {
- *         for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *           {
- *             sum = 0;
- *             for (unsigned int q = 0; q < n_q_points; ++q)
- *               sum += (scratch.fe_values.shape_grad(i, q) *
- *                       scratch.fe_values.shape_grad(j, q)) *
- *                      scratch.fe_values.JxW(q);
- *             scratch.cell_matrix(i, j) = sum;
- *           }
- * 
- *         sum = 0;
- *         for (unsigned int q = 0; q < n_q_points; ++q)
- *           sum -= (scratch.fe_values.shape_grad(i, q) * scratch.u_gradients[q]) *
- *                  scratch.fe_values.JxW(q);
- *         scratch.cell_rhs(i) = sum;
- *       }
- *     for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *       {
- *         sum = 0;
- *         for (unsigned int q = 0; q < n_q_points; ++q)
- *           sum += scratch.fe_values.shape_value(j, q) * scratch.fe_values.JxW(q);
- *         scratch.cell_matrix(0, j) = sum;
- *       }
- *     {
- *       sum = 0;
- *       for (unsigned int q = 0; q < n_q_points; ++q)
- *         sum += scratch.u_values[q] * scratch.fe_values.JxW(q);
- *       scratch.cell_rhs(0) = sum;
- *     }
- * 
- * @endcode
- * 
- * Having assembled all terms, we can again go on and solve the linear
- * system. We invert the matrix and then multiply the inverse by the
- * right hand side. An alternative (and more numerically stable) method
- * would have been to only factorize the matrix and apply the factorization.
- * 
- * @code
- *     scratch.cell_matrix.gauss_jordan();
- *     scratch.cell_matrix.vmult(scratch.cell_sol, scratch.cell_rhs);
- *     cell->distribute_local_to_global(scratch.cell_sol, solution_u_post);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="HDGoutput_results"></a> 
- * <h4>HDG::output_results</h4>
- * We have 3 sets of results that we would like to output:  the local
- * solution, the post-processed local solution, and the skeleton solution. The
- * former 2 both 'live' on element volumes, whereas the latter lives on
- * codimension-1 surfaces
- * of the triangulation.  Our @p output_results function writes all local solutions
- * to the same vtk file, even though they correspond to different
- * DoFHandler objects.  The graphical output for the skeleton
- * variable is done through use of the DataOutFaces class.
- * 
- * @code
- *   template <int dim>
- *   void HDG<dim>::output_results(const unsigned int cycle)
- *   {
- *     std::string filename;
- *     switch (refinement_mode)
- *       {
- *         case global_refinement:
- *           filename = "solution-global";
- *           break;
- *         case adaptive_refinement:
- *           filename = "solution-adaptive";
- *           break;
- *         default:
- *           Assert(false, ExcNotImplemented());
- *       }
- * 
- *     std::string face_out(filename);
- *     face_out += "-face";
- * 
- *     filename += "-q" + Utilities::int_to_string(fe.degree, 1);
- *     filename += "-" + Utilities::int_to_string(cycle, 2);
- *     filename += ".vtk";
- *     std::ofstream output(filename);
- * 
- *     DataOut<dim> data_out;
- * 
- * @endcode
- * 
- * We first define the names and types of the local solution,
- * and add the data to @p data_out.
- * 
- * @code
- *     std::vector<std::string> names(dim, "gradient");
- *     names.emplace_back("solution");
- *     std::vector<DataComponentInterpretation::DataComponentInterpretation>
- *       component_interpretation(
- *         dim + 1, DataComponentInterpretation::component_is_part_of_vector);
- *     component_interpretation[dim] =
- *       DataComponentInterpretation::component_is_scalar;
- *     data_out.add_data_vector(dof_handler_local,
- *                              solution_local,
- *                              names,
- *                              component_interpretation);
- * 
- * @endcode
- * 
- * The second data item we add is the post-processed solution.
- * In this case, it is a single scalar variable belonging to
- * a different DoFHandler.
- * 
- * @code
- *     std::vector<std::string> post_name(1, "u_post");
- *     std::vector<DataComponentInterpretation::DataComponentInterpretation>
- *       post_comp_type(1, DataComponentInterpretation::component_is_scalar);
- *     data_out.add_data_vector(dof_handler_u_post,
- *                              solution_u_post,
- *                              post_name,
- *                              post_comp_type);
- * 
- *     data_out.build_patches(fe.degree);
- *     data_out.write_vtk(output);
- * 
- *     face_out += "-q" + Utilities::int_to_string(fe.degree, 1);
- *     face_out += "-" + Utilities::int_to_string(cycle, 2);
- *     face_out += ".vtk";
- *     std::ofstream face_output(face_out);
- * 
- * @endcode
- * 
- * The <code>DataOutFaces</code> class works analogously to the
- * <code>DataOut</code> class when we have a <code>DoFHandler</code> that
- * defines the solution on the skeleton of the triangulation.  We treat it
- * as such here, and the code is similar to that above.
- * 
- * @code
- *     DataOutFaces<dim>        data_out_face(false);
- *     std::vector<std::string> face_name(1, "u_hat");
- *     std::vector<DataComponentInterpretation::DataComponentInterpretation>
- *       face_component_type(1, DataComponentInterpretation::component_is_scalar);
- * 
- *     data_out_face.add_data_vector(dof_handler,
- *                                   solution,
- *                                   face_name,
- *                                   face_component_type);
- * 
- *     data_out_face.build_patches(fe.degree);
- *     data_out_face.write_vtk(face_output);
- *   }
- * 
- * @endcode
- * 
- * 
- * <a name="HDGrefine_grid"></a> 
- * <h4>HDG::refine_grid</h4>
- * 
 
- * 
- * We implement two different refinement cases for HDG, just as in
- * <code>Step-7</code>: adaptive_refinement and global_refinement.  The
- * global_refinement option recreates the entire triangulation every
- * time. This is because we want to use a finer sequence of meshes than what
- * we would get with one refinement step, namely 2, 3, 4, 6, 8, 12, 16, ...
- * elements per direction.
- * 
 
- * 
- * The adaptive_refinement mode uses the <code>KellyErrorEstimator</code> to
- * give a decent indication of the non-regular regions in the scalar local
- * solutions.
- * 
- * @code
- *   template <int dim>
- *   void HDG<dim>::refine_grid(const unsigned int cycle)
- *   {
- *     if (cycle == 0)
- *       {
- *         GridGenerator::subdivided_hyper_cube(triangulation, 2, -1, 1);
- *         triangulation.refine_global(3 - dim);
- *       }
- *     else
- *       switch (refinement_mode)
- *         {
- *           case global_refinement:
- *             {
- *               triangulation.clear();
- *               GridGenerator::subdivided_hyper_cube(triangulation,
- *                                                    2 + (cycle % 2),
- *                                                    -1,
- *                                                    1);
- *               triangulation.refine_global(3 - dim + cycle / 2);
- *               break;
- *             }
- * 
- *           case adaptive_refinement:
- *             {
- *               Vector<float> estimated_error_per_cell(
- *                 triangulation.n_active_cells());
- * 
- *               FEValuesExtractors::Scalar scalar(dim);
- *               std::map<types::boundary_id, const Function<dim> *>
- *                 neumann_boundary;
- *               KellyErrorEstimator<dim>::estimate(dof_handler_local,
- *                                                  QGauss<dim - 1>(fe.degree + 1),
- *                                                  neumann_boundary,
- *                                                  solution_local,
- *                                                  estimated_error_per_cell,
- *                                                  fe_local.component_mask(
- *                                                    scalar));
- * 
- *               GridRefinement::refine_and_coarsen_fixed_number(
- *                 triangulation, estimated_error_per_cell, 0.3, 0.);
- * 
- *               triangulation.execute_coarsening_and_refinement();
- * 
- *               break;
- *             }
- * 
- *           default:
- *             {
- *               Assert(false, ExcNotImplemented());
- *             }
- *         }
- * 
- * @endcode
- * 
- * Just as in step-7, we set the boundary indicator of two of the faces to 1
- * where we want to specify Neumann boundary conditions instead of Dirichlet
- * conditions. Since we re-create the triangulation every time for global
- * refinement, the flags are set in every refinement step, not just at the
- * beginning.
- * 
- * @code
- *     for (const auto &cell : triangulation.cell_iterators())
- *       for (const auto &face : cell->face_iterators())
- *         if (face->at_boundary())
- *           if ((std::fabs(face->center()(0) - (-1)) < 1e-12) ||
- *               (std::fabs(face->center()(1) - (-1)) < 1e-12))
- *             face->set_boundary_id(1);
- *   }
- * 
- * @endcode
- * 
- * 
- * <a name="HDGrun"></a> 
- * <h4>HDG::run</h4>
- * The functionality here is basically the same as <code>Step-7</code>.
- * We loop over 10 cycles, refining the grid on each one.  At the end,
- * convergence tables are created.
- * 
- * @code
- *   template <int dim>
- *   void HDG<dim>::run()
- *   {
- *     for (unsigned int cycle = 0; cycle < 10; ++cycle)
- *       {
- *         std::cout << "Cycle " << cycle << ':' << std::endl;
- * 
- *         refine_grid(cycle);
- *         setup_system();
- *         assemble_system(false);
- *         solve();
- *         postprocess();
- *         output_results(cycle);
- *       }
- * 
- * @endcode
- * 
- * There is one minor change for the convergence table compared to step-7:
- * Since we did not refine our mesh by a factor two in each cycle (but
- * rather used the sequence 2, 3, 4, 6, 8, 12, ...), we need to tell the
- * convergence rate evaluation about this. We do this by setting the
- * number of cells as a reference column and additionally specifying the
- * dimension of the problem, which gives the necessary information for the
- * relation between number of cells and mesh size.
- * 
- * @code
- *     if (refinement_mode == global_refinement)
- *       {
- *         convergence_table.evaluate_convergence_rates(
- *           "val L2", "cells", ConvergenceTable::reduction_rate_log2, dim);
- *         convergence_table.evaluate_convergence_rates(
- *           "grad L2", "cells", ConvergenceTable::reduction_rate_log2, dim);
- *         convergence_table.evaluate_convergence_rates(
- *           "val L2-post", "cells", ConvergenceTable::reduction_rate_log2, dim);
- *       }
- *     convergence_table.write_text(std::cout);
- *   }
- * 
- * } // end of namespace Step51
- * 
- * 
- * 
- * int main()
- * {
- *   const unsigned int dim = 2;
- * 
- *   try
- *     {
- * @endcode
- * 
- * Now for the three calls to the main class in complete analogy to
- * step-7.
- * 
- * @code
- *       {
- *         std::cout << "Solving with Q1 elements, adaptive refinement"
- *                   << std::endl
- *                   << "============================================="
- *                   << std::endl
- *                   << std::endl;
- * 
- *         Step51::HDG<dim> hdg_problem(1, Step51::HDG<dim>::adaptive_refinement);
- *         hdg_problem.run();
- * 
- *         std::cout << std::endl;
- *       }
- * 
- *       {
- *         std::cout << "Solving with Q1 elements, global refinement" << std::endl
- *                   << "===========================================" << std::endl
- *                   << std::endl;
- * 
- *         Step51::HDG<dim> hdg_problem(1, Step51::HDG<dim>::global_refinement);
- *         hdg_problem.run();
- * 
- *         std::cout << std::endl;
- *       }
- * 
- *       {
- *         std::cout << "Solving with Q3 elements, global refinement" << std::endl
- *                   << "===========================================" << std::endl
- *                   << std::endl;
- * 
- *         Step51::HDG<dim> hdg_problem(3, Step51::HDG<dim>::global_refinement);
- *         hdg_problem.run();
- * 
- *         std::cout << std::endl;
- *       }
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
+然而，我们确实为这个例子准备了几个新的包含文件。第一个文件定义了三角形面上的有限元空间，我们称之为 "骨架"。这些有限元在元素内部没有任何支持，它们代表了在每个模数一的表面上有一个单一的值的多项式，但在模数二的表面上允许有不连续点。
+
+@code
+#include <deal.II/fe/fe_face.h>
+
+
+@endcode 
+
+
+
+我们包含的第二个新文件定义了一种新的稀疏矩阵类型。 常规的 <code>SparseMatrix</code> 类型存储了所有非零条目的索引。  <code>ChunkSparseMatrix</code> 则是利用了DG解的耦合性。 它存储了一个指定大小的矩阵子块的索引。 在HDG背景下，这个子块大小实际上是由骨架解字段定义的每个面的自由度数量。这使矩阵的内存消耗减少了三分之一，当在求解器中使用矩阵时，也会有类似的速度提升。
+
+@code
+#include <deal.II/lac/chunk_sparse_matrix.h>
+
+
+@endcode 
+
+
+
+这个例子的最后一个新包括涉及到数据输出。 由于我们有一个定义在网格骨架上的有限元场，我们希望能直观地看到这个解决方案的实际情况。DataOutFaces正是这样做的；其界面与我们熟悉的DataOut几乎相同，但输出的数据只有模拟的二维1数据。
+
+@code
+#include <deal.II/numerics/data_out_faces.h>
+
+
+#include <iostream>
+
+
+
+
+
+@endcode 
+
+
+
+我们首先将所有的类放入自己的命名空间。
+
+@code
+namespace Step51
+{
+  using namespace dealii;
+
+
+@endcode 
+
+
+
+
+<a name="Equationdata"></a><h3>Equation data</h3>   
+
+
+分析解决方案的结构与  step-7  中的相同。有两个例外。首先，我们也为三维情况创建了一个解决方案，其次，我们对解决方案进行了缩放，使其在解决方案宽度的所有值上的规范是统一的。
+
+@code
+  template <int dim>
+  class SolutionBase
+  {
+  protected:
+    static const unsigned int n_source_centers = 3;
+    static const Point<dim>   source_centers[n_source_centers];
+    static const double       width;
+  };
+
+
+
+  template <>
+  const Point<1>
+    SolutionBase<1>::source_centers[SolutionBase<1>::n_source_centers] =
+      {Point<1>(-1.0 / 3.0), Point<1>(0.0), Point<1>(+1.0 / 3.0)};
+
+
+
+  template <>
+  const Point<2>
+    SolutionBase<2>::source_centers[SolutionBase<2>::n_source_centers] =
+      {Point<2>(-0.5, +0.5), Point<2>(-0.5, -0.5), Point<2>(+0.5, -0.5)};
+
+
+  template <>
+  const Point<3>
+    SolutionBase<3>::source_centers[SolutionBase<3>::n_source_centers] = {
+      Point<3>(-0.5, +0.5, 0.25),
+      Point<3>(-0.6, -0.5, -0.125),
+      Point<3>(+0.5, -0.5, 0.5)};
+
+
+  template <int dim>
+  const double SolutionBase<dim>::width = 1. / 5.;
+
+
+
+  template <int dim>
+  class Solution : public Function<dim>, protected SolutionBase<dim>
+  {
+  public:
+    virtual double value(const Point<dim> &p,
+                         const unsigned int /*component*/ = 0) const override
+    {
+      double sum = 0;
+      for (unsigned int i = 0; i < this->n_source_centers; ++i)
+        {
+          const Tensor<1, dim> x_minus_xi = p - this->source_centers[i];
+          sum +=
+            std::exp(-x_minus_xi.norm_square() / (this->width * this->width));
+        }
+
+
+      return sum /
+             std::pow(2. * numbers::PI * this->width * this->width, dim / 2.);
+    }
+
+
+    virtual Tensor<1, dim>
+    gradient(const Point<dim> &p,
+             const unsigned int /*component*/ = 0) const override
+    {
+      Tensor<1, dim> sum;
+      for (unsigned int i = 0; i < this->n_source_centers; ++i)
+        {
+          const Tensor<1, dim> x_minus_xi = p - this->source_centers[i];
+
+
+          sum +=
+            (-2 / (this->width * this->width) *
+             std::exp(-x_minus_xi.norm_square() / (this->width * this->width)) *
+             x_minus_xi);
+        }
+
+
+      return sum /
+             std::pow(2. * numbers::PI * this->width * this->width, dim / 2.);
+    }
+  };
+
+
+
+
+
+@endcode 
+
+
+
+这个类实现了一个函数，标量解和其负梯度被收集在一起。这个函数在计算HDG近似的误差时使用，它的实现是简单地调用解类的值和梯度函数。
+
+@code
+  template <int dim>
+  class SolutionAndGradient : public Function<dim>, protected SolutionBase<dim>
+  {
+  public:
+    SolutionAndGradient()
+      : Function<dim>(dim + 1)
+    {}
+
+
+    virtual void vector_value(const Point<dim> &p,
+                              Vector<double> &  v) const override
+    {
+      AssertDimension(v.size(), dim + 1);
+      Solution<dim>  solution;
+      Tensor<1, dim> grad = solution.gradient(p);
+      for (unsigned int d = 0; d < dim; ++d)
+        v[d] = -grad[d];
+      v[dim] = solution.value(p);
+    }
+  };
+
+
+
+
+
+@endcode 
+
+
+
+接下来是对流速度的实现。如介绍中所述，我们选择一个二维的 $(y, -x)$ 和三维的 $(y, -x, 1)$ 的速度场。这就得到了一个无发散的速度场。
+
+@code
+  template <int dim>
+  class ConvectionVelocity : public TensorFunction<1, dim>
+  {
+  public:
+    ConvectionVelocity()
+      : TensorFunction<1, dim>()
+    {}
+
+
+    virtual Tensor<1, dim> value(const Point<dim> &p) const override
+    {
+      Tensor<1, dim> convection;
+      switch (dim)
+        {
+          case 1:
+            convection[0] = 1;
+            break;
+          case 2:
+            convection[0] = p[1];
+            convection[1] = -p[0];
+            break;
+          case 3:
+            convection[0] = p[1];
+            convection[1] = -p[0];
+            convection[2] = 1;
+            break;
+          default:
+            Assert(false, ExcNotImplemented());
+        }
+      return convection;
+    }
+  };
+
+
+
+
+
+@endcode 
+
+
+
+我们实现的最后一个函数是用于制造解的右手边。它与 step-7 非常相似，不同的是我们现在有一个对流项而不是反应项。由于速度场是不可压缩的，即 $\nabla \cdot \mathbf{c} =
+0$ ，对流项简单读作 $\mathbf{c} \nabla u$  。
+
+@code
+  template <int dim>
+  class RightHandSide : public Function<dim>, protected SolutionBase<dim>
+  {
+  public:
+    virtual double value(const Point<dim> &p,
+                         const unsigned int /*component*/ = 0) const override
+    {
+      ConvectionVelocity<dim> convection_velocity;
+      Tensor<1, dim>          convection = convection_velocity.value(p);
+      double                  sum        = 0;
+      for (unsigned int i = 0; i < this->n_source_centers; ++i)
+        {
+          const Tensor<1, dim> x_minus_xi = p - this->source_centers[i];
+
+
+          sum +=
+            ((2 * dim - 2 * convection * x_minus_xi -
+              4 * x_minus_xi.norm_square() / (this->width * this->width)) /
+             (this->width * this->width) *
+             std::exp(-x_minus_xi.norm_square() / (this->width * this->width)));
+        }
+
+
+      return sum /
+             std::pow(2. * numbers::PI * this->width * this->width, dim / 2.);
+    }
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="TheHDGsolverclass"></a> <h3>The HDG solver class</h3>
+
+
+
+
+HDG的求解过程与  step-7  的求解过程密切相关。主要区别在于使用了三套不同的DoFHandler和FE对象，以及ChunkSparseMatrix和相应的解决方案向量。我们还使用WorkStream来实现多线程的局部求解过程，利用局部求解器令人尴尬的并行性质。对于WorkStream，我们定义了对单元格的本地操作和复制到全局矩阵和向量的函数。我们这样做既是为了装配（装配要运行两次，一次是在我们生成系统矩阵时，一次是在我们从骨架值计算元素内部解时），也是为了后处理，在后处理中我们提取一个在高阶收敛的解。
+
+@code
+  template <int dim>
+  class HDG
+  {
+  public:
+    enum RefinementMode
+    {
+      global_refinement,
+      adaptive_refinement
+    };
+
+
+    HDG(const unsigned int degree, const RefinementMode refinement_mode);
+    void run();
+
+
+  private:
+    void setup_system();
+    void assemble_system(const bool reconstruct_trace = false);
+    void solve();
+    void postprocess();
+    void refine_grid(const unsigned int cycle);
+    void output_results(const unsigned int cycle);
+
+
+@endcode 
+
+
+
+用于组装和解决原始变量的数据。
+
+@code
+    struct PerTaskData;
+    struct ScratchData;
+
+
+@endcode 
+
+
+
+对解进行后处理以获得 $u^*$ 是一个逐个元素的过程；因此，我们不需要组装任何全局数据，也没有声明任何 "任务数据 "供WorkStream使用。
+
+@code
+    struct PostProcessScratchData;
+
+
+@endcode 
+
+
+
+以下三个函数被WorkStream用来完成程序的实际工作。
+
+@code
+    void assemble_system_one_cell(
+      const typename DoFHandler<dim>::active_cell_iterator &cell,
+      ScratchData &                                         scratch,
+      PerTaskData &                                         task_data);
+
+
+    void copy_local_to_global(const PerTaskData &data);
+
+
+    void postprocess_one_cell(
+      const typename DoFHandler<dim>::active_cell_iterator &cell,
+      PostProcessScratchData &                              scratch,
+      unsigned int &                                        empty_data);
+
+
+
+    Triangulation<dim> triangulation;
+
+
+@endcode 
+
+
+
+本地 "解决方案是每个元素的内部。 这些代表原始解场  $u$  以及辅助场  $\mathbf{q}$  。
+
+@code
+    FESystem<dim>   fe_local;
+    DoFHandler<dim> dof_handler_local;
+    Vector<double>  solution_local;
+
+
+@endcode 
+
+
+
+新的有限元类型和相应的 <code>DoFHandler</code> 被用于耦合元素级局部解的全局骨架解。
+
+@code
+    FE_FaceQ<dim>   fe;
+    DoFHandler<dim> dof_handler;
+    Vector<double>  solution;
+    Vector<double>  system_rhs;
+
+
+@endcode 
+
+
+
+正如介绍中所说，HDG解可以通过后处理达到 $\mathcal{O}(h^{p+2})$ 的超收敛率。 后处理的解是一个不连续的有限元解，代表每个单元内部的原始变量。 我们定义了一个程度为 $p+1$ 的FE类型来表示这个后处理的解，我们只在构造后用于输出。
+
+@code
+    FE_DGQ<dim>     fe_u_post;
+    DoFHandler<dim> dof_handler_u_post;
+    Vector<double>  solution_u_post;
+
+
+@endcode 
+
+
+
+与骨架相对应的自由度强烈地强制执行Dirichlet边界条件，就像在连续Galerkin有限元方法中一样。我们可以通过AffineConstraints对象以类似的方式强制执行边界条件。此外，悬挂节点的处理方式与连续有限元的处理方式相同。对于只在面定义自由度的面元素，这个过程将精炼面的解设置为与粗略面的表示相吻合。     
+
+
+请注意，对于HDG来说，消除悬空节点并不是唯一的可能性&mdash；就HDG理论而言，我们也可以使用精炼侧的未知数，并通过精炼侧的跟踪值表达粗略侧的局部解。然而，这样的设置在deal.II环路方面不容易实现，没有进一步分析。
+
+@code
+    AffineConstraints<double> constraints;
+
+
+@endcode 
+
+
+
+ChunkSparseMatrix类的用法与通常的稀疏矩阵类似。你需要一个ChunkSparsityPattern类型的稀疏模式和实际的矩阵对象。在创建稀疏模式时，我们只需要额外传递局部块的大小。
+
+@code
+    ChunkSparsityPattern      sparsity_pattern;
+    ChunkSparseMatrix<double> system_matrix;
+
+
+@endcode 
+
+
+
+与  step-7  相同。
+
+@code
+    const RefinementMode refinement_mode;
+    ConvergenceTable     convergence_table;
+  };
+
+
+@endcode 
+
+
+
+
+<a name="TheHDGclassimplementation"></a> <h3>The HDG class implementation</h3> <h3>The HDG class implementation</h3>
+
+
+
+
+
+<a name="Constructor"></a> <h4>Constructor</h4> 构造函数与其他例子中的相似，除了处理多个DoFHandler和FiniteElement对象。请注意，我们为局部DG部分创建了一个有限元系统，包括梯度/通量部分和标量部分。
+
+@code
+  template <int dim>
+  HDG<dim>::HDG(const unsigned int degree, const RefinementMode refinement_mode)
+    : fe_local(FE_DGQ<dim>(degree), dim, FE_DGQ<dim>(degree), 1)
+    , dof_handler_local(triangulation)
+    , fe(degree)
+    , dof_handler(triangulation)
+    , fe_u_post(degree + 1)
+    , dof_handler_u_post(triangulation)
+    , refinement_mode(refinement_mode)
+  {}
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="HDGsetup_system"></a> <h4>HDG::setup_system</h4> HDG解的系统设置方式与其他大多数教程程序类似。 我们小心翼翼地用我们所有的DoFHandler对象来分配道夫。  @p solution 和 @p system_matrix 对象与全局骨架解决方案一起。
+
+@code
+  template <int dim>
+  void HDG<dim>::setup_system()
+  {
+    dof_handler_local.distribute_dofs(fe_local);
+    dof_handler.distribute_dofs(fe);
+    dof_handler_u_post.distribute_dofs(fe_u_post);
+
+
+    std::cout << "   Number of degrees of freedom: " << dof_handler.n_dofs()
+              << std::endl;
+
+
+    solution.reinit(dof_handler.n_dofs());
+    system_rhs.reinit(dof_handler.n_dofs());
+
+
+    solution_local.reinit(dof_handler_local.n_dofs());
+    solution_u_post.reinit(dof_handler_u_post.n_dofs());
+
+
+    constraints.clear();
+    DoFTools::make_hanging_node_constraints(dof_handler, constraints);
+    std::map<types::boundary_id, const Function<dim> *> boundary_functions;
+    Solution<dim>                                       solution_function;
+    boundary_functions[0] = &solution_function;
+    VectorTools::project_boundary_values(dof_handler,
+                                         boundary_functions,
+                                         QGauss<dim - 1>(fe.degree + 1),
+                                         constraints);
+    constraints.close();
+
+
+@endcode 
+
+
+
+在创建块状稀疏模式时，我们首先创建通常的动态稀疏模式，然后在将其复制到最终的稀疏模式中时，设置块状大小，该大小等于一个面的道夫数量。
+
+@code
+    {
+      DynamicSparsityPattern dsp(dof_handler.n_dofs());
+      DoFTools::make_sparsity_pattern(dof_handler, dsp, constraints, false);
+      sparsity_pattern.copy_from(dsp, fe.n_dofs_per_face());
+    }
+    system_matrix.reinit(sparsity_pattern);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="HDGPerTaskData"></a> <h4>HDG::PerTaskData</h4> 接下来是平行装配的本地数据结构的定义。第一个结构 @p PerTaskData 包含了被写入全局矩阵的本地向量和矩阵，而ScratchData包含了我们在本地装配中需要的所有数据。这里有一个值得注意的变量，即布尔变量@p trace_reconstruct。正如介绍中提到的，我们分两步解决HDG系统。首先，我们为骨架系统创建一个线性系统，通过舒尔补码 $D-CA^{-1}B$ 将局部部分浓缩到其中。然后，我们用骨架的解来解决局部部分。对于这两个步骤，我们需要两次元素上的相同矩阵，我们希望通过两个装配步骤来计算。由于大部分的代码是相似的，我们用相同的函数来做这件事，但只是根据我们在开始装配时设置的一个标志在两者之间切换。由于我们需要将这一信息传递给本地工作程序，所以我们在任务数据中存储一次。
+
+@code
+  template <int dim>
+  struct HDG<dim>::PerTaskData
+  {
+    FullMatrix<double>                   cell_matrix;
+    Vector<double>                       cell_vector;
+    std::vector<types::global_dof_index> dof_indices;
+
+
+    bool trace_reconstruct;
+
+
+    PerTaskData(const unsigned int n_dofs, const bool trace_reconstruct)
+      : cell_matrix(n_dofs, n_dofs)
+      , cell_vector(n_dofs)
+      , dof_indices(n_dofs)
+      , trace_reconstruct(trace_reconstruct)
+    {}
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="HDGScratchData"></a> <h4>HDG::ScratchData</h4>  @p ScratchData  包含WorkStream内每个线程的持久性数据。 FEValues、矩阵和矢量对象现在应该很熟悉了。 有两个对象需要讨论。  `std::vector<std::vector<unsigned  int> > fe_local_support_on_face`和 `std::vector<std::vector<unsigned  int> > fe_support_on_face`。 这些用于指示所选择的有限元是否在与 @p fe_local 相关的局部部分和骨架部分 @p fe. 的参考单元的特定面上有支持（非零值）。 我们在构造函数中提取这一信息，并为我们工作的所有单元一次性存储。 如果我们不存储这一信息，我们将被迫在每个单元上装配大量的零项，这将大大降低程序的速度。
+
+@code
+  template <int dim>
+  struct HDG<dim>::ScratchData
+  {
+    FEValues<dim>     fe_values_local;
+    FEFaceValues<dim> fe_face_values_local;
+    FEFaceValues<dim> fe_face_values;
+
+
+    FullMatrix<double> ll_matrix;
+    FullMatrix<double> lf_matrix;
+    FullMatrix<double> fl_matrix;
+    FullMatrix<double> tmp_matrix;
+    Vector<double>     l_rhs;
+    Vector<double>     tmp_rhs;
+
+
+    std::vector<Tensor<1, dim>> q_phi;
+    std::vector<double>         q_phi_div;
+    std::vector<double>         u_phi;
+    std::vector<Tensor<1, dim>> u_phi_grad;
+    std::vector<double>         tr_phi;
+    std::vector<double>         trace_values;
+
+
+    std::vector<std::vector<unsigned int>> fe_local_support_on_face;
+    std::vector<std::vector<unsigned int>> fe_support_on_face;
+
+
+    ConvectionVelocity<dim> convection_velocity;
+    RightHandSide<dim>      right_hand_side;
+    const Solution<dim>     exact_solution;
+
+
+    ScratchData(const FiniteElement<dim> &fe,
+                const FiniteElement<dim> &fe_local,
+                const QGauss<dim> &       quadrature_formula,
+                const QGauss<dim - 1> &   face_quadrature_formula,
+                const UpdateFlags         local_flags,
+                const UpdateFlags         local_face_flags,
+                const UpdateFlags         flags)
+      : fe_values_local(fe_local, quadrature_formula, local_flags)
+      , fe_face_values_local(fe_local,
+                             face_quadrature_formula,
+                             local_face_flags)
+      , fe_face_values(fe, face_quadrature_formula, flags)
+      , ll_matrix(fe_local.n_dofs_per_cell(), fe_local.n_dofs_per_cell())
+      , lf_matrix(fe_local.n_dofs_per_cell(), fe.n_dofs_per_cell())
+      , fl_matrix(fe.n_dofs_per_cell(), fe_local.n_dofs_per_cell())
+      , tmp_matrix(fe.n_dofs_per_cell(), fe_local.n_dofs_per_cell())
+      , l_rhs(fe_local.n_dofs_per_cell())
+      , tmp_rhs(fe_local.n_dofs_per_cell())
+      , q_phi(fe_local.n_dofs_per_cell())
+      , q_phi_div(fe_local.n_dofs_per_cell())
+      , u_phi(fe_local.n_dofs_per_cell())
+      , u_phi_grad(fe_local.n_dofs_per_cell())
+      , tr_phi(fe.n_dofs_per_cell())
+      , trace_values(face_quadrature_formula.size())
+      , fe_local_support_on_face(GeometryInfo<dim>::faces_per_cell)
+      , fe_support_on_face(GeometryInfo<dim>::faces_per_cell)
+      , exact_solution()
+    {
+      for (unsigned int face_no : GeometryInfo<dim>::face_indices())
+        for (unsigned int i = 0; i < fe_local.n_dofs_per_cell(); ++i)
+          {
+            if (fe_local.has_support_on_face(i, face_no))
+              fe_local_support_on_face[face_no].push_back(i);
+          }
+
+
+      for (unsigned int face_no : GeometryInfo<dim>::face_indices())
+        for (unsigned int i = 0; i < fe.n_dofs_per_cell(); ++i)
+          {
+            if (fe.has_support_on_face(i, face_no))
+              fe_support_on_face[face_no].push_back(i);
+          }
+    }
+
+
+    ScratchData(const ScratchData &sd)
+      : fe_values_local(sd.fe_values_local.get_fe(),
+                        sd.fe_values_local.get_quadrature(),
+                        sd.fe_values_local.get_update_flags())
+      , fe_face_values_local(sd.fe_face_values_local.get_fe(),
+                             sd.fe_face_values_local.get_quadrature(),
+                             sd.fe_face_values_local.get_update_flags())
+      , fe_face_values(sd.fe_face_values.get_fe(),
+                       sd.fe_face_values.get_quadrature(),
+                       sd.fe_face_values.get_update_flags())
+      , ll_matrix(sd.ll_matrix)
+      , lf_matrix(sd.lf_matrix)
+      , fl_matrix(sd.fl_matrix)
+      , tmp_matrix(sd.tmp_matrix)
+      , l_rhs(sd.l_rhs)
+      , tmp_rhs(sd.tmp_rhs)
+      , q_phi(sd.q_phi)
+      , q_phi_div(sd.q_phi_div)
+      , u_phi(sd.u_phi)
+      , u_phi_grad(sd.u_phi_grad)
+      , tr_phi(sd.tr_phi)
+      , trace_values(sd.trace_values)
+      , fe_local_support_on_face(sd.fe_local_support_on_face)
+      , fe_support_on_face(sd.fe_support_on_face)
+      , exact_solution()
+    {}
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="HDGPostProcessScratchData"></a> <h4>HDG::PostProcessScratchData</h4>  @p PostProcessScratchData  包含WorkStream在对局部解决方案进行后处理时使用的数据  $u^*$  。 它与  @p ScratchData.  类似，但要简单得多。 
+
+@code
+  template <int dim>
+  struct HDG<dim>::PostProcessScratchData
+  {
+    FEValues<dim> fe_values_local;
+    FEValues<dim> fe_values;
+
+
+    std::vector<double>         u_values;
+    std::vector<Tensor<1, dim>> u_gradients;
+    FullMatrix<double>          cell_matrix;
+
+
+    Vector<double> cell_rhs;
+    Vector<double> cell_sol;
+
+
+    PostProcessScratchData(const FiniteElement<dim> &fe,
+                           const FiniteElement<dim> &fe_local,
+                           const QGauss<dim> &       quadrature_formula,
+                           const UpdateFlags         local_flags,
+                           const UpdateFlags         flags)
+      : fe_values_local(fe_local, quadrature_formula, local_flags)
+      , fe_values(fe, quadrature_formula, flags)
+      , u_values(quadrature_formula.size())
+      , u_gradients(quadrature_formula.size())
+      , cell_matrix(fe.n_dofs_per_cell(), fe.n_dofs_per_cell())
+      , cell_rhs(fe.n_dofs_per_cell())
+      , cell_sol(fe.n_dofs_per_cell())
+    {}
+
+
+    PostProcessScratchData(const PostProcessScratchData &sd)
+      : fe_values_local(sd.fe_values_local.get_fe(),
+                        sd.fe_values_local.get_quadrature(),
+                        sd.fe_values_local.get_update_flags())
+      , fe_values(sd.fe_values.get_fe(),
+                  sd.fe_values.get_quadrature(),
+                  sd.fe_values.get_update_flags())
+      , u_values(sd.u_values)
+      , u_gradients(sd.u_gradients)
+      , cell_matrix(sd.cell_matrix)
+      , cell_rhs(sd.cell_rhs)
+      , cell_sol(sd.cell_sol)
+    {}
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="HDGassemble_system"></a> <h4>HDG::assemble_system</h4>  @p assemble_system  函数类似于  Step-32  上的函数，其中正交公式和更新标志被设置，然后  <code>WorkStream</code>  被用来以多线程的方式做工作。  @p trace_reconstruct  输入参数用于决定我们是求全局骨架解（假）还是局部解（真）。   
+
+
+对于汇编的多线程执行，值得注意的一点是，`assemble_system_one_cell()`中的局部计算会调用BLAS和LAPACK函数，如果这些函数在deal.II中可用的话。因此，底层的BLAS/LAPACK库必须支持同时来自多个线程的调用。大多数实现都支持这一点，但有些库需要以特定方式构建以避免问题。例如，在BLAS/LAPACK调用内部没有多线程的情况下编译的OpenBLAS需要建立一个名为`USE_LOCKING'的标志，并将其设置为true。
+
+@code
+  template <int dim>
+  void HDG<dim>::assemble_system(const bool trace_reconstruct)
+  {
+    const QGauss<dim>     quadrature_formula(fe.degree + 1);
+    const QGauss<dim - 1> face_quadrature_formula(fe.degree + 1);
+
+
+    const UpdateFlags local_flags(update_values | update_gradients |
+                                  update_JxW_values | update_quadrature_points);
+
+
+    const UpdateFlags local_face_flags(update_values);
+
+
+    const UpdateFlags flags(update_values | update_normal_vectors |
+                            update_quadrature_points | update_JxW_values);
+
+
+    PerTaskData task_data(fe.n_dofs_per_cell(), trace_reconstruct);
+    ScratchData scratch(fe,
+                        fe_local,
+                        quadrature_formula,
+                        face_quadrature_formula,
+                        local_flags,
+                        local_face_flags,
+                        flags);
+
+
+    WorkStream::run(dof_handler.begin_active(),
+                    dof_handler.end(),
+                    *this,
+                    &HDG<dim>::assemble_system_one_cell,
+                    &HDG<dim>::copy_local_to_global,
+                    scratch,
+                    task_data);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="HDGassemble_system_one_cell"></a> <h4>HDG::assemble_system_one_cell</h4> HDG程序的真正工作是由  @p assemble_system_one_cell.  汇编局部矩阵  $A, B, C$  在这里完成，同时还有全局矩阵的局部贡献  $D$  。
+
+@code
+  template <int dim>
+  void HDG<dim>::assemble_system_one_cell(
+    const typename DoFHandler<dim>::active_cell_iterator &cell,
+    ScratchData &                                         scratch,
+    PerTaskData &                                         task_data)
+  {
+@endcode 
+
+
+
+为FEValues reinit函数构建dof_handler_local的迭代器。
+
+@code
+    typename DoFHandler<dim>::active_cell_iterator loc_cell(&triangulation,
+                                                            cell->level(),
+                                                            cell->index(),
+                                                            &dof_handler_local);
+
+
+    const unsigned int n_q_points =
+      scratch.fe_values_local.get_quadrature().size();
+    const unsigned int n_face_q_points =
+      scratch.fe_face_values_local.get_quadrature().size();
+
+
+    const unsigned int loc_dofs_per_cell =
+      scratch.fe_values_local.get_fe().n_dofs_per_cell();
+
+
+    const FEValuesExtractors::Vector fluxes(0);
+    const FEValuesExtractors::Scalar scalar(dim);
+
+
+    scratch.ll_matrix = 0;
+    scratch.l_rhs     = 0;
+    if (!task_data.trace_reconstruct)
+      {
+        scratch.lf_matrix     = 0;
+        scratch.fl_matrix     = 0;
+        task_data.cell_matrix = 0;
+        task_data.cell_vector = 0;
+      }
+    scratch.fe_values_local.reinit(loc_cell);
+
+
+@endcode 
+
+
+
+我们首先计算单元内部对 @p ll_matrix 矩阵的贡献（在介绍中称为矩阵 $A$ ），对应于局部-局部耦合，以及局部右手向量。 我们在每个正交点存储基函数、右手边值和对流速度的值，以便快速访问这些场。
+
+@code
+    for (unsigned int q = 0; q < n_q_points; ++q)
+      {
+        const double rhs_value = scratch.right_hand_side.value(
+          scratch.fe_values_local.quadrature_point(q));
+        const Tensor<1, dim> convection = scratch.convection_velocity.value(
+          scratch.fe_values_local.quadrature_point(q));
+        const double JxW = scratch.fe_values_local.JxW(q);
+        for (unsigned int k = 0; k < loc_dofs_per_cell; ++k)
+          {
+            scratch.q_phi[k] = scratch.fe_values_local[fluxes].value(k, q);
+            scratch.q_phi_div[k] =
+              scratch.fe_values_local[fluxes].divergence(k, q);
+            scratch.u_phi[k] = scratch.fe_values_local[scalar].value(k, q);
+            scratch.u_phi_grad[k] =
+              scratch.fe_values_local[scalar].gradient(k, q);
+          }
+        for (unsigned int i = 0; i < loc_dofs_per_cell; ++i)
+          {
+            for (unsigned int j = 0; j < loc_dofs_per_cell; ++j)
+              scratch.ll_matrix(i, j) +=
+                (scratch.q_phi[i] * scratch.q_phi[j] -
+                 scratch.q_phi_div[i] * scratch.u_phi[j] +
+                 scratch.u_phi[i] * scratch.q_phi_div[j] -
+                 (scratch.u_phi_grad[i] * convection) * scratch.u_phi[j]) *
+                JxW;
+            scratch.l_rhs(i) += scratch.u_phi[i] * rhs_value * JxW;
+          }
+      }
+
+
+@endcode 
+
+
+
+面项被集合在所有元素的所有面上。这与更传统的DG方法相反，在组装过程中，每个面只被访问一次。
+
+@code
+    for (const auto face_no : cell->face_indices())
+      {
+        scratch.fe_face_values_local.reinit(loc_cell, face_no);
+        scratch.fe_face_values.reinit(cell, face_no);
+
+
+@endcode 
+
+
+
+在求解局部变量时需要已经获得的 $\hat{u}$ 值。
+
+@code
+        if (task_data.trace_reconstruct)
+          scratch.fe_face_values.get_function_values(solution,
+                                                     scratch.trace_values);
+
+
+        for (unsigned int q = 0; q < n_face_q_points; ++q)
+          {
+            const double     JxW = scratch.fe_face_values.JxW(q);
+            const Point<dim> quadrature_point =
+              scratch.fe_face_values.quadrature_point(q);
+            const Tensor<1, dim> normal =
+              scratch.fe_face_values.normal_vector(q);
+            const Tensor<1, dim> convection =
+              scratch.convection_velocity.value(quadrature_point);
+
+
+@endcode 
+
+
+
+在这里，我们计算介绍中讨论的稳定参数：由于扩散是1，并且扩散长度尺度被设定为1/5，它只是导致扩散部分的贡献为5，而通过元素边界的对流的大小为对流部分的中心化方案。
+
+@code
+            const double tau_stab = (5. + std::abs(convection * normal));
+
+
+@endcode 
+
+
+
+我们存储非零流量和标量值，利用我们在 @p ScratchData. 中创建的support_on_face信息。 
+
+@code
+            for (unsigned int k = 0;
+                 k < scratch.fe_local_support_on_face[face_no].size();
+                 ++k)
+              {
+                const unsigned int kk =
+                  scratch.fe_local_support_on_face[face_no][k];
+                scratch.q_phi[k] =
+                  scratch.fe_face_values_local[fluxes].value(kk, q);
+                scratch.u_phi[k] =
+                  scratch.fe_face_values_local[scalar].value(kk, q);
+              }
+
+
+@endcode 
+
+
+
+当  @p trace_reconstruct=false,  我们准备为骨架变量  $\hat{u}$  组装系统时。如果是这种情况，我们必须组装所有与问题相关的局部矩阵：局部-局部、局部-面部、面部-局部和面部-面部。 面-面矩阵被存储为 @p TaskData::cell_matrix, ，这样就可以通过@p copy_local_to_global将其组装到全局系统中。
+
+@code
+            if (!task_data.trace_reconstruct)
+              {
+                for (unsigned int k = 0;
+                     k < scratch.fe_support_on_face[face_no].size();
+                     ++k)
+                  scratch.tr_phi[k] = scratch.fe_face_values.shape_value(
+                    scratch.fe_support_on_face[face_no][k], q);
+                for (unsigned int i = 0;
+                     i < scratch.fe_local_support_on_face[face_no].size();
+                     ++i)
+                  for (unsigned int j = 0;
+                       j < scratch.fe_support_on_face[face_no].size();
+                       ++j)
+                    {
+                      const unsigned int ii =
+                        scratch.fe_local_support_on_face[face_no][i];
+                      const unsigned int jj =
+                        scratch.fe_support_on_face[face_no][j];
+                      scratch.lf_matrix(ii, jj) +=
+                        ((scratch.q_phi[i] * normal +
+                          (convection * normal - tau_stab) * scratch.u_phi[i]) *
+                         scratch.tr_phi[j]) *
+                        JxW;
+
+
+@endcode 
+
+
+
+注意face_no-local矩阵的符号。 我们在组装时否定了这个符号，这样我们就可以在计算舒尔补数时使用 FullMatrix::mmult 的加法。
+
+@code
+                      scratch.fl_matrix(jj, ii) -=
+                        ((scratch.q_phi[i] * normal +
+                          tau_stab * scratch.u_phi[i]) *
+                         scratch.tr_phi[j]) *
+                        JxW;
+                    }
+
+
+                for (unsigned int i = 0;
+                     i < scratch.fe_support_on_face[face_no].size();
+                     ++i)
+                  for (unsigned int j = 0;
+                       j < scratch.fe_support_on_face[face_no].size();
+                       ++j)
+                    {
+                      const unsigned int ii =
+                        scratch.fe_support_on_face[face_no][i];
+                      const unsigned int jj =
+                        scratch.fe_support_on_face[face_no][j];
+                      task_data.cell_matrix(ii, jj) +=
+                        ((convection * normal - tau_stab) * scratch.tr_phi[i] *
+                         scratch.tr_phi[j]) *
+                        JxW;
+                    }
+
+
+                if (cell->face(face_no)->at_boundary() &&
+                    (cell->face(face_no)->boundary_id() == 1))
+                  {
+                    const double neumann_value =
+
+
+                      -scratch.exact_solution.gradient(quadrature_point) *
+                        normal +
+                      convection * normal *
+                        scratch.exact_solution.value(quadrature_point);
+                    for (unsigned int i = 0;
+                         i < scratch.fe_support_on_face[face_no].size();
+                         ++i)
+                      {
+                        const unsigned int ii =
+                          scratch.fe_support_on_face[face_no][i];
+                        task_data.cell_vector(ii) +=
+                          scratch.tr_phi[i] * neumann_value * JxW;
+                      }
+                  }
+              }
+
+
+@endcode 
+
+
+
+这最后一项是将 $\left<w,\tau
+u_h\right>_{\partial \mathcal T}$ 项的贡献添加到本地矩阵中。相对于上面的面矩阵，我们在两个装配阶段都需要它。
+
+@code
+            for (unsigned int i = 0;
+                 i < scratch.fe_local_support_on_face[face_no].size();
+                 ++i)
+              for (unsigned int j = 0;
+                   j < scratch.fe_local_support_on_face[face_no].size();
+                   ++j)
+                {
+                  const unsigned int ii =
+                    scratch.fe_local_support_on_face[face_no][i];
+                  const unsigned int jj =
+                    scratch.fe_local_support_on_face[face_no][j];
+                  scratch.ll_matrix(ii, jj) +=
+                    tau_stab * scratch.u_phi[i] * scratch.u_phi[j] * JxW;
+                }
+
+
+@endcode 
+
+
+
+当 @p trace_reconstruct=true, 我们在逐个元素的基础上求解局部解。 局部右手边的计算是通过用计算值@p trace_values替换 @p lf_matrix 计算中的基础函数@p tr_phi。 当然，现在矩阵的符号是减号，因为我们已经把所有的东西移到了方程的另一边。
+
+@code
+            if (task_data.trace_reconstruct)
+              for (unsigned int i = 0;
+                   i < scratch.fe_local_support_on_face[face_no].size();
+                   ++i)
+                {
+                  const unsigned int ii =
+                    scratch.fe_local_support_on_face[face_no][i];
+                  scratch.l_rhs(ii) -=
+                    (scratch.q_phi[i] * normal +
+                     scratch.u_phi[i] * (convection * normal - tau_stab)) *
+                    scratch.trace_values[q] * JxW;
+                }
+          }
+      }
+
+
+@endcode 
+
+
+
+一旦完成了所有局部贡献的组装，我们必须：（1）组装全局系统。(1)组装全局系统，或者(2)计算局部解值并保存。无论哪种情况，第一步都是对局部-局部矩阵进行反转。
+
+@code
+    scratch.ll_matrix.gauss_jordan();
+
+
+@endcode 
+
+
+
+对于(1)，我们计算舒尔补码，并将其添加到@p cell_matrix，矩阵 $D$ 的介绍中。
+
+@code
+    if (task_data.trace_reconstruct == false)
+      {
+        scratch.fl_matrix.mmult(scratch.tmp_matrix, scratch.ll_matrix);
+        scratch.tmp_matrix.vmult_add(task_data.cell_vector, scratch.l_rhs);
+        scratch.tmp_matrix.mmult(task_data.cell_matrix,
+                                 scratch.lf_matrix,
+                                 true);
+        cell->get_dof_indices(task_data.dof_indices);
+      }
+@endcode 
+
+
+
+对于（2），我们只是求解（ll_matrix）.（solution_local）=（l_rhs）。因此，我们用 @p l_rhs 乘以我们已经倒置的局部-局部矩阵，并用 <code>set_dof_values</code> 函数来存储结果。
+
+@code
+    else
+      {
+        scratch.ll_matrix.vmult(scratch.tmp_rhs, scratch.l_rhs);
+        loc_cell->set_dof_values(scratch.tmp_rhs, solution_local);
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="HDGcopy_local_to_global"></a> <h4>HDG::copy_local_to_global</h4> 如果我们处于解题的第一步，即 @p trace_reconstruct=false, ，那么我们将局部矩阵集合到全局系统中。
+
+@code
+  template <int dim>
+  void HDG<dim>::copy_local_to_global(const PerTaskData &data)
+  {
+    if (data.trace_reconstruct == false)
+      constraints.distribute_local_to_global(data.cell_matrix,
+                                             data.cell_vector,
+                                             data.dof_indices,
+                                             system_matrix,
+                                             system_rhs);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="HDGsolve"></a> <h4>HDG::solve</h4> 骨架解是通过使用带有身份预处理的BiCGStab求解器来解决的。
+
+@code
+  template <int dim>
+  void HDG<dim>::solve()
+  {
+    SolverControl                  solver_control(system_matrix.m() * 10,
+                                 1e-11 * system_rhs.l2_norm());
+    SolverBicgstab<Vector<double>> solver(solver_control);
+    solver.solve(system_matrix, solution, system_rhs, PreconditionIdentity());
+
+
+    std::cout << "   Number of BiCGStab iterations: "
+              << solver_control.last_step() << std::endl;
+
+
+    system_matrix.clear();
+    sparsity_pattern.reinit(0, 0, 0, 1);
+
+
+    constraints.distribute(solution);
+
+
+@endcode 
+
+
+
+一旦我们求出了骨架解，我们就可以以逐个元素的方式求出局部解。 我们通过重新使用相同的 @p assemble_system 函数来做到这一点，但将 @p trace_reconstruct 切换为真。
+
+@code
+    assemble_system(true);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="HDGpostprocess"></a> <h4>HDG::postprocess</h4>
+
+
+
+
+后处理方法有两个目的。首先，我们要在度数为 $p+1$ 的元素空间中构建一个后处理的标量变量，我们希望能在阶 $p+2$ 收敛。这又是一个逐个元素的过程，只涉及标量解以及局部单元上的梯度。为了做到这一点，我们引入了已经定义好的从头开始的数据以及一些更新标志，并运行工作流来并行地完成这一工作。   
+
+
+其次，我们要计算离散化误差，就像我们在  step-7  中做的那样。整体程序与调用 VectorTools::integrate_difference. 相似，区别在于我们如何计算标量变量和梯度变量的误差。在 step-7 中，我们通过计算 @p L2_norm 或 @p H1_seminorm 的贡献来做到这一点。在这里，我们有一个DoFHandler，它计算了这两个贡献，并按其矢量成分排序， <code>[0, dim)</code> 为梯度， @p dim 为标量。为了计算它们的值，我们用一个ComponentSelectFunction来计算它们中的任何一个，再加上上面介绍的@p SolutionAndGradient类，它包含了它们中任何一个的分析部分。最终，我们还计算了后处理的解决方案的L2-误差，并将结果添加到收敛表中。
+
+@code
+  template <int dim>
+  void HDG<dim>::postprocess()
+  {
+    {
+      const QGauss<dim> quadrature_formula(fe_u_post.degree + 1);
+      const UpdateFlags local_flags(update_values);
+      const UpdateFlags flags(update_values | update_gradients |
+                              update_JxW_values);
+
+
+      PostProcessScratchData scratch(
+        fe_u_post, fe_local, quadrature_formula, local_flags, flags);
+
+
+      WorkStream::run(
+        dof_handler_u_post.begin_active(),
+        dof_handler_u_post.end(),
+        [this](const typename DoFHandler<dim>::active_cell_iterator &cell,
+               PostProcessScratchData &                              scratch,
+               unsigned int &                                        data) {
+          this->postprocess_one_cell(cell, scratch, data);
+        },
+        std::function<void(const unsigned int &)>(),
+        scratch,
+        0U);
+    }
+
+
+    Vector<float> difference_per_cell(triangulation.n_active_cells());
+
+
+    ComponentSelectFunction<dim> value_select(dim, dim + 1);
+    VectorTools::integrate_difference(dof_handler_local,
+                                      solution_local,
+                                      SolutionAndGradient<dim>(),
+                                      difference_per_cell,
+                                      QGauss<dim>(fe.degree + 2),
+                                      VectorTools::L2_norm,
+                                      &value_select);
+    const double L2_error =
+      VectorTools::compute_global_error(triangulation,
+                                        difference_per_cell,
+                                        VectorTools::L2_norm);
+
+
+    ComponentSelectFunction<dim> gradient_select(
+      std::pair<unsigned int, unsigned int>(0, dim), dim + 1);
+    VectorTools::integrate_difference(dof_handler_local,
+                                      solution_local,
+                                      SolutionAndGradient<dim>(),
+                                      difference_per_cell,
+                                      QGauss<dim>(fe.degree + 2),
+                                      VectorTools::L2_norm,
+                                      &gradient_select);
+    const double grad_error =
+      VectorTools::compute_global_error(triangulation,
+                                        difference_per_cell,
+                                        VectorTools::L2_norm);
+
+
+    VectorTools::integrate_difference(dof_handler_u_post,
+                                      solution_u_post,
+                                      Solution<dim>(),
+                                      difference_per_cell,
+                                      QGauss<dim>(fe.degree + 3),
+                                      VectorTools::L2_norm);
+    const double post_error =
+      VectorTools::compute_global_error(triangulation,
+                                        difference_per_cell,
+                                        VectorTools::L2_norm);
+
+
+    convergence_table.add_value("cells", triangulation.n_active_cells());
+    convergence_table.add_value("dofs", dof_handler.n_dofs());
+
+
+    convergence_table.add_value("val L2", L2_error);
+    convergence_table.set_scientific("val L2", true);
+    convergence_table.set_precision("val L2", 3);
+
+
+    convergence_table.add_value("grad L2", grad_error);
+    convergence_table.set_scientific("grad L2", true);
+    convergence_table.set_precision("grad L2", 3);
+
+
+    convergence_table.add_value("val L2-post", post_error);
+    convergence_table.set_scientific("val L2-post", true);
+    convergence_table.set_precision("val L2-post", 3);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="HDGpostprocess_one_cell"></a><h4>HDG::postprocess_one_cell</h4>    
+
+
+这是为后处理所做的实际工作。根据介绍中的讨论，我们需要设置一个系统，将DG解的梯度部分投影到后处理变量的梯度上。此外，我们还需要将新的后处理变量的平均值设置为等于单元上标量DG解的平均值。   
+
+
+从技术上讲，梯度的投影是一个有可能填满我们的 @p dofs_per_cell 乘以 @p dofs_per_cell 矩阵的系统，但它是单数（所有行的总和为零，因为常数函数的梯度为零）。因此，我们拿掉一行，用它来强加标量值的平均值。我们为标量部分挑选第一行，尽管我们可以为 $\mathcal
+Q_{-p}$ 元素挑选任何行。然而，如果我们使用FE_DGP元素，第一行将对应常数部分，删除例如最后一行将得到一个奇异系统。这样一来，我们的程序也可以用于这些元素。
+
+@code
+  template <int dim>
+  void HDG<dim>::postprocess_one_cell(
+    const typename DoFHandler<dim>::active_cell_iterator &cell,
+    PostProcessScratchData &                              scratch,
+    unsigned int &)
+  {
+    typename DoFHandler<dim>::active_cell_iterator loc_cell(&triangulation,
+                                                            cell->level(),
+                                                            cell->index(),
+                                                            &dof_handler_local);
+
+
+    scratch.fe_values_local.reinit(loc_cell);
+    scratch.fe_values.reinit(cell);
+
+
+    FEValuesExtractors::Vector fluxes(0);
+    FEValuesExtractors::Scalar scalar(dim);
+
+
+    const unsigned int n_q_points = scratch.fe_values.get_quadrature().size();
+    const unsigned int dofs_per_cell = scratch.fe_values.dofs_per_cell;
+
+
+    scratch.fe_values_local[scalar].get_function_values(solution_local,
+                                                        scratch.u_values);
+    scratch.fe_values_local[fluxes].get_function_values(solution_local,
+                                                        scratch.u_gradients);
+
+
+    double sum = 0;
+    for (unsigned int i = 1; i < dofs_per_cell; ++i)
+      {
+        for (unsigned int j = 0; j < dofs_per_cell; ++j)
+          {
+            sum = 0;
+            for (unsigned int q = 0; q < n_q_points; ++q)
+              sum += (scratch.fe_values.shape_grad(i, q) *
+                      scratch.fe_values.shape_grad(j, q)) *
+                     scratch.fe_values.JxW(q);
+            scratch.cell_matrix(i, j) = sum;
+          }
+
+
+        sum = 0;
+        for (unsigned int q = 0; q < n_q_points; ++q)
+          sum -= (scratch.fe_values.shape_grad(i, q) * scratch.u_gradients[q]) *
+                 scratch.fe_values.JxW(q);
+        scratch.cell_rhs(i) = sum;
+      }
+    for (unsigned int j = 0; j < dofs_per_cell; ++j)
+      {
+        sum = 0;
+        for (unsigned int q = 0; q < n_q_points; ++q)
+          sum += scratch.fe_values.shape_value(j, q) * scratch.fe_values.JxW(q);
+        scratch.cell_matrix(0, j) = sum;
+      }
+    {
+      sum = 0;
+      for (unsigned int q = 0; q < n_q_points; ++q)
+        sum += scratch.u_values[q] * scratch.fe_values.JxW(q);
+      scratch.cell_rhs(0) = sum;
+    }
+
+
+@endcode 
+
+
+
+在集合了所有的项之后，我们又可以继续解决这个线性系统。我们对矩阵进行反转，然后将反转结果乘以右手边。另一种方法（在数值上更稳定）是只对矩阵进行因式分解，并应用因式分解的方法。
+
+@code
+    scratch.cell_matrix.gauss_jordan();
+    scratch.cell_matrix.vmult(scratch.cell_sol, scratch.cell_rhs);
+    cell->distribute_local_to_global(scratch.cell_sol, solution_u_post);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="HDGoutput_results"></a> <h4>HDG::output_results</h4> 我们有三组我们想输出的结果：局部解、后处理的局部解和骨架解。前两个结果都 "活 "在元素体积上，而后者则活在三角形的一维表面上。 我们的 @p output_results 函数将所有的局部解决方案写入同一个vtk文件，尽管它们对应于不同的DoFHandler对象。 骨架变量的图形输出是通过使用DataOutFaces类完成的。
+
+@code
+  template <int dim>
+  void HDG<dim>::output_results(const unsigned int cycle)
+  {
+    std::string filename;
+    switch (refinement_mode)
+      {
+        case global_refinement:
+          filename = "solution-global";
+          break;
+        case adaptive_refinement:
+          filename = "solution-adaptive";
+          break;
+        default:
+          Assert(false, ExcNotImplemented());
+      }
+
+
+    std::string face_out(filename);
+    face_out += "-face";
+
+
+    filename += "-q" + Utilities::int_to_string(fe.degree, 1);
+    filename += "-" + Utilities::int_to_string(cycle, 2);
+    filename += ".vtk";
+    std::ofstream output(filename);
+
+
+    DataOut<dim> data_out;
+
+
+@endcode 
+
+
+
+我们首先定义本地解决方案的名称和类型，并将数据添加到 @p data_out. 。 
+
+@code
+    std::vector<std::string> names(dim, "gradient");
+    names.emplace_back("solution");
+    std::vector<DataComponentInterpretation::DataComponentInterpretation>
+      component_interpretation(
+        dim + 1, DataComponentInterpretation::component_is_part_of_vector);
+    component_interpretation[dim] =
+      DataComponentInterpretation::component_is_scalar;
+    data_out.add_data_vector(dof_handler_local,
+                             solution_local,
+                             names,
+                             component_interpretation);
+
+
+@endcode 
+
+
+
+我们添加的第二个数据项是后处理的解决方案。在这种情况下，它是一个属于不同DoFHandler的单一标量变量。
+
+@code
+    std::vector<std::string> post_name(1, "u_post");
+    std::vector<DataComponentInterpretation::DataComponentInterpretation>
+      post_comp_type(1, DataComponentInterpretation::component_is_scalar);
+    data_out.add_data_vector(dof_handler_u_post,
+                             solution_u_post,
+                             post_name,
+                             post_comp_type);
+
+
+    data_out.build_patches(fe.degree);
+    data_out.write_vtk(output);
+
+
+    face_out += "-q" + Utilities::int_to_string(fe.degree, 1);
+    face_out += "-" + Utilities::int_to_string(cycle, 2);
+    face_out += ".vtk";
+    std::ofstream face_output(face_out);
+
+
+@endcode 
+
+
+
+ <code>DataOutFaces</code> 类的工作方式类似于 <code>DataOut</code> class when we have a <code>DoFHandler</code> ，它定义了三角形的骨架上的解决方案。 我们在此将其视为如此，代码与上面类似。
+
+@code
+    DataOutFaces<dim>        data_out_face(false);
+    std::vector<std::string> face_name(1, "u_hat");
+    std::vector<DataComponentInterpretation::DataComponentInterpretation>
+      face_component_type(1, DataComponentInterpretation::component_is_scalar);
+
+
+    data_out_face.add_data_vector(dof_handler,
+                                  solution,
+                                  face_name,
+                                  face_component_type);
+
+
+    data_out_face.build_patches(fe.degree);
+    data_out_face.write_vtk(face_output);
+  }
+
+
+@endcode 
+
+
+
+
+<a name="HDGrefine_grid"></a> <h4>HDG::refine_grid</h4>
+
+
+
+
+我们为HDG实现了两种不同的细化情况，就像在 <code>Step-7</code> 中一样：adaptive_refinement和global_refinement。 global_refinement选项每次都会重新创建整个三角形。这是因为我们想使用比一个细化步骤更细的网格序列，即每个方向2、3、4、6、8、12、16...个元素。
+
+
+
+
+adaptive_refinement模式使用 <code>KellyErrorEstimator</code> 对标量局部解中的非规则区域给出一个体面的指示。
+
+@code
+  template <int dim>
+  void HDG<dim>::refine_grid(const unsigned int cycle)
+  {
+    if (cycle == 0)
+      {
+        GridGenerator::subdivided_hyper_cube(triangulation, 2, -1, 1);
+        triangulation.refine_global(3 - dim);
+      }
+    else
+      switch (refinement_mode)
+        {
+          case global_refinement:
+            {
+              triangulation.clear();
+              GridGenerator::subdivided_hyper_cube(triangulation,
+                                                   2 + (cycle % 2),
+
+
+                                                   -1,
+                                                   1);
+              triangulation.refine_global(3 - dim + cycle / 2);
+              break;
+            }
+
+
+          case adaptive_refinement:
+            {
+              Vector<float> estimated_error_per_cell(
+                triangulation.n_active_cells());
+
+
+              FEValuesExtractors::Scalar scalar(dim);
+              std::map<types::boundary_id, const Function<dim> *>
+                neumann_boundary;
+              KellyErrorEstimator<dim>::estimate(dof_handler_local,
+                                                 QGauss<dim - 1>(fe.degree + 1),
+                                                 neumann_boundary,
+                                                 solution_local,
+                                                 estimated_error_per_cell,
+                                                 fe_local.component_mask(
+                                                   scalar));
+
+
+              GridRefinement::refine_and_coarsen_fixed_number(
+                triangulation, estimated_error_per_cell, 0.3, 0.);
+
+
+              triangulation.execute_coarsening_and_refinement();
+
+
+              break;
+            }
+
+
+          default:
+            {
+              Assert(false, ExcNotImplemented());
+            }
+        }
+
+
+@endcode 
+
+
+
+就像在 step-7 中一样，我们将其中两个面的边界指标设置为1，在这里我们要指定诺伊曼边界条件而不是迪里希特条件。由于我们每次在全局细化时都会重新创建三角形，所以在每个细化步骤中都会设置标志，而不仅仅是在开始时。
+
+@code
+    for (const auto &cell : triangulation.cell_iterators())
+      for (const auto &face : cell->face_iterators())
+        if (face->at_boundary())
+          if ((std::fabs(face->center()(0) - (-1)) < 1e-12) ||
+              (std::fabs(face->center()(1) - (-1)) < 1e-12))
+            face->set_boundary_id(1);
+  }
+
+
+@endcode 
+
+
+
+
+<a name="HDGrun"></a> <h4>HDG::run</h4> 这里的功能基本上与 <code>Step-7</code>  相同。我们在10个周期中循环，在每个周期中细化网格。 在最后，收敛表被创建。
+
+@code
+  template <int dim>
+  void HDG<dim>::run()
+  {
+    for (unsigned int cycle = 0; cycle < 10; ++cycle)
+      {
+        std::cout << "Cycle " << cycle << ':' << std::endl;
+
+
+        refine_grid(cycle);
+        setup_system();
+        assemble_system(false);
+        solve();
+        postprocess();
+        output_results(cycle);
+      }
+
+
+@endcode 
+
+
+
+与 step-7 相比，收敛表有一个微小的变化：由于我们没有在每个循环中以2的系数细化网格（而是使用2, 3, 4, 6, 8, 12, ...的序列），我们需要告诉收敛率评估这一点。我们通过设置单元格数量作为参考列，并额外指定问题的维度来实现，这为单元格数量和网格大小之间的关系提供了必要的信息。
+
+@code
+    if (refinement_mode == global_refinement)
+      {
+        convergence_table.evaluate_convergence_rates(
+          "val L2", "cells", ConvergenceTable::reduction_rate_log2, dim);
+        convergence_table.evaluate_convergence_rates(
+          "grad L2", "cells", ConvergenceTable::reduction_rate_log2, dim);
+        convergence_table.evaluate_convergence_rates(
+          "val L2-post", "cells", ConvergenceTable::reduction_rate_log2, dim);
+      }
+    convergence_table.write_text(std::cout);
+  }
+
+
+} // end of namespace Step51
+
+
+
+
+
+int main()
+{
+  const unsigned int dim = 2;
+
+
+  try
+    {
+@endcode 
+
+
+
+现在是对主类的三个调用，完全类似于  step-7  。
+
+@code
+      {
+        std::cout << "Solving with Q1 elements, adaptive refinement"
+                  << std::endl
+                  << "============================================="
+                  << std::endl
+                  << std::endl;
+
+
+        Step51::HDG<dim> hdg_problem(1, Step51::HDG<dim>::adaptive_refinement);
+        hdg_problem.run();
+
+
+        std::cout << std::endl;
+      }
+
+
+      {
+        std::cout << "Solving with Q1 elements, global refinement" << std::endl
+                  << "===========================================" << std::endl
+                  << std::endl;
+
+
+        Step51::HDG<dim> hdg_problem(1, Step51::HDG<dim>::global_refinement);
+        hdg_problem.run();
+
+
+        std::cout << std::endl;
+      }
+
+
+      {
+        std::cout << "Solving with Q3 elements, global refinement" << std::endl
+                  << "===========================================" << std::endl
+                  << std::endl;
+
+
+        Step51::HDG<dim> hdg_problem(3, Step51::HDG<dim>::global_refinement);
+        hdg_problem.run();
+
+
+        std::cout << std::endl;
+      }
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
 <a name="Programoutput"></a><h3>Program output</h3>
 
 
-We first have a look at the output generated by the program when run in 2D. In
-the four images below, we show the solution for polynomial degree $p=1$
-and cycles 2, 3, 4, and 8 of the program. In the plots, we overlay the data
-generated from the internal data (DG part) with the skeleton part ($\hat{u}$)
-into the same plot. We had to generate two different data sets because cells
-and faces represent different geometric entities, the combination of which (in
-the same file) is not supported in the VTK output of deal.II.
+我们首先看一下程序在二维运行时产生的输出。在下面的四张图片中，我们展示了多项式度数 $p=1$ 的解决方案和程序的第2、3、4和8周期。在图中，我们将内部数据（DG部分）与骨架部分（ $\hat{u}$ ）产生的数据叠加到同一图中。我们不得不生成两个不同的数据集，因为细胞和面孔代表不同的几何实体，在deal.II的VTK输出中不支持它们的组合（在同一个文件中）。
 
-The images show the distinctive features of HDG: The cell solution (colored
-surfaces) is discontinuous between the cells. The solution on the skeleton
-variable sits on the faces and ties together the local parts. The skeleton
-solution is not continuous on the vertices where the faces meet, even though
-its values are quite close along lines in the same coordinate direction. The
-skeleton solution can be interpreted as a rubber spring between the two sides
-that balances the jumps in the solution (or rather, the flux $\kappa \nabla u
-+ \mathbf{c} u$). From the picture at the top left, it is clear that
-the bulk solution frequently over- and undershoots and that the
-skeleton variable in indeed a better approximation to the exact
-solution; this explains why we can get a better solution using a
-postprocessing step.
+这些图像显示了HDG的明显特征：细胞的解（彩色表面）在细胞之间是不连续的。骨架变量上的解位于面，并将局部部分联系起来。骨架解决方案在面与面之间的顶点上是不连续的，尽管它的值沿着同一坐标方向的线相当接近。骨架解可以被解释为两边之间的橡胶弹簧，它可以平衡解的跳跃（或者说，通量 $\kappa \nabla u
++ \mathbf{c} u$ ）。从左上角的图片可以看出，大体解经常出现过冲和欠冲的情况，而骨架变量确实是对精确解的更好的近似；这就解释了为什么我们可以通过后处理步骤得到更好的解。
 
-As the mesh is refined, the jumps between the cells get
-small (we represent a smooth solution), and the skeleton solution approaches
-the interior parts. For cycle 8, there is no visible difference in the two
-variables. We also see how boundary conditions are implemented weakly and that
-the interior variables do not exactly satisfy boundary conditions. On the
-lower and left boundaries, we set Neumann boundary conditions, whereas we set
-Dirichlet conditions on the right and top boundaries.
+随着网格的细化，单元之间的跳动变得很小（我们代表一个平滑的解决方案），骨架解决方案接近内部部分。对于第8周期，两个变量没有明显的差别。我们还看到边界条件是如何弱化实施的，内部变量并不完全满足边界条件。在下部和左侧边界，我们设置了诺伊曼边界条件，而在右侧和顶部边界，我们设置了迪里希特条件。
 
-<table align="center">
+  <table align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.sol_2.png" alt=""></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.sol_3.png" alt=""></td>
@@ -2224,16 +2045,11 @@ Dirichlet conditions on the right and top boundaries.
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.sol_4.png" alt=""></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.sol_8.png" alt=""></td>
   </tr>
-</table>
+</table>   
 
-Next, we have a look at the post-processed solution, again at cycles 2, 3, 4,
-and 8. This is a discontinuous solution that is locally described by second
-order polynomials. While the solution does not look very good on the mesh of
-cycle two, it looks much better for cycles three and four. As shown by the
-convergence table below, we find that is also converges more quickly to the
-analytical solution.
+接下来，我们看一下后处理的解，还是在周期2、3、4和8。这是一个不连续的解，局部由二阶多项式描述。虽然在第二周期的网格上，解决方案看起来不是很好，但在第三和第四周期，它看起来好得多。正如下面的收敛表所示，我们发现它也更快地收敛到了分析解。
 
-<table align="center">
+  <table align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.post_2.png" alt=""></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.post_3.png" alt=""></td>
@@ -2242,27 +2058,21 @@ analytical solution.
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.post_4.png" alt=""></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.post_8.png" alt=""></td>
   </tr>
-</table>
+</table>   
 
-Finally, we look at the solution for $p=3$ at cycle 2. Despite the coarse
-mesh with only 64 cells, the post-processed solution is similar in quality
-to the linear solution (not post-processed) at cycle 8 with 4,096
-cells. This clearly shows the superiority of high order methods for smooth
-solutions.
+最后，我们看一下 $p=3$ 在第二周期的解。尽管网格较粗，只有64个单元，但经过后处理的解在质量上与第8周期4,096个单元的线性解（未经过后处理）相似。这清楚地表明了高阶方法对于平滑解的优越性。
 
-<table align="center">
+  <table align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.sol_q3_2.png" alt=""></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.post_q3_2.png" alt=""></td>
   </tr>
-</table>
+</table>   
 
 <a name="Convergencetables"></a><h4>Convergence tables</h4>
 
 
-When the program is run, it also outputs information about the respective
-steps and convergence tables with errors in the various components in the
-end. In 2D, the convergence tables look the following:
+当程序运行时，它还会输出各自的步骤和收敛表的信息，并在最后列出各部分的误差。在2D中，收敛表看起来如下。
 
 @code
 Q1 elements, adaptive refinement:
@@ -2278,6 +2088,7 @@ cells dofs   val L2    grad L2  val L2-post
  3271 14638 7.025e-03 9.815e-02   1.075e-03
  6217 27214 4.119e-03 6.407e-02   9.975e-04
 
+
 Q1 elements, global refinement:
 cells dofs      val L2        grad L2      val L2-post
    16    80 1.804e+01    - 2.207e+01    - 1.798e+01    -
@@ -2291,6 +2102,7 @@ cells dofs      val L2        grad L2      val L2-post
  4096 16640 1.043e-02 1.96 7.185e-02 1.96 5.306e-04 2.94
  9216 37248 4.690e-03 1.97 3.228e-02 1.97 1.599e-04 2.96
 
+
 Q3 elements, global refinement:
 cells dofs      val L2        grad L2      val L2-post
    16   160 3.613e-01    - 1.891e+00    - 3.020e-01    -
@@ -2303,24 +2115,15 @@ cells dofs      val L2        grad L2      val L2-post
  2304 18816 2.956e-05 3.96 2.104e-04 3.97 5.750e-07 5.01
  4096 33280 9.428e-06 3.97 6.697e-05 3.98 1.362e-07 5.01
  9216 74496 1.876e-06 3.98 1.330e-05 3.99 1.788e-08 5.01
-@endcode
+@endcode 
 
 
-One can see the error reduction upon grid refinement, and for the cases where
-global refinement was performed, also the convergence rates. The quadratic
-convergence rates of Q1 elements in the $L_2$ norm for both the scalar
-variable and the gradient variable is apparent, as is the cubic rate for the
-postprocessed scalar variable in the $L_2$ norm. Note this distinctive
-feature of an HDG solution. In typical continuous finite elements, the
-gradient of the solution of order $p$ converges at rate $p$ only, as
-opposed to $p+1$ for the actual solution. Even though superconvergence
-results for finite elements are also available (e.g. superconvergent patch
-recovery first introduced by Zienkiewicz and Zhu), these are typically limited
-to structured meshes and other special cases. For Q3 HDG variables, the scalar
-variable and gradient converge at fourth order and the postprocessed scalar
-variable at fifth order.
 
-The same convergence rates are observed in 3d.
+
+我们可以看到网格细化后的误差减少，对于进行了全局细化的情况，也可以看到收敛率。在 $L_2$ 准则下，标量变量和梯度变量的Q1元素的二次收敛率很明显，在 $L_2$ 准则下，后处理的标量变量的三次收敛率也很明显。请注意HDG解决方案的这一明显特征。在典型的连续有限元中，阶 $p$ 的解的梯度只以 $p$ 的速率收敛，而实际的解则是 $p+1$ 。即使有限元的超收敛结果也是可用的（例如Zienkiewicz和Zhu首次提出的超收敛补丁恢复），但这些通常只限于结构化网格和其他特殊情况。对于Q3 HDG变量，标量变量和梯度在四阶收敛，后处理的标量变量在五阶收敛。
+
+同样的收敛率在三维中也被观察到。
+
 @code
 Q1 elements, adaptive refinement:
 cells   dofs    val L2    grad L2  val L2-post
@@ -2335,6 +2138,7 @@ cells   dofs    val L2    grad L2  val L2-post
 144859 1864212 5.007e-03 8.371e-02   7.364e-04
 451060 5684508 2.518e-03 4.562e-02   3.070e-04
 
+
 Q1 elements, global refinement:
 cells   dofs       val L2          grad L2       val L2-post
      8     144 7.122e+00    - 1.941e+01     - 6.102e+00    -
@@ -2348,6 +2152,7 @@ cells   dofs       val L2          grad L2       val L2-post
  32768  405504 4.637e-02 1.88 3.984e-01  1.89 5.932e-03 2.82
 110592 1354752 2.133e-02 1.92 1.830e-01  1.92 1.851e-03 2.87
 
+
 Q3 elements, global refinement:
 cells   dofs       val L2        grad L2      val L2-post
      8     576 5.670e+00    - 1.868e+01    - 5.462e+00    -
@@ -2360,7 +2165,9 @@ cells   dofs       val L2        grad L2      val L2-post
  13824  691200 5.314e-04 3.91 4.697e-03 3.93 2.355e-05 4.99
  32768 1622016 1.723e-04 3.91 1.517e-03 3.93 5.602e-06 4.99
 110592 5419008 3.482e-05 3.94 3.055e-04 3.95 7.374e-07 5.00
-@endcode
+@endcode 
+
+
 
 <a name="Comparisonwithcontinuousfiniteelements"></a><h3>Comparison with continuous finite elements</h3>
 
@@ -2368,89 +2175,41 @@ cells   dofs       val L2        grad L2      val L2-post
 <a name="Resultsfor2D"></a><h4>Results for 2D</h4>
 
 
-The convergence tables verify the expected convergence rates stated in the
-introduction. Now, we want to show a quick comparison of the computational
-efficiency of the HDG method compared to a usual finite element (continuous
-Galkerin) method on the problem of this tutorial. Of course, stability aspects
-of the HDG method compared to continuous finite elements for
-transport-dominated problems are also important in practice, which is an
-aspect not seen on a problem with smooth analytic solution. In the picture
-below, we compare the $L_2$ error as a function of the number of degrees of
-freedom (left) and of the computing time spent in the linear solver (right)
-for two space dimensions of continuous finite elements (CG) and the hybridized
-discontinuous Galerkin method presented in this tutorial. As opposed to the
-tutorial where we only use unpreconditioned BiCGStab, the times shown in the
-figures below use the Trilinos algebraic multigrid preconditioner in
-TrilinosWrappers::PreconditionAMG. For the HDG part, a wrapper around
-ChunkSparseMatrix for the trace variable has been used in order to utilize the
-block structure in the matrix on the finest level.
+这些收敛表验证了介绍中所说的预期收敛率。现在，我们想展示一下HDG方法与通常的有限元（连续Galkerin）方法在本教程的问题上的计算效率的快速比较。当然，与连续有限元相比，HDG方法对于传输为主的问题的稳定性方面在实践中也很重要，这是在平滑分析解的问题上看不到的方面。在下面的图片中，我们比较了 $L_2$ 误差作为自由度数的函数（左）和线性求解器中花费的计算时间（右），连续有限元（CG）和本教程中介绍的混合非连续Galerkin方法的两个空间维度。相对于教程中我们只使用无条件的BiCGStab，下面的数字中显示的时间使用了 TrilinosWrappers::PreconditionAMG. 中的Trilinos代数多网格预处理 对于HDG部分，为了利用最细级别的矩阵中的块状结构，我们使用了ChunkSparseMatrix的跟踪变量的包装器。
 
-<table align="center">
+  <table align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.2d_plain.png" width="400" alt=""></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.2dt_plain.png" width="400" alt=""></td>
   </tr>
-</table>
+</table>   
 
-The results in the graphs show that the HDG method is slower than continuous
-finite elements at $p=1$, about equally fast for cubic elements and
-faster for sixth order elements. However, we have seen above that the HDG
-method actually produces solutions which are more accurate than what is
-represented in the original variables. Therefore, in the next two plots below
-we instead display the error of the post-processed solution for HDG (denoted
-by $p=1^*$ for example). We now see a clear advantage of HDG for the same
-amount of work for both $p=3$ and $p=6$, and about the same quality
-for $p=1$.
+图中的结果显示，HDG方法在 $p=1$ 时比连续有限元慢，对立方体元素的速度差不多，对六阶元素则更快。然而，我们在上面已经看到，HDG方法实际上产生的解比原始变量所表示的更精确。因此，在下面的两幅图中，我们转而显示HDG的后处理解的误差（例如用 $p=1^*$ 表示）。现在我们看到，对于 $p=3$ 和 $p=6$ ，在相同的工作量下，HDG有明显的优势，而对于 $p=1$ ，质量也差不多。
 
-<table align="center">
+  <table align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.2d_post.png" width="400" alt=""></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.2dt_post.png" width="400" alt=""></td>
   </tr>
-</table>
+</table>   
 
-Since the HDG method actually produces results converging as
-$h^{p+2}$, we should compare it to a continuous Galerkin
-solution with the same asymptotic convergence behavior, i.e., FE_Q with degree
-$p+1$. If we do this, we get the convergence curves below. We see that
-CG with second order polynomials is again clearly better than HDG with
-linears. However, the advantage of HDG for higher orders remains.
+由于HDG方法实际产生的结果收敛为  $h^{p+2}$  ，我们应该将其与具有相同渐进收敛行为的连续Galerkin解进行比较，即具有度数的FE_Q  $p+1$  。如果我们这样做，我们会得到下面的收敛曲线。我们看到，用二阶多项式的CG又明显优于用线型的HDG。然而，HDG对高阶的优势仍然存在。
 
-<table align="center">
+  <table align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.2d_postb.png" width="400" alt=""></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.2dt_postb.png" width="400" alt=""></td>
   </tr>
-</table>
+</table>   
 
-The results are in line with properties of DG methods in general: Best
-performance is typically not achieved for linear elements, but rather at
-somewhat higher order, usually around $p=3$. This is because of a
-volume-to-surface effect for discontinuous solutions with too much of the
-solution living on the surfaces and hence duplicating work when the elements
-are linear. Put in other words, DG methods are often most efficient when used
-at relatively high order, despite their focus on a discontinuous (and hence,
-seemingly low accurate) representation of solutions.
+这些结果与一般的DG方法的特性是一致的。最佳性能通常不是在线性元素上实现的，而是在更高的阶数上实现的，通常在  $p=3$  左右。这是因为不连续解的体积-表面效应，有太多的解存在于表面，因此当元素为线性时，会出现重复工作。换句话说，尽管DG方法专注于不连续（因此看起来精度不高）的解的表示，但在相对高的阶数上使用时往往最有效。
 
 <a name="Resultsfor3D"></a><h4>Results for 3D</h4>
 
 
-We now show the same figures in 3D: The first row shows the number of degrees
-of freedom and computing time versus the $L_2$ error in the scalar variable
-$u$ for CG and HDG at order $p$, the second row shows the
-post-processed HDG solution instead of the original one, and the third row
-compares the post-processed HDG solution with CG at order $p+1$. In 3D,
-the volume-to-surface effect makes the cost of HDG somewhat higher and the CG
-solution is clearly better than HDG for linears by any metric. For cubics, HDG
-and CG are of similar quality, whereas HDG is again more efficient for sixth
-order polynomials. One can alternatively also use the combination of FE_DGP
-and FE_FaceP instead of (FE_DGQ, FE_FaceQ), which do not use tensor product
-polynomials of degree $p$ but Legendre polynomials of <i>complete</i>
-degree $p$. There are fewer degrees of freedom on the skeleton variable
-for FE_FaceP for a given mesh size, but the solution quality (error vs. number
-of DoFs) is very similar to the results for FE_FaceQ.
+现在我们在三维中显示同样的数字：第一行显示了自由度数和计算时间与标量变量 $L_2$ 中的 $u$ 误差的关系，在阶数 $p$ 下的CG和HDG，第二行显示了后处理的HDG解决方案而不是原始解决方案，第三行比较了后处理的HDG解决方案与阶数 $p+1$ 下的CG。在三维中，体积-表面效应使得HDG的成本更高，对于线型来说，CG的解决方案显然比HDG更好。对于立方体，HDG和CG的质量相似，而HDG对于六阶多项式又更有效率。我们也可以使用FE_DGP和FE_FaceP的组合来代替（FE_DGQ, FE_FaceQ），它们不使用 $p$ 度的张量积多项式，而是使用<i>complete</i>度的Legendre多项式 $p$ 。在给定的网格大小下，FE_FaceP的骨架变量的自由度较少，但解的质量（误差与自由度数的关系）与FE_FaceQ的结果非常相似。
 
-<table align="center">
+  <table align="center">
   <tr>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.3d_plain.png" width="400" alt=""></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.3dt_plain.png" width="400" alt=""></td>
@@ -2463,37 +2222,20 @@ of DoFs) is very similar to the results for FE_FaceQ.
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.3d_postb.png" width="400" alt=""></td>
     <td><img src="https://www.dealii.org/images/steps/developer/step-51.3dt_postb.png" width="400" alt=""></td>
   </tr>
-</table>
+</table>   
 
-One final note on the efficiency comparison: We tried to use general-purpose
-sparse matrix structures and similar solvers (optimal AMG preconditioners for
-both without particular tuning of the AMG parameters on any of them) to give a
-fair picture of the cost versus accuracy of two methods, on a toy example. It
-should be noted however that geometric multigrid (GMG) for continuous finite
-elements is about a factor four to five faster for $p=3$ and $p=6$. As of
-2019, optimal-complexity iterative solvers for HDG are still under development
-in the research community. Also, there are other implementation aspects for CG
-available such as fast matrix-free approaches as shown in step-37 that make
-higher order continuous elements more competitive. Again, it is not clear to
-the authors of the tutorial whether similar improvements could be made for
-HDG. We refer to <a href="https://dx.doi.org/10.1137/16M110455X">Kronbichler
-and Wall (2018)</a> for a recent efficiency evaluation.
+关于效率比较的最后一点说明。我们试图使用通用的稀疏矩阵结构和类似的求解器（两者的最佳AMG预处理器，没有对任何一个AMG参数进行特别的调整），以便在一个玩具例子上对两种方法的成本与精度进行公平的描述。然而，应该注意的是，连续有限元的几何多网格（GMG）对于 $p=3$ 和 $p=6$ 来说，大约快了四到五个系数。截至2019年，HDG的最优复杂度迭代求解器仍在研究界开发中。另外，还有其他方面的CG的实现，如 step-37 中所示的快速无矩阵方法，使高阶连续元素更具竞争力。同样，本教程的作者也不清楚是否可以对HDG做出类似的改进。我们参考了<a href="https://dx.doi.org/10.1137/16M110455X">Kronbichler
+and Wall (2018)</a>中最近的效率评估。
 
 
-<a name="Possibilitiesforimprovements"></a><h3>Possibilities for improvements</h3>
+<a name="Possibilitiesforimprovements"></a><h3>Possibilities for improvements</h3> 
 
 
-As already mentioned in the introduction, one possibility is to implement
-another post-processing technique as discussed in the literature.
+正如在介绍中已经提到的，一种可能性是实现文献中讨论的另一种后处理技术。
 
-A second item that is not done optimally relates to the performance of this
-program, which is of course an issue in practical applications (weighing in
-also the better solution quality of (H)DG methods for transport-dominated
-problems). Let us look at
-the computing time of the tutorial program and the share of the individual
-components:
+第二个没有做得很好的项目与这个程序的性能有关，这当然是实际应用中的一个问题（还要权衡(H)DG方法对传输为主的问题有更好的解决质量）。让我们看看这个教程程序的计算时间和各个部分的份额。
 
-<table align="center" class="doxtable">
+  <table align="center" class="doxtable">
   <tr>
     <th>&nbsp;</th>
     <th>&nbsp;</th>
@@ -2549,34 +2291,14 @@ components:
     <td align="center">17.1%</td>
     <td align="center">1.5%</td>
   </tr>
-</table>
+</table>   
 
-As can be seen from the table, the solver and assembly calls dominate the
-runtime of the program. This also gives a clear indication of where
-improvements would make the most sense:
+从表中可以看出，解算器和汇编调用在程序的运行时间中占主导地位。这也清楚地表明了哪些地方的改进是最有意义的。
 
-<ol>
-  <li> Better linear solvers: We use a BiCGStab iterative solver without
-  preconditioner, where the number of iteration increases with increasing
-  problem size (the number of iterations for Q1 elements and global
-  refinements starts at 35 for the small sizes but increase up to 701 for the
-  largest size). To do better, one could for example use an algebraic
-  multigrid preconditioner from Trilinos, or some more advanced variants as
-  the one discussed in <a
+  <ol>   <li>  更好的线性求解器。我们使用的是BiCGStab迭代求解器，没有预设条件，迭代次数随着问题大小的增加而增加（Q1元素和全局细化的迭代次数小的时候是35次，大的时候增加到701次）。为了做得更好，例如可以使用Trilinos的代数多网格预处理程序，或者像<a
   href="https://dx.doi.org/10.1137/16M110455X">Kronbichler and Wall
-  (2018)</a>. For diffusion-dominated problems such as the problem at hand
-  with finer meshes, such a solver can be designed that uses the matrix-vector
-  products from the more efficient ChunkSparseMatrix on the finest level, as
-  long as we are not working in parallel with MPI. For MPI-parallelized
-  computations, a standard TrilinosWrappers::SparseMatrix can be used.
+  (2018)</a>中讨论的一些更高级的变体。对于以扩散为主的问题，比如目前的问题，只要我们不与MPI并行工作，就可以设计这样一个求解器，在最细的层次上使用更高效的ChunkSparseMatrix的矩阵-向量积。对于MPI并行化的计算，可以使用一个标准的 TrilinosWrappers::SparseMatrix 。
 
-  <li> Speed up assembly by pre-assembling parts that do not change from one
-  cell to another (those that do neither contain variable coefficients nor
-  mapping-dependent terms).
-</ol>
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-51.cc"
-*/
+    <li>  通过预先组装不从一个单元改变到另一个单元的部分（那些既不包含可变系数也不包含映射依赖项的部分）来加速组装。  </ol>  <a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-51.cc"  。 
+
+  */  

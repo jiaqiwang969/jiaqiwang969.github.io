@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-45 tutorial program</title>
+<title>The deal.II Library: The step-45 tutorial program 。</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,42 +86,46 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-45 tutorial program </div>  </div>
+<div class="title">The step-45 tutorial program 。 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_6.html">step-6</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_6.html">step-6</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Settingupperiodicityconstraintsondistributedtriangulations">Setting up periodicity constraints on distributed triangulations</a>
+        <li><a href="#Settingupperiodicityconstraintsondistributedtriangulations">Setting up periodicity constraints on distributed triangulations</a><a href="#Settingupperiodicityconstraintsondistributedtriangulations">Setting up periodicity constraints on distributed triangulations</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
+</p>
+<p><br  />
  <br  />
 </p>
 <p><em>This program was contributed by Daniel Arndt and Matthias Maier.</em> <a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
-<p>In this example we present how to use periodic boundary conditions in deal.II. Periodic boundary conditions are algebraic constraints that typically occur in computations on representative regions of a larger domain that repeat in one or more directions.</p>
-<p>An example is the simulation of the electronic structure of photonic crystals, because they have a lattice-like structure and, thus, it often suffices to do the actual computation on only one box of the lattice. To be able to proceed this way one has to assume that the model can be periodically extended to the other boxes; this requires the solution to have a periodic structure.</p>
+<p>在这个例子中，我们介绍了如何在deal.II中使用周期性边界条件。周期性边界条件是代数约束，通常发生在一个大域的代表性区域的计算中，在一个或多个方向上重复。</p>
+<p>一个例子是模拟光子晶体的电子结构，因为它们有一个类似格子的结构，因此，往往只需要在格子的一个盒子上进行实际计算。为了能够以这种方式进行，我们必须假设该模型可以周期性地扩展到其他盒子；这就要求解具有周期性结构。</p>
 <p><a class="anchor" id="Procedure"></a> <a class="anchor" id="Procedure"></a></p><h1>Procedure</h1>
-<p>deal.II provides a number of high level entry points to impose periodic boundary conditions. The general approach to apply periodic boundary conditions consists of three steps (see also the <a class="el" href="DEALGlossary.html#GlossPeriodicConstraints">Glossary entry on periodic boundary conditions</a>):</p><ol type="1">
-<li>Create a mesh</li>
-<li>Identify those pairs of faces on different parts of the boundary across which the solution should be symmetric, using <a class="el" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces()</a></li>
-<li>Add the periodicity information to the mesh using <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html#aa7b797070e5443a18f03a4a7f0267453">parallel::distributed::Triangulation::add_periodicity()</a></li>
-<li>Add periodicity constraints using <a class="el" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">DoFTools::make_periodicity_constraints()</a></li>
+<p>deal.II提供了一些高水平的入口来施加周期性边界条件。应用周期性边界条件的一般方法包括三个步骤（也可参见 <a class="el" href="DEALGlossary.html#GlossPeriodicConstraints">关于周期性边界条件的词汇 </a>条目）。</p>
+<ol type="1">
+<li>创建一个网格</li>
+<li>使用 <a class="el" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces()</a> 确定边界不同部分的一对面，这些面的解应该是对称的。</li>
+<li>使用 <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html#aa7b797070e5443a18f03a4a7f0267453">parallel::distributed::Triangulation::add_periodicity()</a> 将周期性信息添加到网格中。</li>
+<li>使用 <a class="el" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">DoFTools::make_periodicity_constraints()</a> 添加周期性约束。</li>
 </ol>
-<p>The second and third step are necessary for parallel meshes using the <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a> class to ensure that cells on opposite sides of the domain but connected by periodic faces are part of the ghost layer if one of them is stored on the local processor. If the <a class="el" href="classTriangulation.html">Triangulation</a> is not a <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a>, these steps are not necessary.</p>
-<p>The first step consists of collecting matching periodic faces and storing them in a <code>std::vector</code> of <a class="el" href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair</a>. This is done with the function <a class="el" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces()</a> that can be invoked for example like this: </p><div class="fragment"><div class="line"><a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
+<p>第二和第三步对于使用 <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a> 类的并行网格是必要的，以确保位于域的对面但由周期性面连接的单元是幽灵层的一部分，如果其中一个单元被存储在本地处理器上。如果Triangulation不是 <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a>, 类，这些步骤就没有必要。</p>
+<p>第一步包括收集匹配的周期性面，并将它们存储在 <a class="el" href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair</a>. 的 <code>std::vector</code> 中，这是通过函数 <a class="el" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces()</a> 完成的，例如可以这样调用。</p>
+<div class="fragment"><div class="line"><a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
 <div class="line">                                  b_id1,</div>
 <div class="line">                                  b_id2,</div>
 <div class="line">                                  direction,</div>
@@ -131,32 +135,37 @@ $(function() {
 <div class="line">                                  first_vector_components = &lt;<span class="keywordflow">default</span> value&gt;);</div>
 <div class="ttc" id="anamespaceGridTools_html_aee88c4dce5066a41183b5dd70289b9df"><div class="ttname"><a href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a></div><div class="ttdeci">void collect_periodic_faces(const MeshType &amp;mesh, const types::boundary_id b_id1, const types::boundary_id b_id2, const int direction, std::vector&lt; PeriodicFacePair&lt; typename MeshType::cell_iterator &gt;&gt; &amp;matched_pairs, const Tensor&lt; 1, MeshType::space_dimension &gt; &amp;offset=::Tensor&lt; 1, MeshType::space_dimension &gt;(), const FullMatrix&lt; double &gt; &amp;matrix=FullMatrix&lt; double &gt;())</div><div class="ttdef"><b>Definition:</b> <a href="grid__tools__dof__handlers_8cc_source.html#l02196">grid_tools_dof_handlers.cc:2196</a></div></div>
 <div class="ttc" id="anamespaceLAPACKSupport_html_a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003"><div class="ttname"><a href="namespaceLAPACKSupport.html#a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003">LAPACKSupport::matrix</a></div><div class="ttdeci">@ matrix</div><div class="ttdoc">Contents is actually a matrix.</div><div class="ttdef"><b>Definition:</b> <a href="lapack__support_8h_source.html#l00058">lapack_support.h:58</a></div></div>
-</div><!-- fragment --><p>This call loops over all faces of the container dof_handler on the periodic boundaries with boundary indicator <code>b_id1</code> and <code>b_id2</code>, respectively. (You can assign these boundary indicators by hand after creating the coarse mesh, see <a class="el" href="DEALGlossary.html#GlossBoundaryIndicator">Boundary indicator</a>. Alternatively, you can also let many of the functions in namespace <a class="el" href="namespaceGridGenerator.html">GridGenerator</a> do this for if you specify the "colorize" flag; in that case, these functions will assign different boundary indicators to different parts of the boundary, with the details typically spelled out in the documentation of these functions.)</p>
-<p>Concretely, if \(\text{vertices}_{1/2}\) are the vertices of two faces \(\text{face}_{1/2}\), then the function call above will match pairs of faces (and dofs) such that the difference between \(\text{vertices}_2\) and \(matrix\cdot \text{vertices}_1+\text{offset}\) vanishes in every component apart from direction and stores the resulting pairs with associated data in <code>matched_pairs</code>. (See <a class="el" href="namespaceGridTools.html#ac2a1903382c6cff07b33d456a641f6d9">GridTools::orthogonal_equality()</a> for detailed information about the matching process.)</p>
-<p>Consider, for example, the colored unit square \(\Omega=[0,1]^2\) with boundary indicator 0 on the left, 1 on the right, 2 on the bottom and 3 on the top faces. (See the documentation of <a class="el" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube()</a> for this convention on how boundary indicators are assigned.) Then, </p><div class="fragment"><div class="line"><a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
+</div><!-- fragment --><p>这个调用在周期性边界上的容器dof_handler的所有面进行循环，边界指标分别为 <code>b_id1</code> 和 <code>b_id2</code>, 。(你可以在创建粗略的网格后手动分配这些边界指标，见 <a class="el" href="DEALGlossary.html#GlossBoundaryIndicator">边界指标</a>。另外，如果你指定了 "着色 "标志，你也可以让命名空间GridGenerator中的许多函数来做这件事；在这种情况下，这些函数会给边界的不同部分分配不同的边界指标，细节通常在这些函数的文档中详细说明）。)</p>
+<p>具体来说，如果 \(\text{vertices}_{1/2}\) 是两个面 \(\text{face}_{1/2}\) 的顶点，那么上面的函数调用将匹配成对的面（和道夫），使得 \(\text{vertices}_2\) 和 \(matrix\cdot \text{vertices}_1+\text{offset}\) 之间的差异在除方向之外的每个分量中都消失，并将产生的对与相关数据存储在 <code>matched_pairs</code>. 中（关于匹配过程的详细信息，参见 <a class="el" href="namespaceGridTools.html#ac2a1903382c6cff07b33d456a641f6d9">GridTools::orthogonal_equality()</a> ）。</p>
+<p>例如，考虑彩色单位方块 \(\Omega=[0,1]^2\) ，其边界指标0在左边，1在右边，2在下面，3在上面的面。见 <a class="el" href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube()</a> 的文件中关于如何分配边界指标的这个约定）。然后。</p>
+<div class="fragment"><div class="line"><a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
 <div class="line">                                  <span class="comment">/*b_id1*/</span> 0,</div>
 <div class="line">                                  <span class="comment">/*b_id2*/</span> 1,</div>
 <div class="line">                                  <span class="comment">/*direction*/</span> 0,</div>
 <div class="line">                                  matched_pairs);</div>
-</div><!-- fragment --><p> would yield periodicity constraints such that \(u(0,y)=u(1,y)\) for all \(y\in[0,1]\).</p>
-<p>If we instead consider the parallelogram given by the convex hull of \((0,0)\), \((1,1)\), \((1,2)\), \((0,1)\) we can achieve the constraints \(u(0,y)=u(1,y+1)\) by specifying an <code>offset:</code> </p><div class="fragment"><div class="line"><a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
+</div><!-- fragment --><p>将产生周期性约束，即 \(u(0,y)=u(1,y)\) 对所有 \(y\in[0,1]\) 。</p>
+<p>如果我们考虑由 \((0,0)\) , \((1,1)\) , \((1,2)\) , \((0,1)\) 的凸壳给出的平行四边形，我们可以通过指定一个 <code>offset:</code> 来实现约束 \(u(0,y)=u(1,y+1)\) 。</p>
+<div class="fragment"><div class="line"><a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
 <div class="line">                                  <span class="comment">/*b_id1*/</span> 0,</div>
 <div class="line">                                  <span class="comment">/*b_id2*/</span> 1,</div>
 <div class="line">                                  <span class="comment">/*direction*/</span> 0,</div>
 <div class="line">                                  matched_pairs,</div>
 <div class="line">                                  <a class="code" href="classTensor.html">Tensor&lt;1, 2&gt;</a>(0.,1.));</div>
 <div class="ttc" id="aclassTensor_html"><div class="ttname"><a href="classTensor.html">Tensor</a></div><div class="ttdef"><b>Definition:</b> <a href="tensor_8h_source.html#l00449">tensor.h:450</a></div></div>
-</div><!-- fragment --><p> or </p><div class="fragment"><div class="line"><a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
+</div><!-- fragment --><p>或</p>
+<div class="fragment"><div class="line"><a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
 <div class="line">                                  <span class="comment">/*b_id1*/</span> 0,</div>
 <div class="line">                                  <span class="comment">/*b_id2*/</span> 1,</div>
 <div class="line">                                  <span class="comment">/*arbitrary direction*/</span> 0,</div>
 <div class="line">                                  matched_pairs,</div>
 <div class="line">                                  <a class="code" href="classTensor.html">Tensor&lt;1, 2&gt;</a>(1.,1.));</div>
-</div><!-- fragment --><p> Here, again, the assignment of boundary indicators 0 and 1 stems from what <a class="el" href="namespaceGridGenerator.html#a324b8447f05b148e2f58bdbcf89f5325">GridGenerator::parallelogram()</a> documents.</p>
-<p>The resulting <code>matched_pairs</code> can be used in <a class="el" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">DoFTools::make_periodicity_constraints</a> for populating an <a class="el" href="classAffineConstraints.html">AffineConstraints</a> object with periodicity constraints: </p><div class="fragment"><div class="line"><a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">DoFTools::make_periodicity_constraints</a>(matched_pairs, constraints);</div>
+</div><!-- fragment --><p>这里，同样，边界指标0和1的分配源于 <a class="el" href="namespaceGridGenerator.html#a324b8447f05b148e2f58bdbcf89f5325">GridGenerator::parallelogram()</a> 的文件。</p>
+<p>由此产生的 <code>matched_pairs</code> 可以用在 <a class="el" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">DoFTools::make_periodicity_constraints</a> 中，用于用周期性约束填充AffineConstraints对象。</p>
+<div class="fragment"><div class="line"><a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">DoFTools::make_periodicity_constraints</a>(matched_pairs, constraints);</div>
 <div class="ttc" id="anamespaceDoFTools_html_a929249499b1e5624728d212e90a8e037"><div class="ttname"><a href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">DoFTools::make_periodicity_constraints</a></div><div class="ttdeci">void make_periodicity_constraints(const FaceIterator &amp;face_1, const typename identity&lt; FaceIterator &gt;::type &amp;face_2, AffineConstraints&lt; number &gt; &amp;constraints, const ComponentMask &amp;component_mask=ComponentMask(), const bool face_orientation=true, const bool face_flip=false, const bool face_rotation=false, const FullMatrix&lt; double &gt; &amp;matrix=FullMatrix&lt; double &gt;(), const std::vector&lt; unsigned int &gt; &amp;first_vector_components=std::vector&lt; unsigned int &gt;(), const number periodicity_factor=1.)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__constraints_8cc_source.html#l02288">dof_tools_constraints.cc:2288</a></div></div>
-</div><!-- fragment --><p>Apart from this high level interface there are also variants of <a class="el" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">DoFTools::make_periodicity_constraints</a> available that combine those two steps (see the variants of DofTools::make_periodicity_constraints).</p>
-<p>There is also a low level interface to <a class="el" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">DoFTools::make_periodicity_constraints</a> if more flexibility is needed. The low level variant allows to directly specify two faces that shall be constrained: </p><div class="fragment"><div class="line"><span class="keyword">using namespace </span><a class="code" href="namespaceDoFTools.html">DoFTools</a>;</div>
+</div><!-- fragment --><p>除了这个高级接口外，还有一些 <a class="el" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">DoFTools::make_periodicity_constraints</a> 的变体可以结合这两个步骤（见 DofTools::make_periodicity_constraints). 的变体）。</p>
+<p>如果需要更多的灵活性，也有一个 <a class="el" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">DoFTools::make_periodicity_constraints</a> 的低级接口。该低级变体允许直接指定两个应被约束的面。</p>
+<div class="fragment"><div class="line"><span class="keyword">using namespace </span><a class="code" href="namespaceDoFTools.html">DoFTools</a>;</div>
 <div class="line"><a class="code" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">make_periodicity_constraints</a>(face_1,</div>
 <div class="line">                             face_2,</div>
 <div class="line">                             affine_constraints,</div>
@@ -167,23 +176,24 @@ $(function() {
 <div class="line">                             <a class="code" href="namespaceLAPACKSupport.html#a1a9009db0d9a77923a7031b549b9b638a5bc7c54a9c20485772672825c6a73003">matrix</a> = &lt;<span class="keywordflow">default</span> <a class="code" href="namespaceinternal.html#aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804">value</a>&gt;);</div>
 <div class="ttc" id="anamespaceDoFTools_html"><div class="ttname"><a href="namespaceDoFTools.html">DoFTools</a></div><div class="ttdef"><b>Definition:</b> <a href="dof__tools_8h_source.html#l00213">dof_tools.h:214</a></div></div>
 <div class="ttc" id="anamespaceinternal_html_aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804"><div class="ttname"><a href="namespaceinternal.html#aa5bef221c94bc6b9c5441c306a72cdbaa2063c1608d6e0baf80249c42e2be5804">internal::EvaluatorQuantity::value</a></div><div class="ttdeci">@ value</div></div>
-</div><!-- fragment --><p> Here, we need to specify the orientation of the two faces using <code>face_orientation</code>, <code>face_flip</code> and <code>face_orientation</code>. For a closer description have a look at the documentation of <a class="el" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">DoFTools::make_periodicity_constraints</a>. The remaining parameters are the same as for the high level interface apart from the self-explaining <code>component_mask</code> and <code>affine_constraints</code>.</p>
+</div><!-- fragment --><p>这里，我们需要使用 <code>face_orientation</code>, <code>face_flip</code> 和 <code>face_orientation</code>. 来指定两个面的方向。要想了解更详细的描述，请看 <a class="el" href="namespaceDoFTools.html#a929249499b1e5624728d212e90a8e037">DoFTools::make_periodicity_constraints</a>. 的文档。除了自我解释的 <code>component_mask</code> 和 <code>affine_constraints</code>. ，其余参数与高层接口相同。</p>
 <p><a class="anchor" id="problem"></a> <a class="anchor" id="Apracticalexample"></a></p><h1>A practical example</h1>
-<p>In the following, we show how to use the above functions in a more involved example. The task is to enforce rotated periodicity constraints for the velocity component of a Stokes flow.</p>
-<p>On a quarter-circle defined by \(\Omega=\{{\bf x}\in(0,1)^2:\|{\bf x}\|\in (0.5,1)\}\) we are going to solve the Stokes problem </p><p class="formulaDsp">
+<p>在下文中，我们将展示如何在一个更复杂的例子中使用上述函数。任务是对斯托克斯流的速度分量实施旋转的周期性约束。</p>
+<p>在由 \(\Omega=\{{\bf x}\in(0,1)^2:\|{\bf x}\|\in (0.5,1)\}\) 定义的四分之一圆上，我们要解决斯托克斯问题 </p><p class="formulaDsp">
 \begin{eqnarray*} -\Delta \; \textbf{u} + \nabla p &amp;=&amp; (\exp(-100\|{\bf x}-(.75,0.1)^T\|^2),0)^T, \\ -\textrm{div}\; \textbf{u}&amp;=&amp;0,\\ \textbf{u}|_{\Gamma_1}&amp;=&amp;{\bf 0}, \end{eqnarray*}
 </p>
-<p> where the boundary \(\Gamma_1\) is defined as \(\Gamma_1 \dealcoloneq \{x\in \partial\Omega: \|x\|\in\{0.5,1\}\}\). For the remaining parts of the boundary we are going to use periodic boundary conditions, i.e. </p><p class="formulaDsp">
+<p>其中边界 \(\Gamma_1\) 被定义为 \(\Gamma_1 \dealcoloneq \{x\in \partial\Omega: \|x\|\in\{0.5,1\}\}\) 。对于边界的其余部分，我们将使用周期性边界条件，即</p>
+<p class="formulaDsp">
 \begin{align*} u_x(0,\nu)&amp;=-u_y(\nu,0)&amp;\nu&amp;\in[0,1]\\ u_y(0,\nu)&amp;=u_x(\nu,0)&amp;\nu&amp;\in[0,1]. \end{align*}
 </p>
-<p>The mesh will be generated by <a class="el" href="namespaceGridGenerator.html#acd7c51b0e8032db65db9a5ff73ccca50">GridGenerator::quarter_hyper_shell()</a>, which also documents how it assigns boundary indicators to its various boundaries if its <code>colorize</code> argument is set to <code>true</code>.</p>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<p>This example program is a slight modification of <a class="el" href="step_22.html">step-22</a> running in parallel using Trilinos to demonstrate the usage of periodic boundary conditions in deal.II. We thus omit to discuss the majority of the source code and only comment on the parts that deal with periodicity constraints. For the rest have a look at <a class="el" href="step_22.html">step-22</a> and the full source code at the bottom.</p>
-<p>In order to implement periodic boundary conditions only two functions have to be modified:</p><ul>
-<li><code>StokesProblem&lt;dim&gt;::setup_dofs()</code>: To populate an <a class="el" href="classAffineConstraints.html">AffineConstraints</a> object with periodicity constraints</li>
-<li><code>StokesProblem&lt;dim&gt;::create_mesh()</code>: To supply a distributed triangulation with periodicity information.</li>
+<p>网格将由 <a class="el" href="namespaceGridGenerator.html#acd7c51b0e8032db65db9a5ff73ccca50">GridGenerator::quarter_hyper_shell()</a>, 生成，它也记录了如果它的<code>colorize'参数设置为</code>true'，它是如何给它的各个边界分配边界指标的。<a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+<p>这个例子程序是对 <a class="el" href="step_22.html">step-22</a> 的轻微修改，使用Trilinos并行运行，以演示交易.II中周期性边界条件的用法。因此我们不讨论大部分的源代码，只对处理周期性约束的部分进行评论。其余的请看 <a class="el" href="step_22.html">step-22</a> 和底部的完整源代码。</p>
+<p>为了实现周期性边界条件，只有两个函数需要修改。</p>
+<ul>
+<li><code>StokesProblem&lt;dim&gt;::setup_dofs()</code> : 用周期性约束来填充AffineConstraints对象</li>
+<li><code>StokesProblem&lt;dim&gt;::create_mesh()</code> : 为分布式三角形提供周期性信息。</li>
 </ul>
-<p>The rest of the program is identical to <a class="el" href="step_22.html">step-22</a>, so let us skip this part and only show these two functions in the following. (The full program can be found in the "Plain program" section below, though.)</p>
+<p>程序的其余部分与 <a class="el" href="step_22.html">step-22</a> 相同，所以让我们跳过这一部分，只在下面展示这两个函数。不过完整的程序可以在下面的 "普通程序 "部分找到）。</p>
 <p><a class="anchor" id="Settingupperiodicityconstraintsondistributedtriangulations"></a> </p><h3>Setting up periodicity constraints on distributed triangulations</h3>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> StokesProblem&lt;dim&gt;::create_mesh()</div>
@@ -192,23 +202,27 @@ $(function() {
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> inner_radius = .5;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> outer_radius = 1.;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="namespaceGridGenerator.html#acd7c51b0e8032db65db9a5ff73ccca50">GridGenerator::quarter_hyper_shell</a>(</div>
 <div class="line">    <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>, <a class="code" href="data__out__base_8cc.html#a8188ef4709fc9a4cc076d37447783ba1">center</a>, inner_radius, outer_radius, 0, <span class="keyword">true</span>);</div>
 <div class="ttc" id="aclassPoint_html"><div class="ttname"><a href="classPoint.html">Point</a></div><div class="ttdef"><b>Definition:</b> <a href="base_2point_8h_source.html#l00110">point.h:111</a></div></div>
 <div class="ttc" id="adata__out__base_8cc_html_a8188ef4709fc9a4cc076d37447783ba1"><div class="ttname"><a href="data__out__base_8cc.html#a8188ef4709fc9a4cc076d37447783ba1">center</a></div><div class="ttdeci">Point&lt; 3 &gt; center</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l00170">data_out_base.cc:170</a></div></div>
 <div class="ttc" id="anamespaceGridGenerator_html_acd7c51b0e8032db65db9a5ff73ccca50"><div class="ttname"><a href="namespaceGridGenerator.html#acd7c51b0e8032db65db9a5ff73ccca50">GridGenerator::quarter_hyper_shell</a></div><div class="ttdeci">void quarter_hyper_shell(Triangulation&lt; dim &gt; &amp;tria, const Point&lt; dim &gt; &amp;center, const double inner_radius, const double outer_radius, const unsigned int n_cells=0, const bool colorize=false)</div></div>
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
-</div><!-- fragment --><p>Before we can prescribe periodicity constraints, we need to ensure that cells on opposite sides of the domain but connected by periodic faces are part of the ghost layer if one of them is stored on the local processor. At this point we need to think about how we want to prescribe periodicity. The vertices \(\text{vertices}_2\) of a face on the left boundary should be matched to the vertices \(\text{vertices}_1\) of a face on the lower boundary given by \(\text{vertices}_2=R\cdot \text{vertices}_1+b\) where the rotation matrix \(R\) and the offset \(b\) are given by </p><p class="formulaDsp">
+</div><!-- fragment --><p>在我们可以规定周期性约束之前，我们需要确保位于域的对面但由周期性面连接的单元是幽灵层的一部分，如果其中一个单元存储在本地处理器上。在这一点上，我们需要考虑我们要如何规定周期性。左边边界上的面的顶点 \(\text{vertices}_2\) 应该与下面边界上的面的顶点 \(\text{vertices}_1\) 相匹配，由 \(\text{vertices}_2=R\cdot \text{vertices}_1+b\) 给出，其中旋转矩阵 \(R\) 和偏移量 \(b\) 给出</p>
+<p class="formulaDsp">
 \begin{align*} R=\begin{pmatrix} 0&amp;1\\-1&amp;0 \end{pmatrix}, \quad b=\begin{pmatrix}0&amp;0\end{pmatrix}. \end{align*}
 </p>
-<p> The data structure we are saving the resulting information into is here based on the <a class="el" href="classTriangulation.html">Triangulation</a>.</p>
+<p>我们将所得信息保存到这里的数据结构是基于三角法的。</p>
 <div class="fragment"><div class="line">std::vector&lt;<a class="code" href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair</a>&lt;</div>
 <div class="line">  <span class="keyword">typename</span> <a class="code" href="classTriaIterator.html">parallel::distributed::Triangulation&lt;dim&gt;::cell_iterator</a>&gt;&gt;</div>
 <div class="line">  periodicity_vector;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> rotation_matrix(dim);</div>
 <div class="line">rotation_matrix[0][1] = 1.;</div>
 <div class="line">rotation_matrix[1][0] = -1.;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>,</div>
 <div class="line">                                  2,</div>
@@ -220,11 +234,13 @@ $(function() {
 <div class="ttc" id="aclassFullMatrix_html"><div class="ttname"><a href="classFullMatrix.html">FullMatrix&lt; double &gt;</a></div></div>
 <div class="ttc" id="aclassTriaIterator_html"><div class="ttname"><a href="classTriaIterator.html">TriaIterator</a></div><div class="ttdef"><b>Definition:</b> <a href="tria__iterator_8h_source.html#l00577">tria_iterator.h:578</a></div></div>
 <div class="ttc" id="astructGridTools_1_1PeriodicFacePair_html"><div class="ttname"><a href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair</a></div><div class="ttdef"><b>Definition:</b> <a href="grid__tools_8h_source.html#l02637">grid_tools.h:2638</a></div></div>
-</div><!-- fragment --><p>Now telling the triangulation about the desired periodicity is particularly easy by just calling <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html#aa7b797070e5443a18f03a4a7f0267453">parallel::distributed::Triangulation::add_periodicity</a>.</p>
+</div><!-- fragment --><p>现在，只要调用 <a class="el" href="classparallel_1_1distributed_1_1Triangulation.html#aa7b797070e5443a18f03a4a7f0267453">parallel::distributed::Triangulation::add_periodicity</a>. ，告诉三角法关于所需的周期性就特别容易。</p>
 <div class="fragment"><div class="line">  <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.add_periodicity(periodicity_vector);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.refine_global(4 - dim);</div>
 <div class="line">}</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
@@ -232,19 +248,23 @@ $(function() {
 <div class="line">{</div>
 <div class="line">  dof_handler.distribute_dofs(fe);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  std::vector&lt;unsigned int&gt; block_component(dim + 1, 0);</div>
 <div class="line">  block_component[dim] = 1;</div>
 <div class="line">  <a class="code" href="namespaceDoFRenumbering.html#a52c1941406d1ce2937e29a46edf111f4">DoFRenumbering::component_wise</a>(dof_handler, block_component);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> std::vector&lt;types::global_dof_index&gt; dofs_per_block =</div>
 <div class="line">    <a class="code" href="namespaceDoFTools.html#a796721b56b3a90e4e3973c7caae4c3d8">DoFTools::count_dofs_per_fe_block</a>(dof_handler, block_component);</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_u = dofs_per_block[0], n_p = dofs_per_block[1];</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  {</div>
 <div class="line">    owned_partitioning.clear();</div>
 <div class="line">    <a class="code" href="classIndexSet.html">IndexSet</a> locally_owned_dofs = dof_handler.locally_owned_dofs();</div>
 <div class="line">    owned_partitioning.push_back(locally_owned_dofs.<a class="code" href="classIndexSet.html#add590b083cdde3fa61e637a058b51835">get_view</a>(0, n_u));</div>
 <div class="line">    owned_partitioning.push_back(locally_owned_dofs.<a class="code" href="classIndexSet.html#add590b083cdde3fa61e637a058b51835">get_view</a>(n_u, n_u + n_p));</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    relevant_partitioning.<a class="code" href="classIndexSet.html#a8a3d75a9cba3f1a50866691327aa7609">clear</a>();</div>
 <div class="line">    <a class="code" href="classIndexSet.html">IndexSet</a> locally_relevant_dofs;</div>
@@ -254,10 +274,13 @@ $(function() {
 <div class="line">    relevant_partitioning.push_back(</div>
 <div class="line">      locally_relevant_dofs.<a class="code" href="classIndexSet.html#add590b083cdde3fa61e637a058b51835">get_view</a>(n_u, n_u + n_p));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    constraints.clear();</div>
 <div class="line">    constraints.reinit(locally_relevant_dofs);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <a class="code" href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a> velocities(0);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, constraints);</div>
 <div class="line">    <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(mapping,</div>
@@ -281,21 +304,25 @@ $(function() {
 <div class="ttc" id="anamespaceDoFTools_html_acad7e0841b9046eaafddc4c617ab1d9d"><div class="ttname"><a href="namespaceDoFTools.html#acad7e0841b9046eaafddc4c617ab1d9d">DoFTools::extract_locally_relevant_dofs</a></div><div class="ttdeci">void extract_locally_relevant_dofs(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, IndexSet &amp;dof_set)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools_8cc_source.html#l01210">dof_tools.cc:1210</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_html_ab2562d41bb26f362043f9719a8cd9b87"><div class="ttname"><a href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a></div><div class="ttdeci">void interpolate_boundary_values(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const std::map&lt; types::boundary_id, const Function&lt; spacedim, number &gt; * &gt; &amp;function_map, std::map&lt; types::global_dof_index, number &gt; &amp;boundary_values, const ComponentMask &amp;component_mask=ComponentMask())</div></div>
 <div class="ttc" id="astructFEValuesExtractors_1_1Vector_html"><div class="ttname"><a href="structFEValuesExtractors_1_1Vector.html">FEValuesExtractors::Vector</a></div><div class="ttdef"><b>Definition:</b> <a href="fe__values__extractors_8h_source.html#l00150">fe_values_extractors.h:151</a></div></div>
-</div><!-- fragment --><p>After we provided the mesh with the necessary information for the periodicity constraints, we are now able to actual create them. For describing the matching we are using the same approach as before, i.e., the \(\text{vertices}_2\) of a face on the left boundary should be matched to the vertices \(\text{vertices}_1\) of a face on the lower boundary given by \(\text{vertices}_2=R\cdot \text{vertices}_1+b\) where the rotation matrix \(R\) and the offset \(b\) are given by </p><p class="formulaDsp">
+</div><!-- fragment --><p>在我们为网格提供了周期性约束的必要信息后，我们现在就可以实际创建它们了。对于描述匹配，我们使用与之前相同的方法，也就是说，左边边界上的一个面的 \(\text{vertices}_2\) 应该与下面边界上的一个面的顶点 \(\text{vertices}_1\) 相匹配，这些顶点的旋转矩阵 \(R\) 和偏移量 \(b\) 是通过以下方式给出的</p>
+<p class="formulaDsp">
 \begin{align*} R=\begin{pmatrix} 0&amp;1\\-1&amp;0 \end{pmatrix}, \quad b=\begin{pmatrix}0&amp;0\end{pmatrix}. \end{align*}
 </p>
-<p> These two objects not only describe how faces should be matched but also in which sense the solution should be transformed from \(\text{face}_2\) to \(\text{face}_1\).</p>
+<p>这两个对象不仅描述了面的匹配方式，而且还描述了解决方案应该从 \(\text{face}_2\) 转换到 \(\text{face}_1\) 的哪个意义上。</p>
 <div class="fragment"><div class="line"><a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> rotation_matrix(dim);</div>
 <div class="line">rotation_matrix[0][1] = 1.;</div>
 <div class="line">rotation_matrix[1][0] = -1.;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><a class="code" href="classTensor.html">Tensor&lt;1, dim&gt;</a> offset;</div>
-</div><!-- fragment --><p>For setting up the constraints, we first store the periodicity information in an auxiliary object of type <code>std::vector&lt;<a class="el" href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair</a>&lt;typename <a class="el" href="classDoFHandler.html">DoFHandler</a>&lt;dim&gt;::cell_iterator&gt; </code>. The periodic boundaries have the boundary indicators 2 (x=0) and 3 (y=0). All the other parameters we have set up before. In this case the direction does not matter. Due to \(\text{vertices}_2=R\cdot \text{vertices}_1+b\) this is exactly what we want.</p>
+</div><!-- fragment --><p>为了设置约束，我们首先将周期性信息存储在一个类型为 <code>std::vector&lt;<a class="el" href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair</a>&lt;typename <a class="el" href="classDoFHandler.html">DoFHandler</a>&lt;dim&gt;::cell_iterator&gt; </code>的辅助对象中。周期性边界的边界指标为2（x=0）和3（y=0）。所有其他的参数我们之前已经设置好了。在这种情况下，方向并不重要。由于 \(\text{vertices}_2=R\cdot \text{vertices}_1+b\) 这正是我们想要的。</p>
 <div class="fragment"><div class="line">std::vector&lt;</div>
 <div class="line">  <a class="code" href="structGridTools_1_1PeriodicFacePair.html">GridTools::PeriodicFacePair&lt;typename DoFHandler&lt;dim&gt;::cell_iterator</a>&gt;&gt;</div>
 <div class="line">  periodicity_vector;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> direction = 1;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><a class="code" href="namespaceGridTools.html#aee88c4dce5066a41183b5dd70289b9df">GridTools::collect_periodic_faces</a>(dof_handler,</div>
 <div class="line">                                  2,</div>
@@ -304,15 +331,16 @@ $(function() {
 <div class="line">                                  periodicity_vector,</div>
 <div class="line">                                  offset,</div>
 <div class="line">                                  rotation_matrix);</div>
-</div><!-- fragment --><p>Next, we need to provide information on which vector valued components of the solution should be rotated. Since we choose here to just constraint the velocity and this starts at the first component of the solution vector, we simply insert a 0:</p>
+</div><!-- fragment --><p>接下来，我们需要提供关于解决方案中哪些矢量值的分量应该被旋转的信息。由于我们在这里选择只约束速度，并且从解向量的第一个分量开始，我们简单地插入一个0。</p>
 <div class="fragment"><div class="line">std::vector&lt;unsigned int&gt; first_vector_components;</div>
 <div class="line">first_vector_components.push_back(0);</div>
-</div><!-- fragment --><p>After setting up all the information in periodicity_vector all we have to do is to tell make_periodicity_constraints to create the desired constraints.</p>
+</div><!-- fragment --><p>在周期性_vector中设置了所有的信息后，我们要做的就是告诉make_periodicity_constraints来创建所需的约束。</p>
 <div class="fragment"><div class="line">    DoFTools::make_periodicity_constraints&lt;dim, dim&gt;(periodicity_vector,</div>
 <div class="line">                                                     constraints,</div>
 <div class="line">                                                     fe.component_mask(</div>
 <div class="line">                                                       velocities),</div>
 <div class="line">                                                     first_vector_components);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a>(mapping,</div>
 <div class="line">                                             dof_handler,</div>
@@ -328,13 +356,16 @@ $(function() {
 <div class="line">                                             fe.component_mask(velocities));</div>
 <div class="line">  }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  constraints.close();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  {</div>
 <div class="line">    <a class="code" href="classTrilinosWrappers_1_1BlockSparsityPattern.html">TrilinosWrappers::BlockSparsityPattern</a> bsp(owned_partitioning,</div>
 <div class="line">                                               owned_partitioning,</div>
 <div class="line">                                               relevant_partitioning,</div>
 <div class="line">                                               mpi_communicator);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="classTable.html">Table&lt;2, DoFTools::Coupling&gt;</a> coupling(dim + 1, dim + 1);</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> c = 0; c &lt; dim + 1; ++c)</div>
@@ -344,6 +375,7 @@ $(function() {
 <div class="line">        <span class="keywordflow">else</span></div>
 <div class="line">          coupling[c][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = <a class="code" href="namespaceDoFTools.html#ad31df71a29dd76de9b4ab241b2527160a193fa079dee88a75524f669136d6faba">DoFTools::none</a>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler,</div>
 <div class="line">                                    coupling,</div>
 <div class="line">                                    bsp,</div>
@@ -352,10 +384,13 @@ $(function() {
 <div class="line">                                    <a class="code" href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">Utilities::MPI::this_mpi_process</a>(</div>
 <div class="line">                                      mpi_communicator));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    bsp.compress();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    system_matrix.reinit(bsp);</div>
 <div class="line">  }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  {</div>
 <div class="line">    <a class="code" href="classTrilinosWrappers_1_1BlockSparsityPattern.html">TrilinosWrappers::BlockSparsityPattern</a> preconditioner_bsp(</div>
@@ -363,6 +398,7 @@ $(function() {
 <div class="line">      owned_partitioning,</div>
 <div class="line">      relevant_partitioning,</div>
 <div class="line">      mpi_communicator);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="classTable.html">Table&lt;2, DoFTools::Coupling&gt;</a> preconditioner_coupling(dim + 1, dim + 1);</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> c = 0; c &lt; dim + 1; ++c)</div>
@@ -372,6 +408,7 @@ $(function() {
 <div class="line">        <span class="keywordflow">else</span></div>
 <div class="line">          preconditioner_coupling[c][<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">d</a>] = <a class="code" href="namespaceDoFTools.html#ad31df71a29dd76de9b4ab241b2527160a193fa079dee88a75524f669136d6faba">DoFTools::none</a>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <a class="code" href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a>(dof_handler,</div>
 <div class="line">                                    preconditioner_coupling,</div>
 <div class="line">                                    preconditioner_bsp,</div>
@@ -380,10 +417,13 @@ $(function() {
 <div class="line">                                    <a class="code" href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">Utilities::MPI::this_mpi_process</a>(</div>
 <div class="line">                                      mpi_communicator));</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    preconditioner_bsp.compress();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    preconditioner_matrix.reinit(preconditioner_bsp);</div>
 <div class="line">  }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  system_rhs.reinit(owned_partitioning, mpi_communicator);</div>
 <div class="line">  solution.reinit(owned_partitioning,</div>
@@ -397,13 +437,13 @@ $(function() {
 <div class="ttc" id="anamespaceDoFTools_html_ad31df71a29dd76de9b4ab241b2527160a6a742e14fbc92a1c202d77d4f319d5ec"><div class="ttname"><a href="namespaceDoFTools.html#ad31df71a29dd76de9b4ab241b2527160a6a742e14fbc92a1c202d77d4f319d5ec">DoFTools::always</a></div><div class="ttdeci">@ always</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools_8h_source.html#l00235">dof_tools.h:235</a></div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a15728437b942dab0b0042eb06a407d2c"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a15728437b942dab0b0042eb06a407d2c">Physics::Elasticity::Kinematics::d</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; d(const Tensor&lt; 2, dim, Number &gt; &amp;F, const Tensor&lt; 2, dim, Number &gt; &amp;dF_dt)</div></div>
 <div class="ttc" id="anamespaceUtilities_1_1MPI_html_a895dcd8223a0ee6f0e6a80b80e2d5982"><div class="ttname"><a href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">Utilities::MPI::this_mpi_process</a></div><div class="ttdeci">unsigned int this_mpi_process(const MPI_Comm &amp;mpi_communicator)</div><div class="ttdef"><b>Definition:</b> <a href="mpi_8cc_source.html#l00128">mpi.cc:128</a></div></div>
-</div><!-- fragment --><p>The rest of the program is then again identical to <a class="el" href="step_22.html">step-22</a>. We will omit it here now, but as before, you can find these parts in the "Plain program" section below.</p>
+</div><!-- fragment --><p>然后，程序的其余部分又与 <a class="el" href="step_22.html">step-22</a> 相同。我们现在省略它，但和以前一样，你可以在下面的 "普通程序 "部分找到这些部分。</p>
 <p><a class="anchor" id="Results"></a></p><h1>Results</h1>
-<p>The created output is not very surprising. We simply see that the solution is periodic with respect to the left and lower boundary:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-45.periodic.png" alt="" class="inline"/></p>
-<p>Without the periodicity constraints we would have ended up with the following solution:</p>
-<p><img src="https://www.dealii.org/images/steps/developer/step-45.non_periodic.png" alt="" class="inline"/></p>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+<p>创建的输出并不十分令人惊讶。我们只是看到，相对于左边界和下边界而言，解是周期性的。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-45.periodic.png" alt="" class="inline"/> <br  />
+</p>
+<p>如果没有周期性约束，我们最终会得到以下的解决方案。</p>
+<p><img src="https://www.dealii.org/images/steps/developer/step-45.non_periodic.png" alt="" class="inline"/> <a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2008 - 2020 by the deal.II authors</span></div>
@@ -1234,7 +1274,8 @@ $(function() {
 <div class="ttc" id="atrilinos__precondition_8h_html"><div class="ttname"><a href="trilinos__precondition_8h.html">trilinos_precondition.h</a></div></div>
 <div class="ttc" id="atrilinos__solver_8h_html"><div class="ttname"><a href="trilinos__solver_8h.html">trilinos_solver.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> 。 </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

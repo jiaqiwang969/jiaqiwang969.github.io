@@ -17,121 +17,67 @@
 /**
  * @page CodingConventions Coding conventions used throughout deal.II
 
-Throughout deal.II, we strive to keep our programming style and the kind of
-interfaces we provide as consistent as possible. To this end, we have adopted
-a set of coding conventions that we attempt to follow wherever possible. They
-have two parts: style issues, and something we call "defensive programming",
-the latter being an attempt to let our code help us find bugs.  When reading
-through them, it is important to remember that styles are not god given or
-better than any other set of conventions; their purpose is merely to keep
-deal.II as uniform as possible. Uniformity reduces the number of bugs we
-produce because we can, for example, always assume that input arguments come
-before output arguments of a function call. They also simplify reading code
-because some things become clear already by looking at the style a piece of
-code is written, without having to look up the exact definition of something.
+在deal.II中，我们努力保持编程风格和提供的接口类型尽可能一致。为此，我们采用了一套编码约定，尽可能遵循这些约定。它们有两个部分：风格问题和我们称之为“防御编程”的东西，后者是让我们的代码帮助我们发现bug的一种尝试。在阅读时，重要的是要记住，风格不是上帝赋予的，也不是比其他任何一套惯例更好；他们的目的仅仅是尽可能保持deal.II的一致性。一致性减少了我们产生的错误的数量，因为我们可以，例如，总是假设输入参数在函数调用的输出参数之前。它们还简化了代码的阅读，因为通过查看一段代码的编写风格，一些事情已经变得很清楚了，而不必查看某个东西的确切定义。
 
-<h3>Notes on deal.II indentation</h3>
+<h3>Notes on deal.II 缩进 indentation</h3>
 
-<p>deal.II uses <code>clang-format</code> 6.0 to normalize indentation. A
-style file is provided at
+<p>deal.II 采用 <code>clang-format</code> 6.0 进行规范化缩进. 样式文件位于
 @code
   \${SOURCE_DIR}/.clang-format
 @endcode
 
-<p>Before a commit, you should run
+<p>在提交之前，您应该运行
 @code
   clang-format -i <file>
 @endcode
-on each of your files. This will make sure indentation is conforming to the
-style guidelines outlined in this page.
+在你的每个档案上。这将确保缩进符合本页中概述的样式准则。
 
-This is cumbersome. Consequently, and more easily, you can just run
+这很麻烦。因此，更容易的是，你可以直接跑
 @code
   make indent
 @endcode
-in whatever directory you set up the library to be compiled in, to indent all
-source files that have been changed recently. If you want to make sure that
-the indenting is correct for all your commits, you might want to set up a
-pre-commit hook. One way to do so, is to copy
-<code>\${SOURCE_DIR}/contrib/git-hooks/pre-commit</code> to
-<code>\${SOURCE_DIR}/.git/hooks/pre-commit</code> and make sure it is
-executable.
 
-If the system you are working on has more than one version of
-<code>clang-format</code> installed (or if it is not in the path)
-you should replace the above <code>make indent</code> command with
+在设置要编译的库的任何目录中，缩进最近更改的所有源文件。如果要确保缩进对于所有提交都是正确的，那么可能需要设置一个预提交。一种方法是复制 <code>\${SOURCE_DIR}/contrib/git-hooks/pre-commit</code> 到
+<code>\${SOURCE_DIR}/.git/hooks/pre-commit</code> 并确保它是可执行的。
+
+如果您正在使用的系统安装了多个版本的 <code>clang-format</code> （或者如果它不在路径中），您应该将上面的 <code>make indent</code> 命令替换为
 @code
   make DEAL_II_CLANG_FORMAT=/path/to/clang-6.0/clang-format indent
 @endcode
-to point to the correct executable.
+指向正确的可执行文件。
 </p>
 
-<h3>Style issues</h3>
+<h3>风格问题</h3>
 
 <ol>
-<li> %Functions which return the number of something (number of cells,
-  degrees of freedom, etc) should start with <code>n_*</code>. Example:
+<li> %返回某个数（单元数、自由度等）的函数应以<code>n_*</code>开头。 例如:
   SparsityPatternBase::n_nonzero_elements().</li>
 
-<li> %Functions which set a bit or flag should start with <code>set_*</code>;
-  functions which clear bits or flags should be named <code>clear_*</code>.
-  Example: CellAccessor::set_refine_flag().</li>
+<li> %设置位或标志的函数应以<code>set_*</code>开始；清除位或标志的函数应命名为<code>clear_*</code>。例如: CellAccessor::set_refine_flag().</li>
 
-<li> Traditional logical operators should be used instead of their English
-  equivalents (i.e., use <code>&&</code>, <code>||</code>, and <code>!</code>
-  instead of <code>and</code>, <code>or</code>, and <code>not</code>).
+<li> 应该使用传统的逻辑运算符，而不是它们的英文等效运算符(i.e., 用 <code>&&</code>, <code>||</code>, 或 <code>!</code> 而非 <code>and</code>, <code>or</code>, and <code>not</code>).
 
-<li> In the implementation files, after each function, three empty lines are
-  expected to enable better readability. One empty line occurs in functions to
-  group blocks of code, since two empty lines are not enough to visibly
-  distinguish sufficiently that the code belongs to two different
-  functions.</li>
+<li> 在实现文件中，在每个函数之后，期望有三行空行，以实现更好的可读性。一个空行出现在对代码块进行分组的函数中，因为两个空行不足以明显区分代码是否属于两个不同的函数。</li>
 
-<li> Whenever an integer variable can only assume nonnegative values,
-  it is marked as unsigned. The same applies to functions that can only
-  return positive or zero values. Example: Triangulation::n_active_cells().</li>
+<li> 每当整数变量只能采用非负值时，它就被标记为无符号 unsigned。这同样适用于只能返回正值或零值的函数。 例如: Triangulation::n_active_cells().</li>
 
-<li> Whenever an argument to a function will not be changed, it should be marked
-  const, even if passed by value. Generally, we mark input parameters as
-  const. This aids as an additional documentation tool to clarify the
-  intent of a parameter (input, output, or both)
-  and lets the compiler issue warnings if such a parameter is
-  changed, which is often either involuntarily or poor style.</li>
+<li> 每当函数的参数不改变时，就应该将其标记为const，即使是按值传递。通常，我们将输入参数标记为const。这有助于作为一个额外的文档工具来澄清参数（输入、输出或两者）的意图，并允许编译器在此类参数更改时发出警告，这通常是非自愿的或风格不佳的。</li>
 
-<li> Whenever a function does not change any of the member variable of
-  the embedding class/object, it should be marked as const.</li>
+<li> 每当函数不更改嵌入类/对象的任何成员变量时，都应将其标记为const。</li>
 
-<li> %Function and variable names may not consist of only one or two
-  letters, unless the variable is a pure counting index.</li>
+<li> %函数名和变量名不能只包含一个或两个字母，除非变量是纯计数索引。</li>
 
-<li> Type aliases (<code>using</code>-declarations) are preferred to
-  <code>typedef</code>-declarations.</li>
+<li> 类型别名（<code>using</code> 声明）优先于 typedef 声明。</li>
 
-<li> Use the geometry information in GeometryInfo to get the
-  number of faces per cell, the number of children per cell, the
-  child indices of the child cells adjacent to face 3, etc, rather
-  than writing them into the code directly as <code>2*dim</code>,
-  <code>(1@<@<dim)</code> and
-  <code>{0,3}</code>. This reduces the possibilities for errors and enhances
-  readability of code.</li>
+<li> 使用GeometryInfo中的几何信息来获得每个单元的面数、每个单元的子单元数、与面3相邻的子单元的子索引等，而不是将它们直接作为 <code>2*dim</code>、<code>(1@<@<dim)</code> 和<code>{0,3}</code> 写入代码。这降低了出错的可能性并增强了代码的可读性。</li>
 
-<li> The layout of class declarations is the following: first the
-  block of public functions, beginning with the constructors, then
-  the destructors. If there are public member variables, these have
-  to occur before the constructor. Public variables shall only be
-  used if constant (in particular if they are static and constant)
-  or unavoidable.
-  <br>
-  After the public members, the protected and finally the private
-  members are to be listed. The order is as above: first variables
-  then functions.
-  <br>
-  Exceptions shall be declared at the end of the public section
-  before the non-public sections start.
-  <br>
-  We do not use the C++11-style class member initialization for member variables
-  that are neither <code>static const</code> nor <code>static constexpr</code>;
-  i.e., instead of
+<li> 类声明的布局如下：首先是公共函数块，从构造函数开始，然后是析构函数。如果存在公共成员变量，则这些变量必须出现在构造函数之前。公共变量只能在常量（特别是静态和常量）或不可避免的情况下使用。
+<br>
+在公共成员之后，是受保护的成员，最后是私有成员。顺序如下：首先是变量，然后是函数。
+<br>
+Exceptions 特殊情况应在公共部分结束时在非公共部分开始前宣布。
+
+对于既不是<code>static const</code>也不是<code>static constexpr</code>，我们 C++ 11风格的类成员初始化；而是这样代替
 @code
   class Foo
   {
@@ -139,7 +85,7 @@ to point to the correct executable.
     int *b = nullptr;
   };
 @endcode
-  write
+  写成
 @code
   class Foo
   {
@@ -158,22 +104,11 @@ to point to the correct executable.
 @endcode
   </li>
 
-<li> If a function has both input and output parameters, usually the
-  input parameters shall precede the output parameters, unless there
-  are good reasons to change this order. (The most common reason is trailing
-  input parameters with default values.) </li>
+<li> 如果一个函数既有输入参数又有输出参数，通常输入参数应在输出参数之前，除非有充分的理由改变这个顺序(最常见的原因是使用默认值跟踪输入参数。）</li>
 
-<li> Exceptions are used for %internal parameter checking and for
-  consistency checks through the Assert macro. Exception handling
-  like done by the C++ language (<code>try/throw/catch</code>, and using the
-  AssertThrow macro) are used to
-  handle run time errors (like I/O failures) which must be on
-  in any case, not only in debug mode.</li>
+<li> Exceptions 异常用于内部参数检查和通过Assert宏进行一致性检查。如C++语言所做的异常处理（尝试/抛出/捕捉 try/throw/catch，并使用AssertThrow Macro）用于处理运行时错误（如I/O故障），这在任何情况下都必须进行，而不仅仅是在调试模式下。</li>
 
-<li> Sometimes it makes sense to implement a class by using several
-  non-member functions that are not part of the public interface and are only
-  meant to be called in the current source file. Such free functions should be
-  put in an internal namespace structured in the following way:
+<li> 有时，通过使用几个非成员函数来实现一个类是有意义的，这些函数不是公共接口的一部分，并且只在当前源文件中调用。此类自由函数应放在内部命名空间中，其结构如下：
   @code
   namespace internal
   {
@@ -183,104 +118,45 @@ to point to the correct executable.
     }
   }
   @endcode
-  where <code>ClassName</code> is the name of the calling class.
+  其中 <code>ClassName</code> 是调用类的名称.
+</li>
 
-<li> Classes, namespaces and types generally are named using uppercase letters
-  to denote word beginnings (e.g. TriaIterator) &mdash; sometimes called
-  <a href="http://en.wikipedia.org/wiki/Camel_case"><i>camel
-  case</i></a> &mdash; while functions and variables
-  use lowercase letters and underscores to separate words.
-  The only exception are the iterator alias in Triangulation
-  and DoFHandler (named cell_iterator, active_line_iterator, etc)
-  to make the connection to the standard library container classes clear.</li>
+<li> 类、名称空间 和 类型 通常使用大写字母来表示单词的开头（例如triiterator）&mdash; 有时称为<a href="http://en.wikipedia.org/wiki/Camel_case"><i>camel case</i></a> &mdash 函数和变量使用小写字母和下划线分隔单词。唯一的例外是三角剖分中的迭代器别名 Triangulation 和 DoFHandler（命名为cell_iterator, active_line_iterator等），以明确与标准库容器类的连接。</li>
 
-<li> For classes with multiple template arguments, the dimension is usually
-  put before the data type specifier, i.e., we use Point<dim,number> and not
-  Point<number,dim>.
+<li> 对于具有多个模板参数的类，维度通常放在数据类型说明符之前, 即书写为 Point<dim,number> 而非 Point<number,dim>. </li>
 
-<li> There are several places in deal.II where we use forward declarations in
-  header files. The reason for this is that we can, hopefully, improve
-  compilation speeds by not using headers when we just need to mark a certain
-  type as an argument to a function. The convention used in deal.II is that, if
-  all we need is a type name, then the type may be forward declared in the
-  header where we need it; if a function (or member function) can return a value
-  then a declaration of that value's type should be available (by including the
-  necessary header). For example, <code>deal.II/dofs/dof_handler.h</code>
-  includes <code>deal.II/dofs/dof_accessor.h</code> so that one can write
-  something like <code>dof_handler.begin_active()->is_active()</code> without
-  explicitly including the header declaring the type of the object returned by
-  <code>begin_active()</code>.
+<li> 在deal.II中有几个地方我们在头文件中使用前向声明。这样做的原因是，当我们只需要将某个类型标记为函数的参数时，我们可以通过不使用头来提高编译速度。deal.II中使用的约定是，如果我们只需要一个类型名，那么可以在我们需要的头中向前声明该类型；如果一个函数（或成员函数）可以返回一个值，那么该值类型的声明应该是可用的（通过包含必要的头）。例如，<code>deal.II/dofs/dof_handler.h</code> 包含<code>deal.II/dofs/dof_accessor.h</code>，这样就可以编写<code>dof_handler.begin_active()->is_active()</code>之类的内容，而不必显式包含声明<code>begin_active()</code>返回的对象类型的头。</li>
 
-<li> Each class has to have at least 200 pages of documentation ;-)</li>
+<li> 每个类必须有至少200页的文档；-） ;-)</li>
 
 </ol>
 
 
-<h3>Instantiation of templated functions/classes</h3>
+<h3> 实例化 Instantiation of templated functions/classes</h3>
 
-<p>The majority of classes and functions in deal.II are templated. This brings a
-question of how and where such objects are instantiated, if at all. Throughout
-deal.II we adopt the following convention:</p>
+<p>deal.II中的大多数类和函数都是模板化的。这就带来了这样一个问题：如果有的话，这些对象是如何实例化的，在哪里实例化的。在整个deal.II中，我们采用以下公约：</p>
 
 <ol>
 
-<li> If we can enumerate all possible template arguments (e.g., the dimension
-can only be 1, 2, or 3), then a function template goes into the <code>.cc</code>
-file and we explicitly instantiate all possibilities. Users will not have any
-need to ever see these function templates because they will not want to
-instantiate these functions for any other template arguments anyway. </li>
+<li> 如果我们可以枚举所有可能的模板参数（例如，维度只能是1、2或3），那么函数模板进入.cc文件，我们显式实例化所有可能的参数。用户将不需要看到这些函数模板，因为他们无论如何也不想为任何其他模板参数实例化这些函数。</li>
 
-<li> If we can not enumerate all possible template arguments (e.g., vector
-types -- because users might want to define their own vector kinds) but at
-least know a few common usage cases, then the function is put into a
-<code>.templates.h</code> file. We \#include it into the <code>.cc</code> file
-and instantiate the functions for all of the common arguments. For almost all
-users, this will be just fine -- they only use the (vector, matrix, ...) types
-we already instantiate, and for them the <code>.templates.h</code> file will not
-be of any interest. It will also not slow down their compilations because
-nothing they see will \#include the <code>.templates.h</code> file. But users who
-define their own (vector, matrix, ...) types can instantiate the template
-functions with their own user-defined types by including the
-<code>.templates.h</code> files.
+<li> 如果我们不能列举所有可能的模板参数（例如，向量类型-因为用户可能想定义自己的向量类型），但至少知道一些常见的使用情况，那么该函数就被放入.templates.h文件中。我们将其 \#include 到.cc文件中，并实例化所有公共参数的函数。对于几乎所有的用户来说，这都很好--他们只使用我们已经实例化的( vector，matrix, ...) 类型，对他们来说.templates.h文件不会有任何意义。它也不会减慢他们的编译速度，因为他们看到的任何东西都不会 \#include .templates.h文件。但是定义自己类型(vector, matrix, ...) 的用户可以通过包含.templates.h文件用自己的用户定义类型实例化模板函数。</li>
 
-<li> Finally, if we can not assume in advance which values template arguments
-will take (e.g., any class derived from Subscriptor can be used as an argument),
-the definitions of functions are provided at the bottom of the header
-file with declarations. The definitions should be guarded with <code>\#ifndef
-DOXYGEN ... \#endif</code> to prevent Doxygen from picking them up.</li>
+<li> 最后，如果我们不能预先假定模板参数将采用哪些值（例如，从Subscriptor派生的任何类都可以用作参数），那么函数的定义将在头文件的底部提供声明。定义应该用<code>\#ifndef DOXYGEN ... \#endif</code> 以防止 Doxygen 误判。</li>
 
 </ol>
 
-<p> For the first two cases, instantiation instructions are defined in
-<code>.inst.in</code> files. They are processed by a binary called
-expand_instantiations (built from
-<code>cmake/scripts/expand_instantiations.cc</code>) and the parameters are
-defined dynamically through cmake depending on your configuration (see
-<code>cmake/config/template-arguments.in</code> in your build directory).
-It is those <code>.inst</code> files that are eventually included from the
-corresponding <code>.cc</code> files. </p>
+<p> 对于前两种情况，实例化指令在 <code>.inst.in</code> 文件中定义。它们由一个名为 expand_instantiations 的二进制文件（从<code>cmake/scripts/expand_instantiations.cc</code> 构建）进行处理，并根据您的配置通过cmake动态定义参数（请参阅构建目录中的<code>cmake/config/template-arguments.in</code> ）。正是这些<code>.inst</code>文件最终包含在相应的<code>.cc</code>文件中。</p>
 
 
 <h3>Defensive programming</h3>
 
-<p> Defensive programming is a term that we use frequently when we talk about
-writing code while in the mindset that errors will happen. Here, errors can
-come in two ways: first, I can make a mistake myself while writing a
-functions; and secondly, someone else can make a mistake while calling my
-function. In either case, I would like to write my code in such a way that
-errors are (i) as unlikely as possible, (ii) that the compiler can already
-find some of the mistakes, and (iii) that the remaining mistakes are
-relatively easy to find, for example because the program aborts. Defensive
-programming is then a set of strategies that make these goals more likely.
-</p>
+<p> 防御性编程是一个术语，我们在谈论编写代码时经常使用这个术语，而我们的思维定势是错误会发生。在这里，错误有两种表现：第一，我自己在写函数的时候会犯错误；第二，其他人在调用我的函数时可能会出错。在任何一种情况下，我都希望我的代码能够（I）尽可能地避免错误，（ii）编译器已经可以找到一些错误，以及（iii）剩余的错误相对容易找到，例如因为程序中止。防御性编程是一套使这些目标更有可能实现的策略。</p>
 
 <p>
-Over time, we have learned a number of techniques to this end, some of which
-we list here:
+随着时间的推移，我们已经学会了一些技巧，其中一些我们在这里列出：
 <ol>
-<li> <i>Assert preconditions on parameters:</i> People call functions with wrong
-  or nonsensical parameters, all the time. As the prototypical example,
-  consider a trivial implementation of vector addition:
+<li> <i>断言参数的前提条件:</i> 人们总是用错误或荒谬的参数调用函数。作为原型示例，考虑向量加法的一个简单实现:
   @code
     Vector &
     operator+=(Vector       &lhs,
@@ -291,18 +167,7 @@ we list here:
       return lhs;
     }
   @endcode
-  While correct, this function will get into trouble if the two vectors
-  do not have the same size. You think it is silly to call this function
-  with vectors of different size? Yes, of course it is. But it happens
-  all the time: people forget to reinitialize a vector, or it is reset in
-  a different function, etc. It happens. So if you are in such an unlucky
-  case, it can take a long time to figure out what's going on because
-  you are likely to just read uninitialized memory, or maybe you are
-  writing to memory the <code>lhs</code> vector doesn't actually own.
-  Neither is going to lead to immediate termination of the program,
-  but you'll probably get random errors at a later time. It would be
-  much easier if the program just stopped here right away. The following
-  implementation will do exactly this:
+  虽然正确，但如果两个向量的大小不相同，则此函数将遇到问题。你认为用不同大小的向量来调用这个函数是愚蠢的吗？是的，当然是。但这种情况经常发生：人们忘记重新初始化一个向量，或者在不同的函数中重置它，等等。因此，如果你在这样一个不幸的情况下，可能需要很长时间才能弄清楚发生了什么，因为你可能只是读取未初始化的内存，或者你正在写入lhs向量实际上并不拥有的内存。两者都不会导致程序的立即终止，但您可能会在以后的某个时间出现随机错误。如果程序马上停在这里就容易多了。下面的实现正好可以做到这一点：
   @code
     Vector &
     operator+=(Vector       &lhs,
@@ -315,39 +180,14 @@ we list here:
       return lhs;
     }
   @endcode
-  The <code>Assert</code> macro ensures that the condition is true
-  at run time, and otherwise prints a string containing information
-  encoded by the second argument and aborts the program. This way,
-  when you write a new program that happens to call this function,
-  you will learn of your error right away and have the opportunity
-  to fix it without ever having to seriously debug anything.
+  <code>Assert</code> 宏用来确保条件在运行时为true，否则将打印包含由第二个参数编码的信息的字符串并中止程序。这样，当您编写一个新的程序来调用这个函数时，您将立即了解到您的错误，并且有机会在不必认真调试任何东西的情况下修复它。
   <p>
-  As a general guideline, whenever you implement a new function,
-  think about the <i>preconditions</i> on parameter, i.e. what does the
-  function expect to be true about each of them, or their combination.
-  Then write assertions for all of these preconditions. This may be
-  half a dozen assertions in some cases but remember that each assertion
-  is a potential bug already found through trivial means.
+  一般来说，无论何时实现一个新函数，都要考虑参数的前提条件<i>preconditions</i>，即函数希望它们中的每一个或它们的组合都是正确的。然后为所有这些前提条件编写断言。在某些情况下，这可能是六个断言，但请记住，每个断言都是通过琐碎的方法已经发现的潜在bug。
   <p>
-  In a final note, let us remark that assertions are of course expensive:
-  they may make a program 3 or 5 times slower when you link it against
-  the debug version of the library. But if you consider your <i>overall</i>
-  development time, the ability to find bugs quickly probably far outweighs
-  the time you spend waiting for your program to finish. Furthermore,
-  calls to the Assert macro are removed from the program in optimized mode
-  (which you presumably only use once you know that everything runs just
-  fine in debug mode. The optimized libraries are faster by a factor of
-  3-5 than the debug libraries, at the price that it's much harder to find
-  bugs.
-  </li>
+  在最后一点中，让我们注意断言当然是昂贵的：当您将程序链接到库的调试版本时，断言可能会使程序慢3到5倍。但是，如果考虑到您的总体开发时间，快速发现bug的能力可能远远超过您等待程序完成所花费的时间。此外，对Assert宏的调用将在优化模式下从程序中删除（假设只有在知道调试模式下一切正常运行时才使用该模式）。优化后的库比调试库快3-5倍，但代价是发现bug要困难得多。
+</li>
 
-<li> <i>Assert postconditions:</i> If a function computes something
-  non-trivial there may be a bug in the code. To find these, use
-  postconditions: just like you have certain knowledge about useful values
-  for input parameters, you have knowledge about what you expect possible
-  return values to be. For example, a function that computes the norm of
-  a vector would expect the norm to be positive. You can write this as
-  follows:
+<li> <i> 断言后置条件 :</i> 如果一个函数计算一些非平凡的东西，那么代码中可能会有一个bug。要找到这些，请使用后置条件：就像您对输入参数的有用值有一定的了解一样，您也知道您期望的可能返回值是什么。例如，计算向量范数的函数期望范数为正。你可以这样写：
   @code
     double norm(const Vector &v)
     {
@@ -359,23 +199,10 @@ we list here:
       return std::sqrt(s);
     }
   @endcode
-  This function is too simple to really justify this assertion, but imagine
-  the computation to be lengthier and you can see how the assertion helps
-  you ensure (or <i>hedge</i>) yourself against mistakes. Note that one
-  could argue that the assertion should be removed once we've run the program
-  a number of times and found that the condition never triggers. But it's
-  better to leave it right where it is: it encodes for the future (and for
-  readers) knowledge you have about the function; if someone comes along
-  and replaced the implementation of the function by a more efficient
-  algorithm, the assertion can help make sure that the function continues
-  to do what it is supposed to do.
-  </li>
+  这个函数太简单了，无法真正证明这个断言是正确的，但是想象一下计算要长一些，您可以看到断言如何帮助您确保（或避免）自己出错。请注意，有人可能会认为，一旦我们运行了多次程序并发现该条件从未触发，就应该删除断言。但最好还是把它放在原处：它为将来（和读者）对函数的知识编码；如果有人出现并用更有效的算法替换函数的实现，断言可以帮助确保函数继续执行它应该执行的操作。
+</li>
 
-<li> <i>Assert internal states:</i> In a similar vein, if you have a
-  complex algorithm, use assertions to ensure that your mental model
-  of what is going on matches what is indeed true. For example, assume
-  you are writing a function that ensures that mesh sizes do not change
-  too much locally. You may end up with a code of the following kind:
+<li> <i>断言内部状态:</i> 同样的道理，如果你有一个复杂的算法，使用断言来确保你的心理模型与事实相符。例如，假设您正在编写一个函数，以确保网格大小不会在局部发生太大变化。您可能会得到以下类型的代码：
   @code
     for (const auto &cell = triangulation.active_cell_iterators())
       for (unsigned int face=0; ...)
@@ -389,22 +216,11 @@ we list here:
             }
         }
   @endcode
-  The conditions that got us into the else-branch may be
-  complicated, and while it may be true that we believed that the
-  only possibility we got here is that the neighbor is at the boundary,
-  there may have been a bug in our implementation. There may also have been
-  a bug in our thinking, or someone changes the code way above in the same
-  function and forgets about the issue here, or a change at a completely
-  different location in the library makes the assumption untenable. In
-  all of these cases, the explicit statement of our assertion makes sure
-  that these problems are easily found.
+  使我们进入else分支的条件可能很复杂，虽然我们认为这里唯一的可能性是邻居在边界上，但我们的实现中可能有一个bug。我们的想法中可能也有一个bug，或者有人在相同的函数中更改了上面的代码，忘记了这里的问题，或者在库中完全不同的位置进行了更改，使得这个假设站不住脚。在所有这些情况下，我们断言的明确声明确保这些问题很容易被发现。
   </li>
 
-<li> <i>Initialize variables at the point of their declaration if they
-  live on the stack:</i>
-  Traditional C required that variables are declared at the beginning of
-  the function even if they are only used further below. This leads to
-  code like this that we may imagine in a 1d code:
+<li> <i>如果变量位于堆栈上，则在其声明点初始化变量:</i>
+  传统的C语言要求在函数的开头声明变量，即使它们只在下面的更进一步使用。这就产生了我们可以想象的一维代码：:
   @code
     template <int dim>
     void foo ()
@@ -419,13 +235,9 @@ we list here:
       ...
     }
   @endcode
-  The problem is that if the code between the declaration and initialization
-  is long and complicated, you can't look up on one page what the type of
-  a variable is and what it's value may be. In fact, it may not even be
-  quite clear that the variable is used initialized at all, or whether it
-  is accidentally left uninitialized.
+  问题是，如果声明和初始化之间的代码既长又复杂，您就无法在一个页面上查找变量的类型和值。事实上，甚至可能不太清楚这个变量是用来初始化的，或者它是否被意外地忽略了初始化。
   <p>
-  A better way to do this would be as follows:
+  更好的方法如下：
   @code
     template <int dim>
     void foo ()
@@ -439,28 +251,12 @@ we list here:
       ...
     }
   @endcode
-  This makes it much clearer what the type of the variable is
-  and that it is in fact only ever used when initialized. Furthermore,
-  if someone wants to read the code to see what the variable is in fact
-  doing, declaring and initializing it in the innermost possible scope
-  makes this task easier: we don't have to look upwards for it beyond
-  the declaration, and we don't have to look downward beyond the end
-  of the current scope since this is where the variable dies.
+  这样就更清楚了变量的类型是什么，而且它实际上只在初始化时使用。此外，如果有人想阅读代码来查看变量实际上在做什么，那么在最内部可能的作用域中声明和初始化它会使这项任务变得更容易：我们不必在声明之外向上查找它，也不必在当前作用域的末尾向下查找，因为这是变量消亡的地方。
   <p>
-  As a final note, it is clear that you can only do this sort of stuff
-  for variables that completely live on the stack without allocating memory
-  on the heap. Within deal.II, this is only true for builtin types like
-  <code>int, double, char</code>, etc, as well as the Point and Tensor
-  classes. Everything else has something like a <code>std::vector</code>
-  as a member variable, which requires memory allocation &mdash; you don't
-  want to declare these inside loops, at least not if the loop is
-  traversed frequently.
+  最后一点，很明显，您只能对完全位于堆栈上的变量执行这类操作，而无需在堆上分配内存。在deal.II中，这仅适用于<code>int, double, char</code>等内置类型，以及 Point 和 Tensor 类。其他所有东西都有类似<code>std::vector</code>的成员变量，这需要内存分配 &mdash;您不希望在循环内声明这些，至少在循环频繁遍历的情况下是这样。
   </li>
 
-<li> <i>Make variables const:</i> To pick up on the example above, note
-  that in most cases we will never change the variable so initialized
-  any more. In other words, if this is the case, we may as well write
-  things as follows:
+<li> <i>使变量成为 const:</i> 为了学习上面的例子，请注意，在大多数情况下，我们永远不会再更改这样初始化的变量。换言之，如果是这样的话，我们不妨这样写：
   @code
     template <int dim>
     void foo ()
@@ -475,25 +271,15 @@ we list here:
       ...
     }
   @endcode
-  By marking the variable as constant we make sure that we don't accidentally
-  change it. For example, the compiler could catch code like this:
+  通过将变量标记为常量，我们可以确保不会意外更改它。例如，编译器可以捕获如下代码：
   @code
         if (cell_center[0] = 0)
           ...
   @endcode
-  This was most likely meant to be a <code>==</code> rather than an
-  assignment. By marking the variable as const, the compiler would have
-  told us about this bug. Maybe equally importantly, human readers of the
-  code need not look further down whether the value of the variable may
-  actually be changed somewhere between declaration and use &mdash; it
-  can't be if it is marked as const.
-  </li>
+  这很可能是一个 <code>==</code> 而不是一个赋值。通过将变量标记为const，编译器就会告诉我们这个bug。也许同样重要的是，代码的人类读者不需要进一步了解变量的值是否真的在声明和使用之间发生了更改—如果它被标记为const，就不可能发生更改。
+</li>
 
-<li> <i>Make input arguments of functions const:</i> The same essentially
-  holds true as well as for function arguments: If you have no intention
-  of changing a variable (which is typically the case for input arguments),
-  then mark it as constant. For example, the following function should take
-  its argument as a constant value:
+<li> <i> 使函数的输入参数为常量:</i> 对于函数参数也是如此：如果您不想更改变量（通常是输入参数的情况），那么将其标记为常量。例如，以下函数应将其参数作为常量值：
   @code
      template <int dim>
      typename Triangulation<dim>::cell_iterator
@@ -503,13 +289,7 @@ we list here:
        return something;
      }
   @endcode
-  Here, the user calls <code>cell-@>child(3)</code>, for example. There really
-  is no reason why the function would ever want to change the value of
-  the <code>child_no</code> argument &mdash; so mark it as constant:
-  this both helps the reader of the code understand that this is an
-  input argument of the function for which we need not search below whether
-  it is ever changed, and it helps the compiler help us finding bugs if
-  we ever accidentally change the value.
+  例如，在这里，用户调用<code>cell-@>child(3)</code>。函数没有理由改变子参数的值，所以把它标记为常量：这可以帮助代码的读者理解这是函数的一个输入参数，我们不需要在下面搜索它是否被改变，如果我们不小心更改了值，它可以帮助编译器发现错误。
 </ol>
 
  */

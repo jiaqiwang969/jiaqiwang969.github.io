@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-16 tutorial program</title>
+<title>The deal.II Library: The step-16 tutorial program 。</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,70 +86,75 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-16 tutorial program </div>  </div>
+<div class="title">The step-16 tutorial program 。 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_6.html">step-6</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_6.html">step-6</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Thetestcase">The testcase</a>
+        <li><a href="#Thetestcase">The testcase</a><a href="#Thetestcase">The testcase</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#TheScratchandCopyobjects">The Scratch and Copy objects</a>
-        <li><a href="#ThecodeLaplaceProblemcodeclasstemplate">The <code>LaplaceProblem</code> class template</a>
-        <li><a href="#ThecodeLaplaceProblemcodeclassimplementation">The <code>LaplaceProblem</code> class implementation</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#TheScratchandCopyobjects">The Scratch and Copy objects</a><a href="#TheScratchandCopyobjects">The Scratch and Copy objects</a>
+        <li><a href="#ThecodeLaplaceProblemcodeclasstemplate">The <code>LaplaceProblem</code> class template</a><a href="#ThecodeLaplaceProblemcodeclasstemplate">The <code>LaplaceProblem</code> class template</a>
+        <li><a href="#ThecodeLaplaceProblemcodeclassimplementation">The <code>LaplaceProblem</code> class implementation</a><a href="#ThecodeLaplaceProblemcodeclassimplementation">The <code>LaplaceProblem</code> class implementation</a>
       <ul>
-        <li><a href="#LaplaceProblemsetup_system">LaplaceProblem::setup_system</a>
-        <li><a href="#LaplaceProblemcell_worker">LaplaceProblem::cell_worker</a>
-        <li><a href="#LaplaceProblemassemble_system">LaplaceProblem::assemble_system</a>
-        <li><a href="#LaplaceProblemassemble_multigrid">LaplaceProblem::assemble_multigrid</a>
-        <li><a href="#LaplaceProblemsolve">LaplaceProblem::solve</a>
-        <li><a href="#Postprocessing">Postprocessing</a>
-        <li><a href="#LaplaceProblemrun">LaplaceProblem::run</a>
+        <li><a href="#LaplaceProblemsetup_system">LaplaceProblem::setup_system</a><a href="#LaplaceProblemsetup_system">LaplaceProblem::setup_system</a>
+        <li><a href="#LaplaceProblemcell_worker">LaplaceProblem::cell_worker</a><a href="#LaplaceProblemcell_worker">LaplaceProblem::cell_worker</a>
+        <li><a href="#LaplaceProblemassemble_system">LaplaceProblem::assemble_system</a><a href="#LaplaceProblemassemble_system">LaplaceProblem::assemble_system</a>
+        <li><a href="#LaplaceProblemassemble_multigrid">LaplaceProblem::assemble_multigrid</a><a href="#LaplaceProblemassemble_multigrid">LaplaceProblem::assemble_multigrid</a>
+        <li><a href="#LaplaceProblemsolve">LaplaceProblem::solve</a><a href="#LaplaceProblemsolve">LaplaceProblem::solve</a>
+        <li><a href="#Postprocessing">Postprocessing</a><a href="#Postprocessing">Postprocessing</a>
+        <li><a href="#LaplaceProblemrun">LaplaceProblem::run</a><a href="#LaplaceProblemrun">LaplaceProblem::run</a>
       </ul>
-        <li><a href="#Themainfunction">The main() function</a>
+        <li><a href="#Themainfunction">The main() function</a><a href="#Themainfunction">The main() function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions"> Possibilities for extensions </a>
+        <li><a href="#Possibilitiesforextensions"> Possibilities for extensions </a><a href="#Possibilitiesforextensions"> Possibilities for extensions </a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
+</p>
+<p><br  />
  <br  />
 </p>
 <p><em> Note: A variant called <a class="el" href="step_16b.html">step-16b</a> of this tutorial exists, that uses <a class="el" href="namespaceMeshWorker.html">MeshWorker</a> and <a class="el" href="namespaceLocalIntegrators.html" title="Library of integrals over cells and faces.">LocalIntegrators</a> instead of assembling matrices manually as it is done in this tutorial. </em></p>
 <p><a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
-<p>This example shows the basic usage of the multilevel functions in deal.II. It solves almost the same problem as used in <a class="el" href="step_6.html">step-6</a>, but demonstrating the things one has to provide when using multigrid as a preconditioner. In particular, this requires that we define a hierarchy of levels, provide transfer operators from one level to the next and back, and provide representations of the Laplace operator on each level.</p>
-<p>In order to allow sufficient flexibility in conjunction with systems of differential equations and block preconditioners, quite a few different objects have to be created before starting the multilevel method, although most of what needs to be done is provided by deal.II itself. These are</p><ul>
-<li>the object handling transfer between grids; we use the <a class="el" href="classMGTransferPrebuilt.html">MGTransferPrebuilt</a> class for this that does almost all of the work inside the library,</li>
-<li>the solver on the coarsest level; here, we use <a class="el" href="classMGCoarseGridHouseholder.html">MGCoarseGridHouseholder</a>,</li>
-<li>the smoother on all other levels, which in our case will be the <a class="el" href="classmg_1_1SmootherRelaxation.html">mg::SmootherRelaxation</a> class using SOR as the underlying method,</li>
-<li>and <a class="el" href="classmg_1_1Matrix.html">mg::Matrix</a>, a class having a special level multiplication, i.e. we basically store one matrix per grid level and allow multiplication with it.</li>
+<p>这个例子显示了deal.II中多级函数的基本用法。它几乎解决了与 <a class="el" href="step_6.html">step-6</a> 中使用的相同的问题，但展示了使用多网格作为预处理程序时必须提供的东西。特别是，这要求我们定义一个层次结构，提供从一个层次到下一个层次以及返回的转移算子，并提供每个层次上的拉普拉斯算子的表示。</p>
+<p>为了使微分方程系统和块状预处理程序具有足够的灵活性，在开始使用多层次方法之前，必须创建一些不同的对象，尽管大部分需要做的事情是由deal.II本身提供。这些对象是</p>
+<ul>
+<li>处理网格间转移的对象；我们使用MGTransferPrebuilt类来处理，它几乎完成了库中的所有工作。</li>
+<li>最粗层次的求解器；在这里，我们使用MGCoarseGridHouseholder。</li>
+<li>所有其他级别的平滑器，在我们的例子中，这将是使用SOR作为基础方法的 <a class="el" href="classmg_1_1SmootherRelaxation.html">mg::SmootherRelaxation</a> 类。</li>
+<li>和 <a class="el" href="classmg_1_1Matrix.html">mg::Matrix</a>, 类，该类有一个特殊的水平乘法，即我们基本上在每个网格水平上存储一个矩阵，并允许与之相乘。</li>
 </ul>
-<p>Most of these objects will only be needed inside the function that actually solves the linear system. There, these objects are combined in an object of type <a class="el" href="classMultigrid.html">Multigrid</a>, containing the implementation of the V-cycle, which is in turn used by the preconditioner <a class="el" href="classPreconditionMG.html">PreconditionMG</a>, ready for plug-in into a linear solver of the LAC library.</p>
-<p>The multigrid method implemented here for adaptively refined meshes follows the outline in the <a class="el" href="DEALGlossary.html#mg_paper">Multigrid paper</a>, which describes the underlying implementation in deal.II and also introduces a lot of the nomenclature. First, we have to distinguish between level meshes, namely cells that have the same refinement distance from the coarse mesh, and the leaf mesh consisting of active cells of the hierarchy (in older work we refer to this as the global mesh, but this term is overused). Most importantly, the leaf mesh is not identical with the level mesh on the finest level. The following image shows what we consider to be a "level mesh":</p>
+<p>这些对象中的大多数只在实际解决线性系统的函数中需要。在这里，这些对象被组合到一个多网格类型的对象中，其中包含V型循环的实现，它又被预处理程序PreconditionMG使用，准备插入到LAC库的线性求解器中。</p>
+<p>这里实现的自适应细化网格的多网格方法遵循 <a class="el" href="DEALGlossary.html#mg_paper">多网格论文 </a>中的纲要，该论文描述了交易二中的基本实现，也介绍了很多术语。首先，我们必须区分层次网格，即与粗网格有相同细化距离的单元，以及由层次结构中的活动单元组成的叶子网格（在较早的工作中，我们将其称为全局网格，但这个术语被过度使用）。最重要的是，叶子网格与最细层次上的层次网格不完全相同。下面的图片显示了我们认为的 "水平网格"。</p>
 <p align="center"></p>
 <div class="image">
 <img src="multigrid.png" alt=""/>
 </div>
- <p>The fine level in this mesh consists only of the degrees of freedom that are defined on the refined cells, but does not extend to that part of the domain that is not refined. While this guarantees that the overall effort grows as \({\cal O}(N)\) as necessary for optimal multigrid complexity, it leads to problems when defining where to smooth and what boundary conditions to pose for the operators defined on individual levels if the level boundary is not an external boundary. These questions are discussed in detail in the article cited above.</p>
+ <p><br  />
+</p>
+<p>这个网格中的精细层次只包括定义在细化单元上的自由度，但不延伸到领域中未被细化的那部分。虽然这保证了整体工作的增长，因为 \({\cal O}(N)\) 是最佳多网格复杂度所必需的，但它导致了在定义平滑的地方和在个别层次上定义的算子的边界条件时的问题，如果层次边界不是外部边界。这些问题在上面引用的文章中进行了详细讨论。</p>
 <p><a class="anchor" id="Thetestcase"></a></p><h3>The testcase</h3>
-<p>The problem we solve here is similar to <a class="el" href="step_6.html">step-6</a>, with two main differences: first, the multigrid preconditioner, obviously. We also change the discontinuity of the coefficients such that the local assembler does not look more complicated than necessary.</p>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
-<p>Again, the first few include files are already known, so we won't comment on them:</p>
+<p>我们在这里解决的问题与 step-6 相似，主要有两个不同点：第一，多网格预处理，显然。我们还改变了系数的不连续性，使局部装配器看起来不会比必要的更复杂。<a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+<p><a class="anchor" id="Includefiles"></a></p><h3>Include files</h3>
+<p>同样，前几个include文件已经知道了，所以我们不做评论。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="quadrature__lib_8h.html">deal.II/base/quadrature_lib.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="function_8h.html">deal.II/base/function.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logstream_8h.html">deal.II/base/logstream.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="include_2deal_8II_2base_2utilities_8h.html">deal.II/base/utilities.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="affine__constraints_8h.html">deal.II/lac/affine_constraints.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector_8h.html">deal.II/lac/vector.h</a>&gt;</span></div>
@@ -158,14 +163,18 @@ $(function() {
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="solver__cg_8h.html">deal.II/lac/solver_cg.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="precondition_8h.html">deal.II/lac/precondition.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2tria_8h.html">deal.II/grid/tria.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid__generator_8h.html">deal.II/grid/grid_generator.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="grid_2grid__refinement_8h.html">deal.II/grid/grid_refinement.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="dof__tools_8h.html">deal.II/dofs/dof_tools.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__q_8h.html">deal.II/fe/fe_q.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe_2fe__values_8h.html">deal.II/fe/fe_values.h</a>&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="vector__tools_8h.html">deal.II/numerics/vector_tools.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="numerics_2data__out_8h.html">deal.II/numerics/data_out.h</a>&gt;</span></div>
@@ -189,8 +198,8 @@ $(function() {
 <div class="ttc" id="asparse__matrix_8h_html"><div class="ttname"><a href="sparse__matrix_8h.html">sparse_matrix.h</a></div></div>
 <div class="ttc" id="avector_8h_html"><div class="ttname"><a href="vector_8h.html">vector.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p>These, now, are the include necessary for the multilevel methods. The first one declares how to handle Dirichlet boundary conditions on each of the levels of the multigrid method. For the actual description of the degrees of freedom, we do not need any new include file because <a class="el" href="classDoFHandler.html">DoFHandler</a> already has all necessary methods implemented. We will only need to distribute the DoFs for the levels further down.</p>
-<p>The rest of the include files deals with the mechanics of multigrid as a linear operator (solver or preconditioner).</p>
+</div><!-- fragment --><p>现在，这些是多级方法所需的include。第一个文件声明了如何处理多网格方法每个层次上的Dirichlet边界条件。对于自由度的实际描述，我们不需要任何新的包含文件，因为DoFHandler已经实现了所有必要的方法。我们只需要为更低的层次分配自由度。</p>
+<p>其余的包含文件涉及到多网格作为线性算子（求解器或预处理器）的机制。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="mg__constrained__dofs_8h.html">deal.II/multigrid/mg_constrained_dofs.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="multigrid_8h.html">deal.II/multigrid/multigrid.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="mg__transfer_8h.html">deal.II/multigrid/mg_transfer.h</a>&gt;</span></div>
@@ -205,20 +214,24 @@ $(function() {
 <div class="ttc" id="amg__tools_8h_html"><div class="ttname"><a href="mg__tools_8h.html">mg_tools.h</a></div></div>
 <div class="ttc" id="amg__transfer_8h_html"><div class="ttname"><a href="mg__transfer_8h.html">mg_transfer.h</a></div></div>
 <div class="ttc" id="amultigrid_8h_html"><div class="ttname"><a href="multigrid_8h.html">multigrid.h</a></div></div>
-</div><!-- fragment --><p>We will be using <a class="el" href="group__MeshWorker.html#ga76ec61fbd188fb320fe8ca166a79b322">MeshWorker::mesh_loop</a> to loop over the cells, so include it here:</p>
+</div><!-- fragment --><p>我们将使用 <a class="el" href="group__MeshWorker.html#ga76ec61fbd188fb320fe8ca166a79b322">MeshWorker::mesh_loop</a> 来循环计算单元，所以在这里包括它。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="mesh__loop_8h.html">deal.II/meshworker/mesh_loop.h</a>&gt;</span></div>
 <div class="ttc" id="amesh__loop_8h_html"><div class="ttname"><a href="mesh__loop_8h.html">mesh_loop.h</a></div></div>
-</div><!-- fragment --><p>This is C++:</p>
+</div><!-- fragment --><p>这就是C++。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span>Step16</div>
 <div class="line">{</div>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="namespace__dealii_8h_source.html#l00025">namespace_dealii.h:26</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="TheScratchandCopyobjects"></a> </p><h3>The Scratch and Copy objects</h3>
-<p>We use <a class="el" href="group__MeshWorker.html#ga76ec61fbd188fb320fe8ca166a79b322">MeshWorker::mesh_loop()</a> to assemble our matrices. For this, we need a ScratchData object to store temporary data on each cell (this is just the <a class="el" href="classFEValues.html">FEValues</a> object) and a CopyData object that will contain the output of each cell assembly. For more details about the usage of scratch and copy objects, see the <a class="el" href="namespaceWorkStream.html">WorkStream</a> namespace.</p>
+<p><br  />
+</p>
+<p>我们使用 <a class="el" href="group__MeshWorker.html#ga76ec61fbd188fb320fe8ca166a79b322">MeshWorker::mesh_loop()</a> 来组装我们的矩阵。为此，我们需要一个ScratchData对象来存储每个单元的临时数据（这只是FEValues对象）和一个CopyData对象，它将包含每个单元装配的输出。关于scratch和copy对象的用法的更多细节，请参见WorkStream命名空间。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">struct </span>ScratchData</div>
 <div class="line">{</div>
@@ -229,6 +242,7 @@ $(function() {
 <div class="line">    : fe_values(mapping, fe, <a class="code" href="classQGauss.html">QGauss</a>&lt;dim&gt;(quadrature_degree), update_flags)</div>
 <div class="line">  {}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  ScratchData(<span class="keyword">const</span> ScratchData&lt;dim&gt; &amp;scratch_data)</div>
 <div class="line">    : fe_values(scratch_data.fe_values.get_mapping(),</div>
 <div class="line">                scratch_data.fe_values.get_fe(),</div>
@@ -236,8 +250,10 @@ $(function() {
 <div class="line">                scratch_data.fe_values.get_update_flags())</div>
 <div class="line">  {}</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> fe_values;</div>
 <div class="line">};</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">struct </span>CopyData</div>
 <div class="line">{</div>
@@ -246,11 +262,13 @@ $(function() {
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a>                       cell_rhs;</div>
 <div class="line">  std::vector&lt;types::global_dof_index&gt; local_dof_indices;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">class</span> Iterator&gt;</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceinternal.html#a38181f4582ff69679bda7d8e31c37291">reinit</a>(<span class="keyword">const</span> Iterator &amp;cell, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell)</div>
 <div class="line">  {</div>
 <div class="line">    <a class="code" href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">cell_matrix</a>.reinit(dofs_per_cell, dofs_per_cell);</div>
 <div class="line">    cell_rhs.<a class="code" href="group__Vectors.html#gac4a4dbef7dd65ef8ad35ae56b57d7c05">reinit</a>(dofs_per_cell);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    local_dof_indices.resize(dofs_per_cell);</div>
 <div class="line">    cell-&gt;get_active_or_mg_dof_indices(local_dof_indices);</div>
@@ -269,9 +287,10 @@ $(function() {
 <div class="ttc" id="anamespaceLocalIntegrators_1_1Advection_html_a8bc7b8136646134f73a4193adefe15f8"><div class="ttname"><a href="namespaceLocalIntegrators_1_1Advection.html#a8bc7b8136646134f73a4193adefe15f8">LocalIntegrators::Advection::cell_matrix</a></div><div class="ttdeci">void cell_matrix(FullMatrix&lt; double &gt; &amp;M, const FEValuesBase&lt; dim &gt; &amp;fe, const FEValuesBase&lt; dim &gt; &amp;fetest, const ArrayView&lt; const std::vector&lt; double &gt;&gt; &amp;velocity, const double factor=1.)</div><div class="ttdef"><b>Definition:</b> <a href="advection_8h_source.html#l00075">advection.h:75</a></div></div>
 <div class="ttc" id="anamespaceinternal_html_a38181f4582ff69679bda7d8e31c37291"><div class="ttname"><a href="namespaceinternal.html#a38181f4582ff69679bda7d8e31c37291">internal::reinit</a></div><div class="ttdeci">void reinit(MatrixBlock&lt; MatrixType &gt; &amp;v, const BlockSparsityPattern &amp;p)</div><div class="ttdef"><b>Definition:</b> <a href="matrix__block_8h_source.html#l00618">matrix_block.h:618</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="ThecodeLaplaceProblemcodeclasstemplate"></a> </p><h3>The <code>LaplaceProblem</code> class template</h3>
-<p>This main class is similar to the same class in <a class="el" href="step_6.html">step-6</a>. As far as member functions is concerned, the only additions are:</p><ul>
-<li>The <code>assemble_multigrid</code> function that assembles the matrices that correspond to the discrete operators on intermediate levels.</li>
-<li>The <code>cell_worker</code> function that assembles our PDE on a single cell.</li>
+<p>这个主类与 <a class="el" href="step_6.html">step-6</a> 中的同一类相似。就成员函数而言，唯一增加的是。</p>
+<ul>
+<li><code>assemble_multigrid</code> 函数，它组装了对应于中间层的离散算子的矩阵。</li>
+<li><code>cell_worker</code> 函数，它将我们的PDE集合在一个单元上。</li>
 </ul>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>LaplaceProblem</div>
@@ -280,11 +299,13 @@ $(function() {
 <div class="line">  LaplaceProblem(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> degree);</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">class</span> Iterator&gt;</div>
 <div class="line">  <span class="keywordtype">void</span> cell_worker(<span class="keyword">const</span> Iterator &amp;  cell,</div>
 <div class="line">                   ScratchData&lt;dim&gt; &amp;scratch_data,</div>
 <div class="line">                   CopyData &amp;        copy_data);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> setup_system();</div>
 <div class="line">  <span class="keywordtype">void</span> assemble_system();</div>
@@ -293,17 +314,22 @@ $(function() {
 <div class="line">  <span class="keywordtype">void</span> refine_grid();</div>
 <div class="line">  <span class="keywordtype">void</span> output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classTriangulation.html">Triangulation&lt;dim&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
 <div class="line">  <a class="code" href="classFE__Q.html">FE_Q&lt;dim&gt;</a>          fe;</div>
 <div class="line">  <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a>    dof_handler;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classSparsityPattern.html">SparsityPattern</a>      sparsity_pattern;</div>
 <div class="line">  <a class="code" href="classSparseMatrix.html">SparseMatrix&lt;double&gt;</a> system_matrix;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> constraints;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> solution;</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;double&gt;</a> system_rhs;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> degree;</div>
 <div class="ttc" id="aclassAffineConstraints_html"><div class="ttname"><a href="classAffineConstraints.html">AffineConstraints&lt; double &gt;</a></div></div>
@@ -314,11 +340,14 @@ $(function() {
 <div class="ttc" id="aclassTriangulation_html"><div class="ttname"><a href="classTriangulation.html">Triangulation</a></div><div class="ttdef"><b>Definition:</b> <a href="grid_2tria_8h_source.html#l01127">tria.h:1128</a></div></div>
 <div class="ttc" id="anamespaceWorkStream_1_1internal_1_1tbb__no__coloring_html_a8673698a405bf47aa24002aeb6d76d70"><div class="ttname"><a href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">WorkStream::internal::tbb_no_coloring::run</a></div><div class="ttdeci">void run(const Iterator &amp;begin, const typename identity&lt; Iterator &gt;::type &amp;end, Worker worker, Copier copier, const ScratchData &amp;sample_scratch_data, const CopyData &amp;sample_copy_data, const unsigned int queue_length, const unsigned int chunk_size)</div><div class="ttdef"><b>Definition:</b> <a href="work__stream_8h_source.html#l00691">work_stream.h:691</a></div></div>
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
-</div><!-- fragment --><p>The following members are the essential data structures for the multigrid method. The first four represent the sparsity patterns and the matrices on individual levels of the multilevel hierarchy, very much like the objects for the global mesh above.</p>
-<p>Then we have two new matrices only needed for multigrid methods with local smoothing on adaptive meshes. They convey data between the interior part of the refined region and the refinement edge, as outlined in detail in the <a class="el" href="DEALGlossary.html#mg_paper">multigrid paper</a>.</p>
-<p>The last object stores information about the boundary indices on each level and information about indices lying on a refinement edge between two different refinement levels. It thus serves a similar purpose as <a class="el" href="classAffineConstraints.html">AffineConstraints</a>, but on each level.</p>
+</div><!-- fragment --><p>以下成员是多网格方法的基本数据结构。前四个表示稀疏模式和多级层次结构中各个层次上的矩阵，非常类似于上面的全局网格的对象。 <br  />
+</p>
+<p>然后，我们有两个新的矩阵，只需要在自适应网格上进行局部平滑的多网格方法。它们在细化区域的内部和细化边缘之间传递数据，正如在 <a class="el" href="DEALGlossary.html#mg_paper">多网格论文 </a>中详细描述的那样。 <br  />
+</p>
+<p>最后一个对象存储了每个层次上的边界指数信息和位于两个不同细化层次之间的细化边缘上的指数信息。因此，它的作用与AffineConstraints类似，但在每个层次上。</p>
 <div class="fragment"><div class="line">  <a class="code" href="classMGLevelObject.html">MGLevelObject&lt;SparsityPattern&gt;</a> mg_sparsity_patterns;</div>
 <div class="line">  <a class="code" href="classMGLevelObject.html">MGLevelObject&lt;SparsityPattern&gt;</a> mg_interface_sparsity_patterns;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classMGLevelObject.html">MGLevelObject&lt;SparseMatrix&lt;double&gt;</a>&gt; mg_matrices;</div>
 <div class="line">  <a class="code" href="classMGLevelObject.html">MGLevelObject&lt;SparseMatrix&lt;double&gt;</a>&gt; mg_interface_matrices;</div>
@@ -326,12 +355,15 @@ $(function() {
 <div class="line">};</div>
 <div class="ttc" id="aclassMGConstrainedDoFs_html"><div class="ttname"><a href="classMGConstrainedDoFs.html">MGConstrainedDoFs</a></div><div class="ttdef"><b>Definition:</b> <a href="mg__constrained__dofs_8h_source.html#l00046">mg_constrained_dofs.h:47</a></div></div>
 <div class="ttc" id="aclassMGLevelObject_html"><div class="ttname"><a href="classMGLevelObject.html">MGLevelObject&lt; SparsityPattern &gt;</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="ThecodeLaplaceProblemcodeclassimplementation"></a> </p><h3>The <code>LaplaceProblem</code> class implementation</h3>
-<p>Just one short remark about the constructor of the <a class="el" href="classTriangulation.html">Triangulation</a>: by convention, all adaptively refined triangulations in deal.II never change by more than one level across a face between cells. For our multigrid algorithms, however, we need a slightly stricter guarantee, namely that the mesh also does not change by more than refinement level across vertices that might connect two cells. In other words, we must prevent the following situation:</p>
+</div><!-- fragment --><p><a class="anchor" id="ThecodeLaplaceProblemcodeclassimplementation"></a></p><h3>The <code>LaplaceProblem</code> class implementation</h3>
+<p>关于三角结构的构造函数只有一个简短的评论：按照惯例，deal.II中的所有自适应精化三角结构在单元格之间的面的变化不会超过一个级别。然而，对于我们的多网格算法，我们需要一个更严格的保证，即网格在连接两个单元的顶点上的变化也不超过细化级别。换句话说，我们必须防止出现以下情况。 <br  />
+</p>
 <div class="image">
 <img src="limit_level_difference_at_vertices.png" alt=""/>
 </div>
-<p>This is achieved by passing the <a class="el" href="classTriangulation.html#a0633dd17e535a59162b79f338c6ff5aeaa2ab57e4f7b1633f26092ae861ea3bfc">Triangulation::limit_level_difference_at_vertices</a> flag to the constructor of the triangulation class.</p>
+<p> <br  />
+</p>
+<p>这可以通过向三角化类的构造函数传递 <a class="el" href="classTriangulation.html#a0633dd17e535a59162b79f338c6ff5aeaa2ab57e4f7b1633f26092ae861ea3bfc">Triangulation::limit_level_difference_at_vertices</a> 标志来实现。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">LaplaceProblem&lt;dim&gt;::LaplaceProblem(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> degree)</div>
 <div class="line">  : <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>(<a class="code" href="classTriangulation.html">Triangulation</a>&lt;dim&gt;::limit_level_difference_at_vertices)</div>
@@ -340,12 +372,13 @@ $(function() {
 <div class="line">  , degree(degree)</div>
 <div class="line">{}</div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemsetup_system"></a> </p><h4>LaplaceProblem::setup_system</h4>
-<p>In addition to just distributing the degrees of freedom in the <a class="el" href="classDoFHandler.html">DoFHandler</a>, we do the same on each level. Then, we follow the same procedure as before to set up the system on the leaf mesh.</p>
+<p>除了只是在DoFHandler中分配自由度外，我们在每一层都做同样的事情。然后，我们按照之前的程序，在叶子网格上设置系统。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::setup_system()</div>
 <div class="line">{</div>
 <div class="line">  dof_handler.distribute_dofs(fe);</div>
 <div class="line">  dof_handler.distribute_mg_dofs();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;   Number of degrees of freedom: &quot;</span> &lt;&lt; dof_handler.n_dofs()</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot; (by level: &quot;</span>;</div>
@@ -355,11 +388,14 @@ $(function() {
 <div class="line">  std::cout &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  solution.reinit(dof_handler.n_dofs());</div>
 <div class="line">  system_rhs.reinit(dof_handler.n_dofs());</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  constraints.clear();</div>
 <div class="line">  <a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, constraints);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::set&lt;types::boundary_id&gt; dirichlet_boundary_ids = {0};</div>
 <div class="line">  <a class="code" href="classFunctions_1_1ZeroFunction.html">Functions::ZeroFunction&lt;dim&gt;</a> homogeneous_dirichlet_bc;</div>
@@ -370,6 +406,7 @@ $(function() {
 <div class="line">                                           dirichlet_boundary_functions,</div>
 <div class="line">                                           constraints);</div>
 <div class="line">  constraints.close();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  {</div>
 <div class="line">    <a class="code" href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a> dsp(dof_handler.n_dofs(), dof_handler.n_dofs());</div>
@@ -383,26 +420,29 @@ $(function() {
 <div class="ttc" id="agroup__constraints_html_gaf78e864edbfba7e0a7477457bfb96b26"><div class="ttname"><a href="group__constraints.html#gaf78e864edbfba7e0a7477457bfb96b26">DoFTools::make_sparsity_pattern</a></div><div class="ttdeci">void make_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, SparsityPatternType &amp;sparsity_pattern, const AffineConstraints&lt; number &gt; &amp;constraints=AffineConstraints&lt; number &gt;(), const bool keep_constrained_dofs=true, const types::subdomain_id subdomain_id=numbers::invalid_subdomain_id)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools__sparsity_8cc_source.html#l00064">dof_tools_sparsity.cc:64</a></div></div>
 <div class="ttc" id="anamespaceVectorTools_html_ab2562d41bb26f362043f9719a8cd9b87"><div class="ttname"><a href="namespaceVectorTools.html#ab2562d41bb26f362043f9719a8cd9b87">VectorTools::interpolate_boundary_values</a></div><div class="ttdeci">void interpolate_boundary_values(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const std::map&lt; types::boundary_id, const Function&lt; spacedim, number &gt; * &gt; &amp;function_map, std::map&lt; types::global_dof_index, number &gt; &amp;boundary_values, const ComponentMask &amp;component_mask=ComponentMask())</div></div>
 <div class="ttc" id="anamespacetypes_html_aed8813fee8c8a2edcc6005e6a48c321a"><div class="ttname"><a href="namespacetypes.html#aed8813fee8c8a2edcc6005e6a48c321a">types::boundary_id</a></div><div class="ttdeci">unsigned int boundary_id</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00129">types.h:129</a></div></div>
-</div><!-- fragment --><p>The multigrid constraints have to be initialized. They need to know where Dirichlet boundary conditions are prescribed.</p>
+</div><!-- fragment --><p>多网格约束必须被初始化。他们需要知道哪里有迪里希特边界条件的规定。</p>
 <div class="fragment"><div class="line">mg_constrained_dofs.clear();</div>
 <div class="line">mg_constrained_dofs.initialize(dof_handler);</div>
 <div class="line">mg_constrained_dofs.make_zero_boundary_constraints(dof_handler,</div>
 <div class="line">                                                   dirichlet_boundary_ids);</div>
-</div><!-- fragment --><p>Now for the things that concern the multigrid data structures. First, we resize the multilevel objects to hold matrices and sparsity patterns for every level. The coarse level is zero (this is mandatory right now but may change in a future revision). Note that these functions take a complete, inclusive range here (not a starting index and size), so the finest level is <code>n_levels-1</code>. We first have to resize the container holding the <a class="el" href="classSparseMatrix.html">SparseMatrix</a> classes, since they have to release their <a class="el" href="classSparsityPattern.html">SparsityPattern</a> before the can be destroyed upon resizing.</p>
+</div><!-- fragment --><p>现在是关于多网格数据结构的事情。首先，我们调整多级对象的大小，以容纳每一级的矩阵和稀疏模式。粗层次是零（现在是强制性的，但在未来的修订中可能会改变）。注意，这些函数在这里采取的是一个完整的、包容的范围（而不是一个起始索引和大小），所以最细的级别是 <code>n_levels-1</code> 。我们首先要调整容纳SparseMatrix类的容器的大小，因为它们必须在调整大小时释放它们的SparsityPattern才能被销毁。</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_levels = <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_levels();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">mg_interface_matrices.resize(0, n_levels - 1);</div>
 <div class="line">mg_matrices.resize(0, n_levels - 1);</div>
 <div class="line">mg_sparsity_patterns.resize(0, n_levels - 1);</div>
 <div class="line">mg_interface_sparsity_patterns.resize(0, n_levels - 1);</div>
-</div><!-- fragment --><p>Now, we have to provide a matrix on each level. To this end, we first use the <a class="el" href="namespaceMGTools.html#a19ba9ee4a2b65235c8bb3fb65ea8f4e0">MGTools::make_sparsity_pattern</a> function to generate a preliminary compressed sparsity pattern on each level (see the <a class="el" href="group__Sparsity.html">Sparsity patterns</a> module for more information on this topic) and then copy it over to the one we really want. The next step is to initialize the interface matrices with the fitting sparsity pattern.</p>
-<p>It may be worth pointing out that the interface matrices only have entries for degrees of freedom that sit at or next to the interface between coarser and finer levels of the mesh. They are therefore even sparser than the matrices on the individual levels of our multigrid hierarchy. Therefore, we use a function specifically build for this purpose to generate it.</p>
+</div><!-- fragment --><p>现在，我们必须在每个层面上提供一个矩阵。为此，我们首先使用 <a class="el" href="namespaceMGTools.html#a19ba9ee4a2b65235c8bb3fb65ea8f4e0">MGTools::make_sparsity_pattern</a> 函数在每个层次上生成一个初步的压缩稀疏模式（关于这个主题的更多信息，请参见 <a class="el" href="group__Sparsity.html">Sparsity patterns</a> 模块），然后将其复制到我们真正想要的那个。下一步是用拟合的稀疏模式初始化接口矩阵。 <br  />
+</p>
+<p>值得指出的是，界面矩阵只有位于较粗和较细的网格之间的自由度的条目。因此，它们甚至比我们的多网格层次中的各个层次的矩阵还要稀疏。因此，我们使用一个专门为此目的而建立的函数来生成它。</p>
 <div class="fragment"><div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> = 0; <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> &lt; n_levels; ++<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>)</div>
 <div class="line">    {</div>
 <div class="line">      {</div>
 <div class="line">        <a class="code" href="classDynamicSparsityPattern.html">DynamicSparsityPattern</a> dsp(dof_handler.n_dofs(<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>),</div>
 <div class="line">                                   dof_handler.n_dofs(<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>));</div>
 <div class="line">        <a class="code" href="namespaceMGTools.html#a19ba9ee4a2b65235c8bb3fb65ea8f4e0">MGTools::make_sparsity_pattern</a>(dof_handler, dsp, <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        mg_sparsity_patterns[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].copy_from(dsp);</div>
 <div class="line">        mg_matrices[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].reinit(mg_sparsity_patterns[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>]);</div>
@@ -423,8 +463,9 @@ $(function() {
 <div class="ttc" id="anamespaceMGTools_html_a19ba9ee4a2b65235c8bb3fb65ea8f4e0"><div class="ttname"><a href="namespaceMGTools.html#a19ba9ee4a2b65235c8bb3fb65ea8f4e0">MGTools::make_sparsity_pattern</a></div><div class="ttdeci">void make_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, SparsityPatternType &amp;sparsity, const unsigned int level, const AffineConstraints&lt; number &gt; &amp;constraints=AffineConstraints&lt; number &gt;(), const bool keep_constrained_dofs=true)</div><div class="ttdef"><b>Definition:</b> <a href="mg__tools_8cc_source.html#l00593">mg_tools.cc:593</a></div></div>
 <div class="ttc" id="anamespaceMGTools_html_a8c677f65f8f1d21fb1f4c55cb90079e0"><div class="ttname"><a href="namespaceMGTools.html#a8c677f65f8f1d21fb1f4c55cb90079e0">MGTools::make_interface_sparsity_pattern</a></div><div class="ttdeci">void make_interface_sparsity_pattern(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, const MGConstrainedDoFs &amp;mg_constrained_dofs, SparsityPatternType &amp;sparsity, const unsigned int level)</div><div class="ttdef"><b>Definition:</b> <a href="mg__tools_8cc_source.html#l01052">mg_tools.cc:1052</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemcell_worker"></a> </p><h4>LaplaceProblem::cell_worker</h4>
-<p>The cell_worker function is used to assemble the matrix and right-hand side on the given cell. This function is used for the active cells to generate the system_matrix and on each level to build the level matrices.</p>
-<p>Note that we also assemble a right-hand side when called from assemble_multigrid() even though it is not used.</p>
+<p>cell_worker函数被用来在给定的单元上组装矩阵和右手边。这个函数用于活动单元生成system_matrix，并在每个层次上建立层次矩阵。 <br  />
+</p>
+<p>请注意，当从assemble_multigrid()调用时，我们也会组装一个右手边，尽管它没有被使用。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> Iterator&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::cell_worker(<span class="keyword">const</span> Iterator &amp;  cell,</div>
@@ -434,17 +475,22 @@ $(function() {
 <div class="line">  <a class="code" href="classFEValues.html">FEValues&lt;dim&gt;</a> &amp;fe_values = scratch_data.fe_values;</div>
 <div class="line">  fe_values.<a class="code" href="classFEValues.html#a21f914e63d588e2652a9514620653d77">reinit</a>(cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = fe_values.<a class="code" href="classFEValuesBase.html#ade22ffd9fb5b07842daa504929244aa7">get_fe</a>().<a class="code" href="classFiniteElementData.html#a33b522422da89e5c080e7405ad49d7c7">n_dofs_per_cell</a>();</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_q_points    = fe_values.<a class="code" href="classFEValues.html#ae053b49309f1dce22268c6bc8fe50cb2">get_quadrature</a>().size();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  copy_data.reinit(cell, dofs_per_cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> std::vector&lt;double&gt; &amp;JxW = fe_values.<a class="code" href="classFEValuesBase.html#a7371618d5977d28dfe82c81fbac29c0f">get_JxW_values</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; n_q_points; ++q)</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">const</span> <span class="keywordtype">double</span> coefficient =</div>
 <div class="line">        (fe_values.<a class="code" href="classFEValuesBase.html#ae41b67cfd48e02f6035e39c84f0fb47a">get_quadrature_points</a>()[q][0] &lt; 0.0) ? 1.0 : 0.1;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">        {</div>
@@ -468,11 +514,12 @@ $(function() {
 <div class="ttc" id="aclassFEValues_html_ae053b49309f1dce22268c6bc8fe50cb2"><div class="ttname"><a href="classFEValues.html#ae053b49309f1dce22268c6bc8fe50cb2">FEValues::get_quadrature</a></div><div class="ttdeci">const Quadrature&lt; dim &gt; &amp; get_quadrature() const</div></div>
 <div class="ttc" id="aclassFiniteElementData_html_a33b522422da89e5c080e7405ad49d7c7"><div class="ttname"><a href="classFiniteElementData.html#a33b522422da89e5c080e7405ad49d7c7">FiniteElementData::n_dofs_per_cell</a></div><div class="ttdeci">unsigned int n_dofs_per_cell() const</div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemassemble_system"></a> </p><h4>LaplaceProblem::assemble_system</h4>
-<p>The following function assembles the linear system on the active cells of the mesh. For this, we pass two lambda functions to the <a class="el" href="group__MeshWorker.html#ga76ec61fbd188fb320fe8ca166a79b322">mesh_loop()</a> function. The cell_worker function redirects to the class member function of the same name, while the copier is specific to this function and copies local matrix and vector to the corresponding global ones using the constraints.</p>
+<p>下面的函数在网格的活动单元上装配线性系统。为此，我们向Mesh_loop()函数传递两个lambda函数。cell_worker函数重定向到同名的类成员函数，而copyer是这个函数特有的，它使用约束条件将本地矩阵和向量复制到相应的全局矩阵。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::assemble_system()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classMappingQ1.html">MappingQ1&lt;dim&gt;</a> mapping;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> cell_worker =</div>
 <div class="line">    [&amp;](<span class="keyword">const</span> <span class="keyword">typename</span> <a class="code" href="group__Iterators.html#ga6b8bbcafed8847f3030ea30c6990eb2d">DoFHandler&lt;dim&gt;::active_cell_iterator</a> &amp;cell,</div>
@@ -480,6 +527,7 @@ $(function() {
 <div class="line">        CopyData &amp;                                            copy_data) {</div>
 <div class="line">      this-&gt;cell_worker(cell, scratch_data, copy_data);</div>
 <div class="line">    };</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> copier = [&amp;](<span class="keyword">const</span> CopyData &amp;cd) {</div>
 <div class="line">    this-&gt;constraints.distribute_local_to_global(cd.cell_matrix,</div>
@@ -489,7 +537,9 @@ $(function() {
 <div class="line">                                                 system_rhs);</div>
 <div class="line">  };</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_gauss_points = degree + 1;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  ScratchData&lt;dim&gt; scratch_data(mapping,</div>
 <div class="line">                                fe,</div>
@@ -497,6 +547,7 @@ $(function() {
 <div class="line">                                <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a> |</div>
 <div class="line">                                  <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a> |</div>
 <div class="line">                                  <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="group__MeshWorker.html#ga76ec61fbd188fb320fe8ca166a79b322">MeshWorker::mesh_loop</a>(dof_handler.begin_active(),</div>
 <div class="line">                        dof_handler.end(),</div>
@@ -514,14 +565,16 @@ $(function() {
 <div class="ttc" id="agroup__Iterators_html_ga6b8bbcafed8847f3030ea30c6990eb2d"><div class="ttname"><a href="group__Iterators.html#ga6b8bbcafed8847f3030ea30c6990eb2d">DoFHandler::active_cell_iterator</a></div><div class="ttdeci">typename ActiveSelector::active_cell_iterator active_cell_iterator</div><div class="ttdef"><b>Definition:</b> <a href="dofs_2dof__handler_8h_source.html#l00438">dof_handler.h:438</a></div></div>
 <div class="ttc" id="agroup__MeshWorker_html_ga76ec61fbd188fb320fe8ca166a79b322"><div class="ttname"><a href="group__MeshWorker.html#ga76ec61fbd188fb320fe8ca166a79b322">MeshWorker::mesh_loop</a></div><div class="ttdeci">void mesh_loop(const CellIteratorType &amp;begin, const CellIteratorType &amp;end, const CellWorkerFunctionType &amp;cell_worker, const CopierType &amp;copier, const ScratchData &amp;sample_scratch_data, const CopyData &amp;sample_copy_data, const AssembleFlags flags=assemble_own_cells, const BoundaryWorkerFunctionType &amp;boundary_worker=BoundaryWorkerFunctionType(), const FaceWorkerFunctionType &amp;face_worker=FaceWorkerFunctionType(), const unsigned int queue_length=2 *MultithreadInfo::n_threads(), const unsigned int chunk_size=8)</div><div class="ttdef"><b>Definition:</b> <a href="mesh__loop_8h_source.html#l00282">mesh_loop.h:282</a></div></div>
 <div class="ttc" id="anamespaceMeshWorker_html_ac7a9db8b34d398d7d398d1e8809874aaa44a76e905b1d4cd80af387b5fac4d8aa"><div class="ttname"><a href="namespaceMeshWorker.html#ac7a9db8b34d398d7d398d1e8809874aaa44a76e905b1d4cd80af387b5fac4d8aa">MeshWorker::assemble_own_cells</a></div><div class="ttdeci">@ assemble_own_cells</div><div class="ttdef"><b>Definition:</b> <a href="assemble__flags_8h_source.html#l00048">assemble_flags.h:48</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="LaplaceProblemassemble_multigrid"></a> </p><h4>LaplaceProblem::assemble_multigrid</h4>
-<p>The next function is the one that builds the matrices that define the multigrid method on each level of the mesh. The integration core is the same as above, but the loop below will go over all existing cells instead of just the active ones, and the results must be entered into the correct level matrices. Fortunately, <a class="el" href="namespaceMeshWorker.html">MeshWorker</a> hides most of that from us, and thus the difference between this function and the previous lies only in the setup of the assembler and the different iterators in the loop.</p>
-<p>We generate an <a class="el" href="classAffineConstraints.html">AffineConstraints</a> object for each level containing the boundary and interface dofs as constrained entries. The corresponding object is then used to generate the level matrices.</p>
+</div><!-- fragment --><p><a class="anchor" id="LaplaceProblemassemble_multigrid"></a></p><h4>LaplaceProblem::assemble_multigrid</h4>
+<p>下一个函数是建立矩阵，定义每一级网格上的多栅方法。集成的核心与上面的相同，但是下面的循环将遍历所有的现有单元，而不仅仅是活动的单元，并且必须将结果输入正确的层级矩阵。幸运的是，MeshWorker对我们隐藏了大部分的内容，因此这个函数和之前的函数的区别只在于汇编器的设置和循环中的不同迭代器。 <br  />
+</p>
+<p>我们为每个层次生成一个AffineConstraints对象，其中包含了边界和界面道夫作为约束条目。然后，相应的对象被用来生成层次矩阵。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::assemble_multigrid()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classMappingQ1.html">MappingQ1&lt;dim&gt;</a>     mapping;</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_levels = <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_levels();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::vector&lt;AffineConstraints&lt;double&gt;&gt; boundary_constraints(n_levels);</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> = 0; <a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a> &lt; n_levels; ++<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>)</div>
@@ -538,6 +591,7 @@ $(function() {
 <div class="line">      boundary_constraints[<a class="code" href="grid__out_8cc.html#a9082f945c1d289684d0bcd51ee08e11e">level</a>].close();</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> cell_worker =</div>
 <div class="line">    [&amp;](<span class="keyword">const</span> <span class="keyword">typename</span> <a class="code" href="classDoFHandler.html#ab3149801261133a12128a87b2ec0ca66">DoFHandler&lt;dim&gt;::level_cell_iterator</a> &amp;cell,</div>
 <div class="line">        ScratchData&lt;dim&gt; &amp;                                   scratch_data,</div>
@@ -545,15 +599,17 @@ $(function() {
 <div class="line">      this-&gt;cell_worker(cell, scratch_data, copy_data);</div>
 <div class="line">    };</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> copier = [&amp;](<span class="keyword">const</span> CopyData &amp;cd) {</div>
 <div class="line">    boundary_constraints[cd.level].distribute_local_to_global(</div>
 <div class="line">      cd.cell_matrix, cd.local_dof_indices, mg_matrices[cd.level]);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dofs_per_cell = cd.local_dof_indices.size();</div>
 <div class="ttc" id="aclassDoFHandler_html_ab3149801261133a12128a87b2ec0ca66"><div class="ttname"><a href="classDoFHandler.html#ab3149801261133a12128a87b2ec0ca66">DoFHandler::level_cell_iterator</a></div><div class="ttdeci">typename LevelSelector::cell_iterator level_cell_iterator</div><div class="ttdef"><b>Definition:</b> <a href="dofs_2dof__handler_8h_source.html#l00502">dof_handler.h:502</a></div></div>
 <div class="ttc" id="aclassIndexSet_html"><div class="ttname"><a href="classIndexSet.html">IndexSet</a></div><div class="ttdef"><b>Definition:</b> <a href="index__set_8h_source.html#l00072">index_set.h:73</a></div></div>
 <div class="ttc" id="anamespaceDoFTools_html_a1fef7be07cf379b661646e39b9354e17"><div class="ttname"><a href="namespaceDoFTools.html#a1fef7be07cf379b661646e39b9354e17">DoFTools::extract_locally_relevant_level_dofs</a></div><div class="ttdeci">void extract_locally_relevant_level_dofs(const DoFHandler&lt; dim, spacedim &gt; &amp;dof_handler, const unsigned int level, IndexSet &amp;dof_set)</div><div class="ttdef"><b>Definition:</b> <a href="dof__tools_8cc_source.html#l01252">dof_tools.cc:1252</a></div></div>
-</div><!-- fragment --><p>Interface entries are ignored by the boundary_constraints object above when filling the mg_matrices[cd.level]. Instead, we copy these entries into the interface matrix of the current level manually:</p>
+</div><!-- fragment --><p>在填充mg_matrices[cd.level]时，界面条目被上面的boundary_constraints对象所忽略。相反，我们手动将这些条目复制到当前级别的界面矩阵中。</p>
 <div class="fragment"><div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dofs_per_cell; ++i)</div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; dofs_per_cell; ++j)</div>
 <div class="line">        <span class="keywordflow">if</span> (mg_constrained_dofs.is_interface_matrix_entry(</div>
@@ -565,7 +621,9 @@ $(function() {
 <div class="line">          }</div>
 <div class="line">  };</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_gauss_points = degree + 1;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  ScratchData&lt;dim&gt; scratch_data(mapping,</div>
 <div class="line">                                fe,</div>
@@ -573,6 +631,7 @@ $(function() {
 <div class="line">                                <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa4057ca2f127aa619c65886a9d3ad4aea">update_values</a> | <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52facbcc430975fa6af05f75ca786dc6fe20">update_gradients</a> |</div>
 <div class="line">                                  <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fa714204722e9eeb43aadbd0d5ddc48c85">update_JxW_values</a> |</div>
 <div class="line">                                  <a class="code" href="fe__update__flags_8h.html#aa94b67d2fdcc390690c523f28019e52fad5c9ff886b9615349a5d04a6c782df4a">update_quadrature_points</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="group__MeshWorker.html#ga76ec61fbd188fb320fe8ca166a79b322">MeshWorker::mesh_loop</a>(dof_handler.begin_mg(),</div>
 <div class="line">                        dof_handler.end_mg(),</div>
@@ -583,14 +642,17 @@ $(function() {
 <div class="line">                        <a class="code" href="namespaceMeshWorker.html#ac7a9db8b34d398d7d398d1e8809874aaa44a76e905b1d4cd80af387b5fac4d8aa">MeshWorker::assemble_own_cells</a>);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemsolve"></a> </p><h4>LaplaceProblem::solve</h4>
-<p>This is the other function that is significantly different in support of the multigrid solver (or, in fact, the preconditioner for which we use the multigrid method).</p>
-<p>Let us start out by setting up two of the components of multilevel methods: transfer operators between levels, and a solver on the coarsest level. In finite element methods, the transfer operators are derived from the finite element function spaces involved and can often be computed in a generic way independent of the problem under consideration. In that case, we can use the <a class="el" href="classMGTransferPrebuilt.html">MGTransferPrebuilt</a> class that, given the constraints of the final linear system and the <a class="el" href="classMGConstrainedDoFs.html">MGConstrainedDoFs</a> object that knows about the boundary conditions on the each level and the degrees of freedom on interfaces between different refinement level can build the matrices for those transfer operations from a <a class="el" href="classDoFHandler.html">DoFHandler</a> object with level degrees of freedom.</p>
-<p>The second part of the following lines deals with the coarse grid solver. Since our coarse grid is very coarse indeed, we decide for a direct solver (a <a class="el" href="classHouseholder.html">Householder</a> decomposition of the coarsest level matrix), even if its implementation is not particularly sophisticated. If our coarse mesh had many more cells than the five we have here, something better suited would obviously be necessary here.</p>
+<p>这是另一个在支持多网格求解器（或者说，事实上，我们使用多网格方法的预处理器）方面有明显不同的函数。 <br  />
+</p>
+<p>让我们从建立多层次方法的两个组成部分开始：层次间的转移算子和最粗层次上的求解器。在有限元方法中，转移算子来自所涉及的有限元函数空间，通常可以用独立于所考虑问题的通用方式计算。在这种情况下，我们可以使用MGTransferPrebuilt类，给定最终线性系统的约束和MGConstrainedDoFs对象，该对象知道每个层次的边界条件和不同细化层次之间接口的自由度，可以从具有层次自由度的DoFHandler对象建立这些转移操作的矩阵。 <br  />
+</p>
+<p>下面几行的第二部分是关于粗网格求解器的。由于我们的粗网格确实非常粗，我们决定采用直接求解器（最粗层次矩阵的Householder分解），即使其实现不是特别复杂。如果我们的粗网格比这里的5个单元多得多，这里显然需要更适合的东西。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::solve()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classMGTransferPrebuilt.html">MGTransferPrebuilt&lt;Vector&lt;double&gt;</a>&gt; mg_transfer(mg_constrained_dofs);</div>
 <div class="line">  mg_transfer.build(dof_handler);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classFullMatrix.html">FullMatrix&lt;double&gt;</a> coarse_matrix;</div>
 <div class="line">  coarse_matrix.<a class="code" href="classFullMatrix.html#ae9e8fbf00e15c7b66d527a5de4b31404">copy_from</a>(mg_matrices[0]);</div>
@@ -600,9 +662,11 @@ $(function() {
 <div class="ttc" id="aclassMGCoarseGridHouseholder_html"><div class="ttname"><a href="classMGCoarseGridHouseholder.html">MGCoarseGridHouseholder</a></div><div class="ttdef"><b>Definition:</b> <a href="mg__coarse_8h_source.html#l00175">mg_coarse.h:176</a></div></div>
 <div class="ttc" id="aclassMGCoarseGridHouseholder_html_a07bd76dc7f6f66cb22d3e7951a558f50"><div class="ttname"><a href="classMGCoarseGridHouseholder.html#a07bd76dc7f6f66cb22d3e7951a558f50">MGCoarseGridHouseholder::initialize</a></div><div class="ttdeci">void initialize(const FullMatrix&lt; number &gt; &amp;A)</div></div>
 <div class="ttc" id="aclassMGTransferPrebuilt_html"><div class="ttname"><a href="classMGTransferPrebuilt.html">MGTransferPrebuilt</a></div><div class="ttdef"><b>Definition:</b> <a href="mg__transfer_8h_source.html#l00636">mg_transfer.h:637</a></div></div>
-</div><!-- fragment --><p>The next component of a multilevel solver or preconditioner is that we need a smoother on each level. A common choice for this is to use the application of a relaxation method (such as the SOR, Jacobi or Richardson method) or a small number of iterations of a solver method (such as CG or GMRES). The <a class="el" href="classmg_1_1SmootherRelaxation.html">mg::SmootherRelaxation</a> and <a class="el" href="classMGSmootherPrecondition.html">MGSmootherPrecondition</a> classes provide support for these two kinds of smoothers. Here, we opt for the application of a single SOR iteration. To this end, we define an appropriate alias and then setup a smoother object.</p>
-<p>The last step is to initialize the smoother object with our level matrices and to set some smoothing parameters. The <code>initialize()</code> function can optionally take additional arguments that will be passed to the smoother object on each level. In the current case for the SOR smoother, this could, for example, include a relaxation parameter. However, we here leave these at their default values. The call to <code>set_steps()</code> indicates that we will use two pre- and two post-smoothing steps on each level; to use a variable number of smoother steps on different levels, more options can be set in the constructor call to the <code>mg_smoother</code> object.</p>
-<p>The last step results from the fact that we use the SOR method as a smoother - which is not symmetric - but we use the conjugate gradient iteration (which requires a symmetric preconditioner) below, we need to let the multilevel preconditioner make sure that we get a symmetric operator even for nonsymmetric smoothers:</p>
+</div><!-- fragment --><p>多级求解器或预处理器的下一个组成部分是，我们需要在每一级上有一个平滑器。这方面常见的选择是使用松弛方法的应用（如SOR、Jacobi或Richardson方法）或求解器方法的少量迭代（如CG或GMRES）。 <a class="el" href="classmg_1_1SmootherRelaxation.html">mg::SmootherRelaxation</a> 和MGSmootherPrecondition类提供了对这两种平滑器的支持。这里，我们选择应用单一的SOR迭代。为此，我们定义一个适当的别名，然后设置一个平滑器对象。 <br  />
+</p>
+<p>最后一步是用我们的水平矩阵初始化平滑器对象并设置一些平滑参数。 <code>initialize()</code> 函数可以有选择地接受额外的参数，这些参数将被传递给每一级的平滑器对象。在目前SOR平滑器的情况下，这可能包括一个松弛参数。然而，我们在这里将这些参数保留为默认值。对 <code>set_steps()</code> 的调用表明我们将在每个级别上使用两个前平滑步骤和两个后平滑步骤；为了在不同级别上使用可变数量的平滑器步骤，可以在对 <code>mg_smoother</code> 对象的构造器调用中设置更多选项。 <br  />
+</p>
+<p>最后一步的结果是，我们使用SOR方法作为平滑器&ndash;它不是对称的&ndash;但我们在下面使用共轭梯度迭代（它需要对称的预处理），我们需要让多级预处理确保我们得到一个对称的算子，即使是非对称的平滑器。</p>
 <div class="fragment"><div class="line"><span class="keyword">using</span> Smoother = <a class="code" href="classPreconditionSOR.html">PreconditionSOR&lt;SparseMatrix&lt;double&gt;</a>&gt;;</div>
 <div class="line"><a class="code" href="classmg_1_1SmootherRelaxation.html">mg::SmootherRelaxation&lt;Smoother, Vector&lt;double&gt;</a>&gt; mg_smoother;</div>
 <div class="line">mg_smoother.<a class="code" href="classmg_1_1SmootherRelaxation.html#ae9e03c626c50a1b13dffe338f5f977b0">initialize</a>(mg_matrices);</div>
@@ -613,26 +677,29 @@ $(function() {
 <div class="ttc" id="aclassPreconditionSOR_html"><div class="ttname"><a href="classPreconditionSOR.html">PreconditionSOR</a></div><div class="ttdef"><b>Definition:</b> <a href="precondition_8h_source.html#l00583">precondition.h:584</a></div></div>
 <div class="ttc" id="aclassmg_1_1SmootherRelaxation_html"><div class="ttname"><a href="classmg_1_1SmootherRelaxation.html">mg::SmootherRelaxation</a></div><div class="ttdef"><b>Definition:</b> <a href="mg__smoother_8h_source.html#l00183">mg_smoother.h:185</a></div></div>
 <div class="ttc" id="aclassmg_1_1SmootherRelaxation_html_ae9e03c626c50a1b13dffe338f5f977b0"><div class="ttname"><a href="classmg_1_1SmootherRelaxation.html#ae9e03c626c50a1b13dffe338f5f977b0">mg::SmootherRelaxation::initialize</a></div><div class="ttdeci">void initialize(const MGLevelObject&lt; MatrixType2 &gt; &amp;matrices, const typename RelaxationType::AdditionalData &amp;additional_data=typename RelaxationType::AdditionalData())</div></div>
-</div><!-- fragment --><p>The next preparatory step is that we must wrap our level and interface matrices in an object having the required multiplication functions. We will create two objects for the interface objects going from coarse to fine and the other way around; the multigrid algorithm will later use the transpose operator for the latter operation, allowing us to initialize both up and down versions of the operator with the matrices we already built:</p>
+</div><!-- fragment --><p>下一个准备步骤是，我们必须将我们的水平矩阵和接口矩阵包裹在一个具有所需乘法函数的对象中。我们将为从粗到细的接口对象创建两个对象，反之亦然；多网格算法将在以后的操作中使用转置算子，允许我们用已经建立的矩阵初始化该算子的上下两个版本。</p>
 <div class="fragment"><div class="line"><a class="code" href="classmg_1_1Matrix.html">mg::Matrix&lt;Vector&lt;double&gt;</a>&gt; mg_matrix(mg_matrices);</div>
 <div class="line"><a class="code" href="classmg_1_1Matrix.html">mg::Matrix&lt;Vector&lt;double&gt;</a>&gt; mg_interface_up(mg_interface_matrices);</div>
 <div class="line"><a class="code" href="classmg_1_1Matrix.html">mg::Matrix&lt;Vector&lt;double&gt;</a>&gt; mg_interface_down(mg_interface_matrices);</div>
 <div class="ttc" id="aclassmg_1_1Matrix_html"><div class="ttname"><a href="classmg_1_1Matrix.html">mg::Matrix</a></div><div class="ttdef"><b>Definition:</b> <a href="mg__matrix_8h_source.html#l00044">mg_matrix.h:45</a></div></div>
-</div><!-- fragment --><p>Now, we are ready to set up the V-cycle operator and the multilevel preconditioner.</p>
+</div><!-- fragment --><p>现在，我们已经准备好设置V型循环算子和多级预处理程序。</p>
 <div class="fragment"><div class="line"><a class="code" href="classMultigrid.html">Multigrid&lt;Vector&lt;double&gt;</a>&gt; <a class="code" href="namespacemg.html">mg</a>(</div>
 <div class="line">  mg_matrix, coarse_grid_solver, mg_transfer, mg_smoother, mg_smoother);</div>
 <div class="line"><a class="code" href="namespacemg.html">mg</a>.set_edge_matrices(mg_interface_down, mg_interface_up);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><a class="code" href="classPreconditionMG.html">PreconditionMG&lt;dim, Vector&lt;double&gt;</a>, <a class="code" href="classMGTransferPrebuilt.html">MGTransferPrebuilt&lt;Vector&lt;double&gt;</a>&gt;&gt;</div>
 <div class="line">  preconditioner(dof_handler, <a class="code" href="namespacemg.html">mg</a>, mg_transfer);</div>
 <div class="ttc" id="aclassMultigrid_html"><div class="ttname"><a href="classMultigrid.html">Multigrid</a></div><div class="ttdef"><b>Definition:</b> <a href="multigrid_8h_source.html#l00152">multigrid.h:153</a></div></div>
 <div class="ttc" id="aclassPreconditionMG_html"><div class="ttname"><a href="classPreconditionMG.html">PreconditionMG</a></div><div class="ttdef"><b>Definition:</b> <a href="multigrid_8h_source.html#l00467">multigrid.h:468</a></div></div>
 <div class="ttc" id="anamespacemg_html"><div class="ttname"><a href="namespacemg.html">mg</a></div><div class="ttdef"><b>Definition:</b> <a href="mg_8h_source.html#l00081">mg.h:82</a></div></div>
-</div><!-- fragment --><p>With all this together, we can finally get about solving the linear system in the usual way:</p>
+</div><!-- fragment --><p>有了这一切，我们终于可以用通常的方式来解决线性系统了。</p>
 <div class="fragment"><div class="line">  <a class="code" href="classSolverControl.html">SolverControl</a>            solver_control(1000, 1<a class="code" href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">e</a>-12);</div>
 <div class="line">  <a class="code" href="classSolverCG.html">SolverCG&lt;Vector&lt;double&gt;</a>&gt; solver(solver_control);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  solution = 0;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  solver.solve(system_matrix, solution, system_rhs, preconditioner);</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;   Number of CG iterations: &quot;</span> &lt;&lt; solver_control.last_step()</div>
@@ -643,12 +710,13 @@ $(function() {
 <div class="ttc" id="aclassSolverCG_html"><div class="ttname"><a href="classSolverCG.html">SolverCG</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__cg_8h_source.html#l00095">solver_cg.h:96</a></div></div>
 <div class="ttc" id="aclassSolverControl_html"><div class="ttname"><a href="classSolverControl.html">SolverControl</a></div><div class="ttdef"><b>Definition:</b> <a href="solver__control_8h_source.html#l00065">solver_control.h:66</a></div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a9587d5229555daa5b1fa1ba2f8a40adb"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">Physics::Elasticity::Kinematics::e</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; e(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
-</div><!-- fragment --><p><a class="anchor" id="Postprocessing"></a> </p><h4>Postprocessing</h4>
-<p>The following two functions postprocess a solution once it is computed. In particular, the first one refines the mesh at the beginning of each cycle while the second one outputs results at the end of each such cycle. The functions are almost unchanged from those in <a class="el" href="step_6.html">step-6</a>.</p>
+</div><!-- fragment --><p><a class="anchor" id="Postprocessing"></a></p><h4>Postprocessing</h4>
+<p>以下两个函数在计算出解决方案后对其进行后处理。特别是，第一个函数在每个周期开始时细化网格，第二个函数在每个周期结束时输出结果。这些函数与 <a class="el" href="step_6.html">step-6</a> 中的函数几乎没有变化。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::refine_grid()</div>
 <div class="line">{</div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;float&gt;</a> estimated_error_per_cell(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classKellyErrorEstimator.html#aa0917e696d4f8ddb983223a68c512357">KellyErrorEstimator&lt;dim&gt;::estimate</a>(</div>
 <div class="line">    dof_handler,</div>
@@ -665,14 +733,18 @@ $(function() {
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> LaplaceProblem&lt;dim&gt;::output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">  <a class="code" href="classDataOut.html">DataOut&lt;dim&gt;</a> data_out;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ac1eb26168177faa30ffbcf9cbb9c3cd5">attach_dof_handler</a>(dof_handler);</div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(solution, <span class="stringliteral">&quot;solution&quot;</span>);</div>
 <div class="line">  data_out.<a class="code" href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">build_patches</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  std::ofstream output(<span class="stringliteral">&quot;solution-&quot;</span> + <a class="code" href="group__Exceptions.html#ga72743302dcb1a0fb1f2f8dc5122d299e">std::to_string</a>(cycle) + <span class="stringliteral">&quot;.vtk&quot;</span>);</div>
 <div class="line">  data_out.<a class="code" href="group__Exceptions.html#gacad99726038e4fca7f605fdffb3317e4">write_vtk</a>(output);</div>
@@ -687,13 +759,14 @@ $(function() {
 <div class="ttc" id="agroup__Exceptions_html_gacad99726038e4fca7f605fdffb3317e4"><div class="ttname"><a href="group__Exceptions.html#gacad99726038e4fca7f605fdffb3317e4">DataOutInterface::write_vtk</a></div><div class="ttdeci">void write_vtk(std::ostream &amp;out) const</div><div class="ttdef"><b>Definition:</b> <a href="data__out__base_8cc_source.html#l07177">data_out_base.cc:7177</a></div></div>
 <div class="ttc" id="anamespaceGridRefinement_html_a48e5395381ed87155942a61a1edd134d"><div class="ttname"><a href="namespaceGridRefinement.html#a48e5395381ed87155942a61a1edd134d">GridRefinement::refine_and_coarsen_fixed_number</a></div><div class="ttdeci">void refine_and_coarsen_fixed_number(Triangulation&lt; dim, spacedim &gt; &amp;triangulation, const Vector&lt; Number &gt; &amp;criteria, const double top_fraction_of_cells, const double bottom_fraction_of_cells, const unsigned int max_n_cells=std::numeric_limits&lt; unsigned int &gt;::max())</div><div class="ttdef"><b>Definition:</b> <a href="grid_2grid__refinement_8cc_source.html#l00322">grid_refinement.cc:322</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="LaplaceProblemrun"></a> </p><h4>LaplaceProblem::run</h4>
-<p>Like several of the functions above, this is almost exactly a copy of the corresponding function in <a class="el" href="step_6.html">step-6</a>. The only difference is the call to <code>assemble_multigrid</code> that takes care of forming the matrices on every level that we need in the multigrid method.</p>
+<p>像上面的几个函数一样，这几乎完全是 <a class="el" href="step_6.html">step-6</a> 中相应函数的复制。唯一的区别是对 <code>assemble_multigrid</code> 的调用，它负责形成我们在多网格方法中需要的每一级矩阵。</p>
 <div class="fragment"><div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">LaplaceProblem&lt;dim&gt;::run</a>()</div>
 <div class="line">  {</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle = 0; cycle &lt; 8; ++cycle)</div>
 <div class="line">      {</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Cycle &quot;</span> &lt;&lt; cycle &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">if</span> (cycle == 0)</div>
 <div class="line">          {</div>
@@ -703,13 +776,17 @@ $(function() {
 <div class="line">        <span class="keywordflow">else</span></div>
 <div class="line">          refine_grid();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;   Number of active cells:       &quot;</span></div>
 <div class="line">                  &lt;&lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells() &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        setup_system();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        assemble_system();</div>
 <div class="line">        assemble_multigrid();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        solve();</div>
 <div class="line">        output_results(cycle);</div>
@@ -718,12 +795,13 @@ $(function() {
 <div class="line">} <span class="comment">// namespace Step16</span></div>
 <div class="ttc" id="anamespaceGridGenerator_html_a533c4778cbc9bcbed365dcab42ca4418"><div class="ttname"><a href="namespaceGridGenerator.html#a533c4778cbc9bcbed365dcab42ca4418">GridGenerator::hyper_ball</a></div><div class="ttdeci">void hyper_ball(Triangulation&lt; dim &gt; &amp;tria, const Point&lt; dim &gt; &amp;center=Point&lt; dim &gt;(), const double radius=1., const bool attach_spherical_manifold_on_boundary_cells=false)</div></div>
 </div><!-- fragment --><p><a class="anchor" id="Themainfunction"></a> </p><h3>The main() function</h3>
-<p>This is again the same function as in <a class="el" href="step_6.html">step-6</a>:</p>
+<p>这又是与 <a class="el" href="step_6.html">step-6</a> 中相同的函数。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">try</span></div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using namespace </span>Step16;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      LaplaceProblem&lt;2&gt; laplace_problem(1);</div>
 <div class="line">      laplace_problem.run();</div>
@@ -740,6 +818,7 @@ $(function() {
 <div class="line">                &lt;&lt; <span class="stringliteral">&quot;----------------------------------------------------&quot;</span></div>
 <div class="line">                &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line">  <span class="keywordflow">catch</span> (...)</div>
@@ -755,60 +834,36 @@ $(function() {
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
-<p>On the finest mesh, the solution looks like this:</p>
+</div><!-- fragment --><p><a class="anchor" id="Results"></a></p><h1>Results</h1>
+<p>在最细的网格上，解决方案看起来像这样。</p>
 <p align="center"></p>
 <p><img src="https://www.dealii.org/images/steps/developer/step-16.solution.png" alt="" class="inline"/> </p>
-<p>More importantly, we would like to see if the multigrid method really improved the solver performance. Therefore, here is the textual output:</p>
-<pre>
-Cycle 0
-   Number of active cells:       80
-   Number of degrees of freedom: 89 (by level: 8, 25, 89)
-   Number of CG iterations: 8
+<p><br  />
+</p>
+<p>更重要的是，我们想看看多网格方法是否真的改善了求解器的性能。因此，这里是文本输出。</p>
+<pre> 周期0 活动单元数：80 自由度数：89 (按级别：8, 25, 89) CG迭代数。8 
 
-Cycle 1
-   Number of active cells:       158
-   Number of degrees of freedom: 183 (by level: 8, 25, 89, 138)
-   Number of CG iterations: 9
+周期1 活跃单元数：158 自由度数：183 (按级别：8, 25, 89, 138) CG迭代次数。9 
 
-Cycle 2
-   Number of active cells:       302
-   Number of degrees of freedom: 352 (by level: 8, 25, 89, 223, 160)
-   Number of CG iterations: 10
+周期2 活跃单元数：302 自由度数：352 (按级别：8, 25, 89, 223, 160) CG迭代次数。10 
 
-Cycle 3
-   Number of active cells:       578
-   Number of degrees of freedom: 649 (by level: 8, 25, 89, 231, 494, 66)
-   Number of CG iterations: 10
+周期3 活跃单元数：578 自由度数：649 (按级别：8, 25, 89, 231, 494, 66) CG迭代次数。10 
 
-Cycle 4
-   Number of active cells:       1100
-   Number of degrees of freedom: 1218 (by level: 8, 25, 89, 274, 764, 417, 126)
-   Number of CG iterations: 10
+第四周期 活跃单元数: 1100 自由度数: 1218 (按级别: 8, 25, 89, 274, 764, 417, 126) CG迭代次数: 10 
 
-Cycle 5
-   Number of active cells:       2096
-   Number of degrees of freedom: 2317 (by level: 8, 25, 89, 304, 779, 1214, 817)
-   Number of CG iterations: 11
+第五周期 活跃单元数: 2096 自由度数: 2317 (按级别: 8, 25, 89, 304, 779, 1214, 817) CG迭代次数: 11 
 
-Cycle 6
-   Number of active cells:       3986
-   Number of degrees of freedom: 4366 (by level: 8, 25, 89, 337, 836, 2270, 897, 1617)
-   Number of CG iterations: 10
+第六周期 活跃单元数: 3986 自由度数: 4366 (按级别: 8, 25, 89, 337, 836, 2270, 897, 1617) CG迭代次数: 10 
 
-Cycle 7
-   Number of active cells:       7574
-   Number of degrees of freedom: 8350 (by level: 8, 25, 89, 337, 1086, 2835, 2268, 1789, 3217)
-   Number of CG iterations: 11
-</pre><p>That's almost perfect multigrid performance: the linear residual gets reduced by 12 orders of magnitude in 10 iteration steps, and the results are almost independent of the mesh size. That's obviously in part due to the simple nature of the problem solved, but it shows the power of multigrid methods.</p>
+第7周期 活跃单元数：7574 自由度数：8350（按级别：8, 25, 89, 337, 1086, 2835, 2268, 1789, 3217） CG迭代次数。11 </pre><p>这几乎是完美的多重网格性能：线性残差在10个迭代步骤中被减少了12个数量级，而且结果几乎与网格大小无关。这显然部分是由于所解决的问题的简单性质，但它显示了多梯度方法的力量。</p>
 <p><a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions </h3>
-<p>We encourage you to generate timings for the solve() call and compare to <a class="el" href="step_6.html">step-6</a>. You will see that the multigrid method has quite an overhead on coarse meshes, but that it always beats other methods on fine meshes because of its optimal complexity.</p>
-<p>A close inspection of this program's performance shows that it is mostly dominated by matrix-vector operations. <a class="el" href="step_37.html">step-37</a> shows one way how this can be avoided by working with matrix-free methods.</p>
-<p>Another avenue would be to use algebraic multigrid methods. The geometric multigrid method used here can at times be a bit awkward to implement because it needs all those additional data structures, and it becomes even more difficult if the program is to run in parallel on machines coupled through MPI, for example. In that case, it would be simpler if one could use a black-box preconditioner that uses some sort of multigrid hierarchy for good performance but can figure out level matrices and similar things by itself. Algebraic multigrid methods do exactly this, and we will use them in <a class="el" href="step_31.html">step-31</a> for the solution of a Stokes problem and in <a class="el" href="step_32.html">step-32</a> and <a class="el" href="step_40.html">step-40</a> for a parallel variation. That said, a parallel version of this example program with MPI can be found in <a class="el" href="step_50.html">step-50</a>.</p>
-<p>Finally, one may want to think how to use geometric multigrid for other kinds of problems, specifically <a class="el" href="group__vector__valued.html">vector valued problems</a>. This is the topic of <a class="el" href="step_56.html">step-56</a> where we use the techniques shown here for the Stokes equation.</p>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+<p>我们鼓励你生成solve()调用的时间，并与 <a class="el" href="step_6.html">step-6</a> 进行比较。你会看到多网格方法在粗网格上有相当大的开销，但在细网格上，由于其最佳的复杂性，它总是胜过其他方法。</p>
+<p>仔细检查这个程序的性能可以发现，它主要是由矩阵-向量操作主导的。 <a class="el" href="step_37.html">step-37</a> 展示了一种通过使用无矩阵方法来避免这种情况的办法。</p>
+<p>另一个途径是使用代数多栅方法。这里使用的几何多网格方法在实现上有时会有点尴尬，因为它需要所有这些额外的数据结构，如果程序要在parallel的机器上通过MPI耦合运行，就会变得更加困难，比如说。在这种情况下，如果能使用一个黑盒预处理程序，就会更简单，该程序使用某种多栅层次结构以获得良好的性能，但可以自己计算出水平矩阵和类似的东西。代数多栅方法正是这样做的，我们将在 <a class="el" href="step_31.html">step-31</a> 中使用它们来解决斯托克斯问题，在 <a class="el" href="step_32.html">step-32</a> 和 <a class="el" href="step_40.html">step-40</a> 中使用它们来解决平行变化。也就是说，这个例子程序的MPI并行版本可以在 <a class="el" href="step_50.html">step-50</a> 中找到。</p>
+<p>最后，人们可能想考虑如何将几何多网格用于其他类型的问题，特别是 <a class="el" href="group__vector__valued.html">矢量值问题</a>。这是 step-56 的主题，我们将这里的技术用于斯托克斯方程。<a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2003 - 2020 by the deal.II authors</span></div>
@@ -1336,7 +1391,8 @@ Cycle 7
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> 。 </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

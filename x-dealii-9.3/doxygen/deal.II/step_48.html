@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The deal.II Library: The step-48 tutorial program</title>
+<title>The deal.II Library: The step-48 tutorial program  。</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,80 +86,79 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The step-48 tutorial program </div>  </div>
+<div class="title">The step-48 tutorial program 。 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This tutorial depends on <a class="el" href="step_25.html">step-25</a>, <a class="el" href="step_37.html">step-37</a>.</p>
+<div class="textblock"><p>本教程取决于 <a class="el" href="step_25.html">step-25</a> , <a class="el" href="step_37.html">step-37</a> 。</p>
 <p> 
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Problemstatementanddiscretization"> Problem statement and discretization </a>
-        <li><a href="#Implementationofconstraints">Implementation of constraints</a>
-        <li><a href="#Parallelization"> Parallelization </a>
-        <li><a href="#Thetestcase"> The test case </a>
+        <li><a href="#Problemstatementanddiscretization"> Problem statement and discretization </a><a href="#Problemstatementanddiscretization"> Problem statement and discretization </a>
+        <li><a href="#Implementationofconstraints">Implementation of constraints</a><a href="#Implementationofconstraints">Implementation of constraints</a>
+        <li><a href="#Parallelization"> Parallelization </a><a href="#Parallelization"> Parallelization </a>
+        <li><a href="#Thetestcase"> The test case </a><a href="#Thetestcase"> The test case </a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#SineGordonOperation">SineGordonOperation</a>
+        <li><a href="#SineGordonOperation">SineGordonOperation</a><a href="#SineGordonOperation">SineGordonOperation</a>
       <ul>
-        <li><a href="#SineGordonOperationSineGordonOperation">SineGordonOperation::SineGordonOperation</a>
-        <li><a href="#SineGordonOperationlocal_apply">SineGordonOperation::local_apply</a>
-        <li><a href="#SineGordonOperationapply">SineGordonOperation::apply</a>
+        <li><a href="#SineGordonOperationSineGordonOperation">SineGordonOperation::SineGordonOperation</a><a href="#SineGordonOperationSineGordonOperation">SineGordonOperation::SineGordonOperation</a>
+        <li><a href="#SineGordonOperationlocal_apply">SineGordonOperation::local_apply</a><a href="#SineGordonOperationlocal_apply">SineGordonOperation::local_apply</a>
+        <li><a href="#SineGordonOperationapply">SineGordonOperation::apply</a><a href="#SineGordonOperationapply">SineGordonOperation::apply</a>
       </ul>
-        <li><a href="#Equationdata">Equation data</a>
-        <li><a href="#SineGordonProblemclass">SineGordonProblem class</a>
+        <li><a href="#Equationdata">Equation data</a><a href="#Equationdata">Equation data</a>
+        <li><a href="#SineGordonProblemclass">SineGordonProblem class</a><a href="#SineGordonProblemclass">SineGordonProblem class</a>
       <ul>
-        <li><a href="#SineGordonProblemSineGordonProblem">SineGordonProblem::SineGordonProblem</a>
-        <li><a href="#SineGordonProblemmake_grid_and_dofs">SineGordonProblem::make_grid_and_dofs</a>
-        <li><a href="#SineGordonProblemoutput_results">SineGordonProblem::output_results</a>
-        <li><a href="#SineGordonProblemrun">SineGordonProblem::run</a>
+        <li><a href="#SineGordonProblemSineGordonProblem">SineGordonProblem::SineGordonProblem</a><a href="#SineGordonProblemSineGordonProblem">SineGordonProblem::SineGordonProblem</a>
+        <li><a href="#SineGordonProblemmake_grid_and_dofs">SineGordonProblem::make_grid_and_dofs</a><a href="#SineGordonProblemmake_grid_and_dofs">SineGordonProblem::make_grid_and_dofs</a>
+        <li><a href="#SineGordonProblemoutput_results">SineGordonProblem::output_results</a><a href="#SineGordonProblemoutput_results">SineGordonProblem::output_results</a>
+        <li><a href="#SineGordonProblemrun">SineGordonProblem::run</a><a href="#SineGordonProblemrun">SineGordonProblem::run</a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Comparisonwithasparsematrix">Comparison with a sparse matrix</a>
-        <li><a href="#Parallelrunin2Dand3D">Parallel run in 2D and 3D</a>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Comparisonwithasparsematrix">Comparison with a sparse matrix</a><a href="#Comparisonwithasparsematrix">Comparison with a sparse matrix</a>
+        <li><a href="#Parallelrunin2Dand3D">Parallel run in 2D and 3D</a><a href="#Parallelrunin2Dand3D">Parallel run in 2D and 3D</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
 </p>
 <p><em> This program was contributed by Katharina Kormann and Martin Kronbichler.</em></p>
-<p><em>The algorithm for the matrix-vector product is based on the article <a href="http://dx.doi.org/10.1016/j.compfluid.2012.04.012">A generic interface for parallel cell-based finite element operator application</a> by Martin Kronbichler and Katharina Kormann, Computers and Fluids 63:135&ndash;147, 2012, and the paper &quot;Parallel finite element operator application: Graph partitioning and coloring&quot; by Katharina Kormann and Martin Kronbichler in: Proceedings of the 7th IEEE International Conference on e-Science, 2011. </em></p>
-<p><a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
-<p>This program demonstrates how to use the cell-based implementation of finite element operators with the <a class="el" href="classMatrixFree.html">MatrixFree</a> class, first introduced in <a class="el" href="step_37.html">step-37</a>, to solve nonlinear partial differential equations. Moreover, we have another look at the handling of constraints within the matrix-free framework. Finally, we will use an explicit time-stepping method to solve the problem and introduce Gauss-Lobatto finite elements that are very convenient in this case since their mass matrix can be accurately approximated by a diagonal, and thus trivially invertible, matrix. The two ingredients to this property are firstly a distribution of the nodal points of Lagrange polynomials according to the point distribution of the Gauss-Lobatto quadrature rule. Secondly, the quadrature is done with the same Gauss-Lobatto quadrature rule. In this formula, the integrals \(\int_K \varphi_i \varphi_j dx\approx \sum_q \varphi_i \varphi_j \mathrm{det}(J) \big |_{x_q}\) become zero whenever \(i\neq j\), because exactly one function \(\varphi_j\) is one and all others zero in the points defining the Lagrange polynomials. Moreover, the Gauss-Lobatto distribution of nodes of Lagrange polynomials clusters the nodes towards the element boundaries. This results in a well-conditioned polynomial basis for high-order discretization methods. Indeed, the condition number of an <a class="el" href="classFE__Q.html">FE_Q</a> elements with equidistant nodes grows exponentially with the degree, which destroys any benefit for orders of about five and higher. For this reason, Gauss-Lobatto points are the default distribution for the <a class="el" href="classFE__Q.html">FE_Q</a> element (but at degrees one and two, those are equivalent to the equidistant points).</p>
+<p><em>The algorithm for the matrix-vector product is based on the article <a href="http://dx.doi.org/10.1016/j.compfluid.2012.04.012">A generic interface for parallel cell-based finite element operator application</a> <a href="http://dx.doi.org/10.1016/j.compfluid.2012.04.012">A generic interface for parallel cell-based finite element operator application</a> by Martin Kronbichler and Katharina Kormann, Computers and Fluids 63:135&ndash;147, 2012, and the paper &quot;Parallel finite element operator application: Graph partitioning and coloring&quot; by Katharina Kormann and Martin Kronbichler in: Proceedings of the 7th IEEE International Conference on e-Science, 2011. </em></p>
+<p><a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a> </p><h1>Introduction</h1>
+<p>这个程序演示了如何使用MatrixFree类的基于单元的有限元算子实现，该类首次在 <a class="el" href="step_37.html">step-37</a> 中介绍，用于解决非线性偏微分方程。此外，我们再看一下无矩阵框架内的约束条件的处理。最后，我们将使用显式时间步进方法来解决问题，并介绍高斯-洛巴托有限元，在这种情况下非常方便，因为它们的质量矩阵可以准确地被对角线矩阵所接近，因此是可逆的。这一特性的两个成分是：首先，根据Gauss-Lobatto正交规则的点分布来分配Lagrange多项式的结点。其次，正交是用同样的Gauss-Lobatto正交规则完成的。在这个公式中，只要 \(i\neq j\) ，积分 \(\int_K \varphi_i \varphi_j dx\approx \sum_q \varphi_i \varphi_j \mathrm{det}(J) \big |_{x_q}\) 就会变成零，因为在定义拉格朗日多项式的点中，正好有一个函数 \(\varphi_j\) 是一，其他都是零。此外，Lagrange多项式的节点的Gauss-Lobatto分布将节点向元素边界聚集。这就为高阶离散化方法提供了条件良好的多项式基础。事实上，具有等距节点的FE_Q元素的条件数随着度数的增加而呈指数级增长，这破坏了约5级以上的任何好处。由于这个原因，高斯-洛巴托点是FE_Q元素的默认分布（但在度数为1和2时，这些点等同于等距点）。</p>
 <p><a class="anchor" id="Problemstatementanddiscretization"></a></p><h3>Problem statement and discretization </h3>
-<p>As an example, we choose to solve the sine-Gordon soliton equation </p><p class="formulaDsp">
+<p>作为一个例子，我们选择解决正弦-戈登孤子方程 </p><p class="formulaDsp">
 \begin{eqnarray*} u_{tt} &amp;=&amp; \Delta u -\sin(u) \quad\mbox{for}\quad (x,t) \in \Omega \times (t_0,t_f],\\ {\mathbf n} \cdot \nabla u &amp;=&amp; 0 \quad\mbox{for}\quad (x,t) \in \partial\Omega \times (t_0,t_f],\\ u(x,t_0) &amp;=&amp; u_0(x). \end{eqnarray*}
 </p>
-<p>that was already introduced in <a class="el" href="step_25.html">step-25</a>. As a simple explicit time integration method, we choose leap frog scheme using the second-order formulation of the equation. With this time stepping, the scheme reads in weak form</p>
+<p>这在 <a class="el" href="step_25.html">step-25</a> 中已经介绍过。作为一种简单的显式时间积分方法，我们选择使用方程的二阶表述的跃迁蛙方案。在这种时间步长的情况下，该方案以弱的形式读取</p>
 <p class="formulaDsp">
 \begin{eqnarray*} (v,u^{n+1}) = (v,2 u^n-u^{n-1} - (\Delta t)^2 \sin(u^n)) - (\nabla v, (\Delta t)^2 \nabla u^n), \end{eqnarray*}
 </p>
-<p> where <em> v</em> denotes a test function and the index <em>n</em> stands for the time step number.</p>
-<p>For the spatial discretization, we choose <a class="el" href="classFE__Q.html">FE_Q</a> elements with basis functions defined to interpolate the support points of the Gauss-Lobatto quadrature rule. Moreover, when we compute the integrals over the basis functions to form the mass matrix and the operator on the right hand side of the equation above, we use the Gauss-Lobatto quadrature rule with the same support points as the node points of the finite element to evaluate the integrals. Since the finite element is Lagrangian, this will yield a diagonal mass matrix on the left hand side of the equation, making the solution of the linear system in each time step trivial.</p>
-<p>Using this quadrature rule, for a <em>p</em>th order finite element, we use a <em>(2p-1)</em>th order accurate formula to evaluate the integrals. Since the product of two <em>p</em>th order basis functions when computing a mass matrix gives a function with polynomial degree <em>2p</em> in each direction, the integrals are not computed exactly. However, the overall convergence properties are not disturbed by the quadrature error on meshes with affine element shapes with L2 errors proportional to <em>h<sup>p+1</sup></em>. Note however that order reduction with sub-optimal convergence rates of the L2 error of <em>O(h<sup>p</sup>)</em> or even <em>O(h<sup>p-1</sup>)</em> for some 3D setups has been reported <a href="https://dx.doi.org/10.1002/num.20353">in literature</a> on deformed (non-affine) element shapes for wave equations when the integrand is not a polynomial any more.</p>
-<p>Apart from the fact that we avoid solving linear systems with this type of elements when using explicit time-stepping, they come with two other advantages. When we are using the sum-factorization approach to evaluate the finite element operator (cf. <a class="el" href="step_37.html">step-37</a>), we have to evaluate the function at the quadrature points. In the case of Gauss-Lobatto elements, where quadrature points and node points of the finite element coincide, this operation is trivial since the value of the function at the quadrature points is given by its one-dimensional coefficients. In this way, the arithmetic work for the finite element operator evaluation is reduced by approximately a factor of two compared to the generic Gaussian quadrature.</p>
-<p>To sum up the discussion, by using the right finite element and quadrature rule combination, we end up with a scheme where we only need to compute the right hand side vector corresponding to the formulation above and then multiply it by the inverse of the diagonal mass matrix in each time step. In practice, of course, we extract the diagonal elements and invert them only once at the beginning of the program.</p>
+<p> 其中<em> v</em>表示测试函数，索引<em>n</em>代表时间步数。</p>
+<p>对于空间离散化，我们选择FE_Q元素，其基函数定义为插值Gauss-Lobatto正交规则的支持点。此外，当我们计算基函数的积分以形成质量矩阵和上述方程右边的算子时，我们使用高斯-洛巴托正交规则，其支持点与有限元的节点点相同，以评估积分。由于有限元是拉格朗日的，这将在方程的左侧产生一个对角线质量矩阵，使每个时间步长的线性系统的解变得微不足道。</p>
+<p>利用这个正交规则，对于<em>p</em>阶有限元，我们使用<em>(2p-1)</em>阶精确公式来评估积分。由于在计算质量矩阵时，两个<em>p</em>阶基函数的乘积在每个方向上给出了一个具有多项式程度<em>2p</em>的函数，所以积分的计算并不精确。 然而，在具有仿生元素形状的网格上，整体收敛特性不受正交误差的干扰，L2误差与<em>h<sup>p+1</sup></em>成正比。然而，请注意，当积分项不再是多项式时，在变形（非仿生）元素形状的波浪方程上，已经有报道<em>O(h<sup>p</sup>)</em>甚至<em>O(h<sup>p-1</sup>)</em>的L2误差的次优收敛率的减序<a href="https://dx.doi.org/10.1002/num.20353">in literature</a>。</p>
+<p>除了在使用显式时间步进时我们可以避免用这种类型的元素解线性系统外，它们还具有另外两个优点。当我们使用和-因子化方法来评估有限元算子时（参见 <a class="el" href="step_37.html">step-37</a> ），我们必须在正交点评估函数。在Gauss-Lobatto元素的情况下，正交点和有限元的节点点是重合的，这种操作是微不足道的，因为正交点的函数值是由其一维系数给出。这样一来，与一般的高斯正交相比，有限元算子评估的算术工作减少了大约两倍。</p>
+<p>总结一下讨论，通过使用正确的有限元和正交规则组合，我们最终得到一个方案，我们只需要计算对应于上述公式的右手向量，然后在每个时间步长中乘以对角线质量矩阵的逆。当然，在实践中，我们提取对角线元素并在程序开始时只反转一次。</p>
 <p><a class="anchor" id="Implementationofconstraints"></a></p><h3>Implementation of constraints</h3>
-<p>The usual way to handle constraints in <code>deal.II</code> is to use the <a class="el" href="classAffineConstraints.html">AffineConstraints</a> class that builds a sparse matrix storing information about which degrees of freedom (DoF) are constrained and how they are constrained. This format uses an unnecessarily large amount of memory since there are not so many different types of constraints: for example, in the case of hanging nodes when using linear finite element on every cell, most constraints have the form \(x_k = \frac 12 x_i + \frac 12 x_j\) where the coefficients \(\frac 12\) are always the same and only \(i,j,k\) are different. While storing this redundant information is not a problem in general because it is only needed once during matrix and right hand side assembly, it becomes a bottleneck in the matrix-free approach since there this information has to be accessed every time we apply the operator, and the remaining components of the operator evaluation are so fast. Thus, instead of an <a class="el" href="classAffineConstraints.html">AffineConstraints</a> object, <a class="el" href="classMatrixFree.html">MatrixFree</a> uses a variable that we call <code>constraint_pool</code> that collects the weights of the different constraints. Then, only an identifier of each constraint in the mesh instead of all the weights have to be stored. Moreover, the constraints are not applied in a pre- and postprocessing step but rather as we evaluate the finite element operator. Therefore, the constraint information is embedded into the variable <code>indices_local_to_global</code> that is used to extract the cell information from the global vector. If a DoF is constrained, the <code>indices_local_to_global</code> variable contains the global indices of the DoFs that it is constrained to. Then, we have another variable <code>constraint_indicator</code> at hand that holds, for each cell, the local indices of DoFs that are constrained as well as the identifier of the type of constraint. Fortunately, you will not see these data structures in the example program since the class <code><a class="el" href="classFEEvaluation.html">FEEvaluation</a></code> takes care of the constraints without user interaction.</p>
-<p>In the presence of hanging nodes, the diagonal mass matrix obtained on the element level via the Gauss-Lobatto quadrature/node point procedure does not directly translate to a diagonal global mass matrix, as following the constraints on rows and columns would also add off-diagonal entries. As explained in <a href="https://dx.doi.org/10.4208/cicp.101214.021015a">Kormann (2016)</a>, interpolating constraints on a vector, which maintains the diagonal shape of the mass matrix, is consistent with the equations up to an error of the same magnitude as the quadrature error. In the program below, we will simply assemble the diagonal of the mass matrix as if it were a vector to enable this approximation.</p>
+<p>在 <code>deal.II</code> 中处理约束的通常方法是使用AffineConstraints类，该类建立了一个稀疏矩阵，存储关于哪些自由度（DoF）被约束以及如何被约束的信息。这种格式使用了不必要的大量内存，因为没有那么多不同类型的约束：例如，在每个单元上使用线性有限元时，悬挂节点的情况下，大多数约束的形式是 \(x_k = \frac 12 x_i + \frac 12 x_j\) ，其中系数 \(\frac 12\) 总是相同，只有 \(i,j,k\) 不同。虽然存储这些冗余信息在一般情况下不是问题，因为在矩阵和右手边装配时只需要一次，但在无矩阵方法中却成为一个瓶颈，因为每次我们应用算子时都要访问这些信息，而算子评估的其余部分都非常快。因此，MatrixFree使用一个我们称为 <code>constraint_pool</code> 的变量来收集不同约束的权重，而不是AffineConstraints对象。然后，只需要存储网格中每个约束条件的标识符，而不是所有的权重。此外，约束不是在前后处理步骤中应用的，而是在我们评估有限元算子时应用的。因此，约束信息被嵌入到变量 <code>indices_local_to_global</code> 中，用于从全局矢量中提取单元信息。如果一个DoF被约束， <code>indices_local_to_global</code> 变量包含它被约束的DoF的全局指数。然后，我们有另一个变量 <code>constraint_indicator</code> ，对于每个单元来说，它持有被约束的DoF的局部指数以及约束类型的标识符。幸运的是，你不会在示例程序中看到这些数据结构，因为类 <code><a class="el" href="classFEEvaluation.html">FEEvaluation</a></code> 负责处理约束，无需用户交互。</p>
+<p>在存在悬空节点的情况下，通过Gauss-Lobatto正交/节点点程序在元素层面获得的对角质量矩阵并不能直接转化为对角的全局质量矩阵，因为遵循行和列的约束也会增加非对角条目。正如在<a href="https://dx.doi.org/10.4208/cicp.101214.021015a">Kormann (2016)</a>中所解释的，在一个矢量上插值约束，保持质量矩阵的对角线形状，与方程一致，直到与正交误差相同大小的误差。在下面的程序中，我们将简单地组装质量矩阵的对角线，就像它是一个矢量一样，以实现这种近似。</p>
 <p><a class="anchor" id="Parallelization"></a></p><h3>Parallelization </h3>
-<p>The <a class="el" href="classMatrixFree.html">MatrixFree</a> class comes with the option to be parallelized on three levels: MPI parallelization on clusters of distributed nodes, thread parallelization scheduled by the Threading Building Blocks library, and finally with a vectorization by working on a batch of two (or more) cells via SIMD data type (sometimes called cross-element or external vectorization). As we have already discussed in <a class="el" href="step_37.html">step-37</a>, you will get best performance by using an instruction set specific to your system, e.g. with the cmake variable <code>-DCMAKE_CXX_FLAGS="-march=native"</code>. The MPI parallelization was already exploited in <a class="el" href="step_37.html">step-37</a>. Here, we additionally consider thread parallelization with TBB. This is fairly simple, as all we need to do is to tell the initialization of the <a class="el" href="classMatrixFree.html">MatrixFree</a> object about the fact that we want to use a thread parallel scheme through the variable MatrixFree::AdditionalData::thread_parallel_scheme. During setup, a dependency graph is set up similar to the one described in the <a class="el" href="DEALGlossary.html#workstream_paper">workstream_paper</a> , which allows to schedule the work of the <code>local_apply</code> function on chunks of cells without several threads accessing the same vector indices. As opposed to the <a class="el" href="namespaceWorkStream.html">WorkStream</a> loops, some additional clever tricks to avoid global synchronizations as described in <a href="https://dx.doi.org/10.1109/eScience.2011.53">Kormann and Kronbichler (2011)</a> are also applied.</p>
-<p>Note that this program is designed to be run with a distributed triangulation (<a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a>), which requires deal.II to be configured with <a href="http://www.p4est.org/">p4est</a> as described in the <a href="../../readme.html">deal.II ReadMe</a> file. However, a non-distributed triangulation is also supported, in which case the computation will be run in serial.</p>
+<p>MatrixFree类可以选择在三个层次上进行并行化。分布式节点集群上的MPI并行化，由线程积木库安排的线程并行化，以及最后通过SIMD数据类型在两个（或更多）单元的批次上工作的矢量化（有时称为跨元素或外部矢量化）。正如我们在 <a class="el" href="step_37.html">step-37</a> 中已经讨论过的，通过使用特定于你的系统的指令集，你将获得最好的性能，例如，通过cmake变量<code>-DCMAKE_CXX_FLAGS="-march=native"</code>。MPI并行化已经在 <a class="el" href="step_37.html">step-37</a> 中得到了利用。在这里，我们额外考虑用TBB进行线程并行化。这相当简单，因为我们需要做的就是告诉MatrixFree对象的初始化，我们想通过变量 MatrixFree::AdditionalData::thread_parallel_scheme. 来使用线程并行方案。 在设置过程中，建立了一个类似于 <a class="el" href="DEALGlossary.html#workstream_paper">workstream_paper</a> 中描述的依赖图，它允许在没有几个线程访问相同向量索引的情况下安排 <code>local_apply</code> 函数在单元块的工作。相对于WorkStream循环，还应用了一些额外的巧妙技巧来避免全局同步，如<a href="https://dx.doi.org/10.1109/eScience.2011.53">Kormann and Kronbichler (2011)</a>中所述。</p>
+<p>请注意，这个程序被设计为与分布式三角计算 (<a class="el" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation</a>), 一起运行，这需要deal.II与<a href="http://www.p4est.org/">p4est</a>一起配置，如<a href="../../readme.html">deal.II ReadMe</a>文件中所述。然而，也支持非分布式三角计算，在这种情况下，计算将以串行方式运行。</p>
 <p><a class="anchor" id="Thetestcase"></a></p><h3>The test case </h3>
-<p>In our example, we choose the initial value to be </p><p class="formulaDsp">
+<p>在我们的例子中，我们选择初始值为 </p><p class="formulaDsp">
 \begin{eqnarray*} u(x,t) = \prod_{i=1}^{d} -4 \arctan \left( \frac{m}{\sqrt{1-m^2}}\frac{\sin\left(\sqrt{1-m^2} t +c_2\right)}{\cosh(mx_i+c_1)}\right) \end{eqnarray*}
 </p>
-<p> and solve the equation over the time interval [-10,10]. The constants are chosen to be \(c_1=c_1=0\) and <em> m=0.5</em>. As mentioned in <a class="el" href="step_25.html">step-25</a>, in one dimension <em>u</em> as a function of <em>t</em> is the exact solution of the sine-Gordon equation. For higher dimension, this is however not the case.</p>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<p>The necessary files from the deal.II library.</p>
+<p>，并在时间区间[-10,10]内求解方程。常数被选择为 \(c_1=c_1=0\) 和<em> m=0.5</em>。正如在 step-25 中提到的，在一维中<em>u</em>作为<em>t</em>的函数是正弦-戈登方程的精确解。然而，对于更高的维度，情况并非如此。<a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+<p>来自deal.II库的必要文件。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logstream_8h.html">deal.II/base/logstream.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="include_2deal_8II_2base_2utilities_8h.html">deal.II/base/utilities.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="function_8h.html">deal.II/base/function.h</a>&gt;</span></div>
@@ -192,14 +191,16 @@ $(function() {
 <div class="ttc" id="atimer_8h_html"><div class="ttname"><a href="timer_8h.html">timer.h</a></div></div>
 <div class="ttc" id="avector_8h_html"><div class="ttname"><a href="vector_8h.html">vector.h</a></div></div>
 <div class="ttc" id="avector__tools_8h_html"><div class="ttname"><a href="vector__tools_8h.html">vector_tools.h</a></div></div>
-</div><!-- fragment --><p>This includes the data structures for the efficient implementation of matrix-free methods.</p>
+</div><!-- fragment --><p>这包括用于有效实现无矩阵方法的数据结构。</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="la__parallel__vector_8h.html">deal.II/lac/la_parallel_vector.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="matrix__free_8h.html">deal.II/matrix_free/matrix_free.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="fe__evaluation_8h.html">deal.II/matrix_free/fe_evaluation.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iomanip&gt;</span></div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span>Step48</div>
@@ -209,11 +210,11 @@ $(function() {
 <div class="ttc" id="ala__parallel__vector_8h_html"><div class="ttname"><a href="la__parallel__vector_8h.html">la_parallel_vector.h</a></div></div>
 <div class="ttc" id="amatrix__free_8h_html"><div class="ttname"><a href="matrix__free_8h.html">matrix_free.h</a></div></div>
 <div class="ttc" id="anamespacedealii_html"><div class="ttname"><a href="namespacedealii.html">dealii</a></div><div class="ttdef"><b>Definition:</b> <a href="namespace__dealii_8h_source.html#l00025">namespace_dealii.h:26</a></div></div>
-</div><!-- fragment --><p>We start by defining two global variables to collect all parameters subject to changes at one place: One for the dimension and one for the finite element degree. The dimension is used in the main function as a template argument for the actual classes (like in all other deal.II programs), whereas the degree of the finite element is more crucial, as it is passed as a template argument to the implementation of the Sine-Gordon operator. Therefore, it needs to be a compile-time constant.</p>
+</div><!-- fragment --><p>我们首先定义了两个全局变量，以便在一个地方收集所有需要改变的参数。一个是维度，一个是有限元度。维度在主函数中作为实际类的模板参数使用（就像所有其他deal.II程序一样），而有限元的度数则更为关键，因为它是作为模板参数传递给Sine-Gordon算子的实现。因此，它需要成为一个编译时常数。</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dimension = 2;</div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fe_degree = 4;</div>
-</div><!-- fragment --><p><a class="anchor" id="SineGordonOperation"></a> </p><h3>SineGordonOperation</h3>
-<p>The <code>SineGordonOperation</code> class implements the cell-based operation that is needed in each time step. This nonlinear operation can be implemented straight-forwardly based on the <code><a class="el" href="classMatrixFree.html">MatrixFree</a></code> class, in the same way as a linear operation would be treated by this implementation of the finite element operator application. We apply two template arguments to the class, one for the dimension and one for the degree of the finite element. This is a difference to other functions in deal.II where only the dimension is a template argument. This is necessary to provide the inner loops in <code><a class="el" href="classFEEvaluation.html">FEEvaluation</a></code> with information about loop lengths etc., which is essential for efficiency. On the other hand, it makes it more challenging to implement the degree as a run-time parameter.</p>
+</div><!-- fragment --><p><a class="anchor" id="SineGordonOperation"></a></p><h3>SineGordonOperation</h3>
+<p><code>SineGordonOperation</code> 类实现了每个时间步长中需要的基于单元的操作。这种非线性操作可以在 <code><a class="el" href="classMatrixFree.html">MatrixFree</a></code> 类的基础上直接实现，就像线性操作被这个实现的有限元算子应用所处理的方式一样。我们对该类应用两个模板参数，一个是尺寸，一个是有限元的度数。这与deal.II中的其他函数不同，其中只有维度是模板参数。这对于向 <code><a class="el" href="classFEEvaluation.html">FEEvaluation</a></code> 中的内循环提供关于循环长度等的信息是必要的，这对于效率是至关重要的。另一方面，这使得将度数作为一个运行时参数来实现更具挑战性。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> fe_degree&gt;</div>
 <div class="line"><span class="keyword">class </span>SineGordonOperation</div>
 <div class="line">{</div>
@@ -221,14 +222,17 @@ $(function() {
 <div class="line">  SineGordonOperation(<span class="keyword">const</span> <a class="code" href="classMatrixFree.html">MatrixFree&lt;dim, double&gt;</a> &amp;data_in,</div>
 <div class="line">                      <span class="keyword">const</span> <span class="keywordtype">double</span>                   time_step);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> <a class="code" href="namespacestd__cxx17.html#aa2fc1031c06af4aea4de90c5a1905473">apply</a>(<a class="code" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector&lt;double&gt;</a> &amp;dst,</div>
 <div class="line">             <span class="keyword">const</span> std::vector&lt;<a class="code" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector&lt;double&gt;</a> *&gt;</div>
 <div class="line">               &amp;src) <span class="keyword">const</span>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classMatrixFree.html">MatrixFree&lt;dim, double&gt;</a> &amp;            data;</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classVectorizedArray.html">VectorizedArray&lt;double&gt;</a>              delta_t_sqr;</div>
 <div class="line">  <a class="code" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector&lt;double&gt;</a> inv_mass_matrix;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordtype">void</span> local_apply(</div>
 <div class="line">    <span class="keyword">const</span> <a class="code" href="classMatrixFree.html">MatrixFree&lt;dim, double&gt;</a> &amp;                                  data,</div>
@@ -240,8 +244,8 @@ $(function() {
 <div class="ttc" id="aclassMatrixFree_html"><div class="ttname"><a href="classMatrixFree.html">MatrixFree</a></div><div class="ttdef"><b>Definition:</b> <a href="matrix__free_8h_source.html#l00116">matrix_free.h:117</a></div></div>
 <div class="ttc" id="aclassVectorizedArray_html"><div class="ttname"><a href="classVectorizedArray.html">VectorizedArray</a></div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l00389">vectorization.h:391</a></div></div>
 <div class="ttc" id="anamespacestd__cxx17_html_aa2fc1031c06af4aea4de90c5a1905473"><div class="ttname"><a href="namespacestd__cxx17.html#aa2fc1031c06af4aea4de90c5a1905473">std_cxx17::apply</a></div><div class="ttdeci">auto apply(F &amp;&amp;fn, Tuple &amp;&amp;t) -&gt; decltype(apply_impl(std::forward&lt; F &gt;(fn), std::forward&lt; Tuple &gt;(t), std::make_index_sequence&lt; std::tuple_size&lt; typename std::remove_reference&lt; Tuple &gt;::type &gt;::value &gt;()))</div><div class="ttdef"><b>Definition:</b> <a href="tuple_8h_source.html#l00036">tuple.h:36</a></div></div>
-</div><!-- fragment --><p><a class="anchor" id="SineGordonOperationSineGordonOperation"></a> </p><h4>SineGordonOperation::SineGordonOperation</h4>
-<p>This is the constructor of the SineGordonOperation class. It receives a reference to the <a class="el" href="classMatrixFree.html">MatrixFree</a> holding the problem information and the time step size as input parameters. The initialization routine sets up the mass matrix. Since we use Gauss-Lobatto elements, the mass matrix is a diagonal matrix and can be stored as a vector. The computation of the mass matrix diagonal is simple to achieve with the data structures provided by <a class="el" href="classFEEvaluation.html">FEEvaluation</a>: Just loop over all cell batches, i.e., collections of cells due to SIMD vectorization, and integrate over the function that is constant one on all quadrature points by using the <code>integrate</code> function with <code>true</code> argument at the slot for values. Finally, we invert the diagonal entries to have the inverse mass matrix directly available in each time step.</p>
+</div><!-- fragment --><p><a class="anchor" id="SineGordonOperationSineGordonOperation"></a></p><h4>SineGordonOperation::SineGordonOperation</h4>
+<p>这是SineGordonOperation类的构造函数。它接收一个对MatrixFree的引用，该引用持有问题信息和时间步长作为输入参数。初始化程序设置了质量矩阵。由于我们使用Gauss-Lobatto元素，质量矩阵是一个对角矩阵，可以存储为一个矢量。利用FEEvaluation提供的数据结构，质量矩阵对角线的计算很容易实现。只要在所有的单元格批次上循环，即由于SIMD矢量化的单元格集合，通过使用 <code>integrate</code> 函数与 <code>true</code> 参数在槽中取值，在所有正交点上常一的函数上积分。最后，我们将对角线条目进行反转，以便在每个时间步长中直接得到反质量矩阵。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> fe_degree&gt;</div>
 <div class="line">SineGordonOperation&lt;dim, fe_degree&gt;::SineGordonOperation(</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classMatrixFree.html">MatrixFree&lt;dim, double&gt;</a> &amp;data_in,</div>
@@ -251,8 +255,10 @@ $(function() {
 <div class="line">{</div>
 <div class="line">  data.initialize_dof_vector(inv_mass_matrix);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classFEEvaluation.html">FEEvaluation&lt;dim, fe_degree&gt;</a> fe_eval(data);</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>           n_q_points = fe_eval.n_q_points;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cell = 0; cell &lt; data.n_cell_batches(); ++cell)</div>
 <div class="line">    {</div>
@@ -262,6 +268,7 @@ $(function() {
 <div class="line">      fe_eval.integrate(<a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">EvaluationFlags::values</a>);</div>
 <div class="line">      fe_eval.distribute_local_to_global(inv_mass_matrix);</div>
 <div class="line">    }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  inv_mass_matrix.compress(<a class="code" href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a>);</div>
 <div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k = 0; k &lt; inv_mass_matrix.locally_owned_size(); ++k)</div>
@@ -276,9 +283,9 @@ $(function() {
 <div class="ttc" id="agroup__Vectors_html_gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708"><div class="ttname"><a href="group__Vectors.html#gga40c50779cd14ba89bbf0bd9b4561964cae1077e8dbf4afea5d2df8c8b723c0708">VectorOperation::add</a></div><div class="ttdeci">@ add</div><div class="ttdef"><b>Definition:</b> <a href="vector__operation_8h_source.html#l00053">vector_operation.h:53</a></div></div>
 <div class="ttc" id="anamespaceEvaluationFlags_html_a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58"><div class="ttname"><a href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">EvaluationFlags::values</a></div><div class="ttdeci">@ values</div><div class="ttdef"><b>Definition:</b> <a href="evaluation__flags_8h_source.html#l00051">evaluation_flags.h:51</a></div></div>
 <div class="ttc" id="anamespacePhysics_1_1Elasticity_1_1Kinematics_html_a9587d5229555daa5b1fa1ba2f8a40adb"><div class="ttname"><a href="namespacePhysics_1_1Elasticity_1_1Kinematics.html#a9587d5229555daa5b1fa1ba2f8a40adb">Physics::Elasticity::Kinematics::e</a></div><div class="ttdeci">SymmetricTensor&lt; 2, dim, Number &gt; e(const Tensor&lt; 2, dim, Number &gt; &amp;F)</div></div>
-</div><!-- fragment --><p><a class="anchor" id="SineGordonOperationlocal_apply"></a> </p><h4>SineGordonOperation::local_apply</h4>
-<p>This operator implements the core operation of the program, the integration over a range of cells for the nonlinear operator of the Sine-Gordon problem. The implementation is based on the <a class="el" href="classFEEvaluation.html">FEEvaluation</a> class as in <a class="el" href="step_37.html">step-37</a>. Due to the special structure in Gauss-Lobatto elements, certain operations become simpler, in particular the evaluation of shape function values on quadrature points which is simply the injection of the values of cell degrees of freedom. The <a class="el" href="classMatrixFree.html">MatrixFree</a> class detects possible structure of the finite element at quadrature points when initializing, which is then automatically used by <a class="el" href="classFEEvaluation.html">FEEvaluation</a> for selecting the most appropriate numerical kernel.</p>
-<p>The nonlinear function that we have to evaluate for the time stepping routine includes the value of the function at the present time <code>current</code> as well as the value at the previous time step <code>old</code>. Both values are passed to the operator in the collection of source vectors <code>src</code>, which is simply a <code>std::vector</code> of pointers to the actual solution vectors. This construct of collecting several source vectors into one is necessary as the cell loop in <code><a class="el" href="classMatrixFree.html">MatrixFree</a></code> takes exactly one source and one destination vector, even if we happen to use many vectors like the two in this case. Note that the cell loop accepts any valid class for input and output, which does not only include vectors but general data types. However, only in case it encounters a LinearAlgebra::distributed::Vector&lt;Number&gt; or a <code>std::vector</code> collecting these vectors, it calls functions that exchange ghost data due to MPI at the beginning and the end of the loop. In the loop over the cells, we first have to read in the values in the vectors related to the local values. Then, we evaluate the value and the gradient of the current solution vector and the values of the old vector at the quadrature points. Next, we combine the terms in the scheme in the loop over the quadrature points. Finally, we integrate the result against the test function and accumulate the result to the global solution vector <code>dst</code>.</p>
+</div><!-- fragment --><p><a class="anchor" id="SineGordonOperationlocal_apply"></a></p><h4>SineGordonOperation::local_apply</h4>
+<p>这个算子实现了程序的核心操作，即对Sine-Gordon问题的非线性算子进行单元范围的积分。其实现是基于 <a class="el" href="step_37.html">step-37</a> 中的 <a class="el" href="classFEEvaluation.html">FEEvaluation</a> 类。由于Gauss-Lobatto元素的特殊结构，某些操作变得更加简单，特别是正交点上的形状函数值的评估，这只是单元自由度值的注入。MatrixFree类在初始化时检测正交点上的有限元的可能结构，然后由FEEvaluation自动用于选择最合适的数值核。</p>
+<p>我们必须为时间步进例程评估的非线性函数包括当前时间的函数值 <code>current</code> 以及前一个时间步进的值 <code>old</code>. 这两个值都在源向量集合 <code>src</code>, 中传递给运算器，这只是一个指向实际解向量的指针 <code>std::vector</code> 。这种将多个源向量收集到一起的结构是必要的，因为 <code><a class="el" href="classMatrixFree.html">MatrixFree</a></code> 中的单元格循环正好需要一个源向量和一个目的向量，即使我们碰巧使用许多向量，如本例中的两个。请注意，单元格循环接受任何有效的输入和输出类，这不仅包括向量，还包括一般的数据类型。 然而，只有在遇到收集这些向量的 LinearAlgebra::distributed::Vector&lt;Number&gt; 或 <code>std::vector</code> 时，它才会在循环的开始和结束时调用由于MPI而交换幽灵数据的函数。在单元格的循环中，我们首先要读入与本地值相关的向量中的值。 然后，我们评估当前求解向量的值和梯度以及正交点的旧向量的值。接下来，我们在正交点的循环中结合方案中的条款。最后，我们将结果与测试函数进行积分，并将结果累积到全局解向量<code>dst。</code> </p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> fe_degree&gt;</div>
 <div class="line"><span class="keywordtype">void</span> SineGordonOperation&lt;dim, fe_degree&gt;::local_apply(</div>
 <div class="line">  <span class="keyword">const</span> <a class="code" href="classMatrixFree.html">MatrixFree&lt;dim&gt;</a> &amp;                                          data,</div>
@@ -293,22 +300,27 @@ $(function() {
 <div class="line">      current.reinit(cell);</div>
 <div class="line">      old.reinit(cell);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      current.read_dof_values(*src[0]);</div>
 <div class="line">      old.read_dof_values(*src[1]);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      current.evaluate(<a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">EvaluationFlags::values</a> | <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aea91b5f00e4be473005cc331b8644ab2f1">EvaluationFlags::gradients</a>);</div>
 <div class="line">      old.evaluate(<a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">EvaluationFlags::values</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q = 0; q &lt; current.n_q_points; ++q)</div>
 <div class="line">        {</div>
 <div class="line">          <span class="keyword">const</span> <a class="code" href="classVectorizedArray.html">VectorizedArray&lt;double&gt;</a> current_value = current.get_value(q);</div>
 <div class="line">          <span class="keyword">const</span> <a class="code" href="classVectorizedArray.html">VectorizedArray&lt;double&gt;</a> old_value     = old.get_value(q);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">          current.submit_value(2. * current_value - old_value -</div>
 <div class="line">                                 delta_t_sqr * std::sin(current_value),</div>
 <div class="line">                               q);</div>
 <div class="line">          current.submit_gradient(-delta_t_sqr * current.get_gradient(q), q);</div>
 <div class="line">        }</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">      current.integrate(<a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aeaf9825c682f693a6a200094641a0d6a58">EvaluationFlags::values</a> | <a class="code" href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aea91b5f00e4be473005cc331b8644ab2f1">EvaluationFlags::gradients</a>);</div>
 <div class="line">      current.distribute_local_to_global(dst);</div>
@@ -317,7 +329,7 @@ $(function() {
 <div class="ttc" id="agroup__Exceptions_html_ga9442b63275c9ef3fab29bc222831c49c"><div class="ttname"><a href="group__Exceptions.html#ga9442b63275c9ef3fab29bc222831c49c">AssertDimension</a></div><div class="ttdeci">#define AssertDimension(dim1, dim2)</div><div class="ttdef"><b>Definition:</b> <a href="include_2deal_8II_2base_2exceptions_8h_source.html#l01630">exceptions.h:1630</a></div></div>
 <div class="ttc" id="anamespaceEvaluationFlags_html_a9b7c6d689cb76386839d0d13640f59aea91b5f00e4be473005cc331b8644ab2f1"><div class="ttname"><a href="namespaceEvaluationFlags.html#a9b7c6d689cb76386839d0d13640f59aea91b5f00e4be473005cc331b8644ab2f1">EvaluationFlags::gradients</a></div><div class="ttdeci">@ gradients</div><div class="ttdef"><b>Definition:</b> <a href="evaluation__flags_8h_source.html#l00055">evaluation_flags.h:55</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="SineGordonOperationapply"></a> </p><h4>SineGordonOperation::apply</h4>
-<p>This function performs the time stepping routine based on the cell-local strategy. Note that we need to set the destination vector to zero before we add the integral contributions of the current time step (via the <a class="el" href="classFEEvaluationBase.html#a13c9d8eac4ca7b3f7d45eda97ea8e2fb">FEEvaluation::distribute_local_to_global()</a> call). In this tutorial, we let the cell-loop do the zero operation via the fifth <code>true</code> argument passed to <a class="el" href="classMatrixFree.html#abc204ec41ead1b5060f47ef3a5a066d7">MatrixFree::cell_loop</a>. The loop can schedule the zero operation closer to the operations on vector entries for supported vector entries, thereby possibly increasing data locality (the vector entries that first get zeroed are later re-used in the <code>distribute_local_to_global()</code> call). The structure of the cell loop is implemented in the cell finite element operator class. On each cell it applies the routine defined as the <code>local_apply()</code> method of the class <code>SineGordonOperation</code>, i.e., <code>this</code>. One could also provide a function with the same signature that is not part of a class. Finally, the result of the integration is multiplied by the inverse mass matrix.</p>
+<p>该函数根据单元格-本地策略执行时间步进例程。请注意，在添加当前时间步长的积分贡献之前，我们需要将目标向量设置为零（通过 <a class="el" href="classFEEvaluationBase.html#a13c9d8eac4ca7b3f7d45eda97ea8e2fb">FEEvaluation::distribute_local_to_global()</a> 调用）。在本教程中，我们通过传递给 <a class="el" href="classMatrixFree.html#abc204ec41ead1b5060f47ef3a5a066d7">MatrixFree::cell_loop</a>. 的第五个<code>true</code>参数让单元格循环进行归零操作。 循环可以将归零操作安排在更接近对支持的向量项的操作，从而可能提高数据的定位性（首先被归零的向量项后来在<code>distribute_local_to_global()</code>调用中重新使用）。单元循环的结构是在单元有限元运算器类中实现的。在每个单元上，它应用定义为类 <code>local_apply()</code> 方法的例程 <code>SineGordonOperation</code>, i.e., <code>this</code> 。我们也可以提供一个具有相同特征的、不属于类的函数。最后，积分的结果要乘以质量矩阵的逆值。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim, <span class="keywordtype">int</span> fe_degree&gt;</div>
 <div class="line"><span class="keywordtype">void</span> <a class="code" href="namespacestd__cxx17.html#aa2fc1031c06af4aea4de90c5a1905473">SineGordonOperation&lt;dim, fe_degree&gt;::apply</a>(</div>
 <div class="line">  <a class="code" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector&lt;double&gt;</a> &amp;                     dst,</div>
@@ -329,8 +341,8 @@ $(function() {
 <div class="line">}</div>
 <div class="ttc" id="aclassMatrixFree_html_abc204ec41ead1b5060f47ef3a5a066d7"><div class="ttname"><a href="classMatrixFree.html#abc204ec41ead1b5060f47ef3a5a066d7">MatrixFree::cell_loop</a></div><div class="ttdeci">void cell_loop(const std::function&lt; void(const MatrixFree&lt; dim, Number, VectorizedArrayType &gt; &amp;, OutVector &amp;, const InVector &amp;, const std::pair&lt; unsigned int, unsigned int &gt; &amp;)&gt; &amp;cell_operation, OutVector &amp;dst, const InVector &amp;src, const bool zero_dst_vector=false) const</div></div>
 <div class="ttc" id="agroup__Vectors_html_gaacdf6bfd4533c47587ba0debe177710e"><div class="ttname"><a href="group__Vectors.html#gaacdf6bfd4533c47587ba0debe177710e">LinearAlgebra::distributed::Vector::scale</a></div><div class="ttdeci">virtual void scale(const VectorSpaceVector&lt; Number &gt; &amp;scaling_factors) override</div></div>
-</div><!-- fragment --><p><a class="anchor" id="Equationdata"></a> </p><h3>Equation data</h3>
-<p>We define a time-dependent function that is used as initial value. Different solutions can be obtained by varying the starting time. This function, taken from <a class="el" href="step_25.html">step-25</a>, would represent an analytic solution in 1D for all times, but is merely used for setting some starting solution of interest here. More elaborate choices that could test the convergence of this program are given in <a class="el" href="step_25.html">step-25</a>.</p>
+</div><!-- fragment --><p><a class="anchor" id="Equationdata"></a></p><h3>Equation data</h3>
+<p>我们定义一个随时间变化的函数，作为初始值使用。通过改变起始时间可以得到不同的解决方案。这个函数取自 <a class="el" href="step_25.html">step-25</a> ，将代表一维中所有时间的分析解，但在这里只是用来设置一些感兴趣的起始解。在 <a class="el" href="step_25.html">step-25</a> 中给出了可以测试这个程序的收敛性的更详细的选择。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>InitialCondition : <span class="keyword">public</span> <a class="code" href="classFunction.html">Function</a>&lt;dim&gt;</div>
 <div class="line">{</div>
@@ -343,6 +355,7 @@ $(function() {
 <div class="line">                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="comment">/*component*/</span>)<span class="keyword"> const override</span></div>
 <div class="line"><span class="keyword">  </span>{</div>
 <div class="line">    <span class="keywordtype">double</span> t = this-&gt;<a class="code" href="classFunctionTime.html#ae7d37ddb04314b38cf67c6cba22923f6">get_time</a>();</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">double</span> m  = 0.5;</div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">double</span> c1 = 0.;</div>
@@ -365,7 +378,7 @@ $(function() {
 <div class="ttc" id="anumbers_8h_html_a27989bdc7b4b828564982787d126bd91"><div class="ttname"><a href="numbers_8h.html#a27989bdc7b4b828564982787d126bd91">std::sin</a></div><div class="ttdeci">::VectorizedArray&lt; Number, width &gt; sin(const ::VectorizedArray&lt; Number, width &gt; &amp;)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l05291">vectorization.h:5291</a></div></div>
 <div class="ttc" id="anumbers_8h_html_ac4a2ed1890a931d0b6a55933310eadca"><div class="ttname"><a href="numbers_8h.html#ac4a2ed1890a931d0b6a55933310eadca">std::sqrt</a></div><div class="ttdeci">::VectorizedArray&lt; Number, width &gt; sqrt(const ::VectorizedArray&lt; Number, width &gt; &amp;)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l05406">vectorization.h:5406</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="SineGordonProblemclass"></a> </p><h3>SineGordonProblem class</h3>
-<p>This is the main class that builds on the class in <a class="el" href="step_25.html">step-25</a>. However, we replaced the <a class="el" href="classSparseMatrix.html">SparseMatrix&lt;double&gt;</a> class by the <a class="el" href="classMatrixFree.html">MatrixFree</a> class to store the geometry data. Also, we use a distributed triangulation in this example.</p>
+<p>这是建立在 <a class="el" href="step_25.html">step-25</a> 中的主类上的。 然而，我们用MatrixFree类代替了SparseMatrix&lt;double&gt;类来存储几何数据。另外，我们在这个例子中使用了一个分布式三角形。</p>
 <div class="fragment"><div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">  <span class="keyword">class </span>SineGordonProblem</div>
 <div class="line">  {</div>
@@ -373,11 +386,14 @@ $(function() {
 <div class="line">    SineGordonProblem();</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">private</span>:</div>
 <div class="line">    <a class="code" href="classConditionalOStream.html">ConditionalOStream</a> pcout;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <span class="keywordtype">void</span> make_grid_and_dofs();</div>
 <div class="line">    <span class="keywordtype">void</span> output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> timestep_number);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#ifdef DEAL_II_WITH_P4EST</span></div>
 <div class="line">    <a class="code" href="classparallel_1_1distributed_1_1Triangulation.html">parallel::distributed::Triangulation&lt;dim&gt;</a> <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>;</div>
@@ -387,15 +403,20 @@ $(function() {
 <div class="line">    <a class="code" href="classFE__Q.html">FE_Q&lt;dim&gt;</a>       fe;</div>
 <div class="line">    <a class="code" href="classDoFHandler.html">DoFHandler&lt;dim&gt;</a> dof_handler;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <a class="code" href="classMappingQ1.html">MappingQ1&lt;dim&gt;</a> mapping;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="classAffineConstraints.html">AffineConstraints&lt;double&gt;</a> constraints;</div>
 <div class="line">    <a class="code" href="classIndexSet.html">IndexSet</a>                  locally_relevant_dofs;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    <a class="code" href="classMatrixFree.html">MatrixFree&lt;dim, double&gt;</a> matrix_free_data;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector&lt;double&gt;</a> solution, old_solution,</div>
 <div class="line">      old_old_solution;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> n_global_refinements;</div>
 <div class="line">    <span class="keywordtype">double</span>             time, time_step;</div>
@@ -414,7 +435,7 @@ $(function() {
 <div class="ttc" id="anamespaceWorkStream_1_1internal_1_1tbb__no__coloring_html_a8673698a405bf47aa24002aeb6d76d70"><div class="ttname"><a href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">WorkStream::internal::tbb_no_coloring::run</a></div><div class="ttdeci">void run(const Iterator &amp;begin, const typename identity&lt; Iterator &gt;::type &amp;end, Worker worker, Copier copier, const ScratchData &amp;sample_scratch_data, const CopyData &amp;sample_copy_data, const unsigned int queue_length, const unsigned int chunk_size)</div><div class="ttdef"><b>Definition:</b> <a href="work__stream_8h_source.html#l00691">work_stream.h:691</a></div></div>
 <div class="ttc" id="ap4est__wrappers_8cc_html_ace00f2f80d9780ef9aa1007e1c22c6a4"><div class="ttname"><a href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a></div><div class="ttdeci">const ::parallel::distributed::Triangulation&lt; dim, spacedim &gt; * triangulation</div><div class="ttdef"><b>Definition:</b> <a href="p4est__wrappers_8cc_source.html#l00069">p4est_wrappers.cc:69</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="SineGordonProblemSineGordonProblem"></a> </p><h4>SineGordonProblem::SineGordonProblem</h4>
-<p>This is the constructor of the SineGordonProblem class. The time interval and time step size are defined here. Moreover, we use the degree of the finite element that we defined at the top of the program to initialize a <a class="el" href="classFE__Q.html">FE_Q</a> finite element based on Gauss-Lobatto support points. These points are convenient because in conjunction with a <a class="el" href="classQGaussLobatto.html">QGaussLobatto</a> quadrature rule of the same order they give a diagonal mass matrix without compromising accuracy too much (note that the integration is inexact, though), see also the discussion in the introduction. Note that <a class="el" href="classFE__Q.html">FE_Q</a> selects the Gauss-Lobatto nodal points by default due to their improved conditioning versus equidistant points. To make things more explicit, we state the selection of the nodal points nonetheless.</p>
+<p>这是SineGordonProblem类的构造函数。时间间隔和时间步长在此定义。此外，我们使用在程序顶部定义的有限元的程度来初始化一个基于Gauss-Lobatto支持点的FE_Q有限元。这些点很方便，因为与同阶的QGauss-Lobatto正交规则相结合，它们可以得到一个对角线质量矩阵，而不会太影响精度（注意，虽然积分是不精确的），也可以参见介绍中的讨论。请注意，FE_Q默认选择Gauss-Lobatto结点，因为它们相对于等距结点有更好的条件。为了使事情更加明确，我们还是要说明节点的选择。</p>
 <div class="fragment"><div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">  SineGordonProblem&lt;dim&gt;::SineGordonProblem()</div>
 <div class="line">    : pcout(std::cout, <a class="code" href="namespaceUtilities.html">Utilities</a>::MPI::<a class="code" href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">this_mpi_process</a>(MPI_COMM_WORLD) == 0)</div>
@@ -436,7 +457,7 @@ $(function() {
 <div class="ttc" id="anamespaceUtilities_1_1MPI_html_a895dcd8223a0ee6f0e6a80b80e2d5982"><div class="ttname"><a href="namespaceUtilities_1_1MPI.html#a895dcd8223a0ee6f0e6a80b80e2d5982">Utilities::MPI::this_mpi_process</a></div><div class="ttdeci">unsigned int this_mpi_process(const MPI_Comm &amp;mpi_communicator)</div><div class="ttdef"><b>Definition:</b> <a href="mpi_8cc_source.html#l00128">mpi.cc:128</a></div></div>
 <div class="ttc" id="anamespaceUtilities_html"><div class="ttname"><a href="namespaceUtilities.html">Utilities</a></div><div class="ttdef"><b>Definition:</b> <a href="base_2communication__pattern__base_8h_source.html#l00030">communication_pattern_base.h:31</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="SineGordonProblemmake_grid_and_dofs"></a> </p><h4>SineGordonProblem::make_grid_and_dofs</h4>
-<p>As in <a class="el" href="step_25.html">step-25</a> this functions sets up a cube grid in <code>dim</code> dimensions of extent \([-15,15]\). We refine the mesh more in the center of the domain since the solution is concentrated there. We first refine all cells whose center is within a radius of 11, and then refine once more for a radius 6. This simple ad hoc refinement could be done better by adapting the mesh to the solution using error estimators during the time stepping as done in other example programs, and using <a class="el" href="classparallel_1_1distributed_1_1SolutionTransfer.html">parallel::distributed::SolutionTransfer</a> to transfer the solution to the new mesh.</p>
+<p>如同在 <a class="el" href="step_25.html">step-25</a> 中，这个函数设置了一个范围为 <code>dim</code> 维的立方体网格 \([-15,15]\) 。我们在域的中心更多的细化网格，因为解决方案集中在那里。我们首先细化所有中心在半径为11的单元，然后再细化一次半径为6的单元。 这种简单的临时细化可以通过在时间步进过程中使用误差估计器使网格适应解决方案来更好地完成，就像在其他例子程序中所做的那样，并使用 <a class="el" href="classparallel_1_1distributed_1_1SolutionTransfer.html">parallel::distributed::SolutionTransfer</a> 将解决方案转移到新的网格。</p>
 <div class="fragment"><div class="line">  <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">  <span class="keywordtype">void</span> SineGordonProblem&lt;dim&gt;::make_grid_and_dofs()</div>
 <div class="line">  {</div>
@@ -452,6 +473,7 @@ $(function() {
 <div class="line">            cell-&gt;set_refine_flag();</div>
 <div class="line">      <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.execute_coarsening_and_refinement();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      cell     = <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.begin_active();</div>
 <div class="line">      end_cell = <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.end();</div>
 <div class="line">      <span class="keywordflow">for</span> (; cell != end_cell; ++cell)</div>
@@ -461,6 +483,7 @@ $(function() {
 <div class="line">      <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.execute_coarsening_and_refinement();</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    pcout &lt;&lt; <span class="stringliteral">&quot;   Number of global active cells: &quot;</span></div>
 <div class="line"><span class="preprocessor">#ifdef DEAL_II_WITH_P4EST</span></div>
 <div class="line">          &lt;&lt; <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_global_active_cells()</div>
@@ -469,28 +492,33 @@ $(function() {
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line">          &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    dof_handler.distribute_dofs(fe);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    pcout &lt;&lt; <span class="stringliteral">&quot;   Number of degrees of freedom: &quot;</span> &lt;&lt; dof_handler.n_dofs()</div>
 <div class="line">          &lt;&lt; std::endl;</div>
 <div class="ttc" id="aclassTriaActiveIterator_html"><div class="ttname"><a href="classTriaActiveIterator.html">TriaActiveIterator</a></div><div class="ttdef"><b>Definition:</b> <a href="tria__iterator_8h_source.html#l00758">tria_iterator.h:759</a></div></div>
 <div class="ttc" id="anamespaceGridGenerator_html_acea0cbcd68e52ce8113d1134b87de403"><div class="ttname"><a href="namespaceGridGenerator.html#acea0cbcd68e52ce8113d1134b87de403">GridGenerator::hyper_cube</a></div><div class="ttdeci">void hyper_cube(Triangulation&lt; dim, spacedim &gt; &amp;tria, const double left=0., const double right=1., const bool colorize=false)</div></div>
-</div><!-- fragment --><p>We generate hanging node constraints for ensuring continuity of the solution. As in <a class="el" href="step_40.html">step-40</a>, we need to equip the constraint matrix with the <a class="el" href="classIndexSet.html">IndexSet</a> of locally relevant degrees of freedom to avoid it to consume too much memory for big problems. Next, the <code> <a class="el" href="classMatrixFree.html">MatrixFree</a> </code> object for the problem is set up. Note that we specify a particular scheme for shared-memory parallelization (hence one would use multithreading for intra-node parallelism and not MPI; we here choose the standard option &mdash; if we wanted to disable shared memory parallelization even in case where there is more than one TBB thread available in the program, we would choose MatrixFree::AdditionalData::TasksParallelScheme::none). Also note that, instead of using the default <a class="el" href="classQGauss.html">QGauss</a> quadrature argument, we supply a <a class="el" href="classQGaussLobatto.html">QGaussLobatto</a> quadrature formula to enable the desired behavior. Finally, three solution vectors are initialized. <a class="el" href="classMatrixFree.html">MatrixFree</a> expects a particular layout of ghost indices (as it handles index access in MPI-local numbers that need to match between the vector and <a class="el" href="classMatrixFree.html">MatrixFree</a>), so we just ask it to initialize the vectors to be sure the ghost exchange is properly handled.</p>
+</div><!-- fragment --><p>我们生成悬挂节点约束，以确保解的连续性。如同在 <a class="el" href="step_40.html">step-40</a> 中，我们需要为约束矩阵配备局部相关自由度的IndexSet，以避免它在大问题中消耗过多的内存。接下来，问题的<code><a class="el" href="classMatrixFree.html">MatrixFree</a></code>对象被设置。请注意，我们为共享内存并行化指定了一个特定的方案（因此，人们会使用多线程来实现节点内的并行化，而不是MPI；我们在这里选择了标准选项&amp;mdash；如果我们想在程序中有一个以上的TBB线程的情况下禁用共享内存并行化，我们会选择 MatrixFree::AdditionalData::TasksParallelScheme::none). 也请注意，我们提供一个QGaussLobatto正交公式，而不是使用默认的QGauss正交参数，以实现期望的行为。最后，三个求解向量被初始化。MatrixFree期望有一个特定的鬼魂索引布局（因为它在MPI本地数字中处理索引访问，需要在向量和MatrixFree之间匹配），所以我们只是要求它初始化向量，以确保鬼魂交换得到正确处理。</p>
 <div class="fragment"><div class="line">  <a class="code" href="namespaceDoFTools.html#acad7e0841b9046eaafddc4c617ab1d9d">DoFTools::extract_locally_relevant_dofs</a>(dof_handler, locally_relevant_dofs);</div>
 <div class="line">  constraints.clear();</div>
 <div class="line">  constraints.reinit(locally_relevant_dofs);</div>
 <div class="line">  <a class="code" href="group__constraints.html#ga3b4ea7dfd313e388d868c4e4aa685799">DoFTools::make_hanging_node_constraints</a>(dof_handler, constraints);</div>
 <div class="line">  constraints.close();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">typename</span> <a class="code" href="structMatrixFree_1_1AdditionalData.html">MatrixFree&lt;dim&gt;::AdditionalData</a> additional_data;</div>
 <div class="line">  additional_data.<a class="code" href="structMatrixFree_1_1AdditionalData.html#a0bcce2facca91b925d3e1a5a00c7704b">tasks_parallel_scheme</a> =</div>
 <div class="line">    <a class="code" href="classMatrixFree.html">MatrixFree&lt;dim&gt;::AdditionalData::TasksParallelScheme::partition_partition</a>;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  matrix_free_data.<a class="code" href="classMatrixFree.html#adb324d469b296f2a6921b41208732ddf">reinit</a>(mapping,</div>
 <div class="line">                          dof_handler,</div>
 <div class="line">                          constraints,</div>
 <div class="line">                          <a class="code" href="classQGaussLobatto.html">QGaussLobatto&lt;1&gt;</a>(fe_degree + 1),</div>
 <div class="line">                          additional_data);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  matrix_free_data.initialize_dof_vector(solution);</div>
 <div class="line">  old_solution.reinit(solution);</div>
@@ -502,12 +530,13 @@ $(function() {
 <div class="ttc" id="astructMatrixFree_1_1AdditionalData_html"><div class="ttname"><a href="structMatrixFree_1_1AdditionalData.html">MatrixFree::AdditionalData</a></div><div class="ttdef"><b>Definition:</b> <a href="matrix__free_8h_source.html#l00181">matrix_free.h:182</a></div></div>
 <div class="ttc" id="astructMatrixFree_1_1AdditionalData_html_a0bcce2facca91b925d3e1a5a00c7704b"><div class="ttname"><a href="structMatrixFree_1_1AdditionalData.html#a0bcce2facca91b925d3e1a5a00c7704b">MatrixFree::AdditionalData::tasks_parallel_scheme</a></div><div class="ttdeci">TasksParallelScheme tasks_parallel_scheme</div><div class="ttdef"><b>Definition:</b> <a href="matrix__free_8h_source.html#l00344">matrix_free.h:344</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="SineGordonProblemoutput_results"></a> </p><h4>SineGordonProblem::output_results</h4>
-<p>This function prints the norm of the solution and writes the solution vector to a file. The norm is standard (except for the fact that we need to accumulate the norms over all processors for the parallel grid which we do via the <a class="el" href="namespaceVectorTools.html#a21eb62d70953182dcc2b15c4e14dd533">VectorTools::compute_global_error()</a> function), and the second is similar to what we did in <a class="el" href="step_40.html">step-40</a> or <a class="el" href="step_37.html">step-37</a>. Note that we can use the same vector for output as the one used during computations: The vectors in the matrix-free framework always provide full information on all locally owned cells (this is what is needed in the local evaluations, too), including ghost vector entries on these cells. This is the only data that is needed in the <a class="el" href="namespaceVectorTools.html#a676190d2c897ac5da68a9c460fa95832">VectorTools::integrate_difference()</a> function as well as in <a class="el" href="classDataOut.html">DataOut</a>. The only action to take at this point is to make sure that the vector updates its ghost values before we read from them, and to reset ghost values once done. This is a feature present only in the <a class="el" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector</a> class. Distributed vectors with PETSc and Trilinos, on the other hand, need to be copied to special vectors including ghost values (see the relevant section in <a class="el" href="step_40.html">step-40</a>). If we also wanted to access all degrees of freedom on ghost cells (e.g. when computing error estimators that use the jump of solution over cell boundaries), we would need more information and create a vector initialized with locally relevant dofs just as in <a class="el" href="step_40.html">step-40</a>. Observe also that we need to distribute constraints for output - they are not filled during computations (rather, they are interpolated on the fly in the matrix-free method <a class="el" href="classFEEvaluationBase.html#a5c3bf28ebceb0271addfba5b92f475ce">FEEvaluation::read_dof_values()</a>).</p>
+<p>这个函数打印出解的规范，并将解的向量写到一个文件中。法线是标准的（除了我们需要累积所有处理器上的法线，用于并行网格，我们通过 <a class="el" href="namespaceVectorTools.html#a21eb62d70953182dcc2b15c4e14dd533">VectorTools::compute_global_error()</a> 函数来做），第二项类似于我们在 <a class="el" href="step_40.html">step-40</a> 或 <a class="el" href="step_37.html">step-37</a> . 请注意，我们可以使用与计算过程中使用的相同的向量进行输出。无矩阵框架中的向量总是提供所有本地拥有的单元的全部信息（这也是本地评估中需要的），包括这些单元上的鬼向量条目。这是 <a class="el" href="namespaceVectorTools.html#a676190d2c897ac5da68a9c460fa95832">VectorTools::integrate_difference()</a> 函数以及DataOut中唯一需要的数据。这时唯一要做的就是确保在我们从矢量中读取数据之前更新其鬼魂值，并且在完成后重置鬼魂值。这是一个只存在于 <a class="el" href="classLinearAlgebra_1_1distributed_1_1Vector.html">LinearAlgebra::distributed::Vector</a> 类中的特性。另一方面，带有PETSc和Trilinos的分布式向量需要被复制到包括ghost值的特殊向量（见 <a class="el" href="step_40.html">step-40</a> 中的相关章节 ）。如果我们还想访问幽灵单元上的所有自由度（例如，在计算使用单元边界上的解的跳跃的误差估计器时），我们需要更多的信息并创建一个初始化了本地相关自由度的向量，就像在 <a class="el" href="step_40.html">step-40</a> 中一样。还请注意，我们需要为输出分配约束条件&ndash;它们不是在计算过程中填充的（相反，它们是在无矩阵方法中即时插值的 <a class="el" href="classFEEvaluationBase.html#a5c3bf28ebceb0271addfba5b92f475ce">FEEvaluation::read_dof_values()</a>). 。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span></div>
 <div class="line">SineGordonProblem&lt;dim&gt;::output_results(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> timestep_number)</div>
 <div class="line">{</div>
 <div class="line">  constraints.distribute(solution);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <a class="code" href="classVector.html">Vector&lt;float&gt;</a> norm_per_cell(<a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.n_active_cells());</div>
 <div class="line">  solution.update_ghost_values();</div>
@@ -523,18 +552,23 @@ $(function() {
 <div class="line">                                      norm_per_cell,</div>
 <div class="line">                                      <a class="code" href="namespaceVectorTools.html#a69967cb7a148a7169963126249213db1aa3903caf348e2d5dc54d1b49e15c1e8e">VectorTools::L2_norm</a>);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  pcout &lt;&lt; <span class="stringliteral">&quot;   Time:&quot;</span> &lt;&lt; std::setw(8) &lt;&lt; std::setprecision(3) &lt;&lt; time</div>
 <div class="line">        &lt;&lt; <span class="stringliteral">&quot;, solution norm: &quot;</span> &lt;&lt; std::setprecision(5) &lt;&lt; std::setw(7)</div>
 <div class="line">        &lt;&lt; solution_norm &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classDataOut.html">DataOut&lt;dim&gt;</a> data_out;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ac1eb26168177faa30ffbcf9cbb9c3cd5">attach_dof_handler</a>(dof_handler);</div>
 <div class="line">  data_out.<a class="code" href="classDataOut__DoFData.html#ace4b76e565ba0701c4d32c26075ed3b9">add_data_vector</a>(solution, <span class="stringliteral">&quot;solution&quot;</span>);</div>
 <div class="line">  data_out.<a class="code" href="classDataOut.html#a5eb51872b8736849bb7e8d2007fae086">build_patches</a>(mapping);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  data_out.<a class="code" href="group__Exceptions.html#ga0864e51eb173c87e2a3edc9391ea8009">write_vtu_with_pvtu_record</a>(</div>
 <div class="line">    <span class="stringliteral">&quot;./&quot;</span>, <span class="stringliteral">&quot;solution&quot;</span>, timestep_number, MPI_COMM_WORLD, 3);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  solution.zero_out_ghost_values();</div>
 <div class="line">}</div>
@@ -550,8 +584,9 @@ $(function() {
 <div class="ttc" id="anamespaceVectorTools_html_a676190d2c897ac5da68a9c460fa95832"><div class="ttname"><a href="namespaceVectorTools.html#a676190d2c897ac5da68a9c460fa95832">VectorTools::integrate_difference</a></div><div class="ttdeci">void integrate_difference(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const InVector &amp;fe_function, const Function&lt; spacedim, typename InVector::value_type &gt; &amp;exact_solution, OutVector &amp;difference, const Quadrature&lt; dim &gt; &amp;q, const NormType &amp;norm, const Function&lt; spacedim, double &gt; *weight=nullptr, const double exponent=2.)</div></div>
 <div class="ttc" id="anamespaceVectorTools_html_a69967cb7a148a7169963126249213db1aa3903caf348e2d5dc54d1b49e15c1e8e"><div class="ttname"><a href="namespaceVectorTools.html#a69967cb7a148a7169963126249213db1aa3903caf348e2d5dc54d1b49e15c1e8e">VectorTools::L2_norm</a></div><div class="ttdeci">@ L2_norm</div><div class="ttdef"><b>Definition:</b> <a href="vector__tools__common_8h_source.html#l00113">vector_tools_common.h:113</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="SineGordonProblemrun"></a> </p><h4>SineGordonProblem::run</h4>
-<p>This function is called by the main function and steps into the subroutines of the class.</p>
-<p>After printing some information about the parallel setup, the first action is to set up the grid and the cell operator. Then, the time step is computed from the CFL number given in the constructor and the finest mesh size. The finest mesh size is computed as the diameter of the last cell in the triangulation, which is the last cell on the finest level of the mesh. This is only possible for meshes where all elements on a level have the same size, otherwise, one needs to loop over all cells. Note that we need to query all the processors for their finest cell since not all processors might hold a region where the mesh is at the finest level. Then, we readjust the time step a little to hit the final time exactly.</p>
+<p>该函数由主函数调用，并步入该类的子程序中。 <br  />
+</p>
+<p>在打印了一些关于并行设置的信息后，第一个动作是设置网格和单元运算器。然后，根据构造函数中给出的CFL编号和最细的网格尺寸计算出时间步长。最细的网格尺寸计算为三角形中最后一个单元的直径，也就是网格中最细层次上的最后一个单元。这只适用于一个层次上的所有元素都具有相同尺寸的网格，否则就需要对所有单元进行循环。请注意，我们需要查询所有处理器的最细单元，因为不是所有的处理器都可能持有网格处于最细级别的区域。然后，我们重新调整一下时间步长，以准确达到最终的时间。</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">SineGordonProblem&lt;dim&gt;::run</a>()</div>
 <div class="line">{</div>
@@ -570,9 +605,12 @@ $(function() {
 <div class="line">  }</div>
 <div class="line">  make_grid_and_dofs();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> local_min_cell_diameter =</div>
 <div class="line">    <a class="code" href="p4est__wrappers_8cc.html#ace00f2f80d9780ef9aa1007e1c22c6a4">triangulation</a>.last()-&gt;diameter() / <a class="code" href="numbers_8h.html#ac4a2ed1890a931d0b6a55933310eadca">std::sqrt</a>(dim);</div>
 <div class="line">  <span class="keyword">const</span> <span class="keywordtype">double</span> global_min_cell_diameter =</div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    -<a class="code" href="namespaceUtilities_1_1MPI.html#ad2f716b789abe53715d6659f38aa7815">Utilities::MPI::max</a>(-local_min_cell_diameter, MPI_COMM_WORLD);</div>
 <div class="line">  time_step = cfl_number * global_min_cell_diameter;</div>
 <div class="line">  time_step = (final_time - time) / (<span class="keywordtype">int</span>((final_time - time) / time_step));</div>
@@ -585,8 +623,8 @@ $(function() {
 <div class="ttc" id="anamespaceUtilities_1_1MPI_html_ac26de0c059200523177bb1d92cc25d00"><div class="ttname"><a href="namespaceUtilities_1_1MPI.html#ac26de0c059200523177bb1d92cc25d00">Utilities::MPI::n_mpi_processes</a></div><div class="ttdeci">unsigned int n_mpi_processes(const MPI_Comm &amp;mpi_communicator)</div><div class="ttdef"><b>Definition:</b> <a href="mpi_8cc_source.html#l00117">mpi.cc:117</a></div></div>
 <div class="ttc" id="anamespaceUtilities_1_1MPI_html_ad2f716b789abe53715d6659f38aa7815"><div class="ttname"><a href="namespaceUtilities_1_1MPI.html#ad2f716b789abe53715d6659f38aa7815">Utilities::MPI::max</a></div><div class="ttdeci">T max(const T &amp;t, const MPI_Comm &amp;mpi_communicator)</div></div>
 <div class="ttc" id="anamespaceUtilities_1_1System_html_ade631a789101336840371e3b2e2851e0"><div class="ttname"><a href="namespaceUtilities_1_1System.html#ade631a789101336840371e3b2e2851e0">Utilities::System::get_current_vectorization_level</a></div><div class="ttdeci">const std::string get_current_vectorization_level()</div><div class="ttdef"><b>Definition:</b> <a href="base_2utilities_8cc_source.html#l00944">utilities.cc:944</a></div></div>
-</div><!-- fragment --><p>Next the initial value is set. Since we have a two-step time stepping method, we also need a value of the solution at time-time_step. For accurate results, one would need to compute this from the time derivative of the solution at initial time, but here we ignore this difficulty and just set it to the initial value function at that artificial time.</p>
-<p>We then go on by writing the initial state to file and collecting the two starting solutions in a <code>std::vector</code> of pointers that get later consumed by the <a class="el" href="namespacestd__cxx17.html#aa2fc1031c06af4aea4de90c5a1905473">SineGordonOperation::apply()</a> function. Next, an instance of the <code> SineGordonOperation class </code> based on the finite element degree specified at the top of this file is set up.</p>
+</div><!-- fragment --><p>接下来是设置初始值。由于我们有一个两步的时间步长方法，我们还需要一个在时间步长时的解的值。为了得到准确的结果，我们需要根据初始时间的解的时间导数来计算，但在这里我们忽略了这个困难，只是将其设置为该人工时间的初始值函数。</p>
+<p>然后，我们将初始状态写入文件，并在 <code>std::vector</code> 的指针中收集两个起始解，随后被 <a class="el" href="namespacestd__cxx17.html#aa2fc1031c06af4aea4de90c5a1905473">SineGordonOperation::apply()</a> 函数消耗。接下来，基于该文件顶部指定的有限元程度的 <code> SineGordonOperation class </code> 的实例被建立起来。</p>
 <div class="fragment"><div class="line"><a class="code" href="namespaceVectorTools.html#a761f008bdeb7d94a69205ae824deefad">VectorTools::interpolate</a>(mapping,</div>
 <div class="line">                         dof_handler,</div>
 <div class="line">                         InitialCondition&lt;dim&gt;(1, time),</div>
@@ -597,15 +635,19 @@ $(function() {
 <div class="line">                         old_solution);</div>
 <div class="line">output_results(0);</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">std::vector&lt;LinearAlgebra::distributed::Vector&lt;double&gt; *&gt;</div>
 <div class="line">  previous_solutions({&amp;old_solution, &amp;old_old_solution});</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">SineGordonOperation&lt;dim, fe_degree&gt; sine_gordon_op(matrix_free_data,</div>
 <div class="line">                                                   time_step);</div>
 <div class="ttc" id="anamespaceVectorTools_html_a761f008bdeb7d94a69205ae824deefad"><div class="ttname"><a href="namespaceVectorTools.html#a761f008bdeb7d94a69205ae824deefad">VectorTools::interpolate</a></div><div class="ttdeci">void interpolate(const Mapping&lt; dim, spacedim &gt; &amp;mapping, const DoFHandler&lt; dim, spacedim &gt; &amp;dof, const Function&lt; spacedim, typename VectorType::value_type &gt; &amp;function, VectorType &amp;vec, const ComponentMask &amp;component_mask=ComponentMask())</div></div>
-</div><!-- fragment --><p>Now loop over the time steps. In each iteration, we shift the solution vectors by one and call the <code>apply</code> function of the <code>SineGordonOperator</code> class. Then, we write the solution to a file. We clock the wall times for the computational time needed as wall as the time needed to create the output and report the numbers when the time stepping is finished.</p>
-<p>Note how this shift is implemented: We simply call the swap method on the two vectors which swaps only some pointers without the need to copy data around, a relatively expensive operation within an explicit time stepping method. Let us see what happens in more detail: First, we exchange <code>old_solution</code> with <code>old_old_solution</code>, which means that <code>old_old_solution</code> gets <code>old_solution</code>, which is what we expect. Similarly, <code>old_solution</code> gets the content from <code>solution</code> in the next step. After this, <code>solution</code> holds <code>old_old_solution</code>, but that will be overwritten during this step.</p>
+</div><!-- fragment --><p>现在对时间步骤进行循环。在每个迭代中，我们将解的向量移动一个，并调用 "正弦GordonOperator "类的<code>apply</code>函数。然后，我们将解决方案写到一个文件中。我们对所需的计算时间和创建输出所需的时间进行计时，并在时间步进结束后报告这些数字。 <br  />
+</p>
+<p>请注意这种转换是如何实现的。我们简单地在两个向量上调用交换方法，只交换一些指针而不需要复制数据，这在显式时间步进方法中是一个相对昂贵的操作。让我们来看看发生了什么。首先，我们交换 <code>old_solution</code> with <code>old_old_solution</code> ，这意味着 <code>old_old_solution</code> 得到 <code>old_solution</code> ，这就是我们所期望的。同样，在下一步中， <code>old_solution</code> gets the content from <code>solution</code> 也是如此。在此之后， <code>solution</code> 持有 <code>old_old_solution</code> ，但这将在这一步中被覆盖。</p>
 <div class="fragment"><div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> timestep_number = 1;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="classTimer.html">Timer</a>  timer;</div>
 <div class="line">    <span class="keywordtype">double</span> wtime       = 0;</div>
@@ -619,9 +661,11 @@ $(function() {
 <div class="line">        sine_gordon_op.apply(solution, previous_solutions);</div>
 <div class="line">        wtime += timer.<a class="code" href="classTimer.html#a6f3e76707411b51e7d7e7bfa5755cf02">wall_time</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">        timer.<a class="code" href="classTimer.html#aa3f7871196bb56202af2bc982bfbfff6">restart</a>();</div>
 <div class="line">        <span class="keywordflow">if</span> (timestep_number % output_timestep_skip == 0)</div>
 <div class="line">          output_results(timestep_number / output_timestep_skip);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">        output_time += timer.<a class="code" href="classTimer.html#a6f3e76707411b51e7d7e7bfa5755cf02">wall_time</a>();</div>
 <div class="line">      }</div>
@@ -629,11 +673,14 @@ $(function() {
 <div class="line">    output_results(timestep_number / output_timestep_skip + 1);</div>
 <div class="line">    output_time += timer.<a class="code" href="classTimer.html#a6f3e76707411b51e7d7e7bfa5755cf02">wall_time</a>();</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    pcout &lt;&lt; std::endl</div>
 <div class="line">          &lt;&lt; <span class="stringliteral">&quot;   Performed &quot;</span> &lt;&lt; timestep_number &lt;&lt; <span class="stringliteral">&quot; time steps.&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">    pcout &lt;&lt; <span class="stringliteral">&quot;   Average wallclock time per time step: &quot;</span></div>
 <div class="line">          &lt;&lt; wtime / timestep_number &lt;&lt; <span class="stringliteral">&quot;s&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    pcout &lt;&lt; <span class="stringliteral">&quot;   Spent &quot;</span> &lt;&lt; output_time &lt;&lt; <span class="stringliteral">&quot;s on output and &quot;</span> &lt;&lt; wtime</div>
 <div class="line">          &lt;&lt; <span class="stringliteral">&quot;s on computations.&quot;</span> &lt;&lt; std::endl;</div>
@@ -643,14 +690,16 @@ $(function() {
 <div class="ttc" id="aclassTimer_html_a6f3e76707411b51e7d7e7bfa5755cf02"><div class="ttname"><a href="classTimer.html#a6f3e76707411b51e7d7e7bfa5755cf02">Timer::wall_time</a></div><div class="ttdeci">double wall_time() const</div><div class="ttdef"><b>Definition:</b> <a href="timer_8cc_source.html#l00264">timer.cc:264</a></div></div>
 <div class="ttc" id="aclassTimer_html_aa3f7871196bb56202af2bc982bfbfff6"><div class="ttname"><a href="classTimer.html#aa3f7871196bb56202af2bc982bfbfff6">Timer::restart</a></div><div class="ttdeci">void restart()</div><div class="ttdef"><b>Definition:</b> <a href="timer_8h_source.html#l00908">timer.h:908</a></div></div>
 </div><!-- fragment --><p><a class="anchor" id="Thecodemaincodefunction"></a> </p><h3>The <code>main</code> function</h3>
-<p>As in <a class="el" href="step_40.html">step-40</a>, we initialize MPI at the start of the program. Since we will in general mix MPI parallelization with threads, we also set the third argument in MPI_InitFinalize that controls the number of threads to an invalid number, which means that the TBB library chooses the number of threads automatically, typically to the number of available cores in the system. As an alternative, you can also set this number manually if you want to set a specific number of threads (e.g. when MPI-only is required).</p>
+<p>与 <a class="el" href="step_40.html">step-40</a> 中一样，我们在程序开始时初始化MPI。由于我们一般会将MPI并行化与线程混合在一起，所以我们也将MPI_InitFinalize中控制线程数量的第三个参数设置为无效数字，这意味着TBB库会自动选择线程数量，通常为系统中的可用内核数量。作为一种选择，如果你想设置一个特定的线程数，你也可以手动设置这个数字（例如，当需要只使用MPI时）。</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>Step48;</div>
 <div class="line">  <span class="keyword">using namespace </span><a class="code" href="namespacedealii.html">dealii</a>;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <a class="code" href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a> mpi_initialization(</div>
 <div class="line">    argc, argv, <a class="code" href="namespacenumbers.html#a8ae36952c7e0cc778b47b5371b3aeff1">numbers::invalid_unsigned_int</a>);</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">try</span></div>
 <div class="line">    {</div>
@@ -669,6 +718,7 @@ $(function() {
 <div class="line">                &lt;&lt; <span class="stringliteral">&quot;----------------------------------------------------&quot;</span></div>
 <div class="line">                &lt;&lt; std::endl;</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line">  <span class="keywordflow">catch</span> (...)</div>
@@ -684,13 +734,14 @@ $(function() {
 <div class="line">      <span class="keywordflow">return</span> 1;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassUtilities_1_1MPI_1_1MPI__InitFinalize_html"><div class="ttname"><a href="classUtilities_1_1MPI_1_1MPI__InitFinalize.html">Utilities::MPI::MPI_InitFinalize</a></div><div class="ttdef"><b>Definition:</b> <a href="mpi_8h_source.html#l00902">mpi.h:903</a></div></div>
 <div class="ttc" id="anamespacenumbers_html_a8ae36952c7e0cc778b47b5371b3aeff1"><div class="ttname"><a href="namespacenumbers.html#a8ae36952c7e0cc778b47b5371b3aeff1">numbers::invalid_unsigned_int</a></div><div class="ttdeci">static const unsigned int invalid_unsigned_int</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00196">types.h:196</a></div></div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
+</div><!-- fragment --><p><a class="anchor" id="Results"></a></p><h1>Results</h1>
 <p><a class="anchor" id="Comparisonwithasparsematrix"></a></p><h3>Comparison with a sparse matrix</h3>
-<p>In order to demonstrate the gain in using the <a class="el" href="classMatrixFree.html">MatrixFree</a> class instead of the standard <code>deal.II</code> assembly routines for evaluating the information from old time steps, we study a simple serial run of the code on a nonadaptive mesh. Since much time is spent on evaluating the sine function, we do not only show the numbers of the full sine-Gordon equation but also for the wave equation (the sine-term skipped from the sine-Gordon equation). We use both second and fourth order elements. The results are summarized in the following table.</p>
+<p>为了证明使用MatrixFree类而不是标准的 <code>deal.II</code> 汇编例程来评估旧时间步长的信息的好处，我们研究了在一个非适应性网格上的简单串行运行代码。由于许多时间花在评估正弦函数上，我们不仅显示了完整的正弦-戈登方程的数字，也显示了波浪方程（正弦-戈登方程中跳过的正弦项）的数字。我们同时使用二阶和四阶元素。结果总结在下表中。</p>
 <table align="center" class="doxtable">
 <tr>
 <th>&#160; </th><th colspan="3">wave equation </th><th colspan="2">sine-Gordon  </th></tr>
@@ -705,16 +756,21 @@ $(function() {
 <tr>
 <td>3D, \(\mathcal{Q}_4\) </td><td align="right">0.0918 </td><td align="right">0.844 </td><td align="right">6.83 </td><td align="right">0.194 </td><td align="right">6.95  </td></tr>
 </table>
-<p>It is apparent that the matrix-free code outperforms the standard assembly routines in deal.II by far. In 3D and for fourth order elements, one operator evaluation is also almost ten times as fast as a sparse matrix-vector product.</p>
+<p><br  />
+</p>
+<p>很明显，无矩阵代码远远超过了deal.II中的标准汇编程序。在三维和四阶元素中，一个运算符的评估速度也几乎是稀疏矩阵-向量乘积的十倍。</p>
 <p><a class="anchor" id="Parallelrunin2Dand3D"></a></p><h3>Parallel run in 2D and 3D</h3>
-<p>We start with the program output obtained on a workstation with 12 cores / 24 threads (one Intel Xeon E5-2687W v4 CPU running at 3.2 GHz, hyperthreading enabled), running the program in release mode: </p><div class="fragment"><div class="line">$ make <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a></div>
+<p>我们从一个具有12个核心/24个线程的工作站（一个英特尔至强E5-2687W v4 CPU，运行频率为3.2 GHz，启用超线程）上获得的程序输出开始，以发布模式运行程序。</p>
+<div class="fragment"><div class="line">$ make <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a></div>
 <div class="line">Number of MPI ranks:            1</div>
 <div class="line">Number of threads on each rank: 24</div>
 <div class="line">Vectorization over 4 doubles = 256 bits (AVX)</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">   Number of global active cells: 15412</div>
 <div class="line">   Number of degrees of freedom: 249065</div>
 <div class="line">   Time step size: 0.00292997, finest cell: 0.117188</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">   Time:     -10, solution <a class="code" href="namespaceLocalIntegrators_1_1Divergence.html#a8bcfc37d2a2be8faa18628a601ecf112">norm</a>:  9.5599</div>
 <div class="line">   Time:   -9.41, solution <a class="code" href="namespaceLocalIntegrators_1_1Divergence.html#a8bcfc37d2a2be8faa18628a601ecf112">norm</a>:  17.678</div>
@@ -753,18 +809,22 @@ $(function() {
 <div class="line">   Time:    9.92, solution <a class="code" href="namespaceLocalIntegrators_1_1Divergence.html#a8bcfc37d2a2be8faa18628a601ecf112">norm</a>:  17.964</div>
 <div class="line">   Time:      10, solution <a class="code" href="namespaceLocalIntegrators_1_1Divergence.html#a8bcfc37d2a2be8faa18628a601ecf112">norm</a>:  17.595</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">   Performed 6826 time steps.</div>
 <div class="line">   Average wallclock time per time step: 0.0013453s</div>
 <div class="line">   Spent 14.976s on output and 9.1831s on computations.</div>
 <div class="ttc" id="anamespaceLocalIntegrators_1_1Divergence_html_a8bcfc37d2a2be8faa18628a601ecf112"><div class="ttname"><a href="namespaceLocalIntegrators_1_1Divergence.html#a8bcfc37d2a2be8faa18628a601ecf112">LocalIntegrators::Divergence::norm</a></div><div class="ttdeci">double norm(const FEValuesBase&lt; dim &gt; &amp;fe, const ArrayView&lt; const std::vector&lt; Tensor&lt; 1, dim &gt;&gt;&gt; &amp;Du)</div><div class="ttdef"><b>Definition:</b> <a href="divergence_8h_source.html#l00472">divergence.h:472</a></div></div>
-</div><!-- fragment --><p>In 3D, the respective output looks like </p><div class="fragment"><div class="line">$ make <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a></div>
+</div><!-- fragment --><p>在3D中，各自的输出看起来像</p>
+<div class="fragment"><div class="line">$ make <a class="code" href="namespaceWorkStream_1_1internal_1_1tbb__no__coloring.html#a8673698a405bf47aa24002aeb6d76d70">run</a></div>
 <div class="line">Number of MPI ranks:            1</div>
 <div class="line">Number of threads on each rank: 24</div>
 <div class="line">Vectorization over 4 doubles = 256 bits (AVX)</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">   Number of global active cells: 17592</div>
 <div class="line">   Number of degrees of freedom: 1193881</div>
 <div class="line">   Time step size: 0.0117233, finest cell: 0.46875</div>
+<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">   Time:     -10, solution <a class="code" href="namespaceLocalIntegrators_1_1Divergence.html#a8bcfc37d2a2be8faa18628a601ecf112">norm</a>:  29.558</div>
 <div class="line">   Time:   -7.66, solution <a class="code" href="namespaceLocalIntegrators_1_1Divergence.html#a8bcfc37d2a2be8faa18628a601ecf112">norm</a>:  129.13</div>
@@ -777,11 +837,13 @@ $(function() {
 <div class="line">   Time:    8.76, solution <a class="code" href="namespaceLocalIntegrators_1_1Divergence.html#a8bcfc37d2a2be8faa18628a601ecf112">norm</a>:  36.734</div>
 <div class="line">   Time:      10, solution <a class="code" href="namespaceLocalIntegrators_1_1Divergence.html#a8bcfc37d2a2be8faa18628a601ecf112">norm</a>:  94.115</div>
 <div class="line"> </div>
+<div class="line"> </div>
 <div class="line">   Performed 1706 time steps.</div>
 <div class="line">   Average wallclock time per time step: 0.0084542s</div>
 <div class="line">   Spent 16.766s on output and 14.423s on computations.</div>
-</div><!-- fragment --><p>It takes 0.008 seconds for one time step with more than a million degrees of freedom (note that we would need many processors to reach such numbers when solving linear systems).</p>
-<p>If we replace the thread-parallelization by a pure MPI parallelization, the timings change into: </p><div class="fragment"><div class="line">$ mpirun -n 24 ./step-48</div>
+</div><!-- fragment --><p>超过一百万个自由度的一个时间步长需要0.008秒（注意，在求解线性系统时，我们需要很多处理器才能达到这样的数字）。</p>
+<p>如果我们用纯MPI并行化取代线程并行化，时间就会变成。</p>
+<div class="fragment"><div class="line">$ mpirun -n 24 ./step-48</div>
 <div class="line">Number of MPI ranks:            24</div>
 <div class="line">Number of threads on each rank: 1</div>
 <div class="line">Vectorization over 4 doubles = 256 bits (AVX)</div>
@@ -789,8 +851,9 @@ $(function() {
 <div class="line">   Performed 1706 time steps.</div>
 <div class="line">   Average wallclock time per time step: 0.0051747s</div>
 <div class="line">   Spent 2.0535s on output and 8.828s on computations.</div>
-</div><!-- fragment --><p>We observe a dramatic speedup for the output (which makes sense, given that most code of the output is not parallelized via threads, whereas it is for MPI), but less than the theoretical factor of 12 we would expect from the parallelism. More interestingly, the computations also get faster when switching from the threads-only variant to the MPI-only variant. This is a general observation for the <a class="el" href="classMatrixFree.html">MatrixFree</a> framework (as of updating this data in 2019). The main reason is that the decisions regarding work on conflicting cell batches made to enable execution in parallel are overly pessimistic: While they ensure that no work on neighboring cells is done on different threads at the same time, this conservative setting implies that data from neighboring cells is also evicted from caches by the time neighbors get touched. Furthermore, the current scheme is not able to provide a constant load for all 24 threads for the given mesh with 17,592 cells.</p>
-<p>The current program allows to also mix MPI parallelization with thread parallelization. This is most beneficial when running programs on clusters with multiple nodes, using MPI for the inter-node parallelization and threads for the intra-node parallelization. On the workstation used above, we can run threads in the hyperthreading region (i.e., using 2 threads for each of the 12 MPI ranks). An important setting for mixing MPI with threads is to ensure proper binning of tasks to CPUs. On many clusters the placing is either automatically via the <code>mpirun/mpiexec</code> environment, or there can be manual settings. Here, we simply report the run times the plain version of the program (noting that things could be improved towards the timings of the MPI-only program when proper pinning is done): </p><div class="fragment"><div class="line">$ mpirun -n 12 ./step-48</div>
+</div><!-- fragment --><p>我们观察到输出的急剧加速（这是有道理的，因为输出的大部分代码没有通过线程并行化，而对于MPI则是如此），但低于我们从并行化中预期的12的理论系数。更有趣的是，当从纯线程变量切换到纯MPI变量时，计算也变得更快。这是MatrixFree框架的一个一般观察结果（截至2019年更新此数据）。主要原因是，为实现并行执行而做出的关于冲突单元批处理工作的决定过于悲观：虽然它们确保在不同的线程上不会同时进行相邻单元的工作，但这种保守的设置意味着在相邻单元被触及时，相邻单元的数据也会从缓存中被驱逐。此外，对于给定的具有17592个单元的网格，目前的方案无法为所有24个线程提供一个恒定的负载。</p>
+<p>目前的方案还允许将MPI并行化与线程并行化相混合。当在具有多个节点的集群上运行程序时，这是最有利的，使用MPI进行节点间并行化，使用线程进行节点内并行化。在上面使用的工作站上，我们可以在超线程区域运行线程（即为12个MPI行列中的每一个使用2个线程）。将MPI与线程混合在一起的一个重要设置是确保将任务适当地分给CPU。在许多集群上，放置是通过<code>mpirun/mpiexec</code>环境自动进行的，或者可以有手动设置。在这里，我们简单地报告了该程序的普通版本的运行时间（注意到当适当的分档完成后，事情可以朝着只用MPI的程序的时间改进）。</p>
+<div class="fragment"><div class="line">$ mpirun -n 12 ./step-48</div>
 <div class="line">Number of MPI ranks:            12</div>
 <div class="line">Number of threads on each rank: 2</div>
 <div class="line">Vectorization over 4 doubles = 256 bits (AVX)</div>
@@ -799,14 +862,14 @@ $(function() {
 <div class="line">   Average wallclock time per time step: 0.0056651s</div>
 <div class="line">   Spent 2.5175s on output and 9.6646s on computations.</div>
 </div><!-- fragment --><p><a class="anchor" id="Possibilitiesforextensions"></a></p><h3>Possibilities for extensions</h3>
-<p>There are several things in this program that could be improved to make it even more efficient (besides improved boundary conditions and physical stuff as discussed in <a class="el" href="step_25.html">step-25</a>):</p>
+<p>这个程序中有几处可以改进，使其更加有效（除了在 <a class="el" href="step_25.html">step-25</a> 中讨论的改进边界条件和物理东西）。</p>
 <ul>
 <li>
-<p class="startli"><b>Faster evaluation of sine terms:</b> As becomes obvious from the comparison of the plain wave equation and the sine-Gordon equation above, the evaluation of the sine terms dominates the total time for the finite element operator application. There are a few reasons for this: Firstly, the deal.II sine computation of a <a class="el" href="classVectorizedArray.html">VectorizedArray</a> field is not vectorized (as opposed to the rest of the operator application). This could be cured by handing the sine computation to a library with vectorized sine computations like Intel's math kernel library (MKL). By using the function <code>vdSin</code> in MKL, the program uses half the computing time in 2D and 40 percent less time in 3D. On the other hand, the sine computation is structurally much more complicated than the simple arithmetic operations like additions and multiplications in the rest of the local operation.</p>
+<p class="startli"><b>Faster evaluation of sine terms:</b> 从上面的平波方程和正弦-戈登方程的比较中可以明显看出，正弦项的评估在有限元算子应用的总时间中占主导地位。这有几个原因。首先，VectorizedArray场的deal.II正弦计算没有被矢量化（相对于算子应用的其他部分而言）。这可以通过将正弦计算交给一个具有矢量化正弦计算的库来解决，比如英特尔的数学内核库（MKL）。通过使用MKL中的函数 <code>vdSin</code> ，该程序在二维中使用了一半的计算时间，在三维中使用了40的时间。另一方面，正弦计算在结构上要比其他局部操作中的加法和乘法等简单算术操作复杂得多。</p>
 <p class="endli"></p>
 </li>
 <li>
-<p class="startli"><b>Higher order time stepping:</b> While the implementation allows for arbitrary order in the spatial part (by adjusting the degree of the finite element), the time stepping scheme is a standard second-order leap-frog scheme. Since solutions in wave propagation problems are usually very smooth, the error is likely dominated by the time stepping part. Of course, this could be cured by using smaller time steps (at a fixed spatial resolution), but it would be more efficient to use higher order time stepping as well. While it would be straight-forward to do so for a first-order system (use some Runge&ndash;Kutta scheme of higher order, probably combined with adaptive time step selection like the <a href="http://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method">Dormand&ndash;Prince method</a>), it is more challenging for the second-order formulation. At least in the finite difference community, people usually use the PDE to find spatial correction terms that improve the temporal error.</p>
+<p class="startli"><b>Higher order time stepping:</b> 虽然实现允许空间部分的任意顺序（通过调整有限元的程度），但时间步进方案是标准的二阶跃迁方案。由于波的传播问题的解通常是非常平滑的，所以误差很可能被时间步进部分所支配。当然，这可以通过使用较小的时间步长（在固定的空间分辨率下）来解决，但使用高阶时间步长也会更有效率。虽然对于一阶系统来说，这样做是很简单的（使用一些高阶的Runge&ndash;Kutta方案，可能结合像<a href="http://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method">Dormand&ndash;Prince method</a>那样的自适应时间步长选择），但对于二阶公式来说，这更具挑战性。至少在有限差分界，人们通常使用PDE来寻找改善时间误差的空间修正项。</p>
 <p class="endli"></p>
 </li>
 </ul>
@@ -1291,7 +1354,8 @@ $(function() {
 <div class="line">  <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="avectorization_8h_html_ad7d7e08942faeecf438c75a254e06cbe"><div class="ttname"><a href="vectorization_8h.html#ad7d7e08942faeecf438c75a254e06cbe">make_vectorized_array</a></div><div class="ttdeci">VectorizedArray&lt; Number, width &gt; make_vectorized_array(const Number &amp;u)</div><div class="ttdef"><b>Definition:</b> <a href="vectorization_8h_source.html#l00721">vectorization.h:721</a></div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p> 。 </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

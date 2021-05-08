@@ -1,1058 +1,853 @@
-/**
-@page step_48 The step-48 tutorial program
-This tutorial depends on step-25, step-37.
+  /**  @page step_48 The step-48 tutorial program  。 
+
+本教程取决于  step-25  ,  step-37  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Problemstatementanddiscretization"> Problem statement and discretization </a>
-        <li><a href="#Implementationofconstraints">Implementation of constraints</a>
-        <li><a href="#Parallelization"> Parallelization </a>
-        <li><a href="#Thetestcase"> The test case </a>
+        <li><a href="#Problemstatementanddiscretization"> Problem statement and discretization </a><a href="#Problemstatementanddiscretization"> Problem statement and discretization </a>
+        <li><a href="#Implementationofconstraints">Implementation of constraints</a><a href="#Implementationofconstraints">Implementation of constraints</a>
+        <li><a href="#Parallelization"> Parallelization </a><a href="#Parallelization"> Parallelization </a>
+        <li><a href="#Thetestcase"> The test case </a><a href="#Thetestcase"> The test case </a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#SineGordonOperation">SineGordonOperation</a>
+        <li><a href="#SineGordonOperation">SineGordonOperation</a><a href="#SineGordonOperation">SineGordonOperation</a>
       <ul>
-        <li><a href="#SineGordonOperationSineGordonOperation">SineGordonOperation::SineGordonOperation</a>
-        <li><a href="#SineGordonOperationlocal_apply">SineGordonOperation::local_apply</a>
-        <li><a href="#SineGordonOperationapply">SineGordonOperation::apply</a>
+        <li><a href="#SineGordonOperationSineGordonOperation">SineGordonOperation::SineGordonOperation</a><a href="#SineGordonOperationSineGordonOperation">SineGordonOperation::SineGordonOperation</a>
+        <li><a href="#SineGordonOperationlocal_apply">SineGordonOperation::local_apply</a><a href="#SineGordonOperationlocal_apply">SineGordonOperation::local_apply</a>
+        <li><a href="#SineGordonOperationapply">SineGordonOperation::apply</a><a href="#SineGordonOperationapply">SineGordonOperation::apply</a>
       </ul>
-        <li><a href="#Equationdata">Equation data</a>
-        <li><a href="#SineGordonProblemclass">SineGordonProblem class</a>
+        <li><a href="#Equationdata">Equation data</a><a href="#Equationdata">Equation data</a>
+        <li><a href="#SineGordonProblemclass">SineGordonProblem class</a><a href="#SineGordonProblemclass">SineGordonProblem class</a>
       <ul>
-        <li><a href="#SineGordonProblemSineGordonProblem">SineGordonProblem::SineGordonProblem</a>
-        <li><a href="#SineGordonProblemmake_grid_and_dofs">SineGordonProblem::make_grid_and_dofs</a>
-        <li><a href="#SineGordonProblemoutput_results">SineGordonProblem::output_results</a>
-        <li><a href="#SineGordonProblemrun">SineGordonProblem::run</a>
+        <li><a href="#SineGordonProblemSineGordonProblem">SineGordonProblem::SineGordonProblem</a><a href="#SineGordonProblemSineGordonProblem">SineGordonProblem::SineGordonProblem</a>
+        <li><a href="#SineGordonProblemmake_grid_and_dofs">SineGordonProblem::make_grid_and_dofs</a><a href="#SineGordonProblemmake_grid_and_dofs">SineGordonProblem::make_grid_and_dofs</a>
+        <li><a href="#SineGordonProblemoutput_results">SineGordonProblem::output_results</a><a href="#SineGordonProblemoutput_results">SineGordonProblem::output_results</a>
+        <li><a href="#SineGordonProblemrun">SineGordonProblem::run</a><a href="#SineGordonProblemrun">SineGordonProblem::run</a>
       </ul>
-        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
+        <li><a href="#Thecodemaincodefunction">The <code>main</code> function</a><a href="#Thecodemaincodefunction">The <code>main</code> function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Comparisonwithasparsematrix">Comparison with a sparse matrix</a>
-        <li><a href="#Parallelrunin2Dand3D">Parallel run in 2D and 3D</a>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Comparisonwithasparsematrix">Comparison with a sparse matrix</a><a href="#Comparisonwithasparsematrix">Comparison with a sparse matrix</a>
+        <li><a href="#Parallelrunin2Dand3D">Parallel run in 2D and 3D</a><a href="#Parallelrunin2Dand3D">Parallel run in 2D and 3D</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
+@endhtmlonly 
+
+
 
 <i>
 This program was contributed by Katharina Kormann and Martin
 Kronbichler.
 
+
 The algorithm for the matrix-vector product is based on the article <a
+href="http://dx.doi.org/10.1016/j.compfluid.2012.04.012">A generic
+interface for parallel cell-based finite element operator
+application</a> <a
 href="http://dx.doi.org/10.1016/j.compfluid.2012.04.012">A generic
 interface for parallel cell-based finite element operator
 application</a> by Martin Kronbichler and Katharina Kormann, Computers
 and Fluids 63:135&ndash;147, 2012, and the paper &quot;Parallel finite element operator
 application: Graph partitioning and coloring&quot; by Katharina
 Kormann and Martin Kronbichler in: Proceedings of the 7th IEEE
-International Conference on e-Science, 2011.  </i>
+International Conference on e-Science, 2011.  </i> 
 
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
-
-
-This program demonstrates how to use the cell-based implementation of finite
-element operators with the MatrixFree class, first introduced in step-37, to
-solve nonlinear partial differential equations. Moreover, we have another look
-at the handling of constraints within the matrix-free framework.
-Finally, we will use an explicit time-stepping
-method to solve the problem and introduce Gauss-Lobatto finite elements that
-are very convenient in this case since their mass matrix can be accurately
-approximated by a diagonal, and thus trivially invertible, matrix. The two
-ingredients to this property are firstly a distribution of the nodal points of
-Lagrange polynomials according to the point distribution of the Gauss-Lobatto
-quadrature rule. Secondly, the quadrature is done with the same Gauss-Lobatto
-quadrature rule. In this formula, the integrals $\int_K \varphi_i \varphi_j
-dx\approx \sum_q \varphi_i \varphi_j \mathrm{det}(J) \big |_{x_q}$ become
-zero whenever $i\neq j$, because exactly one function $\varphi_j$ is one and
-all others zero in the points defining the Lagrange polynomials.
-Moreover, the Gauss-Lobatto distribution of nodes of Lagrange
-polynomials clusters the nodes towards the element boundaries. This results in
-a well-conditioned polynomial basis for high-order discretization
-methods. Indeed, the condition number of an FE_Q elements with equidistant
-nodes grows exponentially with the degree, which destroys any benefit for
-orders of about five and higher. For this reason, Gauss-Lobatto points are the
-default distribution for the FE_Q element (but at degrees one and two, those
-are equivalent to the equidistant points).
-
-<a name="Problemstatementanddiscretization"></a><h3> Problem statement and discretization </h3>
+<a name="Intro"></a> <a name="Introduction"></a> <h1>Introduction</h1> 
 
 
-As an example, we choose to solve the sine-Gordon soliton equation
-\f{eqnarray*}
+这个程序演示了如何使用MatrixFree类的基于单元的有限元算子实现，该类首次在 step-37 中介绍，用于解决非线性偏微分方程。此外，我们再看一下无矩阵框架内的约束条件的处理。最后，我们将使用显式时间步进方法来解决问题，并介绍高斯-洛巴托有限元，在这种情况下非常方便，因为它们的质量矩阵可以准确地被对角线矩阵所接近，因此是可逆的。这一特性的两个成分是：首先，根据Gauss-Lobatto正交规则的点分布来分配Lagrange多项式的结点。其次，正交是用同样的Gauss-Lobatto正交规则完成的。在这个公式中，只要 $i\neq j$ ，积分 $\int_K \varphi_i \varphi_j
+dx\approx \sum_q \varphi_i \varphi_j \mathrm{det}(J) \big |_{x_q}$ 就会变成零，因为在定义拉格朗日多项式的点中，正好有一个函数 $\varphi_j$ 是一，其他都是零。此外，Lagrange多项式的节点的Gauss-Lobatto分布将节点向元素边界聚集。这就为高阶离散化方法提供了条件良好的多项式基础。事实上，具有等距节点的FE_Q元素的条件数随着度数的增加而呈指数级增长，这破坏了约5级以上的任何好处。由于这个原因，高斯-洛巴托点是FE_Q元素的默认分布（但在度数为1和2时，这些点等同于等距点）。
+
+<a name="Problemstatementanddiscretization"></a><h3> Problem statement and discretization </h3> 
+
+
+作为一个例子，我们选择解决正弦-戈登孤子方程\f{eqnarray*}
 u_{tt} &=& \Delta u -\sin(u) \quad\mbox{for}\quad (x,t) \in
 \Omega \times (t_0,t_f],\\
 {\mathbf n} \cdot \nabla u &=& 0
 \quad\mbox{for}\quad (x,t) \in \partial\Omega \times (t_0,t_f],\\
 u(x,t_0) &=& u_0(x).
-\f}
+\f} 
 
-that was already introduced in step-25. As a simple explicit time
-integration method, we choose leap frog scheme using the second-order
-formulation of the equation. With this time stepping, the scheme reads in
-weak form
+这在 step-25 中已经介绍过。作为一种简单的显式时间积分方法，我们选择使用方程的二阶表述的跃迁蛙方案。在这种时间步长的情况下，该方案以弱的形式读取 
 
 \f{eqnarray*}
 (v,u^{n+1}) = (v,2 u^n-u^{n-1} -
 (\Delta t)^2 \sin(u^n)) - (\nabla v, (\Delta t)^2 \nabla u^n),
-\f}
-where <i> v</i> denotes a test function and the index <i>n</i> stands for
-the time step number.
+\f} 其中<i> v</i>表示测试函数，索引<i>n</i>代表时间步数。
 
-For the spatial discretization, we choose FE_Q elements
-with basis functions defined to interpolate the support points of the
-Gauss-Lobatto quadrature rule. Moreover, when we compute the integrals
-over the basis functions to form the mass matrix and the operator on
-the right hand side of the equation above, we use the
-Gauss-Lobatto quadrature rule with the same support points as the
-node points of the finite element to evaluate the integrals. Since the
-finite element is Lagrangian, this will yield a diagonal mass matrix
-on the left hand side of the equation, making the solution of the
-linear system in each time step trivial.
+对于空间离散化，我们选择FE_Q元素，其基函数定义为插值Gauss-Lobatto正交规则的支持点。此外，当我们计算基函数的积分以形成质量矩阵和上述方程右边的算子时，我们使用高斯-洛巴托正交规则，其支持点与有限元的节点点相同，以评估积分。由于有限元是拉格朗日的，这将在方程的左侧产生一个对角线质量矩阵，使每个时间步长的线性系统的解变得微不足道。
 
-Using this quadrature rule, for a <i>p</i>th order finite element, we use a
-<i>(2p-1)</i>th order accurate formula to evaluate the integrals. Since the
-product of two <i>p</i>th order basis functions when computing a mass matrix
-gives a function with polynomial degree <i>2p</i> in each direction, the
-integrals are not computed exactly.  However, the overall convergence
-properties are not disturbed by the quadrature error on meshes with affine
-element shapes with L2 errors proportional to <i>h<sup>p+1</sup></i>. Note
-however that order reduction with sub-optimal convergence rates of the L2
-error of <i>O(h<sup>p</sup>)</i> or even <i>O(h<sup>p-1</sup>)</i> for some 3D
-setups has been reported <a href="https://dx.doi.org/10.1002/num.20353">in
-literature</a> on deformed (non-affine) element shapes for wave equations
-when the integrand is not a polynomial any more.
+利用这个正交规则，对于<i>p</i>阶有限元，我们使用<i>(2p-1)</i>阶精确公式来评估积分。由于在计算质量矩阵时，两个<i>p</i>阶基函数的乘积在每个方向上给出了一个具有多项式程度<i>2p</i>的函数，所以积分的计算并不精确。 然而，在具有仿生元素形状的网格上，整体收敛特性不受正交误差的干扰，L2误差与<i>h<sup>p+1</sup></i>成正比。然而，请注意，当积分项不再是多项式时，在变形（非仿生）元素形状的波浪方程上，已经有报道<i>O(h<sup>p</sup>)</i>甚至<i>O(h<sup>p-1</sup>)</i>的L2误差的次优收敛率的减序<a href="https://dx.doi.org/10.1002/num.20353">in
+literature</a>。
 
-Apart from the fact that we avoid solving linear systems with this
-type of elements when using explicit time-stepping, they come with two
-other advantages. When we are using the sum-factorization approach to
-evaluate the finite element operator (cf. step-37), we have to
-evaluate the function at the quadrature points. In the case of
-Gauss-Lobatto elements, where quadrature points and node points of the
-finite element coincide, this operation is trivial since the value
-of the function at the quadrature points is given by its one-dimensional
-coefficients. In this way, the arithmetic work for the finite element operator
-evaluation is reduced by approximately a factor of two compared to the generic
-Gaussian quadrature.
+除了在使用显式时间步进时我们可以避免用这种类型的元素解线性系统外，它们还具有另外两个优点。当我们使用和-因子化方法来评估有限元算子时（参见 step-37 ），我们必须在正交点评估函数。在Gauss-Lobatto元素的情况下，正交点和有限元的节点点是重合的，这种操作是微不足道的，因为正交点的函数值是由其一维系数给出。这样一来，与一般的高斯正交相比，有限元算子评估的算术工作减少了大约两倍。
 
-To sum up the discussion, by using the right finite element and
-quadrature rule combination, we end up with a scheme where we
-only need to compute the right hand side vector corresponding
-to the formulation above and then multiply it by the inverse of the
-diagonal mass matrix in each time step. In practice, of course, we extract
-the diagonal elements and invert them only once at the beginning of the
-program.
+总结一下讨论，通过使用正确的有限元和正交规则组合，我们最终得到一个方案，我们只需要计算对应于上述公式的右手向量，然后在每个时间步长中乘以对角线质量矩阵的逆。当然，在实践中，我们提取对角线元素并在程序开始时只反转一次。
 
-<a name="Implementationofconstraints"></a><h3>Implementation of constraints</h3>
+<a name="Implementationofconstraints"></a><h3>Implementation of constraints</h3> 
 
 
-The usual way to handle constraints in <code>deal.II</code> is to use
-the AffineConstraints class that builds a sparse matrix storing
-information about which degrees of freedom (DoF) are constrained and
-how they are constrained. This format uses an unnecessarily large
-amount of memory since there are not so many different types of
-constraints: for example, in the case of hanging nodes when using
-linear finite element on every cell, most constraints have the form
-$x_k = \frac 12 x_i + \frac 12 x_j$ where the coefficients $\frac 12$
-are always the same and only $i,j,k$ are different. While storing this
-redundant information is not a problem in general because it is only
-needed once during matrix and right hand side assembly, it becomes a
-bottleneck in the matrix-free approach since there this
-information has to be accessed every time we apply the operator, and the
-remaining components of the operator evaluation are so fast. Thus,
-instead of an AffineConstraints object, MatrixFree uses a variable that
-we call <code>constraint_pool</code> that collects the weights of the
-different constraints. Then, only an identifier of each constraint in the
-mesh instead of all the weights have to be stored. Moreover,
-the constraints are not applied in a pre- and postprocessing step
-but rather as we evaluate the finite element
-operator. Therefore, the constraint information is embedded into the
-variable <code>indices_local_to_global</code> that is used to extract
-the cell information from the global vector. If a DoF is constrained,
-the <code>indices_local_to_global</code> variable contains the global
-indices of the DoFs that it is constrained to. Then, we have another
-variable <code>constraint_indicator</code> at hand that holds, for
-each cell, the local indices of DoFs that are constrained as well as
-the identifier of the type of constraint. Fortunately, you will not see
-these data structures in the example program since the class
-<code>FEEvaluation</code> takes care of the constraints without user
-interaction.
+在 <code>deal.II</code> 中处理约束的通常方法是使用AffineConstraints类，该类建立了一个稀疏矩阵，存储关于哪些自由度（DoF）被约束以及如何被约束的信息。这种格式使用了不必要的大量内存，因为没有那么多不同类型的约束：例如，在每个单元上使用线性有限元时，悬挂节点的情况下，大多数约束的形式是 $x_k = \frac 12 x_i + \frac 12 x_j$ ，其中系数 $\frac 12$ 总是相同，只有 $i,j,k$ 不同。虽然存储这些冗余信息在一般情况下不是问题，因为在矩阵和右手边装配时只需要一次，但在无矩阵方法中却成为一个瓶颈，因为每次我们应用算子时都要访问这些信息，而算子评估的其余部分都非常快。因此，MatrixFree使用一个我们称为 <code>constraint_pool</code> 的变量来收集不同约束的权重，而不是AffineConstraints对象。然后，只需要存储网格中每个约束条件的标识符，而不是所有的权重。此外，约束不是在前后处理步骤中应用的，而是在我们评估有限元算子时应用的。因此，约束信息被嵌入到变量 <code>indices_local_to_global</code> 中，用于从全局矢量中提取单元信息。如果一个DoF被约束， <code>indices_local_to_global</code> 变量包含它被约束的DoF的全局指数。然后，我们有另一个变量 <code>constraint_indicator</code> ，对于每个单元来说，它持有被约束的DoF的局部指数以及约束类型的标识符。幸运的是，你不会在示例程序中看到这些数据结构，因为类 <code>FEEvaluation</code> 负责处理约束，无需用户交互。
 
-In the presence of hanging nodes, the diagonal mass matrix obtained on the
-element level via the Gauss-Lobatto quadrature/node point procedure does not
-directly translate to a diagonal global mass matrix, as following the
-constraints on rows and columns would also add off-diagonal entries. As
-explained in <a href="https://dx.doi.org/10.4208/cicp.101214.021015a">Kormann
-(2016)</a>, interpolating constraints on a vector, which maintains the
-diagonal shape of the mass matrix, is consistent with the equations up to an
-error of the same magnitude as the quadrature error. In the program below, we
-will simply assemble the diagonal of the mass matrix as if it were a vector to
-enable this approximation.
+在存在悬空节点的情况下，通过Gauss-Lobatto正交/节点点程序在元素层面获得的对角质量矩阵并不能直接转化为对角的全局质量矩阵，因为遵循行和列的约束也会增加非对角条目。正如在<a href="https://dx.doi.org/10.4208/cicp.101214.021015a">Kormann
+(2016)</a>中所解释的，在一个矢量上插值约束，保持质量矩阵的对角线形状，与方程一致，直到与正交误差相同大小的误差。在下面的程序中，我们将简单地组装质量矩阵的对角线，就像它是一个矢量一样，以实现这种近似。
 
 
 <a name="Parallelization"></a><h3> Parallelization </h3>
 
 
-The MatrixFree class comes with the option to be parallelized on three levels:
-MPI parallelization on clusters of distributed nodes, thread parallelization
-scheduled by the Threading Building Blocks library, and finally with a
-vectorization by working on a batch of two (or more) cells via SIMD data type
-(sometimes called cross-element or external vectorization).
-As we have already discussed in step-37, you will
-get best performance by using an instruction set specific to your system,
-e.g. with the cmake variable <tt>-DCMAKE_CXX_FLAGS="-march=native"</tt>. The
-MPI parallelization was already exploited in step-37. Here, we additionally
-consider thread parallelization with TBB. This is fairly simple, as all we
-need to do is to tell the initialization of the MatrixFree object about the
-fact that we want to use a thread parallel scheme through the variable
-MatrixFree::AdditionalData::thread_parallel_scheme. During setup, a dependency
-graph is set up similar to the one described in the @ref workstream_paper ,
-which allows to schedule the work of the @p local_apply function on chunks of
-cells without several threads accessing the same vector indices. As opposed to
-the WorkStream loops, some additional clever tricks to avoid global
-synchronizations as described in <a
+MatrixFree类可以选择在三个层次上进行并行化。分布式节点集群上的MPI并行化，由线程积木库安排的线程并行化，以及最后通过SIMD数据类型在两个（或更多）单元的批次上工作的矢量化（有时称为跨元素或外部矢量化）。正如我们在 step-37 中已经讨论过的，通过使用特定于你的系统的指令集，你将获得最好的性能，例如，通过cmake变量<tt>-DCMAKE_CXX_FLAGS="-march=native"</tt>。MPI并行化已经在  step-37  中得到了利用。在这里，我们额外考虑用TBB进行线程并行化。这相当简单，因为我们需要做的就是告诉MatrixFree对象的初始化，我们想通过变量 MatrixFree::AdditionalData::thread_parallel_scheme. 来使用线程并行方案。 在设置过程中，建立了一个类似于 @ref workstream_paper 中描述的依赖图，它允许在没有几个线程访问相同向量索引的情况下安排 @p local_apply 函数在单元块的工作。相对于WorkStream循环，还应用了一些额外的巧妙技巧来避免全局同步，如<a
 href="https://dx.doi.org/10.1109/eScience.2011.53">Kormann and Kronbichler
-(2011)</a> are also applied.
+(2011)</a>中所述。
 
-Note that this program is designed to be run with a distributed triangulation
-(parallel::distributed::Triangulation), which requires deal.II to be
-configured with <a href="http://www.p4est.org/">p4est</a> as described
-in the <a href="../../readme.html">deal.II ReadMe</a> file. However, a
-non-distributed triangulation is also supported, in which case the
-computation will be run in serial.
+请注意，这个程序被设计为与分布式三角计算 (parallel::distributed::Triangulation), 一起运行，这需要deal.II与<a href="http://www.p4est.org/">p4est</a>一起配置，如<a href="../../readme.html">deal.II ReadMe</a>文件中所述。然而，也支持非分布式三角计算，在这种情况下，计算将以串行方式运行。
 
 <a name="Thetestcase"></a><h3> The test case </h3>
 
 
-In our example, we choose the initial value to be \f{eqnarray*} u(x,t) =
+在我们的例子中，我们选择初始值为\f{eqnarray*} u(x,t) =
 \prod_{i=1}^{d} -4 \arctan \left(
 \frac{m}{\sqrt{1-m^2}}\frac{\sin\left(\sqrt{1-m^2} t +c_2\right)}{\cosh(mx_i+c_1)}\right)
-\f} and solve the equation over the time interval [-10,10]. The
-constants are chosen to be $c_1=c_1=0$ and <i> m=0.5</i>. As mentioned
-in step-25, in one dimension <i>u</i> as a function of <i>t</i> is the exact
-solution of the sine-Gordon equation. For higher dimension, this is however
-not the case.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * The necessary files from the deal.II library.
- * 
- * @code
- * #include <deal.II/base/logstream.h>
- * #include <deal.II/base/utilities.h>
- * #include <deal.II/base/function.h>
- * #include <deal.II/base/conditional_ostream.h>
- * #include <deal.II/base/timer.h>
- * #include <deal.II/lac/vector.h>
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/dofs/dof_tools.h>
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/lac/affine_constraints.h>
- * #include <deal.II/fe/fe_q.h>
- * #include <deal.II/fe/fe_values.h>
- * #include <deal.II/numerics/vector_tools.h>
- * #include <deal.II/numerics/data_out.h>
- * #include <deal.II/distributed/tria.h>
- * 
- * @endcode
- * 
- * This includes the data structures for the efficient implementation of
- * matrix-free methods.
- * 
- * @code
- * #include <deal.II/lac/la_parallel_vector.h>
- * #include <deal.II/matrix_free/matrix_free.h>
- * #include <deal.II/matrix_free/fe_evaluation.h>
- * 
- * #include <fstream>
- * #include <iostream>
- * #include <iomanip>
- * 
- * 
- * namespace Step48
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * We start by defining two global variables to collect all parameters
- * subject to changes at one place: One for the dimension and one for the
- * finite element degree. The dimension is used in the main function as a
- * template argument for the actual classes (like in all other deal.II
- * programs), whereas the degree of the finite element is more crucial, as
- * it is passed as a template argument to the implementation of the
- * Sine-Gordon operator. Therefore, it needs to be a compile-time constant.
- * 
- * @code
- *   const unsigned int dimension = 2;
- *   const unsigned int fe_degree = 4;
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="SineGordonOperation"></a> 
- * <h3>SineGordonOperation</h3>
- * 
+\f}，并在时间区间[-10,10]内求解方程。常数被选择为 $c_1=c_1=0$ 和<i> m=0.5</i>。正如在 step-25 中提到的，在一维中<i>u</i>作为<i>t</i>的函数是正弦-戈登方程的精确解。然而，对于更高的维度，情况并非如此。<a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * The <code>SineGordonOperation</code> class implements the cell-based
- * operation that is needed in each time step. This nonlinear operation can
- * be implemented straight-forwardly based on the <code>MatrixFree</code>
- * class, in the same way as a linear operation would be treated by this
- * implementation of the finite element operator application. We apply two
- * template arguments to the class, one for the dimension and one for the
- * degree of the finite element. This is a difference to other functions in
- * deal.II where only the dimension is a template argument. This is
- * necessary to provide the inner loops in @p FEEvaluation with information
- * about loop lengths etc., which is essential for efficiency. On the other
- * hand, it makes it more challenging to implement the degree as a run-time
- * parameter.
- * 
- * @code
- *   template <int dim, int fe_degree>
- *   class SineGordonOperation
- *   {
- *   public:
- *     SineGordonOperation(const MatrixFree<dim, double> &data_in,
- *                         const double                   time_step);
- * 
- *     void apply(LinearAlgebra::distributed::Vector<double> &dst,
- *                const std::vector<LinearAlgebra::distributed::Vector<double> *>
- *                  &src) const;
- * 
- *   private:
- *     const MatrixFree<dim, double> &            data;
- *     const VectorizedArray<double>              delta_t_sqr;
- *     LinearAlgebra::distributed::Vector<double> inv_mass_matrix;
- * 
- *     void local_apply(
- *       const MatrixFree<dim, double> &                                  data,
- *       LinearAlgebra::distributed::Vector<double> &                     dst,
- *       const std::vector<LinearAlgebra::distributed::Vector<double> *> &src,
- *       const std::pair<unsigned int, unsigned int> &cell_range) const;
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="SineGordonOperationSineGordonOperation"></a> 
- * <h4>SineGordonOperation::SineGordonOperation</h4>
- * 
+来自deal.II库的必要文件。
 
- * 
- * This is the constructor of the SineGordonOperation class. It receives a
- * reference to the MatrixFree holding the problem information and the time
- * step size as input parameters. The initialization routine sets up the
- * mass matrix. Since we use Gauss-Lobatto elements, the mass matrix is a
- * diagonal matrix and can be stored as a vector. The computation of the
- * mass matrix diagonal is simple to achieve with the data structures
- * provided by FEEvaluation: Just loop over all cell batches, i.e.,
- * collections of cells due to SIMD vectorization, and integrate over the
- * function that is constant one on all quadrature points by using the
- * <code>integrate</code> function with @p true argument at the slot for
- * values. Finally, we invert the diagonal entries to have the inverse mass
- * matrix directly available in each time step.
- * 
- * @code
- *   template <int dim, int fe_degree>
- *   SineGordonOperation<dim, fe_degree>::SineGordonOperation(
- *     const MatrixFree<dim, double> &data_in,
- *     const double                   time_step)
- *     : data(data_in)
- *     , delta_t_sqr(make_vectorized_array(time_step * time_step))
- *   {
- *     data.initialize_dof_vector(inv_mass_matrix);
- * 
- *     FEEvaluation<dim, fe_degree> fe_eval(data);
- *     const unsigned int           n_q_points = fe_eval.n_q_points;
- * 
- *     for (unsigned int cell = 0; cell < data.n_cell_batches(); ++cell)
- *       {
- *         fe_eval.reinit(cell);
- *         for (unsigned int q = 0; q < n_q_points; ++q)
- *           fe_eval.submit_value(make_vectorized_array(1.), q);
- *         fe_eval.integrate(EvaluationFlags::values);
- *         fe_eval.distribute_local_to_global(inv_mass_matrix);
- *       }
- * 
- *     inv_mass_matrix.compress(VectorOperation::add);
- *     for (unsigned int k = 0; k < inv_mass_matrix.locally_owned_size(); ++k)
- *       if (inv_mass_matrix.local_element(k) > 1e-15)
- *         inv_mass_matrix.local_element(k) =
- *           1. / inv_mass_matrix.local_element(k);
- *       else
- *         inv_mass_matrix.local_element(k) = 1;
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="SineGordonOperationlocal_apply"></a> 
- * <h4>SineGordonOperation::local_apply</h4>
- * 
+@code
+#include <deal.II/base/logstream.h>
+#include <deal.II/base/utilities.h>
+#include <deal.II/base/function.h>
+#include <deal.II/base/conditional_ostream.h>
+#include <deal.II/base/timer.h>
+#include <deal.II/lac/vector.h>
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/dofs/dof_tools.h>
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/lac/affine_constraints.h>
+#include <deal.II/fe/fe_q.h>
+#include <deal.II/fe/fe_values.h>
+#include <deal.II/numerics/vector_tools.h>
+#include <deal.II/numerics/data_out.h>
+#include <deal.II/distributed/tria.h>
 
- * 
- * This operator implements the core operation of the program, the
- * integration over a range of cells for the nonlinear operator of the
- * Sine-Gordon problem. The implementation is based on the FEEvaluation
- * class as in step-37. Due to the special structure in Gauss-Lobatto
- * elements, certain operations become simpler, in particular the evaluation
- * of shape function values on quadrature points which is simply the
- * injection of the values of cell degrees of freedom. The MatrixFree class
- * detects possible structure of the finite element at quadrature points
- * when initializing, which is then automatically used by FEEvaluation for
- * selecting the most appropriate numerical kernel.
- * 
 
- * 
- * The nonlinear function that we have to evaluate for the time stepping
- * routine includes the value of the function at the present time @p current
- * as well as the value at the previous time step @p old. Both values are
- * passed to the operator in the collection of source vectors @p src, which
- * is simply a <tt>std::vector</tt> of pointers to the actual solution
- * vectors. This construct of collecting several source vectors into one is
- * necessary as the cell loop in @p MatrixFree takes exactly one source and
- * one destination vector, even if we happen to use many vectors like the
- * two in this case. Note that the cell loop accepts any valid class for
- * input and output, which does not only include vectors but general data
- * types.  However, only in case it encounters a
- * LinearAlgebra::distributed::Vector<Number> or a <tt>std::vector</tt>
- * collecting these vectors, it calls functions that exchange ghost data due
- * to MPI at the beginning and the end of the loop. In the loop over the
- * cells, we first have to read in the values in the vectors related to the
- * local values.  Then, we evaluate the value and the gradient of the
- * current solution vector and the values of the old vector at the
- * quadrature points. Next, we combine the terms in the scheme in the loop
- * over the quadrature points. Finally, we integrate the result against the
- * test function and accumulate the result to the global solution vector @p
- * dst.
- * 
- * @code
- *   template <int dim, int fe_degree>
- *   void SineGordonOperation<dim, fe_degree>::local_apply(
- *     const MatrixFree<dim> &                                          data,
- *     LinearAlgebra::distributed::Vector<double> &                     dst,
- *     const std::vector<LinearAlgebra::distributed::Vector<double> *> &src,
- *     const std::pair<unsigned int, unsigned int> &cell_range) const
- *   {
- *     AssertDimension(src.size(), 2);
- *     FEEvaluation<dim, fe_degree> current(data), old(data);
- *     for (unsigned int cell = cell_range.first; cell < cell_range.second; ++cell)
- *       {
- *         current.reinit(cell);
- *         old.reinit(cell);
- * 
- *         current.read_dof_values(*src[0]);
- *         old.read_dof_values(*src[1]);
- * 
- *         current.evaluate(EvaluationFlags::values | EvaluationFlags::gradients);
- *         old.evaluate(EvaluationFlags::values);
- * 
- *         for (unsigned int q = 0; q < current.n_q_points; ++q)
- *           {
- *             const VectorizedArray<double> current_value = current.get_value(q);
- *             const VectorizedArray<double> old_value     = old.get_value(q);
- * 
- *             current.submit_value(2. * current_value - old_value -
- *                                    delta_t_sqr * std::sin(current_value),
- *                                  q);
- *             current.submit_gradient(-delta_t_sqr * current.get_gradient(q), q);
- *           }
- * 
- *         current.integrate(EvaluationFlags::values | EvaluationFlags::gradients);
- *         current.distribute_local_to_global(dst);
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="SineGordonOperationapply"></a> 
- * <h4>SineGordonOperation::apply</h4>
- * 
+@endcode 
 
- * 
- * This function performs the time stepping routine based on the cell-local
- * strategy. Note that we need to set the destination vector to zero before
- * we add the integral contributions of the current time step (via the
- * FEEvaluation::distribute_local_to_global() call). In this tutorial, we
- * let the cell-loop do the zero operation via the fifth `true` argument
- * passed to MatrixFree::cell_loop. The loop can schedule the zero operation
- * closer to the operations on vector entries for supported vector entries,
- * thereby possibly increasing data locality (the vector entries that first
- * get zeroed are later re-used in the `distribute_local_to_global()`
- * call). The structure of the cell loop is implemented in the cell finite
- * element operator class. On each cell it applies the routine defined as
- * the <code>local_apply()</code> method of the class
- * <code>SineGordonOperation</code>, i.e., <code>this</code>. One could also
- * provide a function with the same signature that is not part of a
- * class. Finally, the result of the integration is multiplied by the
- * inverse mass matrix.
- * 
- * @code
- *   template <int dim, int fe_degree>
- *   void SineGordonOperation<dim, fe_degree>::apply(
- *     LinearAlgebra::distributed::Vector<double> &                     dst,
- *     const std::vector<LinearAlgebra::distributed::Vector<double> *> &src) const
- *   {
- *     data.cell_loop(
- *       &SineGordonOperation<dim, fe_degree>::local_apply, this, dst, src, true);
- *     dst.scale(inv_mass_matrix);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Equationdata"></a> 
- * <h3>Equation data</h3>
- * 
 
- * 
- * We define a time-dependent function that is used as initial
- * value. Different solutions can be obtained by varying the starting
- * time. This function, taken from step-25, would represent an analytic
- * solution in 1D for all times, but is merely used for setting some
- * starting solution of interest here. More elaborate choices that could
- * test the convergence of this program are given in step-25.
- * 
- * @code
- *   template <int dim>
- *   class InitialCondition : public Function<dim>
- *   {
- *   public:
- *     InitialCondition(const unsigned int n_components = 1,
- *                      const double       time         = 0.)
- *       : Function<dim>(n_components, time)
- *     {}
- *     virtual double value(const Point<dim> &p,
- *                          const unsigned int /*component*/) const override
- *     {
- *       double t = this->get_time();
- * 
- *       const double m  = 0.5;
- *       const double c1 = 0.;
- *       const double c2 = 0.;
- *       const double factor =
- *         (m / std::sqrt(1. - m * m) * std::sin(std::sqrt(1. - m * m) * t + c2));
- *       double result = 1.;
- *       for (unsigned int d = 0; d < dim; ++d)
- *         result *= -4. * std::atan(factor / std::cosh(m * p[d] + c1));
- *       return result;
- *     }
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="SineGordonProblemclass"></a> 
- * <h3>SineGordonProblem class</h3>
- * 
 
- * 
- * This is the main class that builds on the class in step-25.  However, we
- * replaced the SparseMatrix<double> class by the MatrixFree class to store
- * the geometry data. Also, we use a distributed triangulation in this
- * example.
- * 
- * @code
- *   template <int dim>
- *   class SineGordonProblem
- *   {
- *   public:
- *     SineGordonProblem();
- *     void run();
- * 
- *   private:
- *     ConditionalOStream pcout;
- * 
- *     void make_grid_and_dofs();
- *     void output_results(const unsigned int timestep_number);
- * 
- * #ifdef DEAL_II_WITH_P4EST
- *     parallel::distributed::Triangulation<dim> triangulation;
- * #else
- *     Triangulation<dim> triangulation;
- * #endif
- *     FE_Q<dim>       fe;
- *     DoFHandler<dim> dof_handler;
- * 
- *     MappingQ1<dim> mapping;
- * 
- *     AffineConstraints<double> constraints;
- *     IndexSet                  locally_relevant_dofs;
- * 
- *     MatrixFree<dim, double> matrix_free_data;
- * 
- *     LinearAlgebra::distributed::Vector<double> solution, old_solution,
- *       old_old_solution;
- * 
- *     const unsigned int n_global_refinements;
- *     double             time, time_step;
- *     const double       final_time;
- *     const double       cfl_number;
- *     const unsigned int output_timestep_skip;
- *   };
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="SineGordonProblemSineGordonProblem"></a> 
- * <h4>SineGordonProblem::SineGordonProblem</h4>
- * 
+这包括用于有效实现无矩阵方法的数据结构。
 
- * 
- * This is the constructor of the SineGordonProblem class. The time interval
- * and time step size are defined here. Moreover, we use the degree of the
- * finite element that we defined at the top of the program to initialize a
- * FE_Q finite element based on Gauss-Lobatto support points. These points
- * are convenient because in conjunction with a QGaussLobatto quadrature
- * rule of the same order they give a diagonal mass matrix without
- * compromising accuracy too much (note that the integration is inexact,
- * though), see also the discussion in the introduction. Note that FE_Q
- * selects the Gauss-Lobatto nodal points by default due to their improved
- * conditioning versus equidistant points. To make things more explicit, we
- * state the selection of the nodal points nonetheless.
- * 
- * @code
- *   template <int dim>
- *   SineGordonProblem<dim>::SineGordonProblem()
- *     : pcout(std::cout, Utilities::MPI::this_mpi_process(MPI_COMM_WORLD) == 0)
- *     ,
- * #ifdef DEAL_II_WITH_P4EST
- *     triangulation(MPI_COMM_WORLD)
- *     ,
- * #endif
- *     fe(QGaussLobatto<1>(fe_degree + 1))
- *     , dof_handler(triangulation)
- *     , n_global_refinements(10 - 2 * dim)
- *     , time(-10)
- *     , time_step(10.)
- *     , final_time(10.)
- *     , cfl_number(.1 / fe_degree)
- *     , output_timestep_skip(200)
- *   {}
- * 
- * @endcode
- * 
- * 
- * <a name="SineGordonProblemmake_grid_and_dofs"></a> 
- * <h4>SineGordonProblem::make_grid_and_dofs</h4>
- * 
+@code
+#include <deal.II/lac/la_parallel_vector.h>
+#include <deal.II/matrix_free/matrix_free.h>
+#include <deal.II/matrix_free/fe_evaluation.h>
 
- * 
- * As in step-25 this functions sets up a cube grid in <code>dim</code>
- * dimensions of extent $[-15,15]$. We refine the mesh more in the center of
- * the domain since the solution is concentrated there. We first refine all
- * cells whose center is within a radius of 11, and then refine once more
- * for a radius 6.  This simple ad hoc refinement could be done better by
- * adapting the mesh to the solution using error estimators during the time
- * stepping as done in other example programs, and using
- * parallel::distributed::SolutionTransfer to transfer the solution to the
- * new mesh.
- * 
- * @code
- *   template <int dim>
- *   void SineGordonProblem<dim>::make_grid_and_dofs()
- *   {
- *     GridGenerator::hyper_cube(triangulation, -15, 15);
- *     triangulation.refine_global(n_global_refinements);
- *     {
- *       typename Triangulation<dim>::active_cell_iterator
- *         cell     = triangulation.begin_active(),
- *         end_cell = triangulation.end();
- *       for (; cell != end_cell; ++cell)
- *         if (cell->is_locally_owned())
- *           if (cell->center().norm() < 11)
- *             cell->set_refine_flag();
- *       triangulation.execute_coarsening_and_refinement();
- * 
- *       cell     = triangulation.begin_active();
- *       end_cell = triangulation.end();
- *       for (; cell != end_cell; ++cell)
- *         if (cell->is_locally_owned())
- *           if (cell->center().norm() < 6)
- *             cell->set_refine_flag();
- *       triangulation.execute_coarsening_and_refinement();
- *     }
- * 
- *     pcout << "   Number of global active cells: "
- * #ifdef DEAL_II_WITH_P4EST
- *           << triangulation.n_global_active_cells()
- * #else
- *           << triangulation.n_active_cells()
- * #endif
- *           << std::endl;
- * 
- *     dof_handler.distribute_dofs(fe);
- * 
- *     pcout << "   Number of degrees of freedom: " << dof_handler.n_dofs()
- *           << std::endl;
- * 
- * 
- * @endcode
- * 
- * We generate hanging node constraints for ensuring continuity of the
- * solution. As in step-40, we need to equip the constraint matrix with
- * the IndexSet of locally relevant degrees of freedom to avoid it to
- * consume too much memory for big problems. Next, the <code> MatrixFree
- * </code> object for the problem is set up. Note that we specify a
- * particular scheme for shared-memory parallelization (hence one would
- * use multithreading for intra-node parallelism and not MPI; we here
- * choose the standard option &mdash; if we wanted to disable shared
- * memory parallelization even in case where there is more than one TBB
- * thread available in the program, we would choose
- * MatrixFree::AdditionalData::TasksParallelScheme::none). Also note that,
- * instead of using the default QGauss quadrature argument, we supply a
- * QGaussLobatto quadrature formula to enable the desired
- * behavior. Finally, three solution vectors are initialized. MatrixFree
- * expects a particular layout of ghost indices (as it handles index
- * access in MPI-local numbers that need to match between the vector and
- * MatrixFree), so we just ask it to initialize the vectors to be sure the
- * ghost exchange is properly handled.
- * 
- * @code
- *     DoFTools::extract_locally_relevant_dofs(dof_handler, locally_relevant_dofs);
- *     constraints.clear();
- *     constraints.reinit(locally_relevant_dofs);
- *     DoFTools::make_hanging_node_constraints(dof_handler, constraints);
- *     constraints.close();
- * 
- *     typename MatrixFree<dim>::AdditionalData additional_data;
- *     additional_data.tasks_parallel_scheme =
- *       MatrixFree<dim>::AdditionalData::TasksParallelScheme::partition_partition;
- * 
- *     matrix_free_data.reinit(mapping,
- *                             dof_handler,
- *                             constraints,
- *                             QGaussLobatto<1>(fe_degree + 1),
- *                             additional_data);
- * 
- *     matrix_free_data.initialize_dof_vector(solution);
- *     old_solution.reinit(solution);
- *     old_old_solution.reinit(solution);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="SineGordonProblemoutput_results"></a> 
- * <h4>SineGordonProblem::output_results</h4>
- * 
 
- * 
- * This function prints the norm of the solution and writes the solution
- * vector to a file. The norm is standard (except for the fact that we need
- * to accumulate the norms over all processors for the parallel grid which
- * we do via the VectorTools::compute_global_error() function), and the
- * second is similar to what we did in step-40 or step-37. Note that we can
- * use the same vector for output as the one used during computations: The
- * vectors in the matrix-free framework always provide full information on
- * all locally owned cells (this is what is needed in the local evaluations,
- * too), including ghost vector entries on these cells. This is the only
- * data that is needed in the VectorTools::integrate_difference() function
- * as well as in DataOut. The only action to take at this point is to make
- * sure that the vector updates its ghost values before we read from
- * them, and to reset ghost values once done. This is a feature present only
- * in the LinearAlgebra::distributed::Vector class. Distributed vectors with
- * PETSc and Trilinos, on the other hand, need to be copied to special
- * vectors including ghost values (see the relevant section in step-40). If
- * we also wanted to access all degrees of freedom on ghost cells (e.g. when
- * computing error estimators that use the jump of solution over cell
- * boundaries), we would need more information and create a vector
- * initialized with locally relevant dofs just as in step-40. Observe also
- * that we need to distribute constraints for output - they are not filled
- * during computations (rather, they are interpolated on the fly in the
- * matrix-free method FEEvaluation::read_dof_values()).
- * 
- * @code
- *   template <int dim>
- *   void
- *   SineGordonProblem<dim>::output_results(const unsigned int timestep_number)
- *   {
- *     constraints.distribute(solution);
- * 
- *     Vector<float> norm_per_cell(triangulation.n_active_cells());
- *     solution.update_ghost_values();
- *     VectorTools::integrate_difference(mapping,
- *                                       dof_handler,
- *                                       solution,
- *                                       Functions::ZeroFunction<dim>(),
- *                                       norm_per_cell,
- *                                       QGauss<dim>(fe_degree + 1),
- *                                       VectorTools::L2_norm);
- *     const double solution_norm =
- *       VectorTools::compute_global_error(triangulation,
- *                                         norm_per_cell,
- *                                         VectorTools::L2_norm);
- * 
- *     pcout << "   Time:" << std::setw(8) << std::setprecision(3) << time
- *           << ", solution norm: " << std::setprecision(5) << std::setw(7)
- *           << solution_norm << std::endl;
- * 
- *     DataOut<dim> data_out;
- * 
- *     data_out.attach_dof_handler(dof_handler);
- *     data_out.add_data_vector(solution, "solution");
- *     data_out.build_patches(mapping);
- * 
- *     data_out.write_vtu_with_pvtu_record(
- *       "./", "solution", timestep_number, MPI_COMM_WORLD, 3);
- * 
- *     solution.zero_out_ghost_values();
- *   }
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="SineGordonProblemrun"></a> 
- * <h4>SineGordonProblem::run</h4>
- * 
+#include <fstream>
+#include <iostream>
+#include <iomanip>
 
- * 
- * This function is called by the main function and steps into the
- * subroutines of the class.
- *   
 
- * 
- * After printing some information about the parallel setup, the first
- * action is to set up the grid and the cell operator. Then, the time step
- * is computed from the CFL number given in the constructor and the finest
- * mesh size. The finest mesh size is computed as the diameter of the last
- * cell in the triangulation, which is the last cell on the finest level of
- * the mesh. This is only possible for meshes where all elements on a level
- * have the same size, otherwise, one needs to loop over all cells. Note
- * that we need to query all the processors for their finest cell since
- * not all processors might hold a region where the mesh is at the finest
- * level. Then, we readjust the time step a little to hit the final time
- * exactly.
- * 
- * @code
- *   template <int dim>
- *   void SineGordonProblem<dim>::run()
- *   {
- *     {
- *       pcout << "Number of MPI ranks:            "
- *             << Utilities::MPI::n_mpi_processes(MPI_COMM_WORLD) << std::endl;
- *       pcout << "Number of threads on each rank: "
- *             << MultithreadInfo::n_threads() << std::endl;
- *       const unsigned int n_vect_doubles = VectorizedArray<double>::size();
- *       const unsigned int n_vect_bits    = 8 * sizeof(double) * n_vect_doubles;
- *       pcout << "Vectorization over " << n_vect_doubles
- *             << " doubles = " << n_vect_bits << " bits ("
- *             << Utilities::System::get_current_vectorization_level() << ")"
- *             << std::endl
- *             << std::endl;
- *     }
- *     make_grid_and_dofs();
- * 
- *     const double local_min_cell_diameter =
- *       triangulation.last()->diameter() / std::sqrt(dim);
- *     const double global_min_cell_diameter =
- *       -Utilities::MPI::max(-local_min_cell_diameter, MPI_COMM_WORLD);
- *     time_step = cfl_number * global_min_cell_diameter;
- *     time_step = (final_time - time) / (int((final_time - time) / time_step));
- *     pcout << "   Time step size: " << time_step
- *           << ", finest cell: " << global_min_cell_diameter << std::endl
- *           << std::endl;
- * 
- * @endcode
- * 
- * Next the initial value is set. Since we have a two-step time stepping
- * method, we also need a value of the solution at time-time_step. For
- * accurate results, one would need to compute this from the time
- * derivative of the solution at initial time, but here we ignore this
- * difficulty and just set it to the initial value function at that
- * artificial time.
- * 
 
- * 
- * We then go on by writing the initial state to file and collecting
- * the two starting solutions in a <tt>std::vector</tt> of pointers that
- * get later consumed by the SineGordonOperation::apply() function. Next,
- * an instance of the <code> SineGordonOperation class </code> based on
- * the finite element degree specified at the top of this file is set up.
- * 
- * @code
- *     VectorTools::interpolate(mapping,
- *                              dof_handler,
- *                              InitialCondition<dim>(1, time),
- *                              solution);
- *     VectorTools::interpolate(mapping,
- *                              dof_handler,
- *                              InitialCondition<dim>(1, time - time_step),
- *                              old_solution);
- *     output_results(0);
- * 
- *     std::vector<LinearAlgebra::distributed::Vector<double> *>
- *       previous_solutions({&old_solution, &old_old_solution});
- * 
- *     SineGordonOperation<dim, fe_degree> sine_gordon_op(matrix_free_data,
- *                                                        time_step);
- * 
- * @endcode
- * 
- * Now loop over the time steps. In each iteration, we shift the solution
- * vectors by one and call the `apply` function of the
- * `SineGordonOperator` class. Then, we write the solution to a file. We
- * clock the wall times for the computational time needed as wall as the
- * time needed to create the output and report the numbers when the time
- * stepping is finished.
- *     
+namespace Step48
+{
+  using namespace dealii;
 
- * 
- * Note how this shift is implemented: We simply call the swap method on
- * the two vectors which swaps only some pointers without the need to copy
- * data around, a relatively expensive operation within an explicit time
- * stepping method. Let us see what happens in more detail: First, we
- * exchange <code>old_solution</code> with <code>old_old_solution</code>,
- * which means that <code>old_old_solution</code> gets
- * <code>old_solution</code>, which is what we expect. Similarly,
- * <code>old_solution</code> gets the content from <code>solution</code>
- * in the next step. After this, <code>solution</code> holds
- * <code>old_old_solution</code>, but that will be overwritten during this
- * step.
- * 
- * @code
- *     unsigned int timestep_number = 1;
- * 
- *     Timer  timer;
- *     double wtime       = 0;
- *     double output_time = 0;
- *     for (time += time_step; time <= final_time;
- *          time += time_step, ++timestep_number)
- *       {
- *         timer.restart();
- *         old_old_solution.swap(old_solution);
- *         old_solution.swap(solution);
- *         sine_gordon_op.apply(solution, previous_solutions);
- *         wtime += timer.wall_time();
- * 
- *         timer.restart();
- *         if (timestep_number % output_timestep_skip == 0)
- *           output_results(timestep_number / output_timestep_skip);
- * 
- *         output_time += timer.wall_time();
- *       }
- *     timer.restart();
- *     output_results(timestep_number / output_timestep_skip + 1);
- *     output_time += timer.wall_time();
- * 
- *     pcout << std::endl
- *           << "   Performed " << timestep_number << " time steps." << std::endl;
- * 
- *     pcout << "   Average wallclock time per time step: "
- *           << wtime / timestep_number << "s" << std::endl;
- * 
- *     pcout << "   Spent " << output_time << "s on output and " << wtime
- *           << "s on computations." << std::endl;
- *   }
- * } // namespace Step48
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Thecodemaincodefunction"></a> 
- * <h3>The <code>main</code> function</h3>
- * 
 
- * 
- * As in step-40, we initialize MPI at the start of the program. Since we will
- * in general mix MPI parallelization with threads, we also set the third
- * argument in MPI_InitFinalize that controls the number of threads to an
- * invalid number, which means that the TBB library chooses the number of
- * threads automatically, typically to the number of available cores in the
- * system. As an alternative, you can also set this number manually if you
- * want to set a specific number of threads (e.g. when MPI-only is required).
- * 
- * @code
- * int main(int argc, char **argv)
- * {
- *   using namespace Step48;
- *   using namespace dealii;
- * 
- *   Utilities::MPI::MPI_InitFinalize mpi_initialization(
- *     argc, argv, numbers::invalid_unsigned_int);
- * 
- *   try
- *     {
- *       SineGordonProblem<dimension> sg_problem;
- *       sg_problem.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- * 
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
+@endcode 
+
+
+
+我们首先定义了两个全局变量，以便在一个地方收集所有需要改变的参数。一个是维度，一个是有限元度。维度在主函数中作为实际类的模板参数使用（就像所有其他deal.II程序一样），而有限元的度数则更为关键，因为它是作为模板参数传递给Sine-Gordon算子的实现。因此，它需要成为一个编译时常数。
+
+@code
+  const unsigned int dimension = 2;
+  const unsigned int fe_degree = 4;
+
+
+
+@endcode 
+
+
+
+
+<a name="SineGordonOperation"></a><h3>SineGordonOperation</h3>
+
+
+
+
+ <code>SineGordonOperation</code> 类实现了每个时间步长中需要的基于单元的操作。这种非线性操作可以在 <code>MatrixFree</code> 类的基础上直接实现，就像线性操作被这个实现的有限元算子应用所处理的方式一样。我们对该类应用两个模板参数，一个是尺寸，一个是有限元的度数。这与deal.II中的其他函数不同，其中只有维度是模板参数。这对于向 @p FEEvaluation 中的内循环提供关于循环长度等的信息是必要的，这对于效率是至关重要的。另一方面，这使得将度数作为一个运行时参数来实现更具挑战性。
+
+@code
+  template <int dim, int fe_degree>
+  class SineGordonOperation
+  {
+  public:
+    SineGordonOperation(const MatrixFree<dim, double> &data_in,
+                        const double                   time_step);
+
+
+    void apply(LinearAlgebra::distributed::Vector<double> &dst,
+               const std::vector<LinearAlgebra::distributed::Vector<double> *>
+                 &src) const;
+
+
+  private:
+    const MatrixFree<dim, double> &            data;
+    const VectorizedArray<double>              delta_t_sqr;
+    LinearAlgebra::distributed::Vector<double> inv_mass_matrix;
+
+
+    void local_apply(
+      const MatrixFree<dim, double> &                                  data,
+      LinearAlgebra::distributed::Vector<double> &                     dst,
+      const std::vector<LinearAlgebra::distributed::Vector<double> *> &src,
+      const std::pair<unsigned int, unsigned int> &cell_range) const;
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="SineGordonOperationSineGordonOperation"></a><h4>SineGordonOperation::SineGordonOperation</h4>
+
+
+
+
+这是SineGordonOperation类的构造函数。它接收一个对MatrixFree的引用，该引用持有问题信息和时间步长作为输入参数。初始化程序设置了质量矩阵。由于我们使用Gauss-Lobatto元素，质量矩阵是一个对角矩阵，可以存储为一个矢量。利用FEEvaluation提供的数据结构，质量矩阵对角线的计算很容易实现。只要在所有的单元格批次上循环，即由于SIMD矢量化的单元格集合，通过使用 <code>integrate</code> 函数与 @p true 参数在槽中取值，在所有正交点上常一的函数上积分。最后，我们将对角线条目进行反转，以便在每个时间步长中直接得到反质量矩阵。
+
+@code
+  template <int dim, int fe_degree>
+  SineGordonOperation<dim, fe_degree>::SineGordonOperation(
+    const MatrixFree<dim, double> &data_in,
+    const double                   time_step)
+    : data(data_in)
+    , delta_t_sqr(make_vectorized_array(time_step * time_step))
+  {
+    data.initialize_dof_vector(inv_mass_matrix);
+
+
+    FEEvaluation<dim, fe_degree> fe_eval(data);
+    const unsigned int           n_q_points = fe_eval.n_q_points;
+
+
+    for (unsigned int cell = 0; cell < data.n_cell_batches(); ++cell)
+      {
+        fe_eval.reinit(cell);
+        for (unsigned int q = 0; q < n_q_points; ++q)
+          fe_eval.submit_value(make_vectorized_array(1.), q);
+        fe_eval.integrate(EvaluationFlags::values);
+        fe_eval.distribute_local_to_global(inv_mass_matrix);
+      }
+
+
+    inv_mass_matrix.compress(VectorOperation::add);
+    for (unsigned int k = 0; k < inv_mass_matrix.locally_owned_size(); ++k)
+      if (inv_mass_matrix.local_element(k) > 1e-15)
+        inv_mass_matrix.local_element(k) =
+          1. / inv_mass_matrix.local_element(k);
+      else
+        inv_mass_matrix.local_element(k) = 1;
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="SineGordonOperationlocal_apply"></a><h4>SineGordonOperation::local_apply</h4>
+
+
+
+
+这个算子实现了程序的核心操作，即对Sine-Gordon问题的非线性算子进行单元范围的积分。其实现是基于  step-37  中的 FEEvaluation 类。由于Gauss-Lobatto元素的特殊结构，某些操作变得更加简单，特别是正交点上的形状函数值的评估，这只是单元自由度值的注入。MatrixFree类在初始化时检测正交点上的有限元的可能结构，然后由FEEvaluation自动用于选择最合适的数值核。
+
+
+
+
+我们必须为时间步进例程评估的非线性函数包括当前时间的函数值 @p current 以及前一个时间步进的值 @p old. 这两个值都在源向量集合 @p src, 中传递给运算器，这只是一个指向实际解向量的指针 <tt>std::vector</tt> 。这种将多个源向量收集到一起的结构是必要的，因为 @p MatrixFree 中的单元格循环正好需要一个源向量和一个目的向量，即使我们碰巧使用许多向量，如本例中的两个。请注意，单元格循环接受任何有效的输入和输出类，这不仅包括向量，还包括一般的数据类型。 然而，只有在遇到收集这些向量的 LinearAlgebra::distributed::Vector<Number> 或 <tt>std::vector</tt> 时，它才会在循环的开始和结束时调用由于MPI而交换幽灵数据的函数。在单元格的循环中，我们首先要读入与本地值相关的向量中的值。 然后，我们评估当前求解向量的值和梯度以及正交点的旧向量的值。接下来，我们在正交点的循环中结合方案中的条款。最后，我们将结果与测试函数进行积分，并将结果累积到全局解向量@p dst。
+
+@code
+  template <int dim, int fe_degree>
+  void SineGordonOperation<dim, fe_degree>::local_apply(
+    const MatrixFree<dim> &                                          data,
+    LinearAlgebra::distributed::Vector<double> &                     dst,
+    const std::vector<LinearAlgebra::distributed::Vector<double> *> &src,
+    const std::pair<unsigned int, unsigned int> &cell_range) const
+  {
+    AssertDimension(src.size(), 2);
+    FEEvaluation<dim, fe_degree> current(data), old(data);
+    for (unsigned int cell = cell_range.first; cell < cell_range.second; ++cell)
+      {
+        current.reinit(cell);
+        old.reinit(cell);
+
+
+        current.read_dof_values(*src[0]);
+        old.read_dof_values(*src[1]);
+
+
+        current.evaluate(EvaluationFlags::values | EvaluationFlags::gradients);
+        old.evaluate(EvaluationFlags::values);
+
+
+        for (unsigned int q = 0; q < current.n_q_points; ++q)
+          {
+            const VectorizedArray<double> current_value = current.get_value(q);
+            const VectorizedArray<double> old_value     = old.get_value(q);
+
+
+            current.submit_value(2. * current_value - old_value -
+                                   delta_t_sqr * std::sin(current_value),
+                                 q);
+            current.submit_gradient(-delta_t_sqr * current.get_gradient(q), q);
+          }
+
+
+        current.integrate(EvaluationFlags::values | EvaluationFlags::gradients);
+        current.distribute_local_to_global(dst);
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="SineGordonOperationapply"></a> <h4>SineGordonOperation::apply</h4> 
+
+
+
+
+该函数根据单元格-本地策略执行时间步进例程。请注意，在添加当前时间步长的积分贡献之前，我们需要将目标向量设置为零（通过 FEEvaluation::distribute_local_to_global() 调用）。在本教程中，我们通过传递给 MatrixFree::cell_loop. 的第五个`true`参数让单元格循环进行归零操作。 循环可以将归零操作安排在更接近对支持的向量项的操作，从而可能提高数据的定位性（首先被归零的向量项后来在`distribute_local_to_global()`调用中重新使用）。单元循环的结构是在单元有限元运算器类中实现的。在每个单元上，它应用定义为类  <code>local_apply()</code>  方法的例程  <code>SineGordonOperation</code>, i.e., <code>this</code>  。我们也可以提供一个具有相同特征的、不属于类的函数。最后，积分的结果要乘以质量矩阵的逆值。
+
+@code
+  template <int dim, int fe_degree>
+  void SineGordonOperation<dim, fe_degree>::apply(
+    LinearAlgebra::distributed::Vector<double> &                     dst,
+    const std::vector<LinearAlgebra::distributed::Vector<double> *> &src) const
+  {
+    data.cell_loop(
+      &SineGordonOperation<dim, fe_degree>::local_apply, this, dst, src, true);
+    dst.scale(inv_mass_matrix);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Equationdata"></a><h3>Equation data</h3> 
+
+
+
+
+我们定义一个随时间变化的函数，作为初始值使用。通过改变起始时间可以得到不同的解决方案。这个函数取自 step-25 ，将代表一维中所有时间的分析解，但在这里只是用来设置一些感兴趣的起始解。在 step-25 中给出了可以测试这个程序的收敛性的更详细的选择。
+
+@code
+  template <int dim>
+  class InitialCondition : public Function<dim>
+  {
+  public:
+    InitialCondition(const unsigned int n_components = 1,
+                     const double       time         = 0.)
+      : Function<dim>(n_components, time)
+    {}
+    virtual double value(const Point<dim> &p,
+                         const unsigned int /*component*/) const override
+    {
+      double t = this->get_time();
+
+
+      const double m  = 0.5;
+      const double c1 = 0.;
+      const double c2 = 0.;
+      const double factor =
+        (m / std::sqrt(1. - m * m) * std::sin(std::sqrt(1. - m * m) * t + c2));
+      double result = 1.;
+      for (unsigned int d = 0; d < dim; ++d)
+        result *= -4. * std::atan(factor / std::cosh(m * p[d] + c1));
+      return result;
+    }
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="SineGordonProblemclass"></a> <h3>SineGordonProblem class</h3>
+
+
+
+
+这是建立在  step-25  中的主类上的。 然而，我们用MatrixFree类代替了SparseMatrix<double>类来存储几何数据。另外，我们在这个例子中使用了一个分布式三角形。
+
+@code
+  template <int dim>
+  class SineGordonProblem
+  {
+  public:
+    SineGordonProblem();
+    void run();
+
+
+  private:
+    ConditionalOStream pcout;
+
+
+    void make_grid_and_dofs();
+    void output_results(const unsigned int timestep_number);
+
+
+#ifdef DEAL_II_WITH_P4EST
+    parallel::distributed::Triangulation<dim> triangulation;
+#else
+    Triangulation<dim> triangulation;
+#endif
+    FE_Q<dim>       fe;
+    DoFHandler<dim> dof_handler;
+
+
+    MappingQ1<dim> mapping;
+
+
+    AffineConstraints<double> constraints;
+    IndexSet                  locally_relevant_dofs;
+
+
+    MatrixFree<dim, double> matrix_free_data;
+
+
+    LinearAlgebra::distributed::Vector<double> solution, old_solution,
+      old_old_solution;
+
+
+    const unsigned int n_global_refinements;
+    double             time, time_step;
+    const double       final_time;
+    const double       cfl_number;
+    const unsigned int output_timestep_skip;
+  };
+
+
+
+@endcode 
+
+
+
+
+<a name="SineGordonProblemSineGordonProblem"></a> <h4>SineGordonProblem::SineGordonProblem</h4> 
+
+
+
+
+这是SineGordonProblem类的构造函数。时间间隔和时间步长在此定义。此外，我们使用在程序顶部定义的有限元的程度来初始化一个基于Gauss-Lobatto支持点的FE_Q有限元。这些点很方便，因为与同阶的QGauss-Lobatto正交规则相结合，它们可以得到一个对角线质量矩阵，而不会太影响精度（注意，虽然积分是不精确的），也可以参见介绍中的讨论。请注意，FE_Q默认选择Gauss-Lobatto结点，因为它们相对于等距结点有更好的条件。为了使事情更加明确，我们还是要说明节点的选择。
+
+@code
+  template <int dim>
+  SineGordonProblem<dim>::SineGordonProblem()
+    : pcout(std::cout, Utilities::MPI::this_mpi_process(MPI_COMM_WORLD) == 0)
+    ,
+#ifdef DEAL_II_WITH_P4EST
+    triangulation(MPI_COMM_WORLD)
+    ,
+#endif
+    fe(QGaussLobatto<1>(fe_degree + 1))
+    , dof_handler(triangulation)
+    , n_global_refinements(10 - 2 * dim)
+    , time(-10)
+    , time_step(10.)
+    , final_time(10.)
+    , cfl_number(.1 / fe_degree)
+    , output_timestep_skip(200)
+  {}
+
+
+@endcode 
+
+
+
+
+<a name="SineGordonProblemmake_grid_and_dofs"></a> <h4>SineGordonProblem::make_grid_and_dofs</h4> 
+
+
+
+
+如同在 step-25 中，这个函数设置了一个范围为 <code>dim</code> 维的立方体网格 $[-15,15]$  。我们在域的中心更多的细化网格，因为解决方案集中在那里。我们首先细化所有中心在半径为11的单元，然后再细化一次半径为6的单元。 这种简单的临时细化可以通过在时间步进过程中使用误差估计器使网格适应解决方案来更好地完成，就像在其他例子程序中所做的那样，并使用 parallel::distributed::SolutionTransfer 将解决方案转移到新的网格。
+
+@code
+  template <int dim>
+  void SineGordonProblem<dim>::make_grid_and_dofs()
+  {
+    GridGenerator::hyper_cube(triangulation, -15, 15);
+    triangulation.refine_global(n_global_refinements);
+    {
+      typename Triangulation<dim>::active_cell_iterator
+        cell     = triangulation.begin_active(),
+        end_cell = triangulation.end();
+      for (; cell != end_cell; ++cell)
+        if (cell->is_locally_owned())
+          if (cell->center().norm() < 11)
+            cell->set_refine_flag();
+      triangulation.execute_coarsening_and_refinement();
+
+
+      cell     = triangulation.begin_active();
+      end_cell = triangulation.end();
+      for (; cell != end_cell; ++cell)
+        if (cell->is_locally_owned())
+          if (cell->center().norm() < 6)
+            cell->set_refine_flag();
+      triangulation.execute_coarsening_and_refinement();
+    }
+
+
+    pcout << "   Number of global active cells: "
+#ifdef DEAL_II_WITH_P4EST
+          << triangulation.n_global_active_cells()
+#else
+          << triangulation.n_active_cells()
+#endif
+          << std::endl;
+
+
+    dof_handler.distribute_dofs(fe);
+
+
+    pcout << "   Number of degrees of freedom: " << dof_handler.n_dofs()
+          << std::endl;
+
+
+
+@endcode 
+
+
+
+我们生成悬挂节点约束，以确保解的连续性。如同在 step-40 中，我们需要为约束矩阵配备局部相关自由度的IndexSet，以避免它在大问题中消耗过多的内存。接下来，问题的<code>MatrixFree</code>对象被设置。请注意，我们为共享内存并行化指定了一个特定的方案（因此，人们会使用多线程来实现节点内的并行化，而不是MPI；我们在这里选择了标准选项&mdash；如果我们想在程序中有一个以上的TBB线程的情况下禁用共享内存并行化，我们会选择 MatrixFree::AdditionalData::TasksParallelScheme::none). 也请注意，我们提供一个QGaussLobatto正交公式，而不是使用默认的QGauss正交参数，以实现期望的行为。最后，三个求解向量被初始化。MatrixFree期望有一个特定的鬼魂索引布局（因为它在MPI本地数字中处理索引访问，需要在向量和MatrixFree之间匹配），所以我们只是要求它初始化向量，以确保鬼魂交换得到正确处理。
+
+@code
+    DoFTools::extract_locally_relevant_dofs(dof_handler, locally_relevant_dofs);
+    constraints.clear();
+    constraints.reinit(locally_relevant_dofs);
+    DoFTools::make_hanging_node_constraints(dof_handler, constraints);
+    constraints.close();
+
+
+    typename MatrixFree<dim>::AdditionalData additional_data;
+    additional_data.tasks_parallel_scheme =
+      MatrixFree<dim>::AdditionalData::TasksParallelScheme::partition_partition;
+
+
+    matrix_free_data.reinit(mapping,
+                            dof_handler,
+                            constraints,
+                            QGaussLobatto<1>(fe_degree + 1),
+                            additional_data);
+
+
+    matrix_free_data.initialize_dof_vector(solution);
+    old_solution.reinit(solution);
+    old_old_solution.reinit(solution);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="SineGordonProblemoutput_results"></a> <h4>SineGordonProblem::output_results</h4> 
+
+
+
+
+这个函数打印出解的规范，并将解的向量写到一个文件中。法线是标准的（除了我们需要累积所有处理器上的法线，用于并行网格，我们通过  VectorTools::compute_global_error()  函数来做），第二项类似于我们在  step-40  或  step-37  . 请注意，我们可以使用与计算过程中使用的相同的向量进行输出。无矩阵框架中的向量总是提供所有本地拥有的单元的全部信息（这也是本地评估中需要的），包括这些单元上的鬼向量条目。这是 VectorTools::integrate_difference() 函数以及DataOut中唯一需要的数据。这时唯一要做的就是确保在我们从矢量中读取数据之前更新其鬼魂值，并且在完成后重置鬼魂值。这是一个只存在于 LinearAlgebra::distributed::Vector 类中的特性。另一方面，带有PETSc和Trilinos的分布式向量需要被复制到包括ghost值的特殊向量（见 step-40 中的相关章节 ）。如果我们还想访问幽灵单元上的所有自由度（例如，在计算使用单元边界上的解的跳跃的误差估计器时），我们需要更多的信息并创建一个初始化了本地相关自由度的向量，就像在  step-40  中一样。还请注意，我们需要为输出分配约束条件--它们不是在计算过程中填充的（相反，它们是在无矩阵方法中即时插值的  FEEvaluation::read_dof_values()).  。 
+
+@code
+  template <int dim>
+  void
+  SineGordonProblem<dim>::output_results(const unsigned int timestep_number)
+  {
+    constraints.distribute(solution);
+
+
+    Vector<float> norm_per_cell(triangulation.n_active_cells());
+    solution.update_ghost_values();
+    VectorTools::integrate_difference(mapping,
+                                      dof_handler,
+                                      solution,
+                                      Functions::ZeroFunction<dim>(),
+                                      norm_per_cell,
+                                      QGauss<dim>(fe_degree + 1),
+                                      VectorTools::L2_norm);
+    const double solution_norm =
+      VectorTools::compute_global_error(triangulation,
+                                        norm_per_cell,
+                                        VectorTools::L2_norm);
+
+
+    pcout << "   Time:" << std::setw(8) << std::setprecision(3) << time
+          << ", solution norm: " << std::setprecision(5) << std::setw(7)
+          << solution_norm << std::endl;
+
+
+    DataOut<dim> data_out;
+
+
+    data_out.attach_dof_handler(dof_handler);
+    data_out.add_data_vector(solution, "solution");
+    data_out.build_patches(mapping);
+
+
+    data_out.write_vtu_with_pvtu_record(
+      "./", "solution", timestep_number, MPI_COMM_WORLD, 3);
+
+
+    solution.zero_out_ghost_values();
+  }
+
+
+
+@endcode 
+
+
+
+
+<a name="SineGordonProblemrun"></a> <h4>SineGordonProblem::run</h4>
+
+
+
+
+该函数由主函数调用，并步入该类的子程序中。   
+
+
+在打印了一些关于并行设置的信息后，第一个动作是设置网格和单元运算器。然后，根据构造函数中给出的CFL编号和最细的网格尺寸计算出时间步长。最细的网格尺寸计算为三角形中最后一个单元的直径，也就是网格中最细层次上的最后一个单元。这只适用于一个层次上的所有元素都具有相同尺寸的网格，否则就需要对所有单元进行循环。请注意，我们需要查询所有处理器的最细单元，因为不是所有的处理器都可能持有网格处于最细级别的区域。然后，我们重新调整一下时间步长，以准确达到最终的时间。
+
+@code
+  template <int dim>
+  void SineGordonProblem<dim>::run()
+  {
+    {
+      pcout << "Number of MPI ranks:            "
+            << Utilities::MPI::n_mpi_processes(MPI_COMM_WORLD) << std::endl;
+      pcout << "Number of threads on each rank: "
+            << MultithreadInfo::n_threads() << std::endl;
+      const unsigned int n_vect_doubles = VectorizedArray<double>::size();
+      const unsigned int n_vect_bits    = 8 * sizeof(double) * n_vect_doubles;
+      pcout << "Vectorization over " << n_vect_doubles
+            << " doubles = " << n_vect_bits << " bits ("
+            << Utilities::System::get_current_vectorization_level() << ")"
+            << std::endl
+            << std::endl;
+    }
+    make_grid_and_dofs();
+
+
+    const double local_min_cell_diameter =
+      triangulation.last()->diameter() / std::sqrt(dim);
+    const double global_min_cell_diameter =
+
+
+      -Utilities::MPI::max(-local_min_cell_diameter, MPI_COMM_WORLD);
+    time_step = cfl_number * global_min_cell_diameter;
+    time_step = (final_time - time) / (int((final_time - time) / time_step));
+    pcout << "   Time step size: " << time_step
+          << ", finest cell: " << global_min_cell_diameter << std::endl
+          << std::endl;
+
+
+@endcode 
+
+
+
+接下来是设置初始值。由于我们有一个两步的时间步长方法，我们还需要一个在时间步长时的解的值。为了得到准确的结果，我们需要根据初始时间的解的时间导数来计算，但在这里我们忽略了这个困难，只是将其设置为该人工时间的初始值函数。
+
+
+
+
+然后，我们将初始状态写入文件，并在 <tt>std::vector</tt> 的指针中收集两个起始解，随后被 SineGordonOperation::apply() 函数消耗。接下来，基于该文件顶部指定的有限元程度的 <code> SineGordonOperation class </code> 的实例被建立起来。
+
+@code
+    VectorTools::interpolate(mapping,
+                             dof_handler,
+                             InitialCondition<dim>(1, time),
+                             solution);
+    VectorTools::interpolate(mapping,
+                             dof_handler,
+                             InitialCondition<dim>(1, time - time_step),
+                             old_solution);
+    output_results(0);
+
+
+    std::vector<LinearAlgebra::distributed::Vector<double> *>
+      previous_solutions({&old_solution, &old_old_solution});
+
+
+    SineGordonOperation<dim, fe_degree> sine_gordon_op(matrix_free_data,
+                                                       time_step);
+
+
+@endcode 
+
+
+
+现在对时间步骤进行循环。在每个迭代中，我们将解的向量移动一个，并调用 "正弦GordonOperator "类的`apply`函数。然后，我们将解决方案写到一个文件中。我们对所需的计算时间和创建输出所需的时间进行计时，并在时间步进结束后报告这些数字。     
+
+
+请注意这种转换是如何实现的。我们简单地在两个向量上调用交换方法，只交换一些指针而不需要复制数据，这在显式时间步进方法中是一个相对昂贵的操作。让我们来看看发生了什么。首先，我们交换 <code>old_solution</code> with <code>old_old_solution</code> ，这意味着 <code>old_old_solution</code> 得到 <code>old_solution</code> ，这就是我们所期望的。同样，在下一步中， <code>old_solution</code> gets the content from <code>solution</code> 也是如此。在此之后， <code>solution</code> 持有 <code>old_old_solution</code> ，但这将在这一步中被覆盖。
+
+@code
+    unsigned int timestep_number = 1;
+
+
+    Timer  timer;
+    double wtime       = 0;
+    double output_time = 0;
+    for (time += time_step; time <= final_time;
+         time += time_step, ++timestep_number)
+      {
+        timer.restart();
+        old_old_solution.swap(old_solution);
+        old_solution.swap(solution);
+        sine_gordon_op.apply(solution, previous_solutions);
+        wtime += timer.wall_time();
+
+
+        timer.restart();
+        if (timestep_number % output_timestep_skip == 0)
+          output_results(timestep_number / output_timestep_skip);
+
+
+        output_time += timer.wall_time();
+      }
+    timer.restart();
+    output_results(timestep_number / output_timestep_skip + 1);
+    output_time += timer.wall_time();
+
+
+    pcout << std::endl
+          << "   Performed " << timestep_number << " time steps." << std::endl;
+
+
+    pcout << "   Average wallclock time per time step: "
+          << wtime / timestep_number << "s" << std::endl;
+
+
+    pcout << "   Spent " << output_time << "s on output and " << wtime
+          << "s on computations." << std::endl;
+  }
+} // namespace Step48
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="Thecodemaincodefunction"></a> <h3>The <code>main</code> function</h3>
+
+
+
+
+与 step-40 中一样，我们在程序开始时初始化MPI。由于我们一般会将MPI并行化与线程混合在一起，所以我们也将MPI_InitFinalize中控制线程数量的第三个参数设置为无效数字，这意味着TBB库会自动选择线程数量，通常为系统中的可用内核数量。作为一种选择，如果你想设置一个特定的线程数，你也可以手动设置这个数字（例如，当需要只使用MPI时）。
+
+@code
+int main(int argc, char **argv)
+{
+  using namespace Step48;
+  using namespace dealii;
+
+
+  Utilities::MPI::MPI_InitFinalize mpi_initialization(
+    argc, argv, numbers::invalid_unsigned_int);
+
+
+  try
+    {
+      SineGordonProblem<dimension> sg_problem;
+      sg_problem.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+
+
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
 <a name="Comparisonwithasparsematrix"></a><h3>Comparison with a sparse matrix</h3>
 
 
-In order to demonstrate the gain in using the MatrixFree class instead of
-the standard <code>deal.II</code> assembly routines for evaluating the
-information from old time steps, we study a simple serial run of the code on a
-nonadaptive mesh. Since much time is spent on evaluating the sine function, we
-do not only show the numbers of the full sine-Gordon equation but also for the
-wave equation (the sine-term skipped from the sine-Gordon equation). We use
-both second and fourth order elements. The results are summarized in the
-following table.
+为了证明使用MatrixFree类而不是标准的 <code>deal.II</code> 汇编例程来评估旧时间步长的信息的好处，我们研究了在一个非适应性网格上的简单串行运行代码。由于许多时间花在评估正弦函数上，我们不仅显示了完整的正弦-戈登方程的数字，也显示了波浪方程（正弦-戈登方程中跳过的正弦项）的数字。我们同时使用二阶和四阶元素。结果总结在下表中。
 
-<table align="center" class="doxtable">
+  <table align="center" class="doxtable">
   <tr>
     <th>&nbsp;</th>
     <th colspan="3">wave equation</th>
@@ -1098,28 +893,26 @@ following table.
     <td align="right"> 0.194</td>
     <td align="right"> 6.95</td>
    </tr>
-</table>
+</table>   
 
-It is apparent that the matrix-free code outperforms the standard assembly
-routines in deal.II by far. In 3D and for fourth order elements, one operator
-evaluation is also almost ten times as fast as a sparse matrix-vector
-product.
+很明显，无矩阵代码远远超过了deal.II中的标准汇编程序。在三维和四阶元素中，一个运算符的评估速度也几乎是稀疏矩阵-向量乘积的十倍。
 
 <a name="Parallelrunin2Dand3D"></a><h3>Parallel run in 2D and 3D</h3>
 
 
-We start with the program output obtained on a workstation with 12 cores / 24
-threads (one Intel Xeon E5-2687W v4 CPU running at 3.2 GHz, hyperthreading
-enabled), running the program in release mode:
+我们从一个具有12个核心/24个线程的工作站（一个英特尔至强E5-2687W v4 CPU，运行频率为3.2 GHz，启用超线程）上获得的程序输出开始，以发布模式运行程序。
+
 @code
 \$ make run
 Number of MPI ranks:            1
 Number of threads on each rank: 24
 Vectorization over 4 doubles = 256 bits (AVX)
 
+
    Number of global active cells: 15412
    Number of degrees of freedom: 249065
    Time step size: 0.00292997, finest cell: 0.117188
+
 
    Time:     -10, solution norm:  9.5599
    Time:   -9.41, solution norm:  17.678
@@ -1158,21 +951,27 @@ Vectorization over 4 doubles = 256 bits (AVX)
    Time:    9.92, solution norm:  17.964
    Time:      10, solution norm:  17.595
 
+
    Performed 6826 time steps.
    Average wallclock time per time step: 0.0013453s
    Spent 14.976s on output and 9.1831s on computations.
-@endcode
+@endcode 
 
-In 3D, the respective output looks like
+
+
+在3D中，各自的输出看起来像 
+
 @code
 \$ make run
 Number of MPI ranks:            1
 Number of threads on each rank: 24
 Vectorization over 4 doubles = 256 bits (AVX)
 
+
    Number of global active cells: 17592
    Number of degrees of freedom: 1193881
    Time step size: 0.0117233, finest cell: 0.46875
+
 
    Time:     -10, solution norm:  29.558
    Time:   -7.66, solution norm:  129.13
@@ -1185,17 +984,18 @@ Vectorization over 4 doubles = 256 bits (AVX)
    Time:    8.76, solution norm:  36.734
    Time:      10, solution norm:  94.115
 
+
    Performed 1706 time steps.
    Average wallclock time per time step: 0.0084542s
    Spent 16.766s on output and 14.423s on computations.
-@endcode
+@endcode 
 
-It takes 0.008 seconds for one time step with more than a million
-degrees of freedom (note that we would need many processors to reach such
-numbers when solving linear systems).
 
-If we replace the thread-parallelization by a pure MPI parallelization, the
-timings change into:
+
+超过一百万个自由度的一个时间步长需要0.008秒（注意，在求解线性系统时，我们需要很多处理器才能达到这样的数字）。
+
+如果我们用纯MPI并行化取代线程并行化，时间就会变成。
+
 @code
 \$ mpirun -n 24 ./step-48
 Number of MPI ranks:            24
@@ -1205,33 +1005,14 @@ Vectorization over 4 doubles = 256 bits (AVX)
    Performed 1706 time steps.
    Average wallclock time per time step: 0.0051747s
    Spent 2.0535s on output and 8.828s on computations.
-@endcode
+@endcode 
 
-We observe a dramatic speedup for the output (which makes sense, given that
-most code of the output is not parallelized via threads, whereas it is for
-MPI), but less than the theoretical factor of 12 we would expect from the
-parallelism. More interestingly, the computations also get faster when
-switching from the threads-only variant to the MPI-only variant. This is a
-general observation for the MatrixFree framework (as of updating this data in
-2019). The main reason is that the decisions regarding work on conflicting
-cell batches made to enable execution in parallel are overly pessimistic:
-While they ensure that no work on neighboring cells is done on different
-threads at the same time, this conservative setting implies that data from
-neighboring cells is also evicted from caches by the time neighbors get
-touched. Furthermore, the current scheme is not able to provide a constant
-load for all 24 threads for the given mesh with 17,592 cells.
 
-The current program allows to also mix MPI parallelization with thread
-parallelization. This is most beneficial when running programs on clusters
-with multiple nodes, using MPI for the inter-node parallelization and threads
-for the intra-node parallelization. On the workstation used above, we can run
-threads in the hyperthreading region (i.e., using 2 threads for each of the 12
-MPI ranks). An important setting for mixing MPI with threads is to ensure
-proper binning of tasks to CPUs. On many clusters the placing is either
-automatically via the `mpirun/mpiexec` environment, or there can be manual
-settings. Here, we simply report the run times the plain version of the
-program (noting that things could be improved towards the timings of the
-MPI-only program when proper pinning is done):
+
+我们观察到输出的急剧加速（这是有道理的，因为输出的大部分代码没有通过线程并行化，而对于MPI则是如此），但低于我们从并行化中预期的12的理论系数。更有趣的是，当从纯线程变量切换到纯MPI变量时，计算也变得更快。这是MatrixFree框架的一个一般观察结果（截至2019年更新此数据）。主要原因是，为实现并行执行而做出的关于冲突单元批处理工作的决定过于悲观：虽然它们确保在不同的线程上不会同时进行相邻单元的工作，但这种保守的设置意味着在相邻单元被触及时，相邻单元的数据也会从缓存中被驱逐。此外，对于给定的具有17592个单元的网格，目前的方案无法为所有24个线程提供一个恒定的负载。
+
+目前的方案还允许将MPI并行化与线程并行化相混合。当在具有多个节点的集群上运行程序时，这是最有利的，使用MPI进行节点间并行化，使用线程进行节点内并行化。在上面使用的工作站上，我们可以在超线程区域运行线程（即为12个MPI行列中的每一个使用2个线程）。将MPI与线程混合在一起的一个重要设置是确保将任务适当地分给CPU。在许多集群上，放置是通过`mpirun/mpiexec`环境自动进行的，或者可以有手动设置。在这里，我们简单地报告了该程序的普通版本的运行时间（注意到当适当的分档完成后，事情可以朝着只用MPI的程序的时间改进）。
+
 @code
 \$ mpirun -n 12 ./step-48
 Number of MPI ranks:            12
@@ -1241,51 +1022,24 @@ Vectorization over 4 doubles = 256 bits (AVX)
    Performed 1706 time steps.
    Average wallclock time per time step: 0.0056651s
    Spent 2.5175s on output and 9.6646s on computations.
-@endcode
+@endcode 
+
+
+
 
 
 
 <a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
 
 
-There are several things in this program that could be improved to make it
-even more efficient (besides improved boundary conditions and physical
-stuff as discussed in step-25):
+这个程序中有几处可以改进，使其更加有效（除了在 step-25 中讨论的改进边界条件和物理东西）。
 
-<ul> <li> <b>Faster evaluation of sine terms:</b> As becomes obvious
-  from the comparison of the plain wave equation and the sine-Gordon
-  equation above, the evaluation of the sine terms dominates the total
-  time for the finite element operator application. There are a few
-  reasons for this: Firstly, the deal.II sine computation of a
-  VectorizedArray field is not vectorized (as opposed to the rest of
-  the operator application). This could be cured by handing the sine
-  computation to a library with vectorized sine computations like
-  Intel's math kernel library (MKL). By using the function
-  <code>vdSin</code> in MKL, the program uses half the computing time
-  in 2D and 40 percent less time in 3D. On the other hand, the sine
-  computation is structurally much more complicated than the simple
-  arithmetic operations like additions and multiplications in the rest
-  of the local operation.
+  <ul>   <li>  <b>Faster evaluation of sine terms:</b> 从上面的平波方程和正弦-戈登方程的比较中可以明显看出，正弦项的评估在有限元算子应用的总时间中占主导地位。这有几个原因。首先，VectorizedArray场的deal.II正弦计算没有被矢量化（相对于算子应用的其他部分而言）。这可以通过将正弦计算交给一个具有矢量化正弦计算的库来解决，比如英特尔的数学内核库（MKL）。通过使用MKL中的函数 <code>vdSin</code> ，该程序在二维中使用了一半的计算时间，在三维中使用了40%的时间。另一方面，正弦计算在结构上要比其他局部操作中的加法和乘法等简单算术操作复杂得多。
 
-  <li> <b>Higher order time stepping:</b> While the implementation allows for
-  arbitrary order in the spatial part (by adjusting the degree of the finite
-  element), the time stepping scheme is a standard second-order leap-frog
-  scheme. Since solutions in wave propagation problems are usually very
-  smooth, the error is likely dominated by the time stepping part. Of course,
-  this could be cured by using smaller time steps (at a fixed spatial
-  resolution), but it would be more efficient to use higher order time
-  stepping as well. While it would be straight-forward to do so for a
-  first-order system (use some Runge&ndash;Kutta scheme of higher order,
-  probably combined with adaptive time step selection like the <a
+    <li>  <b>Higher order time stepping:</b> 虽然实现允许空间部分的任意顺序（通过调整有限元的程度），但时间步进方案是标准的二阶跃迁方案。由于波的传播问题的解通常是非常平滑的，所以误差很可能被时间步进部分所支配。当然，这可以通过使用较小的时间步长（在固定的空间分辨率下）来解决，但使用高阶时间步长也会更有效率。虽然对于一阶系统来说，这样做是很简单的（使用一些高阶的Runge&ndash;Kutta方案，可能结合像<a
   href="http://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method">Dormand&ndash;Prince
-  method</a>), it is more challenging for the second-order formulation. At
-  least in the finite difference community, people usually use the PDE to find
-  spatial correction terms that improve the temporal error.
+  method</a>那样的自适应时间步长选择），但对于二阶公式来说，这更具挑战性。至少在有限差分界，人们通常使用PDE来寻找改善时间误差的空间修正项。
 
-</ul>
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-48.cc"
-*/
+  </ul>  <a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-48.cc"  。 
+
+  */  

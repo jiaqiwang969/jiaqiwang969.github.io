@@ -1,132 +1,96 @@
-/**
-@page step_69 The step-69 tutorial program
-This tutorial depends on step-33, step-40.
+  /**  @page step_69 The step-69 tutorial program  。 
+
+本教程取决于  step-33  ,  step-40  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Eulersequationsofgasdynamics">Euler's equations of gas dynamics</a>
+        <li><a href="#Eulersequationsofgasdynamics">Euler's equations of gas dynamics</a><a href="#Eulersequationsofgasdynamics">Euler's equations of gas dynamics</a>
       <ul>
-        <li><a href="#Solutiontheory">Solution theory</a>
-        <li><a href="#Variationalversuscollocationtypediscretizations">Variational versus collocation-type discretizations</a>
+        <li><a href="#Solutiontheory">Solution theory</a><a href="#Solutiontheory">Solution theory</a>
+        <li><a href="#Variationalversuscollocationtypediscretizations">Variational versus collocation-type discretizations</a><a href="#Variationalversuscollocationtypediscretizations">Variational versus collocation-type discretizations</a>
       </ul>
-        <li><a href="#Descriptionofthescheme">Description of the scheme </a>
-        <li><a href="#Stableboundaryconditionsandconservationproperties">Stable boundary conditions and conservation properties.</a>
+        <li><a href="#Descriptionofthescheme">Description of the scheme </a><a href="#Descriptionofthescheme">Description of the scheme </a>
+        <li><a href="#Stableboundaryconditionsandconservationproperties">Stable boundary conditions and conservation properties.</a><a href="#Stableboundaryconditionsandconservationproperties">Stable boundary conditions and conservation properties.</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#Classtemplatedeclarations">Class template declarations</a>
+        <li><a href="#Includefiles">Include files</a><a href="#Includefiles">Include files</a>
+        <li><a href="#Classtemplatedeclarations">Class template declarations</a><a href="#Classtemplatedeclarations">Class template declarations</a>
       <ul>
-        <li><a href="#ThecodeDiscretizationcodeclass">The <code>Discretization</code> class</a>
-        <li><a href="#ThecodeOfflineDatacodeclass">The <code>OfflineData</code> class</a>
-        <li><a href="#ThecodeProblemDescriptioncodeclass">The <code>ProblemDescription</code> class</a>
-        <li><a href="#ThecodeInitialValuescodeclass">The <code>InitialValues</code> class</a>
-        <li><a href="#ThecodeTimeSteppingcodeclass">The <code>%TimeStepping</code> class</a>
-        <li><a href="#ThecodeSchlierenPostprocessorcodeclass">The <code>SchlierenPostprocessor</code> class</a>
-        <li><a href="#ThecodeMainLoopcodeclass">The <code>MainLoop</code> class</a>
+        <li><a href="#ThecodeDiscretizationcodeclass">The <code>Discretization</code> class</a><a href="#ThecodeDiscretizationcodeclass">The <code>Discretization</code> class</a>
+        <li><a href="#ThecodeOfflineDatacodeclass">The <code>OfflineData</code> class</a><a href="#ThecodeOfflineDatacodeclass">The <code>OfflineData</code> class</a>
+        <li><a href="#ThecodeProblemDescriptioncodeclass">The <code>ProblemDescription</code> class</a><a href="#ThecodeProblemDescriptioncodeclass">The <code>ProblemDescription</code> class</a>
+        <li><a href="#ThecodeInitialValuescodeclass">The <code>InitialValues</code> class</a><a href="#ThecodeInitialValuescodeclass">The <code>InitialValues</code> class</a>
+        <li><a href="#ThecodeTimeSteppingcodeclass">The <code>%TimeStepping</code> class</a><a href="#ThecodeTimeSteppingcodeclass">The <code>%TimeStepping</code> class</a>
+        <li><a href="#ThecodeSchlierenPostprocessorcodeclass">The <code>SchlierenPostprocessor</code> class</a><a href="#ThecodeSchlierenPostprocessorcodeclass">The <code>SchlierenPostprocessor</code> class</a>
+        <li><a href="#ThecodeMainLoopcodeclass">The <code>MainLoop</code> class</a> ]<a href="#ThecodeMainLoopcodeclass">The <code>MainLoop</code> class</a>
       </ul>
-        <li><a href="#Implementation">Implementation</a>
+        <li><a href="#Implementation">Implementation</a><a href="#Implementation">Implementation</a>
       <ul>
-        <li><a href="#Gridgenerationsetupofdatastructures">Grid generation, setup of data structures</a>
-        <li><a href="#Assemblyofofflinematrices">Assembly of offline matrices</a>
-        <li><a href="#Translationtolocalindexranges">Translation to local index ranges</a>
-        <li><a href="#EquationofstateandapproximateRiemannsolver">Equation of state and approximate Riemann solver</a>
-        <li><a href="#Initialvalues">Initial values</a>
-        <li><a href="#TheForwardEulerstep">The Forward Euler step</a>
-        <li><a href="#Schlierenpostprocessing">Schlieren postprocessing</a>
-        <li><a href="#Themainloop">The main loop</a>
+        <li><a href="#Gridgenerationsetupofdatastructures">Grid generation, setup of data structures</a><a href="#Gridgenerationsetupofdatastructures">Grid generation, setup of data structures</a>
+        <li><a href="#Assemblyofofflinematrices">Assembly of offline matrices</a><a href="#Assemblyofofflinematrices">Assembly of offline matrices</a>
+        <li><a href="#Translationtolocalindexranges">Translation to local index ranges</a><a href="#Translationtolocalindexranges">Translation to local index ranges</a>
+        <li><a href="#EquationofstateandapproximateRiemannsolver">Equation of state and approximate Riemann solver</a><a href="#EquationofstateandapproximateRiemannsolver">Equation of state and approximate Riemann solver</a>
+        <li><a href="#Initialvalues">Initial values</a><a href="#Initialvalues">Initial values</a>
+        <li><a href="#TheForwardEulerstep">The Forward Euler step</a><a href="#TheForwardEulerstep">The Forward Euler step</a>
+        <li><a href="#Schlierenpostprocessing">Schlieren postprocessing</a><a href="#Schlierenpostprocessing">Schlieren postprocessing</a>
+        <li><a href="#Themainloop">The main loop</a><a href="#Themainloop">The main loop</a>
       <ul>
-        <li><a href="#Resume">Resume</a>
-        <li><a href="#Outputandcheckpointing">Output and checkpointing</a>
+        <li><a href="#Resume">Resume</a><a href="#Resume">Resume</a>
+        <li><a href="#Outputandcheckpointing">Output and checkpointing</a><a href="#Outputandcheckpointing">Output and checkpointing</a>
       </ul>
       </ul>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
+        <li><a href="#Possibilitiesforextensions">Possibilities for extensions</a><a href="#Possibilitiesforextensions">Possibilities for extensions</a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
+@endhtmlonly 
+
 <i>
   This program was contributed by Matthias Maier (Texas A&M University),
   and Ignacio Tomas (Sandia National Laboratories$^{\!\dagger}$).
-</i>
+</i> 
 
-$^\dagger$<em>Sandia National Laboratories is a multimission laboratory
-managed and operated by National Technology & Engineering Solutions of Sandia,
-LLC, a wholly owned subsidiary of Honeywell International Inc., for the U.S.
-Department of Energy's National Nuclear Security Administration under contract
-DE-NA0003525. This document describes objective technical results and analysis.
-Any subjective views or opinions that might be expressed in the paper do not
-necessarily represent the views of the U.S. Department of Energy or the United
-States Government.</em>
+  $^\dagger$   <em>  桑迪亚国家实验室是一个多任务实验室，由霍尼韦尔国际公司的全资子公司桑迪亚国家技术与工程解决方案有限公司根据DE-NA0003525号合同为美国能源部国家核安全局管理和运营。本文件描述了客观的技术结果和分析。文件中可能表达的任何主观观点或意见，不一定代表美国能源部或美国政府的观点。 </em>   
 
-@note This tutorial step implements a first-order accurate <i>guaranteed
-maximum wavespeed method</i> based on a first-order <i>graph viscosity</i>
-for solving Euler's equations of gas dynamics @cite GuermondPopov2016. As
-such it is presented primarily for educational purposes. For actual
-research computations you might want to consider exploring a corresponding
-<a href="https://github.com/conservation-laws/ryujin">high-performance
-implementation of a second-order accurate scheme</a> that uses <i>convex
-limiting</i> techniques, and strong stability-preserving (SSP) time
-integration, see @cite GuermondEtAl2018
-(<a href="https://conservation-laws.43-1.org/">website</a>).
+  @note  本教程步骤实现了一个基于一阶精确<i>guaranteed
+maximum wavespeed method</i>的求解欧拉气体动力学方程 @cite GuermondPopov2016  。因此，它主要为教育目的而提出。对于实际的研究计算，你可能要考虑探索相应的<a href="https://github.com/conservation-laws/ryujin">high-performance
+implementation of a second-order accurate scheme</a>，它使用<i>convex
+limiting</i>技术，以及强保稳（SSP）时间积分，见 @cite GuermondEtAl2018  （<a href="https://conservation-laws.43-1.org/">website</a>）。
 
-@dealiiTutorialDOI{10.5281/zenodo.3698223,https://zenodo.org/badge/DOI/10.5281/zenodo.3698223.svg}
+  @dealiiTutorialDOI{10.5281/zenodo.3698223,https://zenodo.org/badge/DOI/10.5281/zenodo.3698223.svg}   
 
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+<a name="Intro"></a><a name="Introduction"></a><h1>Introduction</h1> 
 
 
-This tutorial presents a first-order scheme for solving compressible
-Euler's equations that is based on three ingredients: a
-<i>collocation</i>-type discretization of Euler's equations in the context
-of finite elements; a graph-viscosity stabilization based on a
-<i>guaranteed</i> upper bound of the local wave speed; and explicit
-time-stepping. As such, the ideas and techniques presented in this tutorial
-step are drastically different from those used in step-33, which focuses on
-the use of automatic differentiation. From a programming perspective this
-tutorial will focus on a number of techniques found in large-scale
-computations: hybrid thread-MPI parallelization; efficient local numbering
-of degrees of freedom; concurrent post-processing and write-out of results
-using worker threads; as well as checkpointing and restart.
+本教程提出了一个用于求解可压缩欧拉方程的一阶方案，该方案基于三个要素：在有限元背景下对欧拉方程进行<i>collocation</i>型离散化；基于局部波速的<i>guaranteed</i>上界的图粘性稳定；以及明确的时间步进。因此，本教程步骤中提出的想法和技术与 step-33 中使用的想法和技术有很大的不同，后者主要是使用自动微分。从编程的角度来看，本教程将关注在大规模计算中发现的一些技术：混合线程-MPI并行化；自由度的有效局部编号；使用工作线程进行并发的后处理和结果的写出；以及检查点和重启。
 
-It should be noted that first-order schemes in the context of hyperbolic
-conservation laws require prohibitively many degrees of freedom to resolve
-certain key features of the simulated fluid, and thus, typically only serve
-as elementary building blocks in higher-order schemes
-@cite GuermondEtAl2018. However, we hope that the reader still finds the
-tutorial step to be a good starting point (in particular with respect to
-the programming techniques) before jumping into full research codes such as
-the second-order scheme discussed in @cite GuermondEtAl2018.
+应该注意的是，双曲守恒定律背景下的一阶方案需要太多的自由度来解决模拟流体的某些关键特征，因此，通常只能作为高阶方案的基本构建模块  @cite GuermondEtAl2018  。然而，我们希望读者在跳入完整的研究代码（如 @cite GuermondEtAl2018 中讨论的二阶方案）之前，仍然认为该教程步骤是一个很好的起点（特别是在编程技术方面）。
 
 
-<a name="eulerequations"></a>
-<a name="Eulersequationsofgasdynamics"></a><h3>Euler's equations of gas dynamics</h3>
+<a name="eulerequations"></a> <a name="Eulersequationsofgasdynamics"></a><h3>Euler's equations of gas dynamics</h3>
 
 
-The compressible Euler's equations of gas dynamics are written in
-conservative form as follows:
+气体动力学的可压缩欧拉方程以保守形式写成如下。
+
 @f{align}
 \mathbf{u}_t + \text{div} \, \mathbb{f}(\mathbf{u}) = \boldsymbol{0} ,
-@f}
-where $\mathbf{u}(\textbf{x},t):\mathbb{R}^{d} \times \mathbb{R}
-\rightarrow \mathbb{R}^{d+2}$, and $\mathbb{f}(\mathbf{u}):\mathbb{R}^{d+2}
-\rightarrow \mathbb{R}^{(d+2) \times d}$, and $d \geq 1$ is the space
-dimension. We say that $\mathbf{u} \in \mathbb{R}^{d+2}$ is the state and
-$\mathbb{f}(\mathbf{u}) \in  \mathbb{R}^{(d+2) \times d}$ is the flux of
-the system. In the case of Euler's equations the state is given by
-$\textbf{u} = [\rho, \textbf{m},E]^{\top}$: where $\rho \in \mathbb{R}^+$
-denotes the density, $\textbf{m} \in \mathbb{R}^d$ is the momentum, and $E
-\in \mathbb{R}^+$ is the total energy of the system. The flux of the system
-$\mathbb{f}(\mathbf{u})$ is defined as
+@f} 
+
+其中 $\mathbf{u}(\textbf{x},t):\mathbb{R}^{d} \times \mathbb{R}
+\rightarrow \mathbb{R}^{d+2}$  ，和 $\mathbb{f}(\mathbf{u}):\mathbb{R}^{d+2}
+\rightarrow \mathbb{R}^{(d+2) \times d}$  ，和 $d \geq 1$  是空间维度。我们说， $\mathbf{u} \in \mathbb{R}^{d+2}$ 是状态， $\mathbb{f}(\mathbf{u}) \in  \mathbb{R}^{(d+2) \times d}$ 是系统的通量。在欧拉方程的情况下，状态由 $\textbf{u} = [\rho, \textbf{m},E]^{\top}$ 给出：其中 $\rho \in \mathbb{R}^+$ 表示密度， $\textbf{m} \in \mathbb{R}^d$ 是动量，而 $E
+\in \mathbb{R}^+$ 是系统的总能量。系统的通量 $\mathbb{f}(\mathbf{u})$ 被定义为 
+
 @f{align*}
 \mathbb{f}(\textbf{u})
 =
@@ -135,57 +99,44 @@ $\mathbb{f}(\mathbf{u})$ is defined as
   \rho^{-1} \textbf{m} \otimes \textbf{m} + \mathbb{I} p\\
   \tfrac{\textbf{m}^\top}{\rho} (E + p)
 \end{bmatrix},
-@f}
-where $\mathbb{I} \in \mathbb{R}^{d \times d}$ is the identity matrix and
-$\otimes$ denotes the tensor product. Here, we have introduced the pressure
-$p$ that, in general, is defined by a closed-form equation of state.
-In this tutorial we limit the discussion to the class of polytropic
-ideal gases for which the pressure is given by
+@f} 
+
+其中 $\mathbb{I} \in \mathbb{R}^{d \times d}$ 是身份矩阵， $\otimes$ 表示张量积。在这里，我们介绍了压力 $p$ ，在一般情况下，它是由一个封闭形式的状态方程定义。在本教程中，我们将讨论限制在多晶体理想气体的范畴内，对于这些气体，压力由以下公式给出 
+
 @f{align*}
 p = p(\textbf{u}) := (\gamma -1) \Big(E -
 \tfrac{|\textbf{m}|^2}{2\,\rho}
 \Big),
-@f}
-where the factor $\gamma \in (1,5/3]$ denotes the <a
+@f} 
+
+其中因子 $\gamma \in (1,5/3]$ 表示<a
 href="https://en.wikipedia.org/wiki/Heat_capacity_ratio">ratio of specific
-heats</a>.
+heats</a>。
 
 
 <a name="Solutiontheory"></a><h4>Solution theory</h4>
 
 
-Hyperbolic conservation laws, such as
+双曲守恒定律，如 
+
 @f{align*}
 \mathbf{u}_t + \text{div} \, \mathbb{f}(\mathbf{u}) = \boldsymbol{0},
-@f}
-pose a significant challenge with respect to solution theory. An evident
-observation is that rewriting the equation in variational form and testing with
-the solution itself does not lead to an energy estimate because the pairing
-$\langle \text{div} \, \mathbb{f}(\mathbf{u}), \mathbf{u}\rangle$ (understood as
-the $L^2(\Omega)$ inner product or duality pairing) is not guaranteed to be
-non-negative. Notions such as energy-stability or $L^2(\Omega)$-stability are
-(in general) meaningless in this context.
+@f} 
 
-Historically, the most fruitful step taken in order to deepen the
-understanding of hyperbolic conservation laws was to assume that the
-solution is formally defined as $\mathbf{u} := \lim_{\epsilon \rightarrow
-0^+} \mathbf{u}^{\epsilon}$ where $\mathbf{u}^{\epsilon}$ is the solution
-of the parabolic regularization
+对解决理论构成了重大挑战。一个明显的观察是，以变分形式重写方程并以解本身进行检验并不能导致能量估计，因为配对 $\langle \text{div} \, \mathbb{f}(\mathbf{u}), \mathbf{u}\rangle$ （理解为 $L^2(\Omega)$ 内积或对偶性配对）不能保证是非负的。在这种情况下，诸如能量稳定性或 $L^2(\Omega)$ 稳定性的概念（一般来说）是没有意义的。
+
+历史上，为了加深对双曲守恒定律的理解而采取的最有成效的步骤是假设解被正式定义为 $\mathbf{u} := \lim_{\epsilon \rightarrow
+0^+} \mathbf{u}^{\epsilon}$ ，其中 $\mathbf{u}^{\epsilon}$ 是抛物线正则化的解 
+
 @f{align}
 \mathbf{u}_t^{\epsilon} + \text{div} \, \mathbb{f}(\mathbf{u}^{\epsilon})
+
+
 - {\epsilon} \Delta \mathbf{u}^{\epsilon} = 0.
-@f}
-Such solutions, which are understood as the solution recovered in the
-zero-viscosity limit, are often referred to as <i>viscosity solutions</i>.
-(This is, because physically $\epsilon$ can be understood as related to the viscosity of the
-fluid, i.e., a quantity that indicates the amount of friction neighboring gas particles moving at
-different speeds exert on each other. The Euler equations themselves are derived under
-the assumption of no friction, but can physically be expected to describe the limiting
-case of vanishing friction or viscosity.)
-Global existence and uniqueness of such solutions is an open issue.
-However, we know at least that if such viscosity solutions exists they have
-to satisfy the constraint $\textbf{u}(\mathbf{x},t) \in \mathcal{B}$ for
-all $\mathbf{x} \in \Omega$ and $t \geq 0$ where
+@f} 
+
+这样的解，被理解为在零粘度极限下恢复的解，通常被称为<i>viscosity solutions</i>。这是因为在物理上 $\epsilon$ 可以理解为与流体的粘度有关，即表示以不同速度运动的相邻气体粒子对彼此施加的摩擦力大小的一个量）。欧拉方程本身是在无摩擦的假设下得出的，但在物理上可以预期描述摩擦或粘度消失的极限情况。) 这种解决方案的全球存在和唯一性是一个开放的问题。然而，我们至少知道，如果这种粘度解存在，它们必须满足所有 $\mathbf{x} \in \Omega$ 和 $t \geq 0$ 的约束条件，其中 
+
 @f{align}
   \mathcal{B} = \big\{ \textbf{u} =
   [\rho, \textbf{m},E]^{\top} \in \mathbb{R}^{d+2} \, \big |
@@ -196,190 +147,113 @@ all $\mathbf{x} \in \Omega$ and $t \geq 0$ where
   \
   s(\mathbf{u}) \geq \min_{x \in \Omega} s(\mathbf{u}_0(\mathbf{x}))
   \big\}.
-@f}
-Here, $s(\mathbf{u})$ denotes the specific entropy
+@f} 
+
+这里， $s(\mathbf{u})$ 表示比熵 
+
 @f{align}
   s(\mathbf{u}) = \ln \Big(\frac{p(\mathbf{u})}{\rho^{\gamma}}\Big).
-@f}
-We will refer to $\mathcal{B}$ as the invariant set of Euler's equations.
-In other words, a state $\mathbf{u}(\mathbf{x},t)\in\mathcal{B}$ obeys
-positivity of the density, positivity of the internal energy, and a local
-minimum principle on the specific entropy. This condition is a simplified
-version of a class of pointwise stability constraints satisfied by the
-exact (viscosity) solution. By pointwise we mean that the constraint has to
-be satisfied at every point of the domain, not just in an averaged
-(integral, or high order moments) sense.
+@f} 
 
-In context of a numerical approximation, a violation of such a constraint
-has dire consequences: it almost surely leads to catastrophic failure of
-the numerical scheme, loss of hyperbolicity, and overall, loss of
-well-posedness of the (discrete) problem. It would also mean that we have computed
-something that can not be interpreted physically. (For example, what are we to make
-of a computed solution with a negative density?) In the following we will
-formulate a scheme that ensures that the discrete approximation of
-$\mathbf{u}(\mathbf{x},t)$ remains in $\mathcal{B}$.
+我们将把 $\mathcal{B}$ 称为欧拉方程的不变量集。换句话说，一个状态 $\mathbf{u}(\mathbf{x},t)\in\mathcal{B}$ 服从密度的正性、内能的正性和比熵的局部最小原则。这个条件是精确（粘性）解所满足的一类点式稳定性约束的简化版本。我们所说的 "点 "是指该约束必须在域的每一点上得到满足，而不仅仅是在平均（积分或高阶矩）意义上。
+
+在数值逼近的背景下，违反这样的约束有可怕的后果：它几乎肯定会导致数值方案的灾难性失败，失去双曲性，以及总体上失去（离散）问题的良好解决性。这也意味着我们已经计算了一些不能从物理上解释的东西。例如，我们该如何看待一个具有负密度的计算结果？下面我们将制定一个方案，确保 $\mathbf{u}(\mathbf{x},t)$ 的离散近似值保持在 $\mathcal{B}$ 中。
 
 
 <a name="Variationalversuscollocationtypediscretizations"></a><h4>Variational versus collocation-type discretizations</h4>
 
 
-Following Step-9, Step-12, Step-33, and Step-67, at this point it might look
-tempting to base a discretization of Euler's equations on a (semi-discrete)
-variational formulation:
+在 Step-9 、 Step-12 、 Step-33 和 Step-67 之后，在这一点上，将欧拉方程的离散化建立在（半离散的）变分公式上看起来很诱人。
+
 @f{align*}
   (\partial_t\mathbf{u}_{h},\textbf{v}_h)_{L^2(\Omega)}
+
+
   - ( \mathbb{f}(\mathbf{u}_{h}) ,\text{grad} \, \textbf{v}_{h})_{L^2(\Omega)}
   + s_h(\mathbf{u}_{h},\textbf{v}_h)_{L^2(\Omega)} = \boldsymbol{0}
   \quad\forall \textbf{v}_h \in \mathbb{V}_h.
-@f}
-Here, $\mathbb{V}_h$ is an appropriate finite element space, and
-$s_h(\cdot,\cdot)_{L^2(\Omega)}$ is some linear stabilization method
-(possibly complemented with some ad-hoc shock-capturing technique, see for
-instance Chapter 5 of @cite GuermondErn2004 and references therein). Most
-time-dependent discretization approaches described in the deal.II tutorials
-are based on such a (semi-discrete) variational approach. Fundamentally,
-from an analysis perspective, variational discretizations are conceived
-to provide some notion of global (integral) stability, meaning an
-estimate of the form
+@f} 
+
+这里， $\mathbb{V}_h$ 是一个适当的有限元空间， $s_h(\cdot,\cdot)_{L^2(\Omega)}$ 是一些线性稳定方法（可能辅以一些特殊的冲击捕捉技术，例如，见 @cite GuermondErn2004 的第五章和其中的参考文献）。在deal.II教程中描述的大多数随时间变化的离散化方法都是基于这样一种（半离散的）变量方法。从根本上说，从分析的角度来看，变分离析被认为是提供某种全局（积分）稳定性的概念，也就是说，一个估计的形式为 
+
 @f{align*}
   |\!|\!| \mathbf{u}_{h}(t) |\!|\!| \leq |\!|\!| \mathbf{u}_{h}(0) |\!|\!|
-@f}
-holds true, where $|\!|\!| \cdot |\!|\!| $ could represent the
-$L^2(\Omega)$-norm or, more generally, some discrete (possibly mesh
-dependent) energy-norm. Variational discretizations of hyperbolic
-conservation laws have been very popular since the mid eighties, in
-particular combined with SUPG-type stabilization and/or upwinding
-techniques (see the early work of @cite Brooks1982 and @cite Johnson1986). They
-have proven to be some of the best approaches for simulations in the subsonic
-shockless regime and similarly benign situations.
+@f} 
 
-<!-- In particular, tutorial Step-67 focuses on Euler's equation of gas
-dynamics in the subsonic regime using dG techniques. -->
+为真，其中 $|\!|\!| \cdot |\!|\!| $ 可以代表 $L^2(\Omega)$ -norm，或者更广泛地代表一些离散的（可能与网格有关）能量-norm。自80年代中期以来，双曲守恒定律的变异离散化非常流行，特别是与SUPG类型的稳定化和/或上卷技术相结合（见 @cite Brooks1982 和 @cite Johnson1986 的早期工作）。它们已被证明是在亚音速无冲击制度和类似的良性情况下进行模拟的一些最佳方法。
 
-However, in the transonic and supersonic regimes, and shock-hydrodynamics
-applications the use of variational schemes might be questionable. In fact,
-at the time of this writing, most shock-hydrodynamics codes are still
-firmly grounded on finite volume methods. The main reason for failure of
-variational schemes in such extreme regimes is the lack of pointwise
-stability. This stems from the fact that <i>a priori</i> bounds on
-integrated quantities (e.g. integrals of moments) have in general no
-implications on pointwise properties of the solution. While some of these
-problems might be alleviated by the (perpetual) chase of the right shock
-capturing scheme, finite difference-like and finite volume schemes still
-have an edge in many regards.
+<! -- 特别是，教程 Step-67 侧重于使用dG技术研究亚声速体系中气体动力学的欧拉方程。--> 
 
-In this tutorial step we therefore depart from variational schemes. We will
-present a completely algebraic formulation (with the flavor of a
-collocation-type scheme) that preserves constraints pointwise, i.e.,
+然而，在跨音速和超音速制度中，以及冲击-流体力学应用中，使用变分方案可能是值得怀疑的。事实上，在写这篇文章的时候，大多数冲击-流体力学代码仍然是以有限体积方法为基础的。变分方案在这种极端状态下失败的主要原因是缺乏点状稳定性。这是因为<i>a priori</i>对积分量（如矩积分）的约束一般来说对解的点定性没有影响。虽然其中一些问题可以通过对正确的冲击捕捉方案的（永久）追逐而得到缓解，但类似有限差分的方案和有限体积方案在许多方面仍有优势。
+
+因此，在这一教程步骤中，我们偏离了变分方案。我们将提出一个完全代数化的表述（具有拼合型方案的味道），它可以点状保留约束，即。
+
 @f{align*}
   \textbf{u}_h(\mathbf{x}_i,t) \in \mathcal{B}
   \;\text{at every node}\;\mathbf{x}_i\;\text{of the mesh}.
-@f}
-Contrary to finite difference/volume schemes, the scheme implemented in
-this step maximizes the use of finite element software infrastructure,
-works on any mesh, in any space dimension, and is theoretically guaranteed
-to always work, all the time, no exception. This illustrates that deal.II
-can be used far beyond the context of variational schemes in Hilbert spaces
-and that a large number of classes, modules and namespaces from deal.II can
-be adapted for such a purpose.
+@f} 
+
+与有限差分/体积方案相反，本步骤实现的方案最大限度地利用了有限元软件的基础设施，在任何空间维度的任何网格上都能工作，并且理论上保证始终工作，没有例外。这说明deal.II的使用范围远远超出希尔伯特空间中的变分方案，deal.II中的大量类、模块和命名空间都可以用于这种目的。
 
 
-<a name="Descriptionofthescheme"></a><h3>Description of the scheme </h3>
+<a name="Descriptionofthescheme"></a><h3>Description of the scheme </h3> 
 
 
-Let $\mathbb{V}_h$ be scalar-valued finite dimensional space spanned by a
-basis $\{\phi_i\}_{i \in \mathcal{V}}$ where: $\phi_i:\Omega \rightarrow
-\mathbb{R}$ and $\mathcal{V}$ is the set of all indices (nonnegative
-integers) identifying each scalar Degree of Freedom (DOF) in the mesh.
-Therefore a scalar finite element functional $u_h \in \mathbb{V}_h$ can
-be written as $u_h = \sum_{i \in \mathcal{V}} U_i \phi_i$ with $U_i \in
-\mathbb{R}$. We introduce the notation for vector-valued approximation
-spaces $\pmb{\mathbb{V}}_h := \{\mathbb{V}_h\}^{d+2}$. Let $\mathbf{u}_h
-\in \pmb{\mathbb{V}}_h$, then it can be written as $\mathbf{u}_h = \sum_{i
-\in \mathcal{V}} \mathbf{U}_i \phi_i$ where $\mathbf{U}_i \in
-\mathbb{R}^{d+2}$ and $\phi_i$ is a scalar-valued shape function.
+设 $\mathbb{V}_h$ 为标量值的有限维空间，由基 $\{\phi_i\}_{i \in \mathcal{V}}$ 横跨，其中。  $\phi_i:\Omega \rightarrow
+\mathbb{R}$ 和 $\mathcal{V}$ 是识别网格中每个标量自由度（DOF）的所有索引（非负整数）的集合。因此，标量有限元函数 $u_h \in \mathbb{V}_h$ 可以写成 $u_h = \sum_{i \in \mathcal{V}} U_i \phi_i$ 与 $U_i \in
+\mathbb{R}$  。我们引入矢量值近似空间的符号  $\pmb{\mathbb{V}}_h := \{\mathbb{V}_h\}^{d+2}$  。设  $\mathbf{u}_h
+\in \pmb{\mathbb{V}}_h$  ，则可以写成  $\mathbf{u}_h = \sum_{i
+\in \mathcal{V}} \mathbf{U}_i \phi_i$  ，其中  $\mathbf{U}_i \in
+\mathbb{R}^{d+2}$  和  $\phi_i$  是标量值的形状函数。
 
-@note We purposely refrain from using vector-valued finite element
-spaces in our notation. Vector-valued finite element spaces
-are natural for variational formulations of PDE systems (e.g. Navier-Stokes).
-In such context, the interactions that have to be computed describe
-<i>interactions between DOFs</i>: with proper renumbering of the
-vector-valued DoFHandler (i.e. initialized with an FESystem) it is possible
-to compute the block-matrices (required in order to advance the solution)
-with relative ease. However, the interactions that have to be computed in
-the context of time-explicit collocation-type schemes (such as finite
-differences and/or the scheme presented in this tutorial) can be
-better described as <i>interactions between nodes</i> (not between DOFs).
-In addition, in our case we do not solve a linear equation in order to
-advance the solution. This leaves very little reason to use vector-valued
-finite element spaces both in theory and/or practice.
+  @note  我们特意在符号中不使用矢量值有限元空间。矢量值有限元空间对于PDE系统的变分公式（如Navier-Stokes）是很自然的。在这种情况下，必须计算的相互作用描述了<i>interactions between DOFs</i>：通过对矢量值DoFHandler的适当重新编号（即用FESystem初始化），有可能相对容易地计算块矩阵（为了推进解决方案而需要）。然而，在时间明确的搭配型方案（如有限差分和/或本教程中提出的方案）的背景下，必须计算的相互作用可以更好地描述为<i>interactions between nodes</i>（不是在DOF之间）。此外，在我们的案例中，我们不解决线性方程以推进解决方案。这使得在理论和/或实践中使用矢量值有限元空间的理由非常少。
 
-We will use the usual Lagrange finite elements: let $\{\mathbf{x}_i\}_{i \in
-\mathcal{V}}$ denote the set of all support points (see @ref GlossSupport "this
-glossary entry"), where $\mathbf{x}_i \in \mathbb{R}^d$. Then each index $i \in
-\mathcal{V}$ uniquely identifies a support point $\mathbf{x}_i$, as well as a
-scalar-valued shape function $\phi_i$. With this notation at hand we can define
-the (explicit time stepping) scheme as:
+我们将使用通常的拉格朗日有限元：让 $\{\mathbf{x}_i\}_{i \in
+\mathcal{V}}$ 表示所有支持点的集合（见 @ref GlossSupport "本词汇条"），其中 $\mathbf{x}_i \in \mathbb{R}^d$  。那么每个索引  $i \in
+\mathcal{V}$  都唯一地标识了一个支持点  $\mathbf{x}_i$  ，以及一个标量值的形状函数  $\phi_i$  。有了这个符号在手，我们可以将（显式时间步进）方案定义为。
+
 @f{align*}{
   m_i \frac{\mathbf{U}_i^{n+1} - \mathbf{U}_i^{n}}{\tau}
   + \sum_{j \in \mathcal{I}(i)} \mathbb{f}(\mathbf{U}_j^{n})\cdot
   \mathbf{c}_{ij} - \sum_{j \in \mathcal{I}(i)}
   d_{ij} \mathbf{U}_j^{n} = \boldsymbol{0} \, ,
-@f}
-where
-  - $m_i \dealcoloneq \int_{\Omega} \phi_i \, \mathrm{d}\mathbf{x}$
-    is the lumped mass matrix
-  - $\tau$ is the time step size
-  - $\mathbf{c}_{ij} \dealcoloneq \int_{\Omega} \nabla\phi_j\phi_i \,
-    \mathrm{d}\mathbf{x}$ (note that $\mathbf{c}_{ij}\in \mathbb{R}^d$)
-    is a vector-valued matrix that was used to approximate the divergence
-    of the flux in a weak sense.
-  - $\mathcal{I}(i) \dealcoloneq \{j \in \mathcal{V} \ | \ \mathbf{c}_{ij}
-    \not \equiv \boldsymbol{0}\} \cup \{i\}$ is the adjacency list
-    containing all degrees of freedom coupling to the index $i$. In other
-    words $\mathcal{I}(i)$ contains all nonzero column indices for row
-    index i. $\mathcal{I}(i)$ will also be called a "stencil".
-  - $\mathbb{f}(\mathbf{U}_j^{n})$ is the flux $\mathbb{f}$ of the
-    hyperbolic system evaluated for the state $\mathbf{U}_j^{n}$ associated
-    with support point $\mathbf{x}_j$.
-  - $d_{ij} \dealcoloneq \max \{ \lambda_{\text{max}}
+@f} 
+
+其中 
+
+  -  $m_i \dealcoloneq \int_{\Omega} \phi_i \, \mathrm{d}\mathbf{x}$ 是块状质量矩阵 
+
+  -  $\tau$  是时间步长 
+
+  -  $\mathbf{c}_{ij} \dealcoloneq \int_{\Omega} \nabla\phi_j\phi_i \,
+    \mathrm{d}\mathbf{x}$ （注意 $\mathbf{c}_{ij}\in \mathbb{R}^d$ ）是一个矢量值矩阵，用于在弱意义上近似通量的发散。
+
+  -  $\mathcal{I}(i) \dealcoloneq \{j \in \mathcal{V} \ | \ \mathbf{c}_{ij}
+    \not \equiv \boldsymbol{0}\} \cup \{i\}$  是包含与索引 $i$  耦合的所有自由度的邻接列表。换句话说， $\mathcal{I}(i)$ 包含行索引i的所有非零列索引。 $\mathcal{I}(i)$ 也将被称为 "模板"。
+
+  -  $\mathbb{f}(\mathbf{U}_j^{n})$ 是针对与支持点 $\mathbf{x}_j$ 相关的状态 $\mathbf{U}_j^{n}$ 所评估的双曲系统的通量 $\mathbb{f}$ 。
+
+  - 如果 $i \not = j$ 是所谓的<i>graph viscosity</i>，则为 $d_{ij} \dealcoloneq \max \{ \lambda_{\text{max}}
     (\mathbf{U}_i^{n},\mathbf{U}_j^{n}, \textbf{n}_{ij}),
     \lambda_{\text{max}} (\mathbf{U}_j^{n}, \mathbf{U}_i^{n},
-    \textbf{n}_{ji}) \} \|\mathbf{c}_{ij}\|$ if $i \not = j$ is the so
-    called <i>graph viscosity</i>. The graph viscosity serves as a
-    stabilization term, it is somewhat the discrete counterpart of
-    $\epsilon \Delta \mathbf{u}$ that appears in the notion of viscosity
-    solution described above. We will base our construction of $d_{ij}$ on
-    an estimate of the maximal local wavespeed $\lambda_{\text{max}}$ that
-    will be explained in detail in a moment.
-  - the diagonal entries of the viscosity matrix are defined as
-    $d_{ii} = - \sum_{j \in \mathcal{I}(i)\backslash \{i\}} d_{ij}$.
-  - $\textbf{n}_{ij} = \frac{\mathbf{c}_{ij}}{ \|\mathbf{c}_{ij}\| }$ is a
-    normalization of the $\textbf{c}_{ij}$ matrix that enters the
-    approximate Riemann solver with which we compute an the approximations
-    $\lambda_{\text{max}}$ on the local wavespeed. (This will be explained
-    further down below).
+    \textbf{n}_{ji}) \} \|\mathbf{c}_{ij}\|$ 。图形粘度作为一个稳定项，它在某种程度上是 $\epsilon \Delta \mathbf{u}$ 的离散对应物，出现在上面描述的粘度解决方案的概念中。我们将把 $d_{ij}$ 的构造建立在最大局部波速 $\lambda_{\text{max}}$ 的估计上，稍后将详细解释。
 
-The definition of $\lambda_{\text{max}} (\mathbf{U},\mathbf{V},
-\textbf{n})$ is far from trivial and we will postpone the precise
-definition in order to focus first on some algorithmic and implementation
-questions. We note that
-  - $m_i$ and $\mathbf{c}_{ij}$ do not evolve in time (provided we keep the
-    discretization fixed). It thus makes sense to assemble these
-    matrices/vectors once in a so called <i>offline computation</i> and reuse
-    them in every time step. They are part of what we are going to call
-    off-line data.
-  - At every time step we have to evaluate $\mathbb{f}(\mathbf{U}_j^{n})$ and
-    $d_{ij} \dealcoloneq \max \{ \lambda_{\text{max}}
+  - 粘度矩阵的对角线项被定义为  $d_{ii} = - \sum_{j \in \mathcal{I}(i)\backslash \{i\}} d_{ij}$  。
+
+  -  $\textbf{n}_{ij} = \frac{\mathbf{c}_{ij}}{ \|\mathbf{c}_{ij}\| }$ 是 $\textbf{c}_{ij}$ 矩阵的归一化，它进入了近似黎曼解算器，我们用它来计算本地波速的近似值 $\lambda_{\text{max}}$ 。这将在下文中进一步解释）。
+
+ $\lambda_{\text{max}} (\mathbf{U},\mathbf{V},
+\textbf{n})$ 的定义远非易事，我们将推迟精确的定义，以便首先关注一些算法和实现问题。我们注意到 
+
+  -  $m_i$ 和 $\mathbf{c}_{ij}$ 不会在时间上演化（只要我们保持离散化的固定）。因此，将这些矩阵/向量在所谓的<i>offline computation</i>中组装一次并在每个时间步长中重复使用是有意义的。它们是我们将称之为离线数据的一部分。
+
+  - 在每个时间步骤中，我们必须评估 $\mathbb{f}(\mathbf{U}_j^{n})$ 和 $d_{ij} \dealcoloneq \max \{ \lambda_{\text{max}}
     (\mathbf{U}_i^{n},\mathbf{U}_j^{n}, \textbf{n}_{ij}),
     \lambda_{\text{max}} (\mathbf{U}_j^{n}, \mathbf{U}_i^{n},
-    \textbf{n}_{ji}) \} \|\mathbf{c}_{ij}\| $, which will
-    constitute the bulk of the computational cost.
+    \textbf{n}_{ji}) \} \|\mathbf{c}_{ij}\| $ ，这将构成大部分的计算成本。
 
-Consider the following pseudo-code, illustrating a possible straight
-forward strategy for computing the solution $\textbf{U}^{n+1}$ at a new
-time $t_{n+1} = t_n + \tau_n$ given a known state $\textbf{U}^{n}$ at time
-$t_n$:
+考虑以下伪代码，说明在新的时间 $t_{n+1} = t_n + \tau_n$ 计算解决方案 $\textbf{U}^{n+1}$ 的可能的直接策略，给定在时间 $t_n$ 的已知状态 $\textbf{U}^{n}$  。
+
 @f{align*}
 &\textbf{for } i \in \mathcal{V} \\
 &\ \ \ \  \{\mathbf{c}_{ij}\}_{j \in \mathcal{I}(i)} \leftarrow
@@ -395,87 +269,44 @@ $t_n$:
 &\ \ \ \ \textbf{end} \\
 &\ \ \ \ \mathtt{scatter\_updated\_state} (\textbf{U}_i^{n+1}) \\
 &\textbf{end}
-@f}
+@f} 
 
-We note here that:
-- This "assembly" does not require any form of quadrature or cell-loops.
-- Here $\textbf{c}$ and $\textbf{U}^n$ are a global matrix and a global vector
-containing all the vectors $\mathbf{c}_{ij}$ and all the states
-$\mathbf{U}_j^n$ respectively.
-- $\mathtt{gather\_cij\_vectors}$, $\mathtt{gather\_state\_vectors}$, and
-$\mathtt{scatter\_updated\_state}$ are hypothetical implementations that
-either collect (from) or write (into) global matrices and vectors.
-- If we assume a Cartesian mesh in two space
-dimensions, first-order polynomial space $\mathbb{Q}^1$, and that
-$\mathbf{x}_i$ is an interior node (i.e. $\mathbf{x}_i$ is not on the boundary
-of the domain) then: $\{\textbf{U}_j^n\}_{j \in \mathcal{I}(i)}$ should contain
-nine state vector elements (i.e. all the states in the patch/macro element
-associated to the shape function $\phi_i$). This is one of the major
-differences with the usual cell-based loop where the gather functionality
-(encoded in FEValuesBase<dim, spacedim>.get_function_values() in the case
-of deal.II) only collects values for the local cell (just a subset of the
-patch).
 
-The actual implementation will deviate from above code in one key aspect:
-the time-step size $\tau$ has to be chosen subject to a CFL condition
+
+我们在此注意到，。
+
+- 这种 "装配 "不需要任何形式的正交或单元环。
+
+- 这里 $\textbf{c}$ 和 $\textbf{U}^n$ 是一个全局矩阵和一个全局向量，分别包含所有向量 $\mathbf{c}_{ij}$ 和所有状态 $\mathbf{U}_j^n$ 。
+
+-  $\mathtt{gather\_cij\_vectors}$ ,  $\mathtt{gather\_state\_vectors}$ , 和 $\mathtt{scatter\_updated\_state}$ 是假设的实现，它们要么收集（来自）全局矩阵和向量，要么写入（进入）全局矩阵和向量。
+
+- 如果我们假设一个二维空间的笛卡尔网格，一阶多项式空间  $\mathbb{Q}^1$  ，并且  $\mathbf{x}_i$  是一个内部节点（即  $\mathbf{x}_i$  不在域的边界上），那么。  $\{\textbf{U}_j^n\}_{j \in \mathcal{I}(i)}$ 应该包含九个状态矢量元素（即与形状函数 $\phi_i$ 相关的补丁/宏元素中的所有状态）。这是与通常基于单元的循环的主要区别之一，在这种循环中，收集功能（在deal.II的情况下编码为FEValuesBase<dim, spacedim>.get_function_values()）只收集本地单元的值（只是补丁的一个子集）。
+
+实际执行将在一个关键方面偏离上述代码：时间步长 $\tau$ 必须根据CFL条件来选择 
+
 @f{align*}
   \tau_n = c_{\text{cfl}}\,\min_{
   i\in\mathcal{V}}\left(\frac{m_i}{-2\,d_{ii}^{n}}\right),
-@f}
-where $0<c_{\text{cfl}}\le1$ is a chosen constant. This will require to
-compute all $d_{ij}$ in a separate step prior to actually performing above
-update. The core principle remains unchanged, though: we do not loop over
-cells but rather over all edges of the sparsity graph.
+@f} 
 
-@note It is not uncommon to encounter such fully-algebraic schemes (i.e.
-no bilinear forms, no cell loops, and no quadrature) outside of the finite
-element community in the wider CFD community. There is a rich history of
-application of this kind of schemes, also called <i>edge-based</i> or
-<i>graph-based</i> finite element schemes (see for instance
-@cite Rainald2008 for a historical overview). However, it is important to
-highlight that the algebraic structure of the scheme (presented in this
-tutorial) and the node-loops are not just a performance gimmick. Actually, the
-structure of this scheme was born out of theoretical necessity: the proof of
-pointwise stability of the scheme hinges on the specific algebraic structure of
-the scheme. In addition, it is not possible to compute the algebraic
-viscosities $d_{ij}$ using cell-loops since they depend nonlinearly on
-information that spans more than one cell (superposition does not hold: adding
-contributions from separate cells does not lead to the right result).
+其中 $0<c_{\text{cfl}}\le1$ 是一个选定的常数。这就要求在实际执行上述更新之前，在一个单独的步骤中计算所有的 $d_{ij}$ 。但核心原则没有改变：我们不在单元格上循环，而是在疏散图的所有边上循环。
+
+  @note 在有限元界之外，在更广泛的CFD界遇到这种全代数方案（即没有双线性形式，没有单元循环，没有正交）并不罕见。这类方案有丰富的应用历史，也称为<i>edge-based</i>或<i>graph-based</i>有限元方案（例如，见 @cite Rainald2008 的历史概述）。然而，需要强调的是，该方案的代数结构（在本教程中介绍）和节点循环并不只是一个性能上的噱头。实际上，这个方案的结构是出于理论上的需要：该方案的点稳定性证明取决于该方案的特定代数结构。此外，不可能使用单元环计算代数粘度 $d_{ij}$ ，因为它们非线性地依赖于跨越一个以上单元的信息（叠加不成立：将来自不同单元的贡献相加不会导致正确的结果）。
 
 <a name="Stableboundaryconditionsandconservationproperties"></a><h3>Stable boundary conditions and conservation properties.</h3>
 
 
-In the example considered in this tutorial step we use three different types of
-boundary conditions: essential-like boundary conditions (we prescribe a
-state at the left boundary of our domain), outflow boundary conditions
-(also called "do-nothing" boundary conditions) at the right boundary of the
-domain, and "reflecting" boundary conditions $\mathbf{m} \cdot
-\boldsymbol{\nu} = 0$ (also called "slip" boundary conditions) at the top,
-bottom, and surface of the obstacle. We will not discuss much about
-essential and "do-nothing" boundary conditions since their implementation
-is relatively easy and the reader will be able to pick-up the
-implementation directly from the (documented) source code. In this portion
-of the introduction we will focus only on the "reflecting" boundary
-conditions which are somewhat more tricky.
+在本教程步骤中考虑的例子中，我们使用了三种不同类型的边界条件：本质类边界条件（我们在域的左侧边界规定了一个状态），域的右侧边界的流出边界条件（也称为 "无为 "边界条件），以及障碍物的顶部、底部和表面的 "反射 "边界条件 $\mathbf{m} \cdot
+\boldsymbol{\nu} = 0$ （也称为 "滑移 "边界条件）。我们不会过多地讨论基本的和 "无为 "的边界条件，因为它们的实现相对容易，读者可以直接从（有记录的）源代码中获取实现。在这部分介绍中，我们将只关注 "反映 "的边界条件，这在某种程度上是比较棘手的。
 
-@note At the time of this writing (early 2020) it is not unreasonable to say
-that both analysis and implementation of stable boundary conditions for
-hyperbolic systems of conservation laws is an open issue. For the case of
-variational formulations, stable boundary conditions are those leading to a
-well-posed (coercive) bilinear form. But for general hyperbolic
-systems of conservation laws (and for the algebraic formulation used in this
-tutorial) coercivity has no applicability and/or meaning as a notion of
-stability. In this tutorial step we will use preservation of the invariant set
-as our main notion of stability which (at the very least) guarantees
-well-posedness of the discrete problem.
+  @note  在写这篇文章的时候（2020年初），说双曲守恒定律系统的稳定边界条件的分析和实现都是一个开放的问题也不无道理。对于变分公式的情况，稳定的边界条件是那些导致良好的（胁迫的）双线性形式。但是对于一般的双曲守恒定律系统（以及本教程中所使用的代数式），胁迫性作为稳定性的一个概念没有适用性和/或意义。在本教程的步骤中，我们将使用不变集的保存作为我们主要的稳定性概念，它（至少）保证了离散问题的良好解决。
 
-For the case of the reflecting boundary conditions we will proceed as follows:
-- For every time step advance in time satisfying no boundary condition at all.
-- Let $\partial\Omega^r$ be the portion of the boundary where we want to
-  enforce reflecting boundary conditions. At the end of the time step we enforce
-  reflecting boundary conditions strongly in a post-processing step where we
-  execute the projection
-    @f{align*}
+对于反射边界条件的情况，我们将按如下步骤进行。
+
+- 对于每一个时间步骤，在完全不满足边界条件的情况下前进。
+
+- 让 $\partial\Omega^r$ 成为我们想要执行反射边界条件的那部分边界。在时间步骤结束时，我们在一个后处理步骤中强烈地执行反射边界条件，在这个步骤中我们执行@f{align*}
     \mathbf{m}_i \dealcoloneq \mathbf{m}_i - (\widehat{\boldsymbol{\nu}}_i
     \cdot \mathbf{m}_i)  \widehat{\boldsymbol{\nu}}_i \ \
     \text{where} \ \
@@ -485,40 +316,21 @@ For the case of the reflecting boundary conditions we will proceed as follows:
     \widehat{\boldsymbol{\nu}} \, \mathrm{d}\mathbf{s}\big|}
     \ \ \text{for all }\mathbf{x}_i \in \partial\Omega^r
     \ \ \ \ \boldsymbol{(1)}
-    @f}
-  that removes the normal component of $\mathbf{m}$. This is a somewhat
-  naive idea that preserves a few fundamental properties of the PDE as we
-  explain below.
+    @f}的投影。
 
-This is approach is usually called "explicit treatment of boundary conditions".
-The well seasoned finite element person might find this approach questionable.
-No doubt, when solving parabolic, or elliptic equations, we typically enforce
-essential (Dirichlet-like) boundary conditions by making them part of the
-approximation space $\mathbb{V}$, and treat natural (e.g. Neumann) boundary
-conditions as part of the variational formulation. We also know that explicit
-treatment of boundary conditions (in the context of parabolic PDEs) almost
-surely leads to catastrophic consequences. However, in the context of nonlinear
-hyperbolic equations we have that:
-- It is relatively easy to prove that (for the case of reflecting boundary
-conditions) explicit treatment of boundary conditions is not only conservative
-but also guarantees preservation of the property $\mathbf{U}_i \in \mathcal{B}$
-for all $i \in \mathcal{V}$ (well-posedness). This is perhaps the most
-important reason to use explicit enforcement of boundary conditions.
-- To the best of our knowledge: we are not aware of any mathematical result
-proving that it is possible to guarantee the property $\mathbf{U}_i \in
-\mathcal{B}$ for all $i \in \mathcal{V}$ when using either direct enforcement of
-boundary conditions into the approximation space, or weak enforcement using the
-Nitsche penalty method (which is for example widely used in discontinuous
-Galerkin schemes). In addition, some of these traditional ideas lead to quite
-restrictive time step constraints.
-- There is enough numerical evidence suggesting that explicit treatment of
-Dirichlet-like boundary conditions is stable under CFL conditions and does not
-introduce any loss in accuracy.
+  删除了 $\mathbf{m}$ 的法线分量。这是一个有点天真的想法，保留了PDE的一些基本属性，我们在下面解释。
 
-If $\mathbf{u}_t + \text{div} \, \mathbb{f}(\mathbf{u}) = \boldsymbol{0}$
-represents Euler's equation with reflecting boundary conditions on the entirety
-of the boundary (i.e. $\partial\Omega^r \equiv \partial\Omega$) and we
-integrate in space and time $\int_{\Omega}\int_{t_1}^{t_2}$ we would obtain
+这种方法通常被称为 "边界条件的明确处理"。经验丰富的有限元人员可能会发现这种方法值得怀疑。毫无疑问，在求解抛物线或椭圆方程时，我们通常通过使它们成为近似空间的一部分来强制执行基本的（类似于Dirichlet的）边界条件 $\mathbb{V}$ ，并将自然的（例如Neumann）边界条件作为变量公式的一部分。我们也知道，边界条件的明确处理（在抛物线PDEs的背景下）几乎肯定会导致灾难性的后果。然而，在非线性双曲方程的背景下，我们有。
+
+- 证明（对于反映边界条件的情况）边界条件的显式处理不仅是保守的，而且还能保证对所有 $i \in \mathcal{V}$ 的属性 $\mathbf{U}_i \in \mathcal{B}$ 的保存（良好处理性）是比较容易的。这也许是使用显式执行边界条件的最重要原因。
+
+- 就我们所知：我们不知道有任何数学结果证明，当使用边界条件直接执行到近似空间，或使用Nitsche惩罚方法（例如广泛用于非连续Galerkin方案）的弱执行时，有可能保证所有 $\mathbf{U}_i \in
+\mathcal{B}$ 的属性。此外，其中一些传统的想法导致了相当严格的时间步长约束。
+
+- 有足够的数值证据表明，在CFL条件下，对Dirichlet-like边界条件的明确处理是稳定的，并且不会带来任何精度上的损失。
+
+如果 $\mathbf{u}_t + \text{div} \, \mathbb{f}(\mathbf{u}) = \boldsymbol{0}$ 表示欧拉方程，在整个边界上反映边界条件（即 $\partial\Omega^r \equiv \partial\Omega$ ），我们在空间和时间上进行积分 $\int_{\Omega}\int_{t_1}^{t_2}$ ，我们会得到 
+
 @f{align*}
 \int_{\Omega} \rho(\mathbf{x},t_2) \, \mathrm{d}\mathbf{x} =
 \int_{\Omega} \rho(\mathbf{x},t_1) \, \mathrm{d}\mathbf{x} \ , \ \
@@ -530,14 +342,10 @@ integrate in space and time $\int_{\Omega}\int_{t_1}^{t_2}$ we would obtain
 \int_{\Omega} E(\mathbf{x},t_2) \, \mathrm{d}\mathbf{x} =
 \int_{\Omega} E(\mathbf{x},t_1) \, \mathrm{d}\mathbf{x} \ \ \ \
 \boldsymbol{(2)}
-@f}
-Note that momentum is NOT a conserved quantity (interaction with walls leads to
-momentum gain/loss): however $\mathbf{m}$ has to satisfy a momentum balance.
-Even though we will not use reflecting boundary conditions in the entirety of
-the domain, we would like to know that our implementation of reflecting
-boundary conditions is consistent with the conservation properties mentioned
-above. In particular, if we use the projection $\boldsymbol{(1)}$ in the
-entirety of the domain the following discrete mass-balance can be guaranteed:
+@f} 
+
+请注意，动量不是一个守恒量（与墙壁的相互作用导致动量的增加/减少）：然而 $\mathbf{m}$ 必须满足动量平衡。尽管我们不会在整个域中使用反射边界条件，但我们想知道我们对反射边界条件的实现与上述守恒特性是一致的。特别是，如果我们在整个域中使用投影 $\boldsymbol{(1)}$ ，可以保证以下离散质量平衡。
+
 @f{align*}
 \sum_{i \in \mathcal{V}} m_i \rho_i^{n+1} =
 \sum_{i \in \mathcal{V}} m_i \rho_i^{n} \ , \ \
@@ -548,3549 +356,3607 @@ entirety of the domain the following discrete mass-balance can be guaranteed:
 \sum_{i \in \mathcal{V}} m_i E_i^{n+1} = \sum_{i \in \mathcal{V}} m_i
 E_i^{n} \ \ \ \
 \boldsymbol{(3)}
-@f}
-where $p_i$ is the pressure at the nodes that lie at the boundary. Clearly
-$\boldsymbol{(3)}$ is the discrete counterpart of $\boldsymbol{(2)}$. The
-proof of identity $\boldsymbol{(3)}$ is omitted, but we briefly mention that
-it hinges on the definition of the <i>nodal normal</i>
-$\widehat{\boldsymbol{\nu}}_i$ provided in $\boldsymbol{(1)}$. We also note that
-this enforcement of reflecting boundary conditions is different from the one
-originally advanced in @cite GuermondEtAl2018.
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * 
- * <a name="Includefiles"></a> 
- * <h3>Include files</h3>
- * 
-
- * 
- * The set of include files is quite standard. The most intriguing part is
- * the fact that we will rely solely on deal.II data structures for MPI
- * parallelization, in particular parallel::distributed::Triangulation and
- * LinearAlgebra::distributed::Vector included through
- * <code>distributed/tria.h</code> and
- * <code>lac/la_parallel_vector.h</code>. Instead of a Trilinos, or PETSc
- * specific matrix class, we will use a non-distributed
- * dealii::SparseMatrix (<code>lac/sparse_matrix.h</code>) to store the local
- * part of the $\mathbf{c}_{ij}$, $\mathbf{n}_{ij}$ and $d_{ij}$ matrices.
- * 
- * @code
- * #include <deal.II/base/conditional_ostream.h>
- * #include <deal.II/base/parallel.h>
- * #include <deal.II/base/parameter_acceptor.h>
- * #include <deal.II/base/partitioner.h>
- * #include <deal.II/base/quadrature.h>
- * #include <deal.II/base/timer.h>
- * #include <deal.II/base/work_stream.h>
- * 
- * #include <deal.II/distributed/tria.h>
- * 
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/dofs/dof_renumbering.h>
- * #include <deal.II/dofs/dof_tools.h>
- * 
- * #include <deal.II/fe/fe.h>
- * #include <deal.II/fe/fe_q.h>
- * #include <deal.II/fe/fe_values.h>
- * #include <deal.II/fe/mapping.h>
- * #include <deal.II/fe/mapping_q.h>
- * 
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/manifold_lib.h>
- * 
- * #include <deal.II/lac/dynamic_sparsity_pattern.h>
- * #include <deal.II/lac/la_parallel_vector.h>
- * #include <deal.II/lac/sparse_matrix.h>
- * #include <deal.II/lac/sparse_matrix.templates.h>
- * #include <deal.II/lac/vector.h>
- * 
- * #include <deal.II/meshworker/scratch_data.h>
- * 
- * #include <deal.II/numerics/data_out.h>
- * #include <deal.II/numerics/vector_tools.h>
- * 
- * @endcode
- * 
- * In addition to above deal.II specific includes, we also include four
- * boost headers. The first two are for binary archives that we will use
- * for implementing a check-pointing and restart mechanism.
- * 
- * @code
- * #include <boost/archive/binary_iarchive.hpp>
- * #include <boost/archive/binary_oarchive.hpp>
- * 
- * @endcode
- * 
- * The last two header files are for creating custom iterator ranges
- * over integer intervals.
- * 
- * @code
- * #include <deal.II/base/std_cxx20/iota_view.h>
- * #include <boost/range/iterator_range.hpp>
- * 
- * @endcode
- * 
- * For std::isnan, std::isinf, std::ifstream, std::async, and std::future
- * 
- * @code
- * #include <cmath>
- * #include <fstream>
- * #include <future>
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Classtemplatedeclarations"></a> 
- * <h3>Class template declarations</h3>
- * 
-
- * 
- * We begin our actual implementation by declaring all classes with their
- * data structures and methods upfront. In contrast to previous example
- * steps we use a more fine-grained encapsulation of concepts, data
- * structures, and parameters into individual classes. A single class thus
- * usually centers around either a single data structure (such as the
- * Triangulation) in the <code>Discretization</code> class, or a single
- * method (such as the <code>make_one_step()</code> function of the
- * <code>%TimeStepping</code> class). We typically declare parameter variables
- * and scratch data object `private` and make methods and data structures
- * used by other classes `public`.
- * 
-
- * 
- * @note A cleaner approach would be to guard access to all data
- * structures by <a
- * href="https://en.wikipedia.org/wiki/Mutator_method">getter/setter
- * functions</a>. For the sake of brevity, we refrain from that approach,
- * though.
- * 
-
- * 
- * We also note that the vast majority of classes is derived from
- * ParameterAcceptor. This facilitates the population of all the global
- * parameters into a single (global) ParameterHandler. More explanations
- * about the use of inheritance from ParameterAcceptor as a global
- * subscription mechanism can be found in step-60.
- * 
- * @code
- * namespace Step69
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * We start with defining a number of types::boundary_id constants used
- * throughout the tutorial step. This allows us to refer to boundary
- * types by a mnemonic (such as <code>do_nothing</code>) rather than a
- * numerical value.
- * 
-
- * 
- * 
- * @code
- *   namespace Boundaries
- *   {
- *     constexpr types::boundary_id do_nothing = 0;
- *     constexpr types::boundary_id free_slip  = 1;
- *     constexpr types::boundary_id dirichlet  = 2;
- *   } // namespace Boundaries
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeDiscretizationcodeclass"></a> 
- * <h4>The <code>Discretization</code> class</h4>
- *   
-
- * 
- * The class <code>Discretization</code> contains all data structures
- * concerning the mesh (triangulation) and discretization (mapping,
- * finite element, quadrature) of the problem. As mentioned, we use
- * the ParameterAcceptor class to automatically populate problem-specific
- * parameters, such as the geometry information
- * (<code>length</code>, etc.) or the refinement level
- * (<code>refinement</code>) from a parameter file. This requires us to
- * split the initialization of data structures into two functions: We
- * initialize everything that does not depend on parameters in the
- * constructor, and defer the creation of the mesh to the
- * <code>setup()</code> method that can be called once all parameters are
- * read in via ParameterAcceptor::initialize().
- * 
- * @code
- *   template <int dim>
- *   class Discretization : public ParameterAcceptor
- *   {
- *   public:
- *     Discretization(const MPI_Comm     mpi_communicator,
- *                    TimerOutput &      computing_timer,
- *                    const std::string &subsection = "Discretization");
- * 
- *     void setup();
- * 
- *     const MPI_Comm mpi_communicator;
- * 
- *     parallel::distributed::Triangulation<dim> triangulation;
- * 
- *     const MappingQ<dim>   mapping;
- *     const FE_Q<dim>       finite_element;
- *     const QGauss<dim>     quadrature;
- *     const QGauss<dim - 1> face_quadrature;
- * 
- *   private:
- *     TimerOutput &computing_timer;
- * 
- *     double length;
- *     double height;
- *     double disk_position;
- *     double disk_diameter;
- * 
- *     unsigned int refinement;
- *   };
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeOfflineDatacodeclass"></a> 
- * <h4>The <code>OfflineData</code> class</h4>
- *   
-
- * 
- * The class <code>OfflineData</code> contains pretty much all components
- * of the discretization that do not evolve in time, in particular, the
- * DoFHandler, SparsityPattern, boundary maps, the lumped mass matrix,
- * $\mathbf{c}_{ij}$ and $\mathbf{n}_{ij}$ matrices. Here, the term
- * <i>offline</i> refers to the fact that all the class
- * members of <code>OfflineData</code> have well-defined values
- * independent of the current time step. This means that they can be
- * initialized ahead of time (at <i>time step zero</i>) and are not meant
- * to be modified at any later time step. For instance, the
- * sparsity pattern should not change as we advance in time (we are not
- * doing any form of adaptivity in space). Similarly, the entries of the
- * lumped mass matrix should not be modified as we advance in time
- * either.
- *   
-
- * 
- * We also compute and store a <code>boundary_normal_map</code> that
- * contains a map from a global index of type types::global_dof_index of
- * a boundary degree of freedom to a tuple consisting of a normal vector,
- * the boundary id, and the position associated with the degree of
- * freedom. We have to compute and store this geometric
- * information in this class because we won't have access to geometric
- * (or cell-based) information later on in the algebraic loops over the
- * sparsity pattern.
- *   
-
- * 
- * @note Even though this class currently does not have any parameters
- * that could be read in from a parameter file we nevertheless derive
- * from ParameterAcceptor and follow the same idiom of providing a
- * <code>setup()</code> (and <code>assemble()</code>) method as for the
- * class Discretization.
- * 
- * @code
- *   template <int dim>
- *   class OfflineData : public ParameterAcceptor
- *   {
- *   public:
- *     using BoundaryNormalMap =
- *       std::map<types::global_dof_index,
- *                std::tuple<Tensor<1, dim>, types::boundary_id, Point<dim>>>;
- * 
- *     OfflineData(const MPI_Comm             mpi_communicator,
- *                 TimerOutput &              computing_timer,
- *                 const Discretization<dim> &discretization,
- *                 const std::string &        subsection = "OfflineData");
- * 
- *     void setup();
- *     void assemble();
- * 
- *     DoFHandler<dim> dof_handler;
- * 
- *     std::shared_ptr<const Utilities::MPI::Partitioner> partitioner;
- * 
- *     unsigned int n_locally_owned;
- *     unsigned int n_locally_relevant;
- * 
- *     SparsityPattern sparsity_pattern;
- * 
- *     BoundaryNormalMap boundary_normal_map;
- * 
- *     SparseMatrix<double>                  lumped_mass_matrix;
- *     std::array<SparseMatrix<double>, dim> cij_matrix;
- *     std::array<SparseMatrix<double>, dim> nij_matrix;
- *     SparseMatrix<double>                  norm_matrix;
- * 
- *   private:
- *     const MPI_Comm mpi_communicator;
- *     TimerOutput &  computing_timer;
- * 
- *     SmartPointer<const Discretization<dim>> discretization;
- *   };
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeProblemDescriptioncodeclass"></a> 
- * <h4>The <code>ProblemDescription</code> class</h4>
- *   
-
- * 
- * The member functions of this class are utility functions and data
- * structures specific to Euler's equations:
- * - The type alias <code>state_type</code> is used for the states
- * $\mathbf{U}_i^n$
- * - The type alias <code>flux_type</code> is used for the fluxes
- * $\mathbb{f}(\mathbf{U}_j^n)$.
- * - The <code>momentum</code> function extracts $\textbf{m}$
- * out of the state vector $[\rho,\textbf{m},E]$ and stores it in a
- * <code>Tensor<1, dim></code>.
- * - The <code>internal_energy</code> function computes $E -
- * \frac{|\textbf{m}|^2}{2\rho}$ from a given state vector
- * $[\rho,\textbf{m},E]$.
- *   
-
- * 
- * The purpose of the class members <code>component_names</code>,
- * <code>pressure</code>, and <code>speed_of_sound</code> is evident from
- * their names. We also provide a function
- * <code>compute_lambda_max()</code>, that computes the wave speed
- * estimate mentioned above,
- * $\lambda_{max}(\mathbf{U},\mathbf{V},\mathbf{n})$, which is used in
- * the computation of the $d_{ij}$ matrix.
- *   
-
- * 
- * @note The <code>DEAL_II_ALWAYS_INLINE</code> macro expands to a
- * (compiler specific) pragma that ensures that the corresponding
- * function defined in this class is always inlined, i.e., the function
- * body is put in place for every invocation of the function, and no call
- * (and code indirection) is generated. This is stronger than the
- * <code>inline</code> keyword, which is more or less a (mild) suggestion
- * to the compiler that the programmer thinks it would be beneficial to
- * inline the function. <code>DEAL_II_ALWAYS_INLINE</code> should only be
- * used rarely and with caution in situations such as this one, where we
- * actually know (due to benchmarking) that inlining the function in
- * question improves performance.
- *   
-
- * 
- * Finally, we observe that this is the only class in this tutorial step
- * that is tied to a particular "physics" or "hyperbolic conservation
- * law" (in this case Euler's equations). All the other classes are
- * primarily "discretization" classes, very much agnostic of the
- * particular physics being solved.
- * 
- * @code
- *   template <int dim>
- *   class ProblemDescription
- *   {
- *   public:
- *     static constexpr unsigned int problem_dimension = 2 + dim;
- * 
- *     using state_type = Tensor<1, problem_dimension>;
- *     using flux_type  = Tensor<1, problem_dimension, Tensor<1, dim>>;
- * 
- *     const static std::array<std::string, problem_dimension> component_names;
- * 
- *     static constexpr double gamma = 7. / 5.;
- * 
- *     static DEAL_II_ALWAYS_INLINE inline Tensor<1, dim>
- *     momentum(const state_type &U);
- * 
- *     static DEAL_II_ALWAYS_INLINE inline double
- *     internal_energy(const state_type &U);
- * 
- *     static DEAL_II_ALWAYS_INLINE inline double pressure(const state_type &U);
- * 
- *     static DEAL_II_ALWAYS_INLINE inline double
- *     speed_of_sound(const state_type &U);
- * 
- *     static DEAL_II_ALWAYS_INLINE inline flux_type flux(const state_type &U);
- * 
- *     static DEAL_II_ALWAYS_INLINE inline double
- *     compute_lambda_max(const state_type &    U_i,
- *                        const state_type &    U_j,
- *                        const Tensor<1, dim> &n_ij);
- *   };
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeInitialValuescodeclass"></a> 
- * <h4>The <code>InitialValues</code> class</h4>
- *   
-
- * 
- * The class <code>InitialValues</code>'s only public data attribute is a
- * std::function <code>initial_state</code> that computes the initial
- * state of a given point and time. This function is used for populating
- * the initial flow field as well as setting Dirichlet boundary
- * conditions (at inflow boundaries) explicitly in every time step.
- *   
-
- * 
- * For the purpose of this example step
- * we simply implement a homogeneous uniform flow field for which the
- * direction and a 1D primitive state (density, velocity, pressure) are
- * read from the parameter file.
- *   
-
- * 
- * It would be desirable to initialize the class in a single shot:
- * initialize/set the parameters and define the class members that
- * depend on these default parameters. However, since we do not know the
- * actual values for the parameters, this would be sort of
- * meaningless and unsafe in general (we would like to have mechanisms to
- * check the consistency of the input parameters). Instead of defining
- * another <code>setup()</code> method to be called (by-hand) after the
- * call to ParameterAcceptor::initialize() we provide an
- * "implementation" for the class member
- * <code>parse_parameters_call_back()</code> which is automatically
- * called when invoking ParameterAcceptor::initialize() for every class
- * that inherits from ParameterAceptor.
- * 
- * @code
- *   template <int dim>
- *   class InitialValues : public ParameterAcceptor
- *   {
- *   public:
- *     using state_type = typename ProblemDescription<dim>::state_type;
- * 
- *     InitialValues(const std::string &subsection = "InitialValues");
- * 
- *     std::function<state_type(const Point<dim> &point, double t)> initial_state;
- * 
- *   private:
- * @endcode
- * 
- * We declare a private callback function that will be wired up to the
- * ParameterAcceptor::parse_parameters_call_back signal.
- * 
- * @code
- *     void parse_parameters_callback();
- * 
- *     Tensor<1, dim> initial_direction;
- *     Tensor<1, 3>   initial_1d_state;
- *   };
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeTimeSteppingcodeclass"></a> 
- * <h4>The <code>%TimeStepping</code> class</h4>
- *   
-
- * 
- * With the <code>OfflineData</code> and <code>ProblemDescription</code>
- * classes at hand we can now implement the explicit time-stepping scheme
- * that was introduced in the discussion above. The main method of the
- * <code>%TimeStepping</code> class is <code>make_one_step(vector_type &U,
- * double t)</code> that takes a reference to a state vector
- * <code>U</code> and a time point <code>t</code> (as input arguments)
- * computes the updated solution, stores it in the vector
- * <code>temp</code>, swaps its contents with the vector <code>U</code>,
- * and returns the chosen step-size $\tau$.
- *   
-
- * 
- * The other important method is <code>prepare()</code> which primarily
- * sets the proper partition and sparsity pattern for the temporary
- * vector <code>temp</code> and the matrix <code>dij_matrix</code>
- * respectively.
- * 
- * @code
- *   template <int dim>
- *   class TimeStepping : public ParameterAcceptor
- *   {
- *   public:
- *     static constexpr unsigned int problem_dimension =
- *       ProblemDescription<dim>::problem_dimension;
- * 
- *     using state_type = typename ProblemDescription<dim>::state_type;
- *     using flux_type  = typename ProblemDescription<dim>::flux_type;
- * 
- *     using vector_type =
- *       std::array<LinearAlgebra::distributed::Vector<double>, problem_dimension>;
- * 
- *     TimeStepping(const MPI_Comm            mpi_communicator,
- *                  TimerOutput &             computing_timer,
- *                  const OfflineData<dim> &  offline_data,
- *                  const InitialValues<dim> &initial_values,
- *                  const std::string &       subsection = "TimeStepping");
- * 
- *     void prepare();
- * 
- *     double make_one_step(vector_type &U, double t);
- * 
- *   private:
- *     const MPI_Comm mpi_communicator;
- *     TimerOutput &  computing_timer;
- * 
- *     SmartPointer<const OfflineData<dim>>   offline_data;
- *     SmartPointer<const InitialValues<dim>> initial_values;
- * 
- *     SparseMatrix<double> dij_matrix;
- * 
- *     vector_type temporary_vector;
- * 
- *     double cfl_update;
- *   };
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeSchlierenPostprocessorcodeclass"></a> 
- * <h4>The <code>SchlierenPostprocessor</code> class</h4>
- *   
-
- * 
- * At its core, the Schlieren class implements the class member
- * <code>compute_schlieren()</code>. The main purpose of this class member
- * is to compute an auxiliary finite element field
- * <code>schlieren</code>, that is defined at each node by
- * \f[ \text{schlieren}[i] = e^{\beta \frac{ |\nabla r_i|
- * - \min_j |\nabla r_j| }{\max_j |\nabla r_j| - \min_j |\nabla r_j| } }, \f]
- * where $r$ can in principle be any scalar quantity. In practice
- * though, the density is a natural candidate, viz. $r \dealcoloneq \rho$.
- * <a href="https://en.wikipedia.org/wiki/Schlieren">Schlieren</a>
- * postprocessing is a standard method for enhancing the contrast of a
- * visualization inspired by actual experimental X-ray and shadowgraphy
- * techniques of visualization. (See step-67 for another example where we
- * create a Schlieren plot.)
- * 
- * @code
- *   template <int dim>
- *   class SchlierenPostprocessor : public ParameterAcceptor
- *   {
- *   public:
- *     static constexpr unsigned int problem_dimension =
- *       ProblemDescription<dim>::problem_dimension;
- * 
- *     using state_type = typename ProblemDescription<dim>::state_type;
- * 
- *     using vector_type =
- *       std::array<LinearAlgebra::distributed::Vector<double>, problem_dimension>;
- * 
- *     SchlierenPostprocessor(
- *       const MPI_Comm          mpi_communicator,
- *       TimerOutput &           computing_timer,
- *       const OfflineData<dim> &offline_data,
- *       const std::string &     subsection = "SchlierenPostprocessor");
- * 
- *     void prepare();
- * 
- *     void compute_schlieren(const vector_type &U);
- * 
- *     LinearAlgebra::distributed::Vector<double> schlieren;
- * 
- *   private:
- *     const MPI_Comm mpi_communicator;
- *     TimerOutput &  computing_timer;
- * 
- *     SmartPointer<const OfflineData<dim>> offline_data;
- * 
- *     Vector<double> r;
- * 
- *     unsigned int schlieren_index;
- *     double       schlieren_beta;
- *   };
- * 
- * @endcode
- * 
- * 
- * <a name="ThecodeMainLoopcodeclass"></a> 
- * <h4>The <code>MainLoop</code> class</h4>
- *   
-
- * 
- * Now, all that is left to do is to chain the methods implemented in the
- * <code>%TimeStepping</code>, <code>InitialValues</code>, and
- * <code>SchlierenPostprocessor</code> classes together. We do this in a
- * separate class <code>MainLoop</code> that contains an object of every
- * class and again reads in a number of parameters with the help of the
- * ParameterAcceptor class.
- * 
- * @code
- *   template <int dim>
- *   class MainLoop : public ParameterAcceptor
- *   {
- *   public:
- *     using vector_type = typename TimeStepping<dim>::vector_type;
- * 
- *     MainLoop(const MPI_Comm mpi_communnicator);
- * 
- *     void run();
- * 
- *   private:
- *     vector_type interpolate_initial_values(const double t = 0);
- * 
- *     void output(const vector_type &U,
- *                 const std::string &name,
- *                 double             t,
- *                 unsigned int       cycle,
- *                 bool               checkpoint = false);
- * 
- *     const MPI_Comm     mpi_communicator;
- *     std::ostringstream timer_output;
- *     TimerOutput        computing_timer;
- * 
- *     ConditionalOStream pcout;
- * 
- *     std::string base_name;
- *     double      t_final;
- *     double      output_granularity;
- * 
- *     bool asynchronous_writeback;
- * 
- *     bool resume;
- * 
- *     Discretization<dim>         discretization;
- *     OfflineData<dim>            offline_data;
- *     InitialValues<dim>          initial_values;
- *     TimeStepping<dim>           time_stepping;
- *     SchlierenPostprocessor<dim> schlieren_postprocessor;
- * 
- *     vector_type output_vector;
- * 
- *     std::future<void> background_thread_state;
- *   };
- * 
- * @endcode
- * 
- * 
- * <a name="Implementation"></a> 
- * <h3>Implementation</h3>
- * 
-
- * 
- * 
- * <a name="Gridgenerationsetupofdatastructures"></a> 
- * <h4>Grid generation, setup of data structures</h4>
- * 
-
- * 
- * The first major task at hand is the typical triplet of grid
- * generation, setup of data structures, and assembly. A notable novelty
- * in this example step is the use of the ParameterAcceptor class that we
- * use to populate parameter values: we first initialize the
- * ParameterAcceptor class by calling its constructor with a string
- * <code>subsection</code> denoting the correct subsection in the
- * parameter file. Then, in the constructor body every parameter value is
- * initialized to a sensible default value and registered with the
- * ParameterAcceptor class with a call to
- * ParameterAcceptor::add_parameter().
- * 
- * @code
- *   template <int dim>
- *   Discretization<dim>::Discretization(const MPI_Comm     mpi_communicator,
- *                                       TimerOutput &      computing_timer,
- *                                       const std::string &subsection)
- *     : ParameterAcceptor(subsection)
- *     , mpi_communicator(mpi_communicator)
- *     , triangulation(mpi_communicator)
- *     , mapping(1)
- *     , finite_element(1)
- *     , quadrature(3)
- *     , face_quadrature(3)
- *     , computing_timer(computing_timer)
- *   {
- *     length = 4.;
- *     add_parameter("length", length, "Length of computational domain");
- * 
- *     height = 2.;
- *     add_parameter("height", height, "Height of computational domain");
- * 
- *     disk_position = 0.6;
- *     add_parameter("object position",
- *                   disk_position,
- *                   "x position of immersed disk center point");
- * 
- *     disk_diameter = 0.5;
- *     add_parameter("object diameter",
- *                   disk_diameter,
- *                   "Diameter of immersed disk");
- * 
- *     refinement = 5;
- *     add_parameter("refinement",
- *                   refinement,
- *                   "Number of refinement steps of the geometry");
- *   }
- * 
- * @endcode
- * 
- * Note that in the previous constructor we only passed the MPI
- * communicator to the <code>triangulation</code> but we still have not
- * initialized the underlying geometry/mesh. As mentioned earlier, we
- * have to postpone this task to the <code>setup()</code> function that
- * gets called after the ParameterAcceptor::initialize() function has
- * populated all parameter variables with the final values read from the
- * parameter file.
- *   
-
- * 
- * The <code>setup()</code> function is the last class member that has to
- * be implemented. It creates the actual triangulation that is a
- * benchmark configuration consisting of a channel with a disk obstacle, see
- * @cite GuermondEtAl2018. We construct the geometry by modifying the
- * mesh generated by GridGenerator::hyper_cube_with_cylindrical_hole().
- * We refer to step-49, step-53, and step-54 for an overview how to
- * create advanced meshes.
- * We first create 4 temporary (non distributed) coarse triangulations
- * that we stitch together with the GridGenerator::merge_triangulation()
- * function. We center the disk at $(0,0)$ with a diameter of
- * <code>disk_diameter</code>. The lower left corner of the channel has
- * coordinates (<code>-disk_position</code>, <code>-height/2</code>) and
- * the upper right corner has (<code>length-disk_position</code>,
- * <code>height/2</code>).
- * 
- * @code
- *   template <int dim>
- *   void Discretization<dim>::setup()
- *   {
- *     TimerOutput::Scope scope(computing_timer, "discretization - setup");
- * 
- *     triangulation.clear();
- * 
- *     Triangulation<dim> tria1, tria2, tria3, tria4, tria5, tria6;
- * 
- *     GridGenerator::hyper_cube_with_cylindrical_hole(
- *       tria1, disk_diameter / 2., disk_diameter, 0.5, 1, false);
- * 
- *     GridGenerator::subdivided_hyper_rectangle(
- *       tria2,
- *       {2, 1},
- *       Point<2>(-disk_diameter, disk_diameter),
- *       Point<2>(disk_diameter, height / 2.));
- * 
- *     GridGenerator::subdivided_hyper_rectangle(
- *       tria3,
- *       {2, 1},
- *       Point<2>(-disk_diameter, -disk_diameter),
- *       Point<2>(disk_diameter, -height / 2.));
- * 
- *     GridGenerator::subdivided_hyper_rectangle(
- *       tria4,
- *       {6, 2},
- *       Point<2>(disk_diameter, -disk_diameter),
- *       Point<2>(length - disk_position, disk_diameter));
- * 
- *     GridGenerator::subdivided_hyper_rectangle(
- *       tria5,
- *       {6, 1},
- *       Point<2>(disk_diameter, disk_diameter),
- *       Point<2>(length - disk_position, height / 2.));
- * 
- *     GridGenerator::subdivided_hyper_rectangle(
- *       tria6,
- *       {6, 1},
- *       Point<2>(disk_diameter, -height / 2.),
- *       Point<2>(length - disk_position, -disk_diameter));
- * 
- *     GridGenerator::merge_triangulations(
- *       {&tria1, &tria2, &tria3, &tria4, &tria5, &tria6},
- *       triangulation,
- *       1.e-12,
- *       true);
- * 
- *     triangulation.set_manifold(0, PolarManifold<2>(Point<2>()));
- * 
- * @endcode
- * 
- * We have to fix up the left edge that is currently located at
- * $x=-$<code>disk_diameter</code> and has to be shifted to
- * $x=-$<code>disk_position</code>. As a last step the boundary has to
- * be colorized with <code>Boundaries::do_nothing</code> on the right,
- * <code>dirichlet</code> on the left and <code>free_slip</code> on the
- * upper and lower outer boundaries and the obstacle.
- * 
-
- * 
- * 
- * @code
- *     for (const auto &cell : triangulation.active_cell_iterators())
- *       {
- *         for (const auto v : cell->vertex_indices())
- *           {
- *             if (cell->vertex(v)[0] <= -disk_diameter + 1.e-6)
- *               cell->vertex(v)[0] = -disk_position;
- *           }
- *       }
- * 
- *     for (const auto &cell : triangulation.active_cell_iterators())
- *       {
- *         for (const auto f : cell->face_indices())
- *           {
- *             const auto face = cell->face(f);
- * 
- *             if (face->at_boundary())
- *               {
- *                 const auto center = face->center();
- * 
- *                 if (center[0] > length - disk_position - 1.e-6)
- *                   face->set_boundary_id(Boundaries::do_nothing);
- *                 else if (center[0] < -disk_position + 1.e-6)
- *                   face->set_boundary_id(Boundaries::dirichlet);
- *                 else
- *                   face->set_boundary_id(Boundaries::free_slip);
- *               }
- *           }
- *       }
- * 
- *     triangulation.refine_global(refinement);
- *   }
- * 
- * @endcode
- * 
- * 
- * <a name="Assemblyofofflinematrices"></a> 
- * <h4>Assembly of offline matrices</h4>
- * 
-
- * 
- * Not much is done in the constructor of <code>OfflineData</code> other
- * than initializing the corresponding class members in the
- * initialization list.
- * 
- * @code
- *   template <int dim>
- *   OfflineData<dim>::OfflineData(const MPI_Comm             mpi_communicator,
- *                                 TimerOutput &              computing_timer,
- *                                 const Discretization<dim> &discretization,
- *                                 const std::string &        subsection)
- *     : ParameterAcceptor(subsection)
- *     , dof_handler(discretization.triangulation)
- *     , mpi_communicator(mpi_communicator)
- *     , computing_timer(computing_timer)
- *     , discretization(&discretization)
- *   {}
- * 
- * @endcode
- * 
- * Now we can initialize the DoFHandler, extract the IndexSet objects for
- * locally owned and locally relevant DOFs, and initialize a
- * Utilities::MPI::Partitioner object that is needed for distributed
- * vectors.
- * 
- * @code
- *   template <int dim>
- *   void OfflineData<dim>::setup()
- *   {
- *     IndexSet locally_owned;
- *     IndexSet locally_relevant;
- * 
- *     {
- *       TimerOutput::Scope scope(computing_timer,
- *                                "offline_data - distribute dofs");
- * 
- *       dof_handler.distribute_dofs(discretization->finite_element);
- * 
- *       locally_owned   = dof_handler.locally_owned_dofs();
- *       n_locally_owned = locally_owned.n_elements();
- * 
- *       DoFTools::extract_locally_relevant_dofs(dof_handler, locally_relevant);
- *       n_locally_relevant = locally_relevant.n_elements();
- * 
- *       partitioner =
- *         std::make_shared<Utilities::MPI::Partitioner>(locally_owned,
- *                                                       locally_relevant,
- *                                                       mpi_communicator);
- *     }
- * 
- * @endcode
- * 
- * 
- * <a name="Translationtolocalindexranges"></a> 
- * <h4>Translation to local index ranges</h4>
- * 
-
- * 
- * We are now in a position to create the sparsity pattern for our
- * matrices. There are quite a few peculiarities that need a detailed
- * explanation. We avoid using a distributed matrix class (as for
- * example provided by Trilinos or PETSc) and instead rely on deal.II's
- * own SparseMatrix object to store the local part of all matrices.
- * This design decision is motivated by the fact that (a) we actually
- * never perform a matrix-vector multiplication, and (b) we can always
- * assemble the local part of a matrix exclusively on a given MPI
- * rank. Instead, we will compute nonlinear updates while iterating
- * over (the local part) of a connectivity stencil; a task for which
- * deal.II's own SparsityPattern is specifically optimized for.
- *     
-
- * 
- * This design consideration has a caveat, though. What makes the
- * deal.II SparseMatrix class fast is the <a
- * href="https://en.wikipedia.org/wiki/Sparse_matrix">compressed row
- * storage (CSR)</a> used in the SparsityPattern (see @ref Sparsity).
- * This, unfortunately, does not play nicely with a global distributed
- * index range because a sparsity pattern with CSR cannot contain
- * "holes" in the index range. The distributed matrices offered by
- * deal.II avoid this by translating from a global index range into a
- * contiguous local index range. But this is precisely the type of
- * index manipulation we want to avoid in our iteration over the
- * stencil because it creates a measurable overhead.
- *     
-
- * 
- * The Utilities::MPI::Partitioner class already implements the translation
- * from a global index range to a contiguous local (per MPI rank) index
- * range: we don't have to reinvent the wheel. We just need to use that
- * translation capability (once and only once) in order to create a
- * "local" sparsity pattern for the contiguous index range
- * $[0,$<code>n_locally_relevant</code>$)$. That capability can be
- * invoked by the Utilities::MPI::Partitioner::global_to_local() function.
- * Once the sparsity pattern is created using local indices, all that
- * is left to do is to ensure that (when implementing our scatter and
- * gather auxiliary functions) we always access elements of a
- * distributed vector by a call to
- * LinearAlgebra::distributed::Vector::local_element(). This way we
- * avoid index translations altogether and operate exclusively with
- * local indices.
- * 
-
- * 
- * 
- * @code
- *     {
- *       TimerOutput::Scope scope(
- *         computing_timer,
- *         "offline_data - create sparsity pattern and set up matrices");
- * 
- * @endcode
- * 
- * We have to create the "local" sparsity pattern by hand. We
- * therefore loop over all locally owned and ghosted cells (see @ref
- * GlossArtificialCell) and extract the (global)
- * <code>dof_indices</code> associated with the cell DOFs and renumber
- * them using <code>partitioner->global_to_local(index)</code>.
- *       
-
- * 
- * @note In the case of a locally owned dof, such renumbering consist
- * of applying a shift (i.e. we subtract an offset) such that now they
- * will become a number in the integer interval
- * $[0,$<code>n_locally_owned</code>$)$. However, in the case of a
- * ghosted dof (i.e. not locally owned) the situation is quite
- * different, since the global indices associated with ghosted DOFs will
- * not be (in general) a contiguous set of integers.
- * 
-
- * 
- * 
- * @code
- *       DynamicSparsityPattern dsp(n_locally_relevant, n_locally_relevant);
- * 
- *       const auto dofs_per_cell =
- *         discretization->finite_element.n_dofs_per_cell();
- *       std::vector<types::global_dof_index> dof_indices(dofs_per_cell);
- * 
- *       for (const auto &cell : dof_handler.active_cell_iterators())
- *         {
- *           if (cell->is_artificial())
- *             continue;
- * 
- *           /* We transform the set of global dof indices on the cell to the
- *            * corresponding "local" index range on the MPI process: */
- *           cell->get_dof_indices(dof_indices);
- *           std::transform(dof_indices.begin(),
- *                          dof_indices.end(),
- *                          dof_indices.begin(),
- *                          [&](types::global_dof_index index) {
- *                            return partitioner->global_to_local(index);
- *                          });
- * 
- *           /* And simply add, for each dof, a coupling to all other "local"
- *            * dofs on the cell: */
- *           for (const auto dof : dof_indices)
- *             dsp.add_entries(dof, dof_indices.begin(), dof_indices.end());
- *         }
- * 
- *       sparsity_pattern.copy_from(dsp);
- * 
- *       lumped_mass_matrix.reinit(sparsity_pattern);
- *       norm_matrix.reinit(sparsity_pattern);
- *       for (auto &matrix : cij_matrix)
- *         matrix.reinit(sparsity_pattern);
- *       for (auto &matrix : nij_matrix)
- *         matrix.reinit(sparsity_pattern);
- *     }
- *   }
- * 
- * @endcode
- * 
- * This concludes the setup of the DoFHandler and SparseMatrix objects.
- * Next, we have to assemble various matrices. We define a number of
- * helper functions and data structures in an anonymous namespace.
- * 
-
- * 
- * 
- * @code
- *   namespace
- *   {
- * @endcode
- * 
- * <code>CopyData</code> class that will be used to assemble the
- * offline data matrices using WorkStream. It acts as a container: it
- * is just a struct where WorkStream stores the local cell
- * contributions. Note that it also contains a class member
- * <code>local_boundary_normal_map</code> used to store the local
- * contributions required to compute the normals at the boundary.
- * 
-
- * 
- * 
- * @code
- *     template <int dim>
- *     struct CopyData
- *     {
- *       bool                                         is_artificial;
- *       std::vector<types::global_dof_index>         local_dof_indices;
- *       typename OfflineData<dim>::BoundaryNormalMap local_boundary_normal_map;
- *       FullMatrix<double>                           cell_lumped_mass_matrix;
- *       std::array<FullMatrix<double>, dim>          cell_cij_matrix;
- *     };
- * 
- * @endcode
- * 
- * Next we introduce a number of helper functions that are all
- * concerned about reading and writing matrix and vector entries. They
- * are mainly motivated by providing slightly more efficient code and
- * <a href="https://en.wikipedia.org/wiki/Syntactic_sugar"> syntactic
- * sugar</a> for otherwise somewhat tedious code.
- * 
-
- * 
- * The first function we introduce, <code>get_entry()</code>, will be
- * used to read the value stored at the entry pointed by a
- * SparsityPattern iterator <code>it</code> of <code>matrix</code>. The
- * function works around a small deficiency in the SparseMatrix
- * interface: The SparsityPattern is concerned with all index
- * operations of the sparse matrix stored in CRS format. As such the
- * iterator already knows the global index of the corresponding matrix
- * entry in the low-level vector stored in the SparseMatrix object. Due
- * to the lack of an interface in the SparseMatrix for accessing the
- * element directly with a SparsityPattern iterator, we unfortunately
- * have to create a temporary SparseMatrix iterator. We simply hide
- * this in the <code>get_entry()</code> function.
- * 
-
- * 
- * 
- * @code
- *     template <typename IteratorType>
- *     DEAL_II_ALWAYS_INLINE inline SparseMatrix<double>::value_type
- *     get_entry(const SparseMatrix<double> &matrix, const IteratorType &it)
- *     {
- *       const SparseMatrix<double>::const_iterator matrix_iterator(
- *         &matrix, it->global_index());
- *       return matrix_iterator->value();
- *     }
- * 
- * @endcode
- * 
- * The <code>set_entry()</code> helper is the inverse operation of
- * <code>get_value()</code>: Given an iterator and a value, it sets the
- * entry pointed to by the iterator in the matrix.
- * 
-
- * 
- * 
- * @code
- *     template <typename IteratorType>
- *     DEAL_II_ALWAYS_INLINE inline void
- *     set_entry(SparseMatrix<double> &           matrix,
- *               const IteratorType &             it,
- *               SparseMatrix<double>::value_type value)
- *     {
- *       SparseMatrix<double>::iterator matrix_iterator(&matrix,
- *                                                      it->global_index());
- *       matrix_iterator->value() = value;
- *     }
- * 
- * @endcode
- * 
- * <code>gather_get_entry()</code>: we note that $\mathbf{c}_{ij} \in
- * \mathbb{R}^d$. If $d=2$ then $\mathbf{c}_{ij} =
- * [\mathbf{c}_{ij}^1,\mathbf{c}_{ij}^2]^\top$. Which basically implies
- * that we need one matrix per space dimension to store the
- * $\mathbf{c}_{ij}$ vectors. Similar observation follows for the
- * matrix $\mathbf{n}_{ij}$. The purpose of
- * <code>gather_get_entry()</code> is to retrieve those entries and store
- * them into a <code>Tensor<1, dim></code> for our convenience.
- * 
-
- * 
- * 
- * @code
- *     template <std::size_t k, typename IteratorType>
- *     DEAL_II_ALWAYS_INLINE inline Tensor<1, k>
- *     gather_get_entry(const std::array<SparseMatrix<double>, k> &c_ij,
- *                      const IteratorType                         it)
- *     {
- *       Tensor<1, k> result;
- *       for (unsigned int j = 0; j < k; ++j)
- *         result[j] = get_entry(c_ij[j], it);
- *       return result;
- *     }
- * 
- * @endcode
- * 
- * <code>gather()</code> (first interface): this first function
- * signature, having three input arguments, will be used to retrieve
- * the individual components <code>(i,l)</code> of a matrix. The
- * functionality of <code>gather_get_entry()</code> and
- * <code>gather()</code> is very much the same, but their context is
- * different: the function <code>gather()</code> does not rely on an
- * iterator (that actually knows the value pointed to) but rather on the
- * indices <code>(i,l)</code> of the entry in order to retrieve its
- * actual value. We should expect <code>gather()</code> to be slightly
- * more expensive than <code>gather_get_entry()</code>. The use of
- * <code>gather()</code> will be limited to the task of computing the
- * algebraic viscosity $d_{ij}$ in the particular case that when
- * both $i$ and $j$ lie at the boundary.
- *     
-
- * 
- * @note The reader should be aware that accessing an arbitrary
- * <code>(i,l)</code> entry of a matrix (say for instance Trilinos or PETSc
- * matrices) is in general unacceptably expensive. Here is where we might
- * want to keep an eye on complexity: we want this operation to have
- * constant complexity, which is the case of the current implementation
- * using deal.II matrices.
- * 
-
- * 
- * 
- * @code
- *     template <std::size_t k>
- *     DEAL_II_ALWAYS_INLINE inline Tensor<1, k>
- *     gather(const std::array<SparseMatrix<double>, k> &n_ij,
- *            const unsigned int                         i,
- *            const unsigned int                         j)
- *     {
- *       Tensor<1, k> result;
- *       for (unsigned int l = 0; l < k; ++l)
- *         result[l] = n_ij[l](i, j);
- *       return result;
- *     }
- * 
- * @endcode
- * 
- * <code>gather()</code> (second interface): this second function
- * signature having two input arguments will be used to gather the
- * state at a node <code>i</code> and return it as a
- * <code>Tensor<1,problem_dimension></code> for our convenience.
- * 
-
- * 
- * 
- * @code
- *     template <std::size_t k>
- *     DEAL_II_ALWAYS_INLINE inline Tensor<1, k>
- *     gather(const std::array<LinearAlgebra::distributed::Vector<double>, k> &U,
- *            const unsigned int                                               i)
- *     {
- *       Tensor<1, k> result;
- *       for (unsigned int j = 0; j < k; ++j)
- *         result[j] = U[j].local_element(i);
- *       return result;
- *     }
- * 
- * @endcode
- * 
- * <code>scatter()</code>: this function has three input arguments, the
- * first one is meant to be a "global object" (say a locally owned or
- * locally relevant vector), the second argument which could be a
- * <code>Tensor<1,problem_dimension></code>, and the last argument
- * which represents a index of the global object. This function will be
- * primarily used to write the updated nodal values, stored as
- * <code>Tensor<1,problem_dimension></code>, into the global objects.
- * 
-
- * 
- * 
- * @code
- *     template <std::size_t k, int k2>
- *     DEAL_II_ALWAYS_INLINE inline void
- *     scatter(std::array<LinearAlgebra::distributed::Vector<double>, k> &U,
- *             const Tensor<1, k2> &                                      tensor,
- *             const unsigned int                                         i)
- *     {
- *       static_assert(k == k2,
- *                     "The dimensions of the input arguments must agree");
- *       for (unsigned int j = 0; j < k; ++j)
- *         U[j].local_element(i) = tensor[j];
- *     }
- *   } // namespace
- * 
- * @endcode
- * 
- * We are now in a position to assemble all matrices stored in
- * <code>OfflineData</code>: the lumped mass entries $m_i$, the
- * vector-valued matrices $\mathbf{c}_{ij}$ and $\mathbf{n}_{ij} =
- * \frac{\mathbf{c}_{ij}}{|\mathbf{c}_{ij}|}$, and the boundary normals
- * $\boldsymbol{\nu}_i$.
- *   
-
- * 
- * In order to exploit thread parallelization we use the WorkStream approach
- * detailed in the @ref threads "Parallel computing with multiple processors"
- * accessing shared memory. As customary this requires
- * definition of
- * - Scratch data (i.e. input info required to carry out computations): in
- * this case it is <code>scratch_data</code>.
- * - The worker: in our case this is the <code>local_assemble_system()</code>
- * function that
- * actually computes the local (i.e. current cell) contributions from the
- * scratch data.
- * - A copy data: a struct that contains all the local assembly
- * contributions, in this case <code>CopyData<dim>()</code>.
- * - A copy data routine: in this case it is
- * <code>copy_local_to_global()</code> in charge of actually coping these
- * local contributions into the global objects (matrices and/or vectors)
- *   
-
- * 
- * Most of the following lines are spent in the definition of the worker
- * <code>local_assemble_system()</code> and the copy data routine
- * <code>copy_local_to_global()</code>. There is not much to say about the
- * WorkStream framework since the vast majority of ideas are reasonably
- * well-documented in step-9, step-13 and step-32 among others.
- *   
-
- * 
- * Finally, assuming that $\mathbf{x}_i$ is a support point at the boundary,
- * the (nodal) normals are defined as:
- *   
-
- * 
- * @f{align*}
- * \widehat{\boldsymbol{\nu}}_i \dealcoloneq
- * \frac{\int_{\partial\Omega} \phi_i \widehat{\boldsymbol{\nu}} \,
- * \, \mathrm{d}\mathbf{s}}{\big|\int_{\partial\Omega} \phi_i
- * \widehat{\boldsymbol{\nu}} \, \mathrm{d}\mathbf{s}\big|}
- * @f}
- *   
-
- * 
- * We will compute the numerator of this expression first and store it in
- * <code>OfflineData<dim>::BoundaryNormalMap</code>. We will normalize these
- * vectors in a posterior loop.
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   void OfflineData<dim>::assemble()
- *   {
- *     lumped_mass_matrix = 0.;
- *     norm_matrix        = 0.;
- *     for (auto &matrix : cij_matrix)
- *       matrix = 0.;
- *     for (auto &matrix : nij_matrix)
- *       matrix = 0.;
- * 
- *     unsigned int dofs_per_cell =
- *       discretization->finite_element.n_dofs_per_cell();
- *     unsigned int n_q_points = discretization->quadrature.size();
- * 
- * @endcode
- * 
- * What follows is the initialization of the scratch data required by
- * WorkStream
- * 
-
- * 
- * 
- * @code
- *     MeshWorker::ScratchData<dim> scratch_data(
- *       discretization->mapping,
- *       discretization->finite_element,
- *       discretization->quadrature,
- *       update_values | update_gradients | update_quadrature_points |
- *         update_JxW_values,
- *       discretization->face_quadrature,
- *       update_normal_vectors | update_values | update_JxW_values);
- * 
- *     {
- *       TimerOutput::Scope scope(
- *         computing_timer,
- *         "offline_data - assemble lumped mass matrix, and c_ij");
- * 
- *       const auto local_assemble_system = 
- *         [&](const typename DoFHandler<dim>::cell_iterator &cell,
- *             MeshWorker::ScratchData<dim> &                 scratch,
- *             CopyData<dim> &                                copy) {
- *           copy.is_artificial = cell->is_artificial();
- *           if (copy.is_artificial)
- *             return;
- * 
- *           copy.local_boundary_normal_map.clear();
- *           copy.cell_lumped_mass_matrix.reinit(dofs_per_cell, dofs_per_cell);
- *           for (auto &matrix : copy.cell_cij_matrix)
- *             matrix.reinit(dofs_per_cell, dofs_per_cell);
- * 
- *           const auto &fe_values = scratch.reinit(cell);
- * 
- *           copy.local_dof_indices.resize(dofs_per_cell);
- *           cell->get_dof_indices(copy.local_dof_indices);
- * 
- *           std::transform(copy.local_dof_indices.begin(),
- *                          copy.local_dof_indices.end(),
- *                          copy.local_dof_indices.begin(),
- *                          [&](types::global_dof_index index) {
- *                            return partitioner->global_to_local(index);
- *                          });
- * 
- * @endcode
- * 
- * We compute the local contributions for the lumped mass matrix
- * entries $m_i$ and and vectors $c_{ij}$ in the usual fashion:
- * 
- * @code
- *           for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
- *             {
- *               const auto JxW = fe_values.JxW(q_point);
- * 
- *               for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *                 {
- *                   const auto value_JxW =
- *                     fe_values.shape_value(j, q_point) * JxW;
- *                   const auto grad_JxW = fe_values.shape_grad(j, q_point) * JxW;
- * 
- *                   copy.cell_lumped_mass_matrix(j, j) += value_JxW;
- * 
- *                   for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *                     {
- *                       const auto value = fe_values.shape_value(i, q_point);
- *                       for (unsigned int d = 0; d < dim; ++d)
- *                         copy.cell_cij_matrix[d](i, j) += value * grad_JxW[d];
- * 
- *                     } /* i */
- *                 }     /* j */
- *             }         /* q */
- * 
- * @endcode
- * 
- * Now we have to compute the boundary normals. Note that the
- * following loop does not do much unless the element has faces on
- * the boundary of the domain.
- * 
- * @code
- *           for (const auto f : cell->face_indices())
- *             {
- *               const auto face = cell->face(f);
- *               const auto id   = face->boundary_id();
- * 
- *               if (!face->at_boundary())
- *                 continue;
- * 
- *               const auto &fe_face_values = scratch.reinit(cell, f);
- * 
- *               const unsigned int n_face_q_points =
- *                 fe_face_values.get_quadrature().size();
- * 
- *               for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *                 {
- *                   if (!discretization->finite_element.has_support_on_face(j, f))
- *                     continue;
- * 
- * @endcode
- * 
- * Note that "normal" will only represent the contributions
- * from one of the faces in the support of the shape
- * function phi_j. So we cannot normalize this local
- * contribution right here, we have to take it "as is",
- * store it and pass it to the copy data routine. The
- * proper normalization requires an additional loop on
- * nodes. This is done in the copy function below.
- * 
- * @code
- *                   Tensor<1, dim> normal;
- *                   if (id == Boundaries::free_slip)
- *                     {
- *                       for (unsigned int q = 0; q < n_face_q_points; ++q)
- *                         normal += fe_face_values.normal_vector(q) *
- *                                   fe_face_values.shape_value(j, q);
- *                     }
- * 
- *                   const auto index = copy.local_dof_indices[j];
- * 
- *                   Point<dim> position;
- *                   for (const auto v : cell->vertex_indices())
- *                     if (cell->vertex_dof_index(v, 0) ==
- *                         partitioner->local_to_global(index))
- *                       {
- *                         position = cell->vertex(v);
- *                         break;
- *                       }
- * 
- *                   const auto old_id =
- *                     std::get<1>(copy.local_boundary_normal_map[index]);
- *                   copy.local_boundary_normal_map[index] =
- *                     std::make_tuple(normal, std::max(old_id, id), position);
- *                 }
- *             }
- *         };
- * 
- * @endcode
- * 
- * Last, we provide a copy_local_to_global function as required for
- * the WorkStream
- * 
- * @code
- *       const auto copy_local_to_global = [&](const CopyData<dim> &copy) {
- *         if (copy.is_artificial)
- *           return;
- * 
- *         for (const auto &it : copy.local_boundary_normal_map)
- *           {
- *             std::get<0>(boundary_normal_map[it.first]) +=
- *               std::get<0>(it.second);
- *             std::get<1>(boundary_normal_map[it.first]) =
- *               std::max(std::get<1>(boundary_normal_map[it.first]),
- *                        std::get<1>(it.second));
- *             std::get<2>(boundary_normal_map[it.first]) = std::get<2>(it.second);
- *           }
- * 
- *         lumped_mass_matrix.add(copy.local_dof_indices,
- *                                copy.cell_lumped_mass_matrix);
- * 
- *         for (int k = 0; k < dim; ++k)
- *           {
- *             cij_matrix[k].add(copy.local_dof_indices, copy.cell_cij_matrix[k]);
- *             nij_matrix[k].add(copy.local_dof_indices, copy.cell_cij_matrix[k]);
- *           }
- *       };
- * 
- *       WorkStream::run(dof_handler.begin_active(),
- *                       dof_handler.end(),
- *                       local_assemble_system,
- *                       copy_local_to_global,
- *                       scratch_data,
- *                       CopyData<dim>());
- *     }
- * 
- * @endcode
- * 
- * At this point in time we are done with the computation of $m_i$ and
- * $\mathbf{c}_{ij}$, but so far the matrix <code>nij_matrix</code>
- * contains just a copy of the matrix <code>cij_matrix</code>.
- * That's not what we really want: we have to normalize its entries. In
- * addition, we have not filled the entries of the matrix
- * <code>norm_matrix</code>  and the vectors stored in the map
- * <code>OfflineData<dim>::BoundaryNormalMap</code> are not normalized.
- *     
-
- * 
- * In principle, this is just offline data, it doesn't make much sense
- * to over-optimize their computation, since their cost will get amortized
- * over the many time steps that we are going to use. However,
- * computing/storing the entries of the matrix
- * <code>norm_matrix</code> and the normalization of <code>nij_matrix</code>
- * are perfect to illustrate thread-parallel node-loops:
- * - we want to visit every node $i$ in the mesh/sparsity graph,
- * - and for every such node we want to visit to every $j$ such that
- * $\mathbf{c}_{ij} \not \equiv 0$.
- *     
-
- * 
- * From an algebraic point of view, this is equivalent to: visiting
- * every row in the matrix and for each one of these rows execute a loop on
- * the columns. Node-loops is a core theme of this tutorial step (see
- * the pseudo-code in the introduction) that will repeat over and over
- * again. That's why this is the right time to introduce them.
- *     
-
- * 
- * We have the thread parallelization capability
- * parallel::apply_to_subranges() that is somehow more general than the
- * WorkStream framework. In particular, parallel::apply_to_subranges() can
- * be used for our node-loops. This functionality requires four input
- * arguments which we explain in detail (for the specific case of our
- * thread-parallel node loops):
- * - The iterator <code>indices.begin()</code> points to a row index.
- * - The iterator <code>indices.end()</code> points to a numerically higher
- * row index.
- * - The function <code>on_subranges(i1,i2)</code> (where <code>i1</code>
- * and <code>i2</code> define a sub-range within the range spanned by
- * the end and begin iterators defined in the two previous bullets)
- * applies an operation to every iterator in such subrange. We may as
- * well call <code>on_subranges</code> the "worker".
- * - Grainsize: minimum number of iterators (in this case representing
- * rows) processed by each thread. We decided for a minimum of 4096
- * rows.
- *     
-
- * 
- * A minor caveat here is that the iterators <code>indices.begin()</code>
- * and <code>indices.end()</code> supplied to
- * parallel::apply_to_subranges() have to be random access iterators:
- * internally, parallel::apply_to_subranges() will break the range
- * defined by the <code>indices.begin()</code> and
- * <code>indices.end()</code> iterators into subranges (we want to be
- * able to read any entry in those subranges with constant complexity).
- * In order to provide such iterators we resort to
- * std_cxx20::ranges::iota_view.
- *     
-
- * 
- * The bulk of the following piece of code is spent defining
- * the "worker" <code>on_subranges</code>: i.e. the  operation applied at
- * each row of the sub-range. Given a fixed <code>row_index</code>
- * we want to visit every column/entry in such row. In order to execute
- * such columns-loops we use
- * <a href="http://www.cplusplus.com/reference/algorithm/for_each/">
- * std::for_each</a>
- * from the standard library, where:
- * - <code>sparsity_pattern.begin(row_index)</code>
- * gives us an iterator starting at the first column of the row,
- * - <code>sparsity_pattern.end(row_index)</code> is an iterator pointing
- * at the last column of the row,
- * - the last argument required by `std::for_each` is the operation
- * applied at each nonzero entry (a lambda expression in this case)
- * of such row.
- *     
-
- * 
- * We note that, parallel::apply_to_subranges() will operate on
- * disjoint sets of rows (the subranges) and our goal is to write into
- * these rows. Because of the simple nature of the operations we want
- * to carry out (computation and storage of normals, and normalization
- * of the $\mathbf{c}_{ij}$ of entries) threads cannot conflict
- * attempting to write the same entry (we do not need a scheduler).
- * 
- * @code
- *     {
- *       TimerOutput::Scope scope(computing_timer,
- *                                "offline_data - compute |c_ij|, and n_ij");
- * 
- *       const std_cxx20::ranges::iota_view<unsigned int, unsigned int> indices(
- *         0, n_locally_relevant);
- * 
- *       const auto on_subranges = 
- *         [&](const auto i1, const auto i2) {
- *           for (const auto row_index :
- *                std_cxx20::ranges::iota_view<unsigned int, unsigned int>(*i1,
- *                                                                         *i2))
- *             {
- * @endcode
- * 
- * First column-loop: we compute and store the entries of the
- * matrix norm_matrix and write normalized entries into the
- * matrix nij_matrix:
- * 
- * @code
- *               std::for_each(
- *                 sparsity_pattern.begin(row_index),
- *                 sparsity_pattern.end(row_index),
- *                 [&](const dealii::SparsityPatternIterators::Accessor &jt) {
- *                   const auto   c_ij = gather_get_entry(cij_matrix, &jt);
- *                   const double norm = c_ij.norm();
- * 
- *                   set_entry(norm_matrix, &jt, norm);
- *                   for (unsigned int j = 0; j < dim; ++j)
- *                     set_entry(nij_matrix[j], &jt, c_ij[j] / norm);
- *                 });
- *             }
- *         };
- * 
- *       parallel::apply_to_subranges(indices.begin(),
- *                                    indices.end(),
- *                                    on_subranges,
- *                                    4096);
- * 
- * @endcode
- * 
- * Finally, we normalize the vectors stored in
- * <code>OfflineData<dim>::BoundaryNormalMap</code>. This operation has
- * not been thread parallelized as it would neither illustrate any
- * important concept nor lead to any noticeable speed gain.
- * 
- * @code
- *       for (auto &it : boundary_normal_map)
- *         {
- *           auto &normal = std::get<0>(it.second);
- *           normal /= (normal.norm() + std::numeric_limits<double>::epsilon());
- *         }
- *     }
- *   }
- * 
- * @endcode
- * 
- * At this point we are very much done with anything related to offline data.
- * 
-
- * 
- * 
- * <a name="EquationofstateandapproximateRiemannsolver"></a> 
- * <h4>Equation of state and approximate Riemann solver</h4>
- * 
-
- * 
- * In this section we describe the implementation of the class members of
- * the <code>ProblemDescription</code> class. Most of the code here is
- * specific to the compressible Euler's equations with an ideal gas law.
- * If we wanted to re-purpose step-69 for a different conservation law
- * (say for: instance the shallow water equation) most of the
- * implementation of this class would have to change. But most of the
- * other classes (in particular those defining loop structures) would
- * remain unchanged.
- *   
-
- * 
- * We start by implementing a number of small member functions for
- * computing <code>momentum</code>, <code>internal_energy</code>,
- * <code>pressure</code>, <code>speed_of_sound</code>, and the flux
- * <code>f</code> of the system. The functionality of each one of these
- * functions is self-explanatory from their names.
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   DEAL_II_ALWAYS_INLINE inline Tensor<1, dim>
- *   ProblemDescription<dim>::momentum(const state_type &U)
- *   {
- *     Tensor<1, dim> result;
- *     std::copy_n(&U[1], dim, &result[0]);
- *     return result;
- *   }
- * 
- *   template <int dim>
- *   DEAL_II_ALWAYS_INLINE inline double
- *   ProblemDescription<dim>::internal_energy(const state_type &U)
- *   {
- *     const double &rho = U[0];
- *     const auto    m   = momentum(U);
- *     const double &E   = U[dim + 1];
- *     return E - 0.5 * m.norm_square() / rho;
- *   }
- * 
- *   template <int dim>
- *   DEAL_II_ALWAYS_INLINE inline double
- *   ProblemDescription<dim>::pressure(const state_type &U)
- *   {
- *     return (gamma - 1.) * internal_energy(U);
- *   }
- * 
- *   template <int dim>
- *   DEAL_II_ALWAYS_INLINE inline double
- *   ProblemDescription<dim>::speed_of_sound(const state_type &U)
- *   {
- *     const double &rho = U[0];
- *     const double  p   = pressure(U);
- * 
- *     return std::sqrt(gamma * p / rho);
- *   }
- * 
- *   template <int dim>
- *   DEAL_II_ALWAYS_INLINE inline typename ProblemDescription<dim>::flux_type
- *   ProblemDescription<dim>::flux(const state_type &U)
- *   {
- *     const double &rho = U[0];
- *     const auto    m   = momentum(U);
- *     const auto    p   = pressure(U);
- *     const double &E   = U[dim + 1];
- * 
- *     flux_type result;
- * 
- *     result[0] = m;
- *     for (unsigned int i = 0; i < dim; ++i)
- *       {
- *         result[1 + i] = m * m[i] / rho;
- *         result[1 + i][i] += p;
- *       }
- *     result[dim + 1] = m / rho * (E + p);
- * 
- *     return result;
- *   }
- * 
- * @endcode
- * 
- * Now we discuss the computation of $\lambda_{\text{max}}
- * (\mathbf{U}_i^{n},\mathbf{U}_j^{n}, \textbf{n}_{ij})$. The analysis
- * and derivation of sharp upper-bounds of maximum wavespeeds of Riemann
- * problems is a very technical endeavor and we cannot include an
- * advanced discussion about it in this tutorial. In this portion of the
- * documentation we will limit ourselves to sketch the main functionality
- * of our implementation functions and point to specific academic
- * references in order to help the (interested) reader trace the
- * source (and proper mathematical justification) of these ideas.
- *   
-
- * 
- * In general, obtaining a sharp guaranteed upper-bound on the maximum
- * wavespeed requires solving a quite expensive scalar nonlinear problem.
- * This is typically done with an iterative solver. In order to simplify
- * the presentation in this example step we decided not to include such
- * an iterative scheme. Instead, we will just use an initial guess as a
- * guess for an upper bound on the maximum wavespeed. More precisely,
- * equations (2.11) (3.7), (3.8) and (4.3) of @cite GuermondPopov2016b
- * are enough to define a guaranteed upper bound on the maximum
- * wavespeed. This estimate is returned by a call to the function
- * <code>lambda_max_two_rarefaction()</code>. At its core the
- * construction of such an upper bound uses the so-called two-rarefaction
- * approximation for the intermediate pressure $p^*$, see for instance
- * Equation (4.46), page 128 in @cite Toro2009.
- *   
-
- * 
- * The estimate returned by <code>lambda_max_two_rarefaction()</code> is
- * guaranteed to be an upper bound, it is in general quite sharp, and
- * overall sufficient for our purposes. However, for some specific
- * situations (in particular when one of states is close to vacuum
- * conditions) such an estimate will be overly pessimistic. That's why we
- * used a second estimate to avoid this degeneracy that will be invoked
- * by a call to the function <code>lambda_max_expansion()</code>. The most
- * important function here is <code>compute_lambda_max()</code> which
- * takes the minimum between the estimates returned by
- * <code>lambda_max_two_rarefaction()</code> and
- * <code>lambda_max_expansion()</code>.
- *   
-
- * 
- * We start again by defining a couple of helper functions:
- *   
-
- * 
- * The first function takes a state <code>U</code> and a unit vector
- * <code>n_ij</code> and computes the <i>projected</i> 1D state in
- * direction of the unit vector.
- * 
- * @code
- *   namespace
- *   {
- *     template <int dim>
- *     DEAL_II_ALWAYS_INLINE inline std::array<double, 4> riemann_data_from_state(
- *       const typename ProblemDescription<dim>::state_type U,
- *       const Tensor<1, dim> &                             n_ij)
- *     {
- *       Tensor<1, 3> projected_U;
- *       projected_U[0] = U[0];
- * 
- * @endcode
- * 
- * For this, we have to change the momentum to $\textbf{m}\cdot
- * n_{ij}$ and have to subtract the kinetic energy of the
- * perpendicular part from the total energy:
- * 
- * @code
- *       const auto m   = ProblemDescription<dim>::momentum(U);
- *       projected_U[1] = n_ij * m;
- * 
- *       const auto perpendicular_m = m - projected_U[1] * n_ij;
- *       projected_U[2] = U[1 + dim] - 0.5 * perpendicular_m.norm_square() / U[0];
- * 
- * @endcode
- * 
- * We return the 1D state in <i>primitive</i> variables instead of
- * conserved quantities. The return array consists of density $\rho$,
- * velocity $u$, pressure $p$ and local speed of sound $a$:
- * 
-
- * 
- * 
- * @code
- *       return {{projected_U[0],
- *                projected_U[1] / projected_U[0],
- *                ProblemDescription<1>::pressure(projected_U),
- *                ProblemDescription<1>::speed_of_sound(projected_U)}};
- *     }
- * 
- * @endcode
- * 
- * At this point we also define two small functions that return the
- * positive and negative part of a double.
- * 
-
- * 
- * 
- * @code
- *     DEAL_II_ALWAYS_INLINE inline double positive_part(const double number)
- *     {
- *       return std::max(number, 0.);
- *     }
- * 
- * 
- *     DEAL_II_ALWAYS_INLINE inline double negative_part(const double number)
- *     {
- *       return -std::min(number, 0.);
- *     }
- * 
- * @endcode
- * 
- * Next, we need two local wavenumbers that are defined in terms of a
- * primitive state $[\rho, u, p, a]$ and a given pressure $p^\ast$
- * @cite GuermondPopov2016  Eqn. (3.7):
- * @f{align*}
- * \lambda^- = u - a\,\sqrt{1 + \frac{\gamma+1}{2\gamma}
- * \left(\frac{p^\ast-p}{p}\right)_+}
- * @f}
- * Here, the $(\cdot)_{+}$ denotes the positive part of the given
- * argument.
- * 
-
- * 
- * 
- * @code
- *     DEAL_II_ALWAYS_INLINE inline double
- *     lambda1_minus(const std::array<double, 4> &riemann_data,
- *                   const double                 p_star)
- *     {
- *       /* Implements formula (3.7) in Guermond-Popov-2016 */
- * 
- *       constexpr double gamma = ProblemDescription<1>::gamma;
- *       const auto       u     = riemann_data[1];
- *       const auto       p     = riemann_data[2];
- *       const auto       a     = riemann_data[3];
- * 
- *       const double factor = (gamma + 1.0) / 2.0 / gamma;
- *       const double tmp    = positive_part((p_star - p) / p);
- *       return u - a * std::sqrt(1.0 + factor * tmp);
- *     }
- * 
- * @endcode
- * 
- * Analougously @cite GuermondPopov2016 Eqn. (3.8):
- * @f{align*}
- * \lambda^+ = u + a\,\sqrt{1 + \frac{\gamma+1}{2\gamma}
- * \left(\frac{p^\ast-p}{p}\right)_+}
- * @f}
- * 
-
- * 
- * 
- * @code
- *     DEAL_II_ALWAYS_INLINE inline double
- *     lambda3_plus(const std::array<double, 4> &riemann_data, const double p_star)
- *     {
- *       /* Implements formula (3.8) in Guermond-Popov-2016 */
- * 
- *       constexpr double gamma = ProblemDescription<1>::gamma;
- *       const auto       u     = riemann_data[1];
- *       const auto       p     = riemann_data[2];
- *       const auto       a     = riemann_data[3];
- * 
- *       const double factor = (gamma + 1.0) / 2.0 / gamma;
- *       const double tmp    = positive_part((p_star - p) / p);
- *       return u + a * std::sqrt(1.0 + factor * tmp);
- *     }
- * 
- * @endcode
- * 
- * All that is left to do is to compute the maximum of $\lambda^-$ and
- * $\lambda^+$ computed from the left and right primitive state
- * (@cite GuermondPopov2016 Eqn. (2.11)), where $p^\ast$ is given by
- * @cite GuermondPopov2016 Eqn (4.3):
- * 
-
- * 
- * 
- * @code
- *     DEAL_II_ALWAYS_INLINE inline double
- *     lambda_max_two_rarefaction(const std::array<double, 4> &riemann_data_i,
- *                                const std::array<double, 4> &riemann_data_j)
- *     {
- *       constexpr double gamma = ProblemDescription<1>::gamma;
- *       const auto       u_i   = riemann_data_i[1];
- *       const auto       p_i   = riemann_data_i[2];
- *       const auto       a_i   = riemann_data_i[3];
- *       const auto       u_j   = riemann_data_j[1];
- *       const auto       p_j   = riemann_data_j[2];
- *       const auto       a_j   = riemann_data_j[3];
- * 
- *       const double numerator = a_i + a_j - (gamma - 1.) / 2. * (u_j - u_i);
- * 
- *       const double denominator =
- *         a_i * std::pow(p_i / p_j, -1. * (gamma - 1.) / 2. / gamma) + a_j * 1.;
- * 
- *       /* Formula (4.3) in Guermond-Popov-2016 */
- * 
- *       const double p_star =
- *         p_j * std::pow(numerator / denominator, 2. * gamma / (gamma - 1));
- * 
- *       const double lambda1 = lambda1_minus(riemann_data_i, p_star);
- *       const double lambda3 = lambda3_plus(riemann_data_j, p_star);
- * 
- *       /* Formula (2.11) in Guermond-Popov-2016 */
- * 
- *       return std::max(positive_part(lambda3), negative_part(lambda1));
- *     }
- * 
- * @endcode
- * 
- * We compute the second upper bound of the maximal wavespeed that is, in
- * general, not as sharp as the two-rarefaction estimate. But it will
- * save the day in the context of near vacuum conditions when the
- * two-rarefaction approximation might attain extreme values:
- * @f{align*}
- * \lambda_{\text{exp}} = \max(u_i,u_j) + 5. \max(a_i, a_j).
- * @f}
- * @note The constant 5.0 multiplying the maximum of the sound speeds
- * is <i>neither</i> an ad-hoc constant, <i>nor</i> a tuning parameter.
- * It defines an upper bound for any $\gamma \in [0,5/3]$. Do not play
- * with it!
- * 
-
- * 
- * 
- * @code
- *     DEAL_II_ALWAYS_INLINE inline double
- *     lambda_max_expansion(const std::array<double, 4> &riemann_data_i,
- *                          const std::array<double, 4> &riemann_data_j)
- *     {
- *       const auto u_i = riemann_data_i[1];
- *       const auto a_i = riemann_data_i[3];
- *       const auto u_j = riemann_data_j[1];
- *       const auto a_j = riemann_data_j[3];
- * 
- *       return std::max(std::abs(u_i), std::abs(u_j)) + 5. * std::max(a_i, a_j);
- *     }
- *   } // namespace
- * 
- * @endcode
- * 
- * The following is the main function that we are going to call in order to
- * compute $\lambda_{\text{max}} (\mathbf{U}_i^{n},\mathbf{U}_j^{n},
- * \textbf{n}_{ij})$. We simply compute both maximal wavespeed estimates
- * and return the minimum.
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   DEAL_II_ALWAYS_INLINE inline double
- *   ProblemDescription<dim>::compute_lambda_max(const state_type &    U_i,
- *                                               const state_type &    U_j,
- *                                               const Tensor<1, dim> &n_ij)
- *   {
- *     const auto riemann_data_i = riemann_data_from_state(U_i, n_ij);
- *     const auto riemann_data_j = riemann_data_from_state(U_j, n_ij);
- * 
- *     const double lambda_1 =
- *       lambda_max_two_rarefaction(riemann_data_i, riemann_data_j);
- * 
- *     const double lambda_2 =
- *       lambda_max_expansion(riemann_data_i, riemann_data_j);
- * 
- *     return std::min(lambda_1, lambda_2);
- *   }
- * 
- * @endcode
- * 
- * We conclude this section by defining static arrays
- * <code>component_names</code> that contain strings describing the
- * component names of our state vector. We have template specializations
- * for dimensions one, two and three, that are used later in DataOut for
- * naming the corresponding components:
- * 
-
- * 
- * 
- * @code
- *   template <>
- *   const std::array<std::string, 3> ProblemDescription<1>::component_names{
- *     {"rho", "m", "E"}};
- * 
- *   template <>
- *   const std::array<std::string, 4> ProblemDescription<2>::component_names{
- *     {"rho", "m_1", "m_2", "E"}};
- * 
- *   template <>
- *   const std::array<std::string, 5> ProblemDescription<3>::component_names{
- *     {"rho", "m_1", "m_2", "m_3", "E"}};
- * 
- * @endcode
- * 
- * 
- * <a name="Initialvalues"></a> 
- * <h4>Initial values</h4>
- * 
-
- * 
- * The last preparatory step, before we discuss the implementation of the
- * forward Euler scheme, is to briefly implement the `InitialValues` class.
- *   
-
- * 
- * In the constructor we initialize all parameters with default values,
- * declare all parameters for the `ParameterAcceptor` class and connect the
- * <code>parse_parameters_call_back</code> slot to the respective signal.
- *   
-
- * 
- * The <code>parse_parameters_call_back</code> slot will be invoked from
- * ParameterAceptor after the call to ParameterAcceptor::initialize(). In
- * that regard, its use is appropriate for situations where the
- * parameters have to be postprocessed (in some sense) or some
- * consistency condition between the parameters has to be checked.
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   InitialValues<dim>::InitialValues(const std::string &subsection)
- *     : ParameterAcceptor(subsection)
- *   {
- *     /* We wire up the slot InitialValues<dim>::parse_parameters_callback to
- *        the ParameterAcceptor::parse_parameters_call_back signal: */
- *     ParameterAcceptor::parse_parameters_call_back.connect(
- *       std::bind(&InitialValues<dim>::parse_parameters_callback, this));
- * 
- *     initial_direction[0] = 1.;
- *     add_parameter("initial direction",
- *                   initial_direction,
- *                   "Initial direction of the uniform flow field");
- * 
- *     initial_1d_state[0] = ProblemDescription<dim>::gamma;
- *     initial_1d_state[1] = 3.;
- *     initial_1d_state[2] = 1.;
- *     add_parameter("initial 1d state",
- *                   initial_1d_state,
- *                   "Initial 1d state (rho, u, p) of the uniform flow field");
- *   }
- * 
- * @endcode
- * 
- * So far the constructor of <code>InitialValues</code> has defined
- * default values for the two private members
- * <code>initial_direction</code> and <code>initial_1d_state</code> and
- * added them to the parameter list. But we have not defined an
- * implementation of the only public member that we really care about,
- * which is <code>initial_state()</code> (the function that we are going to
- * call to actually evaluate the initial solution at the mesh nodes). At
- * the top of the function, we have to ensure that the provided initial
- * direction is not the zero vector.
- *   
-
- * 
- * @note As commented, we could have avoided using the method
- * <code>parse_parameters_call_back </code> and defined a class member
- * <code>setup()</code> in order to define the implementation of
- * <code>initial_state()</code>. But for illustrative purposes we want to
- * document a different way here and use the call back signal from
- * ParameterAcceptor.
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   void InitialValues<dim>::parse_parameters_callback()
- *   {
- *     AssertThrow(initial_direction.norm() != 0.,
- *                 ExcMessage(
- *                   "Initial shock front direction is set to the zero vector."));
- *     initial_direction /= initial_direction.norm();
- * 
- * @endcode
- * 
- * Next, we implement the <code>initial_state</code> function object
- * with a lambda function computing a uniform flow field. For this we
- * have to translate a given primitive 1d state (density $\rho$,
- * velocity $u$, and pressure $p$) into a conserved n-dimensional state
- * (density $\rho$, momentum $\mathbf{m}$, and total energy $E$).
- * 
-
- * 
- * 
- * @code
- *     initial_state = [this](const Point<dim> & /*point*/, double /*t*/) {
- *       const double            rho   = initial_1d_state[0];
- *       const double            u     = initial_1d_state[1];
- *       const double            p     = initial_1d_state[2];
- *       static constexpr double gamma = ProblemDescription<dim>::gamma;
- * 
- *       state_type state;
- * 
- *       state[0] = rho;
- *       for (unsigned int i = 0; i < dim; ++i)
- *         state[1 + i] = rho * u * initial_direction[i];
- * 
- *       state[dim + 1] = p / (gamma - 1.) + 0.5 * rho * u * u;
- * 
- *       return state;
- *     };
- *   }
- * 
- * @endcode
- * 
- * 
- * <a name="TheForwardEulerstep"></a> 
- * <h4>The Forward Euler step</h4>
- * 
-
- * 
- * The constructor of the <code>%TimeStepping</code> class does not contain
- * any surprising code:
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   TimeStepping<dim>::TimeStepping(
- *     const MPI_Comm            mpi_communicator,
- *     TimerOutput &             computing_timer,
- *     const OfflineData<dim> &  offline_data,
- *     const InitialValues<dim> &initial_values,
- *     const std::string &       subsection /*= "TimeStepping"*/)
- *     : ParameterAcceptor(subsection)
- *     , mpi_communicator(mpi_communicator)
- *     , computing_timer(computing_timer)
- *     , offline_data(&offline_data)
- *     , initial_values(&initial_values)
- *   {
- *     cfl_update = 0.80;
- *     add_parameter("cfl update",
- *                   cfl_update,
- *                   "Relative CFL constant used for update");
- *   }
- * 
- * @endcode
- * 
- * In the class member <code>prepare()</code> we initialize the temporary
- * vector <code>temp</code> and the matrix <code>dij_matrix</code>. The
- * vector <code>temp</code> will be used to store the solution update
- * temporarily before its contents is swapped with the old vector.
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   void TimeStepping<dim>::prepare()
- *   {
- *     TimerOutput::Scope scope(computing_timer,
- *                              "time_stepping - prepare scratch space");
- * 
- *     for (auto &it : temporary_vector)
- *       it.reinit(offline_data->partitioner);
- * 
- *     dij_matrix.reinit(offline_data->sparsity_pattern);
- *   }
- * 
- * @endcode
- * 
- * It is now time to implement the forward Euler step. Given a (writable
- * reference) to the old state <code>U</code> at time $t$ we update the
- * state <code>U</code> in place and return the chosen time-step size. We
- * first declare a number of read-only references to various different
- * variables and data structures. We do this is mainly to have shorter
- * variable names (e.g., <code>sparsity</code> instead of
- * <code>offline_data->sparsity_pattern</code>).
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   double TimeStepping<dim>::make_one_step(vector_type &U, double t)
- *   {
- *     const auto &n_locally_owned    = offline_data->n_locally_owned;
- *     const auto &n_locally_relevant = offline_data->n_locally_relevant;
- * 
- *     const std_cxx20::ranges::iota_view<unsigned int, unsigned int>
- *       indices_owned(0, n_locally_owned);
- *     const std_cxx20::ranges::iota_view<unsigned int, unsigned int>
- *       indices_relevant(0, n_locally_relevant);
- * 
- *     const auto &sparsity = offline_data->sparsity_pattern;
- * 
- *     const auto &lumped_mass_matrix = offline_data->lumped_mass_matrix;
- *     const auto &norm_matrix        = offline_data->norm_matrix;
- *     const auto &nij_matrix         = offline_data->nij_matrix;
- *     const auto &cij_matrix         = offline_data->cij_matrix;
- * 
- *     const auto &boundary_normal_map = offline_data->boundary_normal_map;
- * 
- * @endcode
- * 
- * <b>Step 1</b>: Computing the $d_{ij}$ graph viscosity matrix.
- *     
-
- * 
- * It is important to highlight that the viscosity matrix has to be
- * symmetric, i.e., $d_{ij} = d_{ji}$. In this regard we note here that
- * $\int_{\Omega} \nabla \phi_j \phi_i \, \mathrm{d}\mathbf{x}= -
- * \int_{\Omega} \nabla \phi_i \phi_j \, \mathrm{d}\mathbf{x}$ (or
- * equivalently $\mathbf{c}_{ij} = - \mathbf{c}_{ji}$) provided either
- * $\mathbf{x}_i$ or $\mathbf{x}_j$ is a support point located away
- * from the boundary. In this case we can check that
- * $\lambda_{\text{max}} (\mathbf{U}_i^{n}, \mathbf{U}_j^{n},
- * \textbf{n}_{ij}) = \lambda_{\text{max}} (\mathbf{U}_j^{n},
- * \mathbf{U}_i^{n},\textbf{n}_{ji})$ by construction, which guarantees
- * the property $d_{ij} = d_{ji}$.
- *     
-
- * 
- * However, if both support points $\mathbf{x}_i$ or $\mathbf{x}_j$
- * happen to lie on the boundary, then, the equalities $\mathbf{c}_{ij} =
- * - \mathbf{c}_{ji}$ and $\lambda_{\text{max}} (\mathbf{U}_i^{n},
- * \mathbf{U}_j^{n}, \textbf{n}_{ij}) = \lambda_{\text{max}}
- * (\mathbf{U}_j^{n}, \mathbf{U}_i^{n}, \textbf{n}_{ji})$ do not
- * necessarily hold true. The only mathematically safe solution for this
- * dilemma is to compute both of them $d_{ij}$ and $d_{ji}$ and
- * take the maximum.
- *     
-
- * 
- * Overall, the computation of $d_{ij}$ is quite expensive. In
- * order to save some computing time we exploit the fact that the viscosity
- * matrix has to be symmetric (as mentioned above): we only compute
- * the upper-triangular entries of $d_{ij}$ and copy the
- * corresponding entries to the lower-triangular counterpart.
- *     
-
- * 
- * We use again parallel::apply_to_subranges() for thread-parallel for
- * loops. Pretty much all the ideas for parallel traversal that we
- * introduced when discussing the assembly of the matrix
- * <code>norm_matrix</code> and the normalization of
- * <code>nij_matrix</code> above are used here again.
- *     
-
- * 
- * We define again a "worker" function <code>on_subranges</code> that
- * computes the viscosity $d_{ij}$ for a subrange [i1, i2) of column
- * indices:
- * 
- * @code
- *     {
- *       TimerOutput::Scope scope(computing_timer,
- *                                "time_stepping - 1 compute d_ij");
- * 
- *       const auto on_subranges = 
- *         [&](const auto i1, const auto i2) {
- *           for (const auto i :
- *                std_cxx20::ranges::iota_view<unsigned int, unsigned int>(*i1,
- *                                                                         *i2))
- *             {
- *               const auto U_i = gather(U, i);
- * 
- * @endcode
- * 
- * For a given column index i we iterate over the columns of the
- * sparsity pattern from <code>sparsity.begin(i)</code> to
- * <code>sparsity.end(i)</code>:
- * 
- * @code
- *               for (auto jt = sparsity.begin(i); jt != sparsity.end(i); ++jt)
- *                 {
- *                   const auto j = jt->column();
- * 
- * @endcode
- * 
- * We only compute $d_{ij}$ if $j < i$ (upper triangular
- * entries) and later copy the values over to $d_{ji}$.
- * 
- * @code
- *                   if (j >= i)
- *                     continue;
- * 
- *                   const auto U_j = gather(U, j);
- * 
- *                   const auto   n_ij = gather_get_entry(nij_matrix, jt);
- *                   const double norm = get_entry(norm_matrix, jt);
- * 
- *                   const auto lambda_max =
- *                     ProblemDescription<dim>::compute_lambda_max(U_i, U_j, n_ij);
- * 
- *                   double d = norm * lambda_max;
- * 
- * @endcode
- * 
- * If both support points happen to be at the boundary we
- * have to compute $d_{ji}$ as well and then take
- * $\max(d_{ij},d_{ji})$. After this we can finally set the
- * upper triangular and lower triangular entries.
- * 
- * @code
- *                   if (boundary_normal_map.count(i) != 0 &&
- *                       boundary_normal_map.count(j) != 0)
- *                     {
- *                       const auto n_ji = gather(nij_matrix, j, i);
- *                       const auto lambda_max_2 =
- *                         ProblemDescription<dim>::compute_lambda_max(U_j,
- *                                                                     U_i,
- *                                                                     n_ji);
- *                       const double norm_2 = norm_matrix(j, i);
- * 
- *                       d = std::max(d, norm_2 * lambda_max_2);
- *                     }
- * 
- *                   set_entry(dij_matrix, jt, d);
- *                   dij_matrix(j, i) = d;
- *                 }
- *             }
- *         };
- * 
- *       parallel::apply_to_subranges(indices_relevant.begin(),
- *                                    indices_relevant.end(),
- *                                    on_subranges,
- *                                    4096);
- *     }
- * 
- * @endcode
- * 
- * <b>Step 2</b>: Compute diagonal entries $d_{ii}$ and
- * $\tau_{\text{max}}$.
- * 
-
- * 
- * So far we have computed all off-diagonal entries of the matrix
- * <code>dij_matrix</code>. We still have to fill its diagonal entries
- * defined as $d_{ii}^n = - \sum_{j \in \mathcal{I}(i)\backslash \{i\}}
- * d_{ij}^n$. We use again parallel::apply_to_subranges() for this
- * purpose. While computing the $d_{ii}$s we also determine the
- * largest admissible time-step, which is defined as
- * \f[
- * \tau_n \dealcoloneq c_{\text{cfl}}\,\min_{i\in\mathcal{V}}
- * \left(\frac{m_i}{-2\,d_{ii}^{n}}\right) \, .
- * \f]
- * Note that the operation $\min_{i \in \mathcal{V}}$ is intrinsically
- * global, it operates on all nodes: first we have to take the minimum
- * over all threads (of a given node) and then we have to take the
- * minimum over all MPI processes. In the current implementation:
- * - We store  <code>tau_max</code> (per node) as
- * <a
- * href="http://www.cplusplus.com/reference/atomic/atomic/"><code>std::atomic<double></code></a>.
- * The internal implementation of <code>std::atomic</code> will take
- * care of guarding any possible race condition when more than one
- * thread attempts to read and/or write <code>tau_max</code> at the
- * same time.
- * - In order to take the minimum over all MPI process we use the utility
- * function <code>Utilities::MPI::min</code>.
- * 
-
- * 
- * 
- * @code
- *     std::atomic<double> tau_max{std::numeric_limits<double>::infinity()};
- * 
- *     {
- *       TimerOutput::Scope scope(computing_timer,
- *                                "time_stepping - 2 compute d_ii, and tau_max");
- * 
- * @endcode
- * 
- * on_subranges() will be executed on every thread individually. The
- * variable <code>tau_max_on_subrange</code> is thus stored thread
- * locally.
- * 
-
- * 
- * 
- * @code
- *       const auto on_subranges = 
- *         [&](const auto i1, const auto i2) {
- *           double tau_max_on_subrange = std::numeric_limits<double>::infinity();
- * 
- *           for (const auto i :
- *                std_cxx20::ranges::iota_view<unsigned int, unsigned int>(*i1,
- *                                                                         *i2))
- *             {
- *               double d_sum = 0.;
- * 
- *               for (auto jt = sparsity.begin(i); jt != sparsity.end(i); ++jt)
- *                 {
- *                   const auto j = jt->column();
- * 
- *                   if (j == i)
- *                     continue;
- * 
- *                   d_sum -= get_entry(dij_matrix, jt);
- *                 }
- * 
- * @endcode
- * 
- * We store the negative sum of the d_ij entries at the
- * diagonal position
- * 
- * @code
- *               dij_matrix.diag_element(i) = d_sum;
- * @endcode
- * 
- * and compute the maximal local time-step size
- * <code>tau</code>:
- * 
- * @code
- *               const double mass   = lumped_mass_matrix.diag_element(i);
- *               const double tau    = cfl_update * mass / (-2. * d_sum);
- *               tau_max_on_subrange = std::min(tau_max_on_subrange, tau);
- *             }
- * 
- * @endcode
- * 
- * <code>tau_max_on_subrange</code> contains the largest possible
- * time-step size computed for the (thread local) subrange. At this
- * point we have to synchronize the value over all threads. This is
- * were we use the <a
- * href="http://www.cplusplus.com/reference/atomic/atomic/"><code>std::atomic<double></code></a>
- * <i>compare exchange</i> update mechanism:
- * 
- * @code
- *           double current_tau_max = tau_max.load();
- *           while (current_tau_max > tau_max_on_subrange &&
- *                  !tau_max.compare_exchange_weak(current_tau_max,
- *                                                 tau_max_on_subrange))
- *             ;
- *         };
- * 
- *       parallel::apply_to_subranges(indices_relevant.begin(),
- *                                    indices_relevant.end(),
- *                                    on_subranges,
- *                                    4096);
- * 
- * @endcode
- * 
- * After all threads have finished we can simply synchronize the
- * value over all MPI processes:
- * 
-
- * 
- * 
- * @code
- *       tau_max.store(Utilities::MPI::min(tau_max.load(), mpi_communicator));
- * 
- * @endcode
- * 
- * This is a good point to verify that the computed
- * <code>tau_max</code> is indeed a valid floating point number.
- * 
- * @code
- *       AssertThrow(
- *         !std::isnan(tau_max.load()) && !std::isinf(tau_max.load()) &&
- *           tau_max.load() > 0.,
- *         ExcMessage(
- *           "I'm sorry, Dave. I'm afraid I can't do that. - We crashed."));
- *     }
- * 
- * @endcode
- * 
- * <b>Step 3</b>: Perform update.
- * 
-
- * 
- * At this point, we have computed all viscosity coefficients $d_{ij}$
- * and we know the maximal admissible time-step size
- * $\tau_{\text{max}}$. This means we can now compute the update:
- *     
-
- * 
- * \f[
- * \mathbf{U}_i^{n+1} = \mathbf{U}_i^{n} - \frac{\tau_{\text{max}} }{m_i}
- * \sum_{j \in \mathcal{I}(i)} (\mathbb{f}(\mathbf{U}_j^{n}) -
- * \mathbb{f}(\mathbf{U}_i^{n})) \cdot \mathbf{c}_{ij} - d_{ij}
- * (\mathbf{U}_j^{n} - \mathbf{U}_i^{n})
- * \f]
- *     
-
- * 
- * This update formula is slightly different from what was discussed in
- * the introduction (in the pseudo-code). However, it can be shown that
- * both equations are algebraically equivalent (they will produce the
- * same numerical values). We favor this second formula since it has
- * natural cancellation properties that might help avoid numerical
- * artifacts.
- * 
-
- * 
- * 
- * @code
- *     {
- *       TimerOutput::Scope scope(computing_timer,
- *                                "time_stepping - 3 perform update");
- * 
- *       const auto on_subranges = 
- *         [&](const auto i1, const auto i2) {
- *           for (const auto i : boost::make_iterator_range(i1, i2))
- *             {
- *               Assert(i < n_locally_owned, ExcInternalError());
- * 
- *               const auto U_i = gather(U, i);
- * 
- *               const auto   f_i = ProblemDescription<dim>::flux(U_i);
- *               const double m_i = lumped_mass_matrix.diag_element(i);
- * 
- *               auto U_i_new = U_i;
- * 
- *               for (auto jt = sparsity.begin(i); jt != sparsity.end(i); ++jt)
- *                 {
- *                   const auto j = jt->column();
- * 
- *                   const auto U_j = gather(U, j);
- *                   const auto f_j = ProblemDescription<dim>::flux(U_j);
- * 
- *                   const auto c_ij = gather_get_entry(cij_matrix, jt);
- *                   const auto d_ij = get_entry(dij_matrix, jt);
- * 
- *                   for (unsigned int k = 0; k < problem_dimension; ++k)
- *                     {
- *                       U_i_new[k] +=
- *                         tau_max / m_i *
- *                         (-(f_j[k] - f_i[k]) * c_ij + d_ij * (U_j[k] - U_i[k]));
- *                     }
- *                 }
- * 
- *               scatter(temporary_vector, U_i_new, i);
- *             }
- *         };
- * 
- *       parallel::apply_to_subranges(indices_owned.begin(),
- *                                    indices_owned.end(),
- *                                    on_subranges,
- *                                    4096);
- *     }
- * 
- * @endcode
- * 
- * <b>Step 4</b>: Fix up boundary states.
- * 
-
- * 
- * As a last step in the Forward Euler method, we have to fix up all
- * boundary states. As discussed in the intro we
- * - advance in time satisfying no boundary condition at all,
- * - at the end of the time step enforce boundary conditions strongly
- * in a post-processing step.
- *     
-
- * 
- * Here, we compute the correction
- * \f[
- * \mathbf{m}_i \dealcoloneq \mathbf{m}_i - (\boldsymbol{\nu}_i \cdot
- * \mathbf{m}_i) \boldsymbol{\nu}_i,
- * \f]
- * which removes the normal component of $\mathbf{m}$.
- * 
-
- * 
- * 
- * @code
- *     {
- *       TimerOutput::Scope scope(computing_timer,
- *                                "time_stepping - 4 fix boundary states");
- * 
- *       for (auto it : boundary_normal_map)
- *         {
- *           const auto i = it.first;
- * 
- * @endcode
- * 
- * We only iterate over the locally owned subset:
- * 
- * @code
- *           if (i >= n_locally_owned)
- *             continue;
- * 
- *           const auto &normal   = std::get<0>(it.second);
- *           const auto &id       = std::get<1>(it.second);
- *           const auto &position = std::get<2>(it.second);
- * 
- *           auto U_i = gather(temporary_vector, i);
- * 
- * @endcode
- * 
- * On free slip boundaries we remove the normal component of the
- * momentum:
- * 
- * @code
- *           if (id == Boundaries::free_slip)
- *             {
- *               auto m = ProblemDescription<dim>::momentum(U_i);
- *               m -= (m * normal) * normal;
- *               for (unsigned int k = 0; k < dim; ++k)
- *                 U_i[k + 1] = m[k];
- *             }
- * 
- * @endcode
- * 
- * On Dirichlet boundaries we enforce initial conditions
- * strongly:
- * 
- * @code
- *           else if (id == Boundaries::dirichlet)
- *             {
- *               U_i = initial_values->initial_state(position, t + tau_max);
- *             }
- * 
- *           scatter(temporary_vector, U_i, i);
- *         }
- *     }
- * 
- * @endcode
- * 
- * <b>Step 5</b>: We now update the ghost layer over all MPI ranks,
- * swap the temporary vector with the solution vector <code>U</code>
- * (that will get returned by reference) and return the chosen
- * time-step size $\tau_{\text{max}}$:
- * 
-
- * 
- * 
- * @code
- *     for (auto &it : temporary_vector)
- *       it.update_ghost_values();
- * 
- *     U.swap(temporary_vector);
- * 
- *     return tau_max;
- *   }
- * 
- * @endcode
- * 
- * 
- * <a name="Schlierenpostprocessing"></a> 
- * <h4>Schlieren postprocessing</h4>
- *   
-
- * 
- * At various intervals we will output the current state <code>U</code>
- * of the solution together with a so-called Schlieren plot.
- * The constructor of the <code>SchlierenPostprocessor</code> class again
- * contains no surprises. We simply supply default values to and register
- * two parameters:
- * - schlieren_beta:
- * is an ad-hoc positive amplification factor in order to enhance the
- * contrast in the visualization. Its actual value is a matter of
- * taste.
- * - schlieren_index: is an integer indicating which component of the
- * state $[\rho, \mathbf{m},E]$ are we going to use in order to generate
- * the visualization.
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   SchlierenPostprocessor<dim>::SchlierenPostprocessor(
- *     const MPI_Comm          mpi_communicator,
- *     TimerOutput &           computing_timer,
- *     const OfflineData<dim> &offline_data,
- *     const std::string &     subsection /*= "SchlierenPostprocessor"*/)
- *     : ParameterAcceptor(subsection)
- *     , mpi_communicator(mpi_communicator)
- *     , computing_timer(computing_timer)
- *     , offline_data(&offline_data)
- *   {
- *     schlieren_beta = 10.;
- *     add_parameter("schlieren beta",
- *                   schlieren_beta,
- *                   "Beta factor used in Schlieren-type postprocessor");
- * 
- *     schlieren_index = 0;
- *     add_parameter("schlieren index",
- *                   schlieren_index,
- *                   "Use the corresponding component of the state vector for the "
- *                   "schlieren plot");
- *   }
- * 
- * @endcode
- * 
- * Again, the <code>prepare()</code> function initializes two temporary
- * the vectors (<code>r</code> and <code>schlieren</code>).
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   void SchlierenPostprocessor<dim>::prepare()
- *   {
- *     TimerOutput::Scope scope(computing_timer,
- *                              "schlieren_postprocessor - prepare scratch space");
- * 
- *     r.reinit(offline_data->n_locally_relevant);
- *     schlieren.reinit(offline_data->partitioner);
- *   }
- * 
- * @endcode
- * 
- * We now discuss the implementation of the class member
- * <code>SchlierenPostprocessor<dim>::compute_schlieren()</code>, which
- * basically takes a component of the state vector <code>U</code> and
- * computes the Schlieren indicator for such component (the formula of the
- * Schlieren indicator can be found just before the declaration of the class
- * <code>SchlierenPostprocessor</code>). We start by noting
- * that this formula requires the "nodal gradients" $\nabla r_j$.
- * However, nodal values of gradients are not defined for $\mathcal{C}^0$
- * finite element functions. More generally, pointwise values of
- * gradients are not defined for $W^{1,p}(\Omega)$ functions. The
- * simplest technique we can use to recover gradients at nodes is
- * weighted-averaging i.e.
- *   
-
- * 
- * \f[ \nabla r_j \dealcoloneq \frac{1}{\int_{S_i} \omega_i(\mathbf{x}) \,
- * \mathrm{d}\mathbf{x}}
- * \int_{S_i} r_h(\mathbf{x}) \omega_i(\mathbf{x}) \, \mathrm{d}\mathbf{x}
- * \ \ \ \ \ \mathbf{(*)} \f]
- *   
-
- * 
- * where $S_i$ is the support of the shape function $\phi_i$, and
- * $\omega_i(\mathbf{x})$ is the weight. The weight could be any
- * positive function such as
- * $\omega_i(\mathbf{x}) \equiv 1$ (that would allow us to recover the usual
- * notion of mean value). But as usual, the goal is to reuse the off-line
- * data as much as possible. In this sense, the most natural
- * choice of weight is $\omega_i = \phi_i$. Inserting this choice of
- * weight and the expansion $r_h(\mathbf{x}) = \sum_{j \in \mathcal{V}}
- * r_j \phi_j(\mathbf{x})$ into $\mathbf{(*)}$ we get :
- *   
-
- * 
- * \f[ \nabla r_j \dealcoloneq \frac{1}{m_i} \sum_{j \in \mathcal{I}(i)} r_j
- * \mathbf{c}_{ij} \ \ \ \ \ \mathbf{(**)} \, . \f]
- *   
-
- * 
- * Using this last formula we can recover averaged nodal gradients without
- * resorting to any form of quadrature. This idea aligns quite well with
- * the whole spirit of edge-based schemes (or algebraic schemes) where
- * we want to operate on matrices and vectors as directly as
- * it could be possible avoiding by all means assembly of bilinear
- * forms, cell-loops, quadrature, or any other
- * intermediate construct/operation between the input arguments (the state
- * from the previous time-step) and the actual matrices and vectors
- * required to compute the update.
- *   
-
- * 
- * The second thing to note is that we have to compute global minimum and
- * maximum $\max_j |\nabla r_j|$ and $\min_j |\nabla r_j|$. Following the
- * same ideas used to compute the time step size in the class member
- * <code>%TimeStepping\<dim>::%step()</code> we define $\max_j |\nabla r_j|$
- * and $\min_j |\nabla r_j|$ as atomic doubles in order to resolve any
- * conflicts between threads. As usual, we use
- * <code>Utilities::MPI::max()</code> and
- * <code>Utilities::MPI::min()</code> to find the global maximum/minimum
- * among all MPI processes.
- *   
-
- * 
- * Finally, it is not possible to compute the Schlieren indicator in a single
- * loop over all nodes. The entire operation requires two loops over nodes:
- *   
-
- * 
- * - The first loop computes $|\nabla r_i|$ for all $i \in \mathcal{V}$ in
- * the mesh, and the bounds $\max_j |\nabla r_j|$ and
- * $\min_j |\nabla r_j|$.
- * - The second loop finally computes the Schlieren indicator using the
- * formula
- *   
-
- * 
- * \f[ \text{schlieren}[i] = e^{\beta \frac{ |\nabla r_i|
- * - \min_j |\nabla r_j| }{\max_j |\nabla r_j| - \min_j |\nabla r_j| } }
- * \, . \f]
- *   
-
- * 
- * This means that we will have to define two workers
- * <code>on_subranges</code> for each one of these stages.
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   void SchlierenPostprocessor<dim>::compute_schlieren(const vector_type &U)
- *   {
- *     TimerOutput::Scope scope(
- *       computing_timer, "schlieren_postprocessor - compute schlieren plot");
- * 
- *     const auto &sparsity            = offline_data->sparsity_pattern;
- *     const auto &lumped_mass_matrix  = offline_data->lumped_mass_matrix;
- *     const auto &cij_matrix          = offline_data->cij_matrix;
- *     const auto &boundary_normal_map = offline_data->boundary_normal_map;
- *     const auto &n_locally_owned     = offline_data->n_locally_owned;
- * 
- *     const auto indices =
- *       std_cxx20::ranges::iota_view<unsigned int, unsigned int>(0,
- *                                                                n_locally_owned);
- * 
- * @endcode
- * 
- * We define the r_i_max and r_i_min in the current MPI process as
- * atomic doubles in order to avoid race conditions between threads:
- * 
- * @code
- *     std::atomic<double> r_i_max{0.};
- *     std::atomic<double> r_i_min{std::numeric_limits<double>::infinity()};
- * 
- * @endcode
- * 
- * First loop: compute the averaged gradient at each node and the
- * global maxima and minima of the gradients.
- * 
- * @code
- *     {
- *       const auto on_subranges = 
- *         [&](const auto i1, const auto i2) {
- *           double r_i_max_on_subrange = 0.;
- *           double r_i_min_on_subrange = std::numeric_limits<double>::infinity();
- * 
- *           for (const auto i : boost::make_iterator_range(i1, i2))
- *             {
- *               Assert(i < n_locally_owned, ExcInternalError());
- * 
- *               Tensor<1, dim> r_i;
- * 
- *               for (auto jt = sparsity.begin(i); jt != sparsity.end(i); ++jt)
- *                 {
- *                   const auto j = jt->column();
- * 
- *                   if (i == j)
- *                     continue;
- * 
- *                   const auto U_js = U[schlieren_index].local_element(j);
- *                   const auto c_ij = gather_get_entry(cij_matrix, jt);
- *                   r_i += c_ij * U_js;
- *                 }
- * 
- * @endcode
- * 
- * We fix up the gradient r_i at free slip boundaries similarly to
- * how we fixed up boundary states in the forward Euler step.
- * This avoids sharp, artificial gradients in the Schlieren
- * plot at free slip boundaries and is a purely cosmetic choice.
- * 
-
- * 
- * 
- * @code
- *               const auto bnm_it = boundary_normal_map.find(i);
- *               if (bnm_it != boundary_normal_map.end())
- *                 {
- *                   const auto &normal = std::get<0>(bnm_it->second);
- *                   const auto &id     = std::get<1>(bnm_it->second);
- * 
- *                   if (id == Boundaries::free_slip)
- *                     r_i -= 1. * (r_i * normal) * normal;
- *                   else
- *                     r_i = 0.;
- *                 }
- * 
- * @endcode
- * 
- * We remind the reader that we are not interested in the nodal
- * gradients per se. We only want their norms in order to
- * compute the Schlieren indicator (weighted with the lumped
- * mass matrix $m_i$):
- * 
- * @code
- *               const double m_i    = lumped_mass_matrix.diag_element(i);
- *               r[i]                = r_i.norm() / m_i;
- *               r_i_max_on_subrange = std::max(r_i_max_on_subrange, r[i]);
- *               r_i_min_on_subrange = std::min(r_i_min_on_subrange, r[i]);
- *             }
- * 
- * @endcode
- * 
- * We compare the current_r_i_max and current_r_i_min (in the
- * current subrange) with r_i_max and r_i_min (for the current MPI
- * process) and update them if necessary:
- * 
-
- * 
- * 
- * @code
- *           double current_r_i_max = r_i_max.load();
- *           while (current_r_i_max < r_i_max_on_subrange &&
- *                  !r_i_max.compare_exchange_weak(current_r_i_max,
- *                                                 r_i_max_on_subrange))
- *             ;
- * 
- *           double current_r_i_min = r_i_min.load();
- *           while (current_r_i_min > r_i_min_on_subrange &&
- *                  !r_i_min.compare_exchange_weak(current_r_i_min,
- *                                                 r_i_min_on_subrange))
- *             ;
- *         };
- * 
- *       parallel::apply_to_subranges(indices.begin(),
- *                                    indices.end(),
- *                                    on_subranges,
- *                                    4096);
- *     }
- * 
- * @endcode
- * 
- * And synchronize <code>r_i_max</code> and <code>r_i_min</code> over
- * all MPI processes.
- * 
-
- * 
- * 
- * @code
- *     r_i_max.store(Utilities::MPI::max(r_i_max.load(), mpi_communicator));
- *     r_i_min.store(Utilities::MPI::min(r_i_min.load(), mpi_communicator));
- * 
- * @endcode
- * 
- * Second loop: we now have the vector <code>r</code> and the scalars
- * <code>r_i_max</code> and <code>r_i_min</code> at our disposal. We
- * are thus in a position to actually compute the Schlieren indicator.
- * 
-
- * 
- * 
- * @code
- *     {
- *       const auto on_subranges = 
- *         [&](const auto i1, const auto i2) {
- *           for (const auto i : boost::make_iterator_range(i1, i2))
- *             {
- *               Assert(i < n_locally_owned, ExcInternalError());
- * 
- *               schlieren.local_element(i) =
- *                 1. - std::exp(-schlieren_beta * (r[i] - r_i_min) /
- *                               (r_i_max - r_i_min));
- *             }
- *         };
- * 
- *       parallel::apply_to_subranges(indices.begin(),
- *                                    indices.end(),
- *                                    on_subranges,
- *                                    4096);
- *     }
- * 
- * @endcode
- * 
- * And finally, exchange ghost elements.
- * 
- * @code
- *     schlieren.update_ghost_values();
- *   }
- * 
- * @endcode
- * 
- * 
- * <a name="Themainloop"></a> 
- * <h4>The main loop</h4>
- *   
-
- * 
- * With all classes implemented it is time to create an instance of
- * <code>Discretization<dim></code>, <code>OfflineData<dim></code>,
- * <code>InitialValues<dim></code>, <code>%TimeStepping\<dim></code>, and
- * <code>SchlierenPostprocessor<dim></code>, and run the forward Euler
- * step in a loop.
- *   
-
- * 
- * In the constructor of <code>MainLoop<dim></code> we now initialize an
- * instance of all classes, and declare a number of parameters
- * controlling output. Most notable, we declare a boolean parameter
- * <code>resume</code> that will control whether the program attempts to
- * restart from an interrupted computation, or not.
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   MainLoop<dim>::MainLoop(const MPI_Comm mpi_communicator)
- *     : ParameterAcceptor("A - MainLoop")
- *     , mpi_communicator(mpi_communicator)
- *     , computing_timer(mpi_communicator,
- *                       timer_output,
- *                       TimerOutput::never,
- *                       TimerOutput::cpu_and_wall_times)
- *     , pcout(std::cout, Utilities::MPI::this_mpi_process(mpi_communicator) == 0)
- *     , discretization(mpi_communicator, computing_timer, "B - Discretization")
- *     , offline_data(mpi_communicator,
- *                    computing_timer,
- *                    discretization,
- *                    "C - OfflineData")
- *     , initial_values("D - InitialValues")
- *     , time_stepping(mpi_communicator,
- *                     computing_timer,
- *                     offline_data,
- *                     initial_values,
- *                     "E - TimeStepping")
- *     , schlieren_postprocessor(mpi_communicator,
- *                               computing_timer,
- *                               offline_data,
- *                               "F - SchlierenPostprocessor")
- *   {
- *     base_name = "test";
- *     add_parameter("basename", base_name, "Base name for all output files");
- * 
- *     t_final = 4.;
- *     add_parameter("final time", t_final, "Final time");
- * 
- *     output_granularity = 0.02;
- *     add_parameter("output granularity",
- *                   output_granularity,
- *                   "time interval for output");
- * 
- *     asynchronous_writeback = true;
- *     add_parameter("asynchronous writeback",
- *                   asynchronous_writeback,
- *                   "Write out solution in a background thread performing IO");
- * 
- *     resume = false;
- *     add_parameter("resume", resume, "Resume an interrupted computation.");
- *   }
- * 
- * @endcode
- * 
- * We start by implementing a helper function <code>print_head()</code>
- * in an anonymous namespace that is used to output messages in the
- * terminal with some nice formatting.
- * 
-
- * 
- * 
- * @code
- *   namespace
- *   {
- *     void print_head(ConditionalOStream &pcout,
- *                     const std::string & header,
- *                     const std::string & secondary = "")
- *     {
- *       const auto header_size   = header.size();
- *       const auto padded_header = std::string((34 - header_size) / 2, ' ') +
- *                                  header +
- *                                  std::string((35 - header_size) / 2, ' ');
- * 
- *       const auto secondary_size = secondary.size();
- *       const auto padded_secondary =
- *         std::string((34 - secondary_size) / 2, ' ') + secondary +
- *         std::string((35 - secondary_size) / 2, ' ');
- * 
- *       /* clang-format off */
- *       pcout << std::endl;
- *       pcout << "    ####################################################" << std::endl;
- *       pcout << "    #########                                  #########" << std::endl;
- *       pcout << "    #########"     <<  padded_header   <<     "#########" << std::endl;
- *       pcout << "    #########"     << padded_secondary <<     "#########" << std::endl;
- *       pcout << "    #########                                  #########" << std::endl;
- *       pcout << "    ####################################################" << std::endl;
- *       pcout << std::endl;
- *       /* clang-format on */
- *     }
- *   } // namespace
- * 
- * @endcode
- * 
- * With <code>print_head</code> in place it is now time to implement the
- * <code>MainLoop<dim>::run()</code> that contains the main loop of our
- * program.
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   void MainLoop<dim>::run()
- *   {
- * @endcode
- * 
- * We start by reading in parameters and initializing all objects. We
- * note here that the call to ParameterAcceptor::initialize reads in
- * all parameters from the parameter file (whose name is given as a
- * string argument). ParameterAcceptor handles a global
- * ParameterHandler that is initialized with subsections and parameter
- * declarations for all class instances that are derived from
- * ParameterAceptor. The call to initialize enters the subsection for
- * each each derived class, and sets all variables that were added
- * using ParameterAcceptor::add_parameter()
- * 
-
- * 
- * 
- * @code
- *     pcout << "Reading parameters and allocating objects... " << std::flush;
- * 
- *     ParameterAcceptor::initialize("step-69.prm");
- *     pcout << "done" << std::endl;
- * 
- * @endcode
- * 
- * Next we create the triangulation, assemble all matrices, set up
- * scratch space, and initialize the DataOut<dim> object:
- * 
-
- * 
- * 
- * @code
- *     {
- *       print_head(pcout, "create triangulation");
- *       discretization.setup();
- * 
- *       pcout << "Number of active cells:       "
- *             << discretization.triangulation.n_global_active_cells()
- *             << std::endl;
- * 
- *       print_head(pcout, "compute offline data");
- *       offline_data.setup();
- *       offline_data.assemble();
- * 
- *       pcout << "Number of degrees of freedom: "
- *             << offline_data.dof_handler.n_dofs() << std::endl;
- * 
- *       print_head(pcout, "set up time step");
- *       time_stepping.prepare();
- *       schlieren_postprocessor.prepare();
- *     }
- * 
- * @endcode
- * 
- * We will store the current time and state in the variable
- * <code>t</code> and vector <code>U</code>:
- * 
-
- * 
- * 
- * @code
- *     double       t            = 0.;
- *     unsigned int output_cycle = 0;
- * 
- *     print_head(pcout, "interpolate initial values");
- *     vector_type U = interpolate_initial_values();
- * 
- * @endcode
- * 
- * 
- * <a name="Resume"></a> 
- * <h5>Resume</h5>
- *     
-
- * 
- * By default the boolean <code>resume</code> is set to false, i.e. the
- * following code snippet is not run. However, if
- * <code>resume==true</code> we indicate that we have indeed an
- * interrupted computation and the program shall restart by reading in
- * an old state consisting of <code>t</code>,
- * <code>output_cycle</code>, and <code>U</code> from a checkpoint
- * file. These checkpoint files will be created in the
- * <code>output()</code> routine discussed below.
- * 
-
- * 
- * 
- * @code
- *     if (resume)
- *       {
- *         print_head(pcout, "restore interrupted computation");
- * 
- *         const unsigned int i =
- *           discretization.triangulation.locally_owned_subdomain();
- * 
- *         const std::string name = base_name + "-checkpoint-" +
- *                                  Utilities::int_to_string(i, 4) + ".archive";
- *         std::ifstream file(name, std::ios::binary);
- * 
- * @endcode
- * 
- * We use a <code>boost::archive</code> to store and read in the
- * contents the checkpointed state.
- * 
-
- * 
- * 
- * @code
- *         boost::archive::binary_iarchive ia(file);
- *         ia >> t >> output_cycle;
- * 
- *         for (auto &it1 : U)
- *           {
- * @endcode
- * 
- * <code>it1</code> iterates over all components of the state
- * vector <code>U</code>. We read in every entry of the
- * component in sequence and update the ghost layer afterwards:
- * 
- * @code
- *             for (auto &it2 : it1)
- *               ia >> it2;
- *             it1.update_ghost_values();
- *           }
- *       }
- * 
- * @endcode
- * 
- * With either the initial state set up, or an interrupted state
- * restored it is time to enter the main loop:
- * 
-
- * 
- * 
- * @code
- *     output(U, base_name, t, output_cycle++);
- * 
- *     print_head(pcout, "enter main loop");
- * 
- *     for (unsigned int cycle = 1; t < t_final; ++cycle)
- *       {
- * @endcode
- * 
- * We first print an informative status message
- * 
-
- * 
- * 
- * @code
- *         std::ostringstream head;
- *         std::ostringstream secondary;
- * 
- *         head << "Cycle  " << Utilities::int_to_string(cycle, 6) << "  (" 
- *              << std::fixed << std::setprecision(1) << t / t_final * 100  
- *              << "%)";
- *         secondary << "at time t = " << std::setprecision(8) << std::fixed << t;
- * 
- *         print_head(pcout, head.str(), secondary.str());
- * 
- * @endcode
- * 
- * and then perform a single forward Euler step. Note that the
- * state vector <code>U</code> is updated in place and that
- * <code>time_stepping.make_one_step()</code> returns the chosen step
- * size.
- * 
-
- * 
- * 
- * @code
- *         t += time_stepping.make_one_step(U, t);
- * 
- * @endcode
- * 
- * Post processing, generating output and writing out the current
- * state is a CPU and IO intensive task that we cannot afford to do
- * every time step - in particular with explicit time stepping. We
- * thus only schedule output by calling the <code>output()</code>
- * function if we are past a threshold set by
- * <code>output_granularity</code>.
- * 
-
- * 
- * 
- * @code
- *         if (t > output_cycle * output_granularity)
- *           {
- *             output(U, base_name, t, output_cycle, true);
- *             ++output_cycle;
- *           }
- *       }
- * 
- * @endcode
- * 
- * We wait for any remaining background output thread to finish before
- * printing a summary and exiting.
- * 
- * @code
- *     if (background_thread_state.valid())
- *       background_thread_state.wait();
- * 
- *     computing_timer.print_summary();
- *     pcout << timer_output.str() << std::endl;
- *   }
- * 
- * @endcode
- * 
- * The <code>interpolate_initial_values</code> takes an initial time "t"
- * as input argument and populates a state vector <code>U</code> with the
- * help of the <code>InitialValues<dim>::initial_state</code> object.
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   typename MainLoop<dim>::vector_type
- *   MainLoop<dim>::interpolate_initial_values(const double t)
- *   {
- *     pcout << "MainLoop<dim>::interpolate_initial_values(t = " << t << ")"
- *           << std::endl;
- *     TimerOutput::Scope scope(computing_timer,
- *                              "main_loop - setup scratch space");
- * 
- *     vector_type U;
- * 
- *     for (auto &it : U)
- *       it.reinit(offline_data.partitioner);
- * 
- *     constexpr auto problem_dimension =
- *       ProblemDescription<dim>::problem_dimension;
- * 
- * @endcode
- * 
- * The function signature of
- * <code>InitialValues<dim>::initial_state</code> is not quite right
- * for VectorTools::interpolate(). We work around this issue by, first,
- * creating a lambda function that for a given position <code>x</code>
- * returns just the value of the <code>i</code>th component. This
- * lambda in turn is converted to a dealii::Function with the help of
- * the ScalarFunctionFromFunctionObject wrapper.
- * 
-
- * 
- * 
- * @code
- *     for (unsigned int i = 0; i < problem_dimension; ++i)
- *       VectorTools::interpolate(offline_data.dof_handler,
- *                                ScalarFunctionFromFunctionObject<dim, double>(
- *                                  [&](const Point<dim> &x) {
- *                                    return initial_values.initial_state(x, t)[i];
- *                                  }),
- *                                U[i]);
- * 
- *     for (auto &it : U)
- *       it.update_ghost_values();
- * 
- *     return U;
- *   }
- * 
- * @endcode
- * 
- * 
- * <a name="Outputandcheckpointing"></a> 
- * <h5>Output and checkpointing</h5>
- *   
-
- * 
- * Writing out the final vtk files is quite an IO intensive task that can
- * stall the main loop for a while. In order to avoid this we use an <a
- * href="https://en.wikipedia.org/wiki/Asynchronous_I/O">asynchronous
- * IO</a> strategy by creating a background thread that will perform IO
- * while the main loop is allowed to continue. In order for this to work
- * we have to be mindful of two things:
- * - Before running the <code>output_worker</code> thread, we have to create
- * a copy of the state vector <code>U</code>. We store it in the
- * vector <code>output_vector</code>.
- * - We have to avoid any MPI communication in the background thread,
- * otherwise the program might deadlock. This implies that we have to
- * run the postprocessing outside of the worker thread.
- * 
-
- * 
- * 
- * @code
- *   template <int dim>
- *   void MainLoop<dim>::output(const typename MainLoop<dim>::vector_type &U,
- *                              const std::string &                        name,
- *                              const double                               t,
- *                              const unsigned int                         cycle,
- *                              const bool checkpoint)
- *   {
- *     pcout << "MainLoop<dim>::output(t = " << t
- *           << ", checkpoint = " << checkpoint << ")" << std::endl;
- * 
- * @endcode
- * 
- * If the asynchronous writeback option is set we launch a background
- * thread performing all the slow IO to disc. In that case we have to
- * make sure that the background thread actually finished running. If
- * not, we have to wait to for it to finish. We launch said background
- * thread with <a
- * href="https://en.cppreference.com/w/cpp/thread/async"><code>std::async()</code></a>
- * that returns a <a
- * href="https://en.cppreference.com/w/cpp/thread/future"><code>std::future</code></a>
- * object. This <code>std::future</code> object contains the return
- * value of the function, which is in our case simply
- * <code>void</code>.
- * 
-
- * 
- * 
- * @code
- *     if (background_thread_state.valid())
- *       {
- *         TimerOutput::Scope timer(computing_timer, "main_loop - stalled output");
- *         background_thread_state.wait();
- *       }
- * 
- *     constexpr auto problem_dimension =
- *       ProblemDescription<dim>::problem_dimension;
- * 
- * @endcode
- * 
- * At this point we make a copy of the state vector, run the schlieren
- * postprocessor, and run DataOut<dim>::build_patches() The actual
- * output code is standard: We create a DataOut instance, attach all
- * data vectors we want to output and call
- * DataOut<dim>::build_patches(). There is one twist, however. In order
- * to perform asynchronous IO on a background thread we create the
- * DataOut<dim> object as a shared pointer that we pass on to the
- * worker thread to ensure that once we exit this function and the
- * worker thread finishes the DataOut<dim> object gets destroyed again.
- * 
-
- * 
- * 
- * @code
- *     for (unsigned int i = 0; i < problem_dimension; ++i)
- *       {
- *         output_vector[i] = U[i];
- *         output_vector[i].update_ghost_values();
- *       }
- * 
- *     schlieren_postprocessor.compute_schlieren(output_vector);
- * 
- *     auto data_out = std::make_shared<DataOut<dim>>();
- * 
- *     data_out->attach_dof_handler(offline_data.dof_handler);
- * 
- *     const auto &component_names = ProblemDescription<dim>::component_names;
- * 
- *     for (unsigned int i = 0; i < problem_dimension; ++i)
- *       data_out->add_data_vector(output_vector[i], component_names[i]);
- * 
- *     data_out->add_data_vector(schlieren_postprocessor.schlieren,
- *                               "schlieren_plot");
- * 
- *     data_out->build_patches(discretization.mapping,
- *                             discretization.finite_element.degree - 1);
- * 
- * @endcode
- * 
- * Next we create a lambda function for the background thread. We <a
- * href="https://en.cppreference.com/w/cpp/language/lambda">capture</a>
- * the <code>this</code> pointer as well as most of the arguments of
- * the output function by value so that we have access to them inside
- * the lambda function.
- * 
- * @code
- *     const auto output_worker = [this, name, t, cycle, checkpoint, data_out]() {
- *       if (checkpoint)
- *         {
- * @endcode
- * 
- * We checkpoint the current state by doing the precise inverse
- * operation to what we discussed for the <a href="Resume">resume
- * logic</a>:
- * 
-
- * 
- * 
- * @code
- *           const unsigned int i =
- *             discretization.triangulation.locally_owned_subdomain();
- *           std::string filename =
- *             name + "-checkpoint-" + Utilities::int_to_string(i, 4) + ".archive";
- * 
- *           std::ofstream file(filename, std::ios::binary | std::ios::trunc);
- * 
- *           boost::archive::binary_oarchive oa(file);
- *           oa << t << cycle;
- *           for (const auto &it1 : output_vector)
- *             for (const auto &it2 : it1)
- *               oa << it2;
- *         }
- * 
- *       DataOutBase::VtkFlags flags(t,
- *                                   cycle,
- *                                   true,
- *                                   DataOutBase::VtkFlags::best_speed);
- *       data_out->set_flags(flags);
- * 
- *       data_out->write_vtu_with_pvtu_record(
- *         "", name + "-solution", cycle, mpi_communicator, 6);
- *     };
- * 
- * @endcode
- * 
- * If the asynchronous writeback option is set we launch a new
- * background thread with the help of
- * <a
- * href="https://en.cppreference.com/w/cpp/thread/async"><code>std::async</code></a>
- * function. The function returns a <a
- * href="https://en.cppreference.com/w/cpp/thread/future"><code>std::future</code></a>
- * object that we can use to query the status of the background thread.
- * At this point we can return from the <code>output()</code> function
- * and resume with the time stepping in the main loop - the thread will
- * run in the background.
- * 
- * @code
- *     if (asynchronous_writeback)
- *       {
- *         background_thread_state = std::async(std::launch::async, output_worker);
- *       }
- *     else
- *       {
- *         output_worker();
- *       }
- *   }
- * 
- * } // namespace Step69
- * 
- * @endcode
- * 
- * And finally, the main function.
- * 
-
- * 
- * 
- * @code
- * int main(int argc, char *argv[])
- * {
- *   try
- *     {
- *       constexpr int dim = 2;
- * 
- *       using namespace dealii;
- *       using namespace Step69;
- * 
- *       Utilities::MPI::MPI_InitFinalize mpi_initialization(argc, argv);
- * 
- *       MPI_Comm      mpi_communicator(MPI_COMM_WORLD);
- *       MainLoop<dim> main_loop(mpi_communicator);
- * 
- *       main_loop.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     };
- * }
- * @endcode
-<a name="Results"></a>
-<a name="Results"></a><h1>Results</h1>
-
-
-Running the program with default parameters in release mode takes about 1
-minute on a 4 core machine (with hyperthreading):
+@f} 
+
+其中 $p_i$ 是位于边界的节点上的压力。显然， $\boldsymbol{(3)}$ 是 $\boldsymbol{(2)}$ 的离散对应物。身份 $\boldsymbol{(3)}$ 的证明被省略了，但我们简要地提到，它取决于 $\boldsymbol{(1)}$ 中提供的<i>nodal normal</i> $\widehat{\boldsymbol{\nu}}_i$ 的定义。我们还注意到，这种反映边界条件的执行与最初在  @cite GuermondEtAl2018  中提出的条件不同。<a name="CommProg"></a> <h1> The commented program</h1>
+
+
+<a name="Includefiles"></a> <h3>Include files</h3>
+
+
+
+
+这套包含文件是相当标准的。最耐人寻味的是，我们将完全依靠deal.II数据结构进行MPI并行化，特别是通过 parallel::distributed::Triangulation 和 LinearAlgebra::distributed::Vector 包含的 <code>distributed/tria.h</code> 和 <code>lac/la_parallel_vector.h</code>  。我们将使用非分布式的  dealii::SparseMatrix  (  <code>lac/sparse_matrix.h</code>  ) 来存储  $\mathbf{c}_{ij}$  ,  $\mathbf{n}_{ij}$  和  $d_{ij}$  矩阵的本地部分，而不是 Trilinos, 或 PETSc 特定的矩阵类。
+
+@code
+#include <deal.II/base/conditional_ostream.h>
+#include <deal.II/base/parallel.h>
+#include <deal.II/base/parameter_acceptor.h>
+#include <deal.II/base/partitioner.h>
+#include <deal.II/base/quadrature.h>
+#include <deal.II/base/timer.h>
+#include <deal.II/base/work_stream.h>
+
+
+#include <deal.II/distributed/tria.h>
+
+
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/dofs/dof_renumbering.h>
+#include <deal.II/dofs/dof_tools.h>
+
+
+#include <deal.II/fe/fe.h>
+#include <deal.II/fe/fe_q.h>
+#include <deal.II/fe/fe_values.h>
+#include <deal.II/fe/mapping.h>
+#include <deal.II/fe/mapping_q.h>
+
+
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/manifold_lib.h>
+
+
+#include <deal.II/lac/dynamic_sparsity_pattern.h>
+#include <deal.II/lac/la_parallel_vector.h>
+#include <deal.II/lac/sparse_matrix.h>
+#include <deal.II/lac/sparse_matrix.templates.h>
+#include <deal.II/lac/vector.h>
+
+
+#include <deal.II/meshworker/scratch_data.h>
+
+
+#include <deal.II/numerics/data_out.h>
+#include <deal.II/numerics/vector_tools.h>
+
+
+@endcode 
+
+
+
+除了上述deal.II特定的包括，我们还包括四个提升头。前两个是二进制文件，我们将用它来实现检查点和重启机制。
+
+@code
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+
+
+@endcode 
+
+
+
+最后两个头文件用于在整数区间内创建自定义迭代器范围。
+
+@code
+#include <deal.II/base/std_cxx20/iota_view.h>
+#include <boost/range/iterator_range.hpp>
+
+
+@endcode 
+
+
+
+对于 std::isnan,   std::isinf,   std::ifstream,   std::async, 和 std::future   
+
+@code
+#include <cmath>
+#include <fstream>
+#include <future>
+
+
+
+@endcode 
+
+
+
+
+<a name="Classtemplatedeclarations"></a> <h3>Class template declarations</h3>
+
+
+
+
+我们开始实际的实现，先声明所有的类及其数据结构和方法。与之前的例子步骤相比，我们使用了更精细的概念、数据结构和参数封装到各个类中。因此，一个单一的类通常围绕着一个单一的数据结构（如 <code>Discretization</code> 类中的Triangulation），或者一个单一的方法（如 <code>make_one_step()</code> 类的 <code>%TimeStepping</code> 函数）。我们通常声明参数变量和抓取数据对象为 "私有"，并使其他类使用的方法和数据结构为 "公共"。
+
+
+
+
+  @note  一个更简洁的方法是通过<a
+href="https://en.wikipedia.org/wiki/Mutator_method">getter/setter
+functions</a>来保护对所有数据结构的访问。但为了简洁起见，我们不采用这种方法。
+
+
+
+
+我们还注意到，绝大多数的类都是从ParameterAcceptor派生的。这有利于将所有的全局参数归纳到一个（全局的）ParameterHandler中。关于从ParameterAcceptor继承作为全局订阅机制的更多解释可以在  step-60  中找到。
+
+@code
+namespace Step69
+{
+  using namespace dealii;
+
+
+@endcode 
+
+
+
+我们首先定义一些 types::boundary_id 常量，在整个教程步骤中使用。这使得我们可以用一个助记符（如 <code>do_nothing</code> ）而不是一个数值来指代边界类型。
+
+
+
+
+
+
+
+@code
+  namespace Boundaries
+  {
+    constexpr types::boundary_id do_nothing = 0;
+    constexpr types::boundary_id free_slip  = 1;
+    constexpr types::boundary_id dirichlet  = 2;
+  } // namespace Boundaries
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeDiscretizationcodeclass"></a> <h4>The <code>Discretization</code> class</h4>   
+
+
+类 <code>Discretization</code> 包含所有关于问题的网格（三角形）和离散化（映射、有限元、正交）的数据结构。如前所述，我们使用ParameterAcceptor类来自动填充特定问题的参数，如几何信息（ <code>length</code>  等）或来自参数文件的细化水平（ <code>refinement</code>  ）。这就要求我们把数据结构的初始化分成两个函数。我们在构造函数中初始化所有不依赖于参数的东西，并将网格的创建推迟到 <code>setup()</code> 方法，一旦所有参数通过 ParameterAcceptor::initialize(). 读入，就可以调用该方法。 
+
+@code
+  template <int dim>
+  class Discretization : public ParameterAcceptor
+  {
+  public:
+    Discretization(const MPI_Comm     mpi_communicator,
+                   TimerOutput &      computing_timer,
+                   const std::string &subsection = "Discretization");
+
+
+    void setup();
+
+
+    const MPI_Comm mpi_communicator;
+
+
+    parallel::distributed::Triangulation<dim> triangulation;
+
+
+    const MappingQ<dim>   mapping;
+    const FE_Q<dim>       finite_element;
+    const QGauss<dim>     quadrature;
+    const QGauss<dim - 1> face_quadrature;
+
+
+  private:
+    TimerOutput &computing_timer;
+
+
+    double length;
+    double height;
+    double disk_position;
+    double disk_diameter;
+
+
+    unsigned int refinement;
+  };
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeOfflineDatacodeclass"></a> <h4>The <code>OfflineData</code> class</h4>来调用。   
+
+
+ <code>OfflineData</code> 类包含了离散化中几乎所有不随时间演变的组件，特别是DoFHandler、SparsityPattern、边界图、块状质量矩阵、 $\mathbf{c}_{ij}$ 和 $\mathbf{n}_{ij}$  矩阵。这里，术语<i>offline</i>指的是 <code>OfflineData</code> 的所有类成员都有明确定义的值，与当前时间步长无关。这意味着它们可以提前初始化（在<i>time step zero</i>），并且不意味着在以后的任何时间步长中被修改。例如，稀疏模式不应该随着时间的推进而改变（我们在空间上不做任何形式的适应性）。同样地，包络质量矩阵的条目也不应该随着时间的推进而被修改。   
+
+
+我们还计算并存储一个 <code>boundary_normal_map</code> ，它包含一个从边界自由度的 types::global_dof_index 类型的全局索引到一个由法向量、边界ID和与自由度相关的位置组成的元组的映射。我们必须在这个类中计算和存储这些几何信息，因为我们在后面的代数循环中无法获得几何（或基于单元）的信息。   
+
+
+
+
+  @note  尽管这个类目前没有任何可以从参数文件中读入的参数，但我们还是从ParameterAcceptor派生出来，并遵循与Discretization类相同的习惯，提供一个 <code>setup()</code> (and <code>assemble()</code>  )方法。
+
+@code
+  template <int dim>
+  class OfflineData : public ParameterAcceptor
+  {
+  public:
+    using BoundaryNormalMap =
+      std::map<types::global_dof_index,
+               std::tuple<Tensor<1, dim>, types::boundary_id, Point<dim>>>;
+
+
+    OfflineData(const MPI_Comm             mpi_communicator,
+                TimerOutput &              computing_timer,
+                const Discretization<dim> &discretization,
+                const std::string &        subsection = "OfflineData");
+
+
+    void setup();
+    void assemble();
+
+
+    DoFHandler<dim> dof_handler;
+
+
+    std::shared_ptr<const Utilities::MPI::Partitioner> partitioner;
+
+
+    unsigned int n_locally_owned;
+    unsigned int n_locally_relevant;
+
+
+    SparsityPattern sparsity_pattern;
+
+
+    BoundaryNormalMap boundary_normal_map;
+
+
+    SparseMatrix<double>                  lumped_mass_matrix;
+    std::array<SparseMatrix<double>, dim> cij_matrix;
+    std::array<SparseMatrix<double>, dim> nij_matrix;
+    SparseMatrix<double>                  norm_matrix;
+
+
+  private:
+    const MPI_Comm mpi_communicator;
+    TimerOutput &  computing_timer;
+
+
+    SmartPointer<const Discretization<dim>> discretization;
+  };
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeProblemDescriptioncodeclass"></a><h4>The <code>ProblemDescription</code> class</h4>   
+
+
+该类的成员函数是欧拉方程特有的实用函数和数据结构。
+
+- 类型别名 <code>state_type</code> 用于状态 $\mathbf{U}_i^n$ 。 
+
+- 类型别名  <code>flux_type</code>  用于通量  $\mathbb{f}(\mathbf{U}_j^n)$  。
+
+-  <code>momentum</code>  函数从状态向量  $[\rho,\textbf{m},E]$  中提取  $\textbf{m}$  并将其存储在  <code>Tensor<1, dim></code>  中。
+
+-  <code>internal_energy</code>  函数从给定的状态向量  $[\rho,\textbf{m},E]$  中计算  $E -
+\frac{|\textbf{m}|^2}{2\rho}$  。   
+
+
+类成员  <code>component_names</code>  ,  <code>pressure</code>, and <code>speed_of_sound</code>  的目的从它们的名字就可以看出。我们还提供了一个函数  <code>compute_lambda_max()</code>  ，用于计算上面提到的波速估计，  $\lambda_{max}(\mathbf{U},\mathbf{V},\mathbf{n})$  ，用于计算  $d_{ij}$  矩阵。   
+
+
+
+
+  @note  宏扩展为一个（编译器特定的）pragma，确保在这个类中定义的相应函数总是内联的，也就是说，在每次调用该函数时，函数体都被放在原位，而不会产生调用（和代码指示）。这比 <code>inline</code> 关键字更强，后者或多或少是对编译器的一个（温和的）建议，即程序员认为内联该函数是有益的。  <code>DEAL_II_ALWAYS_INLINE</code> 只应该在像这样的情况下很少使用，而且要谨慎使用，因为我们实际上知道（由于基准测试）内联有关的函数可以提高性能。   
+
+
+最后，我们观察到这是本教程步骤中唯一一个与特定的 "物理学 "或 "双曲守恒定律"（在本例中为欧拉方程）相联系的类。所有其他的类主要是 "离散化 "类，与正在解决的特定物理学不相干。
+
+@code
+  template <int dim>
+  class ProblemDescription
+  {
+  public:
+    static constexpr unsigned int problem_dimension = 2 + dim;
+
+
+    using state_type = Tensor<1, problem_dimension>;
+    using flux_type  = Tensor<1, problem_dimension, Tensor<1, dim>>;
+
+
+    const static std::array<std::string, problem_dimension> component_names;
+
+
+    static constexpr double gamma = 7. / 5.;
+
+
+    static DEAL_II_ALWAYS_INLINE inline Tensor<1, dim>
+    momentum(const state_type &U);
+
+
+    static DEAL_II_ALWAYS_INLINE inline double
+    internal_energy(const state_type &U);
+
+
+    static DEAL_II_ALWAYS_INLINE inline double pressure(const state_type &U);
+
+
+    static DEAL_II_ALWAYS_INLINE inline double
+    speed_of_sound(const state_type &U);
+
+
+    static DEAL_II_ALWAYS_INLINE inline flux_type flux(const state_type &U);
+
+
+    static DEAL_II_ALWAYS_INLINE inline double
+    compute_lambda_max(const state_type &    U_i,
+                       const state_type &    U_j,
+                       const Tensor<1, dim> &n_ij);
+  };
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeInitialValuescodeclass"></a> <h4>The <code>InitialValues</code> class</h4>   
+
+
+类 <code>InitialValues</code> 的唯一公共数据属性是一个 std::function  <code>initial_state</code> ，用于计算给定点和时间的初始状态。这个函数用于填充初始流场，以及在每个时间步骤中明确设置迪里切特边界条件（在流入边界）。   
+
+
+在这个例子中，我们只是实现了一个均匀的流场，其方向和一维原始状态（密度、速度、压力）从参数文件中读取。   
+
+
+最好是一次性初始化该类：初始化/设置参数并定义依赖于这些默认参数的类成员。然而，由于我们不知道参数的实际值，这在一般情况下是没有意义和不安全的（我们希望有机制来检查输入参数的一致性）。我们没有定义另一个 <code>setup()</code> 方法在调用 ParameterAcceptor::initialize() 后被调用（手动），而是为类成员 <code>parse_parameters_call_back()</code> 提供了一个 "实现"，当调用 ParameterAcceptor::initialize() 时，每个继承自ParameterAceptor的类都会自动调用。
+
+@code
+  template <int dim>
+  class InitialValues : public ParameterAcceptor
+  {
+  public:
+    using state_type = typename ProblemDescription<dim>::state_type;
+
+
+    InitialValues(const std::string &subsection = "InitialValues");
+
+
+    std::function<state_type(const Point<dim> &point, double t)> initial_state;
+
+
+  private:
+@endcode 
+
+
+
+我们声明一个私有的回调函数，它将被连接到 ParameterAcceptor::parse_parameters_call_back 信号上。
+
+@code
+    void parse_parameters_callback();
+
+
+    Tensor<1, dim> initial_direction;
+    Tensor<1, 3>   initial_1d_state;
+  };
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeTimeSteppingcodeclass"></a> <h4>The <code>%TimeStepping</code> class</h4>    
+
+
+有了 <code>OfflineData</code> and <code>ProblemDescription</code> 类在手，我们现在可以实现上面讨论中介绍的显式时间步进方案。 <code>%TimeStepping</code> 类的主要方法是<code>make_one_step(vector_type &U, double t)</code>，它接受对状态向量 <code>U</code> and a time point <code>t</code> 的引用（作为输入参数）计算更新的解决方案，将其存储在向量 <code>temp</code>, swaps its contents with the vector <code>U</code> 中，并返回选择的 step- 大小 $\tau$  。   
+
+
+另一个重要的方法是 <code>prepare()</code> ，主要是为临时向量 <code>temp</code> and the matrix <code>dij_matrix</code> 分别设置适当的分区和稀疏模式。
+
+@code
+  template <int dim>
+  class TimeStepping : public ParameterAcceptor
+  {
+  public:
+    static constexpr unsigned int problem_dimension =
+      ProblemDescription<dim>::problem_dimension;
+
+
+    using state_type = typename ProblemDescription<dim>::state_type;
+    using flux_type  = typename ProblemDescription<dim>::flux_type;
+
+
+    using vector_type =
+      std::array<LinearAlgebra::distributed::Vector<double>, problem_dimension>;
+
+
+    TimeStepping(const MPI_Comm            mpi_communicator,
+                 TimerOutput &             computing_timer,
+                 const OfflineData<dim> &  offline_data,
+                 const InitialValues<dim> &initial_values,
+                 const std::string &       subsection = "TimeStepping");
+
+
+    void prepare();
+
+
+    double make_one_step(vector_type &U, double t);
+
+
+  private:
+    const MPI_Comm mpi_communicator;
+    TimerOutput &  computing_timer;
+
+
+    SmartPointer<const OfflineData<dim>>   offline_data;
+    SmartPointer<const InitialValues<dim>> initial_values;
+
+
+    SparseMatrix<double> dij_matrix;
+
+
+    vector_type temporary_vector;
+
+
+    double cfl_update;
+  };
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeSchlierenPostprocessorcodeclass"></a> <h4>The <code>SchlierenPostprocessor</code> class</h4>   
+
+
+在其核心部分，Schlieren类实现了类成员  <code>compute_schlieren()</code>  。这个类成员的主要目的是计算一个辅助的有限元场 <code>schlieren</code> ，它在每个节点上由\f[ \text{schlieren}[i] = e^{\beta \frac{ |\nabla r_i|
+
+
+- \min_j |\nabla r_j| }{\max_j |\nabla r_j| - \min_j |\nabla r_j| } }, \f]定义， $r$ 原则上可以是任何标量。但在实践中，密度是一个自然的候选量，即 $r \dealcoloneq \rho$  。<a href="https://en.wikipedia.org/wiki/Schlieren">Schlieren</a>后处理是一种标准的方法，用于增强可视化的对比度，其灵感来自实际的实验X射线和可视化的阴影技术。见 step-67 另一个例子，我们创建了一个Schlieren图）。
+
+@code
+  template <int dim>
+  class SchlierenPostprocessor : public ParameterAcceptor
+  {
+  public:
+    static constexpr unsigned int problem_dimension =
+      ProblemDescription<dim>::problem_dimension;
+
+
+    using state_type = typename ProblemDescription<dim>::state_type;
+
+
+    using vector_type =
+      std::array<LinearAlgebra::distributed::Vector<double>, problem_dimension>;
+
+
+    SchlierenPostprocessor(
+      const MPI_Comm          mpi_communicator,
+      TimerOutput &           computing_timer,
+      const OfflineData<dim> &offline_data,
+      const std::string &     subsection = "SchlierenPostprocessor");
+
+
+    void prepare();
+
+
+    void compute_schlieren(const vector_type &U);
+
+
+    LinearAlgebra::distributed::Vector<double> schlieren;
+
+
+  private:
+    const MPI_Comm mpi_communicator;
+    TimerOutput &  computing_timer;
+
+
+    SmartPointer<const OfflineData<dim>> offline_data;
+
+
+    Vector<double> r;
+
+
+    unsigned int schlieren_index;
+    double       schlieren_beta;
+  };
+
+
+@endcode 
+
+
+
+
+<a name="ThecodeMainLoopcodeclass"></a> <h4>The <code>MainLoop</code> class</h4>   
+
+
+现在，剩下的就是将 <code>%TimeStepping</code>, <code>InitialValues</code> 和 <code>SchlierenPostprocessor</code> 类中实现的方法连锁起来。我们在一个单独的类 <code>MainLoop</code> 中完成这个工作，该类包含每个类的一个对象，并在ParameterAcceptor类的帮助下再次读入一些参数。
+
+@code
+  template <int dim>
+  class MainLoop : public ParameterAcceptor
+  {
+  public:
+    using vector_type = typename TimeStepping<dim>::vector_type;
+
+
+    MainLoop(const MPI_Comm mpi_communnicator);
+
+
+    void run();
+
+
+  private:
+    vector_type interpolate_initial_values(const double t = 0);
+
+
+    void output(const vector_type &U,
+                const std::string &name,
+                double             t,
+                unsigned int       cycle,
+                bool               checkpoint = false);
+
+
+    const MPI_Comm     mpi_communicator;
+    std::ostringstream timer_output;
+    TimerOutput        computing_timer;
+
+
+    ConditionalOStream pcout;
+
+
+    std::string base_name;
+    double      t_final;
+    double      output_granularity;
+
+
+    bool asynchronous_writeback;
+
+
+    bool resume;
+
+
+    Discretization<dim>         discretization;
+    OfflineData<dim>            offline_data;
+    InitialValues<dim>          initial_values;
+    TimeStepping<dim>           time_stepping;
+    SchlierenPostprocessor<dim> schlieren_postprocessor;
+
+
+    vector_type output_vector;
+
+
+    std::future<void> background_thread_state;
+  };
+
+
+@endcode 
+
+
+
+
+<a name="Implementation"></a> <h3>Implementation</h3> 
+
+
+
+
+
+<a name="Gridgenerationsetupofdatastructures"></a><h4>Grid generation, setup of data structures</h4>
+
+
+
+
+手头的第一个主要任务是典型的网格生成、数据结构的设置和组装三合一。在这个例子的步骤中，一个值得注意的创新是使用ParameterAcceptor类，我们用它来填充参数值：我们首先初始化ParameterAcceptor类，用一个表示参数文件中正确分段的字符串 <code>subsection</code> 来调用它的构造函数。然后，在构造函数中，每个参数值都被初始化为一个合理的默认值，并通过调用 ParameterAcceptor::add_parameter(). 在ParameterAcceptor类中注册。 
+
+@code
+  template <int dim>
+  Discretization<dim>::Discretization(const MPI_Comm     mpi_communicator,
+                                      TimerOutput &      computing_timer,
+                                      const std::string &subsection)
+    : ParameterAcceptor(subsection)
+    , mpi_communicator(mpi_communicator)
+    , triangulation(mpi_communicator)
+    , mapping(1)
+    , finite_element(1)
+    , quadrature(3)
+    , face_quadrature(3)
+    , computing_timer(computing_timer)
+  {
+    length = 4.;
+    add_parameter("length", length, "Length of computational domain");
+
+
+    height = 2.;
+    add_parameter("height", height, "Height of computational domain");
+
+
+    disk_position = 0.6;
+    add_parameter("object position",
+                  disk_position,
+                  "x position of immersed disk center point");
+
+
+    disk_diameter = 0.5;
+    add_parameter("object diameter",
+                  disk_diameter,
+                  "Diameter of immersed disk");
+
+
+    refinement = 5;
+    add_parameter("refinement",
+                  refinement,
+                  "Number of refinement steps of the geometry");
+  }
+
+
+@endcode 
+
+
+
+请注意，在前面的构造函数中，我们只把MPI通信器传给了 <code>triangulation</code> ，但我们仍然没有初始化底层的几何体/网格。如前所述，我们必须将这项任务推迟到 <code>setup()</code> 函数，该函数在 ParameterAcceptor::initialize() 函数用从参数文件中读取的最终值填充所有参数变量后被调用。   
+
+
+ <code>setup()</code> 函数是最后一个必须实现的类成员。它创建了实际的三角结构，这是一个基准配置，由一个带有盘状障碍物的通道组成，见  @cite GuermondEtAl2018  。我们通过修改 GridGenerator::hyper_cube_with_cylindrical_hole(). 生成的网格来构建几何体。我们参考 step-49 、 step-53 和 step-54 来了解如何创建高级网格。我们首先创建4个临时的（非分布式的）粗略三角形，用 GridGenerator::merge_triangulation() 函数将其缝合起来。我们以 $(0,0)$ 为圆心，直径为 <code>disk_diameter</code>  。通道的左下角有坐标(  <code>-disk_position</code>, <code>-height/2</code>  ) ，右上角有(  <code>length-disk_position</code>  ,  <code>height/2</code>  ) 。
+
+@code
+  template <int dim>
+  void Discretization<dim>::setup()
+  {
+    TimerOutput::Scope scope(computing_timer, "discretization - setup");
+
+
+    triangulation.clear();
+
+
+    Triangulation<dim> tria1, tria2, tria3, tria4, tria5, tria6;
+
+
+    GridGenerator::hyper_cube_with_cylindrical_hole(
+      tria1, disk_diameter / 2., disk_diameter, 0.5, 1, false);
+
+
+    GridGenerator::subdivided_hyper_rectangle(
+      tria2,
+      {2, 1},
+      Point<2>(-disk_diameter, disk_diameter),
+      Point<2>(disk_diameter, height / 2.));
+
+
+    GridGenerator::subdivided_hyper_rectangle(
+      tria3,
+      {2, 1},
+      Point<2>(-disk_diameter, -disk_diameter),
+      Point<2>(disk_diameter, -height / 2.));
+
+
+    GridGenerator::subdivided_hyper_rectangle(
+      tria4,
+      {6, 2},
+      Point<2>(disk_diameter, -disk_diameter),
+      Point<2>(length - disk_position, disk_diameter));
+
+
+    GridGenerator::subdivided_hyper_rectangle(
+      tria5,
+      {6, 1},
+      Point<2>(disk_diameter, disk_diameter),
+      Point<2>(length - disk_position, height / 2.));
+
+
+    GridGenerator::subdivided_hyper_rectangle(
+      tria6,
+      {6, 1},
+      Point<2>(disk_diameter, -height / 2.),
+      Point<2>(length - disk_position, -disk_diameter));
+
+
+    GridGenerator::merge_triangulations(
+      {&tria1, &tria2, &tria3, &tria4, &tria5, &tria6},
+      triangulation,
+      1.e-12,
+      true);
+
+
+    triangulation.set_manifold(0, PolarManifold<2>(Point<2>()));
+
+
+@endcode 
+
+
+
+我们必须将目前位于 $x=-$   <code>disk_diameter</code> 的左边缘固定下来，并将其移到 $x=-$   <code>disk_position</code> 。作为最后一步，边界必须被着色，右边是 <code>Boundaries::do_nothing</code> ， <code>dirichlet</code> on the left and <code>free_slip</code> 在上下外边界，障碍物。
+
+
+
+
+
+
+
+@code
+    for (const auto &cell : triangulation.active_cell_iterators())
+      {
+        for (const auto v : cell->vertex_indices())
+          {
+            if (cell->vertex(v)[0] <= -disk_diameter + 1.e-6)
+              cell->vertex(v)[0] = -disk_position;
+          }
+      }
+
+
+    for (const auto &cell : triangulation.active_cell_iterators())
+      {
+        for (const auto f : cell->face_indices())
+          {
+            const auto face = cell->face(f);
+
+
+            if (face->at_boundary())
+              {
+                const auto center = face->center();
+
+
+                if (center[0] > length - disk_position - 1.e-6)
+                  face->set_boundary_id(Boundaries::do_nothing);
+                else if (center[0] < -disk_position + 1.e-6)
+                  face->set_boundary_id(Boundaries::dirichlet);
+                else
+                  face->set_boundary_id(Boundaries::free_slip);
+              }
+          }
+      }
+
+
+    triangulation.refine_global(refinement);
+  }
+
+
+@endcode 
+
+
+
+
+<a name="Assemblyofofflinematrices"></a> <h4>Assembly of offline matrices</h4>
+
+
+
+
+在 <code>OfflineData</code> 的构造函数中，除了在初始化列表中初始化相应的类成员外，没有做太多的工作。
+
+@code
+  template <int dim>
+  OfflineData<dim>::OfflineData(const MPI_Comm             mpi_communicator,
+                                TimerOutput &              computing_timer,
+                                const Discretization<dim> &discretization,
+                                const std::string &        subsection)
+    : ParameterAcceptor(subsection)
+    , dof_handler(discretization.triangulation)
+    , mpi_communicator(mpi_communicator)
+    , computing_timer(computing_timer)
+    , discretization(&discretization)
+  {}
+
+
+@endcode 
+
+
+
+现在我们可以初始化DoFHandler，为本地拥有的和本地相关的DOF提取IndexSet对象，并初始化一个 Utilities::MPI::Partitioner 对象，这是分布式向量需要的。
+
+@code
+  template <int dim>
+  void OfflineData<dim>::setup()
+  {
+    IndexSet locally_owned;
+    IndexSet locally_relevant;
+
+
+    {
+      TimerOutput::Scope scope(computing_timer,
+                               "offline_data - distribute dofs");
+
+
+      dof_handler.distribute_dofs(discretization->finite_element);
+
+
+      locally_owned   = dof_handler.locally_owned_dofs();
+      n_locally_owned = locally_owned.n_elements();
+
+
+      DoFTools::extract_locally_relevant_dofs(dof_handler, locally_relevant);
+      n_locally_relevant = locally_relevant.n_elements();
+
+
+      partitioner =
+        std::make_shared<Utilities::MPI::Partitioner>(locally_owned,
+                                                      locally_relevant,
+                                                      mpi_communicator);
+    }
+
+
+@endcode 
+
+
+
+
+<a name="Translationtolocalindexranges"></a> <h4>Translation to local index ranges</h4>
+
+
+
+
+我们现在可以为我们的矩阵创建稀疏模式了。有相当多的特殊性需要详细解释。我们避免使用分布式矩阵类（例如由Trilinos或PETSc提供的），而是依靠deal.II自己的SparseMatrix对象来存储所有矩阵的局部部分。这一设计决定的动机是：(a)我们实际上从未进行过矩阵-向量乘法，(b)我们总是可以在一个给定的MPI等级上专门组装矩阵的局部部分。相反，我们将计算非线性更新，同时迭代连通性模版的（局部）部分；这是deal.II自己的SparsityPattern专门优化的任务。     
+
+
+不过，这种设计考虑有一个注意事项。让deal.II SparseMatrix类变得快速的是SparsityPattern中使用的<a
+href="https://en.wikipedia.org/wiki/Sparse_matrix">compressed row
+storage (CSR)</a>（见 @ref Sparsity ）。不幸的是，这与全局分布式索引范围不相称，因为具有CSR的稀疏模式不能在索引范围内包含 "洞"。deal.II提供的分布式矩阵通过将全局索引范围转化为连续的局部索引范围来避免这一点。但这恰恰是我们在网板迭代中想要避免的索引操作类型，因为它产生了可衡量的开销。     
+
+
+ Utilities::MPI::Partitioner 类已经实现了从全局索引范围到连续的局部（每个MPI等级）索引范围的转换：我们不必重新发明车轮。我们只需要使用这种转换能力（一次，而且只有一次），以便为连续的索引范围创建一个 "本地 "稀疏模式  $[0,$   <code>n_locally_relevant</code>   $)$  。这种能力可以通过 Utilities::MPI::Partitioner::global_to_local() 函数来调用。一旦使用本地索引创建了稀疏模式，剩下要做的就是确保（在实现我们的散布和聚集辅助函数时）我们总是通过调用 LinearAlgebra::distributed::Vector::local_element(). 来访问分布式向量的元素，这样我们就完全避免了索引转换，并完全使用本地索引进行操作。
+
+
+
+
+
+
+
+@code
+    {
+      TimerOutput::Scope scope(
+        computing_timer,
+        "offline_data - create sparsity pattern and set up matrices");
+
+
+@endcode 
+
+
+
+我们必须手工创建 "本地 "稀疏模式。因此，我们在所有本地拥有的和重影的单元上进行循环（见 @ref
+GlossArtificialCell ），提取与单元DOF相关的（全局） <code>dof_indices</code> ，并使用 <code>partitioner->global_to_local(index)</code> 对其重新编号。       
+
+
+
+
+  @note  在本地拥有的DOF的情况下，这种重新编号包括应用一个移位（即我们减去一个偏移量），这样，现在它们将成为整数区间 $[0,$   <code>n_locally_owned</code>   $)$  中的一个数字。然而，在重影DOF的情况下（即不是本地拥有的），情况是完全不同的，因为与重影DOF相关的全局指数（一般来说）不会是一个连续的整数集。
+
+
+
+
+
+
+
+@code
+      DynamicSparsityPattern dsp(n_locally_relevant, n_locally_relevant);
+
+
+      const auto dofs_per_cell =
+        discretization->finite_element.n_dofs_per_cell();
+      std::vector<types::global_dof_index> dof_indices(dofs_per_cell);
+
+
+      for (const auto &cell : dof_handler.active_cell_iterators())
+        {
+          if (cell->is_artificial())
+            continue;
+
+
+          /* We transform the set of global dof indices on the cell to the
+           * corresponding "local" index range on the MPI process: */
+          cell->get_dof_indices(dof_indices);
+          std::transform(dof_indices.begin(),
+                         dof_indices.end(),
+                         dof_indices.begin(),
+                         [&](types::global_dof_index index) {
+                           return partitioner->global_to_local(index);
+                         });
+
+
+          /* And simply add, for each dof, a coupling to all other "local"
+           * dofs on the cell: */
+          for (const auto dof : dof_indices)
+            dsp.add_entries(dof, dof_indices.begin(), dof_indices.end());
+        }
+
+
+      sparsity_pattern.copy_from(dsp);
+
+
+      lumped_mass_matrix.reinit(sparsity_pattern);
+      norm_matrix.reinit(sparsity_pattern);
+      for (auto &matrix : cij_matrix)
+        matrix.reinit(sparsity_pattern);
+      for (auto &matrix : nij_matrix)
+        matrix.reinit(sparsity_pattern);
+    }
+  }
+
+
+@endcode 
+
+
+
+DoFHandler和SparseMatrix对象的设置到此结束。接下来，我们要组装各种矩阵。我们在一个匿名命名空间中定义了一些辅助函数和数据结构。
+
+
+
+
+
+
+
+@code
+  namespace
+  {
+@endcode 
+
+
+
+  <code>CopyData</code> 类，将用于使用WorkStream组装离线数据矩阵。它作为一个容器：它只是一个结构，WorkStream在其中存储本地单元的贡献。请注意，它还包含一个类成员 <code>local_boundary_normal_map</code> ，用于存储计算边界法线所需的局部贡献。
+
+
+
+
+
+
+
+@code
+    template <int dim>
+    struct CopyData
+    {
+      bool                                         is_artificial;
+      std::vector<types::global_dof_index>         local_dof_indices;
+      typename OfflineData<dim>::BoundaryNormalMap local_boundary_normal_map;
+      FullMatrix<double>                           cell_lumped_mass_matrix;
+      std::array<FullMatrix<double>, dim>          cell_cij_matrix;
+    };
+
+
+@endcode 
+
+
+
+接下来我们介绍一些辅助函数，它们都与读写矩阵和向量条目有关。它们的动机主要是提供稍微有效的代码和<a href="https://en.wikipedia.org/wiki/Syntactic_sugar"> syntactic
+sugar</a>否则有些乏味的代码。
+
+
+
+
+我们引入的第一个函数 <code>get_entry()</code> ，将用于读取SparsityPattern迭代器 <code>it</code> of <code>matrix</code> 所指向的条目上存储的值。该函数绕过了SparseMatrix接口中的一个小缺陷。SparsityPattern关注的是以CRS格式存储的稀疏矩阵的所有索引操作。因此，迭代器已经知道存储在SparseMatrix对象中的低级向量中相应矩阵条目的全局索引。由于SparseMatrix中缺乏直接用SparsityPattern迭代器访问该元素的接口，不幸的是我们必须创建一个临时的SparseMatrix迭代器。我们只是将其隐藏在 <code>get_entry()</code> 函数中。
+
+
+
+
+
+
+
+@code
+    template <typename IteratorType>
+    DEAL_II_ALWAYS_INLINE inline SparseMatrix<double>::value_type
+    get_entry(const SparseMatrix<double> &matrix, const IteratorType &it)
+    {
+      const SparseMatrix<double>::const_iterator matrix_iterator(
+        &matrix, it->global_index());
+      return matrix_iterator->value();
+    }
+
+
+@endcode 
+
+
+
+ <code>set_entry()</code> 助手是 <code>get_value()</code> 的逆向操作：给定一个迭代器和一个值，它在矩阵中设置迭代器所指向的条目。
+
+
+
+
+
+
+
+@code
+    template <typename IteratorType>
+    DEAL_II_ALWAYS_INLINE inline void
+    set_entry(SparseMatrix<double> &           matrix,
+              const IteratorType &             it,
+              SparseMatrix<double>::value_type value)
+    {
+      SparseMatrix<double>::iterator matrix_iterator(&matrix,
+                                                     it->global_index());
+      matrix_iterator->value() = value;
+    }
+
+
+@endcode 
+
+
+
+  <code>gather_get_entry()</code>  : 我们注意到  $\mathbf{c}_{ij} \in
+\mathbb{R}^d$  。如果 $d=2$ ，那么 $\mathbf{c}_{ij} =
+[\mathbf{c}_{ij}^1,\mathbf{c}_{ij}^2]^\top$  。这基本上意味着我们在每个空间维度需要一个矩阵来存储 $\mathbf{c}_{ij}$ 的向量。对于矩阵 $\mathbf{n}_{ij}$ 也有类似的观察。 <code>gather_get_entry()</code> 的目的是检索这些条目并将其存储到 <code>Tensor<1, dim></code> 中，以方便我们使用。
+
+
+
+
+
+
+
+@code
+    template <std::size_t k, typename IteratorType>
+    DEAL_II_ALWAYS_INLINE inline Tensor<1, k>
+    gather_get_entry(const std::array<SparseMatrix<double>, k> &c_ij,
+                     const IteratorType                         it)
+    {
+      Tensor<1, k> result;
+      for (unsigned int j = 0; j < k; ++j)
+        result[j] = get_entry(c_ij[j], it);
+      return result;
+    }
+
+
+@endcode 
+
+
+
+  <code>gather()</code> （第一个接口）：这第一个函数签名，有三个输入参数，将被用来检索矩阵的各个组成部分 <code>(i,l)</code> 。 <code>gather_get_entry()</code> 和 <code>gather()</code> 的功能非常相同，但它们的背景不同：函数 <code>gather()</code> 不依赖于迭代器（实际上知道指向的值），而是依赖于条目的索引 <code>(i,l)</code> ，以便检索其实际值。我们应该期望 <code>gather()</code> 比 <code>gather_get_entry()</code> 稍微贵一些。 <code>gather()</code> 的使用将限于计算代数粘度 $d_{ij}$ 的任务，即当 $i$ 和 $j$ 都位于边界的特殊情况下。     
+
+
+
+
+  @note  读者应该知道，访问一个矩阵的任意 <code>(i,l)</code> 条目（例如Trilinos或PETSc矩阵）一般来说是昂贵得不可接受的。这里是我们可能想要关注复杂度的地方：我们希望这个操作有恒定的复杂度，这就是目前使用deal.II矩阵的实现的情况。
+
+
+
+
+
+
+
+@code
+    template <std::size_t k>
+    DEAL_II_ALWAYS_INLINE inline Tensor<1, k>
+    gather(const std::array<SparseMatrix<double>, k> &n_ij,
+           const unsigned int                         i,
+           const unsigned int                         j)
+    {
+      Tensor<1, k> result;
+      for (unsigned int l = 0; l < k; ++l)
+        result[l] = n_ij[l](i, j);
+      return result;
+    }
+
+
+@endcode 
+
+
+
+  <code>gather()</code> （第二个接口）：这个有两个输入参数的第二个函数签名将被用来收集节点 <code>i</code> 的状态，并作为 <code>Tensor<1,problem_dimension></code> 返回，以方便我们使用。
+
+
+
+
+
+
+
+@code
+    template <std::size_t k>
+    DEAL_II_ALWAYS_INLINE inline Tensor<1, k>
+    gather(const std::array<LinearAlgebra::distributed::Vector<double>, k> &U,
+           const unsigned int                                               i)
+    {
+      Tensor<1, k> result;
+      for (unsigned int j = 0; j < k; ++j)
+        result[j] = U[j].local_element(i);
+      return result;
+    }
+
+
+@endcode 
+
+
+
+  <code>scatter()</code>  : 这个函数有三个输入参数，第一个是指一个 "全局对象"（比如一个本地拥有的或本地相关的向量），第二个参数可以是一个 <code>Tensor<1,problem_dimension></code>  ，最后一个参数代表全局对象的索引。这个函数主要用于将更新的节点值（存储为 <code>Tensor<1,problem_dimension></code> ）写入全局对象中。
+
+
+
+
+
+
+
+@code
+    template <std::size_t k, int k2>
+    DEAL_II_ALWAYS_INLINE inline void
+    scatter(std::array<LinearAlgebra::distributed::Vector<double>, k> &U,
+            const Tensor<1, k2> &                                      tensor,
+            const unsigned int                                         i)
+    {
+      static_assert(k == k2,
+                    "The dimensions of the input arguments must agree");
+      for (unsigned int j = 0; j < k; ++j)
+        U[j].local_element(i) = tensor[j];
+    }
+  } // namespace
+
+
+@endcode 
+
+
+
+我们现在可以将存储在 <code>OfflineData</code> 中的所有矩阵集合起来：块状质量条目  $m_i$ ，矢量值矩阵  $\mathbf{c}_{ij}$  和  $\mathbf{n}_{ij} =
+\frac{\mathbf{c}_{ij}}{|\mathbf{c}_{ij}|}$  ，以及边界法线  $\boldsymbol{\nu}_i$  。   
+
+
+为了利用线程并行化，我们使用了 @ref threads "多处理器的并行计算 "中详述的WorkStream方法来访问共享内存。按照惯例，这需要定义 
+
+- 抓取数据（即进行计算所需的输入信息）：在这种情况下，它是  <code>scratch_data</code>  。
+
+- 工作者：在我们的例子中，这是 <code>local_assemble_system()</code> 函数，它实际上是从Scratch数据中计算出本地（即当前单元）的贡献。
+
+- 拷贝数据：一个包含所有本地装配贡献的结构，在这里是  <code>CopyData<dim>()</code>  。
+
+- 拷贝数据例程：在这种情况下，它是 <code>copy_local_to_global()</code> ，负责将这些本地贡献实际拷贝到全局对象（矩阵和/或矢量）中。   
+
+
+下面的大部分行是用来定义工作器  <code>local_assemble_system()</code>  和复制数据例程  <code>copy_local_to_global()</code>  的。关于WorkStream框架没有太多可说的，因为绝大多数想法在 step-9 、 step-13 和 step-32 等处都有合理的记录。   
+
+
+最后，假设 $\mathbf{x}_i$ 是边界上的一个支持点，（节点）法线被定义为。   
+
+
+
+
+@f{align*}
+\widehat{\boldsymbol{\nu}}_i \dealcoloneq
+\frac{\int_{\partial\Omega} \phi_i \widehat{\boldsymbol{\nu}} \,
+\, \mathrm{d}\mathbf{s}}{\big|\int_{\partial\Omega} \phi_i
+\widehat{\boldsymbol{\nu}} \, \mathrm{d}\mathbf{s}\big|}
+@f} 
+
+   
+
+
+我们将首先计算这个表达式的分子，并将其存储在  <code>OfflineData<dim>::BoundaryNormalMap</code>  中。我们将在后置循环中对这些向量进行归一化。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  void OfflineData<dim>::assemble()
+  {
+    lumped_mass_matrix = 0.;
+    norm_matrix        = 0.;
+    for (auto &matrix : cij_matrix)
+      matrix = 0.;
+    for (auto &matrix : nij_matrix)
+      matrix = 0.;
+
+
+    unsigned int dofs_per_cell =
+      discretization->finite_element.n_dofs_per_cell();
+    unsigned int n_q_points = discretization->quadrature.size();
+
+
+@endcode 
+
+
+
+下面是对WorkStream所需的抓取数据的初始化 
+
+
+
+
+
+
+
+@code
+    MeshWorker::ScratchData<dim> scratch_data(
+      discretization->mapping,
+      discretization->finite_element,
+      discretization->quadrature,
+      update_values | update_gradients | update_quadrature_points |
+        update_JxW_values,
+      discretization->face_quadrature,
+      update_normal_vectors | update_values | update_JxW_values);
+
+
+    {
+      TimerOutput::Scope scope(
+        computing_timer,
+        "offline_data - assemble lumped mass matrix, and c_ij");
+
+
+      const auto local_assemble_system = 
+        [&](const typename DoFHandler<dim>::cell_iterator &cell,
+            MeshWorker::ScratchData<dim> &                 scratch,
+            CopyData<dim> &                                copy) {
+          copy.is_artificial = cell->is_artificial();
+          if (copy.is_artificial)
+            return;
+
+
+          copy.local_boundary_normal_map.clear();
+          copy.cell_lumped_mass_matrix.reinit(dofs_per_cell, dofs_per_cell);
+          for (auto &matrix : copy.cell_cij_matrix)
+            matrix.reinit(dofs_per_cell, dofs_per_cell);
+
+
+          const auto &fe_values = scratch.reinit(cell);
+
+
+          copy.local_dof_indices.resize(dofs_per_cell);
+          cell->get_dof_indices(copy.local_dof_indices);
+
+
+          std::transform(copy.local_dof_indices.begin(),
+                         copy.local_dof_indices.end(),
+                         copy.local_dof_indices.begin(),
+                         [&](types::global_dof_index index) {
+                           return partitioner->global_to_local(index);
+                         });
+
+
+@endcode 
+
+
+
+我们以通常的方式计算凑合质量矩阵项 $m_i$ 和和向量 $c_{ij}$ 的局部贡献。
+
+@code
+          for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
+            {
+              const auto JxW = fe_values.JxW(q_point);
+
+
+              for (unsigned int j = 0; j < dofs_per_cell; ++j)
+                {
+                  const auto value_JxW =
+                    fe_values.shape_value(j, q_point) * JxW;
+                  const auto grad_JxW = fe_values.shape_grad(j, q_point) * JxW;
+
+
+                  copy.cell_lumped_mass_matrix(j, j) += value_JxW;
+
+
+                  for (unsigned int i = 0; i < dofs_per_cell; ++i)
+                    {
+                      const auto value = fe_values.shape_value(i, q_point);
+                      for (unsigned int d = 0; d < dim; ++d)
+                        copy.cell_cij_matrix[d](i, j) += value * grad_JxW[d];
+
+
+                    } /* i */
+                }     /* j */
+            }         /* q */
+
+
+@endcode 
+
+
+
+现在我们必须计算边界法线。请注意，除非元素在域的边界上有面，否则下面的循环没有什么作用。
+
+@code
+          for (const auto f : cell->face_indices())
+            {
+              const auto face = cell->face(f);
+              const auto id   = face->boundary_id();
+
+
+              if (!face->at_boundary())
+                continue;
+
+
+              const auto &fe_face_values = scratch.reinit(cell, f);
+
+
+              const unsigned int n_face_q_points =
+                fe_face_values.get_quadrature().size();
+
+
+              for (unsigned int j = 0; j < dofs_per_cell; ++j)
+                {
+                  if (!discretization->finite_element.has_support_on_face(j, f))
+                    continue;
+
+
+@endcode 
+
+
+
+请注意，"法线 "将只代表来自形状函数phi_j的支持中的一个面的贡献。所以我们不能在这里对这个局部贡献进行归一化处理，我们必须 "原封不动 "地接受它，存储它并将它传递给复制数据例程。正确的归一化需要在节点上增加一个循环。这在下面的复制函数中完成。
+
+@code
+                  Tensor<1, dim> normal;
+                  if (id == Boundaries::free_slip)
+                    {
+                      for (unsigned int q = 0; q < n_face_q_points; ++q)
+                        normal += fe_face_values.normal_vector(q) *
+                                  fe_face_values.shape_value(j, q);
+                    }
+
+
+                  const auto index = copy.local_dof_indices[j];
+
+
+                  Point<dim> position;
+                  for (const auto v : cell->vertex_indices())
+                    if (cell->vertex_dof_index(v, 0) ==
+                        partitioner->local_to_global(index))
+                      {
+                        position = cell->vertex(v);
+                        break;
+                      }
+
+
+                  const auto old_id =
+                    std::get<1>(copy.local_boundary_normal_map[index]);
+                  copy.local_boundary_normal_map[index] =
+                    std::make_tuple(normal, std::max(old_id, id), position);
+                }
+            }
+        };
+
+
+@endcode 
+
+
+
+最后，我们按照WorkStream的要求提供了一个copy_local_to_global函数 
+
+@code
+      const auto copy_local_to_global = [&](const CopyData<dim> &copy) {
+        if (copy.is_artificial)
+          return;
+
+
+        for (const auto &it : copy.local_boundary_normal_map)
+          {
+            std::get<0>(boundary_normal_map[it.first]) +=
+              std::get<0>(it.second);
+            std::get<1>(boundary_normal_map[it.first]) =
+              std::max(std::get<1>(boundary_normal_map[it.first]),
+                       std::get<1>(it.second));
+            std::get<2>(boundary_normal_map[it.first]) = std::get<2>(it.second);
+          }
+
+
+        lumped_mass_matrix.add(copy.local_dof_indices,
+                               copy.cell_lumped_mass_matrix);
+
+
+        for (int k = 0; k < dim; ++k)
+          {
+            cij_matrix[k].add(copy.local_dof_indices, copy.cell_cij_matrix[k]);
+            nij_matrix[k].add(copy.local_dof_indices, copy.cell_cij_matrix[k]);
+          }
+      };
+
+
+      WorkStream::run(dof_handler.begin_active(),
+                      dof_handler.end(),
+                      local_assemble_system,
+                      copy_local_to_global,
+                      scratch_data,
+                      CopyData<dim>());
+    }
+
+
+@endcode 
+
+
+
+在这个时候，我们已经完成了  $m_i$  和  $\mathbf{c}_{ij}$  的计算，但到目前为止，矩阵  <code>nij_matrix</code>  只包含矩阵  <code>cij_matrix</code>  的一个副本。这不是我们真正想要的：我们必须对其条目进行标准化。此外，我们还没有填充矩阵 <code>norm_matrix</code> 的条目，存储在地图 <code>OfflineData<dim>::BoundaryNormalMap</code> 中的向量也没有被规范化。     
+
+
+原则上，这只是离线数据，过度优化它们的计算并没有什么意义，因为它们的成本会在我们将要使用的许多时间步骤中得到摊销。然而，计算/存储矩阵 <code>norm_matrix</code> and the normalization of <code>nij_matrix</code> 的条目非常适合说明线程并行的节点循环。
+
+- 我们要访问网格/稀疏图中的每个节点 $i$ 。
+
+- 对于每一个这样的节点，我们要访问每一个 $j$ ，以便 $\mathbf{c}_{ij} \not \equiv 0$  。     
+
+
+从代数的角度来看，这相当于：访问矩阵中的每一行，并对这些行中的每一行在列上执行循环。节点循环是本教程步骤的一个核心主题（见介绍中的伪代码），会反复出现。这就是为什么现在是介绍它们的正确时机。     
+
+
+我们有线程并行化能力 parallel::apply_to_subranges() ，在某种程度上比WorkStream框架更通用。特别是， parallel::apply_to_subranges() 可以被用于我们的节点循环。这个功能需要四个输入参数，我们会详细解释（针对我们线程并行节点循环的具体情况）。
+
+- 迭代器 <code>indices.begin()</code> 指向一个行索引。
+
+- 迭代器 <code>indices.end()</code> 指向一个数字较高的行索引。
+
+- 函数 <code>on_subranges(i1,i2)</code> (where <code>i1</code> 和 <code>i2</code> 在前面两个子弹中定义的结束和开始迭代器所跨越的范围内定义了一个子范围）对这个子范围内的每个迭代器应用一个操作。我们不妨称 <code>on_subranges</code> 为 "工作者"。
+
+- Grainsize：每个线程处理的最小迭代器（在本例中代表行）的数量。我们决定最小为4096行。     
+
+
+这里的一个小注意事项是，提供给 parallel::apply_to_subranges() 的迭代器 <code>indices.begin()</code> 和 <code>indices.end()</code> 必须是随机访问迭代器：在内部， parallel::apply_to_subranges() 将把 <code>indices.begin()</code> 和 <code>indices.end()</code> 迭代器定义的范围分成子范围（我们希望能够以恒定的复杂性读取这些子范围的任何条目）。为了提供这样的迭代器，我们求助于 std_cxx20::ranges::iota_view. 。      
+
+
+下面这段代码的大部分内容是用来定义 "工作者" <code>on_subranges</code> ：即在子范围的每一行应用的操作。给定一个固定的 <code>row_index</code> ，我们要访问该行的每一列/条目。为了执行这样的列-循环，我们使用标准库中的<a href="http://www.cplusplus.com/reference/algorithm/for_each/">
+std::for_each</a>，其中。
+
+-  <code>sparsity_pattern.begin(row_index)</code> 给我们一个迭代器，从该行的第一列开始。
+
+-  <code>sparsity_pattern.end(row_index)</code> 是一个指向该行最后一列的迭代器。
+
+-  `std::for_each` 所要求的最后一个参数是应用于该行的每个非零条目（本例中为λ表达式）的操作。     
+
+
+我们注意到， parallel::apply_to_subranges() 将对不相交的行集（子行）进行操作，我们的目标是写进这些行。由于我们要进行的操作的简单性质（法线的计算和存储，以及条目 $\mathbf{c}_{ij}$ 的规范化），线程在试图写同一个条目时不会发生冲突（我们不需要调度器）。
+
+@code
+    {
+      TimerOutput::Scope scope(computing_timer,
+                               "offline_data - compute |c_ij|, and n_ij");
+
+
+      const std_cxx20::ranges::iota_view<unsigned int, unsigned int> indices(
+        0, n_locally_relevant);
+
+
+      const auto on_subranges = 
+        [&](const auto i1, const auto i2) {
+          for (const auto row_index :
+               std_cxx20::ranges::iota_view<unsigned int, unsigned int>(*i1,
+                                                                        *i2))
+            {
+@endcode 
+
+
+
+第一个列循环：我们计算并存储矩阵norm_matrix的条目，并将归一化的条目写入矩阵nij_matrix中。
+
+@code
+              std::for_each(
+                sparsity_pattern.begin(row_index),
+                sparsity_pattern.end(row_index),
+                [&](const dealii::SparsityPatternIterators::Accessor &jt) {
+                  const auto   c_ij = gather_get_entry(cij_matrix, &jt);
+                  const double norm = c_ij.norm();
+
+
+                  set_entry(norm_matrix, &jt, norm);
+                  for (unsigned int j = 0; j < dim; ++j)
+                    set_entry(nij_matrix[j], &jt, c_ij[j] / norm);
+                });
+            }
+        };
+
+
+      parallel::apply_to_subranges(indices.begin(),
+                                   indices.end(),
+                                   on_subranges,
+                                   4096);
+
+
+@endcode 
+
+
+
+最后，我们对存储在  <code>OfflineData<dim>::BoundaryNormalMap</code>  的向量进行归一化。这个操作没有被线程并行化，因为它既不能说明任何重要的概念，也不能带来任何明显的速度提升。
+
+@code
+      for (auto &it : boundary_normal_map)
+        {
+          auto &normal = std::get<0>(it.second);
+          normal /= (normal.norm() + std::numeric_limits<double>::epsilon());
+        }
+    }
+  }
+
+
+@endcode 
+
+
+
+在这一点上，我们已经完成了与离线数据有关的任何工作。
+
+
+
+
+
+<a name="EquationofstateandapproximateRiemannsolver"></a><h4>Equation of state and approximate Riemann solver</h4> 
+
+
+
+
+在这一节中，我们描述了 <code>ProblemDescription</code> 类的成员的实现。这里的大部分代码是专门针对具有理想气体定律的可压缩欧拉方程的。如果我们想把 step-69 重新用于不同的守恒定律（例如：浅水方程），那么这个类的大部分实现就必须改变。但是其他大部分的类（尤其是那些定义循环结构的类）将保持不变。   
+
+
+我们首先实现一些小的成员函数来计算 <code>momentum</code>, <code>internal_energy</code> 、 <code>pressure</code>, <code>speed_of_sound</code> 和系统的通量 <code>f</code> 。这些函数中的每一个的功能从它们的名字中都是不言自明的。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  DEAL_II_ALWAYS_INLINE inline Tensor<1, dim>
+  ProblemDescription<dim>::momentum(const state_type &U)
+  {
+    Tensor<1, dim> result;
+    std::copy_n(&U[1], dim, &result[0]);
+    return result;
+  }
+
+
+  template <int dim>
+  DEAL_II_ALWAYS_INLINE inline double
+  ProblemDescription<dim>::internal_energy(const state_type &U)
+  {
+    const double &rho = U[0];
+    const auto    m   = momentum(U);
+    const double &E   = U[dim + 1];
+    return E - 0.5 * m.norm_square() / rho;
+  }
+
+
+  template <int dim>
+  DEAL_II_ALWAYS_INLINE inline double
+  ProblemDescription<dim>::pressure(const state_type &U)
+  {
+    return (gamma - 1.) * internal_energy(U);
+  }
+
+
+  template <int dim>
+  DEAL_II_ALWAYS_INLINE inline double
+  ProblemDescription<dim>::speed_of_sound(const state_type &U)
+  {
+    const double &rho = U[0];
+    const double  p   = pressure(U);
+
+
+    return std::sqrt(gamma * p / rho);
+  }
+
+
+  template <int dim>
+  DEAL_II_ALWAYS_INLINE inline typename ProblemDescription<dim>::flux_type
+  ProblemDescription<dim>::flux(const state_type &U)
+  {
+    const double &rho = U[0];
+    const auto    m   = momentum(U);
+    const auto    p   = pressure(U);
+    const double &E   = U[dim + 1];
+
+
+    flux_type result;
+
+
+    result[0] = m;
+    for (unsigned int i = 0; i < dim; ++i)
+      {
+        result[1 + i] = m * m[i] / rho;
+        result[1 + i][i] += p;
+      }
+    result[dim + 1] = m / rho * (E + p);
+
+
+    return result;
+  }
+
+
+@endcode 
+
+
+
+现在我们讨论  $\lambda_{\text{max}}
+(\mathbf{U}_i^{n},\mathbf{U}_j^{n}, \textbf{n}_{ij})$  的计算。黎曼问题的最大波速的尖锐上界的分析和推导是一个非常技术性的工作，我们不能在本教程中包括对它的高级讨论。在这部分文档中，我们将仅限于简述我们实现函数的主要功能，并指出具体的学术参考文献，以帮助（感兴趣的）读者追踪这些想法的来源（和适当的数学理由）。   
+
+
+一般来说，获得最大波速的尖锐保证上界需要解决一个相当昂贵的标量非线性问题。这通常是用一个迭代求解器来完成的。为了简化本例中的表述，我们决定不包括这样的迭代方案。相反，我们将只是使用一个初始猜测作为最大波速的上限猜测。更确切地说， @cite GuermondPopov2016b 的方程（2.11）（3.7）、（3.8）和（4.3）足以定义一个有保证的最大波速的上限。这个估计值通过调用函数  <code>lambda_max_two_rarefaction()</code>  返回。在其核心部分，这种上界的构造使用了所谓的中间压力的二重化近似  $p^*$  ，例如，见公式（4.46），在  @cite Toro2009  第128页。   
+
+
+由 <code>lambda_max_two_rarefaction()</code> 返回的估计值保证是一个上界，它在一般情况下是相当尖锐的，而且总体上对我们的目的来说是足够的。然而，对于一些特定的情况（特别是当其中一个状态接近真空条件时），这样的估计将是过于悲观的。这就是为什么我们使用第二个估计来避免这种退化，它将通过调用函数  <code>lambda_max_expansion()</code>  来调用。这里最重要的函数是  <code>compute_lambda_max()</code>  ，它取的是  <code>lambda_max_two_rarefaction()</code>  和  <code>lambda_max_expansion()</code>  所返回的估计值之间的最小值。   
+
+
+我们再次开始定义几个辅助函数。   
+
+
+第一个函数接收一个状态 <code>U</code> 和一个单位向量 <code>n_ij</code> ，并在单位向量的方向上计算<i>projected</i>一维状态。
+
+@code
+  namespace
+  {
+    template <int dim>
+    DEAL_II_ALWAYS_INLINE inline std::array<double, 4> riemann_data_from_state(
+      const typename ProblemDescription<dim>::state_type U,
+      const Tensor<1, dim> &                             n_ij)
+    {
+      Tensor<1, 3> projected_U;
+      projected_U[0] = U[0];
+
+
+@endcode 
+
+
+
+为此，我们必须将动量改为 $\textbf{m}\cdot
+n_{ij}$ ，并且必须从总能量中减去垂直部分的动能。
+
+@code
+      const auto m   = ProblemDescription<dim>::momentum(U);
+      projected_U[1] = n_ij * m;
+
+
+      const auto perpendicular_m = m - projected_U[1] * n_ij;
+      projected_U[2] = U[1 + dim] - 0.5 * perpendicular_m.norm_square() / U[0];
+
+
+@endcode 
+
+
+
+我们以<i>primitive</i>的变量代替守恒量返回一维状态。返回数组包括密度  $\rho$  、速度  $u$  、压力  $p$  和局部声速  $a$  。
+
+
+
+
+
+
+
+@code
+      return {{projected_U[0],
+               projected_U[1] / projected_U[0],
+               ProblemDescription<1>::pressure(projected_U),
+               ProblemDescription<1>::speed_of_sound(projected_U)}};
+    }
+
+
+@endcode 
+
+
+
+在这一点上，我们还定义了两个小函数，返回一个双数的正负部分。
+
+
+
+
+
+
+
+@code
+    DEAL_II_ALWAYS_INLINE inline double positive_part(const double number)
+    {
+      return std::max(number, 0.);
+    }
+
+
+
+    DEAL_II_ALWAYS_INLINE inline double negative_part(const double number)
+    {
+      return -std::min(number, 0.);
+    }
+
+
+@endcode 
+
+
+
+接下来，我们需要两个局部文数，它们是以原始状态 $[\rho, u, p, a]$ 和给定压力 $p^\ast$   @cite GuermondPopov2016 公式（3.7）定义的。
+
+@f{align*}
+\lambda^- = u - a\,\sqrt{1 + \frac{\gamma+1}{2\gamma}
+\left(\frac{p^\ast-p}{p}\right)_+}
+@f} 
+
+这里， $(\cdot)_{+}$ 表示给定参数的正部分。
+
+
+
+
+
+
+
+@code
+    DEAL_II_ALWAYS_INLINE inline double
+    lambda1_minus(const std::array<double, 4> &riemann_data,
+                  const double                 p_star)
+    {
+      /* Implements formula (3.7) in Guermond-Popov-2016 */
+
+
+      constexpr double gamma = ProblemDescription<1>::gamma;
+      const auto       u     = riemann_data[1];
+      const auto       p     = riemann_data[2];
+      const auto       a     = riemann_data[3];
+
+
+      const double factor = (gamma + 1.0) / 2.0 / gamma;
+      const double tmp    = positive_part((p_star - p) / p);
+      return u - a * std::sqrt(1.0 + factor * tmp);
+    }
+
+
+@endcode 
+
+
+
+依次为 @cite GuermondPopov2016  公式（3.8）。
+
+@f{align*}
+\lambda^+ = u + a\,\sqrt{1 + \frac{\gamma+1}{2\gamma}
+\left(\frac{p^\ast-p}{p}\right)_+}
+@f} 
+
+
+
+
+
+
+
+
+
+@code
+    DEAL_II_ALWAYS_INLINE inline double
+    lambda3_plus(const std::array<double, 4> &riemann_data, const double p_star)
+    {
+      /* Implements formula (3.8) in Guermond-Popov-2016 */
+
+
+      constexpr double gamma = ProblemDescription<1>::gamma;
+      const auto       u     = riemann_data[1];
+      const auto       p     = riemann_data[2];
+      const auto       a     = riemann_data[3];
+
+
+      const double factor = (gamma + 1.0) / 2.0 / gamma;
+      const double tmp    = positive_part((p_star - p) / p);
+      return u + a * std::sqrt(1.0 + factor * tmp);
+    }
+
+
+@endcode 
+
+
+
+剩下的就是计算从左和右原始状态计算出的 $\lambda^-$ 和 $\lambda^+$ 的最大值（ @cite GuermondPopov2016  公式（2.11）），其中 $p^\ast$  由 @cite GuermondPopov2016  公式（4.3）给出。
+
+
+
+
+
+
+
+@code
+    DEAL_II_ALWAYS_INLINE inline double
+    lambda_max_two_rarefaction(const std::array<double, 4> &riemann_data_i,
+                               const std::array<double, 4> &riemann_data_j)
+    {
+      constexpr double gamma = ProblemDescription<1>::gamma;
+      const auto       u_i   = riemann_data_i[1];
+      const auto       p_i   = riemann_data_i[2];
+      const auto       a_i   = riemann_data_i[3];
+      const auto       u_j   = riemann_data_j[1];
+      const auto       p_j   = riemann_data_j[2];
+      const auto       a_j   = riemann_data_j[3];
+
+
+      const double numerator = a_i + a_j - (gamma - 1.) / 2. * (u_j - u_i);
+
+
+      const double denominator =
+        a_i * std::pow(p_i / p_j, -1. * (gamma - 1.) / 2. / gamma) + a_j * 1.;
+
+
+      /* Formula (4.3) in Guermond-Popov-2016 */
+
+
+      const double p_star =
+        p_j * std::pow(numerator / denominator, 2. * gamma / (gamma - 1));
+
+
+      const double lambda1 = lambda1_minus(riemann_data_i, p_star);
+      const double lambda3 = lambda3_plus(riemann_data_j, p_star);
+
+
+      /* Formula (2.11) in Guermond-Popov-2016 */
+
+
+      return std::max(positive_part(lambda3), negative_part(lambda1));
+    }
+
+
+@endcode 
+
+
+
+我们计算出最大波速的第二个上界，在一般情况下，它不像二重化估计那样尖锐。但在近真空条件下，当二赖子近似值可能达到极端值时，它将拯救一切。
+
+@f{align*}
+\lambda_{\text{exp}} = \max(u_i,u_j) + 5. \max(a_i, a_j).
+@f} 
+
+
+
+  @note  常数5.0乘以声速的最大值是<i>neither</i>一个临时的常数，<i>nor</i>一个调整参数。它为任何  $\gamma \in [0,5/3]$  定义了一个上限。请不要玩弄它! 
+
+
+
+
+
+
+
+@code
+    DEAL_II_ALWAYS_INLINE inline double
+    lambda_max_expansion(const std::array<double, 4> &riemann_data_i,
+                         const std::array<double, 4> &riemann_data_j)
+    {
+      const auto u_i = riemann_data_i[1];
+      const auto a_i = riemann_data_i[3];
+      const auto u_j = riemann_data_j[1];
+      const auto a_j = riemann_data_j[3];
+
+
+      return std::max(std::abs(u_i), std::abs(u_j)) + 5. * std::max(a_i, a_j);
+    }
+  } // namespace
+
+
+@endcode 
+
+
+
+下面是我们要调用的主要函数，以计算  $\lambda_{\text{max}} (\mathbf{U}_i^{n},\mathbf{U}_j^{n},
+\textbf{n}_{ij})$  。我们简单地计算两个最大的波速估计值并返回最小值。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  DEAL_II_ALWAYS_INLINE inline double
+  ProblemDescription<dim>::compute_lambda_max(const state_type &    U_i,
+                                              const state_type &    U_j,
+                                              const Tensor<1, dim> &n_ij)
+  {
+    const auto riemann_data_i = riemann_data_from_state(U_i, n_ij);
+    const auto riemann_data_j = riemann_data_from_state(U_j, n_ij);
+
+
+    const double lambda_1 =
+      lambda_max_two_rarefaction(riemann_data_i, riemann_data_j);
+
+
+    const double lambda_2 =
+      lambda_max_expansion(riemann_data_i, riemann_data_j);
+
+
+    return std::min(lambda_1, lambda_2);
+  }
+
+
+@endcode 
+
+
+
+我们通过定义静态数组 <code>component_names</code> 来结束本节，这些数组包含描述我们的状态向量的组件名称的字符串。我们对维度一、二和三进行了模板特化，这在后面的DataOut中用于命名相应的组件。
+
+
+
+
+
+
+
+@code
+  template <>
+  const std::array<std::string, 3> ProblemDescription<1>::component_names{
+    {"rho", "m", "E"}};
+
+
+  template <>
+  const std::array<std::string, 4> ProblemDescription<2>::component_names{
+    {"rho", "m_1", "m_2", "E"}};
+
+
+  template <>
+  const std::array<std::string, 5> ProblemDescription<3>::component_names{
+    {"rho", "m_1", "m_2", "m_3", "E"}};
+
+
+@endcode 
+
+
+
+
+<a name="Initialvalues"></a> <h4>Initial values</h4>
+
+
+
+
+在我们讨论正向欧拉方案的实现之前，最后一个准备步骤是简单地实现`InitialValues'类。   
+
+
+在构造函数中，我们用默认值初始化所有参数，为`ParameterAcceptor`类声明所有参数，并将 <code>parse_parameters_call_back</code> 槽连接到相应的信号。   
+
+
+ <code>parse_parameters_call_back</code> 槽将在调用 ParameterAcceptor::initialize(). 后从ParameterAceptor中调用。 在这方面，它的使用适合于必须对参数进行后处理（在某种意义上）或必须检查参数之间的某些一致性条件的情况。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  InitialValues<dim>::InitialValues(const std::string &subsection)
+    : ParameterAcceptor(subsection)
+  {
+    /* We wire up the slot InitialValues<dim>::parse_parameters_callback to
+       the ParameterAcceptor::parse_parameters_call_back signal: */
+    ParameterAcceptor::parse_parameters_call_back.connect(
+      std::bind(&InitialValues<dim>::parse_parameters_callback, this));
+
+
+    initial_direction[0] = 1.;
+    add_parameter("initial direction",
+                  initial_direction,
+                  "Initial direction of the uniform flow field");
+
+
+    initial_1d_state[0] = ProblemDescription<dim>::gamma;
+    initial_1d_state[1] = 3.;
+    initial_1d_state[2] = 1.;
+    add_parameter("initial 1d state",
+                  initial_1d_state,
+                  "Initial 1d state (rho, u, p) of the uniform flow field");
+  }
+
+
+@endcode 
+
+
+
+到目前为止， <code>InitialValues</code> 的构造函数已经为两个私有成员 <code>initial_direction</code> and <code>initial_1d_state</code> 定义了默认值，并将其添加到参数列表中。但是我们还没有定义唯一一个我们真正关心的公共成员的实现，也就是 <code>initial_state()</code> （我们将调用这个函数来实际评估网格节点的初始解）。在该函数的顶部，我们必须确保提供的初始方向不是零矢量。   
+
+
+
+
+  @note  正如所评论的，我们可以避免使用方法  <code>parse_parameters_call_back </code>  并定义一个类成员  <code>setup()</code>  以定义  <code>initial_state()</code>  的实现。但为了说明问题，我们想在这里记录一种不同的方式，并使用ParameterAcceptor的回调信号。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  void InitialValues<dim>::parse_parameters_callback()
+  {
+    AssertThrow(initial_direction.norm() != 0.,
+                ExcMessage(
+                  "Initial shock front direction is set to the zero vector."));
+    initial_direction /= initial_direction.norm();
+
+
+@endcode 
+
+
+
+接下来，我们用一个计算均匀流场的lambda函数来实现 <code>initial_state</code> 函数对象。为此，我们必须将给定的原始1d状态（密度 $\rho$ 、速度 $u$ 和压力 $p$ ）转换为保守的n维状态（密度 $\rho$ 、动量 $\mathbf{m}$ 和总能量 $E$ ）。
+
+
+
+
+
+
+
+@code
+    initial_state = [this](const Point<dim> & /*point*/, double /*t*/) {
+      const double            rho   = initial_1d_state[0];
+      const double            u     = initial_1d_state[1];
+      const double            p     = initial_1d_state[2];
+      static constexpr double gamma = ProblemDescription<dim>::gamma;
+
+
+      state_type state;
+
+
+      state[0] = rho;
+      for (unsigned int i = 0; i < dim; ++i)
+        state[1 + i] = rho * u * initial_direction[i];
+
+
+      state[dim + 1] = p / (gamma - 1.) + 0.5 * rho * u * u;
+
+
+      return state;
+    };
+  }
+
+
+@endcode 
+
+
+
+
+<a name="TheForwardEulerstep"></a><h4>The Forward Euler step</h4>
+
+
+
+
+ <code>%TimeStepping</code> 类的构造函数不包含任何令人惊讶的代码。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  TimeStepping<dim>::TimeStepping(
+    const MPI_Comm            mpi_communicator,
+    TimerOutput &             computing_timer,
+    const OfflineData<dim> &  offline_data,
+    const InitialValues<dim> &initial_values,
+    const std::string &       subsection /*= "TimeStepping"*/)
+    : ParameterAcceptor(subsection)
+    , mpi_communicator(mpi_communicator)
+    , computing_timer(computing_timer)
+    , offline_data(&offline_data)
+    , initial_values(&initial_values)
+  {
+    cfl_update = 0.80;
+    add_parameter("cfl update",
+                  cfl_update,
+                  "Relative CFL constant used for update");
+  }
+
+
+@endcode 
+
+
+
+在类成员  <code>prepare()</code>  中，我们初始化临时向量  <code>temp</code> and the matrix <code>dij_matrix</code>  。向量 <code>temp</code> 将用于在其内容与旧向量交换之前暂时存储解决方案的更新。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  void TimeStepping<dim>::prepare()
+  {
+    TimerOutput::Scope scope(computing_timer,
+                             "time_stepping - prepare scratch space");
+
+
+    for (auto &it : temporary_vector)
+      it.reinit(offline_data->partitioner);
+
+
+    dij_matrix.reinit(offline_data->sparsity_pattern);
+  }
+
+
+@endcode 
+
+
+
+现在是实现正向欧拉步骤的时候了。给出时间 $t$ 的旧状态 <code>U</code> 的（可写引用），我们就地更新状态 <code>U</code> 并返回选择的时间步长。我们首先声明一些对各种不同变量和数据结构的只读引用。我们这样做主要是为了有更短的变量名称（例如， <code>sparsity</code> 而不是 <code>offline_data->sparsity_pattern</code> ）。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  double TimeStepping<dim>::make_one_step(vector_type &U, double t)
+  {
+    const auto &n_locally_owned    = offline_data->n_locally_owned;
+    const auto &n_locally_relevant = offline_data->n_locally_relevant;
+
+
+    const std_cxx20::ranges::iota_view<unsigned int, unsigned int>
+      indices_owned(0, n_locally_owned);
+    const std_cxx20::ranges::iota_view<unsigned int, unsigned int>
+      indices_relevant(0, n_locally_relevant);
+
+
+    const auto &sparsity = offline_data->sparsity_pattern;
+
+
+    const auto &lumped_mass_matrix = offline_data->lumped_mass_matrix;
+    const auto &norm_matrix        = offline_data->norm_matrix;
+    const auto &nij_matrix         = offline_data->nij_matrix;
+    const auto &cij_matrix         = offline_data->cij_matrix;
+
+
+    const auto &boundary_normal_map = offline_data->boundary_normal_map;
+
+
+@endcode 
+
+
+
+<b>Step 1</b>: 计算 $d_{ij}$ 图的粘性矩阵。     
+
+
+需要强调的是，粘度矩阵必须是对称的，即 $d_{ij} = d_{ji}$  。在这方面，我们在此注意到， $\int_{\Omega} \nabla \phi_j \phi_i \, \mathrm{d}\mathbf{x}= -
+\int_{\Omega} \nabla \phi_i \phi_j \, \mathrm{d}\mathbf{x}$ （或等同于 $\mathbf{c}_{ij} = - \mathbf{c}_{ji}$ ）提供 $\mathbf{x}_i$ 或 $\mathbf{x}_j$ 是一个位于远离边界的支持点。在这种情况下，我们可以通过构造检查出 $\lambda_{\text{max}} (\mathbf{U}_i^{n}, \mathbf{U}_j^{n},
+\textbf{n}_{ij}) = \lambda_{\text{max}} (\mathbf{U}_j^{n},
+\mathbf{U}_i^{n},\textbf{n}_{ji})$ ，这保证了属性 $d_{ij} = d_{ji}$  。     
+
+
+然而，如果两个支持点 $\mathbf{x}_i$ 或 $\mathbf{x}_j$ 刚好都位于边界上，那么，等式 $\mathbf{c}_{ij} =
+
+
+- \mathbf{c}_{ji}$ 和 $\lambda_{\text{max}} (\mathbf{U}_i^{n},
+\mathbf{U}_j^{n}, \textbf{n}_{ij}) = \lambda_{\text{max}}
+(\mathbf{U}_j^{n}, \mathbf{U}_i^{n}, \textbf{n}_{ji})$ 就不一定成立。对于这个难题，唯一在数学上安全的解决方案是同时计算 $d_{ij}$ 和 $d_{ji}$ 并取其最大值。     
+
+
+总的来说， $d_{ij}$ 的计算是相当昂贵的。为了节省一些计算时间，我们利用了粘度矩阵必须是对称的这一事实（如上所述）：我们只计算 $d_{ij}$ 的上三角条目，并将相应的条目复制到下三角的对应项。     
+
+
+我们再次使用 parallel::apply_to_subranges() 来实现线程并行的for loops。我们在讨论矩阵的组装 <code>norm_matrix</code> 和上面 <code>nij_matrix</code> 的归一化时介绍的几乎所有平行遍历的想法在这里再次使用。     
+
+
+我们再次定义一个 "工作者 "函数 <code>on_subranges</code> ，计算列索引的子范围[i1, i2]的粘度 $d_{ij}$ 。
+
+@code
+    {
+      TimerOutput::Scope scope(computing_timer,
+                               "time_stepping - 1 compute d_ij");
+
+
+      const auto on_subranges = 
+        [&](const auto i1, const auto i2) {
+          for (const auto i :
+               std_cxx20::ranges::iota_view<unsigned int, unsigned int>(*i1,
+                                                                        *i2))
+            {
+              const auto U_i = gather(U, i);
+
+
+@endcode 
+
+
+
+对于一个给定的列索引i，我们遍历从 <code>sparsity.begin(i)</code> 到 <code>sparsity.end(i)</code> 的稀疏模式的列。
+
+@code
+              for (auto jt = sparsity.begin(i); jt != sparsity.end(i); ++jt)
+                {
+                  const auto j = jt->column();
+
+
+@endcode 
+
+
+
+我们只计算 $d_{ij}$ ，如果 $j < i$ （上三角条目），随后将数值复制到 $d_{ji}$  。
+
+@code
+                  if (j >= i)
+                    continue;
+
+
+                  const auto U_j = gather(U, j);
+
+
+                  const auto   n_ij = gather_get_entry(nij_matrix, jt);
+                  const double norm = get_entry(norm_matrix, jt);
+
+
+                  const auto lambda_max =
+                    ProblemDescription<dim>::compute_lambda_max(U_i, U_j, n_ij);
+
+
+                  double d = norm * lambda_max;
+
+
+@endcode 
+
+
+
+如果两个支持点刚好都在边界上，我们也要计算  $d_{ji}$  ，然后取  $\max(d_{ij},d_{ji})$  。在这之后，我们可以最终设定上三角和下三角的条目。
+
+@code
+                  if (boundary_normal_map.count(i) != 0 &&
+                      boundary_normal_map.count(j) != 0)
+                    {
+                      const auto n_ji = gather(nij_matrix, j, i);
+                      const auto lambda_max_2 =
+                        ProblemDescription<dim>::compute_lambda_max(U_j,
+                                                                    U_i,
+                                                                    n_ji);
+                      const double norm_2 = norm_matrix(j, i);
+
+
+                      d = std::max(d, norm_2 * lambda_max_2);
+                    }
+
+
+                  set_entry(dij_matrix, jt, d);
+                  dij_matrix(j, i) = d;
+                }
+            }
+        };
+
+
+      parallel::apply_to_subranges(indices_relevant.begin(),
+                                   indices_relevant.end(),
+                                   on_subranges,
+                                   4096);
+    }
+
+
+@endcode 
+
+
+
+<b>Step 2</b>: 计算对角线项  $d_{ii}$  和  $\tau_{\text{max}}$  。
+
+
+
+
+到目前为止，我们已经计算了矩阵 <code>dij_matrix</code> 的所有非对角线项。我们仍然需要填补其定义为 $d_{ii}^n = - \sum_{j \in \mathcal{I}(i)\backslash \{i\}}
+d_{ij}^n$ 的对角线项。我们再次使用 parallel::apply_to_subranges() 来实现这一目的。在计算 $d_{ii}$ s的同时，我们也确定了最大的可接受的时间步长，定义为\f[
+\tau_n \dealcoloneq c_{\text{cfl}}\,\min_{i\in\mathcal{V}}
+\left(\frac{m_i}{-2\,d_{ii}^{n}}\right) \, .
+\f] 注意， $\min_{i \in \mathcal{V}}$ 的操作本质上是全局的，它在所有节点上操作：首先我们必须在所有线程（特定节点的）上取最小值，然后我们必须在所有MPI进程上取最小值。在目前的实现中。
+
+- 我们将 <code>tau_max</code> （每个节点）存储为<a
+href="http://www.cplusplus.com/reference/atomic/atomic/"><code>std::atomic<double></code></a>。 <code>std::atomic</code> 的内部实现将负责保护任何可能的竞赛条件，当一个以上的线程试图在同一时间读取和/或写入 <code>tau_max</code> 。
+
+- 为了获取所有MPI进程的最小值，我们使用实用函数  <code>Utilities::MPI::min</code>  。
+
+
+
+
+
+
+
+@code
+    std::atomic<double> tau_max{std::numeric_limits<double>::infinity()};
+
+
+    {
+      TimerOutput::Scope scope(computing_timer,
+                               "time_stepping - 2 compute d_ii, and tau_max");
+
+
+@endcode 
+
+
+
+on_subranges()将在每个线程上单独执行。因此，变量  <code>tau_max_on_subrange</code>  被存储在线程本地。
+
+
+
+
+
+
+
+@code
+      const auto on_subranges = 
+        [&](const auto i1, const auto i2) {
+          double tau_max_on_subrange = std::numeric_limits<double>::infinity();
+
+
+          for (const auto i :
+               std_cxx20::ranges::iota_view<unsigned int, unsigned int>(*i1,
+                                                                        *i2))
+            {
+              double d_sum = 0.;
+
+
+              for (auto jt = sparsity.begin(i); jt != sparsity.end(i); ++jt)
+                {
+                  const auto j = jt->column();
+
+
+                  if (j == i)
+                    continue;
+
+
+                  d_sum -= get_entry(dij_matrix, jt);
+                }
+
+
+@endcode 
+
+
+
+我们将d_ij项的负数之和存储在对角线的位置。
+
+@code
+              dij_matrix.diag_element(i) = d_sum;
+@endcode 
+
+
+
+并计算最大的本地时间步长  <code>tau</code>  。
+
+@code
+              const double mass   = lumped_mass_matrix.diag_element(i);
+              const double tau    = cfl_update * mass / (-2. * d_sum);
+              tau_max_on_subrange = std::min(tau_max_on_subrange, tau);
+            }
+
+
+@endcode 
+
+
+
+  <code>tau_max_on_subrange</code> 包含为（线程局部）子范围计算的最大可能的时间步长。在这一点上，我们必须在所有线程上同步该值。这就是我们使用的<a
+href="http://www.cplusplus.com/reference/atomic/atomic/"><code>std::atomic<double></code></a> <i>compare exchange</i>更新机制。
+
+@code
+          double current_tau_max = tau_max.load();
+          while (current_tau_max > tau_max_on_subrange &&
+                 !tau_max.compare_exchange_weak(current_tau_max,
+                                                tau_max_on_subrange))
+            ;
+        };
+
+
+      parallel::apply_to_subranges(indices_relevant.begin(),
+                                   indices_relevant.end(),
+                                   on_subranges,
+                                   4096);
+
+
+@endcode 
+
+
+
+在所有线程结束后，我们可以简单地在所有MPI进程中同步该值。
+
+
+
+
+
+
+
+@code
+      tau_max.store(Utilities::MPI::min(tau_max.load(), mpi_communicator));
+
+
+@endcode 
+
+
+
+这是一个验证计算出的 <code>tau_max</code> 确实是一个有效的浮点数的好时机。
+
+@code
+      AssertThrow(
+        !std::isnan(tau_max.load()) && !std::isinf(tau_max.load()) &&
+          tau_max.load() > 0.,
+        ExcMessage(
+          "I'm sorry, Dave. I'm afraid I can't do that. - We crashed."));
+    }
+
+
+@endcode 
+
+
+
+<b>Step 3</b>: 执行更新。
+
+
+
+
+在这一点上，我们已经计算了所有的粘性系数 $d_{ij}$ ，我们知道了最大的可接受的时间步长 $\tau_{\text{max}}$  。这意味着我们现在可以计算更新。     
+
+
+\f[
+\mathbf{U}_i^{n+1} = \mathbf{U}_i^{n} - \frac{\tau_{\text{max}} }{m_i}
+\sum_{j \in \mathcal{I}(i)} (\mathbb{f}(\mathbf{U}_j^{n}) -
+\mathbb{f}(\mathbf{U}_i^{n})) \cdot \mathbf{c}_{ij} - d_{ij}
+(\mathbf{U}_j^{n} - \mathbf{U}_i^{n})
+\f]      
+
+
+这个更新公式与介绍中讨论的略有不同（在伪代码中）。然而，可以证明这两个公式在代数上是等价的（它们将产生相同的数值）。我们更倾向于这第二个公式，因为它具有自然的取消属性，可能有助于避免数字伪数的出现。
+
+
+
+
+
+
+
+@code
+    {
+      TimerOutput::Scope scope(computing_timer,
+                               "time_stepping - 3 perform update");
+
+
+      const auto on_subranges = 
+        [&](const auto i1, const auto i2) {
+          for (const auto i : boost::make_iterator_range(i1, i2))
+            {
+              Assert(i < n_locally_owned, ExcInternalError());
+
+
+              const auto U_i = gather(U, i);
+
+
+              const auto   f_i = ProblemDescription<dim>::flux(U_i);
+              const double m_i = lumped_mass_matrix.diag_element(i);
+
+
+              auto U_i_new = U_i;
+
+
+              for (auto jt = sparsity.begin(i); jt != sparsity.end(i); ++jt)
+                {
+                  const auto j = jt->column();
+
+
+                  const auto U_j = gather(U, j);
+                  const auto f_j = ProblemDescription<dim>::flux(U_j);
+
+
+                  const auto c_ij = gather_get_entry(cij_matrix, jt);
+                  const auto d_ij = get_entry(dij_matrix, jt);
+
+
+                  for (unsigned int k = 0; k < problem_dimension; ++k)
+                    {
+                      U_i_new[k] +=
+                        tau_max / m_i *
+                        (-(f_j[k] - f_i[k]) * c_ij + d_ij * (U_j[k] - U_i[k]));
+                    }
+                }
+
+
+              scatter(temporary_vector, U_i_new, i);
+            }
+        };
+
+
+      parallel::apply_to_subranges(indices_owned.begin(),
+                                   indices_owned.end(),
+                                   on_subranges,
+                                   4096);
+    }
+
+
+@endcode 
+
+
+
+<b>Step 4</b>: 修复边界状态。
+
+
+
+
+作为Forward Euler方法的最后一步，我们必须修复所有的边界状态。正如在介绍中所讨论的，我们 
+
+- 在完全不满足边界条件的情况下进行时间推进。
+
+- 在时间步骤结束时，在后处理步骤中强烈地执行边界条件。     
+
+
+在这里，我们计算修正\f[
+\mathbf{m}_i \dealcoloneq \mathbf{m}_i - (\boldsymbol{\nu}_i \cdot
+\mathbf{m}_i) \boldsymbol{\nu}_i,
+\f]，去除 $\mathbf{m}$ 的法线成分。
+
+
+
+
+
+
+
+@code
+    {
+      TimerOutput::Scope scope(computing_timer,
+                               "time_stepping - 4 fix boundary states");
+
+
+      for (auto it : boundary_normal_map)
+        {
+          const auto i = it.first;
+
+
+@endcode 
+
+
+
+我们只对本地拥有的子集进行迭代。
+
+@code
+          if (i >= n_locally_owned)
+            continue;
+
+
+          const auto &normal   = std::get<0>(it.second);
+          const auto &id       = std::get<1>(it.second);
+          const auto &position = std::get<2>(it.second);
+
+
+          auto U_i = gather(temporary_vector, i);
+
+
+@endcode 
+
+
+
+在自由滑移的边界上，我们去除动量的法向分量。
+
+@code
+          if (id == Boundaries::free_slip)
+            {
+              auto m = ProblemDescription<dim>::momentum(U_i);
+              m -= (m * normal) * normal;
+              for (unsigned int k = 0; k < dim; ++k)
+                U_i[k + 1] = m[k];
+            }
+
+
+@endcode 
+
+
+
+在Dirichlet边界上，我们强行执行初始条件。
+
+@code
+          else if (id == Boundaries::dirichlet)
+            {
+              U_i = initial_values->initial_state(position, t + tau_max);
+            }
+
+
+          scatter(temporary_vector, U_i, i);
+        }
+    }
+
+
+@endcode 
+
+
+
+<b>Step 5</b>: 我们现在更新所有MPI行列的鬼魂层，将临时向量与解决方案向量交换  <code>U</code>  （将通过引用返回），并返回所选择的时间步长  $\tau_{\text{max}}$  。
+
+
+
+
+
+
+
+@code
+    for (auto &it : temporary_vector)
+      it.update_ghost_values();
+
+
+    U.swap(temporary_vector);
+
+
+    return tau_max;
+  }
+
+
+@endcode 
+
+
+
+
+<a name="Schlierenpostprocessing"></a> <h4>Schlieren postprocessing</h4>   
+
+
+在不同的时间间隔，我们将输出解决方案的当前状态 <code>U</code> 以及所谓的Schlieren图。 <code>SchlierenPostprocessor</code> 类的构造函数同样不包含任何惊喜。我们只是提供默认值并注册两个参数。
+
+- schlieren_beta：是一个临时的正向放大系数，以增强可视化中的对比度。它的实际值是一个品味问题。
+
+- schlieren_index：是一个整数，表示我们将使用状态 $[\rho, \mathbf{m},E]$ 的哪个分量来生成可视化。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  SchlierenPostprocessor<dim>::SchlierenPostprocessor(
+    const MPI_Comm          mpi_communicator,
+    TimerOutput &           computing_timer,
+    const OfflineData<dim> &offline_data,
+    const std::string &     subsection /*= "SchlierenPostprocessor"*/)
+    : ParameterAcceptor(subsection)
+    , mpi_communicator(mpi_communicator)
+    , computing_timer(computing_timer)
+    , offline_data(&offline_data)
+  {
+    schlieren_beta = 10.;
+    add_parameter("schlieren beta",
+                  schlieren_beta,
+                  "Beta factor used in Schlieren-type postprocessor");
+
+
+    schlieren_index = 0;
+    add_parameter("schlieren index",
+                  schlieren_index,
+                  "Use the corresponding component of the state vector for the "
+                  "schlieren plot");
+  }
+
+
+@endcode 
+
+
+
+同样， <code>prepare()</code> 函数初始化了两个临时向量（ <code>r</code> and <code>schlieren</code>  ）。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  void SchlierenPostprocessor<dim>::prepare()
+  {
+    TimerOutput::Scope scope(computing_timer,
+                             "schlieren_postprocessor - prepare scratch space");
+
+
+    r.reinit(offline_data->n_locally_relevant);
+    schlieren.reinit(offline_data->partitioner);
+  }
+
+
+@endcode 
+
+
+
+我们现在讨论类成员 <code>SchlierenPostprocessor<dim>::compute_schlieren()</code> 的实现，它基本上是取状态向量 <code>U</code> 的一个分量并计算该分量的Schlieren指标（Schlieren指标的公式可以在类的声明 <code>SchlierenPostprocessor</code> 之前找到）。我们首先注意到这个公式需要 "结点梯度"  $\nabla r_j$  。然而，对于 $\mathcal{C}^0$ 有限元函数来说，梯度的节点值没有定义。更一般地说，梯度的点值对 $W^{1,p}(\Omega)$ 函数来说没有定义。我们可以使用最简单的技术来恢复节点的梯度，即加权平均法。   
+
+
+\f[ \nabla r_j \dealcoloneq \frac{1}{\int_{S_i} \omega_i(\mathbf{x}) \,
+\mathrm{d}\mathbf{x}}
+\int_{S_i} r_h(\mathbf{x}) \omega_i(\mathbf{x}) \, \mathrm{d}\mathbf{x}
+\ \ \ \ \ \mathbf{(*)} \f]    
+
+
+其中 $S_i$ 是形状函数 $\phi_i$ 的支持， $\omega_i(\mathbf{x})$ 是权重。权重可以是任何正函数，如 $\omega_i(\mathbf{x}) \equiv 1$ （这将允许我们恢复通常的均值概念）。但是像往常一样，我们的目标是尽可能多地重复使用离线数据。在这个意义上，最自然的权重选择是 $\omega_i = \phi_i$  。将这种权重的选择和扩展 $r_h(\mathbf{x}) = \sum_{j \in \mathcal{V}}
+r_j \phi_j(\mathbf{x})$ 插入 $\mathbf{(*)}$ 中，我们得到:    
+
+
+\f[ \nabla r_j \dealcoloneq \frac{1}{m_i} \sum_{j \in \mathcal{I}(i)} r_j
+\mathbf{c}_{ij} \ \ \ \ \ \mathbf{(**)} \, . \f]    
+
+
+使用这最后一个公式，我们可以恢复平均节点梯度，而不需要求助于任何形式的正交。这个想法与基于边缘的方案（或代数方案）的整体精神非常一致，我们希望尽可能直接地对矩阵和向量进行操作，以避免通过各种方式组装双线性形式、单元环、正交，或在输入参数（上一时间步的状态）和计算更新所需的实际矩阵和向量之间的任何其他中间结构/操作。   
+
+
+第二件要注意的事情是，我们必须计算全局最小和最大  $\max_j |\nabla r_j|$  和  $\min_j |\nabla r_j|$  。按照在类成员 <code>%TimeStepping\<dim>::%step()</code> 中用于计算时间步长的相同思路，我们将 $\max_j |\nabla r_j|$ 和 $\min_j |\nabla r_j|$ 定义为原子倍数，以便解决线程之间的任何冲突。像往常一样，我们使用 <code>Utilities::MPI::max()</code> 和 <code>Utilities::MPI::min()</code> 来寻找所有MPI进程中的全局最大/最小值。   
+
+
+最后，不可能在所有节点上进行一次循环来计算Schlieren指标。整个操作需要在节点上进行两次循环。
+
+   
+
+
+
+
+- 第一个循环计算网格中所有 $i \in \mathcal{V}$ 的 $|\nabla r_i|$ ，以及边界 $\max_j |\nabla r_j|$ 和 $\min_j |\nabla r_j|$  。
+
+- 第二个循环最后使用公式计算Schlieren指标    
+
+
+\f[ \text{schlieren}[i] = e^{\beta \frac{ |\nabla r_i|
+
+
+- \min_j |\nabla r_j| }{\max_j |\nabla r_j| - \min_j |\nabla r_j| } }
+\, . \f]    
+
+
+这意味着我们将不得不为每一个阶段定义两个工作者 <code>on_subranges</code> 。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  void SchlierenPostprocessor<dim>::compute_schlieren(const vector_type &U)
+  {
+    TimerOutput::Scope scope(
+      computing_timer, "schlieren_postprocessor - compute schlieren plot");
+
+
+    const auto &sparsity            = offline_data->sparsity_pattern;
+    const auto &lumped_mass_matrix  = offline_data->lumped_mass_matrix;
+    const auto &cij_matrix          = offline_data->cij_matrix;
+    const auto &boundary_normal_map = offline_data->boundary_normal_map;
+    const auto &n_locally_owned     = offline_data->n_locally_owned;
+
+
+    const auto indices =
+      std_cxx20::ranges::iota_view<unsigned int, unsigned int>(0,
+                                                               n_locally_owned);
+
+
+@endcode 
+
+
+
+我们将当前MPI进程中的r_i_max和r_i_min定义为原子倍数，以避免线程之间的竞赛条件。
+
+@code
+    std::atomic<double> r_i_max{0.};
+    std::atomic<double> r_i_min{std::numeric_limits<double>::infinity()};
+
+
+@endcode 
+
+
+
+第一个循环：计算每个节点的平均梯度以及梯度的全局最大值和最小值。
+
+@code
+    {
+      const auto on_subranges = 
+        [&](const auto i1, const auto i2) {
+          double r_i_max_on_subrange = 0.;
+          double r_i_min_on_subrange = std::numeric_limits<double>::infinity();
+
+
+          for (const auto i : boost::make_iterator_range(i1, i2))
+            {
+              Assert(i < n_locally_owned, ExcInternalError());
+
+
+              Tensor<1, dim> r_i;
+
+
+              for (auto jt = sparsity.begin(i); jt != sparsity.end(i); ++jt)
+                {
+                  const auto j = jt->column();
+
+
+                  if (i == j)
+                    continue;
+
+
+                  const auto U_js = U[schlieren_index].local_element(j);
+                  const auto c_ij = gather_get_entry(cij_matrix, jt);
+                  r_i += c_ij * U_js;
+                }
+
+
+@endcode 
+
+
+
+我们在自由滑移边界固定梯度r_i，类似于我们在正向欧拉步骤中固定边界状态的方式。这可以避免在自由滑移边界的Schlieren图中出现尖锐的、人为的梯度，这纯粹是一种外观上的选择。
+
+
+
+
+
+
+
+@code
+              const auto bnm_it = boundary_normal_map.find(i);
+              if (bnm_it != boundary_normal_map.end())
+                {
+                  const auto &normal = std::get<0>(bnm_it->second);
+                  const auto &id     = std::get<1>(bnm_it->second);
+
+
+                  if (id == Boundaries::free_slip)
+                    r_i -= 1. * (r_i * normal) * normal;
+                  else
+                    r_i = 0.;
+                }
+
+
+@endcode 
+
+
+
+我们提醒读者，我们对结点梯度本身不感兴趣。我们只想得到它们的规范，以便计算Schlieren指标（用块状质量矩阵加权 $m_i$ ）。
+
+@code
+              const double m_i    = lumped_mass_matrix.diag_element(i);
+              r[i]                = r_i.norm() / m_i;
+              r_i_max_on_subrange = std::max(r_i_max_on_subrange, r[i]);
+              r_i_min_on_subrange = std::min(r_i_min_on_subrange, r[i]);
+            }
+
+
+@endcode 
+
+
+
+我们将当前_r_i_max和current_r_i_min（在当前子范围内）与r_i_max和r_i_min（对于当前MPI进程）进行比较，并在必要时更新它们。
+
+
+
+
+
+
+
+@code
+          double current_r_i_max = r_i_max.load();
+          while (current_r_i_max < r_i_max_on_subrange &&
+                 !r_i_max.compare_exchange_weak(current_r_i_max,
+                                                r_i_max_on_subrange))
+            ;
+
+
+          double current_r_i_min = r_i_min.load();
+          while (current_r_i_min > r_i_min_on_subrange &&
+                 !r_i_min.compare_exchange_weak(current_r_i_min,
+                                                r_i_min_on_subrange))
+            ;
+        };
+
+
+      parallel::apply_to_subranges(indices.begin(),
+                                   indices.end(),
+                                   on_subranges,
+                                   4096);
+    }
+
+
+@endcode 
+
+
+
+并在所有MPI进程中同步 <code>r_i_max</code> and <code>r_i_min</code> 。
+
+
+
+
+
+
+
+@code
+    r_i_max.store(Utilities::MPI::max(r_i_max.load(), mpi_communicator));
+    r_i_min.store(Utilities::MPI::min(r_i_min.load(), mpi_communicator));
+
+
+@endcode 
+
+
+
+第二个循环：我们现在有向量 <code>r</code> 和标量 <code>r_i_max</code> and <code>r_i_min</code> 可供我们使用。这样我们就可以实际计算Schlieren指标了。
+
+
+
+
+
+
+
+@code
+    {
+      const auto on_subranges = 
+        [&](const auto i1, const auto i2) {
+          for (const auto i : boost::make_iterator_range(i1, i2))
+            {
+              Assert(i < n_locally_owned, ExcInternalError());
+
+
+              schlieren.local_element(i) =
+                1. - std::exp(-schlieren_beta * (r[i] - r_i_min) /
+                              (r_i_max - r_i_min));
+            }
+        };
+
+
+      parallel::apply_to_subranges(indices.begin(),
+                                   indices.end(),
+                                   on_subranges,
+                                   4096);
+    }
+
+
+@endcode 
+
+
+
+最后，交换幽灵元素。
+
+@code
+    schlieren.update_ghost_values();
+  }
+
+
+@endcode 
+
+
+
+
+<a name="Themainloop"></a> <h4>The main loop</h4>   
+
+
+在实现了所有的类之后，是时候创建一个 <code>Discretization<dim></code>, <code>OfflineData<dim></code> 、 <code>InitialValues<dim></code>, <code>%TimeStepping\<dim></code> 和 <code>SchlierenPostprocessor<dim></code> 的实例，并在一个循环中运行前向欧拉步骤。   
+
+
+在 <code>MainLoop<dim></code> 的构造函数中，我们现在初始化所有类的实例，并声明一些控制输出的参数。最值得注意的是，我们声明了一个布尔参数 <code>resume</code> ，它将控制程序是否试图从中断的计算中重新启动。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  MainLoop<dim>::MainLoop(const MPI_Comm mpi_communicator)
+    : ParameterAcceptor("A - MainLoop")
+    , mpi_communicator(mpi_communicator)
+    , computing_timer(mpi_communicator,
+                      timer_output,
+                      TimerOutput::never,
+                      TimerOutput::cpu_and_wall_times)
+    , pcout(std::cout, Utilities::MPI::this_mpi_process(mpi_communicator) == 0)
+    , discretization(mpi_communicator, computing_timer, "B - Discretization")
+    , offline_data(mpi_communicator,
+                   computing_timer,
+                   discretization,
+                   "C - OfflineData")
+    , initial_values("D - InitialValues")
+    , time_stepping(mpi_communicator,
+                    computing_timer,
+                    offline_data,
+                    initial_values,
+                    "E - TimeStepping")
+    , schlieren_postprocessor(mpi_communicator,
+                              computing_timer,
+                              offline_data,
+                              "F - SchlierenPostprocessor")
+  {
+    base_name = "test";
+    add_parameter("basename", base_name, "Base name for all output files");
+
+
+    t_final = 4.;
+    add_parameter("final time", t_final, "Final time");
+
+
+    output_granularity = 0.02;
+    add_parameter("output granularity",
+                  output_granularity,
+                  "time interval for output");
+
+
+    asynchronous_writeback = true;
+    add_parameter("asynchronous writeback",
+                  asynchronous_writeback,
+                  "Write out solution in a background thread performing IO");
+
+
+    resume = false;
+    add_parameter("resume", resume, "Resume an interrupted computation.");
+  }
+
+
+@endcode 
+
+
+
+我们首先在匿名命名空间中实现了一个辅助函数 <code>print_head()</code> ，用于在终端输出带有一些漂亮格式的信息。
+
+
+
+
+
+
+
+@code
+  namespace
+  {
+    void print_head(ConditionalOStream &pcout,
+                    const std::string & header,
+                    const std::string & secondary = "")
+    {
+      const auto header_size   = header.size();
+      const auto padded_header = std::string((34 - header_size) / 2, ' ') +
+                                 header +
+                                 std::string((35 - header_size) / 2, ' ');
+
+
+      const auto secondary_size = secondary.size();
+      const auto padded_secondary =
+        std::string((34 - secondary_size) / 2, ' ') + secondary +
+        std::string((35 - secondary_size) / 2, ' ');
+
+
+      /* clang-format off */
+      pcout << std::endl;
+      pcout << "    ####################################################" << std::endl;
+      pcout << "    #########                                  #########" << std::endl;
+      pcout << "    #########"     <<  padded_header   <<     "#########" << std::endl;
+      pcout << "    #########"     << padded_secondary <<     "#########" << std::endl;
+      pcout << "    #########                                  #########" << std::endl;
+      pcout << "    ####################################################" << std::endl;
+      pcout << std::endl;
+      /* clang-format on */
+    }
+  } // namespace
+
+
+@endcode 
+
+
+
+有了 <code>print_head</code> ，现在是实现 <code>MainLoop<dim>::run()</code> 的时候了，它包含了我们程序的主循环。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  void MainLoop<dim>::run()
+  {
+@endcode 
+
+
+
+我们首先读入参数并初始化所有对象。我们在这里注意到，对 ParameterAcceptor::initialize 的调用是从参数文件（其名称作为一个字符串参数给出）中读入所有参数。ParameterAcceptor处理一个全局的ParameterHandler，它被初始化为所有从ParameterAceptor派生的类实例的分节和参数声明。对初始化的调用进入了每个每个派生类的分节，并设置所有使用 ParameterAcceptor::add_parameter() 添加的变量。 
+
+
+
+
+
+
+
+@code
+    pcout << "Reading parameters and allocating objects... " << std::flush;
+
+
+    ParameterAcceptor::initialize("step-69.prm");
+    pcout << "done" << std::endl;
+
+
+@endcode 
+
+
+
+接下来我们创建三角形，集合所有的矩阵，设置从头空间，并初始化DataOut<dim>对象。
+
+
+
+
+
+
+
+@code
+    {
+      print_head(pcout, "create triangulation");
+      discretization.setup();
+
+
+      pcout << "Number of active cells:       "
+            << discretization.triangulation.n_global_active_cells()
+            << std::endl;
+
+
+      print_head(pcout, "compute offline data");
+      offline_data.setup();
+      offline_data.assemble();
+
+
+      pcout << "Number of degrees of freedom: "
+            << offline_data.dof_handler.n_dofs() << std::endl;
+
+
+      print_head(pcout, "set up time step");
+      time_stepping.prepare();
+      schlieren_postprocessor.prepare();
+    }
+
+
+@endcode 
+
+
+
+我们将在变量  <code>t</code> and vector <code>U</code>  中存储当前的时间和状态。
+
+
+
+
+
+
+
+@code
+    double       t            = 0.;
+    unsigned int output_cycle = 0;
+
+
+    print_head(pcout, "interpolate initial values");
+    vector_type U = interpolate_initial_values();
+
+
+@endcode 
+
+
+
+
+<a name="Resume"></a> <h5>Resume</h5>     
+
+
+默认情况下，布尔值 <code>resume</code> 被设置为false，也就是说，下面的代码段不会被运行。然而，如果 <code>resume==true</code> 我们表示我们确实有一个中断的计算，程序将通过从检查点文件中读入由 <code>t</code> ,  <code>output_cycle</code>, and <code>U</code> 组成的旧状态来重新启动。这些检查点文件将在下面讨论的 <code>output()</code> 程序中创建。
+
+
+
+
+
+
+
+@code
+    if (resume)
+      {
+        print_head(pcout, "restore interrupted computation");
+
+
+        const unsigned int i =
+          discretization.triangulation.locally_owned_subdomain();
+
+
+        const std::string name = base_name + "-checkpoint-" +
+                                 Utilities::int_to_string(i, 4) + ".archive";
+        std::ifstream file(name, std::ios::binary);
+
+
+@endcode 
+
+
+
+我们使用一个 <code>boost::archive</code> 来存储和读取检查点状态的内容。
+
+
+
+
+
+
+
+@code
+        boost::archive::binary_iarchive ia(file);
+        ia >> t >> output_cycle;
+
+
+        for (auto &it1 : U)
+          {
+@endcode 
+
+
+
+  <code>it1</code>  遍历状态向量的所有分量  <code>U</code>  。我们依次读入组件的每一个条目，之后更新ghost层。
+
+@code
+            for (auto &it2 : it1)
+              ia >> it2;
+            it1.update_ghost_values();
+          }
+      }
+
+
+@endcode 
+
+
+
+随着初始状态的建立，或中断状态的恢复，是时候进入主循环了。
+
+
+
+
+
+
+
+@code
+    output(U, base_name, t, output_cycle++);
+
+
+    print_head(pcout, "enter main loop");
+
+
+    for (unsigned int cycle = 1; t < t_final; ++cycle)
+      {
+@endcode 
+
+
+
+我们首先打印一个信息性的状态信息 
+
+
+
+
+
+
+
+@code
+        std::ostringstream head;
+        std::ostringstream secondary;
+
+
+        head << "Cycle  " << Utilities::int_to_string(cycle, 6) << "  (" 
+             << std::fixed << std::setprecision(1) << t / t_final * 100  
+             << "%)";
+        secondary << "at time t = " << std::setprecision(8) << std::fixed << t;
+
+
+        print_head(pcout, head.str(), secondary.str());
+
+
+@endcode 
+
+
+
+然后执行一个单一的正向欧拉步骤。注意，状态向量 <code>U</code> 被更新到位， <code>time_stepping.make_one_step()</code> 返回所选择的步长。
+
+
+
+
+
+
+
+@code
+        t += time_stepping.make_one_step(U, t);
+
+
+@endcode 
+
+
+
+后期处理、生成输出和写出当前状态是一项CPU和IO密集型的任务，我们不能在每个时间步长上都做--特别是在显式时间步长上。因此，我们只在超过 <code>output_granularity</code> 设定的阈值时通过调用 <code>output()</code> 函数来安排输出。
+
+
+
+
+
+
+
+@code
+        if (t > output_cycle * output_granularity)
+          {
+            output(U, base_name, t, output_cycle, true);
+            ++output_cycle;
+          }
+      }
+
+
+@endcode 
+
+
+
+我们等待任何剩余的后台输出线程完成，然后打印一个摘要并退出。
+
+@code
+    if (background_thread_state.valid())
+      background_thread_state.wait();
+
+
+    computing_timer.print_summary();
+    pcout << timer_output.str() << std::endl;
+  }
+
+
+@endcode 
+
+
+
+ <code>interpolate_initial_values</code>  将初始时间 "t "作为输入参数，并在 <code>InitialValues<dim>::initial_state</code> 对象的帮助下填充一个状态向量 <code>U</code> 。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  typename MainLoop<dim>::vector_type
+  MainLoop<dim>::interpolate_initial_values(const double t)
+  {
+    pcout << "MainLoop<dim>::interpolate_initial_values(t = " << t << ")"
+          << std::endl;
+    TimerOutput::Scope scope(computing_timer,
+                             "main_loop - setup scratch space");
+
+
+    vector_type U;
+
+
+    for (auto &it : U)
+      it.reinit(offline_data.partitioner);
+
+
+    constexpr auto problem_dimension =
+      ProblemDescription<dim>::problem_dimension;
+
+
+@endcode 
+
+
+
+ <code>InitialValues<dim>::initial_state</code> 的函数签名对于 VectorTools::interpolate(). 来说不太合适。我们通过以下方式来解决这个问题：首先，创建一个lambda函数，对于给定的位置 <code>x</code> 只返回 <code>i</code> 第1个分量的值。在ScalarFunctionFromFunctionObject包装器的帮助下，这个lambda又被转换为一个 dealii::Function 。
+
+
+
+
+
+
+
+@code
+    for (unsigned int i = 0; i < problem_dimension; ++i)
+      VectorTools::interpolate(offline_data.dof_handler,
+                               ScalarFunctionFromFunctionObject<dim, double>(
+                                 [&](const Point<dim> &x) {
+                                   return initial_values.initial_state(x, t)[i];
+                                 }),
+                               U[i]);
+
+
+    for (auto &it : U)
+      it.update_ghost_values();
+
+
+    return U;
+  }
+
+
+@endcode 
+
+
+
+
+<a name="Outputandcheckpointing"></a> <h5>Output and checkpointing</h5>    
+
+
+写出最终的vtk文件是一个相当密集的IO任务，会让主循环停滞一段时间。为了避免这种情况，我们使用了一个<a
+href="https://en.wikipedia.org/wiki/Asynchronous_I/O">asynchronous
+IO</a>的策略，即创建一个后台线程，在主循环被允许继续的情况下执行IO。为了使其发挥作用，我们必须注意两件事。
+
+- 在运行  <code>output_worker</code>  线程之前，我们必须创建一个状态向量  <code>U</code>  的副本。我们将其存储在向量  <code>output_vector</code>  中。
+
+- 我们必须避免后台线程中的任何MPI通信，否则程序可能会出现死锁。这意味着我们必须在工作线程之外运行后处理程序。
+
+
+
+
+
+
+
+@code
+  template <int dim>
+  void MainLoop<dim>::output(const typename MainLoop<dim>::vector_type &U,
+                             const std::string &                        name,
+                             const double                               t,
+                             const unsigned int                         cycle,
+                             const bool checkpoint)
+  {
+    pcout << "MainLoop<dim>::output(t = " << t
+          << ", checkpoint = " << checkpoint << ")" << std::endl;
+
+
+@endcode 
+
+
+
+如果设置了异步回写选项，我们会启动一个后台线程来执行所有的慢速IO到磁盘。在这种情况下，我们必须确保后台线程确实完成了运行。如果没有，我们必须等待它完成。我们用<a
+href="https://en.cppreference.com/w/cpp/thread/async"><code>std::async()</code></a>启动上述背景线程，返回<a
+href="https://en.cppreference.com/w/cpp/thread/future"><code>std::future</code></a>对象。这个 <code>std::future</code> 对象包含了函数的返回值，在我们的例子中就是 <code>void</code>  。
+
+
+
+
+
+
+
+@code
+    if (background_thread_state.valid())
+      {
+        TimerOutput::Scope timer(computing_timer, "main_loop - stalled output");
+        background_thread_state.wait();
+      }
+
+
+    constexpr auto problem_dimension =
+      ProblemDescription<dim>::problem_dimension;
+
+
+@endcode 
+
+
+
+在这一点上，我们制作了一份状态向量的副本，运行schlieren后处理器，并运行 DataOut<dim>::build_patches()  实际输出代码是标准的。我们创建一个DataOut实例，附加所有我们想要输出的数据向量，并调用 DataOut<dim>::build_patches(). ，但是有一个转折。为了在后台线程上执行异步IO，我们将DataOut<dim>对象创建为一个共享指针，传递给工作线程，以确保一旦我们退出这个函数，工作线程完成后，DataOut<dim>对象再次被销毁。
+
+
+
+
+
+
+
+@code
+    for (unsigned int i = 0; i < problem_dimension; ++i)
+      {
+        output_vector[i] = U[i];
+        output_vector[i].update_ghost_values();
+      }
+
+
+    schlieren_postprocessor.compute_schlieren(output_vector);
+
+
+    auto data_out = std::make_shared<DataOut<dim>>();
+
+
+    data_out->attach_dof_handler(offline_data.dof_handler);
+
+
+    const auto &component_names = ProblemDescription<dim>::component_names;
+
+
+    for (unsigned int i = 0; i < problem_dimension; ++i)
+      data_out->add_data_vector(output_vector[i], component_names[i]);
+
+
+    data_out->add_data_vector(schlieren_postprocessor.schlieren,
+                              "schlieren_plot");
+
+
+    data_out->build_patches(discretization.mapping,
+                            discretization.finite_element.degree - 1);
+
+
+@endcode 
+
+
+
+接下来我们为后台线程创建一个lambda函数。我们<a
+href="https://en.cppreference.com/w/cpp/language/lambda">capture</a> <code>this</code> 指针以及输出函数的大部分参数的值，这样我们就可以在lambda函数中访问它们。
+
+@code
+    const auto output_worker = [this, name, t, cycle, checkpoint, data_out]() {
+      if (checkpoint)
+        {
+@endcode 
+
+
+
+我们通过做与<a href="Resume">resume
+logic</a>讨论的精确的逆向操作来检查当前状态。
+
+
+
+
+
+
+
+@code
+          const unsigned int i =
+            discretization.triangulation.locally_owned_subdomain();
+          std::string filename =
+            name + "-checkpoint-" + Utilities::int_to_string(i, 4) + ".archive";
+
+
+          std::ofstream file(filename, std::ios::binary | std::ios::trunc);
+
+
+          boost::archive::binary_oarchive oa(file);
+          oa << t << cycle;
+          for (const auto &it1 : output_vector)
+            for (const auto &it2 : it1)
+              oa << it2;
+        }
+
+
+      DataOutBase::VtkFlags flags(t,
+                                  cycle,
+                                  true,
+                                  DataOutBase::VtkFlags::best_speed);
+      data_out->set_flags(flags);
+
+
+      data_out->write_vtu_with_pvtu_record(
+        "", name + "-solution", cycle, mpi_communicator, 6);
+    };
+
+
+@endcode 
+
+
+
+如果设置了异步回写选项，我们在<a
+href="https://en.cppreference.com/w/cpp/thread/async"><code>std::async</code></a>函数的帮助下启动一个新的后台线程。该函数返回一个<a
+href="https://en.cppreference.com/w/cpp/thread/future"><code>std::future</code></a>对象，我们可以用它来查询后台线程的状态。此时，我们可以从 <code>output()</code> 函数中返回，继续在主循环中进行时间步进--该线程将在后台运行。
+
+@code
+    if (asynchronous_writeback)
+      {
+        background_thread_state = std::async(std::launch::async, output_worker);
+      }
+    else
+      {
+        output_worker();
+      }
+  }
+
+
+} // namespace Step69
+
+
+@endcode 
+
+
+
+最后是主函数。
+
+
+
+
+
+
+
+@code
+int main(int argc, char *argv[])
+{
+  try
+    {
+      constexpr int dim = 2;
+
+
+      using namespace dealii;
+      using namespace Step69;
+
+
+      Utilities::MPI::MPI_InitFinalize mpi_initialization(argc, argv);
+
+
+      MPI_Comm      mpi_communicator(MPI_COMM_WORLD);
+      MainLoop<dim> main_loop(mpi_communicator);
+
+
+      main_loop.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    };
+}
+@endcode 
+
+<a name="Results"></a> <a name="Results"></a><h1>Results</h1> 
+
+
+在释放模式下，用默认参数运行程序，在4核机器上（带超线程）大约需要1分钟。
+
 @verbatim
 # mpirun -np 4 ./step-69 | tee output
 Reading parameters and allocating objects... done
+
 
     ####################################################
     #########                                  #########
@@ -4098,7 +3964,9 @@ Reading parameters and allocating objects... done
     #########                                  #########
     ####################################################
 
+
 Number of active cells:       36864
+
 
     ####################################################
     #########                                  #########
@@ -4106,13 +3974,16 @@ Number of active cells:       36864
     #########                                  #########
     ####################################################
 
+
 Number of degrees of freedom: 37376
+
 
     ####################################################
     #########                                  #########
     #########         set up time step         #########
     #########                                  #########
     ####################################################
+
 
     ####################################################
     #########                                  #########
@@ -4121,8 +3992,10 @@ Number of degrees of freedom: 37376
     #########                                  #########
     ####################################################
 
+
 TimeLoop<dim>::interpolate_initial_values(t = 0)
 TimeLoop<dim>::output(t = 0, checkpoint = 0)
+
 
     ####################################################
     #########                                  #########
@@ -4131,6 +4004,7 @@ TimeLoop<dim>::output(t = 0, checkpoint = 0)
     #########                                  #########
     ####################################################
 
+
     ####################################################
     #########                                  #########
     #########      Cycle  000001  (0.0%)       #########
@@ -4138,7 +4012,9 @@ TimeLoop<dim>::output(t = 0, checkpoint = 0)
     #########                                  #########
     ####################################################
 
+
 [...]
+
 
     ####################################################
     #########                                  #########
@@ -4147,7 +4023,9 @@ TimeLoop<dim>::output(t = 0, checkpoint = 0)
     #########                                  #########
     ####################################################
 
+
 TimeLoop<dim>::output(t = 4.00038, checkpoint = 1)
+
 
 +------------------------------------------------------------------------+------------+------------+
 | Total CPU time elapsed since start                                     |       357s |            |
@@ -4170,32 +4048,27 @@ TimeLoop<dim>::output(t = 4.00038, checkpoint = 1)
 | time_step - 4 fix boundary states                          |      7553 |     0.724s |       0.2% |
 | time_step - prepare scratch space                          |         1 |   0.00245s |         0% |
 +------------------------------------------------------------+-----------+------------+------------+
-@endverbatim
+@endverbatim 
 
-One thing that becomes evident is the fact that the program spends two
-thirds of the execution time computing the graph viscosity d_ij and about a
-third of the execution time in performing the update, where computing the
-flux $f(U)$ is the expensive operation. The preset default resolution is
-about 37k gridpoints, which amounts to about 148k spatial degrees of
-freedom in 2D. An animated schlieren plot of the solution looks as follows:
 
-<img src="https://www.dealii.org/images/steps/developer/step-69.coarse.gif" alt="" height="300">
 
-It is evident that 37k gridpoints for the first-order method is nowhere
-near the resolution needed to resolve any flow features. For comparison,
-here is a "reference" computation with a second-order method and about 9.5M
-gridpoints (<a href="https://github.com/conservation-laws/ryujin">github
-project page</a>):
+一个明显的事实是，程序花了三分之二的执行时间计算图形粘度d_ij，大约三分之一的执行时间用于执行更新，其中计算通量 $f(U)$ 是昂贵的操作。预设的默认分辨率约为37k个网格点，相当于二维空间自由度约148k。解决方案的动画斯利安图看起来如下。
 
-<img src="https://www.dealii.org/images/steps/developer/step-69.2nd-order.t400.jpg" alt="" height="300">
+  <img src="https://www.dealii.org/images/steps/developer/step-69.coarse.gif" alt="" height="300">   
 
-So, we give the first-order method a second chance and run it with about
-2.4M gridpoints on a small compute server:
+很明显，一阶方法的37k个网格点远远不能满足解决任何流动特征的需要。作为比较，这里有一个用二阶方法和大约9.5M网格点的 "参考 "计算（<a href="https://github.com/conservation-laws/ryujin">github
+project page</a>）。
+
+  <img src="https://www.dealii.org/images/steps/developer/step-69.2nd-order.t400.jpg" alt="" height="300">   
+
+因此，我们再给一阶方法一个机会，在一个小型计算服务器上用大约240万个网格点运行它。
 
 @verbatim
 # mpirun -np 16 ./step-69 | tee output
 
+
 [...]
+
 
     ####################################################
     #########                                  #########
@@ -4204,9 +4077,12 @@ So, we give the first-order method a second chance and run it with about
     #########                                  #########
     ####################################################
 
+
 TimeLoop<dim>::output(t = 4.00006, checkpoint = 1)
 
+
 [...]
+
 
 +------------------------------------------------------------------------+------------+------------+
 | Total wallclock time elapsed since start                               |  6.75e+03s |            |
@@ -4229,32 +4105,26 @@ TimeLoop<dim>::output(t = 4.00006, checkpoint = 1)
 | time_step - 4 fix boundary states                          |     70216 |        24s |      0.36% |
 | time_step - prepare scratch space                          |         1 |    0.0227s |         0% |
 +------------------------------------------------------------+-----------+------------+------------+
-@endverbatim
-
-And with the following result:
-
-<img src="https://www.dealii.org/images/steps/developer/step-69.fine.gif" alt="" height="300">
-
-That's substantially better, although of course at the price of having run
-the code for roughly 2 hours on 16 cores.
+@endverbatim 
 
 
 
-<a name="extensions"></a>
-<a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
+而结果如下。
+
+  <img src="https://www.dealii.org/images/steps/developer/step-69.fine.gif" alt="" height="300">   
+
+这大大改善了，当然，代价是在16个核心上运行了大约2个小时的代码。
 
 
-The program showcased here is really only first-order accurate, as
-discussed above. The pictures above illustrate how much diffusion that
-introduces and how far the solution is from one that actually resolves
-the features we care about.
 
-This can be fixed, but it would exceed what a *tutorial* is about.
-Nevertheless, it is worth showing what one can achieve by adding a
-second-order scheme. For example, here is a video computed with <a
-href=https://conservation-laws.43-1.org/>the following research code</a>
-that shows (with a different color scheme) a 2d simulation that corresponds
-to the cases shown above:
+
+<a name="extensions"></a> <a name="Possibilitiesforextensions"></a><h3>Possibilities for extensions</h3>
+
+
+如上所述，这里展示的程序实际上只有一阶准确性。上面的图片说明了这引入了多少扩散，以及这个解决方案离真正解决我们所关心的特征有多远。
+
+这一点是可以解决的，但这将超出一个*教程*的意义。然而，值得展示的是，通过增加一个二阶方案，我们可以实现什么。例如，这里有一段用<a
+href=https://conservation-laws.43-1.org/>the following research code</a>计算的视频，显示了（用不同的颜色方案）对应于上述情况的二维模拟。
 
 @htmlonly
 <p align="center">
@@ -4263,15 +4133,13 @@ to the cases shown above:
    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
    allowfullscreen></iframe>
  </p>
-@endhtmlonly
+@endhtmlonly 
 
-This simulation was done with 38 million degrees of freedom
-(continuous $Q_1$ finite elements) per component of the solution
-vector. The exquisite detail of the solution is remarkable for these
-kinds of simulations, including in the sub-sonic region behind the
-obstacle.
 
-One can also with relative ease further extend this to the 3d case:
+
+这个模拟是用3800万个自由度（连续的 $Q_1$ 有限元）的解向量的每个分量完成的。对于这类模拟来说，解决方案的精致细节是显著的，包括在障碍物后面的亚声速区域。
+
+人们还可以相对容易地进一步扩展到三维情况。
 
 @htmlonly
 <p align="center">
@@ -4280,22 +4148,10 @@ One can also with relative ease further extend this to the 3d case:
    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
    allowfullscreen></iframe>
  </p>
-@endhtmlonly
+@endhtmlonly 
 
-Solving this becomes expensive, however: The simulation was done with
-1,817 million degrees of freedom (continuous $Q_1$ finite elements)
-per component (for a total of 9.09 billion spatial degrees of freedom)
-and ran on 30,720 MPI ranks. The code achieved an average througput of
-969M grid points per second (0.04M gridpoints per second per CPU). The
-front and back wall show a "Schlieren plot": the magnitude of the
-gradient of the density on an exponential scale from white (low) to
-black (high). All other cutplanes and the surface of the obstacle show
-the magnitude of the vorticity on a white (low) - yellow (medium) -
-red (high) scale. (The scales of the individual cutplanes have been
-adjusted for a nicer visualization.)
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-69.cc"
-*/
+
+
+然而，解决这个问题变得很昂贵。仿真是以每个部件18.17亿个自由度（连续 $Q_1$ 有限元）完成的（总共90.9亿个空间自由度），在30,720个MPI等级上运行。该代码达到了平均每秒969万个网格点的吞吐量（每个CPU每秒0.04万个网格点）。前面和后面的墙显示了一个 "Schlieren图"：密度的梯度大小在一个从白色（低）到黑色（高）的指数级上。所有其他切面和障碍物表面都显示了白色（低）-黄色（中）-红色（高）尺度上的涡度大小。为了使视觉效果更好，各个切割面的比例已经被调整过了）。<a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-69.cc"  。 
+
+  */  

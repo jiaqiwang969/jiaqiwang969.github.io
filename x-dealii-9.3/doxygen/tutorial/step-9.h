@@ -1,351 +1,201 @@
-/**
-@page step_9 The step-9 tutorial program
-This tutorial depends on step-6.
+  /**   @page step_9 The step-9 tutorial program 。 
+
+本教程取决于  step-6  。
 
 @htmlonly
 <table class="tutorial" width="50%">
-<tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
+<tr><th colspan="2"><b><small>Table of contents</small></b><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#Intro" class=bold>Introduction</a><a href="#Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Discretizingtheadvectionequation">Discretizing the advection equation</a>
-        <li><a href="#Whyisthismethodcalledstreamlinediffusion">Why is this method called "streamline diffusion"?</a>
-        <li><a href="#WhyisthismethodalsocalledPetrovGalerkin">Why is this method also called "Petrov-Galerkin"?</a>
-        <li><a href="#Whyisthismethodalsocalledstreamlineupwind">Why is this method also called "streamline-upwind"?</a>
-        <li><a href="#Solvingthelinearsystemthatcorrespondstotheadvectionequation">Solving the linear system that corresponds to the advection equation</a>
-        <li><a href="#Thetestcase">The test case</a>
-        <li><a href="#Asimplerefinementcriterion">A simple refinement criterion</a>
+        <li><a href="#Discretizingtheadvectionequation">Discretizing the advection equation</a><a href="#Discretizingtheadvectionequation">Discretizing the advection equation</a>
+        <li><a href="#Whyisthismethodcalledstreamlinediffusion">Why is this method called "streamline diffusion"?</a><a href="#Whyisthismethodcalledstreamlinediffusion">Why is this method called "streamline diffusion"?</a>
+        <li><a href="#WhyisthismethodalsocalledPetrovGalerkin">Why is this method also called "Petrov-Galerkin"?</a><a href="#WhyisthismethodalsocalledPetrovGalerkin">Why is this method also called "Petrov-Galerkin"?</a>
+        <li><a href="#Whyisthismethodalsocalledstreamlineupwind">Why is this method also called "streamline-upwind"?</a><a href="#Whyisthismethodalsocalledstreamlineupwind">Why is this method also called "streamline-upwind"?</a>
+        <li><a href="#Solvingthelinearsystemthatcorrespondstotheadvectionequation">Solving the linear system that corresponds to the advection equation</a><a href="#Solvingthelinearsystemthatcorrespondstotheadvectionequation">Solving the linear system that corresponds to the advection equation</a>
+        <li><a href="#Thetestcase">The test case</a><a href="#Thetestcase">The test case</a>
+        <li><a href="#Asimplerefinementcriterion">A simple refinement criterion</a><a href="#Asimplerefinementcriterion">A simple refinement criterion</a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#CommProg" class=bold>The commented program</a><a href="#CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Equationdatadeclaration">Equation data declaration</a>
-        <li><a href="#AdvectionProblemclassdeclaration">AdvectionProblem class declaration</a>
-        <li><a href="#GradientEstimationclassdeclaration">GradientEstimation class declaration</a>
-        <li><a href="#AdvectionProblemclassimplementation">AdvectionProblem class implementation</a>
-        <li><a href="#GradientEstimationclassimplementation">GradientEstimation class implementation</a>
-        <li><a href="#Mainfunction">Main function</a>
+        <li><a href="#Equationdatadeclaration">Equation data declaration</a><a href="#Equationdatadeclaration">Equation data declaration</a>
+        <li><a href="#AdvectionProblemclassdeclaration">AdvectionProblem class declaration</a><a href="#AdvectionProblemclassdeclaration">AdvectionProblem class declaration</a>
+        <li><a href="#GradientEstimationclassdeclaration">GradientEstimation class declaration</a><a href="#GradientEstimationclassdeclaration">GradientEstimation class declaration</a>
+        <li><a href="#AdvectionProblemclassimplementation">AdvectionProblem class implementation</a><a href="#AdvectionProblemclassimplementation">AdvectionProblem class implementation</a>
+        <li><a href="#GradientEstimationclassimplementation">GradientEstimation class implementation</a><a href="#GradientEstimationclassimplementation">GradientEstimation class implementation</a>
+        <li><a href="#Mainfunction">Main function</a><a href="#Mainfunction">Main function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#Results" class=bold>Results</a><a href="#Results" class=bold>Results</a>
     <ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#PlainProg" class=bold>The plain program</a><a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
-@endhtmlonly
-<a name="Intro"></a>
-<a name="Introduction"></a><h1>Introduction</h1>
+@endhtmlonly 
+
+<a name="Intro"></a> <a name="Introduction"></a><h1>Introduction</h1>
 
 
 
-In this example, our aims are the following:
-<ol>
-  <li>solve the advection equation $\beta \cdot \nabla u = f$;
-  <li>show how we can use multiple threads to get results quicker if we have a
-    multi-processor machine;
-  <li>develop a simple refinement criterion.
-</ol>
-While the second aim is difficult to describe in general terms without
-reference to the code, we will discuss the other two aims in the
-following. The use of multiple threads will then be detailed at the
-relevant places within the program. We will, however, follow the
-general discussion of the WorkStream approach detailed in the
-@ref threads "Parallel computing with multiple processors accessing shared memory"
-documentation module.
+
+在这个例子中，我们的目标如下。  <ol>   <li>  解决平流方程  $\beta \cdot \nabla u = f$  ；  <li>  展示如果我们有一台多处理器机器，我们如何使用多线程来快速获得结果；  <li>  开发一个简单的细化标准。  </ol> 虽然第二个目的在不参考代码的情况下很难进行一般性描述，但我们将在下文中讨论其他两个目的。然后将在程序中的相关地方详细介绍多线程的使用。然而，我们将遵循 @ref threads "多处理器访问共享内存的并行计算 "文件模块中详述的关于WorkStream方法的一般讨论。
 
 
-<a name="Discretizingtheadvectionequation"></a><h3>Discretizing the advection equation</h3>
+<a name="Discretizingtheadvectionequation"></a><h3>Discretizing the advection equation</h3> 
 
 
-In the present example program, we want to numerically approximate the
-solution of the advection equation
-@f[
+在本例程序中，我们要对平流方程@f[
   \beta \cdot \nabla u = f,
-@f]
-where $\beta$ is a vector field that describes the advection direction and
-speed (which may be dependent on the space variables if
-$\beta=\beta(\mathbf x)$), $f$ is a source
-function, and $u$ is the solution. The physical process that this
-equation describes is that of a given flow field $\beta$, with which
-another substance is transported, the density or concentration of
-which is given by $u$. The equation does not contain diffusion of this
-second species within its carrier substance, but there are source
-terms.
+@f]的解进行数值近似，其中 $\beta$ 是描述平流方向和速度的矢量场（如果 $\beta=\beta(\mathbf x)$ ，可能取决于空间变量）， $f$ 是一个源函数，而 $u$ 是解。该方程描述的物理过程是一个给定的流场 $\beta$ ，另一种物质随其流动，其密度或浓度由 $u$ 给出。该方程不包含这第二种物质在其载体物质中的扩散，但有源项。
 
-It is obvious that at the inflow, the above equation needs to be
-augmented by boundary conditions:
-@f[
+很明显，在流入地，上述方程需要用边界条件来增加。@f[
   u = g \qquad\qquad \mathrm{on}\ \partial\Omega_-,
-@f]
-where $\partial\Omega_-$ describes the inflow portion of the boundary and is
-formally defined by
-@f[
+@f]其中 $\partial\Omega_-$ 描述了边界的流入部分，并由@f[
   \partial\Omega_-
   =
   \{{\mathbf x}\in \partial\Omega: \beta\cdot{\mathbf n}({\mathbf x}) < 0\},
-@f]
-and ${\mathbf n}({\mathbf x})$ being the outward normal to the domain at point
-${\mathbf x}\in\partial\Omega$. This definition is quite intuitive, since
-as ${\mathbf n}$ points outward, the scalar product with $\beta$ can only
-be negative if the transport direction $\beta$ points inward, i.e. at
-the inflow boundary. The mathematical theory states that we must not
-pose any boundary condition on the outflow part of the boundary.
+@f]和 ${\mathbf n}({\mathbf x})$ 正式定义为点 ${\mathbf x}\in\partial\Omega$ 处域的外向法线。这个定义非常直观，因为由于 ${\mathbf n}$ 指向外侧，如果传输方向 $\beta$ 指向内侧，即在流入边界，与 $\beta$ 的标量乘积只能是负数。数学理论指出，我们必须不在边界的流出部分设置任何边界条件。
 
-Unfortunately, the equation stated above cannot be solved in a stable way using
-the standard finite element method. The problem is that
-solutions to this equation possess insufficient regularity
-perpendicular to the transport direction: while they are smooth along
-the streamlines defined by the "wind field"
-$\beta$, they may be discontinuous perpendicular to this
-direction. This is easy to understand: what the equation $\beta \cdot
-\nabla u = f$ means is in essence that the <i>rate of change of $u$ in
-direction $\beta$ equals $f$</i>. But the equation has no implications
-for the derivatives in the perpendicular direction, and consequently
-if $u$ is discontinuous at a point on the inflow boundary, then this
-discontinuity will simply be transported along the streamline of the
-wind field that starts at this boundary point.
-These discontinuities lead to numerical instabilities that
-make a stable solution by a standard continuous finite element discretization
-impossible.
+不幸的是，上述方程不能用标准的有限元方法以稳定的方式求解。问题是这个方程的解在垂直于传输方向上具有不充分的规则性：虽然它们沿 "风场" $\beta$ 定义的流线是光滑的，但它们在垂直于这个方向上可能是不连续的。这很容易理解：方程 $\beta \cdot
+\nabla u = f$ 的意思实质上就是<i>rate of change of $u$ in
+direction $\beta$ equals $f$</i>。但该方程对垂直方向的导数没有影响，因此，如果 $u$ 在流入边界的某一点上不连续，那么这个不连续将简单地沿着从该边界点开始的风场流线传输。这些不连续会导致数值不稳定，使标准的连续有限元离散化不可能获得稳定的解。
 
-A standard approach to address this difficulty is the <em>"streamline-upwind
-Petrov-Galerkin"</em> (SUPG) method, sometimes also called the
-streamline diffusion method. A good explanation of the method can be
-found in @cite elman2005 . Formally, this method replaces the step
-in which we derive the the weak form of the differential equation from
-the strong form: Instead of multiplying the equation by a test
-function $v$ and integrating over the domain, we instead multiply
-by $v + \delta \beta\cdot\nabla v$, where $\delta$ is a
-parameter that is chosen in the range of the (local) mesh width $h$;
-good results are usually obtained by setting $\delta=0.1h$.
-(Why this is called "streamline diffusion" will be explained below;
-for the moment, let us simply take for granted that this is how we
-derive a stable discrete formulation.)
-The value for $\delta$ here is small enough
-that we do not introduce excessive diffusion, but large enough that the
-resulting problem is well-posed.
+解决这一困难的标准方法是 <em> "流线上风Petrov-Galerkin" </em> （SUPG）方法，有时也称为流线扩散法。对该方法的良好解释可以在  @cite elman2005  中找到。从形式上看，这种方法取代了我们从强形式推导出微分方程的弱形式的步骤。我们不是用测试函数 $v$ 乘以方程并在域上积分，而是乘以 $v + \delta \beta\cdot\nabla v$ ，其中 $\delta$ 是在（局部）网格宽度 $h$ 范围内选择的参数；通过设置 $\delta=0.1h$ 通常可以获得良好的结果。 为什么这被称为 "流线扩散 "将在下面解释；目前，让我们简单地认为这是我们导出稳定离散公式的方式。这里 $\delta$ 的值小到足以使我们不引入过度的扩散，但大到足以使所产生的问题得到良好的解决。
 
-Using the test functions as defined above, an initial weak form of the
-problem would ask for finding a function $u_h$ so that for all test
-functions $v_h$ we have
-@f[
+使用上面定义的测试函数，问题的初始弱形式将要求找到一个函数 $u_h$ ，以便对于所有测试函数 $v_h$ 我们有@f[
   (\beta \cdot \nabla u_h, v_h + \delta \beta\cdot\nabla v_h)_\Omega
   =
   (f, v_h + \delta \beta\cdot\nabla v_h)_\Omega.
-@f]
-However, we would like to include inflow boundary conditions $u=g$
-weakly into this problem, and this can be done by requiring that in
-addition to the equation above we also have
-@f[
+@f]。然而，我们想把流入边界条件 $u=g$ 弱地纳入这个问题，这可以通过要求除了上面的方程之外，对于所有生活在边界上并且来自合适测试空间的测试函数 $w_h$ ，我们也有@f[
   (u_h, w_h)_{\partial\Omega_-}
   =
   (g, w_h)_{\partial\Omega_-}
-@f]
-for all test functions $w_h$ that live on the boundary and that are
-from a suitable test space. It turns out that a suitable space of test
-functions happens to be $\beta\cdot {\mathbf n}$ times the traces of
-the functions $v_h$ in the test space we already use for the
-differential equation in the domain. Thus, we require that for all
-test functions $v_h$ we have
-@f[
+@f]而实现。事实证明，一个合适的检验函数空间恰好是 $\beta\cdot {\mathbf n}$ 乘以我们已经用于域内微分方程的检验空间中的函数 $v_h$ 的痕迹。因此，我们要求对于所有的测试函数 $v_h$ ，我们有@f[
   (u_h, \beta\cdot {\mathbf n} v_h)_{\partial\Omega_-}
   =
   (g, \beta\cdot {\mathbf n} v_h)_{\partial\Omega_-}.
-@f]
-Without attempting a justification (see again the literature on the finite
-element method in general, and the streamline diffusion method in
-particular), we can combine the equations for the differential
-equation and the boundary values in the following
-weak formulation of
-our stabilized problem: find a discrete function $u_h$ such that
-for all discrete test functions $v_h$ there holds
-@f[
+@f]。 在不试图进行论证的情况下（请再次参阅关于一般的有限元方法，特别是流线扩散方法的文献），我们可以将微分方程和边界值的方程结合在我们稳定化问题的以下弱表述中：找到一个离散的函数 $u_h$ ，使得对于所有的离散测试函数 $v_h$ ，有@f[
   (\beta \cdot \nabla u_h, v_h + \delta \beta\cdot\nabla v_h)_\Omega
+
+
   -
   (u_h, \beta\cdot {\mathbf n} v_h)_{\partial\Omega_-}
   =
   (f, v_h + \delta \beta\cdot\nabla v_h)_\Omega
+
+
   -
   (g, \beta\cdot {\mathbf n} v_h)_{\partial\Omega_-}.
-@f]
+@f] 
 
 
-One would think that this leads to a system matrix
-to be inverted of the form
-@f[
+人们会认为，这将导致系统矩阵以基函数 $\varphi_i,\varphi_j$ 的形式被倒置@f[
   a_{ij} =
   (\beta \cdot \nabla \varphi_i,
    \varphi_j + \delta \beta\cdot\nabla \varphi_j)_\Omega
+
+
   -
   (\varphi_i, \beta\cdot {\mathbf n} \varphi_j)_{\partial\Omega_-},
-@f]
-with basis functions $\varphi_i,\varphi_j$.  However, this is a
-pitfall that happens to every numerical analyst at least once
-(including the author): we have here expanded the solution
-$u_h = \sum_i U_i \varphi_i$, but if we do so, we will have to solve the
-problem
-@f[
+@f]。 然而，这是每个数值分析师至少会遇到一次的陷阱（包括笔者）：我们在这里扩展了解 $u_h = \sum_i U_i \varphi_i$ ，但如果我们这样做，我们将不得不解决@f[
   U^T A = F^T,
-@f]
-where $U$ is the vector of expansion coefficients, i.e., we have to
-solve the transpose problem of what we might have expected naively.
+@f]的问题，其中 $U$ 是扩展系数的矢量，也就是说，我们必须解决我们可能天真的预期的转置问题。
 
-This is a point we made in the introduction of step-3. There, we argued that
-to avoid this very kind of problem, one should get in the habit of always
-multiplying with test functions <i>from the left</i> instead of from the right
-to obtain the correct matrix right away. In order to obtain the form
-of the linear system that we need, it is therefore best to rewrite the weak
-formulation to
-@f[
+这是我们在 step-3 的介绍中提出的一个观点。在那里，我们认为，为了避免这种问题，应该养成总是与检验函数相乘的习惯 <i>from the left</i> ，而不是从右面得到正确的矩阵。为了得到我们所需要的线性系统的形式，最好是将弱式改写为@f[
   (v_h + \delta \beta\cdot\nabla v_h, \beta \cdot \nabla u_h)_\Omega
+
+
   -
   (\beta\cdot {\mathbf n} v_h, u_h)_{\partial\Omega_-}
   =
   (v_h + \delta \beta\cdot\nabla v_h, f)_\Omega
+
+
   -
   (\beta\cdot {\mathbf n} v_h, g)_{\partial\Omega_-}
-@f]
-and then to obtain
-@f[
+@f]，然后得到@f[
   a_{ij} =
   (\varphi_i + \delta \beta \cdot \nabla \varphi_i,
    \beta\cdot\nabla \varphi_j)_\Omega
+
+
   -
   (\beta\cdot {\mathbf n} \varphi_i, \varphi_j)_{\partial\Omega_-},
-@f]
-as system matrix. We will assemble this matrix in the program.
+@f]作为系统矩阵。我们将在程序中集合这个矩阵。
 
 
 <a name="Whyisthismethodcalledstreamlinediffusion"></a><h3>Why is this method called "streamline diffusion"?</h3>
 
 
-Looking at the bilinear form mentioned above, we see that the discrete
-solution has to satisfy an equation of which the left hand side in
-weak form has a domain term of the kind
-@f[
+看一下上面提到的双线性形式，我们看到离散解必须满足一个方程，其中弱形式的左手边有一个@f[
   (v_h + \delta \beta\cdot\nabla v_h, \beta \cdot \nabla u_h)_\Omega,
-@f]
-or if we split this up, the form
-@f[
+@f]这样的域项，如果我们把它拆开，则是@f[
   (v_h, \beta \cdot \nabla u_h)_\Omega
   +
   (\delta \beta\cdot\nabla v_h, \beta \cdot \nabla u_h)_\Omega.
-@f]
-If we wanted to see what strong form of the equation that would
-correspond to, we need to integrate the second term. This yields the
-following formulation, where for simplicity we'll ignore boundary
-terms for now:
-@f[
+@f]的形式。 如果我们想看看这将对应于什么强形式的方程，我们需要整合第二个项。这就产生了下面的表述，为了简单起见，我们暂时不考虑边界项。@f[
   (v_h, \beta \cdot \nabla u_h)_\Omega
+
+
   -
   \left(v_h, \delta \nabla \cdot \left[\beta \left(\beta \cdot \nabla
   u_h\right)\right]\right)_\Omega
   +
   \text{boundary terms}.
-@f]
-Let us assume for a moment that the wind field $\beta$ is
-divergence-free, i.e., that $\nabla \cdot \beta = 0$. Then applying
-the product rule to the derivative of the term in square brackets on
-the right and using the divergence-freeness will give us the following:
-@f[
+@f] 让我们暂时假设风场 $\beta$ 是无发散的，即 $\nabla \cdot \beta = 0$  。然后将乘积规则应用于右边方括号内项的导数，并使用发散-绿色，将得到以下结果。@f[
   (v_h, \beta \cdot \nabla u_h)_\Omega
+
+
   -
   \left(v_h, \delta \left[\beta \cdot \nabla\right] \left[\beta \cdot \nabla
   \right]u_h\right)_\Omega
   +
   \text{boundary terms}.
-@f]
-That means that the strong form of the equation would be of the sort
-@f[
+@f] 这意味着方程的强形式将是这样的 @f[
   \beta \cdot \nabla u_h
+
+
   -
   \delta
   \left[\beta \cdot \nabla\right] \left[\beta \cdot \nabla
   \right] u_h.
-@f]
-What is important to recognize now is that $\beta\cdot\nabla$ is the
-<em>derivative in direction $\beta$</em>. So, if we denote this by
-$\beta\cdot\nabla=\frac{\partial}{\partial \beta}$ (in the same way as
-we often write $\mathbf n\cdot\nabla=\frac{\partial}{\partial n}$ for
-the derivative in normal direction at the boundary), then the strong
-form of the equation is
-@f[
+@f] 现在要认识到的是， $\beta\cdot\nabla$  是 <em>  方向上的导数  $\beta$   </em>  。因此，如果我们用 $\beta\cdot\nabla=\frac{\partial}{\partial \beta}$ 来表示（就像我们经常用 $\mathbf n\cdot\nabla=\frac{\partial}{\partial n}$ 来表示边界处法线方向的导数一样），那么方程的强形式就是@f[
   \beta \cdot \nabla u_h
+
+
   -
   \delta
   \frac{\partial^2}{\partial\beta^2} u_h.
-@f]
-In other words, the unusual choice of test function is equivalent to
-the addition of term to the strong form that corresponds to a second
-order (i.e., diffusion) differential operator in the direction of the wind
-field $\beta$, i.e., in "streamline direction". A fuller account would
-also have to explore the effect of the test function on boundary
-values and why it is necessary to also use the same test function for
-the right hand side, but the discussion above might make clear where
-the name "streamline diffusion" for the method originates from.
+@f] 换句话说，测试函数的不寻常选择相当于在强形式中增加了一个项，它对应于风场方向的二阶（即扩散）微分算子 $\beta$  ，即 "流线方向"。更全面的说明还必须探讨测试函数对边界值的影响，以及为什么有必要对右手边也使用相同的测试函数，但上面的讨论可能会使人明白该方法的 "流线扩散 "名称的由来。
 
 
-<a name="WhyisthismethodalsocalledPetrovGalerkin"></a><h3>Why is this method also called "Petrov-Galerkin"?</h3>
+<a name="WhyisthismethodalsocalledPetrovGalerkin"></a><h3>Why is this method also called "Petrov-Galerkin"?</h3> 
 
 
-A "Galerkin method" is one where one obtains the weak formulation by
-multiplying the equation by a test function $v$ (and then integrating
-over $\Omega$) where the functions $v$ are from the same space as the
-solution $u$ (though possibly with different boundary values). But
-this is not strictly necessary: One could also imagine choosing the
-test functions from a different set of functions, as long as that
-different set has "as many dimensions" as the original set of
-functions so that we end up with as many independent equations as
-there are degrees of freedom (where all of this needs to be
-appropriately defined in the infinite-dimensional case). Methods that
-make use of this possibility (i.e., choose the set of test functions
-differently than the set of solutions) are called "Petrov-Galerkin"
-methods. In the current case, the test functions all have the form
-$v+\beta\cdot\nabla v$ where $v$ is from the set of solutions.
+"Galerkin方法 "是指通过将方程乘以测试函数 $v$ （然后在 $\Omega$ 上进行积分）来获得弱表述，其中函数 $v$ 与解 $u$ 来自同一空间（尽管可能具有不同的边界值）。但这并不是严格必要的。我们也可以想象从不同的函数集中选择测试函数，只要这个不同的函数集具有与原始函数集 "同样多的维度"，这样我们最终就会有与自由度同样多的独立方程（在无限维的情况下，所有这些都需要适当地定义）。利用这种可能性的方法（即以不同的方式选择测试函数集和解决方案集）被称为 "Petrov-Galerkin "方法。在目前的情况下，测试函数的形式都是 $v+\beta\cdot\nabla v$ ，其中 $v$ 来自解集。
 
 
 <a name="Whyisthismethodalsocalledstreamlineupwind"></a><h3>Why is this method also called "streamline-upwind"?</h3>
 
 
-[Upwind methods](https://en.wikipedia.org/wiki/Upwind_scheme) have a
-long history in the derivation of stabilized schemes for advection
-equations. Generally, the idea is that instead of looking at a
-function "here", we look at it a small distance further "upstream" or "upwind",
-i.e., where the information "here" originally came from. This might
-suggest not considering $u(\mathbf x)$, but
-something like $u(\mathbf x - \delta \beta)$. Or, equivalently upon
-integration, we could evaluate $u(\mathbf x)$ and instead consider $v$
-a bit downstream: $v(\mathbf x+\delta \beta)$. This would be cumbersome
-for a variety of reasons: First, we would have to define what $v$
-should be if $\mathbf x + \delta \beta$ happens to be outside
-$\Omega$; second, computing integrals numerically would be much more
-awkward since we no longer evaluate $u$ and $v$ at the same quadrature
-points. But since we assume that $\delta$ is small, we can do a Taylor
-expansion:
-@f[
+[上风法](https://en.wikipedia.org/wiki/Upwind_scheme)在推导平流方程的稳定方案方面有很长的历史。一般来说，其想法是，我们不是在 "这里 "看一个函数，而是在 "上游 "或 "上风 "的一小段距离上看它，即 "这里 "的信息最初来自哪里。这可能意味着不考虑 $u(\mathbf x)$ ，而是考虑 $u(\mathbf x - \delta \beta)$ 这样的东西。或者，在整合后，我们可以评估 $u(\mathbf x)$ ，而考虑 $v$ 的下游部分。  $v(\mathbf x+\delta \beta)$  . 由于各种原因，这将是很麻烦的。首先，如果 $\mathbf x + \delta \beta$ 恰好在 $\Omega$ 之外，我们将不得不定义 $v$ 应该是什么；其次，数值计算积分将更加困难，因为我们不再在同一正交点评估 $u$ 和 $v$ 。但由于我们假设 $\delta$ 很小，我们可以做一个泰勒扩展。@f[
   v(\mathbf x + \delta \beta)
   \approx
   v(\mathbf x) + \delta \beta \cdot \nabla v(\mathbf x).
-@f]
-This form for the test function should by now look familiar.
+@f] 这个测试函数的形式现在看起来应该很熟悉了。
 
 
 <a name="Solvingthelinearsystemthatcorrespondstotheadvectionequation"></a><h3>Solving the linear system that corresponds to the advection equation</h3>
 
 
-As the resulting matrix is no longer symmetric positive definite, we cannot
-use the usual Conjugate Gradient method (implemented in the
-SolverCG class) to solve the system. Instead, we use the GMRES (Generalized
-Minimum RESidual) method (implemented in SolverGMRES) that is suitable
-for problems of the kind we have here.
+由于得到的矩阵不再是对称正定的，我们不能使用通常的共轭梯度方法（在SolverCG类中实现）来解决这个系统。相反，我们使用GMRES（Generalized Minimum RESidual）方法（在SolverGMRES中实现），它适用于我们这里的那种问题。
 
 
 <a name="Thetestcase"></a><h3>The test case</h3>
 
 
-For the problem which we will solve in this tutorial program, we use
-the following domain and functions (in $d=2$ space dimensions):
-@f{eqnarray*}
+对于我们将在本教程程序中解决的问题，我们使用以下领域和函数（在 $d=2$ 空间维度）。@f{eqnarray*}
   \Omega &=& [-1,1]^d \\
   \beta({\mathbf x})
   &=&
@@ -376,78 +226,35 @@ the following domain and functions (in $d=2$ space dimensions):
   g
   &=&
   e^{5 (1 - |\mathbf x|^2)} \sin(16\pi|\mathbf x|^2).
-@f}
-For $d>2$, we extend $\beta$ and ${\mathbf x}_0$ by simply duplicating
-the last of the components shown above one more time.
+@f} 
 
-With all of this, the following comments are in order:
-<ol>
-<li> The advection field $\beta$ transports the solution roughly in
-diagonal direction from lower left to upper right, but with a wiggle
-structure superimposed.
-<li> The right hand side adds to the field generated by the inflow
-boundary conditions a blob in the lower left corner, which is then
-transported along.
-<li> The inflow boundary conditions impose a weighted sinusoidal
-structure that is transported along with the flow field. Since
-$|{\mathbf x}|\ge 1$ on the boundary, the weighting term never gets very large.
-</ol>
+对于 $d>2$ ，我们扩展了 $\beta$ 和 ${\mathbf x}_0$ ，只是将上面所示的最后一个组件再重复一次。
+
+有了这一切，下面的评论是有必要的。  <ol>   <li>  平流场 $\beta$ 大致以对角线方向从左下角向右上角传输解决方案，但叠加了一个摆动结构。  <li>  右手边在流入边界条件产生的场中加入了左下角的一个圆球，然后沿着这个圆球传输。  <li>  流入边界条件施加了一个加权的正弦结构，它与流场一起被传送。由于 $|{\mathbf x}|\ge 1$ 在边界上，加权项从未变得非常大。  </ol>   
 
 
-<a name="Asimplerefinementcriterion"></a><h3>A simple refinement criterion</h3>
+<a name="Asimplerefinementcriterion"></a><h3>A simple refinement criterion</h3> 
 
 
-In all previous examples with adaptive refinement, we have used an
-error estimator first developed by Kelly et al., which assigns to each
-cell $K$ the following indicator:
-@f[
+在以前所有的自适应细化的例子中，我们都使用了Kelly等人首先开发的误差估计器，它给每个单元 $K$ 分配了以下指标。@f[
   \eta_K =
   \left(
     \frac {h_K}{24}
     \int_{\partial K}
       [\partial_n u_h]^2 \; d\sigma
   \right)^{1/2},
-@f]
-where $[\partial n u_h]$ denotes the jump of the normal derivatives
-across a face $\gamma\subset\partial K$ of the cell $K$. It can be
-shown that this error indicator uses a discrete analogue of the second
-derivatives, weighted by a power of the cell size that is adjusted to
-the linear elements assumed to be in use here:
-@f[
+@f] 其中 $[\partial n u_h]$ 表示跨越单元格 $\gamma\subset\partial K$ 的一个面的法线导数的跳变。可以证明，这个误差指标使用的是二阶导数的离散类似物，由单元大小的幂加权，该幂被调整为这里假设使用的线性元素。@f[
   \eta_K \approx
   C h \| \nabla^2 u \|_K,
-@f]
-which itself is related to the error size in the energy norm.
+@f]这本身就与能量准则中的误差大小有关。
 
-The problem with this error indicator in the present case is that it
-assumes that the exact solution possesses second derivatives. This is
-already questionable for solutions to Laplace's problem in some cases,
-although there most problems allow solutions in $H^2$. If solutions
-are only in $H^1$, then the second derivatives would be singular in
-some parts (of lower dimension) of the domain and the error indicators
-would not reduce there under mesh refinement. Thus, the algorithm
-would continuously refine the cells around these parts, i.e. would
-refine into points or lines (in 2d).
+在目前的情况下，这个误差指标的问题是，它假定精确的解决方案拥有二次导数。在某些情况下，这对于拉普拉斯问题的解来说已经是个问题了，尽管那里大多数问题允许在 $H^2$ 中的解。如果解只在 $H^1$ 中，那么二阶导数在域的某些部分（低维）是奇异的，在网格细化下，误差指标不会减少。因此，算法将不断细化这些部分周围的单元，即细化为点或线（在2d）。
 
-However, for the present case, solutions are usually not even in $H^1$
-(and this missing regularity is not the exceptional case as for
-Laplace's equation), so the error indicator described above is not
-really applicable. We will thus develop an indicator that is based on
-a discrete approximation of the gradient. Although the gradient often
-does not exist, this is the only criterion available to us, at least
-as long as we use continuous elements as in the present
-example. To start with, we note that given two cells $K$, $K'$ of
-which the centers are connected by the vector ${\mathbf y}_{KK'}$, we can
-approximate the directional derivative of a function $u$ as follows:
-@f[
+然而，对于目前的情况，解通常不在 $H^1$ 内（这种缺失的规律性并不是像拉普拉斯方程那样的特殊情况），所以上述的误差指标并不真正适用。因此，我们将开发一个基于梯度的离散近似的指标。虽然梯度经常不存在，但这是我们唯一可用的标准，至少在我们使用连续元素时是如此。首先，我们注意到，给定两个单元 $K$ ， $K'$ ，其中心由矢量 ${\mathbf y}_{KK'}$ 连接，我们可以对函数 $u$ 的方向导数做如下近似。@f[
   \frac{{\mathbf y}_{KK'}^T}{|{\mathbf y}_{KK'}|} \nabla u
   \approx
   \frac{u(K') - u(K)}{|{\mathbf y}_{KK'}|},
-@f]
-where $u(K)$ and $u(K')$ denote $u$ evaluated at the centers of the
-respective cells. We now multiply the above approximation by
-${\mathbf y}_{KK'}/|{\mathbf y}_{KK'}|$ and sum over all neighbors $K'$ of $K$:
-@f[
+@f] 其中 $u(K)$ 和 $u(K')$ 表示 $u$ 在各自单元中心的评价。现在我们将上述近似值乘以 ${\mathbf y}_{KK'}/|{\mathbf y}_{KK'}|$ ，并对 $K$ 的所有邻居 $K'$ 求和：@f[
   \underbrace{
     \left(\sum_{K'} \frac{{\mathbf y}_{KK'} {\mathbf y}_{KK'}^T}
                          {|{\mathbf y}_{KK'}|^2}\right)}_{=:Y}
@@ -456,13 +263,7 @@ ${\mathbf y}_{KK'}/|{\mathbf y}_{KK'}|$ and sum over all neighbors $K'$ of $K$:
   \sum_{K'}
   \frac{{\mathbf y}_{KK'}}{|{\mathbf y}_{KK'}|}
   \frac{u(K') - u(K)}{|{\mathbf y}_{KK'}|}.
-@f]
-If the vectors ${\mathbf y}_{KK'}$ connecting $K$ with its neighbors span
-the whole space (i.e. roughly: $K$ has neighbors in all directions),
-then the term in parentheses in the left hand side expression forms a
-regular matrix, which we can invert to obtain an approximation of the
-gradient of $u$ on $K$:
-@f[
+@f] 如果连接 ${\mathbf y}_{KK'}$ 与其邻居的向量 $K$ 横跨整个空间（即大致为： $K$  ]在所有方向上都有邻居），那么左侧表达式中括号内的项就形成了一个正则矩阵，我们可以通过反转得到 $u$ 在 $K$ 上的梯度近似值：@f[
   \nabla u
   \approx
   Y^{-1}
@@ -471,15 +272,9 @@ gradient of $u$ on $K$:
     \frac{{\mathbf y}_{KK'}}{|{\mathbf y}_{KK'}|}
     \frac{u(K') - u(K)}{|{\mathbf y}_{KK'}|}
   \right).
-@f]
-We will denote the approximation on the right hand side by
-$\nabla_h u(K)$, and we will use the following quantity as refinement
-criterion:
-@f[
+@f] 我们将用 $\nabla_h u(K)$ 表示右侧的近似值，我们将使用以下数量作为细化标准。@f[
   \eta_K = h^{1+d/2} |\nabla_h u_h(K)|,
-@f]
-which is inspired by the following (not rigorous) argument:
-@f{eqnarray*}
+@f]这是受以下（不严格的）论证的启发。@f{eqnarray*}
   \|u-u_h\|^2_{L_2}
   &\le&
   C h^2 \|\nabla u\|^2_{L_2}
@@ -498,1580 +293,1388 @@ which is inspired by the following (not rigorous) argument:
   C
   \sum_K
   h_K^{2+d} |\nabla_h u_h(K)|^2
-@f}
- *
- *
- * <a name="CommProg"></a>
- * <h1> The commented program</h1>
- * 
- * Just as in previous examples, we have to include several files of which the
- * meaning has already been discussed:
- * 
- * @code
- * #include <deal.II/base/quadrature_lib.h>
- * #include <deal.II/base/function.h>
- * #include <deal.II/base/logstream.h>
- * #include <deal.II/lac/vector.h>
- * #include <deal.II/lac/full_matrix.h>
- * #include <deal.II/lac/sparse_matrix.h>
- * #include <deal.II/lac/dynamic_sparsity_pattern.h>
- * #include <deal.II/lac/solver_gmres.h>
- * #include <deal.II/lac/precondition.h>
- * #include <deal.II/lac/affine_constraints.h>
- * #include <deal.II/grid/tria.h>
- * #include <deal.II/grid/grid_generator.h>
- * #include <deal.II/grid/grid_refinement.h>
- * #include <deal.II/dofs/dof_handler.h>
- * #include <deal.II/dofs/dof_tools.h>
- * #include <deal.II/fe/fe_values.h>
- * #include <deal.II/numerics/vector_tools.h>
- * #include <deal.II/numerics/matrix_tools.h>
- * #include <deal.II/numerics/data_out.h>
- * #include <deal.II/fe/fe_q.h>
- * #include <deal.II/grid/grid_out.h>
- * 
- * @endcode
- * 
- * The following two files provide classes and information for multithreaded
- * programs. In the first one, the classes and functions are declared which we
- * need to do assembly in parallel (i.e. the
- * <code>WorkStream</code> namespace). The
- * second file has a class MultithreadInfo which can be used to query the
- * number of processors in your system, which is often useful when deciding
- * how many threads to start in parallel.
- * 
- * @code
- * #include <deal.II/base/work_stream.h>
- * #include <deal.II/base/multithread_info.h>
- * 
- * @endcode
- * 
- * The next new include file declares a base class <code>TensorFunction</code>
- * not unlike the <code>Function</code> class, but with the difference that
- * TensorFunction::value returns a Tensor instead of a scalar.
- * 
- * @code
- * #include <deal.II/base/tensor_function.h>
- * 
- * #include <deal.II/numerics/error_estimator.h>
- * 
- * @endcode
- * 
- * This is C++, as we want to write some output to disk:
- * 
- * @code
- * #include <fstream>
- * #include <iostream>
- * 
- * 
- * @endcode
- * 
- * The last step is as in previous programs:
- * 
- * @code
- * namespace Step9
- * {
- *   using namespace dealii;
- * 
- * @endcode
- * 
- * 
- * <a name="Equationdatadeclaration"></a> 
- * <h3>Equation data declaration</h3>
- * 
+@f} 
 
- * 
- * Next we declare a class that describes the advection field. This, of
- * course, is a vector field with as many components as there are space
- * dimensions. One could now use a class derived from the
- * <code>Function</code> base class, as we have done for boundary values and
- * coefficients in previous examples, but there is another possibility in
- * the library, namely a base class that describes tensor valued
- * functions. This is more convenient than overriding Function::value() with
- * a method that knows about multiple function components: at the end of the
- * day we need a Tensor, so we may as well just use a class that returns a
- * Tensor.
- * 
- * @code
- *   template <int dim>
- *   class AdvectionField : public TensorFunction<1, dim>
- *   {
- *   public:
- *     virtual Tensor<1, dim> value(const Point<dim> &p) const override;
- * 
- * @endcode
- * 
- * In previous examples, we have used assertions that throw exceptions in
- * several places. However, we have never seen how such exceptions are
- * declared. This can be done as follows:
- * 
- * @code
- *     DeclException2(ExcDimensionMismatch,
- *                    unsigned int,
- *                    unsigned int,
- *                    << "The vector has size " << arg1 << " but should have "
- *                    << arg2 << " elements.");
- * @endcode
- * 
- * The syntax may look a little strange, but is reasonable. The format is
- * basically as follows: use the name of one of the macros
- * <code>DeclExceptionN</code>, where <code>N</code> denotes the number of
- * additional parameters which the exception object shall take. In this
- * case, as we want to throw the exception when the sizes of two vectors
- * differ, we need two arguments, so we use
- * <code>DeclException2</code>. The first parameter then describes the
- * name of the exception, while the following declare the data types of
- * the parameters. The last argument is a sequence of output directives
- * that will be piped into the <code>std::cerr</code> object, thus the
- * strange format with the leading <code>@<@<</code> operator and the
- * like. Note that we can access the parameters which are passed to the
- * exception upon construction (i.e. within the <code>Assert</code> call)
- * by using the names <code>arg1</code> through <code>argN</code>, where
- * <code>N</code> is the number of arguments as defined by the use of the
- * respective macro <code>DeclExceptionN</code>.
- *     
+<a name="CommProg"></a> <h1> The commented program</h1>
 
- * 
- * To learn how the preprocessor expands this macro into actual code,
- * please refer to the documentation of the exception classes. In brief,
- * this macro call declares and defines a class
- * <code>ExcDimensionMismatch</code> inheriting from ExceptionBase which
- * implements all necessary error output functions.
- * 
- * @code
- *   };
- * 
- * @endcode
- * 
- * The following two functions implement the interface described above. The
- * first simply implements the function as described in the introduction,
- * while the second uses the same trick to avoid calling a virtual function
- * as has already been introduced in the previous example program. Note the
- * check for the right sizes of the arguments in the second function, which
- * should always be present in such functions; it is our experience that
- * many if not most programming errors result from incorrectly initialized
- * arrays, incompatible parameters to functions and the like; using
- * assertion as in this case can eliminate many of these problems.
- * 
- * @code
- *   template <int dim>
- *   Tensor<1, dim> AdvectionField<dim>::value(const Point<dim> &p) const
- *   {
- *     Point<dim> value;
- *     value[0] = 2;
- *     for (unsigned int i = 1; i < dim; ++i)
- *       value[i] = 1 + 0.8 * std::sin(8. * numbers::PI * p[0]);
- * 
- *     return value;
- *   }
- * 
- * @endcode
- * 
- * Besides the advection field, we need two functions describing the source
- * terms (<code>right hand side</code>) and the boundary values. As
- * described in the introduction, the source is a constant function in the
- * vicinity of a source point, which we denote by the constant static
- * variable <code>center_point</code>. We set the values of this center
- * using the same template tricks as we have shown in the step-7 example
- * program. The rest is simple and has been shown previously.
- * 
- * @code
- *   template <int dim>
- *   class RightHandSide : public Function<dim>
- *   {
- *   public:
- *     virtual double value(const Point<dim> & p,
- *                          const unsigned int component = 0) const override;
- * 
- *   private:
- *     static const Point<dim> center_point;
- *   };
- * 
- * 
- *   template <>
- *   const Point<1> RightHandSide<1>::center_point = Point<1>(-0.75);
- * 
- *   template <>
- *   const Point<2> RightHandSide<2>::center_point = Point<2>(-0.75, -0.75);
- * 
- *   template <>
- *   const Point<3> RightHandSide<3>::center_point = Point<3>(-0.75, -0.75, -0.75);
- * 
- * 
- * 
- * @endcode
- * 
- * The only new thing here is that we check for the value of the
- * <code>component</code> parameter. As this is a scalar function, it is
- * obvious that it only makes sense if the desired component has the index
- * zero, so we assert that this is indeed the
- * case. <code>ExcIndexRange</code> is a global predefined exception
- * (probably the one most often used, we therefore made it global instead of
- * local to some class), that takes three parameters: the index that is
- * outside the allowed range, the first element of the valid range and the
- * one past the last (i.e. again the half-open interval so often used in the
- * C++ standard library):
- * 
- * @code
- *   template <int dim>
- *   double RightHandSide<dim>::value(const Point<dim> & p,
- *                                    const unsigned int component) const
- *   {
- *     (void)component;
- *     Assert(component == 0, ExcIndexRange(component, 0, 1));
- *     const double diameter = 0.1;
- *     return ((p - center_point).norm_square() < diameter * diameter ?
- *               0.1 / std::pow(diameter, dim) :
- *               0.0);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * Finally for the boundary values, which is just another class derived from
- * the <code>Function</code> base class:
- * 
- * @code
- *   template <int dim>
- *   class BoundaryValues : public Function<dim>
- *   {
- *   public:
- *     virtual double value(const Point<dim> & p,
- *                          const unsigned int component = 0) const override;
- *   };
- * 
- * 
- * 
- *   template <int dim>
- *   double BoundaryValues<dim>::value(const Point<dim> & p,
- *                                     const unsigned int component) const
- *   {
- *     (void)component;
- *     Assert(component == 0, ExcIndexRange(component, 0, 1));
- * 
- *     const double sine_term = std::sin(16. * numbers::PI * p.norm_square());
- *     const double weight    = std::exp(5. * (1. - p.norm_square()));
- *     return weight * sine_term;
- *   }
- * 
- * @endcode
- * 
- * 
- * <a name="AdvectionProblemclassdeclaration"></a> 
- * <h3>AdvectionProblem class declaration</h3>
- * 
+就像以前的例子一样，我们必须包括几个文件，其中的含义已经讨论过了。
 
- * 
- * Here comes the main class of this program. It is very much like the main
- * classes of previous examples, so we again only comment on the
- * differences.
- * 
- * @code
- *   template <int dim>
- *   class AdvectionProblem
- *   {
- *   public:
- *     AdvectionProblem();
- *     void run();
- * 
- *   private:
- *     void setup_system();
- * 
- * @endcode
- * 
- * The next set of functions will be used to assemble the
- * matrix. However, unlike in the previous examples, the
- * <code>assemble_system()</code> function will not do the work
- * itself, but rather will delegate the actual assembly to helper
- * functions <code>assemble_local_system()</code> and
- * <code>copy_local_to_global()</code>. The rationale is that
- * matrix assembly can be parallelized quite well, as the
- * computation of the local contributions on each cell is entirely
- * independent of other cells, and we only have to synchronize
- * when we add the contribution of a cell to the global
- * matrix.
- *     
+@code
+#include <deal.II/base/quadrature_lib.h>
+#include <deal.II/base/function.h>
+#include <deal.II/base/logstream.h>
+#include <deal.II/lac/vector.h>
+#include <deal.II/lac/full_matrix.h>
+#include <deal.II/lac/sparse_matrix.h>
+#include <deal.II/lac/dynamic_sparsity_pattern.h>
+#include <deal.II/lac/solver_gmres.h>
+#include <deal.II/lac/precondition.h>
+#include <deal.II/lac/affine_constraints.h>
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/grid/grid_refinement.h>
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/dofs/dof_tools.h>
+#include <deal.II/fe/fe_values.h>
+#include <deal.II/numerics/vector_tools.h>
+#include <deal.II/numerics/matrix_tools.h>
+#include <deal.II/numerics/data_out.h>
+#include <deal.II/fe/fe_q.h>
+#include <deal.II/grid/grid_out.h>
 
- * 
- * The strategy for parallelization we choose here is one of the
- * possibilities mentioned in detail in the @ref threads module in
- * the documentation. Specifically, we will use the WorkStream
- * approach discussed there. Since there is so much documentation
- * in this module, we will not repeat the rationale for the design
- * choices here (for example, if you read through the module
- * mentioned above, you will understand what the purpose of the
- * <code>AssemblyScratchData</code> and
- * <code>AssemblyCopyData</code> structures is). Rather, we will
- * only discuss the specific implementation.
- *     
 
- * 
- * If you read the page mentioned above, you will find that in
- * order to parallelize assembly, we need two data structures --
- * one that corresponds to data that we need during local
- * integration ("scratch data", i.e., things we only need as
- * temporary storage), and one that carries information from the
- * local integration to the function that then adds the local
- * contributions to the corresponding elements of the global
- * matrix. The former of these typically contains the FEValues and
- * FEFaceValues objects, whereas the latter has the local matrix,
- * local right hand side, and information about which degrees of
- * freedom live on the cell for which we are assembling a local
- * contribution. With this information, the following should be
- * relatively self-explanatory:
- * 
- * @code
- *     struct AssemblyScratchData
- *     {
- *       AssemblyScratchData(const FiniteElement<dim> &fe);
- *       AssemblyScratchData(const AssemblyScratchData &scratch_data);
- * 
- * @endcode
- * 
- * FEValues and FEFaceValues are expensive objects to set up, so we
- * include them in the scratch object so that as much data is reused
- * between cells as possible.
- * 
- * @code
- *       FEValues<dim>     fe_values;
- *       FEFaceValues<dim> fe_face_values;
- * 
- * @endcode
- * 
- * We also store a few vectors that we will populate with values on each
- * cell. Setting these objects up is, in the usual case, cheap; however,
- * they require memory allocations, which can be expensive in
- * multithreaded applications. Hence we keep them here so that
- * computations on a cell do not require new allocations.
- * 
- * @code
- *       std::vector<double>         rhs_values;
- *       std::vector<Tensor<1, dim>> advection_directions;
- *       std::vector<double>         face_boundary_values;
- *       std::vector<Tensor<1, dim>> face_advection_directions;
- * 
- * @endcode
- * 
- * Finally, we need objects that describe the problem's data:
- * 
- * @code
- *       AdvectionField<dim> advection_field;
- *       RightHandSide<dim>  right_hand_side;
- *       BoundaryValues<dim> boundary_values;
- *     };
- * 
- *     struct AssemblyCopyData
- *     {
- *       FullMatrix<double>                   cell_matrix;
- *       Vector<double>                       cell_rhs;
- *       std::vector<types::global_dof_index> local_dof_indices;
- *     };
- * 
- *     void assemble_system();
- *     void local_assemble_system(
- *       const typename DoFHandler<dim>::active_cell_iterator &cell,
- *       AssemblyScratchData &                                 scratch,
- *       AssemblyCopyData &                                    copy_data);
- *     void copy_local_to_global(const AssemblyCopyData &copy_data);
- * 
- * 
- * @endcode
- * 
- * The following functions again are the same as they were in previous
- * examples, as are the subsequent variables:
- * 
- * @code
- *     void solve();
- *     void refine_grid();
- *     void output_results(const unsigned int cycle) const;
- * 
- *     Triangulation<dim> triangulation;
- *     DoFHandler<dim>    dof_handler;
- * 
- *     FE_Q<dim> fe;
- * 
- *     AffineConstraints<double> hanging_node_constraints;
- * 
- *     SparsityPattern      sparsity_pattern;
- *     SparseMatrix<double> system_matrix;
- * 
- *     Vector<double> solution;
- *     Vector<double> system_rhs;
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="GradientEstimationclassdeclaration"></a> 
- * <h3>GradientEstimation class declaration</h3>
- * 
+@endcode 
 
- * 
- * Now, finally, here comes the class that will compute the difference
- * approximation of the gradient on each cell and weighs that with a power
- * of the mesh size, as described in the introduction. This class is a
- * simple version of the <code>DerivativeApproximation</code> class in the
- * library, that uses similar techniques to obtain finite difference
- * approximations of the gradient of a finite element field, or of higher
- * derivatives.
- *   
 
- * 
- * The class has one public static function <code>estimate</code> that is
- * called to compute a vector of error indicators, and a few private functions
- * that do the actual work on all active cells. As in other parts of the
- * library, we follow an informal convention to use vectors of floats for
- * error indicators rather than the common vectors of doubles, as the
- * additional accuracy is not necessary for estimated values.
- *   
 
- * 
- * In addition to these two functions, the class declares two exceptions
- * which are raised when a cell has no neighbors in each of the space
- * directions (in which case the matrix described in the introduction would
- * be singular and can't be inverted), while the other one is used in the
- * more common case of invalid parameters to a function, namely a vector of
- * wrong size.
- *   
+下面两个文件提供了多线程程序的类和信息。在第一个文件中，声明了我们需要进行并行装配的类和函数（即 <code>WorkStream</code> 命名空间）。第二个文件有一个类MultithreadInfo，可以用来查询系统中的处理器数量，这在决定启动多少个并行线程时往往很有用。
 
- * 
- * Two other comments: first, the class has no non-static member functions
- * or variables, so this is not really a class, but rather serves the
- * purpose of a <code>namespace</code> in C++. The reason that we chose a
- * class over a namespace is that this way we can declare functions that are
- * private. This can be done with namespaces as well, if one declares some
- * functions in header files in the namespace and implements these and other
- * functions in the implementation file. The functions not declared in the
- * header file are still in the namespace but are not callable from
- * outside. However, as we have only one file here, it is not possible to
- * hide functions in the present case.
- *   
+@code
+#include <deal.II/base/work_stream.h>
+#include <deal.II/base/multithread_info.h>
 
- * 
- * The second comment is that the dimension template parameter is attached
- * to the function rather than to the class itself. This way, you don't have
- * to specify the template parameter yourself as in most other cases, but
- * the compiler can figure its value out itself from the dimension of the
- * DoFHandler object that one passes as first argument.
- *   
 
- * 
- * Before jumping into the fray with the implementation, let us also comment
- * on the parallelization strategy. We have already introduced the necessary
- * framework for using the WorkStream concept in the declaration of the main
- * class of this program above. We will use it again here. In the current
- * context, this means that we have to define
- * <ol>
- * <li>classes for scratch and copy objects,</li>
- * <li>a function that does the local computation on one cell, and</li>
- * <li>a function that copies the local result into a global object.</li>
- * </ol>
- * Given this general framework, we will, however, deviate from it a
- * bit. In particular, WorkStream was generally invented for cases where
- * each local computation on a cell <i>adds</i> to a global object -- for
- * example, when assembling linear systems where we add local contributions
- * into a global matrix and right hand side. WorkStream is designed to handle
- * the potential conflict of multiple threads trying to do this addition at
- * the same time, and consequently has to provide for some way to ensure that
- * only one thread gets to do this at a time. Here, however, the situation is
- * slightly different: we compute contributions from every cell
- * individually, but then all we need to do is put them into an element of
- * an output vector that is unique to each cell. Consequently, there is no
- * risk that the write operations from two cells might conflict, and the
- * elaborate machinery of WorkStream to avoid conflicting writes is not
- * necessary. Consequently, what we will do is this: We still need a scratch
- * object that holds, for example, the FEValues object. However, we only
- * create a fake, empty copy data structure. Likewise, we do need the
- * function that computes local contributions, but since it can already put
- * the result into its final location, we do not need a copy-local-to-global
- * function and will instead give the WorkStream::run() function an empty
- * function object -- the equivalent to a NULL function pointer.
- * 
- * @code
- *   class GradientEstimation
- *   {
- *   public:
- *     template <int dim>
- *     static void estimate(const DoFHandler<dim> &dof,
- *                          const Vector<double> & solution,
- *                          Vector<float> &        error_per_cell);
- * 
- *     DeclException2(ExcInvalidVectorLength,
- *                    int,
- *                    int,
- *                    << "Vector has length " << arg1 << ", but should have "
- *                    << arg2);
- *     DeclException0(ExcInsufficientDirections);
- * 
- *   private:
- *     template <int dim>
- *     struct EstimateScratchData
- *     {
- *       EstimateScratchData(const FiniteElement<dim> &fe,
- *                           const Vector<double> &    solution,
- *                           Vector<float> &           error_per_cell);
- *       EstimateScratchData(const EstimateScratchData &data);
- * 
- *       FEValues<dim> fe_midpoint_value;
- *       std::vector<typename DoFHandler<dim>::active_cell_iterator>
- *         active_neighbors;
- * 
- *       const Vector<double> &solution;
- *       Vector<float> &       error_per_cell;
- * 
- *       std::vector<double> cell_midpoint_value;
- *       std::vector<double> neighbor_midpoint_value;
- *     };
- * 
- *     struct EstimateCopyData
- *     {};
- * 
- *     template <int dim>
- *     static void
- *     estimate_cell(const typename DoFHandler<dim>::active_cell_iterator &cell,
- *                   EstimateScratchData<dim> &scratch_data,
- *                   const EstimateCopyData &  copy_data);
- *   };
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="AdvectionProblemclassimplementation"></a> 
- * <h3>AdvectionProblem class implementation</h3>
- * 
+@endcode 
 
- * 
- * 
 
- * 
- * Now for the implementation of the main class. Constructor, destructor and
- * the function <code>setup_system</code> follow the same pattern that was
- * used previously, so we need not comment on these three function:
- * 
- * @code
- *   template <int dim>
- *   AdvectionProblem<dim>::AdvectionProblem()
- *     : dof_handler(triangulation)
- *     , fe(5)
- *   {}
- * 
- * 
- * 
- *   template <int dim>
- *   void AdvectionProblem<dim>::setup_system()
- *   {
- *     dof_handler.distribute_dofs(fe);
- *     hanging_node_constraints.clear();
- *     DoFTools::make_hanging_node_constraints(dof_handler,
- *                                             hanging_node_constraints);
- *     hanging_node_constraints.close();
- * 
- *     DynamicSparsityPattern dsp(dof_handler.n_dofs(), dof_handler.n_dofs());
- *     DoFTools::make_sparsity_pattern(dof_handler,
- *                                     dsp,
- *                                     hanging_node_constraints,
- *                                     /*keep_constrained_dofs =*/false);
- *     sparsity_pattern.copy_from(dsp);
- * 
- *     system_matrix.reinit(sparsity_pattern);
- * 
- *     solution.reinit(dof_handler.n_dofs());
- *     system_rhs.reinit(dof_handler.n_dofs());
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * In the following function, the matrix and right hand side are
- * assembled. As stated in the documentation of the main class above, it
- * does not do this itself, but rather delegates to the function following
- * next, utilizing the WorkStream concept discussed in @ref threads .
- *   
 
- * 
- * If you have looked through the @ref threads module, you will have
- * seen that assembling in parallel does not take an incredible
- * amount of extra code as long as you diligently describe what the
- * scratch and copy data objects are, and if you define suitable
- * functions for the local assembly and the copy operation from local
- * contributions to global objects. This done, the following will do
- * all the heavy lifting to get these operations done on multiple
- * threads on as many cores as you have in your system:
- * 
- * @code
- *   template <int dim>
- *   void AdvectionProblem<dim>::assemble_system()
- *   {
- *     WorkStream::run(dof_handler.begin_active(),
- *                     dof_handler.end(),
- *                     *this,
- *                     &AdvectionProblem::local_assemble_system,
- *                     &AdvectionProblem::copy_local_to_global,
- *                     AssemblyScratchData(fe),
- *                     AssemblyCopyData());
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * As already mentioned above, we need to have scratch objects for
- * the parallel computation of local contributions. These objects
- * contain FEValues and FEFaceValues objects (as well as some arrays), and so
- * we will need to have constructors and copy constructors that allow us to
- * create them. For the cell terms we need the values
- * and gradients of the shape functions, the quadrature points in
- * order to determine the source density and the advection field at
- * a given point, and the weights of the quadrature points times the
- * determinant of the Jacobian at these points. In contrast, for the
- * boundary integrals, we don't need the gradients, but rather the
- * normal vectors to the cells. This determines which update flags
- * we will have to pass to the constructors of the members of the
- * class:
- * 
- * @code
- *   template <int dim>
- *   AdvectionProblem<dim>::AssemblyScratchData::AssemblyScratchData(
- *     const FiniteElement<dim> &fe)
- *     : fe_values(fe,
- *                 QGauss<dim>(fe.degree + 1),
- *                 update_values | update_gradients | update_quadrature_points |
- *                   update_JxW_values)
- *     , fe_face_values(fe,
- *                      QGauss<dim - 1>(fe.degree + 1),
- *                      update_values | update_quadrature_points |
- *                        update_JxW_values | update_normal_vectors)
- *     , rhs_values(fe_values.get_quadrature().size())
- *     , advection_directions(fe_values.get_quadrature().size())
- *     , face_boundary_values(fe_face_values.get_quadrature().size())
- *     , face_advection_directions(fe_face_values.get_quadrature().size())
- *   {}
- * 
- * 
- * 
- *   template <int dim>
- *   AdvectionProblem<dim>::AssemblyScratchData::AssemblyScratchData(
- *     const AssemblyScratchData &scratch_data)
- *     : fe_values(scratch_data.fe_values.get_fe(),
- *                 scratch_data.fe_values.get_quadrature(),
- *                 update_values | update_gradients | update_quadrature_points |
- *                   update_JxW_values)
- *     , fe_face_values(scratch_data.fe_face_values.get_fe(),
- *                      scratch_data.fe_face_values.get_quadrature(),
- *                      update_values | update_quadrature_points |
- *                        update_JxW_values | update_normal_vectors)
- *     , rhs_values(scratch_data.rhs_values.size())
- *     , advection_directions(scratch_data.advection_directions.size())
- *     , face_boundary_values(scratch_data.face_boundary_values.size())
- *     , face_advection_directions(scratch_data.face_advection_directions.size())
- *   {}
- * 
- * 
- * 
- * @endcode
- * 
- * Now, this is the function that does the actual work. It is not very
- * different from the <code>assemble_system</code> functions of previous
- * example programs, so we will again only comment on the differences. The
- * mathematical stuff closely follows what we have said in the introduction.
- *   
+下一个新的include文件声明了一个基类 <code>TensorFunction</code> ，与 <code>Function</code> 类不一样，但不同的是 TensorFunction::value 返回一个张量而不是一个标量。
 
- * 
- * There are a number of points worth mentioning here, though. The
- * first one is that we have moved the FEValues and FEFaceValues
- * objects into the ScratchData object. We have done so because the
- * alternative would have been to simply create one every time we
- * get into this function -- i.e., on every cell. It now turns out
- * that the FEValues classes were written with the explicit goal of
- * moving everything that remains the same from cell to cell into
- * the construction of the object, and only do as little work as
- * possible in FEValues::reinit() whenever we move to a new
- * cell. What this means is that it would be very expensive to
- * create a new object of this kind in this function as we would
- * have to do it for every cell -- exactly the thing we wanted to
- * avoid with the FEValues class. Instead, what we do is create it
- * only once (or a small number of times) in the scratch objects and
- * then re-use it as often as we can.
- *   
+@code
+#include <deal.II/base/tensor_function.h>
 
- * 
- * This begs the question of whether there are other objects we
- * create in this function whose creation is expensive compared to
- * its use. Indeed, at the top of the function, we declare all sorts
- * of objects. The <code>AdvectionField</code>,
- * <code>RightHandSide</code> and <code>BoundaryValues</code> do not
- * cost much to create, so there is no harm here. However,
- * allocating memory in creating the <code>rhs_values</code> and
- * similar variables below typically costs a significant amount of
- * time, compared to just accessing the (temporary) values we store
- * in them. Consequently, these would be candidates for moving into
- * the <code>AssemblyScratchData</code> class. We will leave this as
- * an exercise.
- * 
- * @code
- *   template <int dim>
- *   void AdvectionProblem<dim>::local_assemble_system(
- *     const typename DoFHandler<dim>::active_cell_iterator &cell,
- *     AssemblyScratchData &                                 scratch_data,
- *     AssemblyCopyData &                                    copy_data)
- *   {
- * @endcode
- * 
- * We define some abbreviations to avoid unnecessarily long lines:
- * 
- * @code
- *     const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
- *     const unsigned int n_q_points =
- *       scratch_data.fe_values.get_quadrature().size();
- *     const unsigned int n_face_q_points =
- *       scratch_data.fe_face_values.get_quadrature().size();
- * 
- * @endcode
- * 
- * We declare cell matrix and cell right hand side...
- * 
- * @code
- *     copy_data.cell_matrix.reinit(dofs_per_cell, dofs_per_cell);
- *     copy_data.cell_rhs.reinit(dofs_per_cell);
- * 
- * @endcode
- * 
- * ... an array to hold the global indices of the degrees of freedom of
- * the cell on which we are presently working...
- * 
- * @code
- *     copy_data.local_dof_indices.resize(dofs_per_cell);
- * 
- * @endcode
- * 
- * ... then initialize the <code>FEValues</code> object...
- * 
- * @code
- *     scratch_data.fe_values.reinit(cell);
- * 
- * @endcode
- * 
- * ... obtain the values of right hand side and advection directions
- * at the quadrature points...
- * 
- * @code
- *     scratch_data.advection_field.value_list(
- *       scratch_data.fe_values.get_quadrature_points(),
- *       scratch_data.advection_directions);
- *     scratch_data.right_hand_side.value_list(
- *       scratch_data.fe_values.get_quadrature_points(), scratch_data.rhs_values);
- * 
- * @endcode
- * 
- * ... set the value of the streamline diffusion parameter as
- * described in the introduction...
- * 
- * @code
- *     const double delta = 0.1 * cell->diameter();
- * 
- * @endcode
- * 
- * ... and assemble the local contributions to the system matrix and
- * right hand side as also discussed above:
- * 
- * @code
- *     for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
- *       for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *         {
- * @endcode
- * 
- * Alias the AssemblyScratchData object to keep the lines from
- * getting too long:
- * 
- * @code
- *           const auto &sd = scratch_data;
- *           for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *             copy_data.cell_matrix(i, j) +=
- *               ((sd.fe_values.shape_value(i, q_point) +           // (phi_i +
- *                 delta * (sd.advection_directions[q_point] *      // delta beta
- *                          sd.fe_values.shape_grad(i, q_point))) * // grad phi_i)
- *                sd.advection_directions[q_point] *                // beta
- *                sd.fe_values.shape_grad(j, q_point)) *            // grad phi_j
- *               sd.fe_values.JxW(q_point);                         // dx
- * 
- *           copy_data.cell_rhs(i) +=
- *             (sd.fe_values.shape_value(i, q_point) +           // (phi_i +
- *              delta * (sd.advection_directions[q_point] *      // delta beta
- *                       sd.fe_values.shape_grad(i, q_point))) * // grad phi_i)
- *             sd.rhs_values[q_point] *                          // f
- *             sd.fe_values.JxW(q_point);                        // dx
- *         }
- * 
- * @endcode
- * 
- * Besides the cell terms which we have built up now, the bilinear
- * form of the present problem also contains terms on the boundary of
- * the domain. Therefore, we have to check whether any of the faces of
- * this cell are on the boundary of the domain, and if so assemble the
- * contributions of this face as well. Of course, the bilinear form
- * only contains contributions from the <code>inflow</code> part of
- * the boundary, but to find out whether a certain part of a face of
- * the present cell is part of the inflow boundary, we have to have
- * information on the exact location of the quadrature points and on
- * the direction of flow at this point; we obtain this information
- * using the FEFaceValues object and only decide within the main loop
- * whether a quadrature point is on the inflow boundary.
- * 
- * @code
- *     for (const auto &face : cell->face_iterators())
- *       if (face->at_boundary())
- *         {
- * @endcode
- * 
- * Ok, this face of the present cell is on the boundary of the
- * domain. Just as for the usual FEValues object which we have
- * used in previous examples and also above, we have to
- * reinitialize the FEFaceValues object for the present face:
- * 
- * @code
- *           scratch_data.fe_face_values.reinit(cell, face);
- * 
- * @endcode
- * 
- * For the quadrature points at hand, we ask for the values of
- * the inflow function and for the direction of flow:
- * 
- * @code
- *           scratch_data.boundary_values.value_list(
- *             scratch_data.fe_face_values.get_quadrature_points(),
- *             scratch_data.face_boundary_values);
- *           scratch_data.advection_field.value_list(
- *             scratch_data.fe_face_values.get_quadrature_points(),
- *             scratch_data.face_advection_directions);
- * 
- * @endcode
- * 
- * Now loop over all quadrature points and see whether this face is on
- * the inflow or outflow part of the boundary. The normal
- * vector points out of the cell: since the face is at
- * the boundary, the normal vector points out of the domain,
- * so if the advection direction points into the domain, its
- * scalar product with the normal vector must be negative (to see why
- * this is true, consider the scalar product definition that uses a
- * cosine):
- * 
- * @code
- *           for (unsigned int q_point = 0; q_point < n_face_q_points; ++q_point)
- *             if (scratch_data.fe_face_values.normal_vector(q_point) *
- *                   scratch_data.face_advection_directions[q_point] <
- *                 0.)
- * @endcode
- * 
- * If the face is part of the inflow boundary, then compute the
- * contributions of this face to the global matrix and right
- * hand side, using the values obtained from the
- * FEFaceValues object and the formulae discussed in the
- * introduction:
- * 
- * @code
- *               for (unsigned int i = 0; i < dofs_per_cell; ++i)
- *                 {
- *                   for (unsigned int j = 0; j < dofs_per_cell; ++j)
- *                     copy_data.cell_matrix(i, j) -=
- *                       (scratch_data.face_advection_directions[q_point] *
- *                        scratch_data.fe_face_values.normal_vector(q_point) *
- *                        scratch_data.fe_face_values.shape_value(i, q_point) *
- *                        scratch_data.fe_face_values.shape_value(j, q_point) *
- *                        scratch_data.fe_face_values.JxW(q_point));
- * 
- *                   copy_data.cell_rhs(i) -=
- *                     (scratch_data.face_advection_directions[q_point] *
- *                      scratch_data.fe_face_values.normal_vector(q_point) *
- *                      scratch_data.face_boundary_values[q_point] *
- *                      scratch_data.fe_face_values.shape_value(i, q_point) *
- *                      scratch_data.fe_face_values.JxW(q_point));
- *                 }
- *         }
- * 
- * @endcode
- * 
- * The final piece of information the copy routine needs is the global
- * indices of the degrees of freedom on this cell, so we end by writing
- * them to the local array:
- * 
- * @code
- *     cell->get_dof_indices(copy_data.local_dof_indices);
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * The second function we needed to write was the one that copies
- * the local contributions the previous function computed (and
- * put into the AssemblyCopyData object) into the global matrix and right
- * hand side vector objects. This is essentially what we always had
- * as the last block of code when assembling something on every
- * cell. The following should therefore be pretty obvious:
- * 
- * @code
- *   template <int dim>
- *   void
- *   AdvectionProblem<dim>::copy_local_to_global(const AssemblyCopyData &copy_data)
- *   {
- *     hanging_node_constraints.distribute_local_to_global(
- *       copy_data.cell_matrix,
- *       copy_data.cell_rhs,
- *       copy_data.local_dof_indices,
- *       system_matrix,
- *       system_rhs);
- *   }
- * 
- * @endcode
- * 
- * Here comes the linear solver routine. As the system is no longer
- * symmetric positive definite as in all the previous examples, we cannot
- * use the Conjugate Gradient method anymore. Rather, we use a solver that
- * is more general and does not rely on any special properties of the
- * matrix: the GMRES method. GMRES, like the conjugate gradient method,
- * requires a decent preconditioner: we use a Jacobi preconditioner here,
- * which works well enough for this problem.
- * 
- * @code
- *   template <int dim>
- *   void AdvectionProblem<dim>::solve()
- *   {
- *     SolverControl               solver_control(std::max<std::size_t>(1000,
- *                                                        system_rhs.size() / 10),
- *                                  1e-10 * system_rhs.l2_norm());
- *     SolverGMRES<Vector<double>> solver(solver_control);
- *     PreconditionJacobi<SparseMatrix<double>> preconditioner;
- *     preconditioner.initialize(system_matrix, 1.0);
- *     solver.solve(system_matrix, solution, system_rhs, preconditioner);
- * 
- *     Vector<double> residual(dof_handler.n_dofs());
- * 
- *     system_matrix.vmult(residual, solution);
- *     residual -= system_rhs;
- *     std::cout << "   Iterations required for convergence: "
- *               << solver_control.last_step() << '\n'
- *               << "   Max norm of residual:                "
- *               << residual.linfty_norm() << '\n';
- * 
- *     hanging_node_constraints.distribute(solution);
- *   }
- * 
- * @endcode
- * 
- * The following function refines the grid according to the quantity
- * described in the introduction. The respective computations are made in
- * the class <code>GradientEstimation</code>.
- * 
- * @code
- *   template <int dim>
- *   void AdvectionProblem<dim>::refine_grid()
- *   {
- *     Vector<float> estimated_error_per_cell(triangulation.n_active_cells());
- * 
- *     GradientEstimation::estimate(dof_handler,
- *                                  solution,
- *                                  estimated_error_per_cell);
- * 
- *     GridRefinement::refine_and_coarsen_fixed_number(triangulation,
- *                                                     estimated_error_per_cell,
- *                                                     0.3,
- *                                                     0.03);
- * 
- *     triangulation.execute_coarsening_and_refinement();
- *   }
- * 
- * @endcode
- * 
- * This function is similar to the one in step 6, but since we use a higher
- * degree finite element we save the solution in a different
- * way. Visualization programs like VisIt and Paraview typically only
- * understand data that is associated with nodes: they cannot plot
- * fifth-degree basis functions, which results in a very inaccurate picture
- * of the solution we computed. To get around this we save multiple
- * <em>patches</em> per cell: in 2D we save 64 bilinear `cells' to the VTU
- * file for each cell, and in 3D we save 512. The end result is that the
- * visualization program will use a piecewise linear interpolation of the
- * cubic basis functions: this captures the solution detail and, with most
- * screen resolutions, looks smooth. We save the grid in a separate step
- * with no extra patches so that we have a visual representation of the cell
- * faces.
- *   
 
- * 
- * Version 9.1 of deal.II gained the ability to write higher degree
- * polynomials (i.e., write piecewise bicubic visualization data for our
- * piecewise bicubic solution) VTK and VTU output: however, not all recent
- * versions of ParaView and VisIt (as of 2018) can read this format, so we
- * use the older, more general (but less efficient) approach here.
- * 
- * @code
- *   template <int dim>
- *   void AdvectionProblem<dim>::output_results(const unsigned int cycle) const
- *   {
- *     {
- *       GridOut       grid_out;
- *       std::ofstream output("grid-" + std::to_string(cycle) + ".vtu");
- *       grid_out.write_vtu(triangulation, output);
- *     }
- * 
- *     {
- *       DataOut<dim> data_out;
- *       data_out.attach_dof_handler(dof_handler);
- *       data_out.add_data_vector(solution, "solution");
- *       data_out.build_patches(8);
- * 
- * @endcode
- * 
- * VTU output can be expensive, both to compute and to write to
- * disk. Here we ask ZLib, a compression library, to compress the data
- * in a way that maximizes throughput.
- * 
- * @code
- *       DataOutBase::VtkFlags vtk_flags;
- *       vtk_flags.compression_level =
- *         DataOutBase::VtkFlags::ZlibCompressionLevel::best_speed;
- *       data_out.set_flags(vtk_flags);
- * 
- *       std::ofstream output("solution-" + std::to_string(cycle) + ".vtu");
- *       data_out.write_vtu(output);
- *     }
- *   }
- * 
- * 
- * @endcode
- * 
- * ... as is the main loop (setup -- solve -- refine), aside from the number
- * of cycles and the initial grid:
- * 
- * @code
- *   template <int dim>
- *   void AdvectionProblem<dim>::run()
- *   {
- *     for (unsigned int cycle = 0; cycle < 10; ++cycle)
- *       {
- *         std::cout << "Cycle " << cycle << ':' << std::endl;
- * 
- *         if (cycle == 0)
- *           {
- *             GridGenerator::hyper_cube(triangulation, -1, 1);
- *             triangulation.refine_global(3);
- *           }
- *         else
- *           {
- *             refine_grid();
- *           }
- * 
- * 
- *         std::cout << "   Number of active cells:              "
- *                   << triangulation.n_active_cells() << std::endl;
- * 
- *         setup_system();
- * 
- *         std::cout << "   Number of degrees of freedom:        "
- *                   << dof_handler.n_dofs() << std::endl;
- * 
- *         assemble_system();
- *         solve();
- *         output_results(cycle);
- *       }
- *   }
- * 
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="GradientEstimationclassimplementation"></a> 
- * <h3>GradientEstimation class implementation</h3>
- * 
+#include <deal.II/numerics/error_estimator.h>
 
- * 
- * Now for the implementation of the <code>GradientEstimation</code> class.
- * Let us start by defining constructors for the
- * <code>EstimateScratchData</code> class used by the
- * <code>estimate_cell()</code> function:
- * 
- * @code
- *   template <int dim>
- *   GradientEstimation::EstimateScratchData<dim>::EstimateScratchData(
- *     const FiniteElement<dim> &fe,
- *     const Vector<double> &    solution,
- *     Vector<float> &           error_per_cell)
- *     : fe_midpoint_value(fe,
- *                         QMidpoint<dim>(),
- *                         update_values | update_quadrature_points)
- *     , solution(solution)
- *     , error_per_cell(error_per_cell)
- *     , cell_midpoint_value(1)
- *     , neighbor_midpoint_value(1)
- *   {
- * @endcode
- * 
- * We allocate a vector to hold iterators to all active neighbors of
- * a cell. We reserve the maximal number of active neighbors in order to
- * avoid later reallocations. Note how this maximal number of active
- * neighbors is computed here.
- * 
- * @code
- *     active_neighbors.reserve(GeometryInfo<dim>::faces_per_cell *
- *                              GeometryInfo<dim>::max_children_per_face);
- *   }
- * 
- * 
- *   template <int dim>
- *   GradientEstimation::EstimateScratchData<dim>::EstimateScratchData(
- *     const EstimateScratchData &scratch_data)
- *     : fe_midpoint_value(scratch_data.fe_midpoint_value.get_fe(),
- *                         scratch_data.fe_midpoint_value.get_quadrature(),
- *                         update_values | update_quadrature_points)
- *     , solution(scratch_data.solution)
- *     , error_per_cell(scratch_data.error_per_cell)
- *     , cell_midpoint_value(1)
- *     , neighbor_midpoint_value(1)
- *   {}
- * 
- * 
- * @endcode
- * 
- * Next comes the implementation of the <code>GradientEstimation</code>
- * class. The first function does not much except for delegating work to the
- * other function, but there is a bit of setup at the top.
- *   
 
- * 
- * Before starting with the work, we check that the vector into
- * which the results are written has the right size. Programming
- * mistakes in which one forgets to size arguments correctly at the
- * calling site are quite common. Because the resulting damage from
- * not catching such errors is often subtle (e.g., corruption of
- * data somewhere in memory, or non-reproducible results), it is
- * well worth the effort to check for such things.
- * 
- * @code
- *   template <int dim>
- *   void GradientEstimation::estimate(const DoFHandler<dim> &dof_handler,
- *                                     const Vector<double> & solution,
- *                                     Vector<float> &        error_per_cell)
- *   {
- *     Assert(
- *       error_per_cell.size() == dof_handler.get_triangulation().n_active_cells(),
- *       ExcInvalidVectorLength(error_per_cell.size(),
- *                              dof_handler.get_triangulation().n_active_cells()));
- * 
- *     WorkStream::run(dof_handler.begin_active(),
- *                     dof_handler.end(),
- *                     &GradientEstimation::template estimate_cell<dim>,
- *                     std::function<void(const EstimateCopyData &)>(),
- *                     EstimateScratchData<dim>(dof_handler.get_fe(),
- *                                              solution,
- *                                              error_per_cell),
- *                     EstimateCopyData());
- *   }
- * 
- * 
- * @endcode
- * 
- * Here comes the function that estimates the local error by computing the
- * finite difference approximation of the gradient. The function first
- * computes the list of active neighbors of the present cell and then
- * computes the quantities described in the introduction for each of
- * the neighbors. The reason for this order is that it is not a one-liner
- * to find a given neighbor with locally refined meshes. In principle, an
- * optimized implementation would find neighbors and the quantities
- * depending on them in one step, rather than first building a list of
- * neighbors and in a second step their contributions but we will gladly
- * leave this as an exercise. As discussed before, the worker function
- * passed to WorkStream::run works on "scratch" objects that keep all
- * temporary objects. This way, we do not need to create and initialize
- * objects that are expensive to initialize within the function that does
- * the work every time it is called for a given cell. Such an argument is
- * passed as the second argument. The third argument would be a "copy-data"
- * object (see @ref threads for more information) but we do not actually use
- * any of these here. Since WorkStream::run() insists on passing three
- * arguments, we declare this function with three arguments, but simply
- * ignore the last one.
- *   
+@endcode 
 
- * 
- * (This is unsatisfactory from an aesthetic perspective. It can be avoided
- * by using an anonymous (lambda) function. If you allow, let us here show
- * how. First, assume that we had declared this function to only take two
- * arguments by omitting the unused last one. Now, WorkStream::run still
- * wants to call this function with three arguments, so we need to find a
- * way to "forget" the third argument in the call. Simply passing
- * WorkStream::run the pointer to the function as we do above will not do
- * this -- the compiler will complain that a function declared to have two
- * arguments is called with three arguments. However, we can do this by
- * passing the following as the third argument to WorkStream::run():
- * <div class=CodeFragmentInTutorialComment>
- * @code
- * [](const typename DoFHandler<dim>::active_cell_iterator &cell,
- *    EstimateScratchData<dim> &                            scratch_data,
- *    EstimateCopyData &)
- * {
- *   GradientEstimation::estimate_cell<dim>(cell, scratch_data);
- * }
- * @endcode
- * </div>
- * This is not much better than the solution implemented below: either the
- * routine itself must take three arguments or it must be wrapped by
- * something that takes three arguments. We don't use this since adding the
- * unused argument at the beginning is simpler.
- *   
 
- * 
- * Now for the details:
- * 
- * @code
- *   template <int dim>
- *   void GradientEstimation::estimate_cell(
- *     const typename DoFHandler<dim>::active_cell_iterator &cell,
- *     EstimateScratchData<dim> &                            scratch_data,
- *     const EstimateCopyData &)
- *   {
- * @endcode
- * 
- * We need space for the tensor <code>Y</code>, which is the sum of
- * outer products of the y-vectors.
- * 
- * @code
- *     Tensor<2, dim> Y;
- * 
- * @endcode
- * 
- * First initialize the <code>FEValues</code> object, as well as the
- * <code>Y</code> tensor:
- * 
- * @code
- *     scratch_data.fe_midpoint_value.reinit(cell);
- * 
- * @endcode
- * 
- * Now, before we go on, we first compute a list of all active neighbors
- * of the present cell. We do so by first looping over all faces and see
- * whether the neighbor there is active, which would be the case if it
- * is on the same level as the present cell or one level coarser (note
- * that a neighbor can only be once coarser than the present cell, as
- * we only allow a maximal difference of one refinement over a face in
- * deal.II). Alternatively, the neighbor could be on the same level
- * and be further refined; then we have to find which of its children
- * are next to the present cell and select these (note that if a child
- * of a neighbor of an active cell that is next to this active cell,
- * needs necessarily be active itself, due to the one-refinement rule
- * cited above).
- *     
 
- * 
- * Things are slightly different in one space dimension, as there the
- * one-refinement rule does not exist: neighboring active cells may
- * differ in as many refinement levels as they like. In this case, the
- * computation becomes a little more difficult, but we will explain
- * this below.
- *     
+这是C++，因为我们想把一些输出写到磁盘上。
 
- * 
- * Before starting the loop over all neighbors of the present cell, we
- * have to clear the array storing the iterators to the active
- * neighbors, of course.
- * 
- * @code
- *     scratch_data.active_neighbors.clear();
- *     for (const auto face_n : cell->face_indices())
- *       if (!cell->at_boundary(face_n))
- *         {
- * @endcode
- * 
- * First define an abbreviation for the iterator to the face and
- * the neighbor
- * 
- * @code
- *           const auto face     = cell->face(face_n);
- *           const auto neighbor = cell->neighbor(face_n);
- * 
- * @endcode
- * 
- * Then check whether the neighbor is active. If it is, then it
- * is on the same level or one level coarser (if we are not in
- * 1D), and we are interested in it in any case.
- * 
- * @code
- *           if (neighbor->is_active())
- *             scratch_data.active_neighbors.push_back(neighbor);
- *           else
- *             {
- * @endcode
- * 
- * If the neighbor is not active, then check its children.
- * 
- * @code
- *               if (dim == 1)
- *                 {
- * @endcode
- * 
- * To find the child of the neighbor which bounds to the
- * present cell, successively go to its right child if
- * we are left of the present cell (n==0), or go to the
- * left child if we are on the right (n==1), until we
- * find an active cell.
- * 
- * @code
- *                   auto neighbor_child = neighbor;
- *                   while (neighbor_child->has_children())
- *                     neighbor_child = neighbor_child->child(face_n == 0 ? 1 : 0);
- * 
- * @endcode
- * 
- * As this used some non-trivial geometrical intuition,
- * we might want to check whether we did it right,
- * i.e., check whether the neighbor of the cell we found
- * is indeed the cell we are presently working
- * on. Checks like this are often useful and have
- * frequently uncovered errors both in algorithms like
- * the line above (where it is simple to involuntarily
- * exchange <code>n==1</code> for <code>n==0</code> or
- * the like) and in the library (the assumptions
- * underlying the algorithm above could either be wrong,
- * wrongly documented, or are violated due to an error
- * in the library). One could in principle remove such
- * checks after the program works for some time, but it
- * might be a good things to leave it in anyway to check
- * for changes in the library or in the algorithm above.
- *                   
+@code
+#include <fstream>
+#include <iostream>
 
- * 
- * Note that if this check fails, then this is certainly
- * an error that is irrecoverable and probably qualifies
- * as an internal error. We therefore use a predefined
- * exception class to throw here.
- * 
- * @code
- *                   Assert(neighbor_child->neighbor(face_n == 0 ? 1 : 0) == cell,
- *                          ExcInternalError());
- * 
- * @endcode
- * 
- * If the check succeeded, we push the active neighbor
- * we just found to the stack we keep:
- * 
- * @code
- *                   scratch_data.active_neighbors.push_back(neighbor_child);
- *                 }
- *               else
- * @endcode
- * 
- * If we are not in 1d, we collect all neighbor children
- * `behind' the subfaces of the current face and move on:
- * 
- * @code
- *                 for (unsigned int subface_n = 0; subface_n < face->n_children();
- *                      ++subface_n)
- *                   scratch_data.active_neighbors.push_back(
- *                     cell->neighbor_child_on_subface(face_n, subface_n));
- *             }
- *         }
- * 
- * @endcode
- * 
- * OK, now that we have all the neighbors, lets start the computation
- * on each of them. First we do some preliminaries: find out about the
- * center of the present cell and the solution at this point. The
- * latter is obtained as a vector of function values at the quadrature
- * points, of which there are only one, of course. Likewise, the
- * position of the center is the position of the first (and only)
- * quadrature point in real space.
- * 
- * @code
- *     const Point<dim> this_center =
- *       scratch_data.fe_midpoint_value.quadrature_point(0);
- * 
- *     scratch_data.fe_midpoint_value.get_function_values(
- *       scratch_data.solution, scratch_data.cell_midpoint_value);
- * 
- * @endcode
- * 
- * Now loop over all active neighbors and collect the data we
- * need.
- * 
- * @code
- *     Tensor<1, dim> projected_gradient;
- *     for (const auto &neighbor : scratch_data.active_neighbors)
- *       {
- * @endcode
- * 
- * Then get the center of the neighbor cell and the value of the
- * finite element function at that point. Note that for this
- * information we have to reinitialize the <code>FEValues</code>
- * object for the neighbor cell.
- * 
- * @code
- *         scratch_data.fe_midpoint_value.reinit(neighbor);
- *         const Point<dim> neighbor_center =
- *           scratch_data.fe_midpoint_value.quadrature_point(0);
- * 
- *         scratch_data.fe_midpoint_value.get_function_values(
- *           scratch_data.solution, scratch_data.neighbor_midpoint_value);
- * 
- * @endcode
- * 
- * Compute the vector <code>y</code> connecting the centers of the
- * two cells. Note that as opposed to the introduction, we denote
- * by <code>y</code> the normalized difference vector, as this is
- * the quantity used everywhere in the computations.
- * 
- * @code
- *         Tensor<1, dim> y        = neighbor_center - this_center;
- *         const double   distance = y.norm();
- *         y /= distance;
- * 
- * @endcode
- * 
- * Then add up the contribution of this cell to the Y matrix...
- * 
- * @code
- *         for (unsigned int i = 0; i < dim; ++i)
- *           for (unsigned int j = 0; j < dim; ++j)
- *             Y[i][j] += y[i] * y[j];
- * 
- * @endcode
- * 
- * ... and update the sum of difference quotients:
- * 
- * @code
- *         projected_gradient += (scratch_data.neighbor_midpoint_value[0] -
- *                                scratch_data.cell_midpoint_value[0]) /
- *                               distance * y;
- *       }
- * 
- * @endcode
- * 
- * If now, after collecting all the information from the neighbors, we
- * can determine an approximation of the gradient for the present
- * cell, then we need to have passed over vectors <code>y</code> which
- * span the whole space, otherwise we would not have all components of
- * the gradient. This is indicated by the invertibility of the matrix.
- *     
 
- * 
- * If the matrix is not invertible, then the present
- * cell had an insufficient number of active neighbors. In contrast to
- * all previous cases (where we raised exceptions) this is, however,
- * not a programming error: it is a runtime error that can happen in
- * optimized mode even if it ran well in debug mode, so it is
- * reasonable to try to catch this error also in optimized mode. For
- * this case, there is the <code>AssertThrow</code> macro: it checks
- * the condition like the <code>Assert</code> macro, but not only in
- * debug mode; it then outputs an error message, but instead of
- * aborting the program as in the case of the <code>Assert</code>
- * macro, the exception is thrown using the <code>throw</code> command
- * of C++. This way, one has the possibility to catch this error and
- * take reasonable counter actions. One such measure would be to
- * refine the grid globally, as the case of insufficient directions
- * can not occur if every cell of the initial grid has been refined at
- * least once.
- * 
- * @code
- *     AssertThrow(determinant(Y) != 0, ExcInsufficientDirections());
- * 
- * @endcode
- * 
- * If, on the other hand, the matrix is invertible, then invert it,
- * multiply the other quantity with it, and compute the estimated error
- * using this quantity and the correct powers of the mesh width:
- * 
- * @code
- *     const Tensor<2, dim> Y_inverse = invert(Y);
- * 
- *     const Tensor<1, dim> gradient = Y_inverse * projected_gradient;
- * 
- * @endcode
- * 
- * The last part of this function is the one where we write into
- * the element of the output vector what we have just
- * computed. The address of this vector has been stored in the
- * scratch data object, and all we have to do is know how to get
- * at the correct element inside this vector -- but we can ask the
- * cell we're on the how-manyth active cell it is for this:
- * 
- * @code
- *     scratch_data.error_per_cell(cell->active_cell_index()) =
- *       (std::pow(cell->diameter(), 1 + 1.0 * dim / 2) * gradient.norm());
- *   }
- * } // namespace Step9
- * 
- * 
- * @endcode
- * 
- * 
- * <a name="Mainfunction"></a> 
- * <h3>Main function</h3>
- * 
 
- * 
- * The <code>main</code> function is similar to the previous examples. The
- * primary difference is that we use MultithreadInfo to set the maximum
- * number of threads (see the documentation module @ref threads
- * "Parallel computing with multiple processors accessing shared memory"
- * for more information). The number of threads used is the minimum of the
- * environment variable DEAL_II_NUM_THREADS and the parameter of
- * <code>set_thread_limit</code>. If no value is given to
- * <code>set_thread_limit</code>, the default value from the Intel Threading
- * Building Blocks (TBB) library is used. If the call to
- * <code>set_thread_limit</code> is omitted, the number of threads will be
- * chosen by TBB independently of DEAL_II_NUM_THREADS.
- * 
- * @code
- * int main()
- * {
- *   using namespace dealii;
- *   try
- *     {
- *       MultithreadInfo::set_thread_limit();
- * 
- *       Step9::AdvectionProblem<2> advection_problem_2d;
- *       advection_problem_2d.run();
- *     }
- *   catch (std::exception &exc)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Exception on processing: " << std::endl
- *                 << exc.what() << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- *   catch (...)
- *     {
- *       std::cerr << std::endl
- *                 << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       std::cerr << "Unknown exception!" << std::endl
- *                 << "Aborting!" << std::endl
- *                 << "----------------------------------------------------"
- *                 << std::endl;
- *       return 1;
- *     }
- * 
- *   return 0;
- * }
- * @endcode
+@endcode 
+
+
+
+最后一步和以前的程序一样。
+
+@code
+namespace Step9
+{
+  using namespace dealii;
+
+
+@endcode 
+
+
+
+
+<a name="Equationdatadeclaration"></a> <h3>Equation data declaration</h3> 
+
+
+
+
+接下来我们声明一个描述平流场的类。当然，这是一个矢量场，其分量与空间维数一样多。现在我们可以使用一个从 <code>Function</code> 基类派生出来的类，就像我们在以前的例子中对边界值和系数所做的那样，但是在库中还有另一种可能性，即一个描述张量值函数的基类。这比用一个知道多个函数成分的方法覆盖 Function::value() 更方便：最后我们需要一个张量，所以我们还不如直接使用一个返回张量的类。
+
+@code
+  template <int dim>
+  class AdvectionField : public TensorFunction<1, dim>
+  {
+  public:
+    virtual Tensor<1, dim> value(const Point<dim> &p) const override;
+
+
+@endcode 
+
+
+
+在以前的例子中，我们已经在多个地方使用了抛出异常的断言。然而，我们还没有看到如何声明这种异常。这可以通过以下方式实现。
+
+@code
+    DeclException2(ExcDimensionMismatch,
+                   unsigned int,
+                   unsigned int,
+                   << "The vector has size " << arg1 << " but should have "
+                   << arg2 << " elements.");
+@endcode 
+
+
+
+这个语法可能看起来有点奇怪，但很合理。其格式基本如下：使用其中一个宏的名称  <code>DeclExceptionN</code>, where <code>N</code>  表示异常对象应采取的附加参数的数量。在本例中，由于我们想在两个向量的大小不同时抛出异常，我们需要两个参数，所以我们使用  <code>DeclException2</code>  。第一个参数描述了异常的名称，而后面的参数则声明了参数的数据类型。最后一个参数是一连串的输出指令，这些指令将被输送到  <code>std::cerr</code>  对象中，因此出现了奇怪的格式，前面有  <code>@<@<</code>  操作符之类的。注意，我们可以通过使用名称  <code>arg1</code> through <code>argN</code>  来访问在构造时（即在  <code>Assert</code>  调用中）传递给异常的参数，其中  <code>N</code>  是通过使用各自的宏  <code>DeclExceptionN</code>  来定义的参数数。     
+
+
+要了解预处理器如何将这个宏扩展为实际代码，请参考异常类的文档。简而言之，这个宏调用声明并定义了一个继承自ExceptionBase的类  <code>ExcDimensionMismatch</code>  ，实现了所有必要的错误输出函数。
+
+@code
+  };
+
+
+@endcode 
+
+
+
+下面两个函数实现了上面描述的接口。第一个简单地实现了介绍中所描述的函数，而第二个使用了同样的技巧来避免调用虚拟函数，在前面的例子程序中已经介绍过了。注意第二个函数中对参数正确大小的检查，这种检查应该始终存在于这类函数中；根据我们的经验，许多甚至大多数编程错误都是由不正确的初始化数组、不兼容的函数参数等造成的；像这种情况下使用断言可以消除许多这样的问题。
+
+@code
+  template <int dim>
+  Tensor<1, dim> AdvectionField<dim>::value(const Point<dim> &p) const
+  {
+    Point<dim> value;
+    value[0] = 2;
+    for (unsigned int i = 1; i < dim; ++i)
+      value[i] = 1 + 0.8 * std::sin(8. * numbers::PI * p[0]);
+
+
+    return value;
+  }
+
+
+@endcode 
+
+
+
+除了平流场，我们还需要两个描述源项（  <code>right hand side</code>  ）和边界值的函数。如介绍中所述，源是一个源点附近的常数函数，我们用常数静态变量表示  <code>center_point</code>  。我们使用与我们在 step-7 示例程序中所示相同的模板技巧来设置这个中心的值。其余的很简单，之前已经展示过了。
+
+@code
+  template <int dim>
+  class RightHandSide : public Function<dim>
+  {
+  public:
+    virtual double value(const Point<dim> & p,
+                         const unsigned int component = 0) const override;
+
+
+  private:
+    static const Point<dim> center_point;
+  };
+
+
+
+  template <>
+  const Point<1> RightHandSide<1>::center_point = Point<1>(-0.75);
+
+
+  template <>
+  const Point<2> RightHandSide<2>::center_point = Point<2>(-0.75, -0.75);
+
+
+  template <>
+  const Point<3> RightHandSide<3>::center_point = Point<3>(-0.75, -0.75, -0.75);
+
+
+
+
+
+@endcode 
+
+
+
+这里唯一的新东西是我们检查 <code>component</code> 参数的值。由于这是一个标量函数，很明显，只有当所需分量的指数为零时才有意义，所以我们断言这确实是事实。  <code>ExcIndexRange</code> 是一个全局预定义的异常（可能是最经常使用的异常，因此我们让它成为全局的，而不是某个类的局部），它需要三个参数：超出允许范围的索引，有效范围的第一个元素和超过最后一个的元素（也就是说，还是C++标准库中经常使用的半开区间）。
+
+@code
+  template <int dim>
+  double RightHandSide<dim>::value(const Point<dim> & p,
+                                   const unsigned int component) const
+  {
+    (void)component;
+    Assert(component == 0, ExcIndexRange(component, 0, 1));
+    const double diameter = 0.1;
+    return ((p - center_point).norm_square() < diameter * diameter ?
+              0.1 / std::pow(diameter, dim) :
+              0.0);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+最后，对于边界值，这只是从 <code>Function</code> 基类派生的另一个类。
+
+@code
+  template <int dim>
+  class BoundaryValues : public Function<dim>
+  {
+  public:
+    virtual double value(const Point<dim> & p,
+                         const unsigned int component = 0) const override;
+  };
+
+
+
+
+
+  template <int dim>
+  double BoundaryValues<dim>::value(const Point<dim> & p,
+                                    const unsigned int component) const
+  {
+    (void)component;
+    Assert(component == 0, ExcIndexRange(component, 0, 1));
+
+
+    const double sine_term = std::sin(16. * numbers::PI * p.norm_square());
+    const double weight    = std::exp(5. * (1. - p.norm_square()));
+    return weight * sine_term;
+  }
+
+
+@endcode 
+
+
+
+
+<a name="AdvectionProblemclassdeclaration"></a> <h3>AdvectionProblem class declaration</h3>
+
+
+
+
+下面是这个程序的主类。它和前面的例子中的主类非常相似，所以我们再次只评论其中的差异。
+
+@code
+  template <int dim>
+  class AdvectionProblem
+  {
+  public:
+    AdvectionProblem();
+    void run();
+
+
+  private:
+    void setup_system();
+
+
+@endcode 
+
+
+
+下一组函数将被用来组装矩阵。然而，与之前的例子不同， <code>assemble_system()</code> 函数不会自己做这些工作，而是将实际的装配工作委托给辅助函数 <code>assemble_local_system()</code> 和 <code>copy_local_to_global()</code>  。其理由是，矩阵组装可以很好地并行化，因为每个单元的局部贡献的计算完全独立于其他单元，我们只需要在将一个单元的贡献添加到全局矩阵中时进行同步。     
+
+
+我们在这里选择的并行化策略是文档中 @ref threads 模块中详细提到的可能性之一。具体来说，我们将使用那里讨论的WorkStream方法。由于这个模块有很多文档，我们不会在这里重复设计选择的理由（例如，如果你读完上面提到的模块，你会明白 <code>AssemblyScratchData</code> 和 <code>AssemblyCopyData</code> 结构的目的是什么）。相反，我们将只讨论具体的实现。     
+
+
+如果你阅读了上面提到的页面，你会发现为了使汇编并行化，我们需要两个数据结构--一个对应于我们在局部集成过程中需要的数据（"scratch data"，即我们只需要作为临时存储的东西），另一个是将信息从局部集成携带到函数，然后将局部贡献添加到全局矩阵的相应元素中。其中前者通常包含FEValues和FEFaceValues对象，而后者则有局部矩阵、局部右手边，以及关于哪些自由度生活在我们正在组装局部贡献的单元上的信息。有了这些信息，下面的内容应该是相对不言自明的。
+
+@code
+    struct AssemblyScratchData
+    {
+      AssemblyScratchData(const FiniteElement<dim> &fe);
+      AssemblyScratchData(const AssemblyScratchData &scratch_data);
+
+
+@endcode 
+
+
+
+FEValues和FEFaceValues是昂贵的设置对象，所以我们将它们包含在从头开始的对象中，以便尽可能多的数据在单元之间被重复使用。
+
+@code
+      FEValues<dim>     fe_values;
+      FEFaceValues<dim> fe_face_values;
+
+
+@endcode 
+
+
+
+我们还存储了一些向量，我们将在每个单元格上填充数值。在通常情况下，设置这些对象是很便宜的；然而，它们需要内存分配，这在多线程的应用中可能是很昂贵的。因此，我们把它们保留在这里，这样在一个单元格上的计算就不需要新的分配。
+
+@code
+      std::vector<double>         rhs_values;
+      std::vector<Tensor<1, dim>> advection_directions;
+      std::vector<double>         face_boundary_values;
+      std::vector<Tensor<1, dim>> face_advection_directions;
+
+
+@endcode 
+
+
+
+最后，我们需要描述问题数据的对象。
+
+@code
+      AdvectionField<dim> advection_field;
+      RightHandSide<dim>  right_hand_side;
+      BoundaryValues<dim> boundary_values;
+    };
+
+
+    struct AssemblyCopyData
+    {
+      FullMatrix<double>                   cell_matrix;
+      Vector<double>                       cell_rhs;
+      std::vector<types::global_dof_index> local_dof_indices;
+    };
+
+
+    void assemble_system();
+    void local_assemble_system(
+      const typename DoFHandler<dim>::active_cell_iterator &cell,
+      AssemblyScratchData &                                 scratch,
+      AssemblyCopyData &                                    copy_data);
+    void copy_local_to_global(const AssemblyCopyData &copy_data);
+
+
+
+@endcode 
+
+
+
+下面的函数又和以前的例子一样，后面的变量也是一样的。
+
+@code
+    void solve();
+    void refine_grid();
+    void output_results(const unsigned int cycle) const;
+
+
+    Triangulation<dim> triangulation;
+    DoFHandler<dim>    dof_handler;
+
+
+    FE_Q<dim> fe;
+
+
+    AffineConstraints<double> hanging_node_constraints;
+
+
+    SparsityPattern      sparsity_pattern;
+    SparseMatrix<double> system_matrix;
+
+
+    Vector<double> solution;
+    Vector<double> system_rhs;
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="GradientEstimationclassdeclaration"></a> <h3>GradientEstimation class declaration</h3>
+
+
+
+
+现在，最后，这里有一个类，它将计算每个单元上的梯度的差分近似值，并以网格大小的幂数进行权衡，如介绍中所述。这个类是库中 <code>DerivativeApproximation</code> 类的一个简单版本，它使用类似的技术来获得有限元场的梯度或高导数的有限差分近似值。   
+
+
+该类有一个公共的静态函数 <code>estimate</code> ，被调用来计算误差指标的向量，还有一些私有函数，在所有活动单元上做实际工作。正如库的其他部分一样，我们遵循一个非正式的惯例，使用浮点数向量作为误差指标，而不是常见的双数向量，因为对于估计值来说，额外的精度是没有必要的。   
+
+
+除了这两个函数，该类还声明了两个异常，当一个单元在每个空间方向上都没有邻居时（在这种情况下，介绍中描述的矩阵将是奇异的，不能被倒置），而另一个异常则用于更常见的函数参数无效的情况，即一个大小错误的向量。   
+
+
+还有两点意见：首先，这个类没有非静态成员函数或变量，所以这不是一个真正的类，而是起到了C++中 <code>namespace</code> 的作用。我们选择类而不是命名空间的原因是，这样我们可以声明一些私有的函数。如果在命名空间的头文件中声明一些函数，并在实现文件中实现这些函数和其他函数，这也可以用命名空间来实现。没有在头文件中声明的函数仍然在名字空间中，但不能从外部调用。然而，由于我们这里只有一个文件，在目前的情况下不可能隐藏函数。   
+
+
+第二个意见是，维度模板参数是附在函数上的，而不是附在类本身。这样一来，你就不必像其他大多数情况下那样自己指定模板参数，而是编译器可以从作为第一个参数传递的DoFHandler对象的尺寸中自己计算出它的值。   
+
+
+在开始实施之前，让我们也来评论一下并行化策略。我们已经在上面这个程序的主类的声明中介绍了使用WorkStream概念的必要框架。我们将在这里再次使用它。在当前情况下，这意味着我们必须定义 <ol>   <li> 抓取和复制对象的类， </li>   <li> 一个在一个单元上进行局部计算的函数，以及 </li>   <li> 一个将局部结果复制到全局对象的函数。 </li>   </ol>  鉴于这个总体框架，我们将稍微偏离它。特别是，WorkStream一般是为单元格上的每个局部计算<i>adds</i>到全局对象的情况而发明的--例如，在组装线性系统时，我们将局部贡献加入全局矩阵和右手边。WorkStream的设计是为了处理多个线程试图同时进行这种添加的潜在冲突，因此必须提供一些方法来确保每次只有一个线程可以做这个。然而，这里的情况略有不同：我们单独计算每个单元的贡献，但随后我们需要做的是将它们放入每个单元独有的输出向量中的一个元素。因此，不存在来自两个单元的写操作可能发生冲突的风险，也没有必要使用WorkStream的复杂机制来避免冲突的写操作。因此，我们要做的就是这样。我们仍然需要一个持有例如 FEValues 对象的 scratch 对象。但是，我们只创建一个假的、空的拷贝数据结构。同样，我们确实需要计算本地贡献的函数，但由于它已经可以把结果放到它的最终位置，我们不需要一个复制本地到全球的函数，而是给 WorkStream::run() 函数一个空函数对象--相当于一个NULL函数指针。
+
+@code
+  class GradientEstimation
+  {
+  public:
+    template <int dim>
+    static void estimate(const DoFHandler<dim> &dof,
+                         const Vector<double> & solution,
+                         Vector<float> &        error_per_cell);
+
+
+    DeclException2(ExcInvalidVectorLength,
+                   int,
+                   int,
+                   << "Vector has length " << arg1 << ", but should have "
+                   << arg2);
+    DeclException0(ExcInsufficientDirections);
+
+
+  private:
+    template <int dim>
+    struct EstimateScratchData
+    {
+      EstimateScratchData(const FiniteElement<dim> &fe,
+                          const Vector<double> &    solution,
+                          Vector<float> &           error_per_cell);
+      EstimateScratchData(const EstimateScratchData &data);
+
+
+      FEValues<dim> fe_midpoint_value;
+      std::vector<typename DoFHandler<dim>::active_cell_iterator>
+        active_neighbors;
+
+
+      const Vector<double> &solution;
+      Vector<float> &       error_per_cell;
+
+
+      std::vector<double> cell_midpoint_value;
+      std::vector<double> neighbor_midpoint_value;
+    };
+
+
+    struct EstimateCopyData
+    {};
+
+
+    template <int dim>
+    static void
+    estimate_cell(const typename DoFHandler<dim>::active_cell_iterator &cell,
+                  EstimateScratchData<dim> &scratch_data,
+                  const EstimateCopyData &  copy_data);
+  };
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="AdvectionProblemclassimplementation"></a> <h3>AdvectionProblem class implementation</h3>
+
+
+
+
+
+
+
+
+现在是主类的实现。构造器、析构器和函数 <code>setup_system</code> 遵循之前使用的模式，所以我们不需要对这三个函数进行评论。
+
+@code
+  template <int dim>
+  AdvectionProblem<dim>::AdvectionProblem()
+    : dof_handler(triangulation)
+    , fe(5)
+  {}
+
+
+
+
+
+  template <int dim>
+  void AdvectionProblem<dim>::setup_system()
+  {
+    dof_handler.distribute_dofs(fe);
+    hanging_node_constraints.clear();
+    DoFTools::make_hanging_node_constraints(dof_handler,
+                                            hanging_node_constraints);
+    hanging_node_constraints.close();
+
+
+    DynamicSparsityPattern dsp(dof_handler.n_dofs(), dof_handler.n_dofs());
+    DoFTools::make_sparsity_pattern(dof_handler,
+                                    dsp,
+                                    hanging_node_constraints,
+                                    /*keep_constrained_dofs =*/false);
+    sparsity_pattern.copy_from(dsp);
+
+
+    system_matrix.reinit(sparsity_pattern);
+
+
+    solution.reinit(dof_handler.n_dofs());
+    system_rhs.reinit(dof_handler.n_dofs());
+  }
+
+
+
+
+
+@endcode 
+
+
+
+在下面的函数中，矩阵和右手边被组装起来。正如上面主类的文档所述，它本身并不做这个，而是委托给接下来的函数，利用了  @ref threads  中讨论的WorkStream概念。   
+
+
+如果你看了 @ref threads 模块，你会发现并行组装并不需要大量的额外代码，只要你努力描述什么是抓取和复制数据对象，如果你为本地组装和从本地贡献到全局对象的复制操作定义了合适的函数。这样一来，下面就可以完成所有繁重的工作，让这些操作在你的系统中有多少个内核的多线程上都能完成。
+
+@code
+  template <int dim>
+  void AdvectionProblem<dim>::assemble_system()
+  {
+    WorkStream::run(dof_handler.begin_active(),
+                    dof_handler.end(),
+                    *this,
+                    &AdvectionProblem::local_assemble_system,
+                    &AdvectionProblem::copy_local_to_global,
+                    AssemblyScratchData(fe),
+                    AssemblyCopyData());
+  }
+
+
+
+
+
+@endcode 
+
+
+
+如上所述，我们需要有用于本地贡献的并行计算的抓取对象。这些对象包含FEValues和FEFaceValues对象（以及一些数组），因此我们需要有构造函数和复制构造函数，以便我们能够创建它们。对于单元项，我们需要形状函数的值和梯度、正交点以确定给定点的源密度和平流场，以及正交点的权重乘以这些点的雅各布系数的行列式。相反，对于边界积分，我们不需要梯度，而是需要单元的法向量。这决定了我们必须将哪些更新标志传递给类成员的构造函数。
+
+@code
+  template <int dim>
+  AdvectionProblem<dim>::AssemblyScratchData::AssemblyScratchData(
+    const FiniteElement<dim> &fe)
+    : fe_values(fe,
+                QGauss<dim>(fe.degree + 1),
+                update_values | update_gradients | update_quadrature_points |
+                  update_JxW_values)
+    , fe_face_values(fe,
+                     QGauss<dim - 1>(fe.degree + 1),
+                     update_values | update_quadrature_points |
+                       update_JxW_values | update_normal_vectors)
+    , rhs_values(fe_values.get_quadrature().size())
+    , advection_directions(fe_values.get_quadrature().size())
+    , face_boundary_values(fe_face_values.get_quadrature().size())
+    , face_advection_directions(fe_face_values.get_quadrature().size())
+  {}
+
+
+
+
+
+  template <int dim>
+  AdvectionProblem<dim>::AssemblyScratchData::AssemblyScratchData(
+    const AssemblyScratchData &scratch_data)
+    : fe_values(scratch_data.fe_values.get_fe(),
+                scratch_data.fe_values.get_quadrature(),
+                update_values | update_gradients | update_quadrature_points |
+                  update_JxW_values)
+    , fe_face_values(scratch_data.fe_face_values.get_fe(),
+                     scratch_data.fe_face_values.get_quadrature(),
+                     update_values | update_quadrature_points |
+                       update_JxW_values | update_normal_vectors)
+    , rhs_values(scratch_data.rhs_values.size())
+    , advection_directions(scratch_data.advection_directions.size())
+    , face_boundary_values(scratch_data.face_boundary_values.size())
+    , face_advection_directions(scratch_data.face_advection_directions.size())
+  {}
+
+
+
+
+
+@endcode 
+
+
+
+现在，这是一个做实际工作的函数。它与之前例子程序中的 <code>assemble_system</code> 函数没有太大区别，所以我们将再次只评论其区别。数学上的东西紧跟我们在介绍中所说的。   
+
+
+不过，这里有一些值得一提的地方。首先，我们把FEValues和FEFaceValues对象移到了ScratchData对象中。我们这样做是因为我们每次进入这个函数时都要简单地创建一个，也就是在每个单元格上。现在发现，写FEValues类的明确目标是将所有从单元格到单元格保持不变的东西移到对象的构造中，每当我们移到一个新单元格时，只在 FEValues::reinit() 做尽可能少的工作。这意味着在这个函数中创建一个这样的新对象是非常昂贵的，因为我们必须为每一个单元格都这样做--这正是我们想用FEValues类来避免的事情。相反，我们所做的是在抓取对象中只创建一次（或少数几次），然后尽可能多地重复使用它。   
+
+
+这就引出了一个问题：我们在这个函数中创建的其他对象，与它的使用相比，其创建成本很高。事实上，在函数的顶部，我们声明了各种各样的对象。 <code>AdvectionField</code>  ,  <code>RightHandSide</code> and <code>BoundaryValues</code> 的创建成本并不高，所以这里并没有什么危害。然而，在创建 <code>rhs_values</code> 和下面类似的变量时，分配内存通常要花费大量的时间，而只是访问我们存储在其中的（临时）值。因此，这些将是移入 <code>AssemblyScratchData</code> 类的候选者。我们将把这作为一个练习。
+
+@code
+  template <int dim>
+  void AdvectionProblem<dim>::local_assemble_system(
+    const typename DoFHandler<dim>::active_cell_iterator &cell,
+    AssemblyScratchData &                                 scratch_data,
+    AssemblyCopyData &                                    copy_data)
+  {
+@endcode 
+
+
+
+我们定义一些缩写，以避免不必要的长行。
+
+@code
+    const unsigned int dofs_per_cell = fe.n_dofs_per_cell();
+    const unsigned int n_q_points =
+      scratch_data.fe_values.get_quadrature().size();
+    const unsigned int n_face_q_points =
+      scratch_data.fe_face_values.get_quadrature().size();
+
+
+@endcode 
+
+
+
+我们声明单元格矩阵和单元格右侧... 
+
+@code
+    copy_data.cell_matrix.reinit(dofs_per_cell, dofs_per_cell);
+    copy_data.cell_rhs.reinit(dofs_per_cell);
+
+
+@endcode 
+
+
+
+...一个数组，用于保存我们目前正在处理的单元的自由度的全局索引... 
+
+@code
+    copy_data.local_dof_indices.resize(dofs_per_cell);
+
+
+@endcode 
+
+
+
+...然后初始化 <code>FEValues</code> 对象... 
+
+@code
+    scratch_data.fe_values.reinit(cell);
+
+
+@endcode 
+
+
+
+...获得正交点的右手边和平流方向的数值... 
+
+@code
+    scratch_data.advection_field.value_list(
+      scratch_data.fe_values.get_quadrature_points(),
+      scratch_data.advection_directions);
+    scratch_data.right_hand_side.value_list(
+      scratch_data.fe_values.get_quadrature_points(), scratch_data.rhs_values);
+
+
+@endcode 
+
+
+
+...按照介绍中所述，设置流线扩散参数的值... 
+
+@code
+    const double delta = 0.1 * cell->diameter();
+
+
+@endcode 
+
+
+
+......并按照上面所讨论的，集合对系统矩阵和右手边的局部贡献。
+
+@code
+    for (unsigned int q_point = 0; q_point < n_q_points; ++q_point)
+      for (unsigned int i = 0; i < dofs_per_cell; ++i)
+        {
+@endcode 
+
+
+
+别名AssemblyScratchData对象，以防止行数过长。
+
+@code
+          const auto &sd = scratch_data;
+          for (unsigned int j = 0; j < dofs_per_cell; ++j)
+            copy_data.cell_matrix(i, j) +=
+              ((sd.fe_values.shape_value(i, q_point) +           // (phi_i +
+                delta * (sd.advection_directions[q_point] *      // delta beta
+                         sd.fe_values.shape_grad(i, q_point))) * // grad phi_i)
+               sd.advection_directions[q_point] *                // beta
+               sd.fe_values.shape_grad(j, q_point)) *            // grad phi_j
+              sd.fe_values.JxW(q_point);                         // dx
+
+
+          copy_data.cell_rhs(i) +=
+            (sd.fe_values.shape_value(i, q_point) +           // (phi_i +
+             delta * (sd.advection_directions[q_point] *      // delta beta
+                      sd.fe_values.shape_grad(i, q_point))) * // grad phi_i)
+            sd.rhs_values[q_point] *                          // f
+            sd.fe_values.JxW(q_point);                        // dx
+        }
+
+
+@endcode 
+
+
+
+除了我们现在建立的单元项，本问题的双线性形式还包含域的边界上的项。因此，我们必须检查这个单元的任何一个面是否在域的边界上，如果是，也要把这个面的贡献集合起来。当然，双线性形式只包含来自边界 <code>inflow</code> 部分的贡献，但要找出本单元面的某一部分是否是流入边界的一部分，我们必须有关于正交点的确切位置和该点的流动方向的信息；我们使用FEFaceValues对象获得这些信息，只在主循环中决定一个正交点是否在流入边界上。
+
+@code
+    for (const auto &face : cell->face_iterators())
+      if (face->at_boundary())
+        {
+@endcode 
+
+
+
+好的，本单元的这个面是在域的边界上。就像我们在以前的例子和上面使用的通常的FEValues对象一样，我们必须重新初始化本面的FEFaceValues对象。
+
+@code
+          scratch_data.fe_face_values.reinit(cell, face);
+
+
+@endcode 
+
+
+
+对于手头的正交点，我们要求提供流入函数的值和流动方向。
+
+@code
+          scratch_data.boundary_values.value_list(
+            scratch_data.fe_face_values.get_quadrature_points(),
+            scratch_data.face_boundary_values);
+          scratch_data.advection_field.value_list(
+            scratch_data.fe_face_values.get_quadrature_points(),
+            scratch_data.face_advection_directions);
+
+
+@endcode 
+
+
+
+现在在所有正交点上循环，看看这个面是在边界的流入部分还是流出部分。法向量指向单元外：由于该面在边界上，法向量指向域外，所以如果平流方向指向域内，其与法向量的标量积一定是负的（要知道为什么这是真的，请考虑使用余弦的标量积定义）。
+
+@code
+          for (unsigned int q_point = 0; q_point < n_face_q_points; ++q_point)
+            if (scratch_data.fe_face_values.normal_vector(q_point) *
+                  scratch_data.face_advection_directions[q_point] <
+                0.)
+@endcode 
+
+
+
+如果这个面是流入边界的一部分，那么就使用从FEFaceValues对象中获得的值和介绍中讨论的公式，计算这个面对全局矩阵和右侧的贡献。
+
+@code
+              for (unsigned int i = 0; i < dofs_per_cell; ++i)
+                {
+                  for (unsigned int j = 0; j < dofs_per_cell; ++j)
+                    copy_data.cell_matrix(i, j) -=
+                      (scratch_data.face_advection_directions[q_point] *
+                       scratch_data.fe_face_values.normal_vector(q_point) *
+                       scratch_data.fe_face_values.shape_value(i, q_point) *
+                       scratch_data.fe_face_values.shape_value(j, q_point) *
+                       scratch_data.fe_face_values.JxW(q_point));
+
+
+                  copy_data.cell_rhs(i) -=
+                    (scratch_data.face_advection_directions[q_point] *
+                     scratch_data.fe_face_values.normal_vector(q_point) *
+                     scratch_data.face_boundary_values[q_point] *
+                     scratch_data.fe_face_values.shape_value(i, q_point) *
+                     scratch_data.fe_face_values.JxW(q_point));
+                }
+        }
+
+
+@endcode 
+
+
+
+复制程序需要的最后一条信息是这个单元格上自由度的全局索引，所以我们最后把它们写到本地数组中。
+
+@code
+    cell->get_dof_indices(copy_data.local_dof_indices);
+  }
+
+
+
+
+
+@endcode 
+
+
+
+我们需要写的第二个函数是将前一个函数计算出的本地贡献（并放入AssemblyCopyData对象）复制到全局矩阵和右侧向量对象中。这基本上就是我们在每个单元上装配东西时，一直作为最后一块代码的东西。因此，下面的内容应该是很明显的。
+
+@code
+  template <int dim>
+  void
+  AdvectionProblem<dim>::copy_local_to_global(const AssemblyCopyData &copy_data)
+  {
+    hanging_node_constraints.distribute_local_to_global(
+      copy_data.cell_matrix,
+      copy_data.cell_rhs,
+      copy_data.local_dof_indices,
+      system_matrix,
+      system_rhs);
+  }
+
+
+@endcode 
+
+
+
+这里是线性求解程序。由于系统不再像以前的例子那样是对称正定的，我们不能再使用共轭梯度法。相反，我们使用一个更通用的，不依赖矩阵的任何特殊属性的求解器：GMRES方法。GMRES和共轭梯度法一样，需要一个合适的预处理程序：我们在这里使用雅可比预处理程序，它对这个问题足够好。
+
+@code
+  template <int dim>
+  void AdvectionProblem<dim>::solve()
+  {
+    SolverControl               solver_control(std::max<std::size_t>(1000,
+                                                       system_rhs.size() / 10),
+                                 1e-10 * system_rhs.l2_norm());
+    SolverGMRES<Vector<double>> solver(solver_control);
+    PreconditionJacobi<SparseMatrix<double>> preconditioner;
+    preconditioner.initialize(system_matrix, 1.0);
+    solver.solve(system_matrix, solution, system_rhs, preconditioner);
+
+
+    Vector<double> residual(dof_handler.n_dofs());
+
+
+    system_matrix.vmult(residual, solution);
+    residual -= system_rhs;
+    std::cout << "   Iterations required for convergence: "
+              << solver_control.last_step() << '\n'
+              << "   Max norm of residual:                "
+              << residual.linfty_norm() << '\n';
+
+
+    hanging_node_constraints.distribute(solution);
+  }
+
+
+@endcode 
+
+
+
+下面的函数根据引言中描述的数量来细化网格。各自的计算是在  <code>GradientEstimation</code>  类中进行的。
+
+@code
+  template <int dim>
+  void AdvectionProblem<dim>::refine_grid()
+  {
+    Vector<float> estimated_error_per_cell(triangulation.n_active_cells());
+
+
+    GradientEstimation::estimate(dof_handler,
+                                 solution,
+                                 estimated_error_per_cell);
+
+
+    GridRefinement::refine_and_coarsen_fixed_number(triangulation,
+                                                    estimated_error_per_cell,
+                                                    0.3,
+                                                    0.03);
+
+
+    triangulation.execute_coarsening_and_refinement();
+  }
+
+
+@endcode 
+
+
+
+这个函数与第6步中的函数类似，但由于我们使用的是高阶有限元，所以我们以不同的方式保存解决方案。像VisIt和Paraview这样的可视化程序通常只能理解与节点相关的数据：它们不能绘制五度基函数，这导致我们计算的解决方案的图片非常不准确。为了解决这个问题，我们为每个单元保存了多个 <em> 补丁 </em> ：在二维中，我们为每个单元在VTU文件中保存64个双线性 "单元"，在三维中，我们保存512个。最终的结果是，可视化程序将使用立方体基础函数的片状线性插值：这捕捉到了解决方案的细节，并且在大多数屏幕分辨率下，看起来很平滑。我们在一个单独的步骤中保存网格，没有额外的补丁，这样我们就有了细胞面的视觉表现。   
+
+
+9.1版本的deal.II获得了编写更高程度的多项式（即为我们的片状二项式解决方案编写片状二项式可视化数据）VTK和VTU输出的能力：然而，并非所有最近版本的ParaView和Viscit（截至2018年）都能读取这种格式，所以我们在这里使用更古老、更通用（但效率较低）的方法。
+
+@code
+  template <int dim>
+  void AdvectionProblem<dim>::output_results(const unsigned int cycle) const
+  {
+    {
+      GridOut       grid_out;
+      std::ofstream output("grid-" + std::to_string(cycle) + ".vtu");
+      grid_out.write_vtu(triangulation, output);
+    }
+
+
+    {
+      DataOut<dim> data_out;
+      data_out.attach_dof_handler(dof_handler);
+      data_out.add_data_vector(solution, "solution");
+      data_out.build_patches(8);
+
+
+@endcode 
+
+
+
+VTU输出可能很昂贵，无论是计算还是写到磁盘。这里我们要求ZLib，一个压缩库，以最大限度地提高吞吐量的方式来压缩数据。
+
+@code
+      DataOutBase::VtkFlags vtk_flags;
+      vtk_flags.compression_level =
+        DataOutBase::VtkFlags::ZlibCompressionLevel::best_speed;
+      data_out.set_flags(vtk_flags);
+
+
+      std::ofstream output("solution-" + std::to_string(cycle) + ".vtu");
+      data_out.write_vtu(output);
+    }
+  }
+
+
+
+@endcode 
+
+
+
+......就像主循环（setup-solve-refine）一样，除了循环的数量和初始网格之外。
+
+@code
+  template <int dim>
+  void AdvectionProblem<dim>::run()
+  {
+    for (unsigned int cycle = 0; cycle < 10; ++cycle)
+      {
+        std::cout << "Cycle " << cycle << ':' << std::endl;
+
+
+        if (cycle == 0)
+          {
+            GridGenerator::hyper_cube(triangulation, -1, 1);
+            triangulation.refine_global(3);
+          }
+        else
+          {
+            refine_grid();
+          }
+
+
+
+        std::cout << "   Number of active cells:              "
+                  << triangulation.n_active_cells() << std::endl;
+
+
+        setup_system();
+
+
+        std::cout << "   Number of degrees of freedom:        "
+                  << dof_handler.n_dofs() << std::endl;
+
+
+        assemble_system();
+        solve();
+        output_results(cycle);
+      }
+  }
+
+
+
+
+
+@endcode 
+
+
+
+
+<a name="GradientEstimationclassimplementation"></a> <h3>GradientEstimation class implementation</h3>
+
+
+
+
+现在来看看 <code>GradientEstimation</code> 类的实现。让我们先为 <code>estimate_cell()</code> 函数所使用的 <code>EstimateScratchData</code> 类定义构造函数。
+
+@code
+  template <int dim>
+  GradientEstimation::EstimateScratchData<dim>::EstimateScratchData(
+    const FiniteElement<dim> &fe,
+    const Vector<double> &    solution,
+    Vector<float> &           error_per_cell)
+    : fe_midpoint_value(fe,
+                        QMidpoint<dim>(),
+                        update_values | update_quadrature_points)
+    , solution(solution)
+    , error_per_cell(error_per_cell)
+    , cell_midpoint_value(1)
+    , neighbor_midpoint_value(1)
+  {
+@endcode 
+
+
+
+我们分配一个向量来保存一个单元的所有活动邻居的迭代器。我们保留活动邻居的最大数量，以避免以后的重新分配。注意这个最大的活动邻居数是如何计算出来的。
+
+@code
+    active_neighbors.reserve(GeometryInfo<dim>::faces_per_cell *
+                             GeometryInfo<dim>::max_children_per_face);
+  }
+
+
+
+  template <int dim>
+  GradientEstimation::EstimateScratchData<dim>::EstimateScratchData(
+    const EstimateScratchData &scratch_data)
+    : fe_midpoint_value(scratch_data.fe_midpoint_value.get_fe(),
+                        scratch_data.fe_midpoint_value.get_quadrature(),
+                        update_values | update_quadrature_points)
+    , solution(scratch_data.solution)
+    , error_per_cell(scratch_data.error_per_cell)
+    , cell_midpoint_value(1)
+    , neighbor_midpoint_value(1)
+  {}
+
+
+
+@endcode 
+
+
+
+接下来是对 <code>GradientEstimation</code> 类的实现。第一个函数除了将工作委托给另一个函数外，并没有做什么，但在顶部有一点设置。   
+
+
+在开始工作之前，我们要检查写进结果的向量是否有正确的大小。在编程中，忘记在调用地点正确确定参数大小的错误是很常见的。因为没有抓住这些错误所造成的损失往往是微妙的（例如，内存中某个地方的数据损坏，或者是无法重现的结果），所以非常值得努力去检查这些东西。
+
+@code
+  template <int dim>
+  void GradientEstimation::estimate(const DoFHandler<dim> &dof_handler,
+                                    const Vector<double> & solution,
+                                    Vector<float> &        error_per_cell)
+  {
+    Assert(
+      error_per_cell.size() == dof_handler.get_triangulation().n_active_cells(),
+      ExcInvalidVectorLength(error_per_cell.size(),
+                             dof_handler.get_triangulation().n_active_cells()));
+
+
+    WorkStream::run(dof_handler.begin_active(),
+                    dof_handler.end(),
+                    &GradientEstimation::template estimate_cell<dim>,
+                    std::function<void(const EstimateCopyData &)>(),
+                    EstimateScratchData<dim>(dof_handler.get_fe(),
+                                             solution,
+                                             error_per_cell),
+                    EstimateCopyData());
+  }
+
+
+
+@endcode 
+
+
+
+这里有一个函数，通过计算梯度的有限差分近似值来估计局部误差。该函数首先计算当前单元的活动邻居列表，然后为每个邻居计算介绍中描述的数量。之所以有这样的顺序，是因为在局部细化网格的情况下，要找到一个给定的邻居不是一蹴而就的事情。原则上，一个优化的实现可以在一个步骤中找到邻域和取决于它们的量，而不是先建立一个邻域列表，然后在第二步中找到它们的贡献，但是我们很乐意将此作为一个练习。正如之前所讨论的，传递给 WorkStream::run 的工作者函数是在保留所有临时对象的 "scratch "对象上工作。这样，我们就不需要在每次为给定单元调用工作的函数内创建和初始化那些昂贵的对象了。这样的参数被作为第二个参数传递。第三个参数是一个 "copy-data "对象（详见 @ref threads ），但我们在这里实际上没有使用任何这样的对象。由于 WorkStream::run() 坚持要传递三个参数，我们声明这个函数有三个参数，但简单地忽略了最后一个参数。   
+
+
+从美学的角度来看，这并不令人满意。它可以通过使用一个匿名（lambda）函数来避免。如果你允许的话，让我们在这里展示一下如何做。首先，假设我们已经声明这个函数只接受两个参数，省略了未使用的最后一个参数。现在， WorkStream::run 仍然想用三个参数来调用这个函数，所以我们需要找到一种方法来 "忘记 "调用中的第三个参数。简单地像上面那样把指针传给 WorkStream::run 这个函数是做不到的--编译器会抱怨说一个声明为有两个参数的函数被调用时有三个参数。然而，我们可以通过将以下内容作为第三个参数传递给  WorkStream::run():   <div class=CodeFragmentInTutorialComment>
+
+
+[1.x.123]
+
+
+</div>  来做到这一点，这并不比下面实现的解决方案好多少：要么例程本身必须带三个参数，要么它必须被带三个参数的东西所包裹。我们不使用这种方法，因为在开始时添加未使用的参数更简单。   
+
+
+现在说说细节。
+
+@code
+  template <int dim>
+  void GradientEstimation::estimate_cell(
+    const typename DoFHandler<dim>::active_cell_iterator &cell,
+    EstimateScratchData<dim> &                            scratch_data,
+    const EstimateCopyData &)
+  {
+@endcode 
+
+
+
+我们需要为张量 <code>Y</code> 提供空间，它是y向量的外积之和。
+
+@code
+    Tensor<2, dim> Y;
+
+
+@endcode 
+
+
+
+首先初始化 <code>FEValues</code> 对象，以及 <code>Y</code> 张量。
+
+@code
+    scratch_data.fe_midpoint_value.reinit(cell);
+
+
+@endcode 
+
+
+
+现在，在我们继续之前，我们首先计算当前单元的所有活动邻居的列表。我们首先在所有面上进行循环，看看那里的邻居是否是活跃的，如果它与本单元在同一级别或更粗一级，就会出现这种情况（注意，一个邻居只能比本单元粗一次，因为我们只允许在deal.II中对一个面进行最大限度的细化差异）。另外，邻居也可能在同一级别，并被进一步细化；然后我们必须找到它的哪些子单元紧挨着现在的单元，并选择这些子单元（注意，如果一个活动单元的邻居的子单元紧挨着这个活动单元，由于上面提到的一次细化规则，它本身也必须是活动的）。     
+
+
+在一个空间维度上，情况略有不同，因为那里不存在一精一细化规则：相邻的活动单元可以在任意多的精一细化级别上有所不同。在这种情况下，计算变得有点困难，但我们将在下面解释。     
+
+
+在开始对当前单元的所有邻域进行循环之前，我们当然要清除存储活动邻域的迭代器的数组。
+
+@code
+    scratch_data.active_neighbors.clear();
+    for (const auto face_n : cell->face_indices())
+      if (!cell->at_boundary(face_n))
+        {
+@endcode 
+
+
+
+首先定义一个面和邻居的迭代器的缩写 
+
+@code
+          const auto face     = cell->face(face_n);
+          const auto neighbor = cell->neighbor(face_n);
+
+
+@endcode 
+
+
+
+然后检查邻居是否是活动的。如果是，那么它就在同一层或更粗的一层（如果我们不是在一维），而且我们在任何情况下都对它感兴趣。
+
+@code
+          if (neighbor->is_active())
+            scratch_data.active_neighbors.push_back(neighbor);
+          else
+            {
+@endcode 
+
+
+
+如果邻居没有活动，那么就检查它的孩子。
+
+@code
+              if (dim == 1)
+                {
+@endcode 
+
+
+
+为了找到与本单元相邻的子单元，如果我们在本单元的左边（n==0），则依次转到其右边的子单元，如果我们在右边（n==1），则转到左边的子单元，直到我们找到一个活动单元。
+
+@code
+                  auto neighbor_child = neighbor;
+                  while (neighbor_child->has_children())
+                    neighbor_child = neighbor_child->child(face_n == 0 ? 1 : 0);
+
+
+@endcode 
+
+
+
+由于这使用了一些非微妙的几何直觉，我们可能想检查一下我们是否做对了，也就是说，检查我们找到的单元格的邻居是否确实是我们目前正在处理的单元。像这样的检查通常是有用的，并且经常发现像上面这一行的算法（不由自主地交换 <code>n==1</code> for <code>n==0</code> 或类似的算法是很简单的）和库中的错误（上面的算法所依据的假设可能是错误的，记录错误，或者由于库中的错误而被违反）。原则上，我们可以在程序运行一段时间后删除这样的检查，但是无论如何留下它来检查库中或上述算法中的变化可能是一件好事。                   
+
+
+请注意，如果这个检查失败了，那么这肯定是一个无法恢复的错误，而且很可能被称为内部错误。因此，我们在这里使用一个预定义的异常类来抛出。
+
+@code
+                  Assert(neighbor_child->neighbor(face_n == 0 ? 1 : 0) == cell,
+                         ExcInternalError());
+
+
+@endcode 
+
+
+
+如果检查成功，我们就把刚刚发现的活动邻居推到我们保留的栈中。
+
+@code
+                  scratch_data.active_neighbors.push_back(neighbor_child);
+                }
+              else
+@endcode 
+
+
+
+如果我们不在1d中，我们收集所有 "在 "当前面的子面后面的邻居子，并继续前进。
+
+@code
+                for (unsigned int subface_n = 0; subface_n < face->n_children();
+                     ++subface_n)
+                  scratch_data.active_neighbors.push_back(
+                    cell->neighbor_child_on_subface(face_n, subface_n));
+            }
+        }
+
+
+@endcode 
+
+
+
+好了，现在我们有了所有的邻居，让我们开始对他们每个人进行计算。首先，我们做一些预备工作：找出当前单元格的中心和该点的解决方案。后者是以正交点的函数值向量的形式得到的，当然，正交点只有一个。同样地，中心的位置是实空间中第一个（也是唯一的）正交点的位置。
+
+@code
+    const Point<dim> this_center =
+      scratch_data.fe_midpoint_value.quadrature_point(0);
+
+
+    scratch_data.fe_midpoint_value.get_function_values(
+      scratch_data.solution, scratch_data.cell_midpoint_value);
+
+
+@endcode 
+
+
+
+现在在所有活动邻居上循环，收集我们需要的数据。
+
+@code
+    Tensor<1, dim> projected_gradient;
+    for (const auto &neighbor : scratch_data.active_neighbors)
+      {
+@endcode 
+
+
+
+然后得到邻居单元的中心和该点的有限元函数值。注意，为了这些信息，我们必须重新初始化相邻单元的 <code>FEValues</code> 对象。
+
+@code
+        scratch_data.fe_midpoint_value.reinit(neighbor);
+        const Point<dim> neighbor_center =
+          scratch_data.fe_midpoint_value.quadrature_point(0);
+
+
+        scratch_data.fe_midpoint_value.get_function_values(
+          scratch_data.solution, scratch_data.neighbor_midpoint_value);
+
+
+@endcode 
+
+
+
+计算连接两个单元中心的向量 <code>y</code> 。注意，与介绍不同，我们用 <code>y</code> 表示归一化的差分向量，因为这是在计算中到处使用的量。
+
+@code
+        Tensor<1, dim> y        = neighbor_center - this_center;
+        const double   distance = y.norm();
+        y /= distance;
+
+
+@endcode 
+
+
+
+然后把这个单元对Y矩阵的贡献加起来... 
+
+@code
+        for (unsigned int i = 0; i < dim; ++i)
+          for (unsigned int j = 0; j < dim; ++j)
+            Y[i][j] += y[i] * y[j];
+
+
+@endcode 
+
+
+
+...并更新差额商数之和。
+
+@code
+        projected_gradient += (scratch_data.neighbor_midpoint_value[0] -
+                               scratch_data.cell_midpoint_value[0]) /
+                              distance * y;
+      }
+
+
+@endcode 
+
+
+
+如果现在，在收集了来自邻居的所有信息后，我们可以确定当前单元的梯度的近似值，那么我们需要通过跨越整个空间的向量 <code>y</code> ，否则我们将没有梯度的所有组成部分。这是由矩阵的可逆性表示的。     
+
+
+如果矩阵不可逆，那么本单元的活动邻居的数量就不足。然而，与之前所有的情况（我们提出了异常）相比，这不是一个编程错误：这是一个运行时错误，即使在调试模式下运行良好，也会在优化模式下发生，所以在优化模式下尝试捕捉这个错误也是合理的。对于这种情况，有一个 <code>AssertThrow</code> 宏：它像 <code>Assert</code> 宏一样检查条件，但不仅仅是在调试模式下；然后输出一个错误信息，但不是像 <code>Assert</code> 宏那样中止程序，而是使用C++的 <code>throw</code> 命令抛出异常。这样一来，人们就有可能捕捉到这个错误，并采取合理的应对措施。其中一个措施是全局性地细化网格，因为如果初始网格的每个单元都至少被细化过一次，就不会出现方向不足的情况。
+
+@code
+    AssertThrow(determinant(Y) != 0, ExcInsufficientDirections());
+
+
+@endcode 
+
+
+
+另一方面，如果矩阵是可反转的，那么就将其反转，将其他数量与之相乘，并使用这个数量和正确的网格宽度幂来计算估计误差。
+
+@code
+    const Tensor<2, dim> Y_inverse = invert(Y);
+
+
+    const Tensor<1, dim> gradient = Y_inverse * projected_gradient;
+
+
+@endcode 
+
+
+
+这个函数的最后一部分是将我们刚刚计算出来的内容写入输出向量的元素中。这个向量的地址已经存储在scratch数据对象中，我们所要做的就是知道如何在这个向量中获得正确的元素--但是我们可以询问我们所在的单元格是第几个活动单元。
+
+@code
+    scratch_data.error_per_cell(cell->active_cell_index()) =
+      (std::pow(cell->diameter(), 1 + 1.0 * dim / 2) * gradient.norm());
+  }
+} // namespace Step9
+
+
+
+@endcode 
+
+
+
+
+<a name="Mainfunction"></a> <h3>Main function</h3>
+
+
+
+
+ <code>main</code> 函数与前面的例子类似。主要区别是我们使用MultithreadInfo来设置最大的线程数（更多信息请参见文档模块 @ref threads  "多处理器访问共享内存的并行计算"）。使用的线程数是环境变量DEAL_II_NUM_THREADS和  <code>set_thread_limit</code>  的参数中的最小值。如果没有给  <code>set_thread_limit</code>  的值，则使用英特尔线程构建块（TBB）库的默认值。如果省略了对  <code>set_thread_limit</code>  的调用，线程的数量将由 TBB 选择，与 DEAL_II_NUM_THREADS无关。
+
+@code
+int main()
+{
+  using namespace dealii;
+  try
+    {
+      MultithreadInfo::set_thread_limit();
+
+
+      Step9::AdvectionProblem<2> advection_problem_2d;
+      advection_problem_2d.run();
+    }
+  catch (std::exception &exc)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Exception on processing: " << std::endl
+                << exc.what() << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+  catch (...)
+    {
+      std::cerr << std::endl
+                << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      std::cerr << "Unknown exception!" << std::endl
+                << "Aborting!" << std::endl
+                << "----------------------------------------------------"
+                << std::endl;
+      return 1;
+    }
+
+
+  return 0;
+}
+@endcode 
+
 <a name="Results"></a><h1>Results</h1>
 
 
 
-The results of this program are not particularly spectacular. They
-consist of the console output, some grid files, and the solution on
-each of these grids. First for the console output:
+
+这个程序的结果并不特别引人注目。它们由控制台输出、一些网格文件和每个网格上的解决方案组成。首先是控制台的输出。
+
 @code
 Cycle 0:
    Number of active cells:              64
@@ -2123,11 +1726,11 @@ Cycle 9:
    Number of degrees of freedom:        780591
    Iterations required for convergence: 3913
    Max norm of residual:                8.15689e-15
-@endcode
+@endcode 
 
-Quite a number of cells are used on the finest level to resolve the features of
-the solution. Here are the fourth and tenth grids:
-<div class="twocolumn" style="width: 80%">
+
+
+相当多的单元被用在最细的层面上，以解决解决方案的特点。下面是第四和第十个网格。  <div class="twocolumn" style="width: 80%">
   <div>
     <img src="https://www.dealii.org/images/steps/developer/step-9-grid-3.png"
          alt="Fourth grid in the refinement cycle, showing some adaptivity to features."
@@ -2138,9 +1741,7 @@ the solution. Here are the fourth and tenth grids:
          alt="Tenth grid in the refinement cycle, showing that the waves are fully captured."
          width="400" height="400">
   </div>
-</div>
-and the fourth and tenth solutions:
-<div class="twocolumn" style="width: 80%">
+</div> 和第四和第十个解决方案。  <div class="twocolumn" style="width: 80%">
   <div>
     <img src="https://www.dealii.org/images/steps/developer/step-9-solution-3.png"
          alt="Fourth solution, showing that we resolve most features but some
@@ -2152,9 +1753,7 @@ and the fourth and tenth solutions:
          alt="Tenth solution, showing a fully resolved flow."
          width="400" height="400">
   </div>
-</div>
-and both the grid and solution zoomed in:
-<div class="twocolumn" style="width: 80%">
+</div> 以及放大后的网格和解决方案。  <div class="twocolumn" style="width: 80%">
   <div>
     <img src="https://www.dealii.org/images/steps/developer/step-9-solution-3-zoom.png"
          alt="Detail of the fourth solution, showing that we resolve most
@@ -2168,18 +1767,8 @@ and both the grid and solution zoomed in:
          cells than were present in the fourth solution."
          width="400" height="400">
   </div>
-</div>
+</div>   
 
-The solution is created by that part that is transported along the wiggly
-advection field from the left and lower boundaries to the top right, and the
-part that is created by the source in the lower left corner, and the results of
-which are also transported along. The grid shown above is well-adapted to
-resolve these features. The comparison between plots shows that, even though we
-are using a high-order approximation, we still need adaptive mesh refinement to
-fully resolve the wiggles.
- *
- *
-<a name="PlainProg"></a>
-<h1> The plain program</h1>
-@include "step-9.cc"
-*/
+解决方案是由从左、下边界到右上方的蠕动平流场所产生的那部分，以及由左下角的源所产生的那部分，其结果也是沿途传输的。上面显示的网格很好地适应了解决这些特征。从图中的对比可以看出，即使我们使用的是高阶近似，我们仍然需要自适应的网格细化来完全解决摆动的问题。<a name="PlainProg"></a> <h1> The plain program</h1>  @include "step-9.cc" .  
+
+  */  
