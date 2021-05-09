@@ -6,33 +6,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>fe_utils package &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/proof.js"></script>
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <script src="static/proof.js"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
 <!--[if lte IE 6]>
-<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="static/ie6.css" type="text/css" media="screen" charset="utf-8" />
 <![endif]-->
 
-<link rel="stylesheet" href="_static/featured.css">
+<link rel="stylesheet" href="static/featured.css">
 
 
-<link rel="shortcut icon" href="_static/icon.ico" />
+<link rel="shortcut icon" href="static/icon.ico" />
 
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -72,7 +72,7 @@
 <span id="fe-utils-finite-elements-module"></span><h2>fe_utils.finite_elements module<a class="headerlink" href="#module-fe_utils.finite_elements" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="fe_utils.finite_elements.FiniteElement">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.finite_elements.</span></code><code class="sig-name descname"><span class="pre">FiniteElement</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/finite_elements.html#FiniteElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.FiniteElement" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.finite_elements.</span></code><code class="sig-name descname"><span class="pre">FiniteElement</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/finite_elements.html#FiniteElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.FiniteElement" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A finite element defined over cell.</p>
 <dl class="field-list simple">
@@ -114,7 +114,7 @@ is the list of nodes associated with entity <cite>(d, i)</cite>.</p>
 
 <dl class="py method">
 <dt id="fe_utils.finite_elements.FiniteElement.interpolate">
-<code class="sig-name descname"><span class="pre">interpolate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/finite_elements.html#FiniteElement.interpolate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.FiniteElement.interpolate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">interpolate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/finite_elements.html#FiniteElement.interpolate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.FiniteElement.interpolate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interpolate fn onto this finite element by evaluating it
 at each of the nodes.</p>
 <dl class="field-list simple">
@@ -152,7 +152,7 @@ associated with an entity of dimension d.</p>
 
 <dl class="py method">
 <dt id="fe_utils.finite_elements.FiniteElement.tabulate">
-<code class="sig-name descname"><span class="pre">tabulate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/finite_elements.html#FiniteElement.tabulate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.FiniteElement.tabulate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">tabulate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/finite_elements.html#FiniteElement.tabulate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.FiniteElement.tabulate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate the basis functions of this finite element at the points
 provided.</p>
 <dl class="field-list simple">
@@ -180,7 +180,7 @@ is <code class="docutils literal notranslate"><span class="pre">True</span></cod
 
 <dl class="py class">
 <dt id="fe_utils.finite_elements.LagrangeElement">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.finite_elements.</span></code><code class="sig-name descname"><span class="pre">LagrangeElement</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/finite_elements.html#LagrangeElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.LagrangeElement" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.finite_elements.</span></code><code class="sig-name descname"><span class="pre">LagrangeElement</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/finite_elements.html#LagrangeElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.LagrangeElement" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#fe_utils.finite_elements.FiniteElement" title="fe_utils.finite_elements.FiniteElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.finite_elements.FiniteElement</span></code></a></p>
 <p>An equispaced Lagrange finite element.</p>
 <dl class="field-list simple">
@@ -199,7 +199,7 @@ spans the complete polynomial space.</p></li>
 
 <dl class="py function">
 <dt id="fe_utils.finite_elements.lagrange_points">
-<code class="sig-prename descclassname"><span class="pre">fe_utils.finite_elements.</span></code><code class="sig-name descname"><span class="pre">lagrange_points</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/finite_elements.html#lagrange_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.lagrange_points" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">fe_utils.finite_elements.</span></code><code class="sig-name descname"><span class="pre">lagrange_points</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/finite_elements.html#lagrange_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.lagrange_points" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct the locations of the equispaced Lagrange nodes on cell.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -218,7 +218,7 @@ coordinates of the nodes.</p>
 
 <dl class="py function">
 <dt id="fe_utils.finite_elements.vandermonde_matrix">
-<code class="sig-prename descclassname"><span class="pre">fe_utils.finite_elements.</span></code><code class="sig-name descname"><span class="pre">vandermonde_matrix</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/finite_elements.html#vandermonde_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.vandermonde_matrix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">fe_utils.finite_elements.</span></code><code class="sig-name descname"><span class="pre">vandermonde_matrix</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/finite_elements.html#vandermonde_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.finite_elements.vandermonde_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct the generalised Vandermonde matrix for polynomials of the
 specified degree on the cell provided.</p>
 <dl class="field-list simple">
@@ -242,7 +242,7 @@ specified degree on the cell provided.</p>
 <span id="fe-utils-function-spaces-module"></span><h2>fe_utils.function_spaces module<a class="headerlink" href="#module-fe_utils.function_spaces" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="fe_utils.function_spaces.Function">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.function_spaces.</span></code><code class="sig-name descname"><span class="pre">Function</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/function_spaces.html#Function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.function_spaces.Function" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.function_spaces.</span></code><code class="sig-name descname"><span class="pre">Function</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/function_spaces.html#Function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.function_spaces.Function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A function in a finite element space. The main role of this object
 is to store the basis function coefficients associated with the nodes
@@ -265,7 +265,7 @@ which will be used in output and is useful for debugging.</p></li>
 
 <dl class="py method">
 <dt id="fe_utils.function_spaces.Function.integrate">
-<code class="sig-name descname"><span class="pre">integrate</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/function_spaces.html#Function.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.function_spaces.Function.integrate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">integrate</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/function_spaces.html#Function.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.function_spaces.Function.integrate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Integrate this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> over the domain.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Result</dt>
@@ -276,7 +276,7 @@ which will be used in output and is useful for debugging.</p></li>
 
 <dl class="py method">
 <dt id="fe_utils.function_spaces.Function.interpolate">
-<code class="sig-name descname"><span class="pre">interpolate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/function_spaces.html#Function.interpolate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.function_spaces.Function.interpolate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">interpolate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/function_spaces.html#Function.interpolate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.function_spaces.Function.interpolate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interpolate a given Python function onto this finite element
 <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a>.</p>
 <dl class="field-list simple">
@@ -295,7 +295,7 @@ vector and returns a scalar value.</p>
 
 <dl class="py method">
 <dt id="fe_utils.function_spaces.Function.plot">
-<code class="sig-name descname"><span class="pre">plot</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subdivisions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/function_spaces.html#Function.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.function_spaces.Function.plot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">plot</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subdivisions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/function_spaces.html#Function.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.function_spaces.Function.plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot the value of this <a class="reference internal" href="#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a>. This is quite a low
 performance plotting routine so it will perform poorly on
 larger meshes, but it has the advantage of supporting higher
@@ -321,7 +321,7 @@ which render more slowly!</p>
 
 <dl class="py class">
 <dt id="fe_utils.function_spaces.FunctionSpace">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.function_spaces.</span></code><code class="sig-name descname"><span class="pre">FunctionSpace</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/function_spaces.html#FunctionSpace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.function_spaces.FunctionSpace" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.function_spaces.</span></code><code class="sig-name descname"><span class="pre">FunctionSpace</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/function_spaces.html#FunctionSpace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.function_spaces.FunctionSpace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A finite element space.</p>
 <dl class="field-list simple">
@@ -367,7 +367,7 @@ cell. The implementation of this member is left as an
 <span id="fe-utils-mesh-module"></span><h2>fe_utils.mesh module<a class="headerlink" href="#module-fe_utils.mesh" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="fe_utils.mesh.Mesh">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.mesh.</span></code><code class="sig-name descname"><span class="pre">Mesh</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertex_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_vertices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/mesh.html#Mesh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.mesh.Mesh" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.mesh.</span></code><code class="sig-name descname"><span class="pre">Mesh</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertex_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_vertices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/mesh.html#Mesh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.mesh.Mesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A one or two dimensional mesh composed of intervals or triangles
 respectively.</p>
@@ -383,7 +383,7 @@ indices of the vertices of which each cell is made up.</p></li>
 </dl>
 <dl class="py method">
 <dt id="fe_utils.mesh.Mesh.adjacency">
-<code class="sig-name descname"><span class="pre">adjacency</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/mesh.html#Mesh.adjacency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.mesh.Mesh.adjacency" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">adjacency</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/mesh.html#Mesh.adjacency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.mesh.Mesh.adjacency" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the set of <cite>dim2</cite> entities adjacent to each <cite>dim1</cite>
 entity. For example if <cite>dim1==2</cite> and <cite>dim2==1</cite> then return the list of
 edges (1D entities) adjacent to each triangle (2D entity).</p>
@@ -439,7 +439,7 @@ mesh.</p>
 
 <dl class="py method">
 <dt id="fe_utils.mesh.Mesh.jacobian">
-<code class="sig-name descname"><span class="pre">jacobian</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/mesh.html#Mesh.jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.mesh.Mesh.jacobian" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">jacobian</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/mesh.html#Mesh.jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.mesh.Mesh.jacobian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the Jacobian matrix for the specified cell.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -461,7 +461,7 @@ mesh.</p>
 
 <dl class="py class">
 <dt id="fe_utils.mesh.UnitIntervalMesh">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.mesh.</span></code><code class="sig-name descname"><span class="pre">UnitIntervalMesh</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/mesh.html#UnitIntervalMesh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.mesh.UnitIntervalMesh" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.mesh.</span></code><code class="sig-name descname"><span class="pre">UnitIntervalMesh</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/mesh.html#UnitIntervalMesh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.mesh.UnitIntervalMesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.mesh.Mesh</span></code></a></p>
 <p>A mesh of the unit interval.</p>
 <dl class="field-list simple">
@@ -473,7 +473,7 @@ mesh.</p>
 
 <dl class="py class">
 <dt id="fe_utils.mesh.UnitSquareMesh">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.mesh.</span></code><code class="sig-name descname"><span class="pre">UnitSquareMesh</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/mesh.html#UnitSquareMesh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.mesh.UnitSquareMesh" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.mesh.</span></code><code class="sig-name descname"><span class="pre">UnitSquareMesh</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/mesh.html#UnitSquareMesh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.mesh.UnitSquareMesh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">fe_utils.mesh.Mesh</span></code></a></p>
 <p>A triangulated <a class="reference internal" href="#fe_utils.mesh.Mesh" title="fe_utils.mesh.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a> of the unit square.</p>
 <dl class="field-list simple">
@@ -491,7 +491,7 @@ mesh.</p>
 <span id="fe-utils-quadrature-module"></span><h2>fe_utils.quadrature module<a class="headerlink" href="#module-fe_utils.quadrature" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="fe_utils.quadrature.QuadratureRule">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.quadrature.</span></code><code class="sig-name descname"><span class="pre">QuadratureRule</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/quadrature.html#QuadratureRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.quadrature.QuadratureRule" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.quadrature.</span></code><code class="sig-name descname"><span class="pre">QuadratureRule</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/quadrature.html#QuadratureRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.quadrature.QuadratureRule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A quadrature rule implementing integration of the reference cell
 provided.</p>
@@ -526,7 +526,7 @@ rule is defined.</p>
 
 <dl class="py method">
 <dt id="fe_utils.quadrature.QuadratureRule.integrate">
-<code class="sig-name descname"><span class="pre">integrate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/quadrature.html#QuadratureRule.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.quadrature.QuadratureRule.integrate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">integrate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/quadrature.html#QuadratureRule.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.quadrature.QuadratureRule.integrate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Integrate the function provided using this quadrature rule.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -554,7 +554,7 @@ vectors of the quadrature points.</p>
 
 <dl class="py function">
 <dt id="fe_utils.quadrature.gauss_quadrature">
-<code class="sig-prename descclassname"><span class="pre">fe_utils.quadrature.</span></code><code class="sig-name descname"><span class="pre">gauss_quadrature</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/quadrature.html#gauss_quadrature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.quadrature.gauss_quadrature" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">fe_utils.quadrature.</span></code><code class="sig-name descname"><span class="pre">gauss_quadrature</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/quadrature.html#gauss_quadrature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.quadrature.gauss_quadrature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a Gauss-Legendre <a class="reference internal" href="#fe_utils.quadrature.QuadratureRule" title="fe_utils.quadrature.QuadratureRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadratureRule</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -573,7 +573,7 @@ of this quadrature rule.</p></li>
 <span id="fe-utils-reference-elements-module"></span><h2>fe_utils.reference_elements module<a class="headerlink" href="#module-fe_utils.reference_elements" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="fe_utils.reference_elements.ReferenceCell">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.reference_elements.</span></code><code class="sig-name descname"><span class="pre">ReferenceCell</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topology</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/reference_elements.html#ReferenceCell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.reference_elements.ReferenceCell" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">fe_utils.reference_elements.</span></code><code class="sig-name descname"><span class="pre">ReferenceCell</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topology</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/reference_elements.html#ReferenceCell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.reference_elements.ReferenceCell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>An object storing the geometry and topology of the reference cell.</p>
 <dl class="field-list simple">
@@ -600,7 +600,7 @@ is the list of vertices incident to the <cite>i</cite>-th <cite>d</cite>-entity.
 
 <dl class="py method">
 <dt id="fe_utils.reference_elements.ReferenceCell.point_in_entity">
-<code class="sig-name descname"><span class="pre">point_in_entity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/reference_elements.html#ReferenceCell.point_in_entity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.reference_elements.ReferenceCell.point_in_entity" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">point_in_entity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/reference_elements.html#ReferenceCell.point_in_entity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.reference_elements.ReferenceCell.point_in_entity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return true if the point x lies on the entity e.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -644,7 +644,7 @@ with vertices [[0., 0.], [1., 0.], [0., 1.]].</p>
 <span id="fe-utils-utils-module"></span><h2>fe_utils.utils module<a class="headerlink" href="#module-fe_utils.utils" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="fe_utils.utils.errornorm">
-<code class="sig-prename descclassname"><span class="pre">fe_utils.utils.</span></code><code class="sig-name descname"><span class="pre">errornorm</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/utils.html#errornorm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.utils.errornorm" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">fe_utils.utils.</span></code><code class="sig-name descname"><span class="pre">errornorm</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/utils.html#errornorm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.utils.errornorm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the L^2 norm of the difference between f1 and f2.</p>
 </dd></dl>
 

@@ -1,0 +1,157 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>fe_utils.quadrature &#8212; Finite element course 2020.0 documentation</title>
+    <link rel="stylesheet" href="../../static/fenics.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../static/proof.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <script type="text/javascript" src="../../static/language_data.js"></script>
+    <script type="text/javascript" src="../../static/proof.js"></script>
+    <script async="async" type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../../static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+<link rel="stylesheet" href="../../static/featured.css">
+
+
+<link rel="shortcut icon" href="../../static/icon.ico" />
+
+
+  </head><body>
+<div class="wrapper">
+  <a href="../../index.html"><img src="../../static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <div id="access">
+    <div class="menu">
+      <ul>
+          <li class="page_item"><a href="https://github.com/finite-element/finite-element-course" title="GitHub">GitHub</a></li>
+      </ul>
+    </div><!-- .menu -->
+  </div><!-- #access -->
+</div><!-- #wrapper -->
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for fe_utils.quadrature</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">numpy.polynomial.legendre</span> <span class="k">import</span> <span class="n">leggauss</span>
+<span class="kn">from</span> <span class="nn">.reference_elements</span> <span class="k">import</span> <span class="n">ReferenceInterval</span><span class="p">,</span> <span class="n">ReferenceTriangle</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="QuadratureRule"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.quadrature.QuadratureRule">[docs]</a><span class="k">class</span> <span class="nc">QuadratureRule</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A quadrature rule implementing integration of the reference cell</span>
+<span class="sd">        provided.</span>
+
+<span class="sd">        :param cell: the :class:`~.ReferenceCell` over which this quadrature</span>
+<span class="sd">          rule is defined.</span>
+<span class="sd">        :param degree: the :ref:`degree of precision &lt;degree-of-precision&gt;`</span>
+<span class="sd">          of this quadrature rule.</span>
+<span class="sd">        :points: a list of the position vectors of the quadrature points.</span>
+<span class="sd">        :weights: the corresponding vector of quadrature weights.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1">#: The :class:`~.ReferenceCell` over which this quadrature</span>
+        <span class="c1">#: rule is defined.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell</span> <span class="o">=</span> <span class="n">cell</span>
+        <span class="c1">#: Two dimensional array, the rows of which form the position</span>
+        <span class="c1">#: vectors of the quadrature points.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+        <span class="c1">#: The corresponding array of quadrature weights.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
+        <span class="c1">#: The degree of precision of the quadrature rule.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">degree</span> <span class="o">=</span> <span class="n">degree</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">dim</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Dimension mismatch between reference cell and quadrature points&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Number of quadrature points and quadrature weights must match&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="QuadratureRule.integrate"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.quadrature.QuadratureRule.integrate">[docs]</a>    <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Integrate the function provided using this quadrature rule.</span>
+
+<span class="sd">        :param function: A Python function taking a position vector as</span>
+<span class="sd">          its single argument and returning a scalar value.</span>
+
+<span class="sd">        The implementation of this method is left as an :ref:`exercise</span>
+<span class="sd">        &lt;ex-integrate&gt;`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
+
+
+<div class="viewcode-block" id="gauss_quadrature"><a class="viewcode-back" href="../../fe_utils.html#fe_utils.quadrature.gauss_quadrature">[docs]</a><span class="k">def</span> <span class="nf">gauss_quadrature</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return a Gauss-Legendre :class:`QuadratureRule`.</span>
+
+<span class="sd">      :param cell: the :class:`~.ReferenceCell` over which this quadrature</span>
+<span class="sd">        rule is defined.</span>
+<span class="sd">      :param degree: the :ref:`degree of precision &lt;degree-of-precision&gt;`</span>
+<span class="sd">        of this quadrature rule.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">cell</span> <span class="ow">is</span> <span class="n">ReferenceInterval</span><span class="p">:</span>
+        <span class="c1"># We can obtain the 1D gauss-legendre rule from numpy</span>
+        <span class="c1"># and change coordinates.</span>
+
+        <span class="c1"># Gauss-legendre quadrature has degree = 2 * npoints - 1</span>
+        <span class="c1"># The extra + 1 deals with truncation.</span>
+        <span class="n">npoints</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">points</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">leggauss</span><span class="p">(</span><span class="n">npoints</span><span class="p">)</span>
+
+        <span class="c1"># Numpy uses the [-1, 1] interval, we need to change to [0, 1]</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="p">(</span><span class="n">points</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+        <span class="c1"># Rescale the weights to sum to 1 instead of 2.</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">/</span> <span class="mf">2.</span>
+
+        <span class="c1"># We expect points to be an n x dim array.</span>
+        <span class="n">points</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">[</span><span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">elif</span> <span class="n">cell</span> <span class="ow">is</span> <span class="n">ReferenceTriangle</span><span class="p">:</span>
+        <span class="c1"># The 2D rule is obtained using the 1D rule and the Duffy Transform.</span>
+
+        <span class="n">p1</span> <span class="o">=</span> <span class="n">gauss_quadrature</span><span class="p">(</span><span class="n">ReferenceInterval</span><span class="p">,</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">q1</span> <span class="o">=</span> <span class="n">gauss_quadrature</span><span class="p">(</span><span class="n">ReferenceInterval</span><span class="p">,</span> <span class="n">degree</span><span class="p">)</span>
+
+        <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                           <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">p1</span><span class="o">.</span><span class="n">points</span>
+                           <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">q1</span><span class="o">.</span><span class="n">points</span><span class="p">])</span>
+
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">p</span> <span class="o">*</span> <span class="n">q</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                            <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span> <span class="n">p1</span><span class="o">.</span><span class="n">points</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">q1</span><span class="o">.</span><span class="n">weights</span><span class="p">])</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown reference cell&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">QuadratureRule</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014-2020, David A. Ham and Colin J. Cotter.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+    </div>
+  </body>
+</html>

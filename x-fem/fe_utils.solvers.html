@@ -6,33 +6,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>fe_utils.solvers package &#8212; Finite element course 2021.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/fenics.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/proof.js"></script>
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/fenics.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <script id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/underscore.js"></script>
+    <script src="static/doctools.js"></script>
+    <script src="static/proof.js"></script>
     <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
 <!--[if lte IE 6]>
-<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="static/ie6.css" type="text/css" media="screen" charset="utf-8" />
 <![endif]-->
 
-<link rel="stylesheet" href="_static/featured.css">
+<link rel="stylesheet" href="static/featured.css">
 
 
-<link rel="shortcut icon" href="_static/icon.ico" />
+<link rel="shortcut icon" href="static/icon.ico" />
 
 
   </head><body>
 <div class="wrapper">
-  <a href="index.html"><img src="_static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
+  <a href="index.html"><img src="static/banner.png" width="900px" alt="FInAT Project Banner" /></a>
   <div id="access">
     <div class="menu">
       <ul>
@@ -60,7 +60,7 @@ If run as a script, the result is plotted. This file can also be
 imported as a module and convergence tests run on the solver.</p>
 <dl class="py function">
 <dt id="fe_utils.solvers.helmholtz.assemble">
-<code class="sig-prename descclassname"><span class="pre">fe_utils.solvers.helmholtz.</span></code><code class="sig-name descname"><span class="pre">assemble</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/solvers/helmholtz.html#assemble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.helmholtz.assemble" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">fe_utils.solvers.helmholtz.</span></code><code class="sig-name descname"><span class="pre">assemble</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/solvers/helmholtz.html#assemble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.helmholtz.assemble" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assemble the finite element system for the Helmholtz problem given
 the function space in which to solve and the right hand side
 function.</p>
@@ -68,7 +68,7 @@ function.</p>
 
 <dl class="py function">
 <dt id="fe_utils.solvers.helmholtz.solve_helmholtz">
-<code class="sig-prename descclassname"><span class="pre">fe_utils.solvers.helmholtz.</span></code><code class="sig-name descname"><span class="pre">solve_helmholtz</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analytic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/solvers/helmholtz.html#solve_helmholtz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.helmholtz.solve_helmholtz" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">fe_utils.solvers.helmholtz.</span></code><code class="sig-name descname"><span class="pre">solve_helmholtz</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analytic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/solvers/helmholtz.html#solve_helmholtz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.helmholtz.solve_helmholtz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solve a model Helmholtz problem on a unit square mesh with
 <code class="docutils literal notranslate"><span class="pre">resolution</span></code> elements in each direction, using equispaced
 Lagrange elements of degree <code class="docutils literal notranslate"><span class="pre">degree</span></code>.</p>
@@ -82,7 +82,7 @@ If run as a script, the result is plotted. This file can also be
 imported as a module and convergence tests run on the solver.</p>
 <dl class="py function">
 <dt id="fe_utils.solvers.mastery.solve_mastery">
-<code class="sig-prename descclassname"><span class="pre">fe_utils.solvers.mastery.</span></code><code class="sig-name descname"><span class="pre">solve_mastery</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analytic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/solvers/mastery.html#solve_mastery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.mastery.solve_mastery" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">fe_utils.solvers.mastery.</span></code><code class="sig-name descname"><span class="pre">solve_mastery</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analytic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/solvers/mastery.html#solve_mastery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.mastery.solve_mastery" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function should solve the mastery problem with the given resolution. It
 should return both the solution <a class="reference internal" href="fe_utils.html#fe_utils.function_spaces.Function" title="fe_utils.function_spaces.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a> and
 the <span class="math notranslate nohighlight">\(L^2\)</span> error in the solution.</p>
@@ -101,7 +101,7 @@ using the finite element method.</p>
 imported as a module and convergence tests run on the solver.</p>
 <dl class="py function">
 <dt id="fe_utils.solvers.poisson.assemble">
-<code class="sig-prename descclassname"><span class="pre">fe_utils.solvers.poisson.</span></code><code class="sig-name descname"><span class="pre">assemble</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/solvers/poisson.html#assemble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.poisson.assemble" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">fe_utils.solvers.poisson.</span></code><code class="sig-name descname"><span class="pre">assemble</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/solvers/poisson.html#assemble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.poisson.assemble" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assemble the finite element system for the Poisson problem given
 the function space in which to solve and the right hand side
 function.</p>
@@ -109,7 +109,7 @@ function.</p>
 
 <dl class="py function">
 <dt id="fe_utils.solvers.poisson.boundary_nodes">
-<code class="sig-prename descclassname"><span class="pre">fe_utils.solvers.poisson.</span></code><code class="sig-name descname"><span class="pre">boundary_nodes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/solvers/poisson.html#boundary_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.poisson.boundary_nodes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">fe_utils.solvers.poisson.</span></code><code class="sig-name descname"><span class="pre">boundary_nodes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/solvers/poisson.html#boundary_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.poisson.boundary_nodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the list of boundary nodes in fs. This is a
 unit-square-specific solution. A more elegant solution would employ
 the mesh topology and numbering.</p>
@@ -117,7 +117,7 @@ the mesh topology and numbering.</p>
 
 <dl class="py function">
 <dt id="fe_utils.solvers.poisson.solve_poisson">
-<code class="sig-prename descclassname"><span class="pre">fe_utils.solvers.poisson.</span></code><code class="sig-name descname"><span class="pre">solve_poisson</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analytic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fe_utils/solvers/poisson.html#solve_poisson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.poisson.solve_poisson" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">fe_utils.solvers.poisson.</span></code><code class="sig-name descname"><span class="pre">solve_poisson</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analytic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/fe_utils/solvers/poisson.html#solve_poisson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fe_utils.solvers.poisson.solve_poisson" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solve a model Poisson problem on a unit square mesh with
 <code class="docutils literal notranslate"><span class="pre">resolution</span></code> elements in each direction, using equispaced
 Lagrange elements of degree <code class="docutils literal notranslate"><span class="pre">degree</span></code>.</p>
